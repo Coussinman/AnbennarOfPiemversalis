@@ -1,0 +1,331 @@
+#mil_ind_comp = {
+#	potential = {
+#		has_idea = kriegsproduktion3
+#		}
+#	trigger = {
+#		OR = { 
+#			AND = { 
+#			is_at_war = yes
+#			land_maintenance = 1
+#			}
+#			had_recent_war = 5
+#		}
+#	}
+#	land_maintenance_modifier = -0.1
+#	harsh_treatment_cost = -0.4
+#	interest = -1
+#	tec_mechanists_influence = 0.05
+#}
+coalition_of_free_nations = {
+	potential = {
+		has_idea_group = soldnerheer0
+		}
+	trigger = {
+		AND = {
+			NOT = { coalition_target = ROOT }
+			is_in_coalition_war = yes
+		}
+
+	}
+	mercenary_discipline = 0.05
+	land_forcelimit = 20
+	#unlocks the Coalition Army
+}
+brillite0 = {
+	potential = {
+		faction_in_power = tec_brilliance
+		}
+	trigger = {
+		NOT = { innovativeness = 20 }
+	}
+}
+brillite20 = {
+	potential = {
+		faction_in_power = tec_brilliance
+		}
+	trigger = {
+		innovativeness = 20
+		NOT = { innovativeness = 40 }
+	}
+	advisor_cost = -0.04
+	custom_tooltip = brillite20_tt
+}
+brillite40 = {
+	potential = {
+		faction_in_power = tec_brilliance
+		}
+	trigger = {
+		innovativeness = 40
+		NOT = { innovativeness = 60 }
+	}
+	advisor_cost = -0.08
+	custom_tooltip = brillite40_tt
+}
+brillite60 = {
+	potential = {
+		faction_in_power = tec_brilliance
+		}
+	trigger = {
+		innovativeness = 60
+		NOT = { innovativeness = 80 }
+	}
+	advisor_cost = -0.12
+	custom_tooltip = brillite60_tt
+}
+brillite80 = {
+	potential = {
+		faction_in_power = tec_brilliance
+		}
+	trigger = {
+		innovativeness = 80
+		NOT = { innovativeness = 100 }
+	}
+	advisor_cost = -0.16
+	custom_tooltip = brillite80_tt
+}
+brillite100 = {
+	potential = {
+		faction_in_power = tec_brilliance
+		}
+	trigger = {
+		innovativeness = 100
+	}
+	advisor_cost = -0.2
+	custom_tooltip = brillite100_tt
+}
+milmage1 = {
+	potential = {
+		has_idea = militarismus7
+	}
+	trigger = {
+		ROOT = {
+			is_variable_equal = { 
+				which = milmage_count
+				value = 1
+			}
+		}
+	}
+	shock_damage = 0.015
+}
+milmage2 = {
+	potential = {
+		has_idea = militarismus7
+	}
+	trigger = {
+		ROOT = {
+			is_variable_equal = { 
+				which = milmage_count
+				value = 2
+			}
+		}
+	}
+	shock_damage = 0.03
+}
+milmage3 = {
+	potential = {
+		has_idea = militarismus7
+	}
+	trigger = {
+		ROOT = {
+			is_variable_equal = { 
+				which = milmage_count
+				value = 3
+			}
+		}
+	}
+	shock_damage = 0.045
+}
+milmage4 = {
+	potential = {
+		has_idea = militarismus7
+	}
+	trigger = {
+		ROOT = {
+			is_variable_equal = { 
+				which = milmage_count
+				value = 4
+			}
+		}
+	}
+	shock_damage = 0.06
+}
+milmage5 = {
+	potential = {
+		has_idea = militarismus7
+	}
+	trigger = {
+		ROOT = {
+			is_variable_equal = { 
+				which = milmage_count
+				value = 5
+			}
+		}
+	}
+	shock_damage = 0.075
+}
+milmage6 = {
+	potential = {
+		has_idea = militarismus7
+	}
+	trigger = {
+		ROOT = {
+			is_variable_equal = { 
+				which = milmage_count
+				value = 6
+			}
+		}
+	}
+	shock_damage = 0.09
+}
+milmage7 = {
+	potential = {
+		has_idea = militarismus7
+	}
+	trigger = {
+		ROOT = {
+			is_variable_equal = { 
+				which = milmage_count
+				value = 7
+			}
+		}
+	}
+	shock_damage = 0.105
+}
+milmage8 = {
+	potential = {
+		has_idea = militarismus7
+	}
+	trigger = {
+		ROOT = {
+			is_variable_equal = { 
+				which = milmage_count
+				value = 8
+			}
+		}
+	}
+	shock_damage = 0.12
+}
+milmage9 = {
+	potential = {
+		has_idea = militarismus7
+	}
+	trigger = {
+		ROOT = {
+			is_variable_equal = { 
+				which = milmage_count
+				value = 9
+			}
+		}
+	}
+	shock_damage = 0.135
+}
+milmage10 = {
+	potential = {
+		has_idea = militarismus7
+	}
+	trigger = {
+		ROOT = {
+			check_variable = { 
+				which = milmage_count
+				value = 10
+			}
+		}
+	}
+	shock_damage = 0.15
+}
+#hb_diplo_extension_modifier = { #does not work - peace_desire only works in personality files
+#	potential = {
+#		always = no
+#		#ai = yes
+#		#is_at_war = yes
+#	}
+#	trigger = {
+#		any_known_country = {
+#			has_idea = hb_diplo_extension
+#			OR = {
+#				is_in_war = { 
+#					attacker_leader = THIS
+#					defenders = ROOT
+#				}
+#				is_in_war = { 
+#					defender_leader = THIS
+#					attackers = ROOT
+#				}
+#			}
+#		}
+#	}
+#	peace_desire = 10
+#}
+archmage_necromancy = {
+	potential = {
+		has_idea = AIG_archmage
+	}
+	trigger = {
+		has_ruler_flag = necromancy_3
+	}
+	advisor_pool = 1 #mild buff, is made so due to the implication that anyone collecting these modifiers like Thanos would gun for necromancy first
+}
+archmage_evocation = {
+	potential = {
+		has_idea = AIG_archmage
+	}
+	trigger = {
+		has_ruler_flag = evocation_3
+	}
+	mercenary_discipline = 0.05 #gotta love war magic, would be leader shock if war wizards were affected by it
+}
+archmage_divination = {
+	potential = {
+		has_idea = AIG_archmage
+	}
+	trigger = {
+		has_ruler_flag = divination_3
+	}
+	max_absolutism = 10 #pondering your orb makes it easier for rulers to run state affairs
+}
+archmage_abjuration = {
+	potential = {
+		has_idea = AIG_archmage
+	}
+	trigger = {
+		has_ruler_flag = abjuration_3
+	}
+	hostile_attrition = 2 #abjuration already stacks defensiveness, so this lets you capitalize on it
+}
+archmage_conjuration = {
+	potential = {
+		has_idea = AIG_archmage
+	}
+	trigger = {
+		has_ruler_flag = conjuration_3
+	}
+	country_admin_power = 1 #conjuring yourself /some bitches/ better administrators
+}
+archmage_enchantment = {
+	potential = {
+		has_idea = AIG_archmage
+	}
+	trigger = {
+		has_ruler_flag = enchantment_3
+	}
+	reduced_liberty_desire = 10 #brainwashing vassals
+	vassal_income = 0.15
+}
+archmage_transmutation = {
+	potential = {
+		has_idea = AIG_archmage
+	}
+	trigger = {
+		has_ruler_flag = transmutation_3
+	}
+	global_regiment_cost = -0.1 #transmuting metals for the army
+}
+archmage_illusion = {
+	potential = {
+		has_idea = AIG_archmage
+	}
+	trigger = {
+		has_ruler_flag = illusion_3
+	}
+	global_unrest = -2 #nothing to see here
+}

@@ -1,0 +1,214 @@
+#serpentspine ideas moved to combo ideas
+AIG_magocratic_ideas = {
+	category = DIP
+	bonus = {
+		all_power_cost = -0.025
+		technology_cost = 0.05
+		mages_loyalty_modifier = 0.1 #anbennar
+		acolytes_loyalty_modifier = 0.1
+		khelorvalshi_loyalty_modifier = 0.1
+		tec_technomancy_influence = 0.05
+	}
+	trigger = {
+		OR = {
+			has_estate = estate_mages
+			has_estate = estate_acolytes
+			primary_culture = horned_ogre
+		}
+	}
+	AIG_loyal_mages = {
+		stability_cost_modifier = -0.2
+	}
+	AIG_mage_archives = {
+		embracement_cost = -0.1
+		#+25% study exp
+	}
+	AIG_wizard_tax = {
+		global_tax_modifier = 0.15
+	}
+	AIG_magisterium_ties = {
+		diplomatic_reputation = 1
+		improve_relation_modifier = 0.1
+	}
+	#AIG_battlemage_battalions = {
+	#	mercenary_discipline = 0.05
+	#}
+	hb_magical_tournaments = {
+		#enables war wizards
+	}
+	AIG_scriers = {
+		spy_offence = 0.33
+		global_spy_defence = 0.2
+	}
+	AIG_archmage = {
+		monarch_lifespan = 0.2
+	}
+	ai_will_do = {
+		factor = 0.34
+		
+		modifier = {
+			factor = 2
+			ruler_has_personality = mage_personality
+		}
+		modifier = {
+			factor = 3
+			has_country_modifier = witch_king_modifier
+		}
+	}
+}
+monstrous_ideas = {
+	category = DIP
+	bonus = {
+		idea_cost = -0.075
+		monstrous_tribes_loyalty_modifier = 0.1 #anbennar
+	}
+	trigger = {
+		has_country_modifier = monstrous_nation
+	}
+	AIG_war_economy = {
+		available_province_loot = 0.33
+		loot_amount = 0.33
+	}
+	AIG_conquered_bureaucrats = {
+		num_accepted_cultures = 1
+		global_autonomy = -0.025
+	}
+	AIG_your_mom = {
+		power_projection_from_insults = 1
+	}
+	AIG_black_market = {
+		inflation_reduction = 0.1
+	}
+	AIG_brain_drain = {
+		reduced_liberty_desire = 10
+	}
+	#AIG_horde_of_the_seas = {
+	#	privateer_efficiency = 0.25
+	#	may_perform_slave_raid = yes
+	#}
+	AIG_slave_trade = {
+		years_of_nationalism = -3
+		may_perform_slave_raid = yes
+	}
+	AIG_cult_of_personality = {
+		max_absolutism = 10
+	}
+	ai_will_do = {
+		factor = 0.31
+
+		modifier = {
+			factor = 2
+			OR = {
+				technology_group = tech_orcish
+				technology_group = tech_east_orcish
+				technology_group = tech_harpy
+				technology_group = tech_centaur
+				tag = U07 #Viakkoc
+			}
+		}
+	}
+}
+
+AIG_infrastructure_ideas = {
+	category = ADM
+	bonus = {
+		development_cost = -0.075
+	}
+	AIG_ideas_spread = {
+		global_institution_spread = 0.2
+	}
+	AIG_sea_lanes = {
+		light_ship_cost = -0.2
+	}
+	AIG_canal_network = {
+		caravan_power = 0.20
+		global_own_trade_power = 0.1
+	}
+	AIG_emergency_responders = {
+		global_unrest = -2
+	}
+	AIG_mining_regulations = {
+		monthly_gold_inflation_modifier = -0.50
+		#changes meteriote/precursor ruin events
+	}
+	AIG_rural_industries = {
+		build_cost = -0.025
+		#+1 building slot in rough terrain
+		#dwarven holds and urban terrain are exceptions
+		#for obvious reasons
+	}
+	AIG_golden_highway = {
+		trade_efficiency = 0.1
+	}
+	ai_will_do = {
+		factor = 0.34
+		modifier = {
+			factor = 1.5
+			any_owned_province = { #mining regulations go brrr
+			OR = {
+				has_province_modifier = damestear_rich_deposit
+				has_province_modifier = pr_great_ruin
+				}
+			}
+		}
+		modifier = {
+			factor = 1.5
+			gold_income_percentage = 0.2 #mining regulations go brrr
+		}
+		#no condition to check for % of land that has rough terrain :(
+	}
+}
+#elven supremacy moved to combo ideas
+AIG_imperial_ideas = {
+	category = DIP
+	bonus = {
+		imperial_authority_value = 0.05
+	}
+	trigger = {
+		OR = {
+			is_part_of_hre = yes
+			tag = Z01
+		}
+	}
+	AIG_a_velvet_glove = {
+		diplomatic_reputation = 1
+		accept_vassalization_reasons = 5
+	}
+	AIG_citadel_research = {
+		defensiveness = 0.1
+		great_project_upgrade_cost = -0.1
+	}
+	AIG_dameshead_trade = {
+		trade_efficiency = 0.1
+	}
+	AIG_racial_representation = {
+		global_unrest = -1
+		global_autonomy = -0.025
+	}
+	AIG_boat_party_diplo = {
+		diplomats = 1
+	}
+	AIG_imperial_cities = {
+		#+0.75 goods produced on urban and dwarven holds
+		#maybe nerf to 0.5, wait for feedback
+	}
+	AIG_efficient_beaurocracy = {
+		reasons_to_elect = 25
+	}
+	ai_will_do = {
+		factor = 0.34
+
+		modifier = {
+			factor = 3
+			OR = {
+				tag = A30 #Wex
+				tag = A45 #Istralore
+				tag = A04 #Wesdam
+				tag = A58 #Dameria
+				tag = A11 #Pearlsedge
+			}
+		}
+	}
+}
+
+#legionary ideas moved to combo ideas

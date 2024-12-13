@@ -1,0 +1,320 @@
+#naming used to make ideas load ~the middle of the list and prevent any unusual positioning
+
+religious_ideas = {
+	category = ADM
+
+	bonus = {
+		culture_conversion_cost = -0.25
+		church_loyalty_modifier = 0.1
+	}
+
+	trigger = {
+		OR = {
+			NOT = { has_idea_group = AIG_elven_supremacy_ideas }
+			dominant_religion = the_jadd
+			#AND = { #fix for Aelnar needing Religious ideas
+			#	tag = Z43
+			#	NOT = { has_idea_group = AIG_elven_supremacy_ideas }
+			#}
+		}
+	}
+
+	deus_vult = {
+		cb_on_religious_enemies = yes
+	}
+	missionary_schools = {
+		missionaries = 1
+	}
+	church_attendance_duty = {
+		stability_cost_modifier = -0.2
+	}
+	divine_supremacy = {
+		global_missionary_strength = 0.025
+	}
+	devoutness = {
+		tolerance_own = 2
+		papal_influence = 2
+		devotion = 0.5
+		monthly_fervor_increase = 0.25
+		church_power_modifier = 0.1
+	}
+	religious_tradition = {
+		prestige = 0.75
+	}
+	inquisition = {
+		missionary_maintenance_cost = -0.3
+	}
+
+	ai_will_do = {
+		factor = 0.9
+		modifier = {
+			factor = 0
+			has_idea_group = humanist_ideas
+		}
+		modifier = {
+			factor = 1.33
+			NOT = { religious_unity = 0.9 }
+		}
+		modifier = {
+			factor = 1.4
+			NOT = { religious_unity = 0.8 }
+		}
+		modifier = {
+			factor = 2.25
+			NOT = { religious_unity = 0.7 }
+		}
+	}
+}
+
+AIG_elven_supremacy_ideas = {
+	category = ADM
+	bonus = {
+		cb_on_religious_enemies = yes
+		church_loyalty_modifier = 0.1
+	}
+	trigger = {
+		AND = {
+			has_country_modifier = elven_administration
+			NOT = { dominant_religion = the_jadd }
+			NOT = { has_idea_group = religous_ideas }
+		}
+	}
+	AIG_elven_forebears = {
+		prestige = 0.75
+	}
+	AIG_reclaiming_birthright = {
+		missionaries = 1
+	}
+	AIG_holy_orders = {
+		global_missionary_strength = 0.025
+	}
+	AIG_seniority_rule = {
+		max_absolutism = 10
+	}
+	AIG_police_state = {
+		years_of_nationalism = -5
+		global_spy_defence = 0.25
+	}
+	AIG_ethnic_primacy = {
+		culture_conversion_cost = -0.25
+	}
+	AIG_expand_elven_conscription = {
+		manpower_recovery_speed = 0.15
+		drill_gain_modifier = -0.2
+	}
+	ai_will_do = {
+		factor = 0.9
+		modifier = {
+			factor = 0
+			has_idea_group = humanist_ideas
+		}
+		modifier = {
+			factor = 1.33
+			NOT = { religious_unity = 0.9 }
+		}
+		modifier = {
+			factor = 1.4
+			NOT = { religious_unity = 0.8 }
+		}
+		modifier = {
+			factor = 2.25
+			NOT = { religious_unity = 0.7 }
+		}
+		modifier = {
+			factor = 1.5
+			OR = {
+				tag = A21 #Venail
+				tag = Z43 #Aelnar
+			}
+		}
+	}
+}
+
+
+formation0 = {
+	category = MIL
+
+	bonus = {
+		army_tradition_decay = -0.0075
+	}
+	trigger = {
+		NOT = {
+			OR = {
+				has_idea_group = formation0
+				has_idea_group = AIG_serpentspine_ideas
+				has_idea_group = AIG_legionary_ideas
+			}
+		}
+	}
+	
+	hb_repositioning = {
+		movement_speed = 0.1
+	}
+	hb_silver_lining = {
+		war_exhaustion = -0.02
+	}
+	#hb_slow_and_steady = {
+	#	defensiveness = 0.05
+	#	#grants fort level +1 upon sieging an enemy fort
+	#}
+	hb_fob = {
+		#defensiveness = 0.05
+		#lets you build forts in occupied land
+	}
+	hb_relentless = {
+		reinforce_speed = 0.075
+		global_regiment_recruit_speed = -0.075
+	}
+	formation6 = {
+		global_supply_limit_modifier = 0.5
+		land_attrition = -0.1
+	}
+	#hb_decisive_victory = {
+	#	#deals additional casualties on victory #can't make it work properly :(
+	#}
+	hb_objective_warfare = {
+		siege_ability = 0.1
+		defensiveness = 0.15
+	}
+	hb_diplo_extension = {
+		diplomatic_reputation = 1
+		province_warscore_cost = -0.075
+	}
+	
+	ai_will_do = {
+		factor = 0.5
+		modifier = { #very useful for elves
+			factor = 1.5
+			OR = {
+				has_country_modifier = elven_administration
+				has_country_modifier = elven_military
+			}
+		}
+		modifier = { #diplomats see the bigger picture
+			factor = 1.5
+			OR = {
+				ruler_has_personality = careful_personality
+				ruler_has_personality = fierce_negotiator_personality
+				full_idea_group = diplomatic_ideas
+			}
+		}
+		modifier = { #extension of politics? bro I'm here to kill someone
+			factor = 0.66
+			OR = {
+				ruler_has_personality = inspiring_leader_personality
+				ruler_has_personality = zealot_personality
+				has_country_modifier = monstrous_nation
+				NOT = { mil_tech = 16 }
+			}
+		}
+	}
+}
+
+AIG_serpentspine_ideas = {
+	category = MIL
+	bonus = {
+		defensiveness = 0.2
+	}
+	trigger = {
+		any_owned_province = {
+			is_capital = yes
+			continent = serpentspine
+		}
+		NOT = {
+			OR = {
+				has_idea_group = formation0
+				has_idea_group = AIG_legionary_ideas
+			}
+		}
+	}
+	AIG_dwarven_citadels = {
+		#fort level +1 in serpentspine
+	}
+	AIG_hostile_ground = {
+		land_attrition = -0.15
+	}
+	AIG_your_last_stand = {
+		war_exhaustion = -0.01
+		garrison_size = 0.20
+	}
+	AIG_serpentsbeat = {
+		#movement_speed = 0.2 on has_terrain = dwarven_road
+	}
+	AIG_under_fire = {
+		fire_damage_received = -0.05
+	}
+	AIG_make_your_bullets_count = {
+		backrow_artillery_damage = 0.075
+	}
+	AIG_push_them_back = {
+		army_tradition = 0.35
+	}
+	ai_will_do = {
+		factor = 0.31
+
+		modifier = {
+			factor = 2
+			OR = {
+				technology_group = tech_dwarven #born underground, suckled from a teat of stone
+			}
+		}
+	}
+}
+
+AIG_legionary_ideas = {
+	category = MIL
+	bonus = {
+		discipline = 0.035
+	}
+	trigger = {
+		any_owned_province = {
+			is_capital = yes
+			superregion = bulwar_superregion
+		}
+		NOT = {
+			OR = {
+				has_idea_group = formation0
+				has_idea_group = AIG_serpentspine_ideas
+			}
+		}
+	}
+	AIG_phlanx_formation = {
+		shock_damage_received = -0.05
+	}
+	AIG_infantry_en_masse = {
+		infantry_cost = -0.10
+		infantry_power = 0.05
+	}
+	AIG_always_on_campaign = {
+		army_tradition_decay = -0.007
+	}
+	#AIG_foreign_auxilleries = {
+	#	merc_maintenance_modifier = -0.10
+	#	mercenary_manpower = 0.10
+	#}
+	AIG_religious_wars = {
+		missionary_strength = 0.005
+		#gain manpower from converting land
+	}
+	AIG_centralising_our_base = {
+		reduced_liberty_desire = 5
+		vassal_forcelimit_bonus = 0.33
+	}
+	AIG_sun_elf_battlemages = {
+		shock_damage = 0.1
+	}
+	AIG_administering_the_fringes = {
+		liberty_desire_from_subject_development = -0.20
+		
+	}
+	ai_will_do = {
+		factor = 0.34
+
+		modifier = {
+			factor = 3
+			OR = {
+				technology_group = tech_bulwari
+			}
+		}
+	}
+}

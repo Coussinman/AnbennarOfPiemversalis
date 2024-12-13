@@ -1,0 +1,43 @@
+namespace = custom_institution_growth_event
+
+country_event = {
+    id = custom_institution_growth_event.1
+    title = custom_institution_growth_event.1.t
+    desc = custom_institution_growth_event.1.d
+    picture = GFX_evt_debate  # Vous pouvez remplacer par une autre image
+
+    is_triggered_only = yes
+
+    option = {
+        name = custom_institution_growth_event.1.a
+        #12 month of income
+        add_years_of_income = -2
+        capital_scope = {
+            add_province_modifier = {
+                name = institution_growth_boost_modifier
+                duration = 1800
+            }
+        }
+
+    }
+
+    option = {
+        name = custom_institution_growth_event.1.b
+            add_adm_power = -150
+            add_dip_power = -150
+            add_mil_power = -150
+            capital_scope = {
+                add_province_modifier = {
+                    name = institution_growth_boost_modifier
+                    duration = 1530
+                }
+            }
+    }
+
+    option = {
+        name = custom_institution_growth_event.1.c
+        effect = {
+            #nothing to go out of the menu
+        }
+    }
+}

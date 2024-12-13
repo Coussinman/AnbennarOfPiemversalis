@@ -1,0 +1,135 @@
+death_war = {
+	potential = {
+		always = no #wip
+		is_at_war = yes
+		NOT = { #makes sure Aelantiri tags and smaller ai don't hog all the attention
+			AND = {
+				ai = yes
+				OR = {
+					NOT = { num_of_owned_provinces_with = { value = 20 } }
+					AND = {
+						capital_scope = {
+							OR = {
+								continent = north_america
+								continent = south_america
+							}
+						}
+						NOT = { total_development = 400 }
+					}
+				}
+			}
+		}
+	}
+	can_start = {
+		has_any_disaster = no
+		NOT = { 
+			is_in_war = { attacker_leader = ROOT } 
+			any_country = { has_disaster = death_war } #disaster uses global event targets
+		}
+		any_known_country = {
+			is_in_war = { attacker_leader = THIS defender_leader = ROOT }
+			army_strength = { who = ROOT value = 1.5 }
+			OR = {
+				AND = {
+					is_great_power = yes
+					NOT = { great_power_rank = 4 }
+				}
+				custom_trigger_tooltip = {
+					tooltip = hb_is_gc_tt
+					OR = {
+						has_ruler_modifier = great_conqueror_modifier
+						has_ruler_modifier = mythical_conqueror_modifier
+					}
+				}
+			}
+		}
+	}
+	can_stop = {
+		OR = {
+			is_at_war = no
+			is_in_war = { attacker_leader = ROOT }
+		}
+	}
+	progress = {
+		modifier = {
+			factor = 1
+			always = yes
+		}
+		modifier = {
+			factor = -20
+			warscore = 20
+		}
+		modifier = {
+			factor = 3
+			warscore = -20
+		}
+		modifier = {
+			factor = 3
+			warscore = -40
+		}
+		modifier = {
+			factor = 3
+			warscore = -60
+		}
+		modifier = {
+			factor = 3
+			warscore = -80
+		}
+		modifier = {
+			factor = 2
+			has_wartaxes = yes
+		}
+		modifier = {
+			factor = 2
+			num_of_loans = 10
+		}
+		modifier = {
+			factor = 2
+			army_size = 1.1
+		}
+		modifier = {
+			factor = 2
+			manpower_percentage = 0.5
+		}
+		modifier = {
+			factor = 2
+			war_exhaustion = 5
+		}
+		modifier = {
+			factor = 2
+			NOT = { stability = 1 }
+		}
+	}
+	can_end = {
+		OR = {
+			is_at_war = no
+			is_in_war = { attacker_leader = ROOT }
+		}
+	}
+	modifier = {
+		all_power_cost = 0.1
+		army_tradition_from_battle = 1
+		war_exhaustion = -0.03
+		peace_desire = -20
+	}
+	on_start = hb_deathwar.1
+	on_end = hb_deathwar.2
+	on_monthly = {
+		events = {
+			hb_deathwar.3 #merchants give lower interest
+			hb_deathwar.4 #merchants money for CL
+			hb_deathwar.5 #merchants give money for statutory rights
+			hb_deathwar.6 #clergy reduce WE
+			hb_deathwar.7 #nobles give manpower for CL
+			hb_deathwar.8 #nobles give merc discount
+			hb_deathwar.9 #deal with the devil
+			hb_deathwar.10 #make them bleed
+			hb_deathwar.11 #begin counteroffensive
+			hb_deathwar.12 #partisan attacks
+			hb_deathwar.13 #miracle on the [Root.GetRiver]
+		}
+		random_events = {
+			hb_deathwar.10
+		}
+	}
+}

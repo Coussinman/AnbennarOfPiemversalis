@@ -1,0 +1,23 @@
+hb_temp_fort_province = {
+	potential = {
+		always = yes
+	}
+	
+	hidden = yes
+
+	trigger = {
+		NOT = { controlled_by = owner }
+	}
+	
+	on_activation = {
+	}
+	
+	on_deactivation = {
+		remove_building = fort_15th
+		remove_building = fort_16th
+		remove_building = fort_17th
+		remove_building = fort_18th
+		remove_province_triggered_modifier = hb_temp_fort_province
+		hb_fort_removed = yes
+	}
+}

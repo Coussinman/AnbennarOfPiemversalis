@@ -1,0 +1,355 @@
+namespace = hb_deathwar
+
+#start
+country_event = {
+
+	id = hb_deathwar.1
+	title = hb_deathwar.1.t
+	desc = hb_deathwar.1.d
+	picture = BIG_BOOK_eventPicture
+	major = yes
+	is_triggered_only = yes
+	
+	trigger = {
+	}
+	immediate = {
+		hidden_effect = {
+			ROOT = { save_global_event_target_as = dw_self }
+			random_known_country = { #same conditions as dw trigger
+				limit = {
+					is_in_war = { attacker_leader = THIS defender_leader = ROOT }
+					army_strength = { who = ROOT value = 1.5 }
+					OR = {
+						AND = {
+							is_great_power = yes
+							NOT = { great_power_rank = 4 }
+						}
+						has_ruler_modifier = great_conqueror_modifier
+						has_ruler_modifier = mythical_conqueror_modifier
+					}
+				}
+				save_global_event_target_as = dw_enemy
+			}
+		}
+	}
+	
+	mean_time_to_happen = { days = 1 }
+
+	option = {
+		name = "hb_deathwar.1.1"
+	}
+}	
+
+#end
+country_event = {
+
+	id = hb_deathwar.2
+	title = hb_deathwar.2.t
+	desc = hb_deathwar.2.d
+	picture = BIG_BOOK_eventPicture
+	is_triggered_only = yes
+	
+	trigger = {
+	}
+	immediate = {
+		hidden_effect = {
+			clear_global_event_target = dw_self
+			clear_global_event_target = dw_enemy
+		}
+	}
+	
+	mean_time_to_happen = { days = 1 }
+
+	option = {
+		name = "hb_deathwar.2.1"
+	}
+}	
+
+#end
+country_event = {
+
+	id = hb_deathwar.2
+	title = hb_deathwar.2.t
+	desc = hb_deathwar.2.d
+	picture = BIG_BOOK_eventPicture
+	is_triggered_only = yes
+	
+	trigger = {
+	}
+	immediate = {
+	}
+	
+	mean_time_to_happen = { days = 1 }
+
+	option = {
+		name = "hb_deathwar.2.1"
+	}
+}	
+
+#choose a plan
+country_event = {
+
+	id = hb_deathwar.3
+	title = hb_deathwar.3.t
+	desc = hb_deathwar.3.d
+	picture = BIG_BOOK_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		NOT = { has_country_flag = dw_plan_set }
+	}
+	immediate = {
+		hidden_effect = { set_country_flag = dw_plan_set }
+	}
+	
+	mean_time_to_happen = { days = 1 }
+
+	#fuck it, we're doing it live
+	option = {
+		name = "hb_deathwar.3.1"
+	}
+	
+	#welcome to the jungle
+	option = {
+		name = "hb_deathwar.3.2"
+	}
+	
+	#seek foreign aid
+	option = {
+		name = "hb_deathwar.3.3"
+	}
+	
+	#contact rebels
+	option = {
+		name = "hb_deathwar.3.4"
+	}
+	
+	#contact mages
+	option = {
+		name = "hb_deathwar.3.5"
+	}
+	
+	#contact cultists
+	option = {
+		name = "hb_deathwar.3.6"
+	}
+	
+	#construct superweapon
+	option = {
+		name = "hb_deathwar.3.7"
+	}
+	
+}	
+
+#event can happen on a win or loss
+#cultist circle triggered - eldritch horror eats everyone
+province_event = {
+
+	id = hb_deathwar.100
+	title = hb_deathwar.100.t
+	desc = hb_deathwar.100.d
+	picture = BIG_BOOK_eventPicture
+	is_triggered_only = yes
+	
+	trigger = {
+	}
+	immediate = {
+		hidden_effect = { 
+			kill_units = {} #no running away
+		}
+	}
+	
+	mean_time_to_happen = { days = 1 }
+
+	option = {
+		name = "hb_deathwar.100.1"
+		remove_province_modifier = dw_cultist_circle
+		kill_units = {} 
+		add_stability = -1
+		#dw_enemy also loses stability in their notification event
+	}
+}	
+#events for winning batttles
+#cultist circle triggered - ghost army
+province_event = {
+
+	id = hb_deathwar.101
+	title = hb_deathwar.101.t
+	desc = hb_deathwar.101.d
+	picture = BIG_BOOK_eventPicture
+	is_triggered_only = yes
+	
+	trigger = {
+	}
+	immediate = {
+	}
+	
+	mean_time_to_happen = { days = 1 }
+
+	option = {
+		name = "hb_deathwar.101.1"
+		remove_province_modifier = dw_cultist_circle
+		kill_units = {
+			who = enemy
+			amount = 5
+		} 
+		#dw_enemy also gains WE in their notification event
+	}
+}	
+#cultist circle triggered - mass reanimation
+province_event = {
+
+	id = hb_deathwar.102
+	title = hb_deathwar.102.t
+	desc = hb_deathwar.102.d
+	picture = BIG_BOOK_eventPicture
+	is_triggered_only = yes
+	
+	trigger = {
+	}
+	immediate = {
+	}
+	
+	mean_time_to_happen = { days = 1 }
+
+	option = {
+		name = "hb_deathwar.102.1"
+		remove_province_modifier = dw_cultist_circle
+		owner = {
+			add_yearly_manpower = 0.15
+			add_war_exhaustion = -1
+		}
+	}
+}	
+#events for losing battles
+#cultist circle triggered - sundered ground
+province_event = {
+
+	id = hb_deathwar.103
+	title = hb_deathwar.103.t
+	desc = hb_deathwar.103.d
+	picture = BIG_BOOK_eventPicture
+	is_triggered_only = yes
+	
+	trigger = {
+	}
+	immediate = {
+	}
+	
+	mean_time_to_happen = { days = 1 }
+
+	option = {
+		name = "hb_deathwar.103.1"
+		remove_province_modifier = dw_cultist_circle
+		add_province_modifier = { name = dw_sundered_ground duration = 30 }
+	}
+}	
+#cultist circle triggered - unnatural plague
+province_event = {
+
+	id = hb_deathwar.104
+	title = hb_deathwar.104.t
+	desc = hb_deathwar.104.d
+	picture = BIG_BOOK_eventPicture
+	is_triggered_only = yes
+	
+	trigger = {
+	}
+	immediate = {
+	}
+	
+	mean_time_to_happen = { days = 1 }
+
+	option = {
+		name = "hb_deathwar.104.1"
+		remove_province_modifier = dw_cultist_circle
+		kill_units = {
+			who = enemy
+			amount = 5
+		} 
+		event_target:dw_enemy = {
+			add_war_exhaustion = 1
+		}
+	}
+}	
+#notifications for dw_enemy
+province_event = {
+
+	id = hb_deathwar.105
+	title = hb_deathwar.100.t
+	desc = hb_deathwar.100.d
+	picture = BIG_BOOK_eventPicture
+	is_triggered_only = yes
+	
+	trigger = {
+	}
+	immediate = {
+	}
+	
+	mean_time_to_happen = { days = 1 }
+
+	option = {
+		name = "hb_deathwar.100.1"
+		add_stability = -1
+	}
+}	
+province_event = {
+
+	id = hb_deathwar.106
+	title = hb_deathwar.101.t
+	desc = hb_deathwar.101.d
+	picture = BIG_BOOK_eventPicture
+	is_triggered_only = yes
+	
+	trigger = {
+	}
+	immediate = {
+	}
+	
+	mean_time_to_happen = { days = 1 }
+
+	option = {
+		name = "hb_deathwar.101.1"
+		add_war_exhaustion = 1
+	}
+}	
+#107 is skipped for consistency
+province_event = {
+
+	id = hb_deathwar.108
+	title = hb_deathwar.103.t
+	desc = hb_deathwar.103.d
+	picture = BIG_BOOK_eventPicture
+	is_triggered_only = yes
+	
+	trigger = {
+	}
+	immediate = {
+	}
+	
+	mean_time_to_happen = { days = 1 }
+
+	option = {
+		name = "hb_deathwar.103.1"
+		add_province_modifier = { name = dw_sundered_ground duration = 30 } #it's fine to repeat it
+	}
+}	
+province_event = {
+
+	id = hb_deathwar.109
+	title = hb_deathwar.104.t
+	desc = hb_deathwar.104.d
+	picture = BIG_BOOK_eventPicture
+	is_triggered_only = yes
+	
+	trigger = {
+	}
+	immediate = {
+	}
+	
+	mean_time_to_happen = { days = 1 }
+
+	option = {
+		name = "hb_deathwar.104.1"
+		add_war_exhaustion = 1
+	}
+}	

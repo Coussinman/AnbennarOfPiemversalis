@@ -1,0 +1,3468 @@
+namespace = homebrew_idea
+
+### industrial ideas ###
+
+#urbanization wave
+country_event = {
+
+	id = homebrew_idea.1
+	title = homebrew_idea.1.t
+	desc = homebrew_idea.1.d
+	picture = CITY_DEVELOPMENT_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = AIG_industrial_ideas
+		NOT = { has_country_modifier = urbanization_wave }
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.1.1
+		add_country_modifier = {
+				name = "urbanization_wave"
+				duration = 1825
+			}
+	}
+}
+#tyrannical factory owner
+country_event = {
+
+	id = homebrew_idea.2
+	title = homebrew_idea.2.t
+	desc = homebrew_idea.2.d
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = AIG_industrial_ideas
+	}
+	immediate = {
+		hidden_effect = {
+			random_owned_province = {
+				limit = {
+					has_manufactory_trigger = yes
+					is_state = yes
+				}
+				set_province_flag = industry_baron
+			}
+		}
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		ai_chance = { factor = 50 }
+		name = homebrew_idea.2.1
+		every_owned_province = {
+			limit = {
+				has_province_flag = industry_baron
+			}
+			add_unrest = 5
+			add_province_modifier = {
+				name = industry_baron_tyranny
+				duration = 3650
+			}
+		}
+	}
+	option = {
+		ai_chance = { factor = 50 }
+		name = homebrew_idea.2.2
+		add_treasury = -300
+	}
+	option = {
+		ai_chance = { factor = 100 }
+		name = homebrew_idea.2.3
+		highlight = yes
+		trigger = {
+			has_faction = nl_cooperatists
+		}
+		add_manpower = -5
+		add_faction_influence = {
+			faction = nl_cooperatists
+			influence = 10
+		}
+	}
+}
+#factory fire
+country_event = {
+
+	id = homebrew_idea.3
+	title = homebrew_idea.3.t
+	desc = homebrew_idea.3.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = AIG_industrial_ideas
+		NOT = { has_country_flag = flag_factory_fire }
+	}
+	immediate = {
+		hidden_effect = {
+		add_stability = -1
+		set_country_flag = flag_factory_fire
+			random_owned_province = {
+				limit = {
+					has_manufactory_trigger = yes
+					is_state = yes
+					OR = {
+					trade_goods = cloth
+					trade_goods = silk
+					trade_goods = wool
+					trade_goods = dyes
+					}
+				}
+				set_province_flag = factory_fire
+				save_event_target_as = province_factory_fire
+			}
+		}
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.3.1
+		ai_chance = { factor = 50 }
+		add_country_modifier = {
+				name = worker_riots
+				duration = 3650
+			}
+		every_owned_province = {
+			limit = {
+				has_province_flag = factory_fire
+			}
+			add_devastation = 20
+			add_unrest = 10
+		}
+	}
+	option = {
+		name = homebrew_idea.3.2
+		ai_chance = { factor = 50 }
+		add_country_modifier = {
+				name = factory_reforms
+				duration = 3650
+			}
+		every_owned_province = {
+			limit = {
+				has_province_flag = factory_fire
+			}
+			add_devastation = 20
+		}
+	}
+	option = {
+		name = homebrew_idea.3.3
+		ai_chance = { factor = 100 }
+		highlight = yes
+		trigger = {
+			has_faction = nl_cooperatists
+		}
+		add_country_modifier = {
+				name = workers_justice
+				duration = 3650
+			}
+		add_faction_influence = {
+			faction = nl_cooperatists
+			influence = 15
+		}
+		every_owned_province = {
+			limit = {
+				has_province_flag = factory_fire
+			}
+			add_devastation = 20
+		}
+	}
+	option = {
+		name = homebrew_idea.3.4
+		ai_chance = { factor = 100 }
+		highlight = yes
+		trigger = {
+			has_faction = tec_mechanists
+		}
+		add_country_modifier = {
+				name = mechanism_enforcement
+				duration = 3650
+			}
+		add_faction_influence = {
+			faction = tec_mechanists
+			influence = 15
+		}
+		every_owned_province = {
+			limit = {
+				has_province_flag = factory_fire
+			}
+			add_devastation = 20
+		}
+	}
+}
+#new census
+country_event = {
+
+	id = homebrew_idea.4
+	title = homebrew_idea.4.t
+	desc = homebrew_idea.4.d
+	picture = CITY_DEVELOPMENT_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = AIG_industrial_ideas
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.4.1
+		add_years_of_income = 0.5
+		add_yearly_manpower = 0.5
+	}
+}
+##ind cap
+country_event = {
+
+	id = homebrew_idea.5
+	title = homebrew_idea.5.t
+	desc = homebrew_idea.5.d
+	picture = ADVISOR_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = AIG_industrial_ideas
+		NOT = { has_country_modifier = ind_cap }
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.5.1
+		ai_chance = { factor = 50 }
+		define_advisor = {
+			type = treasurer
+			skill = 3
+			cost_multiplier = 0.5
+		}
+	}
+	option = {
+		name = homebrew_idea.5.2
+		ai_chance = { factor = 50 }
+		add_country_modifier = {
+			name = ind_cap
+			duration = 3650
+		}
+	}
+}
+#productive workshops
+country_event = {
+
+	id = homebrew_idea.6
+	title = homebrew_idea.6.t
+	desc = homebrew_idea.6.d
+	picture = ECONOMY_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = AIG_industrial_ideas
+	}
+	immediate = {
+		hidden_effect = {
+		random_owned_province = {
+			limit = {
+				has_manufactory_trigger = yes
+				is_state = yes
+				}
+			set_province_flag = production_boom
+			save_event_target_as = province_production_boom
+			}
+		}
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.6.1
+		ai_chance = { factor = 1 }
+		every_owned_province = {
+			limit = {
+			has_province_flag = production_boom
+			}
+			add_province_modifier = {
+				name = homebrew_production_boom
+				duration = 3650
+			}
+		}
+	}
+	option = {
+		name = homebrew_idea.6.2
+		ai_chance = { factor = 50 }
+		highlight = yes
+		trigger = {
+			has_faction = nl_cooperatists
+		}
+		add_adm_power = -50
+		every_owned_province = {
+			limit = {
+			has_province_flag = production_boom
+			}
+			add_province_modifier = {
+				name = homebrew_production_boom
+				duration = 7300
+			}
+		}
+		add_faction_influence = {
+			faction = nl_cooperatists
+			influence = 10
+		}
+	}
+}
+#expand labor pools
+country_event = {
+
+	id = homebrew_idea.7
+	title = homebrew_idea.7.t
+	desc = homebrew_idea.7.d
+	picture = FARMING_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = AIG_industrial_ideas
+		NOT = { has_country_modifier = loose_labor_laws }
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.7.1
+		ai_chance = { factor = 50 }
+		add_country_modifier = {
+			name = loose_labor_laws
+			duration = 3650
+		}
+	}
+	option = {
+		name = homebrew_idea.7.2
+		ai_chance = { factor = 50 }
+		add_estate_loyalty = {
+		estate = estate_burghers
+		loyalty = -10
+		}
+	}
+}
+#devaluation
+country_event = {
+
+	id = homebrew_idea.8
+	title = homebrew_idea.8.t
+	desc = homebrew_idea.8.d
+	picture = OVEREXTENSION_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = AIG_industrial_ideas
+		NOT = { has_country_modifier = devaluation_modifier }
+		NOT = { has_country_flag = had_devaluation }
+	}
+	immediate = {
+		set_country_flag = had_devaluation
+		hidden_effect = {
+		random_owned_province = {
+			limit = {
+				has_manufactory_trigger = yes
+				is_state = yes
+				}
+			set_province_flag = devaluation_province
+			}
+		random_owned_province = {
+			limit = {
+				has_manufactory_trigger = yes
+				is_state = yes
+				}
+			set_province_flag = devaluation_province
+			}
+		random_owned_province = {
+			limit = {
+				has_manufactory_trigger = yes
+				is_state = yes
+				}
+			set_province_flag = devaluation_province
+			}
+		}
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.8.1
+		ai_chance = { factor = 25 }
+		every_owned_province = {
+			limit = { has_province_flag = devaluation_province }
+			add_province_modifier = {
+				name = devaluation_manufactory
+				duration = 3650
+			}
+		}
+		add_country_modifier = {
+			name = devaluation_modifier
+			duration = 3650
+		}
+	}
+	option = {
+		name = homebrew_idea.8.2
+		ai_chance = { factor = 75 }
+		add_inflation = 5
+	}
+}
+#industry -> artificery
+country_event = {
+
+	id = homebrew_idea.9
+	title = homebrew_idea.9.t
+	desc = homebrew_idea.9.d
+	picture = INVENTION_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = AIG_industrial_ideas
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.9.1
+		add_estate_loyalty = {
+			estate = estate_artificers
+			loyalty = 10
+		}
+		add_adm_power = 25
+		add_dip_power = 25
+		add_mil_power = 25
+	}
+}
+#happy middle class
+country_event = {
+
+	id = homebrew_idea.10
+	title = homebrew_idea.10.t
+	desc = homebrew_idea.10.d
+	picture = BURGHER_ESTATE_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = AIG_industrial_ideas
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.10.1
+		add_estate_burghers_loyalty_effect = yes
+		add_years_of_income = 0.5
+	}
+}
+
+### artificery ideas ###
+
+#artifice research: domination potions
+country_event = {
+
+	id = homebrew_idea.11
+	title = homebrew_idea.11.t
+	desc = homebrew_idea.11.d
+	picture = SPY_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_country_modifier = chief_artificer
+		NOT = { has_country_flag = unlocked_artifice_invention_domination_potions }
+		NOT = { has_country_flag = nurael_convention }
+		NOT = { has_country_modifier = artificer_cooldown }
+	}
+	immediate = {
+		hidden_effect = {
+			add_country_modifier = {
+				name = artificer_cooldown
+				duration = 7300
+				hidden = yes
+			}
+		}
+	}
+	mean_time_to_happen = { 
+		days = 1 
+		modifier = {
+		factor = 1000
+		is_institution_enabled = printing_press
+		}
+	}
+	option = {
+		name = homebrew_idea.11.1
+		hidden_effect = {
+			country_event = {
+				id = homebrew_idea.33
+				days = 0
+			}
+		}
+	}
+}
+
+#artifice research: necrolyzer
+country_event = {
+
+	id = homebrew_idea.12
+	title = homebrew_idea.12.t
+	desc = homebrew_idea.12.d
+	picture = WESTERNISATION_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_country_modifier = chief_artificer
+		has_country_flag = unlocked_artifice_invention_domination_potions
+		NOT = { has_country_flag = unlocked_artifice_invention_necrolyzer }
+		NOT = { has_country_flag = nurael_convention }
+		NOT = { has_country_modifier = artificer_cooldown }
+	}
+	immediate = {
+		hidden_effect = {
+			add_country_modifier = {
+				name = artificer_cooldown
+				duration = 7300
+				hidden = yes
+			}
+		}
+	}
+	mean_time_to_happen = { 
+		days = 1 
+		modifier = {
+		factor = 1000
+		is_institution_enabled = global_trade
+		}
+	}
+	option = {
+		name = homebrew_idea.12.1
+		hidden_effect = {
+		country_event = {
+			id = homebrew_idea.18
+			}
+		}
+	}
+}
+
+#artifice research: bullet worms pt1
+country_event = {
+
+	id = homebrew_idea.13
+	title = homebrew_idea.13.t
+	desc = homebrew_idea.13.d
+	picture = WESTERNISATION_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_country_modifier = chief_artificer
+		is_institution_enabled = global_trade
+		has_country_flag = unlocked_artifice_invention_necrolyzer
+		NOT = { has_country_flag = unlocked_artifice_invention_bullet_worms }
+		NOT = { has_country_flag = nurael_convention }
+		NOT = { has_country_modifier = artificer_cooldown }
+	}
+	immediate = {
+		hidden_effect = {
+			add_country_modifier = {
+				name = artificer_cooldown
+				duration = 7300
+				hidden = yes
+			}
+		}
+	}
+	mean_time_to_happen = { 
+		days = 1 
+		modifier = {
+		factor = 1000
+		is_institution_enabled = manufactories
+		}
+	}
+	option = {
+		name = homebrew_idea.13.1
+		hidden_effect = {
+		country_event = {
+			id = homebrew_idea.14
+			}
+		}
+	}
+}
+
+#artifice research: bullet worms pt2
+#part of event chain, exclude from pulse events
+country_event = {
+
+	id = homebrew_idea.14
+	title = homebrew_idea.14.t
+	desc = homebrew_idea.14.d
+	picture = INVENTION_eventPicture
+	
+	is_triggered_only = yes
+
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.14.1
+		set_country_flag = unlocked_artifice_invention_bullet_worms
+		custom_tooltip = new_artifice_invention_tooltip
+	}
+}
+
+#artifice research: serpentrot gas
+country_event = {
+
+	id = homebrew_idea.15
+	title = homebrew_idea.15.t
+	desc = homebrew_idea.15.d
+	picture = WESTERNISATION_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_country_modifier = chief_artificer
+		is_institution_enabled = enlightenment
+		has_country_flag = unlocked_artifice_invention_dwarf_eye
+		NOT = { has_country_flag = unlocked_artifice_invention_serpentrot_gas }
+		NOT = { has_country_flag = nurael_convention }
+		NOT = { has_country_modifier = artificer_cooldown }
+	}
+	immediate = {
+		hidden_effect = {
+			add_country_modifier = {
+				name = artificer_cooldown
+				duration = 7300
+				hidden = yes
+			}
+		}
+	}
+	mean_time_to_happen = { 
+		days = 1 
+		modifier = {
+		factor = 1000
+		is_institution_enabled = industrialization
+		}
+	}
+	option = {
+		name = homebrew_idea.15.1
+		ai_chance = { factor = 100 }
+		hidden_effect = {
+		country_event = {
+			id = homebrew_idea.16
+			}
+		}
+	}
+	option = {
+		name = homebrew_idea.15.2
+		ai_chance = { factor = 0 }
+		hidden_effect = {
+		country_event = {
+			id = homebrew_idea.17
+			}
+		}
+		custom_tooltip = homebrew_rollinit_tt
+	}
+}
+#artifice research: serpentrot pt 2
+#part of event chain, exclude from pulse events
+country_event = {
+
+	id = homebrew_idea.16
+	title = homebrew_idea.16.t
+	desc = homebrew_idea.16.d
+	picture = BAD_WITH_MONARCH_eventPicture
+	
+	is_triggered_only = yes
+
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.16.1
+		set_country_flag = unlocked_artifice_invention_serpentrot_gas
+		custom_tooltip = new_artifice_invention_tooltip
+	}
+}
+#gassing the ruler
+#part of event chain, exclude from pulse events
+country_event = {
+
+	id = homebrew_idea.17
+	title = homebrew_idea.17.t
+	desc = homebrew_idea.17.d
+	picture = DEATH_OF_HEIR_eventPicture
+	
+	is_triggered_only = yes
+
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.17.1
+		set_country_flag = runaway_artificer
+		kill_ruler = yes
+		add_stability = -1
+	}
+	
+}
+#necrolyzer part 2
+#part of event chain, exclude from pulse events
+country_event = {
+
+	id = homebrew_idea.18
+	title = homebrew_idea.18.t
+	desc = homebrew_idea.18.d
+	picture = UNDEAD_ARMY_eventPicture
+	
+	is_triggered_only = yes
+
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.18.1
+		set_country_flag = unlocked_artifice_invention_necrolyzer
+		custom_tooltip = new_artifice_invention_tooltip
+	}
+}
+#introduce chief artificer
+country_event = {
+
+	id = homebrew_idea.19
+	title = homebrew_idea.19.t
+	desc = homebrew_idea.19.d
+	picture = ADVISOR_eventPicture
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		has_idea_group = AIG_artificery_ideas
+		NOT = { has_country_modifier = chief_artificer }
+		NOT = { has_country_flag = runaway_artificer }
+	}
+	mean_time_to_happen = { 
+		days = 1 
+		modifier = {
+		factor = 1000
+		}
+	}
+	option = {
+		name = homebrew_idea.19.1
+		ai_chance = { factor = 100 }
+		set_country_flag = questioned_artificer
+		add_country_modifier = { 
+		name = chief_artificer
+		duration = -1
+		}
+	}
+	option = {
+		name = homebrew_idea.19.2
+		ai_chance = { factor = 0 }
+		set_country_flag = runaway_artificer
+	}
+	option = {
+		name = homebrew_idea.19.3
+		ai_chance = { factor = 0 }
+		set_country_flag = runaway_artificer
+		define_advisor = {
+		type = court_mage
+		name = "Jamison Earnest"
+		skill = 1
+		culture = anbenncoster
+		religion = regent_court
+		discount = yes
+		cost_multiplier = 0.25
+		}
+	}
+}
+#immortal artificer
+country_event = {
+
+	id = homebrew_idea.20
+	title = homebrew_idea.20.t
+	desc = homebrew_idea.20.d
+	picture = ACCUSATION_eventPicture
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		has_country_modifier = chief_artificer
+		had_country_flag = {
+			flag = questioned_artificer
+			days = 18250
+		}
+	}
+
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.20.1
+		ai_chance = { factor = 30 }
+		hidden_effect = {
+		if = {
+			limit = {
+				OR = {
+					NOT = { dip = 2 }
+					ruler_has_personality = babbling_buffoon_personality
+					ruler_has_personality = naive_personality
+					ruler_has_personality = loose_lips_personality
+					NOT = {
+						OR = {
+						dip = 5
+						ruler_has_personality = silver_tongue_personality
+						ruler_has_personality = charismatic_negotiator_personality
+						ruler_has_personality = secretive_personality
+						ruler_has_personality = fierce_negotiator_personality
+						}
+					}
+				}
+			}
+			country_event = {
+			id = homebrew_idea.24
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					dip = 5
+					ruler_has_personality = silver_tongue_personality
+					ruler_has_personality = charismatic_negotiator_personality
+					ruler_has_personality = secretive_personality
+					ruler_has_personality = fierce_negotiator_personality
+				}
+			}
+			country_event = {
+			id = homebrew_idea.21
+			}
+		}
+		else = {
+		random_list = {
+			10 = {
+				country_event = {
+					id = homebrew_idea.21 #scholar
+					}
+				}
+			10 = {
+				country_event = {
+					id = homebrew_idea.22 #avoided the question
+					}
+				}
+			10 = {
+				country_event = {
+					id = homebrew_idea.23 #temporary insanity
+					}
+				}
+			10 = {
+				country_event = {
+					id = homebrew_idea.24 #fish-head
+					}
+				}
+			}
+		}
+		custom_tooltip = homebrew_rolldip_tt
+	}
+	}
+	option = {
+		name = homebrew_idea.20.2
+		ai_chance = { factor = 60 }
+		set_ruler_flag = questioned_artificer
+		add_prestige = -10
+	}
+	option = {
+		name = homebrew_idea.20.3
+		ai_chance = { factor = 10 }
+		set_country_flag = runaway_artificer
+		if = {
+			limit = {
+				OR = {
+					NOT = { mil = 2 }
+					ruler_has_personality = loose_lips_personality
+					ruler_has_personality = craven_personality
+					ruler_has_personality = babbling_buffoon_personality
+				}
+				NOT = {
+					OR = {
+					mil = 5
+					ruler_has_personality = bold_fighter_personality
+					ruler_has_personality = inspiring_leader_personality
+					ruler_has_personality = strict_personality
+					}
+				}
+			}
+			country_event = {
+				id = homebrew_idea.28
+				}
+		}
+		if = {
+			limit = {
+				OR = {
+					mil = 5
+					ruler_has_personality = bold_fighter_personality
+					ruler_has_personality = inspiring_leader_personality
+					ruler_has_personality = strict_personality
+				}
+			}
+			country_event = {
+				id = homebrew_idea.25
+				}
+		}
+		else = {
+			random_list = {
+				10 = {
+					country_event = {
+					id = homebrew_idea.26 #guards fail to catch
+					}
+				}
+				10 = {
+					country_event = {
+					id = homebrew_idea.27 #guards fail, heavy losses
+					}
+				}
+				10 = {
+					country_event = {
+					id = homebrew_idea.28 #preemptive strike by ch. artificer
+					}
+				}
+			}
+		}
+		custom_tooltip = homebrew_rollinit_tt
+	}
+}
+#outcome: scholar
+#part of event chain, exclude from pulse events
+country_event = {
+
+	id = homebrew_idea.21
+	title = homebrew_idea.21.t
+	desc = homebrew_idea.21.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = homebrew_idea.21.1
+		add_ruler_personality = scholar_personality
+	}
+}
+#outcome: avoided question
+#part of event chain, exclude from pulse events
+country_event = {
+
+	id = homebrew_idea.22
+	title = homebrew_idea.22.t
+	desc = homebrew_idea.22.d
+	picture = OVEREXTENSION_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = homebrew_idea.22.1
+	}
+}
+#outcome: temporary madness
+#part of event chain, exclude from pulse events
+country_event = {
+
+	id = homebrew_idea.23
+	title = homebrew_idea.23.t
+	desc = homebrew_idea.23.d
+	picture = KING_SICK_IN_BED_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = homebrew_idea.23.1
+		add_ruler_modifier = {
+		name = artificer_madness
+		duration = 3650
+		}
+	}
+}
+#outcome: fish head
+#part of event chain, exclude from pulse events
+country_event = {
+
+	id = homebrew_idea.24
+	title = homebrew_idea.24.t
+	desc = homebrew_idea.24.d
+	picture = BAD_WITH_MONARCH_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = homebrew_idea.24.1
+		set_country_flag = runaway_artificer
+		remove_country_modifier = chief_artificer
+		set_dynasty = "Fishface" #doesn't work without messing with dynasty files
+		change_adm = -1
+		change_dip = -1
+		change_mil = -1
+		add_ruler_modifier = {
+		name = fish_head
+		duration = -1
+		}
+	}
+}
+#outcome: ruler led arrest
+#part of event chain, exclude from pulse events
+country_event = {
+
+	id = homebrew_idea.25
+	title = homebrew_idea.25.t
+	desc = homebrew_idea.25.d
+	picture = BATTLE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = homebrew_idea.25.1
+		remove_country_modifier = chief_artificer
+		add_manpower = -0.05
+		add_absolutism = 15
+	}
+}
+#outcome: artificer escapes arrest
+#part of event chain, exclude from pulse events
+country_event = {
+
+	id = homebrew_idea.26
+	title = homebrew_idea.26.t
+	desc = homebrew_idea.26.d
+	picture = BATTLE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = homebrew_idea.26.1
+		remove_country_modifier = chief_artificer
+		add_manpower = -0.05
+		add_adm_power = -25
+		add_dip_power = -25
+		add_mil_power = -25
+	}
+}
+#outcome: artificer escapes arrest, heavy casualties
+#part of event chain, exclude from pulse events
+country_event = {
+
+	id = homebrew_idea.27
+	title = homebrew_idea.27.t
+	desc = homebrew_idea.27.d
+	picture = BATTLE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = homebrew_idea.27.1
+		remove_country_modifier = chief_artificer
+		add_yearly_manpower = -0.5
+		add_prestige = -10
+		add_adm_power = -50
+		add_dip_power = -50
+		add_mil_power = -50
+	}
+}
+#outcome: preemptive strike by artificer
+#part of event chain, exclude from pulse events
+country_event = {
+
+	id = homebrew_idea.28
+	title = homebrew_idea.28.t
+	desc = homebrew_idea.28.d
+	picture = BATTLE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = homebrew_idea.28.1
+		remove_country_modifier = chief_artificer
+		kill_ruler = yes
+		add_adm_power = -100
+		add_dip_power = -100
+		add_mil_power = -100
+	}
+}
+#chief artificer protests nurael convention
+country_event = {
+
+	id = homebrew_idea.29
+	title = homebrew_idea.29.t
+	desc = homebrew_idea.29.d
+	picture = BURGHER_ESTATE_UPSET_eventPicture
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		has_country_modifier = chief_artificer
+		has_country_flag = nurael_convention
+	}
+	mean_time_to_happen = { 
+		days = 1 
+		modifier = {
+		factor = 1000
+		NOT = { has_country_flag = artificer_protest }
+		}
+	}
+	immediate = { set_country_flag = artificer_protest }
+	option = {
+		name = homebrew_idea.29.1
+		ai_chance = { factor = 10 }
+		add_prestige = -10
+		add_estate_loyalty = {
+			estate = estate_artificers
+			loyalty = 10
+		}
+		clr_country_flag = nurael_convention
+		add_country_modifier = {
+			name = nurael_suggestion
+			duration = -1
+		}
+	}
+	option = {
+		name = homebrew_idea.29.2
+		ai_chance = { factor = 90 }
+		add_dip_power = -50
+	}
+	option = {
+		name = homebrew_idea.29.3
+		ai_chance = { factor = 0 }
+		set_country_flag = runaway_artificer
+		if = {
+			limit = {
+				OR = {
+					NOT = { mil = 2 }
+					ruler_has_personality = loose_lips_personality
+					ruler_has_personality = craven_personality
+					ruler_has_personality = babbling_buffoon_personality
+				}
+			}
+			country_event = {
+				id = homebrew_idea.28
+				}
+		}
+		if = {
+			limit = {
+				OR = {
+					mil = 5
+					ruler_has_personality = bold_fighter_personality
+					ruler_has_personality = inspiring_leader_personality
+					ruler_has_personality = strict_personality
+				}
+			}
+			country_event = {
+				id = homebrew_idea.25
+				}
+		}
+		else = {
+			random_list = {
+				10 = {
+					country_event = {
+					id = homebrew_idea.26 #guards fail to catch
+					}
+				}
+				10 = {
+					country_event = {
+					id = homebrew_idea.27 #guards fail, heavy losses
+					}
+				}
+				10 = {
+					country_event = {
+					id = homebrew_idea.28 #preemptive strike by ch. artificer
+					}
+				}
+			}
+		}
+		custom_tooltip = homebrew_rollinit_tt
+	}
+}
+#rumble of scientific triumph
+country_event = {
+
+	id = homebrew_idea.30
+	title = homebrew_idea.30.t
+	desc = homebrew_idea.30.d
+	picture = IMPORTANT_STATUE_eventPicture
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		has_country_modifier = chief_artificer
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.30.1
+		ai_chance = { factor = 75 }
+		random_list = {
+			10 = {
+			add_adm_power = 50
+			}
+			10 = {
+			add_dip_power = 50
+			}
+			10 = {
+			add_mil_power = 50
+			}
+		}
+	}
+	option = {
+		name = homebrew_idea.30.2
+		ai_chance = { factor = 25 }
+		add_years_of_income = -0.5
+		add_adm_power = 50
+		add_dip_power = 50
+		add_mil_power = 50
+	}
+}
+#wub wub
+country_event = {
+
+	id = homebrew_idea.31
+	title = homebrew_idea.31.t
+	desc = homebrew_idea.31.d
+	picture = THEATRE_eventPicture
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		has_idea_group = AIG_artificery_ideas
+		NOT = { has_country_flag = sparkdrive_music }
+	}
+	immediate = {
+		set_country_flag = sparkdrive_music
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.31.1
+		ai_chance = { factor = 50 }
+		add_years_of_income = -0.5
+		add_prestige = 10
+		add_country_modifier = {
+			name = techno_music
+			duration = 3650
+		}
+	}
+	option = {
+		name = homebrew_idea.31.2
+		ai_chance = { factor = 50 }
+		add_prestige = 5
+	}
+}
+#the future is now
+country_event = {
+
+	id = homebrew_idea.32
+	title = homebrew_idea.32.t
+	desc = homebrew_idea.32.d
+	picture = NOBLE_ESTATE_DEMANDS_eventPicture
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		has_idea_group = AIG_artificery_ideas
+	}
+	option = {
+		name = homebrew_idea.32.1
+		ai_chance = { factor = 50 }
+		add_estate_loyalty = {
+			estate = estate_nobles
+			loyalty = -10
+		}
+		add_army_tradition = -15
+	}
+	option = {
+		name = homebrew_idea.32.2
+		ai_chance = { factor = 50 }
+		add_estate_loyalty = {
+			estate = estate_artificers
+			loyalty = -10
+		}
+		add_country_modifier = {
+			name = technology_scaleback
+			duration = 1825
+		}
+	}
+}
+
+#domination potions part 2
+country_event = {
+
+	id = homebrew_idea.33
+	title = homebrew_idea.33.t
+	desc = homebrew_idea.33.d
+	picture = INVENTION_eventPicture
+	
+	is_triggered_only = yes
+
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.33.1
+		set_country_flag = unlocked_artifice_invention_domination_potions
+		custom_tooltip = new_artifice_invention_tooltip
+	}
+}
+
+
+#dwarf eye part 1
+country_event = {
+
+	id = homebrew_idea.36
+	title = homebrew_idea.36.t
+	desc = homebrew_idea.36.d
+	picture = COURT_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_country_modifier = chief_artificer
+		is_institution_enabled = manufactories
+		has_country_flag = unlocked_artifice_invention_bullet_worms
+		NOT = { has_country_flag = unlocked_artifice_invention_dwarf_eye }
+		NOT = { has_country_flag = nurael_convention }
+		NOT = { has_country_modifier = artificer_cooldown }
+	}
+	immediate = {
+		hidden_effect = {
+			add_country_modifier = {
+				name = artificer_cooldown
+				duration = 7300
+				hidden = yes
+			}
+		}
+	}
+	mean_time_to_happen = { 
+		days = 1 
+		modifier = {
+		factor = 1000
+		is_institution_enabled = enlightenment
+		}
+	}
+	option = {
+		name = homebrew_idea.36.1
+		hidden_effect = {
+		country_event = {
+			id = homebrew_idea.37
+			days = 365
+			random = 365
+			}
+		}
+	}
+	option = {
+		name = homebrew_idea.36.2
+		highlight = yes
+		trigger = { religion_group = dwarven }
+		hidden_effect = {
+		country_event = {
+			id = homebrew_idea.37
+			days = 365
+			random = 365
+			}
+		}
+		set_country_flag = unlocked_artifice_invention_runepress
+		custom_tooltip = new_artifice_invention_tooltip
+	}
+}
+
+#dwarf eye part 2
+country_event = {
+
+	id = homebrew_idea.37
+	title = homebrew_idea.37.t
+	desc = homebrew_idea.37.d
+	picture = INVENTION_eventPicture
+	
+	is_triggered_only = yes
+
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.37.1
+		set_country_flag = unlocked_artifice_invention_dwarf_eye
+		custom_tooltip = new_artifice_invention_tooltip
+	}
+}
+
+#khetgirl revision - confrontation
+country_event = {
+
+	id = homebrew_idea.38
+	title = homebrew_idea.38.t
+	desc = homebrew_idea.38.d
+	picture = COURT_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = homebrew_idea.38.1
+		trigger = {
+			has_country_flag = unlocked_artifice_invention_necrolyzer
+		}
+		hidden_effect = {
+		country_event = {
+			id = homebrew_idea.39
+			days = 365
+			random = 365
+			}
+		}
+	}
+	option = {
+		name = homebrew_idea.38.2
+		trigger = {
+		has_country_flag = unlocked_artifice_invention_dwarf_eye
+		}
+		hidden_effect = {
+		country_event = {
+			id = homebrew_idea.40
+			days = 365
+			random = 365
+			}
+		}
+	}
+	option = {
+		name = homebrew_idea.38.3
+	}
+}
+
+#khetgirl revision - failure
+country_event = {
+
+	id = homebrew_idea.39
+	title = homebrew_idea.39.t
+	desc = homebrew_idea.39.d
+	picture = UNDEAD_ARMY_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = homebrew_idea.39.1
+		add_prestige = -10
+	}
+}
+
+#khetgirl revision - success
+country_event = {
+
+	id = homebrew_idea.40
+	title = homebrew_idea.40.t
+	desc = homebrew_idea.40.d
+	picture = FEMALES_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = homebrew_idea.40.1
+		set_country_flag = unlocked_artifice_invention_khetgirl
+		custom_tooltip = new_artifice_invention_tooltip
+	}
+}
+
+### Magocratic Ideas ###
+
+#funni mirror
+country_event = {
+
+	id = homebrew_idea.41
+	title = homebrew_idea.41.t
+	desc = homebrew_idea.41.d
+	picture = CHURCH_ESTATE_1_eventPicture
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		has_idea_group = AIG_magocratic_ideas
+	}
+	immediate = {
+		set_ruler_flag = looked_into_mirror
+	}
+	mean_time_to_happen = {
+		days = 1 
+		modifier = {
+			factor = 10
+			always = yes
+		}
+		modifier = {
+			factor = 0
+			AND = {
+				has_ruler_flag = looked_into_mirror
+				NOT = {
+					had_ruler_flag = {
+						flag = looked_into_mirror
+						days = 18250
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = homebrew_idea.41.1
+		ai_chance = { factor = 100 }
+		hidden_effect = {
+		set_country_flag = knows_of_mirror
+		random_list = { 
+			10 = {
+				modifier = {
+					factor = 1
+					
+				}
+				country_event = {
+					id = homebrew_idea.100
+				}
+			}
+			10 = {
+				country_event = {
+					id = homebrew_idea.101
+				}
+			}
+			10 = {
+				country_event = {
+					id = homebrew_idea.102
+				}
+			}
+			10 = {
+				country_event = {
+					id = homebrew_idea.103
+				}
+			}
+			10 = {
+				country_event = {
+					id = homebrew_idea.104
+				}
+			}
+			10 = {
+				country_event = {
+					id = homebrew_idea.105
+				}
+			}
+			10 = {
+				country_event = {
+					id = homebrew_idea.106
+				}
+			}
+			10 = {
+				country_event = {
+					id = homebrew_idea.107
+				}
+			}
+			10 = {
+				modifier = {
+					factor = 0
+					always = yes #suspended until I can stop cringing at the loc
+				}
+				country_event = {
+					id = homebrew_idea.108
+				}
+			}
+			10 = {
+				modifier = {
+					factor = 0
+					NOT = { capital_scope = { continent = cannor } } #makes no sense if you have no contact w/ magisterium
+				}
+				country_event = {
+					id = homebrew_idea.109
+				}
+			}
+			10 = {
+				country_event = {
+					id = homebrew_idea.110
+				}
+			}
+			10 = {
+				country_event = {
+					id = homebrew_idea.111
+				}
+			}
+			10 = {
+				country_event = {
+					id = homebrew_idea.112
+				}
+			}
+			10 = {
+				modifier = {
+					factor = 0
+					#capital_scope = { continent = insyaa } #makes no sense if you're already on the continent
+					always = yes #wip
+				}
+				country_event = {
+					id = homebrew_idea.113
+				}
+			}
+			10 = {
+				modifier = {
+					factor = 0
+					#capital_scope = { 
+					#	OR = { 
+					#		area = AREANC118_AREA #obvious wip names, will update later
+					#		area = AREANC119_AREA
+					#	} 
+					#} #makes no sense if you're already in 				T̴̼͉̲͖͌Ḩ̵̢̢̨̻͈̼͐̾̃̅͆̾͜Ȩ̷̛̺̦̤̤̯̻̘͎͓̞͚̟̑́͐̆͋̚̚͘͝ ̶̧̥͇͇͕͇͓̥̀̓̿͑̊͒̏̓̄́̑̑͝V̷̛̠́̈́̌͆̀̔́̉̊Ǎ̴͕̠̆͝Ḻ̵̛̦͕̲̦͓̜͍̘̥̙̘̿̿̅͜ͅḶ̸̨̡̖̭͓̖̱̭͕̩͕̥̫̌̇̊ͅȨ̸̢͕͇̜͚͓̩̝̭͔̀̎̿͜͠ͅY̴̻̥̖̩̬͉̝̭͙̞̼͑̂̀́̽̈́͗̀͗̇͌̄̈́̓̚͜
+					always = yes #wip
+				}
+				country_event = {
+					id = homebrew_idea.114
+				}
+			}
+			}
+		}
+		custom_tooltip = homebrew_funni_mirror_tt
+	}
+	option = {
+		name = homebrew_idea.41.2
+		ai_chance = { factor = 0 }
+		add_prestige = -10
+	}
+	option = {
+		name = homebrew_idea.41.3
+		ai_chance = { factor = 0 }
+		trigger = { has_ruler_flag = knows_of_mirror }
+	}
+	option = {
+		name = homebrew_idea.41.4
+		ai_chance = { factor = 25 }
+		highlight = yes
+		trigger = { has_faction = tec_technomancy }
+		add_estate_loyalty = {
+			estate = estate_mages
+			loyalty = 10
+		}
+		add_faction_influence = {
+			faction = tec_technomancy
+			influence = 10
+		}
+	}
+}
+
+#court mage advisor
+country_event = {
+
+	id = homebrew_idea.42
+	title = homebrew_idea.42.t
+	desc = homebrew_idea.42.d
+	picture = ADVISOR_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = AIG_magocratic_ideas
+		NOT = { has_ruler_flag = free_court_mage }
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.42.1
+		set_ruler_flag = free_court_mage
+		define_advisor = {
+		type = court_mage
+		skill = 3
+		discount = yes
+		}
+	}
+}
+
+#war wizard appears
+country_event = {
+
+	id = homebrew_idea.43
+	title = homebrew_idea.43.t
+	desc = homebrew_idea.43.d
+	picture = SPELL_LIST_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = AIG_magocratic_ideas
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.43.1
+		add_years_of_income = -1
+		add_mil_power = -200
+		create_war_wizard_effect = yes
+	}
+	option = {
+		name = homebrew_idea.43.2
+	}
+}
+
+#free spell
+country_event = {
+
+	id = homebrew_idea.44
+	title = homebrew_idea.44.t
+	desc = homebrew_idea.44.d
+	picture = CHURCH_ESTATE_1_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = AIG_magocratic_ideas
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.44.1
+		trigger = {
+			estate_influence = {
+				estate = estate_mages
+				influence = 66
+			}
+		}
+		set_country_flag = homebrew_free_spell
+		custom_tooltip = free_spell_tt
+	}
+	option = {
+		name = homebrew_idea.44.1
+		trigger = {
+			NOT = {
+				estate_influence = {
+					estate = estate_mages
+					influence = 66
+				}
+			}
+		}
+		set_country_flag = homebrew_powerful_spell
+		custom_tooltip = powerful_spell_tt
+	}
+}
+
+#abjuration
+country_event = {
+
+	id = homebrew_idea.45
+	title = homebrew_idea.45.t
+	desc = homebrew_idea.45.d
+	picture = FORT_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = AIG_magocratic_ideas
+	}
+	immediate = {
+		hidden_effect = {
+			random_owned_province = {
+				limit = {
+					fort_level = 2
+				}
+				save_event_target_as = province
+			}
+		}
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.45.1
+		add_dip_power = -25
+		add_country_modifier = {
+			name = homebrew_skilled_abjurer
+			duration = 3650
+		}
+	}
+	option = {
+		name = homebrew_idea.45.2
+		event_target:province = {
+			add_province_modifier = {
+				name = homebrew_local_abjurer
+				duration = -1
+			}
+		}
+	}
+}
+
+#coinmaker mages
+country_event = {
+
+	id = homebrew_idea.46
+	title = homebrew_idea.46.t
+	desc = homebrew_idea.46.d
+	picture = MERCHANTS_TALKING_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = AIG_magocratic_ideas
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.46.1
+		add_years_of_income = 1.5
+		add_inflation = 5
+		add_country_modifier = {
+			name = coinmaker_mages
+			duration = 3650
+		}
+	}
+	option = {
+		name = homebrew_idea.46.2
+		add_mil_power = -50
+	}
+}
+
+#magister loyalty
+country_event = {
+
+	id = homebrew_idea.47
+	title = homebrew_idea.47.t
+	desc = homebrew_idea.47.d
+	picture = CHURCH_ESTATE_UPSET_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = AIG_magocratic_ideas
+		has_estate_privilege = estate_mages_organization_magisterium
+		knows_country = A85
+		NOT = { tag = A85 }
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.47.1
+		add_estate_loyalty = {
+			estate = estate_mages
+			loyalty = 10
+		}
+	}
+	option = {
+		name = homebrew_idea.47.2
+		add_estate_influence_modifier = {
+			estate = estate_mages
+			desc = event_distanced_magisters
+			influence = -20
+		}
+		reverse_add_opinion = {
+			who = A85
+			modifier = opinion_distanced_magisters
+		}	
+	}
+}
+
+#skilled illusion mage
+country_event = {
+
+	id = homebrew_idea.48
+	title = homebrew_idea.48.t
+	desc = homebrew_idea.48.d
+	picture = SPY_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = AIG_magocratic_ideas
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.48.1
+		add_country_modifier = {
+			name = homebrew_illusion_magic
+			duration = 3650
+		}
+	}
+}
+
+#lich hunts
+country_event = {
+
+	id = homebrew_idea.49
+	title = homebrew_idea.49.t
+	desc = homebrew_idea.49.d
+	picture = ACCUSATION_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = AIG_magocratic_ideas
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.49.1
+		add_adm_power = -70
+		add_mil_power = -70
+	}
+	option = {
+		name = homebrew_idea.49.2
+		add_stability = -1
+	}
+}
+
+#muggles
+country_event = {
+
+	id = homebrew_idea.50
+	title = homebrew_idea.50.t
+	desc = homebrew_idea.50.d
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = AIG_magocratic_ideas
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.50.1
+		add_country_modifier = {
+			name = muggles_upset
+			duration = 3650
+		}
+	}
+	option = {
+		name = homebrew_idea.50.2
+		add_adm_power = -50
+		add_dip_power = -50
+		add_mil_power = -50
+	}
+}
+
+### Monstrous Ideas ###
+
+#demonsterize
+country_event = {
+
+	id = homebrew_idea.51
+	title = homebrew_idea.51.t
+	desc = homebrew_idea.51.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		full_idea_group = monstrous_ideas
+		NOT = { has_country_flag = demonsterize_event }
+	}
+	immediate = { set_country_flag = demonsterize_event }
+	mean_time_to_happen = { 
+		days = 1 
+		modifier = {
+		factor = 1000
+		always = yes
+		}
+	}
+	option = {
+		name = homebrew_idea.51.1
+		set_country_flag = homebrew_demonsterization
+		custom_tooltip = homebrew_demonsterize_tt
+	}
+	option = {
+		name = homebrew_idea.51.2
+		add_stability = 1
+		increase_monstrous_3 = yes
+	}
+}
+
+#gorc and morc
+country_event = {
+
+	id = homebrew_idea.52
+	title = homebrew_idea.52.t
+	desc = homebrew_idea.52.d
+	picture = SCOTTISH_MERCENARIES_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = monstrous_ideas
+		high_tolerance_orcish_race_trigger = yes
+		NOT = { has_country_flag = gorc_n_morc }
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.52.1
+		set_country_flag = gorc_n_morc
+		define_general = {
+		shock = 6
+		fire = 4
+		manuever = 4
+		siege = 1
+		name = "G'Orc"
+		trait = master_of_arms_personality
+		}
+	}
+	option = {
+		name = homebrew_idea.52.2
+		set_country_flag = gorc_n_morc
+		define_general = {
+		shock = 4
+		fire = 4
+		manuever = 5
+		siege = 5
+		name = "M'Orc"
+		trait = siege_specialist_personality
+		}
+	}
+}
+
+#harpy concubines
+country_event = {
+
+	id = homebrew_idea.53
+	title = homebrew_idea.53.t
+	desc = homebrew_idea.53.d
+	picture = 3_SONS_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = monstrous_ideas
+		high_tolerance_harpy_race_trigger = yes
+		any_owned_province = {
+			AND = {
+				is_capital = yes
+				OR = {
+					has_harpy_minority_trigger = yes
+					has_harpy_majority_trigger = yes
+				}
+			}
+		}
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.53.1
+		capital_scope = {
+			add_province_modifier = {
+				name = homebrew_mates
+				duration = 3650
+			}
+			random_list = {
+			10 = { add_base_tax = 1 }
+			10 = { add_base_production = 1 }
+			10 = { add_base_manpower = 1 }
+			}
+		}
+	}
+	option = {
+		name = homebrew_idea.53.2
+		add_country_modifier = {
+			name = homebrew_restricted_mates
+			duration = 3650
+		}
+	}
+}
+
+#gobbo industrializing in your backyard
+country_event = {
+
+	id = homebrew_idea.54
+	title = homebrew_idea.54.t
+	desc = homebrew_idea.54.d
+	picture = CITY_DEVELOPMENT_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = monstrous_ideas
+		NOT = { low_tolerance_goblin_race_trigger = yes }
+		any_owned_province = {
+			OR = {
+			has_goblin_minority_trigger = yes
+			has_goblin_majority_trigger = yes
+			}
+		}
+	}
+	immediate = {
+		hidden_effect = {
+			random_owned_province = {
+				limit = {
+					OR = {
+						has_goblin_minority_trigger = yes
+						has_goblin_majority_trigger = yes
+					}
+				}
+				save_event_target_as = gobbo_industrialize
+			}
+		}
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.54.1
+		event_target:gobbo_industrialize = {
+			add_province_modifier = {
+				name = homebrew_rampant_gobbo
+				duration = 3650
+			}
+			random_list = {
+			10 = { add_base_tax = 1 }
+			10 = { add_base_production = 1 }
+			10 = { add_base_manpower = 1 }
+			}
+			if = {
+				limit = { has_goblin_majority_trigger = yes }
+				random = {
+					chance = 50
+					add_base_production = 1
+				}
+			}
+			else_if = {
+				limit = { has_goblin_minority_trigger = yes }
+				add_goblin_minority_size_effect = yes
+			}
+		}
+	}
+	option = {
+		name = homebrew_idea.54.2
+		event_target:gobbo_industrialize = {
+			add_province_modifier = {
+				name = homebrew_restricted_gobbo
+				duration = 3650
+			}
+		}
+	}
+}
+
+#being a dick to advisors
+country_event = {
+
+	id = homebrew_idea.55
+	title = homebrew_idea.55.t
+	desc = homebrew_idea.55.d
+	picture = ACCUSATION_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = monstrous_ideas
+		absolutism = 40
+		AND = {
+			employed_advisor = { category = ADM }
+			employed_advisor = { category = DIP }
+			employed_advisor = { category = MIL }
+		}
+		NOT = { has_country_flag = monstrous_purge }
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.55.1
+		set_country_flag = monstrous_purge
+		remove_advisor_by_category = ADM
+		add_absolutism = 5
+		add_country_modifier = {
+			name = purged_admin
+			duration = 3650
+		}
+	}
+	option = {
+		name = homebrew_idea.55.2
+		set_country_flag = monstrous_purge
+		remove_advisor_by_category = DIP
+		add_absolutism = 5
+		add_country_modifier = {
+			name = purged_diplo
+			duration = 3650
+		}
+	}
+	option = {
+		name = homebrew_idea.55.3
+		set_country_flag = monstrous_purge
+		remove_advisor_by_category = MIL
+		add_absolutism = 5
+		add_country_modifier = {
+			name = purged_mil
+			duration = 3650
+		}
+	}
+	option = {
+		name = homebrew_idea.55.4
+		set_country_flag = monstrous_purge
+		remove_advisor_by_category = ADM
+		remove_advisor_by_category = DIP
+		remove_advisor_by_category = MIL
+		add_absolutism = 15
+		add_country_modifier = {
+			name = purged_cabinet
+			duration = 3650
+		}
+	}
+}
+
+#taking slaves
+country_event = {
+
+	id = homebrew_idea.56
+	title = homebrew_idea.56.t
+	desc = homebrew_idea.56.d
+	picture = LAND_MILITARY_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = monstrous_ideas
+		is_at_war = yes
+	}
+	immediate = {
+		hidden_effect = {
+			random_owned_province = {
+				limit = {
+					NOT = { development = 20 }
+					NOT = { trade_goods = slaves }
+					NOT = {
+						OR = {
+							has_terrain = dwarven_hold
+							has_terrain = dwarven_hold_surface
+							has_terrain = city_terrain
+						}
+					}
+				}
+				save_event_target_as = slave_influx
+			}
+		}
+	}
+	mean_time_to_happen = { 
+		days = 1 
+		modifier = {
+			factor = 10
+			always = yes
+		}
+	}
+	option = {
+		name = homebrew_idea.56.1
+		event_target:slave_influx = {
+			change_trade_goods = slaves
+		}
+	}
+	option = {
+		name = homebrew_idea.56.2
+		highlight = yes
+		trigger = { high_tolerance_gnollish_race_trigger = yes }
+		event_target:slave_influx = {
+			change_trade_goods = slaves
+			random_list = {
+			10 = { add_base_tax = 1 }
+			10 = { add_base_production = 1 }
+			10 = { add_base_manpower = 1 }
+			}
+			if = {
+				limit = { has_gnollish_majority_trigger = yes }
+				random = {
+					chance = 50
+					add_base_production = 1
+				}
+			}
+			else_if = {
+				limit = { has_gnollish_minority_trigger = yes }
+				add_gnollish_minority_size_effect = yes
+			}
+		}
+	}
+	option = {
+		name = homebrew_idea.56.3
+	}
+}
+
+#adventurers looting
+country_event = {
+
+	id = homebrew_idea.57
+	title = homebrew_idea.57.t
+	desc = homebrew_idea.57.d
+	picture = LAND_MILITARY_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = monstrous_ideas
+		NOT = { has_estate = estate_adventurers }
+	}
+	immediate = {
+		hidden_effect = {
+			random_owned_province = {
+				limit = {
+					is_state = yes
+					NOT = {
+						OR = {
+							has_terrain = dwarven_hold
+							has_terrain = dwarven_hold_surface
+							has_terrain = city_terrain
+							is_capital = yes
+						}
+					}
+				}
+				save_event_target_as = adventurer_bandits
+			}
+		}
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.57.1
+		event_target:adventurer_bandits = {
+			spawn_rebels = {
+				type = aw_bandits_rebels
+				size = 1
+			}
+		}
+	}
+	option = {
+		name = homebrew_idea.57.2
+		event_target:adventurer_bandits = {
+			add_province_modifier = {
+				name = wandering_adventurers
+				duration = 3650
+			}
+		}
+	}
+}
+
+#border skirmish
+country_event = {
+
+	id = homebrew_idea.58
+	title = homebrew_idea.58.t
+	desc = homebrew_idea.58.d
+	picture = LAND_MILITARY_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = monstrous_ideas
+		any_country = { is_neighbor_of = ROOT }
+	}
+	immediate = {
+		hidden_effect = {
+			random_neighbor_country = {
+				save_event_target_as = homebrew_border_skirmish
+			}
+		}
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.58.1
+		ai_chance = { 
+			factor = 50 
+			modifier = {
+				factor = 0
+				NOT = {
+					army_strength = {
+						who = event_target:homebrew_border_skirmish
+						value = 0.9
+					}
+				}
+			}
+		}
+		declare_war = event_target:homebrew_border_skirmish
+	}
+	option = {
+		name = homebrew_idea.58.2
+		ai_chance = { factor = 50 }
+		add_prestige = -30
+	}
+}
+
+#stab up
+country_event = {
+
+	id = homebrew_idea.59
+	title = homebrew_idea.59.t
+	desc = homebrew_idea.59.d
+	picture = ARTWORK_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = monstrous_ideas
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.59.1
+		add_stability_or_adm_power = yes
+	}
+}
+
+#conflict in military
+country_event = {
+
+	id = homebrew_idea.60
+	title = homebrew_idea.60.t
+	desc = homebrew_idea.60.d
+	picture = GENERALS_DISCUSSING_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = monstrous_ideas
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.60.1
+		add_country_modifier = {
+			name = monstrous_mil_reform
+			duration = 3650
+		}
+	}
+	option = {
+		name = homebrew_idea.60.2
+		add_army_tradition = 15
+		add_mil_power = -50
+	}
+}
+
+### Imperial Ideas ###
+
+#racial minority (cannorian) appears in capital
+#note: this was a bitch and a half to code. do not use add_minority scripts inside the capital scope, I butchered the add_minority script and inserted in just what I needed for the event to avoid if and else_if clauses
+country_event = {
+
+	id = homebrew_idea.61
+	title = homebrew_idea.61.t
+	desc = homebrew_idea.61.d
+	picture = EUROPEAN_REFUGEES_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = AIG_imperial_ideas
+	}
+	mean_time_to_happen = { 
+		days = 1 
+		modifier = {
+			factor = 3
+			has_idea_group = humanist_ideas
+		}
+		modifier = {
+			factor = 3
+			has_idea_group = assimilation0
+		}
+		modifier = {
+			factor = 0.33
+			AND = {
+				OR = {
+					capital_scope = { has_human_minority_trigger = yes }
+					capital_scope = { has_human_majority_trigger = yes }
+				}
+				OR = {
+					capital_scope = { has_halfling_minority_trigger = yes }
+					capital_scope = { has_halfling_majority_trigger = yes }
+				}
+				OR = {
+					capital_scope = { has_half_elven_minority_trigger = yes }
+					capital_scope = { has_half_elven_majority_trigger = yes }
+				}
+				OR = {
+					capital_scope = { has_dwarven_minority_trigger = yes }
+					capital_scope = { has_dwarven_majority_trigger = yes }
+				}
+				OR = {
+					capital_scope = { has_gnomish_minority_trigger = yes }
+					capital_scope = { has_gnomish_majority_trigger = yes }
+				}
+				OR = {
+					capital_scope = { has_elven_minority_trigger = yes }
+					capital_scope = { has_elven_majority_trigger = yes }
+				}
+			}
+		}
+	}
+	option = {
+		name = homebrew_idea.61.1
+		if = {
+			limit = {
+				OR = {
+					medium_tolerance_human_race_trigger = yes
+					high_tolerance_human_race_trigger = yes
+				}	
+				NOT = {
+					OR = {
+						capital_scope = { has_human_minority_trigger = yes }
+						capital_scope = { has_human_majority_trigger = yes }
+					}
+				}				
+			}			
+			capital_scope = {
+				custom_tooltip = add_human_minority_size_effect_tooltip
+				hidden_effect = {
+					add_permanent_province_modifier = { 
+						name = human_minority_coexisting_small 
+						duration = -1
+					}
+				}
+				add_unrest = 5
+			}
+		}
+		else_if = {
+			limit = {
+				OR = {
+					medium_tolerance_halfling_race_trigger = yes
+					high_tolerance_halfling_race_trigger = yes
+				}	
+				NOT = {
+					OR = {
+						capital_scope = { has_halfling_minority_trigger = yes }
+						capital_scope = { has_halfling_majority_trigger = yes }
+					}
+				}				
+			}			
+			capital_scope = {
+				custom_tooltip = add_halfling_minority_size_effect_tooltip
+				hidden_effect = {
+					add_permanent_province_modifier = { 
+						name = halfling_minority_coexisting_small 
+						duration = -1
+					}
+				}
+				add_unrest = 5
+			}
+		}
+		else_if = {
+			limit = {
+				OR = {
+					medium_tolerance_half_elven_race_trigger = yes
+					high_tolerance_half_elven_race_trigger = yes
+				}	
+				NOT = {
+					OR = {
+						capital_scope = { has_half_elven_minority_trigger = yes }
+						capital_scope = { has_half_elven_majority_trigger = yes }
+					}
+				}				
+			}			
+			capital_scope = {
+				custom_tooltip = add_half_elven_minority_size_effect_tooltip
+				hidden_effect = {
+					add_permanent_province_modifier = { 
+						name = half_elven_minority_coexisting_small 
+						duration = -1
+					}
+				}
+				add_unrest = 5
+			}
+		}
+		else_if = {
+			limit = {
+				OR = {
+					medium_tolerance_dwarven_race_trigger = yes
+					high_tolerance_dwarven_race_trigger = yes
+				}	
+				NOT = {
+					OR = {
+						capital_scope = { has_dwarven_minority_trigger = yes }
+						capital_scope = { has_dwarven_majority_trigger = yes }
+					}
+				}				
+			}			
+			capital_scope = {
+				custom_tooltip = add_dwarven_minority_size_effect_tooltip
+				hidden_effect = {
+					add_permanent_province_modifier = { 
+						name = dwarven_minority_coexisting_small 
+						duration = -1
+					}
+				}
+				add_unrest = 5
+			}
+		}
+		else_if = {
+			limit = {
+				OR = {
+					medium_tolerance_gnomish_race_trigger = yes
+					high_tolerance_gnomish_race_trigger = yes
+				}	
+				NOT = {
+					OR = {
+						capital_scope = { has_gnomish_minority_trigger = yes }
+						capital_scope = { has_gnomish_majority_trigger = yes }
+					}
+				}				
+			}			
+			capital_scope = {
+				custom_tooltip = add_gnomish_minority_size_effect_tooltip
+				hidden_effect = {
+					add_permanent_province_modifier = { 
+						name = gnomish_minority_coexisting_small 
+						duration = -1
+					}
+				}
+				add_unrest = 5
+			}
+		}
+		else_if = {
+			limit = {
+				OR = {
+					medium_tolerance_elven_race_trigger = yes
+					high_tolerance_elven_race_trigger = yes
+				}	
+				NOT = {
+					OR = {
+						capital_scope = { has_elven_minority_trigger = yes }
+						capital_scope = { has_elven_majority_trigger = yes }
+					}
+				}				
+			}			
+			capital_scope = {
+				custom_tooltip = add_elven_minority_size_effect_tooltip
+				hidden_effect = {
+					add_permanent_province_modifier = { 
+						name = elven_minority_coexisting_small 
+						duration = -1
+					}
+				}
+				add_unrest = 5
+			}
+		}
+		else = {
+			capital_scope = {
+				add_base_production = 1
+				add_unrest = 5
+			}
+		}
+	}
+	option = {
+		name = homebrew_idea.61.2
+	}
+}
+
+#Human tolerance - Istralore and Pearlsedge A45 + A11
+country_event = {
+
+	id = homebrew_idea.62
+	title = homebrew_idea.62.t
+	desc = homebrew_idea.62.d
+	picture = PROTESTANT_GREAT_REFORMER_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = AIG_imperial_ideas
+		NOT = {
+			OR = { 
+				tag = A11
+				tag = A45
+			}
+		}
+		NOT = { has_country_modifier = human_administration }
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.62.1
+		reverse_add_opinion = {
+			who = A11
+			modifier = opinion_imperial_elector
+		}
+		reverse_add_opinion = {
+			who = A45
+			modifier = opinion_imperial_elector
+		}
+		medium_increase_of_human_tolerance_effect = yes
+		add_adm_power = -25
+		add_dip_power = -25
+		add_mil_power = -25
+	}
+	option = {
+		name = homebrew_idea.62.2
+		add_prestige = 10
+	}
+}
+
+#Halfling tolerance - Beepeck A12
+country_event = {
+
+	id = homebrew_idea.63
+	title = homebrew_idea.63.t
+	desc = homebrew_idea.63.d
+	picture = PROTESTANT_GREAT_REFORMER_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = AIG_imperial_ideas
+		NOT = {	tag = A12 }
+		NOT = { has_country_modifier = halfling_administration }
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.63.1
+		reverse_add_opinion = {
+			who = A12
+			modifier = opinion_imperial_elector
+		}
+		medium_increase_of_halfling_tolerance_effect = yes
+		add_country_modifier = {
+			name = homebrew_halfling_concessions
+			duration = 3650
+		}
+	}
+	option = {
+		name = homebrew_idea.63.2
+		add_prestige = 10
+	}
+}
+
+#Elf tolerance - Moonhaven A31
+country_event = {
+
+	id = homebrew_idea.64
+	title = homebrew_idea.64.t
+	desc = homebrew_idea.64.d
+	picture = PROTESTANT_GREAT_REFORMER_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = AIG_imperial_ideas
+		NOT = {	tag = A31 }
+		NOT = { has_country_modifier = elven_administration }
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.64.1
+		reverse_add_opinion = {
+			who = A31
+			modifier = opinion_imperial_elector
+		}
+		medium_increase_of_elven_tolerance_effect = yes
+		random_owned_province = {
+			limit = { is_state = yes }
+			add_local_autonomy = 25
+		}
+	}
+	option = {
+		name = homebrew_idea.64.2
+		add_prestige = 10
+	}
+}
+
+#Dwarf Tolerance - Silverforge A73
+country_event = {
+
+	id = homebrew_idea.65
+	title = homebrew_idea.65.t
+	desc = homebrew_idea.65.d
+	picture = PROTESTANT_GREAT_REFORMER_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = AIG_imperial_ideas
+		NOT = {	tag = A73 }
+		NOT = { has_country_modifier = dwarven_administration }
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.65.1
+		reverse_add_opinion = {
+			who = A73
+			modifier = opinion_imperial_elector
+		}
+		medium_increase_of_dwarven_tolerance_effect = yes
+		add_years_of_income = -0.3
+	}
+	option = {
+		name = homebrew_idea.65.2
+		add_prestige = 10
+	}
+}
+
+#Gnome tolerance - Giberd (if elector) A81
+country_event = {
+
+	id = homebrew_idea.66
+	title = homebrew_idea.66.t
+	desc = homebrew_idea.66.d
+	picture = PROTESTANT_GREAT_REFORMER_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = AIG_imperial_ideas
+		NOT = {	tag = A81 }
+		NOT = { has_country_modifier = gnomish_administration }
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.66.1
+		if = {
+			limit = {
+				A81 = {
+					is_elector = yes
+				}
+			}
+			reverse_add_opinion = {
+				who = A81
+				modifier = opinion_imperial_elector
+			}
+		}
+		medium_increase_of_gnomish_tolerance_effect = yes
+		add_country_modifier = {
+			name = homebrew_gnome_concessions
+			duration = 3650
+		}
+	}
+	option = {
+		name = homebrew_idea.66.2
+		add_prestige = 10
+	}
+}
+
+#Half-Elf tolerance - Magisterium A85
+country_event = {
+
+	id = homebrew_idea.67
+	title = homebrew_idea.67.t
+	desc = homebrew_idea.67.d
+	picture = PROTESTANT_GREAT_REFORMER_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = AIG_imperial_ideas
+		NOT = {	tag = A85 }
+		NOT = { has_country_modifier = half_elven_administration }
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.67.1
+		reverse_add_opinion = {
+			who = A85
+			modifier = opinion_imperial_elector
+		}
+		medium_increase_of_half_elven_tolerance_effect = yes
+		add_adm_power = -10
+		add_dip_power = -10
+		add_mil_power = -10
+		random_owned_province = {
+			limit = { is_state = yes }
+			add_local_autonomy = 15
+		}
+	}
+	option = {
+		name = homebrew_idea.67.2
+		add_prestige = 10
+	}
+}
+
+#debates on imperial authority - non-emperor
+country_event = {
+
+	id = homebrew_idea.68
+	title = homebrew_idea.68.t
+	desc = homebrew_idea.68.d
+	picture = DEBATE_REPUBLICAN_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = AIG_imperial_ideas
+		NOT = {	is_emperor = yes }
+	}
+	immediate = {
+		hidden_effect = {
+			random_country = {
+				limit = { is_emperor = yes }
+				save_event_target_as = homebrew_emperor
+			}
+		}
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.68.1
+		event_target:homebrew_emperor = {
+			add_imperial_influence = 1
+			add_opinion = {
+				who = ROOT
+				modifier = opinion_emperor_yes
+			}
+		}
+		add_dip_power = 50
+	}
+	option = {
+		name = homebrew_idea.68.2
+		event_target:homebrew_emperor = {
+			add_opinion = {
+				who = ROOT
+				modifier = opinion_emperor_no
+			}
+		}
+		add_dip_power = 100
+	}
+}
+
+#handing out support in exchange for votes - emperor
+country_event = {
+
+	id = homebrew_idea.69
+	title = homebrew_idea.69.t
+	desc = homebrew_idea.69.d
+	picture = DIPLOMACY_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = AIG_imperial_ideas
+		is_emperor = yes
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.69.1
+		add_years_of_income = -0.5
+		every_country = {
+			limit = {
+				is_part_of_hre = yes
+				is_emperor = no
+			}
+			add_country_modifier = {
+				name = homebrew_tax_break
+				duration = 3650
+			}
+			add_opinion = {
+				who = ROOT
+				modifier = opinion_tax_break
+			}
+		}
+	}
+	option = {
+		name = homebrew_idea.69.2
+		add_prestige = -10
+	}
+}
+
+#merchant class dominating a trade center - Damescrown A25
+country_event = {
+
+	id = homebrew_idea.70
+	title = homebrew_idea.70.t
+	desc = homebrew_idea.70.d
+	picture = MERCHANTS_TALKING_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = AIG_imperial_ideas
+		NOT = {	tag = A25 }
+		any_owned_province = {
+			province_has_center_of_trade_of_level = 1
+			is_state = yes
+		}
+	}
+	immediate = {
+		hidden_effect = {
+			random_owned_province = {
+				limit = { 
+					province_has_center_of_trade_of_level = 1 
+					is_state = yes 
+				}
+				save_event_target_as = homebrew_cot_event
+			}
+		}
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.70.1
+		event_target:homebrew_cot_event = {
+			add_province_modifier = {
+				name = homebrew_cot_effect
+				duration = 3650
+			}
+		}
+		reverse_add_opinion = {
+			who = A25
+			modifier = opinion_imperial_elector
+		}
+	}
+	option = {
+		name = homebrew_idea.70.2
+		add_dip_power = -30
+		event_target:homebrew_cot_event = {
+			add_unrest = 10
+		}
+	}
+}
+
+#connections within the empire - kinda generic ngl
+country_event = {
+
+	id = homebrew_idea.71
+	title = homebrew_idea.71.t
+	desc = homebrew_idea.71.d
+	picture = HRE_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_idea_group = AIG_imperial_ideas
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.71.1
+		add_country_modifier = {
+			name = homebrew_connection
+			duration = 3650
+		}
+	}
+}
+
+###funni mirror outcomes###
+#amogus
+country_event = {
+
+	id = homebrew_idea.100
+	title = homebrew_idea.100.t
+	desc = homebrew_idea.100.d
+	picture = COMET_SIGHTED_eventPicture
+	
+	is_triggered_only = yes
+
+	mean_time_to_happen = { days = 1 }
+	option = {
+	name = homebrew_idea.100.1
+	ai_chance = { factor = 50 }
+	add_prestige = 10
+	}
+	option = {
+	name = homebrew_idea.100.2
+	ai_chance = {
+		factor = 50
+		modifier = {
+			factor = 3
+			is_at_war = yes
+		}
+	}
+	add_ruler_modifier = {
+		name = unexplainable_rage
+		duration = 3650
+		}
+	}
+}
+#revenge of the sith
+country_event = {
+
+	id = homebrew_idea.101
+	title = homebrew_idea.101.t
+	desc = homebrew_idea.101.d
+	picture = CULTURE_eventPicture
+	
+	is_triggered_only = yes
+
+	mean_time_to_happen = { days = 1 }
+	option = {
+	name = homebrew_idea.101.1
+	ai_chance = { factor = 25 }
+	add_prestige = 10
+	}
+	option = {
+	name = homebrew_idea.101.2
+	ai_chance = { factor = 25 }
+	add_ruler_modifier = {
+		name = experimental_land_tech
+		duration = -1
+		}
+	}
+	option = {
+	name = homebrew_idea.101.3
+	ai_chance = { 
+		factor = 25 
+		modifier = {
+			factor = 0
+			has_port = no
+			}
+		}
+	add_ruler_modifier = {
+		name = experimental_navy_tech
+		duration = -1
+		}
+	}
+	option = {
+	name = homebrew_idea.101.4
+	ai_chance = { factor = 25 }
+	add_ruler_modifier = {
+		name = insidious_diplomacy
+		duration = -1
+		}
+	}
+}
+#human-hobgoblin marriage
+country_event = {
+
+	id = homebrew_idea.102
+	title = homebrew_idea.102.t
+	desc = homebrew_idea.102.d
+	picture = CULTURE_eventPicture
+	
+	is_triggered_only = yes
+
+	mean_time_to_happen = { days = 1 }
+	option = {
+	name = homebrew_idea.102.1
+	ai_chance = { factor = 100 }
+	add_prestige = 10
+	small_increase_of_human_tolerance_effect = yes
+	small_increase_of_hobgoblin_tolerance_effect = yes
+	}
+	option = {
+	name = homebrew_idea.102.2
+	ai_chance = { factor = 0 }
+	}
+}
+#rickroll
+country_event = {
+
+	id = homebrew_idea.103
+	title = homebrew_idea.103.t
+	desc = homebrew_idea.103.d
+	picture = CULTURE_eventPicture
+	
+	is_triggered_only = yes
+
+	mean_time_to_happen = { days = 1 }
+	option = {
+	name = homebrew_idea.103.1
+	ai_chance = { factor = 100 }
+	add_prestige = 10
+	}
+	option = {
+	name = homebrew_idea.103.2
+	ai_chance = {
+		factor = 50
+		modifier = {
+			factor = 3
+			is_at_war = yes
+		}
+	}
+	add_ruler_modifier = {
+		name = unexplainable_rage
+		duration = 3650
+		}
+	}
+}
+#visions of Aelnar
+country_event = {
+
+	id = homebrew_idea.104
+	title = homebrew_idea.104.t
+	desc = homebrew_idea.104.d
+	picture = AELNAR_eventPicture
+	
+	is_triggered_only = yes
+
+	mean_time_to_happen = { days = 1 }
+	option = {
+	name = homebrew_idea.104.1
+	trigger = { 
+		NOT = {
+			OR = { 
+				tag = A21
+				tag = Z43 
+			}
+		}
+	} 
+	add_prestige = -10
+	}
+	option = {
+	name = homebrew_idea.104.2
+	reverse_add_opinion = {
+		who = A21
+		modifier = opinion_fm_aelnar
+		}
+	reverse_add_opinion = {
+		who = Z43
+		modifier = opinion_fm_aelnar
+		}	
+	add_opinion = {
+		who = A21
+		modifier = opinion_fm_aelnar
+		}
+	add_opinion = {
+		who = Z43
+		modifier = opinion_fm_aelnar
+		}
+	}
+	option = {
+	name = homebrew_idea.104.3
+	highlight = yes
+	trigger = { 
+		OR = { 
+			tag = A21
+			tag = Z43 
+		}
+	} 
+	add_prestige = 10
+	}
+}
+#is this loss?
+country_event = {
+
+	id = homebrew_idea.105
+	title = homebrew_idea.105.t
+	desc = homebrew_idea.105.d
+	picture = COMET_SIGHTED_eventPicture
+	
+	is_triggered_only = yes
+
+	mean_time_to_happen = { days = 1 }
+	option = {
+	name = homebrew_idea.105.1
+	ai_chance = { factor = 100 }
+	add_prestige = 10
+	}
+	option = {
+	name = homebrew_idea.105.2
+	ai_chance = {
+		factor = 50
+		modifier = {
+			factor = 3
+			is_at_war = yes
+		}
+	}
+	add_ruler_modifier = {
+		name = unexplainable_rage
+		duration = 3650
+		}
+	}
+}
+#bee movie script
+country_event = {
+
+	id = homebrew_idea.106
+	title = homebrew_idea.106.t
+	desc = homebrew_idea.106.d
+	picture = BIG_BOOK_eventPicture
+	
+	is_triggered_only = yes
+
+	mean_time_to_happen = { days = 1 }
+	option = {
+	name = homebrew_idea.106.1
+	add_prestige = 10
+	}
+	option = {
+	name = homebrew_idea.106.2
+	add_years_of_income = -0.5
+	add_prestige = 10
+	add_country_modifier = {
+		name = bee_movie
+		duration = 3650
+		}
+	}
+}
+#sees you
+country_event = {
+
+	id = homebrew_idea.107
+	title = homebrew_idea.107.t
+	desc = homebrew_idea.107.d
+	picture = COMET_SIGHTED_eventPicture
+	
+	is_triggered_only = yes
+
+	mean_time_to_happen = { days = 1 }
+	option = {
+	name = homebrew_idea.107.1
+	add_prestige = -50
+	}
+	option = {
+	name = homebrew_idea.107.2
+	add_ruler_modifier = {
+		name = fm_depressed
+		duration = 3650
+		}
+	}
+	option = {
+	name = homebrew_idea.107.3
+	kill_ruler = yes
+	}
+}
+#Khetgirls - start of chain
+country_event = {
+
+	id = homebrew_idea.108
+	title = homebrew_idea.108.t
+	desc = homebrew_idea.108.d
+	picture = SPY_eventPicture
+	
+	is_triggered_only = yes
+
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.108.1
+		add_prestige = 10
+	}
+	option = {
+		name = homebrew_idea.108.2
+		highlight = yes
+		trigger = { religion = khetist }
+		add_prestige = 20
+	}
+	option = {
+		name = homebrew_idea.108.3
+		highlight = yes
+		trigger = { has_country_modifier = chief_artificer }
+		country_event = {
+			id = homebrew_idea.38
+			days = 1
+		}
+	}
+}
+#harry potter
+country_event = {
+
+	id = homebrew_idea.109
+	title = homebrew_idea.109.t
+	desc = homebrew_idea.109.d
+	picture = CULTURE_eventPicture
+	
+	is_triggered_only = yes
+
+	mean_time_to_happen = { days = 1 }
+	option = {
+	name = homebrew_idea.109.1
+	add_prestige = 10
+	}
+	option = {
+	name = homebrew_idea.109.2
+	trigger = {
+		NOT = {
+			tag = A85
+			}
+		}
+		add_country_modifier = {
+			name = fm_magisterium_standards
+			duration = 3650
+		}
+	}
+	option = {
+	name = homebrew_idea.109.2
+	highlight = yes
+	trigger = {
+		tag = A85 #Magisterium
+		}
+	add_prestige = 10
+	add_country_modifier = {
+			name = fm_magisterium_standards
+			duration = 3650
+		}
+	}
+}
+#peeking on a vampire
+country_event = {
+
+	id = homebrew_idea.110
+	title = homebrew_idea.110.t
+	desc = homebrew_idea.110.d
+	picture = SPY_eventPicture
+	
+	is_triggered_only = yes
+
+	mean_time_to_happen = { days = 1 }
+	option = {
+	name = homebrew_idea.110.1
+	trigger = { 
+		NOT = {
+			OR = { 
+				tag = A59
+				tag = A60
+			}
+		}
+	} 
+	add_prestige = -10
+	}
+	option = {
+	name = homebrew_idea.110.2
+	trigger = { 
+		NOT = {
+			OR = { 
+				tag = A59
+				tag = A60
+			}
+		}
+	}
+	reverse_add_opinion = {
+		who = A59
+		modifier = opinion_fm_vampire
+		}
+	reverse_add_opinion = {
+		who = A60
+		modifier = opinion_fm_vampire
+		}
+	add_opinion = {
+		who = A59
+		modifier = opinion_fm_vampire
+		}
+	add_opinion = {
+		who = A60
+		modifier = opinion_fm_vampire
+		}
+	}
+	option = {
+	name = homebrew_idea.110.3
+	trigger = { 
+		OR = { 
+			tag = A59
+			tag = A60
+			}
+	}
+	add_prestige = 10
+	}
+}
+#lord of the rings
+country_event = {
+
+	id = homebrew_idea.111
+	title = homebrew_idea.111.t
+	desc = homebrew_idea.111.d
+	picture = CULTURE_eventPicture
+	
+	is_triggered_only = yes
+
+	mean_time_to_happen = { days = 1 }
+	option = {
+	name = homebrew_idea.111.1
+	add_prestige = 10
+	}
+	option = {
+	name = homebrew_idea.111.2
+	add_ruler_modifier = {
+		name = debating_lotr
+		duration = 3650
+		}
+	}
+}
+#pirates of the ruined sea
+country_event = {
+
+	id = homebrew_idea.112
+	title = homebrew_idea.112.t
+	desc = homebrew_idea.112.d
+	picture = PIRATE_CAPTAINS_eventPicture
+	
+	is_triggered_only = yes
+
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.112.2
+		add_prestige = 10
+	}
+	option = {
+		name = homebrew_idea.112.1
+		add_ruler_modifier = {
+			name = yarhar
+			duration = 3650
+		}
+	}
+}
+#just like my japanese animes
+country_event = {
+
+	id = homebrew_idea.113
+	title = homebrew_idea.113.t
+	desc = homebrew_idea.113.d
+	picture = TEMPORAL_RIFT_eventPicture
+	
+	is_triggered_only = yes
+
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.113.1
+		add_prestige = 10
+	}
+	option = {
+		name = homebrew_idea.113.2
+		add_years_of_income = -0.5
+		mission_reward_artifice_points_1 = yes
+		add_ruler_modifier = {
+			name = mech_fantasies
+			duration = 3650
+		}
+		set_country_flag = hb_deathwar_artificer_project_2_unlocked
+	}
+}
+#we don't talk about the valley
+country_event = {
+
+	id = homebrew_idea.114
+	title = homebrew_idea.114.t
+	desc = homebrew_idea.114.d
+	picture = COMET_SIGHTED_eventPicture
+	
+	is_triggered_only = yes
+
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_idea.114.1
+		add_prestige = -25
+		add_ruler_modifier = {
+			name = visions_of_beyond
+			duration = 3650
+		}
+	}
+	option = {
+		name = homebrew_idea.114.2
+		add_stability = -1
+		custom_tooltip = hb_drider_waifus_tt
+		random = {
+			chance = 10
+			set_ruler_religion = the_jadd
+		}
+	}
+}

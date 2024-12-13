@@ -1,0 +1,146 @@
+#reference for ez replacement/purging: gross0 handel0 galle0 flottenbasis0
+#reminder to check and replace vanilla tags/regions
+
+homebrew_highseas_ideas = {
+	category = DIP
+	
+	bonus = {
+		naval_morale = 0.1
+		#enables a decision to spend sailors to complete construction of buildings in provinces with port
+	}
+	trigger = {
+		primitives = no
+		NOT = {
+			has_idea_group = maritime_ideas
+			}
+	}
+	
+	naval_cadets = {
+		navy_tradition = 1
+	}
+	homebrew_seaelftutelage = {
+		heavy_ship_power = 0.2
+	}
+	homebrew_fingeronthepulse = {
+		justify_trade_conflict_cost = -1
+		privateer_efficiency = 0.5
+	}
+
+	homebrew_marineracademies = {
+		global_sailors_modifier = 0.25
+		global_ship_cost = -0.1	
+	}
+
+	homebrew_feywood = {
+		ship_durability = 0.1
+	}
+	homebrew_merchantnavy = {
+		global_ship_trade_power = 0.25
+		blockade_efficiency = 0.5
+	}
+	homebrew_signalspells = {
+		global_naval_engagement_modifier = 0.15
+	}
+	
+	ai_will_do = {
+		factor = 0.34
+		modifier = {
+			factor = 0
+			NOT = { num_of_ports = 10 }
+		}
+		#reminder to peruse for any trade-focused nations
+		modifier = {
+			factor = 5
+			OR = {
+			tag = A01 #Lorent
+			tag = A02 #Deranne
+			tag = A25 #Damescrown
+			tag = CAS
+			tag = POR
+			tag = NED
+			tag = HOL
+			tag = BUR
+			}
+		}
+		#preexisting naval buildup
+		modifier = {
+			factor = 1.5
+			has_idea_group = maritime_ideas
+		}
+		modifier = {
+			factor = 2
+			OR = {
+				num_of_heavy_ship = 10
+				heavy_ship_fraction = 0.25
+			}
+		}
+	
+	}
+}
+
+homebrew_amphibious_ideas = {
+	category = DIP
+	bonus = {
+		naval_morale = 0.1
+		#enables a decision to spend sailors to complete construction of buildings in provinces with port
+	}
+	trigger = {
+		primitives = no
+		NOT = { has_idea_group = homebrew_highseas_ideas }
+	}
+	homebrew_marineracademies2 = {
+		global_sailors_modifier = 0.25
+		global_ship_repair = 0.1	
+	}
+	homebrew_orcishrowmen = {
+		galley_power = 0.2
+		
+	}
+	homebrew_marinepropoganda = {
+		allowed_marine_fraction = 0.1
+	}
+
+	homebrew_overseasprojection = {
+		#add_cb = cb_coast
+	}
+
+	homebrew_merchantsfriend = {
+		trade_efficiency = 0.1
+	}
+	homebrew_boardingparties = {
+		capture_ship_chance = 0.1
+	}
+	homebrew_coastalformations = {
+		disengagement_chance = 0.05
+	}
+	
+	ai_will_do = {
+		factor = 0.34
+		modifier = {
+			factor = 0
+			NOT = { num_of_ports = 10 }
+		}
+		#reminder to look up coastline tags outside of cannor
+		modifier = {
+			factor = 5
+			OR = {
+			tag = A47 #Eborthil
+			tag = A29 #Busilar
+			tag = Z08 #Bjarnrik
+			}
+		}
+		#preexisting naval buildup
+		modifier = {
+			factor = 1.5
+			has_idea_group = maritime_ideas
+		}
+		modifier = {
+			factor = 2
+			OR = {
+				num_of_galley = 20
+				galley_fraction = 0.25
+			}
+		}
+		
+	}
+}

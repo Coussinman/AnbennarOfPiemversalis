@@ -1,0 +1,1805 @@
+hb_fort_update = {
+	hidden_effect = { province_event = { id = homebrew.8 days = 1 } }
+	every_neighbor_province = {
+		hidden_effect = { province_event = { id = homebrew.8 days = 1 } }
+	}
+}
+hb_fort_removed = {
+	hidden_effect = { 
+		province_event = { id = homebrew.6 days = 1 } 
+		province_event = { id = homebrew.7 days = 1 }
+		province_event = { id = homebrew.8 days = 1 }
+		every_neighbor_province = { province_event = { id = homebrew.8 days = 1 } }
+	}
+}
+hb_add_development_from_building = { #credit to the original authors, but imma hijack this to make my stuff easier
+	if = {
+		limit = {
+			FROM = { 
+				OR = {
+					has_country_flag = improve_development_on_buildings_built 
+					AND = {
+						has_reform = northern_league_magnates
+						faction_in_power = nl_cooperatists
+					}
+				}
+			}
+			NOT = { gained_development_from_building = { building = $building$ } }
+		}
+		add_base_$type$ = $value$
+		hidden_effect = {
+			set_province_flag = built_dev_$building$
+		}
+	}
+}
+hb_add_development_from_upgrading_or_building = {
+	if = {
+		limit = {
+			FROM = { 
+				OR = {
+					has_country_flag = improve_development_on_buildings_built 
+					AND = {
+						has_reform = northern_league_magnates
+						faction_in_power = nl_cooperatists
+					}
+				}
+			}
+			NOT = { gained_development_from_building = { building = $building$ } }
+		}
+		if = {
+			limit = { has_province_flag = built_dev_$obsolete_building$ }
+			add_base_$type$ = $upgrade_value$
+		}
+		else = {
+			add_base_$type$ = $value$
+		}
+		hidden_effect = {
+			set_province_flag = built_dev_$building$
+		}
+	}
+}
+hb_remove_development_from_building = {
+	if = {
+		limit = {
+			FROM = {
+				OR = {
+					has_country_flag = improve_development_on_buildings_built 
+					has_reform = northern_league_magnates
+				}
+			}
+			gained_development_from_building = { building = $building$ }
+		}
+		add_base_$type$ = -$value$
+		if = {
+			limit = {
+				NOT = { base_$type$ = 1 }
+			}
+			set_base_$type$ = 1
+		}
+		hidden_effect = {
+			clr_province_flag = built_dev_$building$
+		}
+	}
+}
+hb_add_melting_pot = {
+	if = { 
+		limit = { 
+			owner = { 
+				has_idea = homebrew_melting_pot 
+				has_country_flag = hb_has_melting_pot
+				OR = {
+					high_tolerance_$race$_race_trigger = yes
+					medium_tolerance_$race$_race_trigger = yes
+				}
+				NOT = { has_country_modifier = $race$_administration } 
+			}
+		}
+		add_province_modifier = { name = meltingpot_$race$ duration = -1 hidden = yes }
+	}
+}
+hb_remove_melting_pot = {
+	if = { 
+		limit = { 
+			NOT = { has_any_$race$_pop_trigger = yes } 
+		}
+		remove_province_modifier = meltingpot_$race$
+	}
+}
+homebrew_liquidation = { #takes a value arguement
+	if = { limit = { FROM = { has_idea = kriegsproduktion3 } }
+		custom_tooltip = homebrew_liquidation_tt
+		hidden_effect = {
+			set_variable = { which = build_cost_payout value = $value$ } #converts build cost into a variable (can build cost be directly exported to this function? It would remove the need for an arguement)
+			set_variable = { which = base_build_cost value = 100 } #represents 100%
+			export_to_variable = { which = owner_build_cost value = modifier:build_cost who = FROM }
+			export_to_variable = { which = province_build_cost value = modifier:local_build_cost who = ROOT }
+			change_variable = { which = owner_build_cost which = province_build_cost } #totals the two variables above to represent the provincial build cost reduction
+			multiply_variable = { which = owner_build_cost value = 100 } #multiplies above to make it a %
+			change_variable = { which = base_build_cost which = owner_build_cost } #substract the base by the reduction to a) filter through the if check and b) set a variable to be used to alter the payout variable
+			if = { limit = { check_variable = { which = base_build_cost value = 33 } } #so long as the local build cost is not under 33%
+				multiply_variable = { which = build_cost_payout value = 0.33 }
+			}
+			else = {
+				multiply_variable = { which = build_cost_payout which = base_build_cost }
+				divide_variable = { which = build_cost_payout value = 100 }
+			}
+			while = { limit = { check_variable = { which = build_cost_payout value = 1 } } #basic while loop, might upgrade to binary
+				FROM = { add_treasury = 1 }
+				change_variable = { which = build_cost_payout value = -1 }
+			}
+		}
+	}
+}
+add_central_planning = { #takes a level arguement
+	clear_metropolis_planning = yes
+	add_province_modifier = { name = metropolis_planning_$level$ duration = -1 hidden = yes }
+	if = { limit = { OR = { has_terrain = dwarven_hold has_terrain = dwarven_hold_surface } }
+		clear_hold_ei = yes
+		add_province_modifier = { name = hold_ei_$level$ duration = -1 hidden = yes }
+	}
+}
+remember_wildcard = {
+	custom_tooltip = remember_wildcard_tt
+	hidden_effect = {
+		if = {
+			limit = { has_country_flag = wildcard_chose_tax }
+			add_country_modifier = {
+				name = wildcard_tax
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_production }
+			add_country_modifier = {
+				name = wildcard_production
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_inflation }
+			add_country_modifier = {
+				name = wildcard_inflation
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_dev }
+			add_country_modifier = {
+				name = wildcard_dev
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_ccr }
+			add_country_modifier = {
+				name = wildcard_ccr
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_stability }
+			add_country_modifier = {
+				name = wildcard_stability
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_autonomy }
+			add_country_modifier = {
+				name = wildcard_autonomy
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_seperatism }
+			add_country_modifier = {
+				name = wildcard_seperatism
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_tech }
+			add_country_modifier = {
+				name = wildcard_tech
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_idea }
+			add_country_modifier = {
+				name = wildcard_idea
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_institution }
+			add_country_modifier = {
+				name = wildcard_institution
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_prestige }
+			add_country_modifier = {
+				name = wildcard_prestige
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_missionary }
+			add_country_modifier = {
+				name = wildcard_missionary
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_unity }
+			add_country_modifier = {
+				name = wildcard_unity
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_religious_power }
+			add_country_modifier = {
+				name = wildcard_religious_power
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_splendor }
+			add_country_modifier = {
+				name = wildcard_splendor
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_corruption }
+			add_country_modifier = {
+				name = wildcard_corruption
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_governing_cap }
+			add_country_modifier = {
+				name = wildcard_governing_cap
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_reform }
+			add_country_modifier = {
+				name = wildcard_reform
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_estates }
+			add_country_modifier = {
+				name = wildcard_estates
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_colonist }
+			add_country_modifier = {
+				name = wildcard_colonist
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_trade_eff }
+			add_country_modifier = {
+				name = wildcard_trade_eff
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_goods_produced }
+			add_country_modifier = {
+				name = wildcard_goods_produced
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_diplo_rep }
+			add_country_modifier = {
+				name = wildcard_diplo_rep
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_diplo_slots }
+			add_country_modifier = {
+				name = wildcard_diplo_slots
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_vassal_income }
+			add_country_modifier = {
+				name = wildcard_vassal_income
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_ae }
+			add_country_modifier = {
+				name = wildcard_ae
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_diplo_annex }
+			add_country_modifier = {
+				name = wildcard_diplo_annex
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_pwc }
+			add_country_modifier = {
+				name = wildcard_pwc
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_culture_convert }
+			add_country_modifier = {
+				name = wildcard_culture_convert
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_liberty }
+			add_country_modifier = {
+				name = wildcard_liberty
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_spy }
+			add_country_modifier = {
+				name = wildcard_spy
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_colonial_range }
+			add_country_modifier = {
+				name = wildcard_colonial_range
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_trade_power }
+			add_country_modifier = {
+				name = wildcard_trade_power
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_merchant }
+			add_country_modifier = {
+				name = wildcard_merchant
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_navy_trad }
+			add_country_modifier = {
+				name = wildcard_navy_trad
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_ship_cost }
+			add_country_modifier = {
+				name = wildcard_ship_cost
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_heavy }
+			add_country_modifier = {
+				name = wildcard_heavy
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_galley }
+			add_country_modifier = {
+				name = wildcard_galley
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_naval_forcelimit }
+			add_country_modifier = {
+				name = wildcard_naval_forcelimit
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_sailors }
+			add_country_modifier = {
+				name = wildcard_
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_naval_morale }
+			add_country_modifier = {
+				name = wildcard_naval_morale
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_admirals }
+			add_country_modifier = {
+				name = wildcard_admirals
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_marine }
+			add_country_modifier = {
+				name = wildcard_marine
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_government }
+			add_country_modifier = {
+				name = wildcard_government
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_army_trad }
+			add_country_modifier = {
+				name = wildcard_army_trad
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_drill_gain }
+			add_country_modifier = {
+				name = wildcard_drill_gain
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_regiment_cost }
+			add_country_modifier = {
+				name = wildcard_regiment_cost
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_ica }
+			add_country_modifier = {
+				name = wildcard_ica
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_cca }
+			add_country_modifier = {
+				name = wildcard_cca
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_aca }
+			add_country_modifier = {
+				name = wildcard_aca
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_ratioflanking }
+			add_country_modifier = {
+				name = wildcard_ratioflanking
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_art_vs_fort }
+			add_country_modifier = {
+				name = wildcard_art_vs_fort
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_backrow }
+			add_country_modifier = {
+				name = wildcard_backrow
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_disc }
+			add_country_modifier = {
+				name = wildcard_disc
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_merc_disc }
+			add_country_modifier = {
+				name = wildcard_merc_disc
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_morale }
+			add_country_modifier = {
+				name = wildcard_morale
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_defense }
+			add_country_modifier = {
+				name = wildcard_defense
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_siege }
+			add_country_modifier = {
+				name = wildcard_siege
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_movement }
+			add_country_modifier = {
+				name = wildcard_movement
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_fire }
+			add_country_modifier = {
+				name = wildcard_fire
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_shock }
+			add_country_modifier = {
+				name = wildcard_shock
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_attrition }
+			add_country_modifier = {
+				name = wildcard_attrition
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_manpower }
+			add_country_modifier = {
+				name = wildcard_manpower
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_forcelimit }
+			add_country_modifier = {
+				name = wildcard_forcelimit
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_attrition_damage }
+			add_country_modifier = {
+				name = wildcard_attrition_damage
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_exhaustion }
+			add_country_modifier = {
+				name = wildcard_exhaustion
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_leader_fire }
+			add_country_modifier = {
+				name = wildcard_leader_fire
+				duration = -1
+			}
+		}
+		if = {
+			limit = { has_country_flag = wildcard_chose_leader_shock }
+			add_country_modifier = {
+				name = wildcard_leader_shock
+				duration = -1
+			}
+		}
+	}
+}
+random_wildcard = {
+	custom_tooltip = random_wildcard_tt
+	hidden_effect = {
+	random_list = {
+			10 = {
+				set_country_flag = wildcard_chose_tax
+				add_country_modifier = {
+					name = wildcard_tax
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_production
+				add_country_modifier = {
+					name = wildcard_production
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_inflation
+				add_country_modifier = {
+					name = wildcard_inflation
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_dev
+				add_country_modifier = {
+					name = wildcard_dev
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_ccr
+				add_country_modifier = {
+					name = wildcard_ccr
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_stability
+				add_country_modifier = {
+					name = wildcard_stability
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_autonomy
+				add_country_modifier = {
+					name = wildcard_autonomy
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_seperatism
+				add_country_modifier = {
+					name = wildcard_seperatism
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_tech
+				add_country_modifier = {
+					name = wildcard_tech
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_idea
+				add_country_modifier = {
+					name = wildcard_idea
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_institution
+				add_country_modifier = {
+					name = wildcard_institution
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_prestige
+				add_country_modifier = {
+					name = wildcard_prestige
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_missionary
+				add_country_modifier = {
+					name = wildcard_missionary
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_unity
+				add_country_modifier = {
+					name = wildcard_unity
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_religious_power
+				add_country_modifier = {
+					name = wildcard_religious_power
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_splendor
+				add_country_modifier = {
+					name = wildcard_splendor
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_corruption
+				add_country_modifier = {
+					name = wildcard_corruption
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_governing_cap
+				add_country_modifier = {
+					name = wildcard_governing_cap
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_reform
+				add_country_modifier = {
+					name = wildcard_reform
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_estates
+				add_country_modifier = {
+					name = wildcard_estates
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_colonist
+				add_country_modifier = {
+					name = wildcard_colonist
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_trade_eff
+				add_country_modifier = {
+					name = wildcard_trade_eff
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_goods_produced
+				add_country_modifier = {
+					name = wildcard_goods_produced
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_diplo_rep
+				add_country_modifier = {
+					name = wildcard_diplo_rep
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_diplo_slots
+				add_country_modifier = {
+					name = wildcard_diplo_slots
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_vassal_income
+				add_country_modifier = {
+					name = wildcard_vassal_income
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_ae
+				add_country_modifier = {
+					name = wildcard_ae
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_diplo_annex
+				add_country_modifier = {
+					name = wildcard_diplo_annex
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_pwc
+				add_country_modifier = {
+					name = wildcard_pwc
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_culture_convert
+				add_country_modifier = {
+					name = wildcard_culture_convert
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_liberty
+				add_country_modifier = {
+					name = wildcard_liberty
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_spy
+				add_country_modifier = {
+					name = wildcard_spy
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_colonial_range
+				add_country_modifier = {
+					name = wildcard_colonial_range
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_trade_power
+				add_country_modifier = {
+					name = wildcard_trade_power
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_merchant
+				add_country_modifier = {
+					name = wildcard_merchant
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_navy_trad
+				add_country_modifier = {
+					name = wildcard_navy_trad
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_ship_cost
+				add_country_modifier = {
+					name = wildcard_ship_cost
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_heavy
+				add_country_modifier = {
+					name = wildcard_heavy
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_galley
+				add_country_modifier = {
+					name = wildcard_galley
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_naval_forcelimit
+				add_country_modifier = {
+					name = wildcard_naval_forcelimit
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_sailors
+				add_country_modifier = {
+					name = wildcard_sailors
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_naval_morale
+				add_country_modifier = {
+					name = wildcard_naval_morale
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_admirals
+				add_country_modifier = {
+					name = wildcard_admirals
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_marine
+				add_country_modifier = {
+					name = wildcard_marine
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_government
+				add_country_modifier = {
+					name = wildcard_government
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_army_trad
+				add_country_modifier = {
+					name = wildcard_army_trad
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_drill_gain
+				add_country_modifier = {
+					name = wildcard_drill_gain
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_regiment_cost
+				add_country_modifier = {
+					name = wildcard_regiment_cost
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_ica
+				add_country_modifier = {
+					name = wildcard_ica
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_cca
+				add_country_modifier = {
+					name = wildcard_cca
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_aca
+				add_country_modifier = {
+					name = wildcard_aca
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_ratioflanking
+				add_country_modifier = {
+					name = wildcard_ratioflanking
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_art_vs_fort
+				add_country_modifier = {
+					name = wildcard_art_vs_fort
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_backrow
+				add_country_modifier = {
+					name = wildcard_backrow
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_disc
+				add_country_modifier = {
+					name = wildcard_disc
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_merc_disc
+				add_country_modifier = {
+					name = wildcard_merc_disc
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_morale
+				add_country_modifier = {
+					name = wildcard_morale
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_defense
+				add_country_modifier = {
+					name = wildcard_defense
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_siege
+				add_country_modifier = {
+					name = wildcard_siege
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_movement
+				add_country_modifier = {
+					name = wildcard_movement
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_fire
+				add_country_modifier = {
+					name = wildcard_fire
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_shock
+				add_country_modifier = {
+					name = wildcard_shock
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_attrition
+				add_country_modifier = {
+					name = wildcard_attrition
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_manpower
+				add_country_modifier = {
+					name = wildcard_manpower
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_forecelimit
+				add_country_modifier = {
+					name = wildcard_forcelimit
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_attrition_damage
+				add_country_modifier = {
+					name = wildcard_attrition_damage
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_exhaustion
+				add_country_modifier = {
+					name = wildcard_exhaustion
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_leader_fire
+				add_country_modifier = {
+					name = wildcard_leader_fire
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_leader_shock
+				add_country_modifier = {
+					name = wildcard_leader_shock
+					duration = -1
+				}
+			}
+		}
+	}
+}
+random_wildcard_adm = {
+	custom_tooltip = random_wildcard_adm_tt
+	hidden_effect = {
+	random_list = {
+			10 = {
+				set_country_flag = wildcard_chose_tax
+				add_country_modifier = {
+					name = wildcard_tax
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_production
+				add_country_modifier = {
+					name = wildcard_production
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_inflation
+				add_country_modifier = {
+					name = wildcard_inflation
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_dev
+				add_country_modifier = {
+					name = wildcard_dev
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_ccr
+				add_country_modifier = {
+					name = wildcard_ccr
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_stability
+				add_country_modifier = {
+					name = wildcard_stability
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_autonomy
+				add_country_modifier = {
+					name = wildcard_autonomy
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_seperatism
+				add_country_modifier = {
+					name = wildcard_seperatism
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_tech
+				add_country_modifier = {
+					name = wildcard_tech
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_idea
+				add_country_modifier = {
+					name = wildcard_idea
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_institution
+				add_country_modifier = {
+					name = wildcard_institution
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_prestige
+				add_country_modifier = {
+					name = wildcard_prestige
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_missionary
+				add_country_modifier = {
+					name = wildcard_missionary
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_unity
+				add_country_modifier = {
+					name = wildcard_unity
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_religious_power
+				add_country_modifier = {
+					name = wildcard_religious_power
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_splendor
+				add_country_modifier = {
+					name = wildcard_splendor
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_corruption
+				add_country_modifier = {
+					name = wildcard_corruption
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_governing_cap
+				add_country_modifier = {
+					name = wildcard_governing_cap
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_reform
+				add_country_modifier = {
+					name = wildcard_reform
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_estates
+				add_country_modifier = {
+					name = wildcard_estates
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_colonist
+				add_country_modifier = {
+					name = wildcard_colonist
+					duration = -1
+				}
+			}
+		}
+	}
+}
+random_wildcard_dip = {
+	custom_tooltip = random_wildcard_dip_tt
+	hidden_effect = {
+	random_list = {
+			10 = {
+				set_country_flag = wildcard_chose_trade_eff
+				add_country_modifier = {
+					name = wildcard_trade_eff
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_goods_produced
+				add_country_modifier = {
+					name = wildcard_goods_produced
+					duration = -1
+				}
+			}
+			10 = {
+				add_dip_power = -100
+				reset_wildcard_flags = yes
+				set_country_flag = wildcard_chose_diplo_rep
+				add_country_modifier = {
+					name = wildcard_diplo_rep
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_diplo_slots
+				add_country_modifier = {
+					name = wildcard_diplo_slots
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_vassal_income
+				add_country_modifier = {
+					name = wildcard_vassal_income
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_ae
+				add_country_modifier = {
+					name = wildcard_ae
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_diplo_annex
+				add_country_modifier = {
+					name = wildcard_diplo_annex
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_pwc
+				add_country_modifier = {
+					name = wildcard_pwc
+					duration = -1
+				}
+			}10 = {
+				set_country_flag = wildcard_chose_culture_convert
+				add_country_modifier = {
+					name = wildcard_culture_convert
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_liberty
+				add_country_modifier = {
+					name = wildcard_liberty
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_spy
+				add_country_modifier = {
+					name = wildcard_spy
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_colonial_range
+				add_country_modifier = {
+					name = wildcard_colonial_range
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_trade_power
+				add_country_modifier = {
+					name = wildcard_trade_power
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_merchant
+				add_country_modifier = {
+					name = wildcard_merchant
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_navy_trad
+				add_country_modifier = {
+					name = wildcard_navy_trad
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_ship_cost
+				add_country_modifier = {
+					name = wildcard_ship_cost
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_heavy
+				add_country_modifier = {
+					name = wildcard_heavy
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_galley
+				add_country_modifier = {
+					name = wildcard_galley
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_naval_forcelimit
+				add_country_modifier = {
+					name = wildcard_naval_forcelimit
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_sailors
+				add_country_modifier = {
+					name = wildcard_sailors
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_naval_morale
+				add_country_modifier = {
+					name = wildcard_naval_morale
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_admirals
+				add_country_modifier = {
+					name = wildcard_admirals
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_marine
+				add_country_modifier = {
+					name = wildcard_marine
+					duration = -1
+				}
+			}
+		}
+	}
+}
+random_wildcard_mil = {
+	custom_tooltip = random_wildcard_mil_tt
+	hidden_effect = {
+	random_list = {
+			10 = {
+				set_country_flag = wildcard_chose_government
+				add_country_modifier = {
+					name = wildcard_government
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_army_trad
+				add_country_modifier = {
+					name = wildcard_army_trad
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_drill_gain
+				add_country_modifier = {
+					name = wildcard_drill_gain
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_regiment_cost
+				add_country_modifier = {
+					name = wildcard_regiment_cost
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_ica
+				add_country_modifier = {
+					name = wildcard_ica
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_cca
+				add_country_modifier = {
+					name = wildcard_cca
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_aca
+				add_country_modifier = {
+					name = wildcard_aca
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_ratioflanking
+				add_country_modifier = {
+					name = wildcard_ratioflanking
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_art_vs_fort
+				add_country_modifier = {
+					name = wildcard_art_vs_fort
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_backrow
+				add_country_modifier = {
+					name = wildcard_backrow
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_disc
+				add_country_modifier = {
+					name = wildcard_disc
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_merc_disc
+				add_country_modifier = {
+					name = wildcard_merc_disc
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_morale
+				add_country_modifier = {
+					name = wildcard_morale
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_defense
+				add_country_modifier = {
+					name = wildcard_defense
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_siege
+				add_country_modifier = {
+					name = wildcard_siege
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_movement
+				add_country_modifier = {
+					name = wildcard_movement
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_fire
+				add_country_modifier = {
+					name = wildcard_fire
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_shock
+				add_country_modifier = {
+					name = wildcard_shock
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_attrition
+				add_country_modifier = {
+					name = wildcard_attrition
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_manpower
+				add_country_modifier = {
+					name = wildcard_manpower
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_forecelimit
+				add_country_modifier = {
+					name = wildcard_forcelimit
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_attrition_damage
+				add_country_modifier = {
+					name = wildcard_attrition_damage
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_exhaustion
+				add_country_modifier = {
+					name = wildcard_exhaustion
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_leader_fire
+				add_country_modifier = {
+					name = wildcard_leader_fire
+					duration = -1
+				}
+			}
+			10 = {
+				set_country_flag = wildcard_chose_leader_shock
+				add_country_modifier = {
+					name = wildcard_leader_shock
+					duration = -1
+				}
+			}
+		}
+	}
+}
+reset_wildcard_modifiers = {
+	hidden_effect = {
+		remove_country_modifier = wildcard_tax
+		remove_country_modifier = wildcard_production
+		remove_country_modifier = wildcard_inflation
+		remove_country_modifier = wildcard_dev
+		remove_country_modifier = wildcard_ccr
+		remove_country_modifier = wildcard_stability
+		remove_country_modifier = wildcard_autonomy
+		remove_country_modifier = wildcard_seperatism
+		remove_country_modifier = wildcard_tech
+		remove_country_modifier = wildcard_idea
+		remove_country_modifier = wildcard_institution
+		remove_country_modifier = wildcard_prestige
+		remove_country_modifier = wildcard_missionary
+		remove_country_modifier = wildcard_unity
+		remove_country_modifier = wildcard_religious_power
+		remove_country_modifier = wildcard_splendor
+		remove_country_modifier = wildcard_corruption
+		remove_country_modifier = wildcard_governing_cap
+		remove_country_modifier = wildcard_reform
+		remove_country_modifier = wildcard_estates
+		remove_country_modifier = wildcard_colonist
+		remove_country_modifier = wildcard_trade_eff
+		remove_country_modifier = wildcard_goods_produced
+		remove_country_modifier = wildcard_diplo_rep
+		remove_country_modifier = wildcard_diplo_slots
+		remove_country_modifier = wildcard_vassal_income
+		remove_country_modifier = wildcard_ae
+		remove_country_modifier = wildcard_diplo_annex
+		remove_country_modifier = wildcard_pwc
+		remove_country_modifier = wildcard_culture_convert
+		remove_country_modifier = wildcard_liberty
+		remove_country_modifier = wildcard_spy
+		remove_country_modifier = wildcard_colonial_range
+		remove_country_modifier = wildcard_tradepower
+		remove_country_modifier = wildcard_merchant
+		remove_country_modifier = wildcard_navy_trad
+		remove_country_modifier = wildcard_ship_cost
+		remove_country_modifier = wildcard_heavy
+		remove_country_modifier = wildcard_galley
+		remove_country_modifier = wildcard_naval_forcelimit
+		remove_country_modifier = wildcard_sailors
+		remove_country_modifier = wildcard_naval_morale
+		remove_country_modifier = wildcard_admirals
+		remove_country_modifier = wildcard_marine
+		remove_country_modifier = wildcard_government
+		remove_country_modifier = wildcard_army_trad
+		remove_country_modifier = wildcard_drill_gain
+		remove_country_modifier = wildcard_regiment_cost
+		remove_country_modifier = wildcard_ica
+		remove_country_modifier = wildcard_cca
+		remove_country_modifier = wildcard_aca
+		remove_country_modifier = wildcard_ratioflanking
+		remove_country_modifier = wildcard_art_vs_fort
+		remove_country_modifier = wildcard_backrow
+		remove_country_modifier = wildcard_disc
+		remove_country_modifier = wildcard_merc_disc
+		remove_country_modifier = wildcard_morale
+		remove_country_modifier = wildcard_defense
+		remove_country_modifier = wildcard_siege
+		remove_country_modifier = wildcard_movement
+		remove_country_modifier = wildcard_fire
+		remove_country_modifier = wildcard_shock
+		remove_country_modifier = wildcard_attrition
+		remove_country_modifier = wildcard_manpower
+		remove_country_modifier = wildcard_forcelimit
+		remove_country_modifier = wildcard_attrition_damage
+		remove_country_modifier = wildcard_exhaustion
+		remove_country_modifier = wildcard_leader_fire
+		remove_country_modifier = wildcard_leader_shock
+	}
+}
+reset_wildcard_flags = {
+	hidden_effect = {
+		clr_country_flag = wildcard_chose_tax
+		clr_country_flag = wildcard_chose_production
+		clr_country_flag = wildcard_chose_inflation
+		clr_country_flag = wildcard_chose_dev
+		clr_country_flag = wildcard_chose_ccr
+		clr_country_flag = wildcard_chose_stability
+		clr_country_flag = wildcard_chose_autonomy
+		clr_country_flag = wildcard_chose_seperatism
+		clr_country_flag = wildcard_chose_tech
+		clr_country_flag = wildcard_chose_idea
+		clr_country_flag = wildcard_chose_institution
+		clr_country_flag = wildcard_chose_prestige
+		clr_country_flag = wildcard_chose_missionary
+		clr_country_flag = wildcard_chose_unity
+		clr_country_flag = wildcard_chose_religious_power
+		clr_country_flag = wildcard_chose_splendor
+		clr_country_flag = wildcard_chose_corruption
+		clr_country_flag = wildcard_chose_governing_cap
+		clr_country_flag = wildcard_chose_reform
+		clr_country_flag = wildcard_chose_estates
+		clr_country_flag = wildcard_chose_colonist
+		clr_country_flag = wildcard_chose_trade_efficiency
+		clr_country_flag = wildcard_chose_goods_produced
+		clr_country_flag = wildcard_chose_diplo_rep
+		clr_country_flag = wildcard_chose_diplo_slots
+		clr_country_flag = wildcard_chose_vassal_income
+		clr_country_flag = wildcard_chose_ae
+		clr_country_flag = wildcard_chose_diplo_annex
+		clr_country_flag = wildcard_chose_pwc
+		clr_country_flag = wildcard_chose_culture_convert
+		clr_country_flag = wildcard_chose_liberty
+		clr_country_flag = wildcard_chose_spy
+		clr_country_flag = wildcard_chose_colonial_range
+		clr_country_flag = wildcard_chose_tradepower
+		clr_country_flag = wildcard_chose_merchant
+		clr_country_flag = wildcard_chose_navy_trad
+		clr_country_flag = wildcard_chose_ship_cost
+		clr_country_flag = wildcard_chose_heavy
+		clr_country_flag = wildcard_chose_galley
+		clr_country_flag = wildcard_chose_naval_forcelimit
+		clr_country_flag = wildcard_chose_sailors
+		clr_country_flag = wildcard_chose_naval_morale
+		clr_country_flag = wildcard_chose_admirals
+		clr_country_flag = wildcard_chose_marine
+		clr_country_flag = wildcard_chose_government
+		clr_country_flag = wildcard_chose_army_trad
+		clr_country_flag = wildcard_chose_drill_gain
+		clr_country_flag = wildcard_chose_regiment_cost
+		clr_country_flag = wildcard_chose_ica
+		clr_country_flag = wildcard_chose_cca
+		clr_country_flag = wildcard_chose_aca
+		clr_country_flag = wildcard_chose_ratioflanking
+		clr_country_flag = wildcard_chose_art_vs_fort
+		clr_country_flag = wildcard_chose_backrow
+		clr_country_flag = wildcard_chose_disc
+		clr_country_flag = wildcard_chose_merc_disc
+		clr_country_flag = wildcard_chose_morale
+		clr_country_flag = wildcard_chose_defense
+		clr_country_flag = wildcard_chose_siege
+		clr_country_flag = wildcard_chose_movement
+		clr_country_flag = wildcard_chose_fire
+		clr_country_flag = wildcard_chose_shock
+		clr_country_flag = wildcard_chose_attrition
+		clr_country_flag = wildcard_chose_manpower
+		clr_country_flag = wildcard_chose_forcelimit
+		clr_country_flag = wildcard_chose_attrition_damage
+		clr_country_flag = wildcard_chose_exhaustion
+		clr_country_flag = wildcard_chose_leader_fire
+		clr_country_flag = wildcard_chose_leader_shock
+	}
+}
+clear_metropolis_flags = {
+	remove_province_modifier = metropolis_flag_1
+	remove_province_modifier = metropolis_flag_2
+	remove_province_modifier = metropolis_flag_3
+	remove_province_modifier = metropolis_flag_4
+	remove_province_modifier = metropolis_flag_5
+	remove_province_modifier = metropolis_flag_6
+	remove_province_modifier = metropolis_flag_7
+	remove_province_modifier = metropolis_flag_8
+	remove_province_modifier = metropolis_flag_9
+	remove_province_modifier = metropolis_flag_10
+}
+clear_metropolis_planning = {
+	remove_province_modifier = metropolis_planning_1
+	remove_province_modifier = metropolis_planning_2
+	remove_province_modifier = metropolis_planning_3
+	remove_province_modifier = metropolis_planning_4
+	remove_province_modifier = metropolis_planning_5
+	remove_province_modifier = metropolis_planning_6
+	remove_province_modifier = metropolis_planning_7
+	remove_province_modifier = metropolis_planning_8
+	remove_province_modifier = metropolis_planning_9
+	remove_province_modifier = metropolis_planning_10
+}
+clear_hold_ei = {
+	remove_province_modifier = hold_ei_1
+	remove_province_modifier = hold_ei_2
+	remove_province_modifier = hold_ei_3
+	remove_province_modifier = hold_ei_4
+	remove_province_modifier = hold_ei_5
+	remove_province_modifier = hold_ei_6
+	remove_province_modifier = hold_ei_7
+	remove_province_modifier = hold_ei_8
+	remove_province_modifier = hold_ei_9
+	remove_province_modifier = hold_ei_10
+}

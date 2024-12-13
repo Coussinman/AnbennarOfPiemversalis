@@ -1,0 +1,241 @@
+namespace = homebrew_spy
+#sabotage mil
+country_event = {
+
+	id = homebrew_spy.1
+	title = homebrew_spy.1.t
+	desc = homebrew_spy.1.d
+	picture = SPY_eventPicture
+	major = yes
+	major_trigger = {
+		OR = {
+			alliance_with = FROM
+			war_with = FROM
+		}
+	}
+	
+	is_triggered_only = yes
+
+	option = {
+		name = homebrew_spy.1.1
+		add_country_modifier = {
+			name = espionage_mil_modifier
+			duration = 1095
+		}
+	}
+}
+#sabotage navy
+country_event = {
+
+	id = homebrew_spy.2
+	title = homebrew_spy.2.t
+	desc = homebrew_spy.2.d
+	picture = SPY_eventPicture
+	major = yes
+	major_trigger = {
+		OR = {
+			alliance_with = FROM
+			war_with = FROM
+		}
+	}
+	
+	is_triggered_only = yes
+
+	option = {
+		name = homebrew_spy.2.1
+		add_country_modifier = {
+			name = espionage_naval_modifier
+			duration = 1095
+		}
+	}
+}
+#sabotage siege
+country_event = {
+
+	id = homebrew_spy.3
+	title = homebrew_spy.3.t
+	desc = homebrew_spy.3.d
+	picture = SPY_eventPicture
+	major = yes
+	major_trigger = {
+		OR = {
+			alliance_with = FROM
+			war_with = FROM
+		}
+	}
+	
+	is_triggered_only = yes
+
+	option = {
+		name = homebrew_spy.3.1
+		add_country_modifier = {
+			name = espionage_siege_modifier
+			duration = 1095
+		}
+	}
+}
+#sabotage eco
+country_event = {
+
+	id = homebrew_spy.4
+	title = homebrew_spy.4.t
+	desc = homebrew_spy.4.d
+	picture = SPY_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = homebrew_spy.4.1
+		add_country_modifier = {
+			name = espionage_eco_modifier
+			duration = 1825
+		}
+	}
+}
+#master plan
+country_event = {
+
+	id = homebrew_spy.5
+	title = homebrew_spy.5.t
+	desc = homebrew_spy.5.d
+	picture = SPY_eventPicture
+	major = yes
+	major_trigger = {
+		OR = {
+			alliance_with = FROM
+			war_with = FROM
+		}
+	}
+	
+	is_triggered_only = yes
+
+	option = {
+		name = homebrew_spy.5.1
+		add_country_modifier = {
+			name = espionage_full_modifier
+			duration = 1095
+		}
+	}
+}
+#assassination: ruler death
+country_event = {
+
+	id = homebrew_spy.6
+	title = homebrew_spy.6.t
+	desc = homebrew_spy.6.d
+	picture = SPY_eventPicture
+	major = yes
+	major_trigger = {
+		OR = {
+			alliance_with = FROM
+			war_with = FROM
+		}
+	}
+	
+	is_triggered_only = yes
+
+	option = {
+		name = homebrew_spy.6.1
+		kill_ruler = yes
+	}
+}
+#assassination: ruler injury
+country_event = {
+
+	id = homebrew_spy.7
+	title = homebrew_spy.7.t
+	desc = homebrew_spy.7.d
+	picture = SPY_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = homebrew_spy.7.1
+		change_adm = -1 
+		change_dip = -1 
+		change_mil = -1
+	}
+}
+#assassination: advisor death
+country_event = {
+
+	id = homebrew_spy.8
+	title = homebrew_spy.8.t
+	desc = homebrew_spy.8.d
+	picture = SPY_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = homebrew_spy.7.1
+		kill_advisor = random
+	}
+}
+#assassination: nothing
+country_event = {
+
+	id = homebrew_spy.9
+	title = homebrew_spy.9.t
+	desc = homebrew_spy.9.d
+	picture = SPY_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = homebrew_spy.9.1
+		add_prestige = 5
+	}
+}
+#rebellion instigation
+country_event = {
+
+	id = homebrew_spy.10
+	title = homebrew_spy.10.t
+	desc = homebrew_spy.10.d
+	picture = SPY_eventPicture
+	major = yes
+	major_trigger = {
+		overlord_of = FROM
+	}
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		overlord = { 
+			save_event_target_as = hb_overlord 
+			capital_scope = { save_event_target_as = hb_capital }
+		}
+	}
+
+	option = {
+		name = homebrew_spy.10.1
+		add_liberty_desire = 15
+	}
+}
+#automation pulse
+country_event = {
+
+	id = homebrew_spy.11
+	title = homebrew_spy.11.t
+	desc = homebrew_spy.11.d
+	picture = SPY_eventPicture
+	hidden = yes
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		
+	}
+	
+	immediate = {
+		overlord = { 
+			save_event_target_as = hb_overlord 
+			capital_scope = { save_event_target_as = hb_capital }
+		}
+	}
+
+	option = {
+		name = homebrew_spy.10.1
+		add_liberty_desire = 15
+	}
+}

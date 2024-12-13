@@ -1,0 +1,665 @@
+#you always get these mercs
+merc_heroic_bands = {
+	regiments_per_development = 0.06
+		cavalry_weight = 0
+		artillery_weight = 0
+	cost_modifier = 0.95
+	trigger = {
+		OR = {
+		has_idea = soldnerheer5
+		has_country_modifier = heroic_coalition
+		}
+		NOT = { has_country_modifier = centaur_military }
+	}
+	modifier = {
+		morale_damage_received = -0.1
+		shock_damage = 0.2
+	}
+}
+merc_light_brigade = {
+	regiments_per_development = 0.01
+		cavalry_weight = 1
+		cavalry_cap = 60
+		artillery_weight = 0
+	cost_modifier = 0.8
+	trigger = {
+		OR = {
+		has_idea = soldnerheer5
+		has_country_modifier = heroic_coalition
+		}
+	}
+	modifier = {
+	cavalry_power = 0.2
+	morale_damage = 0.1
+	shock_damage_received = -0.1
+	}
+}
+merc_teleporting_army = {
+	regiments_per_development = 0.08
+		cavalry_weight = 0.1
+		cavalry_cap = 4
+		artillery_weight = 0.4
+	cost_modifier = 0.8
+	trigger = {
+		OR = {
+		has_idea = soldnerheer5
+		has_country_modifier = heroic_coalition
+		}
+		NOT = { has_country_modifier = monstrous_nation}
+		NOT = { has_country_modifier = centaur_military }
+	}
+	modifier = {
+		recover_army_morale_speed = 1
+		movement_speed = 0.2
+		prestige_from_land = 0.5
+	}
+}
+merc_professional = {
+	regiments_per_development = 0.04
+		cavalry_weight = 0
+		artillery_weight = 0
+	cost_modifier = 1.2
+	trigger = {
+		AND = {
+		has_idea = soldnerheer5
+		is_year = 1600
+		NOT = { has_country_modifier = monstrous_nation}
+		NOT = { has_country_modifier = centaur_military }
+		}
+	}
+	modifier = {
+		shock_damage = 0.1
+		fire_damage = 0.1
+		morale_damage = 0.1
+		fire_damage_received = -0.075
+		shock_damage_received = -0.075
+		morale_damage_received = -0.075
+		mercenary_manpower = -0.3
+	}
+}
+merc_independent_artificers = {
+	regiments_per_development = 0.04
+		cavalry_weight = 0
+		artillery_weight = 0.3
+	cost_modifier = 1.2
+	trigger = {
+		AND = {
+		has_idea = soldnerheer5
+		has_institution = manufactories
+		NOT = { has_country_modifier = monstrous_nation}
+		NOT = { has_country_modifier = centaur_military }
+		}
+	}
+	modifier = {
+		infantry_fire = 0.3
+		shock_damage_received = -0.2
+		fire_damage = 0.3
+		reinforce_cost_modifier = 0.5
+	}
+}
+#needs battlemage academies
+merc_magisters_majesties = {
+	regiments_per_development = 0.02
+		cavalry_weight = 0
+		artillery_weight = 0
+	cost_modifier = 1.2
+	trigger = {
+		AND = {
+		has_idea = soldnerheer5
+		has_estate_privilege = estate_mages_battlemage_academies
+		NOT = { has_country_modifier = monstrous_nation}
+		NOT = { has_country_modifier = centaur_military }
+		}
+	}
+	modifier = {
+		infantry_shock = 2
+		land_morale = 0.1
+		fire_damage_received = -0.1
+	}
+}
+#locational mercs
+#marines
+merc_munas_marines = {
+	regiments_per_development = 0.02
+		cavalry_weight = 0
+		artillery_weight = 0
+		home_province = 380 #Eborthil
+	cost_modifier = 0.95
+	trigger = {
+		OR = { 
+		has_idea = soldnerheer5
+		tag = A47 # Eborthil
+		has_country_modifier = heroic_coalition
+		}
+		NOT = { has_country_modifier = monstrous_nation }
+		NOT = { has_country_modifier = centaur_military }
+	}
+	modifier = {
+	movement_speed_onto_off_boat_modifier = 2
+	infantry_power = 0.1
+	shock_damage_received = 0.1
+	}
+}
+#harpies
+merc_shrieking_eagles = {
+	regiments_per_development = 0.02
+		cavalry_weight = 0
+		artillery_weight = 0
+		home_province = 660 #Harpylen
+	cost_modifier = 0.95
+	trigger = {
+		OR = {
+		has_idea = soldnerheer5
+		has_country_modifier = heroic_coalition
+		}
+		NOT = { has_country_modifier = centaur_military }
+		}
+	modifier = {
+	infantry_power = 0.1
+	shock_damage_received = -0.1
+	fire_damage_received = -0.1
+	may_recruit_female_generals = yes
+        female_advisor_chance = 1.0
+	}
+}
+#centaurs
+merc_caehns_band = {
+	regiments_per_development = 0.06
+		cavalry_weight = 1
+		cavalry_cap = 60
+		artillery_weight = 0
+		home_province = 5049 #West Forbidden Plains
+	cost_modifier = 0.95
+	trigger = {
+		OR = {
+		has_idea = soldnerheer5
+		has_country_modifier = heroic_coalition
+		}
+	}
+	modifier = {
+	cavalry_shock = 0.2
+	cavalry_power = 0.2
+	cav_to_inf_ratio = 0.5
+	land_morale = -0.1
+	}
+}
+#goblins
+merc_ruin_batteries = {
+	regiments_per_development = 0.02
+	cavalry_weight = 0
+	artillery_weight = 1
+	home_province = 723 #Bayvic
+	cost_modifier = 1.2
+	trigger = {
+		OR = {
+		has_idea = soldnerheer5
+		has_country_modifier = heroic_coalition
+		}
+		NOT = { has_country_modifier = monstrous_nation}
+		NOT = { has_country_modifier = centaur_military }
+	}
+	modifier = {
+	artillery_fire = 0.5
+	}
+}
+#orcs
+merc_dookansons_followers = {
+	regiments_per_development = 0.06
+	cavalry_weight = 0.3
+	cavalry_cap = 8
+	artillery_weight = 0
+	home_province = 740 #Frozenmaw
+	cost_modifier = 0.95
+	trigger = {
+		OR = {
+		has_idea = soldnerheer5
+		has_country_modifier = heroic_coalition
+		}
+		NOT = { has_country_modifier = centaur_military }
+	}
+	modifier = {
+	land_morale = 0.1
+	shock_damage = 0.1
+	shock_damage_received = -0.1
+	fire_damage = -0.1
+	}
+}
+#kobolds
+merc_dragoncult_cultists = {
+	regiments_per_development = 0.08
+		cavalry_weight = 0.2
+		cavalry_cap = 2
+		artillery_weight = 0.2
+		home_province = 185 #Bluescale
+	cost_modifier = 0.6
+	trigger = {
+		OR = {
+		has_idea = soldnerheer5
+		has_country_modifier = heroic_coalition
+		}
+		NOT = { has_country_modifier = centaur_military }
+	}
+	modifier = {
+		loot_amount = 0.5
+		infantry_fire = 0.5
+		discipline = -0.1
+	}
+}
+#wood elves
+merc_fey_touched = {
+	regiments_per_development = 0.02
+	cavalry_weight = 0.3
+	cavalry_cap = 8
+	artillery_weight = 0
+	home_province = 3024 #Cyranvar
+	cost_modifier = 1.2
+	trigger = {
+		OR = {
+		has_idea = soldnerheer5
+		has_country_modifier = heroic_coalition
+		}
+		NOT = { has_country_modifier = monstrous_nation}
+		NOT = { has_country_modifier = centaur_military }
+	}
+	modifier = {
+	discipline = 0.05
+	fire_damage_received = -0.2
+	reinforce_speed = -0.5
+	}
+}
+#desert elves
+merc_jadd_auxiliaries = {
+	regiments_per_development = 0.01
+	cavalry_weight = 1
+	cavalry_cap = 16
+	artillery_weight = 0
+	home_province = 2909 #Jaddari
+	cost_modifier = 1.2
+	trigger = {
+		OR = {
+		has_idea = soldnerheer5
+		has_country_modifier = heroic_coalition
+		}
+		NOT = { has_country_modifier = centaur_military }
+		religion = the_jadd
+	}
+	modifier = {
+	discipline = 0.05
+	shock_damage = 0.2
+	reinforce_speed = -0.5
+	}
+}
+#sun elves
+merc_jaherian_knights = {
+	regiments_per_development = 0.04
+	cavalry_weight = 1
+	cavalry_cap = 24
+	artillery_weight = 0
+	home_province = 561 #Irrliam
+	cost_modifier = 1.2
+	trigger = {
+		OR = {
+		has_idea = soldnerheer5
+		has_country_modifier = heroic_coalition
+		}
+		NOT = { has_country_modifier = monstrous_nation}
+		NOT = { has_country_modifier = centaur_military }
+		NOT = { religion = the_jadd }
+	}
+	modifier = {
+	land_morale = 0.15
+	cavalry_power = 0.2
+	reinforce_speed = -0.25
+	}
+}
+#harimari
+merc_tonys_freezers = {
+	regiments_per_development = 0.04
+	cavalry_weight = 0
+	artillery_weight = 0
+	home_province = 4510 #Rahenraj
+	cost_modifier = 0.8
+	trigger = {
+		OR = {
+		has_idea = soldnerheer5
+		has_country_modifier = heroic_coalition
+		}
+		NOT = { has_country_modifier = monstrous_nation}
+		NOT = { has_country_modifier = centaur_military }
+	}
+	modifier = {
+	infantry_shock = 0.3
+	infantry_power = 0.1
+	movement_speed = 0.1
+	fire_damage = -0.2
+	}
+}
+#gnomes
+merc_giberdi_tinker_corps = {
+	regiments_per_development = 0.02
+	cavalry_weight = 0
+	artillery_weight = 0.8
+	home_province = 271 #Giberd
+	cost_modifier = 0.7
+	trigger = {
+		OR = {
+		has_idea = soldnerheer5
+		has_country_modifier = heroic_coalition
+		}
+		NOT = { has_country_modifier = monstrous_nation}
+		NOT = { has_country_modifier = centaur_military }
+	}
+	modifier = {
+	fire_damage = 0.2
+	leader_siege = 1
+	}
+}
+#gnolls
+merc_howling_hunters = {
+	regiments_per_development = 0.06
+	cavalry_weight = 0.3
+	cavalry_cap = 16
+	artillery_weight = 0
+	home_province = 487 # Gnollakaz
+	cost_modifier = 0.5
+	trigger = {
+		OR = {
+		has_idea = soldnerheer5
+		has_country_modifier = heroic_coalition
+		}
+		NOT = { has_country_modifier = centaur_military }
+	}
+	modifier = {
+	shock_damage = 0.15
+	shock_damage_received = -0.15
+	movement_speed = 0.1
+	fire_damage = -0.1
+	}
+}
+#dwarves
+merc_silvershield_brigade = {
+	regiments_per_development = 0.04
+	cavalry_weight = 0
+	artillery_weight = 0
+	home_province = 2864 #Asra Expedition
+	cost_modifier = 0.65
+	trigger = {
+		OR = {
+		has_idea = soldnerheer5
+		has_country_modifier = heroic_coalition
+		}
+		NOT = { has_country_modifier = monstrous_nation}
+		NOT = { has_country_modifier = centaur_military }
+	}
+	modifier = {
+	shock_damage_received = -0.15
+	fire_damage_received = -0.15
+	}
+}
+merc_dwarovar_regulars = {
+	regiments_per_development = 0.07
+	cavalry_weight = 0.1
+	cavalry_cap = 2
+	artillery_weight = 0.4
+	home_province = 4284 #Ovdal-az-An
+	cost_modifier = 0.8
+	trigger = {
+		OR = {
+		has_idea = soldnerheer5
+		has_country_modifier = heroic_coalition
+		}
+		NOT = { has_country_modifier = monstrous_nation}
+		NOT = { has_country_modifier = centaur_military }
+	}
+	modifier = {
+	shock_damage_received = -0.15
+	backrow_artillery_damage = 0.1
+	}
+}
+#heroic coalition
+merc_coalition_army = {
+regiments_per_development = 0.1
+	cavalry_weight = 0.2
+	cavalry_cap = 4
+	artillery_weight = 0.4
+	cost_modifier = 0.01
+	trigger = {
+		hidden_trigger = {
+			AND = {
+				ai = yes #meant to help ai win coalitions
+				NOT = { coalition_target = ROOT }
+				is_in_coalition_war = yes
+			}
+		}
+	}
+	modifier = {
+	land_morale = 0.2
+	shock_damage_received = -0.1
+	}
+}
+#Aelantir mercs
+merc_valorpoint = {
+	regiments_per_development = 0.06
+	cavalry_weight = 0.3
+	cavalry_cap = 4
+	artillery_weight = 0.2
+	home_province = 1047 #Valorpoint
+	cost_modifier = 0.95
+	trigger = {
+		OR = {
+		has_idea = soldnerheer5
+		has_country_modifier = heroic_coalition
+		}
+		NOT = { has_country_modifier = monstrous_nation }
+		NOT = { has_country_modifier = centaur_military }
+	}
+	modifier = {
+	cavalry_power = 0.15
+	movement_speed = 0.15
+	}
+}
+merc_ynn = {
+	regiments_per_development = 0.04
+	cavalry_weight = 0.3
+	cavalry_cap = 10
+	artillery_weight = 0
+	home_province = 1169 #Malacnar
+	cost_modifier = 1.2
+	trigger = {
+		OR = {
+		has_idea = soldnerheer5
+		has_country_modifier = heroic_coalition
+		}
+		NOT = { has_country_modifier = monstrous_nation }
+		NOT = { has_country_modifier = centaur_military }
+	}
+	modifier = {
+	shock_damage = 0.2
+	army_tradition_from_battle = 0.5
+	}
+}
+merc_eordand = {
+	regiments_per_development = 0.06
+	cavalry_weight = 0.2
+	cavalry_cap = 4
+	artillery_weight = 0
+	home_province = 6241 #Domandrod
+	cost_modifier = 1
+	trigger = {
+		OR = {
+		has_idea = soldnerheer5
+		has_country_modifier = heroic_coalition
+		}
+		NOT = { has_country_modifier = monstrous_nation }
+		NOT = { has_country_modifier = centaur_military }
+	}
+	modifier = {
+	land_morale = 0.1
+	shock_damage = 0.1
+	movement_speed = 0.15
+	}
+}
+merc_taychend = {
+	regiments_per_development = 0.1
+	cavalry_weight = 0.5
+	cavalry_cap = 30
+	artillery_weight = 0
+	home_province = 2487 #Larankar
+	cost_modifier = 1.2
+	trigger = {
+		OR = {
+		has_idea = soldnerheer5
+		has_country_modifier = heroic_coalition
+		}
+		NOT = { has_country_modifier = monstrous_nation }
+		NOT = { has_country_modifier = centaur_military }
+	}
+	modifier = {
+	cavalry_power = 0.1
+	available_province_loot = 0.5
+	loot_amount = 0.5
+	movement_speed = -0.1
+	}
+}
+
+#in practice, only 1 config of each class should be available
+#Protector-class are anti-kaiju weapons first and foremost. They aren't 4k mercenaries, they're big enough to take up 4 regiments of space. Being big and complex, they're very expensive and are slower to transport than conventional armies.
+#Basic/Defense config, think Pacific Rim
+merc_protector_config_a = {
+	regiments_per_development = 0.0
+		cavalry_weight = 0
+		artillery_weight = 0
+	cost_modifier = 5
+	trigger = {
+		has_country_flag = hb_giant_mechanim
+		NOT = { has_country_modifier = centaur_military }
+	}
+	modifier = {
+		land_morale = 1
+		fire_damage_received = -0.33
+		infantry_shock = 2
+		land_attrition = -1
+		reinforce_cost_modifier = 1.5
+		movement_speed = -0.25
+	}
+}
+#Agility config = cav regiments, think Evangelion
+merc_protector_config_b = {
+	regiments_per_development = 0.0
+		cavalry_weight = 0.5
+		artillery_weight = 0
+		cavalry_cap = 2
+	cost_modifier = 5
+	trigger = {
+		has_country_flag = hb_giant_mechanim
+		NOT = { has_country_modifier = centaur_military }
+	}
+	modifier = {
+		land_morale = 1
+		shock_damage = 2
+		shock_damage_received = -0.33
+		land_attrition = -1
+		reinforce_cost_modifier = 1.5
+		movement_speed = -0.25
+	}
+}
+#Offense config, no real throughline tbh - just think of an unarmored config a with more firepower (giant bludgeon, dragonator shivs, rocket punch, etc)
+merc_protector_config_c = {
+	regiments_per_development = 0.0
+		cavalry_weight = 0
+		artillery_weight = 0
+	cost_modifier = 5
+	trigger = {
+		has_country_flag = hb_giant_mechanim
+		NOT = { has_country_modifier = centaur_military }
+	}
+	modifier = {
+		land_morale = 1
+		infantry_power = 0.5
+		shock_damage = 2
+		land_attrition = -1
+		reinforce_cost_modifier = 1.5
+		movement_speed = -0.25
+	}
+}
+#Avenger class aren't required to be humanoid, are built for conventional warfare and always runs artillery. They're more advanced than Protectors, costing way more and being even slower but has fire modifiers and better unique modifiers
+#Basic/Combat config, think Gundam
+merc_avenger_config_a = {
+	regiments_per_development = 0.0
+		cavalry_weight = 0
+		artillery_weight = 0.25
+	cost_modifier = 10
+	trigger = {
+		has_country_flag = hb_giant_mechanim
+		NOT = { has_country_modifier = centaur_military }
+	}
+	modifier = {
+		land_morale = 1
+		discipline = 0.25
+		infantry_fire = 2
+		infantry_shock = 2
+		land_attrition = -1
+		reinforce_cost_modifier = 2.5
+		movement_speed = -0.5
+	}
+}
+#Siege config, think TTGL/ATLA
+merc_avenger_config_b = {
+	regiments_per_development = 0.0
+		cavalry_weight = 0
+		artillery_weight = 0.25
+	cost_modifier = 10
+	trigger = {
+		has_country_flag = hb_giant_mechanim
+		NOT = { has_country_modifier = centaur_military }
+	}
+	modifier = {
+		land_morale = 1
+		siege_ability = 1
+		infantry_fire = 2
+		infantry_shock = 2
+		land_attrition = -1
+		reinforce_cost_modifier = 2.5
+		movement_speed = -0.5
+	}
+}
+#Artillery config = pure artillery, think Metal Gear
+merc_avenger_config_c = {
+	regiments_per_development = 0.0
+		cavalry_weight = 0
+		artillery_weight = 1
+	cost_modifier = 10
+	trigger = {
+		has_country_flag = hb_giant_mechanim
+		NOT = { has_country_modifier = centaur_military }
+	}
+	modifier = {
+		land_morale = 1
+		artillery_power = 0.33
+		artillery_fire = 1
+		artillery_shock = 1
+		land_attrition = -1
+		reinforce_cost_modifier = 2.5
+		movement_speed = -0.5
+	}
+}
+#cultists used to lay circles
+dw_cultists = {
+	regiments_per_development = 0.0
+		cavalry_weight = 0
+		artillery_weight = 0
+	cost_modifier = 1
+	trigger = {
+		has_country_flag = dw_cultist_path
+		NOT = { has_country_modifier = centaur_military }
+	}
+	modifier = {
+		land_morale = 1
+		artillery_power = 0.33
+		artillery_fire = 1
+		artillery_shock = 1
+		land_attrition = -1
+		reinforce_cost_modifier = 2.5
+		movement_speed = -0.5
+	}
+}

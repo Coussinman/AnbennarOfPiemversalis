@@ -1,0 +1,987 @@
+adjacent_fort_penalty = {
+	local_defensiveness = -0.15
+	local_hostile_attrition = -1
+}
+hb_temple = {
+	local_missionary_strength = 0.01
+}
+hb_cathedral = {
+	local_missionary_strength = 0.03
+}
+hold_ei_1 = {
+	trade_goods_size_modifier = -0.025
+	local_manpower_modifier = -0.05
+}
+hold_ei_2 = {
+	trade_goods_size_modifier = -0.05
+	local_manpower_modifier = -0.1
+}
+hold_ei_3 = {
+	trade_goods_size_modifier = -0.075
+	local_manpower_modifier = -0.15
+}
+hold_ei_4 = {
+	trade_goods_size_modifier = -0.1
+	local_manpower_modifier = -0.2
+}
+hold_ei_5 = {
+	trade_goods_size_modifier = -0.125
+	local_manpower_modifier = -0.25
+}
+hold_ei_6 = {
+	trade_goods_size_modifier = -0.150
+	local_manpower_modifier = -0.3
+}
+hold_ei_7 = {
+	trade_goods_size_modifier = -0.175
+	local_manpower_modifier = -0.35
+}
+hold_ei_8 = {
+	trade_goods_size_modifier = -0.175
+	local_manpower_modifier = -0.40
+}
+hold_ei_9 = {
+	trade_goods_size_modifier = -0.2
+	local_manpower_modifier = -0.45
+}
+hold_ei_10 = {
+	trade_goods_size_modifier = -0.225
+	local_manpower_modifier = -0.50
+}
+factory_town = {
+	local_development_cost = -0.075
+}
+#super fort is tricky to balance, as of now it kinda works on its own but is best used in conjunction with terrain and buildings
+super_fort1 = { #early game, it sucks but sieges are at their slowest in this stage
+	local_hostile_attrition = 0.75
+}
+super_fort2 = { #mid game, armies are getting bigger and attrition is becoming less relevant. Let's fix that.
+	local_hostile_attrition = 1.5
+	max_attrition = 5
+	global_tax_income = -6 #maintenance
+}
+super_fort3 = { #a couple techs later, artillery is being spammed by this point and forts are used mainly for terrain rolls. Having a second Scorched Earth effect makes an enemy have to consider overstacking their armies - and overstacking means more attrition damage!
+	local_hostile_attrition = 2.25
+	max_attrition = 5
+	local_hostile_movement_speed = -0.2
+	global_tax_income = -12 #maintenance
+}
+super_fort4 = { #we're in the endgame boys, defensivenes gets added to help delay seiges for longer - by this point you should be a big boi, meaning you need time to respond to hostile sieges.
+	local_hostile_attrition = 3
+	max_attrition = 5
+	local_hostile_movement_speed = -0.2
+	local_defensiveness = 0.3
+	global_tax_income = -18 #maintenance
+}
+super_fort5 = { #if you've come this far, you're building ramparts. Why not double down on 1.34 Ramparts and turn the fort into a meat grinder?
+	local_hostile_attrition = 3.75
+	max_attrition = 5
+	local_hostile_movement_speed = -0.2
+	local_defensiveness = 0.3
+	local_defender_dice_roll_bonus = 1
+	global_tax_income = -24 #maintenance
+}
+super_fort6 = { #literally only possible by stacking every fort buff you can get, including building a magical fortress. Since this is restricted to your capital, why not go crazy and turn it into a high-fantasy Cadia?
+	local_hostile_attrition = 4.5
+	max_attrition = 6
+	local_hostile_movement_speed = -0.3
+	local_defensiveness = 0.45
+	local_defender_dice_roll_bonus = 2
+	global_tax_income = -30 #maintenance
+}
+holdcentralism = {
+	local_development_cost = -0.1
+}
+dwarven_citadel = {
+	fort_level = 1
+}
+serpentsbeat = {
+	local_friendly_movement_speed = 0.2
+}
+bionic_implants = {
+	is_rajput_modifier = yes
+
+	discipline = 0.05
+}
+smart_armor = {
+	is_rajput_modifier = yes
+
+	shock_damage_received = -0.05
+	fire_damage_received = -0.05
+}
+emergency_exit = {
+	is_rajput_modifier = yes
+	
+	drill_decay_modifier = -0.1
+	land_attrition = -0.15
+}
+evocation_drones = {
+	is_rajput_modifier = yes
+
+	infantry_shock = 0.15
+}
+homebrew_mining_regulations_damestear = {
+	trade_goods_size = 1
+}
+homebrew_mining_regulations_relic = {
+	trade_goods_size = 1
+}
+rural_industry = {
+	allowed_num_of_buildings = 1
+	local_build_cost = -0.025
+}
+recruitment1 = {
+	local_manpower = 0.2
+}
+recruitment2 = {
+	local_manpower = 0.4
+}
+conscription1 = {
+	land_forcelimit = 0.33
+}
+conscription2 = {
+	land_forcelimit = 0.66
+}
+#milmage = { #costs a manufactory, is one-per-state and cannot work on territories. I might consider nerfing it even harder, maybe it needs a 20+ dev province too?
+#	shock_damage = 0.02
+#}
+#replaced by a triggered modifier, this lets me add a hard cap
+#urban/dwarven terrain's relative scarcity makes this tricky to balance - it has to be comparable to a global goods produced buff while not being op on a provincial level
+urban_industry = {
+	trade_goods_size = 0.75
+}
+#tricky to balance for similar reasons - balance was done with 2 races/province as a baseline.
+#removed due to it feeling boring
+#homebrew_minority_size_1 = {
+#	local_tax_modifier = 0.035
+#	local_production_efficiency = 0.025
+#}
+#homebrew_minority_size_2 = {
+#	local_tax_modifier = 0.07
+#	local_production_efficiency = 0.05
+#}
+#homebrew_minority_size_3 = {
+#	local_tax_modifier = 0.105
+#	local_production_efficiency = 0.075
+#}
+#homebrew_minority_size_4 = {
+#	local_tax_modifier = 0.14
+#	local_production_efficiency = 0.1
+#}
+#homebrew_minority_size_5 = {
+#	local_tax_modifier = 0.175
+#	local_production_efficiency = 0.125
+#}
+#homebrew_minority_size_6 = {
+#	local_tax_modifier = 0.21
+#	local_production_efficiency = 0.15
+#}
+#homebrew_minority_size_7 = {
+#	local_tax_modifier = 0.245
+#	local_production_efficiency = 0.175
+#}
+#homebrew_minority_size_8 = {
+#	local_tax_modifier = 0.28
+#	local_production_efficiency = 0.2
+#}
+#homebrew_minority_size_9 = {
+#	local_tax_modifier = 0.315
+#	local_production_efficiency = 0.225
+#}
+#homebrew_minority_size_10 = {
+#	local_tax_modifier = 0.35
+#	local_production_efficiency = 0.25
+#}
+homebrew_colonial_boom_modifier = {
+	trade_goods_size_modifier = 0.1
+	local_build_cost = -0.1
+}
+#empty modifiers used for tracking expanded infrastructure
+metropolis_flag_1 = {
+}
+metropolis_flag_2 = {
+}
+metropolis_flag_3 = {
+}
+metropolis_flag_4 = {
+}
+metropolis_flag_5 = {
+}
+metropolis_flag_6 = {
+}
+metropolis_flag_7 = {
+}
+metropolis_flag_8 = {
+}
+metropolis_flag_9 = {
+}
+metropolis_flag_10 = {
+}
+metropolis_planning_1 = {
+	trade_goods_size_modifier = 0.05
+	local_manpower_modifier = 0.1
+}
+metropolis_planning_2 = {
+	trade_goods_size_modifier = 0.1
+	local_manpower_modifier = 0.2
+}
+metropolis_planning_3 = {
+	trade_goods_size_modifier = 0.15
+	local_manpower_modifier = 0.3
+}
+metropolis_planning_4 = {
+	trade_goods_size_modifier = 0.2
+	local_manpower_modifier = 0.4
+}
+metropolis_planning_5 = {
+	trade_goods_size_modifier = 0.25
+	local_manpower_modifier = 0.5
+}
+metropolis_planning_6 = {
+	trade_goods_size_modifier = 0.3
+	local_manpower_modifier = 0.6
+}
+metropolis_planning_7 = {
+	trade_goods_size_modifier = 0.35
+	local_manpower_modifier = 0.7
+}
+metropolis_planning_8 = {
+	trade_goods_size_modifier = 0.4
+	local_manpower_modifier = 0.8
+}
+metropolis_planning_9 = {
+	trade_goods_size_modifier = 0.45
+	local_manpower_modifier = 0.9
+}
+metropolis_planning_10 = {
+	trade_goods_size_modifier = 0.5
+	local_manpower_modifier = 1
+}
+centralize_gov_reduction = {
+	local_governing_cost_increase = -5
+}
+#events
+urbanization_wave = {
+	development_cost = -0.1
+}
+industry_baron_tyranny = {
+	local_unrest = 5
+	local_production_efficiency = -0.2
+}
+worker_riots = {
+	global_unrest = 2
+	global_trade_goods_size_modifier = -0.15
+}
+factory_reforms = {
+	production_efficiency = -0.1
+	build_cost = 0.15
+}
+workers_justice = {
+	global_unrest = -2
+	stability_cost_modifier = -0.25
+}
+mechanism_enforcement = {
+	global_unrest = 2
+}
+ind_cap = {
+	production_efficiency = 0.1
+}
+loose_labor_laws = {
+	global_trade_goods_size_modifier = 0.15
+	technology_cost = 0.05
+	development_cost = 0.05
+}
+homebrew_production_boom = {
+	trade_value_modifier = 0.25
+}
+devaluation_modifier = {
+	global_trade_goods_size_modifier = -0.1
+}
+devaluation_manufactory = {
+	trade_value_modifier = -0.3
+}
+chief_artificer = {
+	technology_cost = -0.01
+}
+artificer_cooldown = {
+}
+artifice_domination_potions = {
+	global_spy_defence = 0.33
+}
+artifice_necrolyzer = {
+	manpower_recovery_speed = 0.15
+}
+artifice_bullet_worms = {
+	is_rajput_modifier = yes
+
+	fire_damage = 0.10
+	infantry_power = 0.1
+}
+artifice_runepress = {
+	all_power_cost = -0.025
+}
+artifice_dwarf_eye_longlived = {
+	country_admin_power = 1
+}
+artifice_dwarf_eye_normal = {
+	all_power_cost = -0.065
+	monarch_lifespan = -0.25
+}
+artifice_serpentrot_gas = {
+	is_rajput_modifier = yes
+
+	infantry_fire = 0.2
+	infantry_shock = 0.2
+}
+artifice_khetgirl = {
+	is_rajput_modifier = yes
+	
+	land_morale = 0.1
+}
+serpent_rot_3 = {
+	local_colonial_growth = -20
+	trade_goods_size_modifier = -0.8
+	local_tax_modifier = -0.8
+	local_manpower_modifier = -0.4
+	province_trade_power_modifier = -0.8
+	local_monthly_devastation = 1
+	local_unrest = 1
+	trade_goods_size = 0.02
+	picture = "serpent_rot_1"
+}
+hcracker_capital = {
+	local_development_cost = 1
+	trade_goods_size_modifier = -1
+	local_unrest = 5
+	trade_goods_size = 0.02
+	picture = "serpent_rot_2"
+}
+hcracker_aftershock = {
+	local_colonial_growth = -50
+	local_development_cost = 0.5
+	local_autonomy = 0.05
+	local_friendly_movement_speed = -0.25
+	local_hostile_movement_speed = -0.25
+	local_defensiveness = -1
+}
+hcracker_recovery = {
+	colonists = 1
+	global_colonial_growth = 100
+}
+artificer_madness = {
+	all_power_cost = 0.05
+}
+fish_head = {
+	all_power_cost = 0.05
+	prestige = -2
+}
+nurael_suggestion = {
+	diplomatic_reputation = -3
+	improve_relation_modifier = -0.33
+	ae_impact = 0.25
+}
+techno_music = {
+	prestige = 1
+}
+technology_scaleback = {
+	mil_tech_cost_modifier = 0.15
+}
+unexplainable_rage = {
+	land_morale = 0.1
+	global_unrest = 2
+}
+experimental_land_tech = {
+	mil_tech_cost_modifier = -0.05
+	infantry_power = 0.05
+	infantry_cost = 0.15
+}
+experimental_navy_tech = {
+	dip_tech_cost_modifier = -0.05
+	heavy_ship_power = 0.1
+	heavy_ship_cost = 0.15
+}
+insidious_diplomacy = {
+	ae_impact = -0.1
+	spy_offence = 0.25
+	legitimacy = -0.75
+	republican_tradition = -0.25
+	horde_unity = -0.75
+	devotion = -0.75
+	meritocracy = -0.75
+}
+bee_movie = {
+	prestige = 1
+}
+debating_lotr = {
+	army_tradition_decay = -0.01
+	advisor_cost = 0.1
+}
+yarhar = {
+	privateer_efficiency = 0.5
+}
+mech_fantasies = {
+	is_rajput_modifier = yes
+	land_maintenance_modifier = 1
+	infantry_power = 0.1
+}
+visions_of_beyond = {
+	prestige_decay = 0.01
+	idea_cost = -0.05
+}
+fm_depressed = {
+	all_power_cost = 0.025
+}
+fm_magisterium_standards = {
+	mages_loyalty_modifier = 10
+}
+homebrew_skilled_abjurer = {
+	defensiveness = 0.25
+}
+homebrew_local_abjurer = {
+	local_defensiveness = 0.15
+}
+coinmaker_mages = {
+	global_tax_modifier = 0.3
+	interest = -1
+	diplomatic_reputation = -2
+	inflation_reduction = -0.1
+}
+homebrew_illusion_magic = {
+	spy_offence = 0.25
+	global_spy_defence = 0.25
+}
+muggles_upset = {
+	all_power_cost = -0.025
+	global_unrest = 5
+	advisor_cost = 0.1
+}
+homebrew_mates = {
+	institution_growth = 0.2
+	local_unrest = 2
+}
+homebrew_restricted_mates = {
+	tolerance_own = 2
+}
+homebrew_rampant_gobbo = {
+	local_tax_modifier = -0.2
+	local_production_efficiency = -0.1
+	local_manpower_modifier = -0.2
+	development_cost = -0.1
+}
+homebrew_restricted_gobbo = {
+	local_tax_modifier = 0.1
+	local_unrest = 2
+}
+purged_admin = {
+	adm_advisor_cost = 1
+	global_tax_modifier = -0.1
+	administrative_efficiency = 0.05
+}
+purged_diplo = {
+	dip_advisor_cost = 1
+	improve_relation_modifier = -0.2
+	administrative_efficiency = 0.05
+}
+purged_mil = {
+	mil_advisor_cost = 1
+	land_morale = -0.05
+	general_cost = 0.25
+	administrative_efficiency = 0.05
+}
+purged_cabinet = {
+	advisor_cost = 1
+	advisor_pool = -2
+	global_tax_modifier = -0.15
+	improve_relation_modifier = -0.3
+	land_morale = -0.075
+	administrative_efficiency = 0.1
+	global_unrest = -2
+}
+wandering_adventurers = {
+	local_monthly_devastation = 0.2
+	local_tax_modifier = -0.3
+	trade_goods_size_modifier = -0.33
+}
+monstrous_mil_reform = {
+	drill_gain_modifier = 0.5
+	mil_tech_cost_modifier = -0.1
+	land_morale = -0.05
+	army_tradition_decay = 0.01
+}
+homebrew_halfling_concessions = {
+	global_trade_power = -0.1
+}
+homebrew_gnome_concessions = {
+	advisor_cost = 0.1
+}
+homebrew_tax_break = {
+	global_tax_modifier = 0.2
+}
+homebrew_cot_effect = {
+	province_trade_power_value = -10
+}
+homebrew_connection = {
+	improve_relation_modifier = 0.25
+}
+
+###more covert actions###
+espionage_network_modifier = {
+	global_spy_defence = -0.33
+}
+espionage_mil_modifier = {
+	land_forcelimit_modifier = -0.15
+}
+espionage_naval_modifier = {
+	naval_forcelimit_modifier = -0.2
+}
+espionage_siege_modifier = {
+	defensiveness = -0.15
+	siege_ability = -0.1
+}
+espionage_eco_modifier = {
+	build_cost = 0.075
+	yearly_corruption = 0.1
+}
+espionage_full_modifier = {
+	land_forcelimit_modifier = -0.15
+	naval_forcelimit_modifier = -0.2
+	defensiveness = -0.15
+	siege_ability = -0.1
+	build_cost = 0.075
+	yearly_corruption = 0.1
+}
+
+###invisible modifiers###
+hb_first_ei = {}
+meltingpot_update = {}
+espionage_vassal_self_cooldown = {}
+espionage_vassal_other_cooldown = {}
+
+###melting pot redux###
+meltingpot_elven = {
+	
+	local_tax_modifier = 0.1
+	trade_value_modifier = 0.1
+	local_production_efficiency = 0.05
+	picture = "pop_icon_elf_sa"
+}
+meltingpot_dwarven = {
+	
+	local_fort_maintenance_modifier = -0.075
+	local_build_cost = -0.05
+	trade_goods_size_modifier = 0.05
+	picture = "pop_icon_dwarf_sa"
+}
+meltingpot_gnomish = {
+	
+	local_production_efficiency = 0.05
+	local_institution_spread = 0.05
+	local_tax_modifier = 0.05
+	picture = "pop_icon_gnome_sa"
+}
+meltingpot_halfling = {
+	
+	local_development_cost = -0.05
+	province_trade_power_modifier = 0.05
+	supply_limit_modifier = 0.1
+	picture = "pop_icon_halfling_sa"
+}
+meltingpot_human = {
+	
+	local_manpower_modifier = 0.05			
+	local_development_cost = -0.05
+	local_sailors_modifier = 0.1
+	picture = "pop_icon_human_sa"
+}
+meltingpot_half_orcish = {
+	
+	local_manpower_modifier = 0.075
+	local_sailors_modifier = 0.075
+	trade_goods_size_modifier = 0.05
+	picture = "pop_icon_half_orc_sa"
+}
+meltingpot_half_elven = {
+	
+	local_tax_modifier = 0.05
+	local_development_cost = -0.05
+	local_core_creation = -0.1
+	picture = "pop_icon_half_elf_sa"
+}
+meltingpot_ruinborn = {
+	
+	local_build_cost = -0.05
+	supply_limit_modifier = 0.1
+	local_monthly_devastation = -0.05
+	picture = "pop_icon_ruinborn_sa"
+}
+meltingpot_orcish = {
+	
+	trade_goods_size_modifier = 0.05
+	local_manpower_modifier = 0.1
+	local_regiment_cost = -0.1
+	picture = "pop_icon_orc_sa"
+}
+meltingpot_kobold = {
+	
+	local_build_cost = -0.1
+	regiment_recruit_speed = -0.1
+	local_hostile_attrition = 1
+	picture = "pop_icon_kobold_sa"
+}
+meltingpot_gnollish = {
+	
+	trade_goods_size_modifier = 0.05
+	local_manpower_modifier = 0.05
+	province_trade_power_value = 0.05
+	picture = "pop_icon_gnoll_sa"
+}
+meltingpot_harpy = {
+	
+	local_build_time = -0.05
+	local_friendly_movement_speed = 0.1
+	local_hostile_attrition = 1
+	picture = "pop_icon_harpy_sa"
+}
+meltingpot_goblin = {
+	
+	local_regiment_cost = -0.1
+	local_hostile_movement_speed = -0.1
+	local_production_efficiency = 0.1
+	picture = "pop_icon_goblin_sa"
+}
+meltingpot_troll = {
+	
+	supply_limit_modifier = 0.05
+ 	local_hostile_movement_speed = -0.1
+	local_manpower_modifier = 0.1
+	picture = "pop_icon_troll_sa"
+}
+meltingpot_ogre = {
+	
+	local_build_time = -0.1
+	local_tax_modifier = 0.05
+	local_manpower_modifier = 0.1
+	picture = "pop_icon_ogre_sa"
+}
+meltingpot_centaur = {
+	
+	province_trade_power_modifier = 0.05
+ 	supply_limit_modifier = 0.05
+	local_friendly_movement_speed = 0.1
+	picture = "pop_icon_centaur_sa"
+}
+meltingpot_harimari = {
+	
+	local_tax_modifier = 0.05
+ 	local_hostile_attrition = 0.5
+	local_governing_cost = -0.05
+	picture = "pop_icon_harimari_sa"
+}
+meltingpot_hobgoblin = {
+	
+	local_unrest = -1
+ 	regiment_recruit_speed = -0.1
+	local_manpower_modifier = 0.1
+	picture = "pop_icon_hobgoblin_sa"
+}
+meltingpot_lizardfolk = {
+	
+	local_production_efficiency = 0.05
+	ship_recruit_speed = -0.10
+	local_regiment_cost = -0.1
+	picture = "pop_icon_lizardfolk_sa"
+}
+###wild card###
+#admin
+wildcard_tax = {
+	global_tax_modifier = 0.15
+}
+wildcard_production = {
+	production_efficiency = 0.1
+}
+wildcard_inflation = {
+	inflation_reduction = 0.1
+}
+wildcard_dev = {
+	development_cost = -0.075
+}
+wildcard_ccr = {
+	core_creation = -0.1
+}
+wildcard_stability = {
+	stability_cost_modifier = -0.2
+}
+wildcard_autonomy = {
+	global_autonomy = -0.05
+}
+wildcard_seperatism = {
+	years_of_nationalism = -5
+}
+wildcard_tech = {
+	technology_cost = -0.05
+}
+wildcard_idea = {
+	idea_cost = -0.05
+}
+wildcard_institution = {
+	global_institution_spread = 0.25
+	embracement_cost = -0.1
+}
+wildcard_prestige = {
+	prestige = 0.75
+}
+wildcard_missionary = {
+	global_missionary_strength = 0.02
+}
+wildcard_unity = {
+	religious_unity = 0.25
+}
+wildcard_religious_power = {
+	papal_influence = 2
+	devotion = 0.5
+	monthly_fervor_increase = 0.25
+	church_power_modifier = 0.1
+}
+wildcard_splendor = {
+	monthly_splendor = 2
+}
+wildcard_corruption = {
+	yearly_corruption = -0.1
+}
+wildcard_governing_cap = {
+	governing_capacity_modifier = 0.15
+}
+wildcard_reform = {
+	monthly_reform_progress_modifier = 0.15
+}
+wildcard_estates = {
+	all_estate_loyalty_equilibrium = 0.05
+}
+wildcard_colonist = {
+	global_colonial_growth = 20
+}
+
+#dip
+wildcard_trade_eff = {
+	trade_efficiency = 0.1
+}
+wildcard_goods_produced = {
+	global_trade_goods_size_modifier = 0.05
+}
+wildcard_diplo_rep = {
+	diplomatic_reputation = 1.5
+}
+wildcard_diplo_slots = {
+	diplomatic_upkeep = 2
+}
+wildcard_vassal_income = {
+	vassal_income = 0.25
+}
+wildcard_ae = {
+	ae_impact = -0.15
+}
+wildcard_diplo_annex = {
+	diplomatic_annexation_cost = -0.15
+}
+wildcard_pwc = {
+	province_warscore_cost = -0.15
+}
+wildcard_culture_convert = {
+	culture_conversion_cost = -0.25
+}
+wildcard_liberty = {
+	reduced_liberty_desire = 10
+}
+wildcard_spy = {
+	spy_offence = 0.5
+}
+wildcard_colonial_range = {
+	range = 0.5
+}
+wildcard_tradepower = {
+	global_trade_power = 0.2
+}
+wildcard_merchant = {
+	merchants = 1
+}
+wildcard_navy_trad = {
+	navy_tradition = 1
+}
+wildcard_ship_cost = {
+	global_ship_cost = -0.15
+}
+wildcard_heavy = {
+	heavy_ship_power = 0.2
+}
+wildcard_galley = {
+	galley_power = 0.2
+}
+wildcard_naval_forcelimit = {
+	naval_forcelimit_modifier = 0.2
+}
+wildcard_sailors = {
+	global_sailors_modifier = 0.3
+}
+wildcard_naval_morale = {
+	naval_morale = 0.1
+}
+wildcard_admirals = {
+	leader_naval_fire = 1
+	leader_naval_shock = 1
+}
+wildcard_marine = {
+	allowed_marine_fraction = 0.1
+}
+
+	
+
+#mil
+wildcard_government = {
+	legitimacy = 1
+	republican_tradition = 0.2
+	devotion = 1
+	horde_unity = 1
+}
+wildcard_army_trad = {
+	army_tradition = 0.25
+}
+wildcard_drill_gain = {
+	drill_gain_modifier = 0.25
+}
+wildcard_regiment_cost = {
+	global_regiment_cost = -0.075
+}
+wildcard_ica = {
+	infantry_power = 0.05
+}
+wildcard_cca = {
+	cavalry_power = 0.05
+}
+wildcard_aca = {
+	artillery_power = 0.05
+}
+wildcard_ratioflanking = {
+	cav_to_inf_ratio = 0.25
+	cavalry_flanking = 0.5
+}
+wildcard_art_vs_fort = {
+	artillery_levels_available_vs_fort = 2
+}
+wildcard_backrow = {
+	backrow_artillery_damage = 0.05
+}
+wildcard_disc = {
+	discipline = 0.025
+}
+wildcard_merc_disc = {
+	mercenary_discipline = 0.035
+}
+wildcard_morale = {
+	land_morale = 0.05
+}
+wildcard_defense = {
+	defensiveness = 0.15
+}
+wildcard_siege = {
+	siege_ability = 0.1
+}
+wildcard_movement = {
+	movement_speed = 0.1
+}
+wildcard_fire = {
+	fire_damage = 0.1
+}
+wildcard_shock = {
+	shock_damage = 0.1
+}
+wildcard_attrition = {
+	land_attrition = -0.15
+}
+wildcard_manpower = {
+	global_manpower_modifier = 0.2
+}
+wildcard_forcelimit = {
+	land_forcelimit_modifier = 0.15
+}
+wildcard_attrition_damage = {
+	hostile_attrition = 2
+}
+wildcard_exhaustion = {
+	war_exhaustion = -0.03
+}
+wildcard_leader_fire = {
+	leader_land_fire = 1
+}
+wildcard_leader_shock = {
+	leader_land_shock = 1
+}
+hb_trade_withdrawl = {
+	merchants = -1
+	trade_efficiency = -0.1
+	global_foreign_trade_power = -0.5
+	trade_company_investment_cost = 1
+}
+
+
+deathwar_partisans_global = {
+	land_morale = -0.1
+	discipline = -0.5
+}
+dw_partisans_local = {
+	local_defensiveness = 0.25
+	local_hostile_attrition = 2
+	max_attrition = 5
+}
+dw_counterattack = {
+	defensiveness = -0.5
+	reinforce_cost_modifier = 0.33
+	land_maintenance_modifier = 0.2
+	reinforce_speed = 0.5
+	movement_speed = 0.5
+	land_morale = 0.2
+	siege_ability = 0.5
+	land_attrition = -0.25
+}
+deathwar_all_or_nothing = {
+	fire_damage = 0.1
+	shock_damage = 0.1
+	fire_damage_received = 0.05
+	shock_damage_received = 0.05
+}
+deathwar_war_magic = {
+	land_morale = 0.1
+	shock_damage = 0.2
+	fire_damage_received = -0.1
+}
+deathwar_cooperating_merchants = {
+	interest = -3
+}
+deathwar_foreign_aid = {
+	mercenary_discipline = 0.05
+	mercenary_cost = -0.25
+}
+dw_cultist_circle = {
+}
+dw_sundered_ground = {
+	supply_limit = -50
+	max_attrition = 1
+	local_hostile_movement_speed = -0.5
+}
+hb_tactical_retreat_friendly = {
+	attrition = 5
+	local_hostile_movement_speed = -0.15
+}
+hb_tactical_retreat_hostile = {
+	attrition = 5
+	local_friendly_movement_speed = -0.15
+}
+hb_slow_and_steady_modifier = {
+	fort_level = 1
+}
+hb_slow_and_steady_modifier_2 = {
+	fort_level = 1
+	local_defensiveness = 0.25
+}
+hb_test_modifier = {
+	local_development_cost_modifier = -0.1
+}

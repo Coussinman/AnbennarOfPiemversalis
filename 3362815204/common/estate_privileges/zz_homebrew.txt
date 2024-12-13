@@ -1,0 +1,389 @@
+#homebrew
+
+artifice_invention_domination_potions = {
+	icon = Artf_Uniq1
+	max_absolutism = 0
+	loyalty = 0.05
+	influence = 0
+	is_valid = {
+		has_country_flag = unlocked_artifice_invention_domination_potions
+	}
+	can_select = {
+		artifice_has_points_for_basic = yes
+	}
+	can_revoke = {
+		always = yes
+	}
+	on_granted = {
+		add_country_modifier = {
+			name = artifice_domination_potions
+			duration = -1
+		}
+		artifice_granted_basic = yes
+	}
+	on_revoked = {
+		artifice_remove_basic = yes
+		remove_country_modifier = artifice_domination_potions
+	}
+	on_invalid = {
+		artifice_remove_basic = yes
+		remove_country_modifier = artifice_domination_potions
+	}
+	penalties = {
+		#foo
+	}
+	benefits = {
+		#foo
+	}
+	ai_will_do = {
+		factor = 5
+		modifier = {
+			factor = 0
+			over_artifice_capacity = yes
+		}
+	}
+}
+
+artifice_invention_necrolyzer = {
+	icon = Artf_Uniq1
+	max_absolutism = 0
+	loyalty = 0.05
+	influence = 0 
+	is_valid = {
+		has_country_flag = unlocked_artifice_invention_necrolyzer
+		NOT = { has_country_flag = nurael_convention }
+	}
+	can_select = {
+		artifice_has_points_for_basic = yes
+	}
+	can_revoke = {
+		always = yes
+	}
+	on_granted = {
+		add_country_modifier = {
+			name = artifice_necrolyzer
+			duration = -1
+		}
+		artifice_granted_basic = yes
+	}
+	on_revoked = {
+		artifice_remove_basic = yes
+		remove_country_modifier = artifice_necrolyzer
+	}
+	on_invalid = {
+		artifice_remove_basic = yes
+		remove_country_modifier = artifice_necrolyzer
+	}
+	penalties = {
+		#foo
+		diplomatic_reputation = -1
+	}
+	benefits = {
+		#foo
+		#enables necromancy event "on battle won = gain manpower"
+	}
+	ai_will_do = {
+		factor = 5
+		modifier = {
+			factor = 0
+			over_artifice_capacity = yes
+		}
+	}
+}
+
+artifice_invention_bullet_worms = {
+	icon = Artf_Uniq1
+	max_absolutism = 0
+	loyalty = 0.05
+	influence = 0 
+	is_valid = {
+		has_country_flag = unlocked_artifice_invention_bullet_worms
+		NOT = { has_country_flag = nurael_convention }
+		NOT = { has_country_modifier = artifice_sparkdrive_rifles } #lore
+	}
+	can_select = {
+		artifice_has_points_for_basic = yes
+		NOT = { has_country_modifier = artifice_sparkdrive_rifles } #lore
+	}
+	can_revoke = {
+		always = yes
+	}
+	on_granted = {
+		add_country_modifier = {
+			name = artifice_bullet_worms
+			duration = -1
+		}
+		artifice_granted_basic = yes
+	}
+	on_revoked = {
+		artifice_remove_basic = yes
+		remove_country_modifier = artifice_bullet_worms
+	}
+	on_invalid = {
+		artifice_remove_basic = yes
+		remove_country_modifier = artifice_bullet_worms
+	}
+	penalties = {
+		#foo
+		army_tradition_decay = 0.0025
+	}
+	benefits = {
+		#foo
+	}
+	ai_will_do = {
+		factor = 100
+		modifier = {
+			factor = 0
+			over_artifice_capacity = yes
+		}
+	}
+}
+
+artifice_invention_runepress = {
+	icon = Artf_Uniq1
+	max_absolutism = 0
+	loyalty = 0.05
+	influence = 0 
+	is_valid = {
+		has_country_flag = unlocked_artifice_invention_runepress
+		religion_group = dwarven
+	}
+	can_select = {
+		artifice_has_points_for_basic = yes
+	}
+	can_revoke = {
+		always = yes
+	}
+	on_granted = {
+		add_country_modifier = {
+			name = artifice_runepress
+			duration = -1
+		}
+		artifice_granted_basic = yes
+	}
+	on_revoked = {
+		artifice_remove_basic = yes
+		remove_country_modifier = artifice_runepress
+	}
+	on_invalid = {
+		artifice_remove_basic = yes
+		remove_country_modifier = artifice_runepress
+	}
+	penalties = {
+		#foo
+	}
+	benefits = {
+		#foo
+	}
+	ai_will_do = {
+		factor = 100
+		modifier = {
+			factor = 0
+			over_artifice_capacity = yes
+		}
+	}
+}
+
+artifice_invention_dwarf_eye = {
+	icon = Artf_Uniq2
+	max_absolutism = 0
+	loyalty = 0.05
+	influence = 0
+	is_valid = {
+		has_country_flag = unlocked_artifice_invention_dwarf_eye
+		NOT = {
+			OR = {
+				AND = {
+					ruler_has_personality = immortal_personality
+					has_country_modifier = artifice_dwarf_eye_normal
+				}
+				AND = {
+					NOT = { ruler_has_personality = immortal_personality }
+					has_country_modifier = artifice_dwarf_eye_longlived
+				}
+			}
+		}
+	}
+	can_select = {
+		artifice_has_points_for_expert = yes
+	}
+	can_revoke = {
+		NOT = { has_ruler_flag = has_dwarf_eye }
+	}
+	on_granted = {
+		if = {
+			limit = { ruler_has_personality = immortal_personality }
+			add_country_modifier = {
+				name = artifice_dwarf_eye_longlived
+				duration = -1
+			}
+		}
+		else = {
+			set_ruler_flag = has_dwarf_eye
+			add_country_modifier = {
+				name = artifice_dwarf_eye_normal
+				duration = -1
+			}
+		}
+		artifice_granted_expert = yes
+	}
+	on_revoked = {
+		artifice_remove_expert = yes
+		remove_country_modifier = artifice_dwarf_eye_longlived
+		remove_country_modifier = artifice_dwarf_eye_normal
+	}
+	on_invalid = {
+		artifice_remove_expert = yes
+		remove_country_modifier = artifice_dwarf_eye_longlived
+		remove_country_modifier = artifice_dwarf_eye_normal
+	}
+	penalties = {
+		#none
+	}
+	benefits = {
+		#none
+	}
+	ai_will_do = {
+		factor = 5
+		modifier = {
+			factor = 0
+			over_artifice_capacity = yes
+		}
+	}
+}
+
+artifice_invention_serpentrot_gas = {
+	icon = Artf_Uniq3
+	max_absolutism = 0
+	loyalty = 0.05
+	influence = 0 
+	is_valid = {
+		has_country_flag = unlocked_artifice_invention_serpentrot_gas
+		NOT = { has_country_flag = nurael_convention }
+	}
+	can_select = {
+		artifice_has_points_for_masterwork = yes
+	}
+	can_revoke = {
+		always = yes
+	}
+	on_granted = {
+		add_country_modifier = {
+			name = artifice_serpentrot_gas
+			duration = -1
+		}
+		artifice_granted_masterwork = yes
+	}
+	on_revoked = {
+		artifice_remove_masterwork = yes
+		remove_country_modifier = artifice_serpentrot_gas
+		clr_country_flag = gamer_move
+	}
+	on_invalid = {
+		artifice_remove_masterwork = yes
+		remove_country_modifier = artifice_serpentrot_gas
+		clr_country_flag = gamer_move
+	}
+	penalties = {
+		#foo
+		army_tradition_decay = 0.01
+	}
+	benefits = {
+		#foo
+	}
+	ai_will_do = {
+		factor = 200
+		modifier = {
+			factor = 0
+			over_artifice_capacity = yes
+		}
+	}
+}
+
+artifice_invention_khetgirl = {
+	icon = Artf_Uniq2
+	max_absolutism = 0
+	loyalty = 0.05
+	influence = 0
+	is_valid = {
+		has_country_flag = unlocked_artifice_invention_khetgirl
+	}
+	can_select = {
+		artifice_has_points_for_expert = yes
+	}
+	can_revoke = {
+		always = yes
+	}
+	on_granted = {
+		add_country_modifier = {
+			name = artifice_khetgirl
+			duration = -1
+		}
+		artifice_granted_expert = yes
+	}
+	on_revoked = {
+		artifice_remove_expert = yes
+		remove_country_modifier = artifice_khetgirl
+	}
+	on_invalid = {
+		artifice_remove_expert = yes
+		remove_country_modifier = artifice_khetgirl
+	}
+	penalties = {
+		army_tradition_decay = 0.0025
+	}
+	benefits = {
+		years_of_nationalism = -5
+		#fluffy kitty
+	}
+	ai_will_do = {
+		factor = 5
+		modifier = {
+			factor = 0
+			over_artifice_capacity = yes
+		}
+	}
+}
+
+artifice_invention_halann_cracker = {
+	icon = Artf_Uniq3
+	max_absolutism = 0
+	loyalty = 0.05
+	influence = 0 
+	is_valid = {
+		has_country_flag = unlocked_artifice_invention_halann_cracker
+		NOT = { has_country_flag = nurael_convention }
+	}
+	can_select = {
+		artifice_has_points_for_masterwork = yes
+	}
+	can_revoke = {
+		always = yes
+	}
+	on_granted = {
+		set_country_flag = hcracker_enabled
+		artifice_granted_masterwork = yes
+	}
+	on_revoked = {
+		artifice_remove_masterwork = yes
+		clr_country_flag = hcracker_enabled
+	}
+	on_invalid = {
+		artifice_remove_masterwork = yes
+		clr_country_flag = hcracker_enabled
+	}
+	penalties = {
+		#foo
+		army_tradition_decay = 0.01
+	}
+	benefits = {
+		#foo
+	}
+	ai_will_do = {
+		factor = 200
+		modifier = {
+			factor = 0
+			over_artifice_capacity = yes
+		}
+	}
+}

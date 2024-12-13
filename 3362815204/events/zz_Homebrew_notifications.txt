@@ -1,0 +1,218 @@
+namespace = homebrew_reminder
+
+country_event = {
+
+	id = homebrew_reminder.1
+	title = homebrew_reminder.1.t
+	desc = homebrew_reminder.1.d
+	picture = BIG_BOOK_eventPicture 
+	#goto = reminder_province #wake me up when multiple provinces can be highlighted
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+
+	trigger = {
+		ai = no
+		4173 = { owned_by = ROOT }
+		4174 = { owned_by = ROOT }
+		4176 = { owned_by = ROOT }
+	}
+	immediate = {
+		4173 = { save_event_target_as = reminder_province }
+		4174 = { save_event_target_as = reminder_province }
+		4176 = { save_event_target_as = reminder_province }
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_reminder.1.1
+	}
+}
+
+country_event = {
+
+	id = homebrew_reminder.2
+	title = homebrew_reminder.2.t
+	desc = homebrew_reminder.2.d
+	picture = BIG_BOOK_eventPicture
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+
+	trigger = {
+		ai = no
+		OR = {
+			white_walls = { owned_by = ROOT }
+			831 = { owned_by = ROOT }
+			832 = { owned_by = ROOT }
+			833 = { owned_by = ROOT }
+		}
+	}
+	immediate = {
+		every_owned_province = {
+			limit = {
+				OR = {
+					area = white_walls
+					province_id = 831
+					province_id = 832
+					province_id = 833
+				}
+			}
+			save_event_target_as = reminder_province
+		}
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_reminder.2.1
+	}
+}
+
+country_event = {
+
+	id = homebrew_reminder.3
+	title = homebrew_reminder.3.t
+	desc = homebrew_reminder.3.d
+	picture = BIG_BOOK_eventPicture
+	#goto = reminder_province
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+
+	trigger = {
+		ai = no
+		854 = { owned_by = ROOT }
+		855 = { owned_by = ROOT }
+	}
+	immediate = {
+		854 = { save_event_target_as = reminder_province }
+		855 = { save_event_target_as = reminder_province }
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_reminder.3.1
+	}
+}
+
+country_event = {
+	id = homebrew_reminder.4
+	title = homebrew_reminder.4.t
+	desc = homebrew_reminder.4.d
+	picture = BIG_BOOK_eventPicture
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+
+	trigger = {
+		ai = no
+		tag = Z43
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_reminder.4.1
+	}
+}
+
+country_event = {
+
+	id = homebrew_reminder.5
+	title = homebrew_reminder.5.t
+	desc = homebrew_reminder.5.d
+	picture = BIG_BOOK_eventPicture
+	#goto = reminder_province
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+
+	trigger = {
+		ai = no
+		OR = {
+			wall_of_yanshen = { owned_by = ROOT }
+			AND = {
+				4396 = { owned_by = ROOT }
+				4600 = { owned_by = ROOT }
+				4489 = { owned_by = ROOT }
+				4470 = { owned_by = ROOT }
+				4500 = { owned_by = ROOT }
+				4620 = { owned_by = ROOT }
+				4364 = { owned_by = ROOT }
+			}
+			AND = {
+				4444 = { owned_by = ROOT }
+				4548 = { owned_by = ROOT }
+				4361 = { owned_by = ROOT }
+				4533 = { owned_by = ROOT }
+			}
+			AND = {
+				4622 = { owned_by = ROOT }
+				4625 = { owned_by = ROOT }
+				4626 = { owned_by = ROOT }
+				4816 = { owned_by = ROOT }
+			}
+		}
+	}
+	immediate = {
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_reminder.5.1
+	}
+}
+
+country_event = {
+
+	id = homebrew_reminder.6
+	title = homebrew_reminder.6.t
+	desc = homebrew_reminder.6.d
+	picture = BIG_BOOK_eventPicture 
+	#goto = reminder_province #wake me up when multiple provinces can be highlighted
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+
+	trigger = {
+		ai = no
+		4149 = { owned_by = ROOT }
+		4119 = { owned_by = ROOT }
+		4122 = { owned_by = ROOT }
+		4128 = { owned_by = ROOT }
+	}
+	immediate = {
+		4149 = { save_event_target_as = reminder_province }
+		4119 = { save_event_target_as = reminder_province }
+		4122 = { save_event_target_as = reminder_province }
+		4128 = { save_event_target_as = reminder_province }
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_reminder.6.1
+	}
+}
+
+country_event = {
+
+	id = homebrew_reminder.7
+	title = homebrew_reminder.7.t
+	desc = homebrew_reminder.7.d
+	picture = BIG_BOOK_eventPicture 
+	#goto = reminder_province #wake me up when multiple provinces can be highlighted
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+
+	trigger = {
+		ai = no
+		675 = { owned_by = ROOT }
+		676 = { owned_by = ROOT }
+		677 = { owned_by = ROOT }
+		678 = { owned_by = ROOT }
+	}
+	immediate = {
+		675 = { save_event_target_as = reminder_province }
+		676 = { save_event_target_as = reminder_province }
+		677 = { save_event_target_as = reminder_province }
+		678 = { save_event_target_as = reminder_province }
+	}
+	mean_time_to_happen = { days = 1 }
+	option = {
+		name = homebrew_reminder.6.1
+	}
+}
