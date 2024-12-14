@@ -3335,7 +3335,7 @@ military_1_azkare = { #Improve Military, preperations for Jaerelic Legions
 			define_advisor = {
 				type = diplomat
 				culture = sunrise_elf
-				religion = righteous_path
+				religion = transmutative_path
 				discount = yes
 				skill = 2
 			}
@@ -3369,13 +3369,19 @@ military_1_azkare = { #Improve Military, preperations for Jaerelic Legions
 		
 		provinces_to_highlight = {
 			owned_by = ROOT
-			religion = righteous_path
+			OR = {
+				religion = transmutative_path
+				religion = accretive_path
+			}
 			NOT = { has_manpower_building_trigger = yes }
 			NOT = {
 				ROOT = {
 					num_of_owned_provinces_with = {
 						value = 20
-						religion = righteous_path
+						OR = {
+							religion = accretive_path
+							religion = transmutative_path
+						}
 						has_manpower_building_trigger = yes
 					}
 				}
@@ -3385,7 +3391,10 @@ military_1_azkare = { #Improve Military, preperations for Jaerelic Legions
 		trigger = {
 			num_of_owned_provinces_with = {
 				value = 20
-				religion = righteous_path
+				OR = {
+					religion = accretive_path
+					religion = transmutative_path
+				}
 				has_manpower_building_trigger = yes
 			}
 			if = {
@@ -4374,8 +4383,16 @@ improve_economy_azkare = { #Improve Haless's economy, protect the little man
 			}
 			NOT = { has_estate_privilege = estate_nobles_command_of_the_military }
 			if = {
-				limit = { religion = righteous_path }
-				has_church_aspect = martial_arts_for_the_peasantry
+				limit = { religion = accretive_path }
+				OR = {
+					has_church_aspect = accretive_path_universal_martial_education_minor
+					has_church_aspect = accretive_path_universal_martial_education_major_improved
+					has_church_aspect = accretive_path_universal_martial_education_major_unimproved
+				}
+			}
+			if = {
+				limit = { religion = transmutative_path }
+				has_church_aspect = transmutative_path_universal_martial_education
 			}
 		}
 		
@@ -4497,7 +4514,7 @@ improve_economy_azkare = { #Improve Haless's economy, protect the little man
 			continent = asia
 			OR = {
 				superregion = rahen_superregion
-				superregion = south_haless_superregion
+				superregion = vimdatrong_superregion
 				superregion = yanshen_superregion
 			}
 			NOT = {
@@ -4519,7 +4536,7 @@ improve_economy_azkare = { #Improve Haless's economy, protect the little man
 				hidden_trigger = {
 					OR = {
 						superregion = rahen_superregion
-						superregion = south_haless_superregion
+						superregion = vimdatrong_superregion
 						superregion = yanshen_superregion
 					}
 				}
@@ -5751,19 +5768,19 @@ public_view_azkare = { #Improve the standing of SE and Elves, radiant campaigns,
 			hidden_effect = {
 				jinqiu_area = {
 					add_province_modifier = {
-						name = azkare_modifier_convert_hill_yan
+						name = azkare_modifier_convert_beikling
 						duration = -1
 					}
 				}
 				jiangszun_area = {
 					add_province_modifier = {
-						name = azkare_modifier_convert_hill_yan
+						name = azkare_modifier_convert_beikling
 						duration = -1
 					}
 				}
 				moryokang_area = {
 					add_province_modifier = {
-						name = azkare_modifier_convert_hill_yan
+						name = azkare_modifier_convert_beikling
 						duration = -1
 					}
 				}
@@ -5822,7 +5839,7 @@ public_view_azkare = { #Improve the standing of SE and Elves, radiant campaigns,
 		provinces_to_highlight = {
 			region = demon_hills_region
 			OR = {
-				religion = lefthand_path
+				religion = devouring_path
 				culture = horned_ogre
 			}
 		}
@@ -5831,7 +5848,7 @@ public_view_azkare = { #Improve the standing of SE and Elves, radiant campaigns,
 			demon_hills_region = {
 				type = all
 				NOT = {
-					religion = lefthand_path
+					religion = devouring_path
 					culture = horned_ogre
 				}
 			}
@@ -6015,7 +6032,7 @@ public_view_azkare = { #Improve the standing of SE and Elves, radiant campaigns,
 		provinces_to_highlight = {
 			OR = {
 				superregion = rahen_superregion
-				superregion = south_haless_superregion
+				superregion = vimdatrong_superregion
 				superregion = yanshen_superregion
 			}
 			has_terrain = city_terrain
@@ -6102,7 +6119,7 @@ public_view_azkare = { #Improve the standing of SE and Elves, radiant campaigns,
 	}
 }
 
-academies_azkare = { #Academies, Convocationary guard, command conquest, develop south haless
+academies_azkare = { #Academies, Convocationary guard, command conquest, develop vimdatrong
 	slot = 4
 	generic = no
 	ai = yes
@@ -6333,7 +6350,7 @@ academies_azkare = { #Academies, Convocationary guard, command conquest, develop
 			custom_tooltip = azkare_breakthrough_into_yanshen_tooltip
 			hidden_effect = {
 				lower_yanshen_region = {
-					limit = { culture = forest_yan }
+					limit = { culture = naamjyut }
 					add_permanent_claim = ROOT
 				}
 			}
@@ -6904,7 +6921,7 @@ legions_azkare = { #Jaerelic legions, conquer Yanshen, Develop rahen
 	
 	#--# Conquer Yanshen #--#
 	
-	azkare_forest_yan = {
+	azkare_naamjyut = {
 		icon = mission_junnagadh_fort
 		position = 22
 		required_missions = {
@@ -6913,7 +6930,7 @@ legions_azkare = { #Jaerelic legions, conquer Yanshen, Develop rahen
 		
 		provinces_to_highlight = {
 			superregion = yanshen_superregion
-			culture = forest_yan
+			culture = naamjyut
 			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		
@@ -6921,9 +6938,9 @@ legions_azkare = { #Jaerelic legions, conquer Yanshen, Develop rahen
 			yanshen_superregion = {
 				type = all
 				OR = {
-					NOT = { culture = forest_yan }
+					NOT = { culture = naamjyut }
 					AND = {
-						culture = forest_yan
+						culture = naamjyut
 						country_or_non_sovereign_subject_holds = ROOT 
 					}
 				}
@@ -6931,10 +6948,10 @@ legions_azkare = { #Jaerelic legions, conquer Yanshen, Develop rahen
 		}
 		
 		effect = {
-			custom_tooltip = azkare_forest_yan_tooltip
+			custom_tooltip = azkare_naamjyut_tooltip
 			hidden_effect = {
 				asia = {
-					limit = { culture = coastal_yan }
+					limit = { culture = gangim }
 					add_permanent_claim = ROOT
 				}
 			}
@@ -6945,12 +6962,12 @@ legions_azkare = { #Jaerelic legions, conquer Yanshen, Develop rahen
 		icon = mission_corsairs_of_the_north_sea
 		position = 23
 		required_missions = {
-			azkare_forest_yan
+			azkare_naamjyut
 		}
 		
 		provinces_to_highlight = {
 			superregion = yanshen_superregion
-			culture = coastal_yan
+			culture = gangim
 			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		
@@ -6958,9 +6975,9 @@ legions_azkare = { #Jaerelic legions, conquer Yanshen, Develop rahen
 			yanshen_superregion = {
 				type = all
 				OR = {
-					NOT = { culture = coastal_yan }
+					NOT = { culture = gangim }
 					AND = {
-						culture = coastal_yan
+						culture = gangim
 						country_or_non_sovereign_subject_holds = ROOT
 					}
 				}
@@ -6968,10 +6985,10 @@ legions_azkare = { #Jaerelic legions, conquer Yanshen, Develop rahen
 		}
 		
 		effect = {
-			custom_tooltip = azkare_northern_yan_tooltip
+			custom_tooltip = azkare_jiangyang_tooltip
 			hidden_effect = {
 				asia = {
-					limit = { culture = northern_yan }
+					limit = { culture = jiangyang }
 					add_permanent_claim = ROOT
 				}
 			}
@@ -6987,7 +7004,7 @@ legions_azkare = { #Jaerelic legions, conquer Yanshen, Develop rahen
 		
 		provinces_to_highlight = {
 			superregion = yanshen_superregion
-			culture = northern_yan
+			culture = jiangyang
 			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		
@@ -6995,9 +7012,9 @@ legions_azkare = { #Jaerelic legions, conquer Yanshen, Develop rahen
 			yanshen_superregion = {
 				type = all
 				OR = {
-					NOT = { culture = northern_yan }
+					NOT = { culture = jiangyang }
 					AND = {
-						culture = northern_yan
+						culture = jiangyang
 						country_or_non_sovereign_subject_holds = ROOT 
 					}
 				}

@@ -186,7 +186,10 @@ province_event = {
 						OR = {
 							has_reform = prabhi_reform
 							has_reform = senapti_reform
-							has_reform = indep_prabhi_reform
+							AND = {
+								has_reform = indep_prabhi_reform
+								NOT = { is_subject = yes }
+							}
 						}
 					}
 					add_core = 4411
@@ -403,6 +406,7 @@ province_event = {
 			add_mil_power = 50
 			set_global_flag = destroyed_raj
 			4411 = {
+				remove_province_modifier = raj_royal_barracks
 				remove_province_modifier = rahen_corrupt_ministery_of_agriculture
 				remove_province_modifier = rahen_corrupt_ministery_of_philosophy
 				remove_province_modifier = rahen_corrupt_ministery_of_internal_relations
@@ -982,7 +986,7 @@ country_event = {
 		custom_tooltip = raj_ganyakanar_becomes_ruler_tt
 	}
 	
-	#Ganjina’s rule offers the chance for a powerful union
+	#Ganjina's rule offers the chance for a powerful union
 	option = {
 		name = rahenraj.90.c
 		goto = sarnavan_capital
@@ -997,7 +1001,7 @@ country_event = {
 		create_marriage = R10
 		define_ruler = {
 			name = "Ganjina"
-			dynasty = "of the Bloody Claw"
+			dynasty = "of the Lotus Claw"
 			age = 27
 			adm = 4
 			dip = 2
@@ -1854,6 +1858,7 @@ country_event = { #Collapse of the Raj
 		add_prestige = -50
 
 		4411 = {
+			remove_province_modifier = raj_royal_barracks
 			remove_province_modifier = rahen_corrupt_ministery_of_agriculture
 			remove_province_modifier = rahen_corrupt_ministery_of_philosophy
 			remove_province_modifier = rahen_corrupt_ministery_of_internal_relations

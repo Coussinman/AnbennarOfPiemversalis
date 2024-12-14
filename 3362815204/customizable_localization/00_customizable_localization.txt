@@ -2997,24 +2997,24 @@ defined_text = {
 	#		religion = sikhism
 	#	}
 	#}
-	text = {
-		localisation_key = animism_string
-		trigger = {
-			religion = animism
-		}
-	}
-	text = {
-		localisation_key = fetishism_string
-		trigger = {
-			religion = shamanism
-		}
-	}
-	text = {
-		localisation_key = totemism_string
-		trigger = {
-			religion = totemism
-		}
-	}
+	#text = {
+	#	localisation_key = animism_string
+	#	trigger = {
+	#		religion = animism
+	#	}
+	#}
+	#text = {
+	#	localisation_key = fetishism_string
+	#	trigger = {
+	#		religion = shamanism
+	#	}
+	#}
+	#text = {
+	#	localisation_key = totemism_string
+	#	trigger = {
+	#		religion = totemism
+	#	}
+	#}
 	#Anbennar - Dotimism
 	text = {
 		localisation_key = dotimism_string
@@ -5183,4 +5183,50 @@ defined_text = {
 			}
 		}
 	}
+}
+
+defined_text = {
+	name = GetAmountofBattles
+	random = no
+	text = {
+		localisation_key = "[Root.num_of_battles_won_var.GetValue]"
+		trigger = {
+			check_variable = {
+				which = num_of_battles_won_var
+				value = 1
+			}
+		}
+	}
+	text = {
+		localisation_key = ZERO
+		trigger = {
+			always = yes
+		}
+	}
+}
+
+defined_text = {
+    name = GetNumWars
+	
+	text = {
+        localisation_key = "[Root.num_of_wars_won_var.GetValue]"
+        trigger = {
+            check_variable = {
+                which = num_of_wars_won_var
+                value = 1
+            }
+        }
+    }
+
+    text = {
+        localisation_key = ZERO
+        trigger = {
+            NOT = {
+                check_variable = {
+                    which = num_of_wars_won_var
+                    value = 1
+                }
+            }
+        }
+    }
 }

@@ -2097,9 +2097,11 @@ jaddari_the_jadd = {
 		}
 		
 		effect = {
-			2909 = {
-				add_province_triggered_modifier = jaddari_the_mountain_of_clear_sight
-				hidden_effect = { add_permanent_province_modifier = { name = jaddari_holy_site duration = -1 } }
+			hidden_effect = {
+				2909 = {
+					add_province_triggered_modifier = jaddari_the_mountain_of_clear_sight
+					hidden_effect = { add_permanent_province_modifier = { name = jaddari_holy_site duration = -1 } }
+				}
 			}
 			tooltip = {
 				2909 = {
@@ -2799,7 +2801,7 @@ jaddari_the_jadd_4 = {
 			OR = {
 				superregion = rahen_superregion
 				superregion = yanshen_superregion
-				superregion = south_haless_superregion
+				superregion = vimdatrong_superregion
 			}
 			NOT = { religion = the_jadd }
 			is_city = yes
@@ -2820,7 +2822,7 @@ jaddari_the_jadd_4 = {
 					is_city = no
 				}
 			}
-			south_haless_superregion = {
+			vimdatrong_superregion = {
 				type = all
 				OR = {
 					religion = the_jadd
@@ -4468,22 +4470,18 @@ jaddari_eastward = {
 		}
 
 		trigger = {
-			F47 = {
-				is_subject_of = ROOT
+			OR = {
+				F47 = {
+					is_subject_of = ROOT
+					owns_core_province = 2914
+				}
 				owns_core_province = 2914
 			}
+			
 		}
 
 		effect = {
-			add_treasury = 200
-			add_country_modifier = {
-				name = jaddari_cash_influx
-				duration = 7300 #20 years
-			}
-			create_subject = {
-				subject_type = autonomous_vassal
-				subject = F47
-			}
+			country_event = { id = jaddari_missions.1005 }
 		}
 	}
 

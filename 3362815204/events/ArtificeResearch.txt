@@ -30,6 +30,9 @@ country_event = {
 
 	immediate = {
 		set_country_flag = artifice_research_menu_open
+
+		#sets the correct research speed
+		research_speed = yes
 	}
 
 	#Gimme that research
@@ -47,16 +50,13 @@ country_event = {
 			}
 			else = {
 				capital_scope = {
-					add_province_triggered_modifier = artifice_research_ptm
+					add_artifice_research_ptm_effect = yes
 				}
 				custom_tooltip = artifice_research_tt
 			}
 		}
 		hidden_effect = {
 			set_country_flag = artifice_research_in_progress
-
-			#sets the correct research speed
-			research_speed = yes
 		}
 		add_adm_power = -30
 		add_dip_power = -30
@@ -100,7 +100,7 @@ country_event = {
 		hidden_effect = {
 			set_country_flag = artifice_researching_economic
 			capital_scope = {
-				add_province_triggered_modifier = artifice_research_ptm
+				add_artifice_research_ptm_effect = yes
 			}
 		}
 	}
@@ -111,7 +111,7 @@ country_event = {
 		hidden_effect = {
 			set_country_flag = artifice_researching_military
 			capital_scope = {
-				add_province_triggered_modifier = artifice_research_ptm
+				add_artifice_research_ptm_effect = yes
 			}
 		}
 	}
@@ -122,7 +122,7 @@ country_event = {
 		hidden_effect = {
 			set_country_flag = artifice_researching_society
 			capital_scope = {
-				add_province_triggered_modifier = artifice_research_ptm
+				add_artifice_research_ptm_effect = yes
 			}
 		}
 	}
@@ -291,13 +291,13 @@ country_event = {
 	option = {
 		name = artifice_research.3.i112
 		trigger = {
-			has_country_flag = research_artifice_invention_golden_gearbox
+			has_country_flag = research_artifice_invention_arcane_battery_capital_complex
 		}
 		hidden_effect = {
-			set_country_flag = researching_artifice_invention_golden_gearbox
+			set_country_flag = researching_artifice_invention_arcane_battery_capital_complex
 		}
 		tooltip = {
-			set_estate_privilege = artifice_invention_golden_gearbox
+			set_estate_privilege = artifice_invention_arcane_battery_capital_complex
 		}
 				ai_chance = {
 			factor = 5
@@ -307,13 +307,13 @@ country_event = {
 	option = {
 		name = artifice_research.3.i113
 		trigger = {
-			has_country_flag = research_artifice_invention_distance_dissolver
+			has_country_flag = research_artifice_invention_plane_of_water_teleporter
 		}
 		hidden_effect = {
-			set_country_flag = researching_artifice_invention_distance_dissolver
+			set_country_flag = researching_artifice_invention_plane_of_water_teleporter
 		}
 		tooltip = {
-			set_estate_privilege = artifice_invention_distance_dissolver
+			set_estate_privilege = artifice_invention_plane_of_water_teleporter
 		}
 				ai_chance = {
 			factor = 5
@@ -858,13 +858,13 @@ country_event = {
 	option = {
 		name = artifice_research.3.i210
 		trigger = {
-			has_country_flag = research_artifice_invention_crazy_double_drill
+			has_country_flag = research_artifice_invention_subterrenes
 		}
 		hidden_effect = {
-			set_country_flag = researching_artifice_invention_crazy_double_drill
+			set_country_flag = researching_artifice_invention_subterrenes
 		}
 		tooltip = {
-			set_estate_privilege = artifice_invention_crazy_double_drill
+			set_estate_privilege = artifice_invention_subterrenes
 		}
 				ai_chance = {
 			factor = 5
@@ -1143,6 +1143,21 @@ country_event = {
 			factor = 5
 		}
 	}
+	option = {
+		name = artifice_research.3.m218
+		trigger = {
+			has_country_flag = research_artifice_invention_veykoda_rune_protections
+		}
+		hidden_effect = {
+			set_country_flag = researching_artifice_invention_veykoda_rune_protections
+		}
+		tooltip = {
+			set_estate_privilege = artifice_invention_veykoda_rune_protections
+		}
+				ai_chance = {
+			factor = 5
+		}
+	}
 	#Society Options tier 2
 	#Remedial Tinctures
 	option = {
@@ -1228,13 +1243,13 @@ country_event = {
 	option = {
 		name = artifice_research.3.s26
 		trigger = {
-			has_country_flag = research_artifice_invention_manyspeak_tongue
+			has_country_flag = research_artifice_invention_think_thought_transmitters
 		}
 		hidden_effect = {
-			set_country_flag = researching_artifice_invention_manyspeak_tongue
+			set_country_flag = researching_artifice_invention_think_thought_transmitters
 		}
 		tooltip = {
-			set_estate_privilege = artifice_invention_manyspeak_tongue
+			set_estate_privilege = artifice_invention_think_thought_transmitters
 		}
 				ai_chance = {
 			factor = 5
@@ -1244,13 +1259,13 @@ country_event = {
 	option = {
 		name = artifice_research.3.s27
 		trigger = {
-			has_country_flag = research_artifice_invention_mirage_maker_3000
+			has_country_flag = research_artifice_invention_mirage_detector_3000
 		}
 		hidden_effect = {
-			set_country_flag = researching_artifice_invention_mirage_maker_3000
+			set_country_flag = researching_artifice_invention_mirage_detector_3000
 		}
 		tooltip = {
-			set_estate_privilege = artifice_invention_mirage_maker_3000
+			set_estate_privilege = artifice_invention_mirage_detector_3000
 		}
 				ai_chance = {
 			factor = 5
@@ -1287,19 +1302,35 @@ country_event = {
 			factor = 5
 		}
 	}
+	#Soarwing Grafts
+	option = {
+		name = artifice_research.3.s30
+		trigger = {
+			has_country_flag = research_artifice_invention_soarwing_grafts
+		}
+		hidden_effect = {
+			set_country_flag = researching_artifice_invention_soarwing_grafts
+		}
+		tooltip = {
+			set_estate_privilege = artifice_invention_soarwing_grafts
+		}
+				ai_chance = {
+			factor = 5
+		}
+	}
 	#Tier 3
 	#Economic Options
-	#Mechanim Workforce
+	#Pathway Transmutation
 	option = {
 		name = artifice_research.3.i31
 		trigger = {
-			has_country_flag = research_artifice_invention_mechanim_workforce
+			has_country_flag = research_artifice_invention_pathway_transmutation
 		}
 		hidden_effect = {
-			set_country_flag = researching_artifice_invention_mechanim_workforce
+			set_country_flag = researching_artifice_invention_pathway_transmutation
 		}
 		tooltip = {
-			set_estate_privilege = artifice_invention_mechanim_workforce
+			set_estate_privilege = artifice_invention_pathway_transmutation
 		}
 				ai_chance = {
 			factor = 5
@@ -1369,17 +1400,17 @@ country_event = {
 			factor = 5
 		}
 	}
-	#Mechanim Handymen
+	#Prefabricated City Constructors
 	option = {
 		name = artifice_research.3.i36
 		trigger = {
-			has_country_flag = research_artifice_invention_mechanim_handymen
+			has_country_flag = research_artifice_invention_prefabricated_city_constructors
 		}
 		hidden_effect = {
-			set_country_flag = researching_artifice_invention_mechanim_handymen
+			set_country_flag = researching_artifice_invention_prefabricated_city_constructors
 		}
 		tooltip = {
-			set_estate_privilege = artifice_invention_mechanim_handymen
+			set_estate_privilege = artifice_invention_prefabricated_city_constructors
 		}
 				ai_chance = {
 			factor = 5
@@ -1434,17 +1465,17 @@ country_event = {
 			factor = 5
 		}
 	}
-	#Mechanim Soldiers
+	#Bioartificed Ascension
 	option = {
 		name = artifice_research.3.m33
 		trigger = {
-			has_country_flag = research_artifice_invention_mechanim_soldiers
+			has_country_flag = research_artifice_invention_bioartificed_ascension
 		}
 		hidden_effect = {
-			set_country_flag = researching_artifice_invention_mechanim_soldiers
+			set_country_flag = researching_artifice_invention_bioartificed_ascension
 		}
 		tooltip = {
-			set_estate_privilege = artifice_invention_mechanim_soldiers
+			set_estate_privilege = artifice_invention_bioartificed_ascension
 		}
 				ai_chance = {
 			factor = 5
@@ -1550,13 +1581,13 @@ country_event = {
 	option = {
 		name = artifice_research.3.m310
 		trigger = {
-			has_country_flag = research_artifice_invention_hypertrophic_implosion_device
+			has_country_flag = research_artifice_invention_damestear_reactor_megacannon
 		}
 		hidden_effect = {
-			set_country_flag = researching_artifice_invention_hypertrophic_implosion_device
+			set_country_flag = researching_artifice_invention_damestear_reactor_megacannon
 		}
 		tooltip = {
-			set_estate_privilege = artifice_invention_hypertrophic_implosion_device
+			set_estate_privilege = artifice_invention_damestear_reactor_megacannon
 		}
 				ai_chance = {
 			factor = 5
@@ -1583,13 +1614,13 @@ country_event = {
 	option = {
 		name = artifice_research.3.s32
 		trigger = {
-			has_country_flag = research_artifice_invention_organizatron
+			has_country_flag = research_artifice_invention_bureaucratizer
 		}
 		hidden_effect = {
-			set_country_flag = researching_artifice_invention_organizatron
+			set_country_flag = researching_artifice_invention_bureaucratizer
 		}
 		tooltip = {
-			set_estate_privilege = artifice_invention_organizatron
+			set_estate_privilege = artifice_invention_bureaucratizer
 		}
 				ai_chance = {
 			factor = 5
@@ -1611,17 +1642,17 @@ country_event = {
 			factor = 5
 		}
 	}
-	#Thought Thresher
+	#Runethought Network
 	option = {
 		name = artifice_research.3.s34
 		trigger = {
-			has_country_flag = research_artifice_invention_thought_thresher
+			has_country_flag = research_artifice_invention_runethought_network
 		}
 		hidden_effect = {
-			set_country_flag = researching_artifice_invention_thought_thresher
+			set_country_flag = researching_artifice_invention_runethought_network
 		}
 		tooltip = {
-			set_estate_privilege = artifice_invention_thought_thresher
+			set_estate_privilege = artifice_invention_runethought_network
 		}
 				ai_chance = {
 			factor = 5
@@ -1913,9 +1944,9 @@ country_event = {
 		clr_country_flag = research_artifice_invention_automated_translator
 		clr_country_flag = research_artifice_invention_wine_ageifier
 		clr_country_flag = research_artifice_invention_pearl_cultivators
-		clr_country_flag = research_artifice_invention_golden_gearbox
+		clr_country_flag = research_artifice_invention_arcane_battery_capital_complex
 		clr_country_flag = research_artifice_invention_market_mender
-		clr_country_flag = research_artifice_invention_distance_dissolver
+		clr_country_flag = research_artifice_invention_plane_of_water_teleporter
 
 		#Tier 1 Military
 		clr_country_flag = research_artifice_invention_portable_turrets
@@ -1930,6 +1961,7 @@ country_event = {
 		clr_country_flag = research_artifice_invention_dragonscale_plating
 		clr_country_flag = research_artifice_invention_predator_exoskeleton
 		clr_country_flag = research_artifice_invention_scrap_mechs
+		clr_country_flag = research_artifice_invention_war_rigs
 		clr_country_flag = research_artifice_invention_sunbeam_armaments
 		clr_country_flag = research_artifice_invention_power_fists
 
@@ -1955,7 +1987,7 @@ country_event = {
 		clr_country_flag = research_artifice_invention_chi_cultivation_charm
 		clr_country_flag = research_artifice_invention_city_maintenance_bots
 		clr_country_flag = research_artifice_invention_artificial_egg_surrogates
-		clr_country_flag = research_artifice_invention_crazy_double_drill
+		clr_country_flag = research_artifice_invention_subterrenes
 
 		#Tier 2 Military
 		clr_country_flag = research_artifice_invention_wandlocks
@@ -1983,36 +2015,37 @@ country_event = {
 		clr_country_flag = research_artifice_invention_god_fragment_decoder
 		clr_country_flag = research_artifice_invention_talking_god_temples
 		clr_country_flag = research_artifice_invention_empire_engine
-		clr_country_flag = research_artifice_invention_mirage_maker_3000
-		clr_country_flag = research_artifice_invention_manyspeak_tongue
+		clr_country_flag = research_artifice_invention_mirage_detector_3000
+		clr_country_flag = research_artifice_invention_think_thought_transmitters
 		clr_country_flag = research_artifice_invention_game_of_khet
+		clr_country_flag = research_artifice_invention_soarwing_grafts
 
 		#Tier 3 Economic
-		clr_country_flag = research_artifice_invention_mechanim_workforce
+		clr_country_flag = research_artifice_invention_pathway_transmutation
 		clr_country_flag = research_artifice_invention_elemental_locomotives
 		clr_country_flag = research_artifice_invention_high_velocity_irrigation
 		clr_country_flag = research_artifice_invention_weather_predicticator
 		clr_country_flag = research_artifice_invention_artifice_powered_magnate_factories
-		clr_country_flag = research_artifice_invention_mechanim_handymen
+		clr_country_flag = research_artifice_invention_prefabricated_city_constructors
 		clr_country_flag = research_artifice_invention_t_wave_transceivers
 
 		#Tier 3 Military
 		clr_country_flag = research_artifice_invention_black_damestear_bullets
 		clr_country_flag = research_artifice_invention_artillery_autoloader
-		clr_country_flag = research_artifice_invention_mechanim_soldiers
+		clr_country_flag = research_artifice_invention_bioartificed_ascension
 		clr_country_flag = research_artifice_invention_personal_mageshields
 		clr_country_flag = research_artifice_invention_military_sky_galleons
 		clr_country_flag = research_artifice_invention_naval_mageshields
 		clr_country_flag = research_artifice_invention_demonflame_flamethrowers
 		clr_country_flag = research_artifice_invention_chase_em_rockets
 		clr_country_flag = research_artifice_invention_dragonblood_gene_warriors
-		clr_country_flag = research_artifice_invention_hypertrophic_implosion_device
+		clr_country_flag = research_artifice_invention_damestear_reactor_megacannon
 
 		#Tier 3 Society
 		clr_country_flag = research_artifice_invention_crierless_crier_device
 		clr_country_flag = research_artifice_invention_divendancer_speedboat
-		clr_country_flag = research_artifice_invention_organizatron
-		clr_country_flag = research_artifice_invention_thought_thresher
+		clr_country_flag = research_artifice_invention_bureaucratizer
+		clr_country_flag = research_artifice_invention_runethought_network
 		clr_country_flag = research_artifice_invention_negotiation_nexus
 
 		#Feiten
@@ -2052,6 +2085,7 @@ country_event = {
 	immediate = {
 
 		#checks if enough researches have been done to update the tier
+		artifice_tiering_progress = yes
 		artifice_tiering_update = yes
 
 		#capacity grant for artificers before 1650
@@ -2162,17 +2196,17 @@ country_event = {
 			}
 		}
 		if = {
-			limit = { has_country_flag = researching_artifice_invention_golden_gearbox }
-			set_country_flag = unlocked_artifice_invention_golden_gearbox
-			clr_country_flag = researching_artifice_invention_golden_gearbox
+			limit = { has_country_flag = researching_artifice_invention_arcane_battery_capital_complex }
+			set_country_flag = unlocked_artifice_invention_arcane_battery_capital_complex
+			clr_country_flag = researching_artifice_invention_arcane_battery_capital_complex
 			country_event = {
 				id = artifice_inventions.1101
 			}
 		}
 		if = {
-			limit = { has_country_flag = researching_artifice_invention_distance_dissolver }
-			set_country_flag = unlocked_artifice_invention_distance_dissolver
-			clr_country_flag = researching_artifice_invention_distance_dissolver
+			limit = { has_country_flag = researching_artifice_invention_plane_of_water_teleporter }
+			set_country_flag = unlocked_artifice_invention_plane_of_water_teleporter
+			clr_country_flag = researching_artifice_invention_plane_of_water_teleporter
 			country_event = {
 				id = artifice_inventions.1102
 			}
@@ -2445,9 +2479,9 @@ country_event = {
 			}
 		}
 		if = {
-			limit = { has_country_flag = researching_artifice_invention_crazy_double_drill }
-			set_country_flag = unlocked_artifice_invention_crazy_double_drill
-			clr_country_flag = researching_artifice_invention_crazy_double_drill
+			limit = { has_country_flag = researching_artifice_invention_subterrenes }
+			set_country_flag = unlocked_artifice_invention_subterrenes
+			clr_country_flag = researching_artifice_invention_subterrenes
 			country_event = {
 				id = artifice_inventions.1103
 			}
@@ -2589,6 +2623,14 @@ country_event = {
 				id = artifice_inventions.902
 			}
 		}
+		if = {
+			limit = { has_country_flag = researching_artifice_invention_veykoda_rune_protections }
+			set_country_flag = unlocked_artifice_invention_veykoda_rune_protections
+			clr_country_flag = researching_artifice_invention_veykoda_rune_protections
+			country_event = {
+				id = artifice_inventions.608
+			}
+		}
 		#Tier 2 Society
 		if = {
 			limit = { has_country_flag = researching_artifice_invention_remedial_tinctures }
@@ -2631,17 +2673,17 @@ country_event = {
 			}
 		}
 		if = {
-			limit = { has_country_flag = researching_artifice_invention_manyspeak_tongue }
-			set_country_flag = unlocked_artifice_invention_manyspeak_tongue
-			clr_country_flag = researching_artifice_invention_manyspeak_tongue
+			limit = { has_country_flag = researching_artifice_invention_think_thought_transmitters }
+			set_country_flag = unlocked_artifice_invention_think_thought_transmitters
+			clr_country_flag = researching_artifice_invention_think_thought_transmitters
 			country_event = {
 				id = artifice_inventions.1104
 			}
 		}
 		if = {
-			limit = { has_country_flag = researching_artifice_invention_mirage_maker_3000 }
-			set_country_flag = unlocked_artifice_invention_mirage_maker_3000
-			clr_country_flag = researching_artifice_invention_mirage_maker_3000
+			limit = { has_country_flag = researching_artifice_invention_mirage_detector_3000 }
+			set_country_flag = unlocked_artifice_invention_mirage_detector_3000
+			clr_country_flag = researching_artifice_invention_mirage_detector_3000
 			country_event = {
 				id = artifice_inventions.1105
 			}
@@ -2659,14 +2701,22 @@ country_event = {
 			set_country_flag = unlocked_artifice_invention_game_of_khet
 			clr_country_flag = researching_artifice_invention_game_of_khet
 			country_event = {
-				id = artifice_inventions.1106
+				id = artifice_inventions.404
 			}
 		}
+		if = {
+			limit = { has_country_flag = researching_artifice_invention_soarwing_grafts }
+			set_country_flag = unlocked_artifice_invention_soarwing_grafts
+			clr_country_flag = researching_artifice_invention_soarwing_grafts
+			country_event = {
+				id = artifice_inventions.208
+			}
+		}		
 		#Tier 3 Economic
 		if = {
-			limit = { has_country_flag = researching_artifice_invention_mechanim_workforce }
-			set_country_flag = unlocked_artifice_invention_mechanim_workforce
-			clr_country_flag = researching_artifice_invention_mechanim_workforce
+			limit = { has_country_flag = researching_artifice_invention_pathway_transmutation }
+			set_country_flag = unlocked_artifice_invention_pathway_transmutation
+			clr_country_flag = researching_artifice_invention_pathway_transmutation
 			country_event = {
 				id = artifice_inventions.203
 			}
@@ -2681,16 +2731,16 @@ country_event = {
 		}
 		if = {
 			limit = { has_country_flag = researching_artifice_invention_artifice_powered_magnate_factories }
-			set_country_flag = unlocked_artifice_invention_powered_magnate_factories
+			set_country_flag = unlocked_artifice_invention_artifice_powered_magnate_factories
 			clr_country_flag = researching_artifice_invention_artifice_powered_magnate_factories
 			country_event = {
 				id = artifice_inventions.800
 			}
 		}
 		if = {
-			limit = { has_country_flag = researching_artifice_invention_mechanim_handymen }
-			set_country_flag = unlocked_artifice_invention_mechanim_handymen
-			clr_country_flag = researching_artifice_invention_mechanim_handymen
+			limit = { has_country_flag = researching_artifice_invention_prefabricated_city_constructors }
+			set_country_flag = unlocked_artifice_invention_prefabricated_city_constructors
+			clr_country_flag = researching_artifice_invention_prefabricated_city_constructors
 			country_event = {
 				id = artifice_inventions.803
 			}
@@ -2729,9 +2779,9 @@ country_event = {
 			}
 		}
 		if = {
-			limit = { has_country_flag = researching_artifice_invention_mechanim_soldiers }
-			set_country_flag = unlocked_artifice_invention_mechanim_soldiers
-			clr_country_flag = researching_artifice_invention_mechanim_soldiers
+			limit = { has_country_flag = researching_artifice_invention_bioartificed_ascension }
+			set_country_flag = unlocked_artifice_invention_bioartificed_ascension
+			clr_country_flag = researching_artifice_invention_bioartificed_ascension
 			country_event = {
 				id = artifice_inventions.302
 			}
@@ -2785,9 +2835,9 @@ country_event = {
 			}
 		}
 		if = {
-			limit = { has_country_flag = researching_artifice_invention_hypertrophic_implosion_device }
-			set_country_flag = unlocked_artifice_invention_hypertrophic_implosion_device
-			clr_country_flag = researching_artifice_invention_hypertrophic_implosion_device
+			limit = { has_country_flag = researching_artifice_invention_damestear_reactor_megacannon }
+			set_country_flag = unlocked_artifice_invention_damestear_reactor_megacannon
+			clr_country_flag = researching_artifice_invention_damestear_reactor_megacannon
 			country_event = {
 				id = artifice_inventions.1107
 			}
@@ -2818,17 +2868,17 @@ country_event = {
 			}
 		}
 		if = {
-			limit = { has_country_flag = researching_artifice_invention_organizatron }
-			set_country_flag = unlocked_artifice_invention_organizatron
-			clr_country_flag = researching_artifice_invention_organizatron
+			limit = { has_country_flag = researching_artifice_invention_bureaucratizer }
+			set_country_flag = unlocked_artifice_invention_bureaucratizer
+			clr_country_flag = researching_artifice_invention_bureaucratizer
 			country_event = {
-				id = artifice_inventions.1008
+				id = artifice_inventions.1108
 			}
 		}
 		if = {
-			limit = { has_country_flag = researching_artifice_invention_thought_thresher }
-			set_country_flag = unlocked_artifice_invention_thought_thresher
-			clr_country_flag = researching_artifice_invention_thought_thresher
+			limit = { has_country_flag = researching_artifice_invention_runethought_network }
+			set_country_flag = unlocked_artifice_invention_runethought_network
+			clr_country_flag = researching_artifice_invention_runethought_network
 			country_event = {
 				id = artifice_inventions.1109
 			}

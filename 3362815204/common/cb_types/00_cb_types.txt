@@ -46,15 +46,25 @@ cb_restore_personal_union = {
 	}
 
 	prerequisites = {
-		FROM = {
-			OR = {
-				government = monarchy
-				has_reform = ambrosian_republic
-				# has_reform = military_dictatorship_reform
-				has_country_flag = neapolitan_republic
+		OR = {
+			AND = {
+				ROOT = {
+					mission_completed = like_a_sister_S53
+				}
+				FROM = {
+					has_country_flag = S53_naleni_union
+				}
 			}
-			is_subject = no
-			NOT = { ruler_can_revive = yes } # Anbennar
+			FROM = {
+				OR = {
+					government = monarchy
+					has_reform = ambrosian_republic
+					# has_reform = military_dictatorship_reform
+					has_country_flag = neapolitan_republic
+				}
+				is_subject = no
+				NOT = { ruler_can_revive = yes } # Anbennar
+			}
 		}
 	}
 
@@ -443,19 +453,22 @@ cb_conquest = {
 
 	prerequisites_self = {
 		# Anbennar
-		OR = {
-			NOT = { has_reform = adventurer_reform }
-			has_reform = found_our_nation
-		}
+		escann_adventurer_cb_restriction_trigger = yes
 		NOT = {
 			has_country_modifier = phoenix_conquest_cb_mod
 			ruler_has_personality = xhazobs_chosen_personality
-			religion = gods_of_the_taychend
-			religion = oren_nayiru
 			AND = {
 				has_reform = hobgoblin_stratocracy_reform
 				has_global_flag = R62_the_edict_of_x_flag
 			}
+		}
+		OR = {
+			NOT = { religion = oren_nayiru }
+			overlord = { NOT = { religion = oren_nayiru } }
+		}
+		OR = {
+			NOT = { religion = gods_of_the_taychend }
+			overlord = { NOT = { religion = gods_of_the_taychend } }
 		}
 		OR = {
 			NOT = { has_reform = hobgoblin_stratocracy_reform }
@@ -491,10 +504,7 @@ cb_core = {
 	prerequisites = {
 		core_claim = FROM
 		# Anbennar
-		OR = {
-			NOT = { has_reform = adventurer_reform }
-			has_reform = found_our_nation
-		}
+		escann_adventurer_cb_restriction_trigger = yes
 		NOT = { OR = { religion = gods_of_the_taychend religion = oren_nayiru } }
 		NOT = { overlord = { OR = { religion = gods_of_the_taychend religion = oren_nayiru } } }
 		NOT = { ruler_has_personality = xhazobs_chosen_personality }
@@ -848,18 +858,41 @@ cb_colonial = {
 cb_liberation = {
 
  	prerequisites_self = {
- 		tag = J33
-		has_country_flag = J33_liberation_GP
+		OR  = {
+			AND = {
+				tag = J33
+				has_country_flag = J33_liberation_GP
+			}
+			AND = {
+				tag = S53
+				has_country_flag = S53_liberation_non_GP_flag
+			}
+		}
  	}
 	prerequisites = {
-		FROM = {
-			OR = {
-				is_great_power = yes
-				government_rank = 3
+		OR = {
+			AND = {
+				tag = J33
+				has_country_flag = J33_liberation_GP
+				FROM = {
+					OR = {
+						is_great_power = yes
+						government_rank = 3
+					}
+				}	
+			}
+			AND = {
+				tag = S53
+				has_country_flag = S53_liberation_non_GP_flag
+				FROM = {
+					any_owned_province = {
+						region = ishyamtumu_region
+					}
+					is_subject = no
+				}
 			}
 		}
 	}
-	
  	war_goal = take_capital_liberation
 }
 
@@ -907,10 +940,7 @@ cb_crusade = {
 		}
 		is_revolutionary = no
 		# Anbennar
-		OR = {
-			NOT = { has_reform = adventurer_reform }
-			has_reform = found_our_nation
-		}
+		escann_adventurer_cb_restriction_trigger = yes
 		NOT = { has_reform = greentide_horde }
 	}
 
@@ -1147,14 +1177,38 @@ cb_blooming_of_the_lorentish_rose = {
 	war_goal = blooming_of_the_lorentish_rose
 } 
 
+cb_aldresian_incursion = {
+	valid_for_subject = yes
+	prerequisites_self = {
+		tag = A77
+		has_country_flag = aldresian_incursion
+	}
+	prerequisites = {
+		FROM = {
+			NOT = {
+				religion = ravelian
+			}
+		}
+	}
+	war_goal = aldresian_incursion_wg
+}
+
 # Imperial Ban
 cb_imperial_ban = {
 	valid_for_subject = no
 
 	prerequisites_self = {
-		is_emperor = yes
-		is_imperial_ban_allowed = yes
-		is_revolutionary = no
+		OR = {
+			AND = {
+				is_emperor = yes
+				is_imperial_ban_allowed = yes
+				is_revolutionary = no
+			}
+			AND = {
+				tag = A77
+				mission_completed = old_ways_and_the_new
+			}
+		}
 	}
 
 	prerequisites = {
@@ -1511,11 +1565,23 @@ cb_humiliate_rotw = {
 	}
 
 	prerequisites = {
-		NOT = {
-			truce_with = FROM
+		OR = {
+			AND = {
+				NOT = {
+					truce_with = FROM
+				}
+				is_rival = FROM
+				NOT = { OR = { religion = gods_of_the_taychend religion = oren_nayiru } }
+			}
+			AND = {
+				tag = A77
+				emperor = {
+					is_rival = FROM
+				}
+				mission_completed = the_empires_second_sons
+				mission_completed = reign_in_the_knight_errants
+			}
 		}
-		is_rival = FROM
-		NOT = { OR = { religion = gods_of_the_taychend religion = oren_nayiru } }
 	}
 
 	attacker_disabled_po = {
@@ -1602,6 +1668,10 @@ cb_take_mandate = {
 			religion_group = tanibic_religion
 			has_country_flag = can_claim_mandate
 			religion = dalcabba
+			AND = {
+				religion = the_hunt
+				secondary_religion_group = khetist
+			}
 		}
 		NOT = { has_country_flag = no_mandate }
 		NOT = { ruler_has_personality = xhazobs_chosen_personality }
@@ -1724,8 +1794,16 @@ cb_force_join_hre = {
 
 	prerequisites_self = {
 		has_dlc = "Emperor"
-		is_emperor = yes
-		hre_reform_passed = emperor_reichsstabilitaet
+		OR = {
+			AND = {
+				tag = A77
+				has_country_flag = aldresia_expand_empire
+			}
+			AND = {
+				is_emperor = yes
+				hre_reform_passed = emperor_reichsstabilitaet
+			}
+		}
 	}
 
 	prerequisites = {
@@ -1783,6 +1861,7 @@ cb_world_crusade = {
 			has_government_attribute = has_upgraded_holy_wars
 			has_reform = religious_permanent_revolution_reform	#Anbennar
 			has_country_flag = jaddari_the_blade_of_light
+			has_country_flag = mengi_expand_realm
 			AND = {
 				religion = dalcabba
 				OR = {
@@ -1802,14 +1881,14 @@ cb_world_crusade = {
 			claim = FROM
 			cb_on_religious_enemies = yes
 			has_country_flag = enabled_great_holy_war_cb
-			AND = {
-				FROM = { religion_group = pagan }
-				OR = {
-					cb_on_primitives = yes
-					cb_on_overseas = yes
-					has_reform = mission_to_civilize_reform
-				}
-			}
+#			AND = {
+#				FROM = { religion_group = pagan }
+#				OR = {
+#					cb_on_primitives = yes
+#					cb_on_overseas = yes
+#					has_reform = mission_to_civilize_reform
+#				}
+#			}
 		}
 	}
 

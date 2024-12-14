@@ -219,7 +219,7 @@ country_event = {
 		hidden_effect = {
 			yanshen_superregion = { discover_country = ROOT }
 			rahen_superregion = { discover_country = ROOT }
-			south_haless_superregion = { discover_country = ROOT }
+			vimdatrong_superregion = { discover_country = ROOT }
 		}
 		hidden_effect = { 
 			Y15 = {
@@ -2716,28 +2716,28 @@ country_event = {
 	}
 	option = {
 		name = flavor_kalsyto.1009.q1 #Gozengun
-		trigger = { kalsyto_CDS_potential = { superegion = north_haless_superregion provs = 130 } }
+		trigger = { kalsyto_CDS_potential = { superegion = gozengun_superregion provs = 130 } }
 		custom_tooltip = kalsyto_not_full_SR
 	}
 	option = {
 		name = flavor_kalsyto.1009.q2 #Gozengun
-		trigger = { kalsyto_CDS_elligible = { superegion = north_haless_superregion provs = 130 } }
+		trigger = { kalsyto_CDS_elligible = { superegion = gozengun_superregion provs = 130 } }
 		highlight = yes
 		custom_tooltip = kalsyto_full_SR
-		hidden_effect = { kalsyto_CDS_tags = { superegion = north_haless_superregion } }
+		hidden_effect = { kalsyto_CDS_tags = { superegion = gozengun_superregion } }
 		country_event = { id = flavor_kalsyto.1010 }
 	}
 	option = {
 		name = flavor_kalsyto.1009.r1 #Vimdatrong
-		trigger = { kalsyto_CDS_potential = { superegion = south_haless_superregion provs = 184 } }
+		trigger = { kalsyto_CDS_potential = { superegion = vimdatrong_superregion provs = 184 } }
 		custom_tooltip = kalsyto_not_full_SR
 	}
 	option = {
 		name = flavor_kalsyto.1009.r2 #Vimdatrong
-		trigger = { kalsyto_CDS_elligible = { superegion = south_haless_superregion provs = 184 } }
+		trigger = { kalsyto_CDS_elligible = { superegion = vimdatrong_superregion provs = 184 } }
 		highlight = yes
 		custom_tooltip = kalsyto_full_SR
-		hidden_effect = { kalsyto_CDS_tags = { superegion = south_haless_superregion } }
+		hidden_effect = { kalsyto_CDS_tags = { superegion = vimdatrong_superregion } }
 		country_event = { id = flavor_kalsyto.1010 }
 	}
 	option = {
@@ -2794,15 +2794,15 @@ country_event = {
 	}
 	option = {
 		name = flavor_kalsyto.1009.w1 #Tanib-Dajek
-		trigger = { kalsyto_CDS_potential = { superegion = west_sarhal_superregion provs = 141 } }
+		trigger = { kalsyto_CDS_potential = { superegion = tanib_dajek_superregion provs = 141 } }
 		custom_tooltip = kalsyto_not_full_SR
 	}
 	option = {
 		name = flavor_kalsyto.1009.w2 #Tanib-Dajek
-		trigger = { kalsyto_CDS_elligible = { superegion = west_sarhal_superregion provs = 141 } }
+		trigger = { kalsyto_CDS_elligible = { superegion = tanib_dajek_superregion provs = 141 } }
 		highlight = yes
 		custom_tooltip = kalsyto_full_SR
-		hidden_effect = { kalsyto_CDS_tags = { superegion = west_sarhal_superregion } }
+		hidden_effect = { kalsyto_CDS_tags = { superegion = tanib_dajek_superregion } }
 		country_event = { id = flavor_kalsyto.1010 }
 	}
 	option = {
@@ -2819,16 +2819,29 @@ country_event = {
 		country_event = { id = flavor_kalsyto.1010 }
 	}
 	option = {
-		name = flavor_kalsyto.1009.y1 #South Sarhal
-		trigger = { kalsyto_CDS_potential = { superegion = south_sarhal_superregion provs = 208 } }
+		name = flavor_kalsyto.1009.y1 #Djinnakah
+		trigger = { kalsyto_CDS_potential = { superegion = djinnakah_superregion provs = 95 } }
 		custom_tooltip = kalsyto_not_full_SR
 	}
 	option = {
-		name = flavor_kalsyto.1009.y2 #South Sarhal
-		trigger = { kalsyto_CDS_elligible = { superegion = south_sarhal_superregion provs = 208 } }
+		name = flavor_kalsyto.1009.y2 #Djinnakah
+		trigger = { kalsyto_CDS_elligible = { superegion = djinnakah_superregion provs = 95 } }
 		highlight = yes
 		custom_tooltip = kalsyto_full_SR
-		hidden_effect = { kalsyto_CDS_tags = { superegion = south_sarhal_superregion } }
+		hidden_effect = { kalsyto_CDS_tags = { superegion = djinnakah_superregion } }
+		country_event = { id = flavor_kalsyto.1010 }
+	}
+	option = {
+		name = flavor_kalsyto.1009.z1 #Taneyas
+		trigger = { kalsyto_CDS_potential = { superegion = taneyas_superregion provs = 112 } }
+		custom_tooltip = kalsyto_not_full_SR
+	}
+	option = {
+		name = flavor_kalsyto.1009.z2 #Taneyas
+		trigger = { kalsyto_CDS_elligible = { superegion = taneyas_superregion provs = 112 } }
+		highlight = yes
+		custom_tooltip = kalsyto_full_SR
+		hidden_effect = { kalsyto_CDS_tags = { superegion = taneyas_superregion } }
 		country_event = { id = flavor_kalsyto.1010 }
 	}
 	option = {
@@ -2886,6 +2899,7 @@ country_event = {
 				AND = {
 					has_country_flag = J33_CDS_flag
 					kalsyto_not_CDS = yes
+					NOT = { is_revolutionary = yes }
 				}
 			}
 		}
@@ -2912,6 +2926,7 @@ country_event = {
 			limit = {
 				has_country_flag = J33_CDS_flag
 				kalsyto_not_CDS = yes
+				NOT = { is_revolutionary = yes }
 			}
 			add_government_reform = lake_consolidated_state
 		}

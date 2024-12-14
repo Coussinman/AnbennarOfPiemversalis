@@ -87,7 +87,7 @@ country_event = {
 			#country_event = { id = flavor_rogieria.1 days = 1 }
 			country_event = { id = flavor_rogieria.2 days = 1 }
 			country_event = { id = flavor_elikhand.1 days = 1 }
-			country_event = { id = flavor_wyvernheart.1 days = 1 }
+			country_event = { id = flavour_wyvernheart.1 days = 1 }
 			country_event = { id = flavor_alenor.1 days = 1 }
 			country_event = { id = flavor_stalbor.1 days = 1 }
 			country_event = { id = flavor_ravenmarch.1 days = 1 }
@@ -127,11 +127,14 @@ country_event = {
 		trigger = {
 			NOT = { tag = B37 } #rogieria
 			NOT = { tag = Z37 } # Covenblad
+			NOT = { tag = B39 } #Wyvernheart
 			NOT = { tag = I20 } #hul-az-krakazol
 			NOT = { tag = I08 } #Haraz Orldhum
 			NOT = { tag = I16 } #Gor Burad
 			NOT = { tag = B58 } #Adenica
+			NOT = { tag = I22 } #Gronstunad
 			NOT = { tag = I25 } #Verkal Dromak
+			NOT = { tag = Z35 } #Rosande
 		}
 		ai_chance = { 
 			factor = 30
@@ -183,6 +186,8 @@ country_event = {
 			NOT = { tag = B50 } #newshire
 			NOT = { tag = B58 } #Adenica
 			NOT = { tag = Z37 } # Covenblad
+			NOT = { tag = B39 } #Wyvernheart
+			NOT = { tag = Z35 } #Rosande
 			NOT = { culture_group = dwarven }
 		}
 		ai_chance = { 
@@ -228,6 +233,8 @@ country_event = {
 			NOT = { tag = B50 } #newshire
 			NOT = { tag = B58 } #Adenica
 			NOT = { tag = Z37 } # Covenblad
+			NOT = { tag = B39 } #Wyvernheart
+			NOT = { tag = Z35 } #Rosande
 			OR = {
 				tag = B20 #Iron Sceptre
 				tag = B54 #Esthil
@@ -932,7 +939,7 @@ country_event = { #Change culture of conquered adventurer provinces
 					culture = esmari
 					culture = gawedi
 					culture = high_lorentish
-					culture = hapremiti
+					culture = korosheshi
 					culture = redfoot_halfling
 					culture = roilsardi
 					culture = vernman
@@ -959,7 +966,7 @@ country_event = { #Change culture of conquered adventurer provinces
 				culture = esmari
 				culture = gawedi
 				culture = high_lorentish
-				culture = hapremiti
+				culture = korosheshi
 				culture = redfoot_halfling
 				culture = roilsardi
 				culture = vernman
@@ -1103,7 +1110,7 @@ country_event = { #Change culture of conquered adventurer provinces
 			if = { #Elikhand
 				limit = {
 					NOT = { culture = ROOT }
-					culture = hapremiti
+					culture = korosheshi
 				}
 				change_culture = elikhander
 			}
@@ -1258,7 +1265,7 @@ country_event = { #Change culture of conquered adventurer provinces
 			}
 			if = { #Elikhand
 				limit = {
-					culture = hapremiti
+					culture = korosheshi
 				}
 				change_culture = elikhander
 			}

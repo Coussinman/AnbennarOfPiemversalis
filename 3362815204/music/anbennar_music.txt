@@ -191,3 +191,63 @@ song = {
 		}
 	}
 }
+
+song = {
+	name = "the_landing"
+	
+	chance = {
+		modifier = {
+			factor = 2
+			capital_scope = {
+				superregion = western_cannor_superregion
+			}
+		}
+	}
+}
+
+song = {
+	name = "the_kenu_ike"
+	
+	chance = {
+		modifier = {
+            factor = 0
+            NOT = { any_owned_province = { continent = asia NOT = { superregion = forbidden_lands_superregion } } }
+        }
+		modifier = {
+			factor = 2
+			is_at_war = yes
+		}
+		modifier = {
+			factor = 4
+			is_in_war = {
+				participants = R62
+			}
+		}
+		modifier = {
+			factor = 0.4
+			tag = R62
+		}
+			
+	}
+}
+
+song = {
+	name = "across_the_lament"
+	
+	chance = {
+		modifier = {
+			factor = 0
+			NOT = {
+				num_of_total_ports = 5
+			}
+		}
+		modifier = {
+			factor = 2
+			OR = {
+				has_idea_group = exploration_ideas
+				any_subject_country = { is_colonial_nation_of = ROOT }
+				is_aelantiri_spawnable = yes
+			}
+		}
+	}
+}

@@ -274,13 +274,22 @@ estate_burghers = {
 	}
 
 	custom_name = {
-		desc = inyaswarosa_leopard_society
+		desc = inyaswarosa_leopard_lodge
 		trigger = {
 			OR = {
-				culture_group = inyaswarosa
+				culture = kombedak
+				culture = umsozidak
+				culture = wakoodak
+				tag = S83 #Katidariga, cyazizeta by default
 			}
 		}
 	}
+	custom_name = {
+			desc = estate_procurers
+			trigger = {
+				tag = A77
+			}
+		}
 
 	custom_name = {
 		desc = antmvura_17_families
@@ -315,11 +324,14 @@ estate_burghers = {
 		}
 	}
 
-	custom_name = {
-		desc = estate_kartels
-		trigger = {
-			culture_group = goblin
-		}
+	custom_name = { 
+		desc = estate_kartels 
+		trigger = { 
+			OR = { 
+				culture_group = goblin 
+				has_country_flag = karakhanbar_cartels 
+			} 
+		} 
 	}
 
 	custom_name = { #Mengi traders
@@ -449,7 +461,13 @@ estate_burghers = {
 				culture = sarnik
 			}
 		}
-	}	
+	}
+	custom_name = {
+		desc = estate_peasants
+		trigger = {
+			tag = Y17 #Gushuokguan
+		}
+	}
 	
 
 	# custom_name = {
@@ -549,7 +567,6 @@ estate_burghers = {
 		#estate_burghers_persian_rugs
 
 		estate_burghers_magnate_council # Anbennar
-		xhazobkult_privilege_the_weak_serve_the_strong # Anbennar
 		estate_burghers_yangban # Anbennar
 		estate_burghers_sgc_merchant_training # Anbennar
 		estate_burghers_sgc_foreign_power # Anbennar
@@ -561,8 +578,8 @@ estate_burghers = {
 		estate_burghers_glozok_the_cunning # Mountainshark MT
 		estate_burghers_glozok_the_mastermind # Mountainshark MT
 		estate_burghers_glozok_the_dominator # Mountainshark MT
-		estate_burghers_pyre_flame_use
 		estate_burghers_sponsor_new_ships # Anbennar Bosancovac MT
+		estate_burghers_improved_supply_routes # Gronstunad MT
 		estate_burghers_brelari_dam_architects #Brelar MT
 		estate_burghers_architect_sponsoring	#Breluslad MT
 		estate_burghers_innovator_invitations
@@ -598,6 +615,8 @@ estate_burghers = {
 		estate_burghers_nazhyn_wars # Nazhni
 		estate_burghers_the_council_of_ignorance # Yassa
 		estate_burghers_city_in_ruins # Shalazar
+		estate_burghers_karakhanbar_cooperation_with_goblin_cartels #Karakhanbar MT
+		estate_burghers_subsidiary_cartels #Brambleskinner
 
 		#Mutation Privileges
 		estate_burghers_ashhana_mutation
@@ -607,6 +626,11 @@ estate_burghers = {
 		estate_burghers_khtashhana_mutation
 		estate_burghers_tsyhyra_mutation
 		estate_burghers_thanats_mutation
+
+		estate_merchants_gnollish_caravans #duwarkani MT
+
+		#Maghargma
+		estate_burghers_friends_in_high_places
 	}
 
 	agendas = {
