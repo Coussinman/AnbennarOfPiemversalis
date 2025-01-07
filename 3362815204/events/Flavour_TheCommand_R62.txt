@@ -3012,11 +3012,43 @@ country_event = { #Auto-Wuhyunification pulse
 				command_not_yet_wuhyunized = yes
 			}
 			if = {
-				limit = { owner = { has_estate_privilege = estate_tiger_command_proselytizers_to_the_wuhyun } }
-				province_event = { id = the_command.34 days = 39 random = 438 }
+				limit = { ROOT = { overlord = { has_estate_privilege = estate_tiger_command_proselytizers_to_the_wuhyun } } }
+				random_list = {
+					9 = {
+						modifier = {
+							factor = 2
+							ROOT = { total_development = 100 }
+						}
+						modifier = {
+							factor = 2
+							ROOT = { total_development = 250 }
+						}
+						modifier = {
+							factor = 2
+							ROOT = { total_development = 500 }
+						}
+					}
+					1 = { province_event = { id = the_command.34 days = 39 random = 438 } }
+				}
 			}
 			else = {
-				province_event = { id = the_command.34 days = 94 random = 548 }
+				random_list = {
+					9 = {
+						modifier = {
+							factor = 2
+							ROOT = { total_development = 100 }
+						}
+						modifier = {
+							factor = 2
+							ROOT = { total_development = 250 }
+						}
+						modifier = {
+							factor = 2
+							ROOT = { total_development = 500 }
+						}
+					}
+					1 = { province_event = { id = the_command.34 days = 94 random = 548 } }
+				}
 			}
 		}
 	}
@@ -7822,7 +7854,6 @@ country_event = { #End the Temple's Curse
 			random_owned_province = {
 				limit = { OR = { has_province_modifier = damaged_temple_complex has_province_modifier = derelict_temple_complex } NOT = { has_province_flag = temple_being_plundered } NOT = { has_province_modifier = temple_restoration_efforts } is_city = yes is_core = ROOT }
 				setup_temple_restoration_speed = yes
-				calculate_temple_restoration = yes
 				save_event_target_as = restore1
 			}
 		}
@@ -7833,7 +7864,10 @@ country_event = { #End the Temple's Curse
 		ai_chance = { factor = 0 } #AI Command ain't dumb. If Azjakuma players want more content we can enable this in the future
 		custom_tooltip = command_the_temples_curse_tt
 		event_target:restore1 = { begin_temple_restoration = yes }
-		custom_tooltip = temple_restoration_cost_tt1
+		add_adm_power = -50
+		add_dip_power = -50
+		add_mil_power = -50
+		add_treasury = -100
 		hidden_effect = {
 			every_owned_province = {
 				limit = { province_group = temple_province_group }
@@ -8218,7 +8252,7 @@ province_event = { #The Breaking of Chains
 			add_government_power = {
 				mechanic_type = command_korashi_mechanic
 				power_type = korashi_reserves
-				value = -10
+				value = -20
 			}
 		}
 		add_permanent_province_modifier = {
@@ -8259,7 +8293,7 @@ province_event = { #The Burning of the RPU
 			add_government_power = {
 				mechanic_type = command_korashi_mechanic
 				power_type = korashi_reserves
-				value = -20
+				value = -30
 			}
 		}
 		controller = {
@@ -13487,6 +13521,8 @@ country_event = { # spawning the tiger command
 						siege = 1
 						name = "Kabkuri 'of the Raj' Tigerborn"
 					}
+					add_army_professionalism = 0.2
+					add_army_tradition = 50
 				}
 				define_ruler = {
 					name = "Zurshin"
@@ -13719,7 +13755,11 @@ country_event = { # spawning the tiger command
 						}
 						add_base_production = 2000
 					}
-					else = { add_latest_building = { builder = R67 fort = yes } add_province_modifier = { name = command_insubordination_fort duration = 1825 } }
+					else = {
+						add_latest_building = { builder = R67 fort = yes }
+						add_building = ramparts
+						add_province_modifier = { name = command_insubordination_fort duration = 1825 }
+					}
 					set_province_flag = command_tiger_capital_flag
 					random_neighbor_province = {
 						limit = {
@@ -13923,6 +13963,8 @@ country_event = { # spawning the elephant command
 						siege = 2
 						name = "Dayong of Flowing Water Elephantborn"
 					}
+					add_army_professionalism = 0.2
+					add_army_tradition = 50
 				}
 				
 				define_ruler = {
@@ -14092,7 +14134,11 @@ country_event = { # spawning the elephant command
 						}
 						add_base_production = 2000
 					}
-					else = { add_latest_building = { builder = R68 fort = yes } add_province_modifier = { name = command_insubordination_fort duration = 1825 } }
+					else = {
+						add_latest_building = { builder = R68 fort = yes }
+						add_building = ramparts
+						add_province_modifier = { name = command_insubordination_fort duration = 1825 }
+					}
 					set_province_flag = command_elephant_capital_flag
 					random_neighbor_province = {
 						limit = {
@@ -14319,6 +14365,8 @@ country_event = { # spawning the dragon command
 						female = yes
 						name = "Ibawasu Dragonborn"
 					}
+					add_army_professionalism = 0.2
+					add_army_tradition = 50
 				}
 				
 				define_ruler = {
@@ -14484,7 +14532,11 @@ country_event = { # spawning the dragon command
 						}
 						add_base_production = 2000
 					}
-					else = { add_latest_building = { builder = R69 fort = yes } add_province_modifier = { name = command_insubordination_fort duration = 1825 } }
+					else = {
+						add_latest_building = { builder = R69 fort = yes }
+						add_building = ramparts
+						add_province_modifier = { name = command_insubordination_fort duration = 1825 }
+					}
 					set_province_flag = command_dragon_capital_flag
 					random_neighbor_province = {
 						limit = {
@@ -16146,6 +16198,9 @@ country_event = { # disaster ends
 			}
 			country_event = { id = the_command.1998 days = 1 }	#Jade March Round 2
 			country_event = { id = the_command.1978 days = 210 random = 60 }	# oni ultimatum post-war
+			clr_country_flag = R62_tiger_subdued
+			clr_country_flag = R62_elephant_subdued
+			clr_country_flag = R62_dragon_subdued
 		}
 	}
 

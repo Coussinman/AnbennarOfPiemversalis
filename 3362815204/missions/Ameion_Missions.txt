@@ -2004,9 +2004,12 @@ G52_3 = {
 				area = zaernmaera_area
 			}
 			OR = {
+				area_for_scope_province = { NOT = { has_building = state_house } }
+				has_building = state_house
+			}
+			OR = {
 				NOT = { development = 20 }
 				NOT = { has_courthouse_building_trigger = yes }
-				area_for_scope_province = { NOT = { has_building = state_house } }
 				NOT = { culture_group = kheionai_ruinborn_elf }
 			}
 			has_discovered = ROOT
@@ -2668,25 +2671,54 @@ G52_4 = {
 		}
 		
 		trigger = {
-			OR = {
-				num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-					value = 20
-					superregion = effelai_superregion
-					trade_goods = tropical_wood
-					has_building = mage_tower
+			if = {
+				limit = {
+					G20 = { is_subject_of = ROOT }
 				}
-				development_in_provinces = {
-					value = 200
-					superregion = effelai_superregion
-					trade_goods = tropical_wood
-					has_building = mage_tower
-				}
-				any_subject_country = {
-					development_in_provinces = {
-						value = 200
+				OR = {
+					num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+						value = 15
 						superregion = effelai_superregion
 						trade_goods = tropical_wood
 						has_building = mage_tower
+					}
+					development_in_provinces = {
+						value = 150
+						superregion = effelai_superregion
+						trade_goods = tropical_wood
+						has_building = mage_tower
+					}
+					G20 = {
+						development_in_provinces = {
+							value = 150
+							superregion = effelai_superregion
+							trade_goods = tropical_wood
+							has_building = mage_tower
+						}
+					}
+				}
+			}
+			else = {
+				OR = {
+					num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+						value = 15
+						superregion = effelai_superregion
+						trade_goods = tropical_wood
+						has_building = mage_tower
+					}
+					development_in_provinces = {
+						value = 150
+						superregion = effelai_superregion
+						trade_goods = tropical_wood
+						has_building = mage_tower
+					}
+					any_subject_country = {
+						development_in_provinces = {
+							value = 150
+							superregion = effelai_superregion
+							trade_goods = tropical_wood
+							has_building = mage_tower
+						}
 					}
 				}
 			}

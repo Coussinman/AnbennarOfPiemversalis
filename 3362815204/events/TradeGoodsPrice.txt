@@ -646,11 +646,15 @@ country_event = {
 
 	trigger = {
 		capital_scope = { continent = europe }
-		
-		cloth = 5
-		calc_true_if = {
-			esmaria_region = { type = all is_prosperous = yes }
-			amount = 20
+		OR = {
+			has_country_flag = esmari_fashion_early
+			AND = {
+				cloth = 5
+				calc_true_if = {
+					esmaria_region = { type = all is_prosperous = yes }
+					amount = 20
+				}
+			}
 		}
 		NOT = { has_global_flag = esmari_fashion_happened }
 	}
@@ -2418,15 +2422,20 @@ country_event = {
 	major = yes
 	
 	trigger = {
-		is_year = 1600
-		capital_scope = { superregion = western_cannor_superregion }
-		num_of_owned_provinces_with = {
-			value = 5
-			trade_goods = wine
-			has_manufactory_trigger = yes
+		OR = {
+			AND = {
+				is_year = 1600
+				production_leader = { trade_goods = wine }
+				capital_scope = { superregion = western_cannor_superregion }
+				num_of_owned_provinces_with = {
+					value = 5
+					trade_goods = wine
+					has_manufactory_trigger = yes
+				}
+				has_institution = global_trade
+			}
+			has_country_flag = rosande_age_wine
 		}
-		production_leader = { trade_goods = wine }
-		has_institution = global_trade
 		NOT = {
 			has_global_flag = age_of_wine_happened
 		}

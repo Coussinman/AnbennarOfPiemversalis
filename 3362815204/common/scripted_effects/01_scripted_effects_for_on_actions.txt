@@ -4187,6 +4187,35 @@ on_religion_change_effect = {
 		clr_country_flag = tether_the_weak_unlocked
 		clr_country_flag = bleed_haless_dry_unlocked
 	}
+
+	if = {
+		limit = { religion_group = raheni }
+		update_personal_visvatma = yes
+	}
+	else_if = {
+		limit = { has_country_flag = was_raheni_religion }
+		clr_country_flag = was_raheni_religion
+		trigger_switch = {
+			on_trigger = has_country_modifier
+			visvatma_10_modifier = { remove_country_modifier = visvatma_10_modifier }
+			visvatma_9_modifier = { remove_country_modifier = visvatma_9_modifier }
+			visvatma_8_modifier = { remove_country_modifier = visvatma_8_modifier }
+			visvatma_7_modifier = { remove_country_modifier = visvatma_7_modifier }
+			visvatma_6_modifier = { remove_country_modifier = visvatma_6_modifier }
+			visvatma_5_modifier = { remove_country_modifier = visvatma_5_modifier }
+			visvatma_4_modifier = { remove_country_modifier = visvatma_4_modifier }
+			visvatma_3_modifier = { remove_country_modifier = visvatma_3_modifier }
+			visvatma_2_modifier = { remove_country_modifier = visvatma_2_modifier }
+			visvatma_1_modifier = { remove_country_modifier = visvatma_1_modifier }
+		}
+		remove_country_modifier = HP_nam_labeda
+		remove_country_modifier = HP_rule_mendab
+		remove_country_modifier = HP_convoke_idisarindat
+		remove_country_modifier = HP_proclaim_anjitaranga
+		remove_country_modifier = HP_reorganise_chalanevaala
+		remove_country_modifier = HP_meditation_on_simrals_mirror
+		remove_country_modifier = HP_meditation_on_the_kamalkundal
+	}
 }
 
 

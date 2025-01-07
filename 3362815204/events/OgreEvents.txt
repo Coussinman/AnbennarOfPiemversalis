@@ -13,11 +13,11 @@ country_event = {
 	is_triggered_only = yes
 	hidden = yes
 	trigger = {
+		has_country_modifier = ogre_administration
 		fast_owns_num_pops_of_race = {
 			race = ogre
 			amount = 1
 		}
-		has_country_modifier = ogre_administration
 	}
 	option = {
 		random_list = {
@@ -766,7 +766,7 @@ country_event = {
 			}
 		}
 		custom_tooltip = linebreak_tt
-		complex_dynamic_effect = {
+		complex_dynamic_effect_without_alternative = {
 			first_custom_tooltip = fotg_unreformed_tt
 			first_limit = "religion = feast_of_the_gods"
 			first_effect = "add_doom = -15"
@@ -833,7 +833,7 @@ country_event = {
 				}
 			}
 			random = {
-				chance = 30
+				chance = 20
 				create_war_wizard_effect = yes
 			}
 		}
@@ -851,12 +851,15 @@ country_event = {
 				}
 			}
 			random = {
-				chance = 65
+				chance = 40
 				create_war_wizard_effect = yes
 			}
 		}
 		else = {
-			create_war_wizard_effect = yes
+			random = {
+				chance = 67
+				create_war_wizard_effect = yes
+			}
 		}
 	}
 	option = {
@@ -869,14 +872,14 @@ country_event = {
 			religion = devouring_path
 		}
 		random_list = {
-			70 = {
+			50 = {
 				add_country_modifier = {
 					name = ogre_flavour_events_mage_tested
 					duration = 3650
 				}
 				create_war_wizard_effect = yes
 			}
-			30 = {
+			50 = {
 				add_country_modifier = {
 					name = ogre_flavour_events_mage_faltered
 					duration = 3650

@@ -281,7 +281,15 @@ G48_slot_2 = {
 		} 
 
 		effect = {
-			custom_tooltip = G48_schemers_bonus_tt  
+			if = {
+				limit = { 
+					has_country_flag = G48_schemers_in_power
+				}
+				custom_tooltip = G48_schemers_bonus_yes_tt
+			}
+			else = {
+				custom_tooltip = G48_schemers_bonus_no_tt
+			}  
 			country_event = { id = flavour_kherka.2 }
 		} 
 	}
@@ -409,7 +417,15 @@ G48_slot_2 = {
 		} 
 
 		effect = { 
-			custom_tooltip = G48_colonists_bonus_tt 
+			if = {
+				limit = { 
+					has_country_flag = G48_colonists_in_power
+				}
+				custom_tooltip = G48_colonists_bonus_yes_tt
+			}
+			else = {
+				custom_tooltip = G48_colonists_bonus_no_tt
+			} 
 			country_event = { id = flavour_kherka.3 }
 		} 
 	}
@@ -450,8 +466,16 @@ G48_slot_3 = {
 			dip_power = 50
 		} 
 
-		effect = {  
-			custom_tooltip = G48_militants_bonus_tt
+		effect = {
+			if = {
+				limit = { 
+					has_country_flag = G48_militants_in_power
+				}
+				custom_tooltip = G48_militants_bonus_yes_tt
+			}
+			else = {
+				custom_tooltip = G48_militants_bonus_no_tt
+			}  
 			country_event = { id = flavour_kherka.4 }
 		} 
 	}

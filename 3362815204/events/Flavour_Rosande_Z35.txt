@@ -538,14 +538,13 @@ country_event = { #The Never-Ending Ball
 	is_triggered_only = yes
 	fire_only_once = yes
 
-	
-
 	option = {
 		name = flavor_rosande.14.a
-
+		
 		add_prestige = 20
 		add_splendor = 100
 		add_stability_or_adm_power = yes
+		custom_tooltip = rosande_ball.tt
 		hidden_effect = {
 			country_event = {
 				id = flavor_rosande.25
@@ -823,9 +822,6 @@ country_event = { #The Ashen Bloom
 		name = flavor_rosande.22.a
 
 		west_castanor_region = {
-			add_permanent_claim = ROOT
-		}
-		south_castanor_region = {
 			add_permanent_claim = ROOT
 		}
 		inner_castanor_region = {
@@ -1146,12 +1142,21 @@ country_event = { #The Rósanda Hero
 	id = flavor_rosande.30
 	title = flavor_rosande.30.t
 	desc = flavor_rosande.30.d
-	picture = TRADE_GOODS_FURS_FISH_AND_SALT_eventPicture
+	picture = {
+		trigger = {
+			NOT = { has_dlc = "Lions of the North"}
+		}
+		picture = BAD_WITH_MONARCH_eventPicture
+	}
+	picture = {
+		trigger = {
+			has_dlc = "Lions of the North"
+		}
+		picture = VIKING_KING_eventPicture
+	}
 
 	is_triggered_only = yes
 	fire_only_once = yes
-
-	
 
 	option = { 
 		name = flavor_rosande.30.a
@@ -1328,7 +1333,7 @@ country_event = { #Royal Corvée
 			tag = Z35
 			was_tag = Z35
 		}
-		mission_completed = rosande_grape_corvee	
+		has_country_flag = rosande_corvee_flag
 	}
 
 	option = { 

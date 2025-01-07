@@ -193,7 +193,7 @@ rosande_1_missions = {
 			229 = {
 				trade_share = {
 					country = Z35
-					share = 40
+					share = 30
 				}
 			}
 			num_of_owned_provinces_with = {
@@ -274,11 +274,19 @@ rosande_1_missions = {
 						has_global_flag = age_of_wine_happened
 					}
 				}
+				set_country_flag = rosande_age_wine
 				country_event = {
 					id = anb_price.7
 				}
+				set_global_flag = age_of_wine_happened
 			}
 			else = { add_dip_power = 100 }
+			hidden_effect = {
+				country_event = {
+					id = flavor_rosande.24
+					days = 180
+				}
+			}
 		}
 	}
 }
@@ -420,6 +428,20 @@ rosande_1_2_missions = {
 			}
 			custom_tooltip = rosande_those_who_escaped.tt.2
 			set_country_flag = rosande_out_of_the_woods	
+			west_deepwoods_region = {
+				limit = { 
+					fast_has_pop_of_race = { race = orcish } 
+					NOT = { country_or_non_sovereign_subject_holds = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			east_deepwoods_region = {
+				limit = { 
+					fast_has_pop_of_race = { race = orcish } 
+					NOT = { country_or_non_sovereign_subject_holds = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
 		}
 	}
 }
@@ -485,6 +507,7 @@ rosande_2_missions = {
 		}
 
 		effect = {
+			set_country_flag = rosande_corvee_flag
 			country_event = {
 				id = flavor_rosande.33
 			}
@@ -526,7 +549,10 @@ rosande_2_missions = {
 				owner = {
 					custom_trigger_tooltip = {
 						tooltip = rosande_sour_taste_tt
-						has_25_opinion_sent_gift = { target = ROOT }
+						if = {
+							limit = { NOT = { total_development = 200 } }
+							has_25_opinion_sent_gift = { target = ROOT }
+						}
 						has_opinion_modifier = {
 							who = ROOT
 							modifier = improved_relation
@@ -539,7 +565,10 @@ rosande_2_missions = {
 				owner = {
 					custom_trigger_tooltip = {
 						tooltip = rosande_sour_taste_tt
-						has_25_opinion_sent_gift = { target = ROOT }
+						if = {
+							limit = { NOT = { total_development = 200 } }
+							has_25_opinion_sent_gift = { target = ROOT }
+						}
 						has_opinion_modifier = {
 							who = ROOT
 							modifier = improved_relation
@@ -690,7 +719,10 @@ rosande_2_missions = {
 					region = west_castanor_region
 					owned_by = ROOT
 					NOT = {
-						has_building = soldier_households
+						OR = {
+							has_building = soldier_households
+							base_manpower = 8
+						}
 					}
 				}
 				AND = {
@@ -706,7 +738,10 @@ rosande_2_missions = {
 			num_of_owned_provinces_with = {
 				value = 10
 				region = west_castanor_region 
-				has_building = soldier_households
+				OR = {
+					has_building = soldier_households
+					base_manpower = 8
+				}
 			}
 			777 = { #Taranton
 				has_building = state_house
@@ -1358,7 +1393,14 @@ rosande_3_missions = {
 					}
 				}
 			}
+			custom_tooltip = rosande_grandest_winery.tt
 			set_country_flag = castanor_unlock_grand_bazaar_early
+			hidden_effect = {
+				country_event = {
+					id = flavor_rosande.23
+					days = 180
+				}
+			}
 		}
 	}
 

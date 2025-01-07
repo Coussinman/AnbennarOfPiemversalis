@@ -318,6 +318,33 @@ Z54_1_hardliner = {
 		required_missions = { 
             Z54_last_shards_of_emerald
         }
+        provinces_to_highlight = {
+            OR = {
+                AND = {
+                    owned_by = ROOT
+                    superregion = deepwoods_superregion
+                    OR = {
+                        culture = wood_elf
+                        culture = forest_goblin
+                    }
+                    AND = {
+                        NOT = { has_province_modifier = autonomy_decreased }
+                        local_autonomy_above_min = 10
+                    }
+                }
+                AND = {
+                    is_capital = yes
+                    superregion = deepwoods_superregion
+                    owner = {
+                        OR = {
+                            culture = forest_goblin
+                            culture = wood_elf
+                        }
+                        NOT = { has_been_insulted_by_root = yes }
+                    }
+                }
+            }
+        }
 		trigger = {
             if = {
                 limit = {
@@ -333,21 +360,16 @@ Z54_1_hardliner = {
                 }
                 all_known_country = {
                     OR = {
-                        culture = forest_goblin
-                        culture = wood_elf
-                    }
-                    capital_scope = {
-                        superregion = deepwoods_superregion
-                    }
-                    OR = {
-                        has_opinion_modifier = {
-                            who = ROOT
-                            modifier = insulted
+                        NOT = {
+                            culture = forest_goblin
+                            culture = wood_elf
                         }
-                        has_opinion_modifier = {
-                            who = ROOT
-                            modifier = scornfully_insulted
+                        NOT = {
+                            capital_scope = {
+                                superregion = deepwoods_superregion
+                            }
                         }
+                        has_been_insulted_by_root = yes
                     }
                 }
             }
@@ -363,8 +385,8 @@ Z54_1_hardliner = {
                 }
                 all_owned_province = {
                     OR = {
+                        NOT = { superregion = deepwoods_superregion }
                         NOT = {
-                            superregion = deepwoods_superregion
                             culture = wood_elf
                             culture = forest_goblin
                         }
@@ -390,13 +412,16 @@ Z54_1_hardliner = {
 		}
 		effect = {
             add_stability_or_adm_power = yes
-            every_owned_province = {
-                limit = { culture = green_orc }
-                change_culture = karakhanbari_orc
-            }
-            for = {
-                amount = 5
-                effect = "random_owned_province = { limit = { culture = karakhanbari_orc NOT = { has_country_flag = karakhanbar_manpower_gained } } add_base_production = 1 set_province_flag = karakhanbar_manpower_gained }"
+            custom_tooltip = karakhanbar_root_out_their_influence_effect_tt
+            hidden_effect = {
+                every_owned_province = {
+                    limit = { culture = green_orc }
+                    change_culture = karakhanbari_orc
+                }
+                for = {
+                    amount = 5
+                    effect = "random_owned_province = { limit = { culture = karakhanbari_orc NOT = { has_province_flag = karakhanbar_production_gained } } add_base_production = 1 set_province_flag = karakhanbar_production_gained }"
+                }
             }
             define_advisor = {
                 type = artist
@@ -411,8 +436,14 @@ Z54_1_hardliner = {
 		required_missions = {
             Z54_root_out_their_influence
             Z54_support_of_shamans
-        } 
-
+        }
+        provinces_to_highlight = {
+            superregion = deepwoods_superregion
+            NOT = {
+                culture = green_orc
+                culture = karakhanbari_orc
+            }
+        }
 		trigger = {
             deepwoods_superregion = {
                 type = all
@@ -509,6 +540,16 @@ Z54_2_hardliner = {
 		required_missions = { 
             Z54_aftermath_of_the_emeraldtide
         }
+        provinces_to_highlight = {
+            owned_by = ROOT
+            culture = emerald_orc
+            NOT = {
+                num_of_units_in_province = {
+                    who = ROOT
+                    amount = 2
+                }
+            }
+        }
 		trigger = {
             if = {
                 limit = {
@@ -517,10 +558,12 @@ Z54_2_hardliner = {
                     }
                 }
                 all_owned_province = {
-                    culture = emerald_orc
-                    num_of_units_in_province = {
-                        who = ROOT
-                        amount = 2
+                    OR = {
+                        NOT = { culture = emerald_orc }
+                        num_of_units_in_province = {
+                            who = ROOT
+                            amount = 2
+                        }
                     }
                 }
             }
@@ -1903,7 +1946,7 @@ Z54_3_1 = {
                 }
                 province_id = 6258
             }
-            else {
+            else = {
                 OR = {
                     province_id = 3058
                     province_id = 3053
