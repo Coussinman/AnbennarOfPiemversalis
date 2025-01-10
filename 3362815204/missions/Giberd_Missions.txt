@@ -933,6 +933,9 @@ giberd_konwell_conquest = {
 				}
 				custom_tooltip = giberd_esmari_fashion_happened_yes
 				add_treasury = -5000
+				hidden_effect = {
+					set_country_flag = esmari_fashion_early
+				}
 				country_event = {
 					id = anb_price.43
 				}
@@ -2601,19 +2604,19 @@ giberd_artificer = {
 			}
 			add_treasury = -1000
 			275 = {
-				add_or_upgrade_lodge = yes
+				add_or_upgrade_ravelian_society = yes
 			}
 			271 = {
-				add_or_upgrade_lodge = yes
+				add_or_upgrade_ravelian_society = yes
 			}
 			911 = {
-				add_or_upgrade_lodge = yes
+				add_or_upgrade_ravelian_society = yes
 			}
 			265 = {
-				add_or_upgrade_lodge = yes
+				add_or_upgrade_ravelian_society = yes
 			}
 			266 = {
-				add_or_upgrade_lodge = yes
+				add_or_upgrade_ravelian_society = yes
 			}
 		}
 	}
@@ -2883,10 +2886,6 @@ giberd_artificer = {
 			}
 		}
 		effect = {
-			add_or_extend_country_modifier = {
-				name = artificers_busy_all
-				duration = 3650
-			}
 			271 = {
 				add_province_modifier = {
 					name = giberd_ravelians_send_finest
@@ -2909,13 +2908,26 @@ giberd_artificer = {
 				name = giberd_factions_united
 				duration = -1
 			}
-			simple_dynamic_effect = {
-				first_custom_tooltip = giberd_understanding_the_fragment_effect_yes_tt
-				first_limit = "NOT = { exists = Z97 }"
-				first_effect = "country_event = { id = ravelian.4 }"
-				second_custom_tooltip = giberd_understanding_the_fragment_effect_no_tt
-				second_limit = "exists = Z97"
-				second_effect = "transfer_papal_controller = ROOT"
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = giberd_understanding_the_fragment_effect_not_yet_tt
+				first_limit = "NOT = { has_global_flag = ravelianism_can_be_founded }"
+				first_effect = "add_prestige = 10"
+				second_custom_tooltip = giberd_understanding_the_fragment_effect_yes_tt
+				second_limit = "NOT = { exists = Z97 }
+								has_global_flag = ravelianism_can_be_founded"
+				second_effect = "set_global_flag = allow_non_ideal_rectorate_candidate
+								 country_event = { id = ravelian.4 }
+			add_or_extend_country_modifier = {
+				name = artificers_busy_all
+				duration = 3650
+			}"
+				third_custom_tooltip = giberd_understanding_the_fragment_effect_no_tt
+				third_limit = "exists = Z97"
+				third_effect = "transfer_papal_controller = ROOT
+			add_or_extend_country_modifier = {
+				name = artificers_busy_all
+				duration = 3650
+			}"
 			}
 		}
 	}

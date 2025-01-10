@@ -609,8 +609,6 @@ uthojdihr_a = {
 
 		effect = {  
 			country_event = { id = flavour_ovdal_tungr.0 } #Tugged two ways.
-			unlock_government_reform = { government_reform = F23_the_port_hold }
-			change_government_reform_progress = 50
 		} 
 	}
 
@@ -981,6 +979,8 @@ uthojdihr_a = {
 					add_country_modifier = { name = "thalassocracy" duration = -1 }
 					unlock_government_reform = { government_reform = thalassocracy_reform }
 				}
+				custom_tooltip = F23_divenhal_dominion_tt_false_2
+				hidden_effect = { set_country_flag = confirm_thalassocracy_trade_node_req_bypass }
 			}
 			custom_tooltip = F23_divenhal_dominion_tt_tiers
 		} 
@@ -1081,7 +1081,7 @@ uthojdihr_b = {
 		} 
 
 		effect = {  
-			add_accepted_culture = korosheshi
+			anb_add_accepted_culture_or_dip_power = { culture = korosheshi free = yes }
 			custom_tooltip = F23_our_granary_tt
 			526 = {
 				tooltip = {
@@ -3267,6 +3267,7 @@ strongbellow_d = {
 				remove_province_modifier = F23_heartland_safety
 				add_province_modifier = { name = F23_heartbeat_of_steam duration = -1 }
 			}
+			custom_tooltip = F23_steamers_tt_global
 		}
 	}
 }

@@ -436,10 +436,21 @@ country_event = {#The Means of Experimentation E5.2
 	option = {
 		name = "flavour_wyvernheart.106.a"
 		ai_chance = { factor = 1 }
-		840 = {
-			spawn_rebels = {
-				size = 1
-				type = wyverns_rebels
+		if = {
+			limit = { 840 = { owned_by = ROOT } }
+			840 = {
+				spawn_rebels = {
+					size = 1
+					type = wyverns_rebels
+				}
+			}
+		}
+		else = {
+			729 = {
+				spawn_rebels = {
+					size = 1
+					type = wyverns_rebels
+				}
 			}
 		}
 		country_event = {
@@ -1859,6 +1870,15 @@ country_event = {#The Scions of Wyvernheart
 	option = {
 		name = "flavour_wyvernheart.117.a"
 		ai_chance = { factor = 1 }
+		trigger = {
+			NOT = {
+				num_of_owned_provinces_with = {
+					value = 20
+					has_building = mage_tower
+				}
+			}
+			NOT = { crown_land_share = 60 }
+		}
 		if = {
 			limit = { NOT = { has_ruler_flag = wyvernheart_the_regent } }
 			add_mil_power = -200
@@ -1875,11 +1895,12 @@ country_event = {#The Scions of Wyvernheart
 	option = {
 		name = "flavour_wyvernheart.117.b"
 		ai_chance = { factor = 1 }
-		trigger = { 
+		trigger = {
 			num_of_owned_provinces_with = {
 				value = 20
 				has_building = mage_tower
 			}
+			NOT = { crown_land_share = 60 }
 		}
 		if = {
 			limit = { NOT = { has_ruler_flag = wyvernheart_the_regent } }
@@ -1898,7 +1919,9 @@ country_event = {#The Scions of Wyvernheart
 	option = {
 		name = "flavour_wyvernheart.117.c"
 		ai_chance = { factor = 1 }
-		trigger = { crown_land_share = 60 }
+		trigger = {
+			crown_land_share = 60
+		}
 		if = {
 			limit = { NOT = { has_ruler_flag = wyvernheart_the_regent } }
 			add_mil_power = -200
@@ -2102,6 +2125,7 @@ country_event = {#Tyrant's Fall
 				days = 365
 			}
 		}
+		custom_tooltip = wyvernheart_202_event_tt
 	}
 }
 country_event = {#Victory or Death
@@ -2213,7 +2237,17 @@ country_event = {#Event manager for the flavour events
 				}
 			}
 			1000 = {
-				trigger = { NOT = { AND = { has_country_flag = wyvernheart_new_face_of_magic mission_completed = the_red_flood } } }
+				trigger = {
+					NOT = {
+						AND = {
+							has_country_flag = wyvernheart_new_face_of_magic
+							mission_completed = the_red_flood
+						}
+					}
+					castonath_area = {
+						owned_by = ROOT
+					}
+				}
 				country_event = {
 					id = flavour_wyvernheart.303
 				}
@@ -2673,10 +2707,26 @@ country_event = {#The Council's Challenge
 	option = {
 		name = "flavour_wyvernheart.306.b"
 		ai_chance = { factor = 1 }
-		castonath_area = {
-			spawn_rebels = {
-				size = 2
-				type = pretender_rebels
+		if = {
+			limit = {
+				castonath_area = {
+					type = all
+					owned_by = ROOT
+				}
+			}
+			castonath_area = {
+				spawn_rebels = {
+					size = 2
+					type = pretender_rebels
+				}
+			}
+		}
+		else = {
+			athfork_area = {
+				spawn_rebels = {
+					size = 2
+					type = pretender_rebels
+				}
 			}
 		}
 	}

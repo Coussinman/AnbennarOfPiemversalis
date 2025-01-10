@@ -494,7 +494,22 @@ country_event = {
 		isle_of_tef_area = {
 			add_permanent_claim = ROOT
 		}
-		custom_tooltip = F23_tugged_two_ways_tt
+		custom_tooltip = F23_tugged_two_ways_tt_1
+		hidden_effect = { unlock_government_reform = { government_reform = F23_the_port_hold } }
+		add_government_reform = F23_the_port_hold
+	}
+
+	option = { 
+		name = flavour_ovdal_tungr.0.b
+		ai_chance = { factor = 100 }
+		add_country_modifier = { name = F23_naval_morale_buff duration = 3650 }
+		isle_of_tef_area = {
+			add_permanent_claim = ROOT
+		}
+		custom_tooltip = F23_tugged_two_ways_tt_1
+		change_government_reform_progress = 50
+		unlock_government_reform = { government_reform = F23_the_port_hold }
+		custom_tooltip = F23_tugged_two_ways_tt_2
 	}
 }
 # Safe Sarhali Seas
@@ -643,7 +658,7 @@ country_event = {
 			add_trade_modifier = {
 				who = H78
 				duration = -1
-				power = 100
+				power = -100
 				key = F23_SEGHDIHR_TRADE_RIGHTS
 			}
 		}
@@ -674,9 +689,8 @@ country_event = {
 
 		add_historical_friend = A73
 		A73 = { add_historical_friend = ROOT }
-		add_accepted_culture = silver_dwarf
+		anb_add_accepted_culture_or_dip_power = { culture = silver_dwarf free = yes }
 		add_country_modifier = { name = F23_grun_strongbellow duration = -1 }
-		add_country_modifier = { name = free_slot_for_silver_dwarf duration = -1 }
 
 		set_country_flag = F23_mt_unlock_strongbellow_1
 		swap_non_generic_missions = yes
@@ -1966,7 +1980,13 @@ country_event = {
 
 	trigger = {
 		has_global_flag = F23_bulwar_bankruptcy 
-		capital_scope = { superregion = bulwar_superregion } 
+		OR = {
+			capital_scope = { superregion = bulwar_superregion } 
+			AND = {
+				F23 = { mission_completed = F23_steamers }
+				is_subject_of_type_with_overlord = { type = trade_protectorate who = F23 }
+			}
+		}
 		NOT = { tag = F23 }
 		NOT = { tag = U17 }
 		OR = {
@@ -2186,6 +2206,10 @@ country_event = {
 		}
 
 		custom_tooltip = F23_party_host_tt
+		
+		if = { limit = { mission_completed = F23_steamers }
+			custom_tooltip = F23_party_host_tt_global
+		}
 
 		hidden_effect = { 
 			add_prestige = 100 add_prestige = -100 
@@ -2193,18 +2217,25 @@ country_event = {
 
 			every_known_country = {
 				limit = { 
-					capital_scope = { superregion = bulwar_superregion } 
 					NOT = { tag = F23 }
+					NOT = { tag = U17 } 
 					OR = {
 						AND = {
+							capital_scope = { superregion = bulwar_superregion } 
 							is_subject = no 
 							has_opinion = { who = ROOT value = 100 } 
 						}
 						AND = {
 							is_subject_of = ROOT 
 							NOT = { liberty_desire = 50 } 
-							NOT = { tag = U17 } 
 							NOT = { is_subject_of_type = loyal_trade_protectorate } 
+							OR = {
+								capital_scope = { superregion = bulwar_superregion } 
+								AND = {
+									ROOT = { mission_completed = F23_steamers } 
+									is_subject_of_type = trade_protectorate 
+								}
+							}
 						}
 					}
 				}
@@ -2224,7 +2255,7 @@ country_event = {
 					set_variable = 	{ which = treasury_lost which = party_var_own_prestige }
 					change_variable = { which = treasury_lost value = 100 }
 					multiply_variable = { which = treasury_lost value = -1 }
-					multiply_variable = { which = treasury_lost value = 20 }
+					multiply_variable = { which = treasury_lost value = 25 }
 					var_effect = { effect = add_treasury var = treasury_lost sign = - }
 				}
 			}

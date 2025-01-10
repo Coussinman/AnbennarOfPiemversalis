@@ -1250,9 +1250,11 @@ country_event = { #planning preparations
 		highlight = yes
 
 		trigger = {
-			has_country_flag = land_surveydone_a95
-			has_country_flag = secured_workforce_a95
-			has_country_flag = resources_prepared_a95
+			hidden_trigger = {
+				has_country_flag = land_surveydone_a95
+				has_country_flag = secured_workforce_a95
+				has_country_flag = resources_prepared_a95
+			}
 		}
 		
 		clr_country_flag = land_surveydone_a95
@@ -1396,6 +1398,7 @@ country_event = { #phase 2 intro
 	fire_only_once = yes
 
 	option = { #start river-to-river phase
+		name = flavour_themarenn.31.a
 		if = {
 			limit = { has_country_flag = valen_canal_candidate }
 			country_event = { id = flavour_themarenn.32 days = 912 }
@@ -1796,6 +1799,7 @@ country_event = { #taking esmaraine
 		}
 	}
 	option = {
+		name = flavour_themarenn.39.a
 		A44 = {
 			white_peace = A95
 		}
@@ -1824,10 +1828,12 @@ country_event = {
 		highlight = yes
 
 		trigger = {
-			AND = {
-				has_country_flag = a95_esmaryal_stewards
-				has_country_flag = a95_esmaryal_palace
-				has_country_flag = a95_esmaryal_vultures
+			hidden_trigger = {
+				AND = {
+					has_country_flag = a95_esmaryal_stewards
+					has_country_flag = a95_esmaryal_palace
+					has_country_flag = a95_esmaryal_vultures
+				}
 			}
 		}
 		set_country_flag = a95_esmaryal_path
@@ -1844,10 +1850,12 @@ country_event = {
 		highlight = yes
 
 		trigger = {
-			AND = {
-				has_country_flag = a95_ryala_seagulls
-				has_country_flag = a95_ryala_immemorial
-				has_country_flag = a95_ryala_ryalanar
+			hidden_trigger = {
+				AND = {
+					has_country_flag = a95_ryala_seagulls
+					has_country_flag = a95_ryala_immemorial
+					has_country_flag = a95_ryala_ryalanar
+				}
 			}
 		}
 		set_country_flag = a95_ryala_path

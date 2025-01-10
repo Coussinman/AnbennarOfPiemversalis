@@ -14,6 +14,7 @@ country_event = { #Starting Event
 
     option  = {
         name = flavour_kherka.1.a
+        custom_tooltip = G58_introduction_tt
         custom_tooltip = G48_enemies_at_the_gate_tt
         hidden_effect = {
             G50 = {
@@ -120,9 +121,6 @@ country_event = { #Shift The Tide
                 NOT = { has_country_flag = has_degarikes }
             }
             enable_degarikes = yes
-            hidden_effect = {
-                set_country_flag = has_degarikes
-            }
         }
         G59 = {
             if = {
@@ -130,21 +128,25 @@ country_event = { #Shift The Tide
                     NOT = { has_country_flag = has_degarikes }
                 }
                 enable_degarikes = yes
-                hidden_effect = {
-                    set_country_flag = has_degarikes
-                    add_country_modifier = {
-                        name = G48_mass_degarikes
-                        duration = -1
-                    }
-                    add_country_modifier = {
-                        name = G48_heart_of_the_navy
-                        duration = -1
+            }
+            custom_tooltip = G48_anisikheion_degarikes_tt
+            custom_tooltip = G48_tide_spawn_tt
+            hidden_effect = {
+                capital_scope = {
+                    create_units_of_type_in_province = {
+                        amount = 5
+                        who = PREV
+                        unit_type = geobukseon_galley
                     }
                 }
-                custom_tooltip = G48_anisikheion_degarikes_tt
-            }
-            capital_scope = {
-                spawn_units_for = { type = geobukseon_galley who = PREV amount = 5 }
+                add_country_modifier = {
+                    name = G48_mass_degarikes
+                    duration = -1
+                }
+                add_country_modifier = {
+                    name = G48_heart_of_the_navy
+                    duration = -1
+                }
             }
         }
         if = {

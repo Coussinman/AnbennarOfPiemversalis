@@ -466,10 +466,13 @@ wyvernheart_column_2 = {
 						province_id = 751
 						province_id = 753
 					}
-					NOT = { #NOR
-						local_autonomy = 10
-						infantry_in_province = 3
+					NOT = {
+						NOT = { local_autonomy_above_min = 10 }
 						has_province_modifier = autonomy_decreased
+						num_of_units_in_province = {
+							who = ROOT
+							amount = 3
+						}
 					}
 				}
 			}
@@ -495,7 +498,7 @@ wyvernheart_column_2 = {
 				229 = {
 					OR = {
 						has_province_modifier = autonomy_decreased
-						NOT = { local_autonomy = 10 } 
+						NOT = { local_autonomy_above_min = 10 } 
 						num_of_units_in_province = {
 							who = ROOT
 							amount = 3
@@ -505,7 +508,7 @@ wyvernheart_column_2 = {
 				726 = {
 					OR = {
 						has_province_modifier = autonomy_decreased
-						NOT = { local_autonomy = 10 } 
+						NOT = { local_autonomy_above_min = 10 } 
 						num_of_units_in_province = {
 							who = ROOT
 							amount = 3
@@ -515,7 +518,7 @@ wyvernheart_column_2 = {
 				725 = {
 					OR = {
 						has_province_modifier = autonomy_decreased
-						NOT = { local_autonomy = 10 } 
+						NOT = { local_autonomy_above_min = 10 } 
 						num_of_units_in_province = {
 							who = ROOT
 							amount = 3
@@ -525,7 +528,7 @@ wyvernheart_column_2 = {
 				729 = {
 					OR = {
 						has_province_modifier = autonomy_decreased
-						NOT = { local_autonomy = 10 } 
+						NOT = { local_autonomy_above_min = 10 } 
 						num_of_units_in_province = {
 							who = ROOT
 							amount = 3
@@ -535,7 +538,7 @@ wyvernheart_column_2 = {
 				749 = {
 					OR = {
 						has_province_modifier = autonomy_decreased
-						NOT = { local_autonomy = 10 } 
+						NOT = { local_autonomy_above_min = 10 } 
 						num_of_units_in_province = {
 							who = ROOT
 							amount = 3
@@ -545,7 +548,7 @@ wyvernheart_column_2 = {
 				751 = {
 					OR = {
 						has_province_modifier = autonomy_decreased
-						NOT = { local_autonomy = 10 } 
+						NOT = { local_autonomy_above_min = 10 } 
 						num_of_units_in_province = {
 							who = ROOT
 							amount = 3
@@ -555,7 +558,7 @@ wyvernheart_column_2 = {
 				753 = {
 					OR = {
 						has_province_modifier = autonomy_decreased
-						NOT = { local_autonomy = 10 } 
+						NOT = { local_autonomy_above_min = 10 } 
 						num_of_units_in_province = {
 							who = ROOT
 							amount = 3
@@ -682,16 +685,20 @@ wyvernheart_column_2 = {
 			hidden_effect = { #THIS IS A TEMP BYPASS UNTIL WE FIX CORINISM AND ITS SPAWNING
 				if = {
 					limit = { is_year = 1500 }
-					country_event = {
-						id = corinite.1
-						days = 3650
+					capital_scope = {
+						province_event = {
+							id = unraveling.100
+							days = 7300
+						}
 					}
 				}
 				else_if = {
 					limit = { is_year = 1490 }
-					country_event = {
-						id = corinite.1
-						days = 7300
+					capital_scope = {
+						province_event = {
+							id = unraveling.100
+							days = 7300
+						}
 					}
 				}
 			}
@@ -804,19 +811,25 @@ wyvernheart_column_2 = {
 				loyalty = 60
 			}
 			OR = {
-				employed_advisor = {
-					category = ADM
-					skill = 4
+				custom_trigger_tooltip = {
+					tooltip = wyvernheart_bioimproved_mages_trigger_a
+					employed_advisor = {
+						category = ADM
+						skill = 4
+					}
 				}
-				employed_advisor = {
-					category = ADM
-					skill = 3
-					type = court_mage
-				}
-				employed_advisor = {
-					category = ADM
-					skill = 3
-					type = philosopher
+				custom_trigger_tooltip = {
+					tooltip = wyvernheart_bioimproved_mages_trigger_b
+					employed_advisor = {
+						category = ADM
+						skill = 3
+						type = court_mage
+					}
+					employed_advisor = {
+						category = ADM
+						skill = 3
+						type = philosopher
+					}
 				}
 			}
 			innovativeness = 10
@@ -1126,18 +1139,22 @@ wyvernheart_column_3 = {
 						}
 					"
 				}
-				if = { #THIS IS A TEMP BYPASS UNTIL WE FIX CORINISM AND ITS SPAWNING
+				if = {
 					limit = { is_year = 1500 }
-					country_event = {
-						id = corinite.1
-						days = 3650
+					capital_scope = {
+						province_event = {
+							id = unraveling.100
+							days = 7300
+						}
 					}
 				}
 				else_if = {
 					limit = { is_year = 1490 }
-					country_event = {
-						id = corinite.1
-						days = 7300
+					capital_scope = {
+						province_event = {
+							id = unraveling.100
+							days = 7300
+						}
 					}
 				}
 			}
@@ -1221,6 +1238,7 @@ wyvernheart_column_3 = {
 				remove_province_modifier = castonath_patrician_influence_considerable
 				remove_province_modifier = castonath_patrician_influence_some
 				remove_province_modifier = castonath_patrician_influence_full
+				set_global_flag = castonath_patricians_wiped_out
 			}
 			831 = {
 				spawn_rebels = {
@@ -2025,16 +2043,20 @@ wyvernheart_column_5 = {
 			hidden_effect = { #THIS IS A TEMP BYPASS UNTIL WE FIX CORINISM AND ITS SPAWNING
 				if = {
 					limit = { is_year = 1500 }
-					country_event = {
-						id = corinite.1
-						days = 3650
+					capital_scope = {
+						province_event = {
+							id = unraveling.100
+							days = 7300
+						}
 					}
 				}
 				else_if = {
 					limit = { is_year = 1490 }
-					country_event = {
-						id = corinite.1
-						days = 7300
+					capital_scope = {
+						province_event = {
+							id = unraveling.100
+							days = 7300
+						}
 					}
 				}
 			}
@@ -2335,6 +2357,7 @@ wyvernheart_column_1_civilwar = {
 					days = 365
 				}
 			}
+			custom_tooltip = wyvernheart_A9_effect_tt2
 		}
 	}
 }
