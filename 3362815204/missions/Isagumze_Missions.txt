@@ -107,7 +107,7 @@ isagumze_missions_2 = {
 	potential = { tag = L03 }
 
 	L03_isagumze_restarting_the_sacred_war = {
-		icon = mission_torch_fire
+		icon = mission_burning_man
 		required_missions = {}
 		position = 1
 		
@@ -1471,7 +1471,10 @@ isagumze_missions_3b = {
 		}
 
 		trigger = {
-			NOT = { great_power_rank = 2 }
+			OR = {
+				NOT = { great_power_rank = 2 }
+				is_hegemon = yes
+			}	
 			katala_raz_region = {
 				type = all
 				OR = { 

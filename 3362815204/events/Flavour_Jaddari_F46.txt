@@ -1273,6 +1273,7 @@ country_event = {
 		hidden_effect = {
 			every_ally = {
 				limit = {
+					NOT = { tag = F46 }
 					any_owned_province = {
 						OR = {
 							area = ascension_cape_area
@@ -2359,7 +2360,7 @@ country_event = {
 	title = jaddari_missions.55.t
 	desc = jaddari_missions.55.d
 	picture = COMET_SIGHTED_eventPicture
-	goto = venail_area
+	goto = 1
 
 	is_triggered_only = yes
 
@@ -2971,7 +2972,7 @@ country_event = {
 			name = jaddari_ruler_obsession_law
 			duration = 7300
 		}
-		jaddempire_change_leaning_west_massive = yes
+		jaddempire_change_leaning_west_medium = yes
 	}
 	
 	option = { #[Root.Monarch.GetName]'s attention has been captured by Yansheni poetry
@@ -2982,7 +2983,7 @@ country_event = {
 			name = jaddari_ruler_obsession_poetry
 			duration = 7300
 		}
-		jaddempire_change_leaning_east_large = yes
+		jaddempire_change_leaning_east_tiny = yes
 	}
 	
 	option = { #[Root.Monarch.GetName]'s attention has been captured by Sun Elven fashion
@@ -2993,7 +2994,7 @@ country_event = {
 			name = jaddari_ruler_obsession_fashion
 			duration = 7300
 		}
-		jaddempire_change_leaning_west_large = yes
+		jaddempire_change_leaning_west_tiny = yes
 	}
 	
 	option = { #[Root.Monarch.GetName]'s attention has been captured by Raheni architecture
@@ -3004,7 +3005,7 @@ country_event = {
 			name = jaddari_ruler_obsession_architecture
 			duration = 7300
 		}
-		jaddempire_change_leaning_east_large = yes
+		jaddempire_change_leaning_east_tiny = yes
 	}
 	
 	option = { #[Root.Monarch.GetName]'s attention has been captured by Harimari philosophy
@@ -3015,7 +3016,7 @@ country_event = {
 			name = jaddari_ruler_obsession_philosophy
 			duration = 7300
 		}
-		jaddempire_change_leaning_east_massive = yes
+		jaddempire_change_leaning_east_medium = yes
 	}
 	
 	option = { #[Root.Monarch.GetName]'s attention has been captured by Cannorian martial culture
@@ -3026,7 +3027,7 @@ country_event = {
 			name = jaddari_ruler_obsession_strategy
 			duration = 7300
 		}
-		jaddempire_change_leaning_west_large = yes
+		jaddempire_change_leaning_west_tiny = yes
 	}
 }
 
@@ -3102,6 +3103,10 @@ country_event = {
 				else_if = {
 					limit = { is_subject_of_type = client_march }
 					F99 = { create_subject = { subject = PREV subject_type = client_march } }
+				}
+				else_if = {
+					limit = { is_subject_of_type = tributary_state }
+					F99 = { create_subject = { subject = PREV subject_type = tributary_state_anb } }
 				}
 				else = {
 					F99 = { vassalize = PREV }
@@ -3233,6 +3238,10 @@ country_event = {
 				else_if = {
 					limit = { is_subject_of_type = client_march }
 					F99 = { create_subject = { subject = PREV subject_type = client_march } }
+				}
+				else_if = {
+					limit = { is_subject_of_type = tributary_state }
+					F99 = { create_subject = { subject = PREV subject_type = tributary_state_anb } }
 				}
 				else = {
 					F99 = { vassalize = PREV }
@@ -4190,14 +4199,6 @@ country_event = {
 			factor = 1
 		}
 		
-		#Crutch for AI
-		if = {
-			limit = { ai = yes }
-			add_country_modifier = {
-				name = jaddari_ai_boost
-				duration = 36500
-			}
-		}
 	}
 }
 
@@ -4567,4 +4568,364 @@ country_event = {
 	# }
 # }
 
+#Allegiance of the Golden Citadel
+country_event = {
+	id = jaddari_missions.1005
+	title = jaddari_missions.1005.t
+	desc = jaddari_missions.1005.d
+	picture = DIPLOMACY_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	trigger = {
+		OR = {
+			tag = F46
+			was_tag = F46
+		}
+	}
+	
+	option = {
+		name = jaddari_missions.1005.a
+		ai_chance = {
+			factor = 1
+		}
+		
+		add_treasury = 200
+		add_country_modifier = {
+			name = jaddari_cash_influx
+			duration = 7300 #20 years
+		}
+		if = {
+			limit = {
+				F47 = { exists = no }
+			}
+			2914 = {
+				cede_province = F47
+			}
+		}
+		2915 = {
+			remove_core = F47
+			add_core = F46
+			change_culture = siadunan_harpy
+			change_religion = the_jadd
+		}
+		create_subject = {
+			subject_type = autonomous_vassal
+			subject = F47
+		}
+		F47 = {
+			change_government_to_monarchy = yes
+			define_ruler = {
+				name = "Urothr"
+				dynasty = "of the Gate"
+				age = 69
+				adm = 4
+				dip = 1
+				mil = 6
+				claim = 100
+				culture = gold_dwarf
+				religion = the_jadd
+			}
+			hidden_effect = {
+				add_ruler_personality = strict_personality
+				add_ruler_personality = cruel_personality
+				set_ruler_flag = long_lived_ruler
+			}
+			define_consort = {
+				name = "Khedira"
+				dynasty = "Goldhands"
+				religion = the_jadd
+				age = 77
+				adm = 3
+				dip = 5
+				mil = 2
+				claim = 100
+				female = yes
+				country_of_origin = F46
+			}
+		}
+		medium_increase_of_dwarven_tolerance_effect = yes
+	}
+}
 
+#Ascend Legion Captain
+country_event = {
+	id = jaddari_missions.1006
+	title = jaddari_missions.1006.t
+	desc = jaddari_missions.1006.d
+	picture = DIPLOMACY_eventPicture
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		has_government_mechanic = desert_legion_mechanic
+	}
+	
+	option = {
+		name = jaddari_missions.1006.a
+		ai_chance = {
+			factor = 1
+		}
+		
+		if = {
+			limit = { army_tradition = 100 }
+			create_general = {
+				tradition = 100
+				add_shock = 1
+				culture = desert_elf
+			}
+		}
+		else_if = {
+			limit = {  army_tradition = 90 } 
+			create_general = {
+				tradition = 90
+				add_shock = 1
+				culture = desert_elf
+			}
+		}
+		else_if = {
+			limit = {  army_tradition = 80 } 
+			create_general = {
+				tradition = 80
+				add_shock = 1
+				culture = desert_elf
+			}
+		}
+		else_if = {
+			limit = {  army_tradition = 70 } 
+			create_general = {
+				tradition = 70
+				add_shock = 1
+				culture = desert_elf
+			}
+		}
+		else_if = {
+			limit = {  army_tradition = 60 } 
+			create_general = {
+				tradition = 60
+				add_shock = 1
+				culture = desert_elf
+			}
+		}
+		else_if = {
+			limit = {  army_tradition = 50 } 
+			create_general = {
+				tradition = 50
+				add_shock = 1
+				culture = desert_elf
+			}
+		}
+		else = {
+			create_general = {
+				tradition = 40
+				add_shock = 1
+				culture = desert_elf
+			}
+		}
+		custom_tooltip = desert_legion_shock_tt
+	}
+
+	option = {
+		name = jaddari_missions.1006.b
+		ai_chance = {
+			factor = 1
+		}
+		
+		if = {
+			limit = { army_tradition = 100 }
+			create_general = {
+				tradition = 100
+				add_manuever = 1
+				culture = masnsih
+			}
+		}
+		else_if = {
+			limit = {  army_tradition = 90 } 
+			create_general = {
+				tradition = 90
+				add_manuever = 1
+				culture = masnsih
+			}
+		}
+		else_if = {
+			limit = {  army_tradition = 80 } 
+			create_general = {
+				tradition = 80
+				add_manuever = 1
+				culture = masnsih
+			}
+		}
+		else_if = {
+			limit = {  army_tradition = 70 } 
+			create_general = {
+				tradition = 70
+				add_manuever = 1
+				culture = masnsih
+			}
+		}
+		else_if = {
+			limit = {  army_tradition = 60 } 
+			create_general = {
+				tradition = 60
+				add_manuever = 1
+				culture = masnsih
+			}
+		}
+		else_if = {
+			limit = {  army_tradition = 50 } 
+			create_general = {
+				tradition = 50
+				add_manuever = 1
+				culture = masnsih
+			}
+		}
+		else = {
+			create_general = {
+				tradition = 40
+				add_manuever = 1
+				culture = masnsih
+			}
+		}
+		custom_tooltip = desert_legion_manuever_tt
+	}
+
+	option = {
+		name = jaddari_missions.1006.c
+		ai_chance = {
+			factor = 1
+		}
+
+		trigger = {
+			accepted_culture = sandfang_gnoll
+		}
+		
+		if = {
+			limit = { army_tradition = 100 }
+			create_general = {
+				tradition = 100
+				add_fire = 1
+				culture = sandfang_gnoll
+			}
+		}
+		else_if = {
+			limit = {  army_tradition = 90 } 
+			create_general = {
+				tradition = 90
+				add_fire = 1
+				culture = sandfang_gnoll
+			}
+		}
+		else_if = {
+			limit = {  army_tradition = 80 } 
+			create_general = {
+				tradition = 80
+				add_fire = 1
+				culture = sandfang_gnoll
+			}
+		}
+		else_if = {
+			limit = {  army_tradition = 70 } 
+			create_general = {
+				tradition = 70
+				add_fire = 1
+				culture = sandfang_gnoll
+			}
+		}
+		else_if = {
+			limit = {  army_tradition = 60 } 
+			create_general = {
+				tradition = 60
+				add_fire = 1
+				culture = sandfang_gnoll
+			}
+		}
+		else_if = {
+			limit = {  army_tradition = 50 } 
+			create_general = {
+				tradition = 50
+				add_fire = 1
+				culture = sandfang_gnoll
+			}
+		}
+		else = {
+			create_general = {
+				tradition = 40
+				add_fire = 1
+				culture = sandfang_gnoll
+			}
+		}
+		custom_tooltip = desert_legion_fire_tt
+	}
+
+	option = {
+		name = jaddari_missions.1006.e
+		ai_chance = {
+			factor = 1
+		}
+		
+		if = {
+			limit = { army_tradition = 100 }
+			create_general = {
+				tradition = 100
+				add_siege = 1
+				culture = siadunan_harpy
+				female = yes
+			}
+		}
+		else_if = {
+			limit = {  army_tradition = 90 } 
+			create_general = {
+				tradition = 90
+				add_siege = 1
+				culture = siadunan_harpy
+				female = yes
+			}
+		}
+		else_if = {
+			limit = {  army_tradition = 80 } 
+			create_general = {
+				tradition = 80
+				add_siege = 1
+				culture = siadunan_harpy
+				female = yes
+			}
+		}
+		else_if = {
+			limit = {  army_tradition = 70 } 
+			create_general = {
+				tradition = 70
+				add_siege = 1
+				culture = siadunan_harpy
+				female = yes
+			}
+		}
+		else_if = {
+			limit = {  army_tradition = 60 } 
+			create_general = {
+				tradition = 60
+				add_siege = 1
+				culture = siadunan_harpy
+				female = yes
+			}
+		}
+		else_if = {
+			limit = {  army_tradition = 50 } 
+			create_general = {
+				tradition = 50
+				add_siege = 1
+				culture = siadunan_harpy
+				female = yes
+			}
+		}
+		else = {
+			create_general = {
+				tradition = 40
+				add_siege = 1
+				culture = siadunan_harpy
+				female = yes
+			}
+		}
+		custom_tooltip = desert_legion_siege_tt
+	}
+}

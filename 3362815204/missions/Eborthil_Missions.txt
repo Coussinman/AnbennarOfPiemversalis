@@ -407,7 +407,7 @@ A47_akasik = {
 	}
 	
 	eborthil_chase_off_the_gnolls = {
-		icon = mission_torch_fire
+		icon = mission_burning_man
 		required_missions = { eborthil_the_final_push }
 		position = 4
 		
@@ -1177,15 +1177,11 @@ A47_development = {
 			}
 			if = {
 				limit = {
-					NOT = {
-						is_rival = U01
-					}
+					exists = U01
+					NOT = { is_rival = U01 }
 				}
 				create_alliance = U01
 			}
-			#else = {
-				#always = yes
-			#}
 		}
 	}
 	
@@ -1268,6 +1264,7 @@ A47_development = {
 			add_mil_power = -100
 			custom_tooltip = eborthil_unlock_defensive_decisions
 			set_country_flag = eborthil_reinforce_the_home_isles
+			set_country_flag = eborthil_space_cleared_out_unlock_flag
 		}
 	}
 	

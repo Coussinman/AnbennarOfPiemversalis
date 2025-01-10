@@ -700,6 +700,7 @@ fertile_personality = {
 		allow = {
 			NOT = { ruler_has_personality = infertile_personality }
 			NOT = { ruler_age = 35 }
+			NOT = { has_ruler_flag = vf_fatecutter_flg }
 		}
 	
 		chance = {
@@ -1415,6 +1416,10 @@ industrious_personality = {
 		modifier = {
 			factor = 1
 			has_government_attribute = is_merchant_republic
+		}
+		modifier = { 
+			factor = 3 
+			has_country_flag = karakhanbar_industrious_rulers 
 		}
 	}
 	
@@ -3915,6 +3920,65 @@ peasant_revolt_leader_personality = {
 	}
 	immortal = 0
 }
+
+reaver_personality = {
+	ruler_allow = {
+		allow = {
+			MIL = 3
+		}
+	
+		chance = {
+			modifier = {
+				factor = 1
+				is_monarch_leader = yes
+			}
+			modifier = {
+				factor = 1
+				MIL = 6
+			}
+		}
+	}
+
+	heir_allow = {
+		allow = {
+			heir_MIL = 3
+		}
+	
+		chance = {
+			modifier = {
+				factor = 1
+				is_heir_leader = yes
+			}
+			modifier = {
+				factor = 1
+				heir_MIL = 6
+			}
+		}
+	}
+	
+	consort_allow = {
+		allow = {
+			consort_MIL = 3
+		}
+
+		chance = {
+			modifier = {
+				factor = 1
+				consort_MIL = 6
+			}
+		}
+	}
+	allow = {
+		has_country_flag = unlocked_reaver_personality_flag
+	}
+
+	available_province_loot = 0.15
+	raze_power_gain = 0.2
+	nation_designer_cost = 2
+	
+	gift_chance = -50
+	wants_land = yes
+}
 ## Anbennar
 
 mage_personality = {	#Powerful Mage
@@ -4000,7 +4064,15 @@ mage_personality = {	#Powerful Mage
 					ruler_culture = delta_gnome
 					ruler_culture = emerald_orc
 					ruler_culture = half_elf
+					ruler_culture = lencori_half_elf
+					ruler_culture = alenic_half_elf
+					ruler_culture = businori_half_elf
+					ruler_culture = dostanorian_half_elf
+					ruler_culture = farrani_half_elf
 					ruler_culture = bulwari_half_elf
+					ruler_culture = bom_half_elf
+					ruler_culture = kai_half_elf
+					ruler_culture = kelino_half_elf
 					ruler_culture = horned_ogre
 				}
 			}
@@ -4017,7 +4089,6 @@ mage_personality = {	#Powerful Mage
 					ruler_culture = peitar
 					ruler_culture = tuathak
 					ruler_culture = snecboth
-					ruler_culture = farrani
 					has_ruler_flag = elven_father
 				}
 			}
@@ -4065,6 +4136,7 @@ mage_personality = {	#Powerful Mage
 					ruler_culture = ungulan_orc
 					ruler_culture = barumand_orc
 					ruler_culture = brown_orc
+					ruler_culture = karakhanbari_orc
 					ruler_culture = karashari_orc
 					ruler_culture = redtusk_orc
 					ruler_culture = common_goblin
@@ -4083,6 +4155,12 @@ mage_personality = {	#Powerful Mage
 			modifier = {
 				factor = 2
 				has_country_flag = ameion_mages
+			}
+			
+			modifier = {
+				factor = 2
+				has_country_flag = bagcatir_mage_representation
+				government = republic
 			}
 
 			modifier = {
@@ -4173,7 +4251,15 @@ mage_personality = {	#Powerful Mage
 					heir_culture = delta_gnome
 					heir_culture = emerald_orc
 					heir_culture = half_elf
+					heir_culture = lencori_half_elf
+					heir_culture = alenic_half_elf
+					heir_culture = businori_half_elf
+					heir_culture = dostanorian_half_elf
+					heir_culture = farrani_half_elf
 					heir_culture = bulwari_half_elf
+					heir_culture = bom_half_elf
+					heir_culture = kai_half_elf
+					heir_culture = kelino_half_elf
 					heir_culture = horned_ogre
 				}
 			}
@@ -4190,7 +4276,6 @@ mage_personality = {	#Powerful Mage
 					heir_culture = peitar
 					heir_culture = tuathak
 					heir_culture = snecboth
-					heir_culture = farrani
 					has_heir_flag = elven_father
 					mission_completed = seinathil_bardic_college
 				}
@@ -4239,6 +4324,7 @@ mage_personality = {	#Powerful Mage
 					heir_culture = ungulan_orc
 					heir_culture = barumand_orc
 					heir_culture = brown_orc
+					heir_culture = karakhanbari_orc
 					heir_culture = karashari_orc
 					heir_culture = redtusk_orc
 					heir_culture = common_goblin
@@ -4329,7 +4415,15 @@ mage_personality = {	#Powerful Mage
 					consort_culture = delta_gnome
 					consort_culture = emerald_orc
 					consort_culture = half_elf
+					consort_culture = lencori_half_elf
+					consort_culture = alenic_half_elf
+					consort_culture = businori_half_elf
+					consort_culture = dostanorian_half_elf
+					consort_culture = farrani_half_elf
 					consort_culture = bulwari_half_elf
+					consort_culture = bom_half_elf
+					consort_culture = kai_half_elf
+					consort_culture = kelino_half_elf
 					consort_culture = horned_ogre
 				}
 			}
@@ -4346,7 +4440,6 @@ mage_personality = {	#Powerful Mage
 					consort_culture = peitar
 					consort_culture = tuathak
 					consort_culture = snecboth
-					consort_culture = farrani
 				}
 			}
 			
@@ -4393,6 +4486,7 @@ mage_personality = {	#Powerful Mage
 					consort_culture = ungulan_orc
 					consort_culture = barumand_orc
 					consort_culture = brown_orc
+					consort_culture = karakhanbari_orc
 					consort_culture = karashari_orc
 					consort_culture = redtusk_orc
 					consort_culture = common_goblin
@@ -4420,7 +4514,6 @@ mage_personality = {	#Powerful Mage
 	yearly_absolutism = 0.5
 	may_recruit_female_generals = yes
 	monarch_lifespan = 0.25
-	yearly_patriarch_authority = 0.01
 	reasons_to_elect = 25
 	meritocracy = 0.15 #Anbennar
 	
@@ -4563,10 +4656,10 @@ xhazobs_chosen_personality = {
 		}
 	}
 	
-	yearly_patriarch_authority = 0.01
-	province_warscore_cost = -0.2
-	max_absolutism_effect = 0.1
+	yearly_patriarch_authority = 0.015
+	land_morale = 0.1
 	global_autonomy = -0.05
+	monarch_lifespan = 0.75 #they get forced into a general so this is to somewhat offset that
 	election_cycle = 40
 	nation_designer_cost = 800
 	
@@ -4586,7 +4679,6 @@ mongoose_shifter_personality = {
 			OR = {
 				ruler_religion = beast_memory
 				ruler_culture = tanizu
-				ruler_culture = dakinshi
 				ruler_culture = antmvura
 				ruler_culture = kombedak
 				ruler_culture = umsozidak
@@ -4614,7 +4706,6 @@ mongoose_shifter_personality = {
 			OR = {
 				heir_religion = beast_memory
 				heir_culture = tanizu
-				heir_culture = dakinshi
 				heir_culture = antmvura
 				heir_culture = kombedak
 				heir_culture = umsozidak
@@ -4641,7 +4732,6 @@ mongoose_shifter_personality = {
 			OR = {
 				consort_religion = beast_memory
 				consort_culture = tanizu
-				consort_culture = dakinshi
 				consort_culture = antmvura
 				consort_culture = kombedak
 				consort_culture = umsozidak
@@ -4687,7 +4777,6 @@ leopard_shifter_personality = {
 			OR = {
 				ruler_religion = beast_memory
 				ruler_culture = tanizu
-				ruler_culture = dakinshi
 				ruler_culture = antmvura
 				ruler_culture = kombedak
 				ruler_culture = umsozidak
@@ -4715,7 +4804,6 @@ leopard_shifter_personality = {
 			OR = {
 				heir_religion = beast_memory
 				heir_culture = tanizu
-				heir_culture = dakinshi
 				heir_culture = antmvura
 				heir_culture = kombedak
 				heir_culture = umsozidak
@@ -4742,7 +4830,6 @@ leopard_shifter_personality = {
 			OR = {
 				consort_religion = beast_memory
 				consort_culture = tanizu
-				consort_culture = dakinshi
 				consort_culture = antmvura
 				consort_culture = kombedak
 				consort_culture = umsozidak
@@ -4786,7 +4873,6 @@ elephant_shifter_personality = {
 			OR = {
 				ruler_religion = beast_memory
 				ruler_culture = tanizu
-				ruler_culture = dakinshi
 				ruler_culture = antmvura
 				ruler_culture = kombedak
 				ruler_culture = umsozidak
@@ -4814,7 +4900,6 @@ elephant_shifter_personality = {
 			OR = {
 				heir_religion = beast_memory
 				heir_culture = tanizu
-				heir_culture = dakinshi
 				heir_culture = antmvura
 				heir_culture = kombedak
 				heir_culture = umsozidak
@@ -4841,7 +4926,6 @@ elephant_shifter_personality = {
 			OR = {
 				consort_religion = beast_memory
 				consort_culture = tanizu
-				consort_culture = dakinshi
 				consort_culture = antmvura
 				consort_culture = kombedak
 				consort_culture = umsozidak

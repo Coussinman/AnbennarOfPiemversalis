@@ -24,10 +24,9 @@ J33_1_1 = {
 		}
 		
 		trigger = {
-			yyl_moista_region = {
-				type = all
-				owned_by = ROOT
-				is_core = ROOT
+			num_of_owned_provinces_with = {
+				value = 16
+				region = yyl_moista_region
 			}
 			if = {
 				limit = { NOT = { has_harmonized_with = kukatodic_religion } }
@@ -1804,7 +1803,7 @@ J33_3_GUNS = {
 		
 		trigger = {
 			num_of_owned_provinces_with = {
-				value = 11
+				value = 9
 				OR = {
 					region = south_yarikhoi_region
 					region = north_yarikhoi_region
@@ -2071,9 +2070,9 @@ J33_3_2 = {
 		effect = {
 			custom_tooltip = J33_discover_gozengun_tt
 			hidden_effect = { 
-				north_haless_superregion = { discover_country = ROOT }
+				gozengun_superregion = { discover_country = ROOT }
 				every_country = {
-					limit = { capital_scope = { superregion = north_haless_superregion } }
+					limit = { capital_scope = { superregion = gozengun_superregion } }
 					forbidden_lands_superregion = { discover_country = PREV }
 				}
 			}
@@ -2275,7 +2274,7 @@ J33_3_2 = {
 					all_known_country = {
 						capital_scope = {
 							continent = asia
-							NOT = { superregion = north_haless_superregion }
+							NOT = { superregion = gozengun_superregion }
 						}
 						OR = {
 							alliance_with = ROOT
@@ -2817,7 +2816,7 @@ J33_4_1 = {
 			OR = {
 				area = baizoi_area
 				area = area_1_area
-				superregion = north_haless_superregion
+				superregion = gozengun_superregion
 			}
 			NOT = { country_or_subject_holds = ROOT }
 			is_city = yes
@@ -2834,7 +2833,7 @@ J33_4_1 = {
 				country_or_subject_holds = ROOT
 			}
 			any_subject_country = {
-				capital_scope = { superregion = north_haless_superregion }
+				capital_scope = { superregion = gozengun_superregion }
 				is_subject_of_type = democratic_sphere_of_influence_subject
 				religion = kalyin_worshippers
 			}
@@ -2844,11 +2843,11 @@ J33_4_1 = {
 			custom_tooltip = J33_gozengun_claims
 			random_subject_country = {
 				limit = {
-					capital_scope = { superregion = north_haless_superregion }
+					capital_scope = { superregion = gozengun_superregion }
 					is_subject_of_type = democratic_sphere_of_influence_subject
 					religion = kalyin_worshippers
 				}
-				north_haless_superregion = { add_permanent_claim = PREV }
+				gozengun_superregion = { add_permanent_claim = PREV }
 			}
 		}
 	}
@@ -2860,7 +2859,7 @@ J33_4_1 = {
 		position = 5
 		
 		provinces_to_highlight = {
-			superregion = north_haless_superregion
+			superregion = gozengun_superregion
 			NOT = { country_or_subject_holds = ROOT }
 			has_discovered = ROOT
 			NOT = { province_id = 6838 }
@@ -2868,7 +2867,7 @@ J33_4_1 = {
 		
 		trigger = {
 			any_subject_country = {
-				capital_scope = { superregion = north_haless_superregion }
+				capital_scope = { superregion = gozengun_superregion }
 				kalsyto_CDS = yes
 			}
 		}
@@ -3816,9 +3815,9 @@ J33_5 = {
 		}
 		
 		trigger = {
-			moduk_region = {
-				type = all
-				country_or_subject_holds = ROOT
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 14
+				region = moduk_region
 			}
 			6804 = {
 				development = 10

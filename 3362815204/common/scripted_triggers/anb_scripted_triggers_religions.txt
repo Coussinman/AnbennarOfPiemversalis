@@ -280,6 +280,13 @@ feast_of_the_gods_4_reforms_passed = {
 	}
 }
 
+has_reformed_feast_of_the_gods = {
+	custom_trigger_tooltip = {
+		tooltip = fotg_reformed_tt
+		NOT = { religion = feast_of_the_gods }
+	}
+}
+
 infernal_court_variable_calc_true_if = {
 	calc_true_if = {
 		amount = $amount$
@@ -391,5 +398,191 @@ is_cult_suppressed = {
 	else_if = {
 		limit = { region = lencenor_region }
 		101 = { NOT = { has_province_flag = unsuppressed_infernal_cult } }
+	}
+}
+
+shadow_pact_has_active_portent = {
+	custom_trigger_tooltip = {
+		tooltip = shadow_pact_has_portent
+		OR = {
+			has_church_aspect = shadow_pact_$portent$_adm
+			has_church_aspect = shadow_pact_$portent$_dip
+			has_church_aspect = shadow_pact_$portent$_mil
+		}
+	}
+}
+
+shadow_pact_has_active_portent_reroll = {
+	OR = {
+		has_church_aspect = shadow_pact_$portent$_adm
+		has_church_aspect = shadow_pact_$portent$_dip
+		has_church_aspect = shadow_pact_$portent$_mil
+	}
+	has_country_flag = shadow_pact_last_set_$portent$
+}
+
+shadow_pact_portents_adm = {
+	OR = {
+		has_church_aspect = shadow_pact_sorcerer_adm
+		has_church_aspect = shadow_pact_wraith_adm
+		has_church_aspect = shadow_pact_three_urns_adm
+		has_church_aspect = shadow_pact_silat_adm
+		has_church_aspect = shadow_pact_tree_adm
+		has_church_aspect = shadow_pact_flame_adm
+		has_church_aspect = shadow_pact_flayed_man_adm
+		has_church_aspect = shadow_pact_meteor_adm
+		has_church_aspect = shadow_pact_tyrant_adm
+		has_church_aspect = shadow_pact_sleeper_adm
+		has_church_aspect = shadow_pact_burden_adm
+		has_church_aspect = shadow_pact_time_adm
+		has_church_aspect = shadow_pact_defiant_adm
+		has_church_aspect = shadow_pact_madness_adm
+		has_church_aspect = shadow_pact_golem_adm
+		has_church_aspect = shadow_pact_vulture_adm
+		has_church_aspect = shadow_pact_mother_adm
+	}
+}
+
+shadow_pact_portents_dip = {
+	OR = {
+		has_church_aspect = shadow_pact_sorcerer_dip
+		has_church_aspect = shadow_pact_wraith_dip
+		has_church_aspect = shadow_pact_three_urns_dip
+		has_church_aspect = shadow_pact_silat_dip
+		has_church_aspect = shadow_pact_tree_dip
+		has_church_aspect = shadow_pact_flame_dip
+		has_church_aspect = shadow_pact_flayed_man_dip
+		has_church_aspect = shadow_pact_meteor_dip
+		has_church_aspect = shadow_pact_tyrant_dip
+		has_church_aspect = shadow_pact_sleeper_dip
+		has_church_aspect = shadow_pact_burden_dip
+		has_church_aspect = shadow_pact_time_dip
+		has_church_aspect = shadow_pact_defiant_dip
+		has_church_aspect = shadow_pact_madness_dip
+		has_church_aspect = shadow_pact_golem_dip
+		has_church_aspect = shadow_pact_vulture_dip
+		has_church_aspect = shadow_pact_mother_dip
+	}
+}
+
+shadow_pact_portents_mil = {
+	OR = {
+		has_church_aspect = shadow_pact_sorcerer_mil
+		has_church_aspect = shadow_pact_wraith_mil
+		has_church_aspect = shadow_pact_three_urns_mil
+		has_church_aspect = shadow_pact_silat_mil
+		has_church_aspect = shadow_pact_tree_mil
+		has_church_aspect = shadow_pact_flame_mil
+		has_church_aspect = shadow_pact_flayed_man_mil
+		has_church_aspect = shadow_pact_meteor_mil
+		has_church_aspect = shadow_pact_tyrant_mil
+		has_church_aspect = shadow_pact_sleeper_mil
+		has_church_aspect = shadow_pact_burden_mil
+		has_church_aspect = shadow_pact_time_mil
+		has_church_aspect = shadow_pact_defiant_mil
+		has_church_aspect = shadow_pact_madness_mil
+		has_church_aspect = shadow_pact_golem_mil
+		has_church_aspect = shadow_pact_vulture_mil
+		has_church_aspect = shadow_pact_mother_mil
+	}
+}
+
+shadow_pact_random_portent_check = {
+	NOT = {
+		has_church_aspect = shadow_pact_$portent$_adm
+		has_church_aspect = shadow_pact_$portent$_dip
+		has_church_aspect = shadow_pact_$portent$_mil
+		has_country_flag = shadow_pact_$portent$_excluded
+		AND = {
+			has_country_flag = shadow_pact_rerolling
+			has_country_flag = shadow_pact_last_set_$portent$
+		}
+	}
+}
+
+shadow_pact_can_reroll = {
+	OR = {
+		has_country_flag = shadow_pact_last_set_sorcerer
+		has_country_flag = shadow_pact_last_set_wraith
+		has_country_flag = shadow_pact_last_set_three_urns
+		has_country_flag = shadow_pact_last_set_silat
+		has_country_flag = shadow_pact_last_set_tree
+		has_country_flag = shadow_pact_last_set_flame
+		has_country_flag = shadow_pact_last_set_flayed_man
+		has_country_flag = shadow_pact_last_set_meteor
+		has_country_flag = shadow_pact_last_set_tyrant
+		has_country_flag = shadow_pact_last_set_sleeper
+		has_country_flag = shadow_pact_last_set_burden
+		has_country_flag = shadow_pact_last_set_time
+		has_country_flag = shadow_pact_last_set_defiant
+		has_country_flag = shadow_pact_last_set_madness
+		has_country_flag = shadow_pact_last_set_golem
+		has_country_flag = shadow_pact_last_set_vulture
+		has_country_flag = shadow_pact_last_set_mother
+	}
+}
+
+shadow_pact_has_three_portents = {
+	custom_trigger_tooltip = {
+		tooltip = shadow_pact_three_portents
+		calc_true_if = {
+			amount = 3
+			has_country_flag = shadow_pact_has_sorcerer
+			has_country_flag = shadow_pact_has_wraith
+			has_country_flag = shadow_pact_has_three_urns
+			has_country_flag = shadow_pact_has_silat
+			has_country_flag = shadow_pact_has_tree
+			has_country_flag = shadow_pact_has_flame
+			has_country_flag = shadow_pact_has_flayed_man
+			has_country_flag = shadow_pact_has_meteor
+			has_country_flag = shadow_pact_has_tyrant
+			has_country_flag = shadow_pact_has_sleeper
+			has_country_flag = shadow_pact_has_burden
+			has_country_flag = shadow_pact_has_time
+			has_country_flag = shadow_pact_has_defiant
+			has_country_flag = shadow_pact_has_madness
+			has_country_flag = shadow_pact_has_golem
+			has_country_flag = shadow_pact_has_vulture
+			has_country_flag = shadow_pact_has_mother
+		}
+	}
+}
+
+can_use_cannorian_holy_site_trigger = {
+	OR = {
+		AND = {
+			religion_group = cannorian
+			NOT = { religion = infernal_court }
+		}
+		religion = skaldhyrric_faith
+	}
+}
+
+has_corinite_adm_order = {
+	OR = {
+		holy_order = begga_order
+		holy_order = dame_order
+		holy_order = esmaryal_order
+		holy_order = nerat_order
+	}
+}
+
+has_corinite_dip_order = {
+	OR = {
+		holy_order = ara_order
+		holy_order = minara_order
+		holy_order = munas_order
+		holy_order = ryala_order
+	}
+}
+
+has_corinite_mil_order = {
+	OR = {
+		holy_order = balgar_order
+		holy_order = corin_order
+		holy_order = falah_order
+		holy_order = nathalyne_order
+		holy_order = dookan_order
+		holy_order = adean_order
 	}
 }

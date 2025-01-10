@@ -18,6 +18,7 @@ country_event = {
 	}
 	option = {
 		name = sapchopper.1.a
+		custom_tooltip = sapchopper.1.a.tt
 		add_country_modifier = {
 			name = deepwoods_orc_tax_debuff
 			duration = -1
@@ -283,7 +284,7 @@ country_event = {
 		name = sapchopper.9.a
 		remove_country_modifier = deepwoods_orc_production_debuff
 		add_country_modifier = {
-			name = deepwoods_orc_ashenfey_tax_buff
+			name = deepwoods_orc_ashenfey_production_buff
 			duration = -1
 		}
 	}
@@ -378,7 +379,13 @@ country_event = {
 		name = sapchopper.13.a
 		custom_tooltip = sapchopper.13.a.tt
 		hidden_effect = {
+			clr_country_flag = ashentree_fey_investigation
 			set_country_flag = ashentree_fey_investigation_completed
+			every_province = {	# Bandaid for edge case where these aren't already removed somehow(???)
+				remove_province_modifier = sapchopper_the_path_clue_a
+				remove_province_modifier = sapchopper_the_path_clue_b
+				remove_province_modifier = sapchopper_the_path_clue_c
+			}
 		}
 	}
 }
@@ -480,16 +487,10 @@ country_event = {
 
 	option = {
 		name = sapchopper.17.a
-		add_stability_or_adm_power = yes
-		add_prestige = 5
 		set_country_flag = fey_offering_denied
-		hidden_effect = {
-			change_tag = Z54
-			hidden_effect = { restore_country_name = yes }
-			swap_non_generic_missions = yes
-			country_event = { id = orcform.1 days = 1 }
-			country_event = { id = ideagroups.1 } #Swap Ideas
-		}
+		set_country_flag = sapchopper_ire_of_prince
+		kill_ruler = yes
+		custom_tooltip = sapchopper.17.a.tt
 	}
 }
 

@@ -4,29 +4,62 @@ country_decisions = {
 		major = yes
 		potential = {
 			culture_group = baashidi
-			hidden_trigger = {
-				OR = {
-					ai = no
-					total_development = 100
-					ruler_has_personality = great_conqueror_personality
-					ruler_has_personality = mythical_conqueror_personality
-				}
+			NOT  = { culture = guryadagga }
+			OR = {
+				ai = no
+				total_development = 100
+				ruler_has_personality = great_conqueror_personality
+				ruler_has_personality = mythical_conqueror_personality
 			}
 			NOT = { tag = S79 }
+			
 		}
-
 		provinces_to_highlight = {
-			region = jasiir_jadid_region
-			NOT = { owned_by = ROOT }
-		}
-		
-		allow = {
-			jasiir_jadid_region = {
-				owned_by = ROOT
+			OR = {
+                AND = {
+					region = jasiir_jadid_region
+					NOT = { owned_by = ROOT }
+					NOT = {
+						ROOT = {
+							num_of_owned_provinces_with = {
+								value = 30
+								region = jasiir_jadid_region
+							}
+						}
+					}
+				}
+				AND = {
+                    OR = {
+                        province_id = 6679
+						province_id = 6052
+						province_id = 6678
+						province_id = 6675
+						province_id = 6060
+						province_id = 6021 
+                    }
+                    NOT = { owned_by = ROOT }
+                }
+            }
+        }
 
-				type = all
+        allow = {
+			hidden_trigger = {
+				culture_group = baashidi
 			}
-		}
+			is_at_war = no
+			is_free_or_tributary_trigger = yes                        
+            #Required provinces
+            owns = 6679 #Qasri Aqoon
+			owns = 6052 #Magaalad Qasr
+			owns = 6678 #Qasri Maroodiqya
+			owns = 6675 #Qasri Bariga
+			owns = 6060 #Qasri Abeesooyinka
+			owns = 6021 #Qasri Ubakhiyo
+            num_of_owned_provinces_with = {
+                value = 30
+                region = jasiir_jadid_region
+            }                        
+        }
 		
 		effect = {
 			change_tag = S79
@@ -39,7 +72,7 @@ country_decisions = {
             }
 		}
 		
-		ai_will_do = { #The AI can't use this anyway
+		ai_will_do = {
 			factor = 1
 		}
 	}
@@ -133,7 +166,6 @@ country_decisions = {
 				}
 			}
 			OR = {
-				#primary_culture = dakinshi
 				primary_culture = antmvura
 				primary_culture = kombedak
 				primary_culture = umsozidak
@@ -146,30 +178,29 @@ country_decisions = {
 			NOT = { has_global_flag = dakinshiland_unified }
 		}
 		provinces_to_highlight = {
-			province_id = 5585
-			province_id = 5580
-			province_id = 5573
-			province_id = 5574
-			province_id = 5566
-			province_id = 5562
-			province_id = 5558
-			province_id = 5548
-			province_id = 5547
-			province_id = 5545
+			province_id = 5585 #Kuvunika
+			province_id = 5580 #Inshibonde
+			province_id = 5573 #Jiwenjaalo-bo
+			province_id = 5574 #Kaziradoka
+			province_id = 5566 #Balanka-bo
+			province_id = 5562 #Gumti
+			province_id = 5558 #Fuheongwaan
+			province_id = 5548 #Eusiwuni
+			province_id = 5547 #Degumwamba
+			province_id = 5545 #Goufeingon
 		}
 		allow = {
-			owns = 5585
-			owns = 5580
-			owns = 5573
-			owns = 5574
-			owns = 5566
-			owns = 5562
-			owns = 5558
-			owns = 5548
-			owns = 5547
-			owns = 5545
+			owns = 5585 #Kuvunika
+			owns = 5580 #Inshibonde
+			owns = 5573 #Jiwenjaalo-bo
+			owns = 5574 #Kaziradoka
+			owns = 5566 #Balanka-bo
+			owns = 5562 #Gumti
+			owns = 5558 #Fuheongwaan
+			owns = 5548 #Eusiwuni
+			owns = 5547 #Degumwamba
+			owns = 5545 #Goufeingon
 			OR = { 
-				#primary_culture = dakinshi
 				primary_culture = antmvura
 				primary_culture = kombedak
 				primary_culture = umsozidak
@@ -202,10 +233,6 @@ country_decisions = {
 			}
 			# custom_tooltip = dakinshi_end_warlord_era_effect_tt
 			add_prestige = 50
-			if = {
-				limit = { primary_culture = dakinshi }
-				override_country_name = BWA_DAKINSHI
-			}
 			add_country_modifier = {
 				name = "centralization_modifier"
 				duration = 7300
@@ -230,6 +257,7 @@ country_decisions = {
 				tag = S81
 				tag = L87
 				exists = S81
+				mission_completed = L70_khugra_decree_of_unification
 			}
             was_never_end_game_tag_trigger = yes
             
@@ -278,6 +306,7 @@ country_decisions = {
 			hidden_trigger = {
 				culture_group = lizardfolk
 			}
+			religion = anzalkatsa
 			is_at_war = no
 			is_free_or_tributary_trigger = yes                        
             #Required provinces

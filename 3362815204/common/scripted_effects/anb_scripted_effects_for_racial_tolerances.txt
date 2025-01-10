@@ -15,6 +15,7 @@ reset_racial_military_via_administration = {
 		add_country_modifier = {
 			name = orcish_military
 			duration = -1
+			hidden = yes
 		}
 		if = {
 			limit = {
@@ -84,7 +85,7 @@ reset_racial_military_via_administration = {
 		}
 		else_if = {
 			limit = {
-				capital_scope = { superregion = west_sarhal_superregion }
+				capital_scope = { superregion = tanib_dajek_superregion }
 			}
 			change_unit_type = tech_west_sarhaly
 		}
@@ -96,7 +97,6 @@ reset_racial_military_via_administration = {
 				limit = { 
 					OR = {
 						accepted_culture = tanizu
-						accepted_culture = dakinshi
 						accepted_culture = antmvura
 						accepted_culture = kombedak
 						accepted_culture = umsozidak
@@ -110,7 +110,12 @@ reset_racial_military_via_administration = {
 		}
 		else_if = {
 			limit = {
-				capital_scope = { superregion = south_sarhal_superregion }
+				capital_scope = { 
+					OR = { 
+						superregion = djinnakah_superregion
+						superregion = taneyas_superregion
+					}
+				}
 			}
 			if = {
 				limit = { 
@@ -136,14 +141,14 @@ reset_racial_military_via_administration = {
 			limit = {
 				OR = {
 					capital_scope = { superregion = yanshen_superregion }
-					capital_scope = { superregion = south_haless_superregion }
+					capital_scope = { superregion = vimdatrong_superregion }
 				}
 			}
 			change_unit_type = tech_halessi
 		}
 		else_if = {
 			limit = {
-				capital_scope = { superregion = north_haless_superregion }
+				capital_scope = { superregion = gozengun_superregion }
 			}
 			if = {
 				limit = {
@@ -343,7 +348,7 @@ reset_racial_military_via_administration = {
         else_if = {
         	limit = {
         		OR = {
-        			capital_scope = { continent = asia NOT = { superregion = forbidden_plains_superregion } }
+        			capital_scope = { continent = asia NOT = { superregion = forbidden_lands_superregion } }
         			primary_culture = hill_troll
         			AND = {
         				accepted_culture = hill_troll
@@ -368,12 +373,9 @@ reset_racial_military_via_administration = {
 		add_country_modifier = {
 			name = gnollish_military
 			duration = -1
+			hidden = yes
 		}
 		change_unit_type = tech_gnollish
-		if = {
-			limit = { is_tribal = no }
-			set_country_flag = gnoll_reformed_mil_flag
-		}
 	}
 	else_if = {
 		limit = {
@@ -483,8 +485,8 @@ reset_racial_military_via_administration = {
 			limit = {
 				OR = {
 					capital_scope = { superregion = yanshen_superregion }
-					capital_scope = { superregion = south_haless_superregion }
-					capital_scope = { superregion = north_haless_superregion }
+					capital_scope = { superregion = vimdatrong_superregion }
+					capital_scope = { superregion = gozengun_superregion }
 					capital_scope = { superregion = rahen_superregion }
 					primary_culture = goldscale_kobold
 					primary_culture = dragonfire_kobold
@@ -632,8 +634,8 @@ reset_racial_military_via_administration = {
 			limit = {
 				OR = {
 					capital_scope = { superregion = yanshen_superregion }
-					capital_scope = { superregion = south_haless_superregion }
-					capital_scope = { superregion = north_haless_superregion }
+					capital_scope = { superregion = vimdatrong_superregion }
+					capital_scope = { superregion = gozengun_superregion }
 					primary_culture = pezarangi_harpy
 					primary_culture = reishao_harpy
 					AND = {
@@ -652,7 +654,7 @@ reset_racial_military_via_administration = {
 			limit = {
 				OR = {
 					capital_scope = { superregion = north_salahad_superregion }
-					capital_scope = { superregion = west_sarhal_superregion }
+					capital_scope = { superregion = tanib_dajek_superregion }
 					capital_scope = { superregion = fangaula_superregion }
 					primary_culture = nzeri_harpy
 					AND = {
@@ -662,6 +664,19 @@ reset_racial_military_via_administration = {
 				}
 			}
 			change_unit_type = tech_nzeri_harpy
+		}
+		else_if = {
+			limit = {
+				OR = {
+					capital_scope = { superregion = gozengun_superregion }
+					primary_culture = nuzenapu_harpy
+					AND = {
+						accepted_culture = nuzenapu_harpy
+						NOT = { culture_group = harpy }
+					}
+				}
+			}
+			change_unit_type = tech_nuzenapu_harpy
 		}
 		else = {
 			change_unit_type = tech_firanyan_harpy
@@ -684,7 +699,7 @@ reset_racial_military_via_administration = {
             limit = {
                 OR = {
                     capital_scope = {
-						superregion = west_sarhal_superregion
+						superregion = tanib_dajek_superregion
 					}
 					is_vyzemby_primary_culture = yes
                     AND = {
@@ -723,8 +738,8 @@ reset_racial_military_via_administration = {
 			limit = {
 				OR = {
 					capital_scope = { superregion = yanshen_superregion }
-					capital_scope = { superregion = south_haless_superregion }
-					capital_scope = { superregion = north_haless_superregion }
+					capital_scope = { superregion = vimdatrong_superregion }
+					capital_scope = { superregion = gozengun_superregion }
 					capital_scope = { superregion = rahen_superregion }
 					primary_culture = horned_ogre
 					AND = {
@@ -771,8 +786,8 @@ reset_racial_military_via_administration = {
 			limit = {
 				OR = {
 					capital_scope = { superregion = yanshen_superregion }
-					capital_scope = { superregion = south_haless_superregion }
-					capital_scope = { superregion = north_haless_superregion }
+					capital_scope = { superregion = vimdatrong_superregion }
+					capital_scope = { superregion = gozengun_superregion }
 					primary_culture = serene_harimari
 					primary_culture = roaming_harimari
 					AND = {
@@ -811,7 +826,7 @@ reset_racial_military_via_administration = {
 			}
 		}
 		if = {
-			limit = { capital_scope = { superregion = north_haless_superregion } }
+			limit = { capital_scope = { superregion = gozengun_superregion } }
 			change_unit_type = tech_eagle_hobgoblin
 		}
 		else = {
@@ -832,6 +847,21 @@ reset_racial_military_via_administration = {
 			hidden = yes
 		}
 		change_unit_type = tech_lizardfolk
+	}
+	else_if = {
+		limit = {
+			has_country_modifier = mechanim_administration
+		}
+		add_country_modifier = {
+			name = restructuring_military
+			duration = 3650
+		}
+		add_country_modifier = {
+			name = mechanim_military
+			duration = -1
+			hidden = yes
+		}
+		change_unit_type = tech_mechanim
 	}
 }
 
@@ -855,6 +885,7 @@ clear_racial_administration = {
 	remove_country_modifier = ogre_administration
 	remove_country_modifier = hobgoblin_administration
 	remove_country_modifier = lizardfolk_administration
+	remove_country_modifier = mechanim_administration
 }
 
 clear_racial_military = {
@@ -878,6 +909,7 @@ clear_racial_military = {
 	remove_country_modifier = ogre_military
 	remove_country_modifier = hobgoblin_military
 	remove_country_modifier = lizardfolk_military
+	remove_country_modifier = mechanim_military
 	
 	#modifiers if no Cradle of Civ dlc
 	remove_country_modifier = hobgoblin_military_no_dlc
@@ -1152,6 +1184,16 @@ startup_minority_count_and_flags = {
 		set_province_flag = lizardfolk_present
 		owner = { increment_racial_pop_count = { race = lizardfolk } }
 	}
+
+	if = {
+		limit = {
+			NOT = { has_province_flag = mechanim_present }
+			has_mechanim_minority_trigger = yes
+		}
+		# add <race>_present and increase race count if minorities are in the prov
+		set_province_flag = mechanim_present
+		owner = { increment_racial_pop_count = { race = mechanim } }
+	}
 			
 }
 
@@ -1286,14 +1328,14 @@ generic_add_race_minority_size_effect = {
 			}
 
 			# Add the minority with the right tolerance if they have none
-	
-			#Impact Oppressed
+
+			#Impact Integrated
 			else_if = {
 				limit = {
-					owner = { low_tolerance_$race$_race_trigger = yes }
+					owner = { high_tolerance_$race$_race_trigger = yes }
 				}
 				add_permanent_province_modifier = {
-					name = $race$_minority_oppressed_small
+					name = $race$_minority_integrated_small
 					duration = -1
 				}
 			}
@@ -1309,13 +1351,16 @@ generic_add_race_minority_size_effect = {
 				}
 			}
 
-			#Impact Integrated
+			#Impact Oppressed
 			else_if = {
 				limit = {
-					owner = { high_tolerance_$race$_race_trigger = yes }
+					OR = {
+						is_empty = yes
+						owner = { low_tolerance_$race$_race_trigger = yes }
+					}
 				}
 				add_permanent_province_modifier = {
-					name = $race$_minority_integrated_small
+					name = $race$_minority_oppressed_small
 					duration = -1
 				}
 			}
@@ -2474,6 +2519,47 @@ remove_lizardfolk_minority_size_effect = {
 	generic_remove_race_minority_size_effect = { race = lizardfolk }
 }
 
+# Mechanim
+small_increase_of_mechanim_tolerance_effect = {
+	generic_increase_of_racial_tolerance_effect = { race = mechanim small = yes }
+}
+
+medium_increase_of_mechanim_tolerance_effect = {
+	generic_increase_of_racial_tolerance_effect = { race = mechanim medium = yes }
+}
+
+large_increase_of_mechanim_tolerance_effect = {
+	generic_increase_of_racial_tolerance_effect = { race = mechanim large = yes }
+}
+
+largest_increase_of_mechanim_tolerance_effect = {
+	generic_increase_of_racial_tolerance_effect = { race = mechanim largest = yes }
+}
+
+small_decrease_of_mechanim_tolerance_effect = {
+	generic_decrease_of_racial_tolerance_effect = { race = mechanim small = yes }
+}
+
+medium_decrease_of_mechanim_tolerance_effect = {
+	generic_decrease_of_racial_tolerance_effect = { race = mechanim medium = yes }
+}
+
+large_decrease_of_mechanim_tolerance_effect = {
+	generic_decrease_of_racial_tolerance_effect = { race = mechanim large = yes }
+}
+
+largest_decrease_of_mechanim_tolerance_effect = {
+	generic_decrease_of_racial_tolerance_effect = { race = mechanim largest = yes }
+}
+
+add_mechanim_minority_size_effect = {
+	generic_add_race_minority_size_effect = { race = mechanim }
+}
+
+remove_mechanim_minority_size_effect = {
+	generic_remove_race_minority_size_effect = { race = mechanim }
+}
+
 
 # adds majority of specific race with the correct tolerance
 add_majority_with_correct_tolerance = {
@@ -2732,6 +2818,14 @@ add_majority_of_current_culture = {
 		add_majority_with_correct_tolerance = { race = lizardfolk }
 	}
 
+	#mechanim
+	else_if = {
+		limit = {
+			NOT = { has_mechanim_majority_trigger = yes }
+			culture_is_mechanim = yes
+		}
+		add_majority_with_correct_tolerance = { race = mechanim }
+	}
 }
 
 convert_majority_to_minority = {
@@ -2945,6 +3039,17 @@ convert_majority_to_minority = {
 
 		remove_racial_majority = { race = lizardfolk }
 	}
+
+	#mechanim
+	else_if = {
+		limit = {
+			has_mechanim_majority_trigger = yes
+			NOT = { culture_is_mechanim = yes }
+		}
+		add_minority_with_correct_tolerance = { race = mechanim size = $size$ }
+
+		remove_racial_majority = { race = mechanim }
+	}
 }
 
 
@@ -3009,6 +3114,8 @@ update_racial_province_modifier_tolerance = {
 	#Lizardfolk
 	update_specific_racial_province_modifier_tolerance = { race = lizardfolk }
 
+	#Mechanim
+	update_specific_racial_province_modifier_tolerance = { race = mechanim }
 }
 
 update_racial_province_modifier_tolerance_and_count = {
@@ -3222,6 +3329,15 @@ update_racial_province_modifier_tolerance_and_count = {
 		update_specific_racial_province_modifier_tolerance = { race = lizardfolk }
 	}
 
+	#mechanim
+	if = {
+		limit = { has_province_flag = mechanim_present }
+		# update tolerance counts for previous owner (FROM) and current owner
+		
+		owner = { increment_racial_pop_count = { race = mechanim } }
+		FROM = { decrement_racial_pop_count = { race = mechanim } }
+		update_specific_racial_province_modifier_tolerance = { race = mechanim }
+	}
 }
 
 #This should be use in a province scope
@@ -3992,6 +4108,33 @@ cleanup_racial_province_minority_into_majority = {
 			duration = 3650	#10 years
 		}
 	}
+
+	#mechanim
+	else_if = {
+		limit = {
+			has_mechanim_minority_trigger = yes
+			culture_is_mechanim = yes
+		}
+
+		if = {
+			limit = { owner = { has_country_flag = save_minorities_for_migration } }
+			# save whether it was large or small to restore later - yes this has to be done in a country flag because we have to keep the define to clear province flags on empty
+			if = {
+				limit = { has_small_mechanim_minority_trigger = yes }
+				owner = { set_country_flag = migratory_small_minority }
+			}
+			else = {
+				owner = { set_country_flag = migratory_large_minority }
+			}
+		}
+
+		remove_racial_minority_any_size = { race = mechanim }
+
+		add_province_modifier = {
+			name = minority_into_majority
+			duration = 3650	#10 years
+		}
+	}
 }
 
 make_majority_primary = {
@@ -4262,6 +4405,20 @@ make_majority_primary = {
 			duration = -1
 		}
 	}
+
+	#mechanim
+	else_if = {
+		limit = {
+			has_province_modifier = mechanim_majority_integrated
+			owner = { has_country_modifier = mechanim_administration }
+		}
+		remove_province_modifier = mechanim_majority_integrated
+
+		add_permanent_province_modifier = {
+			name = mechanim_majority_primary
+			duration = -1
+		}
+	}
 }
 
 #Check so tolerance values are not over max
@@ -4375,13 +4532,12 @@ increase_all_existing_tolerances = {
 			}
 			$size$_increase_of_lizardfolk_tolerance_effect = yes
 		}
-		#Uncomment for Insyaa
-		#if = {
-		#	limit = {
-		#		any_owned_province = { has_any_mechanim_pop_trigger = yes }
-		#	}
-		#	$size$_increase_of_mechanim_tolerance_effect = yes
-		#}
+		if = {
+			limit = {
+				any_owned_province = { has_any_mechanim_pop_trigger = yes }
+			}
+			$size$_increase_of_mechanim_tolerance_effect = yes
+		}
 		if = {
 			limit = {
 				any_owned_province = { has_any_ogre_pop_trigger = yes }
@@ -4428,7 +4584,7 @@ increase_all_tolerances = {
 		$size$_increase_of_human_tolerance_effect = yes
 		$size$_increase_of_kobold_tolerance_effect = yes
 		$size$_increase_of_lizardfolk_tolerance_effect = yes
-		#$size$_increase_of_mechanim_tolerance_effect = yes	#Uncomment for Insyaa
+		$size$_increase_of_mechanim_tolerance_effect = yes
 		$size$_increase_of_ogre_tolerance_effect = yes
 		$size$_increase_of_orcish_tolerance_effect = yes
 		$size$_increase_of_ruinborn_tolerance_effect = yes
@@ -4548,6 +4704,13 @@ add_minority_size_if_present = {
 
 	if = {
 		limit = {
+			has_any_mechanim_pop_trigger = yes					
+		}
+		add_mechanim_minority_size_effect = yes
+	}
+
+	if = {
+		limit = {
 			has_any_ogre_pop_trigger = yes					
 		}
 		add_ogre_minority_size_effect = yes
@@ -4653,6 +4816,10 @@ add_primary_race_minority_size_effect = {	#Adding this for ruinborn_tolerance_ev
 		limit = { culture_is_lizardfolk = yes }
 		add_lizardfolk_minority_size_effect = yes
 	}
+	else_if = {
+		limit = { culture_is_mechanim = yes }
+		add_mechanim_minority_size_effect = yes
+	}
 }
 
 #----# Scripted effects for pop menu #----#
@@ -4673,10 +4840,11 @@ pop_menu_main_setup = {
 	set_variable = { which = humanRanking value = 13 }
 	set_variable = { which = koboldRanking value = 14 }
 	set_variable = { which = lizardfolkRanking value = 15 }
-	set_variable = { which = ogreRanking value = 16 }
-	set_variable = { which = orcishRanking value = 17 }
-	set_variable = { which = ruinbornRanking value = 18 }
-	set_variable = { which = trollRanking value = 19 }
+	set_variable = { which = mechanimRanking value = 16 }
+	set_variable = { which = ogreRanking value = 17 }
+	set_variable = { which = orcishRanking value = 18 }
+	set_variable = { which = ruinbornRanking value = 19 }
+	set_variable = { which = trollRanking value = 20 }
 	pop_menu_main_sorting_effect = yes
 }
 
@@ -4726,9 +4894,9 @@ pop_menu_calculations = {
 	set_variable = { which = nblizardfolkMajority value = 0 }
 	set_variable = { which = nblizardfolkMinority value = 0 }
 	set_variable = { which = nblizardfolkDev value = 0 }
-	# set_variable = { which = nbmechanismMajority value = 0 }
-	# set_variable = { which = nbmechanismMinority value = 0 }
-	# set_variable = { which = nbmechanismDev value = 0 }
+	set_variable = { which = nbmechanimMajority value = 0 }
+	set_variable = { which = nbmechanimMinority value = 0 }
+	set_variable = { which = nbmechanimDev value = 0 }
 	set_variable = { which = nbogreMajority value = 0 }
 	set_variable = { which = nbogreMinority value = 0 }
 	set_variable = { which = nbogreDev value = 0 }
@@ -4776,7 +4944,7 @@ pop_menu_calculations = {
 		calculate_province_race_values = { RACE = human }
 		calculate_province_race_values = { RACE = kobold }
 		calculate_province_race_values = { RACE = lizardfolk }
-		# calculate_province_race_values = { RACE = mechanim }
+		calculate_province_race_values = { RACE = mechanim }
 		calculate_province_race_values = { RACE = ogre }
 		calculate_province_race_values = { RACE = orcish }
 		calculate_province_race_values = { RACE = ruinborn }
@@ -4798,7 +4966,7 @@ pop_menu_calculations = {
 	change_variable = { which = nbTotalDev which = nbhumanDev }
 	change_variable = { which = nbTotalDev which = nbkoboldDev }
 	change_variable = { which = nbTotalDev which = nblizardfolkDev }
-	# change_variable = { which = nbTotalDev which = nbmechanimDev }
+	change_variable = { which = nbTotalDev which = nbmechanimDev }
 	change_variable = { which = nbTotalDev which = nbogreDev }
 	change_variable = { which = nbTotalDev which = nborcishDev }
 	change_variable = { which = nbTotalDev which = nbruinbornDev }
@@ -4819,7 +4987,7 @@ pop_menu_calculations = {
 	pop_menu_round_and_percent = { which = nbhumanDev total = nbTotalDev }
 	pop_menu_round_and_percent = { which = nbkoboldDev total = nbTotalDev }
 	pop_menu_round_and_percent = { which = nblizardfolkDev total = nbTotalDev }
-	# pop_menu_round_and_percent = { which = nbmechanimDev total = nbTotalDev }
+	pop_menu_round_and_percent = { which = nbmechanimDev total = nbTotalDev }
 	pop_menu_round_and_percent = { which = nborcishDev total = nbTotalDev }
 	pop_menu_round_and_percent = { which = nbogreDev total = nbTotalDev }
 	pop_menu_round_and_percent = { which = nbruinbornDev total = nbTotalDev }
@@ -4870,21 +5038,22 @@ pop_menu_round_and_percent = {
 }
 
 pop_menu_main_sorting_effect = {
-	19 = { set_variable = { which = nbcentaurDev which = PREV } set_variable = { which = nbRaceDev which = nbcentaurDev } set_province_flag = not_sorted }
-	18 = { set_variable = { which = nbdwarvenDev which = PREV } set_variable = { which = nbRaceDev which = nbdwarvenDev } set_province_flag = not_sorted }
-	17 = { set_variable = { which = nbelvenDev which = PREV } set_variable = { which = nbRaceDev which = nbelvenDev } set_province_flag = not_sorted }
-	16 = { set_variable = { which = nbgnollishDev which = PREV } set_variable = { which = nbRaceDev which = nbgnollishDev } set_province_flag = not_sorted }
-	15 = { set_variable = { which = nbgnomishDev which = PREV } set_variable = { which = nbRaceDev which = nbgnomishDev } set_province_flag = not_sorted }
-	14 = { set_variable = { which = nbgoblinDev which = PREV } set_variable = { which = nbRaceDev which = nbgoblinDev } set_province_flag = not_sorted }
-	13 = { set_variable = { which = nbhalf_elvenDev which = PREV } set_variable = { which = nbRaceDev which = nbhalf_elvenDev } set_province_flag = not_sorted }
-	12 = { set_variable = { which = nbhalf_orcishDev which = PREV } set_variable = { which = nbRaceDev which = nbhalf_orcishDev } set_province_flag = not_sorted }
-	11 = { set_variable = { which = nbhalflingDev which = PREV } set_variable = { which = nbRaceDev which = nbhalflingDev } set_province_flag = not_sorted }
-	10 = { set_variable = { which = nbharimariDev which = PREV } set_variable = { which = nbRaceDev which = nbharimariDev } set_province_flag = not_sorted }
-	9 = { set_variable = { which = nbharpyDev which = PREV } set_variable = { which = nbRaceDev which = nbharpyDev } set_province_flag = not_sorted }
-	8 = { set_variable = { which = nbhobgoblinDev which = PREV } set_variable = { which = nbRaceDev which = nbhobgoblinDev } set_province_flag = not_sorted }
-	7 = { set_variable = { which = nbhumanDev which = PREV } set_variable = { which = nbRaceDev which = nbhumanDev } set_province_flag = not_sorted }
-	6 = { set_variable = { which = nbkoboldDev which = PREV } set_variable = { which = nbRaceDev which = nbkoboldDev } set_province_flag = not_sorted }
-	5 = { set_variable = { which = nblizardfolkDev which = PREV } set_variable = { which = nbRaceDev which = nblizardfolkDev } set_province_flag = not_sorted }
+	20 = { set_variable = { which = nbcentaurDev which = PREV } set_variable = { which = nbRaceDev which = nbcentaurDev } set_province_flag = not_sorted }
+	19 = { set_variable = { which = nbdwarvenDev which = PREV } set_variable = { which = nbRaceDev which = nbdwarvenDev } set_province_flag = not_sorted }
+	18 = { set_variable = { which = nbelvenDev which = PREV } set_variable = { which = nbRaceDev which = nbelvenDev } set_province_flag = not_sorted }
+	17 = { set_variable = { which = nbgnollishDev which = PREV } set_variable = { which = nbRaceDev which = nbgnollishDev } set_province_flag = not_sorted }
+	16 = { set_variable = { which = nbgnomishDev which = PREV } set_variable = { which = nbRaceDev which = nbgnomishDev } set_province_flag = not_sorted }
+	15 = { set_variable = { which = nbgoblinDev which = PREV } set_variable = { which = nbRaceDev which = nbgoblinDev } set_province_flag = not_sorted }
+	14 = { set_variable = { which = nbhalf_elvenDev which = PREV } set_variable = { which = nbRaceDev which = nbhalf_elvenDev } set_province_flag = not_sorted }
+	13 = { set_variable = { which = nbhalf_orcishDev which = PREV } set_variable = { which = nbRaceDev which = nbhalf_orcishDev } set_province_flag = not_sorted }
+	12 = { set_variable = { which = nbhalflingDev which = PREV } set_variable = { which = nbRaceDev which = nbhalflingDev } set_province_flag = not_sorted }
+	11 = { set_variable = { which = nbharimariDev which = PREV } set_variable = { which = nbRaceDev which = nbharimariDev } set_province_flag = not_sorted }
+	10 = { set_variable = { which = nbharpyDev which = PREV } set_variable = { which = nbRaceDev which = nbharpyDev } set_province_flag = not_sorted }
+	9 = { set_variable = { which = nbhobgoblinDev which = PREV } set_variable = { which = nbRaceDev which = nbhobgoblinDev } set_province_flag = not_sorted }
+	8 = { set_variable = { which = nbhumanDev which = PREV } set_variable = { which = nbRaceDev which = nbhumanDev } set_province_flag = not_sorted }
+	7 = { set_variable = { which = nbkoboldDev which = PREV } set_variable = { which = nbRaceDev which = nbkoboldDev } set_province_flag = not_sorted }
+	6 = { set_variable = { which = nblizardfolkDev which = PREV } set_variable = { which = nbRaceDev which = nblizardfolkDev } set_province_flag = not_sorted }
+	5 = { set_variable = { which = nbmechanimDev which = PREV } set_variable = { which = nbRaceDev which = nbmechanimDev } set_province_flag = not_sorted }
 	4 = { set_variable = { which = nbogreDev which = PREV } set_variable = { which = nbRaceDev which = nbogreDev } set_province_flag = not_sorted }
 	3 = { set_variable = { which = nborcishDev which = PREV } set_variable = { which = nbRaceDev which = nborcishDev } set_province_flag = not_sorted }
 	2 = { set_variable = { which = nbruinbornDev which = PREV } set_variable = { which = nbRaceDev which = nbruinbornDev } set_province_flag = not_sorted }
@@ -4893,7 +5062,7 @@ pop_menu_main_sorting_effect = {
 	set_variable = { which = raceRanking value = 0 }
 	2 = { save_event_target_as = most_represented_race }
 
-	while = { limit = { NOT = { check_variable = { which = raceRanking value = 19 } } }	#19 = nb of races
+	while = { limit = { NOT = { check_variable = { which = raceRanking value = 20 } } }	#20 = nb of races
 		change_variable = { which = raceRanking value = 1 }
 		pop_menu_variables = {	#province group that has all the provinces with stored variables
 			limit = {
@@ -4911,21 +5080,22 @@ pop_menu_main_sorting_effect = {
 }
 
 pop_ranking_conversion = {
-	if = { limit = { province_id = 19 } ROOT = { set_variable = { which = centaurRanking which = raceRanking } } }
-	else_if = { limit = { province_id = 18 } ROOT = { set_variable = { which = dwarvenRanking which = raceRanking } } }
-	else_if = { limit = { province_id = 17 } ROOT = { set_variable = { which = elvenRanking which = raceRanking } } }
-	else_if = { limit = { province_id = 16 } ROOT = { set_variable = { which = gnollishRanking which = raceRanking } } }
-	else_if = { limit = { province_id = 15 } ROOT = { set_variable = { which = gnomishRanking which = raceRanking } } }
-	else_if = { limit = { province_id = 14 } ROOT = { set_variable = { which = goblinRanking which = raceRanking } } }
-	else_if = { limit = { province_id = 13 } ROOT = { set_variable = { which = half_elvenRanking which = raceRanking } } }
-	else_if = { limit = { province_id = 12 } ROOT = { set_variable = { which = half_orcishRanking which = raceRanking } } }
-	else_if = { limit = { province_id = 11 } ROOT = { set_variable = { which = halflingRanking which = raceRanking } } }
-	else_if = { limit = { province_id = 10 } ROOT = { set_variable = { which = harimariRanking which = raceRanking } } }
-	else_if = { limit = { province_id = 9 } ROOT = { set_variable = { which = harpyRanking which = raceRanking } } }
-	else_if = { limit = { province_id = 8 } ROOT = { set_variable = { which = hobgoblinRanking which = raceRanking } } }
-	else_if = { limit = { province_id = 7 } ROOT = { set_variable = { which = humanRanking which = raceRanking } } }
-	else_if = { limit = { province_id = 6 } ROOT = { set_variable = { which = koboldRanking which = raceRanking } } }
-	else_if = { limit = { province_id = 5 } ROOT = { set_variable = { which = lizardfolkRanking which = raceRanking } } }
+	if = { limit = { province_id = 20 } ROOT = { set_variable = { which = centaurRanking which = raceRanking } } }
+	else_if = { limit = { province_id = 19 } ROOT = { set_variable = { which = dwarvenRanking which = raceRanking } } }
+	else_if = { limit = { province_id = 18 } ROOT = { set_variable = { which = elvenRanking which = raceRanking } } }
+	else_if = { limit = { province_id = 17 } ROOT = { set_variable = { which = gnollishRanking which = raceRanking } } }
+	else_if = { limit = { province_id = 16 } ROOT = { set_variable = { which = gnomishRanking which = raceRanking } } }
+	else_if = { limit = { province_id = 15 } ROOT = { set_variable = { which = goblinRanking which = raceRanking } } }
+	else_if = { limit = { province_id = 14 } ROOT = { set_variable = { which = half_elvenRanking which = raceRanking } } }
+	else_if = { limit = { province_id = 13 } ROOT = { set_variable = { which = half_orcishRanking which = raceRanking } } }
+	else_if = { limit = { province_id = 12 } ROOT = { set_variable = { which = halflingRanking which = raceRanking } } }
+	else_if = { limit = { province_id = 11 } ROOT = { set_variable = { which = harimariRanking which = raceRanking } } }
+	else_if = { limit = { province_id = 10 } ROOT = { set_variable = { which = harpyRanking which = raceRanking } } }
+	else_if = { limit = { province_id = 9 } ROOT = { set_variable = { which = hobgoblinRanking which = raceRanking } } }
+	else_if = { limit = { province_id = 8 } ROOT = { set_variable = { which = humanRanking which = raceRanking } } }
+	else_if = { limit = { province_id = 7 } ROOT = { set_variable = { which = koboldRanking which = raceRanking } } }
+	else_if = { limit = { province_id = 6 } ROOT = { set_variable = { which = lizardfolkRanking which = raceRanking } } }
+	else_if = { limit = { province_id = 5 } ROOT = { set_variable = { which = mechanimRanking which = raceRanking } } }
 	else_if = { limit = { province_id = 4 } ROOT = { set_variable = { which = ogreRanking which = raceRanking } } }
 	else_if = { limit = { province_id = 3 } ROOT = { set_variable = { which = orcishRanking which = raceRanking } } }
 	else_if = { limit = { province_id = 2 } ROOT = { set_variable = { which = ruinbornRanking which = raceRanking } } }
@@ -4948,7 +5118,7 @@ pop_menu_rank_effect = {
 	pop_menu_race_selected_effect = { RACE = human ORDER = $ORDER$ }
 	pop_menu_race_selected_effect = { RACE = kobold ORDER = $ORDER$ }
 	pop_menu_race_selected_effect = { RACE = lizardfolk ORDER = $ORDER$ }
-	# pop_menu_race_selected_effect = { RACE = mechanim ORDER = $ORDER$ }
+	pop_menu_race_selected_effect = { RACE = mechanim ORDER = $ORDER$ }
 	pop_menu_race_selected_effect = { RACE = ogre ORDER = $ORDER$ }
 	pop_menu_race_selected_effect = { RACE = orcish ORDER = $ORDER$ }
 	pop_menu_race_selected_effect = { RACE = ruinborn ORDER = $ORDER$ }
@@ -5099,12 +5269,12 @@ pop_menu_cored_minorities_calculations = {
 	else_if = { limit = { has_large_lizardfolk_minority_trigger = yes }
 		ROOT = { change_variable = { which = nbMinorityCoredDev value = 0.10 } }
 	}
-	# if = { limit = { has_small_mechanism_minority_trigger = yes }
-		# ROOT = { change_variable = { which = nbMinorityCoredDev value = 0.05 } }
-	# }
-	# else_if = { limit = { has_large_mechanism_minority_trigger = yes }
-		# ROOT = { change_variable = { which = nbMinorityCoredDev value = 0.10 } }
-	# }
+	if = { limit = { has_small_mechanim_minority_trigger = yes }
+		ROOT = { change_variable = { which = nbMinorityCoredDev value = 0.05 } }
+	}
+	else_if = { limit = { has_large_mechanim_minority_trigger = yes }
+		ROOT = { change_variable = { which = nbMinorityCoredDev value = 0.10 } }
+	}
 	if = { limit = { has_small_ogre_minority_trigger = yes }
 		ROOT = { change_variable = { which = nbMinorityCoredDev value = 0.05 } }
 	}
@@ -5150,10 +5320,11 @@ pop_menu_military_setup = {
 	set_variable = { which = humanRanking value = 13 }
 	set_variable = { which = koboldRanking value = 14 }
 	set_variable = { which = lizardfolkRanking value = 15 }
-	set_variable = { which = ogreRanking value = 16 }
-	set_variable = { which = orcishRanking value = 17 }
-	set_variable = { which = ruinbornRanking value = 18 }
-	set_variable = { which = trollRanking value = 19 }
+	set_variable = { which = mechanimRanking value = 16 }
+	set_variable = { which = ogreRanking value = 17 }
+	set_variable = { which = orcishRanking value = 18 }
+	set_variable = { which = ruinbornRanking value = 19 }
+	set_variable = { which = trollRanking value = 20 }
 	pop_menu_military_sorting_effect = yes
 }
 
@@ -5174,26 +5345,22 @@ pop_menu_military_sorting_setup = {
 }
 
 pop_menu_military_sorting_effect = {
-	19 = { pop_menu_military_sorting_setup = { RACE = centaur } }
-	18 = { pop_menu_military_sorting_setup = { RACE = dwarven } }
-	17 = { pop_menu_military_sorting_setup = { RACE = elven } }
-	16 = { pop_menu_military_sorting_setup = { RACE = gnollish } }
-	15 = { pop_menu_military_sorting_setup = { RACE = gnomish } }
-	14 = { pop_menu_military_sorting_setup = { RACE = goblin } }
-	13 = {
-		set_variable = { which = nbRaceDev value = 0 }
-		set_variable = { which = raceRanking value = 20 }
-		ROOT = { set_variable = { which = half_elvenRanking value = 20 } }
-		# pop_menu_military_sorting_setup = { RACE = half_elven }
-	}	#half elven military doesn't exist
-	12 = { pop_menu_military_sorting_setup = { RACE = half_orcish } }
-	11 = { pop_menu_military_sorting_setup = { RACE = halfling } }
-	10 = { pop_menu_military_sorting_setup = { RACE = harimari } }
-	9 = { pop_menu_military_sorting_setup = { RACE = harpy } }
-	8 = { pop_menu_military_sorting_setup = { RACE = hobgoblin } }
-	7 = { pop_menu_military_sorting_setup = { RACE = human } }
-	6 = { pop_menu_military_sorting_setup = { RACE = kobold } }
-	5 = { pop_menu_military_sorting_setup = { RACE = lizardfolk } }
+	20 = { pop_menu_military_sorting_setup = { RACE = centaur } }
+	19 = { pop_menu_military_sorting_setup = { RACE = dwarven } }
+	18 = { pop_menu_military_sorting_setup = { RACE = elven } }
+	17 = { pop_menu_military_sorting_setup = { RACE = gnollish } }
+	16 = { pop_menu_military_sorting_setup = { RACE = gnomish } }
+	15 = { pop_menu_military_sorting_setup = { RACE = goblin } }
+	14 = { pop_menu_military_sorting_setup = { RACE = half_elven } }
+	13 = { pop_menu_military_sorting_setup = { RACE = half_orcish } }
+	12 = { pop_menu_military_sorting_setup = { RACE = halfling } }
+	11 = { pop_menu_military_sorting_setup = { RACE = harimari } }
+	10 = { pop_menu_military_sorting_setup = { RACE = harpy } }
+	9 = { pop_menu_military_sorting_setup = { RACE = hobgoblin } }
+	8 = { pop_menu_military_sorting_setup = { RACE = human } }
+	7 = { pop_menu_military_sorting_setup = { RACE = kobold } }
+	6 = { pop_menu_military_sorting_setup = { RACE = lizardfolk } }
+	5 = { pop_menu_military_sorting_setup = { RACE = mechanim } }
 	4 = { pop_menu_military_sorting_setup = { RACE = ogre } }
 	3 = { pop_menu_military_sorting_setup = { RACE = orcish } }
 	2 = { pop_menu_military_sorting_setup = { RACE = ruinborn } }
@@ -5240,14 +5407,14 @@ pop_menu_military_change_mil_effects = {
 	pop_menu_military_change_mil_race = { RACE = gnomish ORDER = $ORDER$ GNOMISH_ARTIFICERS = yes }
 	pop_menu_military_change_mil_race = { RACE = goblin ORDER = $ORDER$ }
 	pop_menu_military_change_mil_race = { RACE = halfling ORDER = $ORDER$ }
-	# pop_menu_military_change_mil_race = { RACE = half_elven ORDER = $ORDER$ }
+	pop_menu_military_change_mil_race = { RACE = half_elven ORDER = $ORDER$ }
 	pop_menu_military_change_mil_race = { RACE = half_orcish ORDER = $ORDER$ }
 	pop_menu_military_change_mil_race = { RACE = harimari ORDER = $ORDER$ }
 	pop_menu_military_change_mil_race = { RACE = harpy ORDER = $ORDER$ }
 	pop_menu_military_change_mil_race = { RACE = human ORDER = $ORDER$ }
 	pop_menu_military_change_mil_race = { RACE = kobold ORDER = $ORDER$ }
 	pop_menu_military_change_mil_race = { RACE = lizardfolk ORDER = $ORDER$ }
-	# pop_menu_military_change_mil_race = { RACE = mechanism ORDER = $ORDER$ }
+	pop_menu_military_change_mil_race = { RACE = mechanim ORDER = $ORDER$ }
 	pop_menu_military_change_mil_race = { RACE = ogre ORDER = $ORDER$ }
 	pop_menu_military_change_mil_race = { RACE = orcish ORDER = $ORDER$ }
 	pop_menu_military_change_mil_race = { RACE = ruinborn ORDER = $ORDER$ }
@@ -5449,8 +5616,8 @@ pop_menu_military_change_tech = {
 			limit = {
 				OR = {
 					capital_scope = { superregion = yanshen_superregion }
-					capital_scope = { superregion = south_haless_superregion }
-					capital_scope = { superregion = north_haless_superregion }
+					capital_scope = { superregion = vimdatrong_superregion }
+					capital_scope = { superregion = gozengun_superregion }
 					primary_culture = serene_harimari
 					primary_culture = roaming_harimari
 					AND = {
@@ -5475,8 +5642,8 @@ pop_menu_military_change_tech = {
 			limit = {
 				OR = {
 					capital_scope = { superregion = yanshen_superregion }
-					capital_scope = { superregion = south_haless_superregion }
-					capital_scope = { superregion = north_haless_superregion }
+					capital_scope = { superregion = vimdatrong_superregion }
+					capital_scope = { superregion = gozengun_superregion }
 					primary_culture = pezarangi_harpy
 					primary_culture = reishao_harpy
 					AND = {
@@ -5495,7 +5662,7 @@ pop_menu_military_change_tech = {
 			limit = {
 				OR = {
 					capital_scope = { superregion = north_salahad_superregion }
-					capital_scope = { superregion = west_sarhal_superregion }
+					capital_scope = { superregion = tanib_dajek_superregion }
 					capital_scope = { superregion = fangaula_superregion }
 					primary_culture = nzeri_harpy
 					AND = {
@@ -5522,12 +5689,11 @@ pop_menu_military_change_tech = {
 			change_unit_type = tech_salahadesi
 		}
 		else_if = { 
-			limit = { capital_scope = { superregion = west_sarhal_superregion } }
+			limit = { capital_scope = { superregion = tanib_dajek_superregion } }
 		    if = {
 				limit = { 
 					OR = {
 						accepted_culture = tanizu
-						accepted_culture = dakinshi
 						accepted_culture = antmvura
 						accepted_culture = kombedak
 						accepted_culture = umsozidak
@@ -5540,7 +5706,14 @@ pop_menu_military_change_tech = {
 			change_unit_type = tech_west_sarhaly
 		}
 		else_if = { 
-			limit = { capital_scope = { superregion = south_sarhal_superregion } }
+			limit = { 
+				capital_scope = { 
+					OR = { 
+						superregion = djinnakah_superregion
+						superregion = taneyas_superregion
+					}
+				}
+			}
 			if = {
 				limit = { 
 					OR = {
@@ -5565,12 +5738,12 @@ pop_menu_military_change_tech = {
 			limit = {
 				OR = {
 					capital_scope = { superregion = yanshen_superregion }
-					capital_scope = { superregion = south_haless_superregion }
+					capital_scope = { superregion = vimdatrong_superregion }
 				}
 			}
 			change_unit_type = tech_halessi
 		}
-		else_if = { limit = { capital_scope = { superregion = north_haless_superregion } }
+		else_if = { limit = { capital_scope = { superregion = gozengun_superregion } }
 			change_unit_type = tech_shuvuush
 		}
 		else_if = { limit = { capital_scope = { superregion = forbidden_lands_superregion } }
@@ -5599,8 +5772,8 @@ pop_menu_military_change_tech = {
 			limit = {
 				OR = {
 					capital_scope = { superregion = yanshen_superregion }
-					capital_scope = { superregion = south_haless_superregion }
-					capital_scope = { superregion = north_haless_superregion }
+					capital_scope = { superregion = vimdatrong_superregion }
+					capital_scope = { superregion = gozengun_superregion }
 					capital_scope = { superregion = rahen_superregion }
 					primary_culture = goldscale_kobold
 					primary_culture = dragonfire_kobold
@@ -5626,7 +5799,7 @@ pop_menu_military_change_tech = {
 			limit = {
 				OR = {
 					capital_scope = { superregion = yanshen_superregion }
-					capital_scope = { superregion = south_haless_superregion }
+					capital_scope = { superregion = vimdatrong_superregion }
 					capital_scope = { superregion = rahen_superregion }
 					primary_culture = horned_ogre
 					AND = {
@@ -5640,7 +5813,7 @@ pop_menu_military_change_tech = {
 		else_if = {
 			limit = {
 				OR = {
-					capital_scope = { superregion = north_haless_superregion }
+					capital_scope = { superregion = gozengun_superregion }
 					AND = {
 						accepted_culture = soulseeker_ogre
 						NOT = { culture_group = ogre }
@@ -5786,7 +5959,7 @@ pop_menu_military_change_tech = {
             limit = {
                 OR = {
                     capital_scope = {
-						superregion = west_sarhal_superregion
+						superregion = tanib_dajek_superregion
 					}
 					is_vyzemby_primary_culture = yes
                     AND = {
@@ -5871,12 +6044,12 @@ update_unit_sprites_for_racial_mil = {
 			hidden_effect = { apply_sprite_pack = indiangfx_sprite_pack }
 		}
 		
-		# south haless + yanshen
+		# vimdatrong + yanshen
 		else_if = {
 			limit = {
 				capital_scope = {
 					OR = {
-						superregion = south_haless_superregion
+						superregion = vimdatrong_superregion
 						superregion = yanshen_superregion
 					}
 				}
@@ -5890,8 +6063,8 @@ update_unit_sprites_for_racial_mil = {
 			limit = {
 				capital_scope = {
 					OR = {
-						superregion = north_haless_superregion
-						superregion = forbidden_plains_superregion
+						superregion = gozengun_superregion
+						superregion = forbidden_lands_superregion
 					}
 				}
 			}
@@ -5905,7 +6078,8 @@ update_unit_sprites_for_racial_mil = {
 				capital_scope = {
 					OR = {
 						superregion = east_sarhal_superregion
-						superregion = south_sarhal_superregion
+						superregion = djinnakah_superregion
+						superregion = taneyas_superregion
 					}
 				}
 			}
@@ -6194,20 +6368,10 @@ update_unit_sprites_for_racial_mil = {
 
 	else_if = {
 		limit = { has_country_modifier = troll_military }
-		# TODO update if trolls get unique models
-		
-		# swamp trolls
-		if = {
-			limit = { capital_scope = { region = yezel_mora_region } }
-			custom_tooltip = swap_to_swamp_troll_sprites_tooltip
-			hidden_effect = { apply_sprite_pack = africangfx_sprite_pack }
-		}
-		
-		# gerudian trolls (default fallback)
-		else = {
-			custom_tooltip = swap_to_gerudian_troll_sprites_tooltip
-			hidden_effect = { apply_sprite_pack = westerngfx_sprite_pack }
-		}
+		# TODO update if trolls get regional unique models
+
+		custom_tooltip = swap_to_swamp_troll_sprites_tooltip
+		hidden_effect = { apply_sprite_pack = troll_sprite_pack }
 	}
 
 	else_if = {
@@ -6220,7 +6384,7 @@ update_unit_sprites_for_racial_mil = {
 				capital_scope = {
 					OR = {
 						superregion = bulwar_superregion
-						superregion = far_salahad_superregion
+						region = far_salahad_region
 					}
 				}
 			}
@@ -6277,6 +6441,13 @@ update_unit_sprites_for_racial_mil = {
 		custom_tooltip = swap_to_lizardfolk_sprites_tooltip
 		hidden_effect = { apply_sprite_pack = muslimgfx_sprite_pack }
 	}
+
+	else_if = {
+		limit = { has_country_modifier = mechanim_military }
+		# TODO update if mechanim get unique models
+		custom_tooltip = swap_to_mechanim_sprites_tooltip
+		hidden_effect = { apply_sprite_pack = asiangfx_sprite_pack }
+	}
 }
 
 grant_unlimited_state_action = {
@@ -6298,44 +6469,46 @@ generic_increase_state_action_malus = { #this can be called to take away free st
 		limit = { has_country_flag = unlimited_$action$ }
 		custom_tooltip = $action$_free_tt
 	}
-	else_if = {
-		limit = { check_variable = { which = remaining_free_$action$ value = 1 } }
-		custom_tooltip = $action$_below_limit_tt
-	}
 	else = {
-		custom_tooltip = $action$_limit_tt
-	}
-	hidden_effect = { change_variable = { which = remaining_free_$action$ value = -1 } } #starts at 1 for all nations by default
-	if = {
-		limit = {
-			OR = {
-				AND = {
-					check_variable = { which = remaining_free_$action$ value = 0 }
-					NOT = { check_variable = { which = remaining_free_$action$ value = 1 } }
-					ai = no
-				}
-				AND = { #ai are a little dumb and need the extra buffer
-					check_variable = { which = remaining_free_$action$ value = -1 }
-					NOT = { check_variable = { which = remaining_free_$action$ value = 0 } }
-					ai = yes
+		if = {
+			limit = { check_variable = { which = remaining_free_$action$ value = 1 } }
+			custom_tooltip = $action$_below_limit_tt
+		}
+		else = {
+			custom_tooltip = $action$_limit_tt
+		}
+		hidden_effect = { change_variable = { which = remaining_free_$action$ value = -1 } } #starts at 1 for all nations by default
+		if = {
+			limit = {
+				OR = {
+					AND = {
+						check_variable = { which = remaining_free_$action$ value = 0 }
+						NOT = { check_variable = { which = remaining_free_$action$ value = 1 } }
+						ai = no
+					}
+					AND = { #ai are a little dumb and need the extra buffer
+						check_variable = { which = remaining_free_$action$ value = -1 }
+						NOT = { check_variable = { which = remaining_free_$action$ value = 0 } }
+						ai = yes
+					}
 				}
 			}
+			hidden_effect = { add_country_modifier = { name = $action$_diplomats_0 duration = -1 hidden = yes } }
 		}
-		hidden_effect = { add_country_modifier = { name = $action$_diplomats_0 duration = -1 hidden = yes } }
-	}
-	else = {
-		trigger_switch = {
-			on_trigger = has_country_modifier
-			$action$_diplomats_0 = { remove_country_modifier = $action$_diplomats_0 add_country_modifier = { name = $action$_diplomats_1 duration = -1 desc = while_policy_active } }
-			$action$_diplomats_1 = { remove_country_modifier = $action$_diplomats_1 add_country_modifier = { name = $action$_diplomats_2 duration = -1 desc = while_policy_active } }
-			$action$_diplomats_2 = { remove_country_modifier = $action$_diplomats_2 add_country_modifier = { name = $action$_diplomats_3 duration = -1 desc = while_policy_active } }
-			$action$_diplomats_3 = { remove_country_modifier = $action$_diplomats_3 add_country_modifier = { name = $action$_diplomats_4 duration = -1 desc = while_policy_active } }
-			$action$_diplomats_4 = { remove_country_modifier = $action$_diplomats_4 add_country_modifier = { name = $action$_diplomats_5 duration = -1 desc = while_policy_active } }
-			$action$_diplomats_5 = { remove_country_modifier = $action$_diplomats_5 add_country_modifier = { name = $action$_diplomats_6 duration = -1 desc = while_policy_active } }
-			$action$_diplomats_6 = { remove_country_modifier = $action$_diplomats_6 add_country_modifier = { name = $action$_diplomats_7 duration = -1 desc = while_policy_active } }
-			$action$_diplomats_7 = { remove_country_modifier = $action$_diplomats_7 add_country_modifier = { name = $action$_diplomats_8 duration = -1 desc = while_policy_active } }
-			$action$_diplomats_8 = { remove_country_modifier = $action$_diplomats_8 add_country_modifier = { name = $action$_diplomats_9 duration = -1 desc = while_policy_active } }
-			$action$_diplomats_9 = { remove_country_modifier = $action$_diplomats_9 add_country_modifier = { name = $action$_diplomats_10 duration = -1 desc = while_policy_active } }
+		else = {
+			trigger_switch = {
+				on_trigger = has_country_modifier
+				$action$_diplomats_0 = { remove_country_modifier = $action$_diplomats_0 add_country_modifier = { name = $action$_diplomats_1 duration = -1 desc = while_policy_active } }
+				$action$_diplomats_1 = { remove_country_modifier = $action$_diplomats_1 add_country_modifier = { name = $action$_diplomats_2 duration = -1 desc = while_policy_active } }
+				$action$_diplomats_2 = { remove_country_modifier = $action$_diplomats_2 add_country_modifier = { name = $action$_diplomats_3 duration = -1 desc = while_policy_active } }
+				$action$_diplomats_3 = { remove_country_modifier = $action$_diplomats_3 add_country_modifier = { name = $action$_diplomats_4 duration = -1 desc = while_policy_active } }
+				$action$_diplomats_4 = { remove_country_modifier = $action$_diplomats_4 add_country_modifier = { name = $action$_diplomats_5 duration = -1 desc = while_policy_active } }
+				$action$_diplomats_5 = { remove_country_modifier = $action$_diplomats_5 add_country_modifier = { name = $action$_diplomats_6 duration = -1 desc = while_policy_active } }
+				$action$_diplomats_6 = { remove_country_modifier = $action$_diplomats_6 add_country_modifier = { name = $action$_diplomats_7 duration = -1 desc = while_policy_active } }
+				$action$_diplomats_7 = { remove_country_modifier = $action$_diplomats_7 add_country_modifier = { name = $action$_diplomats_8 duration = -1 desc = while_policy_active } }
+				$action$_diplomats_8 = { remove_country_modifier = $action$_diplomats_8 add_country_modifier = { name = $action$_diplomats_9 duration = -1 desc = while_policy_active } }
+				$action$_diplomats_9 = { remove_country_modifier = $action$_diplomats_9 add_country_modifier = { name = $action$_diplomats_10 duration = -1 desc = while_policy_active } }
+			}
 		}
 	}
 }
@@ -6344,34 +6517,47 @@ generic_decrease_state_action_malus = { #this can be called to give free state a
 		limit = { has_country_flag = unlimited_$action$ }
 		custom_tooltip = $action$_free_tt
 	}
-	else_if = {
-		limit = { check_variable = { which = remaining_free_$action$ value = 0 } }
-		custom_tooltip = $action$_below_limit_tt
-	}
 	else = {
-		custom_tooltip = $action$_limit_tt
-	}
-	hidden_effect = { change_variable = { which = remaining_free_$action$ value = 1 } }
-	trigger_switch = {
-		on_trigger = has_country_modifier
-		$action$_diplomats_0 = { remove_country_modifier = $action$_diplomats_0 }
-		$action$_diplomats_1 = { remove_country_modifier = $action$_diplomats_1 add_country_modifier = { name = $action$_diplomats_0 duration = -1 desc = while_policy_active } }
-		$action$_diplomats_2 = { remove_country_modifier = $action$_diplomats_2 add_country_modifier = { name = $action$_diplomats_1 duration = -1 desc = while_policy_active } }
-		$action$_diplomats_3 = { remove_country_modifier = $action$_diplomats_3 add_country_modifier = { name = $action$_diplomats_2 duration = -1 desc = while_policy_active } }
-		$action$_diplomats_4 = { remove_country_modifier = $action$_diplomats_4 add_country_modifier = { name = $action$_diplomats_3 duration = -1 desc = while_policy_active } }
-		$action$_diplomats_5 = { remove_country_modifier = $action$_diplomats_5 add_country_modifier = { name = $action$_diplomats_4 duration = -1 desc = while_policy_active } }
-		$action$_diplomats_6 = { remove_country_modifier = $action$_diplomats_6 add_country_modifier = { name = $action$_diplomats_5 duration = -1 desc = while_policy_active } }
-		$action$_diplomats_7 = { remove_country_modifier = $action$_diplomats_7 add_country_modifier = { name = $action$_diplomats_6 duration = -1 desc = while_policy_active } }
-		$action$_diplomats_8 = { remove_country_modifier = $action$_diplomats_8 add_country_modifier = { name = $action$_diplomats_7 duration = -1 desc = while_policy_active } }
-		$action$_diplomats_9 = { remove_country_modifier = $action$_diplomats_9 add_country_modifier = { name = $action$_diplomats_8 duration = -1 desc = while_policy_active } }
-		$action$_diplomats_10 = { remove_country_modifier = $action$_diplomats_10 add_country_modifier = { name = $action$_diplomats_9 duration = -1 desc = while_policy_active } }
+		if = {
+			limit = { check_variable = { which = remaining_free_$action$ value = 0 } }
+			custom_tooltip = $action$_below_limit_tt
+		}
+		else = {
+			custom_tooltip = $action$_limit_tt
+		}
+		hidden_effect = { change_variable = { which = remaining_free_$action$ value = 1 } }
+		trigger_switch = {
+			on_trigger = has_country_modifier
+			$action$_diplomats_0 = { remove_country_modifier = $action$_diplomats_0 }
+			$action$_diplomats_1 = { remove_country_modifier = $action$_diplomats_1 add_country_modifier = { name = $action$_diplomats_0 duration = -1 desc = while_policy_active } }
+			$action$_diplomats_2 = { remove_country_modifier = $action$_diplomats_2 add_country_modifier = { name = $action$_diplomats_1 duration = -1 desc = while_policy_active } }
+			$action$_diplomats_3 = { remove_country_modifier = $action$_diplomats_3 add_country_modifier = { name = $action$_diplomats_2 duration = -1 desc = while_policy_active } }
+			$action$_diplomats_4 = { remove_country_modifier = $action$_diplomats_4 add_country_modifier = { name = $action$_diplomats_3 duration = -1 desc = while_policy_active } }
+			$action$_diplomats_5 = { remove_country_modifier = $action$_diplomats_5 add_country_modifier = { name = $action$_diplomats_4 duration = -1 desc = while_policy_active } }
+			$action$_diplomats_6 = { remove_country_modifier = $action$_diplomats_6 add_country_modifier = { name = $action$_diplomats_5 duration = -1 desc = while_policy_active } }
+			$action$_diplomats_7 = { remove_country_modifier = $action$_diplomats_7 add_country_modifier = { name = $action$_diplomats_6 duration = -1 desc = while_policy_active } }
+			$action$_diplomats_8 = { remove_country_modifier = $action$_diplomats_8 add_country_modifier = { name = $action$_diplomats_7 duration = -1 desc = while_policy_active } }
+			$action$_diplomats_9 = { remove_country_modifier = $action$_diplomats_9 add_country_modifier = { name = $action$_diplomats_8 duration = -1 desc = while_policy_active } }
+			$action$_diplomats_10 = { remove_country_modifier = $action$_diplomats_10 add_country_modifier = { name = $action$_diplomats_9 duration = -1 desc = while_policy_active } }
+		}
 	}
 }
 generic_start_purge = {
+	[[free]
+		custom_tooltip = racial_policy_free
+		set_country_flag = free_$race$_genocide
+		if = {
+			limit = { has_country_modifier = racial_pop_$race$_purge }
+			hidden_effect = { generic_decrease_state_action_malus = { action = genocide } }
+		}
+	]
 	if = {
 		limit = { NOT = { has_country_modifier = racial_pop_$race$_purge } }
 		if = {
-			limit = { NOT = { has_country_flag = unlimited_genocide } }
+			limit = { has_country_flag = free_$race$_genocide }
+			custom_tooltip = free_genocide_tt
+		}
+		else = {
 			generic_increase_state_action_malus = { action = genocide }
 		}
 		add_country_modifier = {
@@ -6407,9 +6593,23 @@ generic_start_purge = {
 	}
 }
 generic_start_expulsion = {
+	[[free]
+		custom_tooltip = racial_policy_free
+		set_country_flag = free_$race$_genocide
+		if = {
+			limit = { has_country_modifier = racial_pop_$race$_expulsion }
+			hidden_effect = { generic_decrease_state_action_malus = { action = genocide } }
+		}
+	]
 	if = {
 		limit = { NOT = { has_country_modifier = racial_pop_$race$_expulsion } }
-		generic_increase_state_action_malus = { action = genocide }
+		if = {
+			limit = { has_country_flag = free_$race$_genocide }
+			custom_tooltip = free_genocide_tt
+		}
+		else = {
+			generic_increase_state_action_malus = { action = genocide }
+		}
 		add_country_modifier = {
 			name = racial_pop_$race$_expulsion
 			duration = -1
@@ -6583,9 +6783,7 @@ racial_purge_disabled_tt =  {
 	if = {
 		limit = {
 			has_country_flag = has_caste_estates
-			is_race_in_any_caste = {
-				$RACE$ = yes
-			}
+			is_race_in_any_caste = { race = $RACE$ }
 		}
 		custom_tooltip = pop_menu_cannot_purge_castes_tt
 	}
@@ -6620,9 +6818,7 @@ racial_expel_disabled_tt = {
 	if = {
 		limit = {
 			has_country_flag = has_caste_estates
-			is_race_in_any_caste = {
-				$RACE$ = yes
-			}
+			is_race_in_any_caste = { race = $RACE$ }
 		}
 		custom_tooltip = pop_menu_cannot_purge_castes_tt
 	}
@@ -6645,9 +6841,9 @@ racial_focus_disabled_tt = {
 	if = { limit = { NOT = { can_afford_state_action_diplomat_malus = { action = focus } } }
 		custom_tooltip = pop_menu_need_a_diplomat_tt
 	}
-	if = { limit = { NOT = { dip_power = 50 } }
-		custom_tooltip = pop_menu_cannot_focus_not_enough_dip_tt
-	}
+	if = { limit = { NOT = { dip_power = 50 has_country_flag = focusing_is_free_flag } }
+        custom_tooltip = pop_menu_cannot_focus_not_enough_dip_tt
+    }	
 }
 
 remove_all_racial_majority = {
@@ -6666,6 +6862,7 @@ remove_all_racial_majority = {
 	remove_racial_majority = { race = human }
 	remove_racial_majority = { race = kobold }
 	remove_racial_majority = { race = lizardfolk }
+	remove_racial_majority = { race = mechanim }
 	remove_racial_majority = { race = ogre }
 	remove_racial_majority = { race = orcish }
 	remove_racial_majority = { race = ruinborn }
@@ -6738,6 +6935,12 @@ update_ruler_racial_flag = {
 			ruler_is_lizardfolk = yes
 		}
 		set_ruler_flag = lizardfolk_ruler
+	}
+	else_if = {
+		limit = {
+			ruler_is_mechanim = yes
+		}
+		set_ruler_flag = mechanim_ruler
 	}
 	else_if = {
 		limit = {
@@ -6858,6 +7061,12 @@ update_heir_racial_flag = {
 	}
 	else_if = {
 		limit = {
+			heir_is_mechanim = yes
+		}
+		set_heir_flag = mechanim_heir
+	}
+	else_if = {
+		limit = {
 			heir_is_halfling = yes
 		}
 		set_heir_flag = halfling_heir
@@ -6972,6 +7181,12 @@ update_consort_racial_flag = {
 			consort_is_lizardfolk = yes
 		}
 		set_consort_flag = lizardfolk_consort
+	}
+	else_if = {
+		limit = {
+			consort_is_mechanim = yes
+		}
+		set_consort_flag = mechanim_consort
 	}
 	else_if = {
 		limit = {
@@ -7614,6 +7829,7 @@ calculate_refugee_exploit_rewards = {
 }
 
 set_tolerance_to_coexisting_or_higher = {
+	custom_tooltip = set_tolerance_of_$race$_to_coexisting_or_higher_tt
 	hidden_effect = {
 		if = {
 			limit = {
@@ -7652,7 +7868,7 @@ set_all_tolerance_to_coexisting_or_higher = {
 	set_tolerance_to_coexisting_or_higher = { race = centaur }
 	set_tolerance_to_coexisting_or_higher = { race = ogre }
 	set_tolerance_to_coexisting_or_higher = { race = lizardfolk }
-	#set_tolerance_to_coexisting_or_higher = { race = mechanim } When Insyaa comes
+	set_tolerance_to_coexisting_or_higher = { race = mechanim }
 }
 
 set_tolerance_to_integrated_or_higher = {
@@ -7689,7 +7905,7 @@ set_all_tolerance_to_integrated_or_higher = {
     set_tolerance_to_integrated_or_higher = { race = centaur }
     set_tolerance_to_integrated_or_higher = { race = ogre }
     set_tolerance_to_integrated_or_higher = { race = lizardfolk }
-    #set_tolerance_to_integrated_or_higher = { race = mechanim } When Insyaa comes
+    set_tolerance_to_integrated_or_higher = { race = mechanim }
 }
 
 set_tolerance_below_coexisting = {
@@ -7731,7 +7947,7 @@ set_all_tolerance_below_coexisting = {
     set_tolerance_below_coexisting = { race = centaur }
     set_tolerance_below_coexisting = { race = ogre }
     set_tolerance_below_coexisting = { race = lizardfolk }
-    #set_tolerance_below_coexisting = { race = mechanim } When Insyaa comes
+    set_tolerance_below_coexisting = { race = mechanim }
 }
 
 set_tolerance_below_integrated = {
@@ -7770,5 +7986,571 @@ set_all_tolerance_below_integrated = {
     set_tolerance_below_integrated = { race = centaur }
     set_tolerance_below_integrated = { race = ogre }
     set_tolerance_below_integrated = { race = lizardfolk }
-    #set_tolerance_below_integrated = { race = mechanim } When Insyaa comes
+    set_tolerance_below_integrated = { race = mechanim }
+}
+
+end_all_expel = {
+	generic_end_expulsion = { race = elven }
+	generic_end_expulsion = { race = dwarven }
+	generic_end_expulsion = { race = halfling }
+	generic_end_expulsion = { race = gnomish }
+	generic_end_expulsion = { race = kobold }
+	generic_end_expulsion = { race = orcish }
+	generic_end_expulsion = { race = half_orcish }
+	generic_end_expulsion = { race = human }
+	generic_end_expulsion = { race = gnollish }
+	generic_end_expulsion = { race = ruinborn }
+	generic_end_expulsion = { race = goblin }
+	generic_end_expulsion = { race = harpy }
+	generic_end_expulsion = { race = troll }
+	generic_end_expulsion = { race = half_elven }
+	generic_end_expulsion = { race = harimari }
+	generic_end_expulsion = { race = hobgoblin }
+	generic_end_expulsion = { race = centaur }
+	generic_end_expulsion = { race = ogre }
+	generic_end_expulsion = { race = lizardfolk }
+	generic_end_expulsion = { race = mechanim }
+}
+
+end_all_purge = {
+	generic_end_purge = { race = elven }
+	generic_end_purge = { race = dwarven }
+	generic_end_purge = { race = halfling }
+	generic_end_purge = { race = gnomish }
+	generic_end_purge = { race = kobold }
+	generic_end_purge = { race = orcish }
+	generic_end_purge = { race = half_orcish }
+	generic_end_purge = { race = human }
+	generic_end_purge = { race = gnollish }
+	generic_end_purge = { race = ruinborn }
+	generic_end_purge = { race = goblin }
+	generic_end_purge = { race = harpy }
+	generic_end_purge = { race = troll }
+	generic_end_purge = { race = half_elven }
+	generic_end_purge = { race = harimari }
+	generic_end_purge = { race = hobgoblin }
+	generic_end_purge = { race = centaur }
+	generic_end_purge = { race = ogre }
+	generic_end_purge = { race = lizardfolk }
+	generic_end_purge = { race = mechanim }
+}
+
+#4 effects to grab a random present race and use it in a scripted effect of choice. remember to use the fourth effect to clear the flags after
+save_random_present_race_as_flag_effect_province = {	#primary excluded. province scope.
+	random_list = {
+		1000 = {
+			trigger = {
+				fast_has_pop_of_race = { race = centaur }
+				owner = {
+					NOT = { has_country_modifier = centaur_administration }
+					[[prevflag] NOT = { has_country_flag = $prevflag$_centaur }]	#this is if you want to choose a second race. prevflag = name of the flag used for the first race chosen
+				}																	#if the effect don't find a second race it will set country flag no_second_minority instead
+			}
+			owner = { set_country_flag = $flag$_centaur }
+		}
+		1000 = {
+			trigger = {
+				fast_has_pop_of_race = { race = dwarven }
+				owner = {
+					NOT = { has_country_modifier = dwarven_administration }
+					[[prevflag] NOT = { has_country_flag = $prevflag$_dwarven }]
+				}
+			}
+			owner = { set_country_flag = $flag$_dwarven }
+		}
+		1000 = {
+			trigger = {
+				fast_has_pop_of_race = { race = elven }
+				owner = {
+					NOT = { has_country_modifier = elven_administration }
+					[[prevflag] NOT = { has_country_flag = $prevflag$_elven }]
+				}
+			}
+			owner = { set_country_flag = $flag$_elven }
+		}
+		1000 = {
+			trigger = {
+				fast_has_pop_of_race = { race = gnollish }
+				owner = {
+					NOT = { has_country_modifier = gnollish_administration }
+					[[prevflag] NOT = { has_country_flag = $prevflag$_gnollish }]
+				}
+			}
+			owner = { set_country_flag = $flag$_gnollish }
+		}
+		1000 = {
+			trigger = {
+				fast_has_pop_of_race = { race = gnomish }
+				owner = {
+					NOT = { has_country_modifier = gnomish_administration }
+					[[prevflag] NOT = { has_country_flag = $prevflag$_gnomish }]
+				}
+			}
+			owner = { set_country_flag = $flag$_gnomish }
+		}
+		1000 = {
+			trigger = {
+				fast_has_pop_of_race = { race = goblin }
+				owner = {
+					NOT = { has_country_modifier = goblin_administration }
+					[[prevflag] NOT = { has_country_flag = $prevflag$_goblin }]
+				}
+			}
+			owner = { set_country_flag = $flag$_goblin }
+		}
+		1000 = {
+			trigger = {
+				fast_has_pop_of_race = { race = halfling }
+				owner = {
+					NOT = { has_country_modifier = halfling_administration }
+					[[prevflag] NOT = { has_country_flag = $prevflag$_halfling }]
+				}
+			}
+			owner = { set_country_flag = $flag$_halfling }
+		}
+		1000 = {
+			trigger = {
+				fast_has_pop_of_race = { race = half_elven }
+				owner = {
+					NOT = { has_country_modifier = half_elven_administration }
+					[[prevflag] NOT = { has_country_flag = $prevflag$_half_elven }]
+				}
+			}
+			owner = { set_country_flag = $flag$_half_elven }
+		}
+		1000 = {
+			trigger = {
+				fast_has_pop_of_race = { race = half_orcish }
+				owner = {
+					NOT = { has_country_modifier = half_orcish_administration }
+					[[prevflag] NOT = { has_country_flag = $prevflag$_half_orcish }]
+				}
+			}
+			owner = { set_country_flag = $flag$_half_orcish }
+		}
+		1000 = {
+			trigger = {
+				fast_has_pop_of_race = { race = harimari }
+				owner = {
+					NOT = { has_country_modifier = harimari_administration }
+					[[prevflag] NOT = { has_country_flag = $prevflag$_harimari }]
+				}
+			}
+			owner = { set_country_flag = $flag$_harimari }
+		}
+		1000 = {
+			trigger = {
+				fast_has_pop_of_race = { race = harpy }
+				owner = {
+					NOT = { has_country_modifier = harpy_administration }
+					[[prevflag] NOT = { has_country_flag = $prevflag$_harpy }]
+				}
+			}
+			owner = { set_country_flag = $flag$_harpy }
+		}
+		1000 = {
+			trigger = {
+				fast_has_pop_of_race = { race = hobgoblin }
+				owner = {
+					NOT = { has_country_modifier = hobgoblin_administration }
+					[[prevflag] NOT = { has_country_flag = $prevflag$_hobgoblin }]
+				}
+			}
+			owner = { set_country_flag = $flag$_hobgoblin }
+		}
+		1000 = {
+			trigger = {
+				fast_has_pop_of_race = { race = human }
+				owner = {
+					NOT = { has_country_modifier = human_administration }
+					[[prevflag] NOT = { has_country_flag = $prevflag$_human }]
+				}
+			}
+			owner = { set_country_flag = $flag$_human }
+		}
+		1000 = {
+			trigger = {
+				fast_has_pop_of_race = { race = kobold }
+				owner = {
+					NOT = { has_country_modifier = kobold_administration }
+					[[prevflag] NOT = { has_country_flag = $prevflag$_kobold }]
+				}
+			}
+			owner = { set_country_flag = $flag$_kobold }
+		}
+		1000 = {
+			trigger = {
+				fast_has_pop_of_race = { race = lizardfolk }
+				owner = {
+					NOT = { has_country_modifier = lizardfolk_administration }
+					[[prevflag] NOT = { has_country_flag = $prevflag$_lizardfolk }]
+				}
+			}
+			owner = { set_country_flag = $flag$_lizardfolk }
+		}
+		1000 = {
+			trigger = {
+				fast_has_pop_of_race = { race = mechanim }
+				owner = {
+					NOT = { has_country_modifier = mechanim_administration }
+					[[prevflag] NOT = { has_country_flag = $prevflag$_mechanim }]
+				}
+			}
+			owner = { set_country_flag = $flag$_mechanim }
+		}
+		1000 = {
+			trigger = {
+				fast_has_pop_of_race = { race = ogre }
+				owner = {
+					NOT = { has_country_modifier = ogre_administration }
+					[[prevflag] NOT = { has_country_flag = $prevflag$_ogre }]
+				}
+			}
+			owner = { set_country_flag = $flag$_ogre }
+		}
+		1000 = {
+			trigger = {
+				fast_has_pop_of_race = { race = orcish }
+				owner = { 
+					NOT = { has_country_modifier = orcish_administration }
+					[[prevflag] NOT = { has_country_flag = $prevflag$_orcish }]
+				}
+			}
+			owner = { set_country_flag = $flag$_orcish }
+		}
+		1000 = {
+			trigger = {
+				fast_has_pop_of_race = { race = ruinborn }
+				owner = {
+					NOT = { has_country_modifier = ruinborn_administration }
+					[[prevflag] NOT = { has_country_flag = $prevflag$_ruinborn }]
+				}
+			}
+			owner = { set_country_flag = $flag$_ruinborn }
+		}
+		1000 = {
+			trigger = {
+				fast_has_pop_of_race = { race = troll }
+				owner = {
+					NOT = { has_country_modifier = troll_administration }
+					[[prevflag] NOT = { has_country_flag = $prevflag$_troll }]
+				}
+			}
+			owner = { set_country_flag = $flag$_troll }
+		}
+		[prevflag] 1 = { owner = { set_country_flag = no_second_minority } } ]
+	}
+}
+
+save_random_present_race_as_flag_effect_country = {	#primary excluded. country scope.
+	random_list = {
+		1000 = {
+			trigger = {
+				fast_owns_num_pops_of_race = { race = centaur amount = 1 }
+				NOT = { has_country_modifier = centaur_administration }
+				[[prevflag] NOT = { has_country_flag = $prevflag$_centaur }]	#this is if you want to choose a second race. prevflag = name of the flag used for the first race chosen
+			}																	#if the effect don't find a second race it will set country flag no_second_minority instead
+			set_country_flag = $flag$_centaur
+		}
+		1000 = {
+			trigger = {
+				fast_owns_num_pops_of_race = { race = dwarven amount = 1 }
+				NOT = { has_country_modifier = dwarven_administration }
+				[[prevflag] NOT = { has_country_flag = $prevflag$_dwarven }]
+			}
+			set_country_flag = $flag$_dwarven
+		}
+		1000 = {
+			trigger = {
+				fast_owns_num_pops_of_race = { race = elven amount = 1 }
+				NOT = { has_country_modifier = elven_administration }
+				[[prevflag] NOT = { has_country_flag = $prevflag$_elven }]
+			}
+			set_country_flag = $flag$_elven
+		}
+		1000 = {
+			trigger = {
+				fast_owns_num_pops_of_race = { race = gnollish amount = 1 }
+				NOT = { has_country_modifier = gnollish_administration }
+				[[prevflag] NOT = { has_country_flag = $prevflag$_gnollish }]
+			}
+			set_country_flag = $flag$_gnollish
+		}
+		1000 = {
+			trigger = {
+				fast_owns_num_pops_of_race = { race = gnomish amount = 1 }
+				NOT = { has_country_modifier = gnomish_administration }
+				[[prevflag] NOT = { has_country_flag = $prevflag$_gnomish }]
+			}
+			set_country_flag = $flag$_gnomish
+		}
+		1000 = {
+			trigger = {
+				fast_owns_num_pops_of_race = { race = goblin amount = 1 }
+				NOT = { has_country_modifier = goblin_administration }
+				[[prevflag] NOT = { has_country_flag = $prevflag$_goblin }]
+			}
+			set_country_flag = $flag$_goblin
+		}
+		1000 = {
+			trigger = {
+				fast_owns_num_pops_of_race = { race = halfling amount = 1 }
+				NOT = { has_country_modifier = halfling_administration }
+				[[prevflag] NOT = { has_country_flag = $prevflag$_halfling }]
+			}
+			set_country_flag = $flag$_halfling
+		}
+		1000 = {
+			trigger = {
+				fast_owns_num_pops_of_race = { race = half_elven amount = 1 }
+				NOT = { has_country_modifier = half_elven_administration }
+				[[prevflag] NOT = { has_country_flag = $prevflag$_half_elven }]
+			}
+			set_country_flag = $flag$_half_elven
+		}
+		1000 = {
+			trigger = {
+				fast_owns_num_pops_of_race = { race = half_orcish amount = 1 }
+				NOT = { has_country_modifier = half_orcish_administration }
+				[[prevflag] NOT = { has_country_flag = $prevflag$_half_orcish }]
+			}
+			set_country_flag = $flag$_half_orcish
+		}
+		1000 = {
+			trigger = {
+				fast_owns_num_pops_of_race = { race = harimari amount = 1 }
+				NOT = { has_country_modifier = harimari_administration }
+				[[prevflag] NOT = { has_country_flag = $prevflag$_harimari }]
+			}
+			set_country_flag = $flag$_harimari
+		}
+		1000 = {
+			trigger = {
+				fast_owns_num_pops_of_race = { race = harpy amount = 1 }
+				NOT = { has_country_modifier = harpy_administration }
+				[[prevflag] NOT = { has_country_flag = $prevflag$_harpy }]
+			}
+			set_country_flag = $flag$_harpy
+		}
+		1000 = {
+			trigger = {
+				fast_owns_num_pops_of_race = { race = hobgoblin amount = 1 }
+				NOT = { has_country_modifier = hobgoblin_administration }
+				[[prevflag] NOT = { has_country_flag = $prevflag$_hobgoblin }]
+			}
+			set_country_flag = $flag$_hobgoblin
+		}
+		1000 = {
+			trigger = {
+				fast_owns_num_pops_of_race = { race = human amount = 1 }
+				NOT = { has_country_modifier = human_administration }
+				[[prevflag] NOT = { has_country_flag = $prevflag$_human }]
+			}
+			set_country_flag = $flag$_human
+		}
+		1000 = {
+			trigger = {
+				fast_owns_num_pops_of_race = { race = kobold amount = 1 }
+				NOT = { has_country_modifier = kobold_administration }
+				[[prevflag] NOT = { has_country_flag = $prevflag$_kobold }]
+			}
+			set_country_flag = $flag$_kobold
+		}
+		1000 = {
+			trigger = {
+				fast_owns_num_pops_of_race = { race = lizardfolk }
+				NOT = { has_country_modifier = lizardfolk_administration }
+				[[prevflag] NOT = { has_country_flag = $prevflag$_lizardfolk }]
+			}
+			set_country_flag = $flag$_lizardfolk
+		}
+		1000 = {
+			trigger = {
+				fast_owns_num_pops_of_race = { race = mechanim amount = 1 }
+				NOT = { has_country_modifier = mechanim_administration }
+				[[prevflag] NOT = { has_country_flag = $prevflag$_mechanim }]
+			}
+			set_country_flag = $flag$_mechanim
+		}
+		1000 = {
+			trigger = {
+				fast_owns_num_pops_of_race = { race = ogre amount = 1 }
+				NOT = { has_country_modifier = ogre_administration }
+				[[prevflag] NOT = { has_country_flag = $prevflag$_ogre }]
+			}
+			set_country_flag = $flag$_ogre
+		}
+		1000 = {
+			trigger = {
+				fast_owns_num_pops_of_race = { race = orcish amount = 1 }
+				NOT = { has_country_modifier = orcish_administration }
+				[[prevflag] NOT = { has_country_flag = $prevflag$_orcish }]
+			}
+			set_country_flag = $flag$_orcish
+		}
+		1000 = {
+			trigger = {
+				fast_owns_num_pops_of_race = { race = ruinborn amount = 1 }
+				NOT = { has_country_modifier = ruinborn_administration }
+				[[prevflag] NOT = { has_country_flag = $prevflag$_ruinborn }]
+			}
+			set_country_flag = $flag$_ruinborn
+		}
+		1000 = {
+			trigger = {
+				fast_owns_num_pops_of_race = { race = troll amount = 1 }
+				NOT = { has_country_modifier = troll_administration }
+				[[prevflag] NOT = { has_country_flag = $prevflag$_troll }]
+			}
+			set_country_flag = $flag$_troll
+		}
+		[prevflag] 1 = { set_country_flag = no_second_minority } ]
+	}
+}
+
+effect_for_saved_race = {		
+	if = {
+		limit = {
+			has_country_flag = $flag$_troll
+		}
+		$scripted_effect$ = { race = troll [[arguments] $arguments$ ] }
+	}
+	if = {
+		limit = {
+			has_country_flag = $flag$_ruinborn
+		}
+		$scripted_effect$ = { race = ruinborn [[arguments] $arguments$ ] }
+	}
+	if = {
+		limit = {
+			has_country_flag = $flag$_orcish
+		}
+		$scripted_effect$ = { race = orcish [[arguments] $arguments$ ] }
+	}
+	if = {
+		limit = {
+			has_country_flag = $flag$_ogre
+		}
+		$scripted_effect$ = { race = ogre [[arguments] $arguments$ ] }
+	}
+	if = {
+		limit = {
+			has_country_flag = $flag$_mechanim
+		}
+		$scripted_effect$ = { race = mechanim [[arguments] $arguments$ ] }
+	}
+	if = {
+		limit = {
+			has_country_flag = $flag$_lizardfolk
+		}
+		$scripted_effect$ = { race = lizardfolk [[arguments] $arguments$ ] }
+	}
+	if = {
+		limit = {
+			has_country_flag = $flag$_kobold
+		}
+		$scripted_effect$ = { race = kobold [[arguments] $arguments$ ] }
+	}
+	if = {
+		limit = {
+			has_country_flag = $flag$_human
+		}
+		$scripted_effect$ = { race = human [[arguments] $arguments$ ] }
+	}
+	if = {
+		limit = {
+			has_country_flag = $flag$_hobgoblin
+		}
+		$scripted_effect$ = { race = hobgoblin [[arguments] $arguments$ ] }
+	}
+	if = {
+		limit = {
+			has_country_flag = $flag$_harpy
+		}
+		$scripted_effect$ = { race = harpy [[arguments] $arguments$ ] }
+	}
+	if = {
+		limit = {
+			has_country_flag = $flag$_harimari
+		}
+		$scripted_effect$ = { race = harimari [[arguments] $arguments$ ] }
+	}
+	if = {
+		limit = {
+			has_country_flag = $flag$_half_orcish
+		}
+		$scripted_effect$ = { race = half_orcish [[arguments] $arguments$ ] }
+	}
+	if = {
+		limit = {
+			has_country_flag = $flag$_half_elven
+		}
+		$scripted_effect$ = { race = half_elven [[arguments] $arguments$ ] }
+	}
+	if = {
+		limit = {
+			has_country_flag = $flag$_halfling
+		}
+		$scripted_effect$ = { race = halfling [[arguments] $arguments$ ] }
+	}
+	if = {
+		limit = {
+			has_country_flag = $flag$_goblin
+		}
+		$scripted_effect$ = { race = goblin [[arguments] $arguments$ ] }
+	}
+	if = {
+		limit = {
+			has_country_flag = $flag$_gnomish
+		}
+		$scripted_effect$ = { race = gnomish [[arguments] $arguments$ ] }
+	}
+	if = {
+		limit = {
+			has_country_flag = $flag$_gnollish
+		}
+		$scripted_effect$ = { race = gnollish [[arguments] $arguments$ ] }
+	}
+	if = {
+		limit = {
+			has_country_flag = $flag$_elven
+		}
+		$scripted_effect$ = { race = elven [[arguments] $arguments$ ] }
+	}
+	if = {
+		limit = {
+			has_country_flag = $flag$_dwarven
+		}
+		$scripted_effect$ = { race = dwarven [[arguments] $arguments$ ] }
+	}
+	if = {
+		limit = {
+			has_country_flag = $flag$_centaur
+		}
+		$scripted_effect$ = { race = centaur [[arguments] $arguments$ ] }
+	}
+}
+
+clear_random_race_flags = {
+	clr_country_flag = $flag$_troll
+	clr_country_flag = $flag$_ruinborn
+	clr_country_flag = $flag$_orcish
+	clr_country_flag = $flag$_ogre
+	clr_country_flag = $flag$_mechanim
+	clr_country_flag = $flag$_lizardfolk
+	clr_country_flag = $flag$_kobold
+	clr_country_flag = $flag$_human
+	clr_country_flag = $flag$_hobgoblin
+	clr_country_flag = $flag$_harpy
+	clr_country_flag = $flag$_harimari
+	clr_country_flag = $flag$_halfling
+	clr_country_flag = $flag$_half_orcish
+	clr_country_flag = $flag$_half_elven
+	clr_country_flag = $flag$_goblin
+	clr_country_flag = $flag$_gnomish
+	clr_country_flag = $flag$_gnollish
+	clr_country_flag = $flag$_elven
+	clr_country_flag = $flag$_dwarven
+	clr_country_flag = $flag$_centaur
+	clr_country_flag = no_second_minority
 }

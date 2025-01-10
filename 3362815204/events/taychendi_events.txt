@@ -23,6 +23,9 @@ country_event = {
 			value = 0
 		}
 		every_ally = {
+			limit = {
+				NOT = { historical_friend_with = ROOT }
+			}
 			break_alliance = ROOT
 			if = {
 				limit = { is_in_war = { participants = ROOT } }
@@ -864,7 +867,7 @@ country_event = { #hidden startup, makes taychend rulers generals
 			}
 		}
 
-		G79 = { #vul tenvach
+		G79 = { #vuls tenvach
 			define_ruler_to_general = {
 				fire = 2
 				shock = 3
@@ -898,9 +901,9 @@ country_event = { #hidden startup, makes taychend rulers generals
 }
 
 
-################
-#Flavour Events#
-################
+######################
+#Raist Flavour Events#
+######################
 
 
 country_event = { #gangs of nenru nakar
@@ -1138,7 +1141,7 @@ country_event = { #kheionist philosopher
 				event_target:convert_province_3 = { change_religion = kheionism }
 			}
 		}
-		custom_tooltip = "25% chance that our §YHeir§! converts to §YKheionism§!."
+		custom_tooltip = taychendi_kheionist_chance_tt
 		hidden_effect = {
 			random = {
 				chance = 25
@@ -1496,3 +1499,33 @@ country_event = { #prophecy of no annex bad ending
 		}
 	}
 }
+
+country_event = { #Map Color Change
+	id = taychendi.20
+	title = taychendi.20.t
+	desc = taychendi.20.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = { #Taychend Brown
+		name = taychendi.20.a
+		change_tag = J84
+		swap_non_generic_missions = yes
+		
+	}
+	option = { #Previous Tag Color
+		name = taychendi.20.b
+		change_tag_and_keep_color = { tag = J84 }
+		swap_non_generic_missions = yes
+	}
+
+	after = {
+		if = {
+			limit = { has_custom_ideas = no }
+			country_event = { id = ideagroups.1 } #Swap Ideas
+		}
+	}
+}
+
+

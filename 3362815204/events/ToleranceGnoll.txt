@@ -21,6 +21,10 @@ country_event = {
 			factor = 10
 			has_country_modifier = racial_focus_gnollish
 		}
+		modifier = {
+			factor = 1.5
+			has_government_attribute = more_migration_and_tolerance
+		}
 	}
 
 	option = {
@@ -176,6 +180,21 @@ country_event = {
 				country_event = {
 					id = gnoll_tolerance_events.9
 				}
+			}
+			30 = {
+				trigger = {
+					ai = no
+					OR = {
+						has_country_modifier = just_lost_war_timer
+						average_unrest = 10
+						is_bankrupt = yes
+						NOT = { stability = 0 }
+					}
+					NOT = { high_tolerance_gnollish_race_trigger = yes }
+					is_not_purging_or_expelling_any_race_trigger = yes
+				}
+				set_country_flag = propflag_gnollish
+				country_event = { id = tolerance_generic.1 }
 			}
 		}
 	}
@@ -938,7 +957,7 @@ country_event = {
 					1 = {
 						define_advisor = {
 							type = trader
-							culture = sorrowclaw_gnoll
+							culture = pyreclaw_gnoll
 							skill = 3
 							discount = yes
 						}
@@ -946,7 +965,7 @@ country_event = {
 					1 = {
 						define_advisor = {
 							type = commandant
-							culture = sorrowclaw_gnoll
+							culture = pyreclaw_gnoll
 							skill = 3
 							discount = yes
 						}
@@ -961,7 +980,7 @@ country_event = {
 					1 = {
 						define_advisor = {
 							type = trader
-							culture = sorrowclaw_gnoll
+							culture = pyreclaw_gnoll
 							skill = 2
 							discount = yes
 						}
@@ -969,7 +988,7 @@ country_event = {
 					1 = {
 						define_advisor = {
 							type = commandant
-							culture = sorrowclaw_gnoll
+							culture = pyreclaw_gnoll
 							skill = 2
 							discount = yes
 						}
@@ -981,7 +1000,7 @@ country_event = {
 					1 = {
 						define_advisor = {
 							type = trader
-							culture = sorrowclaw_gnoll
+							culture = pyreclaw_gnoll
 							skill = 1
 							discount = yes
 						}
@@ -989,7 +1008,7 @@ country_event = {
 					1 = {
 						define_advisor = {
 							type = commandant
-							culture = sorrowclaw_gnoll
+							culture = pyreclaw_gnoll
 							skill = 1
 							discount = yes
 						}

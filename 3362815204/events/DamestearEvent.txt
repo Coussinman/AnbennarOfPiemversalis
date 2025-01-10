@@ -57,11 +57,6 @@ province_event = {
 		trade_goods = damestear
 		NOT = { has_province_flag = permanent_damestear }
 		NOT = { has_province_modifier = dwindling_resources }
-		#homebrew
-		if = {
-			limit = { has_province_flag = homebrew_permanent_damestear }
-			base_production = 11
-		}
 	}
 	
 	option = {
@@ -158,17 +153,10 @@ country_event = {
 
 	mean_time_to_happen  = {
 		years = 100
-		modifier = {
-			factor = 0.75
-			has_idea = AIG_prospector_mages
-		}
 	}
 	
 	trigger = {
-		OR = {
-			damestear_can_spawn = yes
-			has_idea = AIG_prospector_mages
-		}
+		damestear_can_spawn = yes
 	}
 	
 	immediate = {
@@ -200,18 +188,6 @@ country_event = {
         ai_chance = { factor = 100 }
 		event_target:province = {
 			save_trade_goods = yes
-			hidden_effect = {
-				if = {
-					limit = { has_idea = AIG_mining_regulations }
-					set_province_flag = homebrew_permanent_damestear
-					REB = {
-						change_variable = {
-							which = homebrew_permadamestear
-							value = 1
-						}
-					}
-				}
-			}
 			change_trade_goods = damestear
 		}
 		set_add_damestear_count = yes
@@ -264,18 +240,6 @@ country_event = {
 		years = 355
 
 		modifier = {
-			factor = 0.75
-			has_idea = AIG_prospector_mages
-		}
-		modifier = {
-			factor = 0.75
-			AND = {
-				has_idea = AIG_prospector_mages
-				is_year = 1700
-			}
-		}
-		
-		modifier = {
 			factor = 0.33
 			is_month = 9
 		}
@@ -308,10 +272,7 @@ country_event = {
 	}
 	
 	trigger = {
-		OR = {
-			damestear_can_spawn = yes
-			has_idea = AIG_prospector_mages
-		}
+		damestear_can_spawn = yes
 	}
 	
 	immediate = {
@@ -342,18 +303,6 @@ country_event = {
         name = damestear.4.a
         ai_chance = { factor = 100 }
 		event_target:damestear_province = {
-			if = { #homebrew
-				limit = { has_idea = AIG_mining_regulations }
-				set_province_flag = homebrew_permanent_damestear
-				hidden_effect = {
-					REB = {
-						change_variable = {
-							which = homebrew_permadamestear
-							value = 1
-						}
-					}
-				}
-			}
 			add_base_tax = -2
 			add_base_production = -2
 			add_base_manpower = -2
@@ -365,128 +314,5 @@ country_event = {
 			}
 		}
 		set_add_damestear_count = yes
-	}
-}
-
-#Removing a Damestear
-province_event = {
-	id = damestear.5
-	title = damestear.5.t
-	desc = damestear.5.d
-	picture = ARTWORK_eventPicture
-	goto = root
-	
-	is_triggered_only = yes
-	
-	trigger = {
-		OR = {
-			trade_goods = damestear
-			has_province_modifier = dwindling_resources
-		}
-	}
-	
-	immediate = {
-		hidden_effect = {
-			if = {
-				limit = { trade_goods = damestear }
-				change_trade_goods = unknown
-				set_province_flag = province_had_damestear
-			}
-
-			REB = { subtract_variable = { num_damestear = 1 } }
-		}
-	}
-	
-	
-	option = {
-		name = damestear.5.a
-		ai_chance = { factor = 100 }
-		remove_province_modifier = dwindling_resources
-		if = {
-			limit = { has_province_flag = province_had_damestear }
-			set_from_saved_trade_goods = yes
-			remove_province_modifier = hold_foundry
-			remove_province_modifier = hold_foundry_2
-			hidden_effect = { 
-				clr_province_flag = specialized_hold 
-				clr_province_flag = province_had_damestear
-			}
-		}
-		hidden_effect = { REB = { subtract_variable = { num_damestear = 1 } } }
-	}
-}
-
-#homebrew - too many perma damestear = price drop
-country_event = {
-	id = damestear.6
-	title = damestear.6.t
-	desc = damestear.6.d
-	picture = TRADE_GOODS_PLANTATION_GOODS_IN_WAREHOUSE_eventPicture
-	
-	fire_only_once = yes
-	major = yes
-	mean_time_to_happen = {
-		years = 5
-	}
-	
-	trigger = {
-		is_institution_enabled = global_trade
-		trading_bonus = { trade_goods = damestear value = yes }
-		ai = no #so you don't get fucked over by ai, you have to be taking advantage of this
-		REB = {
-			check_variable = { 
-				which = homebrew_permadamestear
-				value = 5
-			}
-		}
-	}
-	
-	option = {
-		name = damestear.6.1
-		ai_chance = { factor = 100 }
-		change_price = {
-			trade_goods = damestear
-			key = homebrew_damestear_overflow
-			
-			value = -0.25
-			duration = -1
-		}
-		hidden_effect = { set_global_flag = homebrew_damestear_overflow }
-	}
-}
-
-#homebrew - AoWK boom
-country_event = {
-	id = damestear.7
-	title = damestear.7.t
-	desc = damestear.7.d
-	picture = TRADE_GOODS_PLANTATION_GOODS_IN_WAREHOUSE_eventPicture
-	
-	fire_only_once = yes
-	major = yes
-	mean_time_to_happen = {
-		years = 5
-	}
-	
-	trigger = {
-		has_institution = manufactories
-		OR = {
-			has_idea_group = AIG_artificery_ideas
-			num_of_rajput = 20
-			has_idea_group = AIG_magocratic_ideas
-			has_country_modifier = witch_king_modifier
-		}
-	}
-	
-	option = {
-		name = damestear.7.1
-		ai_chance = { factor = 100 }
-		change_price = {
-			trade_goods = damestear
-			key = homebrew_damestear_boom
-			
-			value = 0.2
-			duration = 18250
-		}
 	}
 }

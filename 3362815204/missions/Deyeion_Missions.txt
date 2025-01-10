@@ -29,7 +29,7 @@ G56_1_missions = {
 					}
 				}
 				AND = {
-					is_capital_of = G46 #Eneion
+					is_capital_of = G46 #Degakheion
 					NOT = {
 						OR = {
 							owned_by = ROOT
@@ -70,35 +70,31 @@ G56_1_missions = {
 		}
 
 		effect = {
-			add_country_modifier = {
-				name = G56_pushing_inland_based
-				duration = 7300 #20 years
+			if = {
+				limit = {
+					AND = {
+						has_spy_network_in = { 
+							who = G55  #Eneion
+							value = 25
+						}
+						has_spy_network_in = {
+							who = G46  #Degakheion
+							value = 25
+						}
+					}
+				}
+				add_country_modifier = {
+					name = G56_pushing_inland_based
+					duration = 7300 #20 years
+				}
 			}
-			# if = {
-			# 	limit = {
-			# 		AND = {
-			# 			has_spy_network_in = { 
-			# 				who = G55  #Eneion
-			# 				value = 25
-			# 			}
-			# 			has_spy_network_in = {
-			# 				who = G46  #Degakheion
-			# 				value = 25
-			# 			}
-			# 		}
-			# 	}
-			# 	add_country_modifier = {
-			# 		name = G56_pushing_inland_based
-			# 		duration = 7300 #20 years
-			# 	}
-			# }
-			# else = {
-			# 	add_country_modifier = {
-			# 		name = G56_pushing_inland_cringe
-			# 		duration = 7300 #20 years
-			# 	}
-			# }
-			# custom_tooltip = G56_1_1_pushing_inland_tt
+			else = {
+				add_country_modifier = {
+					name = G56_pushing_inland_cringe
+					duration = 7300 #20 years
+				}
+			}
+			custom_tooltip = G56_1_1_pushing_inland_tt
 		}
 	}
 
@@ -269,7 +265,7 @@ G56_1_missions = {
 		}
 
 		trigger = {
-			has_kheionist_philosophy_advanced = { type = mil }
+			has_kheionist_deity = { deity = mil }
 			num_of_owned_provinces_with = {
 				value = 7
 				region = mteibas_valley_region
@@ -1096,7 +1092,7 @@ G56_3_missions = {
 			is_subject = no
 			is_at_war = no
 			army_size_percentage = 0.95
-			has_kheionist_philosophy_basic = { type = mil }
+			has_kheionist_deity = { deity = mil }
 		}
 
 		effect = {
@@ -1405,7 +1401,7 @@ G56_3_missions = {
 		}
 
 		trigger = {
-			has_kheionist_philosophy_advanced = { type = adm }
+			has_kheionist_deity = { deity = adm }
 			NOT = { exists = G55 } #Eneion
 			eneion_area = { 
 				type = all
@@ -2257,7 +2253,7 @@ G56_3_missions = {
 		}
 
 		trigger = {
-			has_kheionist_philosophy_best = { type = adm }
+			has_kheionist_deity = { deity = adm }
 			num_of_rebel_armies = 0
 			num_of_rebel_controlled_provinces = 0
 			devand_region = {
@@ -2381,7 +2377,7 @@ G56_4_missions = {
 
 		trigger = {
 			G46 = { has_been_insulted_by_root = yes }
-			has_kheionist_philosophy_basic = { type = dip }
+			has_kheionist_deity = { deity = dip }
 			manpower_percentage = 0.75
 			OR = {
 				G52 = { #Ameion
@@ -2539,7 +2535,7 @@ G56_4_missions = {
 		}
 
 		trigger = {
-			has_kheionist_philosophy_basic = { type = dip }
+			has_kheionist_deity = { deity = dip }
 			G62 = { #Amgremos
 				OR = {
 					is_subject_of = ROOT
@@ -2706,7 +2702,7 @@ G56_4_missions = {
 				owned_by = ROOT 
 				is_core = ROOT
 			} 
-			has_kheionist_philosophy_basic = { type = dip }
+			has_kheionist_deity = { deity = dip }
 		}
 
 		effect = {
@@ -3032,9 +3028,9 @@ G56_5_missions = {
 		provinces_to_highlight = {  
 			OR = {
 				AND = {
-					province_id = 1546 #Oremvand (Korrimutren)
+					province_id = 1545 #Vyech
 					NOT = {
-						1546 = { #Oremvand (Korrimutren)
+						1545 = { #Vyech
 							trade_share = { 
 								country = ROOT
 								share = 10
@@ -3045,7 +3041,7 @@ G56_5_missions = {
 				AND = {
 					owner = {
 						capital_scope = { superregion = taychend_superregion }
-						1546 = { #Oremvand (Korrimutren)
+						1545 = { #Vyech
 							trade_share = {
 								country = PREV
 								share = 15
@@ -3063,7 +3059,7 @@ G56_5_missions = {
 		}
 
 		trigger = { 
-			1546 = { #Oremvand (Korrimutren)
+			1545 = { #Vyech
 				trade_share = { 
 					country = ROOT
 					share = 10
@@ -3071,7 +3067,7 @@ G56_5_missions = {
 			} 
 			OR = {
 				any_country = {
-					1546 = { #Oremvand (Korrimutren)
+					1545 = { #Vyech
 						trade_share = { 
 							country = PREV
 							share = 15 
@@ -3086,7 +3082,7 @@ G56_5_missions = {
 				NOT = {
 					any_country = {
 						capital_scope = { superregion = taychend_superregion }
-						1546 = { #Oremvand (Korrimutren)
+						1545 = { #Vyech
 							trade_share = {
 								country = PREV
 								share = 15
@@ -3095,7 +3091,7 @@ G56_5_missions = {
 					}
 				}
 			}
-			has_kheionist_philosophy_basic = { type = dip }
+			has_kheionist_deity = { deity = dip }
 		}
 	
 		effect = {
@@ -3256,9 +3252,9 @@ G56_5_missions = {
 		provinces_to_highlight = { 
 			OR = {
 				AND = {
-					province_id = 1546 #Has 60% Trade Power in Oremvand
-					NOT = { #Oremvand (Korrimutren)
-						1546 = {
+					province_id = 1545 #Has 60% Trade Power in Vyech
+					NOT = { #Vyech
+						1545 = {
 							trade_share = { 
 								country = ROOT 
 								share = 45 
@@ -3266,10 +3262,10 @@ G56_5_missions = {
 						} 
 					}
 				}
-				AND = { #Has 15% Trade Power in Orenkorain
+				AND = { #Has 15% Trade Power in Kalavend
 					province_id = 1544
 					NOT = {
-						1544 = { #Orenkoraim(?) (Taychend)
+						1544 = { #Kalavend
 							trade_share = { 
 								country = ROOT 
 								share = 15 
@@ -3352,7 +3348,7 @@ G56_5_missions = {
 		}
 
 		trigger = {
-			has_kheionist_philosophy_best = { type = dip }
+			has_kheionist_deity = { deity = dip }
 			devand_region = {
 				type = all
 				OR = {
@@ -3383,13 +3379,13 @@ G56_5_missions = {
 				base_production = 5
 				has_production_building_trigger = yes
 			}
-			1546 = { #Oremvand (Korrimutren)
+			1545 = { #Vyech
 				trade_share = { 
 					country = ROOT 
 					share = 45 
 				} 
 			} 
-			1544 = { #Orenkoraim(?) (Taychend)
+			1544 = { #Kalavend
 				trade_share = { 
 					country = ROOT 
 					share = 15 
@@ -3407,7 +3403,7 @@ G56_5_missions = {
 						type = all
 						trade_goods = tea
 						if = {
-							limit = { owned_by = G62 }
+							limit = { owned_by = G52 }
 							owner = {
 								OR = {
 									has_opinion = {

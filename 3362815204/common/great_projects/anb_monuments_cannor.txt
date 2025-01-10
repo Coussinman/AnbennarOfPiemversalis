@@ -1,7 +1,7 @@
 # Monuments for Cannor. Monuments added by specific missions do not go here.
-#Bal Dostan (Corvuria)
-bal_dostan = {
-	start = 441		#Arca Corvur
+
+bal_vertesk = {
+	start = 216		#Vertesk
 
 	date = 1.1.1
 
@@ -12,7 +12,189 @@ bal_dostan = {
 	build_cost = 0
 
 	can_be_moved = no
-	move_days_per_unit_distance = 1
+
+	starting_tier = 0
+
+	#project type
+	type = monument
+
+	build_trigger = {
+	}
+
+	on_built = {
+	}
+
+	on_destroyed = {
+	}
+
+	keep_trigger = {
+	}
+
+	can_upgrade_trigger = {
+		NOT = { has_province_modifier = ruined_castanorian_citadel }
+		owner = {
+			OR = {
+				primary_culture = vertesker
+				accepted_culture = vertesker
+				holds_castanor_legacy = yes
+			}
+		}
+	}
+
+	can_use_modifiers_trigger = {
+		owner = {
+			OR = {
+				primary_culture = vertesker
+				accepted_culture = vertesker
+				holds_castanor_legacy = yes
+			}	
+		}
+	}
+
+	#tier data
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+
+		cost_to_upgrade = {
+			factor = 0
+		}
+
+		province_modifiers = {
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+
+		}
+
+		on_upgraded = {
+		}
+	}
+
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 1000
+		}
+
+		province_modifiers = {
+			local_defensiveness = 0.15
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+			spy_offence = 0.1
+		}
+
+		on_upgraded = {
+			remove_province_modifier = A23_black_tower_renovations
+			if = {
+				limit = { owner = { has_estate = estate_castonath_patricians } }
+				owner = {
+					add_estate_loyalty = {
+						estate = estate_castonath_patricians
+						loyalty = 15
+					}
+				}
+			}			
+		}
+	}
+
+	tier_2 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 2500
+		}
+
+		province_modifiers = {
+			local_defensiveness = 0.25
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+			spy_offence = 0.25
+			max_absolutism = 5
+		}
+
+		on_upgraded = {
+			remove_province_modifier = A23_black_tower_renovations
+			if = {
+				limit = { owner = { has_estate = estate_castonath_patricians } }
+				owner = {
+					add_estate_loyalty = {
+						estate = estate_castonath_patricians
+						loyalty = 15
+					}
+				}
+			}			
+		}
+	}
+
+	tier_3 = {
+		
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 5000
+		}
+
+		province_modifiers = {
+			local_defensiveness = 0.25
+			fort_level = 1
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+			spy_offence = 0.5
+			max_absolutism = 10
+		}
+
+		on_upgraded = {
+			if = {
+				limit = { owner = { has_estate = estate_castonath_patricians } }
+				owner = {
+					add_estate_loyalty = {
+						estate = estate_castonath_patricians
+						loyalty = 15
+					}
+				}
+			}
+			remove_province_modifier = A23_black_tower_renovations			
+		}
+	}
+}
+
+bal_ouord = {
+	start = 510		#Bal Ouord
+
+	date = 1.1.1
+
+	time = {
+		months = 120
+	}
+
+	build_cost = 0
+
+	can_be_moved = no
+
 	starting_tier = 0
 
 	#project type
@@ -28,11 +210,24 @@ bal_dostan = {
 	}
 
 	can_use_modifiers_trigger = {
-		NOT = { has_province_modifier = ruined_castanorian_citadel }
+		owner = {
+			OR = {
+				tag = U16 
+				accepted_culture = ourdi
+				holds_castanor_legacy = yes
+			}
+		}
 	}
 
 	can_upgrade_trigger = {
 		NOT = { has_province_modifier = ruined_castanorian_citadel }
+		owner = {
+			OR = {
+				tag = U16
+				accepted_culture = ourdi
+				holds_castanor_legacy = yes
+			}
+		}
 	}
 
 	keep_trigger = {
@@ -53,8 +248,7 @@ bal_dostan = {
 
 		area_modifier = {
 		}
-		region_modifier = {
-		}
+
 		country_modifiers = {
 
 		}
@@ -73,23 +267,199 @@ bal_dostan = {
 		}
 
 		province_modifiers = {
-			local_defensiveness = 0.2
+			local_defensiveness = 0.15
+			garrison_size = 0.15
 		}
 
 		area_modifier = {
-			supply_limit = 0.5
 		}
-		region_modifier = {
-		}
+
 		country_modifiers = {
-			prestige = 0.1
-			yearly_absolutism = 0.1
-			global_autonomy = -0.01
-			vampires_loyalty_modifier = 0.025
+			naval_forcelimit_modifier = 0.1 
 		}
 
 		on_upgraded = {
-			add_base_manpower = 1
+			if = {
+				limit = { owner = { has_estate = estate_castonath_patricians } }
+				owner = {
+					add_estate_loyalty = {
+						estate = estate_castonath_patricians
+						loyalty = 5
+					}
+				}
+			}			
+		}
+	}
+
+	tier_2 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 2500
+		}
+
+		province_modifiers = {
+			local_defensiveness = 0.25
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+			naval_forcelimit_modifier = 0.15
+			garrison_size = 0.15 
+		}
+
+		on_upgraded = {
+			if = {
+				limit = { owner = { has_estate = estate_castonath_patricians } }
+				owner = {
+					add_estate_loyalty = {
+						estate = estate_castonath_patricians
+						loyalty = 15
+					}
+				}
+			}			
+		}
+	}
+
+	tier_3 = {
+		
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 5000
+		}
+
+		province_modifiers = {
+			local_defensiveness = 0.25
+			fort_level = 1
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+			naval_forcelimit_modifier = 0.2
+			garrison_size = 0.25 
+		}
+
+		on_upgraded = {
+			if = {
+				limit = { owner = { has_estate = estate_castonath_patricians } }
+				owner = {
+					add_estate_loyalty = {
+						estate = estate_castonath_patricians
+						loyalty = 15
+					}
+				}
+			}		
+		}
+	}
+}
+
+bal_dostan = {
+	start = 441		#Arca Corvur
+
+	date = 1.1.1
+
+	time = {
+		months = 120
+	}
+
+	build_cost = 0
+
+	can_be_moved = no
+
+	starting_tier = 0
+
+	#project type
+	type = monument
+
+	build_trigger = {
+	}
+
+	on_built = {
+	}
+
+	on_destroyed = {
+	}
+
+	can_upgrade_trigger = {
+		NOT = { has_province_modifier = ruined_castanorian_citadel }
+		owner = {
+			OR = {
+				has_estate = estate_vampires
+				holds_castanor_legacy = yes
+				escanni_legacy_monument = yes
+				tag = Z07
+			}
+		}
+	}
+
+	can_use_modifiers_trigger = {
+		owner = {
+			OR = {
+				has_estate = estate_vampires
+				holds_castanor_legacy = yes
+				escanni_legacy_monument = yes
+				tag = Z07
+			}
+		}
+	}
+
+	keep_trigger = {
+	}
+
+	#tier data
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+
+		cost_to_upgrade = {
+			factor = 0
+		}
+
+		province_modifiers = {
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+
+		}
+
+		on_upgraded = {
+		}
+	}
+
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 1000
+		}
+
+		province_modifiers = {
+			local_defensiveness = 0.15
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+			vampires_loyalty_modifier = 0.05
+		}
+
+		on_upgraded = {
 			owner = {
 				add_estate_loyalty = {
 					estate = estate_nobles
@@ -118,7 +488,7 @@ bal_dostan = {
 
 	tier_2 = {
 		upgrade_time = {
-			months = 240
+			months = 120
 		}
 
 		cost_to_upgrade = {
@@ -126,27 +496,18 @@ bal_dostan = {
 		}
 
 		province_modifiers = {
-			local_defensiveness = 0.33
-			local_hostile_attrition = 0.5
+			local_defensiveness = 0.25
 		}
 
 		area_modifier = {
-			local_development_cost_modifier = -0.05
-			supply_limit_modifier = 0.25
-		}
-		region_modifier = {
 		}
 
 		country_modifiers = {
-			prestige = 0.25
-			global_autonomy = -0.03
 			vampires_loyalty_modifier = 0.05
-			vampires_influence_modifier = 0.025
-			yearly_absolutism = 0.25
+			global_autonomy = -0.1
 		}
 
 		on_upgraded = {
-			add_base_manpower = 2
 			owner = {
 				add_estate_loyalty = {
 					estate = estate_nobles
@@ -177,7 +538,7 @@ bal_dostan = {
 	tier_3 = {
 		
 		upgrade_time = {
-			months = 480
+			months = 120
 		}
 
 		cost_to_upgrade = {
@@ -185,66 +546,33 @@ bal_dostan = {
 		}
 
 		province_modifiers = {
-			local_defensiveness = 0.5
-			local_hostile_attrition = 1
-			local_defender_dice_roll_bonus = 1
-			fort_level = 1
+			local_defensiveness = 0.25
+			local_development_cost = -0.1 
 		}
 
 		area_modifier = {
-			local_development_cost_modifier = -0.1
-			supply_limit_modifier = 0.5
+			local_development_cost = -0.1
 		}
-		region_modifier = {
-		}
+
 		country_modifiers = {
-			prestige = 0.5
-			global_autonomy = -0.05
-			yearly_absolutism = 0.5
-			nobles_loyalty_modifier = 0.05
 			vampires_loyalty_modifier = 0.1
-			vampires_influence_modifier = 0.05
+			global_autonomy = -0.1
 		}
 
 		on_upgraded = {
-			add_base_manpower = 3
-			owner = {
-				if = {
-					limit = {
-						has_estate = estate_nobles
-					}
-					add_estate_loyalty = {
-						estate = estate_nobles
-						loyalty = 15
-					}
-				}
-				if = {
-					limit = {
-						has_estate = estate_castonath_patricians
-					}
+			if = {
+				limit = { owner = { has_estate = estate_castonath_patricians } }
+				owner = {
 					add_estate_loyalty = {
 						estate = estate_castonath_patricians
 						loyalty = 15
 					}
 				}
-				if = {
-					limit = {
-						has_estate = estate_vampires
-					}
-					add_estate_loyalty = {
-						estate = estate_vampires
-						loyalty = 15
-					}
-				}
-				country_event = { 
-					id = cannorian_monuments_bal_dostan.1
-					days = 1
-				}
 			}
 		}
 	}
 }
-#Bal Vroren
+
 bal_vroren = {
 	start = 740		#Bal Vroren
 
@@ -257,7 +585,7 @@ bal_vroren = {
 	build_cost = 0
 
 	can_be_moved = no
-	move_days_per_unit_distance = 1
+
 	starting_tier = 0
 
 	#project type
@@ -272,12 +600,29 @@ bal_vroren = {
 	on_destroyed = {
 	}
 
-	can_use_modifiers_trigger = {
-		NOT = { has_province_modifier = ruined_castanorian_citadel }
-	}
-
 	can_upgrade_trigger = {
 		NOT = { has_province_modifier = ruined_castanorian_citadel }
+		owner = {
+			OR = {
+				primary_culture = gray_orc
+				primary_culture = grombar_orc
+				primary_culture = grombar_half_orc
+				primary_culture = white_reachman
+				holds_castanor_legacy = yes
+			}
+		}
+	}
+
+	can_use_modifiers_trigger = {
+		owner = {
+			OR = {
+				primary_culture = gray_orc
+				primary_culture = grombar_orc
+				primary_culture = grombar_half_orc
+				primary_culture = white_reachman
+				holds_castanor_legacy = yes
+			}
+		}
 	}
 
 	keep_trigger = {
@@ -298,8 +643,7 @@ bal_vroren = {
 
 		area_modifier = {
 		}
-		region_modifier = {
-		}
+
 		country_modifiers = {
 
 		}
@@ -318,19 +662,14 @@ bal_vroren = {
 		}
 
 		province_modifiers = {
-			local_defensiveness = 0.2
-			local_garrison_size = 0.2
+			local_defensiveness = 0.15
 		}
 
 		area_modifier = {
-		}
-
-		region_modifier = {
 		}
 
 		country_modifiers = {
 			drill_gain_modifier = 0.1
-			army_tradition_decay = -0.001
 		}
 
 		on_upgraded = {
@@ -347,229 +686,26 @@ bal_vroren = {
 	}
 
 	tier_2 = {
-		upgrade_time = {
-			months = 240
-		}
-
-		cost_to_upgrade = {
-			factor = 2500
-		}
-
-		province_modifiers = {
-			local_defensiveness = 0.33
-			local_garrison_size = 0.33
-		}
-
-		area_modifier = {
-			supply_limit_modifier = 0.25
-		}
-
-		region_modifier = {
-		}
-
-		country_modifiers = {
-			drill_gain_modifier = 0.3
-			army_tradition_decay = -0.003
-		}
-
-		on_upgraded = {
-			if = {
-				limit = { owner = { has_estate = estate_castonath_patricians } }
-				owner = {
-					add_estate_loyalty = {
-						estate = estate_castonath_patricians
-						loyalty = 10
-					}
-				}
-			}
-		}
-	}
-
-	tier_3 = {
-		
-		upgrade_time = {
-			months = 480
-		}
-
-		cost_to_upgrade = {
-			factor = 5000
-		}
-
-		province_modifiers = {
-			local_defensiveness = 0.5
-			local_garrison_size = 0.5
-			local_defender_dice_roll_bonus = 1
-			fort_level = 1
-		}
-
-		area_modifier = {
-			local_defensiveness = 0.10
-			supply_limit_modifier = 0.5
-		}
-
-		region_modifier = {
-		}
-
-		country_modifiers = {
-			drill_gain_modifier = 0.5
-			army_tradition_decay = -0.005
-		}
-
-		on_upgraded = {
-			if = {
-				limit = { owner = { has_estate = estate_castonath_patricians } }
-				owner = {
-					add_estate_loyalty = {
-						estate = estate_castonath_patricians
-						loyalty = 15
-					}
-				}
-			}
-		}
-	}
-}
-#Bal Vertesk
-bal_vertesk = {
-	start = 216		#Vertesk
-
-	date = 1.1.1
-
-	time = {
-		months = 120
-	}
-
-	build_cost = 0
-
-	can_be_moved = no
-	move_days_per_unit_distance = 1
-	starting_tier = 1
-
-	#project type
-	type = monument
-
-	build_trigger = {
-	}
-
-	on_built = {
-	}
-
-	on_destroyed = {
-	}
-
-	can_use_modifiers_trigger = {
-	}
-
-	can_upgrade_trigger = {
-	}
-
-	keep_trigger = {
-	}
-
-	#tier data
-	tier_0 = {
-		upgrade_time = {
-			months = 0
-		}
-
-		cost_to_upgrade = {
-			factor = 0
-		}
-
-		province_modifiers = {
-		}
-
-		area_modifier = {
-		}
-
-		region_modifier = {
-		}
-
-		country_modifiers = {
-		}
-
-		on_upgraded = {
-		}
-	}
-
-	tier_1 = {
 		upgrade_time = {
 			months = 120
 		}
 
 		cost_to_upgrade = {
-			factor = 1000
-		}
-
-		province_modifiers = {
-			local_defensiveness = 0.1
-			local_garrison_size = 0.1
-		}
-
-		area_modifier = {
-		}
-
-		region_modifier = {
-		}
-
-		country_modifiers = {
-			spy_offence = 0.1
-		}
-
-		on_upgraded = {
-			add_base_production = 1
-			owner = {
-				add_estate_loyalty = {
-					estate = estate_burghers
-					loyalty = 5
-				}
-			}
-			remove_province_modifier = A23_black_tower_renovations
-			if = {
-				limit = { owner = { has_estate = estate_castonath_patricians } }
-				owner = {
-					add_estate_loyalty = {
-						estate = estate_castonath_patricians
-						loyalty = 5
-					}
-				}
-			}
-		}
-	}
-
-	tier_2 = {
-		upgrade_time = {
-			months = 240
-		}
-
-		cost_to_upgrade = {
 			factor = 2500
 		}
 
 		province_modifiers = {
-			local_defensiveness = 0.2
-			local_garrison_size = 0.2
+			local_defensiveness = 0.25
 		}
 
 		area_modifier = {
 		}
 
-		region_modifier = {
-		}
-
 		country_modifiers = {
-			spy_offence = 0.25
-			max_absolutism = 5
+			drill_gain_modifier = 0.2
 		}
 
 		on_upgraded = {
-			add_base_production = 2
-			owner = {
-				add_estate_loyalty = {
-					estate = estate_burghers
-					loyalty = 10
-				}
-			}
-			remove_province_modifier = A23_black_tower_renovations
 			if = {
 				limit = { owner = { has_estate = estate_castonath_patricians } }
 				owner = {
@@ -584,237 +720,28 @@ bal_vertesk = {
 
 	tier_3 = {
 		
-		upgrade_time = {
-			months = 480
-		}
-
-		cost_to_upgrade = {
-			factor = 5000
-		}
-
-		province_modifiers = {
-			local_defensiveness = 0.33
-			local_garrison_size = 0.33
-			local_defender_dice_roll_bonus = 1
-		}
-
-		area_modifier = {
-			local_defensiveness = 0.10
-		}
-
-		region_modifier = {
-		}
-
-		country_modifiers = {
-			spy_offence = 0.5
-			max_absolutism = 10
-		}
-
-		on_upgraded = {
-			add_base_production = 3
-			owner = {
-				add_estate_loyalty = {
-					estate = estate_burghers
-					loyalty = 15
-				}
-			}
-			remove_province_modifier = A23_black_tower_renovations
-			if = {
-				limit = { owner = { has_estate = estate_castonath_patricians } }
-				owner = {
-					add_estate_loyalty = {
-						estate = estate_castonath_patricians
-						loyalty = 15
-					}
-				}
-			}
-		}
-	}
-}
-#Bal Ouord
-bal_ouord = {
-	start = 510		#Bal Ouord
-
-	date = 1.1.1
-
-	time = {
-		months = 120
-	}
-
-	build_cost = 0
-
-	can_be_moved = no
-	move_days_per_unit_distance = 1
-	starting_tier = 0
-
-	#project type
-	type = monument
-
-	build_trigger = {
-	}
-
-	on_built = {
-	}
-
-	on_destroyed = {
-	}
-
-	can_use_modifiers_trigger = {
-		NOT = { has_province_modifier = ruined_castanorian_citadel }
-	}
-
-	can_upgrade_trigger = {
-		NOT = { has_province_modifier = ruined_castanorian_citadel }
-		}
-
-	keep_trigger = {
-	}
-
-	#tier data
-	tier_0 = {
-		upgrade_time = {
-			months = 0
-		}
-
-		cost_to_upgrade = {
-			factor = 0
-		}
-
-		province_modifiers = {
-		}
-
-		area_modifier = {
-		}
-
-		region_modifier = {
-		}
-
-		country_modifiers = {
-		}
-
-		on_upgraded = {
-		}
-	}
-
-	tier_1 = {
 		upgrade_time = {
 			months = 120
 		}
 
 		cost_to_upgrade = {
-			factor = 1000
-		}
-
-		province_modifiers = {
-			local_defensiveness = 0.1
-		}
-
-		area_modifier = {
-		}
-
-		region_modifier = {
-		}
-
-		country_modifiers = {
-			naval_forcelimit_modifier = 0.1
-		}
-
-		on_upgraded = {
-			owner = {
-				add_estate_loyalty = {
-					estate = estate_nobles
-					loyalty = 5
-				}
-			}
-			if = {
-				limit = { owner = { has_estate = estate_castonath_patricians } }
-				owner = {
-					add_estate_loyalty = {
-						estate = estate_castonath_patricians
-						loyalty = 5
-					}
-				}
-			}
-		}
-	}
-
-	tier_2 = {
-		upgrade_time = {
-			months = 240
-		}
-
-		cost_to_upgrade = {
-			factor = 2500
-		}
-
-		province_modifiers = {
-			local_defensiveness = 0.2
-		}
-
-		area_modifier = {
-		}
-
-		region_modifier = {
-		}
-
-		country_modifiers = {
-			naval_forcelimit_modifier = 0.2
-			garrison_size = 0.15
-		}
-
-		on_upgraded = {
-			owner = {
-				add_estate_loyalty = {
-					estate = estate_nobles
-					loyalty = 10
-				}
-			}
-			if = {
-				limit = { owner = { has_estate = estate_castonath_patricians } }
-				owner = {
-					add_estate_loyalty = {
-						estate = estate_castonath_patricians
-						loyalty = 10
-					}
-				}
-			}
-		}
-	}
-
-	tier_3 = {
-		
-		upgrade_time = {
-			months = 480
-		}
-
-		cost_to_upgrade = {
 			factor = 5000
 		}
 
 		province_modifiers = {
-			local_defensiveness = 0.33
+			local_defensiveness = 0.25
 			fort_level = 1
 		}
 
 		area_modifier = {
-			local_defensiveness = 0.10
-		}
-
-		region_modifier = {
 		}
 
 		country_modifiers = {
-			naval_forcelimit_modifier = 0.3
-			garrison_size = 0.25 
+			drill_gain_modifier = 0.4
+			army_tradition_decay = -0.02
 		}
 
 		on_upgraded = {
-			owner = {
-				add_estate_loyalty = {
-					estate = estate_nobles
-					loyalty = 15
-				}
-			}
 			if = {
 				limit = { owner = { has_estate = estate_castonath_patricians } }
 				owner = {
@@ -827,9 +754,9 @@ bal_ouord = {
 		}
 	}
 }
-#Bal Hyl, aka Wexkeep
+
 bal_hyl = {
-	start = 306
+	start = 306		#Wexkeep
 
 	date = 1.1.1
 
@@ -840,7 +767,7 @@ bal_hyl = {
 	build_cost = 0
 
 	can_be_moved = no
-	move_days_per_unit_distance = 1
+
 	starting_tier = 0
 
 	#project type
@@ -856,27 +783,38 @@ bal_hyl = {
 	}
 
 	can_use_modifiers_trigger = {
-		NOT = { has_province_modifier = ruined_castanorian_citadel }
-	owner = {
+		owner = {
 			OR = {
 				tag = A30
 				AND = {
 					accepted_culture = wexonard
-					owns_all_provinces = { area = wexhills_area }
+					PREV = { 
+						area_for_scope_province = { 
+							type = all 
+							country_or_non_sovereign_subject_holds = PREV 
+						} 
+					}
 				}
+				holds_castanor_legacy = yes
 			}
 		}
 	}
 
 	can_upgrade_trigger = {
 		NOT = { has_province_modifier = ruined_castanorian_citadel }
-	owner = {
+		owner = {
 			OR = {
 				tag = A30
 				AND = {
 					accepted_culture = wexonard
-					owns_all_provinces = { area = wexhills_area }
+					PREV = { 
+						area_for_scope_province = { 
+							type = all 
+							country_or_non_sovereign_subject_holds = PREV 
+						} 
+					}
 				}
+				holds_castanor_legacy = yes
 			}
 		}
 	}
@@ -900,9 +838,6 @@ bal_hyl = {
 		area_modifier = {
 		}
 
-		region_modifier = {
-		}
-
 		country_modifiers = {
 		}
 
@@ -920,13 +855,10 @@ bal_hyl = {
 		}
 
 		province_modifiers = {
-			local_defensiveness = 0.1
+			local_defensiveness = 0.15
 		}
 
 		area_modifier = {
-		}
-
-region_modifier = {
 		}
 
 		country_modifiers = {
@@ -934,12 +866,6 @@ region_modifier = {
 		}
 
 		on_upgraded = {
-			owner = {
-				add_estate_loyalty = {
-					estate = estate_nobles
-					loyalty = 5
-				}
-			}
 			if = {
 				limit = { owner = { has_estate = estate_castonath_patricians } }
 				owner = {
@@ -948,13 +874,13 @@ region_modifier = {
 						loyalty = 5
 					}
 				}
-			}
+			}			
 		}
 	}
 
 	tier_2 = {
 		upgrade_time = {
-			months = 240
+			months = 120
 		}
 
 		cost_to_upgrade = {
@@ -962,14 +888,10 @@ region_modifier = {
 		}
 
 		province_modifiers = {
-			local_defensiveness = 0.2
+			local_defensiveness = 0.25
 		}
 
 		area_modifier = {
-			supply_limit_modifier = 0.25
-		}
-
-		region_modifier = {
 		}
 
 		country_modifiers = {
@@ -978,12 +900,6 @@ region_modifier = {
 		}
 
 		on_upgraded = {
-			owner = {
-				add_estate_loyalty = {
-					estate = estate_nobles
-					loyalty = 10
-				}
-			}
 			if = {
 				limit = { owner = { has_estate = estate_castonath_patricians } }
 				owner = {
@@ -992,14 +908,14 @@ region_modifier = {
 						loyalty = 10
 					}
 				}
-			}
+			}		
 		}
 	}
 
 	tier_3 = {
 		
 		upgrade_time = {
-			months = 480
+			months = 120
 		}
 
 		cost_to_upgrade = {
@@ -1007,29 +923,20 @@ region_modifier = {
 		}
 
 		province_modifiers = {
-			local_defensiveness = 0.33
-			local_defender_dice_roll_bonus = 1
+			local_defensiveness = 0.25
 			fort_level = 1
 		}
 
 		area_modifier = {
-			supply_limit_modifier = 0.5
-		}
-		region_modifier = {
 		}
 
 		country_modifiers = {
-			spy_action_cost_modifier = -0.2
+			spy_action_cost_modifier = -0.25
 			ae_impact = -0.1
+			can_claim_states = yes
 		}
 
 		on_upgraded = {
-			owner = {
-				add_estate_loyalty = {
-					estate = estate_nobles
-					loyalty = 15
-				}
-			}
 			if = {
 				limit = { owner = { has_estate = estate_castonath_patricians } }
 				owner = {
@@ -1038,13 +945,13 @@ region_modifier = {
 						loyalty = 15
 					}
 				}
-			}
+			}			
 		}
 	}
 }
-#Bal Mire
+
 bal_mire = {
-	start = 229
+	start = 229		#Bal Mire
 
 	date = 1.1.1
 
@@ -1055,13 +962,27 @@ bal_mire = {
 	build_cost = 0
 
 	can_be_moved = no
-	move_days_per_unit_distance = 1
+
 	starting_tier = 0
 
 	#project type
 	type = monument
 
 	build_trigger = {
+	}
+
+	can_upgrade_trigger = {
+		NOT = { has_province_modifier = ruined_castanorian_citadel }
+		OR = {
+			owner = {
+				OR = {
+					primary_culture = green_orc
+					culture_group = escanni
+					holds_castanor_legacy = yes
+				}
+			}
+			development = 14
+		}
 	}
 
 	on_built = {
@@ -1071,21 +992,19 @@ bal_mire = {
 	}
 
 	can_use_modifiers_trigger = {
-		NOT = { has_province_modifier = ruined_castanorian_citadel }
 		OR = {
-			primary_culture = green_orc
-			culture_group = escanni
+			owner = {
+				OR = {
+					primary_culture = green_orc
+					culture_group = escanni
+					holds_castanor_legacy = yes
+				}
+			}
 			development = 14
 		}
 	}
-	can_upgrade_trigger = {
-		NOT = { has_province_modifier = ruined_castanorian_citadel }
-		OR = {
-			primary_culture = green_orc
-			culture_group = escanni
-			development = 14
-		}
-	}
+
+
 	keep_trigger = {
 	}
 
@@ -1103,9 +1022,6 @@ bal_mire = {
 		}
 
 		area_modifier = {
-		}
-
-		region_modifier = {
 		}
 
 		country_modifiers = {
@@ -1131,24 +1047,13 @@ bal_mire = {
 		}
 
 		area_modifier = {
-			local_autonomy = -0.01
-		}
-
-		region_modifier = {
 		}
 
 		country_modifiers = {
-			prestige = 0.1
-			rival_border_fort_maintenance = -0.1
+			global_supply_limit_modifier = 0.1
 		}
 
 		on_upgraded = {
-			owner = {
-				add_estate_loyalty = {
-					estate = estate_nobles
-					loyalty = 5
-				}
-			}
 			if = {
 				limit = { owner = { has_estate = estate_castonath_patricians } }
 				owner = {
@@ -1163,7 +1068,7 @@ bal_mire = {
 
 	tier_2 = {
 		upgrade_time = {
-			months = 240
+			months = 120
 		}
 
 		cost_to_upgrade = {
@@ -1176,23 +1081,14 @@ bal_mire = {
 		}
 
 		area_modifier = {
-			local_autonomy = -0.025
-		}
-		region_modifier = {
 		}
 
 		country_modifiers = {
-			prestige = 0.25
-			hostile_attrition = 0.5
+			global_supply_limit_modifier = 0.2
+			fort_maintenance_modifier = -0.15
 		}
 
 		on_upgraded = {
-			owner = {
-				add_estate_loyalty = {
-					estate = estate_nobles
-					loyalty = 10
-				}
-			}
 			if = {
 				limit = { owner = { has_estate = estate_castonath_patricians } }
 				owner = {
@@ -1208,7 +1104,7 @@ bal_mire = {
 	tier_3 = {
 		
 		upgrade_time = {
-			months = 480
+			months = 120
 		}
 
 		cost_to_upgrade = {
@@ -1216,32 +1112,20 @@ bal_mire = {
 		}
 
 		province_modifiers = {
-			local_defensiveness = 0.5
-			local_hostile_attrition = 1
-			local_defender_dice_roll_bonus = 1
+			local_defensiveness = 0.25
 			fort_level = 1
 		}
 
 		area_modifier = {
-			local_defensiveness = 0.10
-			local_autonomy = -0.05
-		}
-
-		region_modifier = {
 		}
 
 		country_modifiers = {
-			prestige = 0.5
+			global_supply_limit_modifier = 0.2
+			fort_maintenance_modifier = -0.15
 			hostile_attrition = 1
 		}
 
 		on_upgraded = {
-			owner = {
-				add_estate_loyalty = {
-					estate = estate_nobles
-					loyalty = 15
-				}
-			}
 			if = {
 				limit = { owner = { has_estate = estate_castonath_patricians } }
 				owner = {
@@ -1254,9 +1138,9 @@ bal_mire = {
 		}
 	}
 }
-#The North Citadel
+
 the_north_citadel = {
-	start = 840
+	start = 840		#The North Citadel
 
 	date = 1.1.1
 
@@ -1267,7 +1151,7 @@ the_north_citadel = {
 	build_cost = 0
 
 	can_be_moved = no
-	move_days_per_unit_distance = 1
+
 	starting_tier = 0
 
 	#project type
@@ -1286,6 +1170,7 @@ the_north_citadel = {
 	}
 
 	can_upgrade_trigger = {
+		NOT = { has_province_modifier = ruined_castanorian_citadel }
 	}
 
 	keep_trigger = {
@@ -1307,9 +1192,6 @@ the_north_citadel = {
 		area_modifier = {
 		}
 
-		region_modifier = {
-		}
-
 		country_modifiers = {
 
 		}
@@ -1328,13 +1210,10 @@ the_north_citadel = {
 		}
 
 		province_modifiers = {
-			local_defensiveness = 0.1
+			local_defensiveness = 0.05
 		}
 
 		area_modifier = {
-		}
-
-		region_modifier = {
 		}
 
 		country_modifiers = {
@@ -1346,24 +1225,16 @@ the_north_citadel = {
 		on_upgraded = {
 			owner = {
 				add_estate_loyalty = {
-					estate = estate_nobles
-					loyalty = 5
-				}
-			}
-			if = {
-				limit = { owner = { has_estate = estate_castonath_patricians } }
-			owner = {
-				add_estate_loyalty = {
 					estate = estate_castonath_patricians
 					loyalty = 5
 				}
-			}
+			}			
 		}
 	}
-	}
+
 	tier_2 = {
 		upgrade_time = {
-			months = 240
+			months = 120
 		}
 
 		cost_to_upgrade = {
@@ -1371,46 +1242,33 @@ the_north_citadel = {
 		}
 
 		province_modifiers = {
-			local_defensiveness = 0.2
-			local_hostile_attrition = 0.5
+			local_defensiveness = 0.1
 		}
 
 		area_modifier = {
 		}
 
-		region_modifier = {
-		}
-
 		country_modifiers = {
 			prestige = 0.25
 			legitimacy = 0.5
-			governing_capacity_modifier = 0.1
+			governing_capacity_modifier = 0.10
 			vassal_forcelimit_bonus = 0.25
 		}
 
 		on_upgraded = {
 			owner = {
 				add_estate_loyalty = {
-					estate = estate_nobles
-					loyalty = 10
-				}
-			}
-			if = {
-				limit = { owner = { has_estate = estate_castonath_patricians } }
-			owner = {
-				add_estate_loyalty = {
 					estate = estate_castonath_patricians
 					loyalty = 10
 				}
-			}
+			}			
 		}
-	}
 	}
 
 	tier_3 = {
 		
 		upgrade_time = {
-			months = 480
+			months = 120
 		}
 
 		cost_to_upgrade = {
@@ -1418,16 +1276,11 @@ the_north_citadel = {
 		}
 
 		province_modifiers = {
-			local_defensiveness = 0.33
-			local_hostile_attrition = 1
-			local_defender_dice_roll_bonus = 1
+			local_defensiveness = 0.10
 		}
 
 		area_modifier = {
 			local_defensiveness = 0.10
-		}
-
-		region_modifier = {
 		}
 
 		country_modifiers = {
@@ -1435,187 +1288,24 @@ the_north_citadel = {
 			legitimacy = 1
 			governing_capacity_modifier = 0.15
 			castonath_patricians_loyalty_modifier = 0.05
-			nobles_loyalty_modifier = 0.05
 			vassal_forcelimit_bonus = 0.5
 		}
 
 		on_upgraded = {
 			owner = {
 				add_estate_loyalty = {
-					estate = estate_nobles
-					loyalty = 15
-				}
-			}
-			if = {
-				limit = { owner = { has_estate = estate_castonath_patricians } }
-			owner = {
-				add_estate_loyalty = {
 					estate = estate_castonath_patricians
 					loyalty = 15
 				}
-			}
+			}		
 		}
 	}
 }
-}
-#Aelcandar
+
 aelcandar = {
-	start = 162
+	start = 162		#Aelcandar
 
-	date = 1.1.1
-
-	time = {
-		months = 120
-	}
-
-	build_cost = 0
-
-	can_be_moved = no
-	move_days_per_unit_distance = 1
-	starting_tier = 0
-
-	#project type
-	type = monument
-
-	build_trigger = {
-	}
-
-	on_built = {
-	}
-
-	on_destroyed = {
-	}
-
-	can_use_modifiers_trigger = {
-	}
-
-	can_upgrade_trigger = {
-	}
-
-	keep_trigger = {
-	}
-
-	#tier data
-	tier_0 = {
-		upgrade_time = {
-			months = 0
-		}
-
-		cost_to_upgrade = {
-			factor = 0
-		}
-
-		province_modifiers = {
-		}
-
-		area_modifier = {
-		}
-
-		region_modifier = {
-		}
-
-		country_modifiers = {
-		}
-
-		on_upgraded = {
-		}
-	}
-
-	tier_1 = {
-		upgrade_time = {
-			months = 120
-		}
-
-		cost_to_upgrade = {
-			factor = 1000
-		}
-
-		province_modifiers = {
-			local_defensiveness = 0.2
-		}
-
-		area_modifier = {
-		}
-
-		region_modifier = {
-		}
-
-		country_modifiers = {
-		    prestige = 0.1
-			harsh_treatment_cost = -0.1
-		}
-
-		on_upgraded = {
-		}
-	}
-
-	tier_2 = {
-		upgrade_time = {
-			months = 240
-		}
-
-		cost_to_upgrade = {
-			factor = 2500
-		}
-
-		province_modifiers = {
-			local_defensiveness = 0.33
-			local_hostile_attrition = 0.5
-		}
-
-		area_modifier = {
-		}
-
-		region_modifier = {
-		}
-
-		country_modifiers = {
-		    prestige = 0.25
-			harsh_treatment_cost = -0.15
-			governing_capacity_modifier = 0.05
-		}
-
-		on_upgraded = {
-		}
-	}
-
-	tier_3 = {
-		
-		upgrade_time = {
-			months = 480
-		}
-
-		cost_to_upgrade = {
-			factor = 5000
-		}
-
-		province_modifiers = {
-			local_defensiveness = 0.5
-			local_hostile_attrition = 1
-			local_defender_dice_roll_bonus = 1
-			fort_level = 1
-		}
-
-		area_modifier = {
-			local_defensiveness = 0.10
-		}
-		region_modifier = {
-		}
-		country_modifiers = {
-		    prestige = 0.5
-			harsh_treatment_cost = -0.2
-			governing_capacity_modifier = 0.1
-		}
-
-		on_upgraded = {
-		}
-	}
-}
-#Escandar
-escandar = {
-	start = 316
-
-	date = 1.1.1
+	date = 1000.1.1
 
 	time = {
 		months = 120
@@ -1624,162 +1314,7 @@ escandar = {
 	build_cost = 0
 
 	can_be_moved = no
-	move_days_per_unit_distance = 1
-	starting_tier = 0
 
-	#project type
-	type = monument
-
-	build_trigger = {
-	}
-
-	on_built = {
-	}
-
-	on_destroyed = {
-	}
-
-	can_use_modifiers_trigger = {
-	}
-
-	can_upgrade_trigger = {
-	}
-
-	keep_trigger = {
-	}
-
-	#tier data
-	tier_0 = {
-		upgrade_time = {
-			months = 0
-		}
-
-		cost_to_upgrade = {
-			factor = 0
-		}
-
-		province_modifiers = {
-		}
-
-		area_modifier = {
-		}
-
-		region_modifier = {
-		}
-
-		country_modifiers = {
-		}
-
-		on_upgraded = {
-		}
-	}
-
-	tier_1 = {
-		upgrade_time = {
-			months = 120
-		}
-
-		cost_to_upgrade = {
-			factor = 1000
-		}
-
-		province_modifiers = {
-			local_defensiveness = 0.2
-		}
-
-		area_modifier = {
-		}
-
-		region_modifier = {
-		}
-
-		country_modifiers = {
-		    prestige = 0.1
-			mercenary_cost = -0.1
-		}
-
-		on_upgraded = {
-		}
-	}
-
-	tier_2 = {
-		upgrade_time = {
-			months = 240
-		}
-
-		cost_to_upgrade = {
-			factor = 2500
-		}
-
-		province_modifiers = {
-			local_defensiveness = 0.33
-			local_hostile_attrition = 0.5
-		}
-
-		area_modifier = {
-		}
-
-		region_modifier = {
-		}
-
-		country_modifiers = {
-		    prestige = 0.25
-			mercenary_cost = -0.15
-			merc_leader_army_tradition = 0.25
-		}
-
-		on_upgraded = {
-		}
-	}
-
-	tier_3 = {
-		
-		upgrade_time = {
-			months = 480
-		}
-
-		cost_to_upgrade = {
-			factor = 5000
-		}
-
-		province_modifiers = {
-			local_defensiveness = 0.5
-			local_hostile_attrition = 1
-			local_defender_dice_roll_bonus = 1
-			fort_level = 1
-		}
-
-		area_modifier = {
-			local_defensiveness = 0.10
-		}
-
-		region_modifier = {
-		}
-
-		country_modifiers = {
-		    prestige = 0.5
-			mercenary_cost = -0.2
-			merc_leader_army_tradition = 0.5
-		}
-
-		on_upgraded = {
-		}
-	}
-}
-#Calascandar
-calascandar = {
-	start = 254
-
-	date = 1.1.1
-
-	time = {
-		months = 120
-	}
-
-	build_cost = 0
-
-	can_be_moved = no
-	move_days_per_unit_distance = 1
 	starting_tier = 0
 
 	#project type
@@ -1797,8 +1332,302 @@ calascandar = {
 	can_use_modifiers_trigger = {
 		owner = {
 			OR = {
-				tag = A25
-				tag = A46
+				culture_group = lencori
+				primary_culture = gawedi
+				is_cannorian_halfling_primary_culture = yes
+				tag = A46 #Arbaran
+				tag = A40 #Exwes
+			}
+		}
+	}
+
+	can_upgrade_trigger = {
+		owner = {
+			OR = {
+				culture_group = lencori
+				primary_culture = gawedi
+				is_cannorian_halfling_primary_culture = yes
+				tag = A46 #Arbaran
+				tag = A40 #Exwes
+			}
+		}
+	}
+
+	keep_trigger = {
+	}
+
+	#tier data
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+
+		cost_to_upgrade = {
+			factor = 0
+		}
+
+		province_modifiers = {
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+
+		}
+
+		on_upgraded = {
+		}
+	}
+
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 1000
+		}
+
+		province_modifiers = {
+			local_defensiveness = 0.15
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+		  harsh_treatment_cost = -0.1
+		}
+
+		on_upgraded = {
+		}
+	}
+
+	tier_2 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 2500
+		}
+
+		province_modifiers = {
+			local_defensiveness = 0.25
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+		  harsh_treatment_cost = -0.15
+			governing_capacity_modifier = 0.05
+		}
+
+		on_upgraded = {
+		}
+	}
+
+	tier_3 = {
+		
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 5000
+		}
+
+		province_modifiers = {
+			local_defensiveness = 0.25
+			fort_level = 1
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+		  harsh_treatment_cost = -0.2
+			governing_capacity_modifier = 0.1
+		}
+
+		on_upgraded = {
+		}
+	}
+}
+
+escandar = {
+	start = 316		#Escandar
+
+	date = 1000.1.1
+
+	time = {
+		months = 120
+	}
+
+	build_cost = 0
+
+	can_be_moved = no
+
+	starting_tier = 0
+
+	#project type
+	type = monument
+
+	build_trigger = {
+	}
+
+	on_built = {
+	}
+
+	on_destroyed = {
+	}
+
+	can_use_modifiers_trigger = {
+	}
+
+	can_upgrade_trigger = {
+	}
+
+	keep_trigger = {
+	}
+
+	#tier data
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+
+		cost_to_upgrade = {
+			factor = 0
+		}
+
+		province_modifiers = {
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+
+		}
+
+		on_upgraded = {
+		}
+	}
+
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 1000
+		}
+
+		province_modifiers = {
+			local_defensiveness = 0.15
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+			mercenary_cost = -0.1
+		}
+
+		on_upgraded = {		
+		}
+	}
+
+	tier_2 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 2500
+		}
+
+		province_modifiers = {
+			local_defensiveness = 0.25
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+			mercenary_cost = -0.1
+			merc_leader_army_tradition = 0.25
+		}
+
+		on_upgraded = {
+			set_global_flag = merc_border_guards_enabled			
+		}
+	}
+
+	tier_3 = {
+		
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 5000
+		}
+
+		province_modifiers = {
+			local_defensiveness = 0.25
+			fort_level = 1
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+			mercenary_cost = -0.2
+			merc_leader_army_tradition = 0.5
+		}
+
+		on_upgraded = {			
+		}
+	}
+}
+
+calascandar = {
+	start = 254		#Calascandar
+
+	date = 1000.1.1
+
+	time = {
+		months = 120
+	}
+
+	build_cost = 0
+
+	can_be_moved = no
+
+	starting_tier = 0
+
+	#project type
+	type = monument
+
+	build_trigger = {
+	}
+
+	on_built = {
+	}
+
+	on_destroyed = {
+	}
+
+	can_use_modifiers_trigger = {
+		owner = {
+			OR = {
+				tag = A25 #Damescrown
+				tag = A46 #Arbaran
+				tag = A40 #Exwes
 				num_of_merchants = 5
 			}
 		}
@@ -1826,10 +1655,8 @@ calascandar = {
 		area_modifier = {
 		}
 
-		region_modifier = {
-		}
-
 		country_modifiers = {
+
 		}
 
 		on_upgraded = {
@@ -1846,27 +1673,23 @@ calascandar = {
 		}
 
 		province_modifiers = {
-			local_defensiveness = 0.2
+			local_defensiveness = 0.15
 		}
 
 		area_modifier = {
 		}
 
-		region_modifier = {
-		}
-
 		country_modifiers = {
-		    prestige = 0.1
-			trade_steering = 0.05
+		  caravan_power = 0.1
 		}
 
-		on_upgraded = {
+		on_upgraded = {			
 		}
 	}
 
 	tier_2 = {
 		upgrade_time = {
-			months = 240
+			months = 120
 		}
 
 		cost_to_upgrade = {
@@ -1874,29 +1697,25 @@ calascandar = {
 		}
 
 		province_modifiers = {
-			local_defensiveness = 0.33
-			local_hostile_attrition = 0.5
+			local_defensiveness = 0.25
 		}
 
 		area_modifier = {
 		}
 
-		region_modifier = {
-		}
-
 		country_modifiers = {
-		    prestige = 0.25
-			trade_steering = 0.1
+		  caravan_power = 0.2
+			fort_maintenance_modifier = -0.15
 		}
 
-		on_upgraded = {
+		on_upgraded = {			
 		}
 	}
 
 	tier_3 = {
 		
 		upgrade_time = {
-			months = 480
+			months = 120
 		}
 
 		cost_to_upgrade = {
@@ -1904,31 +1723,26 @@ calascandar = {
 		}
 
 		province_modifiers = {
-			local_defensiveness = 0.5
-			local_hostile_attrition = 1
-			local_defender_dice_roll_bonus = 1
+			local_defensiveness = 0.25
 			fort_level = 1
 		}
 
 		area_modifier = {
-			local_defensiveness = 0.10
-		}
-
-		region_modifier = {
+			province_trade_power_modifier = 0.25
 		}
 
 		country_modifiers = {
-		    prestige = 0.5
-			trade_steering = 0.15
+		  caravan_power = 0.25
+			fort_maintenance_modifier = -0.3
 		}
 
-		on_upgraded = {
+		on_upgraded = {			
 		}
 	}
 }
-#The Necropolis
+
 the_necropolis = {
-	start = 332 #Corseton
+	start = 332		#Corseton
 
 	date = 1.1.1
 
@@ -1936,16 +1750,18 @@ the_necropolis = {
 		months = 120
 	}
 
-	build_cost = 0
+	build_cost = 1000
 
 	can_be_moved = no
-	move_days_per_unit_distance = 1
-	starting_tier = 0
+
+	starting_tier = 1
 
 	#project type
 	type = monument
 
 	build_trigger = {
+		religion_group = cannorian
+		has_owner_religion = yes
 	}
 
 	on_built = {
@@ -1983,10 +1799,8 @@ the_necropolis = {
 		area_modifier = {
 		}
 
-		region_modifier = {
-		}
-
 		country_modifiers = {
+
 		}
 
 		on_upgraded = {
@@ -2006,16 +1820,13 @@ the_necropolis = {
 		}
 
 		area_modifier = {
-			local_tax_modifier = 0.2
-		}
-
-		region_modifier = {
+			local_autonomy = -0.025
+			local_tax_modifier = 0.05
 		}
 
 		country_modifiers = {
 			global_missionary_strength = 0.01
 			stability_cost_modifier = -0.05
-			global_autonomy = -0.01
 		}
 
 		on_upgraded = {
@@ -2030,30 +1841,33 @@ the_necropolis = {
 
 	tier_2 = {
 		upgrade_time = {
-			months = 240
+			months = 120
 		}
+
 		
 		cost_to_upgrade = {
 			factor = 2500
 		}
 
+		
 		province_modifiers = {
+			
 		}
+
 		
 		area_modifier = {
-			local_tax_modifier = 0.33
+			local_tax_modifier = 0.10
 		}
 
-		region_modifier = {
-		}
-
+		
 		country_modifiers = {
 			missionaries = 1
 			global_missionary_strength = 0.02
-			stability_cost_modifier = -0.1
-			global_autonomy = -0.03
+			stability_cost_modifier = -0.10
+			global_autonomy = -0.025
 		}
 
+		
 		on_upgraded = {
 			owner = {
 				add_estate_loyalty = {
@@ -2067,23 +1881,25 @@ the_necropolis = {
 	tier_3 = {
 		
 		upgrade_time = {
-			months = 480
+			months = 120
 		}
+
 		
 		cost_to_upgrade = {
 			factor = 5000
 		}
+
 		
 		province_modifiers = {
+			
 		}
+
 		
 		area_modifier = {
-			local_tax_modifier = 0.5
+			local_tax_modifier = 0.15
 		}
 
-		region_modifier = {
-		}
-
+		
 		country_modifiers = {
 			missionaries = 1
 			global_missionary_strength = 0.03
@@ -2092,12 +1908,519 @@ the_necropolis = {
 		}
 		
 		on_upgraded = {
+		}
+	}
+}
+
+the_lake_palace = {
+	start = 267		#Themarenn
+
+	date = 1.1.1
+
+	time = {
+		months = 120
+	}
+
+	build_cost = 0
+
+	can_be_moved = no
+
+	starting_tier = 0
+
+	#project type
+	type = monument
+
+	build_trigger = {
+	}
+
+	on_built = {
+	}
+
+	on_destroyed = {
+	}
+
+	can_upgrade_trigger = {
+	}
+
+	can_use_modifiers_trigger = {
+		owner = {
+			accepted_culture = esmari
+		}
+		267 = { culture = esmari }
+	}
+
+	keep_trigger = {
+	}
+
+	#tier data
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+
+		cost_to_upgrade = {
+			factor = 0
+		}
+
+		province_modifiers = {
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+
+		}
+
+		on_upgraded = {
+		}
+	}
+
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 1000
+		}
+
+		province_modifiers = {
+			local_defensiveness = 0.15
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+			monarch_lifespan = 0.05
+		}
+
+		on_upgraded = {
 			owner = {
-				add_estate_loyalty = {
-					estate = estate_church
-					loyalty = 15
+				add_splendor = 150
+			}
+		}
+	}
+
+	tier_2 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 2500
+		}
+
+		province_modifiers = {
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+			monarch_lifespan = 0.1
+			all_estate_possible_privileges = 1
+		}
+
+		on_upgraded = {
+			owner = {
+				add_splendor = 300
+			}
+		}
+	}
+
+	tier_3 = {
+		
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 5000
+		}
+
+		province_modifiers = {
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+			monarch_lifespan = 0.15
+			all_estate_possible_privileges = 2
+		}
+
+		on_upgraded = {
+			owner = {
+				add_splendor = 450
+			}
+		}
+	}
+}
+
+ciranmyna_the_shimmering_city = {
+	start = 3020		#Ciranmyna
+
+	date = 1.1.1
+
+	time = {
+		months = 120
+	}
+
+	build_cost = 0
+
+	can_be_moved = no
+
+	starting_tier = 1
+
+	#project type
+	type = monument
+
+	build_trigger = {
+	}
+
+	on_built = {
+	}
+
+	on_destroyed = {
+	}
+
+	can_upgrade_trigger = {
+		culture = wood_elf
+		owner = {
+			OR = {
+				primary_culture = wood_elf
+				accepted_culture = wood_elf
+			}
+		}
+	}
+
+	can_use_modifiers_trigger = {
+		culture = wood_elf
+		owner = {
+			OR = {
+				primary_culture = wood_elf
+				accepted_culture = wood_elf
+			}
+		}
+	}
+
+
+	keep_trigger = {
+	}
+
+	#tier data
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+
+		cost_to_upgrade = {
+			factor = 0
+		}
+
+		province_modifiers = {
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+
+		}
+
+		on_upgraded = {
+		}
+	}
+
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 1000
+		}
+
+		province_modifiers = {
+			local_defensiveness = 0.15
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+			advisor_pool = 1
+			dip_advisor_cost = -0.1
+			dip_tech_cost_modifier = -0.05
+		}
+
+		on_upgraded = {
+		}
+	}
+
+	tier_2 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 2500
+		}
+
+		province_modifiers = {
+			local_defensiveness = 0.15
+		}
+
+		area_modifier = {
+			trade_goods_size = 0.5
+		}
+
+		country_modifiers = {
+			advisor_pool = 1
+			dip_advisor_cost = -0.1
+			dip_tech_cost_modifier = -0.05
+		}
+
+		on_upgraded = {
+		}
+	}
+
+	tier_3 = {
+		
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 5000
+		}
+
+		province_modifiers = {
+			local_defensiveness = 0.15
+		}
+
+		area_modifier = {
+			trade_goods_size = 1
+		}
+
+		country_modifiers = {
+			advisor_pool = 1
+			advisor_cost = -0.1
+			dip_tech_cost_modifier = -0.1
+		}
+
+		on_upgraded = {
+		}
+	}
+}
+
+mines_of_yfelorr = {
+	start = 3042		#Yfelorr
+
+	date = 1.1.1
+
+	time = {
+		months = 120
+	}
+
+	build_cost = 0
+
+	can_be_moved = no
+
+	starting_tier = 1
+
+	#project type
+	type = monument
+
+	build_trigger = {
+	}
+
+	on_built = {
+	}
+
+	on_destroyed = {
+	}
+
+	can_upgrade_trigger = {
+		if = {
+			limit = {
+				owner = {
+					OR = {
+						tag = H81
+						was_tag = H81
+					}
 				}
 			}
+			custom_trigger_tooltip = {
+				tooltip = mb_yle_mine_tt
+				owner = { has_country_flag = mb_yle_mine_flg }
+			}
+		}
+		else = {
+			OR = {
+				culture = wood_elf
+				culture = forest_goblin
+				culture = green_orc
+				culture = emerald_orc
+				culture = karakhanbari_orc
+			}
+			owner = {
+				capital_scope = {
+					superregion = deepwoods_superregion
+				}
+				OR = {
+					accepted_culture = wood_elf
+					accepted_culture = forest_goblin
+					accepted_culture = green_orc
+					accepted_culture = emerald_orc
+					accepted_culture = karakhanbari_orc
+				}
+			}
+		}
+	}
+
+	can_use_modifiers_trigger = {
+		if = {
+			limit = {
+				owner = {
+					OR = {
+						tag = H81
+						was_tag = H81
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = mb_yle_mine_tt
+				owner = { has_country_flag = mb_yle_mine_flg }
+			}
+		}
+		else = {
+			OR = {
+				culture = wood_elf
+				culture = forest_goblin
+				culture = green_orc
+				culture = emerald_orc
+				culture = karakhanbari_orc
+			}
+			owner = {
+				capital_scope = {
+					superregion = deepwoods_superregion
+				}
+				OR = {
+					accepted_culture = wood_elf
+					accepted_culture = forest_goblin
+					accepted_culture = green_orc
+					accepted_culture = emerald_orc
+					accepted_culture = karakhanbari_orc
+				}
+			}
+		}
+	}
+
+	keep_trigger = {
+	}
+
+	#tier data
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+
+		cost_to_upgrade = {
+			factor = 0
+		}
+
+		province_modifiers = {
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+
+		}
+
+		on_upgraded = {
+		}
+	}
+
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 1000
+		}
+
+		province_modifiers = {
+			trade_goods_size = 1
+			local_gold_depletion_chance_modifier = -0.2
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+		}
+
+		on_upgraded = {
+		}
+	}
+
+	tier_2 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 2500
+		}
+
+		province_modifiers = {
+			trade_goods_size = 2
+			local_gold_depletion_chance_modifier = -0.35
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+			gold_depletion_chance_modifier = -0.1
+			monthly_gold_inflation_modifier = -0.1
+		}
+
+		on_upgraded = {
+		}
+	}
+
+	tier_3 = {
+		
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 5000
+		}
+
+		province_modifiers = {
+			trade_goods_size = 3
+			local_gold_depletion_chance_modifier = -0.5
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+			gold_depletion_chance_modifier = -0.2
+			monthly_gold_inflation_modifier = -0.2
+			artillery_cost = -0.2
+		}
+
+		on_upgraded = {
 		}
 	}
 }
