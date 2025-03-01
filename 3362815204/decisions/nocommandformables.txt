@@ -1,0 +1,247 @@
+
+country_decisions = {
+
+	proclaim_great_command = {	#The Command
+		major = yes
+		potential = {
+			NOT = { exists = R62 }
+			OR = {
+				tag = R94
+				tag = R95
+				tag = R96
+			}
+		}
+		allow = {
+			NOT = { exists = R62 }
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			if = {		
+				limit = { tag = R94 }
+				OR = { R95 = { vassal_of = ROOT } R95 = { exists = no } }
+				OR = { R96 = { vassal_of = ROOT } R96 = { exists = no } }
+			}
+			else_if = {
+				limit = { tag = R95 }
+				OR = { R94 = { vassal_of = ROOT } R94 = { exists = no } }
+				OR = { R96 = { vassal_of = ROOT } R96 = { exists = no } }
+			}
+			else_if = {
+				limit = { tag = R96 }
+				OR = { R94 = { vassal_of = ROOT } R94 = { exists = no } }
+				OR = { R95 = { vassal_of = ROOT } R95 = { exists = no } }
+			}
+			num_of_cities = 12
+		}
+		effect = {
+			change_tag = R62
+			add_prestige = 25
+			swap_non_generic_missions = yes
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			if = {
+				limit = { NOT = { government_rank = 2 } }
+				set_government_rank = 2
+			}
+			on_change_tag_effect = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	
+	enslave_the_goblins = {
+		major = yes
+		potential = {
+			tag = R62
+			NOT = { has_country_flag = enslaved_jade_goblins }
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = tuwad_area
+				area = dromak_area
+			}
+		}
+		allow {
+			OR = { dromak_area = { type = all owned_by = ROOT } R65 = { is_subject_of = ROOT } }
+			OR = { tuwad_area = { type = all owned_by = ROOT } R66 = { is_subject_of = ROOT } }
+			OR = { R65 = { is_subject_of = ROOT } R65 = { exists = no } }
+			OR = { R66 = { is_subject_of = ROOT } R66 = { exists = no } }
+		}
+		effect = {
+			jadeforges_area = { limit = { owned_by = R66 } cede_province = R62 }
+			the_back_tunnels_area = { limit = { owned_by = R65 } cede_province = R62 }
+			jazka_area = { limit = { owned_by = R65 } cede_province = R62 }
+			dromak_area = { limit = { owned_by = R62 } cede_province = R65 }
+			dromak_pass_area = { limit = { owned_by = R62 } cede_province = R65 } 
+			blastcrack_area = { limit = { owned_by = R62 } cede_province = R65 }
+			4319 = { limit = { owned_by = R62 } cede_province = R65 }
+			4320 = { limit = { owned_by = R62 } cede_province = R65 }
+			tuwad_area = { limit = { owned_by = R62 } cede_province = R66 }
+			tuwad__pass_area = { limit = { owned_by = R62 } cede_province = R66 }
+			dwarovrod_66_68_area = { limit = { owned_by = R62 } cede_province = R66 }
+			4307 = { limit = { owned_by = R62 } cede_province = R66 }
+			create_subject = { subject = R65 subject_type = slave_state }
+			create_subject = { subject = R66 subject_type = slave_state }
+			R65 = { set_country_flag = command_slave_state_flag }
+			R66 = { set_country_flag = command_slave_state_flag }
+			set_country_flag = enslaved_jade_goblins
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	
+	enslave_the_orcs = {
+		major = yes
+		potential = {
+			tag = R62
+			NOT = { has_country_flag = enslaved_brown_orcs }
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = munlanan_area
+				area = yodhilakra_area
+				province_id = 4519
+				province_id = 4523
+				province_id = 4525
+				province_id = 4545
+				province_id = 4630
+				province_id = 4633
+			}
+		}
+		allow {
+			4519 = { owned_by = ROOT }
+			4523 = { owned_by = ROOT }
+			4525 = { owned_by = ROOT }
+			4545 = { owned_by = ROOT }
+			4630 = { owned_by = ROOT }
+			4633 = { owned_by = ROOT }
+			munlanan_area = { type = all owned_by = ROOT }
+			yodhilakra_area = { type = all owned_by = ROOT }
+			OR = { R63 = { is_subject_of = ROOT } R63 = { exists = no } }
+			OR = { R64 = { is_subject_of = ROOT } R64 = { exists = no } }
+		}
+		effect = {
+			4516 = {
+			cede_province = R63
+			add_orcish_minority_size_effect = yes add_orcish_minority_size_effect = yes
+			}
+			4517 = {
+			cede_province = R63
+			add_orcish_minority_size_effect = yes add_orcish_minority_size_effect = yes
+			}
+			4521 = {
+				cede_province = R63
+				change_culture = brown_orc 
+				change_religion = old_dookan
+				add_human_minority_size_effect = yes
+				add_human_minority_size_effect = yes
+			}
+			4522 = {
+			cede_province = R63
+			add_orcish_minority_size_effect = yes add_orcish_minority_size_effect = yes
+			}
+			4523 = {
+				change_culture = brown_orc 
+				change_religion = old_dookan
+				add_human_minority_size_effect = yes
+				add_human_minority_size_effect = yes
+			}
+			4628 = {
+				change_culture = brown_orc 
+				change_religion = old_dookan
+				add_human_minority_size_effect = yes
+				add_human_minority_size_effect = yes
+			}
+			yodhilakra_area = { cede_province = R64 }
+			create_subject = { subject = R63 subject_type = slave_state }
+			create_subject = { subject = R64 subject_type = slave_state }
+			R63 = { set_country_flag = command_slave_state_flag }
+			R64 = { set_country_flag = command_slave_state_flag }
+			set_country_flag = enslaved_brown_orcs
+			4519 = {
+				add_hobgoblin_minority_size_effect = yes add_hobgoblin_minority_size_effect = yes
+				add_orcish_minority_size_effect = yes add_orcish_minority_size_effect = yes
+				add_goblin_minority_size_effect = yes
+			}
+			4525 = {
+				add_hobgoblin_minority_size_effect = yes add_hobgoblin_minority_size_effect = yes
+				add_orcish_minority_size_effect = yes add_orcish_minority_size_effect = yes
+				add_goblin_minority_size_effect = yes
+			}
+			4624 = { add_orcish_minority_size_effect = yes add_orcish_minority_size_effect = yes }
+			4627 = { add_orcish_minority_size_effect = yes add_orcish_minority_size_effect = yes }
+			4545 = {
+				add_hobgoblin_minority_size_effect = yes add_hobgoblin_minority_size_effect = yes
+				add_orcish_minority_size_effect = yes add_orcish_minority_size_effect = yes
+				add_goblin_minority_size_effect = yes
+			}
+			4630 = {
+				add_hobgoblin_minority_size_effect = yes add_hobgoblin_minority_size_effect = yes
+				add_orcish_minority_size_effect = yes add_orcish_minority_size_effect = yes
+				add_goblin_minority_size_effect = yes
+			}
+			4633 = {
+				add_hobgoblin_minority_size_effect = yes add_hobgoblin_minority_size_effect = yes
+				add_orcish_minority_size_effect = yes add_orcish_minority_size_effect = yes
+				add_goblin_minority_size_effect = yes
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	
+	kingdom_of_the_plains = { #sir revolt
+		major = yes
+		potential = {
+			tag = R62
+			NOT = { has_country_flag = plains_kingdom }
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = sir_area
+				area = pharata_area
+				area = nadida_area
+				area = ghatasak_area
+				area = marudhoj_area
+				area = khasardul_area
+				area = nakara_area
+				area = raghajandi_area
+				area = khamarutar_area
+			}
+		}
+		allow {
+			sir_area = { type = all owned_by = ROOT }
+			pharata_area = { type = all owned_by = ROOT }
+			nadida_area = { type = all owned_by = ROOT }
+			ghatasak_area = { type = all owned_by = ROOT }
+			marudhoj_area = { type = all owned_by = ROOT }
+			khasardul_area = { type = all owned_by = ROOT }
+			nakara_area = { type = all owned_by = ROOT }
+			raghajandi_area = { type = all owned_by = ROOT }
+			khamarutar_area = { type = all owned_by = ROOT }
+		}
+		effect = {
+			set_government_rank = 3
+			add_prestige = 25
+			set_country_flag = plains_kingdom
+			4630 = {
+				move_capital_effect = yes
+			}
+			country_event = {
+				id = the_command.110
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+}
+
