@@ -6,18 +6,18 @@ country_decisions = {
             always = yes
         }
         allow = {
-        capital_scope = {
-            OR = {
-            is_institution_enabled = feudalism
-            is_institution_enabled = renaissance
-            is_institution_enabled = colonialism
-            is_institution_enabled = printing_press
-            is_institution_enabled = global_trade
-            is_institution_enabled = manufactories
-            is_institution_enabled = enlightenment
+            capital_scope = {
+                OR = {
+                is_institution_enabled = feudalism
+                is_institution_enabled = renaissance
+                is_institution_enabled = colonialism
+                is_institution_enabled = printing_press
+                is_institution_enabled = global_trade
+                is_institution_enabled = manufactories
+                is_institution_enabled = enlightenment
+                }
             }
         }
-    }
 
         effect = {
             country_event = {
@@ -63,5 +63,22 @@ country_decisions = {
             has_country_flag = fortification_expert
             has_country_flag = inquisitor
         }
+    }
+    select_edict_for_all_province = {
+        color = { 254 128 0 }
+        potential = {
+            always = yes
+        }
+        ai_will_do = {
+            factor = 0
+        }
+        allow = {
+            #Pas de condition nécessaire
+        }
+        effect = {
+            country_event = {
+                id = custom_edict_for_all_pronvince_event.1
+            }
+        }     
     }
 }

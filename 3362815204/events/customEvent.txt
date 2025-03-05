@@ -41,3 +41,77 @@ country_event = {
         }
     }
 }
+
+namespace = custom_edict_for_all_province_event
+
+country_event = {
+    id = custom_edict_for_all_province_event.1
+    title = custom_edict_for_all_province_event.1.t
+    desc = custom_edict_for_all_province_event.1.d
+    picture = GFX_evt_debate  # Vous pouvez remplacer par une autre image
+
+    is_triggered_only = yes
+
+    # Il y a beaucoup plus d'options dans Common\state_edicts\ pour les édits de province
+    # Ici ne seront mis que les edict "Basiques"
+
+    option = {
+        name = custom_edict_for_all_province_event.1.a
+        every_owned_province = {
+            limit = {
+                is_state = yes
+            }
+            set_state_edict = edict_advancement_effort # +33% institution spread
+        }
+    }
+
+    option = {
+        name = custom_edict_for_all_province_event.1.b
+        every_owned_province = {
+            limit = {
+                is_state = yes
+            }
+            set_state_edict = edict_centralization_effort # -0.03 monthly local autonomy
+        }
+    }
+
+    option = {
+        name = custom_edict_for_all_province_event.1.c
+        every_owned_province = {
+            limit = {
+                is_state = yes
+            }
+            set_state_edict = edict_defensive_edict # +33% local defensiveness
+        }
+    }
+
+    option = {
+        name = custom_edict_for_all_province_event.1.d
+        every_owned_province = {
+            limit = {
+                is_state = yes
+            }
+            set_state_edict = edict_encourage_development # -10% local development cost
+        }
+    }
+
+    option = {
+        name = custom_edict_for_all_province_event.1.e
+        every_owned_province = {
+            limit = {
+                is_state = yes
+            }
+            set_state_edict = edict_protect_trade # +50% province trade power
+        }
+    }
+
+    option = {
+        name = custom_edict_for_all_province_event.1.f
+        every_owned_province = {
+            limit = {
+                is_state = yes
+            }
+            set_state_edict = edict_religious_unity # +1% local missionary strength
+        }
+    }
+}
