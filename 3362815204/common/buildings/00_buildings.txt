@@ -518,9 +518,10 @@ shipyard = {
 			development = 10
 		}
 		has_port = yes
+		forcelimit_development_limiter_trigger = yes
 	}
 	modifier = {
-		naval_forcelimit = 2
+		naval_forcelimit = 1
 		ship_recruit_speed = -0.25
 		local_ship_repair = 0.25
 		local_has_man_of_war = yes #1.35
@@ -532,6 +533,8 @@ shipyard = {
 			type = production
 			value = 1
 		}
+		#Doge
+		navy_forcelimit_giver_building_modifier_effect = yes
 		add_faction_influence = {
 			faction = nl_cooperatists
 			influence = 0.5
@@ -1036,7 +1039,15 @@ regimental_camp = {
 	cost = 200
 	time = 12
 	modifier = {
-		land_forcelimit = 1
+		land_forcelimit = 0.5
+	}
+	build_trigger = {
+		if = {
+			limit = { FROM = { ai = yes overlord = { ai = yes } } }
+			FROM = { NOT = { num_of_loans = 4 } }
+			development = 10
+		}
+		forcelimit_development_limiter_trigger = yes
 	}
 
 	on_built = {
@@ -1065,6 +1076,7 @@ regimental_camp = {
 			faction = nl_cooperatists
 			influence = 0.5
 		}
+		
 		#Anbennar
 		anbennar_building_effect = yes
 		if = {
@@ -1629,9 +1641,10 @@ grand_shipyard = {
 			development = 10
 		}
 		has_port = yes
+		forcelimit_development_limiter_trigger = yes
 	}
 	modifier = {
-		naval_forcelimit = 4
+		naval_forcelimit = 2
 		ship_recruit_speed = -0.50
 		local_ship_repair = 0.50
 		local_has_man_of_war = yes #1.35
@@ -1647,6 +1660,8 @@ grand_shipyard = {
 			value = 2
 			upgrade_value = 1
 		}
+		#Doge
+		navy_forcelimit_giver_building_modifier_effect = yes
 		#Anbennar
 		anbennar_building_effect = yes
 		merfolk_dynamic_settlement_effect = yes
@@ -2067,7 +2082,7 @@ counting_house = {
 
 	make_obsolete = workshop
 	modifier = {
-		local_production_efficiency = 1
+		local_production_efficiency = 1.5
 	}
 
 	on_built = {
@@ -2342,7 +2357,7 @@ conscription_center = {
 	# THIS = Province, FROM = Builder(not nessecairly owner, can be overlord)
 
 	modifier = {
-		land_forcelimit = 2
+		land_forcelimit = 1
 	}
 	build_trigger = {
 		if = {
@@ -2378,14 +2393,14 @@ conscription_center = {
 		update_improved_military_buildings_modifier = { #1.35
 			building = conscription_center
 		}
-
+		#Doge
+		land_forcelimit_giver_building_modifier_effect = yes
 		#Anbennar
 		anbennar_building_effect = yes
 		if = {
 			limit = { FROM = { has_estate_privilege = estate_boar_command_war_room_rights } }
 			FROM = { add_legitimacy = 0.5 }
 		}
-		land_forcelimit_giver_building_modifier_effect = yes
 
 		owner = { accretive_path_jiangyang_chi_stacking_effect = { amount = 20 } }
 		
@@ -2596,19 +2611,25 @@ wharf = {
 		if = {
 			limit = { FROM = { ai = yes } }
 			FROM = { NOT = { num_of_loans = 4 } }
-			development = 10
+			base_production = 5
 		}
+		manufactory_production_limiter_trigger = yes
 	}
 	manufactory = {
 		naval_supplies
 		fish
 		salt
+		
+		#TGE
+		seafood
+		tar
 	}
 	onmap = yes
 
 
 
 	on_built = {
+		manufactory_goods_giver_building_modifier_effect = yes
 	 	if = { limit = { FROM = { has_idea = AIG_factory_towns } }
 			FROM = { set_country_flag = hb_has_factory_towns }
 	 		add_province_modifier = { name = factory_town duration = -1 }
@@ -2662,6 +2683,7 @@ wharf = {
 	}
 
 	on_destroyed = {
+		manufactory_goods_remover_building_modifier_effect = yes
 		homebrew_liquidation = { value = 500 }
 		remove_province_modifier = factory_town
 		hb_remove_development_from_building = {
@@ -2669,7 +2691,6 @@ wharf = {
 			type = production
 			value = 2
 		}
-		manufactory_goods_remover_building_modifier_effect = yes
 		remove_dev_from_building = { #1.35
 			building = manufactory 
 			type = production 
@@ -2743,17 +2764,30 @@ weapons = {
 		if = {
 			limit = { FROM = { ai = yes } }
 			FROM = { NOT = { num_of_loans = 4 } }
-			development = 10
+			base_production = 5
 		}
+		manufactory_production_limiter_trigger = yes
 	}
 	manufactory = {
 		copper
 		iron
-		mithril	#Anbennar
+		
+		#TGE
+		lead
+		mercury
+		tin
+		metalworking
+		munitions
+		zinc
+		cannon
+		
+		#Anbennar
+		mithril
 	}
 	onmap = yes
 
 	on_built = {
+		manufactory_goods_giver_building_modifier_effect = yes
 	 	if = { limit = { FROM = { has_idea = AIG_factory_towns } }
 			FROM = { set_country_flag = hb_has_factory_towns }
 	 		add_province_modifier = { name = factory_town duration = -1 }
@@ -2889,16 +2923,29 @@ weapons = {
 }
 
 textile = {
+	build_trigger = {
+		if = {
+			limit = { FROM = { ai = yes } }
+			FROM = { NOT = { num_of_loans = 4 } }
+			base_production = 5
+		}
+		manufactory_production_limiter_trigger = yes
+	}
 	manufactory = {
 		wool
 		cloth
 		silk
 		dyes
+		
+		#TGE
+		indigo
+		uniforms
+		carpet
 	}
 	onmap = yes
 
 	on_built = {
-	
+		manufactory_goods_giver_building_modifier_effect = yes
 	 	if = { limit = { FROM = { has_idea = AIG_factory_towns } }
 			FROM = { set_country_flag = hb_has_factory_towns }
 	 		add_province_modifier = { name = factory_town duration = -1 }
@@ -3011,8 +3058,9 @@ plantations = {
 		if = {
 			limit = { FROM = { ai = yes } }
 			FROM = { NOT = { num_of_loans = 4 } }
-			development = 10
+			base_production = 5
 		}
+		manufactory_production_limiter_trigger = yes
 	}
 	manufactory = {
 		coffee
@@ -3021,11 +3069,21 @@ plantations = {
 		tobacco
 		tea
 		cocoa
+		
+		#TGE
+		palm_oil
+		saffron
+		cinnamon
+		cloves
+		opium
+		dates
+		vanilla
+		nutmeg
 	}
 	onmap = yes
 
 	on_built = {
-	
+		manufactory_goods_giver_building_modifier_effect = yes
 	 	if = { limit = { FROM = { has_idea = AIG_factory_towns } }
 			FROM = { set_country_flag = hb_has_factory_towns }
 	 		add_province_modifier = { name = factory_town duration = -1 }
@@ -3140,8 +3198,9 @@ tradecompany = {
 		if = {
 			limit = { FROM = { ai = yes } }
 			FROM = { NOT = { num_of_loans = 4 } }
-			development = 10
+			base_production = 5
 		}
+		manufactory_production_limiter_trigger = yes
 	}
 	manufactory = {
 		ivory
@@ -3150,6 +3209,23 @@ tradecompany = {
 		cloves
 		fur
 		incense
+		
+		#TGE
+		whaling
+		beer
+		rum
+		jade
+		jade_sculptures
+		marble
+		marble_sculpture
+		gunpowder
+		exotic_animals
+		sulfur
+		woodworking
+		jewellery
+		maple_syrup
+		sea_turtle
+		fur_clothing
 
 		#Anbennar
 		precursor_relics
@@ -3158,6 +3234,7 @@ tradecompany = {
 	onmap = yes
 
 	on_built = {
+		manufactory_goods_giver_building_modifier_effect = yes
 	 	if = { limit = { FROM = { has_idea = AIG_factory_towns } }
 			FROM = { set_country_flag = hb_has_factory_towns }
 	 		add_province_modifier = { name = factory_town duration = -1 }
@@ -3289,13 +3366,29 @@ farm_estate = {
 		if = {
 			limit = { FROM = { ai = yes } }
 			FROM = { NOT = { num_of_loans = 4 } }
-			development = 10
+			base_production = 5
 		}
+		manufactory_production_limiter_trigger = yes
 	}
 	manufactory = {
 		grain
 		livestock
 		wine
+		
+		#TGE
+		apiculture
+		rice
+		horses
+		olive_oil
+		camel
+		elephants
+		citrus
+		potato
+		maize
+		tomato
+		llama
+		cheese
+		leather
 
 		#Anbennar
 		fungi
@@ -3304,6 +3397,7 @@ farm_estate = {
 	onmap = yes
 
 	on_built = {
+		manufactory_goods_giver_building_modifier_effect = yes
 		if = {
 			limit = { FROM = { has_estate_privilege = estate_wolf_command_war_room_rights } }
 			FROM = { add_legitimacy = 1 }
@@ -3501,18 +3595,28 @@ mills = {
 		if = {
 			limit = { FROM = { ai = yes } }
 			FROM = { NOT = { num_of_loans = 4 } }
-			development = 10
+			base_production = 5
 		}
+		manufactory_production_limiter_trigger = yes
 	}
 	manufactory = {
-		paper
-		gems
-		tropical_wood
-		glass
 		chinaware
+		gems
+		glass
+		paper
+		
+		#TGE
+		tropical_wood
+		pearls
+		lumber
+		ebony
+		amber
+		steam_engine
+		optics
 	}
 	onmap = yes
 	on_built = {
+		manufactory_goods_giver_building_modifier_effect = yes
 		if = {
 			limit = { FROM = { has_estate_privilege = estate_elephant_command_war_room_rights } }
 			FROM = { add_legitimacy = 1 }
@@ -3643,6 +3747,7 @@ furnace = {
 	show_separate = yes # Means as a manufactory it will be shown according to the old way
 
 	on_built = {
+		manufactory_goods_giver_building_modifier_effect = yes
 	 	if = { limit = { FROM = { has_idea = AIG_factory_towns } }
 			FROM = { set_country_flag = hb_has_factory_towns }
 	 		add_province_modifier = { name = factory_town duration = -1 }
@@ -3870,6 +3975,22 @@ soldier_households = {
 		fish
 		livestock
 		wine
+		
+		#TGE
+		apiculture
+		rice
+		leather
+		horses
+		olive_oil
+		camel
+		elephants
+		potato
+		tomato
+		maize
+		llama
+		cheese
+		
+		#Anbennar
 		fungi
 		serpentbloom
 	}
@@ -4061,6 +4182,11 @@ impressment_offices = {
 		fish
 		naval_supplies
 		tropical_wood
+		
+		#TGE
+		seafood
+		citrus
+		tar
 	}
 
 	build_trigger = {
@@ -4068,14 +4194,14 @@ impressment_offices = {
 	}
 
 	modifier = {
-		local_sailors = 250
+		local_sailors = 500
 		ship_recruit_speed = -0.1
 		local_ship_cost = -0.05
 		naval_forcelimit = 1
 
 	}
 	bonus_modifier = {
-		local_sailors = 250
+		local_sailors = 500
 		ship_recruit_speed = -0.1
 		local_ship_cost = -0.05
 		naval_forcelimit = 1
@@ -4176,6 +4302,13 @@ state_house = {
 		paper
 		glass
 		gems
+		
+		#TGE
+		amber
+		pearls
+		jewellery
+		marble_sculpture
+		jade_sculptures
 	}
 
 	build_trigger = {

@@ -1,0 +1,62 @@
+no_ongoing_construction_triggers = {
+    NOT = { has_construction = core }
+    NOT = { has_construction = culture }
+    NOT = { has_construction = building }
+    NOT = { has_construction = missionary }
+    NOT = { has_construction = great_project }
+    NOT = { has_construction = canal }
+}
+
+meet_basic_province_requirements_trigger = {
+    is_state_core = ROOT
+    controlled_by = ROOT
+    has_siege = no
+}
+
+manufactory_production_limiter_trigger = {
+	if = {
+		limit = {
+			owner = { has_country_flag = building_selection_15_prod_flag }
+		}
+		base_production = 15
+	}
+	else_if = {
+		limit = {
+			owner = { has_country_flag = building_selection_10_prod_flag }
+		}
+		base_production = 10
+	}
+	else_if = {
+		limit = {
+			owner = { has_country_flag = building_selection_5_prod_flag }
+		}
+		base_production = 5
+	}
+	else = {
+		
+	}
+}
+
+forcelimit_development_limiter_trigger = {
+	if = {
+		limit = {
+			owner = { has_country_flag = building_selection_30_development_flag }
+		}
+		development = 30
+	}
+	else_if = {
+		limit = {
+			owner = { has_country_flag = building_selection_20_development_flag }
+		}
+		development = 20
+	}
+	else_if = {
+		limit = {
+			owner = { has_country_flag = building_selection_10_development_flag }
+		}
+		development = 10
+	}
+	else = {
+		
+	}
+}

@@ -499,10 +499,7 @@ krakdhumvror_1c = {
 				}
 				AND = {
 					owned_by = ROOT
-					OR = {
-						trade_goods = iron
-						trade_goods = copper
-					}
+					has_metal_goods = yes
 					NOT = { has_production_building_trigger = yes }
 					NOT = {	base_production = 10 }
 				}
@@ -524,10 +521,7 @@ krakdhumvror_1c = {
 			4039 = { has_dwarven_hold_6 = yes }
 			num_of_owned_provinces_with = {
 				value = 25
-				OR = {
-					trade_goods = iron
-					trade_goods = copper
-				}
+				has_metal_goods = yes
 				has_production_building_trigger = yes
 				base_production = 8
 			}
@@ -1583,7 +1577,10 @@ krakdhumvror_3b = {
 				if = {
 					limit = { 
 						NOT = {
+							trade_goods = tin
 							trade_goods = iron
+							trade_goods = lead
+							trade_goods = zinc
 							trade_goods = copper
 							trade_goods = mithril
 							trade_goods = gold
@@ -2176,8 +2173,8 @@ krakdhumvror_4b = {
 		
 		effect = {
 			add_country_modifier = { name = krak_twin_trade duration = 10950 }
-			4182 = { change_province_name = "Seldizâd" rename_capital = "Seldizâd" }
-			4202 = { change_province_name = "Skordhûmad" rename_capital = "Skordhûmad" }
+			4182 = { change_province_name = "Seldizï¿½d" rename_capital = "Seldizï¿½d" }
+			4202 = { change_province_name = "Skordhï¿½mad" rename_capital = "Skordhï¿½mad" }
 		}
 	}
 
@@ -2647,7 +2644,7 @@ krakdhumvror_5 = {
 			dead_end_tunnel_area = { add_permanent_province_modifier = { name = krak_anvil_mines duration = -1 } }
 			4209 = { change_province_name = "Uristov" rename_capital = "Uristov" }
 			4210 = { change_province_name = "Garlimstunad" rename_capital = "Garlimstunad" }
-			4211 = { change_province_name = "Sedadhûm" rename_capital = "Sedadhûm" }
+			4211 = { change_province_name = "Sedadhï¿½m" rename_capital = "Sedadhï¿½m" }
 			hidden_effect = { country_event = { id = flavor_krak.5 days = 365 random = 730 } }
 		}
 	}
@@ -2702,7 +2699,7 @@ krakdhumvror_5 = {
 				AND = {
 					NOT = { province_id = 4208 }
 					owned_by = ROOT
-					trade_goods = iron
+					has_metal_goods = yes
 					NOT = { base_production = 5 }
 					NOT = { has_building = weapons }
 				}
@@ -2715,9 +2712,9 @@ krakdhumvror_5 = {
 				base_production = 20
 			}
 			num_of_owned_provinces_with = {
-				value = 3
+				value = 5
 				NOT = { province_id = 4208 }
-				trade_goods = iron
+				has_metal_goods = yes
 				OR = {
 					base_production = 5
 					has_building = weapons
@@ -2758,10 +2755,7 @@ krakdhumvror_5b = {
 				}
 				AND = {
 					owned_by = ROOT
-					OR = {
-						trade_goods = iron
-						trade_goods = copper
-					}
+					has_metal_goods = yes
 					OR = {
 						NOT = { base_production = 6 }
 						NOT = { has_building = weapons }
@@ -2774,10 +2768,7 @@ krakdhumvror_5b = {
 			4208 = { has_dwarven_hold_5 = yes }
 			num_of_owned_provinces_with = {
 				value = 5
-				OR = {
-					trade_goods = iron
-					trade_goods = copper
-				}
+				has_metal_goods = yes
 				base_production = 6
 				has_building = weapons
 			}
@@ -3159,10 +3150,7 @@ krakdhumvror_5b = {
 		
 		provinces_to_highlight = {
 			owned_by = ROOT
-			OR = {
-				trade_goods = iron
-				trade_goods = copper
-			}
+			has_metal_goods = yes
 			OR = {
 				NOT = { has_building = weapons }
 				NOT = { has_production_building_trigger = yes }
@@ -3173,14 +3161,7 @@ krakdhumvror_5b = {
 		trigger = {
 			num_of_owned_provinces_with = {
 				value = 10
-				trade_goods = iron
-				has_building = weapons
-				has_production_building_trigger = yes
-				base_production = 8
-			}
-			num_of_owned_provinces_with = {
-				value = 4
-				trade_goods = copper
+				has_metal_goods = yes
 				has_building = weapons
 				has_production_building_trigger = yes
 				base_production = 8
