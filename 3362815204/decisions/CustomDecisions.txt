@@ -1,4 +1,5 @@
 country_decisions = {
+    #Cette décision permet de faires spawn l'institution
     institution_growth_decision = {
         color = { 254 128 0 }
         potential = {
@@ -28,7 +29,7 @@ country_decisions = {
             factor = 0
         }
     }
-
+    # Cette décision donne le statut de tous les evenements uniques du jeu lié à des advisors
     advisor_flags_info  = {
         color = { 254 128 0 }
         potential = {
@@ -64,7 +65,7 @@ country_decisions = {
             has_country_flag = inquisitor
         }
     }
-
+    # Trump edict
     select_edict_for_all_province = {
         color = { 254 128 0 }
         potential = {
@@ -79,6 +80,48 @@ country_decisions = {
         effect = {
             country_event = {
                 id = custom_edict_for_all_province_event.1
+            }
+        }     
+    }
+    # Cette décision montre le nombre de devclick qui ont été fait par pays
+    monkey_devclick = {
+        color = { 254 128 0 }
+        potential = {
+            always = yes
+        }
+        ai_will_do = {
+            factor = 0
+        }
+        allow = {
+            custom_trigger_tooltip = {
+                tooltip = monkey_devclick_tooltip
+                always = no
+            }
+        }
+        effect = {}
+    }
+    # Cette décision applique le parlement sur toutes les provinces
+    parliament_all_provinces = {
+        color = { 254 128 0 }
+        potential = {
+            always = yes
+            has_parliament = yes
+        }
+        ai_will_do = {
+            factor = 0
+        }
+        allow = {
+  			NOT = {
+  				all_owned_province = { has_seat_in_parliament = yes }
+  			}
+        }
+        effect = {
+            custom_tooltip = parliament_all_provinces_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = { has_seat_in_parliament = no }
+                    set_seat_in_parliament = yes
+                }
             }
         }     
     }
