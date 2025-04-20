@@ -201,7 +201,72 @@ on_startup = {
 	country_event = { id = race_setup_events.6 days = 1 } #On Culture Promote
 	country_event = { id = racial_modifiers.7 days = 1 } #Save primary culture
 	#########     Racial Pop Stuff     ###########
-
+	#### Dev click counter ####
+	every_country = {
+		if = {
+			limit = {
+				check_variable = {
+					which = dev_adm_clicks
+					value = 1
+				}
+			}
+		}
+		else = {
+			set_variable = {
+				which = dev_adm_clicks
+				value = 0
+			}
+		}
+	}
+	every_country = {
+		if = {
+			limit = {
+				check_variable = {
+					which = dev_dip_clicks
+					value = 1
+				}
+			}
+		}
+		else = {
+			set_variable = {
+				which = dev_dip_clicks
+				value = 0
+			}
+		}
+	}
+	every_country = {
+		if = {
+			limit = {
+				check_variable = {
+					which = dev_mil_clicks
+					value = 1
+				}
+			}
+		}
+		else = {
+			set_variable = {
+				which = dev_mil_clicks
+				value = 0
+			}
+		}
+	}
+	every_country = {
+		if = {
+			limit = {
+				check_variable = {
+					which = dev_sum_clicks
+					value = 1
+				}
+			}
+		}
+		else = {
+			set_variable = {
+				which = dev_sum_clicks
+				value = 0
+			}
+		}
+	}
+	#### Dev click counter ####
 }
 
 # country
