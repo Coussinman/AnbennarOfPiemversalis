@@ -562,6 +562,11 @@ naval_supplies = {
 				superregion = northern_expanse_superregion
 				region = yezel_mora_region
 				region = dao_nako_region
+				region = inner_castanor_region
+				region = south_castanor_region
+				region = west_castanor_region
+				area = whistlevale_area
+				area = cursewood_area
 			}
 		}
 		modifier = {
@@ -604,6 +609,7 @@ naval_supplies = {
 				has_terrain = gladeway
 				has_terrain = bloodgroves
 				region = dalaire_region # old frozen trees! 
+			
 			}
 		}
 		modifier = {
@@ -2510,13 +2516,71 @@ lumber = {
 		local_build_cost = -0.10
 	}
 	chance = {
-		factor = 20
+		factor = 15
 		modifier = {
 			factor = 0
-			OR = { 
-				NOT = { has_terrain = forest }
-				NOT = { has_terrain = woods }
-				NOT = { province_id = 4100 }
+			OR = {
+				has_terrain = glacier
+				has_terrain = desert
+				has_terrain = coastal_desert
+				has_terrain = drylands
+				has_terrain = savannah
+				has_terrain = marsh
+				has_terrain = steppe
+				has_terrain = highlands
+				has_terrain = farmlands
+				has_terrain = cavern
+				has_terrain = dwarven_hold
+				has_terrain = dwarven_hold_surface
+				has_terrain = dwarven_road
+				superregion = northern_expanse_superregion
+				region = yezel_mora_region
+				region = dao_nako_region
+			}
+		}
+		modifier = {
+			factor = 0.5
+			OR = {
+				has_terrain = mountain
+				has_terrain = grasslands
+				has_climate = arctic
+			}
+		}
+		modifier = {
+			factor = 0.75
+			OR = {
+				has_terrain = coastline
+				has_climate = tropical
+			}
+		}
+		modifier = {
+			factor = 1.5
+			OR = {
+				region = moduk_region
+				area = somyonghon_area
+			}
+			NOT = { has_terrain = steppe }
+		}
+		modifier = {
+			factor = 1.5
+			OR = {
+				has_terrain = forest
+				has_terrain = woods
+				has_terrain = hills
+				has_terrain = jungle
+				has_terrain = ancient_forest
+				has_terrain = gladeway
+				has_terrain = bloodgroves
+				region = dalaire_region # old frozen trees! 
+			
+			}
+		}
+		modifier = {
+			factor = 0
+			OR = {
+				province_id = 4236
+				province_id = 2978
+				province_id = 2914
 			}
 		}
 		modifier = {
@@ -2525,8 +2589,8 @@ lumber = {
 				province_id = 4100
 			}
 		}
-	}	
-}
+	}
+}		
 
 palm_oil = { 
 	color = { 0.60 0.20 0.0 } 
