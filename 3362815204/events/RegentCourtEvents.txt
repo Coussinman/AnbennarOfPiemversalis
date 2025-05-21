@@ -2062,6 +2062,200 @@ country_event = {
 		}
 	}
 	
+	#ACE
+	#Upgraded Nathalyne
+	option = {
+		name = regent_court.2.o
+		highlight = yes
+		trigger = {
+			always = no
+			#has_country_flag = upgraded_nathalyne
+		}
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 2
+				personality = ai_capitalist
+			}
+			modifier = {
+				factor = 2
+				personality = ai_diplomat
+			}
+			modifier = {
+				factor = 1.2
+				government = republic
+			}
+			modifier = {
+				factor = 0.5
+				personality = ai_militarist
+			}
+			modifier = {
+				factor = 5
+				tag = A74	#Nathalaire
+			}
+		}
+		set_country_flag = regent_court_deity_switch_cooldown
+		#change_personal_deity = upgraded_nathalyne
+		if = {
+			limit = { has_government_attribute = follower_of_many_gods }
+			improve_relations_with_deity_followers = { deity = nathalyne }
+		}
+	}
+	
+	#general comment: Is this whole adean war/peace really needed?
+	#adean peace base
+	option = {
+		name = regent_court.2.e
+		trigger = {
+			hidden_trigger = { has_global_flag = "upgraded_adean_admin" }
+			NOT = {
+				ruler_has_personality = righteous_personality
+				ruler_has_personality = martial_educator_personality
+				ruler_has_personality = strict_personality
+			}
+		}
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 2
+				personality = ai_militarist
+			}
+			modifier = {
+				factor = 0.5
+				personality = ai_colonialist
+			}
+			modifier = {
+				factor = 2
+				culture_group = escanni
+			}
+			modifier = {
+				factor = 1.5
+				culture_group = lencori
+			}
+			modifier = {
+				factor = 3
+				personality = ai_balanced
+			}
+			modifier = {
+				factor = 2
+				personality = ai_capitalist
+			}
+			modifier = {
+				factor = 1.2
+				government = monarchy
+			}
+			modifier = {
+				factor = 10 
+				tag = B58	#Adenica
+			}
+		}
+		set_country_flag = regent_court_deity_switch_cooldown
+		change_personal_deity = adean_upgraded_admin
+	}
+	
+	#adean peace favorable
+	option = {
+		name = regent_court.2.e
+		highlight = yes
+		trigger = {
+			hidden_trigger = { has_global_flag = "upgraded_adean_admin" }
+			OR = {
+				ruler_has_personality = righteous_personality
+				ruler_has_personality = martial_educator_personality
+				ruler_has_personality = strict_personality
+			}
+		}
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 2
+				personality = ai_militarist
+			}
+			modifier = {
+				factor = 0.5
+				personality = ai_colonialist
+			}
+			modifier = {
+				factor = 2
+				culture_group = escanni
+			}
+			modifier = {
+				factor = 1.5
+				culture_group = lencori
+			}
+			modifier = {
+				factor = 3
+				personality = ai_balanced
+			}
+			modifier = {
+				factor = 2
+				personality = ai_capitalist
+			}
+			modifier = {
+				factor = 1.2
+				government = monarchy
+			}
+			modifier = {
+				factor = 10 
+				tag = B58	#Adenica
+			}
+		}
+		set_country_flag = regent_court_deity_switch_cooldown
+		change_personal_deity = adean_upgraded_admin
+	}
+	
+	#adean war base
+	option = {
+		name = regent_court.2.e
+		trigger = {
+			hidden_trigger = { has_global_flag = "upgraded_adean_war" }
+			NOT = {
+				ruler_has_personality = righteous_personality
+				ruler_has_personality = martial_educator_personality
+				ruler_has_personality = strict_personality
+			}
+		}
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 2
+				personality = ai_militarist
+			}
+			modifier = {
+				factor = 0.5
+				personality = ai_colonialist
+			}
+			modifier = {
+				factor = 1.5
+				culture_group = escanni
+			}
+			modifier = {
+				factor = 1.5
+				culture_group = lencori
+			}
+			modifier = {
+				factor = 10 
+				tag = B58	#Adenica
+			}
+		}
+		set_country_flag = regent_court_deity_switch_cooldown
+		change_personal_deity = adean_upgraded_war
+	}
+	
+	#adean war favorable
+	option = {
+		name = regent_court.2.e
+		highlight = yes
+		trigger = {
+			hidden_trigger = { has_global_flag = "upgraded_adean_war" }
+			OR = {
+				ruler_has_personality = righteous_personality
+				ruler_has_personality = martial_educator_personality
+				ruler_has_personality = strict_personality
+			}
+		}
+	}
+	
 	#Begga Base
 	option = {
 		name = regent_court.2.p
@@ -2302,6 +2496,116 @@ country_event = {
 		change_personal_deity = lightfather
 	}
 	
+
+	#One-Armed Skald Base
+	option = {
+		name = regent_court.2.s
+		trigger = {
+			hidden_trigger = { NOT = { has_global_flag = one_armed_skald_upgraded_flag } }
+			NOT = {
+				ruler_has_personality = pious_personality
+				ruler_has_personality = bold_fighter_personality
+				ruler_has_personality = inspiring_leader_personality
+			}
+			OR = {
+				culture_group = gerudian
+				has_country_flag = pearlsedge_gerudia
+			}
+		}
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 2
+				personality = ai_militarist
+			}
+			modifier = {
+				factor = 3
+				ruler_culture = reverian
+			}
+		}
+		set_country_flag = regent_court_deity_switch_cooldown
+		change_personal_deity = one_armed_skald
+	}
+
+	#One-Armed Skald Favorable
+	option = {
+		name = regent_court.2.s
+		highlight = yes
+		trigger = {
+			hidden_trigger = { NOT = { has_global_flag = one_armed_skald_upgraded_flag } }
+			OR = {
+				ruler_has_personality = pious_personality
+				ruler_has_personality = bold_fighter_personality
+				ruler_has_personality = inspiring_leader_personality
+			}
+		}
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 2
+				personality = ai_militarist
+			}
+			modifier = {
+				factor = 5
+				ruler_culture = reverian
+			}
+		}
+		set_country_flag = regent_court_deity_switch_cooldown
+		change_personal_deity = one_armed_skald
+	}
+
+	#One-Armed Skald Upgraded
+	option = {
+		name = regent_court.2.s
+		trigger = {
+			hidden_trigger = { has_global_flag = one_armed_skald_upgraded_flag }
+			NOT = {
+				ruler_has_personality = pious_personality
+				ruler_has_personality = bold_fighter_personality
+				ruler_has_personality = inspiring_leader_personality
+			}
+		}
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 2
+				personality = ai_militarist
+			}
+			modifier = {
+				factor = 7.5
+				ruler_culture = reverian
+			}
+		}
+		set_country_flag = regent_court_deity_switch_cooldown
+		change_personal_deity = one_armed_skald_upgraded
+	}
+
+	#One-Armed Skald Upgraded Favorable
+	option = {
+		name = regent_court.2.s
+		highlight = yes
+		trigger = {
+			hidden_trigger = { has_global_flag = one_armed_skald_upgraded_flag }
+			OR = {
+				ruler_has_personality = pious_personality
+				ruler_has_personality = bold_fighter_personality
+				ruler_has_personality = inspiring_leader_personality
+			}
+		}
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 2
+				personality = ai_militarist
+			}
+			modifier = {
+				factor = 10
+				ruler_culture = reverian
+			}
+		}
+		set_country_flag = regent_court_deity_switch_cooldown
+		change_personal_deity = one_armed_skald_upgraded
+	}
 
 	option = {
 		name = regent_court.2.a

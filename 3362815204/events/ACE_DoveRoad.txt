@@ -1,0 +1,243 @@
+namespace = rose_road
+namespace = dove_road
+
+province_event = { #Complete a Rose Road
+	id = rose_road.1
+	title = rose_road.1.t
+	desc = rose_road.1.desc
+	picture = FARMING_eventPicture
+	goto = ROOT
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			remove_province_modifier = rose_road_under_construction
+			add_permanent_province_modifier = {
+				name = rose_road
+				duration = -1
+			}
+			if = {
+				trigger_switch = {
+					on_trigger = province_group
+					rose_road = { rose_road_select_next_province = yes }
+				}
+			}
+			event_target:rose_road_next_province = {
+				if = {
+					limit = {
+						NOT = { has_province_modifier = rose_road }
+					}
+					add_permanent_province_modifier = { name = rose_road_under_construction duration = -1 }
+					province_event = { id = rose_road.1 days = 90 random = 90 }
+				}
+			}
+		}
+	}
+
+	#The road is built!
+	option = {
+		name = rose_road.1.a
+		ai_chance = { factor = 1 }
+		owner = { add_prestige_excess_to_splendour_effect = { VAL = 5 } }
+	}
+}
+
+province_event = { #Complete a Dove Road
+	id = dove_road.1
+	title = dove_road.1.t
+	desc = dove_road.1.desc
+	picture = FARMING_eventPicture
+	goto = ROOT
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			remove_province_modifier = dove_road_under_construction
+			add_permanent_province_modifier = {
+				name = dove_road
+				duration = -1
+			}
+			if = { #bordering provinces and setting another direction (ED, Borders, Esmaria done)
+				limit = {
+					OR = {
+						province_id = 8
+						province_id = 168
+						province_id = 6
+						province_id = 327
+						province_id = 328
+						province_id = 329
+						province_id = 52 #east dameshead
+						province_id = 305
+						province_id = 332
+						province_id = 294
+						province_id = 417
+						province_id = 418
+						province_id = 904
+						province_id = 413
+						province_id = 313
+						province_id = 305 #borders
+						province_id = 267
+						province_id = 266
+						province_id = 911 #esmaria end
+						province_id = 262
+						province_id = 249
+						province_id = 253 #damescrown
+						province_id = 67
+						province_id = 70
+						province_id = 71
+						province_id = 74
+						province_id = 111
+						province_id = 112
+						province_id = 113
+						province_id = 128
+						province_id = 79
+						province_id = 101 #lencenor
+						province_id = 166
+						province_id = 158
+						province_id = 163 #small country
+						province_id = 142
+						province_id = 141 #dragon coast
+						province_id = 432
+						province_id = 433 #dostanor
+						province_id = 361
+						province_id = 777 #forlorn vale
+						province_id = 220
+						province_id = 256 #alenic frontier
+						province_id = 704
+						province_id = 696
+						province_id = 709
+						province_id = 712
+						province_id = 701 #alenic reach
+						province_id = 13
+						province_id = 20
+						province_id = 43 #west dameshead
+						province_id = 802
+						province_id = 798
+						province_id = 794
+						province_id = 817
+						province_id = 818
+						province_id = 896 #south castanor
+						province_id = 773
+						province_id = 785
+						province_id = 787
+						province_id = 760
+						province_id = 765 #west castanor
+						province_id = 832
+						province_id = 831
+						province_id = 828
+						province_id = 847 #east castanor
+					}
+				}
+				trigger_switch = {
+					on_trigger = province_id
+					8 = { 168 = { save_event_target_as = dove_road_next_province } }
+					168 = { 6 = { save_event_target_as = dove_road_next_province } }
+					6 = { 328 = { save_event_target_as = dove_road_next_province } }
+					328 = { 298 = { save_event_target_as = dove_road_next_province } }
+					327 = { 329 = { save_event_target_as = dove_road_next_province } }
+					329 = { 394 = { save_event_target_as = dove_road_next_province } }
+					52 = { 587 = { save_event_target_as = dove_road_next_province } } #east dameshead ends
+					305 = { 332 = { save_event_target_as = dove_road_next_province } }
+					332 = { 923 = { save_event_target_as = dove_road_next_province } }
+					294 = { 300 = { save_event_target_as = dove_road_next_province } }
+					417 = { 416 = { save_event_target_as = dove_road_next_province } }
+					413 = { 418 = { save_event_target_as = dove_road_next_province } }
+					418 = { 904 = { save_event_target_as = dove_road_next_province } }
+					904 = { 313 = { save_event_target_as = dove_road_next_province } }
+					313 = { 326 = { save_event_target_as = dove_road_next_province } } #borders end
+					267 = { 266 = { save_event_target_as = dove_road_next_province } }
+					266 = { 260 = { save_event_target_as = dove_road_next_province } }
+					911 = { 268 = { save_event_target_as = dove_road_next_province } } #esmaria ends here
+					262 = { 254 = { save_event_target_as = dove_road_next_province } }
+					249 = { 253 = { save_event_target_as = dove_road_next_province } }
+					253 = { 236 = { save_event_target_as = dove_road_next_province } } #damescrown
+					67 = { 70 = { save_event_target_as = dove_road_next_province } }
+					70 = { 71 = { save_event_target_as = dove_road_next_province } }
+					71 = { 74 = { save_event_target_as = dove_road_next_province } }
+					74 = { 75 = { save_event_target_as = dove_road_next_province } }
+					111 = { 112 = { save_event_target_as = dove_road_next_province } }
+					112 = { 113 = { save_event_target_as = dove_road_next_province } }
+					113 = { 124 = { save_event_target_as = dove_road_next_province } }
+					128 = { 114 = { save_event_target_as = dove_road_next_province } }
+					79 = { 97 = { save_event_target_as = dove_road_next_province } }
+					97 = { 101 = { save_event_target_as = dove_road_next_province } }
+					101 = { 98 = { save_event_target_as = dove_road_next_province } } #lencenor
+					166 = { 135 = { save_event_target_as = dove_road_next_province } }
+					158 = { 163 = { save_event_target_as = dove_road_next_province } }
+					163 = { 165 = { save_event_target_as = dove_road_next_province } } #small country
+					142 = { 141 = { save_event_target_as = dove_road_next_province } }
+					141 = { 140 = { save_event_target_as = dove_road_next_province } } #dragon coast
+					432 = { 433 = { save_event_target_as = dove_road_next_province } }
+					433 = { 440 = { save_event_target_as = dove_road_next_province } } #dostanor
+					361 = { 778 = { save_event_target_as = dove_road_next_province } }
+					777 = { 353 = { save_event_target_as = dove_road_next_province } } #forlorn vale
+					220 = { 237 = { save_event_target_as = dove_road_next_province } }
+					256 = { 339 = { save_event_target_as = dove_road_next_province } } #alenic frontier
+					704 = { 705 = { save_event_target_as = dove_road_next_province } }
+					696 = { 722 = { save_event_target_as = dove_road_next_province } }
+					709 = { 711 = { save_event_target_as = dove_road_next_province } }
+					712 = { 701 = { save_event_target_as = dove_road_next_province } }
+					701 = { 715 = { save_event_target_as = dove_road_next_province } } #alenic reach
+					13 = { 20 = { save_event_target_as = dove_road_next_province } }
+					20 = { 16 = { save_event_target_as = dove_road_next_province } }
+					43 = { 10 = { save_event_target_as = dove_road_next_province } } #west dameshead
+					802 = { 798 = { save_event_target_as = dove_road_next_province } }
+					798 = { 799 = { save_event_target_as = dove_road_next_province } }
+					794 = { 800 = { save_event_target_as = dove_road_next_province } }
+					817 = { 818 = { save_event_target_as = dove_road_next_province } }
+					818 = { 876 = { save_event_target_as = dove_road_next_province } }
+					896 = { 824 = { save_event_target_as = dove_road_next_province } } #south castanor
+					773 = { 785 = { save_event_target_as = dove_road_next_province } }
+					785 = { 787 = { save_event_target_as = dove_road_next_province } }
+					787 = { 783 = { save_event_target_as = dove_road_next_province } }
+					760 = { 765 = { save_event_target_as = dove_road_next_province } }
+					765 = { 759 = { save_event_target_as = dove_road_next_province } } #west castanor
+					832 = { 831 = { save_event_target_as = dove_road_next_province } }
+					831 = { 830 = { save_event_target_as = dove_road_next_province } }
+					828 = { 833 = { save_event_target_as = dove_road_next_province } }
+					847 = { 849 = { save_event_target_as = dove_road_next_province } } #east castanor
+				}
+			}
+			else = { #so it doesn't fire it with every single province group, prevents the construction from moving to an adjacent province group
+				trigger_switch = {
+					on_trigger = province_group
+					dove_road_start_wex = { dove_road_select_next_province = { section = start_wex } }
+					dove_road_east_dameshead = { dove_road_select_next_province = { section = east_dameshead } }
+					dove_road_west_dameshead = { dove_road_select_next_province = { section = west_dameshead } }
+					dove_road_the_borders = { dove_road_select_next_province = { section = the_borders } }
+					dove_road_businor = { dove_road_select_next_province = { section = businor } }
+					dove_road_esmaria = { dove_road_select_next_province = { section = esmaria } }
+					dove_road_dostanor = { dove_road_select_next_province = { section = dostanor } }
+					dove_road_forlorn_vale = { dove_road_select_next_province = { section = forlorn_vale } }
+					dove_road_damescrown = { dove_road_select_next_province = { section = damescrown } }
+					dove_road_lencenor = { dove_road_select_next_province = { section = lencenor } }
+					dove_road_small_country = { dove_road_select_next_province = { section = small_country } }
+					dove_road_dragon_coast = { dove_road_select_next_province = { section = dragon_coast } }
+					dove_road_alenic_frontier = { dove_road_select_next_province = { section = alenic_frontier } }
+					dove_road_alenic_reach = { dove_road_select_next_province = { section = alenic_reach } }
+					dove_road_west_castanor = { dove_road_select_next_province = { section = west_castanor } }
+					dove_road_east_castanor = { dove_road_select_next_province = { section = east_castanor } }
+					dove_road_south_castanor = { dove_road_select_next_province = { section = south_castanor } }
+				}
+			}
+			event_target:dove_road_next_province = {
+				if = { #this "if" keeps the event from looping forever on the end provinces, because event targets get saved between events in an event chain.
+					limit = {
+						NOT = { has_province_modifier = dove_road }
+					}
+					add_permanent_province_modifier = { name = dove_road_under_construction duration = -1 }
+					province_event = { id = dove_road.1 days = 90 random = 90 }
+				}
+			}
+		}
+	}
+
+	#The road is built!
+	option = {
+		name = dove_road.1.a
+		ai_chance = { factor = 1 }
+		owner = { add_prestige_excess_to_splendour_effect = { VAL = 5 } }
+	}
+}

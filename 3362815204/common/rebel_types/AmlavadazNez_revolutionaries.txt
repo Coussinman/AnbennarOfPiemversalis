@@ -1,0 +1,81 @@
+amlavadaznez_revolutionaries = {
+	area = nation
+	government = republic
+	defection = none
+	defect_delay = 120
+	independence = none
+	unit_transfer = no
+	gfx_type = culture_province
+	will_relocate = yes
+	resilient = yes
+	reinforcing = yes
+	general = yes
+	smart = yes
+	artillery = 0.3
+	infantry = 0.6
+	cavalry = 0.1
+	morale = 1.2
+	handle_action_build_core = no
+	handle_action_negotiate = yes
+	handle_action_send_missionary = no
+	handle_action_stability = no
+	handle_action_change_culture = no
+	spawn_chance = {
+		factor = 0 #these are event rebels only
+	}
+	siege_won_trigger = {
+
+	}
+	siege_won_effect = {
+		add_local_autonomy = 15
+		hidden_effect = { add_devastation = 5 }
+	}
+	can_negotiate_trigger = {
+		always = yes
+	}
+	can_enforce_trigger = {
+		always = yes
+	}
+	demands_description = "amlavadaznez_revolutionaries_demand"
+	demands_enforced_effect = {
+		add_prestige = -100
+		if = {
+			limit = { NOT = { government = republic } }
+			change_government = republic
+		}
+		if = {
+			limit = { has_country_flag = formed_diggy_formable }
+			add_government_reform = amldihr_dutch_republic_reform
+		}
+		else = {
+			add_government_reform = amldihr_dutch_republic_reform
+		}
+		hidden_effect = { set_government_rank = 3 }
+		hidden_effect = {
+			add_republican_tradition = -100
+			add_republican_tradition = 50
+			change_statists_vs_orangists = -0.60
+		}
+		hidden_effect = {
+			4119 = {
+				set_seat_in_parliament = yes
+			}
+		}
+
+		every_owned_province = {
+			limit = {
+				has_rebel_faction = REB
+				is_overseas = no
+			}
+			add_local_autonomy = 25
+		}
+		custom_tooltip = amlavadaznez_revolutionaries_tt
+		hidden_effect = {
+			every_owned_province = {
+				add_province_modifier = {
+				name = "amlavadazNez_surrender"
+				duration = 3650 }
+			}
+		}
+	}
+}

@@ -1,0 +1,54 @@
+po_lorent_dismantle_lose = {
+	category = 6
+	power_projection = humiliated_rival
+	power_cost_base = 0.0
+	prestige_base = 1.0
+	ae_base = 0.0
+	warscore_cost = {
+		all_provinces = 0.0
+		no_provinces = 1000.0
+		owner_keeps = 0.0
+		conquered = 1.0
+		returned_core = 0.0
+		released_nation = 0.0
+		cancelled_subject = 0.0
+		concede_colonial_region = 0.0
+	}
+	warscore_cap = 100
+	requires_demand_independence = yes
+	is_make_subject = no
+	requires_is_allowed = yes
+
+	is_visible = {
+		is_in_war = {
+			defender_leader = THIS
+			casus_belli = dismantle_lorent
+		}
+	}
+
+	is_allowed = {
+		always = yes
+	}
+
+	effect = {
+		A01 = {
+			set_emperor = yes
+		}
+		create_subject = {
+			subject_type = vassal
+			subject = A11
+		}
+	}
+	ai_weight = {
+		export_to_variable = {
+			variable_name = ai_value
+			value = trigger_value:always
+		}
+		set_variable = {
+			ai_value = 2000
+		}
+		limit = {
+			always = yes
+		}
+	}
+}

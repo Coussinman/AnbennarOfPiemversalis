@@ -1,0 +1,72 @@
+A05_cl1 = {
+	6000 = { has_great_project = { type = great_merfolk_canal } }
+}
+
+A05_cl2 = {
+	NOT = {
+		6000 = { has_great_project = { type = great_merfolk_canal } }
+	}
+	AND = {
+		has_estate_privilege = artifice_invention_subterrenes 
+		has_estate_privilege = artifice_invention_codorran_powered_exosuit 
+	}
+}
+
+A05_cl3 = {
+	NOT = {
+		6000 = { has_great_project = { type = great_merfolk_canal } }
+	}
+	NOT = {
+		AND = {
+			has_estate_privilege = artifice_invention_subterrenes 
+			has_estate_privilege = artifice_invention_codorran_powered_exosuit 
+		}
+	}
+	OR = {
+		has_estate_privilege = artifice_invention_subterrenes 
+		has_estate_privilege = artifice_invention_codorran_powered_exosuit 
+	}
+}
+
+A05_cl4 = {
+	NOT = {
+		6000 = { has_great_project = { type = great_merfolk_canal } }
+	}
+	NOT = {
+		AND = {
+			has_estate_privilege = artifice_invention_subterrenes 
+			has_estate_privilege = artifice_invention_codorran_powered_exosuit 
+		}
+	}
+	OR = { #todo, batavi check the logic here
+		has_estate_privilege = artifice_invention_subterrenes 
+		has_estate_privilege = artifice_invention_codorran_powered_exosuit
+	}
+	treasury = 20000
+	custom_trigger_tooltip = { #shoutout to Ovdal Tungr for this masterpiece
+		tooltip = F23_the_path_to_haless_trigger_tt
+		OR = { 
+			if = { 
+				limit = { full_idea_group = infrastructure_ideas }
+				OR = {
+					adm_tech = 20
+					AND = { adm_tech = 19 innovativeness = 20 }
+					AND = { adm_tech = 18 innovativeness = 40 }
+					AND = { adm_tech = 17 innovativeness = 60 }
+					AND = { adm_tech = 16 innovativeness = 80 }
+					AND = { adm_tech = 15 innovativeness = 100 }
+				}
+			}
+			else = {
+				OR = {
+					adm_tech = 22
+					AND = { adm_tech = 21 innovativeness = 20 }
+					AND = { adm_tech = 20 innovativeness = 40 }
+					AND = { adm_tech = 19 innovativeness = 60 }
+					AND = { adm_tech = 18 innovativeness = 80 }
+					AND = { adm_tech = 17 innovativeness = 100 }
+				}
+			}
+		}
+	}
+}

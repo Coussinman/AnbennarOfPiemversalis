@@ -1,0 +1,268 @@
+recruit_foreign_general = {
+	category = relation
+
+	alert_index = 56
+	alert_tooltip = recruit_foreign_general_alert_tooltip
+
+	require_acceptance = yes # Whether the recipient gets an option to decline
+
+	is_visible = {
+		has_government_attribute = enables_recruit_foreign_generals
+	}
+	is_allowed = {
+		years_of_income = 1
+		if = {
+			limit = {
+				NOT = {
+					FROM = { 
+						OR = {
+							is_subject_of = ROOT
+							alliance_with = ROOT
+						}
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = FROM_IS_SUBJECT_OR_ALLY_TT
+				FROM = { 
+					OR = {
+						is_subject_of = ROOT
+						alliance_with = ROOT
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				FROM = {
+					NOT = { army_tradition = 10 }
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = FROM_10_AT_TT
+				FROM = {
+					army_tradition = 10
+				}
+			}
+		}
+		if = {
+			limit = {
+				ROOT = {
+					has_country_flag = feo_recruit_general_cooldown
+					NOT = {
+						had_country_flag = {
+							flag = feo_recruit_general_cooldown
+							days = 3650
+						}
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = ROOT_10_YEAR_CD_TT
+				ROOT = {
+					had_country_flag = {
+						flag = feo_recruit_general_cooldown
+						days = 3650
+					}
+				}
+			}
+		}
+	}
+	on_accept = {
+		clr_country_flag = feo_recruit_general_cooldown
+		set_country_flag = feo_recruit_general_cooldown
+		#add all variables, then determine the general
+		FROM = {
+			add_army_tradition = -10
+		}
+		add_army_tradition = 10
+		hidden_effect = { #Pays the Money
+			set_variable = {
+				which = MoneyToPay
+				value = years_of_income
+			}
+			while = {
+				limit = {
+					check_variable = {
+						which = MoneyToPay
+						value = 1
+					}
+				}
+				FROM = {
+					add_treasury = 1
+				}
+				add_treasury = -1
+				subtract_variable = {
+					which = MoneyToPay
+					value = -1
+				}
+			}
+		}
+		#Final Army Tradition = ArmyTradtionOfFROM * (OpinionOfFROM / 200)
+		#Example: 
+		#Final Army Tradition = 75 * (150 / 200)
+		#Final Army Tradition = 75 * 0.75
+		#Final Army Tradition = 56
+		#In the feo_create_general_diplomatic_action_effect scripted effect, this would mean it generates a general of 50 Army Tradition
+		export_to_variable = {
+			which = ArmyTradtionOfFROM
+			value = army_tradition
+			who = FROM
+		}
+		export_to_variable = {
+			which = OpinionOfFROM
+			value = opinion
+			who = FROM
+		}
+		divide_variable = {
+			which = OpinionOfFROM
+			value = 200
+		}
+		multiply_variable = {
+			which = ArmyTradtionOfFROM
+			value = OpinionOfFROM
+		}
+		feo_create_general_diplomatic_action_effect = yes
+	}
+	on_decline = {
+	}
+
+	ai_acceptance = { # This works similarly to variable_arithmetic_trigger, but does not support triggers generally. Instead, "limit" will be evaluated first and the rest ignored if it isn't passed.
+		add_entry = {
+			name = TRUST
+			export_to_variable = {
+				variable_name = ai_value
+				value = trust
+				who = FROM
+				with = ROOT
+			}
+			subtract_variable = { 
+				which = ai_value
+				value = 50
+			}
+			#1 trust = +3 ai points
+			multiply_variable = {
+				which = ai_value
+				value = 0.3
+			}
+		}
+		add_entry = {
+			name = OPINION
+			export_to_variable = {
+				variable_name = ai_value
+				value = opinion
+				who = FROM
+				with = ROOT
+			}
+			multiply_variable = {
+				which = ai_value 
+				value = 0.2
+			}
+		}
+		add_entry = {
+			name = DIPLO_IS_RIVAL
+			limit = {
+				FROM = {
+					ai_attitude = {
+						who = ROOT
+						attitude = attitude_rivalry
+					}
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = 1
+			}
+
+			multiply_variable = {
+				which = ai_value
+				value = -1000
+			}
+		}
+		add_entry = {
+			name = diplomatic_reputation
+			limit = { }
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:diplomatic_reputation
+			}
+			#1 rep = 1
+			multiply_variable = {
+				which = ai_value
+				value = 1
+			}
+		}
+		add_entry = {
+			name = attitude_neutral_DIPLO_ATTITUDE_TT
+			limit = { FROM = { ai_attitude = { who = ROOT attitude = attitude_neutral } } }
+			export_to_variable = { variable_name = ai_value value = 1 }
+			multiply_variable = { which = ai_value value = -5 }
+		}
+		add_entry = {
+			name = attitude_rivalry_DIPLO_ATTITUDE_TT
+			limit = { FROM = { ai_attitude = { who = ROOT attitude = attitude_rivalry } } }
+			export_to_variable = { variable_name = ai_value value = 1 }
+			multiply_variable = { which = ai_value value = -1000 }
+		}
+		add_entry = {
+			name = attitude_hostile_DIPLO_ATTITUDE_TT
+			limit = { FROM = { ai_attitude = { who = ROOT attitude = attitude_hostile } } }
+			export_to_variable = { variable_name = ai_value value = 1 }
+			multiply_variable = { which = ai_value value = -1000 }
+		}
+		add_entry = {
+			name = attitude_friendly_DIPLO_ATTITUDE_TT
+			limit = { FROM = { ai_attitude = { who = ROOT attitude = attitude_friendly } } }
+			export_to_variable = { variable_name = ai_value value = 1 }
+			multiply_variable = { which = ai_value value = 10 }
+		}
+		add_entry = {
+			name = attitude_threatened_DIPLO_ATTITUDE_TT
+			limit = { FROM = { ai_attitude = { who = ROOT attitude = attitude_threatened } } }
+			export_to_variable = { variable_name = ai_value value = 1 }
+			multiply_variable = { which = ai_value value = -1000 }
+		}
+		add_entry = {
+			name = attitude_outraged_DIPLO_ATTITUDE_TT
+			limit = { FROM = { ai_attitude = { who = ROOT attitude = attitude_outraged } } }
+			export_to_variable = { variable_name = ai_value value = 1 }
+			multiply_variable = { which = ai_value value = -1000 }
+		}
+		add_entry = {
+			name = attitude_domineering_DIPLO_ATTITUDE_TT
+			limit = { FROM = { ai_attitude = { who = ROOT attitude = attitude_domineering } } }
+			export_to_variable = { variable_name = ai_value value = 1 }
+			multiply_variable = { which = ai_value value = -1000 }
+		}
+		add_entry = {
+			name = DIPLO_BORDER_DISTANCE_TT
+			export_to_variable = {
+				variable_name = ai_value
+				value = border_distance
+				who = FROM
+				with = ROOT
+			}
+			#2 units = -1
+			multiply_variable = {
+				which = ai_value
+				value = -0.1
+			}
+		}
+	}
+
+	ai_will_do = { # this is a trigger
+		has_opinion = {
+			who = FROM
+			value = 50
+		}
+		FROM = {
+			NOT = { stability = 2 }
+		}
+		NOT = { is_rival = FROM }
+		NOT = { is_enemy = FROM }
+		trust = {
+			who = FROM
+			value = 65
+		}
+	}
+}

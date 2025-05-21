@@ -1,0 +1,140 @@
+country_decisions = {
+	plan_wex_dismantlement = {
+		potential = {
+			is_part_of_hre = yes
+			current_age = age_of_discovery
+			OR = {
+				has_country_flag = lilac_wars_moon_party
+				is_rival = A30
+				historical_rival_with = A30
+				core_claim = A30
+			}
+			A30 = {
+				exists = yes
+			}
+			NOT = {
+				has_global_flag = wex_dismantlement_planned
+				has_global_flag = lothane_death_disaster
+			}
+		}
+		provinces_to_highlight = {
+			is_capital_of = A30
+		}
+		allow = {
+			is_at_war = no
+			num_of_cities = 4
+			NOT = {
+				alliance_with = A30
+				truce_with = A30
+				A30 = {
+					is_emperor = yes
+				}
+				active_imperial_incident = any
+			}
+			calc_true_if = {
+				amount = 3
+				all_known_country = {
+					alliance_with = ROOT
+					is_at_war = no
+					NOT = {
+						alliance_with = A30
+						truce_with = A30
+						has_country_modifier = monstrous_nation
+					}
+					OR = {
+						has_country_flag = lilac_wars_moon_party
+						is_rival = A30
+						historical_rival_with = A30
+						core_claim = A30
+					}
+				}
+			}
+		}
+		effect = {
+			set_imperial_incident = incident_curtail_wex
+			set_country_flag = curtailing_wex_leader
+			set_global_flag = wex_dismantlement_planned
+			custom_tooltip = curtailing_wex_coalition_tooltip
+			hidden_effect = {
+				every_country = {
+					limit = {
+						OR = {
+							is_rival = A30
+							historical_rival_with = A30
+							core_claim = A30
+						}
+						NOT = {
+							alliance_with = A30
+							truce_with = A30
+							tag = ROOT
+							has_country_modifier = monstrous_nation
+						}
+					}
+					country_event = {
+						id = ace_flavor_eoa.110
+						days = 4
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0.1
+		}
+	}
+	dragon_coast_revitalization = {
+		potential = {
+			NOT = { has_global_flag = dragon_coast_revitalization_done }
+			has_country_flag = owns_dragon_coast_province
+		}
+		provinces_to_highlight = {
+			region = dragon_coast_region
+			NOT = {
+				has_province_flag = dragon_coast_revitalized
+				province_id = 1001 #Lonely Isle
+			}
+		}
+		allow = {
+			hidden_trigger = { NOT = { has_global_flag = dragon_coast_revitalization_done } }
+			custom_trigger_tooltip = {
+				tooltip = owns_dragon_coast_trigger_tt
+				has_country_flag = owns_dragon_coast_province
+			}
+			adm_tech = 7
+			if = {
+				limit = { has_country_flag = dragon_coast_sided_with_kobolds_flag }
+				is_not_purging_or_expelling_race_trigger = { race = kobold }
+			}
+			else_if = {
+				limit = { has_country_flag = dragon_coast_sided_with_gnomes_flag }
+				is_not_purging_or_expelling_race_trigger = { race = gnomish }
+			}
+			else = {
+				OR = {
+					is_not_purging_or_expelling_race_trigger = { race = kobold }
+					is_not_purging_or_expelling_race_trigger = { race = gnomish }
+				}
+			}
+
+			if = {
+				limit = { ai = yes }
+				NOT = { has_country_modifier = ai_dragon_coast_cooldown }
+				adm_power = 100
+				dip_power = 100
+				mil_power = 100
+			}
+			hidden_trigger = { NOT = { has_country_flag = dragon_coast_revitalization_menu_open } }
+		}
+		effect = {
+			if = {
+				limit = { NOT = { has_country_flag = dragon_coast_chose_a_side_flag } }
+				country_event = { id = dragon_coast.1 }
+			}
+			else = {
+				set_country_flag = dragon_coast_revitalization_menu_open
+				country_event = { id = dragon_coast.2 }
+			}
+		}
+
+		ai_will_do = { factor = 1 }
+	}
+}

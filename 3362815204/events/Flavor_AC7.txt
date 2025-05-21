@@ -1,0 +1,352 @@
+namespace = flavor_Kryzzar
+
+country_event = {
+	id = flavor_Kryzzar.1
+	title = flavor_Kryzzar.1.t
+	desc = flavor_Kryzzar.1.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		tag = AC7
+	}
+
+	option = {
+		custom_tooltip = AC7_guide
+		name = flavor_Kryzzar.1.a
+		set_ruler_flag = kryzzar_flag
+	}
+}
+
+country_event = {
+	id = flavor_Kryzzar.2
+	title = flavor_Kryzzar.2.t
+	desc = flavor_Kryzzar.2.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_Kryzzar.2.a
+		random_list = {
+			33 = { change_adm = 1}
+			33 = { change_dip = 1}
+			33 = { change_mil = 1}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_Kryzzar.3
+	title = flavor_Kryzzar.3.t
+	desc = flavor_Kryzzar.3.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_Kryzzar.3.a
+		add_country_modifier = {
+			name = AC7_demonic_favor
+			duration = -1
+		}
+		add_patriarch_authority = 0.1
+	}
+}
+
+country_event = {
+	id = flavor_Kryzzar.4
+	title = flavor_Kryzzar.4.t
+	desc = flavor_Kryzzar.4.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_Kryzzar.4.a
+		custom_tooltip = AC7_demonic_favor_tooltip
+		hidden_effect = {
+			every_province = {
+				limit = {
+					region = the_borders_region
+					culture = arannese
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+				cede_province = A72
+				add_core = A72
+			}
+		}
+
+		AC7 = {
+			country_event = {
+				id = flavor_Kryzzar.5
+				days = 10
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_Kryzzar.5
+	title = flavor_Kryzzar.5.t
+	desc = flavor_Kryzzar.5.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_Kryzzar.5.a
+		420 = {
+			add_building_construction = {
+				building = fort_15th
+				speed = 0.5
+				cost = 0
+			}
+		}
+		A72 = {
+			add_country_modifier = {
+				name = AC7_arannen_march
+				duration = -1
+			}
+		}
+		add_country_modifier = {
+			name = AC7_fear_incarnate
+			duration = 5475
+		}
+	}
+}
+
+country_event = {
+	id = flavor_Kryzzar.6
+	title = flavor_Kryzzar.6.t
+	desc = flavor_Kryzzar.6.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_Kryzzar.6.a
+		clr_country_flag = flamemarked_awakening
+		capital_scope = {
+			add_institution_embracement = {
+				which = feudalism
+				value = 100
+			}
+		}
+		custom_tooltip = flavor_Kryzzar.6_tt
+		hidden_effect = {
+			every_province = {
+				limit = {
+					region = daravans_folly_region
+					tribal_land_of = ROOT
+				}
+				add_core = AC7
+				cede_province = AC7
+				change_culture = ROOT
+				change_religion = ROOT
+				add_colonysize = 1000
+				add_province_modifier = {
+					name = AC7_tribes_united
+					duration = -1
+				}
+			}
+		}
+		custom_tooltip = flavor_Kryzzar.6_tt2
+		tooltip = {
+			add_province_modifier = {
+				name = AC7_tribes_united
+				duration = -1
+			}
+		}
+	}
+
+}
+
+country_event = {
+	id = flavor_Kryzzar.8
+	title = flavor_Kryzzar.8.t
+	desc = flavor_Kryzzar.8.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_Kryzzar.8.a
+		add_country_modifier = {
+			name = AC7_demonic_fury
+			duration = -1
+		}
+		set_ruler_flag = undergoing_xhazob_ritual
+		custom_tooltip = AC7_demonic_fury_tooltip
+		country_event = {
+			id = xhazobkult_events.3001
+			days = 30
+		}
+
+		escann_superregion = {
+			add_permanent_claim = ROOT
+		}
+	}
+}
+
+country_event = {
+	id = flavor_Kryzzar.9
+	title = flavor_Kryzzar.9.t
+	desc = flavor_Kryzzar.9.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+
+	fire_only_once = yes
+	trigger = {
+		tag = AC7
+		U08 = {
+			exists = no
+		}
+	}
+
+	option = {
+		name = flavor_Kryzzar.9.a
+		set_country_flag = viakkoc_refugees
+		add_country_modifier = {
+			name = AC7_viakkoc_refugees
+			duration = 7300
+		}
+	}
+}
+
+country_event = {
+	id = flavor_Kryzzar.10
+	title = flavor_Kryzzar.10.t
+	desc = flavor_Kryzzar.10.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_Kryzzar.10.a
+		451 = {
+			change_trade_goods = slaves
+			add_province_modifier = {
+				name = AC7_isle_of_corpses
+				duration = -1
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_Kryzzar.11
+	title = flavor_Kryzzar.11.t
+	desc = flavor_Kryzzar.11.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_Kryzzar.11.a
+		large_increase_of_dwarven_tolerance_effect = yes
+		release_with_religion_and_culture = {
+			tag = F23
+			religion = ancestor_worship
+			culture = copper_dwarf
+		}
+		create_subject = {
+			subject_type = march
+			subject = F23
+		}
+		F23 = {
+			add_country_modifier = {
+				name = AC7_buckbroken_dwarf
+				duration = -1
+			}
+		}
+	}
+
+	option = {
+		name = flavor_Kryzzar.11.b
+		526 = {
+			change_trade_goods = slaves
+			add_province_modifier = {
+				name = AC7_slave_port
+				duration = -1
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_Kryzzar.12
+	title = flavor_Kryzzar.12.t
+	desc = flavor_Kryzzar.12.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_Kryzzar.12.a
+		add_country_modifier = {
+			name = AC7_hellfire_wyverns
+			duration = -1
+		}
+	}
+}
+
+country_event = {
+	id = flavor_Kryzzar.13
+	title = flavor_Kryzzar.13.t
+	desc = flavor_Kryzzar.13.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_Kryzzar.13.a
+		add_patriarch_authority = 0.3
+
+		8 = {
+			change_trade_goods = slaves
+		}
+
+		override_country_name = KRYZZARHORDE
+
+		western_cannor_superregion = {
+			add_permanent_claim = ROOT
+		}
+
+		add_country_modifier = {
+			name = AC7_bane_of_cannor
+			duration = -1
+		}
+	}
+}
+
+country_event = {
+	id = flavor_Kryzzar.14
+	title = flavor_Kryzzar.14.t
+	desc = flavor_Kryzzar.14.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+
+	fire_only_once = yes
+	hidden = yes
+	trigger = {
+		AC7 = { exists = no }
+	}
+
+	option = {
+		name = flavor_Kryzzar.14.a
+		daravans_folly_region = {
+			change_tribal_land = ---
+		}
+	}
+}

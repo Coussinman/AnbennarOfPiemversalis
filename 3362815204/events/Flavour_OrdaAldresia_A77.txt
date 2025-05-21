@@ -216,6 +216,12 @@ country_event = { #	hidden edge case event if Orda Aldresia breaks alliance for 
         emperor = {				#game crashes if this is the other way around, see flavor_orda_aldresia.3
             has_matching_religion = ROOT
             war_with = ROOT
+		NOT = {
+			AND = {
+				tag = A30
+				has_country_flag = A30_domination_path
+			}
+		}
         }
         NOT = { has_country_flag = broken_oath }
     }
@@ -890,8 +896,7 @@ country_event = { #Arrest of the Grand Magister
 			A77 = {
 				elector = yes
 			}
-		}
-		else = {
+		} else = {
 			A77 = {
 				add_adm_power = 100
 				add_dip_power = 100
@@ -945,8 +950,7 @@ country_event = { #Arrest of the Grand Magister
 			A77 = {
 				elector = yes
 			}
-		}
-		else = {
+		} else = {
 			A77 = {
 				add_adm_power = 100
 				add_dip_power = 100
@@ -998,8 +1002,7 @@ country_event = { #Arrest of the Grand Magister
 			A77 = {
 				elector = yes
 			}
-		}
-		else = {
+		} else = {
 			A77 = {
 				add_adm_power = 100
 				add_dip_power = 100
@@ -1721,8 +1724,7 @@ country_event = { # Hear me roar!
 				}
 			}
 
-		}
-		else_if = {
+		} else_if = {
 			limit = {
 				estate_influence = {
 					estate = estate_nobles
@@ -1749,8 +1751,7 @@ country_event = { # Hear me roar!
 					size = 2
 				}
 			}
-		}
-		else_if = {
+		} else_if = {
 			limit = {
 				estate_influence = {
 					estate = estate_nobles
@@ -1770,8 +1771,7 @@ country_event = { # Hear me roar!
 					size = 2
 				}
 			}
-		}
-		else = {
+		} else {
 			custom_tooltip = A77_second_sons_revolt_fails
 		}
 	}

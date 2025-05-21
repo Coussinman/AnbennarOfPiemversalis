@@ -1,0 +1,135 @@
+po_curtail_wex = {
+	category = 6
+	power_projection = humiliated_rival
+	power_cost_base = 0.0
+	prestige_base = 1.0
+	ae_base = 0.0
+	warscore_cost = {
+		all_provinces = 0.0
+		no_provinces = 1000.0
+		owner_keeps = 0.0
+		conquered = 1.0
+		returned_core = 0.0
+		released_nation = 0.0
+		cancelled_subject = 0.0
+		concede_colonial_region = 0.0
+	}
+	warscore_cap = 100
+	requires_demand_independence = yes
+	is_make_subject = no
+	requires_is_allowed = yes
+	is_visible = {
+		is_in_war = {
+			attacker_leader = THIS
+			casus_belli = cb_curtail_wex
+		}
+	}
+	is_allowed = {
+		always = yes
+	}
+	effect = {
+		every_country = {
+			limit = {
+				OR = {
+					has_country_flag = curtailing_wex_member
+					overlord = {
+						has_country_flag = curtailing_wex_member
+					}
+				}
+			}
+			country_event = {
+				id = ace_flavor_eoa.104
+			}
+		}
+		every_country = {
+			limit = {
+				has_country_flag = curtailing_wex_leader
+			}
+			country_event = {
+				id = ace_flavor_eoa.105
+			}
+		}
+		A30 = {
+			country_event = {
+				id = ace_flavor_eoa.103
+			}
+			set_country_flag = lost_eoa_war
+			release = A34
+			release = A56
+			release = A72
+			A48 = {
+				if = {
+					limit = {
+						is_subject_of = A30
+					}
+					release = A34
+					release = A56
+					release = A72
+				}
+			}
+			release = A60
+			release = A85
+			release = A45
+			release = A37
+			release_all_subjects = yes
+			release_all_possible_countries = yes
+			if = {
+				limit = {
+					owns = 299
+				}
+				if = {
+					limit = {
+						A85 = {
+							exists = yes
+						}
+					}
+					299 = {
+						cede_province = A85
+					}
+				}
+			}
+			if = {
+				limit = {
+					owns = 902
+				}
+				if = {
+					limit = {
+						A60 = {
+							exists = yes
+						}
+					}
+					902 = {
+						cede_province = A60
+					}
+				}
+			}
+			if = {
+				limit = {
+					owns = 920
+				}
+				if = {
+					limit = {
+						A72 = {
+							exists = yes
+						}
+					}
+					920 = {
+						cede_province = A72
+					}
+				}
+			}
+		}
+	}
+	ai_weight = {
+		export_to_variable = {
+			variable_name = ai_value
+			value = trigger_value:always
+		}
+		set_variable = {
+			ai_value = 2000
+		}
+		limit = {
+			always = yes
+		}
+	}
+}

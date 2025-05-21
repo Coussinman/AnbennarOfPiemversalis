@@ -1,0 +1,103 @@
+leslinpar_dwarf = {
+	complex_dynamic_effect_without_alternative = {
+		first_custom_tooltip = A92_dwarves_tooltip
+		first_limit = "
+			308 = {
+				country_or_non_sovereign_subject_holds = root
+			}
+			912 = {
+				country_or_non_sovereign_subject_holds = root
+			}
+		"
+		first_effect = "
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						trade_goods = grain
+					}
+					add_dwarven_minority_size_effect = yes
+					add_province_modifier = {
+						name = A92_dwarf_ale_makers
+						duration = 7300
+					}
+				}
+			}
+			custom_tooltip = A92_dwarf_conquer
+			tooltip = {
+				add_province_modifier = {
+					name = A92_dwarf_ale_makers
+					duration = 7300
+				}
+			}
+		"
+
+		second_custom_tooltip = A92_dwarves_tooltip2
+		second_limit = "
+			A73 = {
+				is_rival = root
+				has_spy_network_from = {
+					who = ROOT
+					value = 30
+				}
+			}
+		"
+		second_effect = "
+			add_country_modifier = {
+				name = A92_dwarf_secrets
+				duration = 5475
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						trade_goods = grain
+					}
+					add_province_modifier = {
+						name = A92_dwarf_secrets_ale
+						duration = 7300
+					}
+				}
+			}
+			custom_tooltip = A92_dwarf_rival
+			tooltip = {
+				add_province_modifier = {
+					name = A92_dwarf_secrets_ale
+					duration = 7300
+				}
+			}
+		"
+
+		third_custom_tooltip = A92_dwarves_tooltip3
+		third_limit = "
+			A73 = {
+				alliance_with = ROOT
+				has_100_opinion_improved_relation = {
+					target = ROOT
+				}
+			}
+		"
+
+		third_effect = "
+			901 = {
+				add_dwarven_minority_size_effect = yes
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						trade_goods = grain
+					}
+					add_province_modifier = {
+						name = A92_dwarf_trade_partnership
+						duration = 7300
+					}
+				}
+			}
+			custom_tooltip = A92_dwarf_friendship
+			tooltip = {
+				add_province_modifier = {
+					name = A92_dwarf_trade_partnership
+					duration = 7300
+				}
+			}
+		"
+	}
+}

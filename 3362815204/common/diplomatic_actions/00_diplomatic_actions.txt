@@ -745,6 +745,18 @@ declarewar = {
 		
 		if = {
 			limit = {
+				tag = A05
+				is_in_war = {
+					attacker_leader = A05
+					defender_leader = A06
+					casus_belli = cb_core
+				}
+			}
+			A05 = { country_event = { id = reveria.92 } }
+		}
+		
+		if = {
+			limit = {
 				NOT = { has_country_modifier = lake_federation_member }
 				FROM = { has_country_modifier = lake_federation_member }
 				has_global_flag = lake_the_place_of_everyone
@@ -3012,6 +3024,22 @@ request_to_join_federation = {
 }
 
 callaction = {
+	condition = { #ACE
+		tooltip = KRYZZAR_RAID_CALL
+		potential = {
+			is_in_war = {
+				defender_leader = ROOT
+				casus_belli = cb_flamemarked_awakening
+			}
+		}
+		allow = {
+			OR = {
+				overlord_of = FROM 
+				is_subject_of = FROM
+				alliance_with = FROM
+			}
+		}
+	}
 	condition = { #Can't call to arms while the Samartal incident is active
 		tooltip = NSC_SAMARTAL_TRAGEDY_CALL
 		potential = {
@@ -3542,6 +3570,18 @@ requestpeace = {
 			always = no
 		}
 	}
+	#ACE Magmascales war
+	condition = {
+		tooltip = AC5_CANT_PEACE_tt
+		potential = {
+			ROOT = {
+				has_country_flag = AC5_cannorian_war_flag
+			}
+		}
+		allow = {
+			always = no
+        }
+	}
 }
 
 support_heir = {
@@ -3566,7 +3606,7 @@ excommunicate_action = {
 	condition = {  }
 	
 	effect = {
-		add_ruler_modifier = { name = anb_excommunicated duration = -1 }
+		FROM = { add_ruler_modifier = { name = ravelian_excommunicated duration = -1 } } #removed in on_actions
 	}
 }
 

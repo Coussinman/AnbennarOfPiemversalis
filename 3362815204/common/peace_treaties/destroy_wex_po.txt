@@ -1,0 +1,202 @@
+po_destroy_wex = {
+	category = 6
+	power_projection = humiliated_rival
+	power_cost_base = 0.0
+	prestige_base = 1.0
+	ae_base = 0.0
+	warscore_cost = {
+		all_provinces = 0.0
+		no_provinces = 1000.0
+		owner_keeps = 0.0
+		conquered = 1.0
+		returned_core = 0.0
+		released_nation = 0.0
+		cancelled_subject = 0.0
+		concede_colonial_region = 0.0
+	}
+	warscore_cap = 100
+	requires_demand_independence = yes
+	is_make_subject = no
+	requires_is_allowed = yes
+
+	is_visible = {
+		is_in_war = {
+			defender_leader = THIS
+			casus_belli = cb_destroy_anbennar_wex
+		}
+	}
+
+	is_allowed = {
+		always = yes
+	}
+
+	effect = {
+		every_country = {
+			limit = {
+				NOT = {
+					is_emperor = yes
+				}
+				OR = {
+					has_country_flag = fought_against_wex
+					overlord = {
+						has_country_flag = fought_against_wex
+					}
+				}
+			}
+			country_event = {
+				id = flavor_wex.113
+			}
+		}
+		emperor = {
+			country_event = {
+				id = flavor_wex.114
+			}
+		}
+		A30 = {
+			every_owned_province = {
+				limit = {
+					continent = europe
+				}
+				set_in_empire = yes
+			}
+			country_event = {
+				id = flavor_wex.112
+			}
+			set_country_flag = lost_eoa_war
+			if = {
+				limit = {
+					has_country_flag = wex_angered_corvurians
+					A59 = {
+						exists = yes
+						has_country_flag = fought_against_wex
+					}
+				}
+				every_owned_province = {
+					limit = {
+						region = dostanor_region
+					}
+					cede_province = A59
+				}
+				every_subject_country = {
+					every_owned_province = {
+						limit = {
+							region = dostanor_region
+						}
+						cede_province = A59
+					}
+				}
+			}
+			release = A34
+			release = A56
+			release = A72
+			A48 = {
+				if = {
+					limit = {
+						is_subject_of = A30
+					}
+					release = A34
+					release = A56
+					release = A72
+				}
+			}
+			release = A60
+			release = A85
+			release = A45
+			release = A37
+			release_all_subjects = yes
+			release_all_possible_countries = yes
+			if = {
+				limit = {
+					owns = 299
+				}
+				if = {
+					limit = {
+						A85 = {
+							exists = yes
+						}
+					}
+					299 = { cede_province = A85 }
+				}
+				else = {
+					299 = { cede_province = A93 }
+				}
+			}
+			if = {
+				limit = {
+					owns = 307
+				}
+				if = {
+					limit = {
+						A34 = {
+							exists = yes
+						}
+					}
+					307 = { cede_province = A34 }
+				}
+				else = {
+					307 = { cede_province = Z04 }
+				}
+			}
+			if = {
+				limit = {
+					owns = 907
+				}
+				if = {
+					limit = {
+						A34 = {
+							exists = yes
+						}
+					}
+					907 = { cede_province = A34 }
+				}
+				else = {
+					907 = { cede_province = Z04 }
+				}
+			}
+			if = {
+				limit = {
+					owns = 318
+				}
+				if = {
+					limit = {
+						A72 = {
+							exists = yes
+						}
+					}
+					318 = { cede_province = A72 }
+				}
+				else = {
+					318 = { cede_province = A48 }
+				}
+			}
+			if = {
+				limit = {
+					owns = 920
+				}
+				if = {
+					limit = {
+						A72 = {
+							exists = yes
+						}
+					}
+					920 = { cede_province = A72 }
+				}
+				else = {
+					920 = { cede_province = A60 }
+				}
+			}
+		}
+	}
+	ai_weight = {
+		export_to_variable = {
+			variable_name = ai_value
+			value = trigger_value:always
+		}
+		set_variable = {
+			ai_value = 2000
+		}
+		limit = {
+			always = yes
+		}
+	}
+}

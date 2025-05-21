@@ -3187,6 +3187,122 @@ on_province_owner_change_estate_privileges_effect = {
 			}
 		}
 	}
+	if = {
+		limit = {
+			owner = {
+				has_estate_privilege = estate_steelblood_barons
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					has_terrain = mountain
+					has_terrain = dwarven_road
+				}
+				OR = {
+					trade_goods = iron
+					AND = {
+						owner = {
+							has_country_flag = steelblood_barons_copper_unlocked
+						}
+						trade_goods = copper
+					}
+				}
+			}
+			add_province_modifier = {
+				name = estate_burghers_mountain_expansion_mountains
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_terrain = highlands
+				OR = {
+					trade_goods = iron
+					AND = {
+						owner = {
+							has_country_flag = steelblood_barons_copper_unlocked
+						}
+						trade_goods = copper
+					}
+				}
+			}
+			add_province_modifier = {
+				name = estate_burghers_mountain_expansion_highlands
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_terrain = hills
+				OR = {
+					trade_goods = iron
+					AND = {
+						owner = {
+							has_country_flag = steelblood_barons_copper_unlocked
+						}
+						trade_goods = copper
+					}
+				}
+			}
+			add_province_modifier = {
+				name = estate_burghers_mountain_expansion_hills
+				duration = -1
+			}
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_estate_privilege = artifice_invention_rock_melter_mk1
+			}
+		}
+		if = {
+			limit = {
+				has_terrain = cavern
+			}
+			add_province_modifier = {
+				name = AC5_artifice_rock_melter_cavern
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_terrain = dwarven_road
+			}
+			add_province_modifier = {
+				name = AC5_artifice_rock_melter_road
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_terrain = mountain
+			}
+			add_province_modifier = {
+				name = estate_burghers_mountain_expansion_mountains
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_terrain = highlands
+			}
+			add_province_modifier = {
+				name = estate_burghers_mountain_expansion_highlands
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_terrain = hills
+			}
+			add_province_modifier = {
+				name = estate_burghers_mountain_expansion_hills
+				duration = -1
+			}
+		}
+	}
 	#1.35
 	if = {
 		limit = {
@@ -6814,6 +6930,17 @@ pick_random_estate_if_present = {
 			$estate_action$ = estate_ahati
 			]
 		}
+		#Lorentish Elite
+		1 = {
+			trigger = {
+				has_estate = estate_lorentish_elite
+				NOT = { has_country_flag = estate_lorentish_elite_$flag$ }
+			}
+			set_country_flag = estate_lorentish_elite_$flag$
+			[[estate_action]
+			$estate_action$ = estate_lorentish_elite
+			]
+		}
 	}
 }
 
@@ -7677,6 +7804,8 @@ on_completed_agenda_effect_estate_shinukhorchi = {}
 on_completed_agenda_effect_estate_daulophs = {}
 
 on_completed_agenda_effect_estate_ahati = { clr_country_flag = auto_complete_estate_agenda_estate_ahati } 
+
+on_completed_agenda_effect_estate_lorentish_elite = {}
 
 on_completed_agenda_effect = {
 	on_completed_agenda_effect_$estate$ = yes

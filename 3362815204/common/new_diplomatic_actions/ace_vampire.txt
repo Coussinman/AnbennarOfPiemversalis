@@ -1,0 +1,461 @@
+vampire_actions = {
+	category = covert
+	
+	is_visible = {
+		ai = no
+		has_estate = estate_vampires
+		FROM = {
+			capital_scope = {
+				OR = {
+					continent = europe
+					range = ROOT
+				}
+			}
+		}
+	}
+	
+	is_allowed = {
+		ai = no
+		has_estate = estate_vampires
+		FROM = {
+			capital_scope = {
+				OR = {
+					continent = europe
+					range = ROOT
+				}
+			}
+		}
+	}
+
+	on_accept = {
+		ROOT = {
+			set_variable = {
+				which = vampire_target_dev
+				value = 0
+			}
+			set_variable = {
+				which = vampire_target_threshold
+				value = 0
+			}
+			set_variable = {
+				which = vampire_spread_spy_factor
+				value = 0
+			}
+			set_variable = {
+				which = vampire_spread_trust_factor
+				value = 0
+			}
+			set_variable = {
+				which = vampire_spread_trade_factor
+				value = 0
+			}
+			set_variable = {
+				which = vampire_spread_sum
+				value = 0
+			}
+		}
+		FROM = {
+			ROOT = {
+				export_to_variable = {
+					which = vampire_target_dev
+					value = trigger_value:total_development
+					who = FROM
+				}
+			}
+			if = {
+				limit = {
+					trust = {
+						who = ROOT
+						value = 100
+					}
+				}
+				ROOT = {
+					change_variable = {
+						vampire_spread_trust_factor = 5
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					trust = {
+						who = ROOT
+						value = 90
+					}
+				}
+				ROOT = {
+					change_variable = {
+						vampire_spread_trust_factor = 4
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					trust = {
+						who = ROOT
+						value = 80
+					}
+				}
+				ROOT = {
+					change_variable = {
+						vampire_spread_trust_factor = 3
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					trust = {
+						who = ROOT
+						value = 70
+					}
+				}
+				ROOT = {
+					change_variable = {
+						vampire_spread_trust_factor = 2
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					trust = {
+						who = ROOT
+						value = 60
+					}
+				}
+				ROOT = {
+					change_variable = {
+						vampire_spread_trust_factor = 1
+					}
+				}
+			}
+			home_trade_node_effect_scope = {
+				if = {
+					limit = {
+						trade_share = {
+							country = ROOT
+							share = 50
+						}
+					}
+					ROOT = {
+						change_variable = {
+							vampire_spread_trade_factor = 5
+						}
+					}
+				}
+				else_if = {
+					limit = {
+						trade_share = {
+							country = ROOT
+							share = 40
+						}
+					}
+					ROOT = {
+						change_variable = {
+							vampire_spread_trade_factor = 4
+						}
+					}
+				}
+				else_if = {
+					limit = {
+						trade_share = {
+							country = ROOT
+							share = 30
+						}
+					}
+					ROOT = {
+						change_variable = {
+							vampire_spread_trade_factor = 3
+						}
+					}
+				}
+				else_if = {
+					limit = {
+						trade_share = {
+							country = ROOT
+							share = 20
+						}
+					}
+					ROOT = {
+						change_variable = {
+							vampire_spread_trade_factor = 2
+						}
+					}
+				}
+				else_if = {
+					limit = {
+						trade_share = {
+							country = ROOT
+							share = 10
+						}
+					}
+					ROOT = {
+						change_variable = {
+							vampire_spread_trade_factor = 1
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_spy_network_from = {
+						who = ROOT
+						value = 100
+					}
+				}
+			}
+			ROOT = {
+				change_variable = {
+					vampire_spread_spy_factor = 10
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				FROM = {
+					has_spy_network_from = {
+						who = ROOT
+						value = 90
+					}
+				}
+			}
+			ROOT = {
+				change_variable = {
+					vampire_spread_spy_factor = 9
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				FROM = {
+					has_spy_network_from = {
+						who = ROOT
+						value = 80
+					}
+				}
+			}
+			ROOT = {
+				change_variable = {
+					vampire_spread_spy_factor = 8
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				FROM = {
+					has_spy_network_from = {
+						who = ROOT
+						value = 70
+					}
+				}
+			}
+			ROOT = {
+				change_variable = {
+					vampire_spread_spy_factor = 7
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				FROM = {
+					has_spy_network_from = {
+						who = ROOT
+						value = 60
+					}
+				}
+			}
+			ROOT = {
+				change_variable = {
+					vampire_spread_spy_factor = 6
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				FROM = {
+					has_spy_network_from = {
+						who = ROOT
+						value = 50
+					}
+				}
+			}
+			ROOT = {
+				change_variable = {
+					vampire_spread_spy_factor = 5
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				FROM = {
+					has_spy_network_from = {
+						who = ROOT
+						value = 40
+					}
+				}
+			}
+			ROOT = {
+				change_variable = {
+					vampire_spread_spy_factor = 4
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				FROM = {
+					has_spy_network_from = {
+						who = ROOT
+						value = 30
+					}
+				}
+			}
+			ROOT = {
+				change_variable = {
+					vampire_spread_spy_factor = 3
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				FROM = {
+					has_spy_network_from = {
+						who = ROOT
+						value = 20
+					}
+				}
+			}
+			ROOT = {
+				change_variable = {
+					vampire_spread_spy_factor = 2
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				FROM = {
+					has_spy_network_from = {
+						who = ROOT
+						value = 10
+					}
+				}
+			}
+			ROOT = {
+				change_variable = {
+					vampire_spread_spy_factor = 1
+				}
+			}
+		}
+		ROOT = {
+			divide_variable = {
+				which = vampire_target_dev
+				value = 10
+			}
+			change_variable = {
+				which = vampire_target_threshold
+				which = vampire_target_dev
+			}
+			if = {
+				limit = {
+					FROM = {
+						calc_true_if = {
+							amount = 1
+							tag = A77
+							is_elector = yes
+							is_emperor = yes
+							culture_is_dwarven = yes
+							culture_is_elven = yes
+							culture_is_gnomish = yes
+						}
+						NOT = {
+							calc_true_if = {
+								amount = 2
+								tag = A77
+								is_elector = yes
+								is_emperor = yes
+								culture_is_dwarven = yes
+								culture_is_elven = yes
+								culture_is_gnomish = yes
+							}
+						}
+					}
+				}
+				multiply_variable = {
+					which = vampire_target_threshold
+					value = 1.5
+				}
+			}
+			else_if = {
+				limit = {
+					FROM = {
+						calc_true_if = {
+							amount = 2
+							tag = A77
+							is_elector = yes
+							is_emperor = yes
+							culture_is_dwarven = yes
+							culture_is_elven = yes
+							culture_is_gnomish = yes
+						}
+						NOT = {
+							calc_true_if = {
+								amount = 3
+								tag = A77
+								is_elector = yes
+								is_emperor = yes
+								culture_is_dwarven = yes
+								culture_is_elven = yes
+								culture_is_gnomish = yes
+							}
+						}
+					}
+				}
+				multiply_variable = {
+					which = vampire_target_threshold
+					value = 2
+				}
+			}
+			else_if = {
+				limit = {
+					FROM = {
+						calc_true_if = {
+							amount = 3
+							tag = A77
+							is_elector = yes
+							is_emperor = yes
+							culture_is_dwarven = yes
+							culture_is_elven = yes
+							culture_is_gnomish = yes
+						}
+					}
+				}
+				multiply_variable = {
+					which = vampire_target_threshold
+					value = 2.5
+				}
+			}
+			change_variable = {
+				which = vampire_spread_sum
+				which = vampire_spread_spy_factor
+			}
+			change_variable = {
+				which = vampire_spread_sum
+				which = vampire_spread_trade_factor
+			}
+			change_variable = {
+				which = vampire_spread_sum
+				which = vampire_spread_trust_factor
+			}
+		}
+		FROM = {
+			save_event_target_as = vampire_action_target
+		}
+		ROOT = {
+			country_event = {
+				id = vampires_estate_events.2000
+			}
+		}
+	}
+	ai_will_do = {
+		always = no
+	}
+}

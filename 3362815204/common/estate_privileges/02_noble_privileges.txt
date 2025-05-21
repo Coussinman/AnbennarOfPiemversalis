@@ -720,6 +720,8 @@ estate_nobles_supremacy_over_crown = {
 		castonath_patricians_influence_modifier = 0.1
 		eunuchs_anb_loyalty_modifier = 0.1
 		eunuchs_anb_influence_modifier = 0.1
+		lorentish_elite_loyalty_modifier = 0.1
+		lorentish_elite_influence_modifier = 0.1
 	}
 	mechanics = {
 		can_give_agendas_without_interaction
@@ -1182,6 +1184,7 @@ estate_nobles_strong_duchies = {
 		NOT = { has_country_flag = estate_nobles_castanor_upgraded_strong_duchies_unlocked }
 		NOT = { has_estate_privilege = estate_nobles_sunijalla_council_of_lords }
 		NOT = { has_country_flag = L62_mengi_partners }
+		NOT = { has_estate_privilege = estate_lorentish_elite_integrated_vassal }
 		any_subject_country = {
 			OR = {
 				is_subject_of_type = vassal
@@ -1520,6 +1523,7 @@ estate_nobles_better_integration = {
 	loyalty = 0
 	check_valid_when_tag_switching = no
 	is_valid = {
+		NOT = { has_estate_privilege = estate_lorentish_elite_integrated_vassal }
 		any_subject_country = {
 			OR = {
 				is_subject_of_type = vassal

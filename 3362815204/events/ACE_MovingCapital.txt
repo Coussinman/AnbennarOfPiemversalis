@@ -1,0 +1,267 @@
+namespace = flavor_wex
+
+country_event = { #MOVING CAPITAL
+	id = flavor_wex.700
+	title = flavor_wex.700.t
+	desc = flavor_wex.700.d
+	picture = HRE_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		OR = {
+			is_emperor = yes
+			tag = Z01
+		}
+	}
+	immediate = {
+		wex_remove_eoa_capital_modifier = yes
+	}
+	option = {
+		name = flavor_wex.700.a
+		trigger = {
+			8 = {
+				is_valid_eoa_capital = yes
+			}
+		}
+		goto = 8
+		eoa_move_capital = {
+			province_id = 8
+			eoa_capital_region = east_dameshead
+		}
+		eoa_moving_capital_anbenncost = yes
+	}
+
+	option = {
+		name = flavor_wex.700.b
+		trigger = {
+			3 = {
+				is_valid_eoa_capital = yes
+			}
+		}
+		goto = 3
+		eoa_move_capital = {
+			province_id = 3
+			eoa_capital_region = east_dameshead
+		}
+		eoa_moving_capital_damenath = yes
+	}
+
+	option = {
+		name = flavor_wex.700.c
+		trigger = {
+			52 = {
+				is_valid_eoa_capital = yes
+			}
+		}
+		goto = 52
+		eoa_move_capital = {
+			province_id = 52
+			eoa_capital_region = east_dameshead
+		}
+		eoa_moving_capital_portmunas = yes
+	}
+
+	option = {
+		name = flavor_wex.700.dd
+		trigger = {
+			327 = {
+				is_valid_eoa_capital = yes
+			}
+		}
+		goto = 327
+		eoa_move_capital = {
+			province_id = 327
+			eoa_capital_region = east_dameshead
+		}
+		eoa_moving_capital_cestaire = yes
+	}
+
+	option = {
+		name = flavor_wex.700.e
+		trigger = {
+			292 = {
+				is_valid_eoa_capital = yes
+			}
+		}
+		goto = 292
+		eoa_move_capital = {
+			province_id = 292
+			eoa_capital_region = east_dameshead
+		}
+		eoa_moving_capital_verne = yes
+	}
+
+	option = {
+		name = flavor_wex.700.f
+		trigger = {
+			306 = {
+				is_valid_eoa_capital = yes
+			}
+		}
+		goto = 306
+		eoa_move_capital = {
+			province_id = 306
+			eoa_capital_region = the_borders
+		}
+		eoa_moving_capital_wexkeep = yes
+	}
+
+	option = {
+		name = flavor_wex.700.g
+		trigger = {
+			417 = {
+				is_valid_eoa_capital = yes
+			}
+		}
+		goto = 417
+		eoa_move_capital = {
+			province_id = 417
+			eoa_capital_region = the_borders
+		}
+		eoa_moving_capital_tellum = yes
+	}
+
+	option = {
+		name = flavor_wex.700.h
+		trigger = {
+			271 = {
+				is_valid_eoa_capital = yes
+			}
+		}
+		goto = 271
+		eoa_move_capital = {
+			province_id = 271
+			eoa_capital_region = esmaria
+		}
+		eoa_moving_capital_giberd = yes
+	}
+
+	option = {
+		name = flavor_wex.700.i
+		trigger = {
+			266 = {
+				is_valid_eoa_capital = yes
+			}
+		}
+		goto = 266
+		eoa_move_capital = {
+			province_id = 266
+			eoa_capital_region = esmaria
+		}
+		eoa_moving_capital_esmaraine = yes
+	}
+
+	option = {
+		name = flavor_wex.700.k
+		trigger = {
+			234 = {
+				is_valid_eoa_capital = yes
+			}
+		}
+		goto = 234
+		eoa_move_capital = {
+			province_id = 234
+			eoa_capital_region = damescrown
+		}
+		eoa_moving_capital_damescrown = yes
+	}
+
+	option = {
+		name = flavor_wex.700.m
+		trigger = {
+			216 = {
+				is_valid_eoa_capital = yes
+			}
+		}
+		goto = 216
+		eoa_move_capital = {
+			province_id = 216
+			eoa_capital_region = damescrown
+		}
+		eoa_moving_capital_vertesk = yes
+	}
+
+	option = {
+		name = flavor_wex.700.n
+		trigger = {
+			151 = {
+				is_valid_eoa_capital = yes
+			}
+		}
+		goto = 151
+		eoa_move_capital = {
+			province_id = 151
+			eoa_capital_region = west_dameshead
+		}
+		eoa_moving_capital_beepeck = yes
+	}
+
+	option = {
+		name = flavor_wex.700.o
+		trigger = {
+			10 = {
+				is_valid_eoa_capital = yes
+			}
+		}
+		goto = 10
+		eoa_move_capital = {
+			province_id = 10
+			eoa_capital_region = west_dameshead
+		}
+		eoa_moving_capital_wesdam = yes
+	}
+
+	option = {
+		name = flavor_wex.700.p
+		trigger = {
+			26 = {
+				is_valid_eoa_capital = yes
+			}
+		}
+		goto = 26
+		eoa_move_capital = {
+			province_id = 26
+			eoa_capital_region = west_dameshead
+		}
+		eoa_moving_capital_throatport = yes
+	}
+	after = {
+		country_event = {
+			id = flavor_wex.701
+			days = 3650
+		}
+	}
+}
+
+#helper event
+country_event = {
+	id = flavor_wex.701
+	title = flavor_wex.701.t
+	desc = flavor_wex.701.d
+	picture = DIPLOMACY_eventPicture
+	hidden = yes
+	is_triggered_only = yes
+	immediate = {
+		if = {
+			limit = {
+				Z01 = {
+					exists = no
+				}
+			}
+			emperor = {
+				country_event = {
+					id = flavor_wex.700
+				}
+			}
+		}
+		else = {
+			Z01 = {
+				country_event = {
+					id = flavor_wex.700
+				}
+			}
+		}
+	}
+	option = {
+		name = flavor_wex.701.a
+	}
+}

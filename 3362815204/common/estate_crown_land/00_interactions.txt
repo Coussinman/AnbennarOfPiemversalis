@@ -253,6 +253,7 @@ interaction = { # Sale of Titles
 		}
 		if = {
 			limit = {
+				NOT = { has_estate_privilege = estate_lorentish_elite_harmonize_feudal_laws }
 				NOT = { has_government_attribute = can_sell_crownland_to_single_estates }
 				NOT = { has_country_flag = can_sell_crownland_to_estates_targeted_flag }
 			}
@@ -557,6 +558,7 @@ interaction = { # Seize Land
 		set_country_flag = recent_land_seizure
 		if = {
 			limit = {
+				NOT = { has_estate_privilege = estate_lorentish_elite_harmonize_feudal_laws }
 				NOT = { has_government_attribute = can_seize_crownland_of_single_estates }
 				NOT = { has_country_flag = can_seize_crownland_to_estates_targeted_flag }
 			}
@@ -631,6 +633,7 @@ interaction = { # Seize Land
 			limit = { has_government_attribute = theocratic_monarchy_mechanic }
 			change_statists_vs_orangists = 0.05
 		}
+		on_seize_land_effect = yes
 	}
 	ai_will_do = {
 		factor = 50

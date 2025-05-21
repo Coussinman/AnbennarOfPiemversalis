@@ -33,7 +33,17 @@ custom_button = {
 			}
 			custom_trigger_tooltip = {
 				tooltip = has_centralized_hold_operations_tt
-				owner = { has_country_flag = hold_operation }
+				OR = {
+					owner = {
+						has_country_flag = hold_operation
+						}
+					AND = {
+						province_id = 4039
+						owner = {
+							mission_completed = AC5_exploit_fissures
+						}
+					}
+				}
 			}
 		}
 	}
@@ -114,12 +124,17 @@ custom_button = {
 		has_subterranean_race = yes
 		owner = {
 			if = {
-				limit = { NOT = { has_country_modifier = dwarven_administration } }
+				limit = {
+					NOT = {
+						has_country_modifier = dwarven_administration
+					}
+				}
 				if = {
 					limit = {
 						OR = {
 							dwarovar_goblin_culture_primary = yes
 							primary_culture = darkscale_kobold
+							primary_culture = magmascale_kobold
 						}
 					}
 					adm_tech = 5

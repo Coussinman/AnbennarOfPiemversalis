@@ -73,6 +73,89 @@ lightfather = {
 	}
 }
 
+#One Armed Skald as RC Deity of the Gerudians. Generally only used by Reveria
+one_armed_skald = {
+	land_morale = 0.1
+	tolerance_heathen = 1
+
+
+	potential = {
+		OR = {
+			religion = cannorian_pantheon
+			religion = regent_court
+		}
+		OR  ={
+			culture_group = gerudian
+			has_country_flag = pearlsedge_gerudia
+		}
+		hidden_trigger = {
+			NOT = { has_global_flag = one_armed_skald_upgraded_flag }
+		}
+	}
+
+	sprite = 34	#temp, to be changed
+
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 2
+			personality = ai_militarist
+		}
+		modifier = {
+			factor = 7.5
+			ruler_culture = reverian
+		}
+		modifier = {
+			factor = 2
+			OR = {
+				ruler_has_personality = pious_personality
+				ruler_has_personality = bold_fighter_personality
+				ruler_has_personality = inspiring_leader_personality
+			}
+		}
+	}
+}
+
+#One Armed Skald as RC Deity of the Gerudians. Generally only used by Reveria
+one_armed_skald_upgraded = {
+	land_morale = 0.15
+	tolerance_heathen = 2
+	country_military_power = 1
+
+	potential = {
+		OR = {
+			religion = cannorian_pantheon
+			religion = regent_court
+		}
+		culture_group = gerudian
+		hidden_trigger = {
+			has_global_flag = one_armed_skald_upgraded_flag
+		}
+	}
+
+	sprite = 34	#temp, to be changed
+
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 2
+			personality = ai_militarist
+		}
+		modifier = {
+			factor = 10
+			ruler_culture = reverian
+		}
+		modifier = {
+			factor = 2
+			OR = {
+				ruler_has_personality = pious_personality
+				ruler_has_personality = bold_fighter_personality
+				ruler_has_personality = inspiring_leader_personality
+			}
+		}
+	}
+}
+
 the_dame = {
 	production_efficiency = 0.1
 	idea_cost = -0.05

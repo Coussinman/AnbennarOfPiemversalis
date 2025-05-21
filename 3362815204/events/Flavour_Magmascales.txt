@@ -1,0 +1,1795 @@
+namespace = flavor_magmascale
+
+country_event = { #Kobold lifestyle event chain
+	id = flavor_magmascale.1
+	title = flavor_magmascale.1.t
+	desc = flavor_magmascale.1.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_magmascale.1.a
+		add_country_modifier = {
+			name = AC5_new_forges
+			duration = 3650
+		}
+		country_event = {
+			id = flavor_magmascale.2
+			days = 14
+		}
+	}
+	option = {
+		name = flavor_magmascale.1.b
+		trigger = {
+			2949 = {
+				is_capital = no
+			}
+		}
+		set_capital = 2949
+		add_country_modifier = {
+			name = AC5_new_forges
+			duration = 3650
+		}
+		country_event = {
+			id = flavor_magmascale.2
+			days = 14
+		}
+	}
+}
+country_event = { #Kobold lifestyle event chain
+	id = flavor_magmascale.2
+	title = flavor_magmascale.2.t
+	desc = flavor_magmascale.2.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_magmascale.2.a
+		add_country_modifier = {
+			name = AC5_healty_younglings
+			duration = 3650
+		}
+		country_event = {
+			id = flavor_magmascale.3
+			days = 14
+		}
+	}
+	option = {
+		name = flavor_magmascale.2.b
+		trigger = {
+			4041 = {
+				is_capital = no
+			}
+		}
+		set_capital = 4041
+		add_country_modifier = {
+			name = AC5_healty_younglings
+			duration = 3650
+		}
+		country_event = {
+			id = flavor_magmascale.3
+			days = 14
+		}
+	}
+}
+country_event = { #Kobold lifestyle event chain
+	id = flavor_magmascale.3
+	title = flavor_magmascale.3.t
+	desc = flavor_magmascale.3.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_magmascale.3.a
+		add_country_modifier = {
+			name = AC5_constructive_conflict
+			duration = 3650
+		}
+		country_event = {
+			id = flavor_magmascale.4
+			days = 14
+		}
+	}
+	option = {
+		name = flavor_magmascale.3.b
+		trigger = {
+			4042 = {
+				is_capital = no
+			}
+		}
+		set_capital = 4042
+		add_country_modifier = {
+			name = AC5_constructive_conflict
+			duration = 3650
+		}
+		country_event = {
+			id = flavor_magmascale.4
+			days = 14
+		}
+	}
+}
+country_event = { #Kobold lifestyle event chain
+	id = flavor_magmascale.4
+	title = flavor_magmascale.4.t
+	desc = flavor_magmascale.4.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_magmascale.4.a
+		add_country_modifier = {
+			name = AC5_lava_garden
+			duration = 3650
+		}
+	}
+	option = {
+		name = flavor_magmascale.4.b
+		trigger = {
+			4040 = {
+				is_capital = no
+			}
+		}
+		set_capital = 4040
+		add_country_modifier = {
+			name = AC5_lava_garden
+			duration = 3650
+		}
+	}
+}
+
+country_event = { #Uniting caverns event chain, spawn rebels
+	id = flavor_magmascale.5
+	title = flavor_magmascale.5.t
+	desc = flavor_magmascale.5.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_magmascale.5.a
+		add_legitimacy = -10
+		buradforge_area = {
+			spawn_rebels = {
+				type = particularist_rebels
+				size = 2
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = flavor_magmascale.500
+				days = 30
+			}
+		}
+	}
+}
+
+country_event = { #loop event
+	id = flavor_magmascale.500
+	title = flavor_magmascale.5.t
+	desc = flavor_magmascale.5.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = flavor_magmascale.5.a
+		if = {
+			limit = {
+				NOT = {
+					num_of_rebel_armies = 1
+				}
+			}
+			country_event = {
+				id = flavor_magmascale.6
+			}
+		}
+		else = {
+			hidden_effect = {
+				country_event = {
+					id = flavor_magmascale.500
+					days = 30
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Uniting caverns after defeating rebels, take from mission
+	id = flavor_magmascale.6
+	title = flavor_magmascale.6.t
+	desc = flavor_magmascale.6.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_magmascale.6.a
+		add_legitimacy = 10
+		add_prestige = 20
+		custom_tooltip = AC5_buradforge_area_10_development_tt
+		buradforge_area = {
+			add_permanent_province_modifier = {
+				name = AC5_home_manpower
+				duration = -1
+			}
+			add_base_tax = 1
+			add_base_production = 1
+			add_base_manpower = 1
+		}
+	}
+}
+
+country_event = { #Melting Walls event chain part 1
+	id = flavor_magmascale.7
+	title = flavor_magmascale.7.t
+	desc = flavor_magmascale.7.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_magmascale.7.a
+		add_manpower = -5
+		add_mil_power = -50
+		4040 = {
+			add_orcish_minority_size_effect = yes
+		}
+		country_event = {
+			id = flavor_magmascale.8
+			days = 730
+		}
+	}
+	option = {
+		name = flavor_magmascale.7.b
+		add_manpower = -10
+		add_mil_power = -75
+		4040 = {
+			add_orcish_minority_size_effect = yes
+		}
+		country_event = {
+			id = flavor_magmascale.8
+			days = 365
+		}
+	}
+}
+
+country_event = { #Melting Walls event chain part 2
+	id = flavor_magmascale.8
+	title = flavor_magmascale.8.t
+	desc = flavor_magmascale.8.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_magmascale.8.a
+		add_treasury = -100
+		add_dip_power = -50
+		4040 = {
+			add_goblin_minority_size_effect = yes
+		}
+		country_event = {
+			id = flavor_magmascale.9
+			days = 730
+		}
+	}
+	option = {
+		name = flavor_magmascale.8.b
+		add_treasury = -150
+		add_dip_power = -75
+		4040 = {
+			add_goblin_minority_size_effect = yes
+		}
+		country_event = {
+			id = flavor_magmascale.9
+			days = 365
+		}
+	}
+}
+
+country_event = { #Melting Walls event chain part 3
+	id = flavor_magmascale.9
+	title = flavor_magmascale.9.t
+	desc = flavor_magmascale.9.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_magmascale.9.a
+		add_legitimacy = -10
+		add_prestige = -25
+		add_stability = -1
+		add_estate_loyalty = {
+			estate = estate_church
+			loyalty = -10
+		}
+		country_event = {
+			id = flavor_magmascale.10
+			days = 730
+		}
+	}
+	option = {
+		name = flavor_magmascale.9.b
+		add_legitimacy = -20
+		add_prestige = -50
+		add_stability = -1
+		add_estate_loyalty = {
+			estate = estate_church
+			loyalty = -10
+		}
+		country_event = {
+			id = flavor_magmascale.10
+			days = 365
+		}
+	}
+}
+
+country_event = { #Melting Walls event chain part 4
+	id = flavor_magmascale.10
+	title = flavor_magmascale.10.t
+	desc = flavor_magmascale.10.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_magmascale.10.a
+		add_legitimacy = 10
+		add_prestige = 20
+		change_innovativeness = 5
+		669 = {
+			discover_country = ROOT
+			add_permanent_claim = ROOT
+		}
+		set_country_flag = AC5_zilzurro_tunnel_flag
+		4040 = {
+			add_great_project = {
+				type = magmascale_tunnel
+				instant = yes
+			}
+			hidden_effect = {
+				add_great_project_tier = {
+					type = magmascale_tunnel
+					tier = 1
+				}
+			}
+		}
+		country_event = {
+			id = flavor_magmascale.11
+			days = 14
+		}
+	}
+}
+
+country_event = { #Melting Walls event chain part 5
+	id = flavor_magmascale.11
+	title = flavor_magmascale.11.t
+	desc = flavor_magmascale.1.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_magmascale.11.a
+		4040 = {
+			add_goblin_minority_size_effect = yes
+		}
+		add_mil_power = 50
+		harpy_hills_region = {
+			discover_country = ROOT
+			add_permanent_claim = ROOT
+		}
+		north_naza_area = {
+			discover_country = ROOT
+			add_permanent_claim = ROOT
+		}
+		add_country_modifier = {
+			name = AC5_bulwar_march
+			duration = 10950
+		}
+	}
+}
+
+country_event = { #Scorched Wing, harpy rebels, if you win remove roosts, reduce autonomy and give mil power and cash
+	id = flavor_magmascale.12
+	title = flavor_magmascale.12.t
+	desc = flavor_magmascale.12.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_magmascale.12.a
+		every_owned_province = {
+			limit = {
+				has_active_triggered_province_modifier = harpy_roost
+			}
+			spawn_rebels = {
+				type = nationalist_rebels
+				size = 2
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = flavor_magmascale.501
+				days = 30
+			}
+		}
+	}
+}
+
+country_event = { #loop event
+	id = flavor_magmascale.501
+	title = flavor_magmascale.501.t
+	desc = flavor_magmascale.501.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = flavor_magmascale.501.a
+		if = {
+			limit = {
+				NOT = {
+					num_of_rebel_armies = 1
+				}
+			}
+			country_event = {
+				id = flavor_magmascale.13
+			}
+		}
+		else = {
+			hidden_effect = {
+				country_event = {
+					id = flavor_magmascale.501
+					days = 30
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Scorched Wing reward after defeating rebels, take from mission
+	id = flavor_magmascale.13
+	title = flavor_magmascale.13.t
+	desc = flavor_magmascale.13.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_magmascale.13.a
+		every_owned_province = {
+			limit = {
+				OR = {
+					has_active_triggered_province_modifier = harpy_roost
+					culture_is_harpy = yes
+				}
+			}
+			add_nationalism = -10
+			add_local_autonomy = -25
+			add_kobold_minority_size_effect = yes
+			remove_province_triggered_modifier = harpy_roost
+		}
+	}
+}
+
+country_event = { #Learning from the strong event
+	id = flavor_magmascale.14
+	title = flavor_magmascale.14.t
+	desc = flavor_magmascale.14.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_magmascale.14.a
+		largest_increase_of_orcish_tolerance_effect = yes
+		custom_tooltip = AC5_10_orcish_minorities_tooltip
+			for = {
+				amount = 10
+				effect = "
+					random_owned_province = {
+						limit = {
+							NOT = {
+								has_large_orcish_minority_trigger = yes
+								culture_is_orcish = yes
+							}
+						}
+						add_orcish_minority_size_effect = yes
+					}
+				"
+			}
+		add_country_modifier = {
+			name = AC5_militarization
+			duration = 9125
+		}
+	}
+}
+
+country_event = { #Threaten Cannor
+	id = flavor_magmascale.15
+	title = flavor_magmascale.15.t
+	desc = flavor_magmascale.15.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					hre_size = 1
+				}
+				every_known_country = {
+					limit = {
+						OR = {
+							capital_scope = {
+								OR = {
+									region = dostanor_region
+									region = lencenor_region
+									region = forlorn_vale_region
+									is_part_of_hre = yes
+								}
+							}
+							has_opinion_modifier = {
+								modifier = aggressive_expansion
+								who = ROOT
+								value = -50
+							}
+						}
+						NOT = { is_subject = yes }
+					}
+					add_aggressive_expansion = { who = ROOT value = 100 apply_calc = no }
+					set_ai_attitude = { attitude = attitude_outraged who = ROOT }
+					form_coalition_against = ROOT
+					set_country_flag = AC5_cannorian_war_flag
+					white_peace = ROOT
+				}
+				random_known_country = {
+					limit = {
+						capital_scope = {
+							OR = {
+								region = dostanor_region
+								region = lencenor_region
+								region = forlorn_vale_region
+								is_part_of_hre = yes
+							}
+						}
+						has_country_flag = AC5_cannorian_war_flag
+						coalition_target = ROOT
+					}
+					save_event_target_as = magmascales_war_target
+				}
+				declare_war_with_cb = {
+					who = event_target:magmascales_war_target
+					casus_belli = cb_super_badboy
+				}
+				set_country_flag = AC5_cannorian_war_flag
+			}
+			else = {
+				every_known_country = {
+					limit = {
+						OR = {
+							capital_scope = {
+								OR = {
+									region = dostanor_region
+									region = lencenor_region
+									region = forlorn_vale_region
+									region = businor_region
+									region = east_dameshead_region
+									region = west_dameshead_region
+									region = esmaria_region
+									region = damescrown_region
+								}
+							}
+							has_opinion_modifier = {
+								modifier = aggressive_expansion
+								who = ROOT
+								value = -50
+							}
+						}
+						NOT = { is_subject = yes }
+					}
+					add_aggressive_expansion = { who = ROOT value = 100 apply_calc = no }
+					set_ai_attitude = { attitude = attitude_outraged who = ROOT }
+					form_coalition_against = ROOT
+					set_country_flag = AC5_cannorian_war_flag
+					white_peace = ROOT
+				}
+				random_known_country = {
+					limit = {
+						capital_scope = {
+							OR = {
+								region = dostanor_region
+								region = lencenor_region
+								region = forlorn_vale_region
+								region = businor_region
+								region = east_dameshead_region
+								region = west_dameshead_region
+								region = esmaria_region
+								region = damescrown_region
+								region = the_borders_region
+							}
+						}
+						has_country_flag = AC5_cannorian_war_flag
+						coalition_target = ROOT
+					}
+					save_event_target_as = magmascales_war_target
+				}
+				declare_war_with_cb = {
+					who = event_target:magmascales_war_target
+					casus_belli = cb_super_badboy
+				}
+				set_country_flag = AC5_cannorian_war_flag
+			}
+		}
+	}
+	option = {
+		name = flavor_magmascale.15.a
+		510 = {
+			add_permanent_province_modifier = {
+				name = AC5_bal_ouroud_defenses
+				duration = -1
+			}
+		}
+		custom_tooltip = AC5_15_year_war_tt
+	}
+	after = {
+		country_event = {
+			id = flavor_magmascale.19
+			days = 3650
+		}
+	}
+}
+
+country_event = { #Cannorians captured Bal Ouord
+	id = flavor_magmascale.18
+	title = flavor_magmascale.18.t
+	desc = flavor_magmascale.18.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	immediate = {
+		every_known_country = {
+			limit = { war_with = ROOT }
+			clr_country_flag = AC5_cannorian_war_flag
+		}
+		clr_country_flag = AC5_cannorian_war_flag
+	}
+	option = {
+		name = flavor_magmascale.18.a
+		custom_tooltip = AC5_this_is_a_normal_war_now_tt
+		add_country_modifier = {
+			name = AC5_last_resort
+			duration = 3650
+		}
+	}
+	option = {
+		name = flavor_magmascale.18.b
+		add_stability = -6
+		add_war_exhaustion = 20
+		custom_tooltip = AC5_cede_dostanor_tt
+		hidden_effect = {
+			every_known_country = {
+				limit = { war_with = ROOT }
+				white_peace = ROOT
+			}
+			every_owned_province = {
+				limit = {
+					OR = {
+						region = dostanor_region
+						region = daravans_folly_region
+						region = ourdia_region
+					}
+				}
+				add_core = previous_owner
+				cede_province = previous_owner
+			}
+		}
+	}
+}
+
+country_event = { #Magmascale victory against Cannor
+	id = flavor_magmascale.19
+	title = flavor_magmascale.19.t
+	desc = flavor_magmascale.19.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	trigger = {
+		OR = {
+			tag = AC5
+			was_tag = AC5
+		}
+		has_country_flag = AC5_cannorian_war_flag
+		war_score = 100
+	}
+	mean_time_to_happen = {
+		days = 1
+	}
+	immediate = {
+		hidden_effect = {
+			every_known_country = {
+				limit = {
+					war_with = ROOT
+				}
+				white_peace = ROOT
+				clr_country_flag = AC5_cannorian_war_flag
+			}
+			every_known_country = {
+				limit = {
+					capital_scope = { 
+						OR = {
+							region = dostanor_region
+							region = lencenor_region
+							region = forlorn_vale_region
+							region = businor_region
+							region = east_dameshead_region
+							region = west_dameshead_region
+							region = esmaria_region
+							region = damescrown_region
+							region = the_borders_region
+						}
+					}
+				}
+				add_country_modifier = {
+					name = AC5_utterly_defeated
+					duration = -1
+				}
+			}
+		}
+	}
+	option = {
+		name = flavor_magmascale.19.a
+		clr_country_flag = AC5_cannorian_war_flag
+		dismantle_hre = yes
+		custom_tooltip = AC5_defeated_countries_get_debuffs_tt
+		tooltip = {
+			add_country_modifier = {
+				name = AC5_utterly_defeated
+				duration = -1
+			}
+		}
+		custom_tooltip = AC5_defeated_regions_devastated_tt
+		western_cannor_superregion = {
+			limit = {
+				OR = {
+					region = the_borders_region
+					region = esmaria_region
+					region = west_dameshead_region
+					region = damescrown_region
+					region = east_dameshead_region
+					region = businor_region
+					region = dostanor_region
+					region = lencenor_region
+					region = forlorn_vale_region
+				}
+				NOT = {
+					owned_by = ROOT
+				}
+			}
+			add_devastation = 100
+			add_base_tax = -4
+			add_base_production = -4
+			add_base_manpower = -4
+			remove_fortifications = yes
+		}
+		if = {
+			limit = { has_dlc = "Mandate of Heaven" }
+			if = {
+				limit = { in_golden_age = yes }
+				extend_golden_age = 600
+			}
+			else_if = {
+				limit = { has_had_golden_age = yes }
+				reset_golden_age = yes
+			}
+			else = { add_splendor = 800 }
+		}
+		else = {
+			add_stability_or_adm_power = yes
+			add_stability_or_adm_power = yes
+			add_stability_or_adm_power = yes
+			add_prestige_or_monarch_power = { amount = 200 }
+		}
+		add_power_projection = {
+			type = 25_permanent_power_projection
+			amount = 25
+		}
+	}
+}
+
+country_event = { #Lavaflood against Serpentrot
+	id = flavor_magmascale.20
+	title = flavor_magmascale.20.t
+	desc = flavor_magmascale.20.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_magmascale.20.a
+		country_event = {
+			id = flavor_magmascale.21
+			days = 7
+		}
+	}
+	option = {
+		name = flavor_magmascale.20.b
+		add_legitimacy = -5
+		add_prestige = -5
+		set_country_flag = emergency_lava_flood
+	}
+}
+
+country_event = { #Lavaflood against Serpentrot
+	id = flavor_magmascale.21
+	title = flavor_magmascale.21.t
+	desc = flavor_magmascale.21.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			set_global_flag = magmascale_serpentrot_flood
+			west_dwarovar_region = {
+				limit = {
+					has_terrain = dwarven_road
+				}
+				add_devastation = 100
+			}
+			every_country = {
+				limit = {
+					NOT = {
+						tag = ROOT
+					}
+					any_owned_province = {
+						region = west_dwarovar_region
+					}
+				}
+				country_event = {
+					id = flavor_magmascale.2000
+				}
+			}
+		}
+	}
+	option = {
+		name = flavor_magmascale.21.a
+		add_legitimacy = -10
+		add_prestige = -10
+		custom_tooltip = AC5_flood_devastation_serpentrot_tooltip
+		tooltip = {
+			6150 = {
+				add_devastation = 100
+			}
+		}
+		custom_tooltip = AC5_flood_opinion_serpentrot_tooltip
+		tooltip = {
+			random_country = {
+				limit = {
+					NOT = {
+						tag = ROOT
+					}
+					any_owned_province = {
+						region = west_dwarovar_region
+					}
+				}
+				add_opinion = {
+					who = ROOT
+					modifier = flooded_my_shit
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Notification your shit is fucked up
+	id = flavor_magmascale.2000
+	title = flavor_magmascale.2000.t
+	desc = flavor_magmascale.2000.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_magmascale.2000.a
+		add_stability = -1
+		add_legitimacy_equivalent = {
+			amount = -20
+			republican_tradition = -10
+		}
+		add_opinion = {
+			who = FROM
+			modifier = flooded_my_shit
+		}
+		custom_tooltip = AC5_flood_devastation_serpentrot_tooltip
+		tooltip = {
+			6150 = {
+				add_devastation = 100
+			}
+		}
+	}
+}
+
+country_event = { #Lavaflood against Obsidian Invasion
+	id = flavor_magmascale.22
+	title = flavor_magmascale.22.t
+	desc = flavor_magmascale.22.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_magmascale.22.a
+		country_event = {
+			id = flavor_magmascale.23
+			days = 7
+		}
+	}
+	option = {
+		name = flavor_magmascale.22.b
+		add_legitimacy = -5
+		add_prestige = -5
+		set_country_flag = emergency_lava_flood
+	}
+}
+
+country_event = { #Lavaflood against Obsidian Invasion
+	id = flavor_magmascale.23
+	title = flavor_magmascale.23.t
+	desc = flavor_magmascale.23.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			set_global_flag = magmascale_serpentrot_flood
+			H94 = {
+				every_owned_province = {
+					limit = {
+						has_terrain = dwarven_road
+					}
+					add_devastation = 100
+					remove_fortifications = yes
+					kill_units = {
+						who = H94
+					}
+				}
+				capital_scope = {
+					region = {
+						limit = {
+							has_terrain = dwarven_road
+						}
+						add_devastation = 100
+						kill_units = {
+							who = H94
+						}
+						if = {
+							limit = {
+								NOT = {
+									owned_by = ROOT
+								}
+							}
+							kill_units = {
+								who = owner
+							}
+						}
+						if = {
+							limit = {
+								NOT = {
+									owned_by = H94
+									owned_by = ROOT
+								}
+							}
+							owner = {
+								country_event = {
+									id = flavor_magmascale.3000
+								}
+							}
+						}
+					}
+				}
+				country_event = {
+					id = flavor_magmascale.3000
+				}
+			}
+			AC5 = {
+				every_owned_province = {
+					limit = {
+						has_terrain = dwarven_road
+					}
+					add_devastation = 50
+					kill_units = {
+						who = enemy
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = flavor_magmascale.23.a
+		add_legitimacy = -10
+		add_prestige = -10
+		add_power_projection = {
+			type = mission_rewards_power_projection
+			amount = 20
+		}
+		custom_tooltip = AC5_flood_devastation_obsidian_tooltip
+		tooltip = {
+			6150 = {
+				add_devastation = 50
+			}
+		}
+		custom_tooltip = AC5_flood_opinion_obsidian_tooltip
+		tooltip = {
+			H94 = {
+				add_opinion = {
+					who = ROOT
+					modifier = flooded_my_shit
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Notification your shit is fucked up
+	id = flavor_magmascale.3000
+	title = flavor_magmascale.3000.t
+	desc = flavor_magmascale.3000.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_magmascale.3000.a
+		trigger = {
+			NOT = {
+				tag = H94
+			}
+		}
+		add_stability = -1
+		add_legitimacy_equivalent = { amount = -20 republican_tradition = -10 }
+		add_opinion = {
+			who = FROM
+			modifier = flooded_my_shit
+		}
+		custom_tooltip = AC5_flood_devastation_obsidian_tooltip
+		tooltip = {
+			6150 = {
+				add_devastation = 100
+			}
+		}
+	}
+	option = {
+		name = flavor_magmascale.3000.b
+		trigger = {
+			tag = H94
+		}
+		add_stability = -3
+		add_legitimacy_equivalent = { amount = -50 republican_tradition = -25 }
+		add_opinion = {
+			who = FROM
+			modifier = flooded_my_shit
+		}
+		custom_tooltip = AC5_flood_devastation_obsidian_tooltip
+		tooltip = {
+			6150 = {
+				add_devastation = 100
+			}
+		}
+	}
+}
+
+country_event = { #Lavaflood against Obsidian Invasion
+	id = flavor_magmascale.24
+	title = flavor_magmascale.24.t
+	desc = flavor_magmascale.24.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_magmascale.24.a
+		country_event = {
+			id = flavor_magmascale.25
+			days = 7
+		}
+	}
+	option = {
+		name = flavor_magmascale.24.b
+		add_legitimacy = -5
+		add_prestige = -5
+		set_country_flag = emergency_lava_flood
+	}
+}
+
+country_event = { #Lavaflood against Obsidian Invasion
+	id = flavor_magmascale.25
+	title = flavor_magmascale.25.t
+	desc = flavor_magmascale.25.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			random_owned_province = {
+				limit = {
+					has_province_modifier = old_hold
+				}
+				region = {
+					limit = {
+						has_terrain = dwarven_road
+					}
+					add_devastation = 25
+					kill_units = {
+						who = REB
+					}
+					change_controller = ROOT
+					if = {
+						limit = {
+							NOT = {
+								owned_by = ROOT
+							}
+						}
+						owner = {
+							country_event = {
+								id = flavor_magmascale.4000
+							}
+						}
+					}
+				}
+			}
+			every_owned_province = {
+				limit = {
+					has_province_modifier = old_hold
+				}
+				add_devastation = 100
+				remove_province_modifier = dig_1
+				remove_province_modifier = dig_2
+				remove_province_modifier = dig_3
+				remove_province_modifier = dig_4
+				remove_province_modifier = dig_5
+				remove_province_modifier = dig_6
+				remove_province_modifier = dig_7
+				remove_province_modifier = dig_8
+				remove_province_modifier = dig_9
+				remove_province_modifier = dig_10
+				remove_province_modifier = dig_11
+				remove_province_modifier = partially_ruined_hold
+				remove_province_modifier = damaged_hold
+				add_permanent_province_modifier = {
+					name = ruined_hold
+					duration = -1
+				}
+				add_base_production = -5
+				add_base_manpower = -5
+				add_base_tax = -5
+				kill_units = {
+					who = REB
+				}
+				change_controller = ROOT
+			}
+			every_owned_province = {
+				limit = {
+					has_province_modifier = old_gate
+				}
+				add_devastation = 50
+				kill_units = {
+					who = REB
+				}
+				change_controller = ROOT
+			}
+		}
+	}
+	option = {
+		name = flavor_magmascale.25.a
+		add_legitimacy = -10
+		add_prestige = -10
+		add_power_projection = {
+			type = mission_rewards_power_projection
+			amount = 20
+		}
+		tooltip = {
+			every_owned_province = {
+				limit = {
+					has_province_modifier = old_hold
+				}
+				add_devastation = 100
+				remove_province_modifier = dig_1
+				remove_province_modifier = dig_2
+				remove_province_modifier = dig_3
+				remove_province_modifier = dig_4
+				remove_province_modifier = dig_5
+				remove_province_modifier = dig_6
+				remove_province_modifier = dig_7
+				remove_province_modifier = dig_8
+				remove_province_modifier = dig_9
+				remove_province_modifier = dig_10
+				remove_province_modifier = dig_11
+				remove_province_modifier = partially_ruined_hold
+				remove_province_modifier = damaged_hold
+				add_permanent_province_modifier = {
+					name = ruined_hold
+					duration = -1
+				}
+				add_base_production = -5
+				add_base_manpower = -5
+				add_base_tax = -5
+				kill_units = {
+					who = REB
+				}
+				change_controller = ROOT
+			}
+		}
+		custom_tooltip = AC5_flood_devastation_goblintide_hotspot_tooltip
+		tooltip = {
+			random_owned_province = {
+				limit = {
+					has_province_modifier = old_gate
+				}
+				add_devastation = 50
+				kill_units = {
+					who = REB
+				}
+				change_controller = ROOT
+			}
+		}
+		custom_tooltip = AC5_flood_devastation_goblintide_tooltip
+		tooltip = {
+			6150 = {
+				add_devastation = 25
+				kill_units = {
+					who = REB
+				}
+				change_controller = ROOT
+			}
+		}
+		custom_tooltip = AC5_flood_opinion_goblintide_tooltip
+		tooltip = {
+			random_known_country = {
+				add_opinion = {
+					who = ROOT
+					modifier = flooded_my_shit_briefly
+				}
+			}
+		}
+		every_owned_province = {
+			remove_province_modifier = old_gate
+		}
+		set_country_flag = fallen_disaster_end
+	}
+}
+
+country_event = { #Notification your shit is fucked up
+	id = flavor_magmascale.4000
+	title = flavor_magmascale.4000.t
+	desc = flavor_magmascale.4000.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_magmascale.4000.a
+		add_legitimacy_equivalent = {
+			amount = -10
+			republican_tradition = -5
+		}
+		add_opinion = {
+			who = FROM
+			modifier = flooded_my_shit_briefly
+		}
+		custom_tooltip = AC5_flood_devastation_goblintide_tooltip
+		tooltip = {
+			6150 = {
+				add_devastation = 25
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_magmascale.30
+	title = flavor_magmascale.30.t
+	desc = flavor_magmascale.30.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = flavor_magmascale.30.a
+		add_stability_or_adm_power = yes
+		custom_tooltip = AC5_decolonize_provinces_tt
+		tooltip = {
+			6150 = {
+				AC5_expand_river_mission_effect = yes
+			}
+		}
+		custom_tooltip = AC5_lava_rivers_colonization_tooltip
+		tooltip = {
+			6150 = {
+				add_province_modifier = {
+					name = AC5_lava_surf
+					duration = 7300
+				}
+			}
+		}
+		4039 = {
+			remove_province_modifier = dig_1
+			remove_province_modifier = dig_2
+			remove_province_modifier = dig_3
+			remove_province_modifier = dig_4
+			remove_province_modifier = dig_5
+			remove_province_modifier = dig_6
+			remove_province_modifier = dig_7
+			remove_province_modifier = dig_8
+			remove_province_modifier = dig_9
+			remove_province_modifier = dig_10
+			remove_province_modifier = dig_11
+			remove_province_modifier = partially_ruined_hold
+			remove_province_modifier = damaged_hold
+			remove_province_triggered_modifier = AC5_exploited_hold
+			remove_province_modifier = AC5_exploited_hold_aftermath
+			add_permanent_province_modifier = {
+				name = ruined_hold
+				duration = -1
+			}
+			add_base_tax = -10
+			add_base_production = -10
+			add_base_manpower = -10
+			add_devastation = 100
+		}
+		hidden_effect = {
+			every_province = {
+				limit = {
+					OR = {
+						area = gor_burad_area
+						area = argrod_14_16_area
+						area = argrod_junction_area
+						area = jorkad_junction_area
+						area = argrod_9_11_area
+						area = argrod_6_8_area
+					}
+					NOT = {
+						owned_by = ROOT
+					}
+					has_terrain = dwarven_road
+				}
+				discover_country = ROOT
+				decolonize = yes
+				change_culture = no_culture
+				change_native_size = -20000
+				add_base_tax = -10
+				add_base_production = -10
+				add_base_manpower = -10
+			}
+			every_province = {
+				limit = {
+					OR = {
+						area = gor_burad_area
+						area = argrod_14_16_area
+						area = argrod_junction_area
+						area = jorkad_junction_area
+						area = argrod_9_11_area
+						area = argrod_6_8_area
+					}
+					owned_by = ROOT
+					has_terrain = dwarven_road
+				}
+				discover_country = ROOT
+				AC5_expand_river_mission_effect = yes
+			}
+			every_province = {
+				limit = {
+					OR = {
+						province_id = 2973
+						province_id = 4100
+					}
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+				remove_province_modifier = dig_1
+				remove_province_modifier = dig_2
+				remove_province_modifier = dig_3
+				remove_province_modifier = dig_4
+				remove_province_modifier = dig_5
+				remove_province_modifier = dig_6
+				remove_province_modifier = dig_7
+				remove_province_modifier = dig_8
+				remove_province_modifier = dig_9
+				remove_province_modifier = dig_10
+				remove_province_modifier = dig_11
+				remove_province_modifier = partially_ruined_hold
+				remove_province_modifier = damaged_hold
+				add_permanent_province_modifier = {
+					name = ruined_hold
+					duration = -1
+				}
+				add_base_tax = -5
+				add_base_production = -5
+				add_base_manpower = -5
+				add_devastation = 100
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_magmascale.33
+	title = flavor_magmascale.33.t
+	desc = flavor_magmascale.33.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = flavor_magmascale.33.a
+		buradforge_area = {
+			limit = {
+				owned_by = ROOT
+			}
+			spawn_rebels = {
+				type = particularist_rebels
+				size = 2
+			}
+		}
+		gor_burad_area = {
+			limit = {
+				owned_by = ROOT
+			}
+			spawn_rebels = {
+				type = particularist_rebels
+				size = 2
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_magmascale.34
+	title = flavor_magmascale.34.t
+	desc = flavor_magmascale.34.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = flavor_magmascale.34.a
+	}
+}
+
+province_event = {
+	id = flavor_magmascale.110
+	title = flavor_magmascale.110.t
+	desc = flavor_magmascale.110.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = { owner = { set_country_flag = AC5_magmascales_opened_lava_menu } }
+	}
+	option = { #place lava river
+		name = flavor_magmascale.110.a
+		trigger = {
+			NOT = {
+				has_province_modifier = AC5_lava_river
+			}
+			owner = {
+				has_country_flag = AC5_can_place_lavarivers
+			}
+		}
+		if = {
+			limit = {
+				calc_true_if = {
+					amount = 1
+					all_neighbor_province = {
+						has_province_modifier = AC5_lava_river
+					}
+				}
+				NOT = {
+					calc_true_if = {
+						amount = 2
+						all_neighbor_province = {
+							has_province_modifier = AC5_lava_river
+						}
+					}
+				}
+				owner = {
+					treasury = 250
+				}
+			}
+			AC5_expand_river_event_effect = yes
+		}
+		else = {
+			custom_tooltip = AC5_cant_place_lava_river_tt
+		}
+	}
+	option = { #place lava city, 1 city per region
+		name = flavor_magmascale.110.b
+		trigger = {
+			owner = {
+				NOT = { has_country_flag = AC5_more_lavacities }
+			}
+			NOT = {
+				has_province_modifier = AC5_lava_city
+				has_province_modifier = AC5_sprawling_lava_city
+				calc_true_if = {
+					amount = 2
+					region_for_scope_province = {
+						OR = {
+							has_province_modifier = AC5_lava_city
+							has_province_modifier = AC5_sprawling_lava_city
+						}
+					}
+				}
+			}
+			owner = {
+				has_country_flag = AC5_can_place_lavacities
+			}
+		}
+		if = {
+			limit = {
+				development = 20
+				has_province_modifier = AC5_lava_river
+				owner = {
+					treasury = 1000
+					manpower = 20
+					adm_power = 25
+					dip_power = 25
+					mil_power = 25
+				}
+			}
+			owner = {
+				add_treasury = -1000
+				add_manpower = -20
+				add_adm_power = -25
+				add_dip_power = -25
+				add_mil_power = -25
+			}
+			add_permanent_province_modifier = {
+				name = AC5_lava_city
+				duration = -1
+			}
+			hidden_effect = {
+				update_artifice_points = yes
+			}
+			if = {
+				limit = {
+					owner = { has_estate_privilege = artifice_invention_obsidian_settlement_generation_kit }
+				}
+				add_province_modifier = {
+					name = artifice_obsidian_settlement_generation_kit
+					duration = -1
+				}
+			}
+		}
+		else = {
+			custom_tooltip = AC5_cant_place_lava_city_tt
+		}
+	}
+	option = { #place lava cities, how many you want
+		name = flavor_magmascale.110.b
+		trigger = {
+			owner = {
+				has_country_flag = AC5_more_lavacities
+			}
+			NOT = {
+				has_province_modifier = AC5_lava_city
+				has_province_modifier = AC5_sprawling_lava_city
+				calc_true_if = {
+					amount = 4
+					region_for_scope_province = {
+						OR = {
+							has_province_modifier = AC5_lava_city
+							has_province_modifier = AC5_sprawling_lava_city
+						}
+					}
+				}
+			}
+			owner = {
+				has_country_flag = AC5_can_place_lavacities
+			}
+		}
+		if = {
+			limit = {
+				development = 20
+				has_province_modifier = AC5_lava_river
+				owner = {
+					treasury = 1000
+					manpower = 20
+					adm_power = 25
+					dip_power = 25
+					mil_power = 25
+				}
+			}
+			owner = {
+				add_treasury = -1000
+				add_manpower = -20
+				add_adm_power = -25
+				add_dip_power = -25
+				add_mil_power = -25
+			}
+			add_permanent_province_modifier = {
+				name = AC5_lava_city
+				duration = -1
+			}
+			hidden_effect = {
+				update_artifice_points = yes
+			}
+			if = {
+				limit = {
+					owner = { has_estate_privilege = artifice_invention_obsidian_settlement_generation_kit }
+				}
+				add_province_modifier = {
+					name = artifice_obsidian_settlement_generation_kit
+					duration = -1
+				}
+			}
+		}
+		else = {
+			custom_tooltip = AC5_cant_place_lava_city2_tt
+		}
+	}
+	option = {
+		name = flavor_magmascale.110.c
+		trigger = {
+			has_province_modifier = AC5_lava_city
+			NOT = {
+				has_province_modifier = AC5_sprawling_lava_city
+			}
+			owner = {
+				has_country_flag = AC5_can_place_lavacities
+				has_country_flag = AC5_can_upgrade_lavacities
+			}
+		}
+		if = {
+			limit = {
+				development = 35
+				has_province_modifier = AC5_lava_city
+				owner = {
+					treasury = 2000
+					manpower = 40
+					adm_power = 50
+					dip_power = 50
+					mil_power = 50
+				}
+			}
+			remove_province_modifier = AC5_lava_city
+			owner = {
+				add_treasury = -2000
+				add_manpower = -40
+				add_adm_power = -50
+				add_dip_power = -50
+				add_mil_power = -50
+			}
+			add_permanent_province_modifier = {
+				name = AC5_sprawling_lava_city
+				duration = -1
+			}
+			hidden_effect = {
+				update_artifice_points = yes
+			}
+		}
+		else = {
+			custom_tooltip = AC5_cant_upgrade_lava_city_tt
+		}
+	}
+	option = {
+		name = flavor_magmascale.110.dd
+		trigger = {
+			NOT = {
+				has_province_modifier = AC5_lavaforge
+				has_province_modifier = AC5_upgraded_lavaforge
+			}
+			owner = {
+				has_country_flag = AC5_lavaforges_unlocked
+			}
+		}
+		if = {
+			limit = {
+				base_manpower = 10
+				has_province_modifier = AC5_lava_river
+				OR = {
+					trade_goods = copper
+					trade_goods = iron
+					trade_goods = mithril
+					trade_goods = damestear
+				}
+				owner = {
+					treasury = 300
+					manpower = 10
+				}
+			}
+			owner = {
+				add_treasury = -300
+				add_manpower = -10
+			}
+			add_permanent_province_modifier = {
+				name = AC5_lavaforge
+				duration = -1
+			}
+		}
+		else = {
+			custom_tooltip = AC5_cant_place_lava_forge_tt
+		}
+	}
+	option = {
+		name = flavor_magmascale.110.e
+		trigger = {
+			has_province_modifier = AC5_lavaforge
+			NOT = {
+				has_province_modifier = AC5_upgraded_lavaforge
+			}
+			owner = {
+				has_country_flag = AC5_lavaforges_unlocked
+				has_country_flag = AC5_can_upgrade_lavaforges
+			}
+		}
+		if = {
+			limit = {
+				base_manpower = 20
+				has_province_modifier = AC5_lavaforge
+				OR = {
+					trade_goods = copper
+					trade_goods = iron
+					trade_goods = mithril
+					trade_goods = damestear
+				}
+				owner = {
+					treasury = 600
+					manpower = 20
+				}
+			}
+			owner = {
+				add_treasury = -600
+				add_manpower = -20
+			}
+			add_permanent_province_modifier = {
+				name = AC5_upgraded_lavaforge
+				duration = -1
+			}
+		}
+		else = {
+			custom_tooltip = AC5_cant_upgrade_lava_forge_tt
+		}
+	}
+	option = {
+		name = flavor_magmascale.110.f
+	}
+	after = {
+		hidden_effect = { owner = { clr_country_flag = AC5_magmascales_opened_lava_menu } }
+	}
+}
+
+country_event = { #DEBUG
+	id = flavor_magmascale.1100
+	title = flavor_magmascale.1100.t
+	desc = flavor_magmascale.1100.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = { #rivers cities forges
+		name = flavor_magmascale.1100.a
+		set_country_flag = AC5_lava_river_orcs
+		set_country_flag = AC5_lava_river_goblins
+		set_country_flag = AC5_can_place_lavarivers
+		set_country_flag = AC5_can_place_lavacities
+		set_country_flag = AC5_can_upgrade_lavacities
+		set_country_flag = AC5_more_lavacities
+		set_country_flag = AC5_lavaforges_unlocked
+		set_country_flag = AC5_can_upgrade_lavaforges
+	}
+	option = {
+		name = flavor_magmascale.1100.b
+		override_country_name = ZUTARZIRA
+		change_government = monarchy
+		add_government_reform = ace_magmascales_stratocratic_rule
+		add_government_reform = ace_magmascale_engineer_generals_reform
+		custom_tooltip = AC5_reformswap_privileges_tt
+		set_country_flag = unlocked_artifice_invention_bioartificed_fireplants
+		set_country_flag = unlocked_artifice_invention_obsidian_settlement_generation_kit
+		set_country_flag = unlocked_artifice_invention_rock_melter_mk1
+		set_country_flag = unlocked_artifice_invention_flamewoven_clothing
+		hidden_effect = {
+			artifice_magic_switch_to_artificery_only_mode = yes
+		}
+	}
+	option = {
+		name = flavor_magmascale.1100.c
+		complete_mission = AC5_heartland
+		complete_mission = AC5_erect_lavacity
+		complete_mission = AC5_feed_people
+		complete_mission = AC5_molten_grasp
+		complete_mission = AC5_soot_goblins
+		complete_mission = AC5_fireplant_cash_crops
+		complete_mission = AC5_settle_the_caverns
+		complete_mission = AC5_uniting_caverns
+		complete_mission = AC5_kobold_lifestyle
+		complete_mission = AC5_obsidian_city
+		complete_mission = AC5_flood_serpentreach
+		complete_mission = AC5_leaking_out
+		complete_mission = AC5_scorched_wings
+		complete_mission = AC5_first_lavacities
+		complete_mission = AC5_endless_lavacities
+		complete_mission = AC5_flamewoven_threads
+		complete_mission = AC5_threaten_cannor
+		complete_mission = AC5_fallen_empire
+		complete_mission = AC5_exploit_fissures
+		complete_mission = AC5_funneled_lava
+		complete_mission = AC5_rock_smelteries
+		complete_mission = AC5_triggered_eruption
+		complete_mission = AC5_melting_walls
+		complete_mission = AC5_fill_valley
+		complete_mission = AC5_emergency_flood
+		complete_mission = AC5_settle_suran
+		complete_mission = AC5_annihilate_khets
+		complete_mission = AC5_ignite_sorrow
+		complete_mission = AC5_pyramid_pyre
+		complete_mission = AC5_realm_forged_in_fire
+		complete_mission = AC5_learning_from_strong
+		complete_mission = AC5_rule_of_strength
+		complete_mission = AC5_orcish_auxiliaries
+		complete_mission = AC5_flood_suran
+		complete_mission = AC5_burning_bulwar
+		complete_mission = AC5_questioning_humanity
+		complete_mission = AC5_flamemithril_formula
+		complete_mission = AC5_lava_fueled_industrialization
+		complete_mission = AC5_artificer_lavaforges
+		complete_mission = AC5_construct_lavaforges
+		complete_mission = AC5_forge_every_home
+		complete_mission = AC5_molten_artillery
+		complete_mission = AC5_engineers_of_war
+		complete_mission = AC5_strenghten_engineers
+	}
+}

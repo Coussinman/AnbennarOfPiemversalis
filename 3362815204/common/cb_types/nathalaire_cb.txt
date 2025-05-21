@@ -1,0 +1,21 @@
+pirate_raid = {
+	prerequisites_self = {
+		OR = {
+			has_reform = pirate_republic_reform
+			has_country_flag = pirate_raid_cb
+		}
+		NOT = {
+			is_subject = yes
+		}
+	}
+
+	prerequisites = {
+		FROM = {
+			any_owned_province = {
+				has_port = yes
+			}
+		}
+	}
+
+	war_goal = pirate_raid_war_goal
+}

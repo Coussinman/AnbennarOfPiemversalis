@@ -11,34 +11,53 @@ country_decisions = {
 				}
 			}
 			else = {
-				capital_scope = { superregion = gerudia_superregion }
 				NOT = { has_country_modifier = ebonforging_rediscovered }
+				OR = {
+					capital_scope = {
+						superregion = gerudia_superregion
+					}
+					AND = {
+						OR = {
+							tag = A05
+							was_tag = A05
+						}
+						religion = skaldhyrric_faith
+						has_country_flag = ACE_reveria_ebonsteel_flag
+					}
+				}
 			}
 		}
 
 		provinces_to_highlight = {
 			province_id = 984 #Urviksten
-			OR = {
-				NOT = { owned_by = ROOT }
-				NOT = { is_core = ROOT }
+			NOT = {
+				AND = {
+					owned_by = ROOT
+					is_core = ROOT
+				}
 			}
 		}
 
 		allow = {
-			owns = 984
-			capital_scope = { superregion = gerudia_superregion }
 			OR = {
 				treasury = 2000
 				mission_completed = urviksten_olavlund
+				has_country_flag = ebonsteel_allowed
 			}
+			owns = 984
 			OR = { 
 				mil_tech = 10
 				mission_completed = urviksten_olavlund
+				has_country_flag = ebonsteel_allowed
 			}
 			OR = {
 				AND = {
 					culture_group = gerudian
 					NOT = { primary_culture = reverian }			
+				}
+				AND = {
+					primary_culture = reverian
+					mission_completed = A05_Skaldhyrric_3_1
 				}
 				primary_culture = blue_reachman
 				primary_culture = fjord_troll
@@ -50,11 +69,10 @@ country_decisions = {
 			IF = {
 				limit = {
 					NOT = {
-						OR = {
 							tag = Z15
 							tag = Z34
-						}	
 						mission_completed = urviksten_olavlund
+						has_country_flag = ebonsteel_allowed
 					}
 				}
 				add_treasury = -2000
@@ -75,6 +93,8 @@ country_decisions = {
 				capital_scope = { superregion = gerudia_superregion }
 				tag = Z15
 				tag = Z34
+				tag = A05
+				was_tag = A05
 			}	
 			has_country_modifier = ebonforging_rediscovered
 			NOT = {

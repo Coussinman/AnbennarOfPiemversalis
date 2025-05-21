@@ -1,0 +1,468 @@
+non_wexonard_borders = {
+	OR = {
+		area = antir_drop_area
+		area = highcliff_area
+		area = gisden_area
+		area = arannen_area
+		area = eastborders_area
+		area = ashfields_area
+		area = rotwall_area
+		province_id = 410
+		province_id = 411
+		province_id = 414
+		province_id = 417
+	}
+}
+
+shared_expand_iron_mines_trigger = {
+	if = {
+		limit = {
+			299 = {
+				NOT = {
+					has_building = weapons
+				}
+			}
+			306 = {
+				NOT = {
+					has_building = weapons
+				}
+			}
+		}
+		treasury = 1000
+	}
+	else_if = {
+		limit = {
+			OR = {
+				299 = {
+					NOT = {
+						has_building = weapons
+					}
+				}
+				306 = {
+					NOT = {
+						has_building = weapons
+					}
+				}
+			}
+		}
+		treasury = 500
+	}
+	299 = {
+		base_production = 6
+		has_production_building_trigger = yes
+		NOT = {
+			has_any_ongoing_construction = yes
+		}
+	}
+	303 = {
+		base_production = 6
+		has_production_building_trigger = yes
+	}
+	306 = {
+		base_production = 6
+		has_production_building_trigger = yes
+		NOT = {
+			has_any_ongoing_construction = yes
+		}
+	}
+	316 = {
+		base_production = 6
+		has_production_building_trigger = yes
+	}
+	317 = {
+		base_production = 6
+		has_production_building_trigger = yes
+	}
+}
+
+shared_riches_of_khenak_trigger = {
+	if = {
+		limit = {
+			367 = {
+				NOT = {
+					has_building = weapons
+				}
+			}
+			371 = {
+				NOT = {
+					has_building = weapons
+				}
+			}
+		}
+		treasury = 1000
+	}
+	else_if = {
+		limit = {
+			OR = {
+				367 = {
+					NOT = {
+						has_building = weapons
+					}
+				}
+				371 = {
+					NOT = {
+						has_building = weapons
+					}
+				}
+			}
+		}
+		treasury = 500
+	}
+	364 = {
+		base_production = 5
+		has_production_building_trigger = yes
+	}
+	367 = {
+		base_production = 5
+		has_production_building_trigger = yes
+		NOT = {
+			has_any_ongoing_construction = yes
+		}
+	}
+	371 = {
+		base_production = 5
+		has_production_building_trigger = yes
+		NOT = {
+			has_any_ongoing_construction = yes
+		}
+	}
+	377 = {
+		base_production = 5
+		has_production_building_trigger = yes
+	}
+}
+
+shared_mine_coal_trigger = {
+	treasury = 2000
+	manpower = 20
+	303 = {
+		development = 30
+		if = {
+			limit = {
+				has_dlc = "Leviathan"
+			}
+			num_of_times_expanded_infrastructure = 2
+		}
+		num_of_buildings_in_province = 5
+		NOT = {
+			devastation = 1
+			unrest = 1
+		}
+	}
+	OR = {
+		AND = {
+			adm_power = 100
+			dip_power = 100
+			OR = {
+				AND = {
+					has_institution = global_trade
+					if = {
+						limit = {
+							has_dlc = "Rule Britannia"
+						}
+						innovativeness = 75
+					}
+				}
+				AND = {
+					has_institution = manufactories
+					if = {
+						limit = {
+							has_dlc = "Rule Britannia"
+						}
+						innovativeness = 50
+					}
+				}
+			}
+			303 = {
+				NOT = {
+					trade_goods = coal
+				}
+			}
+		}
+		303 = {
+			trade_goods = coal
+		}
+	}
+}
+
+marry_lisolette_trigger = {
+	NOT = {
+		has_country_flag = sugamber_succession_war_start
+		has_country_flag = had_sugamber_succession_war
+		has_country_flag = sugamber_ethelbert_rebellion
+		has_country_flag = sugamber_baldwin_rebellion
+	}
+	OR = {
+		AND = {
+			heir_age = 15
+			has_female_heir = no
+		}
+		AND = {
+			NOT = {
+				has_ruler_flag = lothane_sil_wex
+			}
+			ruler_age = 15
+			is_female = no
+			has_heir = no
+			has_regency = no
+			government = monarchy
+			has_consort = no
+		}
+	}
+	A48 = {
+		has_female_heir = yes
+		has_opinion = {
+			who = ROOT
+			value = 180
+		}
+		has_opinion_modifier = {
+			who = ROOT
+			modifier = sent_gift
+		}
+	}
+}
+
+has_built_lorentish_trade_centers = {
+	num_of_owned_provinces_with = {
+		value = 5
+		region = lencenor_region
+		province_has_center_of_trade_of_level = 2
+		has_shipyard_building_trigger = yes
+		has_dock_building_trigger = yes
+	}
+}
+
+has_built_lorentish_coastal_manufactories = {
+	num_of_owned_provinces_with = {
+		value = 5
+		region = lencenor_region
+		has_manufactory_trigger = yes
+		OR = {
+			trade_goods = naval_supplies
+			trade_goods = fish
+		}
+	}
+}
+
+has_build_lorentish_barracks = {
+	num_of_owned_provinces_with = {
+		value = 5
+		region = lencenor_region
+		has_terrain = grasslands
+		base_manpower = 5
+		has_manpower_building_trigger = yes
+		has_forcelimit_building_trigger = yes
+	}
+}
+
+has_build_lorentish_pastures = {
+	num_of_owned_provinces_with = {
+		value = 5
+		region = lencenor_region
+		has_manufactory_trigger = yes
+		trade_goods = livestock
+	}
+}
+
+culture_is_wexonard = {
+	custom_trigger_tooltip = {
+		tooltip = culture_is_wexonard_trigger_tooltip
+		OR = {
+			culture = wexonard
+			culture = wexonard_new
+			culture = wexonard_dual
+		}
+	}
+}
+
+culture_is_high_lorentish = {
+	custom_trigger_tooltip = {
+		tooltip = culture_is_high_lorentish_trigger_tooltip
+		OR = {
+			culture = high_lorentish
+			culture = high_lorentish_dual
+		}
+	}
+}
+
+has_200_opinion_improved_relation = {
+	custom_trigger_tooltip = {
+		tooltip = 200_improved_relation_trigger_tooltip
+		has_opinion_modifier = {
+			who = $target$
+			modifier = improved_relation
+			value = 200
+		}
+	}
+}
+
+small_duchy_extra_reward_condition = {
+	OR = {
+		development_in_provinces = {
+			value = 600
+			region = small_country_region
+		}
+		any_subject_country = {
+			is_cannorian_halfling_primary_culture = yes
+			capital_scope = {
+				region = small_country_region
+			}
+			total_development = 600
+		}
+	}
+	high_tolerance_halfling_race_trigger = yes
+}
+
+imperial_small_country_developed = {
+	num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+		value = 5
+		culture = redfoot_halfling
+		development = 15
+		num_of_buildings_in_province = 3
+	}
+	num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+		value = 5
+		culture = bluefoot_halfling
+		development = 15
+		num_of_buildings_in_province = 3
+	}
+	63 = {
+		development = 20
+		num_of_buildings_in_province = 5
+	}
+	66 = {
+		development = 20
+		num_of_buildings_in_province = 5
+	}
+}
+
+directy_owns_busilar = {
+	NOT = {
+		A29 = {
+			is_subject_of = ROOT
+		}
+	}
+	362 = {
+		country_or_non_sovereign_subject_holds = ROOT
+	}
+	363 = {
+		country_or_non_sovereign_subject_holds = ROOT
+	}
+	lorbet_area = {
+		type = all
+		country_or_non_sovereign_subject_holds = ROOT
+	}
+	busilar_area = {
+		type = all
+		country_or_non_sovereign_subject_holds = ROOT
+	}
+	busilari_straits_area = {
+		type = all
+		country_or_non_sovereign_subject_holds = ROOT
+	}
+	hapiande_area = {
+		type = all
+		country_or_non_sovereign_subject_holds = ROOT
+	}
+}
+
+owns_hill_gnolls = {
+	364 = {
+		OR = {
+			owned_by = ROOT
+			owned_by = B67
+		}
+	}
+	375 = {
+		OR = {
+			owned_by = ROOT
+			owned_by = B67
+		}
+	}
+	377 = {
+		OR = {
+			owned_by = ROOT
+			owned_by = B67
+		}
+	}
+	913 = {
+		OR = {
+			owned_by = ROOT
+			owned_by = B67
+		}
+	}
+	6513 = {
+		OR = {
+			owned_by = ROOT
+			owned_by = B67
+		}
+	}
+}
+
+wex_indirect_ourdia_expansion = {
+	lencmarck_area = {
+		type = all
+		OR = {
+			AND = {
+				NOT = {
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				is_part_of_hre = yes
+			}
+			AND = {
+				U16 = {
+					is_subject_of = ROOT
+				}
+				owned_by = U16
+			}
+		}
+	}
+	tencmarck_area = {
+		type = all
+		OR = {
+			AND = {
+				NOT = {
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				is_part_of_hre = yes
+			}
+			AND = {
+				U16 = {
+					is_subject_of = ROOT
+				}
+				owned_by = U16
+			}
+		}
+	}
+}
+
+can_restore_south_escann_states = {
+	OR = {
+		AND = {
+			blademarch_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			B33 = {
+				OR = {
+					exists = no
+					is_subject_of = ROOT
+				}
+			}
+		}
+		AND = {
+			NOT = {
+				religion = corinite
+			}
+			824 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			B02 = {
+				OR = {
+					exists = no
+					is_subject_of = ROOT
+				}
+			}
+		}
+	}
+}

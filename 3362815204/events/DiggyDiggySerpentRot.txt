@@ -131,6 +131,21 @@ province_event = {
 	trigger = {
 		has_global_flag = serpent_rot_happening
 		continent = serpentspine
+		NOT = {
+			AND = {
+				region = serpentreach_region
+				NOT = {
+					any_neighbor_province = {
+						region = serpentreach_region
+						OR = {
+							has_province_modifier = serpent_rot_1
+							has_province_modifier = serpent_rot_2
+						}
+					}
+				}
+				has_global_flag = magmascale_serpentrot_flood
+			}
+		}
 		is_city = yes
 		NOT = { has_province_modifier = serpent_rot_1 }
 		NOT = { has_province_modifier = serpent_rot_2 }

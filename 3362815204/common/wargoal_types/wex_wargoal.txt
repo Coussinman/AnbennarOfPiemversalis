@@ -1,0 +1,196 @@
+end_anbennar = {
+	type = take_capital
+
+	attacker = {
+		badboy_factor = 0
+		prestige_factor = 0
+		peace_cost_factor = 0.2
+		allowed_provinces_are_eligible = yes
+
+		allowed_provinces = {
+			is_core = ROOT
+		}
+
+		peace_options = {
+			po_destroy_anbennar
+		}
+
+		prov_desc = ALL_CORES
+	}
+
+	defender = {
+		badboy_factor = 0
+		prestige_factor = 0
+		peace_cost_factor = 0.2
+		allowed_provinces_are_eligible = yes
+
+		allowed_provinces = {
+			is_core = ROOT
+		}
+
+		peace_options = {
+			po_destroy_wex
+		}
+
+		prov_desc = ALL_CORES
+	}
+
+	war_name = ANBENNAR_WEXONARD_WAR
+
+}
+
+curtail_wex = {
+	type = take_capital
+
+	attacker = {
+		badboy_factor = 0
+		prestige_factor = 0
+		peace_cost_factor = 0.2
+		allowed_provinces_are_eligible = yes
+
+		allowed_provinces = {
+			is_core = ROOT
+		}
+
+		peace_options = {
+			po_curtail_wex
+		}
+
+		prov_desc = ALL_CORES
+	}
+
+	defender = {
+		badboy_factor = 0
+		prestige_factor = 0
+		peace_cost_factor = 0.2
+		allowed_provinces_are_eligible = yes
+
+		allowed_provinces = {
+			is_core = ROOT
+		}
+
+		peace_options = {
+			po_dismantle_wex_coalition
+		}
+
+		prov_desc = ALL_CORES
+	}
+
+	war_name = CURTAIL_WEX_WAR
+
+}
+
+transfer_electorship = {
+	type = take_capital
+	attacker = {
+		badboy_factor = 1
+		prestige_factor = 1
+		peace_cost_factor = 1
+
+		peace_options = {
+			po_transfer_electorship
+		}
+
+		prov_desc = ALL_CORES
+	}
+
+	defender = {
+		badboy_factor = 1
+		prestige_factor = 1
+		peace_cost_factor = 1
+		allowed_provinces_are_eligible = yes
+
+		allowed_provinces = {
+			is_core = ROOT
+		}
+
+		peace_options = {
+			po_demand_provinces
+		}
+
+	}
+	war_name = TRANSFER_OF_ELECTORSHIP_WAR_NAME
+}
+
+
+ace_force_join_anbennar = {
+	type = take_capital
+
+	attacker = {
+		badboy_factor = 0.8
+		prestige_factor = 0.8
+		allowed_provinces_are_eligible = yes
+
+		allowed_provinces = {
+			always = no
+		}
+
+		peace_options = {
+			po_ace_expand_empire
+		}
+	}
+
+	war_name = FORCE_JOIN_HRE_WAR_NAME
+}
+
+take_capital_vassalize_magisterium = {
+	type = take_capital
+
+	attacker = {
+		badboy_factor = 0.75
+		prestige_factor = 2
+		peace_cost_factor = 1
+
+		required_treaty_to_take_provinces = {
+			po_subjugate_vassal
+		}
+
+		peace_options = {
+			po_demand_provinces
+			po_subjugate_vassal
+		}
+	}
+
+	defender = {
+		badboy_factor = 0.75
+		prestige_factor = 1
+		peace_cost_factor = 1
+
+		peace_options = {
+			po_demand_provinces
+		}
+	}
+
+	war_name = VASSAL_MISSION_WAR_NAME
+}
+
+take_capital_personal_union_lorent = {
+	type = take_capital
+
+	attacker = {
+		badboy_factor = 0.5
+		prestige_factor = 1
+		peace_cost_factor = 1
+
+		required_treaty_to_take_provinces = {
+			po_form_personal_union
+		}
+
+		peace_options = {
+			po_demand_provinces
+			po_form_personal_union
+		}
+	}
+
+	defender = {
+		badboy_factor = 0.5
+		prestige_factor = 1
+		peace_cost_factor = 1
+
+		peace_options = {
+			po_demand_provinces
+		}
+	}
+
+	war_name = UNION_WAR_LORENT_NAME
+}

@@ -516,3 +516,28 @@ captains_log = {
 		factor = 1
 	}
 }
+
+wex_bombardier = {
+	trigger = {
+		has_country_flag = A30_damerian_arsenal_flagship
+	}
+	modifier = {
+		barrage_cost_in_fleet_modifier = -0.5
+		movement_speed_onto_off_boat_modifier = 0.5
+		landing_penalty = -2
+		naval_maintenance_flagship_modifier = 1
+	}
+	ai_trade_score = {
+		factor = 0
+	}
+	ai_war_score = {
+		factor = 1
+		modifier = {
+			factor = 10
+			OR = {
+				tag = A30
+				was_tag = A30
+			}
+		}
+	}
+}

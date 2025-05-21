@@ -805,20 +805,26 @@ can_dig_hold_alert = {
 			culture_group = dwarven
 			AND = {
 				OR = {
-					dwarovar_goblin_culture_primary = yes
 					primary_culture = darkscale_kobold
+					primary_culture = magmascale_kobold
+					dwarovar_goblin_culture_primary = yes
 				}
 				adm_tech = 5
 			}
 			AND = {
-				NOT = { culture_group = dwarven }
-				NOT = { primary_culture = darkscale_kobold }
-				NOT = { dwarovar_goblin_culture_primary = yes }
+				NOT = {
+					culture_group = dwarven
+					primary_culture = darkscale_kobold
+					primary_culture = magmascale_kobold
+					dwarovar_goblin_culture_primary = yes
+				}
 				adm_tech = 7
 			}
 		}
-		NOT = { num_of_rebel_armies = 1 }
-		NOT = { dwarovar_orc_culture_primary = yes }
+		NOT = {
+			num_of_rebel_armies = 1
+			dwarovar_orc_culture_primary = yes
+		}
 	}
 	OR = {
 		AND = {
@@ -826,6 +832,12 @@ can_dig_hold_alert = {
 			NOT = { owner = { has_country_flag = building_diggy } } # upgrading infrastructure
 		}
 		owner = { has_country_flag = hold_operation } # centralized hold operations
+		AND = {
+			province_id = 4039
+			owner = {
+				mission_completed = AC5_exploit_fissures
+			}
+		}
 	}
 	NOT = {
 		has_construction = any

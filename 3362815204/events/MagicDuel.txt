@@ -1228,6 +1228,11 @@ country_event = {
 			add_prestige_excess_to_splendour_effect = { VAL=3 }
 			update_blackpurgis = yes
 		}
+		else_if = { #Lothane murders an old senile knight
+			limit = { has_country_flag = lothane_vs_oa }
+			clr_country_flag = lothane_vs_oa
+			country_event = { id = flavor_wex.13 } #OA
+		}
 		else_if = { #Challenging Zokka to magical duel
 			limit = { has_country_flag = tluukt_the_challenge }
 			hidden_effect = { set_country_flag = tluukt_challenge_won }

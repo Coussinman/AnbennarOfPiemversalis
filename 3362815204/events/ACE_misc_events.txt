@@ -1,0 +1,92 @@
+namespace = ace_misc
+
+country_event = {
+	id = ace_misc.1
+	title = ace_misc.1.t
+	desc = ace_misc.1.d
+	picture = "GFX_report_event_generic"
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = ace_misc.1.a
+		change_primary_culture = arbarani_new
+		custom_tooltip = ace_misc.1.a.tt
+		hidden_effect = {
+			update_entire_culture_foreign = {
+				culture = crownsman
+			}
+			update_entire_culture_foreign = {
+				culture = morbani
+			}
+			update_entire_culture_foreign = {
+				culture = arbarani
+			}
+			anb_add_accepted_culture_or_dip_power = {
+				culture = crodamic
+				free = yes
+			}
+			anb_add_accepted_culture_or_dip_power = {
+				culture = morbani_new
+				free = yes
+			}
+			anb_add_accepted_culture_or_dip_power = {
+				culture = stargi
+				free = yes
+			}
+			anb_add_accepted_culture_or_dip_power = {
+				culture = crownsman_new
+				free = yes
+			}
+			anb_add_accepted_culture_or_dip_power = {
+				culture = arbarani_new
+				free = yes
+			}
+			anb_add_accepted_culture_or_dip_power = {
+				culture = adeanic
+				free = yes
+			}
+			every_owned_province = {
+				limit = {
+					culture = crownsman
+				}
+				change_culture = crownsman_new
+			}
+
+			every_owned_province = {
+				limit = {
+					culture = arbarani
+				}
+				change_culture = arbarani_new
+			}
+			remove_accepted_culture	= crownsman
+			remove_accepted_culture	= arbarani
+			capital_scope = {
+				change_culture = adeanic
+			}
+			338 = {
+				change_culture = morbani_new
+			}
+			334 = {
+				change_culture = crodamic
+			}
+			782 = {
+				change_culture = stargi
+			}
+			774 = {
+				change_culture = adeanic
+			}
+
+		}
+		add_country_modifier = {
+			name = rohibonic_revival
+			duration = -1
+		}
+	}
+
+	option = {
+		name = ace_misc.1.b
+
+	}
+}

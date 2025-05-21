@@ -1,0 +1,116 @@
+country_decisions = {
+
+	I01_nation_submod = {	#Amldihr
+		major = yes
+		potential = {
+			owns = 4119 #Amldihr
+			OR = {
+				AND = {
+					current_age = age_of_discovery
+					culture_group = dwarven
+				}
+				has_reform = dwarovar_adventurer_reform
+			}
+			has_country_modifier = dwarven_administration
+			NOT = {
+				has_country_flag = formed_diggy_formable
+				exists = I01
+			}
+		}
+		provinces_to_highlight = {
+			province_id = 4119
+			NOT = { is_core = ROOT }
+		}
+		allow = {
+			owns_core_province = 4119
+			adm_tech = 7	#around 1500
+			is_free_or_tributary_trigger = yes
+			is_at_war = no
+			num_of_cities = 3
+			dwarovar_special_formation_trigger = yes #TODO check
+		}
+		effect = {
+			adventurer_hold_formation = {
+				tag = I01
+				culture = kronium
+				capital_id = 4119
+			}
+			swap_non_generic_missions = yes
+			hidden_effect = {
+				restore_country_name = yes
+			}
+			remove_non_electors_emperors_from_empire_effect = yes
+			country_event = {
+				id = amldihr.101
+				days = 7
+			}
+			every_owned_province = {
+				limit = {
+					culture = ROOT
+				}
+				change_culture = kronium_dwarf
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+
+	recruit_mage_amldihr_republic_action = {
+		potential = {
+			mission_completed = I01_an_empire
+			OR = {
+				tag = I01
+				tag = I24
+			}
+		}
+		allow = {
+			NOT = {
+				employed_advisor = {
+					type = court_mage
+				}
+			}
+			treasury =  500
+		}
+		effect = {
+			define_advisor = {
+				type = court_mage
+   				female = yes
+   				skill = 3
+   				culture = kronium_dwarf
+				religion = ancestor_worship
+			}
+			add_treasury = -500
+			add_corruption = 0.50
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	long_lived_amldihr_republic_abdicate = {
+		potential = {
+			has_reform = amldihr_dutch_republic_reform
+		}
+		allow = {
+			prestige = 0
+			months_of_ruling = 120
+		}
+		effect = {
+			custom_tooltip = step_down_tooltip
+			hidden_effect = {
+				kill_ruler = yes
+			}
+			add_prestige = -50
+			add_estate_loyalty = {
+				estate = estate_nobles
+				loyalty = -10
+			}
+			change_statists_vs_orangists = -0.10
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+}

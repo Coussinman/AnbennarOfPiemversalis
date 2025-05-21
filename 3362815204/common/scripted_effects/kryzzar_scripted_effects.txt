@@ -1,0 +1,39 @@
+rule_might = {
+	complex_dynamic_effect = {
+		first_custom_tooltip = AC7_rule_by_might_tooltip1
+		first_limit = "
+			AND = {
+				army_strength = {
+					who = A49
+					value = 1
+				}
+				A49 = {
+					has_100_opinion_improved_relation = {
+						target = ROOT
+					}
+				}
+			}
+		"
+		first_effect = "
+			create_subject = {
+				subject_type = march
+				subject = A49
+			}
+		"
+
+		second_custom_tooltip = AC7_rule_by_might_tooltip2
+		second_limit = "
+			A49 = {
+				exists = no
+			}
+		"
+		second_effect = "
+			khenak_area = {
+				add_core = root
+			}
+			364 = {
+				add_core = root
+			}
+		"
+	}
+}

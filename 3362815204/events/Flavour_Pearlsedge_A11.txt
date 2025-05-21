@@ -1,0 +1,238 @@
+namespace = flavor_Pearlsedge
+
+country_event = {
+	id = flavor_Pearlsedge.1
+	title = flavor_Pearlsedge.1.t
+	desc = flavor_Pearlsedge.1.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = flavor_Pearlsedge.1.a
+		add_casus_belli = {
+			target = A01
+			type = cb_restore_personal_union
+			months = 300
+		}
+		lencenor_region = {
+			add_permanent_claim = ROOT
+		}
+	}
+
+	option = {
+		name = flavor_Pearlsedge.1.b
+		custom_tooltip = flavor_Pearlsedge.1.b.tt
+		set_country_flag = dismantle_lorent
+
+		lencenor_region = {
+			add_permanent_claim = ROOT
+		}
+	}
+}
+
+country_event = {
+	id = flavor_Pearlsedge.3
+	title = flavor_Pearlsedge.3.t
+	desc = flavor_Pearlsedge.3.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_Pearlsedge.3.a
+		add_country_modifier = {
+			name = fahvosy_relations
+			duration = 10950
+		}
+	}
+
+	option = {
+		name = flavor_Pearlsedge.3.b
+		every_province = {
+			limit = {
+				region = fahvanosy_region
+				province_has_center_of_trade_of_level = 1
+			}
+			add_permanent_claim = ROOT
+		}
+	}
+}
+
+country_event = {
+	id = flavor_Pearlsedge.4
+	title = flavor_Pearlsedge.4.t
+	desc = flavor_Pearlsedge.4.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_Pearlsedge.4.a
+		add_casus_belli = {
+			type = cb_restore_personal_union
+			target = A47
+			months = 300
+		}
+	}
+}
+
+country_event = {
+	id = flavor_Pearlsedge.5
+	title = flavor_Pearlsedge.5.t
+	desc = flavor_Pearlsedge.5.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_Pearlsedge.5.a
+
+		add_country_modifier = {
+			name = pearlsedger_invasion
+			duration = 7300
+		}
+
+		define_advisor = {
+			skill = 1
+			type = commandant
+			discount = yes
+		}
+
+		dalr_region = {
+			add_permanent_claim = ROOT
+		}
+
+		olavlund_region = {
+			add_permanent_claim = ROOT
+		}
+	}
+
+}
+
+country_event = {
+	id = flavor_Pearlsedge.6
+	title = flavor_Pearlsedge.6.t
+	desc = flavor_Pearlsedge.6.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_Pearlsedge.6.a
+		random = {
+			chance = 25
+			change_religion = regent_court
+		}
+	}
+}
+
+country_event = {
+	id = flavor_Pearlsedge.7
+	title = flavor_Pearlsedge.7.t
+	desc = flavor_Pearlsedge.7.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_Pearlsedge.7.a
+		add_adm_power = 100
+		add_scaled_imperial_influence = 5
+		custom_tooltip = flavor_Pearlsedge.7.a.tt
+		hidden_effect = {
+			divide_lorent = yes
+		}
+	}
+
+	option = {
+		name = flavor_Pearlsedge.7.b
+		add_adm_power = 100
+		change_adm = 1
+		tooltip = {
+			every_owned_province = {
+				limit = {
+					region = lencenor_region
+				}
+				add_local_autonomy = -20
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_Pearlsedge.8
+	title = flavor_Pearlsedge.8.t
+	desc = flavor_Pearlsedge.8.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_Pearlsedge.8.a
+		add_adm_power = 100
+		add_scaled_imperial_influence = 5
+		custom_tooltip = flavor_Pearlsedge.8.a.tt
+		hidden_effect = {
+			divide_dalr = yes
+		}
+	}
+
+	option = {
+		name = flavor_Pearlsedge.8.b
+		add_mil_power = 100
+		change_mil = 1
+		every_owned_province = {
+			limit = {
+				region = dalr_region
+			}
+			add_local_autonomy = -50
+			set_in_empire = yes
+		}
+	}
+}
+
+country_event = {
+	id = flavor_Pearlsedge.9
+	title = flavor_Pearlsedge.9.t
+	desc = flavor_Pearlsedge.9.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+
+	mean_time_to_happen = {
+		days = 1
+	}
+	hidden = yes
+
+	trigger = {
+		mission_completed = A11_unite_dalr
+		any_province = {
+			region = dalr_region
+			religion = regent_court
+			NOT = {
+				culture = pearlsedger
+			}
+		}
+	}
+
+	option = {
+		name = flavor_Pearlsedge.9.a
+		random_owned_province = {
+			limit = {
+				region = dalr_region
+				religion = regent_court
+				NOT = {
+					culture = pearlsedger
+				}
+			}
+			change_culture = pearlsedger
+		}
+	}
+
+}
+

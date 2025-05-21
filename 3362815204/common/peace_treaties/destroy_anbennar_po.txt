@@ -1,0 +1,240 @@
+po_destroy_anbennar = {
+	category = 6
+	power_projection = humiliated_rival
+	power_cost_base = 0.0
+	prestige_base = 1.0
+	ae_base = 0.0
+	warscore_cost = {
+		all_provinces = 0.0
+		no_provinces = 1000.0
+		owner_keeps = 0.0
+		conquered = 1.0
+		returned_core = 0.0
+		released_nation = 0.0
+		cancelled_subject = 0.0
+		concede_colonial_region = 0.0
+	}
+	warscore_cap = 100
+	requires_demand_independence = yes
+	is_make_subject = no
+	requires_is_allowed = yes
+
+	is_visible = {
+		is_in_war = {
+			attacker_leader = THIS
+			casus_belli = cb_destroy_anbennar_wex
+		}
+	}
+
+	is_allowed = {
+		always = yes
+	}
+
+	effect = {
+		A30 = {
+			country_event = {
+				id = flavor_wex.110
+			}
+		}
+		every_country = {
+			limit = {
+				OR = {
+					has_country_flag = fought_against_wex
+					overlord = {
+						has_country_flag = fought_against_wex
+					}
+					is_part_of_hre = yes
+				}
+				NOT = {
+					tag = A30
+				}
+			}
+			country_event = {
+				id = flavor_wex.111
+			}
+		}
+		set_global_flag = eoa_wex_collapse
+		every_country = {
+			limit = {
+				has_regency = no
+				OR = {
+					is_part_of_hre = yes
+					tag = A01
+					tag = A13
+					tag = A29
+					tag = A32
+					tag = A49
+					tag = A59
+				}
+			}
+			set_ai_personality = {
+				personality = ai_militarist
+			}
+		}
+		dismantle_hre = yes
+		if = {
+			limit = {
+				328 = {
+					owner = {
+						OR = {
+							has_country_flag = fought_against_wex
+							overlord = {
+								has_country_flag = fought_against_wex
+							}
+						}
+					}
+				}
+			}
+			328 = {
+				cede_province = A30
+			}
+		}
+		if = {
+			limit = {
+				903 = {
+					owner = {
+						OR = {
+							has_country_flag = fought_against_wex
+							overlord = {
+								has_country_flag = fought_against_wex
+							}
+						}
+					}
+				}
+			}
+			903 = {
+				cede_province = A30
+			}
+		}
+		if = {
+			limit = {
+				294 = {
+					owner = {
+						OR = {
+							has_country_flag = fought_against_wex
+							overlord = {
+								has_country_flag = fought_against_wex
+							}
+						}
+					}
+				}
+			}
+			294 = {
+				cede_province = A30
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = wex_lorentish_support
+				A01 = {
+					exists = yes
+				}
+			}
+			every_province = {
+				limit = {
+					OR = {
+						area = eastern_winebay_area
+						area = carneteria_area
+						area = woodwell_area
+					}
+					owner = {
+						OR = {
+							has_country_flag = fought_against_wex
+							overlord = {
+								has_country_flag = fought_against_wex
+							}
+						}
+					}
+				}
+				cede_province = A01
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = wex_corvurian_aid
+				A59 = {
+					exists = yes
+				}
+			}
+			if = {
+				limit = {
+					A59 = {
+						has_country_modifier = corvuria_recolonizing
+					}
+				}
+				A59 = {
+					extend_country_modifier = {
+						name = corvuria_recolonizing
+						duration = 9125
+					}
+				}
+			}
+			else = {
+				A59 = {
+					add_country_modifier = {
+						name = corvuria_recolonizing
+						duration = 9125
+					}
+				}
+			}
+			every_province = {
+				limit = {
+					OR = {
+						area = eastborders_area
+						region = daravans_folly_region
+					}
+					owner = {
+						OR = {
+							has_country_flag = fought_against_wex
+							overlord = {
+								has_country_flag = fought_against_wex
+							}
+						}
+					}
+				}
+				cede_province = A59
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = wex_angered_corvurians
+				A59 = {
+					exists = yes
+					has_country_flag = fought_against_wex
+				}
+			}
+			every_province = {
+				limit = {
+					OR = {
+						province_id = 424
+						province_id = 426
+						province_id = 427
+					}
+					owner = {
+						tag = A59
+					}
+				}
+				if = {
+					limit = {
+						A60 = {
+							is_subject_of = A30
+						}
+					}
+					cede_province = A60
+				}
+			}
+		}
+	}
+	ai_weight = {
+		export_to_variable = {
+			variable_name = ai_value
+			value = trigger_value:always
+		}
+		set_variable = {
+			ai_value = 2000
+		}
+		limit = {
+			always = yes
+		}
+	}
+}

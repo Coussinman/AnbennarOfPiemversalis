@@ -62,7 +62,7 @@ province_event = {
 					days = 7
 				}
 				define_ruler = {
-					name = "Reán"
+					name = "Reï¿½n"
 					dynasty = "of Casna Ola"
 					adm = 4
 					dip = 4
@@ -96,7 +96,7 @@ province_event = {
 					days = 7
 				}
 				define_ruler = {
-					name = "Reán"
+					name = "Reï¿½n"
 					dynasty = "of Casna Ola"
 					adm = 4
 					dip = 4
@@ -506,7 +506,7 @@ province_event = {
 				}
 				define_ruler = {
 					name = "Sybille"
-					dynasty = "Lánchs"
+					dynasty = "Lï¿½nchs"
 					adm = 4
 					dip = 1
 					mil = 6
@@ -545,7 +545,7 @@ province_event = {
 				}
 				define_ruler = {
 					name = "Sybille"
-					dynasty = "Lánchs"
+					dynasty = "Lï¿½nchs"
 					adm = 4
 					dip = 1
 					mil = 6
@@ -1416,7 +1416,7 @@ province_event = {
 					days = 7
 				}
 				define_ruler = {
-					name = "Otó"
+					name = "Otï¿½"
 					dynasty = "'the Handsome'"
 					adm = 4
 					dip = 4
@@ -1454,7 +1454,7 @@ province_event = {
 					days = 7
 				}
 				define_ruler = {
-					name = "Otó"
+					name = "Otï¿½"
 					dynasty = "'the Handsome'"
 					adm = 4
 					dip = 4
@@ -2158,7 +2158,7 @@ province_event = {
 					days = 7
 				}
 				define_ruler = {
-					name = "Ašuria"
+					name = "Aï¿½uria"
 					dynasty ="Ayarakin"
 					adm = 3
 					dip = 5
@@ -2197,7 +2197,7 @@ province_event = {
 					days = 7
 				}
 				define_ruler = {
-					name = "Ašuria"
+					name = "Aï¿½uria"
 					dynasty ="Ayarakin"
 					adm = 3
 					dip = 5
@@ -2220,6 +2220,120 @@ province_event = {
 		}
 	}
 
+	after = { 
+		hidden_effect = { owner = { country_event = { id = anb_price.53 days = 15 } } }
+	}
+}
+
+# ACE
+
+province_event = {
+	id = adventurerspawnables.16
+	title = adventurerspawnables.16.t
+	desc = adventurerspawnables.16.d
+	picture = CARIBBEAN_PIRATE_FORT_eventPicture
+	goto = spawn_province
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	trigger = {
+		has_global_flag = new_world_discovered
+
+		NOT = { has_global_flag = delete_haless_region }
+		ringlet_isles_region = {
+			is_empty = yes
+			has_empty_adjacent_province = yes
+		}
+	}
+	
+	immediate = {
+		hidden_effect = {
+			random_province = {
+				limit = {
+					region = ringlet_isles_region
+					is_empty = yes
+					has_empty_adjacent_province = yes
+				}
+				save_event_target_as = spawn_province
+			}
+		}
+	}
+	
+	option = {
+		name = adventurerspawnables.1.a 
+		
+		AC5 = {
+			event_target:spawn_province = {
+				create_colony = 1000
+				add_core = AC5
+			}
+		}
+		
+		hidden_effect = {
+			AC5 = {
+				country_event = {
+					id = anb_miscevents.8
+					days = 7
+				}
+				define_ruler = {
+					name = "Dimble"
+					dynasty = "Bobbman"
+					adm = 2
+					dip = 3
+					mil = 6
+					age = 73
+					claim = 95
+					culture = imperial_gnome
+				}
+				add_ruler_personality = free_thinker_personality
+				add_ruler_personality = conqueror_personality
+				add_ruler_personality = obsessive_perfectionist_personality
+
+				country_event = { id = anb_miscevents.22 } # new country setup
+			}
+		}
+		
+		owner = { adventurer_spawnable_starting_bonus = { tag = AC5 } }
+	}
+	
+	option = { # play as the adventurers
+		name = adventurerspawnables.1.b
+		AC5 = {
+			event_target:spawn_province = {
+				create_colony = 1000
+				add_core = H60
+			}
+		}
+		
+		AC5 = {
+			country_event = {
+				id = anb_miscevents.8
+				days = 7
+			}
+			define_ruler = {
+				name = "Dimble"
+				dynasty = "Bobbman"
+				adm = 2
+				dip = 3
+				mil = 6
+				age = 73
+				claim = 95
+				culture = imperial_gnome
+			}
+			add_ruler_personality = free_thinker_personality
+			add_ruler_personality = conqueror_personality
+			add_ruler_personality = obsessive_perfectionist_personality
+
+			country_event = { id = anb_miscevents.22 } # new country setup
+		}
+		
+		owner = { 
+			adventurer_spawnable_starting_bonus = { tag = AC5 }
+			switch_tag = AC5
+		}
+	}
+	
 	after = { 
 		hidden_effect = { owner = { country_event = { id = anb_price.53 days = 15 } } }
 	}

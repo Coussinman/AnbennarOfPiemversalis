@@ -1,0 +1,85 @@
+country_decisions = {
+	adeanicempire = {
+		major = yes
+		potential = {
+			# tag = Z01
+			has_country_flag = adeanic_peace_flag
+		}
+		allow = {
+			tag = Z01
+			religion = regent_court
+			religious_unity = 0.75
+		}
+		effect = {
+			change_tag = AD3
+		}
+	}
+	excavate_gems = {
+		major = yes
+		potential = {
+			tag = A11
+			mission_completed = A11_search_pearls
+		}
+		allow = {
+			NOT = {
+				has_country_modifier = gem_cooldown
+			}
+			treasury = 600
+			any_subject_country = {
+				is_colonial_nation_of = ROOT
+				num_of_cities = 10
+			}
+		}
+		effect = {
+			add_treasury = -600
+			add_country_modifier = {
+				name = gem_cooldown
+				duration = 5475
+			}
+			random_subject_country = {
+				limit = {
+					is_colonial_nation_of = ROOT
+					num_of_cities = 10
+				}
+				if = {
+					limit = {
+						mission_completed = A11_south_aelntir
+					}
+					for = {
+						custom_tooltip = excavate_gems2_tt
+						amount = 5
+						effect = "
+							random_owned_province = {
+								limit = {
+									NOT = {
+										trade_goods = gems
+										trade_goods = gold
+									}
+								}
+								change_trade_goods = gems
+							}
+						"
+					}
+				}
+				else = {
+					for = {
+						custom_tooltip = excavate_gems1_tt
+						amount = 3
+						effect = "
+							random_owned_province = {
+								limit = {
+									NOT = {
+										trade_goods = gems
+										trade_goods = gold
+									}
+								}
+								change_trade_goods = gems
+							}
+						"
+					}
+				}
+			}
+		}
+	}
+
+}

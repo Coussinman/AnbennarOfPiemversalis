@@ -1,0 +1,99 @@
+release_small_country = {
+	roysfort_area = {
+		add_core = A67
+	}
+	applefields_area = {
+		add_core = A67
+	}
+
+	release_with_religion_and_culture = {
+		tag = A67
+		religion = corinite
+		culture = redfoot_halfling
+	}
+	A67 = {
+		change_government = theocracy
+		add_government_reform = monastic_order_reform
+	}
+
+	create_subject = {
+		subject_type = march
+		subject = A67
+	}
+
+	lorenans_reach_area = {
+		add_core = A68
+	}
+	thomsbridge_area = {
+		add_core = A68
+	}
+
+	release_with_religion_and_culture = {
+		tag = A68
+		religion = corinite
+		culture = redfoot_halfling
+	}
+	A68 = {
+		change_government = theocracy
+		add_government_reform = monastic_order_reform
+	}
+
+	create_subject = {
+		subject_type = march
+		subject = A68
+	}
+
+	the_borders_area = {
+		add_core = A69
+	}
+	63 = {
+		add_core = A69
+	}
+
+	release_with_religion_and_culture = {
+		tag = A69
+		religion = corinite
+		culture = redfoot_halfling
+	}
+	A69 = {
+		change_government = theocracy
+		add_government_reform = monastic_order_reform
+	}
+
+	create_subject = {
+		subject_type = march
+		subject = A69
+	}
+}
+
+united_faith_vassal = {
+	add_country_modifier = {
+		name = lencenor_corinite_league
+		duration = -1
+	}
+
+	set_country_flag = holy_orders_flag
+	custom_tooltip = Z05_united_faith_tt3
+
+	every_subject_country = {
+		limit = {
+			NOT = {
+				is_colonial_nation_of = ROOT
+			}
+			has_matching_religion = corinite
+			capital_scope = {
+				region = lencenor_region
+			}
+		}
+		change_government = theocracy
+		add_government_reform = corinite_crusaders_reform
+		create_subject = {
+			subject_type = holy_order
+			subject = ROOT
+		}
+		hidden_effect = {
+			change_country_color = { country = ROOT}
+			change_religion = corinite
+		}
+	}
+}

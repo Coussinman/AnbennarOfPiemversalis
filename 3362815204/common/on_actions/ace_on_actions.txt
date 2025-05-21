@@ -1,0 +1,1146 @@
+# country
+on_startup = {
+	events = {
+		flavor_wex.1
+		flavor_wex.1000 #AI
+		dragon_coast.0
+		reveria.56 #prevents introduce heir for starting disaster
+		flavor_Kryzzar.1 #Kryzzar
+	}
+}
+
+# country
+# root = winning country, from = loser country
+on_war_won = {
+	if = { #Wex befriends corvurians
+		limit = {
+			has_country_flag = wex_corvurian_deal
+		}
+		ROOT = {
+			country_event = {
+				id = flavor_wex.15
+			}
+		}
+	}
+
+	if = { #Wex angers corvurians
+		limit = {
+			has_country_flag = wex_no_deal
+		}
+		ROOT = {
+			country_event = {
+				id = flavor_wex.16
+			}
+		}
+	}
+
+	if = {
+		limit = {
+			tag = A30
+		}
+		ROOT = {
+			country_event = {
+				id = flavor_wex.205
+			}
+		}
+	}
+
+	if = {
+		limit = {
+			tag = A74
+			FROM = {
+				OR = {
+					culture_group = bulwari
+					primary_culture = sun_elf
+				}
+			}
+		}
+		change_variable = { A74warswon = 1 }
+	}
+
+	if = {
+		limit = {
+			tag = AC7
+			FROM = {
+				capital_scope = {
+					superregion = escann_superregion
+				}
+				culture_is_human = yes
+			}
+		}
+		change_variable = { AC7escannwarswon = 1 }
+	}
+
+	if = {
+		limit = {
+			tag = Z88
+		}
+		change_variable = { Z88warswon = 1 }
+	}
+
+	if = {
+		limit = {
+			root = {
+				tag = Z05
+			}
+			FROM = {
+				NOT = {
+					has_matching_religion = ROOT
+				}
+			}
+		}
+		change_variable = {
+			which = numOfBattlesWonVsAdean
+			value = 1
+		}
+	}
+
+	#Tretun turns normal vassals into holy orders
+	if = {
+		limit = {
+			ROOT = {
+				has_country_flag = holy_orders_flag
+				any_subject_country = {
+					religion = corinite
+				}
+			}
+		}
+		ROOT = {
+			every_subject_country = {
+				limit = {
+					religion = corinite
+					NOT = {
+						is_subject_of_type = holy_order
+						is_colonial_nation_of = ROOT
+					}
+				}
+				grant_independence = yes
+				ROOT = { create_subject = { subject_type = holy_order subject = PREV } }
+				change_government = theocracy
+				add_government_reform = corinite_crusaders_reform
+				change_country_color = { country = ROOT}
+			}
+		}
+	}
+
+	update_artifice_points = yes #needs to be last
+}
+
+# country
+# root = loser country, from = winner country
+on_battle_lost_country = {
+	if = {
+		limit = {
+			tag = Z05
+			Z05 = {
+				any_hired_mercenary_company = {
+					is_foreign_company = yes
+				}
+			}
+			from = {
+				war_with = root
+			}
+		}
+		set_country_flag = Z05_won_merc
+		from = { set_country_flag = Z05_lost_merc }
+	}
+}
+
+# country
+# root = winning country, from = loser country
+on_battle_won_country = {
+	if = {
+		limit = {
+			tag = Z05
+			NOT = { has_matching_religion = FROM }
+			religion = corinite
+		}
+		change_variable = { numOfBattlesWonVsAdean = 1 }
+	}
+}
+
+# province
+# root = location, from = winning country
+on_siege_lost_province = {
+	if = { #Magmascales cannorian war
+		limit = {
+			ROOT = {
+				province_id = 510 #bal ouord
+				owner = {
+					OR = {
+						was_tag = AC5
+						tag = AC5
+					}
+					has_country_flag = AC5_cannorian_war_flag
+				}
+			}
+			FROM = { has_country_flag = AC5_cannorian_war_flag }
+		}
+		ROOT = {
+			owner = {
+				country_event = {
+					id = flavor_magmascale.18
+				}
+			}
+		}
+	}
+}
+
+# country
+on_new_monarch = {
+	events = {
+		flavor_wex.600
+		reveria.74
+		reveria.79
+		reveria.80
+	}
+}
+
+# country
+on_monarch_death = {
+	#Anbennar
+	events = {
+		flavor_vaengheim.100
+		flavor_wex.100
+		flavor_wex.50
+	}
+}
+
+# country
+on_new_term_election = {
+	events = {
+		#court_of_blood = yes
+		#flavor_Toarnaire.1000
+	}
+}
+
+# country
+on_death_election = {
+	events = {
+		#court_of_blood = yes
+		#flavor_Toarnaire.1000
+	}
+}
+
+# country
+on_heir_death = {
+	events = {
+		flavor_sugamber.500
+		flavor_vaengheim.100
+	}
+}
+
+# Called whenever a new emperor is elected
+# FROM = Previous Emperor
+# ROOT = New Emperor
+on_emperor_elected = {
+	if = {
+		limit = { has_global_flag = eoa_moving_capital }
+		ROOT = {
+			country_event = {
+				id = flavor_wex.700
+			}
+		}
+	}
+	if = {
+		limit = {
+			ROOT = {
+				has_country_flag = lilac_wars_moon_party
+			}
+			NOT = {
+				has_global_flag = first_post_lilac_moon_emperor
+			}
+		}
+		every_country = {
+			limit = {
+				has_country_flag = lilac_wars_moon_party
+			}
+			country_event = {
+				id = flavor_istralore.10
+			}
+		}
+	}
+}
+
+# province
+on_dip_development = {
+	if = {
+		limit = {
+			has_manufactory_trigger = yes
+			owner = {
+				mission_completed = A11_industralization
+			}
+		}
+		random = {
+			chance = 25
+			add_base_production = 1
+			if = {
+				limit = {
+					has_province_modifier = increased_production
+				}
+				extend_province_modifier = { name = increased_production duration = 1825 }
+			}
+			else = {
+				add_province_modifier = { name = increased_production duration = 1825 }
+			}
+		}
+	}
+}
+
+# province
+on_mil_development = {
+	if = {
+		limit = {
+			owner = {
+				mission_completed = A92_army_state
+			}
+		}
+		add_army_tradition = 1
+	}
+}
+
+# country random events
+on_monthly_pulse = {
+	if = {
+		limit = {
+			tag = B87
+			has_estate_privilege = estate_lorentish_elite_ruby_crown
+		}
+		country_event = {
+			id = flavor_wex.401
+		}
+		country_event = {
+			id = flavor_wex.402
+		}
+		country_event = {
+			id = flavor_wex.403
+		}
+	}
+}
+
+on_yearly_pulse = {
+	events = {
+		flavor_Nathalaire.8 #flamemarked crew
+		flavor_Nathalaire.2 #treasure cove
+		eoa_cities.1 #cities skylines
+		flavor_wex.300 #steelblood recalc
+		#blood_court_events.1
+	}
+}
+
+# country random events
+on_bi_yearly_pulse = {
+	if = {
+		limit = {
+			OR = {
+				tag = A30
+				was_tag = A30
+				tag = B87
+			}
+		}
+		country_event = {
+			id = flavor_wex.23
+			days = 90
+		}
+		country_event = {
+			id = flavor_wex.32
+			days = 180
+		}
+		country_event = {
+			id = flavor_wex.33
+			days = 270
+		}
+		country_event = {
+			id = flavor_wex.34
+			days = 360
+		}
+		country_event = {
+			id = flavor_wex.201
+			days = 90
+		}
+		country_event = {
+			id = flavor_wex.202
+			days = 180
+		}
+	}
+	if = {
+		limit = {
+			OR = {
+				tag = B87
+				AND = {
+					tag = A97
+					has_country_flag = wexorenti_small_duchy
+				}
+			}
+		}
+		country_event = {
+			id = flavor_wex.208
+			days = 270
+		}
+	}
+
+	if = {
+		limit = {
+			A11 = {
+				mission_completed = A11_unite_dalr
+			}
+		}
+		country_event = {
+			id = flavor_Pearlsedge.9
+			days = 180
+		}
+	}
+}
+
+
+on_four_year_pulse_4 = {
+	events = {
+		flavor_vaengheim.36 #vaengheim event handler
+	}
+}
+
+on_five_year_pulse = {
+	if = {
+		limit = {
+			OR = {
+				tag = A30
+				was_tag = A30
+				tag = B87
+			}
+		}
+		country_event = {
+			id = flavor_wex.22
+		}
+		if = {
+			limit = {
+				has_country_flag = wex_giberd_gnomes
+			}
+			random_list = {
+				1 = {
+					country_event = {
+						id = flavor_wex.49
+						days = 180
+					}
+				}
+				1 = {}
+			}
+		}
+	}
+	if = {
+		limit = {
+			OR = {
+				is_part_of_hre = yes
+				tag = A30
+				tag = Z01
+			}
+			has_global_flag = imperial_halfling_expansion
+		}
+		country_event = {
+			id = flavor_wex.516
+		}
+	}
+	events = {
+		favored_RC.400 #Skald
+	}
+}
+
+#1.35
+on_province_religion_changed = {
+	if = {
+		limit = {
+			religion = corinite
+			tag = Z05
+		}
+		owner = {
+			change_variable = {
+				which = numOfCoriniteProvincesConverted
+				value = 1
+			}
+		}
+	}
+	if = { #skaldhyrric church power
+		limit = {
+			religion = skaldhyrric_faith
+			owner = { has_country_flag = skald_council_established }
+		}
+		owner = { add_church_power = 5 }
+	}
+}
+
+# province, general conversion through effects 1.35
+on_province_culture_changed = {
+	if = {
+		limit = {
+			culture = tretunic
+		}
+		add_base_manpower = 1
+	}
+	if = {
+		limit = {
+			culture = carnetori
+			OR = {
+				area = woodwell_area
+				area = neckcliffe_area
+				area = carneteria_area
+				area = windtower_area
+				area = wesdam_area
+			}
+		}
+		add_base_production = 1
+	}
+}
+
+# province
+# FROM = old owner
+on_province_owner_change = {
+	if = {
+		limit = {
+			has_terrain = forest
+			owner = {
+				has_country_flag = vaengheim_forest_expansion
+			}
+		}
+		add_province_modifier = {
+			name = estate_burghers_forest_expansion_forest
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			has_terrain = woods
+			owner = {
+				has_country_flag = vaengheim_forest_expansion
+			}
+		}
+		add_province_modifier = {
+			name = estate_burghers_forest_expansion_woods
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			has_terrain = mountain
+			owner = {
+				has_country_flag = vaengheim_mountain_expansion
+			}
+		}
+		add_province_modifier = {
+			name = estate_burghers_mountain_expansion_mountains
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			has_terrain = highlands
+			owner = {
+				has_country_flag = vaengheim_mountain_expansion
+			}
+		}
+		add_province_modifier = {
+			name = estate_burghers_mountain_expansion_highlands
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			has_terrain = hills
+			owner = {
+				has_country_flag = vaengheim_mountain_expansion
+			}
+		}
+		add_province_modifier = {
+			name = estate_burghers_mountain_expansion_hills
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			has_climate = arctic
+			owner = {
+				has_country_flag = vaengheim_arctic_expansion
+			}
+		}
+		owner = { set_country_flag = vaengheim_incense_2_flag }
+		add_province_modifier = {
+			name = estate_burghers_vaengheim_expansion_arctic
+			duration = -1
+		}
+	}
+
+	#Leslinpar
+	if = {
+		limit = {
+			has_terrain = woods
+			owner = {
+				has_country_flag = leslinpar_woods_expansion
+			}
+		}
+		add_province_modifier = {
+			name = A92_leslinpar_forestry
+			duration = -1
+			hidden = yes
+		}
+	}
+}
+
+on_carolean_raised = {
+	owner = {
+		if = {
+			limit = {
+				mission_completed = A05_Skaldhyrric_3_2
+			}
+			add_manpower = 0.5
+		}
+	}
+}
+
+on_center_of_trade_upgrade = {
+	if = {
+		limit = {
+			owner = {
+				has_country_flag = A92_parian_cities
+			}
+		}
+		add_base_production = 1
+	}
+}
+
+on_culture_promoted = {
+	if = {
+		limit = {
+			has_country_flag = wex_giberd_gnomes
+			has_gnomish_accepted_culture = yes
+		}
+		every_owned_province = {
+			limit = {
+				trade_goods = glass
+				NOT = {
+					has_province_modifier = giberdi_glassworks
+					has_province_modifier = wex_gnomish_glassworks
+				}
+			}
+			add_province_modifier = {
+				name = wex_gnomish_glassworks
+				duration = -1
+			}
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_estate_privilege = estate_lorentish_elite_lorentization
+			}
+			OR = {
+				region = lencenor_region
+				region = west_dameshead_region
+				area = lorenans_reach_area
+			}
+			OR = {
+				has_owner_accepted_culture = yes
+				has_owner_culture = yes
+				culture_is_high_lorentish = yes
+			}
+		}
+		remove_province_modifier = lorentish_education
+	}
+}
+
+# ROOT = country
+on_culture_demoted = {
+	if = {
+		limit = {
+			owner = {
+				has_estate_privilege = estate_lorentish_elite_ruby_crown
+				estate_loyalty = {
+					estate = estate_lorentish_elite
+					loyalty = 60
+				}
+			}
+			OR = {
+				region = lencenor_region
+				region = west_dameshead_region
+				area = lorenans_reach_area
+			}
+		}
+		add_province_modifier = {
+			name = loyal_ruby_crown
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_estate_privilege = estate_lorentish_elite_lorentization
+			}
+			OR = {
+				region = lencenor_region
+				region = west_dameshead_region
+				area = lorenans_reach_area
+			}
+			NOT = {
+				has_owner_accepted_culture = yes
+				has_owner_culture = yes
+				culture_is_high_lorentish = yes
+			}
+		}
+		add_province_modifier = {
+			name = lorentish_education
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			has_country_flag = wex_giberd_gnomes
+			has_gnomish_accepted_culture = no
+		}
+		every_owned_province = {
+			limit = {
+				has_province_modifier = wex_gnomish_glassworks
+			}
+			remove_province_modifier = wex_gnomish_glassworks
+		}
+	}
+}
+
+# THIS = Raiding country, FROM = Sea province
+on_raid_coast = {
+	A74raidcoasts = yes
+	F32raidcoasts = yes
+}
+
+# ROOT = province, FROM = country
+on_trade_good_changed = {
+	if = {
+		limit = {
+			trade_goods = wine
+			FROM = {
+				mission_completed = Z68_our_bay
+			}
+		}
+		add_province_modifier = {
+			name = wine_lord_wine
+			duration = -1
+			hidden = yes
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_reform = pearl_monarchy
+			}
+			trade_goods = gems
+		}
+		add_province_modifier = {
+			name = gem_lord
+			duration = -1
+			hidden = yes
+		}
+	}
+}
+
+# province: spawned whenever a new owner takes over the province
+# FROM = The previous owner.
+on_conquest = {
+	if = {
+		limit = {
+			trade_goods = glass
+			owner = {
+				has_country_flag = wex_giberd_gnomes
+				has_gnomish_accepted_culture = yes
+			}
+		}
+		add_province_modifier = {
+			name = wex_gnomish_glassworks
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_estate_privilege = estate_lorentish_elite_autonomous_duchies
+			}
+			OR = {
+				region = lencenor_region
+				region = small_country_region
+				area = lorenans_reach_area
+			}
+		}
+		add_province_modifier = {
+			name = lorentish_autonomy
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_estate_privilege = estate_lorentish_elite_local_cooperation
+			}
+			OR = {
+				region = lencenor_region
+				region = small_country_region
+				area = lorenans_reach_area
+			}
+		}
+		add_province_modifier = {
+			name = lorentish_cooperation
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_estate_privilege = estate_lorentish_elite_lorentization
+			}
+			OR = {
+				region = lencenor_region
+				region = west_dameshead_region
+				area = lorenans_reach_area
+			}
+			NOT = {
+				has_owner_accepted_culture = yes
+				has_owner_culture = yes
+				culture_is_high_lorentish = yes
+			}
+		}
+		add_province_modifier = {
+			name = lorentish_education
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_estate_privilege = estate_lorentish_elite_grant_spoils
+			}
+			OR = {
+				region = lencenor_region
+				region = small_country_region
+				region = west_dameshead_region
+				region = dragon_coast_region
+			}
+		}
+		add_province_modifier = {
+			name = wex_western_spoils
+			duration = 10950
+		}
+	}
+	#Vaengheim
+	if = {
+		limit = {
+			has_terrain = forest
+			owner = {
+				has_country_flag = vaengheim_forest_expansion
+			}
+		}
+		add_province_modifier = {
+			name = estate_burghers_forest_expansion_forest
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			has_terrain = woods
+			owner = {
+				has_country_flag = vaengheim_forest_expansion
+			}
+		}
+		add_province_modifier = {
+			name = estate_burghers_forest_expansion_woods
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			has_terrain = mountain
+			owner = {
+				has_country_flag = vaengheim_mountain_expansion
+			}
+		}
+		add_province_modifier = {
+			name = estate_burghers_mountain_expansion_mountains
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			has_terrain = highlands
+			owner = {
+				has_country_flag = vaengheim_mountain_expansion
+			}
+		}
+		add_province_modifier = {
+			name = estate_burghers_mountain_expansion_highlands
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			has_terrain = hills
+			owner = {
+				has_country_flag = vaengheim_mountain_expansion
+			}
+		}
+		add_province_modifier = {
+			name = estate_burghers_mountain_expansion_hills
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			has_climate = arctic
+			owner = {
+				has_country_flag = vaengheim_arctic_expansion
+			}
+		}
+		owner = { set_country_flag = vaengheim_incense_2_flag }
+		add_province_modifier = {
+			name = estate_burghers_vaengheim_expansion_arctic
+			duration = -1
+		}
+	}
+}
+
+#FROM = country pillaged, ROOT = country doing the pillaging
+on_pillaged_capital = {
+	if = {
+		limit = {
+			ai = no
+		}
+		change_variable = {
+			which = PillagedCapitals
+			value = 1
+		}
+	}
+}
+
+
+##scope = colony province, FROM = owner country or province if there's a minority expulsion source, fires when the colony is created 1.35
+on_colony_established = {
+	if = {
+		limit = {
+			owner = {
+				tag = AC5
+				mission_completed = AC5_triggered_eruption
+			}
+			region = serpentreach_region
+			has_terrain = dwarven_road
+		}
+		remove_province_modifier = dwarovar_rail
+		remove_province_modifier = restored_rail
+		remove_province_modifier = advanced_rail
+		add_permanent_province_modifier = {
+			name = AC5_lava_river
+			duration = -1
+		}
+		add_province_modifier = {
+			name = AC5_lava_surf
+			duration = 7300
+		}
+	}
+}
+
+on_institution_embracement = {
+	if = { #Reveria spreads institution to embassy
+		limit = {
+			tag = A05
+		}
+		every_country = {
+			limit = {
+				any_owned_province = {
+					has_province_modifier = ACE_reveria_embassy
+				}
+			}
+			country_event = {
+				id = reveria.90
+			}
+		}
+	}
+	if = {
+		limit = {
+			tag = A05
+			has_institution = printing_press
+			has_country_flag = ACE_reveria_20_inno_on_embrace
+		}
+		change_innovativeness = 20
+		clr_country_flag = ACE_reveria_20_inno_on_embrace
+	}
+	if = {
+		limit = {
+			tag = A05
+			has_institution = printing_press
+			has_country_flag = ACE_reveria_10_capacity_on_embrace
+		}
+		artifice_remove_10 = yes
+		clr_country_flag = ACE_reveria_10_capacity_on_embrace
+	}
+	if = {
+		limit = {
+			tag = A05
+		}
+		every_country = {
+			limit = {
+				any_owned_province = {
+					has_province_modifier = ACE_reveria_embassy
+				}
+			}
+			country_event = {
+				id = reveria.90
+			}
+		}
+	}
+}
+
+on_raze = {
+	if = {
+		limit = {
+			mission_completed = AC7_break_marches
+			FROM = {
+				is_part_of_hre = yes
+			}
+		}
+		add_treasury = 40
+	}
+	if = {
+		limit = {
+			mission_completed = AC7_esmaria
+			FROM = {
+				OR = {
+					superregion = western_region_superregion
+					superregion = escann_superregion
+				}
+			}
+		}
+		capital_scope = {
+			add_next_institution_embracement = 1
+		}
+	}
+}
+
+on_colony_finished = { #ROOT - Province
+	if = {
+		limit = {
+			owner = { has_country_modifier = vaengheim_frontiers }
+			OR = {
+				superregion = gerudia_superregion
+				region = northern_pass_region
+			}
+			OR = {
+				NOT = { has_climate = arctic }
+				AND = {
+					has_climate = arctic
+					has_terrain = mountain
+				}
+			}
+		}
+		ROOT = {
+			change_culture = jarnklo_harpy
+			add_human_minority_size_effect = yes
+		}
+	}
+	if = {
+		limit = {
+			owner = { has_country_modifier = vaengheim_frontiers }
+			OR = {
+				superregion = gerudia_superregion
+				region = northern_pass_region
+			}
+			has_climate = arctic
+			NOT = { has_terrain = mountain }
+		}
+		ROOT = {
+			change_culture = olavish
+			add_harpy_minority_size_effect = yes
+		}
+	}
+	if = {
+		limit = { owner = { has_country_flag = vaengheim_cagodic_oath } }
+		ROOT = {
+			add_random_development = 1
+		}
+	}
+	if = {
+		limit = {
+			has_terrain = forest
+			owner = {
+				has_country_flag = vaengheim_forest_expansion
+			}
+		}
+		add_province_modifier = {
+			name = estate_burghers_forest_expansion_forest
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			has_terrain = woods
+			owner = {
+				has_country_flag = vaengheim_forest_expansion
+			}
+		}
+		add_province_modifier = {
+			name = estate_burghers_forest_expansion_woods
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			has_terrain = mountain
+			owner = {
+				has_country_flag = vaengheim_mountain_expansion
+			}
+		}
+		add_province_modifier = {
+			name = estate_burghers_mountain_expansion_mountains
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			has_terrain = highlands
+			owner = {
+				has_country_flag = vaengheim_mountain_expansion
+			}
+		}
+		add_province_modifier = {
+			name = estate_burghers_mountain_expansion_highlands
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			has_terrain = hills
+			owner = {
+				has_country_flag = vaengheim_mountain_expansion
+			}
+		}
+		add_province_modifier = {
+			name = estate_burghers_mountain_expansion_hills
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			has_climate = arctic
+			owner = {
+				has_country_flag = vaengheim_arctic_expansion
+			}
+		}
+		owner = { set_country_flag = vaengheim_incense_2_flag }
+		add_province_modifier = {
+			name = estate_burghers_vaengheim_expansion_arctic
+			duration = -1
+		}
+	}
+}
+
+on_heir_disinherited = {
+	if = {
+		limit = { has_reform = vaengheim_court }
+		country_event = {
+			id = flavor_vaengheim.100
+		}
+	}
+}
+
+on_expanded_infrastructure_removed = {
+}

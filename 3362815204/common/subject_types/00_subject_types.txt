@@ -4912,3 +4912,108 @@ maghargma_special_subject = {
 	# Subject Interactions:
 	customize_subject = yes
 }
+
+#ACE
+
+vampire_dominion = {
+	# Graphics:
+	sprite = GFX_icon_vassal
+	diplomacy_overlord_sprite = GFX_diplomacy_leadvassal
+	diplomacy_subject_sprite = GFX_diplomacy_amvassal
+
+	# Properties:
+	transfer_trade_if_merchant_republic = yes
+	can_be_annexed = no
+	has_power_projection = no
+	gets_help_with_rebels = yes
+	forms_trade_companies = no
+	takes_diplo_slot = no
+	joins_overlords_wars = yes
+	can_fight_independence_war = no
+	can_use_claims = yes
+	can_send_missionary_to_subject = yes
+	can_gain_favors = yes
+	
+	max_government_rank = 2
+
+	liberty_desire_development_ratio = -0.50
+	base_liberty_desire = -50
+	liberty_desire_same_dynasty = -5.0
+	pays_overlord = 1.0
+	forcelimit_to_overlord = 0.1
+	manpower_to_overlord = 0.1							# Percent of subject FL to use as base for modifiers
+	sailors_to_overlord = 0.1	
+
+	relative_power_class = 2
+	should_quit_wars_on_activation = yes
+
+	restoration_cb = cb_disloyal_vassal
+
+	# Subject Interactions:
+	scutage = yes
+	divert_trade = yes
+	enforce_religion = yes
+	embargo_rivals = yes
+	send_officers = yes
+	enforce_culture = yes
+	takeondebt = yes
+	conscript_general = yes
+}
+
+
+holy_order = {
+	can_use_claims = yes
+	can_send_missionary_to_subject = yes
+	can_gain_favors = yes
+	takes_diplo_slot = no
+	joins_overlords_wars = yes
+	can_be_annexed = yes
+	
+	# Graphics:
+    sprite = GFX_icon_vassal
+    diplomacy_overlord_sprite = GFX_diplomacy_leadvassal
+    diplomacy_subject_sprite = GFX_diplomacy_amvassal
+    
+
+	max_government_rank = 2
+
+	base_liberty_desire = 25.0
+	military_focus = 0.5
+
+	restoration_cb = cb_disloyal_vassal
+
+	support_loyalists = yes
+	divert_trade = yes
+	subsidize_armies = yes
+	send_additional_troops = yes
+	seize_territory = no
+	grant_core_claim = yes
+	grant_province = yes
+
+
+	modifier_subject = {
+		modifier = holy_order_vassal
+	}
+	modifier_overlord = {
+		modifier = holy_order_overlord
+	}
+
+	modifier_subject = {
+		trigger = {
+			overlord = { has_country_flag = holy_order_addition_1 }
+		}
+		modifier = holy_order_reform_vassal1
+	}
+
+	can_fight = {
+		independent_nations = yes
+		other_overlord = all
+		same_overlord = all
+	}
+
+	can_rival = {
+		independent_nations = yes
+		other_overlord = all
+		same_overlord = all
+	}
+}

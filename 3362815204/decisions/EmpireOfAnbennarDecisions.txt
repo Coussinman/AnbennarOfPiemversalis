@@ -1,27 +1,67 @@
 country_decisions = {
-	anbennar_anbenncost_capital = {
+	#anbennar_anbenncost_capital = {
+	#	potential = {
+	#		tag = Z01   #Anbennar
+	#	   owns = 8	#Anbenncost
+	#		NOT = {
+	#			capital = 8
+	#			was_tag = A30 #TODO???
+	#		}
+	#	}
+	#	provinces_to_highlight = { province_id = 8 }	#Anbenncost
+	#	allow = {
+	#		8 = { is_state_core = ROOT }	#Anbenncost
+	#		is_at_war = no
+	#
+	#	}
+	#	effect = {
+	#		if = {
+	#			limit = { NOT = { 8 = { has_province_modifier = perpetual_diet } } }
+	#			europe = { remove_province_triggered_modifier = perpetual_diet }
+	#			8 = { add_province_triggered_modifier = perpetual_diet }
+	#		}
+	#		8 = { move_capital_effect = yes }
+	#	}
+	#	ai_will_do = { factor = 1 }
+	#}
+	check_provinces_of_interest = {
+		major = yes
         potential = {
-            tag = Z01   #Anbennar
-            owns = 8    #Anbenncost
+			is_emperor = yes
+			OR = {
+				NOT = {
+					tag = A30
+					was_tag = A30
+				}
+				has_country_flag = A30_imperial_path
+			}
 			NOT = {
-                capital = 8
-                mission_completed = A30_true_imperial_capital   #Wex moves the imperial capital to Wexkeep in this mission
+				eoa_provinces_of_interest = {
+					type = all
+					is_part_of_hre = yes
+				}
             }
 		}
-        provinces_to_highlight = { province_id = 8 }    #Anbenncost
+		provinces_to_highlight = {
+			province_group = eoa_provinces_of_interest
+			NOT = {
+				is_part_of_hre = yes
+			}
+		}
         allow = {
-			8 = { is_state_core = ROOT }    #Anbenncost
-			is_at_war = no
-			
+			eoa_provinces_of_interest = {
+				type = all
+				is_part_of_hre = yes
+				has_province_flag = eoa_interest
+			}
 		}
         effect = {
-            if = {
-                limit = { NOT = { 8 = { has_province_modifier = perpetual_diet } } }
-                europe = { remove_province_triggered_modifier = perpetual_diet }
-                8 = { add_province_triggered_modifier = perpetual_diet }
-            }
-            8 = { move_capital_effect = yes }
+			country_event = {
+				id = eoa_cities.37
+			}
         }
-		ai_will_do = { factor = 1 }
+		ai_will_do = {
+			factor = 0
+		}
     }
 }

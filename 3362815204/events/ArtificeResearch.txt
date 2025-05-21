@@ -1903,6 +1903,71 @@ country_event = {
 			factor = 5
 		}
 	}
+	#ACE
+	#Gerudian Autorowers
+	option = { #Gerudian Culture Group
+		name = artifice_research.3.aceger1
+		trigger = {
+			has_country_flag = research_artifice_invention_gerudian_autorowers
+		}
+		hidden_effect = {
+			set_country_flag = researching_artifice_invention_gerudian_autorowers
+		}
+		tooltip = {
+			set_estate_privilege = artifice_invention_gerudian_autorowers
+		}
+				ai_chance = {
+			factor = 5
+		}
+	}
+	#Gerudian Axepistol
+	option = { #Gerudian Culture Group
+		name = artifice_research.3.aceger2
+		trigger = {
+			has_country_flag = research_artifice_invention_gerudian_axepistol
+		}
+		hidden_effect = {
+			set_country_flag = researching_artifice_invention_gerudian_axepistol
+		}
+		tooltip = {
+			set_estate_privilege = artifice_invention_gerudian_axepistol
+		}
+				ai_chance = {
+			factor = 5
+		}
+	}
+	#Gerudian Weightless Holds
+	option = { #Gerudian Culture Group
+		name = artifice_research.3.aceger3
+		trigger = {
+			has_country_flag = research_artifice_invention_gerudian_weightless_holds
+		}
+		hidden_effect = {
+			set_country_flag = researching_artifice_invention_gerudian_weightless_holds
+		}
+		tooltip = {
+			set_estate_privilege = artifice_invention_gerudian_weightless_holds
+		}
+				ai_chance = {
+			factor = 5
+		}
+	}
+	#Tale Generator
+	option = { #Skaldhyrric Faith
+		name = artifice_research.3.aceger4
+		trigger = {
+			has_country_flag = research_artifice_invention_skaldhyrric_tale_generator
+		}
+		hidden_effect = {
+			set_country_flag = researching_artifice_invention_skaldhyrric_tale_generator
+		}
+		tooltip = {
+			set_estate_privilege = artifice_invention_skaldhyrric_tale_generator
+		}
+				ai_chance = {
+			factor = 5
+		}
+	}
 
 	option = {
 		name = artifice_research.3.x
@@ -2061,6 +2126,12 @@ country_event = {
 		clr_country_flag = research_feiten_invention_long_rockets
 		clr_country_flag = research_feiten_invention_lightning_amplifier
 		clr_country_flag = research_feiten_invention_skywriting
+
+		#ACE
+		clr_country_flag = research_artifice_invention_gerudian_autorowers
+		clr_country_flag = research_artifice_invention_gerudian_axepistol
+		clr_country_flag = research_artifice_invention_gerudian_weightless_holds
+		clr_country_flag = research_artifice_invention_skaldhyrric_tale_generator
 
 		#Misc
 		clr_country_flag = research_unlocked_artifice_invention_drill_shells
@@ -2987,6 +3058,39 @@ country_event = {
 			clr_country_flag = researching_feiten_invention_skywriting
 			country_event = {
 				id = flavor_feiten.254
+			}
+		}
+		#ACE
+		if = {
+			limit = { has_country_flag = researching_artifice_invention_gerudian_autorowers }
+			set_country_flag = unlocked_artifice_invention_gerudian_autorowers
+			clr_country_flag = researching_artifice_invention_gerudian_autorowers
+			country_event = {
+				id = reveria.97
+			}
+		}
+		if = {
+			limit = { has_country_flag = researching_artifice_invention_gerudian_axepistol }
+			set_country_flag = unlocked_artifice_invention_gerudian_axepistol
+			clr_country_flag = researching_artifice_invention_gerudian_axepistol
+			country_event = {
+				id = reveria.98
+			}
+		}
+		if = {
+			limit = { has_country_flag = researching_artifice_invention_gerudian_weightless_holds }
+			set_country_flag = unlocked_artifice_invention_gerudian_weightless_holds
+			clr_country_flag = researching_artifice_invention_gerudian_weightless_holds
+			country_event = {
+				id = reveria.99
+			}
+		}
+		if = {
+			limit = { has_country_flag = researching_artifice_invention_skaldhyrric_tale_generator }
+			set_country_flag = unlocked_artifice_invention_skaldhyrric_tale_generator
+			clr_country_flag = researching_artifice_invention_skaldhyrric_tale_generator
+			country_event = {
+				id = reveria.100
 			}
 		}
 

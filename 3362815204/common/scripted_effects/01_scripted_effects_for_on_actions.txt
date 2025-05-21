@@ -4973,6 +4973,19 @@ remove_all_age_of_discovery_modifiers = {
 	# 		remove_country_modifier = eng_jousting_tournaments
 	# 	}
 	# }
+	if = {
+		limit = {
+			NOT = {
+				current_age = age_of_discovery
+			}
+		}
+		if = {
+			limit = {
+				has_country_modifier = age_of_wex
+			}
+			remove_country_modifier = age_of_wex
+		}
+	}
 }
 remove_all_age_of_reformation_modifiers = {
 	# if = {
@@ -5126,6 +5139,24 @@ on_harmonized_effect = {
 			kalsyto_pan_harmonize = yes
 		}
 	}
+
+	if = {
+		limit = { has_country_flag = ACE_reveria_harmonic_subjects_flag }
+		every_subject_country = {
+			limit = { religion = the_thought }
+			reveria_pan_harmonize = yes
+		}
+	}
+
+	if = {
+		limit = { 
+			is_subject_of = A05
+			A05 = {
+				has_country_flag = ACE_reveria_advanced_harmonic_subjects_flag
+			}
+		}
+		reverse_reveria_pan_harmonize = yes
+	}
 }
 
 clear_harmonization_flags = {
@@ -5137,6 +5168,46 @@ clear_harmonization_flags = {
 }
 
 on_province_culture_change_effect = {
+	#ACE
+	if = {
+		limit = {
+			owner = {
+				has_estate_privilege = estate_lorentish_elite_lorentization
+			}
+			OR = {
+				region = lencenor_region
+				region = west_dameshead_region
+				area = lorenans_reach_area
+			}
+			OR = {
+				has_owner_accepted_culture = yes
+				has_owner_culture = yes
+				culture_is_high_lorentish = yes
+			}
+		}
+		remove_province_modifier = lorentish_education
+	}
+	if = {
+		limit = {
+			owner = {
+				has_estate_privilege = estate_lorentish_elite_lorentization
+			}
+			OR = {
+				region = lencenor_region
+				region = west_dameshead_region
+				area = lorenans_reach_area
+			}
+			NOT = {
+				has_owner_accepted_culture = yes
+				has_owner_culture = yes
+				culture_is_high_lorentish = yes
+			}
+		}
+		add_province_modifier = {
+			name = lorentish_education
+			duration = -1
+		}
+	}
 	
 	if = {
 		limit = {
@@ -5488,6 +5559,67 @@ on_province_culture_converted_effect = {
 		add_base_manpower = 1
 		add_base_production = 1
 		set_province_flag = arm_converted_bonus
+	}
+	if = {
+		limit = {
+			owner = {
+				has_estate_privilege = estate_lorentish_elite_lorentization
+			}
+			OR = {
+				region = lencenor_region
+				region = west_dameshead_region
+				area = lorenans_reach_area
+			}
+			OR = {
+				has_owner_accepted_culture = yes
+				has_owner_culture = yes
+				culture_is_high_lorentish = yes
+			}
+		}
+		remove_province_modifier = lorentish_education
+	}
+	if = {
+		limit = {
+			owner = {
+				has_estate_privilege = estate_lorentish_elite_lorentization
+			}
+			OR = {
+				region = lencenor_region
+				region = west_dameshead_region
+				area = lorenans_reach_area
+			}
+			NOT = {
+				has_owner_accepted_culture = yes
+				has_owner_culture = yes
+				culture_is_high_lorentish = yes
+			}
+		}
+		add_province_modifier = {
+			name = lorentish_education
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				tag = B87
+				has_global_flag = wexorenti_group
+			}
+			culture = high_lorentish
+		}
+		change_culture = high_lorentish_dual
+	}
+	else_if = {
+		if = {
+			limit = {
+				owner = {
+					tag = B87
+					has_global_flag = wexorenti_group
+				}
+				culture = wexonard
+			}
+			change_culture = wexonard_dual
+		}
 	}
 }
 
@@ -6014,6 +6146,87 @@ on_development_effect = {
 	#		}
 	#	}
 	#}
+
+	if = {
+		limit = {
+			owner = {
+				OR = {
+					tag = A30
+					was_tag = A30
+				}
+			}
+			has_province_modifier = wexonard_settlers
+		}
+		add_nationalism = -1
+	}
+
+	if = {
+		limit = {
+			owner = {
+				tag = AC5
+				mission_completed = AC5_kobold_lifestyle
+				has_country_modifier = AC5_new_forges
+			}
+			province_id = 2949
+		}
+		owner = {
+			extend_country_modifier = {
+				name = AC5_new_forges
+				duration = 365
+			}
+		}
+	}
+
+	if = {
+		limit = {
+			owner = {
+				tag = AC5
+				mission_completed = AC5_kobold_lifestyle
+				has_country_modifier = AC5_lava_garden
+			}
+			province_id = 4040
+		}
+		owner = {
+			extend_country_modifier = {
+				name = AC5_lava_garden
+				duration = 365
+			}
+		}
+	}
+
+	if = {
+		limit = {
+			owner = {
+				tag = AC5
+				mission_completed = AC5_kobold_lifestyle
+				has_country_modifier = AC5_healty_younglings
+			}
+			province_id = 4041
+		}
+		owner = {
+			extend_country_modifier = {
+				name = AC5_healty_younglings
+				duration = 365
+			}
+		}
+	}
+
+	if = {
+		limit = {
+			owner = {
+				tag = AC5
+				mission_completed = AC5_kobold_lifestyle
+				has_country_modifier = AC5_constructive_conflict
+			}
+			province_id = 4042
+		}
+		owner = {
+			extend_country_modifier = {
+				name = AC5_constructive_conflict
+				duration = 365
+			}
+		}
+	}
 }
 
 # THIS = Province, FROM = Country, ROOT = Merc Unit
@@ -8037,6 +8250,23 @@ startup_1444_effects = {
 			}
 		}
 	}
+
+	#ACE
+	if = {
+		limit = {
+			has_reform = pearl_monarchy
+		}
+		every_owned_province = {
+			limit = {
+				trade_goods = gems
+			}
+			add_province_modifier = {
+				name = gem_lord
+				duration = -1
+				hidden = yes
+			}
+		}
+	}
 }
 
 on_province_owner_change_effect = {
@@ -8159,6 +8389,45 @@ on_province_owner_change_effect = {
 			hidden = yes
 		}
 	}
+
+	#ACE
+	if = {
+		limit = {
+			NOT = { has_province_modifier = A92_leslinpar_forestry }
+			owner = { mission_completed = A92_the_forestry_guild }
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					has_terrain = forest
+				}
+				add_province_modifier = {
+					name = A92_leslinpar_forestry
+					duration = -1
+					hidden = yes
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			NOT = { has_province_modifier = A92_leslinpar_grain }
+			owner = { mission_completed = A92_perfecting_our_grain }
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					trade_goods = grain
+				}
+				add_province_modifier = {
+					name = A92_leslinpar_grain
+					duration = -1
+					hidden = yes
+				}
+			}
+		}
+	}
+	#ACE DONE
 
 	if = {
 		limit = {

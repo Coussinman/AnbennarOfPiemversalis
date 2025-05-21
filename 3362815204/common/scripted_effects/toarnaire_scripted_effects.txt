@@ -1,0 +1,165 @@
+vivinmar_purchase = {
+	country_event_with_option_insight = {
+		id = flavor_Toarnaire.2
+		option_1 = "
+			add_treasury = -100
+			40 = {
+				add_core = ROOT
+				cede_province = ROOT
+			}
+			add_truce_with = Z05
+			add_truce_with = A18
+		"
+		option_2 = "
+			Z05 = {
+				capital_scope = {
+					add_province_modifier = {
+						name = sabotaged_fort
+						duration = 3650
+					}
+				}
+			}
+			A18 = {
+				capital_scope = {
+					add_province_modifier = {
+						name = sabotaged_fort
+						duration = 3650
+					}
+				}
+			}
+		"
+	}
+}
+spread_random_vamp = {
+	random_country = {
+		limit = {
+			is_neighbor_of = ROOT
+			NOT = {
+				has_estate = estate_vampires
+			}
+		}
+		country_event = { id = vampires_estate_events.11 days = 7 }
+	}
+}
+
+chosen_emperor = {
+	if = {
+		limit = {
+			calc_true_if = {
+				amount = 3
+				is_elector = yes
+				has_estate_privilege = estate_vampires_organization_the_blood_court
+			}
+		}
+		add_country_modifier = {
+			name = puppet_emperor1
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			calc_true_if = {
+				amount = 4
+				is_elector = yes
+				has_estate_privilege = estate_vampires_organization_the_blood_court
+			}
+		}
+		add_country_modifier = {
+			name = puppet_emperor2
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			calc_true_if = {
+				amount = 5
+				is_elector = yes
+				has_estate_privilege = estate_vampires_organization_the_blood_court
+			}
+		}
+		add_country_modifier = {
+			name = puppet_emperor3
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			calc_true_if = {
+				amount = 6
+				is_elector = yes
+				has_estate_privilege = estate_vampires_organization_the_blood_court
+			}
+		}
+		add_country_modifier = {
+			name = puppet_emperor4
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			calc_true_if = {
+				amount = 7
+				is_elector = yes
+				has_estate_privilege = estate_vampires_organization_the_blood_court
+			}
+		}
+		add_country_modifier = {
+			name = puppet_emperor5
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			calc_true_if = {
+				amount = 8
+				is_elector = yes
+				has_estate_privilege = estate_vampires_organization_the_blood_court
+			}
+		}
+		add_country_modifier = {
+			name = puppet_emperor6
+			duration = -1
+		}
+	}
+}
+
+first_effect = {
+	A57 = {
+		add_trust = {
+			who = Z68
+			value = 10
+			mutual = yes
+		}
+		chosen_emperor = yes
+	}
+}
+
+second_effect = {
+	every_known_country = {
+		limit = {
+			is_part_of_hre = yes
+			government = monarchy
+			has_100_opinion_improved_relation = {
+				target = ROOT
+			}
+			has_estate = estate_vampires
+
+		}
+		add_trust = {
+			who = Z68
+			value = 10
+			mutual = yes
+		}
+		chosen_emperor = yes
+		set_country_flag = chosen_emperor
+	}
+}
+
+court_of_blood = {
+	if = {
+		limit = {
+			mission_completed = Z68_court_of_blood
+		}
+		flavor_Toarnaire.10
+	}
+}

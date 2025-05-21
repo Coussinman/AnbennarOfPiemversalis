@@ -95,6 +95,9 @@ country_event = {
 		NOT = { has_reform = abyssal_otardom_reform }
 		NOT = { has_reform = forge_council_reform }
 		NOT = { has_reform = ameion_republic }
+
+		#ACE
+		NOT = { has_reform = toarnaire_bloodcourt_reform }
 	}
 
 	immediate = {
@@ -1150,6 +1153,9 @@ country_event = {
 		NOT = { has_reform = abyssal_otardom_reform }
 		NOT = { has_reform = forge_council_reform }
 		NOT = { has_reform = ameion_republic }
+
+		#ACE
+		NOT = { has_reform = toarnaire_bloodcourt_reform }
  	}
 
 	immediate = {
@@ -1910,6 +1916,10 @@ country_event = {
 		desc = elections.720.raithtall
 	}
 	
+	desc = { #ACE
+		trigger = { has_reform = amldihr_dutch_republic_reform }
+		desc = elections.720.amldihr
+	}
 	# desc = {
 	# 	trigger = { 
 	# 		NOT = {
@@ -1941,6 +1951,9 @@ country_event = {
 			NOT = { has_reform = feuillant_reform }
 			NOT = { has_reform = damescrown_republic_reform }
 			NOT = { has_reform = feiten_reformist_movement }
+
+			#ACE
+			NOT = { has_reform = amldihr_dutch_republic_reform }
 		}
 		if = {
 			limit = {
@@ -2030,6 +2043,9 @@ country_event = {
 					has_reform = monastic_elections_reform
 					has_reform = damescrown_republic_reform
 					has_reform = raithtall_twilight_court_reform
+
+					#ACE
+					has_reform = amldihr_dutch_republic_reform
 				}
 			} 
 			NOT = { has_reform = feiten_reformist_movement }
@@ -2183,6 +2199,74 @@ country_event = {
 		set_ruler_flag = raithtallTwilightTheocrat
 		change_statists_vs_orangists = 0.2
 	}
+	#ACE Amldihr Reformists
+	option = {
+		name = elections.720.y
+		trigger = { has_reform = amldihr_dutch_republic_reform }
+		ai_chance = {
+			factor = 50
+		}
+		define_ruler = {
+			dynasty = "of Amldihr"
+			change_adm = 1
+			change_dip = 1
+			change_mil = 1
+			min_age = 35
+			max_age = 195
+		}
+		change_statists_vs_orangists = -0.20
+	}
+	#ACE Amldihr Clans
+	option = {
+		name = elections.720.z
+		trigger = { has_reform = amldihr_dutch_republic_reform }
+		ai_chance = {
+			factor = 50
+		}
+		random_list = {
+            25 = {
+				define_ruler = {
+					dynasty = "Adstunad" 
+					change_adm = 2
+					change_dip = 0
+					change_mil = 1
+					min_age = 35
+					max_age = 195
+					}
+				}
+            25 = {
+					define_ruler = {
+					dynasty = "Azgheled"
+					change_adm = 0
+					change_dip = 2
+					change_mil = 1
+					min_age = 35
+					max_age = 195
+					}
+				}
+            25 = {
+					define_ruler = {
+					dynasty = "Nezvelad" 
+					change_adm = 0
+					change_dip = 1
+					change_mil = 2
+					min_age = 35
+					max_age = 195
+					}
+				}
+            25 = {
+					define_ruler = {
+					dynasty = "Shazstun" 
+					change_adm = 1
+					change_dip = 0
+					change_mil = 2
+					min_age = 35
+					max_age = 195
+					}
+				}
+		}
+		change_statists_vs_orangists = 0.20
+	}
 }
 
 country_event = {
@@ -2220,6 +2304,11 @@ country_event = {
 		desc = elections.721.raithtall
 	}
 	
+	desc = { #ACE
+		trigger = { has_reform = amldihr_dutch_republic_reform }
+		desc = elections.721.amldihr
+	}
+	
 	# desc = {
 	# 	trigger = {
 	# 		NOT = {
@@ -2252,6 +2341,9 @@ country_event = {
 			NOT = { has_reform = damescrown_republic_reform }
 			NOT = { has_reform = feiten_reformist_movement }
 			NOT = { has_reform = raithtall_twilight_court_reform }
+
+			#ACE
+			NOT = { has_reform = amldihr_dutch_republic_reform }
 		}
 		if = {
 			limit = {
@@ -2330,6 +2422,9 @@ country_event = {
 					has_reform = damescrown_republic_reform
 					has_reform = feiten_reformist_movement
 					has_reform = raithtall_twilight_court_reform
+
+					#ACE
+					has_reform = amldihr_dutch_republic_reform
 				} 
 			}
 		}
@@ -2443,6 +2538,75 @@ country_event = {
 		}
 		set_ruler_flag = raithtallTwilightTheocrat
 		change_statists_vs_orangists = 0.2
+	}
+	#Amldihr Reformists
+	option = {
+		name = elections.720.y
+		trigger = { has_reform = amldihr_dutch_republic_reform }
+		ai_chance = {
+			factor = 50
+		}
+		define_ruler = {
+			dynasty = "of Amldihr"
+			change_adm = 1
+			change_dip = 1
+			change_mil = 1
+			min_age = 35
+			max_age = 195
+		}
+		change_statists_vs_orangists = -0.20
+	}
+
+	#ACE Amldihr Clans
+	option = {
+		name = elections.720.z
+		trigger = { has_reform = amldihr_dutch_republic_reform }
+		ai_chance = {
+			factor = 50
+		}
+		random_list = {
+            25 = {
+				define_ruler = {
+					dynasty = "Adstunad" 
+					change_adm = 2
+					change_dip = 0
+					change_mil = 1
+					min_age = 35
+					max_age = 195
+					}
+				}
+            25 = {
+					define_ruler = {
+					dynasty = "Azgheled"
+					change_adm = 0
+					change_dip = 2
+					change_mil = 1
+					min_age = 35
+					max_age = 195
+					}
+				}
+            25 = {
+					define_ruler = {
+					dynasty = "Nezvelad" 
+					change_adm = 0
+					change_dip = 1
+					change_mil = 2
+					min_age = 35
+					max_age = 195
+					}
+				}
+            25 = {
+					define_ruler = {
+					dynasty = "Shazstun" 
+					change_adm = 1
+					change_dip = 0
+					change_mil = 2
+					min_age = 35
+					max_age = 195
+					}
+				}
+		}
+		change_statists_vs_orangists = 0.20
 	}
 }
 

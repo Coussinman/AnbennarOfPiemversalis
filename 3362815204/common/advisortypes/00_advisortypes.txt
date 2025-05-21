@@ -131,6 +131,15 @@ philosopher = {
 		modifier = { idea_cost = -0.02 }
 	}
 
+	skill_scaled_modifier = {
+		trigger = { 
+			owner = {  
+				has_reform = wexonard_grand_court_reform
+			}
+		}
+		modifier = { global_institution_spread = 0.04 }
+	}
+
 	chance = {
 		factor = 1
 	}
@@ -259,6 +268,15 @@ natural_scientist = {
 			}
 		}
 		modifier = { monthly_reform_progress = 0.06 }
+	}
+
+	skill_scaled_modifier = {
+		trigger = { 
+			owner = {  
+				has_reform = wexonard_grand_court_reform
+			}
+		}
+		modifier = { global_prosperity_growth = 0.1 }
 	}
 
 	chance = {
@@ -440,6 +458,18 @@ artist = {
 		modifier = { land_morale = 0.02 }
 	}
 
+	skill_scaled_modifier = {
+		trigger = { 
+			owner = {  
+				has_reform = wexonard_grand_court_reform
+			}
+		}
+		modifier = {
+			legitimacy = 0.1
+			monthly_splendor = 0.5
+		}
+	}
+
 	chance = {
 		factor = 1
 	}
@@ -568,6 +598,15 @@ treasurer = {
 		modifier = { build_cost = -0.02 }
 	}
 	
+	skill_scaled_modifier = {
+		trigger = { 
+			owner = {  
+				has_reform = wexonard_grand_court_reform
+			}
+		}
+		modifier = { state_maintenance_modifier = -0.1 }
+	}
+	
 	chance = {
 		factor = 1
 	}
@@ -640,16 +679,17 @@ theologian = {
 	# 	}
 	# 	modifier = { meritocracy = 0.25 }
 	# }
-	# skill_scaled_modifier = {
-	# 	trigger = { 
-	# 		owner = { 
-	# 			has_country_flag = mng_dev_per_adm_advisor_level_flag 
-	# 		}
-	# 	}
-	# 	modifier = {
-	# 		development_cost = -0.02
-	# 	}
-	# }
+	#ACE
+	skill_scaled_modifier = {
+		trigger = { 
+			owner = {
+				has_country_flag = Z05_faithful
+			}
+		}
+		modifier = {
+			development_cost = -0.02
+		}
+	}
 	# skill_scaled_modifier = {
 	# 	trigger = {
 	# 		owner = { has_country_modifier = eng_foreign_religious_control }
@@ -658,8 +698,10 @@ theologian = {
 	# }
 	skill_scaled_modifier = {
 		trigger = {
-			owner = { 
-				has_government_attribute = advisors_generate_innovativeness 
+			OR = {
+				owner = { 
+					has_government_attribute = advisors_generate_innovativeness 
+				}
 			}
 		}
 		modifier = {
@@ -685,6 +727,15 @@ theologian = {
 			}
 		}
 		modifier = { innovativeness_gain = 0.1 }
+	}
+
+	skill_scaled_modifier = {
+		trigger = { 
+			owner = {  
+				has_reform = wexonard_grand_court_reform
+			}
+		}
+		modifier = { religious_unity = 0.05 }
 	}
 
 	chance = {
@@ -813,6 +864,18 @@ master_of_mint = {
 			}
 		}
 		modifier = { interest = -0.2 }
+	}
+	
+	skill_scaled_modifier = {
+		trigger = { 
+			owner = {  
+				has_reform = wexonard_grand_court_reform
+			}
+		}
+		modifier = {
+			monthly_gold_inflation_modifier = -0.04
+			gold_depletion_chance_modifier = -0.04
+		}
 	}
 	
 	chance = {
@@ -950,6 +1013,15 @@ inquisitor = {
 		modifier = { missionary_maintenance_cost = -0.05 }
 	}
 	
+	skill_scaled_modifier = {
+		trigger = { 
+			owner = {  
+				has_reform = wexonard_grand_court_reform
+			}
+		}
+		modifier = { tolerance_own = 0.4 }
+	}
+	
 	chance = {
 		factor = 1
 		modifier = {
@@ -1084,6 +1156,18 @@ statesman = {
 		}
 	}
 
+	skill_scaled_modifier = {
+		trigger = { 
+			owner = {  
+				has_reform = wexonard_grand_court_reform
+			}
+		}
+		modifier = {
+			accept_vassalization_reasons = 4
+			diplomatic_annexation_cost = -0.02
+		}
+	}
+
 	chance = {
 		factor = 1
 	}
@@ -1203,6 +1287,18 @@ naval_reformer = {
 		}
 		modifier = {
 			monthly_kalsyto_influence = 0.03
+		}
+	}
+
+	skill_scaled_modifier = {
+		trigger = { 
+			owner = {  
+				has_reform = wexonard_grand_court_reform
+			}
+		}
+		modifier = {
+			global_ship_recruit_speed = -0.04
+			global_ship_repair = 0.04
 		}
 	}
 
@@ -1332,6 +1428,15 @@ trader = {
 		}
 	}
 
+	skill_scaled_modifier = {
+		trigger = { 
+			owner = {  
+				has_reform = wexonard_grand_court_reform
+			}
+		}
+		modifier = { trade_steering = 0.04 }
+	}
+
 	chance = {
 		factor = 1
 	}
@@ -1455,6 +1560,15 @@ spymaster = {
 		}
 	}
 
+	skill_scaled_modifier = {
+		trigger = { 
+			owner = {  
+				has_reform = wexonard_grand_court_reform
+			}
+		}
+		modifier = { spy_action_cost_modifier = -0.04 }
+	}
+
 	chance = {
 		factor = 1
 	}
@@ -1561,6 +1675,15 @@ colonial_governor = {
 		modifier = {
 			monthly_kalsyto_influence = 0.03
 		}
+	}
+	
+	skill_scaled_modifier = {
+		trigger = { 
+			owner = {  
+				has_reform = wexonard_grand_court_reform
+			}
+		}
+		modifier = { reduced_liberty_desire_on_other_continent = 6 }
 	}
 	
 	chance = {
@@ -1684,6 +1807,18 @@ diplomat = {
 		}
 	}
 	
+	skill_scaled_modifier = {
+		trigger = { 
+			owner = {  
+				has_reform = wexonard_grand_court_reform
+			}
+		}
+		modifier = {
+			unjustified_demands = -0.02
+			envoy_travel_time = -0.04
+		}
+	}
+	
 	chance = {
 		factor = 1
 	}
@@ -1792,6 +1927,18 @@ navigator = {
 		}
 	}
 	
+	skill_scaled_modifier = {
+		trigger = { 
+			owner = {  
+				has_reform = wexonard_grand_court_reform
+			}
+		}
+		modifier = {
+			naval_attrition = -0.04
+			transport_attrition = -0.04
+		}
+	}
+	
 	chance = {
 		factor = 1
 		modifier = {
@@ -1895,6 +2042,17 @@ army_reformer = {
 		}
 	}
 
+	skill_scaled_modifier = {
+		trigger = { 
+			owner = {  
+				has_reform = wexonard_grand_court_reform
+			}
+		}
+		modifier = {
+			army_tradition_from_battle = 0.2
+		}
+	}
+
 	chance = {
 		factor = 1
 	}
@@ -1995,6 +2153,17 @@ army_organiser = {
 		}
 	}
 
+	skill_scaled_modifier = {
+		trigger = { 
+			owner = {
+				has_reform = wexonard_grand_court_reform
+			}
+		}
+		modifier = {
+			global_supply_limit_modifier = 0.1
+		}
+	}
+
 	chance = {
 		factor = 1
 	}
@@ -2081,6 +2250,18 @@ commandant = {
 		}
 		modifier = {
 			global_autonomy = -0.02
+		}
+	}
+
+
+	skill_scaled_modifier = {
+		trigger = { 
+			owner = {  
+				has_reform = wexonard_grand_court_reform
+			}
+		}
+		modifier = {
+			drill_decay_modifier = -0.02
 		}
 	}
 
@@ -2184,6 +2365,18 @@ quartermaster = {
 		}
 	}
 
+	skill_scaled_modifier = {
+		trigger = { 
+			owner = {
+				has_reform = wexonard_grand_court_reform
+			}
+		}
+		modifier = {
+			movement_speed = 0.02
+			recover_army_morale_speed = 0.04
+		}
+	}
+
 	chance = {
 		factor = 1
 	}
@@ -2275,6 +2468,15 @@ recruitmaster = {
 		modifier = {
 			global_autonomy = -0.02
 		}
+	}
+
+	skill_scaled_modifier = {
+		trigger = { 
+			owner = {  
+				has_reform = wexonard_grand_court_reform
+			}
+		}
+		modifier = { war_exhaustion = -0.01 }
 	}
 
 	chance = {
@@ -2381,6 +2583,15 @@ fortification_expert = {
 		}
 	}
 
+	skill_scaled_modifier = {
+		trigger = { 
+			owner = {  
+				has_reform = wexonard_grand_court_reform
+			}
+		}
+		modifier = { artillery_level_modifier = 0.1 }
+	}
+
 	chance = {
 		factor = 1
 		
@@ -2469,6 +2680,15 @@ grand_captain = {
 		modifier = {
 			global_autonomy = -0.02
 		}
+	}
+
+	skill_scaled_modifier = {
+		trigger = { 
+			owner = {  
+				has_reform = wexonard_grand_court_reform
+			}
+		}
+		modifier = { land_attrition = -0.04 }
 	}
 
 	chance = {
@@ -2628,6 +2848,15 @@ court_mage = {
 			}
 		}
 		modifier = { church_power_modifier = 0.06 }
+	}
+	
+	skill_scaled_modifier = {
+		trigger = { 
+			owner = {  
+				has_reform = wexonard_grand_court_reform
+			}
+		}
+		modifier = { loyalty_change_on_revoked = 0.01 }
 	}
 	
 	chance = {

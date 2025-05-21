@@ -1,0 +1,154 @@
+cb_destroy_anbennar_wex = {
+	ai_peace_desire = -30
+	valid_for_subject = no
+
+	prerequisites_self = {
+		tag = A30
+	}
+
+	attacker_disabled_po = {
+		po_demand_provinces
+		po_revoke_cores
+		po_release_vassals
+		po_release_annexed
+		po_return_cores
+		po_become_vassal
+		po_subjugate_vassal
+		po_anb_tributary
+		po_form_personal_union
+		po_transfer_vassals
+	}
+
+	is_triggered_only = yes
+
+	war_goal = end_anbennar
+}
+
+cb_curtail_wex = {
+	ai_peace_desire = -20
+	valid_for_subject = no
+
+	prerequisites_self = {
+		tag = A30
+	}
+
+	attacker_disabled_po = {
+		po_demand_provinces
+		po_revoke_cores
+		po_release_vassals
+		po_release_annexed
+		po_return_cores
+		po_become_vassal
+		po_subjugate_vassal
+		po_anb_tributary
+		po_form_personal_union
+		po_transfer_vassals
+	}
+
+	is_triggered_only = yes
+
+	war_goal = curtail_wex
+}
+
+cb_electorship_transfer = {
+	valid_for_subject = no
+	ai_peace_desire = -25
+
+	is_triggered_only = yes
+
+	prerequisites_self = {
+		tag = A30
+	}
+
+	prerequisites = {
+		A45 = { is_elector = yes }
+	}
+
+	war_goal = transfer_electorship
+}
+
+cb_expand_empire_ace = { #new expand the empire cb
+	valid_for_subject = no 
+
+	prerequisites_self = { #check and kek
+		has_dlc = "Emperor"
+		is_emperor = yes
+		hre_reform_passed = emperor_reichsstabilitaet
+		NOT = {
+			has_country_flag = A30_anbennar_cb
+		}
+	}
+
+	prerequisites = { 
+		FROM = {
+			religion_group = ROOT
+			NOT = { has_country_modifier = monstrous_nation }
+			NOT = { is_part_of_hre = yes }
+			NOT = { is_subject = yes }
+			capital_scope = {
+				OR = {
+					superregion = western_cannor_superregion
+					superregion = escann_superregion
+					superregion = gerudia_superregion
+					superregion = deepwoods_superregion
+				}
+				is_part_of_hre = no
+			}
+			any_owned_province = {
+				any_neighbor_province = {
+					is_part_of_hre = yes
+				}
+			}
+			OR = {
+				AND = {
+					ROOT = { total_development = 300 }	# emperor must have more dev than this
+					NOT = { total_development = 100 }	# target must have less dev than this
+				}
+				AND = {
+					ROOT = { total_development = 450 }	# emperor must have more dev than this
+					NOT = { total_development = 150 }	# target must have less dev than this
+				}
+				AND = {
+					ROOT = { total_development = 600 }	# emperor must have more dev than this
+					NOT = { total_development = 200 }	# target must have less dev than this
+				}
+			}
+		}
+	} 
+
+	war_goal = ace_force_join_anbennar
+}
+
+cb_wex_anbennar_vassalize = { #cb after the final wex anbennar mission
+	valid_for_subject = no 
+
+	prerequisites_self = {
+		has_country_flag = A30_anbennar_cb
+	}
+
+	prerequisites = { 
+		FROM = {
+			NOT = { total_development = 500 }	# target must have less dev than this
+		}
+	}
+
+	war_goal = take_capital_vassalize
+}
+
+cb_vassalize_mission_magisterium = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+	months = 120
+
+	war_goal = take_capital_vassalize_magisterium
+}
+
+cb_restore_personal_union_lorent = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+	months = 240
+
+	war_goal = take_capital_personal_union_lorent
+}

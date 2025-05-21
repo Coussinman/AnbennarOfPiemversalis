@@ -103,6 +103,16 @@ estate_mages_organization_magisterium = {
 		global_tax_modifier = 0.05
 		imperial_authority = 0.05
 	}
+	conditional_modifier = {
+		trigger = {
+			has_country_flag = wex_magisterium_puppet
+		}
+		modifier = {
+			imperial_authority = -0.05
+			diplomatic_reputation = 1
+			max_absolutism = 10
+		}
+	}
 	#Removed this so AI doesn't sit at negative mages loyalty
 	# conditional_modifier = {
 		# trigger = {
@@ -736,6 +746,16 @@ estate_mages_battlemage_academies = {
 		}
 		modifier = {
 			army_tradition_decay = -0.01
+		}
+	}
+	conditional_modifier = {
+		trigger = {
+			has_country_flag = established_lothane_academy
+		}
+		modifier = {
+			max_absolutism = 5
+			army_tradition_decay = -0.005
+			country_military_power = 1
 		}
 	}
 	conditional_modifier = {
@@ -3182,6 +3202,14 @@ estate_monstrous_tribes_share_of_the_spoils = {
 	}
 	benefits = {
 	}
+	conditional_modifier = {
+		trigger = {
+			has_country_flag = AC7_monstrous_knowledge
+		}
+		modifier = {
+			technology_cost = -0.1
+		}
+	}
 	ai_will_do = {
 		factor = 0
 	}
@@ -5395,6 +5423,27 @@ estate_church_protected_burials = {
 	}
 	benefits = {
 		prestige = 0.5
+	}
+	conditional_modifier = {
+		trigger = {
+			has_country_modifier = support_of_neratic_clergy
+		}
+		modifier = {
+			war_exhaustion = -0.03
+			global_prosperity_growth = 0.2
+			global_monthly_devastation = -0.05
+		}
+	}
+	conditional_modifier = {
+		trigger = {
+			mission_completed = A30_overtures_to_milcorissia
+		}
+		modifier = {
+			war_exhaustion = -0.02
+			global_prosperity_growth = 0.2
+			global_monthly_devastation = -0.05
+			max_absolutism = 5
+		}
 	}
 	on_granted = {
 		custom_tooltip = reduced_aw_ghouls_tt
@@ -14894,7 +14943,7 @@ estate_nobles_rosande_noble_slaveowners = {
 	loyalty = 0
 	influence = 0.1
 	land_share = 0
-	max_absolutism = 0
+	max_absolutism = -10
 
 	can_select = {
 		has_country_flag = unlocked_estate_rosande_slaveowners
@@ -15026,5 +15075,476 @@ estate_nobility_S53_tanizu_tradition_covenant = {
 	}
 	ai_will_do = {
 		factor = 1000
+	}
+}
+
+
+
+#####
+#ACE#
+#####
+estate_steelblood_barons = {
+	icon = privilege_limited_war_support
+	
+	loyalty = 0.05
+    influence = 0.1
+    land_share = 5
+    max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } }
+
+	is_valid = {
+		OR = {
+			tag = A30
+			was_tag = A30
+		}
+		has_country_flag = established_steelblood_barons
+	}
+	
+	can_revoke = { always = yes }
+	
+	benefits = {
+		production_efficiency = 0.05
+	}
+
+	on_granted = {
+		custom_tooltip = estate_steelblood_barons_granted
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						has_terrain = mountain
+						has_terrain = dwarven_road
+					}
+					OR = {
+						trade_goods = iron
+						AND = {
+							owner = {
+								has_country_flag = steelblood_barons_copper_unlocked
+							}
+							trade_goods = copper
+						}
+					}
+				}
+				add_province_modifier = {
+					name = estate_burghers_mountain_expansion_mountains
+					duration = -1
+				}
+			}
+			every_owned_province = {
+				limit = {
+					has_terrain = highlands
+					OR = {
+						trade_goods = iron
+						AND = {
+							owner = {
+								has_country_flag = steelblood_barons_copper_unlocked
+							}
+							trade_goods = copper
+						}
+					}
+				}
+				add_province_modifier = {
+					name = estate_burghers_mountain_expansion_highlands
+					duration = -1
+				}
+			}
+			every_owned_province = {
+				limit = {
+					has_terrain = hills
+					OR = {
+						trade_goods = iron
+						AND = {
+							owner = {
+								has_country_flag = steelblood_barons_copper_unlocked
+							}
+							trade_goods = copper
+						}
+					}
+				}
+				add_province_modifier = {
+					name = estate_burghers_mountain_expansion_hills
+					duration = -1
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = wex_scaling_steel_unlocked
+			}
+			recalculate_wex_steel_modifier = yes
+		}
+		if = {
+			limit = {
+				has_country_flag = steelblood_barons_copper_unlocked
+				has_country_flag = wex_scaling_flagship_unlocked
+			}
+			recalculate_wex_bronze_modifier = yes
+		}
+		if = {
+			limit = {
+				has_country_flag = wex_scaling_artillery_unlocked
+			}
+			recalculate_wex_artillery_modifier = yes
+		}
+	}
+	on_revoked = {
+		custom_tooltip = estate_steelblood_barons_removed
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						has_province_modifier = estate_burghers_mountain_expansion_mountains
+						has_province_modifier = estate_burghers_mountain_expansion_highlands
+						has_province_modifier = estate_burghers_mountain_expansion_hills
+					}
+				}
+				remove_province_modifier = estate_burghers_mountain_expansion_mountains
+				remove_province_modifier = estate_burghers_mountain_expansion_highlands
+				remove_province_modifier = estate_burghers_mountain_expansion_hills
+			}
+		}
+		remove_wex_steel_modifier = yes
+		remove_wex_bronze_modifier = yes
+		remove_wex_artillery_modifier = yes
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+estate_burghers_vaengheim_expansion = { #ACE Vaengheim
+	icon = privilege_vaengheim_expansion
+	max_absolutism = -10
+	conditional_modifier = { 
+		trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } 
+	}
+	conditional_modifier = { 
+		trigger = { 
+            trade_goods_produced_amount = {
+                trade_goods = incense
+                amount = 10
+            }
+		} 
+		modifier = { development_cost = -0.1 } 
+	}
+	conditional_modifier = { 
+		trigger = { 
+            trade_goods_produced_amount = {
+                trade_goods = incense
+                amount = 15
+            }
+		} 
+		modifier = { global_trade_goods_size_modifier = 0.1 } 
+	}
+	conditional_modifier = { 
+		trigger = {
+            trade_goods_produced_amount = {
+                trade_goods = incense
+                amount = 30
+            }
+		} 
+		modifier = { development_cost_modifier = -0.05 } 
+	}
+	conditional_modifier = { 
+		trigger = {
+			has_country_flag = vaengheim_incense_mission_flag
+            trade_goods_produced_amount = {
+                trade_goods = incense
+                amount = 45
+            }
+		} 
+		modifier = { 
+			country_admin_power = 1
+			country_diplomatic_power = 1
+			country_military_power = 1
+		} 
+	}
+	conditional_modifier = { 
+		trigger = {
+			has_country_flag = vaengheim_incense_mission_flag
+            trade_goods_produced_amount = {
+                trade_goods = incense
+                amount = 60
+            }
+		} 
+		modifier = {  
+			administrative_efficiency = 0.1
+		} 
+	}
+	influence = 0.2
+	loyalty = 0.05
+	is_valid = {
+		has_unlocked_estate_privilege = { estate_privilege = estate_burghers_vaengheim_expansion }
+	}
+	can_select = {
+	}
+	benefits = {
+		global_colonial_growth = 10
+		colonist_placement_chance = 0.05
+	}
+	on_granted = {
+		if = {
+			limit = {
+				trade_goods_produced_amount = {
+					trade_goods = incense
+					amount = 2
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						has_terrain = forest
+					}
+					add_province_modifier = {
+						name = estate_burghers_forest_expansion_forest
+						duration = -1
+					}
+				}
+				every_owned_province = {
+					limit = {
+						has_terrain = woods
+					}
+					add_province_modifier = {
+						name = estate_burghers_forest_expansion_woods
+						duration = -1
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				trade_goods_produced_amount = {
+					trade_goods = incense
+					amount = 4
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						has_terrain = mountain
+					}
+					add_province_modifier = {
+						name = estate_burghers_mountain_expansion_mountains
+						duration = -1
+					}
+				}
+				every_owned_province = {
+					limit = {
+						has_terrain = highlands
+					}
+					add_province_modifier = {
+						name = estate_burghers_mountain_expansion_highlands
+						duration = -1
+					}
+				}
+				every_owned_province = {
+					limit = {
+						has_terrain = hills
+					}
+					add_province_modifier = {
+						name = estate_burghers_mountain_expansion_hills
+						duration = -1
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				trade_goods_produced_amount = {
+					trade_goods = incense
+					amount = 8
+				}
+			}
+        	set_country_flag = vaengheim_incense_2_flag
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						has_climate = arctic
+					}
+					add_province_modifier = {
+						name = estate_burghers_vaengheim_expansion_arctic
+						duration = -1
+					}
+				}
+			}
+    	}
+	}
+	mechanics = {
+		exempt_from_seize_land
+	}
+	on_revoked = {
+		custom_tooltip = estate_burghers_vaengheim_expansion_rt
+		hidden_effect = {
+			clr_country_flag = vaengheim_forest_expansion
+			clr_country_flag = vaengheim_mountain_expansion
+			clr_country_flag = vaengheim_arctic_expansion
+			every_owned_province = {
+				limit = {
+					OR = {
+						has_province_modifier = estate_burghers_mountain_expansion_mountains
+						has_province_modifier = estate_burghers_mountain_expansion_highlands
+						has_province_modifier = estate_burghers_mountain_expansion_hills
+						has_province_modifier = estate_burghers_forest_expansion_forest
+						has_province_modifier = estate_burghers_forest_expansion_woods
+					}
+				}
+				remove_province_modifier = estate_burghers_mountain_expansion_mountains
+				remove_province_modifier = estate_burghers_mountain_expansion_highlands
+				remove_province_modifier = estate_burghers_mountain_expansion_hills
+				remove_province_modifier = estate_burghers_forest_expansion_forest
+				remove_province_modifier = estate_burghers_forest_expansion_woods
+			}
+		}
+	}
+	penalties = {
+	}
+	benefits = {
+	}
+	ai_will_do = {
+		factor = 100
+		modifier = {
+			factor = 0
+			is_absolutism_active = yes
+		}
+	}
+}
+
+estate_clergy_vaengheim_1 = { #ACE Vaengheim
+	icon = privilege_soothing_the_winter
+	max_absolutism = -10
+	conditional_modifier = { 
+		trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } 
+	}
+	influence = 0.1
+	is_valid = {
+		has_unlocked_estate_privilege = { estate_privilege = estate_clergy_vaengheim_1 }
+	}
+	can_select = {
+	}
+	benefits = {
+		development_cost = -0.025
+   	 	church_power_modifier = 0.1
+	}
+	on_granted = {
+	}
+	mechanics = {
+	}
+	on_revoked = {
+	}
+	penalties = {
+	}
+	benefits = {
+	}
+	ai_will_do = {
+		factor = 100
+		modifier = {
+			factor = 0
+			is_absolutism_active = yes
+		}
+	}
+}
+
+estate_clergy_vaengheim_2 = { #ACE Vaengheim
+	icon = privilege_soothing_the_winter
+	max_absolutism = -10
+	conditional_modifier = { 
+		trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } 
+	}
+	influence = 0.1
+	is_valid = {
+		has_unlocked_estate_privilege = { estate_privilege = estate_clergy_vaengheim_2 }
+	}
+	can_select = {
+	}
+	benefits = {
+		governing_capacity_modifier = 0.05
+		global_missionary_strength = 0.01 
+	}
+	on_granted = {
+	}
+	mechanics = {
+	}
+	on_revoked = {
+	}
+	penalties = {
+	}
+	benefits = {
+	}
+	ai_will_do = {
+		factor = 100
+		modifier = {
+			factor = 0
+			is_absolutism_active = yes
+		}
+	}
+}
+
+estate_reavers_1 = { #ACE Vaengheim
+	icon = privilege_diversify_fluyts
+	max_absolutism = -10
+	conditional_modifier = { 
+		trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } 
+	}
+	influence = 0.1
+	is_valid = {
+		has_unlocked_estate_privilege = { estate_privilege = estate_reavers_1 }
+	}
+	can_select = {
+	}
+	benefits = {
+		trade_efficiency = 0.1
+	}
+	on_granted = {
+	}
+	mechanics = {
+	}
+	on_revoked = {
+	}
+	penalties = {
+	}
+	benefits = {
+	}
+	ai_will_do = {
+		factor = 100
+		modifier = {
+			factor = 0
+			is_absolutism_active = yes
+		}
+	}
+}
+
+estate_reavers_2 = { #ACE Vaengheim
+	icon = privilege_diversify_fluyts
+	max_absolutism = -10
+	conditional_modifier = { 
+		trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } 
+	}
+	influence = 0.1
+	is_valid = {
+		has_unlocked_estate_privilege = { estate_privilege = estate_reavers_2 }
+	}
+	can_select = {
+	}
+	benefits = {
+		may_perform_slave_raid = yes
+    	capture_ship_chance = 0.15
+	}
+	on_granted = {
+	}
+	mechanics = {
+	}
+	on_revoked = {
+	}
+	penalties = {
+	}
+	benefits = {
+	}
+	ai_will_do = {
+		factor = 100
+		modifier = {
+			factor = 0
+			is_absolutism_active = yes
+		}
 	}
 }

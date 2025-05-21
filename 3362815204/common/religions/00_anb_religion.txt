@@ -20,6 +20,21 @@ cannorian = {
 			corinite
 			ravelian
 		}
+		allowed_center_conversion = {
+			corinite
+		}
+		will_get_center = { #Referred to even for initial CoR Spawn
+			OR = {
+				is_year = 1550
+				has_global_flag = crimson_deluge_is_over
+			}
+			any_owned_province = {
+				can_have_center_of_reformation_trigger = {
+					RELIGION = regent_court
+
+				}
+			}
+		}
 		country = {
 			tolerance_heathen = 2
 			stability_cost_modifier = -0.15
@@ -948,7 +963,7 @@ cannorian = {
 			}
 		}
 
-		heretic = { AGRADOSIAN_ELECT DEMONWORSHIPPERS }
+		heretic = { AGRADOSIAN_ELECT DEMONWORSHIPPERS DEVILWORSHIPPERS }
 	}
 
 	crusade_name = CRUSADE
@@ -3260,28 +3275,38 @@ gerudian = {
 		allowed_conversion = {
 		}
 		country = {
-			stability_cost_modifier = -0.1
-			tolerance_own = 1
+			stability_cost_modifier = -0.15
+   		 	recover_army_morale_speed = 0.10
+ 		 	church_power_modifier = -0.75 #you have a religious mage organization
 		}
 		country_as_secondary = {
 			global_missionary_strength = 0.02
 			infantry_power = 0.10
 		}
-		personal_deity = yes
-
-		province = {
-			local_missionary_strength = -0.02	#its harder to convert them
+		uses_church_power = yes
+		aspects = {
+			ace_the_dragon_and_the_skald
+			ace_voyage_of_the_north_raider
+			ace_beralic_saga
+			ace_dirge_of_the_deep
+			ace_treasure_of_the_golden_forest
+			ace_the_old_winter_lullaby
+			ace_tale_of_leif_snaketongue
+			ace_harpies
+			ace_master_boat_builders_of_far_gerudia_beyond #150
+			ace_skcorin #150
+			ace_gjalund_and_the_giantslayers #150
+			ace_elven_voyages #150
+			ace_ebonsteel #150
+			ace_olav #150
+			ace_gnomes #150
+			ace_blue_reach #150
+			ace_ambrstrond #200 cost
+			ace_anbenncost #200 cost
+			ace_castan_ebonfrost #200 cost
+			ace_harpies_upgraded #200 cost
 		}
-
-		on_convert = {
-			change_religion = skaldhyrric_faith
-			add_prestige = -100
-
-			add_country_modifier = {
-				name = "conversion_zeal"
-				duration = 3650
-			}
-		}
+		aspects_name = ACE_SKALDHYRRIC_ASPECTS
 
 		heretic = { AWAKER }
 	}
@@ -3572,6 +3597,7 @@ dragon_cult = {
 			}
 			effect = {
 				country_event = { id = flavour_kobold_dragon_cult.1 }
+				custom_tooltip = kdc_festival_explainer_tt
 			}
 			ai_will_do = {
 				factor = 1
@@ -6306,7 +6332,7 @@ raheni = {
 			all_walk_nitikamarja
 			guru_diplomacy
 			horizons_of_mind
-			promote_school_unity
+			promote_long_path
 			paradigmatic_zeal
 		}
 		aspects_name = ANGLICAN_ASPECTS
@@ -6601,30 +6627,11 @@ halessi = {
 							remove_church_aspect = random
 							remove_church_aspect = random
 							if = {
-								limit = { adm = 5 }
-								add_ruler_modifier = {
-									name = accretive_path_liberation_of_the_mind_major_improved_mod
-									duration = -1
-								}
-							}
-							else_if = {
-								limit = { adm = 4 }
-								change_adm = 1
-							}
-							else_if = {
-								limit = { adm = 3 }
-								change_adm = 2
-							}
-							else_if = {
-								limit = { adm = 2 }
-								change_adm = 3
-							}
-							else_if = {
-								limit = { adm = 1 }
-								change_adm = 4
+								limit = { adm = 6 }
+								add_adm_power = 100
 							}
 							else = {
-								change_adm = 5
+								change_adm = 1
 							}
 						}
 
@@ -6641,30 +6648,11 @@ halessi = {
 							remove_church_aspect = random
 							remove_church_aspect = random
 							if = {
-								limit = { dip = 5 }
-								add_ruler_modifier = {
-									name = accretive_path_liberation_of_the_soul_major_improved_mod
-									duration = -1
-								}
-							}
-							else_if = {
-								limit = { dip = 4 }
-								change_dip = 1
-							}
-							else_if = {
-								limit = { dip = 3 }
-								change_dip = 2
-							}
-							else_if = {
-								limit = { dip = 2 }
-								change_dip = 3
-							}
-							else_if = {
-								limit = { dip = 1 }
-								change_dip = 4
+								limit = { dip = 6 }
+								add_dip_power = 100
 							}
 							else = {
-								change_dip = 5
+								change_dip = 1
 							}
 						}
 
@@ -6681,30 +6669,11 @@ halessi = {
 							remove_church_aspect = random
 							remove_church_aspect = random
 							if = {
-								limit = { mil = 5 }
-								add_ruler_modifier = {
-									name = accretive_path_liberation_of_the_body_major_improved_mod
-									duration = -1
-								}
-							}
-							else_if = {
-								limit = { mil = 4 }
-								change_mil = 1
-							}
-							else_if = {
-								limit = { mil = 3 }
-								change_mil = 2
-							}
-							else_if = {
-								limit = { mil = 2 }
-								change_mil = 3
-							}
-							else_if = {
-								limit = { mil = 1 }
-								change_mil = 4
+								limit = { mil = 6 }
+								add_mil_power = 100
 							}
 							else = {
-								change_mil = 5
+								change_mil = 1
 							}
 						}
 
@@ -6895,6 +6864,8 @@ halessi = {
 			transmutative_path_dessicate_landscape
 			transmutative_path_dredge_the_flats
 			transmutative_path_threadeth_the_corn
+			transmutative_path_irrigate_jungle_plantations
+			transmutative_path_hon_sai_ghost_emperor
 		}
 		aspects_name = TRANSMUTATIVE_PATH_ASPECTS
 

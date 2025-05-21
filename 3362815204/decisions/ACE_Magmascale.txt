@@ -1,0 +1,95 @@
+country_decisions = {
+	flood_spine = {
+		major = yes
+		potential = {
+			tag = AC5
+			has_country_flag = emergency_lava_flood
+		}
+		allow = {
+			tag = AC5
+			OR = {
+				custom_trigger_tooltip = {
+					tooltip = AC5_serpentrot_disaster_tooltip
+					AND = {
+						has_global_flag = serpent_rot_happening
+						NOT = {
+							has_global_flag = serpent_rot_happened
+							serpentreach_region = {
+								OR = {
+									has_province_modifier = serpent_rot_1
+									has_province_modifier = serpent_rot_2
+								}
+							}
+						}
+						west_dwarovar_region = {
+							OR = {
+								has_province_modifier = serpent_rot_1
+								has_province_modifier = serpent_rot_2
+							}
+						}
+					}
+				}
+				custom_trigger_tooltip = {
+					tooltip = AC5_obsidian_invasion_tooltip
+					OR = {
+						offensive_war_with = H94
+						defensive_war_with = H94
+					}
+				}
+				has_disaster = goblin_tide
+			}
+		}
+		effect = {
+			custom_tooltip = AC5_only_one_flood_tooltip
+			clr_country_flag = emergency_lava_flood
+			if = {
+				limit = {
+					has_global_flag = serpent_rot_happening
+					NOT = {
+						has_global_flag = serpent_rot_happened
+						serpentreach_region = {
+							OR = {
+								has_province_modifier = serpent_rot_1
+								has_province_modifier = serpent_rot_2
+							}
+						}
+					}
+					west_dwarovar_region = {
+						OR = {
+							has_province_modifier = serpent_rot_1
+							has_province_modifier = serpent_rot_2
+						}
+					}
+				}
+				country_event = {
+					id = flavor_magmascale.20
+				}
+			}
+			else_if = {
+				limit = {
+					OR = {
+						offensive_war_with = H94
+						defensive_war_with = H94
+					}
+				}
+				country_event = {
+					id = flavor_magmascale.22
+				}
+			}
+			else_if = {
+				limit = {
+					has_disaster = goblin_tide
+				}
+				country_event = {
+					id = flavor_magmascale.24
+				}
+			}
+			else = {
+				custom_tooltip = AC5_disaster_flood_outcome_tooltip
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+}
