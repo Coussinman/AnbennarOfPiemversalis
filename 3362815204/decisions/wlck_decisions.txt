@@ -1,0 +1,31 @@
+country_decisions = {
+    warlock_decision = {
+        major = yes
+
+        potential = {
+            has_country_flag = warlockpkk_decision_unlocked
+        }
+
+        allow = {
+            hidden_trigger = {
+                NOT = { has_country_modifier = warlockpkk_cooldown }
+            }
+        }
+
+        effect = {
+            country_event = { id = warlockpkk_event.3 }
+            add_country_modifier = {
+                name = warlockpkk_cooldown
+                duration = 31
+            }
+        }
+
+        ai_will_do = {
+            factor = 1
+            modifier = {
+                factor = 0
+                always = yes
+            }
+        }
+    }
+}
