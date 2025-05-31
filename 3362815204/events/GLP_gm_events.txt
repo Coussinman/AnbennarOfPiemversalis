@@ -1,0 +1,113 @@
+namespace = glp_gm_events
+normal_or_historical_nations = yes
+
+country_event = {
+	id = glp_gm_events.1
+	title = none
+	desc = none
+	picture = none
+    hidden = yes
+		
+	is_triggered_only = yes
+    #fire_only_once = yes
+
+	trigger = {
+        OR = {
+            tag = A1A
+            tag = A2A
+        }
+	}
+
+    immediate = { # todo : modif region
+		#Provinces discovery
+    	every_province = {
+            ROOT = {
+                discover_province = PREV
+            }
+		}
+		west_american_sea_superregion = {
+            ROOT = {
+                discover_province = PREV
+            }
+		}
+		east_american_sea_superregion = {
+            ROOT = {
+                discover_province = PREV
+            }
+		}
+		north_european_sea_superregion = {
+            ROOT = {
+                discover_province = PREV
+            }
+		}
+		south_european_sea_superregion = {
+            ROOT = {
+                discover_province = PREV
+            }
+		}
+		west_african_sea_superregion = {
+            ROOT = {
+                discover_province = PREV
+            }
+		}
+		east_african_sea_superregion = {
+            ROOT = {
+                discover_province = PREV
+            }
+		}
+		indian_pacific_sea_superregion = {
+            ROOT = {
+                discover_province = PREV
+            }
+		}
+		north_pacific_sea_superregion = {
+            ROOT = {
+                discover_province = PREV
+            }
+		}
+    }
+	option = {
+	}
+}
+
+#Removed Autonomy
+country_event = {
+    id = glp_gm_events.3
+    title = "glp_gm_events.EVTNAME3"
+    desc = "glp_gm_events.EVTDESC3"
+    picture = HRE_eventPicture
+
+    is_triggered_only = yes
+
+    trigger = {
+    }
+
+    mean_time_to_happen = {
+    }
+
+    option = {
+        name = "glp_gm_events.EVTOPTA3"
+        custom_tooltip = "glp_removed_autonomy_tt"
+    }
+}
+
+#Insitution
+country_event = {
+    id = glp_gm_events.4
+    title = "glp_gm_events.EVTNAME4"
+    desc = "glp_gm_events.EVTDESC4"
+    picture = HRE_eventPicture
+
+    is_triggered_only = yes
+
+    trigger = {
+    }
+
+    mean_time_to_happen = {
+    }
+
+    option = {
+        name = "glp_gm_events.EVTOPTA4"
+        custom_tooltip = "glp_institution_spawned_tt"
+    }
+}
