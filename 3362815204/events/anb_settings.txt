@@ -168,6 +168,20 @@ country_event = {
 			# if = { limit = { has_global_flag = delete_insyaa_region }
 				# oceania = { destroy_province_permanently = yes }
 			# }
+			#################piemversalis#####################
+			if = { limit = { has_global_flag = delete_admin }
+ 				1001 = {
+				change_culture = no_culture
+				change_religion = no_religion
+				destroy_province = yes
+				}
+				5791 = {
+				change_culture = no_culture
+				change_religion = no_religion
+				destroy_province = yes
+			    }
+			}
+
 		}
 		set_global_flag = settings_done
 		clr_global_flag = settings_opened 
@@ -887,6 +901,23 @@ country_event = {
 		# }
 		# hidden_effect = { country_event = { id = anb_settings.100 } }
 	# }
+	########################ADMIN Piemversalis#################################
+	option = {
+		name = anb_settings.3.q
+		trigger = { NOT = { has_global_flag = delete_admin } }
+		custom_tooltip = disable_region_tt
+		set_global_flag = delete_admin
+		hidden_effect = { country_event = { id = anb_settings.100 } }
+	}
+	option = {
+		name = anb_settings.3.qx
+		trigger = { has_global_flag = delete_admin }
+		clr_global_flag = delete_admin
+		hidden_effect = { country_event = { id = anb_settings.100 } }
+	}
+	########################ADMIN Piemversalis end#############################
+
+
 	
 	#Go back
 	option = {
