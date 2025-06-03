@@ -6126,234 +6126,286 @@ country_event = {
 	}
 
 	option = {
-		name = "glp_save_edit_events.EVTOPTJ71"
+		name = "glp_save_edit_events.EVTBATZZ1"
 	}
 
 	option = {
-		name = "glp_save_edit_events.EVTOPTA71"
+		name = "glp_save_edit_events.EVTBATA01"
 		FROM = {
-			if = {
-				limit = {
-					has_manufactory_trigger = no
-				}
 				add_manufactory = yes
-			}
 		}
 	}
 
 	option = {
-		name = "glp_save_edit_events.EVTOPTB71"
-		trigger = {
-			FROM = {
-				num_free_building_slots = 2
-				owner = {
-					adm_tech = 6
-				}
-			}
-		}
+		name = "glp_save_edit_events.EVTBATA02"
 		FROM = {
-			if = {
 				limit = {
-					has_tax_building_trigger = no
+					has_manufactory_trigger = yes
 				}
+				remove_building = manufactory
+		}
+	}
+
+	option = {
+		name = "glp_save_edit_events.EVTBATA03"
+		FROM = {
 				add_building = temple
-			}
-			if = {
-				limit = {
-					has_production_building_trigger = no
-				}
-				add_building = workshop
-			}
 		}
 	}
 
 	option = {
-		name = "glp_save_edit_events.EVTOPTC71"
-		trigger = {
-			FROM = {
-				OR = {
-					num_free_building_slots = 2
-					AND = {
-						num_free_building_slots = 1
-						has_tax_building_trigger = yes
-					}
-					AND = {
-						num_free_building_slots = 1
-						has_production_building_trigger = yes
-					}
-					AND = {
-						has_production_building_trigger = yes
-						has_tax_building_trigger = yes
-					}
-				}
-				owner = {
-					adm_tech = 24
-				}
-			}
-		}
+		name = "glp_save_edit_events.EVTBATA04"
 		FROM = {
-			if = {
-				limit = {
-					has_building = temple
-				}
-				remove_building = temple
-			}
+				add_building = workshop
+		}
+	}
+
+	option = {
+		name = "glp_save_edit_events.EVTBATA05"
+		FROM = {
 			add_building = cathedral
-			if = {
-				limit = {
-					has_building = workshop
-				}
-				remove_building = workshop
-			}
+		}
+	}
+
+	option = {
+		name = "glp_save_edit_events.EVTBATA06"
+		FROM = {
 			add_building = counting_house
 		}
 	}
 
 	option = {
-		name = "glp_save_edit_events.EVTOPTD71"
-		trigger = {
-			FROM = {
-				num_free_building_slots = 2
-				owner = {
-					mil_tech = 8
-				}
-			}
-		}
+		name = "glp_save_edit_events.EVTBATA07"
 		FROM = {
-			if = {
-				limit = {
-					NOT = { has_building = barracks }
-				}
-				add_building = barracks
-			}
-			if = {
-				limit = {
-					NOT = { has_building = regimental_camp }
-				}
-				add_building = regimental_camp
-			}
+			add_building = barracks
 		}
 	}
 
 	option = {
-		name = "glp_save_edit_events.EVTOPTE71"
-		trigger = {
-			FROM = {
-				OR = {
-					num_free_building_slots = 2
-					AND = {
-						num_free_building_slots = 1
-						has_building = barracks
-					}
-					AND = {
-						num_free_building_slots = 1
-						has_building = regimental_camp
-					}
-					AND = {
-						has_building = regimental_camp
-						has_building = barracks
-					}
-				}
-				owner = {
-					mil_tech = 22
-				}
-			}
-		}
+		name = "glp_save_edit_events.EVTBATA08"
 		FROM = {
-			if = {
-				limit = {
-					has_building = regimental_camp
-				}
-				remove_building = regimental_camp
-			}
+			add_building = regimental_camp
+		}
+	}
+
+	option = {
+		name = "glp_save_edit_events.EVTBATA09"
+		FROM = {
 			add_building = conscription_center
-			if = {
-				limit = {
-					has_building = barracks
-				}
-				remove_building = barracks
-			}
+		}
+	}
+
+	option = {
+		name = "glp_save_edit_events.EVTBATA10"
+		FROM = {
 			add_building = training_fields
 		}
 	}
 
 	option = {
-		name = "glp_save_edit_events.EVTOPTF71"
+		name = "glp_save_edit_events.EVTBATA11"
 		FROM = {
 			if = {
-				limit = {
-					has_tax_building_trigger = no
-					num_free_building_slots = 1
-				}
-				add_building = temple
-			}
-			else_if = {
 				limit = {
 					has_building = temple
 				}
 				remove_building = temple
-				add_building = cathedral
+			}
+			else_if = {
+				limit = {
+					has_building = cathedral
+				}
+				remove_building = cathedral
 			}
 		}
 	}
 
 	option = {
-		name = "glp_save_edit_events.EVTOPTG71"
+		name = "glp_save_edit_events.EVTBATA12"
 		FROM = {
 			if = {
-				limit = {
-					has_production_building_trigger = no
-					num_free_building_slots = 1
-				}
-				add_building = workshop
-			}
-			else_if = {
 				limit = {
 					has_building = workshop
 				}
 				remove_building = workshop
-				add_building = counting_house
+			}
+			else_if = {
+				limit = {
+					has_building = counting_house
+				}
+				remove_building = counting_house
 			}
 		}
 	}
 
 	option = {
-		name = "glp_save_edit_events.EVTOPTH71"
+		name = "glp_save_edit_events.EVTBATA13"
 		FROM = {
 			if = {
-				limit = {
-					NOT = { has_building = barracks }
-					num_free_building_slots = 1
-				}
-				add_building = barracks
-			}
-			else_if = {
 				limit = {
 					has_building = barracks
 				}
 				remove_building = barracks
-				add_building = training_fields
+			}
+			else_if = {
+				limit = {
+					has_building = training_fields
+				}
+				remove_building = training_fields
 			}
 		}
 	}
 
 	option = {
-		name = "glp_save_edit_events.EVTOPTI71"
+		name = "glp_save_edit_events.EVTBATA14"
 		FROM = {
 			if = {
-				limit = {
-					NOT = { has_building = regimental_camp }
-					num_free_building_slots = 1
-				}
-				add_building = regimental_camp
-			}
-			else_if = {
 				limit = {
 					has_building = regimental_camp
 				}
 				remove_building = regimental_camp
-				add_building = conscription_center
+			}
+			else_if = {
+				limit = {
+					has_building = conscription_center
+				}
+				remove_building = conscription_center
 			}
 		}
 	}
+
+	option = {
+		name = "glp_save_edit_events.EVTBATA15"
+		FROM = {
+			if = {
+				limit = {
+					has_building = early_road
+				}
+				remove_building = early_road
+				add_building = gravel_road
+			}
+			else_if = {
+				limit = {
+					has_building = gravel_road
+				}
+				remove_building = gravel_road
+				add_building = royal_road
+			}
+			else_if = {
+				limit = {
+					has_building = royal_road
+				}
+				remove_building = royal_road
+				add_building = macadam_road
+			}
+			else_if = {
+				limit = {
+					has_building = macadam_road
+				}
+				remove_building = macadam_road
+				add_building = railroad
+			}
+			else = {
+				add_building = early_road
+			}
+		}
+	}
+
+	option = {
+		name = "glp_save_edit_events.EVTBATA16"
+		FROM = {
+			add_building = mage_tower
+		}
+	}
+
+	option = {
+		name = "glp_save_edit_events.EVTBATA17"
+		FROM = {
+			if = {
+				limit = {
+					has_building = mage_tower
+				}
+				add_building = mage_tower
+			}
+		}
+	}
+
+	option = {
+		name = "glp_save_edit_events.EVTBATA18"
+		FROM = {
+			add_building = fort_magic
+		}
+	}
+
+	option = {
+		name = "glp_save_edit_events.EVTBATA19"
+		FROM = {
+			if = {
+				limit = {
+					has_building = fort_magic
+				}
+				add_building = fort_magic
+			}
+		}
+	}
+	
+	option = {
+		name = "glp_save_edit_events.EVTBATA20"
+		FROM = {
+			add_building = fort_15th
+		}
+	}
+
+	option = {
+		name = "glp_save_edit_events.EVTBATA21"
+		FROM = {
+			add_building = fort_16th
+		}
+	}
+
+	option = {
+		name = "glp_save_edit_events.EVTBATA22"
+		FROM = {
+			add_building = fort_17th
+		}
+	}
+
+	option = {
+		name = "glp_save_edit_events.EVTBATA23"
+		FROM = {
+			add_building = fort_18th
+		}
+	}
+
+	option = {
+		name = "glp_save_edit_events.EVTBATA24"
+		FROM = {
+			if = {
+				limit = {
+					has_building = fort_15th
+				}
+				remove_building = fort_15th
+			}
+			else_if = {
+				limit = {
+					has_building = fort_16th
+				}
+				remove_building = fort_16th
+			}
+			else_if = {
+				limit = {
+					has_building = fort_17th
+				}
+				remove_building = fort_17th
+			}
+			else_if = {
+				limit = {
+					has_building = fort_18th
+				}
+				remove_building = fort_18th
+			}
+		}
+	}
+	
+
 }
