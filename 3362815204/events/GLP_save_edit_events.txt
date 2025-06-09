@@ -3705,7 +3705,7 @@ country_event = {
 			}
 		}
 	}
-		option = {
+	option = {
 		name = "glp_save_edit_events.EVTFIXINGA12"
 		FROM = {
 			owner = {
@@ -4224,16 +4224,16 @@ country_event = {
 	}
 
 	option = {
-		name = "glp_save_edit_events.EVTOPTA28"
+		name = "glp_save_edit_events.EVTCAPACTIVEZZ1"
 	}
 
 	option = {
-		name = "glp_save_edit_events.EVTOPTB28"
+		name = "glp_save_edit_events.EVTCAPACTIVEA01"
 		FROM = {
 			owner = {
 				add_country_modifier = {
-					name = "glp_quest_reward_colonist"
-					duration = 3650
+					name = "glp_idea_industrial_completed"
+					duration = 7300
 				}
 				country_event = { id = glp_save_edit_events.29 }
 			}
@@ -4241,130 +4241,269 @@ country_event = {
 	}
 
 	option = {
-		name = "glp_save_edit_events.EVTOPTC28"
+		name = "glp_save_edit_events.EVTCAPACTIVEA02"
 		FROM = {
 			owner = {
 				add_country_modifier = {
-					name = "glp_quest_reward_settler"
-					duration = 3650
+					name = "glp_idea_innovation_completed"
+					duration = 7300
 				}
+				#donner 25 d'innovation
 				country_event = { id = glp_save_edit_events.29 }
 			}
 		}
 	}
-
 	option = {
-		name = "glp_save_edit_events.EVTOPTD28"
+		name = "glp_save_edit_events.EVTCAPACTIVEA03"
 		FROM = {
 			owner = {
 				add_country_modifier = {
-					name = "glp_quest_reward_missionary"
-					duration = 3650
+					name = "glp_idea_economic_completed"
+					duration = 7300
 				}
+				add_years_of_income = 5
 				country_event = { id = glp_save_edit_events.29 }
 			}
 		}
 	}
-
 	option = {
-		name = "glp_save_edit_events.EVTOPTE28"
+		name = "glp_save_edit_events.EVTCAPACTIVEA04"
 		FROM = {
 			owner = {
 				add_country_modifier = {
-					name = "glp_quest_reward_conversion"
-					duration = 3650
+					name = "glp_idea_expansion_completed"
+					duration = 7300
 				}
 				country_event = { id = glp_save_edit_events.29 }
 			}
 		}
 	}
-
 	option = {
-		name = "glp_save_edit_events.EVTOPTF28"
+		name = "glp_save_edit_events.EVTCAPACTIVEA05"
 		FROM = {
 			owner = {
-				custom_tooltip = glp_new_merc_company
 				add_country_modifier = {
-					name = "glp_quest_reward_mercenary"
-					duration = 3650
+					name = "glp_idea_administrative_completed"
+					duration = 7300
 				}
+				add_adm_power = 600
 				country_event = { id = glp_save_edit_events.29 }
-				#set_country_flag = glp_merc_quest_reward_flag
 			}
 		}
 	}
-
 	option = {
-		name = "glp_save_edit_events.EVTOPTJ28"
+		name = "glp_save_edit_events.EVTCAPACTIVEA06"
 		FROM = {
 			owner = {
-				custom_tooltip = glp_new_merc_company
 				add_country_modifier = {
-					name = "glp_quest_reward_mercenary_inf"
-					duration = 3650
+					name = "glp_idea_tolerance_completed"
+					duration = 7300
 				}
 				country_event = { id = glp_save_edit_events.29 }
-				set_country_flag = glp_inf_merc_quest_reward_flag
 			}
 		}
 	}
-
 	option = {
-		name = "glp_save_edit_events.EVTOPTK28"
-		trigger = {
-			FROM = { owner = { mil_tech = 7 } }
-		}
+		name = "glp_save_edit_events.EVTCAPACTIVEA07"
 		FROM = {
 			owner = {
-				custom_tooltip = glp_new_merc_company
 				add_country_modifier = {
-					name = "glp_quest_reward_mercenary_art"
-					duration = 3650
+					name = "glp_idea_religious_completed"
+					duration = 7300
 				}
 				country_event = { id = glp_save_edit_events.29 }
-				set_country_flag = glp_art_merc_quest_reward_flag
 			}
 		}
 	}
-
 	option = {
-		name = "glp_save_edit_events.EVTOPTG28"
+		name = "glp_save_edit_events.EVTCAPACTIVEA08"
 		FROM = {
 			owner = {
 				add_country_modifier = {
-					name = "glp_quest_reward_trader"
-					duration = 3650
+					name = "glp_idea_elven_supremacy_completeds"
+					duration = 7300
 				}
+				add_yearly_manpower = 1
 				country_event = { id = glp_save_edit_events.29 }
 			}
 		}
 	}
-
 	option = {
-		name = "glp_save_edit_events.EVTOPTH28"
+		name = "glp_save_edit_events.EVTCAPACTIVEA09"
 		FROM = {
 			owner = {
 				add_country_modifier = {
-					name = "glp_quest_reward_stability"
-					duration = 3650
+					name = "glp_idea_jurisprudence_completed"
+					duration = 7300
 				}
+				save_event_target_as = glp_ae_opinion_remove
 				country_event = { id = glp_save_edit_events.29 }
+			}
+			every_country = {
+				limit = {
+					has_opinion_modifier = {
+						who = event_target:glp_ae_opinion_remove
+						modifier = aggressive_expansion
+					}
+				}
+				remove_opinion = {
+					who = event_target:glp_ae_opinion_remove
+					modifier = aggressive_expansion
+				}
 			}
 		}
 	}
-
 	option = {
-		name = "glp_save_edit_events.EVTOPTI28"
+		name = "glp_save_edit_events.EVTCAPACTIVEA10"
 		FROM = {
 			owner = {
 				add_country_modifier = {
-					name = "glp_quest_reward_diplomatic"
-					duration = 3650
+					name = "glp_idea_health_completed"
+					duration = 7300
 				}
 				country_event = { id = glp_save_edit_events.29 }
 			}
 		}
 	}
+	option = {
+		name = "glp_save_edit_events.EVTCAPACTIVEA11"
+		FROM = {
+			owner = {
+				add_country_modifier = {
+					name = "glp_idea_plutocracy_completed"
+					duration = 7300
+				}
+				country_event = { id = glp_save_edit_events.29 }
+			}
+		}
+	}
+	
+
+#	option = {
+#		name = "glp_save_edit_events.EVTOPTC28"
+#		FROM = {
+#			owner = {
+#				add_country_modifier = {
+#					name = "glp_quest_reward_settler"
+#					duration = 3650
+#				}
+#				country_event = { id = glp_save_edit_events.29 }
+#			}
+#		}
+#	}
+#
+#	option = {
+#		name = "glp_save_edit_events.EVTOPTD28"
+#		FROM = {
+#			owner = {
+#				add_country_modifier = {
+#					name = "glp_quest_reward_missionary"
+#					duration = 3650
+#				}
+#				country_event = { id = glp_save_edit_events.29 }
+#			}
+#		}
+#	}
+#
+#	option = {
+#		name = "glp_save_edit_events.EVTOPTE28"
+#		FROM = {
+#			owner = {
+#				add_country_modifier = {
+#					name = "glp_quest_reward_conversion"
+#					duration = 3650
+#				}
+#				country_event = { id = glp_save_edit_events.29 }
+#			}
+#		}
+#	}
+#
+#	option = {
+#		name = "glp_save_edit_events.EVTOPTF28"
+#		FROM = {
+#			owner = {
+#				custom_tooltip = glp_new_merc_company
+#				add_country_modifier = {
+#					name = "glp_quest_reward_mercenary"
+#					duration = 3650
+#				}
+#				country_event = { id = glp_save_edit_events.29 }
+#				#set_country_flag = glp_merc_quest_reward_flag
+#			}
+#		}
+#	}
+#
+#	option = {
+#		name = "glp_save_edit_events.EVTOPTJ28"
+#		FROM = {
+#			owner = {
+#				custom_tooltip = glp_new_merc_company
+#				add_country_modifier = {
+#					name = "glp_quest_reward_mercenary_inf"
+#					duration = 3650
+#				}
+#				country_event = { id = glp_save_edit_events.29 }
+#				set_country_flag = glp_inf_merc_quest_reward_flag
+#			}
+#		}
+#	}
+#
+#	option = {
+#		name = "glp_save_edit_events.EVTOPTK28"
+#		trigger = {
+#			FROM = { owner = { mil_tech = 7 } }
+#		}
+#		FROM = {
+#			owner = {
+#				custom_tooltip = glp_new_merc_company
+#				add_country_modifier = {
+#					name = "glp_quest_reward_mercenary_art"
+#					duration = 3650
+#				}
+#				country_event = { id = glp_save_edit_events.29 }
+#				set_country_flag = glp_art_merc_quest_reward_flag
+#			}
+#		}
+#	}
+#
+#	option = {
+#		name = "glp_save_edit_events.EVTOPTG28"
+#		FROM = {
+#			owner = {
+#				add_country_modifier = {
+#					name = "glp_quest_reward_trader"
+#					duration = 3650
+#				}
+#				country_event = { id = glp_save_edit_events.29 }
+#			}
+#		}
+#	}
+#
+#	option = {
+#		name = "glp_save_edit_events.EVTOPTH28"
+#		FROM = {
+#			owner = {
+#				add_country_modifier = {
+#					name = "glp_quest_reward_stability"
+#					duration = 3650
+#				}
+#				country_event = { id = glp_save_edit_events.29 }
+#			}
+#		}
+#	}
+#
+#	option = {
+#		name = "glp_save_edit_events.EVTOPTI28"
+#		FROM = {
+#			owner = {
+#				add_country_modifier = {
+#					name = "glp_quest_reward_diplomatic"
+#					duration = 3650
+#				}
+#				country_event = { id = glp_save_edit_events.29 }
+#			}
+#		}
+#	}
 }
 
 country_event = {
