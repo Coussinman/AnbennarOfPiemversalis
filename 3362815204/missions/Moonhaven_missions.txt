@@ -2103,7 +2103,10 @@ moonhaven_colonial_missions = {
 		position = 12
 		required_missions = { A31_east } 
 		provinces_to_highlight = {
-			superregion = yanshen_superregion
+			OR = {
+				superregion = yanshen_superregion
+				superregion = taychend_superregion
+			}
 			trade_goods = tea
 			NOT = { owned_by = ROOT } 
 			has_discovered = ROOT
@@ -2113,7 +2116,10 @@ moonhaven_colonial_missions = {
 			treasury = 500
 			num_of_owned_provinces_with = {
 				value = 5
+				OR = {
 				superregion = yanshen_superregion
+				superregion = taychend_superregion
+				}
 				trade_goods = tea
 			}
 		}
@@ -2525,6 +2531,9 @@ moonhaven_exploration_missions = {
 						value = 120
 					}
 				}
+				any_owned_province = {
+					region = ardimya_region
+				}
 			}
 		}
 		effect = {
@@ -2554,6 +2563,7 @@ moonhaven_exploration_missions = {
 					OR = {
 						superregion = rahen_superregion
 						superregion = vimdatrong_superregion
+						superregion = taychend_superregion
 					}
 					trade_goods = tea
 				}
@@ -2562,6 +2572,7 @@ moonhaven_exploration_missions = {
 						OR = {
 							superregion = rahen_superregion
 							superregion = vimdatrong_superregion
+							superregion = taychend_superregion
 						}
 					}
 					has_spy_network_from = {
