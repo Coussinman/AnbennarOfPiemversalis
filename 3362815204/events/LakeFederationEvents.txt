@@ -1672,7 +1672,6 @@ country_event = {
 	
 	immediate = {
 		hidden_effect = {
-			federation_decrease_cohesion_all = yes
 			remove_country_modifier = lake_federation_member
 			clr_country_flag = LF_mages_banned
 		}
@@ -2600,7 +2599,7 @@ country_event = {
 	
 	
 	mean_time_to_happen = {
-		years = 600
+		years = 50000
 	}
 	fire_only_once = yes
 	
@@ -2951,7 +2950,7 @@ country_event = {
 		}
 	}
 	
-	#Buogoj (Doubled for Daengun)
+	#Onman (Doubled for danggun)
 	option = {
 		name = lake.67.b
 		goto = 5356
@@ -3935,182 +3934,182 @@ country_event = { #Exceptional Sailor
 	}
 }
 
-country_event = { #Restore Besholgi Culture
-	id = lake.76
-	title = lake.76.t
-	desc = lake.76.d
-	picture = NATIVES_eventPicture
+#country_event = { #Restore Besholgi Culture
+#	id = lake.76
+#	title = lake.76.t
+#	desc = lake.76.d
+#	picture = NATIVES_eventPicture
+#
+#	is_triggered_only = yes
+#
+#	option = { #Accept
+#		name = lake.76.a
+#		ai_chance = {
+#			factor = 100
+#		}
+#		custom_tooltip = lake.76.tt
+#		hidden_effect = {
+#			tuusbulak_area = {
+#				change_culture = tuugalak
+#			}
+#			bagdagerin_area = {
+#				change_culture = mogirga
+#			}
+#			mogomorin_area = {
+#				change_culture = mogirga
+#			}
+#			dolshob_area = {
+#				change_culture = tuugalak
+#			}
+#			kokevdan_area = {
+#				change_culture = ulukungu
+#			}
+#			nurboesig_area = {
+#				change_culture = ulukungu
+#			}
+#		}
+#		add_accepted_culture = tuugalak
+#		add_accepted_culture = mogirga
+#		add_accepted_culture = ulukungu
+#		add_country_modifier = {
+#			name = federation_come_to_accept_1
+#			duration = -1
+#		}
+#		custom_tooltip = federation_remove_citizen_accept_1_tt
+#		add_dip_power = -200
+#	}
+#
+#	option = { #Decline
+#		name = lake.76.b
+#		ai_chance = {
+#			factor = 0
+#		}
+#		moduk_region = {
+#			add_province_modifier = {
+#				name = federation_repressed_besholgi
+#				duration = 18250
+#			}
+#		}
+#	}
+#}
 
-	is_triggered_only = yes
-
-	option = { #Accept
-		name = lake.76.a
-		ai_chance = {
-			factor = 100
-		}
-		custom_tooltip = lake.76.tt
-		hidden_effect = {
-			tuusbulak_area = {
-				change_culture = tuugalak
-			}
-			bagdagerin_area = {
-				change_culture = mogirga
-			}
-			mogomorin_area = {
-				change_culture = mogirga
-			}
-			dolshob_area = {
-				change_culture = tuugalak
-			}
-			kokevdan_area = {
-				change_culture = ulukungu
-			}
-			nurboesig_area = {
-				change_culture = ulukungu
-			}
-		}
-		add_accepted_culture = tuugalak
-		add_accepted_culture = mogirga
-		add_accepted_culture = ulukungu
-		add_country_modifier = {
-			name = federation_come_to_accept_1
-			duration = -1
-		}
-		custom_tooltip = federation_remove_citizen_accept_1_tt
-		add_dip_power = -200
-	}
-
-	option = { #Decline
-		name = lake.76.b
-		ai_chance = {
-			factor = 0
-		}
-		moduk_region = {
-			add_province_modifier = {
-				name = federation_repressed_besholgi
-				duration = 18250
-			}
-		}
-	}
-}
-
-country_event = { #Runsukhi want help against facestealers
-	id = lake.77
-	title = lake.77.t
-	desc = lake.77.d
-	picture = NATIVES_LOW_eventPicture
-
-	is_triggered_only = yes
-
-	option = { #Accept
-		name = lake.77.a
-		ai_chance = {
-			factor = 85
-		}
-		add_adm_power = -50
-		add_dip_power = -50
-		add_mil_power = -50
-		add_manpower = -25
-		add_country_modifier = {
-			name = federation_helping_runsukhi
-			duration = 1825
-		}
-		hidden_effect = {
-			country_event = {
-				id = lake.78
-				days = 365
-				random = 365
-			}
-		}
-	}
-
-	option = { #Decline
-		name = lake.77.b
-		ai_chance = {
-			factor = 15
-		}
-		custom_tooltip = lake.77.b.tt
-		hidden_effect = {
-			every_owned_province = {
-					limit = {
-						region = khaashalg_region
-					}
-					add_province_modifier = {
-						name = federation_refused_to_help
-						duration = -1
-					}
-			}
-		}
-	}
-}
-
-country_event = { #Facestealers attack - only occurs if accepted previous event
-	id = lake.78
-	title = lake.78.t
-	desc = lake.78.d
-	picture = BATTLE_eventPicture
-
-	is_triggered_only = yes
-
-	option = {
-		name = lake.78.a
-		ai_chance = {
-			factor = 100
-		}
-		every_owned_province = {
-			limit = {
-				has_province_modifier = Y91_plagued_by_face_eaters
-			}
-			spawn_rebels = {
-				type = face_stealers_rebels
-				size = 1
-			}
-		}
-	}
-	after = {
-		set_country_flag = federation_facestealers_attack
-	}
-}
-
-country_event = { #Facestealers dwindling after attack
-	id = lake.79
-	title = lake.79.t
-	desc = lake.79.d
-	picture = CITY_DEVELOPMENT_eventPicture
-
-	mean_time_to_happen = {
-		days = 30
-	}
-
-	trigger = {
-		tag = J33
-		has_country_flag = federation_facestealers_attack
-		NOT = {
-			num_of_rebel_armies = 1
-		}
-		NOT = {
-			num_of_rebel_controlled_provinces = 1
-		}
-	}
-
-	option = {
-		name = lake.79.a
-		ai_chance = {
-			factor = 100
-		}
-		every_owned_province = {
-			limit = {
-				has_province_modifier = Y91_plagued_by_face_eaters
-			}
-			remove_province_modifier = Y91_plagued_by_face_eaters
-			add_province_modifier = {
-				name = federation_roaming_facestealers
-				duration = -1
-			}
-		}
-		clr_country_flag = federation_facestealers_attack
-	}
-}
+#country_event = { #Runsukhi want help against facestealers
+#	id = lake.77
+#	title = lake.77.t
+#	desc = lake.77.d
+#	picture = NATIVES_LOW_eventPicture
+#
+#	is_triggered_only = yes
+#
+#	option = { #Accept
+#		name = lake.77.a
+#		ai_chance = {
+#			factor = 85
+#		}
+#		add_adm_power = -50
+#		add_dip_power = -50
+#		add_mil_power = -50
+#		add_manpower = -25
+#		add_country_modifier = {
+#			name = federation_helping_runsukhi
+#			duration = 1825
+#		}
+#		hidden_effect = {
+#			country_event = {
+#				id = lake.78
+#				days = 365
+#				random = 365
+#			}
+#		}
+#	}
+#
+#	option = { #Decline
+#		name = lake.77.b
+#		ai_chance = {
+#			factor = 15
+#		}
+#		custom_tooltip = lake.77.b.tt
+#		hidden_effect = {
+#			every_owned_province = {
+#					limit = {
+#						region = khaashalg_region
+#					}
+#					add_province_modifier = {
+#						name = federation_refused_to_help
+#						duration = -1
+#					}
+#			}
+#		}
+#	}
+#}
+#
+#country_event = { #Facestealers attack - only occurs if accepted previous event
+#	id = lake.78
+#	title = lake.78.t
+#	desc = lake.78.d
+#	picture = BATTLE_eventPicture
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = lake.78.a
+#		ai_chance = {
+#			factor = 100
+#		}
+#		every_owned_province = {
+#			limit = {
+#				has_province_modifier = Y91_plagued_by_face_eaters
+#			}
+#			spawn_rebels = {
+#				type = face_stealers_rebels
+#				size = 1
+#			}
+#		}
+#	}
+#	after = {
+#		set_country_flag = federation_facestealers_attack
+#	}
+#}
+#
+#country_event = { #Facestealers dwindling after attack
+#	id = lake.79
+#	title = lake.79.t
+#	desc = lake.79.d
+#	picture = CITY_DEVELOPMENT_eventPicture
+#
+#	mean_time_to_happen = {
+#		days = 30
+#	}
+#
+#	trigger = {
+#		tag = J33
+#		has_country_flag = federation_facestealers_attack
+#		NOT = {
+#			num_of_rebel_armies = 1
+#		}
+#		NOT = {
+#			num_of_rebel_controlled_provinces = 1
+#		}
+#	}
+#
+#	option = {
+#		name = lake.79.a
+#		ai_chance = {
+#			factor = 100
+#		}
+#		every_owned_province = {
+#			limit = {
+#				has_province_modifier = Y91_plagued_by_face_eaters
+#			}
+#			remove_province_modifier = Y91_plagued_by_face_eaters
+#			add_province_modifier = {
+#				name = federation_roaming_facestealers
+#				duration = -1
+#			}
+#		}
+#		clr_country_flag = federation_facestealers_attack
+#	}
+#}
 
 ###################
 ##TEST and DEBUG events
@@ -4304,7 +4303,6 @@ country_event = {
 				is_subject = no
 			}
 			set_country_flag = federation_leader
-			country_event = { id = lake.40 }
 		}
 		else = {
 			clr_country_flag = federation_leader
@@ -4544,6 +4542,9 @@ country_event = {
 		else_if = {
 			limit = { NOT = { has_country_flag = federation_leader } }
 			set_country_flag = federation_leader
+		}
+		every_country = {
+			limit = { has_country_flag = federation_leader }
 			country_event = { id = lake.40 }
 		}
 	}

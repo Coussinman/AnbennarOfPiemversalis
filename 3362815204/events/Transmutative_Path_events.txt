@@ -14,17 +14,20 @@ province_event = { #province level interaction stage 1
 	}
 	option = { #back out
 		name = transmutative_path.1.a
+		highlight = yes
 		hidden_effect = {
 			owner = { clr_country_flag = transmutative_path_infuse_chi_menu_open }
 		}
 	}
-	option = { #create chi wellspring
+	option = { #Build Chi Wellspring
 		name = transmutative_path.1.b
+		custom_tooltip = build_chi_wellspring_tt
 		if = {
 			limit = {
 				NOT = { transmutative_path_has_chi_wellspring_trigger = yes }
 				NOT = { has_province_flag = no_chi_wellspring }
 				NOT = { transmutative_path_infuse_province_trigger = yes }
+				NOT = { is_capital = yes }
 				development = 10
 				owner = {
 					treasury = 100
@@ -33,6 +36,7 @@ province_event = { #province level interaction stage 1
 					mil_power = 25
 				}
 			}
+			custom_tooltip = " " #Linebreak
 			owner = {
 				add_treasury = -100
 				add_adm_power = -25
@@ -41,21 +45,22 @@ province_event = { #province level interaction stage 1
 			}
 			add_chi_wellspring_to_size = yes
 		}
-		else = {
-			custom_tooltip = cant_build_chi_wellspring_tt
-		}
 	}
-	option = { #change trade good
+	option = { #Change Trade Goods
 		name = transmutative_path.1.c
 		trigger = {
 			owner = {
 				OR = {
-					culture_group = kai
+					AND = {
+						culture_group = kai
+						NOT = { tag = Y60 } #Lo Ngoen - Because transmuting gold is op
+					}
 					culture = naamjyut
 					culture = antmvura
 				}
 			}
 		}
+		custom_tooltip = transmutative_path_change_trade_good_tt
 		if = {
 			limit = {
 				transmutative_path_change_trade_good_trigger = yes
@@ -66,8 +71,8 @@ province_event = { #province level interaction stage 1
 					}
 				}
 			}
+			custom_tooltip = " " #Linebreak
 			transmutative_path_change_trade_good_effect = yes
-			custom_tooltip = transmutative_path_trade_goods_change_cd_tt
 			owner = {
 				add_church_power = -50
 				hidden_effect = {
@@ -79,12 +84,11 @@ province_event = { #province level interaction stage 1
 				}
 			}
 		}
-		else = {
-			custom_tooltip = cant_change_trade_good_tt
-		}
 	}
-	option = { #infuse province
+
+	option = { #Infuse Province
 		name = transmutative_path.1.1
+		custom_tooltip = infuse_province_tt
 		if = {
 			limit = {
 				transmutative_path_infuse_province_trigger = yes
@@ -92,12 +96,49 @@ province_event = { #province level interaction stage 1
 			}
 			province_event = { id = transmutative_path.2 }
 		}
+	}
+	
+	option = {
+		name = transmutative_path_temples_for_warriors
+		trigger = {
+			owner = { has_church_aspect = transmutative_path_temples_for_warriors }
+			has_province_flag = is_xia_origin
+		}
+		if = {
+			limit = {
+				owner = {
+					church_power = 200
+					NOT = {
+						has_country_flag = xia_path_empowered_@ROOT
+						has_country_flag = xia_path_enlightened_@ROOT
+					}
+				}
+			}
+			owner = { add_church_power = -200 }
+			cultivate_province_xia_path = yes
+		}
 		else = {
-			custom_tooltip = cannot_infuse_province_tt
+			custom_tooltip = transmutative_path_200_chi_check_province_tt
+			if = {
+				limit = {
+					owner = {
+						NOT = {
+							has_country_flag = xia_path_empowered_@ROOT
+							has_country_flag = xia_path_enlightened_@ROOT
+						}
+					}
+				}
+				custom_tooltip = transmutative_path_empowered_yes_tt
+			}
+			else = { custom_tooltip = transmutative_path_empowered_no_tt }
 		}
 	}
 	option = { #back out
 		name = transmutative_path.1.a
+		highlight = yes
+		hidden_effect = {
+			owner = { clr_country_flag = transmutative_path_infuse_chi_menu_open }
+		}
 	}
 	after = {
 		hidden_effect = { owner = { clr_country_flag = transmutative_path_infuse_chi_menu_open } }
@@ -167,7 +208,7 @@ province_event = { #province level interaction stage 2
 				has_church_aspect = transmutative_path_fill_the_begging_bowls
 			}
 		}
-		add_prosperity = 50
+		add_prosperity = 25
 		owner = { add_church_power = -50 }
 	}
 	option = { #relive past lives
@@ -252,15 +293,8 @@ province_event = { #province level interaction stage 2
 				has_church_aspect = transmutative_path_the_second_ascension
 			}
 		}
-		if = {
-			limit = {
-				is_prosperous = yes
-			}
-			owner = { add_splendor = 5 }
-		}
-		else = {
-			add_prosperity = 10
-		}
+		add_prosperity = 10
+		owner = { add_splendor = 5 }
 		owner = { add_church_power = -50 }
 	}
 	option = { #sages of the misty mountains
@@ -272,6 +306,17 @@ province_event = { #province level interaction stage 2
 			NOT = { has_province_modifier = transmutative_path_sages_of_the_misty_mountains_mod }
 		}
 		add_province_modifier = { name = transmutative_path_sages_of_the_misty_mountains_mod duration = 3650 }
+		owner = { add_church_power = -50 }
+	}
+	option = {
+		name = transmutative_path.2.p
+		trigger = {
+			owner = {
+				has_church_aspect = transmutative_path_dredge_the_flats
+			}
+			NOT = { has_province_modifier = transmutative_path_dredge_the_flats_mod }
+		}
+		add_province_modifier = { name = transmutative_path_dredge_the_flats_mod duration = 3650 }
 		owner = { add_church_power = -50 }
 	}
 	option = { #back out

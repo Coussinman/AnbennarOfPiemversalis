@@ -21,6 +21,7 @@ country_event = { #Orcish slavery handler
 		NOT = {
 			has_country_modifier = the_abolish_slavery_act
 			has_country_flag = mountainshark_abolished_slavery
+			has_country_flag = ung_abolish_slavery
 		}
 	}
 
@@ -482,6 +483,10 @@ province_event = {
 		name = orc_slavery.5.a
 		ai_chance = {
 			factor = 5
+			modifier = {
+				factor = 0
+				trade_goods = gold
+			}
 		}
 		change_trade_goods = slaves
 		add_base_production = 1
@@ -536,6 +541,10 @@ province_event = {
 		name = orc_slavery.6.a
 		ai_chance = {
 			factor = 5
+			modifier = {
+				factor = 0
+				trade_goods = gold
+			}
 		}
 		change_trade_goods = slaves
 		
@@ -586,9 +595,12 @@ province_event = {
 		}
 		
 		owner = {
-			add_years_of_income = -0.5
+			if = {
+				limit = { monthly_income = 833 }
+				add_treasury = -5000
+			}
+			else = { add_years_of_income = -0.5 }
 		}
-
 	}
 	
 	option = { # Thats just how it goes

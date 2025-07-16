@@ -159,6 +159,7 @@ has_estate_agenda_of_estate_adventurers = {
 	has_active_estate_agenda = estate_adventurers_condottieri_witch_king
 	has_active_estate_agenda = estate_adventurers_condottieri_coalition
 	has_active_estate_agenda = estate_adventurers_develop_x
+	has_active_estate_agenda = estate_adventurers_protect_people
 }
 
 has_estate_agenda_of_estate_ahati = {
@@ -455,4 +456,81 @@ has_estate_agenda_of_estate_khelorvalshi = {
 	has_active_estate_agenda = estate_khelorvalshi_build_mage_tower_in_y
 	has_active_estate_agenda = estate_khelorvalshi_fire_advisor
 	has_active_estate_agenda = estate_khelorvalshi_restore_legitimacy
+}
+estate_has_stability_to_revoke_mutation = {
+	[[1]
+		if = {
+			limit = {
+				NOT = {
+					has_government_attribute = mutation_less_stab_cost
+					has_country_flag = no_stab_cost_for_mutations
+				}
+			}
+			stability = 1
+		}
+		else = {
+			
+		}
+	]
+	[[2]
+		if = {
+			limit = { 
+				NOT = { 
+					has_government_attribute = mutation_less_stab_cost 
+					has_country_flag = no_stab_cost_for_mutations 
+				} 
+			}
+			stability = 2
+		}
+		else_if = {
+			limit = {
+				has_government_attribute = mutation_less_stab_cost
+				NOT = {
+					has_country_flag = no_stab_cost_for_mutations 
+				}
+			}
+			stability = 1
+		}
+		else = {
+			
+		}
+	]
+	[[3]
+		if = {
+			limit = { 
+				NOT = { 
+					has_government_attribute = mutation_less_stab_cost 
+					has_country_flag = no_stab_cost_for_mutations 
+				} 
+			}
+			stability = 3
+		}
+		else_if = {
+			limit = {
+				has_government_attribute = mutation_less_stab_cost
+				NOT = {
+					has_country_flag = no_stab_cost_for_mutations 
+				}
+			}
+			stability = 2
+		}
+		else = {
+			
+		}
+	]
+}
+
+estate_province_intended_to_dev = {
+	custom_trigger_tooltip = {
+		tooltip = estate_province_intended_to_dev_tt
+		has_any_blorc_camp = no
+		NOT = {
+			has_terrain = fey_gladeway
+			has_terrain = gladeway
+			has_province_modifier = lupulan_nature_reservat
+			has_province_modifier = lupulan_nature_reservat_profit
+			has_province_modifier = ruined_hold
+			has_province_modifier = infested_hold
+		}
+	}
 }

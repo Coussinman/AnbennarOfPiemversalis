@@ -92,6 +92,25 @@ country_event = {
 	trigger = {}
 
 	option = {
+		name = flavor_maghargma.4.b #Collaborate With Them
+		set_country_flag = I90_collaborate_westmarches
+		custom_tooltip = I90_collaborate_westmarches_tt
+		tooltip = {
+			define_general = {
+				shock = 2
+				fire = 4
+				manuever = 6
+				siege = 2
+				name = "Hirvoi Citybreaker"
+			}
+			add_yearly_manpower = 2
+			custom_tooltip = maghargma_the_iron_barons_tt
+			large_increase_of_human_tolerance_effect = yes
+		}
+		swap_non_generic_missions = yes
+	}
+
+	option = {
 		name = flavor_maghargma.4.a #Occupy Them
 		set_country_flag = I90_occupy_westmarches
 		custom_tooltip = I90_occupy_westmarches_tt
@@ -113,25 +132,6 @@ country_event = {
 				add_base_production = 2
 				add_base_manpower = 2
 			}
-		}
-		swap_non_generic_missions = yes
-	}
-
-	option = {
-		name = flavor_maghargma.4.b #Collaborate With Them
-		set_country_flag = I90_collaborate_westmarches
-		custom_tooltip = I90_collaborate_westmarches_tt
-		tooltip = {
-			define_general = {
-				shock = 2
-				fire = 4
-				manuever = 6
-				siege = 2
-				name = "Hirvoi Citybreaker"
-			}
-			add_yearly_manpower = 2
-			custom_tooltip = maghargma_the_iron_barons_tt
-			large_increase_of_human_tolerance_effect = yes
 		}
 		swap_non_generic_missions = yes
 	}
@@ -211,7 +211,7 @@ country_event = {
 	id = flavor_maghargma.7
 	title = flavor_maghargma.7.t
 	picture = SCOTTISH_MERCENARIES_eventPicture
-	desc = flavor_maghargma.6.d
+	desc = flavor_maghargma.7.d
 
 	is_triggered_only = yes
 
@@ -630,7 +630,7 @@ country_event = {
 				duration = -1
 				hidden = yes
 			}
-			change_unit_type = tech_goblin
+			change_unit_type = tech_cave_goblin
 			custom_tooltip = update_unit_sprites_tooltip
 			hidden_effect = { update_unit_sprites_for_racial_mil = yes }
 		}
@@ -935,7 +935,7 @@ country_event = {
 country_event = {
 	id = flavor_maghargma.21
 	title = flavor_maghargma.21.t
-	picture = ULMISBAR_eventPicture
+	picture = GENIE_RUINS_eventPicture
 	desc = flavor_maghargma.21.d
 
 	is_triggered_only = yes
@@ -1317,7 +1317,11 @@ country_event = {
 	option = {
 		name = flavor_maghargma.29.b #They Can Rule Under Us
 		large_increase_of_troll_tolerance_effect = yes
-		release = V16
+		release_with_religion_and_culture = { 
+			tag = V16 
+			culture = hill_troll 
+			religion = un_khudai
+		}
 		vassalize = V16
 		V16 = {
 			add_country_modifier = {

@@ -25,6 +25,7 @@ command_warroom_3 = {
 				employed_advisor = { category = DIP }
 				employed_advisor = { category = MIL }
 			}
+			4630 = { has_construction = iron_palace }
 		}
 		
 		effect = {
@@ -228,7 +229,10 @@ command_xiadao_4 = {
 		}
 		
 		trigger = {
-			controls = 4559 #Xiadao
+			OR = {
+				controls = 4559 #Xiadao	
+				owns_or_subject_of = 4559
+			}
 			4559 = { has_ruler_leader_from = ROOT }
 		}
 		
@@ -440,7 +444,10 @@ command_shamakhad_4 = {
 		}
 		
 		trigger = {
-			controls = 4460 #Sarnihanpur
+			OR = {
+				controls = 4460 #Sarnihanpur
+				owns_or_subject_of = 4460
+			}
 		}
 		
 		effect = {
@@ -715,16 +722,27 @@ command_ghavaanaj_2 = {
 		position = 3
 		
 		provinces_to_highlight = {
-			NOT = { controlled_by = ROOT }
+			NOT = { 
+				OR = {
+					controlled_by = ROOT 
+					country_or_subject_holds = ROOT
+				}
+			}
 			OR = {
-				province_id = 4506
-				province_id = 4466
+				province_id = 4506 #Pordhatti
+				province_id = 4466 #Tiltaghar
 			}
 		}
 		
 		trigger = {
-			controls = 4506 #Pordhatti
-			controls = 4466 #Tiltaghar
+			OR = { #Pordhatti
+				controls = 4506 #Pordhatti
+				owns_or_subject_of = 4506 #Pordhatti
+			}
+			OR = { #Tiltaghar
+				controls = 4466 #Tiltaghar
+				owns_or_subject_of = 4466 #Tiltaghar
+			}
 		}
 		
 		effect = {
@@ -1766,14 +1784,14 @@ command_rakhadesh_3 = {
 				limit = { ai = yes }
 				calc_true_if = {
 					amount = 3
-					owns_or_subject_of = 4450 #Bubhagama
+					owns_or_subject_of = 4450 #Babhagama
 					owns_or_subject_of = 4435 #Rayavhashapal
 					owns_or_subject_of = 4438 #Dhurasidheni
 					owns_or_subject_of = 4446 #Dakhilamvi
 				}
 			}
 			else = {
-				owns_or_subject_of = 4450 #Bubhagama
+				owns_or_subject_of = 4450 #Babhagama
 				owns_or_subject_of = 4435 #Rayavhashapal
 				owns_or_subject_of = 4438 #Dhurasidheni
 				owns_or_subject_of = 4446 #Dakhilamvi
@@ -1805,14 +1823,14 @@ command_rakhadesh_4 = {
 		
 		provinces_to_highlight = {
 			OR = {
-				province_id = 4450 #Bubhagama
+				province_id = 4450 #Babhagama
 				province_id = 4446 #Dakhilamvi
 			}
 			NOT = { country_or_subject_holds = ROOT }
 		}
 		
 		trigger = {
-			owns_or_subject_of = 4450 #Bubhagama
+			owns_or_subject_of = 4450 #Babhagama
 			owns_or_subject_of = 4446 #Dakhilamvi
 		}
 		
@@ -2307,7 +2325,10 @@ command_telebei_4 = {
 		}
 		
 		trigger = {
-			controls = 4941 #Lapnam Amrik
+			OR = {
+				controls = 4941 #Lapnam Amrik
+				owns_or_subject_of = 4941
+			}
 		}
 		
 		effect = {
@@ -2517,7 +2538,10 @@ command_sikai_2 = {
 		}
 		
 		trigger = {
-			controls = 5424 #Verkal Ozovar
+			OR = {
+				controls = 5424 #Verkal Ozovar
+				owns_or_subject_of = 5424
+			}
 		}
 		
 		effect = {
@@ -2902,6 +2926,12 @@ command_thidinkai_2 = {
 			OR = {
 				province_id = 4750 #Khrunvod
 				province_id = 4749 #Vurangsom
+			}
+			NOT = { 
+				OR = {
+					controlled_by = ROOT 
+					country_or_subject_holds = ROOT
+				}
 			}
 		}
 		
@@ -4211,15 +4241,18 @@ command_xianjie_4 = {
 		}
 		
 		trigger = {
-			controls = 4614 #Yinchao
+			OR = {
+				controls = 4614 #Yinchao
+				owns_or_subject_of = 4614
+			}
 		}
 		
 		effect = {
 			4614 = { #Yinchao
 				if = {
-					limit = { has_province_modifier = harpy_roost }
+					limit = { harpy_roost_st_has_non_fledgling_roost = yes }
 					custom_tooltip = command_destroy_roost_tt
-					hidden_effect = { remove_province_triggered_modifier = harpy_roost }
+					hidden_effect = { harpy_roost_se_destroy_roost = yes }
 				}
 				add_devastation = 50
 				add_base_tax = -1
@@ -5543,14 +5576,10 @@ command_azjakuma_3 = {
 			owns_or_subject_of = 4829 #Ajgriijarul
 			owns_or_subject_of = 4828 #Kabiurgarko
 			if = {
-				limit = { has_country_flag = command_end_azjakuma_forever }
-				Y01 = { exists = no }
-			}
-			else = {
+				limit = { ai = no }
 				OR = {
 					Y01 = { exists = no }
 					Y01 = { is_subject_of = ROOT }
-					hidden_trigger = { ai = yes }
 				}
 			}
 		}
@@ -5567,118 +5596,112 @@ command_azjakuma_3 = {
 		
 		effect = {
 			command_complete_campaign_effect = { campaign = azjakuma }
+			custom_tooltip = R62_turn_azjakuma_into_slavestate
+			if = { #make AI command move its butt out of the way
+				limit = { ai = yes }
+				R63 = {
+					if = {
+						limit = {
+							any_owned_province = {
+								region = demon_hills_region
+							}
+						}
+						R62 = {
+							random_owned_area = {
+								limit = {
+									region = shamakhad_region
+									area_for_scope_province = {
+										type = all
+										owned_by = R62
+										is_capital = no
+										NOT = { culture_group = hobgoblin }
+									}
+								}
+								save_event_target_as = command_move_target_candidate_1
+								set_province_flag = command_move_target_candidate_1
+							}
+						}
+						command_move_orc_slave_state = {
+							tag = R63
+							target = command_move_target_candidate_1
+						}
+					}
+				}
+				R64 = {
+					if = {
+						limit = {
+							any_owned_province = {
+								region = demon_hills_region
+							}
+						}
+						R62 = {
+							random_owned_area = {
+								limit = {
+									region = shamakhad_region
+									area_for_scope_province = {
+										type = all
+										owned_by = R62
+										is_capital = no
+										NOT = { culture_group = hobgoblin }
+									}
+								}
+								save_event_target_as = command_move_target_candidate_2
+								set_province_flag = command_move_target_candidate_2
+							}
+						}
+						command_move_orc_slave_state = {
+							tag = R64
+							target = command_move_target_candidate_2
+						}
+					}
+				}
+			}
 			if = {
-				limit = { has_country_flag = command_end_azjakuma_forever }
-				add_country_modifier = { name = command_oni_compensation duration = -1 }
+				limit = { 
+					Y01 = { 
+						exists = no 
+					} 
+				}
+				release_with_religion_and_culture = { tag = Y01 religion = devouring_path culture = horned_ogre }
+				create_subject = {
+					subject_type = slave_state
+					subject = Y01
+				}
+				hidden_effect = {
+					Y01 = {
+						set_ruler_religion = devouring_path
+						set_ruler_culture = horned_ogre
+						clear_fast_ruler_flags = yes
+						set_ruler_flag = ogre_ruler
+					}
+				}
+
 			}
 			else = {
-				custom_tooltip = R62_turn_azjakuma_into_slavestate
-				if = { #make AI command move its butt out of the way
-					limit = { ai = yes }
-					R63 = {
-						if = {
-							limit = {
-								any_owned_province = {
-									region = demon_hills_region
-								}
-							}
-							R62 = {
-								random_owned_area = {
-									limit = {
-										region = shamakhad_region
-										area_for_scope_province = {
-											type = all
-											owned_by = R62
-											is_capital = no
-											NOT = { culture_group = hobgoblin }
-										}
-									}
-									save_event_target_as = command_move_target_candidate_1
-									set_province_flag = command_move_target_candidate_1
-								}
-							}
-							command_move_orc_slave_state = {
-								tag = R63
-								target = command_move_target_candidate_1
-							}
-						}
-					}
-					R64 = {
-						if = {
-							limit = {
-								any_owned_province = {
-									region = demon_hills_region
-								}
-							}
-							R62 = {
-								random_owned_area = {
-									limit = {
-										region = shamakhad_region
-										area_for_scope_province = {
-											type = all
-											owned_by = R62
-											is_capital = no
-											NOT = { culture_group = hobgoblin }
-										}
-									}
-									save_event_target_as = command_move_target_candidate_2
-									set_province_flag = command_move_target_candidate_2
-								}
-							}
-							command_move_orc_slave_state = {
-								tag = R64
-								target = command_move_target_candidate_2
-							}
-						}
-					}
+				create_subject = {
+					subject_type = slave_state
+					subject = Y01
 				}
-				if = {
-					limit = { 
-						Y01 = { 
-							exists = no 
-						} 
-					}
-					release_with_religion_and_culture = { tag = Y01 religion = devouring_path culture = horned_ogre }
-					create_subject = {
-						subject_type = slave_state
-						subject = Y01
-					}
-					hidden_effect = {
-						Y01 = {
-							set_ruler_religion = devouring_path
-							set_ruler_culture = horned_ogre
-							clear_fast_ruler_flags = yes
-							set_ruler_flag = ogre_ruler
+				every_owned_province = {
+					limit = {
+						OR = {
+							culture = horned_ogre
+							is_core = Y01
 						}
 					}
-
+					cede_province = Y01
 				}
-				else = {
-					create_subject = {
-						subject_type = slave_state
-						subject = Y01
-					}
+			}
+			Y01 = {
+				release_all_subjects = yes
+				hidden_effect = {
 					every_owned_province = {
 						limit = {
-							OR = {
-								culture = horned_ogre
-								is_core = Y01
-							}
+							NOT = { region = demon_hills_region }
 						}
-						cede_province = Y01
+						cede_province = R62
 					}
-				}
-				Y01 = {
-					release_all_subjects = yes
-					hidden_effect = {
-						every_owned_province = {
-							limit = {
-								NOT = { region = demon_hills_region }
-							}
-							cede_province = R62
-						}
-						set_country_flag = command_slave_state_flag
-					}
+					set_country_flag = command_slave_state_flag
 				}
 			}
 		}
@@ -7952,8 +7975,8 @@ command_3 = {
 		}
 		
 		effect = {
-			custom_tooltip = absolute_domination_cb_unlocked_tt
-			hidden_effect = { set_country_flag = absolute_domination_cb_unlocked_flag }
+			custom_tooltip = R62_one_great_command_effect_tt
+			set_country_flag = early_imperialism_flag
 			
 			if = {
 				limit = { R63 = { is_subject_of = ROOT } }
@@ -8085,6 +8108,7 @@ command_4 = {
 		effect = {
 			country_event = { id = the_command.19 }
 			custom_tooltip = R62_prepare_new_stewards_effect_tt
+			set_country_flag = eligible_for_jade_rivalry_events
 		}
 	}
 	
@@ -8119,7 +8143,7 @@ command_4 = {
 		effect = {
 			custom_tooltip = R62_warbringer_peacemaker_effect_tt
 			hidden_effect = {
-				set_country_flag = command_jade_rivalry_ended
+				clr_country_flag = eligible_for_jade_rivalry_events
 				R66 = { create_marriage = R65 }
 				R66 = { remove_historical_rival = R65 }
 			}
@@ -8918,7 +8942,7 @@ command_5 = {
 		trigger = {
 			if = {
 				limit = { ai = yes }
-				is_year = 1486 #this is when the korashi truce ends
+				NOT = { has_country_modifier = command_azjakuma_imports }
 				NOT = { truce_with = Y01 }
 			}
 			else = {
@@ -9022,9 +9046,9 @@ command_5 = {
 			else = {
 				sir_area = { type = all owned_by = ROOT has_building = mage_tower }
 			}
-			OR = {
-				courthouse = 75
-				town_hall = 75
+			num_of_owned_provinces_with = {
+				value = 75
+				has_courthouse_building_trigger = yes
 			}
 		}
 		
@@ -9042,10 +9066,11 @@ command_5 = {
 				add_permanent_province_modifier = { name = command_chain_workshop duration = -1 }
 			}
 			4630 = { add_permanent_province_modifier = { name = command_rpu_hq duration = -1 } }
+			custom_tooltip = important_korashi_prov_warning_tt
 		}
 	}
 	
-	R62_end_raheni_magic = {
+	R62_end_halessi_magic = {
 		icon = mission_magical_forest
 		position = 9
 		required_missions = {
@@ -9055,7 +9080,7 @@ command_5 = {
 		
 		trigger = {
 			custom_trigger_tooltip = {
-				tooltip = command_end_of_raheni_magic_trigger_tt
+				tooltip = command_end_of_halessi_magic_trigger_tt
 				has_country_flag = mage_proves_loyalty_flag
 			}
 			has_government_power = {
@@ -9069,6 +9094,9 @@ command_5 = {
 		effect = {
 			add_mil_power = -150
 			country_event = { id = the_command.152 }
+			custom_tooltip = EVENT_INSIGHT_INTRO
+			custom_tooltip = command_the_end_of_halessi_magic_event_tt
+			tooltip = { remove_country_modifier = no_slacken_mod }
 		}
 	}
 	

@@ -112,6 +112,7 @@ country_event = {
 	fire_only_once = yes
 	
 	trigger = {
+		tag = F30
 		F30 = {
 			is_subject = no 
 			is_at_war = yes
@@ -627,11 +628,11 @@ country_event = {
 		}
 		custom_tooltip = F30_harpy_vassal_tt
 		if = {
-			limit = { NOT = { F80 = { is_subject_of = ROOT } } }
+			limit = { NOT = { F80 = { is_subject_of = F30 } } }
 			vassalize = F80
 		}
 		hidden_effect = {
-		every_owned_province = {
+			every_owned_province = {
                 limit = {
                     OR = {
                         area = siffiraeri_area
@@ -644,12 +645,14 @@ country_event = {
 						area = kuzak_area
                     }
                 }
-                hidden_effect = {
-                    remove_core = ROOT
-                    add_core = F80
-                }
-                cede_province = F80
-            }	
+                remove_core = ROOT
+                add_core = F80
+				cede_province = F80
+			}
+			if = {
+				limit = { NOT = { F80 = { is_subject_of = F30 } } }
+				vassalize = F80
+			}
 		}
 	}
 	option = {
@@ -1009,6 +1012,8 @@ country_event = {
 		change_adm = 2
 		change_dip = 2
 		change_mil = 2
+		custom_tooltip = add_magic_study_modifier_50_tt
+		update_magic_study_experience_modifier = { value=50 }
 		country_event = { id = flavor_kumarkand.25 days = 7 }
 	}
 }
@@ -1638,7 +1643,7 @@ country_event = {
 	id = flavor_kumarkand.50
 	title = flavor_kumarkand.50.t
 	desc = flavor_kumarkand.50.d
-	picture = SAMARTAL_eventPicture
+	picture = SUN_CULT_DEBATE_event_picture
 	
 	fire_only_once = yes
 	
@@ -1738,6 +1743,7 @@ country_event = {
 	
 	option = {
 		name = flavor_kumarkand.54.a
+		custom_tooltip = F30_something_wrong_here_tt
 		hidden_effect = {
 			country_event = { id = flavor_kumarkand.55 days = 1825 }
 		}
@@ -3113,7 +3119,8 @@ country_event = { #Kumarkand Alusir event handler
 					has_country_flag = kumarkand_cooldown_62
 				}
 				country_event = { #Barkabti Treachery
-					id = flavor_kumarkand.62 
+					id = flavor_kumarkand.62
+					days = 1
 					random = 100
 				}
 			}
@@ -3124,6 +3131,7 @@ country_event = { #Kumarkand Alusir event handler
 				}
 				country_event = { #Decaying Mind
 					id = flavor_kumarkand.63
+					days = 1
 					random = 100
 				}
 			}
@@ -3134,6 +3142,7 @@ country_event = { #Kumarkand Alusir event handler
 				}
 				country_event = { #Alusir Vanity
 					id = flavor_kumarkand.64
+					days = 1
 					random = 100
 				}
 			}
@@ -3144,6 +3153,7 @@ country_event = { #Kumarkand Alusir event handler
 				}
 				country_event = { #Palace fit a Emperor
 					id = flavor_kumarkand.65
+					days = 1
 					random = 100
 				}
 			}
@@ -3154,6 +3164,7 @@ country_event = { #Kumarkand Alusir event handler
 				}
 				country_event = { #Crown Conspiracies
 					id = flavor_kumarkand.66
+					days = 1
 					random = 100
 				}
 			}
@@ -3164,6 +3175,7 @@ country_event = { #Kumarkand Alusir event handler
 				}
 				country_event = { #Hunting the Qasnitu way
 					id = flavor_kumarkand.67
+					days = 1
 					random = 100
 				}
 			}
@@ -3174,6 +3186,7 @@ country_event = { #Kumarkand Alusir event handler
 				}
 				country_event = { #Court Politic
 					id = flavor_kumarkand.68
+					days = 1
 					random = 100
 				}
 			}
@@ -3184,6 +3197,7 @@ country_event = { #Kumarkand Alusir event handler
 				}
 				country_event = { #Dealings under Dark
 					id = flavor_kumarkand.69
+					days = 1
 					random = 100
 				}
 			}
@@ -3194,6 +3208,7 @@ country_event = { #Kumarkand Alusir event handler
 				}
 				country_event = { #Emperor's Influence
 					id = flavor_kumarkand.70
+					days = 1
 					random = 100
 				}
 			}

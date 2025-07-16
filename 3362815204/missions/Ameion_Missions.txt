@@ -360,7 +360,7 @@ G52_1 = {
 		
 		provinces_to_highlight = {
 			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-			NOT = { is_island = yes }
+			island = no
 			NOT = { area = vothelisi_area }
 			region = devand_region
 			has_discovered = ROOT
@@ -371,7 +371,7 @@ G52_1 = {
 				type = all
 				OR = {
 					country_or_non_sovereign_subject_holds = ROOT
-					is_island = yes
+					island = yes
 					area = vothelisi_area
 				}
 			}
@@ -628,13 +628,25 @@ G52_2 = {
 				is_city = yes
 				owned_by = ROOT
 			}
-			reverse_has_opinion = { who = G63 value = 50 }
-			prestige = G63
+			if = {
+				limit = { G63 = { exists = yes } }
+				reverse_has_opinion = { who = G63 value = 50 }
+				prestige = G63
+			}
 		}
 		
 		effect = {
-			country_event = { id = flavor_ameion.11 }
-			custom_tooltip = G52_leaders_meeting_tt
+			if = {
+				limit = { G63 = { exists = yes } }
+				country_event = { id = flavor_ameion.11 }
+				custom_tooltip = G52_leaders_meeting_tt
+			}
+			else = {
+				mteibas_valley_region = { add_claim = ROOT }
+				set_country_flag = G52_mteibhar_conquest
+				clr_country_flag = G52_mteibhar_tributary
+				custom_tooltip = ameion_no_mteibhara_tt
+			}
 		}
 	}
 	
@@ -2121,16 +2133,23 @@ G52_3 = {
 		position = 16
 		
 		provinces_to_highlight = {
-			NOT = { superregion = ruin_proper_superregion }
-			NOT = { region = tor_nayyi_region }
-			continent = south_america
+			OR = {
+				AND = {
+					NOT = { culture_is_ruinborn = yes }
+					owned_by = ROOT
+				}
+				AND = {
+					NOT = {
+						superregion = ruin_proper_superregion
+						region = tor_nayyi_region
+						country_or_non_sovereign_subject_holds = ROOT
+					}
+					continent = south_america
+				}
+			}
 			NOT = {
 				is_sea = yes
 				is_wasteland = yes
-			}
-			OR = {
-				NOT = { country_or_non_sovereign_subject_holds = ROOT }
-				NOT = { culture_is_ruinborn = yes }
 			}
 			has_discovered = ROOT
 		}
@@ -2448,7 +2467,7 @@ G52_4 = {
 			custom_tooltip = ameion_strong_duchies_tt
 			every_subject_country = { 
 				limit = { capital_scope = { superregion = taychend_superregion } }
-				change_religion = kheionism
+				add_liberty_desire = -10
 				hidden_effect = {
 					remove_opinion = {
 						who = ROOT
@@ -2986,7 +3005,7 @@ G52_5 = {
 		}
 	}
 	
-	G52_peace_coexistance = {
+	G52_peace_coexistence = {
 		icon = mission_reliable_allies
 		required_missions = { G52_place_exile }
 		position = 8
@@ -3030,7 +3049,7 @@ G52_5 = {
 	
 	G52_isle_severance = {
 		icon = mission_rb_conquer_brittany
-		required_missions = { G52_twilight G52_peace_coexistance }
+		required_missions = { G52_twilight G52_peace_coexistence }
 		position = 10
 		
 		provinces_to_highlight = {
@@ -3075,6 +3094,10 @@ G52_5 = {
 						}
 						else = { change_culture = thekvrystana }
 					}
+				}
+				create_subject = {
+					subject_type = crown_colony
+					subject = G79
 				}
 			}
 			add_historical_friend = G79

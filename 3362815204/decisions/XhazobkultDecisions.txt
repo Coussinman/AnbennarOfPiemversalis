@@ -3,10 +3,11 @@ country_decisions = {
 	xhazobkult_begin_xhazobine_ritual = {
 		major = yes
 		potential = {
+			has_country_modifier = monstrous_nation
 			religion = xhazobkult
 			is_emperor_of_china = no
 			NOT = { 
-				has_ruler_flag = undergoing_xhazob_ritual 
+				has_ruler_flag = undergoing_xhazob_ritual
 				ruler_has_personality = xhazobs_chosen_personality
 				has_country_flag = removing_monstrous
 			}
@@ -20,13 +21,11 @@ country_decisions = {
 			has_regency = no
 			has_consort_regency = no
 			has_country_modifier = monstrous_nation
-			OR = {
-				has_reform = gnoll_pack
-				has_reform = xhazobkult_sacrifices
-				has_reform = flamemarked_horde
-				has_reform = flamemarked_pack
+			has_government_attribute = can_summon_xhazob
+			if = {
+				limit = { NOT = { has_country_flag = zokka_xhaz_buff_flag } }
+				NOT = { overextension_percentage = 0.01 }
 			}
-			NOT = { overextension_percentage = 0.01 }
 			if = {
 				limit = { ai = yes }
 				is_year = 1460
@@ -42,7 +41,17 @@ country_decisions = {
 			}
 			
 			else = {
-				patriarch_authority = 0.9
+				custom_trigger_tooltip = {
+					tooltip = not_have_ritualized_cleansing_privilege_tooltip
+					NOT = { 
+						has_estate_privilege = xhazobkult_ritualized_cleansing 
+						has_estate_privilege = xhazobkult_ritualized_cleansing_clergy
+					}
+				}
+				if = {
+					limit = { NOT = { has_country_flag = zokka_xhaz_buff_flag } }
+					patriarch_authority = 0.9
+				}
 				num_of_cities = 50
 				custom_trigger_tooltip = {
 					tooltip = xhazob_no_ritual_tt
@@ -53,7 +62,7 @@ country_decisions = {
 					NOT = {
 						has_ruler_flag = magic_project_lichdom_started
 						has_country_flag = lich_ruler
-						has_country_flag = vampire_ruler
+						ruler_is_vampire = yes
 						is_long_lived_ruler = yes
 					}
 				}

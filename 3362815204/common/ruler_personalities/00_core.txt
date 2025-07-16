@@ -239,6 +239,9 @@ tolerant_personality = {
 		NOT = { 
 			has_idea_group = religious_ideas
 		}
+		NOT = {
+			has_country_flag = az_an_meaning_granite_reward
+		}
 	}
 	
 	chance = {
@@ -631,7 +634,10 @@ intricate_web_weaver_personality = {
 	ruler_allow = {
 		allow = {
 			NOT = { ruler_has_personality = loose_lips_personality }
-			ADM = 3
+			OR = {
+				ADM = 3
+				has_country_flag = farranean_great_rulers
+			}
 		}
 	
 		chance = {
@@ -648,7 +654,10 @@ intricate_web_weaver_personality = {
 	heir_allow = {
 		allow = {
 			NOT = { heir_has_personality = loose_lips_personality }
-			heir_ADM = 3
+			OR = {
+				heir_ADM = 3
+				has_country_flag = farranean_great_rulers
+			}
 		}
 	
 		chance = {
@@ -812,7 +821,10 @@ benevolent_personality = {
 	ruler_allow = {
 		allow = {
 			NOT = { ruler_has_personality = malevolent_personality }
-			DIP = 3
+			OR = {
+				DIP = 3
+				has_country_flag = farranean_great_rulers
+			}
 		}
 	
 		chance = {
@@ -830,7 +842,10 @@ benevolent_personality = {
 	heir_allow = {
 		allow = {
 			NOT = { heir_has_personality = malevolent_personality }
-			heir_DIP = 3
+			OR = {
+				heir_DIP = 3
+				has_country_flag = farranean_great_rulers
+			}
 		}
 	
 		chance = {
@@ -884,7 +899,7 @@ zealot_personality = {
 			NOT = { ruler_has_personality = sinner_personality }
 		}
 		chance = {
-			modifier = {
+			modifier = { #Anbennar
 				factor = 2
 				has_country_modifier = ynn_zodiac_ruler_12
 			}
@@ -937,6 +952,11 @@ zealot_personality = {
 		modifier = {
 			factor = 1
 			has_estate_privilege = estate_church_clerical_education
+		}
+		# Anbennar
+		modifier = { # Ovdal-az-An Mission Reward
+			factor = 2
+			has_country_flag = az_an_meaning_granite_reward
 		}
 	}
 	
@@ -1006,7 +1026,10 @@ lawgiver_personality = {
 	#personality_events.29
 	ruler_allow = {
 		allow = {
-			ADM = 3
+			OR = {
+				ADM = 3
+				has_country_flag = farranean_great_rulers
+			}
 		}
 	
 		chance = {
@@ -1023,7 +1046,10 @@ lawgiver_personality = {
 
 	heir_allow = {
 		allow = {
-			heir_ADM = 3
+			OR = {
+				heir_ADM = 3
+				has_country_flag = farranean_great_rulers
+			}
 		}
 	
 		chance = {
@@ -1067,7 +1093,10 @@ midas_touched_personality = {
 	ruler_allow = {
 		allow = {
 			NOT = { ruler_has_personality = greedy_personality }
-			ADM = 3
+			OR = {
+				ADM = 3
+				has_country_flag = farranean_great_rulers
+			}
 		}
 	
 		chance = {
@@ -1089,7 +1118,10 @@ midas_touched_personality = {
 	heir_allow = {
 		allow = {
 			NOT = { heir_has_personality = greedy_personality }
-			heir_ADM = 3
+			OR = {
+				heir_ADM = 3
+				has_country_flag = farranean_great_rulers
+			}
 		}
 	
 		chance = {
@@ -1144,7 +1176,10 @@ incorruptible_personality = {
 		allow = {
 			NOT = { ruler_has_personality = embezzler_personality }
 			NOT = { has_ruler_modifier = borgia_pope }
-			ADM = 3
+			OR = {
+				ADM = 3
+				has_country_flag = farranean_great_rulers
+			}
 		}
 	
 		chance = {
@@ -1162,7 +1197,10 @@ incorruptible_personality = {
 	heir_allow = {
 		allow = {
 			NOT = { heir_has_personality = embezzler_personality }
-			heir_ADM = 3
+			OR = {
+				heir_ADM = 3
+				has_country_flag = farranean_great_rulers
+			}
 		}
 	
 		chance = {
@@ -1525,7 +1563,10 @@ charismatic_negotiator_personality = {
 	ruler_allow = {
 		allow = {
 			NOT = { ruler_has_personality = babbling_buffoon_personality }
-			DIP = 3
+			OR = {
+				DIP = 3
+				has_country_flag = farranean_great_rulers
+			}
 		}
 	
 		chance = {
@@ -1547,7 +1588,10 @@ charismatic_negotiator_personality = {
 	heir_allow = {
 		allow = {
 			NOT = { heir_has_personality = babbling_buffoon_personality }
-			heir_DIP = 3
+			OR = {
+				heir_DIP = 3
+				has_country_flag = farranean_great_rulers
+			}
 		}
 	
 		chance = {
@@ -1597,7 +1641,10 @@ silver_tongue_personality = {
 		allow = {
 			NOT = { ruler_has_personality = babbling_buffoon_personality }
 			NOT = { ruler_has_personality = naive_personality }
-			DIP = 3
+			OR = {
+				DIP = 3
+				has_country_flag = farranean_great_rulers
+			}
 		}
 	
 		chance = {
@@ -1620,7 +1667,10 @@ silver_tongue_personality = {
 		allow = {
 			NOT = { heir_has_personality = babbling_buffoon_personality }
 			NOT = { heir_has_personality = naive_personality }
-			heir_DIP = 3
+			OR = {
+				heir_DIP = 3
+				has_country_flag = farranean_great_rulers
+			}
 		}
 	
 		chance = {
@@ -1669,7 +1719,10 @@ silver_tongue_personality = {
 conqueror_personality = {
 	ruler_allow = {
 		allow = {
-			MIL = 3
+			OR = {
+				MIL = 3
+				has_country_flag = farranean_great_rulers
+			}
 		}
 	
 		chance = {
@@ -1688,16 +1741,23 @@ conqueror_personality = {
 			modifier = {
 				factor = 0.25
 				AND = {
-					has_reform = heroic_realm_reform
+					has_government_attribute = is_heroic_realm
 					is_monarch_leader = yes
 				}
+			}
+			modifier = {
+				factor = 2
+				has_country_flag = jad_radash_leader_buff
 			}
 		}
 	}
 
 	heir_allow = {
 		allow = {
-			heir_MIL = 3
+			OR = {
+				heir_MIL = 3
+				has_country_flag = farranean_great_rulers
+			}
 		}
 	
 		chance = {
@@ -1746,7 +1806,10 @@ conqueror_personality = {
 tactical_genius_personality = {
 	ruler_allow = {
 		allow = {
-			MIL = 3
+			OR = {
+				MIL = 3
+				has_country_flag = farranean_great_rulers
+			}
 		}
 	
 		chance = {
@@ -1765,16 +1828,23 @@ tactical_genius_personality = {
 			modifier = {
 				factor = 0.25
 				AND = {
-					has_reform = heroic_realm_reform
+					has_government_attribute = is_heroic_realm
 					is_monarch_leader = yes
 				}
+			}
+			modifier = {
+				factor = 2
+				has_country_flag = jad_radash_leader_buff
 			}
 		}
 	}
 
 	heir_allow = {
 		allow = {
-			heir_MIL = 3
+			OR = {
+				heir_MIL = 3
+				has_country_flag = farranean_great_rulers
+			}
 		}
 	
 		chance = {
@@ -1836,9 +1906,13 @@ bold_fighter_personality = {
 			modifier = {
 				factor = 0.25
 				AND = {
-					has_reform = heroic_realm_reform
+					has_government_attribute = is_heroic_realm
 					is_monarch_leader = yes
 				}
+			}
+			modifier = {
+				factor = 2
+				has_country_flag = jad_radash_leader_buff
 			}
 		}
 	}
@@ -1905,9 +1979,13 @@ strict_personality = {
 			modifier = {
 				factor = 0.25
 				AND = {
-					has_reform = heroic_realm_reform
+					has_government_attribute = is_heroic_realm
 					is_monarch_leader = yes
 				}
+			}
+			modifier = {
+				factor = 2
+				has_country_flag = jad_radash_leader_buff
 			}
 		}
 	}
@@ -1952,7 +2030,10 @@ strict_personality = {
 inspiring_leader_personality = {
 	ruler_allow = {
 		allow = {
-			MIL = 3
+			OR = {
+				MIL = 3
+				has_country_flag = farranean_great_rulers
+			}
 			NOT = { ruler_has_personality = craven_personality }
 		}
 	
@@ -1972,16 +2053,23 @@ inspiring_leader_personality = {
 			modifier = {
 				factor = 0.25
 				AND = {
-					has_reform = heroic_realm_reform
+					has_government_attribute = is_heroic_realm
 					is_monarch_leader = yes
 				}
+			}
+			modifier = {
+				factor = 2
+				has_country_flag = jad_radash_leader_buff
 			}
 		}
 	}
 
 	heir_allow = {
 		allow = {
-			heir_MIL = 3
+			OR = {
+				heir_MIL = 3
+				has_country_flag = farranean_great_rulers
+			}
 			NOT = { heir_has_personality = craven_personality }
 		}
 	
@@ -2028,7 +2116,10 @@ inspiring_leader_personality = {
 martial_educator_personality = {
 	ruler_allow = {
 		allow = {
-			MIL = 3
+			OR = {
+				MIL = 3
+				has_country_flag = farranean_great_rulers
+			}
 		}
 	
 		chance = {
@@ -2039,16 +2130,23 @@ martial_educator_personality = {
 			modifier = {
 				factor = 0.25
 				AND = {
-					has_reform = heroic_realm_reform
+					has_government_attribute = is_heroic_realm
 					is_monarch_leader = yes
 				}
+			}
+			modifier = {
+				factor = 2
+				has_country_flag = jad_radash_leader_buff
 			}
 		}
 	}
 
 	heir_allow = {
 		allow = {
-			heir_MIL = 3
+			OR = {
+				heir_MIL = 3
+				has_country_flag = farranean_great_rulers
+			}
 		}
 	
 		chance = {
@@ -2154,7 +2252,10 @@ navigator_personality = {
 fierce_negotiator_personality = {
 	ruler_allow = {
 		allow = {
-			DIP = 3
+			OR = {
+				DIP = 3
+				has_country_flag = farranean_great_rulers
+			}
 			NOT = { has_country_modifier = centaur_military }
 		}
 	
@@ -2170,7 +2271,7 @@ fierce_negotiator_personality = {
 			modifier = {
 				factor = 0.25
 				AND = {
-					has_reform = heroic_realm_reform
+					has_government_attribute = is_heroic_realm
 					is_monarch_leader = yes
 				}
 			}
@@ -2179,7 +2280,10 @@ fierce_negotiator_personality = {
 
 	heir_allow = {
 		allow = {
-			heir_DIP = 3
+			OR = {
+				heir_DIP = 3
+				has_country_flag = farranean_great_rulers
+			}
 			NOT = { has_country_modifier = centaur_military }
 		}
 	
@@ -2230,6 +2334,7 @@ babbling_buffoon_personality = {
 			NOT = { ruler_has_personality = charismatic_negotiator_personality }
 			NOT = { ruler_has_personality = silver_tongue_personality }
 			NOT = { dip = 5 }
+			NOT = { has_country_flag = farranean_great_rulers }
 		}
 	
 		chance = {
@@ -2262,6 +2367,7 @@ babbling_buffoon_personality = {
 			NOT = { heir_has_personality = charismatic_negotiator_personality }
 			NOT = { heir_has_personality = silver_tongue_personality }
 			NOT = { heir_dip = 5 }
+			NOT = { has_country_flag = farranean_great_rulers }
 		}
 	
 		chance = {
@@ -2332,6 +2438,7 @@ embezzler_personality = {
 	ruler_allow = {
 		allow = {
 			NOT = { ruler_has_personality = incorruptible_personality }
+			NOT = { has_country_flag = farranean_great_rulers }
 		}
 	
 		chance = {
@@ -2362,6 +2469,7 @@ embezzler_personality = {
 	heir_allow = {
 		allow = {
 			NOT = { heir_has_personality = incorruptible_personality }
+			NOT = { has_country_flag = farranean_great_rulers }
 		}
 	
 		chance = {
@@ -2431,6 +2539,7 @@ infertile_personality = {
 	ruler_allow = {
 		allow = {
 			NOT = { ruler_has_personality = fertile_personality }
+			NOT = { has_country_flag = farranean_great_rulers }
 		}
 	
 		chance = {
@@ -2465,6 +2574,7 @@ infertile_personality = {
 	heir_allow = {
 		allow = {
 			NOT = { heir_has_personality = fertile_personality }
+			NOT = { has_country_flag = farranean_great_rulers }
 		}
 	
 		chance = {
@@ -2546,6 +2656,7 @@ drunkard_personality = {
 			NOT = { ruler_has_personality = pious_personality }
 			NOT = { ruler_has_personality = entrepreneur_personality }
 			NOT = { ruler_has_personality = zealot_personality }
+			NOT = { has_country_flag = farranean_great_rulers }
 		}
 	
 		chance = {
@@ -2574,6 +2685,7 @@ drunkard_personality = {
 			NOT = { heir_has_personality = pious_personality }
 			NOT = { heir_has_personality = entrepreneur_personality }
 			NOT = { heir_has_personality = zealot_personality }
+			NOT = { has_country_flag = farranean_great_rulers }
 		}
 	
 		chance = {
@@ -2646,6 +2758,7 @@ sinner_personality = {
 		allow = {
 			NOT = { ruler_has_personality = pious_personality }
 			NOT = { ruler_has_personality = zealot_personality }
+			NOT = { has_country_flag = farranean_great_rulers }
 		}
 	
 		chance = {
@@ -2677,6 +2790,7 @@ sinner_personality = {
 		allow = {
 			NOT = { heir_has_personality = pious_personality }
 			NOT = { heir_has_personality = zealot_personality }
+			NOT = { has_country_flag = farranean_great_rulers }
 		}
 	
 		chance = {
@@ -2752,6 +2866,7 @@ greedy_personality = {
 	ruler_allow = {
 		allow = {
 			NOT = { ruler_has_personality = midas_touched_personality }
+			NOT = { has_country_flag = farranean_great_rulers }
 		}
 	
 		chance = {
@@ -2785,6 +2900,7 @@ greedy_personality = {
 	heir_allow = {
 		allow = {
 			NOT = { heir_has_personality = midas_touched_personality }
+			NOT = { has_country_flag = farranean_great_rulers }
 		}
 	
 		chance = {
@@ -2886,6 +3002,7 @@ cruel_personality = {
 		allow = {
 			NOT = { ruler_has_personality = just_personality }
 			NOT = { ruler_has_personality = kind_hearted_personality }
+			NOT = { has_country_flag = farranean_great_rulers }
 		}
 	
 		chance = {
@@ -2920,6 +3037,7 @@ cruel_personality = {
 		allow = {
 			NOT = { heir_has_personality = just_personality }
 			NOT = { heir_has_personality = kind_hearted_personality }
+			NOT = { has_country_flag = farranean_great_rulers }
 		}
 	
 		chance = {
@@ -2984,6 +3102,7 @@ naive_personality = {
 		allow = {
 			NOT = { ruler_has_personality = silver_tongue_personality }
 			NOT = { ruler_has_personality = careful_personality }
+			NOT = { has_country_flag = farranean_great_rulers }
 		}
 	
 		chance = {
@@ -3019,6 +3138,7 @@ naive_personality = {
 		allow = {
 			NOT = { heir_has_personality = silver_tongue_personality }
 			NOT = { heir_has_personality = careful_personality }
+			NOT = { has_country_flag = farranean_great_rulers }
 		}
 	
 		chance = {
@@ -3099,6 +3219,7 @@ craven_personality = {
 			NOT = { ruler_has_personality = inspiring_leader_personality }
 			NOT = { ruler_has_personality = bold_fighter_personality }
 			NOT = { ruler_has_personality = xhazobs_chosen_personality }
+			NOT = { has_country_flag = farranean_great_rulers }
 		}
 	
 		chance = {
@@ -3134,6 +3255,7 @@ craven_personality = {
 		allow = {
 			NOT = { heir_has_personality = inspiring_leader_personality }
 			NOT = { heir_has_personality = bold_fighter_personality }
+			NOT = { has_country_flag = farranean_great_rulers }
 		}
 	
 		chance = {
@@ -3205,6 +3327,7 @@ loose_lips_personality = {
 		allow = {
 			NOT = { ruler_has_personality = intricate_web_weaver_personality }
 			NOT = { ruler_has_personality = secretive_personality }
+			NOT = { has_country_flag = farranean_great_rulers }
 		}
 	
 		chance = {
@@ -3236,6 +3359,7 @@ loose_lips_personality = {
 		allow = {
 			NOT = { heir_has_personality = intricate_web_weaver_personality }
 			NOT = { heir_has_personality = secretive_personality }
+			NOT = { has_country_flag = farranean_great_rulers }
 		}
 	
 		chance = {
@@ -3301,6 +3425,7 @@ loose_lips_personality = {
 obsessive_perfectionist_personality = {
 	ruler_allow = {
 		allow = {
+			NOT = { has_country_flag = farranean_great_rulers }
 			OR = {
 				NOT = { ruler_has_personality = patron_of_arts_personality }
 				NOT = { ruler_has_personality = architectural_visionary_personality }
@@ -3335,6 +3460,7 @@ obsessive_perfectionist_personality = {
 	heir_allow = {
 		allow = {
 			NOT = { heir_has_personality = architectural_visionary_personality }
+			NOT = { has_country_flag = farranean_great_rulers }
 		}
 	
 		chance = {
@@ -3402,6 +3528,7 @@ malevolent_personality = {
 		allow = {
 			NOT = { ruler_has_personality = benevolent_personality }
 			NOT = { ruler_has_personality = kind_hearted_personality }
+			NOT = { has_country_flag = farranean_great_rulers }
 		}
 	
 		chance = {
@@ -3433,6 +3560,7 @@ malevolent_personality = {
 		allow = {
 			NOT = { heir_has_personality = benevolent_personality }
 			NOT = { heir_has_personality = kind_hearted_personality }
+			NOT = { has_country_flag = farranean_great_rulers }
 		}
 	
 		chance = {
@@ -4000,6 +4128,12 @@ mage_personality = {	#Powerful Mage
 				}
 			}
 			NOT = { has_country_flag = LF_mages_banned }
+			NOT = { OR = { tag = H35 was_tag = H35 } }
+			OR = {
+				NOT = { has_global_flag = konolkhatep_master_of_the_arcane_macic_ban }
+				tag = F66
+				is_subject_of = F66
+			}
 		}
 	
 		chance = {
@@ -4023,11 +4157,6 @@ mage_personality = {	#Powerful Mage
 			}
 
 			modifier = {
-				factor = 5
-				has_reform = wex_magisterium_reform
-			}
-
-			modifier = {
 				factor = 1.25
 				ruler_has_personality = scholar_personality
 			}
@@ -4042,7 +4171,11 @@ mage_personality = {	#Powerful Mage
 			
 			modifier = {
 				factor = 2
-				has_estate_privilege = estate_church_khateshala_mutation
+				OR = {
+					has_estate_privilege = estate_church_khateshala_mutation
+					has_estate_privilege = estate_church_akhaxpa_mutation
+					has_estate_privilege = estate_church_akhaxazai_mutation
+				}
 			}
 			
 			modifier = {
@@ -4077,7 +4210,8 @@ mage_personality = {	#Powerful Mage
 					ruler_culture = bulwari_half_elf
 					ruler_culture = bom_half_elf
 					ruler_culture = kai_half_elf
-					ruler_culture = kelino_half_elf
+					ruler_culture = jahe_half_elf
+					ruler_culture = jahe_half_elf_cannorianise
 					ruler_culture = horned_ogre
 				}
 			}
@@ -4088,8 +4222,6 @@ mage_personality = {	#Powerful Mage
 					ruler_culture = west_damerian
 					ruler_culture = east_damerian
 					ruler_culture = anbenncoster
-					ruler_culture = wexonard_dual
-					ruler_culture = high_lorentish_dual
 					ruler_culture = high_lorentish
 					ruler_culture = selphereg
 					ruler_culture = caamas
@@ -4175,6 +4307,27 @@ mage_personality = {	#Powerful Mage
 				is_emperor_of_china = yes
 				empire_of_china_reform_passed = taste_magic_reform
 			}
+
+			#This is supposed to double the chances of getting PM. Revisit when the other factors are rebalanced
+			modifier = {
+				factor = 1
+				OR = {
+					has_reform = gowon_kingdom
+					has_reform = gowon_republic
+					has_reform = gowon_theocracy
+				}
+			}
+			
+			modifier = {
+				factor = 3.25
+				has_country_modifier = rinta_dark_magicks_ruler
+			}
+
+			modifier = {
+				factor = 1.25
+				is_part_of_hre = yes
+				hre_reform_passed = anbennar_nobles_of_the_wand
+			}
 		}
 	}
 	heir_allow = {
@@ -4184,6 +4337,11 @@ mage_personality = {	#Powerful Mage
 				has_heir_flag = is_a_secret_homunculus
 				has_heir_flag = heir_consort_mage_personality
 				has_country_flag = command_slave_state_flag
+			}
+			OR = {
+				NOT = { has_global_flag = konolkhatep_master_of_the_arcane_macic_ban }
+				tag = F66
+				is_subject_of = F66
 			}
 		}
 	
@@ -4207,17 +4365,13 @@ mage_personality = {	#Powerful Mage
 				OR = {
 					has_reform = magical_elite_reform
 					has_reform = eternal_council
+					has_reform = nobles_of_the_wand_reform #enabled by eoa magocratic path
 				}
 			}
 			
 			modifier = {
 				factor = 10
 				has_reform = emerald_horde
-			}
-			
-			modifier = {
-				factor = 5
-				has_reform = wex_magisterium_reform
 			}
 			
 			modifier = {
@@ -4271,7 +4425,8 @@ mage_personality = {	#Powerful Mage
 					heir_culture = bulwari_half_elf
 					heir_culture = bom_half_elf
 					heir_culture = kai_half_elf
-					heir_culture = kelino_half_elf
+					heir_culture = jahe_half_elf
+					heir_culture = jahe_half_elf_cannorianise
 					heir_culture = horned_ogre
 				}
 			}
@@ -4282,8 +4437,6 @@ mage_personality = {	#Powerful Mage
 					heir_culture = west_damerian
 					heir_culture = east_damerian
 					heir_culture = anbenncoster
-					heir_culture = wexonard_dual
-					heir_culture = high_lorentish_dual
 					heir_culture = high_lorentish
 					heir_culture = selphereg
 					heir_culture = caamas
@@ -4360,6 +4513,16 @@ mage_personality = {	#Powerful Mage
 				is_emperor_of_china = yes
 				empire_of_china_reform_passed = taste_magic_reform
 			}
+
+			#This is supposed to double the chances of getting PM. Revisit when the other factors are rebalanced
+			modifier = {
+				factor = 1
+				OR = {
+					has_reform = gowon_kingdom
+					has_reform = gowon_republic
+					has_reform = gowon_theocracy
+				}
+			}
 		}
 	}
 	consort_allow = {
@@ -4369,6 +4532,11 @@ mage_personality = {	#Powerful Mage
 				NOT = { has_consort_flag = is_a_secret_homunculus }
 			}
 			NOT = { has_consort_flag = heir_consort_mage_personality }
+			OR = {
+				NOT = { has_global_flag = konolkhatep_master_of_the_arcane_macic_ban }
+				tag = F66
+				is_subject_of = F66
+			}
 		}
 		
 		chance = {
@@ -4395,11 +4563,6 @@ mage_personality = {	#Powerful Mage
 			modifier = {
 				factor = 10
 				has_reform = emerald_horde
-			}
-			
-			modifier = {
-				factor = 5
-				has_reform = wex_magisterium_reform
 			}
 			
 			modifier = {
@@ -4442,7 +4605,8 @@ mage_personality = {	#Powerful Mage
 					consort_culture = bulwari_half_elf
 					consort_culture = bom_half_elf
 					consort_culture = kai_half_elf
-					consort_culture = kelino_half_elf
+					consort_culture = jahe_half_elf
+					consort_culture = jahe_half_elf_cannorianise
 					consort_culture = horned_ogre
 				}
 			}
@@ -4453,8 +4617,6 @@ mage_personality = {	#Powerful Mage
 					consort_culture = west_damerian
 					consort_culture = east_damerian
 					consort_culture = anbenncoster
-					consort_culture = wexonard_dual
-					consort_culture = high_lorentish_dual
 					consort_culture = high_lorentish
 					consort_culture = selphereg
 					consort_culture = caamas
@@ -4516,6 +4678,16 @@ mage_personality = {	#Powerful Mage
 					dwarovar_goblin_culture_consort = yes
 					consort_culture = city_goblin
 					consort_culture = march_goblin
+				}
+			}
+
+			#This is supposed to double the chances of getting PM. Revisit when the other factors are rebalanced
+			modifier = {
+				factor = 1
+				OR = {
+					has_reform = gowon_kingdom
+					has_reform = gowon_republic
+					has_reform = gowon_theocracy
 				}
 			}
 		}
@@ -4680,6 +4852,7 @@ xhazobs_chosen_personality = {
 	yearly_patriarch_authority = 0.015
 	land_morale = 0.1
 	global_autonomy = -0.05
+	raze_power_gain = 0.5
 	monarch_lifespan = 0.75 #they get forced into a general so this is to somewhat offset that
 	election_cycle = 40
 	nation_designer_cost = 800
@@ -4694,293 +4867,66 @@ xhazobs_chosen_personality = {
 }
 
 
-mongoose_shifter_personality = {
+shapeshifter_personality = {
 	ruler_allow = {
 		allow = {
-			OR = {
-				ruler_religion = beast_memory
-				ruler_culture = tanizu
-				ruler_culture = antmvura
-				ruler_culture = kombedak
-				ruler_culture = umsozidak
-				ruler_culture = wakoodak
-			}
+			OR = { 
+				ruler_religion = beast_memory 
+				ruler_culture = tanizu 
+				ruler_culture = antmvura 
+				ruler_culture = kombedak 
+				ruler_culture = umsozidak 
+				ruler_culture = wakoodak 
+			} 
 		}
 
 		chance = {
 			modifier = {
-				factor = 1
-			}
-			modifier = {
-				factor = 0.5
-				mil = 3
-			}
-			modifier = {
-				factor = 1
-				mil = 6
+				factor = 0
 			}
 		}
 	}
 
 	heir_allow = {
 		allow = {
-			OR = {
-				heir_religion = beast_memory
-				heir_culture = tanizu
-				heir_culture = antmvura
-				heir_culture = kombedak
-				heir_culture = umsozidak
-				heir_culture = wakoodak
-			}
+			OR = { 
+				ruler_religion = beast_memory 
+				ruler_culture = tanizu 
+				ruler_culture = antmvura 
+				ruler_culture = kombedak 
+				ruler_culture = umsozidak 
+				ruler_culture = wakoodak 
+			} 
 		}
 		chance = {
 			modifier = {
-				factor = 1
-			}
-			modifier = {
-				factor = 0.5
-				heir_mil = 3
-			}
-			modifier = {
-				factor = 1
-				heir_mil = 6
+				factor = 0
 			}
 		}
 	}
 	
 	consort_allow = {
 		allow = {
-			OR = {
-				consort_religion = beast_memory
-				consort_culture = tanizu
-				consort_culture = antmvura
-				consort_culture = kombedak
-				consort_culture = umsozidak
-				consort_culture = wakoodak
-			}
-			NOT = {
-				consort_has_personality = mongoose_shifter_personality
-				consort_has_personality = leopard_shifter_personality
-				consort_has_personality = elephant_shifter_personality
-			}
+			OR = { 
+				ruler_religion = beast_memory 
+				ruler_culture = tanizu 
+				ruler_culture = antmvura 
+				ruler_culture = kombedak 
+				ruler_culture = umsozidak 
+				ruler_culture = wakoodak 
+			} 
 		}
 		chance = {
 			modifier = {
-				factor = 1
-			}
-			modifier = {
-				factor = 0.5
-				consort_mil = 3
-			}
-			modifier = {
-				factor = 1
-				consort_mil = 6
+				factor = 0
 			}
 		}
 	}
 
-
-
-    land_morale = 0.05
-    monarch_lifespan = 0.2
+    unjustified_demands = -0.25
+    monarch_lifespan = 0.25
 
 	nation_designer_cost = 800
-	enemy_strength_multiplier = 0.75 # Mongoose shifters are bold
-	easy_war_chance_multiplier = 1.5 # Wants to go fight
-	war_chance_multiplier = 8 # wants to go fight
-	wants_land = yes #ambitious
-	immortal = 0
-}
-
-leopard_shifter_personality = {
-	ruler_allow = {
-		allow = {
-			OR = {
-				ruler_religion = beast_memory
-				ruler_culture = tanizu
-				ruler_culture = antmvura
-				ruler_culture = kombedak
-				ruler_culture = umsozidak
-				ruler_culture = wakoodak
-			}
-		}
-
-		chance = {
-			modifier = {
-				factor = 1
-			}
-			modifier = {
-				factor = 0.5
-				mil = 3
-			}
-			modifier = {
-				factor = 1
-				mil = 6
-			}
-		}
-	}
-
-	heir_allow = {
-		allow = {
-			OR = {
-				heir_religion = beast_memory
-				heir_culture = tanizu
-				heir_culture = antmvura
-				heir_culture = kombedak
-				heir_culture = umsozidak
-				heir_culture = wakoodak
-			}
-		}
-		chance = {
-			modifier = {
-				factor = 1
-			}
-			modifier = {
-				factor = 0.5
-				heir_mil = 3
-			}
-			modifier = {
-				factor = 1
-				heir_mil = 6
-			}
-		}
-	}
-	
-	consort_allow = {
-		allow = {
-			OR = {
-				consort_religion = beast_memory
-				consort_culture = tanizu
-				consort_culture = antmvura
-				consort_culture = kombedak
-				consort_culture = umsozidak
-				consort_culture = wakoodak
-			}
-			NOT = {
-				consort_has_personality = mongoose_shifter_personality
-				consort_has_personality = leopard_shifter_personality
-				consort_has_personality = elephant_shifter_personality
-			}
-		}
-		chance = {
-			modifier = {
-				factor = 1
-			}
-			modifier = {
-				factor = 0.5
-				consort_mil = 3
-			}
-			modifier = {
-				factor = 1
-				consort_mil = 6
-			}
-		}
-	}
-
-    trade_efficiency = 0.1
-    monarch_lifespan = 0.2
-
-	nation_designer_cost = 800
-	enemy_strength_multiplier = 1.15 # cautious
-	easy_war_chance_multiplier = 20 # Hunter pouncing
-	other_ai_peace_term_bonus = 20
-	send_warning_desire = 10
-	immortal = 0
-}
-
-elephant_shifter_personality = {
-	ruler_allow = {
-		allow = {
-			OR = {
-				ruler_religion = beast_memory
-				ruler_culture = tanizu
-				ruler_culture = antmvura
-				ruler_culture = kombedak
-				ruler_culture = umsozidak
-				ruler_culture = wakoodak
-			}
-		}
-
-		chance = {
-			modifier = {
-				factor = 1
-			}
-			modifier = {
-				factor = 0.5
-				mil = 3
-			}
-			modifier = {
-				factor = 1
-				mil = 6
-			}
-		}
-	}
-
-	heir_allow = {
-		allow = {
-			OR = {
-				heir_religion = beast_memory
-				heir_culture = tanizu
-				heir_culture = antmvura
-				heir_culture = kombedak
-				heir_culture = umsozidak
-				heir_culture = wakoodak
-			}
-		}
-		chance = {
-			modifier = {
-				factor = 1
-			}
-			modifier = {
-				factor = 0.5
-				heir_mil = 3
-			}
-			modifier = {
-				factor = 1
-				heir_mil = 6
-			}
-		}
-	}
-	
-	consort_allow = {
-		allow = {
-			OR = {
-				consort_religion = beast_memory
-				consort_culture = tanizu
-				consort_culture = antmvura
-				consort_culture = kombedak
-				consort_culture = umsozidak
-				consort_culture = wakoodak
-			}
-			NOT = {
-				consort_has_personality = mongoose_shifter_personality
-				consort_has_personality = leopard_shifter_personality
-				consort_has_personality = elephant_shifter_personality
-			}
-		}
-		chance = {
-			modifier = {
-				factor = 1
-			}
-			modifier = {
-				factor = 0.5
-				consort_mil = 3
-			}
-			modifier = {
-				factor = 1
-				consort_mil = 6
-			}
-		}
-	}
-
-    build_cost = -0.1
-    monarch_lifespan = 0.2
-
-	nation_designer_cost = 800
-	building_budget_multiplier = 2 # Will invest much more in buildings
-	gift_chance = 50 # helps others
-	war_chance_multiplier = 0.8
-	alliance_acceptance = 10
 	immortal = 0
 }
 

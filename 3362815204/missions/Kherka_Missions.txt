@@ -129,6 +129,7 @@ G48_slot_1 = {
 					cost_multiplier = 0.50
 				}
 			}
+			custom_tooltip = " "
 			G59 = {
 				add_years_of_owned_provinces_production_income = {
 					years = 5
@@ -283,7 +284,7 @@ G48_slot_2 = {
 		effect = {
 			if = {
 				limit = { 
-					has_country_flag = G48_schemers_in_power
+					has_country_flag = schemers_in_power
 				}
 				custom_tooltip = G48_schemers_bonus_yes_tt
 			}
@@ -317,10 +318,10 @@ G48_slot_2 = {
 				owned_by = ROOT
 			}
 			2736 = { has_manpower_building_trigger = yes }
-			all_known_country = {
-				OR = {
-					is_a_kheion = yes
-					NOT = { army_size = ROOT }
+			NOT = {
+				any_known_country = {
+					capital_scope = { region = alecand_region }
+					army_size = ROOT
 				}
 			}
 		} 
@@ -419,7 +420,7 @@ G48_slot_2 = {
 		effect = { 
 			if = {
 				limit = { 
-					has_country_flag = G48_colonists_in_power
+					has_country_flag = colonists_in_power
 				}
 				custom_tooltip = G48_colonists_bonus_yes_tt
 			}
@@ -469,7 +470,7 @@ G48_slot_3 = {
 		effect = {
 			if = {
 				limit = { 
-					has_country_flag = G48_militants_in_power
+					has_country_flag = militants_in_power
 				}
 				custom_tooltip = G48_militants_bonus_yes_tt
 			}
@@ -829,6 +830,7 @@ G48_slot_4 = {
 					COST = 0
 				}
 			}
+			custom_tooltip = " "
 			custom_tooltip = G48_stalwarts_in_power_tt
 			if = {
 				limit = {
@@ -868,22 +870,21 @@ G48_slot_4 = {
 			}
 		} 
 
-		trigger = {  
-			NOT = {
-				alecand_region	= {
-					OR = {
-						trade_goods = copper
-                    	trade_goods = iron
-                    	trade_goods = gems
-                    	trade_goods = gold
-					}
-					OR = {
-						NOT = { owned_by = ROOT }
-						NOT = { num_of_times_improved = 5 }
-						NOT = { #This is so the tooltip renders properly with the NOT
-							has_building = workshop
-							has_building = counting_house
-							trade_goods = gold 
+		trigger = { 
+			custom_trigger_tooltip = {
+				tooltip =  G48_metal_in_our_blood_trigger_tt
+				NOT = {
+					alecand_region	= {
+						OR = {
+							trade_goods = copper
+            	        	trade_goods = iron
+            	        	trade_goods = gems
+            	        	trade_goods = gold
+						}
+						OR = {
+							NOT = { owned_by = ROOT }
+							NOT = { num_of_times_improved = 5 }
+							has_production_or_gold_building_trigger = no
 						}
 					}
 				}
@@ -892,20 +893,30 @@ G48_slot_4 = {
 
 		effect = {  
 			custom_tooltip = G48_metal_in_our_blood_tt
-			set_country_flag = G48_master_of_metal
-			alecand_region = {
-				limit = {
-					owned_by = ROOT
-					OR = {
-						trade_goods = copper
-                    	trade_goods = iron
-                    	trade_goods = gems
-                    	trade_goods = gold
-					}
-				}
+			set_country_flag = no_more_bad_iron
+			set_country_flag = no_more_bad_copper
+			custom_tooltip = anb_province_effect_tt
+			tooltip = {
 				add_province_modifier = {
 					name = G48_master_of_metallu
 					duration = -1
+				}
+			}
+			hidden_effect = {
+				alecand_region = {
+					limit = {
+						owned_by = ROOT
+						OR = {
+							trade_goods = copper
+							trade_goods = iron
+							trade_goods = gems
+							trade_goods = gold
+						}
+					}
+					add_province_modifier = {
+						name = G48_master_of_metallu
+						duration = -1
+					}
 				}
 			}
 		} 

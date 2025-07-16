@@ -55,6 +55,7 @@ servants_of_surael_order = {
 			religion = bulwari_sun_cult
 			has_country_flag = updating_isolationism_window
 		}
+        NOT = { tag = H67 } #Rezankand
 	}
 	cost = 50
 	cost_type = dip_power
@@ -144,6 +145,7 @@ order_of_exemplars_order = {
 			religion = bulwari_sun_cult
 			has_country_flag = updating_isolationism_window
 		}
+        NOT = { tag = H67 } #Rezankand
     }
     cost = 50
     cost_type = mil_power
@@ -190,12 +192,131 @@ order_of_exemplars_order = {
     localization = holy_order
 }
 
+#Rezankand
+sundancers_order = {
+    icon = GFX_holy_order_rezankand_sundancers
+    trigger = {
+		OR = {
+			religion = bulwari_sun_cult
+			has_country_flag = updating_isolationism_window
+		}
+        has_country_flag = rezankand_unlocked_sundancers
+    }
+    cost = 50
+    cost_type = dip_power
+    modifier = {
+        local_production_efficiency = 0.1
+        trade_value_modifier = 0.1
+    }
+    per_province_effect = {
+        add_base_production = 1
+        custom_tooltip = sundancer_order_bonus_tt
+        hidden_effect = {
+            if = {
+                limit = {
+                    OR = {
+                        trade_goods = damestear
+                        trade_goods = precursor_relics
+                    }
+                }
+                add_province_modifier = {
+                    name = rezankand_sundancer_order_bonus
+                    duration = -1
+                }
+            }
+        }
+        custom_tooltip = sundancers_diranhria_bonus_tt
+        tooltip = {
+            add_province_modifier = {
+                name = rezankand_diranhria_sundancer_bonus
+                duration = -1
+            }
+        }
+        if = {
+            limit = {
+                has_province_modifier = rezankand_diranhria_stationed_def
+            }
+            add_province_modifier = {
+                name = rezankand_diranhria_sundancer_bonus
+                duration = -1
+            }
+        }
+        custom_tooltip = removes_slaves_tooltip
+        hidden_effect = {
+            if = {
+                limit = {
+                    trade_goods = slaves
+                }
+                change_trade_goods = unknown
+            }
+        }
+    }
+    per_province_abandon_effect = {
+        add_base_production = -1
+        remove_province_modifier = rezankand_sundancer_order_bonus
+    }
+    localization = holy_order
+}
+
+avengers_order = {
+    icon = GFX_holy_order_rezankand_avengers
+    trigger = {
+		OR = {
+			religion = bulwari_sun_cult
+			has_country_flag = updating_isolationism_window
+		}
+        has_country_flag = rezankand_unlocked_avengers
+    }
+    cost = 50
+    cost_type = mil_power
+    modifier = {
+        local_hostile_attrition = 1
+        regiment_recruit_speed = -0.5
+    }
+    per_province_effect = {
+        add_base_manpower = 1
+        custom_tooltip = avengers_order_bonus_tt
+        hidden_effect = {
+            if = {
+                limit = { has_province_modifier = effelai_roots_blooming }
+                add_province_modifier = {
+                    name = rezankand_avengers_order_roots_blooming
+                    duration = -1
+                }
+            }
+            else_if = {
+                limit = { has_province_modifier = effelai_hub_blooming }
+                add_province_modifier = {
+                    name = rezankand_avengers_order_hub_blooming
+                    duration = -1
+                }
+            }
+        }
+        custom_tooltip = removes_slaves_tooltip
+        hidden_effect = {
+            if = {
+                limit = {
+                    trade_goods = slaves
+                }
+                change_trade_goods = unknown
+            }
+        }
+    }
+    per_province_abandon_effect = {
+        add_base_manpower = -1
+        remove_province_modifier = rezankand_avengers_order_hub_blooming
+        remove_province_modifier = rezankand_avengers_order_roots_blooming
+    }
+    localization = holy_order
+}
+
 #Jadd
 lightbringers_order = {
     icon = GFX_holy_order_lightbringers
     trigger = {
         religion = the_jadd
 		has_country_modifier = jaddari_lightbringers
+        NOT = { has_country_flag = the_jadd_holy_order_reformed }
     }
     cost = 50
     cost_type = adm_power
@@ -230,6 +351,7 @@ jasienes_daughters_order = {
     icon = GFX_holy_order_jasienes_daughters
     trigger = {
         religion = the_jadd
+        NOT = { has_country_flag = the_jadd_holy_order_reformed }
     }
     cost = 50
     cost_type = dip_power
@@ -282,6 +404,7 @@ militant_jadd_order = {
     icon = GFX_holy_order_militant_jadd
     trigger = {
         religion = the_jadd
+        NOT = { has_country_flag = the_jadd_holy_order_reformed }
     }
     cost = 50
     cost_type = mil_power
@@ -315,12 +438,136 @@ militant_jadd_order = {
     }
     localization = holy_order
 }
+#Jadd upgraded
+lightbringers_order_upgraded = {
+    icon = GFX_holy_order_lightbringers
+    trigger = {
+        religion = the_jadd
+		has_country_modifier = jaddari_lightbringers
+        has_country_flag = the_jadd_holy_order_reformed
+    }
+    cost = 50
+    cost_type = adm_power
+    per_province_effect = {
+        add_base_tax = 1
+    }
+    per_province_abandon_effect = {
+        add_base_tax = -1
+        hidden_effect = {
+            if = {
+                limit = { NOT = { base_tax = 1 } }
+                set_base_tax = 1
+            }
+        }
+    }
+    modifier = {
+        local_missionary_strength = 0.02
+        local_governing_cost = -0.25
+    }
+    ai_priority = {
+        factor = 10
+        modifier = {
+            factor = 0
+            religion = the_jadd 
+        }
+    }
+    localization = holy_order
+}
 
+jasienes_daughters_order_upgraded = {
+    icon = GFX_holy_order_jasienes_daughters
+    trigger = {
+        religion = the_jadd
+        has_country_flag = the_jadd_holy_order_reformed
+    }
+    cost = 50
+    cost_type = dip_power
+    per_province_effect = {
+        add_base_production = 1
+
+        custom_tooltip = removes_slaves_tooltip
+        hidden_effect = {
+            if = {
+                limit = {
+                    trade_goods = slaves
+                }
+                change_trade_goods = unknown
+            }
+        }
+    }
+    per_province_abandon_effect = {
+        add_base_production = -1
+        hidden_effect = {
+            if = {
+                limit = { NOT = { base_production = 1 } }
+                set_base_production = 1
+            }
+        }
+    }
+    modifier = {
+        local_development_cost = -0.1
+        local_monthly_devastation = -0.1
+    }
+    ai_priority = {
+        factor = 1
+        modifier = {
+            factor = 4
+            trade_goods = slaves
+        }
+        modifier = {
+            factor = 3
+            unrest = 5
+        }
+        modifier = {
+            factor = 1.5
+            devastation = 50
+        }
+    }
+    localization = holy_order
+}
+
+militant_jadd_order_upgraded = {
+    icon = GFX_holy_order_militant_jadd
+    trigger = {
+        religion = the_jadd
+        has_country_flag = the_jadd_holy_order_reformed
+    }
+    cost = 50
+    cost_type = mil_power
+    per_province_effect = {
+        add_base_manpower = 1
+    }
+    per_province_abandon_effect = {
+        add_base_manpower = -1
+        hidden_effect = {
+            if = {
+                limit = { NOT = { base_manpower = 1 } }
+                set_base_manpower = 1
+            }
+        }
+    }
+    modifier = {
+        land_forcelimit = 0.2
+        local_manpower = 0.5
+    }
+    ai_priority = {
+        factor = 4
+		modifier = {
+			factor = 0.5
+			development = 9
+		}
+		modifier = {
+			factor = 0
+			development = 12
+		}
+    }
+    localization = holy_order
+}
 #Old Sun Cult
 #Order of Judges reused from NSC
 servants_of_surakel_order = {
 	icon = GFX_holy_order_servants_of_surael
-    	trigger = {
+    trigger = {
 		religion = old_bulwari_sun_cult
 	}
 	cost = 50
@@ -993,8 +1240,8 @@ munas_order = {
     trigger = {
         religion = corinite
         OR = {
-		    has_country_flag = munas_order_picked
-		    has_country_flag = upgraded_munas
+            has_country_flag = munas_order_picked
+            has_country_flag = upgraded_munas
         }
     }
     cost = 50
@@ -1733,6 +1980,10 @@ maederitic_rule_order_level_1 = {
     }
     ai_priority = {
         factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
     }
     localization = kheionist_philosophy
 }
@@ -1761,6 +2012,10 @@ maederitic_rule_order_level_2 = {
     }
     ai_priority = {
         factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
     }
     localization = kheionist_philosophy
 }
@@ -1787,6 +2042,10 @@ maederitic_rule_order_level_3 = {
     }
     ai_priority = {
         factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
     }
     localization = kheionist_philosophy
 }
@@ -1812,6 +2071,10 @@ schaal_onitheia_order_level_1 = {
     }
     ai_priority = {
         factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
     }
     localization = kheionist_philosophy
 }
@@ -1840,6 +2103,10 @@ schaal_onitheia_order_level_2 = {
     }
     ai_priority = {
         factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
     }
     localization = kheionist_philosophy
 }
@@ -1866,6 +2133,10 @@ schaal_onitheia_order_level_3 = {
     }
     ai_priority = {
         factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
     }
     localization = kheionist_philosophy
 }
@@ -1891,6 +2162,10 @@ teachings_of_varamelas_order_level_1 = {
     }
     ai_priority = {
         factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
     }
     localization = kheionist_philosophy
 }
@@ -1919,6 +2194,10 @@ teachings_of_varamelas_order_level_2 = {
     }
     ai_priority = {
         factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
     }
     localization = kheionist_philosophy
 }
@@ -1945,6 +2224,10 @@ teachings_of_varamelas_order_level_3 = {
     }
     ai_priority = {
         factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
     }
     localization = kheionist_philosophy
 }
@@ -1971,6 +2254,10 @@ dictats_of_isparokaeus_order_level_1 = {
     }
     ai_priority = {
         factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
     }
     localization = kheionist_philosophy
 }
@@ -1999,6 +2286,10 @@ dictats_of_isparokaeus_order_level_2 = {
     }
     ai_priority = {
         factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
     }
     localization = kheionist_philosophy
 }
@@ -2025,6 +2316,10 @@ dictats_of_isparokaeus_order_level_3 = {
     }
     ai_priority = {
         factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
     }
     localization = kheionist_philosophy
 }
@@ -2050,6 +2345,10 @@ archatiradist_doctrine_order_level_1 = {
     }
     ai_priority = {
         factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
     }
     localization = kheionist_philosophy
 }
@@ -2078,6 +2377,10 @@ archatiradist_doctrine_order_level_2 = {
     }
     ai_priority = {
         factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
     }
     localization = kheionist_philosophy
 }
@@ -2104,6 +2407,10 @@ archatiradist_doctrine_order_level_3 = {
     }
     ai_priority = {
         factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
     }
     localization = kheionist_philosophy
 }
@@ -2129,6 +2436,10 @@ anagbheism_order_level_1 = {
     }
     ai_priority = {
         factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
     }
     localization = kheionist_philosophy
 }
@@ -2157,6 +2468,10 @@ anagbheism_order_level_2 = {
     }
     ai_priority = {
         factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
     }
     localization = kheionist_philosophy
 }
@@ -2183,6 +2498,10 @@ anagbheism_order_level_3 = {
     }
     ai_priority = {
         factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
     }
     localization = kheionist_philosophy
 }
@@ -2209,6 +2528,10 @@ axierophonic_mandate_order_level_1 = {
     }
     ai_priority = {
         factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
     }
     localization = kheionist_philosophy
 }
@@ -2237,6 +2560,10 @@ axierophonic_mandate_order_level_2 = {
     }
     ai_priority = {
         factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
     }
     localization = kheionist_philosophy
 }
@@ -2263,6 +2590,10 @@ axierophonic_mandate_order_level_3 = {
     }
     ai_priority = {
         factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
     }
     localization = kheionist_philosophy
 }
@@ -2288,6 +2619,10 @@ drivos_rochos_order_level_1 = {
     }
     ai_priority = {
         factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
     }
     localization = kheionist_philosophy
 }
@@ -2316,6 +2651,10 @@ drivos_rochos_order_level_2 = {
     }
     ai_priority = {
         factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
     }
     localization = kheionist_philosophy
 }
@@ -2342,6 +2681,10 @@ drivos_rochos_order_level_3 = {
     }
     ai_priority = {
         factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
     }
     localization = kheionist_philosophy
 }
@@ -2367,6 +2710,10 @@ laskaris_creed_order_level_1 = {
     }
     ai_priority = {
         factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
     }
     localization = kheionist_philosophy
 }
@@ -2395,6 +2742,10 @@ laskaris_creed_order_level_2 = {
     }
     ai_priority = {
         factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
     }
     localization = kheionist_philosophy
 }
@@ -2421,8 +2772,360 @@ laskaris_creed_order_level_3 = {
     }
     ai_priority = {
         factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
     }
     localization = kheionist_philosophy
+}
+
+### DROZMA TUR ORDERS
+
+drozma_avarkavalky_order = {
+    icon = GFX_holy_order_drozma_avarkavalky
+    trigger = {
+        religion = drozma_tur
+    }
+
+    color = { 255 205 0 }
+    cost = 50
+    cost_type = adm_power
+    modifier = {
+        local_tax_modifier = 0.2
+        trade_goods_size_modifier = 0.05
+    }
+    per_province_effect = {
+        add_base_tax = 1
+        owner = {
+            if = {
+                limit = {
+                    has_church_aspect = aspire_wisdom_aspect_adm
+                }
+                add_church_power = 2
+                add_estate_loyalty = {
+                    estate = estate_church
+                    loyalty = 1
+                }
+            }
+        }
+    }
+
+    per_province_abandon_effect = {
+        add_base_tax = -1
+    }
+
+    ai_priority = {
+        factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
+    }
+    localization = drozma_order
+}
+
+drozma_gydkanecy_order = {
+    icon = GFX_holy_order_drozma_gydkanecy
+    trigger = {
+        religion = drozma_tur
+    }
+
+    color = { 0 161 255 }
+    cost = 50
+    cost_type = dip_power
+    modifier = {
+        local_production_efficiency = 0.1
+        local_institution_spread = 0.2
+    }
+    per_province_effect = {
+        add_base_production = 1
+        owner = {
+            if = {
+                limit = {
+                    has_church_aspect = aspire_wisdom_aspect_adm
+                }
+                add_church_power = 2
+                add_estate_loyalty = {
+                    estate = estate_church
+                    loyalty = 1
+                }
+            }
+        }
+    }
+
+    per_province_abandon_effect = {
+        add_base_production = -1
+    }
+
+    ai_priority = {
+        factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
+    }
+    localization = drozma_order
+}
+
+drozma_drozmove_bojevy_order = {
+    icon = GFX_holy_order_drozma_drozmove_bojevy
+    trigger = {
+        religion = drozma_tur
+    }
+
+    color = { 255 30 45 }
+    cost = 50
+    cost_type = mil_power
+    modifier = {
+        local_manpower_modifier = 0.15
+        supply_limit_modifier = 0.25
+    }
+    per_province_effect = {
+        add_base_manpower = 1
+        owner = {
+            if = {
+                limit = {
+                    has_church_aspect = aspire_wisdom_aspect_adm
+                }
+                add_church_power = 2
+                add_estate_loyalty = {
+                    estate = estate_church
+                    loyalty = 1
+                }
+            }
+        }
+    }
+
+    per_province_abandon_effect = {
+        add_base_manpower = -1
+    }
+
+    ai_priority = {
+        factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
+    }
+    localization = drozma_order
+}
+
+drozma_bozamachi_order = {
+    icon = GFX_holy_order_drozma_bozamachi
+    trigger = {
+        religion = drozma_tur
+        tag = H24 # Dragon Dominion
+    }
+
+    color = { 61 179 26 }
+    cost = 50
+    cost_type = mil_power
+    modifier = {
+        local_defensiveness = 0.25
+        local_garrison_damage = 0.5
+    }
+    per_province_effect = {
+        add_base_manpower = 1
+        owner = {
+            if = {
+                limit = {
+                    has_church_aspect = aspire_wisdom_aspect_adm
+                }
+                add_church_power = 2
+                add_estate_loyalty = {
+                    estate = estate_church
+                    loyalty = 1
+                }
+            }
+        }
+    }
+
+    per_province_abandon_effect = {
+        add_base_manpower = -1
+    }
+
+    ai_priority = {
+        factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
+    }
+    localization = drozma_order
+}
+
+istralore_order = {
+    icon = GFX_holy_order_Corinite_Mil_Order
+    color = { 136 8 8 }
+    trigger = {
+        religion = corinite
+        has_country_flag = A45_holy_order_enable
+    }
+    cost = 50
+    cost_type = mil_power
+    per_province_effect = {
+        add_base_manpower = 1
+        custom_tooltip = A45_daughters_tt
+        if = {
+			limit = { has_dlc = "Common Sense" }
+			custom_tooltip = corinite_mil_order_event_karma_tt
+		}
+        if = {
+            limit = {
+                owner = {
+                    has_government_attribute = patronise_the_corinite_orders
+                }
+            }
+            corinite_improved_holy_order_mil = yes
+        }
+        hidden_effect = {
+            if = {
+                limit = { NOT = { has_province_modifier = corinite_order_event_block } }
+                owner = { country_event = { id = istralore.15 } }
+                area = {
+                    add_province_modifier = {
+                        name = corinite_order_event_block
+                        hidden = yes
+                        duration = -1
+                    }
+                }
+            }
+        }
+    }
+    per_province_abandon_effect = {
+        add_base_manpower = -1
+        corinite_improved_holy_order_remove = yes
+        hidden_effect = {
+            if = {
+                limit = { NOT = { base_manpower = 1 } }
+                set_base_manpower = 1
+            }
+        }
+    }
+    modifier = {
+        local_manpower_modifier = 0.25
+    }
+    ai_priority = {
+        factor = 10
+        modifier = {
+            factor = 0
+            NOT = { owned_by = ROOT }
+        }
+    }
+    localization = holy_order
+}
+
+
+drozma_varlen_order = {
+    icon = GFX_holy_order_laskaris_creed_1
+    trigger = {
+        religion = drozma_tur
+        has_country_flag = drozma_tur_varlengeilt_holy_order_allowed
+        has_global_flag = drozma_tur_varlengeilt_can_happen
+    }
+
+    color = { 61 179 26 }
+    cost = 9999
+    cost_type = mil_power
+    modifier = {
+        innovativeness_gain = 0.05
+        reform_progress_growth = 0.05
+        local_institution_spread = 0.2
+    }
+    per_province_effect = {
+    }
+
+    per_province_abandon_effect = {
+    }
+
+    ai_priority = {
+        factor = 0
+    }
+    localization = drozma_varlen_order
+}
+
+
+#Verne
+crimson_wings_protectors_order = {
+    icon = GFX_holy_order_Corinite_Mil_Order
+    trigger = {
+        religion = corinite
+        has_country_flag = verne_crimson_wings_protectors
+    }
+    cost = 50
+    cost_type = mil_power
+    per_province_effect = {
+        add_base_manpower = 1
+        custom_tooltip = verne_protectors_effect_tt
+        hidden_effect = {
+            if = {
+                limit = { NOT = { has_province_modifier = corinite_order_event_block } }
+                owner = { country_event = { id = verne.902 } }
+                area = {
+                    add_province_modifier = {
+                        name = corinite_order_event_block
+                        hidden = yes
+                        duration = -1
+                    }
+                }
+            }
+        }
+    }
+    per_province_abandon_effect = {
+        add_base_manpower = -1
+    }
+    modifier = {
+        local_manpower_modifier = 0.1
+        local_amount_of_hussars = 0.2
+        local_defensiveness = 0.20
+        local_hostile_attrition = 1
+    }
+    ai_priority = {
+        factor = 10
+        #modifier = {
+        #}
+    }
+    localization = holy_order
+}
+steward_of_the_crimson_wings_order = {
+    icon = GFX_holy_order_Corinite_Mil_Order
+    trigger = {
+        religion = corinite
+        has_country_flag = verne_stewards_of_the_crimson_wings
+    }
+    cost = 50
+    cost_type = mil_power
+    per_province_effect = {
+        add_base_manpower = 1
+        custom_tooltip = verne_steward_effect_tt
+        hidden_effect = {
+            if = {
+                limit = { NOT = { has_province_modifier = corinite_order_event_block } }
+                owner = { country_event = { id = verne.903 } }
+                area = {
+                    add_province_modifier = {
+                        name = corinite_order_event_block
+                        hidden = yes
+                        duration = -1
+                    }
+                }
+            }
+        }
+    }
+    per_province_abandon_effect = {
+        add_base_manpower = -1
+    }
+    modifier = {
+        local_manpower_modifier = 0.2
+        local_amount_of_hussars = 0.3
+    }
+    ai_priority = {
+        factor = 10
+        #modifier = {
+        #}
+    }
+    localization = holy_order
 }
 
 #A holy order you can set a province to so it loses it's current holy order, a workaround of the fact that there's no remove_holy_order effect

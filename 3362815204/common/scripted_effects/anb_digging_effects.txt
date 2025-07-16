@@ -1031,11 +1031,18 @@ define_hold_to_clear = {
 		set_province_flag = infested_@ROOT
 		save_event_target_as = infested3
 	}
-	random_owned_province = {
-		limit = { has_province_modifier = infested_hold is_city = yes NOT = { has_province_flag = infested_@ROOT } }
-		set_province_flag = option_infested_4_@ROOT
-		set_province_flag = infested_@ROOT
-		save_event_target_as = infested4
+	random_subject_country = {
+		limit = {
+			has_country_flag = owns_hold_province
+			any_owned_province = { has_province_modifier = infested_hold is_city = yes }
+		}
+		set_country_flag = infested_subject
+		random_owned_province = {
+			limit = { has_province_modifier = infested_hold is_city = yes NOT = { has_province_flag = infested_@ROOT } }
+			set_province_flag = option_infested_4_@ROOT
+			set_province_flag = infested_@ROOT
+			save_event_target_as = infested4
+		}
 	}
 }
 infested_hold_clearing = {
@@ -1061,7 +1068,30 @@ infested_hold_clearing = {
 				clr_province_flag = option_infested_3_@ROOT
 				clr_province_flag = option_infested_4_@ROOT
 			}
+			every_subject_country = {
+				limit = { has_country_flag = infested_subject }
+				clr_country_flag = infested_subject
+				every_owned_province = {
+					limit = { has_province_flag = infested_@ROOT }
+					clr_province_flag = infested_@ROOT
+					clr_province_flag = option_infested_4_@ROOT
+				}
+			}
 			clr_country_flag = open_infested_hold_menu
+			if = {
+				limit = { is_subject = yes }
+				clr_country_flag = infested_subject
+				overlord = {
+					every_owned_province = {
+						limit = { has_province_flag = infested_@ROOT }
+						clr_province_flag = infested_@ROOT
+						clr_province_flag = option_infested_1_@ROOT
+						clr_province_flag = option_infested_2_@ROOT
+						clr_province_flag = option_infested_3_@ROOT
+					}
+					clr_country_flag = open_infested_hold_menu
+				}
+			}
 		}
 	}
 }
@@ -1676,6 +1706,18 @@ setup_digging_deeper_capital = {
 			multiply_variable = { speed = 0.9 }
 		}
 		if = {
+			limit = { owner = { has_country_modifier = az_an_granite_isolation_2 } }
+			multiply_variable = { speed = 0.95 }
+		}
+		if = {
+			limit = { owner = { has_country_modifier = az_an_granite_isolation_1 } }
+			multiply_variable = { speed = 0.90 }
+		}
+		if = {
+			limit = { owner = { has_country_modifier = az_an_granite_isolation_0 } }
+			multiply_variable = { speed = 0.75 }
+		}
+		if = {
 			limit = { 
 				owner = { 
 					NOT = { 
@@ -1733,6 +1775,14 @@ setup_digging_deeper_capital = {
 		if = {
 			limit = { owner = { has_estate_privilege = artifice_invention_snotfinger_stimulant } }
 			multiply_variable = { speed = 0.9 }
+		}
+		if = { #Ovdal-az-An Granite Isolation bonus
+			limit = { owner = { has_country_modifier = az_an_granite_isolation_1 } }	
+			multiply_variable = { speed = 0.9 }
+		}
+		if = { #Ovdal-az-An Granite Isolation bonus
+			limit = { owner = { has_country_modifier = az_an_granite_isolation_0 } }	
+			multiply_variable = { speed = 0.75 }
 		}
 		
 		if = {
@@ -2201,7 +2251,7 @@ setup_digging_deeper_non_capital = {
 			multiply_variable = { speed = 0.8 }
 		}
 		if = {
-			limit = { 676 = { has_province_modifier = the_jorkad_dam owned_by = owner } }
+			limit = { owner = { owns = 676 } 676 = { has_great_project = { type = jorkad_dam tier = 3 } } }
 			multiply_variable = { speed = 0.8 }
 		}
 		if = {
@@ -2243,6 +2293,14 @@ setup_digging_deeper_non_capital = {
 		if = {
 			limit = { owner = { has_estate_privilege = artifice_invention_snotfinger_stimulant } }
 			multiply_variable = { speed = 0.9 }
+		}
+		if = { #Ovdal-az-An Granite Isolation bonus
+			limit = { owner = { has_country_modifier = az_an_granite_isolation_1 } }	
+			multiply_variable = { speed = 0.9 }
+		}
+		if = { #Ovdal-az-An Granite Isolation bonus
+			limit = { owner = { has_country_modifier = az_an_granite_isolation_0 } }	
+			multiply_variable = { speed = 0.75 }
 		}
 
 
@@ -5773,7 +5831,10 @@ respawn_dwarovkron_fragments = {
 
 dwarven_pantheon_unlock_deity = {
 	custom_tooltip = dwarven_pantheon_unlock_deity_$deity$_tooltip
-	hidden_effect = { set_country_flag = dwarven_pantheon_knows_$deity$ }
+	hidden_effect = { 
+		set_country_flag = dwarven_pantheon_knows_$deity$ 
+		change_variable = { which = dwarven_pantheon_num_of_deities_unlocked value = 1 }
+	}
 }
 
 clr_dwarven_pantheon_deities = {
@@ -5818,6 +5879,21 @@ clr_dwarven_pantheon_deities = {
 		remove_church_aspect = lorgram_dip_aspect
 		remove_church_aspect = grobilazk_dip_aspect
 		remove_church_aspect = grobilazk_mil_aspect
+
+		if = { limit = { tag = I19 }
+			change_variable = { which = az_an_var_rituals_completed value = 1 }
+			if = { limit = { mission_completed = az_an_halannas_chambers }
+				4269 = {  if = { limit = { has_province_modifier = az_an_shrine_of_dagrin_active 		} remove_province_modifier = az_an_shrine_of_dagrin_active 			add_permanent_province_modifier = { name = az_an_shrine_of_dagrin_inactive 			duration = -1 } } }
+				4311 = {  if = { limit = { has_province_modifier = az_an_shrine_of_anvelind_active 		} remove_province_modifier = az_an_shrine_of_anvelind_active 		add_permanent_province_modifier = { name = az_an_shrine_of_anvelind_inactive 		duration = -1 } } }
+				4350 = {  if = { limit = { has_province_modifier = az_an_shrine_of_durvorazir_active 	} remove_province_modifier = az_an_shrine_of_durvorazir_active 		add_permanent_province_modifier = { name = az_an_shrine_of_durvorazir_inactive 		duration = -1 } } }
+				4266 = {  if = { limit = { has_province_modifier = az_an_shrine_of_margurz_active 		} remove_province_modifier = az_an_shrine_of_margurz_active 		add_permanent_province_modifier = { name = az_an_shrine_of_margurz_inactive 		duration = -1 } } }
+				4313 = {  if = { limit = { has_province_modifier = az_an_shrine_of_miradeth_active 		} remove_province_modifier = az_an_shrine_of_miradeth_active 		add_permanent_province_modifier = { name = az_an_shrine_of_miradeth_inactive 		duration = -1 } } }
+				4247 = {  if = { limit = { has_province_modifier = az_an_shrine_of_azmirethazin_active 	} remove_province_modifier = az_an_shrine_of_azmirethazin_active 	add_permanent_province_modifier = { name = az_an_shrine_of_azmirethazin_inactive 	duration = -1 } } }
+				4284 = {  if = { limit = { has_province_modifier = az_an_shrine_of_argezenna_active 	} remove_province_modifier = az_an_shrine_of_argezenna_active 		add_permanent_province_modifier = { name = az_an_shrine_of_argezenna_inactive 		duration = -1 } } }
+				4265 = {  if = { limit = { has_province_modifier = az_an_shrine_of_auirikus_active 		} remove_province_modifier = az_an_shrine_of_auirikus_active 		add_permanent_province_modifier = { name = az_an_shrine_of_auirikus_inactive 		duration = -1 } } }
+				4323 = {  if = { limit = { has_province_modifier = az_an_shrine_of_urisazirn_active 	} remove_province_modifier = az_an_shrine_of_urisazirn_active 		add_permanent_province_modifier = { name = az_an_shrine_of_urisazirn_inactive 		duration = -1 } } }
+			} 
+		}
 	}
 }
 
@@ -5827,6 +5903,7 @@ dwarven_pantheon_argezenna_purge_effect = {
 		if = {
 			limit = { 
 				OR = {
+					has_province_modifier = hobgoblin_majority_oppressed
 					has_province_modifier = orcish_majority_oppressed
 					has_province_modifier = goblin_majority_oppressed
 					has_province_modifier = ogre_majority_oppressed
@@ -5836,6 +5913,7 @@ dwarven_pantheon_argezenna_purge_effect = {
 			}
 
 			# remove majority first so no minorities
+			remove_racial_majority = { race = hobgoblin }
 			remove_racial_majority = { race = orcish }
 			remove_racial_majority = { race = goblin }
 			remove_racial_majority = { race = ogre }
@@ -5853,6 +5931,7 @@ dwarven_pantheon_argezenna_purge_effect = {
 			add_permanent_province_modifier = { name = purge_unrest_modifier duration = 9125 }
 		}
 		else = {
+			remove_racial_minority_any_size_with_tolerance = { race = hobgoblin tolerance = oppressed }
 			remove_racial_minority_any_size_with_tolerance = { race = orcish tolerance = oppressed }
 			remove_racial_minority_any_size_with_tolerance = { race = goblin tolerance = oppressed }
 			remove_racial_minority_any_size_with_tolerance = { race = ogre tolerance = oppressed }
@@ -8476,40 +8555,12 @@ update_runefather_allegiance_scripted_effect = {
 ##############
 ### Rails ###
 ##############
-construct_every_rail_road = { #Used in country scope
+rail_construct_every_rail_road = { #Used in country scope
 	every_owned_province = {
 		limit = {
-			has_province_modifier = $rail$
+			rail_province_eligibility_trigger = { rail_to_replace = $current_rail$ $upgraded_rail$ = yes }
 			NOT = { has_construction = any }
 			NOT = { has_colonist = yes }
-			is_city = yes
-			is_state = yes
-			any_neighbor_province = {
-				OR = {
-					[[repair]
-						has_province_modifier = restored_rail
-						has_province_modifier = advanced_rail
-						has_province_modifier = rocket_rail
-					]
-					[[upgrade]
-						has_province_modifier = advanced_rail
-						has_province_modifier = rocket_rail
-					]
-					[[rocket]
-						has_province_modifier = rocket_rail
-					]
-					AND = {
-						province_group = hold_province
-						OR = {
-							NOT = { has_province_modifier = ruined_hold }
-							has_province_modifier = blorc_war_camp
-						}
-						NOT = { has_province_modifier = infested_hold }
-					}
-				}
-				is_state = yes
-				owned_by = ROOT
-			}
 		}
 		add_building_construction = {
 			building = railway_work

@@ -1,22 +1,23 @@
 #Artificers
-#_______________________________________________________________#
-#		:Files to edit when adding inventions Checklist:		#
-#			1. estate_privleges/estate_artifice_privileges.txt	#
-#			2. estates/99_artificers.txt						#
-#			3. scripted_effects/artifice_scripted_effects.txt	#
-#			4. events/ArtificeResearch.txt						#
-#			5. common/custom_gui/countrydecisionsview.txt		#
-#			6. Don't forget to localize your work				#
-#---------------------------------------------------------------#
-#			:OPTIONAL: GFX/GUI editers only:					#
-#			7. interface/countrydecisionsview.gui				#
-#			8. interface/countrydecisionsview.gfx				#
-#																#
-#			:GFX Assets Folder: 								#
-#			9. gfx/interface/custom_gui/artificery				#
-#																#
-#			Written By: Tators/River Doge						#
-#_______________________________________________________________#
+#___________________________________________________________________#
+#		:Files to edit when adding inventions Checklist:			#
+#			1. estate_privleges/estate_artifice_privileges.txt		#
+#			2. estates/99_artificers.txt							#
+#			3. scripted_effects/artifice_scripted_effects.txt		#
+#			4. events/ArtificeResearch.txt							#
+#			5. common/custom_gui/countrydecisionsview.txt			#
+#			6. scripted_triggers/anb_scripted_triggers_artifice.txt	#
+#			7. Don't forget to localize your work					#
+#-------------------------------------------------------------------#
+#			:OPTIONAL: GFX/GUI editers only:						#
+#			7. interface/countrydecisionsview.gui					#
+#			8. interface/countrydecisionsview.gfx					#
+#																	#
+#			:GFX Assets Folder: 									#
+#			9. gfx/interface/custom_gui/artificery					#
+#																	#
+#			Written By: Tators/River Doge							#
+#___________________________________________________________________#
 estate_artificers_organization_international_gommo = {
 	icon = privilege_promote_maratha_nobility
 	max_absolutism = 0
@@ -649,7 +650,7 @@ estate_artificers_organization_feiten_shuimu_cadre = {
 	on_revoked = {
 		custom_tooltip = ten_year_artifice_research_tt
 		custom_tooltip = artificer_points_hover_over_me_tt
-		custom_tooltip = "Our Shuimu Operating Capacity currently provide the following to our Artificer regiments:"
+		custom_tooltip = estate_artificers_organization_feiten_shuimu_cadre_provides_tt
 		if = {
 			limit = {
 				ROOT = {
@@ -1143,15 +1144,15 @@ estate_artificers_monopoly_of_damestear = {
 				trade_goods = damestear
 			}
 			add_province_modifier = {
-				name = estate_shinukhorchi_monopoly_of_damestear_mod
+				name = estate_artificers_monopoly_of_damestear_mod
 				duration = -1
 			}
 		}
 		else_if = {
 			limit = {
-				has_province_modifier = estate_shinukhorchi_monopoly_of_damestear_mod
+				has_province_modifier = estate_artificers_monopoly_of_damestear_mod
 			}
-			remove_province_modifier = estate_shinukhorchi_monopoly_of_damestear_mod
+			remove_province_modifier = estate_artificers_monopoly_of_damestear_mod
 		}
 	}
 	on_revoked = {
@@ -1160,9 +1161,9 @@ estate_artificers_monopoly_of_damestear = {
 	on_revoked_province = {
 		if = {
 			limit = {
-				has_province_modifier = estate_shinukhorchi_monopoly_of_damestear_mod
+				has_province_modifier = estate_artificers_monopoly_of_damestear_mod
 			}
-			remove_province_modifier = estate_shinukhorchi_monopoly_of_damestear_mod
+			remove_province_modifier = estate_artificers_monopoly_of_damestear_mod
 		}
 	}
 	on_invalid = {
@@ -1171,9 +1172,9 @@ estate_artificers_monopoly_of_damestear = {
 	on_invalid_province = {
 		if = {
 			limit = {
-				has_province_modifier = estate_shinukhorchi_monopoly_of_damestear_mod
+				has_province_modifier = estate_artificers_monopoly_of_damestear_mod
 			}
-			remove_province_modifier = estate_shinukhorchi_monopoly_of_damestear_mod
+			remove_province_modifier = estate_artificers_monopoly_of_damestear_mod
 		}
 	}
 	penalties = {
@@ -1305,7 +1306,7 @@ estate_artificers_artificer_generals = {
 	}
 }
 estate_artificers_relic_fueled_artificery = {
-	icon = privilege_promote_maratha_nobility
+	icon = privilege_artificers_relic_fueled_artificery
 	max_absolutism = -5
 	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
 	loyalty = 0
@@ -1348,7 +1349,7 @@ estate_artificers_relic_fueled_artificery = {
 	}
 }
 estate_artificers_focus_on_quantity = {
-	icon = privilege_promote_maratha_nobility
+	icon = privilege_artificers_focus_on_quantity
 	land_share = 5
 	max_absolutism = -10
 	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } }
@@ -1361,24 +1362,16 @@ estate_artificers_focus_on_quantity = {
 
 	}
 	on_granted = {
-		hidden_effect = { 
-			set_country_flag = artifice_cannot_research_expert
-		}
-		custom_tooltip = artifice_cannot_research_expert_tt
 		hidden_effect = {
-			change_variable = {
-				which = artifice_max_invention_slots
-				value = 3
-			}
+			set_country_flag = artifice_limited_to_tier_2
 		}
+		custom_tooltip = artifice_limited_to_tier_2_tt
 	}
 	on_revoked = {
 		hidden_effect = {
-			subtract_variable = {
-				which = artifice_max_invention_slots
-				value = 3
-			}
+			clr_country_flag = artifice_limited_to_tier_2
 		}
+		custom_tooltip = artifice_limited_to_tier_3_tt
 	}
 	on_invalid = {
 		
@@ -1387,13 +1380,14 @@ estate_artificers_focus_on_quantity = {
 		
 	}
 	benefits = {
+		artificers_invention_slots = 3
 	}
 	ai_will_do = {
 		factor = 5
 	}
 }
 estate_artificers_gnommo_diplomacy = { #this one is a bit weird, probably needs adjusting
-	icon = privilege_promote_maratha_nobility
+	icon = privilege_artificers_gnommo_diplomacy
 	max_absolutism = -5
 	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
 	loyalty = 0
@@ -1434,7 +1428,7 @@ estate_artificers_gnommo_diplomacy = { #this one is a bit weird, probably needs 
 	}
 }
 estate_artificers_ravelian_emissaries = {
-	icon = privilege_promote_maratha_nobility
+	icon = privilege_artificers_ravelian_emissaries
 	land_share = 5
 	max_absolutism = -5
 	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
@@ -1462,7 +1456,7 @@ estate_artificers_ravelian_emissaries = {
 }
 
 estate_artificers_development_tools = {
-	icon = privilege_promote_maratha_nobility
+	icon = privilege_artificers_development_tools
 	land_share = 5
 	max_absolutism = 0
 	loyalty = 0
@@ -1471,8 +1465,12 @@ estate_artificers_development_tools = {
 	}
 	can_select = {
 		custom_trigger_tooltip = {
-			tooltip = artifice_requires_artificery_only_mode_tt
+			tooltip = artifice_requires_artificery_only_mode_add_tt
 			has_country_flag = magic_artificery_artificery_only
+			OR = {
+				has_country_flag = artifice_unlocked_advanced
+				has_country_flag = artifice_unlocked_expert
+			}
 		}
 	}
 	on_granted = {
@@ -1489,7 +1487,7 @@ estate_artificers_development_tools = {
 }
 
 estate_artificers_precursor_weapons = { #Not sure how you want this implemented
-	icon = privilege_promote_maratha_nobility
+	icon = privilege_artificers_precursor_weapons
 	land_share = 5
 	loyalty = 0.05
 	influence = 0.05
@@ -1617,6 +1615,42 @@ estate_artificers_precursor_weapons = { #Not sure how you want this implemented
 		factor = 5
 	}
 }
+
+estate_artificers_organization_strict_state_supervision = {
+	icon = privilege_promote_maratha_nobility
+	loyalty = 0.2
+	influence = 0.1
+	land_share = 0
+	max_absolutism = 0
+
+	is_valid = {
+		has_country_flag = pashaine_strict_state_supervision_unlock
+	}
+	
+	can_revoke = { always = no }
+
+	on_granted = {
+		custom_tooltip = cannot_recruit_war_artificers_tt
+		custom_tooltip = fifteen_year_artifice_research_tt
+		custom_tooltip = artificer_points_hover_over_me_tt
+		hidden_effect = {
+			set_country_flag = artifice_research_slow
+		}
+	}
+
+	on_revoked = {
+		custom_tooltip = fifteen_year_artifice_research_tt
+		custom_tooltip = artificer_points_hover_over_me_tt
+		hidden_effect = {
+			clr_country_flag = artifice_research_slow
+		}
+	}
+	
+	benefits = {
+		technology_cost = -0.05
+	}
+}
+
 # estate_artificers_porcelain_shields = { #Not sure how you want this implemented
 # 	icon = privilege_promote_maratha_nobility
 # 	max_absolutism = 0
@@ -1655,7 +1689,7 @@ estate_artificers_precursor_weapons = { #Not sure how you want this implemented
 # 	}
 # }
 estate_artificers_ivory_tools = {
-	icon = privilege_promote_maratha_nobility
+	icon = privilege_artificers_ivory_tools
 	max_absolutism = 0
 	loyalty = 0.05
 	influence = 0.05
@@ -1717,7 +1751,7 @@ estate_artificers_ivory_tools = {
 	}
 }
 estate_artificers_grant_production_rights = {
-	icon = privilege_promote_maratha_nobility
+	icon = privilege_artificers_grant_production_rights
 	max_absolutism = -5
 	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
 	loyalty = 0.1
@@ -1750,7 +1784,7 @@ estate_artificers_grant_production_rights = {
 	}
 }
 estate_artificers_grand_exhibition_hall = {
-	icon = privilege_promote_maratha_nobility
+	icon = privilege_artificers_grand_exhibition_hall
 	max_absolutism = -5
 	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
 	loyalty = 0.1
@@ -1782,7 +1816,7 @@ estate_artificers_grand_exhibition_hall = {
 	}
 }
 estate_artificery_gov_cap = {
-	icon = privilege_promote_maratha_nobility
+	icon = privilege_grant_autonomy
 	land_share = 5
 	max_absolutism = -5
 	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
@@ -1814,7 +1848,7 @@ estate_artificery_gov_cap = {
 	}
 }
 estate_artificers_trained_mage_hunters = {
-	icon = privilege_promote_maratha_nobility
+	icon = privilege_artificers_trained_mage_hunters
 	max_absolutism = 0
 	loyalty = 0.1
 	influence = 0.1
@@ -1874,7 +1908,7 @@ estate_artificers_trained_mage_hunters = {
 	}
 }
 estate_artificers_focus_on_artificer_units = {
-	icon = privilege_promote_maratha_nobility
+	icon = privilege_artificers_focus_on_artificer_units
 	max_absolutism = 0
 	loyalty = -0.1
 	influence = 0.15
@@ -1918,13 +1952,13 @@ estate_artificers_focus_on_artificer_units = {
 	}
 }
 estate_artificers_draft_artificers = {
-	icon = privilege_promote_maratha_nobility
+	icon = privilege_artificers_draft_artificers
 	max_absolutism = -10
 	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } }
 	loyalty = 0.05
 	influence = 0.05
 	is_valid = {
-
+		NOT = { has_estate_privilege = estate_artificers_organization_strict_state_supervision }
 	}
 	can_revoke = {
 
@@ -2495,6 +2529,49 @@ estate_artificers_feiten_grant_foreign_membership = {
 		factor = 1
 	}
 }
+
+#Karshyr
+#estate_artificers_karshyr = { #MAGIC REWORK - Disables inventions and offsets all mana disadvantages from being in mixed in regards to magic
+#	icon = privilege_promote_maratha_nobility
+#	max_absolutism = 0
+#	loyalty = 0
+#	influence = 0
+#	is_valid = {
+#		has_estate_privilege = estate_artificers_karshyr
+#	}
+#	can_select = { }
+#	can_revoke = {
+#		always = no
+#	}
+#	on_granted = { }
+#	on_revoked = { }
+#	penalties = { }
+#	benefits = { }
+#	ai_will_do = {
+#		factor = 1
+#	}
+#}
+
+#estate_artificers_karshyr_improved = { #MAGIC REWORK - do not disable inventions. Sets the balance between mages and artificers to 100% Mage/50% Artificer
+#	icon = privilege_promote_maratha_nobility
+#	max_absolutism = 0
+#	loyalty = 0
+#	influence = 0
+#	is_valid = {
+#		has_estate_privilege = estate_artificers_karshyr_improved
+#	}
+#	can_select = {}
+#	can_revoke = {
+#		always = no
+#	}
+#	on_granted = { }
+#	on_revoked = { }
+#	penalties = { }
+#	benefits = { }
+#	ai_will_do = {
+#		factor = 1
+#	}
+#}
 
 #inventions
 
@@ -3091,7 +3168,13 @@ artifice_invention_black_damestear_bullets = {
 	}
 	can_select = {
         ai = yes
-		artifice_has_points_30 = yes
+		OR = {
+			artifice_has_points_30 = yes
+			custom_trigger_tooltip = {
+				tooltip = artifice_free_upkeep_tt
+				has_country_flag = no_upkeep_artifice_invention_black_damestear_bullets
+			}
+		}
 	}
 	can_revoke = {
 		hidden_trigger = {
@@ -3102,21 +3185,30 @@ artifice_invention_black_damestear_bullets = {
 		hidden_effect = {
 			artifice_inventions_currently_used_increase = yes
 		}
-		artifice_granted_30 = yes
+		if = {
+			limit = { NOT = { has_country_flag = no_upkeep_artifice_invention_black_damestear_bullets } }
+			artifice_granted_30 = yes
+		}
 		#update_artifice_points = yes #is included in the above effect
 	}
 	on_revoked = {
 		hidden_effect = {
 			artifice_inventions_currently_used_decrease = yes
 		}
-		artifice_remove_30 = yes
+		if = {
+			limit = { NOT = { has_country_flag = no_upkeep_artifice_invention_black_damestear_bullets } }
+			artifice_remove_30 = yes
+		}
 		#update_artifice_points = yes #is included in the above effect
 	}
 	on_invalid = {
 		hidden_effect = {
 			artifice_inventions_currently_used_decrease = yes
 		}
-		artifice_remove_30 = yes
+		if = {
+			limit = { NOT = { has_country_flag = no_upkeep_artifice_invention_black_damestear_bullets } }
+			artifice_remove_30 = yes
+		}
 		#update_artifice_points = yes #is included in the above effect
 	}
 	penalties = {
@@ -3800,7 +3892,7 @@ artifice_invention_commercial_sky_galleons = {
 		artificers_privilege_slots = 1
 		dragon_command_privilege_slots = 1
 		naval_morale = 0.05
-		ship_trade_power_modifier = 0.2
+		global_ship_trade_power = 0.2
 		tec_mechanists_influence = 0.02
 	}
 	ai_will_do = {
@@ -3886,6 +3978,7 @@ artifice_invention_prototype_tanks = {
 	influence = 0 #artificer privileges must never affect influence due to the fact influence affects points
 	is_valid = {
 		has_country_flag = unlocked_artifice_invention_prototype_tanks
+		NOT = { has_country_flag = blocked_artifice_invention_prototype_tanks }
 		OR = {
 			ai = yes
 			has_estate_privilege = artifice_invention_prototype_tanks
@@ -3927,7 +4020,8 @@ artifice_invention_prototype_tanks = {
 	benefits = {
 		artificers_privilege_slots = 1
 		dragon_command_privilege_slots = 1
-		cavalry_fire = 2
+		cavalry_fire = 0.25
+		cavalry_power = 0.15
 		tec_brilliance_influence = 0.04
 	}
 	ai_will_do = {
@@ -4975,15 +5069,24 @@ artifice_invention_game_of_khet = {
 		}
 	}
 	on_granted = {
-		artifice_granted_20 = yes
+		if = {
+			limit = { NOT = { has_country_flag = horutep_title_flag_king_games } }
+			artifice_granted_20 = yes
+		}
 		#update_artifice_points = yes #is included in the above effect
 	}
 	on_revoked = {
-		artifice_remove_20 = yes
+		if = {
+			limit = { NOT = { has_country_flag = horutep_title_flag_king_games } }
+			artifice_remove_20 = yes
+		}
 		#update_artifice_points = yes #is included in the above effect
 	}
 	on_invalid = {
-		artifice_remove_20 = yes
+		if = {
+			limit = { NOT = { has_country_flag = horutep_title_flag_king_games } }
+			artifice_remove_20 = yes
+		}
 		#update_artifice_points = yes #is included in the above effect
 	}
 	penalties = {
@@ -6294,10 +6397,7 @@ artifice_invention_gu_boats = {
 	influence = 0 #artificer privileges must never affect influence due to the fact influence affects points
 	is_valid = {
 		has_country_flag = unlocked_artifice_invention_gu_boats
-		OR = {
 		culture_group = gnomish
-			mission_completed = A05_gnomes_in_the_navy
-		}
 		OR = {
 			ai = yes
 			has_estate_privilege = artifice_invention_gu_boats
@@ -6306,10 +6406,7 @@ artifice_invention_gu_boats = {
 	can_select = {
         ai = yes
 		artifice_has_points_20 = yes
-		OR = {
 		culture_group = gnomish
-			mission_completed = A05_gnomes_in_the_navy
-		}
 	}
 	can_revoke = {
 		hidden_trigger = {
@@ -6673,7 +6770,7 @@ artifice_invention_chase_em_rockets = {
 	}
 	benefits = {
 		artificers_privilege_slots = 1
-		backrow_artillery_damage = 0.2
+		backrow_artillery_damage = 0.15
 		tec_mechanists_influence = 0.06
 	}
 	ai_will_do = {
@@ -6825,29 +6922,23 @@ artifice_invention_elemental_gunpowder = {
 	}
 }
 
-artifice_invention_codorran_powered_exosuit = {
+artifice_invention_coddorran_powered_exosuit = {
 	icon = Artf_BrMi2
 	max_absolutism = 0
 	loyalty = 0.00
 	influence = 0 #artificer privileges must never affect influence due to the fact influence affects points
 	is_valid = {
-		has_country_flag = unlocked_artifice_invention_codorran_powered_exosuit
-		OR = {
+		has_country_flag = unlocked_artifice_invention_coddorran_powered_exosuit
 		has_country_modifier = gnomish_military
-			mission_completed = A05_gnomes_in_the_army
-		}
 		OR = {
 			ai = yes
-			has_estate_privilege = artifice_invention_codorran_powered_exosuit
+			has_estate_privilege = artifice_invention_coddorran_powered_exosuit
 		}
 	}
 	can_select = {
         ai = yes
 		artifice_has_points_20 = yes
-		OR = {
 		has_country_modifier = gnomish_military
-			mission_completed = A05_gnomes_in_the_army
-		}
 	}
 	can_revoke = {
 		hidden_trigger = {
@@ -6859,7 +6950,7 @@ artifice_invention_codorran_powered_exosuit = {
 			artifice_inventions_currently_used_increase = yes
 		}
 		add_country_modifier = {
-			name = artifice_codorran_powered_exoskeleton
+			name = artifice_coddorran_powered_exoskeleton
 			duration = -1
 		}
 		artifice_granted_20 = yes
@@ -6872,7 +6963,7 @@ artifice_invention_codorran_powered_exosuit = {
 		}
 		artifice_remove_20 = yes
 		#update_artifice_points = yes #is included in the above effect
-		remove_country_modifier = artifice_codorran_powered_exoskeleton
+		remove_country_modifier = artifice_coddorran_powered_exoskeleton
 	}
 	on_invalid = {
 		hidden_effect = {
@@ -6880,7 +6971,7 @@ artifice_invention_codorran_powered_exosuit = {
 		}
 		artifice_remove_20 = yes
 		#update_artifice_points = yes #is included in the above effect
-		remove_country_modifier = artifice_codorran_powered_exoskeleton
+		remove_country_modifier = artifice_coddorran_powered_exoskeleton
 	}
 	penalties = {
 	}
@@ -7012,7 +7103,7 @@ artifice_invention_believable_ruin_bomb = {
 	}
 	benefits = {
 		artificers_privilege_slots = 1
-		diplomatic_reputation = 5
+		diplomatic_reputation = 3
 		accept_vassalization_reasons = 5
 		tec_brilliance_influence = 0.02
 	}
@@ -7311,12 +7402,19 @@ artifice_invention_wine_ageifier = {
 		# 		trade_goods = wine
 		# 	}
 		# 	add_province_modifier = {
-		# 		name = artifice_ageifier_bonus
+		# 		name = artifice_wine_ageifier
 		# 		duration = -1
 		# 		hidden = yes
 		# 	}
 		# }
 		artifice_granted_10 = yes
+		custom_tooltip = artifice_invention_wine_ageifier_tt
+		tooltip = {
+			add_province_modifier = {
+				name = artifice_wine_ageifier
+				duration = -1
+			}
+		}
 		#update_artifice_points = yes #is included in the above effect\
 	}
 	on_granted_province = {
@@ -7325,16 +7423,16 @@ artifice_invention_wine_ageifier = {
 				trade_goods = wine
 			}
 			add_province_modifier = {
-				name = artifice_ageifier_bonus
+				name = artifice_wine_ageifier
 				duration = -1
 				hidden = yes
 			}
 		}
 		else_if = {
 			limit = {
-				has_province_modifier = artifice_ageifier_bonus
+				has_province_modifier = artifice_wine_ageifier
 			}
-			remove_province_modifier = artifice_ageifier_bonus
+			remove_province_modifier = artifice_wine_ageifier
 		}
 	}
 	on_revoked = {
@@ -7347,9 +7445,9 @@ artifice_invention_wine_ageifier = {
 	on_revoked_province = {
 		if = {
 			limit = {
-				has_province_modifier = artifice_ageifier_bonus
+				has_province_modifier = artifice_wine_ageifier
 			}
-			remove_province_modifier = artifice_ageifier_bonus
+			remove_province_modifier = artifice_wine_ageifier
 		}
 	}
 	on_invalid = {
@@ -7362,9 +7460,9 @@ artifice_invention_wine_ageifier = {
 	on_invalid_province = {
 		if = {
 			limit = {
-				has_province_modifier = artifice_ageifier_bonus
+				has_province_modifier = artifice_wine_ageifier
 			}
-			remove_province_modifier = artifice_ageifier_bonus
+			remove_province_modifier = artifice_wine_ageifier
 		}
 	}
 	penalties = {
@@ -7418,6 +7516,12 @@ artifice_invention_growth_beans = {
 		}
 		artifice_granted_20 = yes
 		custom_tooltip = artifice_invention_growth_beans_tt
+		tooltip = {
+			add_province_modifier = {
+				name = artifice_growth_beans
+				duration = -1
+			}
+		}
 		#update_artifice_points = yes #is included in the above effect
 	}
 	on_granted_province = {
@@ -7440,16 +7544,16 @@ artifice_invention_growth_beans = {
 				}
 			}
 			add_province_modifier = {
-				name = artifice_growthbeans_bonus
+				name = artifice_growth_beans
 				duration = -1
 				hidden = yes
 			}
 		}
 		else_if = {
 			limit = {
-				has_province_modifier = artifice_growthbeans_bonus
+				has_province_modifier = artifice_growth_beans
 			}
-			remove_province_modifier = artifice_growthbeans_bonus
+			remove_province_modifier = artifice_growth_beans
 		}
 	}
 	on_revoked = {
@@ -7462,9 +7566,9 @@ artifice_invention_growth_beans = {
 	on_revoked_province = {
 		if = {
 			limit = {
-				has_province_modifier = artifice_growthbeans_bonus
+				has_province_modifier = artifice_growth_beans
 			}
-			remove_province_modifier = artifice_growthbeans_bonus
+			remove_province_modifier = artifice_growth_beans
 		}
 	}
 	on_invalid = {
@@ -7477,9 +7581,9 @@ artifice_invention_growth_beans = {
 	on_invalid_province = {
 		if = {
 			limit = {
-				has_province_modifier = artifice_growthbeans_bonus
+				has_province_modifier = artifice_growth_beans
 			}
-			remove_province_modifier = artifice_growthbeans_bonus
+			remove_province_modifier = artifice_growth_beans
 		}
 	}
 	penalties = {
@@ -7650,6 +7754,13 @@ artifice_invention_superfast_elevators = {
 			artifice_inventions_currently_used_increase = yes
 		}
 		artifice_granted_10 = yes
+		custom_tooltip = artifice_invention_superfast_elevators_tt
+		tooltip = {
+			add_province_modifier = {
+				name = artifice_superfast_elevators
+				duration = -1
+			}
+		}
 		#update_artifice_points = yes #is included in the above effect\
 	}
 	on_granted_province = {
@@ -7658,16 +7769,16 @@ artifice_invention_superfast_elevators = {
 				province_group = hold_province
 			}
 			add_province_modifier = {
-				name = artifice_superfast_elevators_bonus
+				name = artifice_superfast_elevators
 				duration = -1
 				hidden = yes
 			}
 		}
 		else_if = {
 			limit = {
-				has_province_modifier = artifice_superfast_elevators_bonus
+				has_province_modifier = artifice_superfast_elevators
 			}
-			remove_province_modifier = artifice_superfast_elevators_bonus
+			remove_province_modifier = artifice_superfast_elevators
 		}
 	}
 	on_revoked = {
@@ -7680,9 +7791,9 @@ artifice_invention_superfast_elevators = {
 	on_revoked_province = {
 		if = {
 			limit = {
-				has_province_modifier = artifice_superfast_elevators_bonus
+				has_province_modifier = artifice_superfast_elevators
 			}
-			remove_province_modifier = artifice_superfast_elevators_bonus
+			remove_province_modifier = artifice_superfast_elevators
 		}
 	}
 	on_invalid = {
@@ -7695,9 +7806,9 @@ artifice_invention_superfast_elevators = {
 	on_invalid_province = {
 		if = {
 			limit = {
-				has_province_modifier = artifice_superfast_elevators_bonus
+				has_province_modifier = artifice_superfast_elevators
 			}
-			remove_province_modifier = artifice_superfast_elevators_bonus
+			remove_province_modifier = artifice_superfast_elevators
 		}
 	}
 	penalties = {}
@@ -7748,6 +7859,13 @@ artifice_invention_pearl_cultivators = {
 			artifice_inventions_currently_used_increase = yes
 		}
 		artifice_granted_10 = yes
+		custom_tooltip = artifice_invention_pearl_cultivators_tt
+		tooltip = {
+			add_province_modifier = {
+				name = artifice_pearl_cultivators
+				duration = -1
+			}
+		}
 		#update_artifice_points = yes #is included in the above effect\
 
 	}
@@ -7758,16 +7876,16 @@ artifice_invention_pearl_cultivators = {
 				has_port = yes
 			}
 			add_province_modifier = {
-				name = artifice_pearl_cultivator_bonus
+				name = artifice_pearl_cultivators
 				duration = -1
 				hidden = yes
 			}
 		}
 		else_if = {
 			limit = {
-				has_province_modifier = artifice_pearl_cultivator_bonus
+				has_province_modifier = artifice_pearl_cultivators
 			}
-			remove_province_modifier = artifice_pearl_cultivator_bonus
+			remove_province_modifier = artifice_pearl_cultivators
 		}
 	}
 	on_revoked = {
@@ -7780,9 +7898,9 @@ artifice_invention_pearl_cultivators = {
 	on_revoked_province = {
 		if = {
 			limit = {
-				has_province_modifier = artifice_pearl_cultivator_bonus
+				has_province_modifier = artifice_pearl_cultivators
 			}
-			remove_province_modifier = artifice_pearl_cultivator_bonus
+			remove_province_modifier = artifice_pearl_cultivators
 		}
 	}
 	on_invalid = {
@@ -7795,9 +7913,9 @@ artifice_invention_pearl_cultivators = {
 	on_invalid_province = {
 		if = {
 			limit = {
-				has_province_modifier = artifice_pearl_cultivator_bonus
+				has_province_modifier = artifice_pearl_cultivators
 			}
-			remove_province_modifier = artifice_pearl_cultivator_bonus
+			remove_province_modifier = artifice_pearl_cultivators
 		}
 	}
 	penalties = {
@@ -7886,7 +8004,10 @@ artifice_invention_prehensile_tail_attachments = {
 	influence = 0 #artificer privileges must never affect influence due to the fact influence affects points
 	is_valid = {
 		has_country_flag = unlocked_artifice_invention_prehensile_tail_attachments
-		culture_group = kobold
+		OR = {
+			culture_group = kobold
+			has_country_flag = A49_alternate_prehensile_tail_unlock
+		}
 		OR = {
 			ai = yes
 			has_estate_privilege = artifice_invention_prehensile_tail_attachments
@@ -7895,7 +8016,10 @@ artifice_invention_prehensile_tail_attachments = {
 	can_select = {
         ai = yes
 		artifice_has_points_20 = yes
-		culture_group = kobold
+		OR = {
+			culture_group = kobold
+			has_country_flag = A49_alternate_prehensile_tail_unlock
+		}
 	}
 	can_revoke = {
 		hidden_trigger = {
@@ -7962,7 +8086,6 @@ artifice_invention_automated_translator = {
 			primary_culture = nurcestiran
 			primary_culture = ancardian
 			primary_culture = anbenncoster
-			primary_culture = anbenlander
 		}
 	}
 	can_revoke = {
@@ -8188,8 +8311,8 @@ artifice_invention_weather_predicticator = {
 	}
 	benefits = {
 		artificers_privilege_slots = 1
-		global_trade_goods_size_modifier = 0.1
-		development_cost = -0.2
+		global_trade_goods_size_modifier = 0.05
+		development_cost = -0.15
 		tec_technomancy_influence = 0.04
 	}
 	ai_will_do = {
@@ -10020,7 +10143,7 @@ artifice_invention_feiten_damestear_ribbing = {
 	can_select = {
         ai = yes
 		NOT = { feiten_has_envelope_invention = yes }
-		artifice_has_points_10 = yes
+		artifice_has_points_20 = yes
 	}
 	can_revoke = {
 		hidden_trigger = {
@@ -10050,7 +10173,7 @@ artifice_invention_feiten_damestear_ribbing = {
 				duration = -1
 			}
 		}
-		artifice_granted_20 = yes
+		artifice_granted_10 = yes
 		#update_artifice_points = yes #is included in the above effect
 	}
 	on_revoked = {
@@ -10064,7 +10187,7 @@ artifice_invention_feiten_damestear_ribbing = {
 				loyalty = 20
 			}
 		}
-		artifice_remove_10 = yes
+		artifice_remove_20 = yes
 		remove_country_modifier = feiten_damestear_ribbing_mod
 		remove_country_modifier = feiten_damestear_ribbing_mod_upgraded
 		#update_artifice_points = yes #is included in the above effect
@@ -10073,7 +10196,7 @@ artifice_invention_feiten_damestear_ribbing = {
 		hidden_effect = {
 			artifice_inventions_currently_used_decrease = yes
 		}
-		artifice_remove_10 = yes
+		artifice_remove_20 = yes
 		remove_country_modifier = feiten_damestear_ribbing_mod
 		remove_country_modifier = feiten_damestear_ribbing_mod_upgraded
 		#update_artifice_points = yes #is included in the above effect
@@ -10365,7 +10488,7 @@ artifice_invention_feiten_steel_rudders = {
 				duration = -1
 			}
 		}
-		artifice_granted_30 = yes
+		artifice_granted_20 = yes
 		#update_artifice_points = yes #is included in the above effect
 	}
 	on_revoked = {
@@ -10379,7 +10502,7 @@ artifice_invention_feiten_steel_rudders = {
 				loyalty = 20
 			}
 		}
-		artifice_remove_20 = yes
+		artifice_remove_30 = yes
 		remove_country_modifier = feiten_bluesteel_rudders_mod
 		remove_country_modifier = feiten_bluesteel_rudders_mod_upgraded
 		#update_artifice_points = yes #is included in the above effect
@@ -10388,7 +10511,7 @@ artifice_invention_feiten_steel_rudders = {
 		hidden_effect = {
 			artifice_inventions_currently_used_decrease = yes
 		}
-		artifice_remove_20 = yes
+		artifice_remove_30 = yes
 		remove_country_modifier = feiten_bluesteel_rudders_mod
 		remove_country_modifier = feiten_bluesteel_rudders_mod_upgraded
 		#update_artifice_points = yes #is included in the above effect
@@ -13722,6 +13845,7 @@ artifice_invention_kobildzan_draconic_ascension = {
 		remove_country_modifier = Z38_dragonfire_sacs_regiment_mod
 		remove_country_modifier = Z38_ebonsteel_shieldscales_regiment_mod
 		remove_country_modifier = Z38_the_holiest_flesh_regiment_mod
+		artifice_remove_dynamic = yes
 	}
 	on_invalid = {
 		hidden_effect = {
@@ -13828,22 +13952,17 @@ artifice_invention_kobildzan_draconic_ascension = {
 	}
 }
 
-#####
-#ACE#
-#####
-
-#Magmascales
-artifice_invention_obsidian_settlement_generation_kit = {
+#Rezankand
+artifice_invention_rezankand_phoenix = {
 	icon = Artf_Uniq1
 	max_absolutism = 0
 	loyalty = 0.00
 	influence = 0 #artificer privileges must never affect influence due to the fact influence affects points
 	is_valid = {
-		has_country_flag = unlocked_artifice_invention_obsidian_settlement_generation_kit
+		has_country_flag = unlocked_artifice_invention_rezankand_phoenix
 	}
 	can_select = {
-        ai = yes
-		artifice_has_points_30 = yes
+		artifice_has_points_10 = yes
 	}
 	can_revoke = {
 		hidden_trigger = {
@@ -13854,47 +13973,30 @@ artifice_invention_obsidian_settlement_generation_kit = {
 		hidden_effect = {
 			artifice_inventions_currently_used_increase = yes
 		}
-		custom_tooltip = AC5_lavacities_devcost_reduction_tt
-		hidden_effect = {
-			every_owned_province = {
-				limit = { has_province_modifier = AC5_lava_city }
-				add_province_modifier = { #INCLUDE ALL OF THIS STUFF IN THE LAVA CITY BUILDING STUFF 
-					name = artifice_obsidian_settlement_generation_kit
-					duration = -1
-				}
-			}
+		artifice_granted_10 = yes
+		add_country_modifier = {
+			name = rezankand_phoenix_invention_mod
+			duration = -1
 		}
-		artifice_granted_30 = yes
-		#update_artifice_points = yes #is included in the above effect
 	}
 	on_revoked = {
 		hidden_effect = {
 			artifice_inventions_currently_used_decrease = yes
 		}
-		every_owned_province = {
-			limit = { has_province_modifier = artifice_obsidian_settlement_generation_kit }
-			remove_province_modifier = artifice_obsidian_settlement_generation_kit
-		}
-		artifice_remove_30 = yes
-		#update_artifice_points = yes #is included in the above effect
+		artifice_remove_10 = yes
+		remove_country_modifier = rezankand_phoenix_invention_mod
 	}
 	on_invalid = {
 		hidden_effect = {
 			artifice_inventions_currently_used_decrease = yes
 		}
-		every_owned_province = {
-			limit = { has_province_modifier = artifice_obsidian_settlement_generation_kit }
-			remove_province_modifier = artifice_obsidian_settlement_generation_kit
-		}		
-		artifice_remove_30 = yes
-		#update_artifice_points = yes #is included in the above effect
+		artifice_remove_10 = yes
 	}
 	penalties = {
 		#foo
 	}
 	benefits = {
-		build_time = -0.2
-		expand_infrastructure_cost_modifier = -0.2
+		amount_of_hussars = 4
 	}
 	ai_will_do = {
 		factor = 5
@@ -13905,16 +14007,15 @@ artifice_invention_obsidian_settlement_generation_kit = {
 	}
 }
 
-artifice_invention_bioartificed_fireplants = {
-	icon = Artf_Uniq1
+artifice_invention_sunplate_armors = {
+	icon = Artf_Uniq2
 	max_absolutism = 0
 	loyalty = 0.00
 	influence = 0 #artificer privileges must never affect influence due to the fact influence affects points
 	is_valid = {
-		has_country_flag = unlocked_artifice_invention_bioartificed_fireplants
+		has_country_flag = unlocked_artifice_invention_sunplate_armors
 	}
 	can_select = {
-        ai = yes
 		artifice_has_points_20 = yes
 	}
 	can_revoke = {
@@ -13926,43 +14027,394 @@ artifice_invention_bioartificed_fireplants = {
 		hidden_effect = {
 			artifice_inventions_currently_used_increase = yes
 		}
-		custom_tooltip = AC5_bioartificed_fireplants_tt
+		artifice_granted_20 = yes
+		add_country_modifier = {
+			name = rezankand_sunplate_armors_mod
+			duration = -1
+		}
+	}
+	on_revoked = {
 		hidden_effect = {
-			every_owned_province = {
-				limit = { 
-					has_province_modifier = AC5_lava_river 
-					OR = {
-						trade_goods = fungi
-						trade_goods = grain
-					}
-				}
+			artifice_inventions_currently_used_decrease = yes
+		}
+		artifice_remove_20 = yes
+		remove_country_modifier = rezankand_sunplate_armors_mod
+	}
+	on_invalid = {
+		hidden_effect = {
+			artifice_inventions_currently_used_decrease = yes
+		}
+		artifice_remove_20 = yes
+	}
+	penalties = {
+		#foo
+	}
+	benefits = {
+	}
+	ai_will_do = {
+		factor = 5
+		modifier = {
+			factor = 0
+			over_artifice_capacity = yes
+		}
+	}
+}
+
+artifice_invention_light_matrix_supply = {
+	icon = Artf_Uniq2
+	max_absolutism = 0
+	loyalty = 0.00
+	influence = 0 #artificer privileges must never affect influence due to the fact influence affects points
+	is_valid = {
+		has_country_flag = unlocked_artifice_invention_light_matrix_supply
+	}
+	can_select = {
+		artifice_has_points_20 = yes
+	}
+	can_revoke = {
+		hidden_trigger = {
+			ai = yes
+		}
+	}
+	on_granted = {
+		hidden_effect = {
+			artifice_inventions_currently_used_increase = yes
+		}
+		artifice_granted_20 = yes
+		custom_tooltip = rezankand_light_matrix_explanation_tt
+		if = {
+			limit = { has_country_flag = rezankand_matrix_invention_upgraded }
+			tooltip = {
 				add_province_modifier = {
-					name = artifice_bioartificed_fireplants
+					name = rezankand_light_matrix_supply_upgraded
 					duration = -1
 				}
 			}
+		}
+		else = {
+			tooltip = {
+				add_province_modifier = {
+					name = rezankand_light_matrix_supply
+					duration = -1
+				}
+			}
+		} 
+	}
+	on_revoked = {
+		custom_tooltip = rezankand_light_matrix_supply_removal_tt
+		hidden_effect = {
+			artifice_inventions_currently_used_decrease = yes
+		}
+		artifice_remove_20 = yes
+	}
+	on_invalid = {
+		hidden_effect = {
+			artifice_inventions_currently_used_decrease = yes
+		}
+		artifice_remove_20 = yes
+	}
+	penalties = {
+		#foo
+	}
+	benefits = {
+	}
+	
+	on_granted_province = {
+		if = {
+			limit = {  owner = { has_country_flag = rezankand_matrix_invention_upgraded } }
 			if = {
-				limit = {
-					has_country_flag = AC5_exotic_fireplant_upgrade
+				limit = { has_building = mage_tower }
+				add_province_modifier = {
+					name = rezankand_light_matrix_supply_upgraded
+					duration = -1
 				}
-				every_owned_province = {
-					limit = {
-						has_province_modifier = AC5_lava_river
-						OR = {
-							trade_goods = coffee
-							trade_goods = spices
-							trade_goods = incense
-							trade_goods = cotton
-							trade_goods = tea
-							trade_goods = sugar							
-						}			
-					}
-					add_province_modifier = { #INCLUDE ALL OF THIS STUFF IN THE LAVA RIVERS ADDING STUFF
-						name = artifice_exotic_fireplant
-						duration = -1						
+				every_neighbor_province = {
+					limit = { owned_by = ROOT }
+					add_province_modifier = {
+						name = rezankand_light_matrix_supply_upgraded
+						duration = -1
 					}
 				}
 			}
+			else_if = {
+				limit = { 
+					any_neighbor_province = {
+						owned_by = ROOT 
+						has_building = mage_tower
+					} 
+				}
+				add_province_modifier = {
+					name = rezankand_light_matrix_supply_upgraded
+					duration = -1
+				}
+			}
+		}
+		else = {
+			if = {
+				limit = { has_building = mage_tower }
+				add_province_modifier = {
+					name = rezankand_light_matrix_supply
+					duration = -1
+				}
+				every_neighbor_province = {
+					limit = { owned_by = ROOT }
+					add_province_modifier = {
+						name = rezankand_light_matrix_supply
+						duration = -1
+					}
+				}
+			}
+			else_if = {
+				limit = { 
+					any_neighbor_province = {
+						owned_by = ROOT 
+						has_building = mage_tower
+					} 
+				}
+				add_province_modifier = {
+					name = rezankand_light_matrix_supply
+					duration = -1
+				}
+			}
+		}
+	}
+
+	on_revoked_province = {
+		if = {
+			limit = { has_province_modifier = rezankand_light_matrix_supply_upgraded }
+			remove_province_modifier = rezankand_light_matrix_supply_upgraded
+		}
+		else_if = {
+			limit = { has_province_modifier = rezankand_light_matrix_supply }
+			remove_province_modifier = rezankand_light_matrix_supply
+		}
+	}
+
+	ai_will_do = {
+		factor = 5
+		modifier = {
+			factor = 0
+			over_artifice_capacity = yes
+		}
+	}
+}
+
+artifice_invention_light_matrix_logistic = {
+	icon = Artf_Uniq2
+	max_absolutism = 0
+	loyalty = 0.00
+	influence = 0 #artificer privileges must never affect influence due to the fact influence affects points
+	is_valid = {
+		has_country_flag = unlocked_artifice_invention_light_matrix_logistic
+	}
+	can_select = {
+		artifice_has_points_20 = yes
+	}
+	can_revoke = {
+		hidden_trigger = {
+			ai = yes
+		}
+	}
+	on_granted = {
+		hidden_effect = {
+			artifice_inventions_currently_used_increase = yes
+		}
+		artifice_granted_20 = yes
+		custom_tooltip = rezankand_light_matrix_explanation_tt
+		if = {
+			limit = { has_country_flag = rezankand_matrix_invention_upgraded }
+			tooltip = {
+				add_province_modifier = {
+					name = rezankand_light_matrix_logistic_upgraded
+					duration = -1
+				}
+			}
+		}
+		else = {
+			tooltip = {
+				add_province_modifier = {
+					name = rezankand_light_matrix_logistic
+					duration = -1
+				}
+			}
+		} 
+	}
+	on_revoked = {
+		custom_tooltip = rezankand_light_matrix_logistic_removal_tt
+		hidden_effect = {
+			artifice_inventions_currently_used_decrease = yes
+		}
+		artifice_remove_20 = yes
+	}
+	on_invalid = {
+		hidden_effect = {
+			artifice_inventions_currently_used_decrease = yes
+		}
+		artifice_remove_20 = yes
+	}
+	penalties = {
+		#foo
+	}
+	benefits = {
+	}
+	
+	on_granted_province = {
+		if = {
+			limit = {  owner = { has_country_flag = rezankand_matrix_invention_upgraded } }
+			if = {
+				limit = { has_building = mage_tower }
+				add_province_modifier = {
+					name = rezankand_light_matrix_logistic_upgraded
+					duration = -1
+				}
+				every_neighbor_province = {
+					limit = { owned_by = ROOT }
+					add_province_modifier = {
+						name = rezankand_light_matrix_logistic_upgraded
+						duration = -1
+					}
+				}
+			}
+			else_if = {
+				limit = { 
+					any_neighbor_province = {
+						owned_by = ROOT 
+						has_building = mage_tower
+					} 
+				}
+				add_province_modifier = {
+					name = rezankand_light_matrix_logistic_upgraded
+					duration = -1
+				}
+			}
+		}
+		else = {
+			if = {
+				limit = { has_building = mage_tower }
+				add_province_modifier = {
+					name = rezankand_light_matrix_logistic
+					duration = -1
+				}
+				every_neighbor_province = {
+					limit = { owned_by = ROOT }
+					add_province_modifier = {
+						name = rezankand_light_matrix_logistic
+						duration = -1
+					}
+				}
+			}
+			else_if = {
+				limit = { 
+					any_neighbor_province = {
+						owned_by = ROOT 
+						has_building = mage_tower
+					} 
+				}
+				add_province_modifier = {
+					name = rezankand_light_matrix_logistic
+					duration = -1
+				}
+			}
+		}
+	}
+
+	on_revoked_province = {
+		if = {
+			limit = { has_province_modifier = rezankand_light_matrix_logistic_upgraded }
+			remove_province_modifier = rezankand_light_matrix_logistic_upgraded
+		}
+		else_if = {
+			limit = { has_province_modifier = rezankand_light_matrix_logistic }
+			remove_province_modifier = rezankand_light_matrix_logistic
+		}
+	}
+
+	ai_will_do = {
+		factor = 5
+		modifier = {
+			factor = 0
+			over_artifice_capacity = yes
+		}
+	}
+}
+
+artifice_invention_rezankand_colossus = {
+	icon = Artf_Uniq2
+	max_absolutism = 0
+	loyalty = 0.00
+	influence = 0 #artificer privileges must never affect influence due to the fact influence affects points
+	is_valid = {
+		has_country_flag = unlocked_artifice_invention_rezankand_colossus
+	}
+	can_select = {
+		artifice_has_points_20 = yes
+	}
+	can_revoke = {
+		hidden_trigger = {
+			ai = yes
+		}
+	}
+	on_granted = {
+		hidden_effect = {
+			artifice_inventions_currently_used_increase = yes
+		}
+		artifice_granted_20 = yes
+	}
+	on_revoked = {
+		hidden_effect = {
+			artifice_inventions_currently_used_decrease = yes
+		}
+		artifice_remove_20 = yes
+	}
+	on_invalid = {
+		hidden_effect = {
+			artifice_inventions_currently_used_decrease = yes
+		}
+		artifice_remove_20 = yes
+	}
+	penalties = {
+		#foo
+	}
+	benefits = {
+		cavalry_fire = 0.25
+		morale_damage = 0.05
+		cavalry_power = 0.15
+		shock_damage_received = -0.05
+	}
+
+	ai_will_do = {
+		factor = 5
+		modifier = {
+			factor = 0
+			over_artifice_capacity = yes
+		}
+	}
+}
+
+#Xanzerbexis
+artifice_invention_wyvern_blood_tincture = {
+	icon = Artf_Pot_Strength
+	max_absolutism = 0
+	loyalty = 0.00
+	influence = 0 #artificer privileges must never affect influence due to the fact influence affects points
+	is_valid = {
+		has_country_flag = unlocked_artifice_invention_wyvern_blood_tincture
+	}
+	can_select = {
+		artifice_has_points_20 = yes
+	}
+	can_revoke = {
+		hidden_trigger = {
+			ai = yes
+		}
+	}
+	on_granted = {
+		hidden_effect = {
+			artifice_inventions_currently_used_increase = yes
+		}
+		add_country_modifier = {
+			name = artifice_wyvern_blood_tincture
+			duration = -1
 		}
 		artifice_granted_20 = yes
 		#update_artifice_points = yes #is included in the above effect
@@ -13971,38 +14423,24 @@ artifice_invention_bioartificed_fireplants = {
 		hidden_effect = {
 			artifice_inventions_currently_used_decrease = yes
 		}
-		every_owned_province = {
-			limit = { has_province_modifier = artifice_bioartificed_fireplants }
-			remove_province_modifier = artifice_bioartificed_fireplants
-		}
-		every_owned_province = {
-			limit = { has_province_modifier = artifice_exotic_fireplant }
-			remove_province_modifier = artifice_exotic_fireplant
-		}
+		remove_country_modifier = artifice_wyvern_blood_tincture
 		artifice_remove_20 = yes
 		#update_artifice_points = yes #is included in the above effect
+
 	}
 	on_invalid = {
 		hidden_effect = {
 			artifice_inventions_currently_used_decrease = yes
 		}
-		every_owned_province = {
-			limit = { has_province_modifier = artifice_bioartificed_fireplants }
-			remove_province_modifier = artifice_bioartificed_fireplants
-		}
-		every_owned_province = {
-			limit = { has_province_modifier = artifice_exotic_fireplant }
-			remove_province_modifier = artifice_exotic_fireplant
-		}	
+		remove_country_modifier = artifice_wyvern_blood_tincture
 		artifice_remove_20 = yes
 		#update_artifice_points = yes #is included in the above effect
 	}
 	penalties = {
-		#foo
+		manpower_recovery_speed = -0.1
 	}
 	benefits = {
-		global_supply_limit_modifier = 0.5
-		reinforce_speed = 0.2
+	
 	}
 	ai_will_do = {
 		factor = 5
@@ -14013,16 +14451,15 @@ artifice_invention_bioartificed_fireplants = {
 	}
 }
 
-artifice_invention_flamewoven_clothing = {
-	icon = Artf_Uniq1
+artifice_invention_gnollverns = {
+	icon = Artf_BrMi3
 	max_absolutism = 0
 	loyalty = 0.00
 	influence = 0 #artificer privileges must never affect influence due to the fact influence affects points
 	is_valid = {
-		has_country_flag = unlocked_artifice_invention_flamewoven_clothing
+		has_country_flag = unlocked_artifice_invention_gnollverns
 	}
 	can_select = {
-        ai = yes
 		artifice_has_points_30 = yes
 	}
 	can_revoke = {
@@ -14034,21 +14471,9 @@ artifice_invention_flamewoven_clothing = {
 		hidden_effect = {
 			artifice_inventions_currently_used_increase = yes
 		}
-		custom_tooltip = AC5_flamewoven_clothing_tt
-		hidden_effect = {
-			every_owned_province = {
-				limit = { 
-					has_province_modifier = AC5_lava_river 
-					OR = {
-						trade_goods = silk
-						trade_goods = cloth
-					}
-				}
-				add_province_modifier = { #INCLUDE ALL OF THIS STUFF IN THE LAVA RIVERS ADDING STUFF
-					name = artifice_flamewoven_clothing
-					duration = -1
-				}
-			}
+		add_country_modifier = {
+			name = artifice_gnollverns
+			duration = -1
 		}
 		artifice_granted_30 = yes
 		#update_artifice_points = yes #is included in the above effect
@@ -14057,30 +14482,24 @@ artifice_invention_flamewoven_clothing = {
 		hidden_effect = {
 			artifice_inventions_currently_used_decrease = yes
 		}
-		every_owned_province = {
-			limit = { has_province_modifier = artifice_flamewoven_clothing }
-			remove_province_modifier = artifice_flamewoven_clothing
-		}
+		remove_country_modifier = artifice_gnollverns
 		artifice_remove_30 = yes
 		#update_artifice_points = yes #is included in the above effect
+
 	}
 	on_invalid = {
 		hidden_effect = {
 			artifice_inventions_currently_used_decrease = yes
 		}
-		every_owned_province = {
-			limit = { has_province_modifier = artifice_flamewoven_clothing }
-			remove_province_modifier = artifice_flamewoven_clothing
-		}	
+		remove_country_modifier = artifice_gnollverns
 		artifice_remove_30 = yes
 		#update_artifice_points = yes #is included in the above effect
 	}
 	penalties = {
-		#foo
+	
 	}
 	benefits = {
-		stability_cost_modifier = -0.2
-		monthly_splendor = 2
+		movement_speed = 0.2
 	}
 	ai_will_do = {
 		factor = 5
@@ -14091,16 +14510,15 @@ artifice_invention_flamewoven_clothing = {
 	}
 }
 
-artifice_invention_rock_melter_mk1 = {
-	icon = Artf_Uniq1
+artifice_invention_wyvern_reactive_mage_shield = {
+	icon = Artf_BrMi3
 	max_absolutism = 0
 	loyalty = 0.00
 	influence = 0 #artificer privileges must never affect influence due to the fact influence affects points
 	is_valid = {
-		has_country_flag = unlocked_artifice_invention_rock_melter_mk1
+		has_country_flag = unlocked_artifice_invention_wyvern_reactive_mage_shield
 	}
 	can_select = {
-        ai = yes
 		artifice_has_points_20 = yes
 	}
 	can_revoke = {
@@ -14109,54 +14527,12 @@ artifice_invention_rock_melter_mk1 = {
 		}
 	}
 	on_granted = {
-		custom_tooltip = artifice_invention_rock_melter_mk1_granted_tooltip
 		hidden_effect = {
 			artifice_inventions_currently_used_increase = yes
-			every_owned_province = {
-				limit = {
-					has_terrain = cavern
-				}
-				add_province_modifier = {
-					name = AC5_artifice_rock_melter_cavern
-					duration = -1
-				}
-			}
-			every_owned_province = {
-				limit = {
-					has_terrain = dwarven_road
-				}
-				add_province_modifier = {
-					name = AC5_artifice_rock_melter_road
-					duration = -1
-				}
-			}
-			every_owned_province = {
-				limit = {
-					has_terrain = mountain
-				}
-				add_province_modifier = {
-					name = estate_burghers_mountain_expansion_mountains
-					duration = -1
-				}
-			}
-			every_owned_province = {
-				limit = {
-					has_terrain = highlands
-				}
-				add_province_modifier = {
-					name = estate_burghers_mountain_expansion_highlands
-					duration = -1
-				}
-			}
-			every_owned_province = {
-				limit = {
-					has_terrain = hills
-				}
-				add_province_modifier = {
-					name = estate_burghers_mountain_expansion_hills
-					duration = -1
-				}
-			}
+		}
+		add_country_modifier = {
+			name = artifice_wyvern_reactive_mage_shield
+			duration = -1
 		}
 		artifice_granted_20 = yes
 		#update_artifice_points = yes #is included in the above effect
@@ -14165,41 +14541,193 @@ artifice_invention_rock_melter_mk1 = {
 		hidden_effect = {
 			artifice_inventions_currently_used_decrease = yes
 		}
-		custom_tooltip = estate_steelblood_barons_removed
-		hidden_effect = {
-			every_owned_province = {
-				remove_province_modifier = AC5_artifice_rock_melter_cavern
-				remove_province_modifier = AC5_artifice_rock_melter_road
-				remove_province_modifier = estate_burghers_mountain_expansion_mountains
-				remove_province_modifier = estate_burghers_mountain_expansion_highlands
-				remove_province_modifier = estate_burghers_mountain_expansion_hills
-			}
-		}
+		remove_country_modifier = artifice_wyvern_reactive_mage_shield
 		artifice_remove_20 = yes
 		#update_artifice_points = yes #is included in the above effect
+
 	}
 	on_invalid = {
 		hidden_effect = {
 			artifice_inventions_currently_used_decrease = yes
 		}
-		custom_tooltip = estate_steelblood_barons_removed
+		remove_country_modifier = artifice_wyvern_reactive_mage_shield
+		artifice_remove_20 = yes
+		#update_artifice_points = yes #is included in the above effect
+	}
+	penalties = {
+	
+	}
+	benefits = {
+	}
+	ai_will_do = {
+		factor = 5
+		modifier = {
+			factor = 0
+			over_artifice_capacity = yes
+		}
+	}
+}
+artifice_invention_wyvern_mithril_scale_plating = {
+	icon = Artf_BrMi3
+	max_absolutism = 0
+	loyalty = 0.00
+	influence = 0 #artificer privileges must never affect influence due to the fact influence affects points
+	is_valid = {
+		has_country_flag = unlocked_artifice_invention_wyvern_mithril_scale_plating
+	}
+	can_select = {
+		artifice_has_points_20 = yes
+	}
+	can_revoke = {
+		hidden_trigger = {
+			ai = yes
+		}
+	}
+	on_granted = {
 		hidden_effect = {
-			every_owned_province = {
-				remove_province_modifier = AC5_artifice_rock_melter_cavern
-				remove_province_modifier = AC5_artifice_rock_melter_road
-				remove_province_modifier = estate_burghers_mountain_expansion_mountains
-				remove_province_modifier = estate_burghers_mountain_expansion_highlands
-				remove_province_modifier = estate_burghers_mountain_expansion_hills
-			}
+			artifice_inventions_currently_used_increase = yes
+		}
+		add_country_modifier = {
+			name = artifice_wyvern_mithril_scale_plating
+			duration = -1
+		}
+		artifice_granted_20 = yes
+		#update_artifice_points = yes #is included in the above effect
+	}
+	on_revoked = {
+		hidden_effect = {
+			artifice_inventions_currently_used_decrease = yes
+		}
+		remove_country_modifier = artifice_wyvern_mithril_scale_plating
+		artifice_remove_20 = yes
+		#update_artifice_points = yes #is included in the above effect
+
+	}
+	on_invalid = {
+		hidden_effect = {
+			artifice_inventions_currently_used_decrease = yes
+		}
+		remove_country_modifier = artifice_wyvern_mithril_scale_plating
+		artifice_remove_20 = yes
+		#update_artifice_points = yes #is included in the above effect
+	}
+	penalties = {
+	
+	}
+	benefits = {
+	}
+	ai_will_do = {
+		factor = 5
+		modifier = {
+			factor = 0
+			over_artifice_capacity = yes
+		}
+	}
+}
+artifice_invention_wyvern_incendiary_nebulizers = {
+	icon = Artf_BrMi3
+	max_absolutism = 0
+	loyalty = 0.00
+	influence = 0 #artificer privileges must never affect influence due to the fact influence affects points
+	is_valid = {
+		has_country_flag = unlocked_artifice_invention_wyvern_incendiary_nebulizers
+	}
+	can_select = {
+		artifice_has_points_10 = yes
+	}
+	can_revoke = {
+		hidden_trigger = {
+			ai = yes
+		}
+	}
+	on_granted = {
+		hidden_effect = {
+			artifice_inventions_currently_used_increase = yes
+		}
+		add_country_modifier = {
+			name = artifice_wyvern_incendiary_nebulizers
+			duration = -1
+		}
+		artifice_granted_10 = yes
+		#update_artifice_points = yes #is included in the above effect
+	}
+	on_revoked = {
+		hidden_effect = {
+			artifice_inventions_currently_used_decrease = yes
+		}
+		remove_country_modifier = artifice_wyvern_incendiary_nebulizers
+		artifice_remove_10 = yes
+		#update_artifice_points = yes #is included in the above effect
+
+	}
+	on_invalid = {
+		hidden_effect = {
+			artifice_inventions_currently_used_decrease = yes
+		}
+		remove_country_modifier = artifice_wyvern_incendiary_nebulizers
+		artifice_remove_10 = yes
+		#update_artifice_points = yes #is included in the above effect
+	}
+	penalties = {
+	
+	}
+	benefits = {
+	}
+	ai_will_do = {
+		factor = 5
+		modifier = {
+			factor = 0
+			over_artifice_capacity = yes
+		}
+	}
+}
+artifice_invention_innate_windshaping = {
+	icon = Artf_Uniq2
+	max_absolutism = 0
+	loyalty = 0.00
+	influence = 0 #artificer privileges must never affect influence due to the fact influence affects points
+	is_valid = {
+		has_country_flag = unlocked_artifice_invention_innate_windshaping
+	}
+	can_select = {
+		artifice_has_points_20 = yes
+		hidden_trigger = {
+			ai = yes
+		}
+	}
+	can_revoke = {
+		hidden_trigger = {
+			ai = yes
+		}
+	}
+	on_granted = {
+		hidden_effect = {
+			artifice_inventions_currently_used_increase = yes
+		}
+		artifice_granted_20 = yes
+		#update_artifice_points = yes #is included in the above effect
+	}
+	on_revoked = {
+		hidden_effect = {
+			artifice_inventions_currently_used_decrease = yes
+		}
+		artifice_remove_20 = yes
+		#update_artifice_points = yes #is included in the above effect
+
+	}
+	on_invalid = {
+		hidden_effect = {
+			artifice_inventions_currently_used_decrease = yes
 		}
 		artifice_remove_20 = yes
 		#update_artifice_points = yes #is included in the above effect
 	}
 	penalties = {
-		#foo
+		
 	}
 	benefits = {
-		governing_capacity_modifier = 0.1
+		movement_speed_in_fleet_modifier = 2
+		ship_trade_power_modifier = 0.2
 	}
 	ai_will_do = {
 		factor = 5
@@ -14210,108 +14738,56 @@ artifice_invention_rock_melter_mk1 = {
 	}
 }
 
-AC5_engineer_bureaucracy = {
-	icon = Artf_Uniq1
+artifice_invention_icestorm_cannons = {
+	icon = Artf_Uniq2
 	max_absolutism = 0
-	loyalty = -0.1
-	influence = 0.1
+	loyalty = 0.00
+	influence = 0 #artificer privileges must never affect influence due to the fact influence affects points
 	is_valid = {
-		has_country_flag = unlocked_AC5_engineer_bureaucracy
+		has_country_flag = unlocked_artifice_invention_icestorm_cannons
 	}
 	can_select = {
+		artifice_has_points_20 = yes
+		hidden_trigger = {
+			ai = yes
+		}
 	}
 	can_revoke = {
-		always = no
+		hidden_trigger = {
+			ai = yes
+		}
 	}
 	on_granted = {
-		add_estate_loyalty = {
-			estate = estate_artificers
-			loyalty = -20
+		hidden_effect = {
+			artifice_inventions_currently_used_increase = yes
 		}
-		update_artifice_points = yes
+		artifice_granted_20 = yes
+		#update_artifice_points = yes #is included in the above effect
 	}
 	on_revoked = {
+		hidden_effect = {
+			artifice_inventions_currently_used_decrease = yes
+		}
+		artifice_remove_20 = yes
+		#update_artifice_points = yes #is included in the above effect
+
 	}
 	on_invalid = {
+		hidden_effect = {
+			artifice_inventions_currently_used_decrease = yes
+		}
+		artifice_remove_20 = yes
+		#update_artifice_points = yes #is included in the above effect
 	}
 	penalties = {
-		technology_cost = 0.1
-		build_cost = 0.25
-		build_time = 0.25
+		
 	}
 	benefits = {
-		administrative_efficiency = 0.1
-		artificers_invention_slots = 2
-	}
- 	cooldown_years = 10
- 	on_cooldown_expires = {
-		remove_estate_privilege = AC5_engineer_bureaucracy
+		naval_morale_damage = 0.15
+		heavy_ship_power = 0.05
 	}
 	ai_will_do = {
 		factor = 5
-	}
-}
-
-#Reveria
-artifice_invention_gerudian_autorowers = {
-	icon = Artf_MaMi2
-	max_absolutism = 0
-	loyalty = 0
-	influence = 0 #artificer privileges must never affect influence due to the fact influence affects points
-	is_valid = {
-		has_country_flag = unlocked_artifice_invention_gerudian_autorowers
-		culture_group = gerudian
-		NOT = { has_estate_privilege = artifice_invention_gerudian_autorowers }
-		OR = {
-			ai = yes
-			has_estate_privilege = artifice_invention_gerudian_autorowers
-		}
-	}
-	can_select = {
-        ai = yes
-		artifice_has_points_20 = yes
-		culture_group = gerudian
-	}
-	can_revoke = {
-		hidden_trigger = {
-			ai = yes
-		}
-	}
-	on_granted = {
-		hidden_effect = {
-			artifice_inventions_currently_used_increase = yes
-		}
-		add_country_modifier = {
-			name = artifice_gerudian_autorowers
-			duration = -1
-		}
-		artifice_granted_20 = yes
-		#update_artifice_points = yes #is included in the above effect
-	}
-	on_revoked = {
-		hidden_effect = {
-			artifice_inventions_currently_used_decrease = yes
-		}
-		artifice_remove_20 = yes
-		#update_artifice_points = yes #is included in the above effect
-		remove_country_modifier = artifice_gerudian_autorowers
-	}
-	on_invalid = {
-		hidden_effect = {
-			artifice_inventions_currently_used_decrease = yes
-		}
-		artifice_remove_20 = yes
-		#update_artifice_points = yes #is included in the above effect
-		remove_country_modifier = artifice_gerudian_autorowers
-	}
-	penalties = {
-	}
-	benefits = {
-		artificers_privilege_slots = 1
-		tec_mechanists_influence = 0.04
-	}
-	ai_will_do = {
-		factor = 50
 		modifier = {
 			factor = 0
 			over_artifice_capacity = yes
@@ -14319,24 +14795,19 @@ artifice_invention_gerudian_autorowers = {
 	}
 }
 
-artifice_invention_gerudian_axepistol = {
-	icon = Artf_BrMi2
+artifice_invention_sustaining_arks = {
+	icon = Artf_Uniq2
 	max_absolutism = 0
-	loyalty = 0
+	loyalty = 0.00
 	influence = 0 #artificer privileges must never affect influence due to the fact influence affects points
 	is_valid = {
-		has_country_flag = unlocked_artifice_invention_gerudian_axepistol
-		culture_group = gerudian
-		NOT = { has_estate_privilege = artifice_invention_gerudian_axepistol }
-		OR = {
-			ai = yes
-			has_estate_privilege = artifice_invention_gerudian_axepistol
-		}
+		has_country_flag = unlocked_artifice_invention_sustaining_arks
 	}
 	can_select = {
-        ai = yes
-		artifice_has_points_20 = yes
-		culture_group = gerudian
+		artifice_has_points_10 = yes
+		hidden_trigger = {
+			ai = yes
+		}
 	}
 	can_revoke = {
 		hidden_trigger = {
@@ -14347,169 +14818,33 @@ artifice_invention_gerudian_axepistol = {
 		hidden_effect = {
 			artifice_inventions_currently_used_increase = yes
 		}
-		add_country_modifier = {
-			name = artifice_gerudian_axepistol
-			duration = -1
-		}
-		artifice_granted_20 = yes
+		artifice_granted_10 = yes
 		#update_artifice_points = yes #is included in the above effect
 	}
 	on_revoked = {
 		hidden_effect = {
 			artifice_inventions_currently_used_decrease = yes
 		}
-		artifice_remove_20 = yes
+		artifice_remove_10 = yes
 		#update_artifice_points = yes #is included in the above effect
-		remove_country_modifier = artifice_gerudian_axepistol
-	}
-	on_invalid = {
-		hidden_effect = {
-			artifice_inventions_currently_used_decrease = yes
-		}
-		artifice_remove_20 = yes
-		#update_artifice_points = yes #is included in the above effect
-		remove_country_modifier = artifice_gerudian_axepistol
-	}
-	penalties = {
-	}
-	benefits = {
-		artificers_privilege_slots = 1
-		tec_brilliance_influence = 0.04
-	}
-	ai_will_do = {
-		factor = 50
-		modifier = {
-			factor = 0
-			over_artifice_capacity = yes
-		}
-	}
-}
 
-artifice_invention_gerudian_weightless_holds = {
-	icon = Artf_BrMi2
-	max_absolutism = 0
-	loyalty = 0
-	influence = 0 #artificer privileges must never affect influence due to the fact influence affects points
-	is_valid = {
-		culture_group = gerudian
-		has_country_flag = unlocked_artifice_invention_gerudian_weightless_holds
-		NOT = { has_estate_privilege = artifice_invention_gerudian_weightless_holds }
-		OR = {
-			ai = yes
-			has_estate_privilege = artifice_invention_gerudian_weightless_holds
-		}
-	}
-	can_select = {
-        ai = yes
-		artifice_has_points_20 = yes
-		culture_group = gerudian
-	}
-	can_revoke = {
-		hidden_trigger = {
-			ai = yes
-		}
-	}
-	on_granted = {
-		hidden_effect = {
-			artifice_inventions_currently_used_increase = yes
-		}
-		add_country_modifier = {
-			name = artifice_gerudian_weightless_holds
-			duration = -1
-		}
-		artifice_granted_20 = yes
-		#update_artifice_points = yes #is included in the above effect
-	}
-	on_revoked = {
-		hidden_effect = {
-			artifice_inventions_currently_used_decrease = yes
-		}
-		artifice_remove_20 = yes
-		#update_artifice_points = yes #is included in the above effect
-		remove_country_modifier = artifice_gerudian_weightless_holds
 	}
 	on_invalid = {
 		hidden_effect = {
 			artifice_inventions_currently_used_decrease = yes
 		}
-		artifice_remove_20 = yes
+		artifice_remove_10 = yes
 		#update_artifice_points = yes #is included in the above effect
-		remove_country_modifier = artifice_gerudian_weightless_holds
 	}
 	penalties = {
+		
 	}
 	benefits = {
-		artificers_privilege_slots = 1
-		tec_brilliance_influence = 0.04
+		transport_attrition = -1
+		trade_efficiency = 0.1
 	}
 	ai_will_do = {
-		factor = 50
-		modifier = {
-			factor = 0
-			over_artifice_capacity = yes
-		}
-	}
-}
-
-artifice_invention_skaldhyrric_tale_generator = {
-	icon = Artf_BrSo2
-	max_absolutism = 0
-	loyalty = 0
-	influence = 0 #artificer privileges must never affect influence due to the fact influence affects points
-	is_valid = {
-		has_country_flag = unlocked_artifice_invention_skaldhyrric_tale_generator
-		religion = skaldhyrric_faith
-		NOT = { has_estate_privilege = artifice_invention_skaldhyrric_tale_generator }
-		OR = {
-			ai = yes
-			has_estate_privilege = artifice_invention_skaldhyrric_tale_generator
-		}
-	}
-	can_select = {
-        ai = yes
-		artifice_has_points_20 = yes
-		religion = skaldhyrric_faith
-	}
-	can_revoke = {
-		hidden_trigger = {
-			ai = yes
-		}
-	}
-	on_granted = {
-		hidden_effect = {
-			artifice_inventions_currently_used_increase = yes
-		}
-		add_country_modifier = {
-			name = artifice_skaldhyrric_tale_generator
-			duration = -1
-		}
-		artifice_granted_20 = yes
-		#update_artifice_points = yes #is included in the above effect
-	}
-	on_revoked = {
-		hidden_effect = {
-			artifice_inventions_currently_used_decrease = yes
-		}
-		artifice_remove_20 = yes
-		#update_artifice_points = yes #is included in the above effect
-		remove_country_modifier = artifice_skaldhyrric_tale_generator
-	}
-	on_invalid = {
-		hidden_effect = {
-			artifice_inventions_currently_used_decrease = yes
-		}
-		artifice_remove_20 = yes
-		#update_artifice_points = yes #is included in the above effect
-		remove_country_modifier = artifice_skaldhyrric_tale_generator
-	}
-	penalties = {
-	}
-	benefits = {
-		artificers_privilege_slots = 1
-		tec_technomancy_influence = 0.04
-	}
-	ai_will_do = {
-		factor = 50
+		factor = 5
 		modifier = {
 			factor = 0
 			over_artifice_capacity = yes

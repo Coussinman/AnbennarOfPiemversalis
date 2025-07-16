@@ -218,39 +218,6 @@ country_decisions = {
 			} 
 		}
 	}
-	
-	command_violently_suppress_the_mages = {
-		color = { 161 43 32 }
-		potential = {
-			tag = R62
-			has_disaster = command_rise_of_the_shamans
-			NOT = { has_country_modifier = command_violently_suppressing_mages }
-		}
-		
-		allow = {
-			hidden_trigger = {
-				tag = R62
-			}
-			mil_power = 100
-			NOT = {
-				any_neighbor_country = { has_reform = magocracy_reform }
-			}
-			NOT = { num_of_rebel_controlled_provinces = 1 }
-			stability = 0
-		}
-		
-		effect = {
-			add_mil_power = -100
-			add_country_modifier = {
-				name = command_violently_suppressing_mages
-				duration = -1
-			}
-		}
-		
-		ai_will_do = {
-			factor = 1
-		}
-	}
 
 	command_insubordination_menu = {
 		color = { 161 43 32 }
@@ -279,9 +246,7 @@ country_decisions = {
 	
 	command_ease_jade_mines_tension = {
 		potential = {
-			tag = R62
-			NOT = { has_country_flag = command_jade_rivalry_ended }
-			mission_completed = R62_prepare_new_stewards
+			has_country_flag = eligible_for_jade_rivalry_events
 			4311 = {
 				check_variable = {
 					which = command_jade_mines_tension
@@ -291,9 +256,7 @@ country_decisions = {
 		}
 		
 		allow = {
-			hidden_trigger = {
-				tag = R62
-			}
+			hidden_trigger = { has_country_flag = eligible_for_jade_rivalry_events }
 			dip_power = 75
 			4311 = {
 				check_variable = {

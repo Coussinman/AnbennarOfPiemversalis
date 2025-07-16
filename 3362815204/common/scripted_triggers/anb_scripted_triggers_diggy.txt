@@ -145,10 +145,16 @@ is_remnant_hold = {
 runefather_conversion_exempt = {
 	OR = {
 		tag = H81 #masked butcher
+		AND = {
+			was_tag = H81
+			tag = M04 #tarakar, if formed by masked butcher
+		}
 		tag = I19 #ovdal-az-an
 		tag = H90 #spiderwretch
 		tag = I05 #mithradhum
 		tag = I07 #khugdihr
+		tag = J32 #mire maw
+		tag = R62 #the command
 	}
 }
 
@@ -507,7 +513,8 @@ dwarovar_orc_culture_accepted = {
 owns_jorkad_dam = {
 	custom_trigger_tooltip = {
 		tooltip = owns_built_jorkad_dam_tt
-		676 = { has_province_modifier = the_jorkad_dam owned_by = owner }
+		owns = 676
+		676 = { has_great_project = { type = jorkad_dam tier = 3 } }
 	}
 }
 
@@ -662,7 +669,7 @@ can_upgrade_hold = {
 	NOT = { owner = { dwarovar_orc_culture_primary = yes } }
 	custom_trigger_tooltip = {
 		tooltip = not_diggy_locked_tooltip
-		NOT = { has_province_flag = cannot_dig }
+		NOT = { has_province_modifier = F23_flooded_depths }
 		NOT = { has_province_modifier = incomplete_hold }
 		NOT = { has_province_modifier = incomplete_hold_0 }
 	}
@@ -805,26 +812,20 @@ can_dig_hold_alert = {
 			culture_group = dwarven
 			AND = {
 				OR = {
-					primary_culture = darkscale_kobold
-					primary_culture = magmascale_kobold
 					dwarovar_goblin_culture_primary = yes
+					primary_culture = darkscale_kobold
 				}
 				adm_tech = 5
 			}
 			AND = {
-				NOT = {
-					culture_group = dwarven
-					primary_culture = darkscale_kobold
-					primary_culture = magmascale_kobold
-					dwarovar_goblin_culture_primary = yes
-				}
+				NOT = { culture_group = dwarven }
+				NOT = { primary_culture = darkscale_kobold }
+				NOT = { dwarovar_goblin_culture_primary = yes }
 				adm_tech = 7
 			}
 		}
-		NOT = {
-			num_of_rebel_armies = 1
-			dwarovar_orc_culture_primary = yes
-		}
+		NOT = { num_of_rebel_armies = 1 }
+		NOT = { dwarovar_orc_culture_primary = yes }
 	}
 	OR = {
 		AND = {
@@ -832,15 +833,10 @@ can_dig_hold_alert = {
 			NOT = { owner = { has_country_flag = building_diggy } } # upgrading infrastructure
 		}
 		owner = { has_country_flag = hold_operation } # centralized hold operations
-		AND = {
-			province_id = 4039
-			owner = {
-				mission_completed = AC5_exploit_fissures
-			}
-		}
 	}
 	NOT = {
 		has_construction = any
+		has_province_modifier = developing_advanced_infrastructure
 		has_province_modifier = ruined_hold
 		has_province_modifier = infested_hold
 		has_province_modifier = incomplete_hold
@@ -960,8 +956,6 @@ hold_condition = {
 	]
 }
 
-
-
 ################################
 ### Expeditions and Dungeons ###
 ################################
@@ -999,7 +993,7 @@ has_dwarovkron_fragment = {
 
 has_special_expedition = {
 	OR = {
-		has_province_flag = block_dungeon_spawn_flag
+		province_id = 4033
 		has_province_flag = khug_expedition_1_created 
 		has_province_flag = khug_expedition_2_created 
 		has_province_flag = krakazol_1st_exp 
@@ -1322,38 +1316,66 @@ has_old_dookan_omen = {
 ##############
 ### Rails ###
 ##############
-rail_can_construct = {
-	any_owned_province = {
-		has_province_modifier = $rail$
-		NOT = { has_construction = any }
-		NOT = { has_colonist = yes }
-		is_city = yes
-		is_state = yes
-		any_neighbor_province = {
-			OR = {
-				[[repair]
-					has_province_modifier = restored_rail
-					has_province_modifier = advanced_rail
-					has_province_modifier = rocket_rail
-				]
-				[[upgrade]
-					has_province_modifier = advanced_rail
-					has_province_modifier = rocket_rail
-				]
-				[[rocket]
-					has_province_modifier = rocket_rail
-				]
-				AND = {
-					province_group = hold_province
+# This trigger is used to determine when a country can see a decision to upgrade rail.
+rail_potential_trigger = {
+	[[adm_tech_req]
+		adm_tech = $adm_tech_req$
+	]
+	OR = {
+		ai = no
+		capital_scope = { continent = serpentspine }
+	}
+	any_owned_province = { has_province_modifier = $rail_to_replace$ }
+	NOT = { has_reform = roadwarrior_great_convoy }
+}
+
+# This trigger determines whether a province can have its rail upgraded. 
+# Checks for construction have been commented out, as this is also used for highlighting where such provinces should be shown. 
+rail_province_eligibility_trigger = {
+	# NOT = { has_construction = any }
+	# NOT = { has_colonist = yes }
+	has_province_modifier = $rail_to_replace$
+	is_core = ROOT
+	is_city = yes
+	owned_by = ROOT
+	any_neighbor_province = {
+		is_core = ROOT
+		owned_by = ROOT
+		OR = {
+			[[repair]
+				has_province_modifier = restored_rail
+				has_province_modifier = advanced_rail
+				has_province_modifier = rocket_rail
+			]
+			[[upgrade]
+				has_province_modifier = advanced_rail
+				has_province_modifier = rocket_rail
+			]
+			[[rocket]
+				has_province_modifier = rocket_rail
+			]
+			AND = {
+				province_group = hold_province
+				NOT = { has_province_modifier = infested_hold }
+				if = { limit = { ROOT = { has_country_flag = blorc_plunder_capital_set } }
 					OR = {
 						NOT = { has_province_modifier = ruined_hold }
 						has_province_modifier = blorc_war_camp
 					}
-					NOT = { has_province_modifier = infested_hold }
+				}
+				else = {
+					NOT = { has_province_modifier = ruined_hold }
 				}
 			}
-			is_state = yes
-			owned_by = ROOT
 		}
+	}
+}
+
+# This trigger checks whether any owned province can have its rail upgraded.
+rail_can_construct = {
+	any_owned_province = {
+		rail_province_eligibility_trigger = { rail_to_replace = $current_rail$ $upgraded_rail$ = yes }
+		NOT = { has_construction = any }
+		NOT = { has_colonist = yes }
 	}
 }

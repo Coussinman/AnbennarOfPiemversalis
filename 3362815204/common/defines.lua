@@ -131,9 +131,9 @@ NDiplomacy = {
 	HRE_FOREIGN_CONTROL_PENALTY = -0.005,			-- Each foreign-controlled province in the empire (owned or vassalised) lowers IA by this amount
 	HRE_HERETIC_PENALTY = -0.01,					-- Per heretic prince (halved by Peace of Westphalia)
 	LACK_OF_ELECTORS_HIT = -0.1,					-- Also applied to vassalized electors
-	JOIN_HRE_DEVELOPMENT_CAP_VASSAL = 200,			-- Max cap of development of vassals to join the empire
+	JOIN_HRE_DEVELOPMENT_CAP_VASSAL = 2000,			-- Max cap of development of vassals to join the empire
 	IMPERIAL_REFORM_COST = 50,						-- Minium Cost of enacting a new reform.
-	IMPERIAL_REFORM_AUTHORITY_ACCEPTANCE = 1,		-- How much acceptance for each authority above IMPERIAL_REFORM_COST
+	IMPERIAL_REFORM_AUTHORITY_ACCEPTANCE = 2,		-- How much acceptance for each authority above IMPERIAL_REFORM_COST
 	CELESTIAL_EMPIRE_REFORM_COST = 70,				-- Mandate cost of enacting a new reform for the Emperor of China.
 	CELESTIAL_EMPIRE_REFORM_STABILITY_COST = 1,		-- Stability cost of enacting a new reform for the Emperor of China
 	CELESTIAL_EMPIRE_REFORM_MIN_VALUE = 80,		-- Minimum value of Mandate above which new reforms can be enacted.
@@ -350,7 +350,7 @@ NDiplomacy = {
 
 	DIPLOMAT_SPEED = 20.0,							-- DIPLOMAT_SPEED
 	DIPLOMAT_COOLDOWN_TIME = 1,						-- DIPLOMATIC ACTION COOLDOWN IN MONTHS
-	MIN_RELATIONS_TO_ALLY = -200,						-- Alliances not possible if either country has an opinion of the other lower than this
+	MIN_RELATIONS_TO_ALLY = -25,						-- Alliances not possible if either country has an opinion of the other lower than this
 	MIN_RELATIONS_TO_SUPPORT_INDEPENDENCE = -25,	-- Support Independence not possible if either country has an opinion of the other lower than this
 
 	ELECTIVE_VICTORY_PRESTIGE = 25,				-- Prestige for getting a heir from your country onto the throne of an elective nation
@@ -493,7 +493,7 @@ NCountry = {
 	MONTHS_FOR_MAX_MP_ALERT = 3,
 
 	CHANGE_COLONIAL_TYPE_COOLDOWN_DURATION = 10,
-	CONCENTRATE_DEVELOPMENT_COOLDOWN_DURATION = 400, -- (Anbennar) pdx: 50
+	CONCENTRATE_DEVELOPMENT_COOLDOWN_DURATION = 50,
 	SIBERIAN_FRONTIER_DAILY_BASE = 5,
 	SIBERIAN_FRONTIER_DAILY_RANGE = 11,
 	CONTRIBUTE_TO_CAPITAL_MIN_DEV_RATIO = 0.5,		-- Overlord's development times this value must be smaller than Subject's development.
@@ -660,7 +660,7 @@ NCountry = {
 	SUPPORT_OWN_HEIR_SUPPORT_BONUS = 5,
 	ELECTIVE_HEIR_CLAIM_STRENGTH = 80,
 	MAX_ACTIVE_POLICIES = 5,						-- how many active policies at once.
-	MINIMUM_POLICY_TIME = 5,						-- how many years minimum for a policy
+	MINIMUM_POLICY_TIME = 10,						-- how many years minimum for a policy
 	POLICY_COST = 1,								-- Monthly cost per policy
 	BASE_POSSIBLE_POLICIES = 3,						-- How many policies in a category a nation can have as a base
 	BASE_FREE_POLICIES = 1,							-- How many policies in a category a nation get for free
@@ -979,7 +979,7 @@ NCountry = {
 	SCUTAGE_TAX_FRACTION = 0.5,
 	PERCENTAGE_OF_DEV_FOR_CONVERT_TRIBUTARY_TO_VASSAL = 0.4,
 	MAX_LIBERTY_DESIRE_FOR_CONVERT_TRIBUTARY_TO_VASSAL = 50,
-	CONCENTRATE_DEVELOPMENT_DEVELOPMENT_DECREASE = 0,	-- (Anbennar) pdx: 0.2 (disabled concentrate development)
+	CONCENTRATE_DEVELOPMENT_DEVELOPMENT_DECREASE = 0.2,
 	PILLAGE_CAPITAL_DEVELOPMENT_DECREASE = 0.2,
 	RAZE_UNREST_DURATION = 10,						-- Years of unrest. Also used for duration of neg. opinion modifier for previous owner.
 	RAZE_PROVINCE_DEVELOPMENT_DECREASE = 0.33,
@@ -1300,7 +1300,7 @@ NMilitary = {
 	MAX_BREACH = 3,
 	SIEGE_GARRISON_SURRENDER = 100,					-- A siege ends when there is less than 100 defenders left.
 	ASSAULT_WIDTH_LIMIT = 5,						-- how many times the garrison size that can effectively assault at the same time.
-	ASSAULT_ATTACKER_LOSS = 2.0, 					-- MDEF_ASSAULT_ATTACKER_LOSS = 10,
+	ASSAULT_ATTACKER_LOSS = 1.0, 					-- MDEF_ASSAULT_ATTACKER_LOSS = 10,
 	ASSAULT_DEFENDER_LOSS = 0.05, 					-- _MDEF_ASSAULT_DEFENDER_LOSS = 10,
 	ASSAULT_DICE_MODIFIER = 5, 						-- _MDEF_ASSAULT_DICE_MODIFIER_
 	INF_REGIMENT_MANPOWER_COST = 1.0, 				-- 1 = 1000 men in cost.
@@ -1443,7 +1443,7 @@ NMilitary = {
 	BATTLE_DAILY_MORALE_DAMAGE = 0.01,				-- Deployed troops take this fraction of their maximum morale as damage
 	RESERVE_DAILY_MORALE_DAMAGE = 0.02,				-- Reserve troops take this fraction of their maximum morale as damage (modified by reserves_organisation)
 	CREATE_JANISSARIES_MIL_COST = 5,				-- (Anbennar) pdx: 3 Cost to create janissaries (per unit)
-	CREATE_CAWA_MIL_COST = 2,						-- Cost to create Cawa (per unit)
+	CREATE_CAWA_MIL_COST = 5,						-- Cost to create Cawa (per unit)
 	CREATE_HUSSARS_MIL_COST = 10;					-- (Anbennar) pdx: 0 (Mythical Riders) Cost to create Hussars (per unit)
 	COSSACKS_MAXIMUM_RATIO = 1.0,					-- Maximum number of Cossacks regiments, relative to force limit
 	REVOLUTIONARY_GUARD_MAXIMUM_RATIO = 1.0,			-- Maximum number of Revolutionary Guard regiments, relative to force limit
@@ -2099,7 +2099,7 @@ NAI = {
 	MIN_FORCE_LIMIT_SHARE_REGION_ASSIGN = 0.10,					-- AI will only assign armies larger that this to a region
 	MAX_ARMIES_NEW_REGION_ASSIGN_ALGORITHM = 12,				-- Max. amount of armies to use in new region assignment algorithm (fall back to old one)
 	MAX_TASKS_NEW_REGION_ASSIGN_ALGORITHM = 100,				-- Max. amount of tasks to use in new region assignment algorithm (fall back to old one)
-	ELECTORAL_REFORMATION_CONVERT_TRESHOLD = 0.1,				-- How much of an electors development needs to be a reformed religion for it to try and reform
+	ELECTORAL_REFORMATION_CONVERT_TRESHOLD = 0.5,				-- How much of an electors development needs to be a reformed religion for it to try and reform
 	TRADE_COMPANY_INVESTMENT_COST_THRESHOLD = 1.0,				-- How many times the cost of the investment must be in the treasury to consider buying it
 	ASSIMILATION_INTEREST_AMOUNT_FACTOR = 10,					-- Influence on assimilation interest from number of provinces left to conquer
 	INVASION_ARMY_LOOKUP_INTERVAL_ON_FAILURE = 15,				-- If AI fails to find an army for an invasion it will try again in this number of days
@@ -2149,7 +2149,7 @@ NAI = {
 	ESTATE_MAX_WANTED_INFLUENCE = 73.0,
 	ESTATE_MIN_WANTED_CROWNLAND = 33.0,
 	ESTATE_MAX_PRIVILEGES = 7, 									-- (Anbennar) pdx: 6. Also see ESTATE_PRIVILEGES_MAX_CONCURRENT in NCountry
-	MIN_SCORE_TO_CONCENTRATE_DEVELOPMENT = 100,					-- (Anbennar) pdx: 1.5 (disabled in Anbennar)
+	MIN_SCORE_TO_CONCENTRATE_DEVELOPMENT = 1.5,
 
 	-- # AI unit strength evaluation
 
@@ -2735,7 +2735,7 @@ NGovernment = {
 	LEGACY_NATIVES_REFORM_THEOCRACY_SPONSOR = "theocratic_government",
 	LEADER_AS_MONARCH_TRADITION = 30, -- How much tradition leaders will get when generated for
 	
-	CONCENTRATE_DEVELOPMENT_CAPITAL_PROPORTION = 0.8,
+	CONCENTRATE_DEVELOPMENT_CAPITAL_PROPORTION = 0.75,
 	DEVASTATION_PER_DEV_STOLEN = 5,
 	FREE_CONCENTRATE_DEVELOPMENT_CAPITAL_PROPORTION = 1,
 	FREE_CONCENTRATE_DEVELOPMENT_OTHER_STATE_PROVINCES_PROPORTION = 0,

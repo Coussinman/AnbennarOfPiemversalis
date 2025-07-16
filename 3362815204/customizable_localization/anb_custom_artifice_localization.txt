@@ -210,7 +210,7 @@ defined_text = {
 		}
 	}
 	text = {
-		localisation_key = get_artificery_Progress_slow_2
+		localisation_key = get_artificery_progress_slow_2
 		trigger = {
 			has_country_flag = artifice_research_slow
 			NOT = { has_country_flag = artifice_unlocked_expert }
@@ -967,7 +967,7 @@ defined_text = {
 	}
 
 	text = {
-		localisation_key = artifice_invention_codorran_powered_exosuit
+		localisation_key = artifice_invention_coddorran_powered_exosuit
 		trigger = {
 			has_country_modifier = gnomish_military
 		}
@@ -1336,11 +1336,33 @@ defined_text = {
 			}
 		}
 	}
+
 	text = {
 		localisation_key = artifice_invention_kobildzan_draconic_ascension
 		trigger = {
 			has_country_flag = unlocked_artifice_invention_kobildzan_draconic_ascension
 		}
+	}
+	text = {
+		localisation_key = artifice_invention_wyvern_blood_tincture
+		trigger = {
+			OR = {
+				tag = A49
+				was_tag = A49
+			}
+		}
+	}
+	
+	text = {
+		localisation_key = z22_artifice_invention_icestorm_cannons
+		trigger = {
+			is_or_was_tag = { tag = Z22 }
+		}
+	}
+
+	text = {
+		localisation_key = artifice_invention_wyvern_reactive_mage_shielding_loc
+		trigger = { is_or_was_tag = { tag = A33 } }
 	}
 }
 
@@ -1396,12 +1418,28 @@ defined_text = {
 			}
 		}
 	}
+
 	text = {
 		localisation_key = artifice_invention_lullaby_cannon
 		trigger = {
 			has_country_flag = can_use_lullaby_cannon
 		}
 	}
+	text = {
+		localisation_key = artifice_invention_prehensile_tail_attachments
+		trigger = {
+			OR = {
+				tag = A49
+				was_tag = A49
+			}
+		}
+	}
+	
+	text = {
+		localisation_key = artifice_invention_wyvern_mithril_scale_plating_loc
+		trigger = { is_or_was_tag = { tag = A33 } }
+	}
+
 }
 
 defined_text = {
@@ -1416,12 +1454,47 @@ defined_text = {
 			}
 		}
 	}
+
 	text = {
 		localisation_key = artifice_invention_elemental_gunpowder
 		trigger = {
 			has_country_flag = can_use_elemental_gunpowder
 		}
 	}
+	
+	text = {
+		localisation_key = artifice_invention_gnollverns
+		trigger = {
+			OR = {
+				tag = A49
+				was_tag = A49
+			}
+		}
+	}
+
+	text = {
+		localisation_key = artifice_invention_wyvern_incendiary_nebulizers_loc
+		trigger = { is_or_was_tag = { tag = A33 } }
+	}
+	
+	text = {
+		localisation_key = z22_artifice_invention_sustaining_arks
+		trigger = {
+			is_or_was_tag = { tag = Z22 }
+		}
+	}
+}
+
+defined_text = {
+	name = artificer_unique_invention_4_loc
+	
+	text = {
+		localisation_key = z22_artifice_invention_innate_windshaping
+		trigger = {
+			is_or_was_tag = { tag = Z22 }
+		}
+	}
+
 }
 
 defined_text = {
@@ -1468,6 +1541,13 @@ defined_text = {
 			}
 		}
 	}
+
+	text = {
+		localisation_key = artifice_invention_light_matrix_logistic
+		trigger = {
+			tag = H67
+		}
+	}
 }
 
 defined_text = {
@@ -1500,6 +1580,13 @@ defined_text = {
 				tag =  I98
 				was_tag = I98
 			}
+		}
+	}
+
+	text = {
+		localisation_key = artifice_invention_light_matrix_supply
+		trigger = {
+			tag = H67
 		}
 	}
 }
@@ -1536,6 +1623,13 @@ defined_text = {
 			}
 		}
 	}
+
+	text = {
+		localisation_key = artifice_invention_rezankand_phoenix
+		trigger = {
+			tag = H67
+		}
+	}
 }
 
 defined_text = {
@@ -1570,6 +1664,13 @@ defined_text = {
 			}
 		}
 	}
+
+	text = {
+		localisation_key = artifice_invention_sunplate_armors
+		trigger = {
+			tag = H67
+		}
+	}
 }
 
 defined_text = {
@@ -1602,6 +1703,13 @@ defined_text = {
 				tag =  I98
 				was_tag = I98
 			}
+		}
+	}
+
+	text = {
+		localisation_key = artifice_invention_rezankand_colossus
+		trigger = {
+			tag = H67
 		}
 	}
 }
@@ -1876,4 +1984,27 @@ defined_text = {
 			has_country_flag = magic_artificery_mage_only
         }
     }
+}
+
+defined_text = {
+	name = eoa_regulated_artificery_cl
+	random = no
+	text = {
+        localisation_key = anbennar_regulated_artificery
+        trigger = {
+			OR = {
+				tag = Z01
+				is_subject_of = Z01
+				is_part_of_hre = yes
+			}
+			hre_reform_passed = anbennar_regulate_artificery
+			has_country_flag = magic_artificery_artificery_only
+		}
+    }
+	text = {
+		localisation_key = artifice_mode_none
+		trigger = {
+			always = yes
+		}
+	}
 }

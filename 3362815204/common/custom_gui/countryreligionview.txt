@@ -5,6 +5,12 @@ custom_button = {
     		religion = regent_court
     		religion = infernal_court
 			religion = runefather_worship
+			religion = anzalkatsa
+			religion = skaldhyrric_faith
+			AND = {
+				tag = J84 #Taychendi Empire
+				religion = gods_of_the_taychend_reformed
+			}
     	}
     	OR = {
     		#Regent Court
@@ -12,6 +18,7 @@ custom_button = {
 			has_personal_deity = lightfather
     		has_personal_deity = the_dame
     		has_personal_deity = corin
+			has_personal_deity = corin_upgraded
     		has_personal_deity = adean
     		has_personal_deity = adean_upgraded_admin
     		has_personal_deity = adean_upgraded_war
@@ -30,12 +37,10 @@ custom_button = {
     		has_personal_deity = falah_upgraded
     		has_personal_deity = nerat
     		has_personal_deity = nathalyne
-			#has_personal_deity = upgraded_nathalyne
+    		has_personal_deity = wip
     		has_personal_deity = begga
 			has_personal_deity = begga_upgraded
     		has_personal_deity = dookan
-			has_personal_deity = one_armed_skald
-			has_personal_deity = one_armed_skald_upgraded
     		#Infernal Court
     		has_personal_deity = kazraiel
 			has_personal_deity = hedine
@@ -44,6 +49,13 @@ custom_button = {
     		has_personal_deity = ildran
     		has_personal_deity = mesner
     		has_personal_deity = canturian
+			has_personal_deity = kazraiel_upgrade
+			has_personal_deity = hedine_upgrade
+    		has_personal_deity = forsara_upgrade
+    		has_personal_deity = ibberal_upgrade
+    		has_personal_deity = ildran_upgrade
+    		has_personal_deity = mesner_upgrade
+    		has_personal_deity = canturian_upgrade
 			#Runefather Worship
 			has_personal_deity = clan_shadowhammer_1
 			has_personal_deity = clan_shadowhammer_2
@@ -85,6 +97,59 @@ custom_button = {
 			has_personal_deity = runefathers_majesty_3
 			has_personal_deity = runefathers_majesty_4
 			has_personal_deity = runefathers_majesty_5
+			#anzalkatsa 
+			has_personal_deity = the_sovereign
+			has_personal_deity = the_storm
+			has_personal_deity = the_anchor 
+			has_personal_deity = the_erudite
+			has_personal_deity = lizard_the_river
+			has_personal_deity = the_sail
+			#Skaldhyrric Faith
+			has_personal_deity = the_dragon_and_the_skald
+			has_personal_deity = emp_the_dragon_and_the_skald
+			has_personal_deity = voyage_of_the_north_raider
+			has_personal_deity = emp_voyage_of_the_north_raider
+			has_personal_deity = beralic_saga
+			has_personal_deity = emp_beralic_saga
+			has_personal_deity = dirge_of_the_deep
+			has_personal_deity = emp_dirge_of_the_deep
+			has_personal_deity = treasure_of_the_golden_forest
+			has_personal_deity = emp_treasure_of_the_golden_forest
+			has_personal_deity = the_old_winter_lullaby
+			has_personal_deity = emp_the_old_winter_lullaby
+			has_personal_deity = gjalund_and_the_giantslayers
+			has_personal_deity = emp_gjalund_and_the_giantslayers
+			has_personal_deity = master_boat_builders_of_far_gerudia_beyond
+			has_personal_deity = emp_master_boat_builders_of_far_gerudia_beyond
+			has_personal_deity = tale_of_leif_snaketongue
+			has_personal_deity = emp_tale_of_leif_snaketongue
+			has_personal_deity = castan_ebonfrost
+			has_personal_deity = emp_castan_ebonfrost
+			has_personal_deity = skcorin
+			has_personal_deity = emp_skcorin
+			has_personal_deity = elven_voyages
+			has_personal_deity = emp_elven_voyages
+			has_personal_deity = ebonsteel
+			has_personal_deity = emp_ebonsteel
+			has_personal_deity = ambrstrond
+			has_personal_deity = emp_ambrstrond
+			has_personal_deity = lineages_of_adventurers
+			has_personal_deity = emp_lineages_of_adventurers
+			has_personal_deity = olav
+			has_personal_deity = emp_olav
+			has_personal_deity = Z88_the_dragon_dreaming
+			has_personal_deity = Z88_emp_the_dragon_and_the_skald
+			has_personal_deity = Z88_tale_of_krja
+			#Taychend Reformed Religion
+			has_personal_deity = taychend_style_temperate
+			has_personal_deity = taychend_style_prosperous
+			has_personal_deity = taychend_style_patron
+			has_personal_deity = taychend_style_eminence
+			has_personal_deity = taychend_style_conqueror
+			has_personal_deity = taychend_style_dreamer
+			has_personal_deity = taychend_style_dynast
+			has_personal_deity = taychend_style_universalist
+			has_personal_deity = taychend_style_vainglorious
     	}
     }
     trigger = {
@@ -100,7 +165,7 @@ custom_button = {
 						NOT = { has_country_flag = regent_court_deity_switch_cooldown }
 						had_country_flag = {
 							flag = regent_court_deity_switch_cooldown
-							days = 1750
+							days = 1825
 						}
 					}
 				}
@@ -112,7 +177,7 @@ custom_button = {
 						NOT = { has_country_flag = regent_court_deity_switch_cooldown }
 						had_country_flag = {
 							flag = regent_court_deity_switch_cooldown
-							days = 3500
+							days = 3650
 						}
 					}
 				}
@@ -126,7 +191,7 @@ custom_button = {
 					NOT = { has_country_flag = infernal_court_deity_switch_cooldown }
 					had_country_flag = {
 						flag = infernal_court_deity_switch_cooldown
-						days = 3500
+						days = 3650
 					}
 				}
 			}
@@ -134,12 +199,73 @@ custom_button = {
 		else_if = {
 			limit = { religion = runefather_worship }
 			custom_trigger_tooltip = {
-				tooltip = swap_deity_tt_2
+				tooltip = swap_deity_tt_4
 				OR = {
 					NOT = { has_country_flag = runefather_worship_deity_switch_cooldown }
 					had_country_flag = {
 						flag = runefather_worship_deity_switch_cooldown
 						days = 9125
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = { religion = anzalkatsa }
+			custom_trigger_tooltip = {
+				tooltip = swap_deity_tt_5
+				OR = {
+					has_country_modifier = 333_khus_an_zhyani_colony
+					AND = {
+						5921 = {
+							owned_by = ROOT
+							has_great_project = {
+								type = khus_an_zhyani
+								tier = 3
+							}
+						}
+					}
+				}
+			}
+		}
+		else_if = {
+    		limit = { religion = skaldhyrric_faith }
+    		if = {
+				limit = {
+					has_country_flag = skaldhyrric_fast_deity_change
+				}
+				custom_trigger_tooltip = {
+					tooltip = swap_deity_tt_3
+					OR = {
+						NOT = { has_country_flag = skaldhyrric_faith_deity_switch_cooldown }
+						had_country_flag = {
+							flag = skaldhyrric_faith_deity_switch_cooldown
+							days = 1825
+						}
+					}
+				}
+			}
+			else = {
+				custom_trigger_tooltip = {
+					tooltip = swap_deity_tt_2
+					OR = {
+						NOT = { has_country_flag = skaldhyrric_faith_deity_switch_cooldown }
+						had_country_flag = {
+							flag = skaldhyrric_faith_deity_switch_cooldown
+							days = 3650
+						}
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = { religion = gods_of_the_taychend_reformed }
+			custom_trigger_tooltip = {
+				tooltip = swap_deity_tt_6
+				OR = {
+					NOT = { has_country_flag = J84_changed_rule_style_flag }
+					had_country_flag = {
+						flag = J84_changed_rule_style_flag
+						days = 7300
 					}
 				}
 			}
@@ -150,6 +276,9 @@ custom_button = {
 				has_country_flag = regent_court_menu_open
 				has_country_flag = infernal_court_menu_open
 				has_country_flag = runefather_worship_menu_open
+				has_country_flag = anzalkatsa_menu_open
+				has_country_flag = skaldhyrric_faith_menu_open
+				has_country_flag = gods_of_the_taychend_reformed_menu_open
 			}
 		}
     }
@@ -166,6 +295,18 @@ custom_button = {
 			else_if = {
 				limit = { religion = runefather_worship }
 				country_event = { id = runefather_worship.1 }
+			}
+			else_if = {
+				limit = { religion = anzalkatsa }
+				country_event = { id = sarhalevents.300 }
+			}
+			else_if = {
+				limit = { religion = skaldhyrric_faith }
+				country_event = { id = skaldhyrric.2 }
+			}
+			else_if = {
+				limit = { religion = gods_of_the_taychend_reformed }
+				country_event = { id = taychendi_empire_events.0 }
 			}
     	}
     }
@@ -207,6 +348,119 @@ custom_icon = {
     name = high_philosophy_visvatma
     potential = {
     	religion = high_philosophy
+	}
+	tooltip = high_philosophy_visvatma_ui_custom_tt
+	frame = {
+		number = 1
+		trigger = {
+			4871 = {
+				check_variable = {
+					which = globalWardStrength
+					value = 102
+				}
+			}
+		}
+	}
+	frame = {
+		number = 2
+		trigger = {
+			4871 = {
+				check_variable = {
+					which = globalWardStrength
+					value = 92
+				}
+			}
+		}
+	}
+	frame = {
+		number = 3
+		trigger = {
+			4871 = {
+				check_variable = {
+					which = globalWardStrength
+					value = 82
+				}
+			}
+		}
+	}
+	frame = {
+		number = 4
+		trigger = {
+			4871 = {
+				check_variable = {
+					which = globalWardStrength
+					value = 72
+				}
+			}
+		}
+	}
+	frame = {
+		number = 5
+		trigger = {
+			4871 = {
+				check_variable = {
+					which = globalWardStrength
+					value = 62
+				}
+			}
+		}
+	}
+	frame = {
+		number = 6
+		trigger = {
+			4871 = {
+				check_variable = {
+					which = globalWardStrength
+					value = 52
+				}
+			}
+		}
+	}
+	frame = {
+		number = 7
+		trigger = {
+			4871 = {
+				check_variable = {
+					which = globalWardStrength
+					value = 42
+				}
+			}
+		}
+	}
+	frame = {
+		number = 8
+		trigger = {
+			4871 = {
+				check_variable = {
+					which = globalWardStrength
+					value = 32
+				}
+			}
+		}
+	}
+	frame = {
+		number = 9
+		trigger = {
+			4871 = {
+				check_variable = {
+					which = globalWardStrength
+					value = 22
+				}
+			}
+		}
+	}
+	frame = {
+		number = 10
+		trigger = {
+			always = yes
+		}
+	}
+}
+
+custom_icon = {
+    name = suhans_praxis_visvatma
+    potential = {
+    	religion = suhans_praxis
 	}
 	tooltip = high_philosophy_visvatma_ui_custom_tt
 	frame = {
@@ -1166,324 +1420,77 @@ custom_icon = {
 	tooltip = runefather_worship_allegiance_custom_tt
 }
 
-custom_icon = {
-    name = suhans_praxis_visvatma
-    potential = {
-    	religion = suhans_praxis
-	}
-	tooltip = high_philosophy_visvatma_ui_custom_tt
-}
 
 custom_button = {
 	name = xhazobkult_light_the_pyres
 	tooltip = xhazobkult_light_the_pyres_tt
 	potential = { religion = xhazobkult }
-	trigger = {		
-		any_owned_province = {
-			AND = {
+	trigger = {
+		if = {
+			limit = {
+				owns = 6104
+				culture_group = gnollish
+				religion = xhazobkult
+				6104 = { has_great_project = { type = ger_bexamurr tier = 1 } }
+				has_estate_privilege = estate_mages_moment_of_felflame
+			}
+			always = yes
+		}
+		else_if = {
+			limit = {
+				owns = 6104
+				culture_group = gnollish
+				religion = xhazobkult
+				6104 = { has_great_project = { type = ger_bexamurr tier = 1 } }
+			}
+			any_owned_province = {
+				NOT = { culture_group = gnollish }
+			}
+		}
+		else_if = {
+			limit = { has_estate_privilege = estate_mages_moment_of_felflame }
+			any_owned_province = {
+				base_tax = 2
+				base_production = 2
+				base_manpower = 2			
+			}
+		}
+		else = {
+			any_owned_province = {
 				NOT = { religion = xhazobkult }
 				base_tax = 2
 				base_production = 2
-				base_manpower = 2
-			}			
+				base_manpower = 2		
+			}
 		}
-		custom_trigger_tooltip = {
-			tooltip = xhazobkult_light_the_pyres_cooldown_tt
-			OR = {
-				had_country_flag = {
-					flag = xhazobkult_light_the_pyres_cooldown
-					days = 1825
-				}
-				NOT = { has_country_flag = xhazobkult_light_the_pyres_cooldown }
-			}				
+		if = {
+			limit = { has_estate_privilege = estate_monstrous_tribes_open_pyres }
+			custom_trigger_tooltip = {
+				tooltip = zokka_light_the_pyres_cooldown_tt
+				OR = {
+					had_country_flag = {
+						flag = xhazobkult_light_the_pyres_cooldown
+						days = 1095
+					}
+					NOT = { has_country_flag = xhazobkult_light_the_pyres_cooldown }
+				}				
+			}
+		}
+		else = {
+			custom_trigger_tooltip = {
+				tooltip = xhazobkult_light_the_pyres_cooldown_tt
+				OR = {
+					had_country_flag = {
+						flag = xhazobkult_light_the_pyres_cooldown
+						days = 1825
+					}
+					NOT = { has_country_flag = xhazobkult_light_the_pyres_cooldown }
+				}				
+			}
 		}
 	}
 	effect = { 
-		hidden_effect = {
-			change_variable = {
-				which = numOfLightThePyres
-				value = 1
-			}
-		}
-		if = {
-			limit = { NOT = { total_development = 100 } }
-			custom_tooltip = xhazobkult_light_the_pyres_100
-			hidden_effect = {
-				random_owned_province = {
-					limit = {
-						AND = {
-							NOT = { religion = xhazobkult }							
-							base_tax = 2
-							base_production = 2
-							base_manpower = 2
-						}	
-					}
-					add_base_tax = -1
-					add_base_production = -1
-					add_base_manpower = -1
-				}
-			}		
-		}
-		else_if = {
-			limit = { NOT = { total_development = 200 } }
-			for = {
-				amount = 2
-				custom_tooltip = xhazobkult_light_the_pyres_200
-				effect = "
-					random_owned_province = {
-						limit = {
-							NOT = { religion = xhazobkult }							
-							NOT = { has_province_flag = xhazobkult_already_lighted_the_pyre }
-							base_tax = 2
-							base_production = 2
-							base_manpower = 2
-						}
-						add_base_tax = -1
-						add_base_production = -1
-						add_base_manpower = -1
-						set_province_flag = xhazobkult_already_lighted_the_pyre
-					}
-				"
-			}
-			every_owned_province = {
-				clr_province_flag = xhazobkult_already_lighted_the_pyre
-			}
-		}
-		else_if = {
-			limit = { NOT = { total_development = 300 } }
-			for = {
-				amount = 3
-				custom_tooltip = xhazobkult_light_the_pyres_300
-				effect = "
-					random_owned_province = {
-						limit = {
-							NOT = { religion = xhazobkult }							
-							NOT = { has_province_flag = xhazobkult_already_lighted_the_pyre }
-							base_tax = 2
-							base_production = 2
-							base_manpower = 2
-						}
-						add_base_tax = -1
-						add_base_production = -1
-						add_base_manpower = -1
-						set_province_flag = xhazobkult_already_lighted_the_pyre
-					}
-				"
-			}
-			every_owned_province = {
-				clr_province_flag = xhazobkult_already_lighted_the_pyre
-			}
-		}
-		else_if = {
-			limit = { NOT = { total_development = 400 } }
-			for = {
-				amount = 4
-				custom_tooltip = xhazobkult_light_the_pyres_400
-				effect = "
-					random_owned_province = {
-						limit = {
-							NOT = { religion = xhazobkult }							
-							NOT = { has_province_flag = xhazobkult_already_lighted_the_pyre }
-							base_tax = 2
-							base_production = 2
-							base_manpower = 2
-						}
-						add_base_tax = -1
-						add_base_production = -1
-						add_base_manpower = -1
-						set_province_flag = xhazobkult_already_lighted_the_pyre
-					}
-				"
-			}
-			every_owned_province = {
-				clr_province_flag = xhazobkult_already_lighted_the_pyre
-			}
-		}
-		else_if = {
-			limit = { NOT = { total_development = 500 } }
-			for = {
-				amount = 5
-				custom_tooltip = xhazobkult_light_the_pyres_500
-				effect = "
-					random_owned_province = {
-						limit = {
-							NOT = { religion = xhazobkult }							
-							NOT = { has_province_flag = xhazobkult_already_lighted_the_pyre }
-							base_tax = 2
-							base_production = 2
-							base_manpower = 2
-						}
-						add_base_tax = -1
-						add_base_production = -1
-						add_base_manpower = -1
-						set_province_flag = xhazobkult_already_lighted_the_pyre
-					}
-				"
-			}
-			every_owned_province = {
-				clr_province_flag = xhazobkult_already_lighted_the_pyre
-			}
-		}
-		else_if = {
-			limit = { NOT = { total_development = 600 } }
-			for = {
-				amount = 6
-				custom_tooltip = xhazobkult_light_the_pyres_600
-				effect = "
-					random_owned_province = {
-						limit = {
-							NOT = { religion = xhazobkult }							
-							NOT = { has_province_flag = xhazobkult_already_lighted_the_pyre }
-							base_tax = 2
-							base_production = 2
-							base_manpower = 2
-						}
-						add_base_tax = -1
-						add_base_production = -1
-						add_base_manpower = -1
-						set_province_flag = xhazobkult_already_lighted_the_pyre
-					}
-				"
-			}
-			every_owned_province = {
-				clr_province_flag = xhazobkult_already_lighted_the_pyre
-			}
-		}
-		else_if = {
-			limit = { NOT = { total_development = 700 } }
-			for = {
-				amount = 7
-				custom_tooltip = xhazobkult_light_the_pyres_700
-				effect = "
-					random_owned_province = {
-						limit = {
-							NOT = { religion = xhazobkult }							
-							NOT = { has_province_flag = xhazobkult_already_lighted_the_pyre }
-							base_tax = 2
-							base_production = 2
-							base_manpower = 2
-						}
-						add_base_tax = -1
-						add_base_production = -1
-						add_base_manpower = -1
-						set_province_flag = xhazobkult_already_lighted_the_pyre
-					}
-				"
-			}
-			every_owned_province = {
-				clr_province_flag = xhazobkult_already_lighted_the_pyre
-			}
-		}
-		else_if = {
-			limit = { NOT = { total_development = 800 } }
-			for = {
-				amount = 8
-				custom_tooltip = xhazobkult_light_the_pyres_800
-				effect = "
-					random_owned_province = {
-						limit = {
-							NOT = { religion = xhazobkult }							
-							NOT = { has_province_flag = xhazobkult_already_lighted_the_pyre }
-							base_tax = 2
-							base_production = 2
-							base_manpower = 2
-						}
-						add_base_tax = -1
-						add_base_production = -1
-						add_base_manpower = -1
-						set_province_flag = xhazobkult_already_lighted_the_pyre
-					}
-				"
-			}
-			every_owned_province = {
-				clr_province_flag = xhazobkult_already_lighted_the_pyre
-			}
-		}
-		else_if = {
-			limit = { NOT = { total_development = 900 } }
-			for = {
-				amount = 9
-				custom_tooltip = xhazobkult_light_the_pyres_900
-				effect = "
-					random_owned_province = {
-						limit = {
-							NOT = { religion = xhazobkult }							
-							NOT = { has_province_flag = xhazobkult_already_lighted_the_pyre }
-							base_tax = 2
-							base_production = 2
-							base_manpower = 2
-						}
-						add_base_tax = -1
-						add_base_production = -1
-						add_base_manpower = -1
-						set_province_flag = xhazobkult_already_lighted_the_pyre
-					}
-				"
-			}
-			every_owned_province = {
-				clr_province_flag = xhazobkult_already_lighted_the_pyre
-			}
-		}
-		else_if = {
-			limit = { NOT = { total_development = 1000 } }
-			for = {
-				amount = 10
-				custom_tooltip = xhazobkult_light_the_pyres_900
-				effect = "
-					random_owned_province = {
-						limit = {
-							NOT = { religion = xhazobkult }							
-							NOT = { has_province_flag = xhazobkult_already_lighted_the_pyre }
-							base_tax = 2
-							base_production = 2
-							base_manpower = 2
-						}
-						add_base_tax = -1
-						add_base_production = -1
-						add_base_manpower = -1
-						set_province_flag = xhazobkult_already_lighted_the_pyre
-					}
-				"
-			}
-			every_owned_province = {
-				clr_province_flag = xhazobkult_already_lighted_the_pyre
-			}
-		}
-		else_if = {
-			limit = { total_development = 1000 }
-			for = {
-				amount = 10
-				custom_tooltip = xhazobkult_light_the_pyres_1000
-				effect = "
-					random_owned_province = {
-						limit = {
-							NOT = { religion = xhazobkult }						
-							NOT = { has_province_flag = xhazobkult_already_lighted_the_pyre }
-							base_tax = 2
-							base_production = 2
-							base_manpower = 2
-						}
-						add_base_tax = -1
-						add_base_production = -1
-						add_base_manpower = -1
-						set_province_flag = xhazobkult_already_lighted_the_pyre
-					}
-				"
-			}
-			every_owned_province = {
-				clr_province_flag = xhazobkult_already_lighted_the_pyre
-			}
-		}
-		clr_country_flag = xhazobkult_light_the_pyres_cooldown
-		set_country_flag = xhazobkult_light_the_pyres_cooldown
-		if = {
-			limit = { has_country_flag = rakkaz_light_the_pyres_upgrade }
-			add_patriarch_authority = 0.075
-		}
-		else = {
-			add_patriarch_authority = 0.05
-		}
-		rakkaz_fighting_pit_mazu_makhara_interactions = yes
+		light_the_pyres_effect = yes
 	}
 }
 
@@ -1526,7 +1533,7 @@ custom_icon = {
 	tooltip = devouring_path_blocker_tt
 }
 
-custom_icon = {
+custom_text_box = {
     name = taychend_deity_desc
     potential = { OR = { religion = gods_of_the_taychend religion = oren_nayiru } }
 	tooltip = taychend_deity_description
@@ -1537,3 +1544,917 @@ custom_icon = {
     potential = { religion = kheionism }
 	tooltip = kheionist_deity_description
 }
+
+custom_icon = {
+	name = beast_memory_admin_blocker
+	potential = {
+		religion = beast_memory
+		beast_memory_has_adm_aspect_scripted_trigger = yes
+	}
+	tooltip = beast_memory_adm_cant_change_aspect_tt
+}
+custom_icon = {
+	name = beast_memory_diplo_blocker
+	potential = {
+		religion = beast_memory
+		beast_memory_has_dip_aspect_scripted_trigger = yes
+	}
+	tooltip = beast_memory_dip_cant_change_aspect_tt
+}
+custom_icon = {
+	name = beast_memory_mil_blocker
+	potential = {
+		religion = beast_memory
+		beast_memory_has_mil_aspect_scripted_trigger = yes
+	}
+	tooltip = beast_memory_mil_cant_change_aspect_tt
+}
+
+#### noukahi Pantheon Pilgrimage mechanic
+custom_icon = {#base
+	name = noukahi_pantheon_pilgrimage_furled
+	potential = {
+		religion = noukahi_pantheon
+		NOT = { #NOR
+			has_country_flag = noukahi_pantheon_pilgrimage_main_open
+			has_country_flag = noukahi_pantheon_pilgrimage_khet_open
+			has_country_flag = noukahi_pantheon_pilgrimage_unique_open
+		}
+	}
+}
+custom_icon = {
+	name = noukahi_pantheon_pilgrimage_background
+	potential = { religion = noukahi_pantheon }
+}
+
+#Main
+custom_window = {
+	name = noukahi_pantheon_pilgrimage_window_main
+	potential = { has_country_flag = noukahi_pantheon_pilgrimage_main_open }
+}
+custom_icon = {
+	name = noukahi_pantheon_pilgrimage_main
+	potential = {
+		religion = noukahi_pantheon
+		has_country_flag = noukahi_pantheon_pilgrimage_main_open
+	}
+	frame = {
+		number = 1
+		trigger = {}
+	}
+}
+custom_button = {
+	name = noukahi_pantheon_pilgrimage_main_button_open
+	tooltip = ""
+	potential = {
+		religion = noukahi_pantheon
+		#NOT = { has_country_flag = noukahi_pantheon_pilgrimage_main_open }
+	}
+	frame = {
+		number = 2
+		trigger = {}
+	}
+	trigger = { }
+	effect = {
+		set_country_flag = noukahi_pantheon_pilgrimage_main_open
+		clr_country_flag = noukahi_pantheon_pilgrimage_khet_open
+		clr_country_flag = noukahi_pantheon_pilgrimage_unique_open
+	}
+}
+custom_button = {
+	name = noukahi_pantheon_pilgrimage_main_button_close
+	tooltip = ""
+	potential = { has_country_flag = noukahi_pantheon_pilgrimage_main_open }
+	frame = {
+		number = 3
+		trigger = {}
+	}
+	trigger = { }
+	effect = { clr_country_flag = noukahi_pantheon_pilgrimage_main_open }
+}
+custom_button = { #gamyi
+	name = noukahi_pantheon_pilgrimage_main_button_1
+	tooltip = "Gamyi"
+	potential = { has_country_flag = noukahi_pantheon_pilgrimage_main_open }
+	frame = {
+		number = 1
+		trigger = {}
+	}
+	trigger = {
+		np_can_go_on_pilgrimmage = yes
+		NOT = { ruler_religion = elikhetist }
+		5863 = {
+			np_holy_site_is_available_for_pilgrimmage = yes
+		}
+	}
+	effect = {
+		set_ruler_flag = np_gamyi
+		np_pilgrimmage_setup = yes
+		if = {
+			limit = {
+				has_country_flag = noukahi_gamyi_pilgrimage_completed_at_least_once
+			}
+			custom_tooltip = noukahi_gamyi_tooltip_full_effect_tooltip
+		}
+		else = {
+			custom_tooltip = noukahi_gamyi_tooltip_cryptic_effect_tooltip
+		}
+	}
+}
+custom_button = { #lelanan
+	name = noukahi_pantheon_pilgrimage_main_button_2
+	tooltip = "Lelanan"
+	potential = { has_country_flag = noukahi_pantheon_pilgrimage_main_open }
+	frame = {
+		number = 5
+		trigger = {}
+	}
+	trigger = {
+		np_can_go_on_pilgrimmage = yes
+		NOT = { ruler_religion = elikhetist }
+		6599 = {
+			np_holy_site_is_available_for_pilgrimmage = yes
+		}
+	}
+	effect = {
+		set_ruler_flag = np_lelanan
+		np_pilgrimmage_setup = yes
+		if = {
+			limit = {
+				has_country_flag = noukahi_lelanan_pilgrimage_completed_at_least_once
+			}
+			custom_tooltip = noukahi_lelanan_tooltip_full_effect_tooltip
+		}
+		else = {
+			custom_tooltip = noukahi_lelanan_tooltip_cryptic_effect_tooltip
+		}
+	}
+}
+custom_button = { #junansuar
+	name = noukahi_pantheon_pilgrimage_main_button_3
+	tooltip = "Junansuar"
+	potential = { has_country_flag = noukahi_pantheon_pilgrimage_main_open }
+	frame = {
+		number = 3
+		trigger = {}
+	}
+	trigger = {
+		np_can_go_on_pilgrimmage = yes
+		NOT = { ruler_religion = elikhetist }
+		5808 = {
+			np_holy_site_is_available_for_pilgrimmage = yes
+		}
+	}
+	effect = {
+		set_ruler_flag = np_junansuar
+		np_pilgrimmage_setup = yes
+		if = {
+			limit = {
+				has_country_flag = noukahi_junansuar_pilgrimage_completed_at_least_once
+			}
+			custom_tooltip = noukahi_junansuar_tooltip_full_effect_tooltip
+		}
+		else = {
+			custom_tooltip = noukahi_junansuar_tooltip_cryptic_effect_tooltip
+		}
+	}
+}
+custom_button = { #Nazhni
+	name = noukahi_pantheon_pilgrimage_main_button_4
+	tooltip = "Nazhni"
+	potential = { has_country_flag = noukahi_pantheon_pilgrimage_main_open }
+	frame = {
+		number = 6
+		trigger = {}
+	}
+	trigger = {
+		np_can_go_on_pilgrimmage = yes
+		NOT = { ruler_religion = elikhetist }
+		5941 = {
+			np_holy_site_is_available_for_pilgrimmage = yes
+		}
+	}
+	effect = {
+		set_ruler_flag = np_nazhni
+		np_pilgrimmage_setup = yes
+		if = {
+			limit = {
+				has_country_flag = noukahi_nazhni_pilgrimage_completed_at_least_once
+			}
+			custom_tooltip = noukahi_nazhni_tooltip_full_effect_tooltip
+		}
+		else = {
+			custom_tooltip = noukahi_nazhni_tooltip_cryptic_effect_tooltip
+		}
+	}
+}
+custom_button = { #Ardim qarast
+	name = noukahi_pantheon_pilgrimage_main_button_5
+	tooltip = "Ardim Qarast"
+	potential = { has_country_flag = noukahi_pantheon_pilgrimage_main_open }
+	frame = {
+		number = 5
+		trigger = {}
+	}
+	trigger = {
+		np_can_go_on_pilgrimmage = yes
+		NOT = { ruler_religion = elikhetist }
+		6063 = {
+			np_holy_site_is_available_for_pilgrimmage = yes
+		}
+	}
+	effect = {
+		set_ruler_flag = np_ardimqarast
+		np_pilgrimmage_setup = yes
+		if = {
+			limit = {
+				has_country_flag = noukahi_ardimqarast_pilgrimage_completed_at_least_once
+			}
+			custom_tooltip = noukahi_ardimqarast_tooltip_full_effect_tooltip
+		}
+		else = {
+			custom_tooltip = noukahi_ardimqarast_tooltip_cryptic_effect_tooltip
+		}
+	}
+}
+custom_button = { #Kunolo
+	name = noukahi_pantheon_pilgrimage_main_button_6
+	tooltip = "Kunolo"
+	potential = { has_country_flag = noukahi_pantheon_pilgrimage_main_open }
+	frame = {
+		number = 7
+		trigger = {}
+	}
+	trigger = {
+		np_can_go_on_pilgrimmage = yes
+		NOT = { ruler_religion = elikhetist }
+		5710 = {
+			np_holy_site_is_available_for_pilgrimmage = yes
+		}
+	}
+	effect = {
+		set_ruler_flag = np_kunolo
+		np_pilgrimmage_setup = yes
+		if = {
+			limit = {
+				has_country_flag = noukahi_kunolo_pilgrimage_completed_at_least_once
+			}
+			custom_tooltip = noukahi_kunolo_tooltip_full_effect_tooltip
+		}
+		else = {
+			custom_tooltip = noukahi_kunolo_tooltip_cryptic_effect_tooltip
+		}
+	}
+}
+custom_button = { #Niramit
+	name = noukahi_pantheon_pilgrimage_main_button_7
+	tooltip = "Niramit"
+	potential = { has_country_flag = noukahi_pantheon_pilgrimage_main_open }
+	frame = {
+		number = 4
+		trigger = {}
+	}
+	trigger = {
+		np_can_go_on_pilgrimmage = yes
+		NOT = { ruler_religion = elikhetist }
+		5481 = {
+			np_holy_site_is_available_for_pilgrimmage = yes
+		}
+	}
+	effect = {
+		set_ruler_flag = np_niramit
+		np_pilgrimmage_setup = yes
+		if = {
+			limit = {
+				has_country_flag = noukahi_niramit_pilgrimage_completed_at_least_once
+			}
+			custom_tooltip = noukahi_niramit_tooltip_full_effect_tooltip
+		}
+		else = {
+			custom_tooltip = noukahi_niramit_tooltip_cryptic_effect_tooltip
+		}
+	}
+}
+custom_button = { #Sprigi Twani
+	name = noukahi_pantheon_pilgrimage_main_button_8
+	tooltip = "Sprigi Twani"
+	potential = { has_country_flag = noukahi_pantheon_pilgrimage_main_open }
+	frame = {
+		number = 8
+		trigger = {}
+	}
+	trigger = {
+		np_can_go_on_pilgrimmage = yes
+		NOT = { ruler_religion = elikhetist }
+		6690 = {
+			np_holy_site_is_available_for_pilgrimmage = yes
+		}
+	}
+	effect = {
+		set_ruler_flag = np_sprigitwani
+		np_pilgrimmage_setup = yes
+		if = {
+			limit = {
+				has_country_flag = noukahi_sprigitwani_pilgrimage_completed_at_least_once
+			}
+			custom_tooltip = noukahi_sprigitwani_tooltip_full_effect_tooltip
+		}
+		else = {
+			custom_tooltip = noukahi_sprigitwani_tooltip_cryptic_effect_tooltip
+		}
+	}
+}
+
+#Khet
+custom_window = {
+	name = noukahi_pantheon_pilgrimage_window_khet
+	potential = { has_country_flag = noukahi_pantheon_pilgrimage_khet_open }
+}
+custom_icon = {
+	name = noukahi_pantheon_pilgrimage_khet
+	potential = {
+		religion = noukahi_pantheon
+		has_country_flag = noukahi_pantheon_pilgrimage_khet_open
+	}
+	frame = {
+		number = 2
+		trigger = {}
+	}
+}
+custom_button = {
+	name = noukahi_pantheon_pilgrimage_khet_button_open
+	tooltip = ""
+	potential = {
+		religion = noukahi_pantheon
+		#NOT = { has_country_flag = noukahi_pantheon_pilgrimage_khet_open }
+	}
+	frame = {
+		number = 2
+		trigger = {}
+	}
+	trigger = { }
+	effect = {
+		clr_country_flag = noukahi_pantheon_pilgrimage_main_open
+		set_country_flag = noukahi_pantheon_pilgrimage_khet_open
+		clr_country_flag = noukahi_pantheon_pilgrimage_unique_open
+	}
+}
+custom_button = {
+	name = noukahi_pantheon_pilgrimage_khet_button_close
+	tooltip = ""
+	potential = { has_country_flag = noukahi_pantheon_pilgrimage_khet_open }
+	frame = {
+		number = 3
+		trigger = {}
+	}
+	trigger = { }
+	effect = { clr_country_flag = noukahi_pantheon_pilgrimage_khet_open }
+}
+custom_button = { #Kheterat
+	name = noukahi_pantheon_pilgrimage_khet_button_1
+	tooltip = "Kheterat"
+	potential = { has_country_flag = noukahi_pantheon_pilgrimage_khet_open }
+	trigger = {
+		np_can_go_on_pilgrimmage = yes
+		ruler_religion = elikhetist
+	}
+	effect = {
+		set_ruler_flag = np_kheterat
+		np_pilgrimmage_setup = yes
+		custom_tooltip = noukahi_kheterat_tooltip_full_effect_tooltip
+	}
+}
+
+#Unique
+custom_window = {
+	name = noukahi_pantheon_pilgrimage_window_unique
+	potential = { has_country_flag = noukahi_pantheon_pilgrimage_unique_open }
+}
+custom_icon = {
+	name = noukahi_pantheon_pilgrimage_unique
+	potential = {
+		religion = noukahi_pantheon
+		has_country_flag = noukahi_pantheon_pilgrimage_unique_open
+	}
+	frame = {
+		number = 3
+		trigger = {}
+	}
+}
+custom_button = {
+	name = noukahi_pantheon_pilgrimage_unique_button_open
+	tooltip = ""
+	potential = {
+		religion = noukahi_pantheon
+		#NOT = { has_country_flag = noukahi_pantheon_pilgrimage_unique_open }
+	}
+	frame = {
+		number = 2
+		trigger = {}
+	}
+	trigger = { }
+	effect = {
+		clr_country_flag = noukahi_pantheon_pilgrimage_main_open
+		clr_country_flag = noukahi_pantheon_pilgrimage_khet_open
+		set_country_flag = noukahi_pantheon_pilgrimage_unique_open
+	}
+}
+custom_button = {
+	name = noukahi_pantheon_pilgrimage_unique_button_close
+	tooltip = ""
+	potential = { has_country_flag = noukahi_pantheon_pilgrimage_unique_open }
+	frame = {
+		number = 3
+		trigger = {}
+	}
+	trigger = { }
+	effect = { clr_country_flag = noukahi_pantheon_pilgrimage_unique_open }
+}
+custom_button = { #Jezarpizu
+	name = noukahi_pantheon_pilgrimage_unique_button_1
+	tooltip = "§gUnknown§!"
+	potential = { has_country_flag = noukahi_pantheon_pilgrimage_unique_open }
+	frame = {
+		number = 1
+		trigger = {}
+	}
+	trigger = {
+		np_can_go_on_pilgrimmage = yes
+		NOT = { religion = elikhetist }
+		custom_trigger_tooltip = {
+			tooltip = np_jezarpizu_tt
+			6659 = {
+				np_holy_site_is_available_for_pilgrimmage = yes
+			}
+		}
+	}
+	effect = {
+		set_ruler_flag = np_jezarpizu
+		np_pilgrimmage_setup = yes
+	}
+}
+custom_icon = {
+	name = noukahi_pantheon_pilgrimage_unique_button_1_gilded
+	potential = { has_country_flag = np_jezarpizu_pilgrimage_complete }
+}
+custom_button = {#special unused
+	name = noukahi_pantheon_pilgrimage_unique_button_2
+	tooltip = ""
+	potential = { has_country_flag = noukahi_pantheon_pilgrimage_unique_open }
+	frame = {
+		number = 2
+		trigger = {}
+	}
+	trigger = {
+		np_can_go_on_pilgrimmage = yes
+		NOT = { religion = elikhetist }
+		always = no #remove when implemented
+		#special condition here
+	}
+	effect = {
+		#set the flag here
+		#np_pilgrimmage_setup = yes
+	} #put the effect here
+}
+# custom_icon = {
+# 	name = noukahi_pantheon_pilgrimage_unique_button_2_gilded
+# 	potential = { has_country_flag = np_XXXXXXXX_pilgrimage_complete }
+# }
+custom_button = {#special unused
+	name = noukahi_pantheon_pilgrimage_unique_button_3
+	tooltip = ""
+	potential = { has_country_flag = noukahi_pantheon_pilgrimage_unique_open }
+	frame = {
+		number = 3
+		trigger = {}
+	}
+	trigger = {
+		np_can_go_on_pilgrimmage = yes
+		NOT = { religion = elikhetist }
+		#special condition here
+		always = no #remove when implemented
+	}
+	effect = {
+		#set the flag here
+		#np_pilgrimmage_setup = yes
+	} #put the effect here
+}
+# custom_icon = {
+# 	name = noukahi_pantheon_pilgrimage_unique_button_3_gilded
+# 	potential = { has_country_flag = np_XXXXXXXX_pilgrimage_complete }
+# }
+custom_button = {#special unused
+	name = noukahi_pantheon_pilgrimage_unique_button_4
+	tooltip = ""
+	potential = { has_country_flag = noukahi_pantheon_pilgrimage_unique_open }
+	frame = {
+		number = 4
+		trigger = {}
+	}
+	trigger = {
+		np_can_go_on_pilgrimmage = yes
+		NOT = { religion = elikhetist }
+		#special condition here
+		always = no #remove when implemented
+	}
+	effect = {
+		#set the flag here
+		#np_pilgrimmage_setup = yes
+	} #put the effect here
+}
+# custom_icon = {
+# 	name = noukahi_pantheon_pilgrimage_unique_button_4_gilded
+# 	potential = { has_country_flag = np_XXXXXXXX_pilgrimage_complete }
+# }
+custom_button = {#special unused
+	name = noukahi_pantheon_pilgrimage_unique_button_5
+	tooltip = ""
+	potential = { has_country_flag = noukahi_pantheon_pilgrimage_unique_open }
+	frame = {
+		number = 5
+		trigger = {}
+	}
+	trigger = {
+		np_can_go_on_pilgrimmage = yes
+		NOT = { religion = elikhetist }
+		always = no #to be changed
+		#special condition here
+	}
+	effect = {
+		#set the flag here
+		#np_pilgrimmage_setup = yes
+	} #put the effect here
+}
+# custom_icon = {
+# 	name = noukahi_pantheon_pilgrimage_unique_button_5_gilded
+# 	potential = { has_country_flag = np_XXXXXXXX_pilgrimage_complete }
+# }
+custom_button = {#special unused
+	name = noukahi_pantheon_pilgrimage_unique_button_6
+	tooltip = ""
+	potential = { has_country_flag = noukahi_pantheon_pilgrimage_unique_open }
+	frame = {
+		number = 6
+		trigger = {}
+	}
+	trigger = {
+		np_can_go_on_pilgrimmage = yes
+		NOT = { religion = elikhetist }
+		always = no #to be changed
+		#special condition here
+	}
+	effect = {
+		#set the flag here
+		#np_pilgrimmage_setup = yes
+	} #put the effect here
+}
+# custom_icon = {
+# 	name = noukahi_pantheon_pilgrimage_unique_button_6_gilded
+# 	potential = { has_country_flag = np_XXXXXXXX_pilgrimage_complete }
+# }
+custom_button = {#tag specific
+	name = noukahi_pantheon_pilgrimage_unique_button_7
+	tooltip = ""
+	potential = { has_country_flag = noukahi_pantheon_pilgrimage_unique_open }
+	frame = {
+		number = 7
+		trigger = {}
+	}
+	trigger = {
+		np_can_go_on_pilgrimmage = yes
+		NOT = { religion = elikhetist }
+		always = no #to be changed
+		#special condition here
+	}
+	effect = {
+		#set the flag here
+		#np_pilgrimmage_setup = yes
+	} #put the effect here
+}
+# custom_icon = {
+# 	name = noukahi_pantheon_pilgrimage_unique_button_7_gilded
+# 	potential = { has_country_flag = np_XXXXXXXX_pilgrimage_complete }
+# }
+custom_button = {#tag specific
+	name = noukahi_pantheon_pilgrimage_unique_button_8
+	tooltip = ""
+	potential = { has_country_flag = noukahi_pantheon_pilgrimage_unique_open }
+	frame = {
+		number = 8
+		trigger = {}
+	}
+	trigger = {
+		np_can_go_on_pilgrimmage = yes
+		NOT = { religion = elikhetist }
+		always = no #to be changed
+		#special condition here
+	}
+	effect = {
+		#set the flag here
+		#np_pilgrimmage_setup = yes
+	} #put the effect here
+}
+# custom_icon = {
+# 	name = noukahi_pantheon_pilgrimage_unique_button_8_gilded
+# 	potential = { has_country_flag = np_XXXXXXXX_pilgrimage_complete }
+# }
+custom_button = {#tag specific
+	name = noukahi_pantheon_pilgrimage_unique_button_9
+	tooltip = ""
+	potential = { has_country_flag = noukahi_pantheon_pilgrimage_unique_open }
+	frame = {
+		number = 9
+		trigger = {}
+	}
+	trigger = {
+		np_can_go_on_pilgrimmage = yes
+		NOT = { religion = elikhetist }
+		always = no #to be changed
+		#special condition here
+	}
+	effect = {
+		#set the flag here
+		#np_pilgrimmage_setup = yes
+	} #put the effect here
+}
+# custom_icon = {
+# 	name = noukahi_pantheon_pilgrimage_unique_button_9_gilded
+# 	potential = { has_country_flag = np_XXXXXXXX_pilgrimage_complete }
+# }
+custom_button = {#tag specific
+	name = noukahi_pantheon_pilgrimage_unique_button_10
+	tooltip = ""
+	potential = { has_country_flag = noukahi_pantheon_pilgrimage_unique_open }
+	frame = {
+		number = 10
+		trigger = {}
+	}
+	trigger = {
+		np_can_go_on_pilgrimmage = yes
+		NOT = { religion = elikhetist }
+		always = no #to be changed
+		#special condition here
+	}
+	effect = {
+		#set the flag here
+		#np_pilgrimmage_setup = yes
+	} #put the effect here
+}
+# custom_icon = {
+# 	name = noukahi_pantheon_pilgrimage_unique_button_10_gilded
+# 	potential = { has_country_flag = np_XXXXXXXX_pilgrimage_complete }
+# }
+custom_icon = {
+	name = AnzalkatsaClashIconNeutralFate
+	tooltip = AnzalkatsaSchoolFightFate
+	potential = {
+		anb_fate_school_trigger_lizardfolk = yes
+	}
+}
+
+custom_icon = {
+	name = AnzalkatsaClashIconNeutralBeing
+	tooltip = AnzalkatsaSchoolFightBeing
+	potential = {
+		anb_being_school_trigger_lizardfolk = yes
+	}
+}
+
+
+
+##################################
+##Taychendi Religious Reforms UI##
+##################################
+
+#Ways to give out free reform (Free reform meaning the requirements are removed, removing stab should be asked with your 
+#reviewer first):
+#1. set_country_flag = taychend_free_reform_x (1-5)
+#2. free_taychend_reform_effect (Has uses instead of specific reforms) 
+
+custom_button = {
+	name = taychendi_window_button
+	potential = {
+		has_dlc = "El Dorado" 
+		OR = { 
+			religion = gods_of_the_taychend
+			religion = oren_nayiru
+		}
+	}
+	trigger = { }
+	effect = {
+		if = { 
+			limit = {
+				NOT = {  has_country_flag = taychendi_window_open } 
+			}
+			set_country_flag = taychendi_window_open 
+		}
+		else = { clr_country_flag = taychendi_window_open }
+	}
+	tooltip = taychendi_window_button_tt
+}
+
+custom_button = {
+	name = taychendi_window_button_close
+	effect = {
+		clr_country_flag = taychendi_window_open
+	}
+}
+
+custom_window = {
+	name = taychendi_window
+	potential = {
+		has_dlc = "El Dorado" 
+		OR = { 
+			religion = gods_of_the_taychend
+			religion = oren_nayiru
+		}
+		has_country_flag = taychendi_window_open
+	}
+}
+
+custom_text_box = {
+	name = taychendi_religious_reform_text
+	tooltip = taychendi_religious_reform_text_desc
+}
+
+custom_icon = {
+	name = taychendi_got_reform_1
+	potential = { has_country_flag = taychendi_passed_reform_1 }
+	tooltip = gods_of_the_taychend_reform_1_tt
+}
+
+custom_button = {
+	name = taychendi_reform_1
+	trigger = {
+		hidden_trigger = { 
+			NOT = { has_country_flag = taychendi_is_passing_reform } 
+		}
+		if = {
+			limit = { 
+				NOT = { taychend_free_reform_check = { reform = 1 } }
+			}
+			is_at_war = no
+			stability = 1
+			NOT = { overextension_percentage = 0.01 }
+			NOT = { num_of_rebel_armies = 1 }
+			total_development = 100
+			calc_true_if = {
+				all_subject_country = { NOT = { liberty_desire = 50 } }
+				amount = 2
+			}
+		}
+	}
+	effect = { 
+		set_country_flag = taychendi_passed_reform_1
+		country_event = { id = taychendi.1000 }
+	}
+	tooltip = gods_of_the_taychend_reform_1_tt
+}
+
+custom_icon = {
+	name = taychendi_got_reform_2
+	potential = { has_country_flag = taychendi_passed_reform_2 }
+	tooltip = gods_of_the_taychend_reform_2_tt
+}
+
+custom_button = {
+	name = taychendi_reform_2
+	trigger = {
+		custom_trigger_tooltip = { 
+			tooltip = gods_of_the_taychend_reform_2_buy_tt 
+			has_country_flag = taychendi_passed_reform_1
+			NOT = { has_country_flag = taychendi_is_passing_reform }
+		}
+		if = {
+			limit = { 
+				NOT = { taychend_free_reform_check = { reform = 2 } }
+			}
+			is_at_war = no
+			stability = 1
+			NOT = { overextension_percentage = 0.01 }
+			NOT = { num_of_rebel_armies = 1 }
+			total_development = 200
+			calc_true_if = {
+				all_subject_country = { NOT = { liberty_desire = 50 } }
+				amount = 3
+			}
+		}
+	}
+	effect = {
+		set_country_flag = taychendi_passed_reform_2
+		country_event = { id = taychendi.1001 }
+	}
+	tooltip = gods_of_the_taychend_reform_2_tt
+}
+
+custom_icon = {
+	name = taychendi_got_reform_3
+	potential = { has_country_flag = taychendi_passed_reform_3 }
+	tooltip = gods_of_the_taychend_reform_3_tt
+}
+
+custom_button = {
+	name = taychendi_reform_3
+	trigger = {
+		custom_trigger_tooltip = { 
+			tooltip = gods_of_the_taychend_reform_3_buy_tt 
+			has_country_flag = taychendi_passed_reform_2
+			NOT = { has_country_flag = taychendi_is_passing_reform }  
+		}
+		if = {
+			limit = { 
+				NOT = { taychend_free_reform_check = { reform = 3 } }
+			}
+			is_at_war = no
+			stability = 1
+			NOT = { overextension_percentage = 0.01 }
+			NOT = { num_of_rebel_armies = 1 }
+			total_development = 300
+			calc_true_if = {
+				all_subject_country = { NOT = { liberty_desire = 50 } }
+				amount = 4
+			}
+		}
+	}
+	effect = {
+		set_country_flag = taychendi_passed_reform_3
+		country_event = { id = taychendi.1002 }
+	}
+	tooltip = gods_of_the_taychend_reform_3_tt
+}
+
+custom_icon = {
+	name = taychendi_got_reform_4
+	potential = { has_country_flag = taychendi_passed_reform_4 }
+	tooltip = gods_of_the_taychend_reform_4_tt
+}
+
+custom_button = {
+	name = taychendi_reform_4
+	trigger = {
+		custom_trigger_tooltip = { 
+			tooltip = gods_of_the_taychend_reform_4_buy_tt
+			has_country_flag = taychendi_passed_reform_3
+			NOT = { has_country_flag = taychendi_is_passing_reform }  
+		}
+		if = {
+			limit = { 
+				NOT = { taychend_free_reform_check = { reform = 4 } }
+			}
+			is_at_war = no
+			stability = 1
+			NOT = { overextension_percentage = 0.01 }
+			NOT = { num_of_rebel_armies = 1 }
+			total_development = 400
+			calc_true_if = {
+				all_subject_country = { NOT = { liberty_desire = 50 } }
+				amount = 5
+			}
+		}
+	}
+	effect = {
+		set_country_flag = taychendi_passed_reform_4
+		country_event = { id = taychendi.1003 }
+	}
+	tooltip = gods_of_the_taychend_reform_4_tt
+}
+
+custom_icon = {
+	name = taychendi_got_reform_5
+	potential = { has_country_flag = taychendi_passed_reform_5 }
+	tooltip = gods_of_the_taychend_reform_5_tt
+}
+
+custom_button = {
+	name = taychendi_reform_5
+	trigger = {
+		custom_trigger_tooltip = { 
+			tooltip = gods_of_the_taychend_reform_5_buy_tt
+			has_country_flag = taychendi_passed_reform_4
+			NOT = { has_country_flag = taychendi_is_passing_reform } 
+		}
+		if = {
+			limit = { 
+				NOT = { taychend_free_reform_check = { reform = 5 } } 
+			}
+			is_at_war = no
+			stability = 1
+			NOT = { overextension_percentage = 0.01 }
+			NOT = { num_of_rebel_armies = 1 }
+			total_development = 500
+			calc_true_if = {
+				all_subject_country = { NOT = { liberty_desire = 50 } }
+				amount = 6
+			}
+		}
+	}
+	effect = {
+		set_country_flag = taychendi_passed_reform_5
+		country_event = { id = taychendi.1004 }
+	}
+	tooltip = gods_of_the_taychend_reform_5_tt
+}
+
+######################################
+##Taychendi Religious Reforms UI END##
+######################################

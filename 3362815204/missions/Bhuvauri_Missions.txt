@@ -143,10 +143,13 @@ R38_Pre_Suhan_1 = {
 #				}
 #			}
 #			else = {
-				Y58 = {
-					all_core_province = {
-						owned_by = R38
-						is_core = R38
+				custom_trigger_tooltip = {
+					tooltip = R38_eliminate_tt
+					Y58 = {
+						all_core_province = {
+							owned_by = ROOT
+							is_core = ROOT
+						}
 					}
 				}
 				4941 = { 
@@ -380,7 +383,7 @@ R38_Pre_Suhan_1 = {
 					create_march = Y50
 				}
 			}
-		} 
+		}
 	}
 
 	R38_smoke_water = {
@@ -502,7 +505,10 @@ R38_Pre_Suhan_1 = {
 #								R38 = { ai = yes }
 #							}
 #						}
-						tag = R38
+						OR = {
+							tag = R38
+							is_subject_of = R38
+						}	
 						has_spy_network_from = { who = R38 value = 70 }
 						overlord = { has_spy_network_from = { who = R38 value = 70 } }
 					}
@@ -517,7 +523,10 @@ R38_Pre_Suhan_1 = {
 #								R38 = { ai = yes }
 #							}
 #						}
-						tag = R38
+						OR = {
+							tag = R38
+							is_subject_of = R38
+						}	
 						has_spy_network_from = { who = R38 value = 70 }
 						overlord = { has_spy_network_from = { who = R38 value = 70 } }
 					}
@@ -532,7 +541,10 @@ R38_Pre_Suhan_1 = {
 #								R38 = { ai = yes }
 #							}
 #						}
-						tag = R38
+						OR = {
+							tag = R38
+							is_subject_of = R38
+						}	
 						has_spy_network_from = { who = R38 value = 70 }
 						overlord = { has_spy_network_from = { who = R38 value = 70 } }
 					}
@@ -850,6 +862,7 @@ R38_Pre_Suhan_2_a = {
 							owned_by = R38
 							base_production = 5
 							has_production_building_trigger = yes
+							has_any_ongoing_construction = no
 						}
 					}
 				}
@@ -888,6 +901,7 @@ R38_Pre_Suhan_2_a = {
 								owned_by = R38
 								base_production = 5
 								has_production_building_trigger = yes
+								has_any_ongoing_construction = no
 							}
 						}
 					}
@@ -989,6 +1003,10 @@ R38_Pre_Suhan_2_a = {
 					name = bhuvauri_isle_of_chains
 					duration = -1
 				}
+			}
+			country_event = {
+				id = flavor_bhuvauri.24
+				days = 3650 
 			}
 			custom_tooltip = bhuvauri_fetters_sarhal_effect_tt
 			custom_tooltip = bhuvauri_fetters_sarhal_effect_2_tt
@@ -1354,7 +1372,12 @@ R38_Pre_Suhan_3_a = {
 				}
 				AND = {
 					province_id = 4551
-					NOT = { province_has_current_tech_fort_trigger = yes}			
+					NOT = { 
+						AND = {
+							province_has_current_tech_fort_trigger = yes
+							has_any_ongoing_construction = no	
+						}			
+					}
 				}
 			}
 		}
@@ -1362,9 +1385,10 @@ R38_Pre_Suhan_3_a = {
 		trigger = {
 			if = {
 				limit = { ai = yes }
-				treasury = 400
+				treasury = 200
 				4420 = {
 					NOT = { devastation = 10 }
+					province_has_current_tech_fort_trigger = yes
 				}
 			}
 			else = {
@@ -1373,7 +1397,8 @@ R38_Pre_Suhan_3_a = {
 					province_has_current_tech_fort_trigger = yes
 				}
 				4551 = {
-					province_has_current_tech_fort_trigger = yes			
+					province_has_current_tech_fort_trigger = yes
+					has_any_ongoing_construction = no	
 				}
 				army_size_percentage = 0.9
 			}
@@ -1382,13 +1407,8 @@ R38_Pre_Suhan_3_a = {
 		effect = {
 			if = {
 				limit = { ai = yes }
-				add_treasury = -400
-				4420 = {
-					add_latest_building = { builder = R38 fort = yes }
-				}
-				4551 = {
-					add_latest_building = { builder = R38 fort = yes }
-				}
+				add_treasury = -200
+				4551 = { add_latest_building = { builder = R38 fort = yes } }
 			}
 			4551 =	{
 				add_building_construction = {
@@ -1606,7 +1626,6 @@ R38_Pre_Suhan_3_a_branching = {
 		icon = mission_unknown_mission
 		position = 7
 		required_missions = {
-			R38_fetters_sarhal
 			R38_suhans_speech
 		}
 	}
@@ -1692,7 +1711,6 @@ R38_Post_Suhan_3_a_suhans = {
 		position = 7
 		required_missions = {
 			R38_suhans_speech
-			R38_fetters_sarhal
 		}
 		provinces_to_highlight = {
 			is_capital = yes
@@ -1742,34 +1760,19 @@ R38_Post_Suhan_3_a_suhans = {
 		effect = {
 			custom_tooltip = bhuvauri_spread_the_word_effect_tt
 			hidden_effect = {
-#				if = {
-#					limit = { ai = yes }
-#					every_known_country = {
-#						limit = {
-#							ai = yes
-#							OR = {
-#								religion = high_philosophy
-#								religion = accretive_path
-#								religion = transmutative_path
-#							}
-#							trust = { who = R38 value = 60 }
-#						}
-#						change_religion = suhans_praxis
-#					}
-#				}
-#				else = {
-					every_known_country = {
-						limit = {
-							OR = {
-								religion = high_philosophy
-								religion = accretive_path
-								religion = transmutative_path
-							}
-							trust = { who = R38 value = 80 }
+				every_known_country = {
+					limit = {
+						OR = {
+							religion = high_philosophy
+							religion = accretive_path
+							religion = transmutative_path
 						}
-						change_religion = suhans_praxis
+						trust = { who = R38 value = 80 }
 					}
-#				}
+					country_event = {
+						id = flavor_bhuvauri.41
+					}
+				}
 			}
 			add_country_modifier = {
 				name = bhuvauri_kharunyana_throat
@@ -1970,7 +1973,6 @@ R38_Post_Suhan_3_a_hp = {
 		position = 7
 		required_missions = {
 			R38_suhans_speech
-			R38_fetters_sarhal
 		}
 		provinces_to_highlight = {
 			OR = {
@@ -2879,7 +2881,7 @@ R38_Pre_Suhan_4 = {
 	R38_suhans_speech = {
 		icon = mission_colonise_brazil
 		position = 6
-		required_missions = { R38_old_soldiers }
+		required_missions = { }
 		provinces_to_highlight = {
 			owned_by = R38
 			OR = {
@@ -2954,16 +2956,30 @@ R38_Pre_Suhan_5 = {
 			R38_integrate_the_bhoorakama
 		}
 		provinces_to_highlight = {
-			owned_by = R38
 			OR = {
-				has_tax_building_trigger = no
-				has_manpower_building_trigger = no
+				AND = {
+					owned_by = R38
+					OR = {
+						has_tax_building_trigger = no
+						has_manpower_building_trigger = no
+					}
+				}
+				AND = {
+					OR = {
+						province_id = 4420 #Sramaya
+						province_id = 4551 #Ishudhen
+					}
+					has_any_ongoing_construction = yes
+				}
 			}
 		} 
 
 		trigger = {
 			treasury = 500
-			has_idea = R38_the_adasa_system
+			OR = {
+				has_idea = R38_the_adasa_system
+				has_idea = R38_new_model_army
+			}
 #			if = {
 #				limit = { ai = no }
 				estate_influence = {
@@ -2980,19 +2996,21 @@ R38_Pre_Suhan_5 = {
 					has_tax_building_trigger = yes
 					has_manpower_building_trigger = yes
 				}
+				4420 = { has_any_ongoing_construction = no } #Sramaya
+				4551 = { has_any_ongoing_construction = no } #Ishudhen
 #			}
 		} 
 
 		effect = {
 			add_treasury = -500
-			4420 = {
+			4420 = { #Sramaya
 				add_building_construction = {
 					building = training_fields
 					speed = 1
 					cost = 0
 				}
 			}
-			4551 = {
+			4551 = { #Ishudhen
 				add_building_construction = {
 					building = training_fields
 					speed = 1
@@ -3066,7 +3084,7 @@ R38_post_suhan_1 = {
 					NOT = {
 						AND = {
 							enlightenment = 100
-							development = 55
+							development = 40
 							OR = {
 								NOT = { has_dlc = "Leviathan" }
 								custom_trigger_tooltip = {
@@ -3141,7 +3159,7 @@ R38_post_suhan_1 = {
 #			else = {
 				4420 = {
 					enlightenment = 100
-					development = 55
+					development = 40
 					OR = {
 						NOT = { has_dlc = "Leviathan" }
 						custom_trigger_tooltip = {
@@ -3447,7 +3465,7 @@ R38_post_suhan_3 = {
 				}
 				AND = {
 					province_id = 4420
-					NOT = { development = 65 }
+					NOT = { development = 50 }
 				}
 			}
 		} 
@@ -3458,7 +3476,7 @@ R38_post_suhan_3 = {
 #				limit = { ai = no }
 				NOT = { great_power_rank = 2 }
 				is_hegemon_of_type = economic_hegemon
-				4420 = { development = 65 }
+				4420 = { development = 50 }
 #			}
 		} 
 
@@ -3516,13 +3534,21 @@ R38_post_suhan_4 = {
 			R38_representative_government
 		}
 		provinces_to_highlight = {
-			owned_by = R38
 			OR = {
-				has_tax_building_trigger = no
-				controller = { tag = REB }
-				infantry_in_province = REB
-				cavalry_in_province = REB
-				artillery_in_province = REB
+				AND = {
+					owned_by = R38
+					OR = {
+						has_tax_building_trigger = no
+						controller = { tag = REB }
+						infantry_in_province = REB
+						cavalry_in_province = REB
+						artillery_in_province = REB
+					}
+				}
+				AND = {
+					province_id = 4420 #Sramaya
+					has_any_ongoing_construction = yes
+				}
 			}
 		} 
 
@@ -3552,10 +3578,11 @@ R38_post_suhan_4 = {
 					}
 				}
 #			}
+				4420 = { has_any_ongoing_construction = no } #Sramaya
 		} 
 
 		effect = {
-			4420 = {
+			4420 = { #Sramaya
 				remove_building = temple
 				add_building = cathedral
 				add_building_construction = {
@@ -3591,6 +3618,7 @@ R38_post_suhan_4 = {
 						AND = {
 							has_tax_building_trigger = yes
 							base_tax = 8
+							has_any_ongoing_construction = no
 						}
 					}
 				}
@@ -3636,6 +3664,7 @@ R38_post_suhan_4 = {
 				owned_by = R38
 				has_tax_building_trigger = yes
 				base_tax = 8
+				has_any_ongoing_construction = no
 			}
 		} 
 
@@ -3683,6 +3712,10 @@ R38_post_suhan_4 = {
 					remove_province_modifier = bhuvauri_slave_export_station_75
 					add_permanent_province_modifier = { name = bhuvauri_slave_export_station_50 duration = -1 }
 				}
+			}
+			country_event = {
+				id = flavor_bhuvauri.27
+				days = 3650 
 			}
 		} 
 	}
@@ -3779,22 +3812,27 @@ R38_post_suhan_4 = {
 				select_highest_dev_province_with_limit = {
 					limit = "NOT = { infantry_in_province = REB }"
 					effect = "spawn_rebels = { type = noble_rebels size = 2 }"
+					index = 1
 				}
 				select_highest_dev_province_with_limit = {
 					limit = "NOT = { infantry_in_province = REB }"
 					effect = "spawn_rebels = { type = noble_rebels size = 2 }"
+					index = 2
 				}
 				select_highest_dev_province_with_limit = {
 					limit = "NOT = { infantry_in_province = REB }"
 					effect = "spawn_rebels = { type = noble_rebels size = 2 }"
+					index = 3
 				}
 				select_highest_dev_province_with_limit = {
 					limit = "NOT = { infantry_in_province = REB }"
 					effect = "spawn_rebels = { type = noble_rebels size = 2 }"
+					index = 4
 				}
 				select_highest_dev_province_with_limit = {
 					limit = "NOT = { infantry_in_province = REB }"
 					effect = "spawn_rebels = { type = noble_rebels size = 2 }"
+					index = 5
 				}
 				every_owned_province = {
 					limit = { has_building = soldier_households }

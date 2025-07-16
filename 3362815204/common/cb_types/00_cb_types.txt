@@ -58,9 +58,10 @@ cb_restore_personal_union = {
 			FROM = {
 				OR = {
 					government = monarchy
-					has_reform = ambrosian_republic
+					# has_reform = ambrosian_republic
 					# has_reform = military_dictatorship_reform
-					has_country_flag = neapolitan_republic
+					# has_country_flag = neapolitan_republic
+					has_country_flag = verne_union_target #Verne PU coup's two republics so I need this to keep the CB
 				}
 				is_subject = no
 				NOT = { ruler_can_revive = yes } # Anbennar
@@ -447,6 +448,21 @@ cb_humiliate = {
 	war_goal = humiliate
 }
 
+#Anbennar - Humiliate CB for missions
+cb_humiliate_triggered = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+	months = 24
+
+	attacker_disabled_po = {
+		po_demand_provinces
+		po_become_vassal
+		po_subjugate_vassal
+	}
+
+	war_goal = humiliate
+}
 
 # Temporary claim CB (mostly used by missions)
 cb_conquest = {
@@ -456,7 +472,6 @@ cb_conquest = {
 		escann_adventurer_cb_restriction_trigger = yes
 		NOT = {
 			has_country_modifier = phoenix_conquest_cb_mod
-			ruler_has_personality = xhazobs_chosen_personality
 			AND = {
 				has_reform = hobgoblin_stratocracy_reform
 				has_global_flag = R62_the_edict_of_x_flag
@@ -471,11 +486,8 @@ cb_conquest = {
 			overlord = { NOT = { religion = gods_of_the_taychend } }
 		}
 		OR = {
-			NOT = { has_reform = hobgoblin_stratocracy_reform }
+			NOT = { tag = R62 }
 			ai = no
-			tag = R94
-			tag = R95
-			tag = R96
 			has_country_flag = command_current_campaign_completed_flag
 			had_country_flag = { flag = command_has_active_campaign_flag days = 9125 }
 		}
@@ -526,16 +538,11 @@ cb_independence_war = {
 	prerequisites = {
 		is_subject_of = FROM
 		NOT = { is_colonial_nation_of = FROM }
-		OR = {
-			NOT = {
-				# has_reform = daimyo
-				has_reform = prabhi_reform 
-				has_reform = senapti_reform 
-				has_reform = xiaken
-			}
-			NOT = { from = { OR = { has_government_attribute = is_raja has_reform = wulin } } }
-		}
 		NOT = {
+			AND = {	#xia
+				has_reform = xiaken
+				FROM = { has_reform = wulin }
+			}
 			AND = {	#Can't declare independence if you have a NSC level 3 or more (lvl 3 in the code = lvl 4 in the loc/interface)
 				religion = bulwari_sun_cult
 				has_dlc = "Mandate of Heaven"
@@ -546,6 +553,9 @@ cb_independence_war = {
 		}
 		NOT = {
 			has_country_modifier = G55_degakheioni_funding
+		}
+		NOT = {
+			is_subject_of_type = sponsored_adventurer_subject
 		}
 	}
 
@@ -582,9 +592,14 @@ cb_colonial_independence_war = {
 cb_nationalist = {
 
 	prerequisites_self = {
-		dip_tech = 23
-		is_free_or_tributary_trigger = yes
-		is_revolutionary = no
+		OR = {
+			AND = {
+				dip_tech = 23
+				is_free_or_tributary_trigger = yes
+				is_revolutionary = no
+			}
+			has_country_flag = early_nationalism_flag #Xanzerbexis
+		}
 	}
 
 	prerequisites = {
@@ -602,9 +617,9 @@ cb_imperial = {
 		OR = {
 			dip_tech = 23
 			invasion_nation = yes
-			has_age_ability = ab_splintered_lands
 			#Anbennar
-			has_country_flag = sunijalla_dominance #Sunijalla
+			has_age_ability = ab_splintered_lands
+			has_country_flag = early_imperialism_flag #Sunijalla and Command
 		}
 		is_free_or_tributary_trigger = yes
 		is_revolutionary = no
@@ -615,7 +630,14 @@ cb_imperial = {
 	war_goal = take_capital_imperial
 }
 
+#Imperialism cb for mission trees that want to give it early
+cb_anb_imperial = {
+	valid_for_subject = no
 
+	is_triggered_only = yes
+
+	war_goal = take_capital_imperial
+}
 
 cb_hegemon = {
 	valid_for_subject = no
@@ -794,8 +816,7 @@ cb_revolutionary = {
 			government = native
 
 			#Anbennar
-			has_reform = senapti_reform
-			has_reform = prabhi_reform
+			has_government_attribute = is_raja_subject
 			has_government_attribute = is_raja
 			has_reform = xiaken
 			has_reform = wulin
@@ -818,8 +839,7 @@ cb_revolutionary = {
 				government = native
 
 				#Anbennar
-				has_reform = senapti_reform
-				has_reform = prabhi_reform
+				has_government_attribute = is_raja_subject
 				has_government_attribute = is_raja
 				has_reform = xiaken
 				has_reform = wulin
@@ -867,8 +887,13 @@ cb_liberation = {
 				tag = S53
 				has_country_flag = S53_liberation_non_GP_flag
 			}
+			AND = {
+				tag = A45
+				has_country_flag = A45_liberation
+			}
+			has_country_flag = LRM_imperial_liberation_war
 		}
- 	}
+	}
 	prerequisites = {
 		OR = {
 			AND = {
@@ -885,10 +910,39 @@ cb_liberation = {
 				tag = S53
 				has_country_flag = S53_liberation_non_GP_flag
 				FROM = {
-					any_owned_province = {
-						region = ishyamtumu_region
+					OR = {
+						any_subject_country = {
+							OR = {
+								primary_culture = tanizu
+								primary_culture = cyazizeta_lizardfolk
+							}
+						}
+						AND = {
+							any_owned_province = {
+								region = ishyamtumu_region
+							}
+							is_subject = no
+							NOT = {
+								primary_culture = tanizu
+								primary_culture = cyazizeta_lizardfolk
+							}
+						}
 					}
-					is_subject = no
+				}
+			}
+			AND = {
+				has_country_flag = LRM_imperial_liberation_war
+				FROM = {
+					any_owned_province = {
+						province_group = luna_river_cities_provinces
+					}
+				}
+			}
+			AND = {
+				has_country_flag = A45_liberation
+				FROM = {
+					NOT = { is_part_of_hre = yes }
+					any_neighbor_country = { is_part_of_hre = yes}
 				}
 			}
 		}
@@ -1175,7 +1229,27 @@ cb_blooming_of_the_lorentish_rose = {
 	is_triggered_only = yes
 
 	war_goal = blooming_of_the_lorentish_rose
-} 
+}
+
+cb_the_second_sons_rebellion = {
+	valid_for_subject = no
+	prerequisites_self = {
+		is_emperor = yes
+	}
+	call_empire_members = yes
+
+	is_triggered_only = yes
+	war_goal = second_son_rebellion
+}
+
+cb_heart_of_darkness_war = {
+	valid_for_subject = no
+	prerequisites_self = {
+		tag = H99
+	}
+	is_triggered_only = yes
+	war_goal = heart_of_darkness_war_goal
+}
 
 cb_aldresian_incursion = {
 	valid_for_subject = yes
@@ -1205,7 +1279,13 @@ cb_imperial_ban = {
 				is_revolutionary = no
 			}
 			AND = {
-				tag = A77
+				OR = {
+					tag = A77
+					AND = {
+						tag = Z97
+						was_tag = A77
+					}
+				}
 				mission_completed = old_ways_and_the_new
 			}
 		}
@@ -1704,12 +1784,12 @@ cb_force_satrapy = {
 
 	prerequisites_self = {
 		has_dlc = "Mandate of Heaven"
+		is_emperor_of_china = yes
 		NOT = { ruler_has_personality = xhazobs_chosen_personality }
 	}
 
 	prerequisites = {
 		FROM = { is_subject = no }
-		is_emperor_of_china = yes
 		OR = {
 			is_neighbor_of = FROM
 			any_subject_country = { is_neighbor_of = FROM } #Anbennar
@@ -1721,25 +1801,58 @@ cb_force_satrapy = {
 
 cb_force_tributary_anb = {
 
-    valid_for_subject = no
+	valid_for_subject = no
 
-    prerequisites_self = {
-        has_dlc = "Mandate of Heaven"
-    }
-
-    prerequisites = {
-
-        FROM = { is_subject = no }
-        OR = {
-            culture_group = ogre # anbennar
-            religion = feast_of_the_gods # anbennar, required for mechanics
-            has_country_flag = can_use_tributary_cb_flag # anbennar
+	prerequisites_self = {
+		has_dlc = "Mandate of Heaven"
+		NOT = { is_subject_of_type = tributary_state } #Satrapies can't get tributaries
+		NOT = { tag = L25 } #so AI sakul doesnt block its own expansion
+		OR = {
+			culture_group = ogre # anbennar
+			religion = feast_of_the_gods # anbennar, required for mechanics
+			AND = {
+				culture_group = gnollish
+				OR = {
+					religion = xhazobkult
+					NOT = { ai = yes }
+				}
+			}
+			has_country_flag = can_use_tributary_cb_flag # anbennar
 			has_government_attribute = can_use_tributary_cb
-        }
-        OR = {	
+			is_sri_baginda = yes
+		}
+	}
+
+	prerequisites = {
+
+		FROM = { is_subject = no }
+		OR = {
+			NOT = { is_sri_baginda = yes }
+			AND = {
+				is_tier_2_baginda = yes
+				FROM = { 
+					OR = {
+						tag = Y69  #Brenulan
+						culture_group = yanglam 
+					}
+				}
+			}
+			is_tier_3_baginda = yes
+		}
+		OR = {	
 			is_neighbor_of = FROM
 			AND = {
-				religion = feast_of_the_gods
+				OR = {
+					is_sri_baginda = yes
+					religion = feast_of_the_gods
+					AND = {
+						culture_group = gnollish
+						OR = {
+							religion = xhazobkult
+							NOT = { ai = yes }
+						}
+					}
+				}
 				any_subject_country = { is_neighbor_of = FROM } #Anbennar
 			}
 			AND = { #anbennar, miremaw MT reward
@@ -1758,9 +1871,9 @@ cb_force_tributary_anb = {
 				}
 				has_country_modifier = miremaw_exerting_our_influence_reward
 			}
-        }
-    }
-    war_goal = take_capital_force_tributary_anb
+		}
+	}
+	war_goal = take_capital_force_tributary_anb
 }
 
 cb_force_tributary_mission = {
@@ -1794,16 +1907,8 @@ cb_force_join_hre = {
 
 	prerequisites_self = {
 		has_dlc = "Emperor"
-		OR = {
-			AND = {
-				tag = A77
-				has_country_flag = aldresia_expand_empire
-			}
-			AND = {
-				is_emperor = yes
-				hre_reform_passed = emperor_reichsstabilitaet
-			}
-		}
+		is_emperor = yes
+		hre_reform_passed = anbennar_reinforce_imperial_frontiers
 	}
 
 	prerequisites = {
@@ -1869,6 +1974,7 @@ cb_world_crusade = {
 					has_global_flag = B38_elikhetist_enlightenment_flag
 				}
 			}
+			has_country_modifier = temporary_world_crusade
 		}
 		NOT = { has_ruler_flag = xhazob_patron }
 	}
@@ -1881,6 +1987,7 @@ cb_world_crusade = {
 			claim = FROM
 			cb_on_religious_enemies = yes
 			has_country_flag = enabled_great_holy_war_cb
+			has_country_modifier = temporary_world_crusade
 #			AND = {
 #				FROM = { religion_group = pagan }
 #				OR = {
@@ -2081,6 +2188,7 @@ cb_push_back_colonizers = {
 		has_dlc = "Conquest of Paradise"
 		is_native_tribe = yes
 		NOT = { has_reform = adventurer_reform has_country_modifier = monstrous_nation } # Anbennar
+		NOT = { has_reform = chendhyan_tribal_federation } # Tribal Chendhyans
 	}
 
 	prerequisites = {

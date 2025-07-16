@@ -36,15 +36,18 @@ G64_1_missions = {
 				AND = {
 					is_capital_of = G77 #Marhed Rayodana
 					NOT = {
-						AND = {
-							OR = {
-								G77 = { is_subject_of = ROOT }
-								exists = no
-							}
-							num_of_units_in_province = {
-								amount = 15
-								who = ROOT
-							}
+						OR = {
+							G77 = { is_subject_of = ROOT }
+							exists = no
+						}
+					}
+				}
+				AND = {
+					province_id = 2556
+					NOT = {
+						num_of_units_in_province = {
+							amount = 15
+							who = ROOT
 						}
 					}
 				}
@@ -473,6 +476,7 @@ G64_1_missions = {
 					limit = { country_or_non_sovereign_subject_holds = ROOT }
 					cede_province = PREV 
 				}
+				ROOT = { create_march = PREV }
 				add_country_modifier = {
 					name = G64_agent_of_larankar
 					duration = -1
@@ -613,7 +617,11 @@ G64_2_missions = {
 
 		provinces_to_highlight = {
 			superregion = taychend_superregion
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+			NOT = { 
+				country_or_non_sovereign_subject_holds = ROOT 
+				province_group = taychend_islands
+			}
+			is_city = yes
 		}
 
 		trigger = {
@@ -622,6 +630,7 @@ G64_2_missions = {
 				OR = {
 					country_or_non_sovereign_subject_holds = ROOT 
 					is_city = no
+					province_group = taychend_islands
 				}
 			}
 			OR = {
@@ -656,7 +665,7 @@ G64_2_missions = {
 			}
 			custom_tooltip = G64_nekheis_warning_tt
 			hidden_effect = {
-				set_country_flag = G64_lower_taychend_dev_flag
+				set_country_flag = lower_taychend_dev_by_200_flag
 				set_country_flag = G64_new_taychendi_empire_name_flag
 				if = {
 					limit = { has_ruler_flag = G64_is_erankar_flag }
@@ -687,7 +696,7 @@ G64_2_missions = {
 			superregion = taychend_superregion
 			OR = {
 				devastation = 5
-				NOT = { owned_by = ROOT }
+				NOT = { country_or_non_sovereign_subject_holds = ROOT }
 			}
 		}
 
@@ -713,7 +722,7 @@ G64_2_missions = {
 					taychend_superregion = {
 						type = all
 						NOT = { devastation = 5 }
-						owned_by = ROOT
+						country_or_non_sovereign_subject_holds = ROOT 
 					}
 					heir_claim = 75
 				}
@@ -897,13 +906,9 @@ G64_3_missions = {
 							OR = {
 								controlled_by = ROOT
 								NOT = {
-									owned_by = G68
-									owned_by = G69
-									owned_by = G70
-									
-									owned_by_subject_of = G68
-									owned_by_subject_of = G69
-									owned_by_subject_of = G70
+									country_or_subject_holds = G68
+									country_or_subject_holds = G69
+									country_or_subject_holds = G70
 								}
 							}
 						}
@@ -912,13 +917,9 @@ G64_3_missions = {
 							OR = {
 								controlled_by = ROOT
 								NOT = {
-									owned_by = G68
-									owned_by = G69
-									owned_by = G70
-									
-									owned_by_subject_of = G68
-									owned_by_subject_of = G69
-									owned_by_subject_of = G70
+									country_or_subject_holds = G68
+									country_or_subject_holds = G69
+									country_or_subject_holds = G70
 								}
 							}
 						}
@@ -927,13 +928,9 @@ G64_3_missions = {
 							OR = {
 								controlled_by = ROOT
 								NOT = {
-									owned_by = G68
-									owned_by = G69
-									owned_by = G70
-									
-									owned_by_subject_of = G68
-									owned_by_subject_of = G69
-									owned_by_subject_of = G70
+									country_or_subject_holds = G68
+									country_or_subject_holds = G69
+									country_or_subject_holds = G70
 								}
 							}
 						}
@@ -1066,6 +1063,7 @@ G64_3_missions = {
 						}
 					}
 				}
+				ROOT = { create_march = PREV }
 				add_country_modifier = {
 					name = G64_agent_of_larankar
 					duration = -1
@@ -1747,7 +1745,8 @@ G64_5_missions = {
 				}
 			}
 			custom_tooltip = G64_skip_first_two_reforms_tt
-			set_country_flag = G64_skip_first_two_reforms_flag
+			set_country_flag = free_taychend_reform_1
+			set_country_flag = free_taychend_reform_2
 		}
 	}
 

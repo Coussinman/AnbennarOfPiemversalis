@@ -22,13 +22,19 @@ elikhet_pyramid = {
 	can_use_modifiers_trigger = {
 		owner = { 
 			is_emperor_of_china = yes
-			religion_group = khetist
+			OR = {
+				religion_group = khetist
+				religion = dalcabba
+			}
 		}
 	}
 	can_upgrade_trigger = { 
 		owner = { 
 			is_emperor_of_china = yes
-			religion_group = khetist
+			OR = {
+				religion_group = khetist
+				religion = dalcabba
+			}
 		}
 	}
 
@@ -394,7 +400,7 @@ shadowroot_matriarch = {
 		}
 
 		area_modifier = {
-
+			institution_growth = 5
 		}
 		region_modifier = {
 			
@@ -424,6 +430,7 @@ shadowroot_matriarch = {
 		}
 
 		area_modifier = {
+			institution_growth = 10
 		}
 		region_modifier = {
 			
@@ -459,7 +466,10 @@ shadowroot_matriarch_purified = {
 	type = monument
 
 	build_trigger = {
-		has_global_flag = shadowtree_purified
+		custom_trigger_tooltip = {
+			tooltip = shadowtree_purified_tt
+			has_global_flag = shadowtree_purified
+		}
 		owner = {
 			NOT = {
 				religion = night_coven
@@ -629,23 +639,28 @@ lizardfolk_port = {
 	type = monument
 
 	build_trigger = {
-		OR = {
-			owner = {
-				OR = {
-					is_vyzemby_primary_culture = yes
-					culture_group = lizardfolk
-				}
-			}
-			AND = {
-				OR = {
-					is_vyzemby_culture = yes
-					culture_group = lizardfolk
-				}
-				has_owner_accepted_culture = yes
-			}
+		if = {
+            limit = { owner = { has_country_flag = lizardfolk_port_enabled } }
 			custom_trigger_tooltip = {
-				tooltip = lizardfolk_port_mt_enabled
-				owner = { has_country_flag = lizardfolk_port_enabled }
+				tooltip = great_project_mt_enabled
+				always = yes
+			}
+        }
+		else = {
+			OR = {
+				owner = {
+					OR = {
+						is_vyzemby_primary_culture = yes
+						culture_group = lizardfolk
+					}
+				}
+				AND = {
+					OR = {
+						is_vyzemby_culture = yes
+						culture_group = lizardfolk
+					}
+					has_owner_accepted_culture = yes
+				}
 			}
 		}
 	}
@@ -657,45 +672,55 @@ lizardfolk_port = {
 	}
 
 	can_use_modifiers_trigger = {
-		OR = {
-			owner = {
-				OR = {
-					is_vyzemby_primary_culture = yes
-					culture_group = lizardfolk
-				}
-			}
-			AND = {
-				OR = {
-					is_vyzemby_culture = yes
-					culture_group = lizardfolk
-				}
-				has_owner_accepted_culture = yes
-			}
+		if = {
+            limit = { owner = { has_country_flag = lizardfolk_port_enabled } }
 			custom_trigger_tooltip = {
-				tooltip = lizardfolk_port_mt_enabled
-				owner = { has_country_flag = lizardfolk_port_enabled }
+				tooltip = great_project_mt_enabled
+				always = yes
+			}
+        }
+		else = {
+			OR = {
+				owner = {
+					OR = {
+						is_vyzemby_primary_culture = yes
+						culture_group = lizardfolk
+					}
+				}
+				AND = {
+					OR = {
+						is_vyzemby_culture = yes
+						culture_group = lizardfolk
+					}
+					has_owner_accepted_culture = yes
+				}
 			}
 		}
 	}
 
 	can_upgrade_trigger = {
-		OR = {
-			owner = {
-				OR = {
-					is_vyzemby_primary_culture = yes
-					culture_group = lizardfolk
-				}
-			}
-			AND = {
-				OR = {
-					is_vyzemby_culture = yes
-					culture_group = lizardfolk
-				}
-				has_owner_accepted_culture = yes
-			}
+		if = {
+            limit = { owner = { has_country_flag = lizardfolk_port_enabled } }
 			custom_trigger_tooltip = {
-				tooltip = lizardfolk_port_mt_enabled
-				owner = { has_country_flag = lizardfolk_port_enabled }
+				tooltip = great_project_mt_enabled
+				always = yes
+			}
+        }
+		else = {
+			OR = {
+				owner = {
+					OR = {
+						is_vyzemby_primary_culture = yes
+						culture_group = lizardfolk
+					}
+				}
+				AND = {
+					OR = {
+						is_vyzemby_culture = yes
+						culture_group = lizardfolk
+					}
+					has_owner_accepted_culture = yes
+				}
 			}
 		}
 	}
@@ -1064,12 +1089,42 @@ esuvrem = {
 
 	can_use_modifiers_trigger = {
 		culture_group = gnollish
-		owner = { culture_group = gnollish }
+		if = {
+			limit = {
+				owner = {
+					has_country_flag = s23_unlock_esuvrem
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = s23_unlock_esuvrem_tt
+				owner =  {
+					has_country_flag = s23_unlock_esuvrem
+				}
+			}
+		}
+		else = {
+			owner = { culture_group = gnollish }
+		}
 	}
 
 	can_upgrade_trigger = {
 		culture_group = gnollish
-		owner = { culture_group = gnollish }
+		if = {
+			limit = {
+				owner = {
+					has_country_flag = s23_unlock_esuvrem
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = s23_unlock_esuvrem_tt
+				owner =  {
+					has_country_flag = s23_unlock_esuvrem
+				}
+			}
+		}
+		else = {
+			owner = { culture_group = gnollish }
+		}
 	}
 
 	keep_trigger = {
@@ -1335,41 +1390,56 @@ kuiika_gamyi = {
 	on_destroyed = {}
 
 	build_trigger = {
-		owner = {
+		if = {
+			limit = { owner = { is_or_was_tag = { tag = S15 } } }
+			owner = { mission_completed = S15_investigate_the_spires }
+		} else = {
+			owner = {
+				OR = {
+					religion_group = tanibic_religion 
+					religion_group = lizardfolk_religion
+				}
+			}
 			OR = {
 				religion_group = tanibic_religion 
 				religion_group = lizardfolk_religion
 			}
-		}
-		OR = {
-			religion_group = tanibic_religion 
-			religion_group = lizardfolk_religion
 		}
 	}
 
 	can_use_modifiers_trigger = {
-		owner = {
+		if = {
+			limit = { owner = { is_or_was_tag = { tag = S15 } } }
+			owner = { mission_completed = S15_investigate_the_spires }
+		} else = {
+			owner = {
+				OR = {
+					religion_group = tanibic_religion 
+					religion_group = lizardfolk_religion
+				}
+			}
 			OR = {
 				religion_group = tanibic_religion 
 				religion_group = lizardfolk_religion
 			}
-		}
-		OR = {
-			religion_group = tanibic_religion 
-			religion_group = lizardfolk_religion
 		}
 	}
 
 	can_upgrade_trigger = {
-		owner = {
+		if = {
+			limit = { owner = { is_or_was_tag = { tag = S15 } } }
+			owner = { mission_completed = S15_investigate_the_spires }
+		} else = {
+			owner = {
+				OR = {
+					religion_group = tanibic_religion 
+					religion_group = lizardfolk_religion
+				}
+			}
 			OR = {
 				religion_group = tanibic_religion 
 				religion_group = lizardfolk_religion
 			}
-		}
-		OR = {
-			religion_group = tanibic_religion 
-			religion_group = lizardfolk_religion
 		}
 	}
 
@@ -1472,21 +1542,55 @@ koroshesh_library = {
 	on_destroyed = {}
 
 	build_trigger = {
-		culture_group = kheteratan
-		has_owner_accepted_culture = yes
-		owner = { OR = { medium_tolerance_gnomish_race_trigger = yes high_tolerance_gnomish_race_trigger = yes } }
+		if = {
+            limit = { has_province_flag = korashesh_destroyed_flag }
+            custom_trigger_tooltip = {
+                tooltip = monument_destroyed_tt
+                NOT = { has_province_flag = korashesh_destroyed_flag }
+            }
+        }
+		if = {
+			limit = { owner = { tag = F29 } }
+			custom_trigger_tooltip = {
+				tooltip = zokka_koroshesh_usage_tt
+				owner = { has_country_flag = zokka_library_flag }
+			}
+		}
+		else = {
+			culture_group = kheteratan
+			has_owner_accepted_culture = yes
+			owner = { OR = { medium_tolerance_gnomish_race_trigger = yes high_tolerance_gnomish_race_trigger = yes } }
+		}
 	}
 
 	can_use_modifiers_trigger = {
-		culture_group = kheteratan
-		has_owner_accepted_culture = yes
-		owner = { OR = { medium_tolerance_gnomish_race_trigger = yes high_tolerance_gnomish_race_trigger = yes } }
+		if = {
+			limit = { owner = { tag = F29 } }
+			custom_trigger_tooltip = {
+				tooltip = zokka_koroshesh_usage_tt
+				owner = { has_country_flag = zokka_library_flag }
+			}
+		}
+		else = {
+			culture_group = kheteratan
+			has_owner_accepted_culture = yes
+			owner = { OR = { medium_tolerance_gnomish_race_trigger = yes high_tolerance_gnomish_race_trigger = yes } }
+		}
 	}
 
 	can_upgrade_trigger = {
-		culture_group = kheteratan
-		has_owner_accepted_culture = yes
-		owner = { OR = { medium_tolerance_gnomish_race_trigger = yes high_tolerance_gnomish_race_trigger = yes } }
+		if = {
+			limit = { owner = { tag = F29 } }
+			custom_trigger_tooltip = {
+				tooltip = zokka_koroshesh_usage_tt
+				owner = { has_country_flag = zokka_library_flag }
+			}
+		}
+		else = {
+			culture_group = kheteratan
+			has_owner_accepted_culture = yes
+			owner = { OR = { medium_tolerance_gnomish_race_trigger = yes high_tolerance_gnomish_race_trigger = yes } }
+		}
 	}
 
 
@@ -1579,7 +1683,7 @@ great_merfolk_canal = {
 	}
 	
 	#how much to build one
-	build_cost = 20000
+	build_cost = 2000
 
 	#can we move it?
 	can_be_moved = no
@@ -1592,10 +1696,19 @@ great_merfolk_canal = {
 
 	#can we build it?
 	build_trigger = {
-		FROM = {
-			owns_or_vassal_of = 6000
-			is_subject = no
-			adm_tech = 22
+		if = {
+			limit = { FROM = { mission_completed = khatalashya_the_merfolk_canal } }
+			FROM = {
+				is_subject = no
+				owns_or_vassal_of = 6000
+			}
+		}
+		else = {
+			FROM = {
+				owns_or_vassal_of = 6000
+				is_subject = no
+				adm_tech = 22
+			}
 		}
 	}
 
@@ -1765,13 +1878,13 @@ aur_kes_akasik = {
 		OR = {
 			religion = mother_akasik
 			religion = fangaulan_pantheon
-			}
-			has_owner_religion = yes
-		AND = {
-				culture_group = akasi
-				province_is_or_accepts_culture = yes
-			}
 		}
+		has_owner_religion = yes
+		AND = {
+			culture_group = akasi
+			province_is_or_accepts_culture = yes
+		}
+	}
     on_built = {
     }
 
@@ -1779,28 +1892,50 @@ aur_kes_akasik = {
     }
 
     can_use_modifiers_trigger = {
-        OR = {
-			religion = mother_akasik
-			religion = fangaulan_pantheon
+		if = {
+			limit = {
+				country_or_subject_holds = A33
 			}
-			has_owner_religion = yes
-		AND = {
-				culture_group = akasi
-				province_is_or_accepts_culture = yes
+			owner = {
+				OR = {
+					mission_completed = A33_a_crimson_sea
+					overlord = { mission_completed = A33_a_crimson_sea }
+				}
 			}
 		}
+		else = {
+			OR = {
+				religion = mother_akasik
+				religion = fangaulan_pantheon
+			}
+		}
+		has_owner_religion = yes
+		culture_group = akasi
+		province_is_or_accepts_culture = yes
+	}
 
     can_upgrade_trigger = {
-		OR = {
-			religion = mother_akasik
-			religion = fangaulan_pantheon
+		if = {
+			limit = {
+				country_or_subject_holds = A33
 			}
-			has_owner_religion = yes
-		AND = {
-				culture_group = akasi
-				province_is_or_accepts_culture = yes
+			owner = {
+				OR = {
+					mission_completed = A33_a_crimson_sea
+					overlord = { mission_completed = A33_a_crimson_sea }
+				}
 			}
 		}
+		else = {
+			OR = {
+				religion = mother_akasik
+				religion = fangaulan_pantheon
+			}
+		}
+		has_owner_religion = yes
+		culture_group = akasi
+		province_is_or_accepts_culture = yes
+	}
 
     keep_trigger = {
     }
@@ -2131,6 +2266,7 @@ hawatli_wizti_tali = {
 			OR = {
 				culture_group = mengi
 				primary_culture = naleni_harpy
+				religion = the_jadd
 			}
 			has_matching_religion = sky_domain	
 		}
@@ -2152,6 +2288,7 @@ hawatli_wizti_tali = {
 			OR = {
 				culture_group = mengi
 				primary_culture = naleni_harpy
+				religion = the_jadd
 			}
 			has_matching_religion = sky_domain	
 		}
@@ -2164,6 +2301,7 @@ hawatli_wizti_tali = {
 			OR = {
 				culture_group = mengi
 				primary_culture = naleni_harpy
+				religion = the_jadd
 			}
 			has_matching_religion = sky_domain		
 		}
@@ -2527,7 +2665,10 @@ crater_of_the_martyr = {
 
 	build_trigger = {
 		province_is_or_accepts_culture = yes
-		religion = sky_domain
+		OR = { 
+			religion = sky_domain
+			religion = the_hunt
+		}
 		OR = {
 			has_owner_religion = yes
 			owner = {
@@ -2544,7 +2685,10 @@ crater_of_the_martyr = {
 
 	can_use_modifiers_trigger = {
  		province_is_or_accepts_culture = yes
-		religion = sky_domain
+		 OR = { 
+			religion = sky_domain
+			religion = the_hunt
+		}
 		OR = {
 			has_owner_religion = yes
 			owner = {
@@ -2556,7 +2700,10 @@ crater_of_the_martyr = {
 
 	can_upgrade_trigger = {
 		province_is_or_accepts_culture = yes
-		religion = sky_domain
+		OR = { 
+			religion = sky_domain
+			religion = the_hunt
+		}
 		OR = {
 			has_owner_religion = yes
 			owner = {
@@ -2711,7 +2858,6 @@ tree_of_tales = {
 	type = monument
 
 	build_trigger = {
-		has_country_flag = A11_tree #ACE
 		religion_group = tanibic_religion
 		has_owner_religion = yes
 	}
@@ -2723,13 +2869,11 @@ tree_of_tales = {
 	}
 
 	can_use_modifiers_trigger = {
-		has_country_flag = A11_tree #ACE
 		religion_group = tanibic_religion
 		has_owner_religion = yes
 	}
 
 	can_upgrade_trigger = {
-		has_country_flag = A11_tree #ACE
 		religion_group = tanibic_religion
 		has_owner_religion = yes
 	}
@@ -2846,6 +2990,1950 @@ tree_of_tales = {
 
 		on_upgraded = {
 			owner = { country_event = { id = sarhalevents.6 } }
+		}
+	}
+}
+
+#Dendugma Monastery
+dendugma_monastery = {
+	start = 5808		#Junansuar
+
+	date = 1.1.1
+
+	time = {
+		months = 120
+	}
+
+	build_cost = 0
+
+	can_be_moved = no
+
+	starting_tier = 1
+
+	#project type
+	type = monument
+
+	build_trigger = {
+			owner = {
+					religion = fangaulan_pantheon
+			}
+			culture_group = west_sarhaly
+			has_owner_accepted_culture = yes
+	}
+
+	on_built = {
+	}
+
+	on_destroyed = {
+	}
+
+	can_use_modifiers_trigger = {
+			owner = {
+					religion = fangaulan_pantheon
+			}
+			culture_group = west_sarhaly
+			has_owner_accepted_culture = yes
+	}
+
+	can_upgrade_trigger = {
+			owner = {
+					religion = fangaulan_pantheon
+			}
+			culture_group = west_sarhaly
+			has_owner_accepted_culture = yes
+	}
+
+	keep_trigger = {
+	}
+
+	#tier data
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+
+		cost_to_upgrade = {
+			factor = 0
+		}
+
+		province_modifiers = {
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+
+		}
+
+		on_upgraded = {
+		}
+	}
+
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 1000
+		}
+
+		province_modifiers = {
+
+		}
+
+		area_modifier = {
+			local_production_efficiency = 0.1
+		}
+		
+		region_modifier = {
+
+		}
+		
+		country_modifiers = {
+			artillery_cost = -0.1
+			global_rebel_suppression_efficiency = 0.25
+		}
+
+		on_upgraded = {	
+		}
+	}
+
+	tier_2 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 2500
+		}
+
+		province_modifiers = {
+		}
+
+		area_modifier = {
+			local_production_efficiency = 0.1
+		}
+		region_modifier = {
+	
+		}
+		country_modifiers = {
+			artillery_cost = -0.1
+			global_rebel_suppression_efficiency = 0.25
+		}
+		
+
+		on_upgraded = {
+			add_building = weapons
+			custom_tooltip = dendugma_monastery_tier_2
+			hidden_effect = {
+				owner = {
+					every_owned_province = {
+						limit = {
+							has_province_modifier = ironwood_trees
+						}
+						dendugma_monastery_ironwood_modifier = yes
+					}
+				}
+			}
+		}
+	}
+
+	tier_3 = {
+		
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 5000
+		}
+
+		province_modifiers = {
+		}
+
+		area_modifier = {
+			local_production_efficiency = 0.2
+		}
+		region_modifier = {
+			
+		}
+		country_modifiers = {
+			artillery_cost = -0.1
+			global_rebel_suppression_efficiency = 0.25
+			artificers_capacity = 20
+		}
+
+		on_upgraded = {
+			custom_tooltip = dendugma_monastery_tier_3
+			hidden_effect = {
+				owner = {
+					every_owned_province = {
+						limit = {
+							has_province_modifier = ironwood_trees
+						}
+						dendugma_monastery_ironwood_modifier = yes
+					}
+				}
+			}
+		}
+	}
+}
+
+#Imperial Arena
+imperial_arena = {
+	start = 5745		#Sinjetaso
+
+	date = 1.1.1
+
+	time = {
+		months = 120
+	}
+
+	build_cost = 0
+
+	can_be_moved = no
+
+	starting_tier = 1
+
+	#project type
+	type = monument
+
+	build_trigger = {
+			owner = {
+					religion = fangaulan_pantheon
+			}
+			culture_group = west_sarhaly
+			has_owner_accepted_culture = yes
+	}
+
+	on_built = {
+	}
+
+	on_destroyed = {
+	}
+
+	can_use_modifiers_trigger = {
+			owner = {
+					religion = fangaulan_pantheon
+			}
+			culture_group = west_sarhaly
+			has_owner_accepted_culture = yes
+	}
+
+	can_upgrade_trigger = {
+			owner = {
+					religion = fangaulan_pantheon
+			}
+			culture_group = west_sarhaly
+			has_owner_accepted_culture = yes
+	}
+
+	keep_trigger = {
+	}
+
+	#tier data
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+
+		cost_to_upgrade = {
+			factor = 0
+		}
+
+		province_modifiers = {
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+
+		}
+
+		on_upgraded = {
+		}
+	}
+
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 1000
+		}
+
+		province_modifiers = {
+			garrison_size = 0.1
+		}
+
+		area_modifier = {
+			local_manpower_modifier = 0.3
+		}
+		
+		region_modifier = {
+
+		}
+		
+		country_modifiers = {
+			army_tradition_decay = -0.01
+		}
+
+		on_upgraded = {	
+		}
+	}
+
+	tier_2 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 2500
+		}
+
+		province_modifiers = {
+			garrison_size = 0.2
+		}
+
+		area_modifier = {
+			local_manpower_modifier = 0.3
+		}
+		
+		region_modifier = {
+
+		}
+		
+		country_modifiers = {
+			army_tradition_decay = -0.01
+			leader_land_fire = 1
+		}		
+
+		on_upgraded = {
+			custom_tooltip = imperial_arena_tier_2
+		}
+	}
+
+	tier_3 = {
+		
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 5000
+		}
+
+		province_modifiers = {
+			garrison_size = 0.2
+		}
+
+		area_modifier = {
+			local_manpower_modifier = 0.3
+		}
+		
+		region_modifier = {
+
+		}
+		
+		country_modifiers = {
+			army_tradition_decay = -0.01
+			leader_land_fire = 1
+			leader_land_shock = 1
+		}		
+
+		on_upgraded = {
+			add_building = training_fields
+		}
+	}
+}
+
+#Jisugo Loban Oasis
+water_dreams_oasis = {
+	start = 6098		#Rostgrax
+
+	date = 1.1.1
+
+	time = {
+		months = 120
+	}
+
+	build_cost = 0
+
+	can_be_moved = no
+
+	starting_tier = 1
+
+	#project type
+	type = monument
+
+	build_trigger = {
+			OR = {
+				AND = {
+					religion_group = tanibic_religion
+					OR = {
+						culture_group = west_sarhaly
+						culture_group = akasi
+					}
+				}
+				AND = {
+					religion = kvangahga
+					culture_group = gnollish
+				}
+			}
+	}
+
+	on_built = {
+	}
+
+	on_destroyed = {
+	}
+
+	can_use_modifiers_trigger = {
+			OR = {
+				AND = {
+					religion_group = tanibic_religion
+					OR = {
+						culture_group = west_sarhaly
+						culture_group = akasi
+					}
+				}
+				AND = {
+					religion = kvangahga
+					culture_group = gnollish
+				}
+			}
+	}
+
+	can_upgrade_trigger = {
+		OR = {
+			AND = {
+				religion_group = tanibic_religion
+				OR = {
+					culture_group = west_sarhaly
+					culture_group = akasi
+				}
+			}
+			AND = {
+				religion = kvangahga
+				culture_group = gnollish
+			}
+		}
+	}
+
+	keep_trigger = {
+	}
+
+	#tier data
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+
+		cost_to_upgrade = {
+			factor = 0
+		}
+
+		province_modifiers = {
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+
+		}
+
+		on_upgraded = {
+		}
+	}
+
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 1000
+		}
+
+		province_modifiers = {
+			local_friendly_movement_speed = 0.25
+			local_hostile_movement_speed = -0.25
+		}
+
+		area_modifier = {
+
+		}
+		
+		region_modifier = {
+
+		}
+		
+		country_modifiers = {
+			tolerance_own = 1
+			caravan_power = 0.1
+		}
+
+		on_upgraded = {	
+			custom_tooltip = water_dreams_oasis_tier_1_tt
+		}
+	}
+
+	tier_2 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 2500
+		}
+
+		province_modifiers = {
+		}
+
+		area_modifier = {
+			local_friendly_movement_speed = 0.25
+			local_hostile_movement_speed = -0.25
+
+		}
+		region_modifier = {
+	
+		}
+		country_modifiers = {
+			tolerance_own = 1
+			caravan_power = 0.2
+		}
+		
+
+		on_upgraded = {
+			custom_tooltip = water_dreams_oasis_tier_2_tt
+			owner = {
+				define_general = {
+					shock = 6
+					fire = 4
+					manuever = 4
+					siege = 2
+					trait = planetouched_commander_personality
+				}
+			}
+			hidden_effect = {
+				owner = {
+					if = {
+						limit = { has_estate_privilege = oasis_of_water_dreams_privilege }
+						every_owned_province = {
+							limit = {
+								has_province_modifier = oasis_of_water_dreams_fmk_mod1
+							}
+							remove_province_modifier = oasis_of_water_dreams_fmk_mod1
+							add_province_modifier = {
+								name = oasis_of_water_dreams_fmk_mod2
+								duration = -1
+								hidden = yes
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	tier_3 = {
+		
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 5000
+		}
+
+		province_modifiers = {
+			trade_goods_size_modifier = 1
+		}
+
+		area_modifier = {
+			local_friendly_movement_speed = 0.25
+			local_hostile_movement_speed = -0.25
+			local_hostile_attrition = 1
+
+		}
+		region_modifier = {
+			
+		}
+		country_modifiers = {
+			tolerance_own = 2
+			caravan_power = 0.2
+		}
+
+		on_upgraded = {
+			change_trade_goods = incense
+			custom_tooltip = water_dreams_oasis_tier_3_tt
+			owner = {
+				define_general = {
+					shock = 6
+					fire = 4
+					manuever = 6
+					siege = 4
+					trait = planetouched_commander_personality
+				}
+			}
+			hidden_effect = {
+				owner = {
+					if = {
+						limit = { has_estate_privilege = oasis_of_water_dreams_privilege }
+						every_owned_province = {
+							limit = {
+								has_province_modifier = oasis_of_water_dreams_fmk_mod2
+							}
+							remove_province_modifier = oasis_of_water_dreams_fmk_mod2
+							add_province_modifier = {
+								name = oasis_of_water_dreams_fmk_mod3
+								duration = -1
+								hidden = yes
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+#Khus-an-Zhyani - Zerat Spire
+khus_an_zhyani = {
+
+	start = 5921 #Zerat
+	
+	date = 1001.01.01
+
+	time = { months = 12 }
+
+	build_cost = 1
+
+	can_be_moved = no
+
+	starting_tier = 1
+
+	type = monument
+
+	on_built = {}
+
+	on_destroyed = {}
+
+	build_trigger = {
+		owner = {
+			religion = anzalkatsa
+		}
+	}
+
+	can_use_modifiers_trigger = {
+		owner = {
+			religion = anzalkatsa
+		}
+	}
+
+	can_upgrade_trigger = {
+		owner = {
+			religion = anzalkatsa
+		}
+	}
+
+
+	keep_trigger = { always = yes }
+
+	tier_0 = {
+		upgrade_time = { months = 0 }
+
+		cost_to_upgrade = { factor = 0 }
+
+		province_modifiers = {}
+
+		area_modifier = {}
+
+		country_modifiers = {}
+
+		on_upgraded = {}
+	}
+
+	tier_1 = {
+		upgrade_time = { months = 120 }
+
+		cost_to_upgrade = { factor = 1000 }
+
+		province_modifiers = {
+			local_tax_modifier = 0.03
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+			  tolerance_own = 1
+			}
+
+		on_upgraded = {}
+	}
+
+	tier_2 = {
+		upgrade_time = { months = 120 }
+
+		cost_to_upgrade = { factor = 2500 }
+
+		province_modifiers = {
+			local_tax_modifier = 0.33
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+			  missionaries = 1
+			  tolerance_own = 2
+			}
+
+		on_upgraded = {}
+	}
+
+	tier_3 = {
+		upgrade_time = { months = 120 }
+
+		cost_to_upgrade = { factor = 5000 }
+
+		province_modifiers = {
+			local_tax_modifier = 3.33
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+			missionaries = 1
+			tolerance_own = 2
+		}
+
+		on_upgraded = {
+			custom_tooltip = lizard_spires_zerat_tt	
+		}
+	}
+}
+
+#Khaga-Yetsa - the shadow spire
+khaga_yatsa = {
+
+	start = 5971 #metat tagokag
+	
+	date = 1001.01.01
+
+	time = { months = 12 }
+
+	build_cost = 1
+
+	can_be_moved = no
+
+	starting_tier = 0
+
+	type = monument
+
+	on_built = {}
+
+	on_destroyed = {}
+
+	build_trigger = {
+		if = {
+			limit = { owner = { has_country_flag = can_repair_spire_bypass_khaga_yatsa } }
+			culture_group = lizardfolk
+		}
+		else = {
+			owner = {
+				OR = {
+					primary_culture = ashhana_lizardfolk
+					accepted_culture = ashhana_lizardfolk
+				}
+				if = {
+					limit = { is_or_was_tag = { tag = S15 } }
+					mission_completed = S15_investigate_the_spires
+				}
+				else = {
+					OR = {
+						religion = shadow_pact
+						religion = zaradyrra
+					}
+				}
+			}
+		}
+	}
+
+	can_use_modifiers_trigger = {
+		if = {
+			limit = { owner = { has_country_flag = can_repair_spire_bypass_khaga_yatsa } }
+			culture_group = lizardfolk
+		}
+		else = {
+			owner = {
+				OR = {
+					primary_culture = ashhana_lizardfolk
+					accepted_culture = ashhana_lizardfolk
+				}
+				if = {
+					limit = { is_or_was_tag = { tag = S15 } }
+					mission_completed = S15_investigate_the_spires
+				}
+				else = {
+					OR = {
+						religion = shadow_pact
+						religion = zaradyrra
+					}
+				}
+			}
+		}
+
+	}
+
+	can_upgrade_trigger = {
+		if = {
+			limit = { owner = { has_country_flag = can_repair_spire_bypass_khaga_yatsa } }
+			culture_group = lizardfolk
+		}
+		else = {
+			owner = {
+				OR = {
+					primary_culture = ashhana_lizardfolk
+					accepted_culture = ashhana_lizardfolk
+				}
+				if = {
+					limit = { is_or_was_tag = { tag = S15 } }
+					mission_completed = S15_investigate_the_spires
+				}
+				else = {
+					OR = {
+						religion = shadow_pact
+						religion = zaradyrra
+					}
+				}
+			}
+		}
+
+	}
+
+
+	keep_trigger = { always = yes }
+
+	tier_0 = {
+		upgrade_time = { months = 0 }
+
+		cost_to_upgrade = { factor = 0 }
+
+		province_modifiers = {}
+
+		area_modifier = {}
+
+		country_modifiers = {}
+
+		on_upgraded = {}
+	}
+
+	tier_1 = {
+		upgrade_time = { months = 120 }
+
+		cost_to_upgrade = { factor = 1000 }
+
+		province_modifiers = {
+			local_hostile_attrition = 1
+			local_defensiveness = 0.25
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+			  tolerance_own = 1
+			}
+
+		on_upgraded = {
+			owner = {
+				set_estate_privilege = estate_burghers_gasabi_mutation
+			}
+		}
+	}
+
+	tier_2 = {
+		upgrade_time = { months = 120 }
+
+		cost_to_upgrade = { factor = 2500 }
+
+		province_modifiers = {
+			local_hostile_attrition = 1
+			local_defensiveness = 0.25
+			local_hostile_movement_speed = -0.1
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+			movement_speed = 0.05
+		}
+
+		on_upgraded = {
+			custom_tooltip =  lizard_spires_khaga_yatsa_2_tt
+		}
+	}
+
+	tier_3 = {
+		upgrade_time = { months = 120 }
+
+		cost_to_upgrade = { factor = 5000 }
+
+		province_modifiers = {
+			local_hostile_attrition = 2
+			local_defensiveness = 0.25
+			local_hostile_movement_speed = -0.2
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+			movement_speed = 0.1
+		}
+
+		on_upgraded = {
+			custom_tooltip =  lizard_spires_khaga_yatsa_3_tt
+		}
+	}
+}
+
+#Dummy Shalazar Spire
+dummy_shalazar_spire = {
+
+	start = 5650 #shalazar
+	
+	date = 1001.01.01
+
+	time = { months = 12 }
+
+	build_cost = 1
+
+	can_be_moved = no
+
+	starting_tier = 0
+
+	type = monument
+
+	on_built = {}
+
+	on_destroyed = {}
+
+	build_trigger = {
+		NOT = { has_global_flag = gate_of_earth_revealed }
+		owner = {
+			if = {
+				limit = { NOT = { mission_completed = khatalashya_approve_examination } }  
+				culture_group = lizardfolk
+				custom_trigger_tooltip = {
+					tooltip = lizard_spires_dummy_shalazar_tt
+					OR = {
+						ruler_has_personality = mage_personality
+						ruler_has_personality = fire_planetouched_personality
+						ruler_has_personality = wind_planetouched_personality
+						ruler_has_personality = water_planetouched_personality
+						ruler_has_personality = earth_planetouched_personality
+						ruler_has_personality = life_planetouched_personality
+						ruler_has_personality = shadow_planetouched_personality
+						has_estate = estate_artificers
+					}
+				}
+			}
+		}
+	}
+
+	can_use_modifiers_trigger = {
+		owner = {
+			culture_group = lizardfolk
+			if = {
+				limit = { NOT = { mission_completed = khatalashya_approve_examination } }
+				custom_trigger_tooltip = {
+					tooltip = lizard_spires_dummy_shalazar_tt
+					OR = {
+						ruler_has_personality = mage_personality
+						ruler_has_personality = fire_planetouched_personality
+						ruler_has_personality = wind_planetouched_personality
+						ruler_has_personality = water_planetouched_personality
+						ruler_has_personality = earth_planetouched_personality
+						ruler_has_personality = life_planetouched_personality
+						ruler_has_personality = shadow_planetouched_personality
+						has_estate = estate_artificers
+					}
+				}
+			}
+		}
+	}
+
+	can_upgrade_trigger = {
+		owner = {
+			culture_group = lizardfolk
+			if = {
+				limit = { NOT = { mission_completed = khatalashya_approve_examination } }
+				custom_trigger_tooltip = {
+					tooltip = lizard_spires_dummy_shalazar_tt
+					OR = {
+						ruler_has_personality = mage_personality
+						ruler_has_personality = fire_planetouched_personality
+						ruler_has_personality = wind_planetouched_personality
+						ruler_has_personality = water_planetouched_personality
+						ruler_has_personality = earth_planetouched_personality
+						ruler_has_personality = life_planetouched_personality
+						ruler_has_personality = shadow_planetouched_personality
+						has_estate = estate_artificers
+					}
+				}
+			}
+		}
+	}
+
+
+	keep_trigger = { }
+
+	tier_0 = {
+		upgrade_time = { months = 0 }
+
+		cost_to_upgrade = { factor = 0 }
+
+		province_modifiers = {}
+
+		area_modifier = {}
+
+		country_modifiers = {}
+
+		on_upgraded = {}
+	}
+
+	tier_1 = {
+		upgrade_time = { months = 120 }
+
+		cost_to_upgrade = { factor = 1000 }
+
+		province_modifiers = {
+			trade_goods_size = 1
+		}
+
+		area_modifier = {
+			local_hostile_movement_speed = -0.1
+		}
+
+		country_modifiers = {
+		}
+
+		on_upgraded = {
+			owner = {
+				custom_tooltip = lizard_spire_dummy_spire_mystery_tt
+				hidden_effect = {
+					country_event = {
+						id = sarhalevents.301
+					}
+				}
+				
+			}
+		}
+	}
+
+	tier_2 = {
+		upgrade_time = { months = 120 }
+
+		cost_to_upgrade = { factor = 2500 }
+
+		province_modifiers = {
+			trade_goods_size = 1
+		}
+
+		area_modifier = {
+			local_hostile_movement_speed = -0.1
+			trade_goods_size_modifier = 0.1
+		}
+
+		country_modifiers = {
+		}
+
+		on_upgraded = {
+			custom_tooltip = lizard_spire_dummy_spire_mystery_tt
+		}
+	}
+
+	tier_3 = {
+		upgrade_time = { months = 120 }
+
+		cost_to_upgrade = { factor = 5000 }
+
+		province_modifiers = {
+			trade_goods_size = 2
+		}
+
+		area_modifier = {
+			local_hostile_movement_speed = -0.1
+			trade_goods_size_modifier = 0.1
+		}
+
+		region_modifier = {
+			trade_goods_size_modifier = 0.1
+		}
+
+		country_modifiers = {
+		}
+
+		on_upgraded = {
+			custom_tooltip = lizard_spire_dummy_spire_mystery_tt
+		}
+	}
+}
+
+
+#Gate of Earth
+gate_of_earth = {
+
+	start = 5650 #shalazar
+	
+	date = 1855.06.20
+
+	time = { months = 12 }
+
+	build_cost = 1
+
+	can_be_moved = no
+
+	starting_tier = 1
+
+	type = monument
+
+	on_built = {}
+
+	on_destroyed = {}
+
+	build_trigger = {
+		custom_trigger_tooltip = {
+			tooltip = gate_of_earth_revealed_tt
+			has_global_flag = gate_of_earth_revealed
+		}
+		
+	}
+
+	can_use_modifiers_trigger = {
+	}
+
+	can_upgrade_trigger = {
+	}
+
+
+	keep_trigger = { always = yes }
+
+	tier_0 = {
+		upgrade_time = { months = 0 }
+
+		cost_to_upgrade = { factor = 0 }
+
+		province_modifiers = {}
+
+		area_modifier = {}
+
+		country_modifiers = {}
+
+		on_upgraded = {}
+	}
+
+	tier_1 = {
+		upgrade_time = { months = 120 }
+
+		cost_to_upgrade = { factor = 1000 }
+
+		province_modifiers = {
+			trade_goods_size = 1
+		}
+
+		area_modifier = {
+			local_hostile_movement_speed = -0.1
+		}
+
+		country_modifiers = {
+		}
+
+		on_upgraded = {
+			custom_tooltip = gate_of_earth_planetouched_heirs
+			#earth planetouched heirs +50%
+		}
+	}
+
+	tier_2 = {
+		upgrade_time = { months = 120 }
+
+		cost_to_upgrade = { factor = 2500 }
+
+		province_modifiers = {
+			trade_goods_size = 1
+		}
+
+		area_modifier = {
+			local_hostile_movement_speed = -0.1
+			trade_goods_size_modifier = 0.1
+		}
+
+		country_modifiers = {
+		}
+
+		on_upgraded = {
+			custom_tooltip = gate_of_earth_planetouched_heirs
+		}
+	}
+
+	tier_3 = {
+		upgrade_time = { months = 120 }
+
+		cost_to_upgrade = { factor = 5000 }
+
+		province_modifiers = {
+			trade_goods_size = 2
+		}
+
+		area_modifier = {
+			local_hostile_movement_speed = -0.1
+			trade_goods_size_modifier = 0.1
+		}
+
+		region_modifier = {
+			trade_goods_size_modifier = 0.1
+		}
+
+		country_modifiers = {
+		}
+
+		on_upgraded = {
+			owner = {
+				custom_tooltip = gate_of_earth_artificers_tt
+				hidden_effect = {
+					add_country_modifier = {
+						name = gate_of_earth_artificer_bonus
+						duration = -1
+					}
+				}
+			}
+			custom_tooltip = gate_of_earth_planetouched_heirs
+			#add magic stuff here later
+			5650 = {
+				change_trade_goods = coal
+			}
+		}
+	}
+}
+
+
+#Kuvunika Citadel
+kuvunika_citadel = {
+
+	start = 5585 #kuvunika
+	
+	date = 1001.01.01
+
+	time = { months = 12 }
+
+	build_cost = 1
+
+	can_be_moved = no
+
+	starting_tier = 1
+
+	type = monument
+
+	on_built = {}
+
+	on_destroyed = {}
+
+	build_trigger = {
+		owner = {
+			capital_scope = {
+				superregion = east_sarhal_superregion
+			}
+		}
+	}
+
+	can_use_modifiers_trigger = {
+		owner = {
+			capital_scope = {
+				superregion = east_sarhal_superregion
+			}
+		}
+	}
+
+	can_upgrade_trigger = {
+		owner = {
+			capital_scope = {
+				superregion = east_sarhal_superregion
+			}
+		}
+	}
+
+
+	keep_trigger = { always = yes }
+
+	tier_0 = {
+		upgrade_time = { months = 0 }
+
+		cost_to_upgrade = { factor = 0 }
+
+		province_modifiers = {}
+
+		area_modifier = {}
+
+		country_modifiers = {}
+
+		on_upgraded = {}
+	}
+
+	tier_1 = {
+		upgrade_time = { months = 120 }
+
+		cost_to_upgrade = { factor = 1000 }
+
+		province_modifiers = {
+			local_development_cost = -0.1
+			local_defensiveness = 0.25
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+			  global_regiment_recruit_speed = -0.1
+		}
+
+		on_upgraded = {
+		}
+	}
+
+	tier_2 = {
+		upgrade_time = { months = 120 }
+
+		cost_to_upgrade = { factor = 2500 }
+
+		province_modifiers = {
+			local_development_cost = -0.1
+			local_defensiveness = 0.25
+			supply_limit = 0.5
+			fort_level = 2
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+			  global_regiment_recruit_speed = -0.2
+		}
+
+		on_upgraded = {
+			
+		}
+	}
+
+	tier_3 = {
+		upgrade_time = { months = 120 }
+
+		cost_to_upgrade = { factor = 5000 }
+
+		province_modifiers = {
+			local_development_cost = -0.1
+			local_defensiveness = 0.25
+			supply_limit = 1
+			fort_level = 2
+		}
+
+		area_modifier = {
+		}
+
+		region_modifier = {
+			province_trade_power_modifier = 0.1
+		}
+
+		country_modifiers = {
+			  global_regiment_recruit_speed = -0.2
+		}
+
+		on_upgraded = {
+			owner = {
+				add_power_projection = {
+					type = 10_permanent_power_projection
+					amount = 10
+				}
+			}
+		}
+	}
+}
+
+
+#Arskitse
+arskitse = {
+
+	start = 6032 #Mubfadodja
+	
+	date = 1001.01.01
+
+	time = { months = 12 }
+
+	build_cost = 1
+
+	can_be_moved = no
+
+	starting_tier = 0
+
+	type = monument
+
+	on_built = {}
+
+	on_destroyed = {}
+
+	build_trigger = {
+		owner = {
+			OR ={
+				culture_group = baashidi
+				culture_group = lizardfolk
+			}
+		}
+	}
+
+	can_use_modifiers_trigger = {
+		owner = {
+			OR ={
+				culture_group = baashidi
+				culture_group = lizardfolk
+			}
+		}
+	}
+
+	can_upgrade_trigger = {
+		owner = {
+			OR ={
+				culture_group = baashidi
+				culture_group = lizardfolk
+			}
+			has_country_flag = merfolk_opinion_allied
+		}
+	}
+
+
+	keep_trigger = { always = yes }
+
+	tier_0 = {
+		upgrade_time = { months = 0 }
+
+		cost_to_upgrade = { factor = 0 }
+
+		province_modifiers = {}
+
+		area_modifier = {}
+
+		country_modifiers = {}
+
+		on_upgraded = {}
+	}
+
+	tier_1 = {
+		upgrade_time = { months = 120 }
+
+		cost_to_upgrade = { factor = 1000 }
+
+		province_modifiers = {
+		}
+
+		area_modifier = {
+			local_sailors_modifier = 0.5
+		}
+
+		country_modifiers = {
+		}
+
+		on_upgraded = {
+			owner = {
+				merfolk_add_opinion_effect_large = yes
+			}
+		}
+	}
+
+	tier_2 = {
+		upgrade_time = { months = 120 }
+
+		cost_to_upgrade = { factor = 2500 }
+
+		province_modifiers = {
+		}
+
+		area_modifier = {
+			local_sailors_modifier = 0.5
+		}
+
+		country_modifiers = {
+			diplomatic_reputation = 1
+		}
+
+		on_upgraded = {
+			owner = {
+				merfolk_add_opinion_effect_large = yes
+				custom_tooltip = arskitse_merfolk_boon_tt
+				every_owned_province = { 
+					limit = { has_province_modifier = offcoast_merfolk_allied } 
+					add_province_modifier = {
+						name = arskitse_merfolk_boon
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+
+	tier_3 = {
+		upgrade_time = { months = 120 }
+
+		cost_to_upgrade = { factor = 5000 }
+
+		province_modifiers = {
+		}
+
+		area_modifier = {
+			local_sailors_modifier = 0.5
+		}
+
+		country_modifiers = {
+			diplomatic_reputation = 1
+			naval_morale = 0.1
+		}
+
+		on_upgraded = {
+			owner = {
+				merfolk_add_opinion_effect_large = yes
+				if = {
+					limit = { NOT = { has_global_flag = arskitse_monument_trade_centers } }
+					custom_tooltip = arskitse_merfolk_trade_centers_tt
+					for = {
+						amount = 2
+						effect = "
+							random_owned_province = {
+								limit = {
+									NOT = { province_has_center_of_trade_of_level = 1 }
+									has_province_modifier = offcoast_merfolk_allied
+									}
+							center_of_trade = 1
+						}"
+					}
+					set_global_flag = arskitse_monument_trade_centers
+				}
+			}
+			
+		}
+	}
+}
+
+#Kazakesh
+kazakesh = {
+
+	start = 5763 #New Hookfield
+	
+	date = 1001.01.01
+
+	time = { months = 12 }
+
+	build_cost = 1
+
+	can_be_moved = no
+
+	starting_tier = 0
+
+	type = monument
+
+	on_built = {}
+
+	on_destroyed = {}
+
+	build_trigger = {
+		owner = {
+			OR = {
+				num_of_colonists = 1
+				is_vyzemby_culture = yes
+				culture_group = lizardfolk
+			}
+		}
+		custom_trigger_tooltip = {
+			tooltip = kazakesh_ananoma_build_tt
+			OR = {
+				has_province_modifier = ananoma_improved
+				has_province_modifier = ananoma_improved_more
+				has_province_modifier = ananoma_standart
+				has_province_modifier = cleared_land
+			}
+		}
+		hidden_trigger = {
+			NOT = { has_province_flag = verne_moved_this_spire }
+		}
+	}
+
+	can_use_modifiers_trigger = {
+	}
+
+	
+
+	can_upgrade_trigger = {
+		owner = {
+			OR = {
+				num_of_colonists = 1
+				is_vyzemby_culture = yes
+				culture_group = lizardfolk
+			}
+			custom_trigger_tooltip = {
+				tooltip = kazakesh_ananoma_build_tt
+				5763 = {
+					OR = {
+						has_province_modifier = ananoma_improved
+						has_province_modifier = ananoma_improved_more
+						has_province_modifier = ananoma_standart
+						has_province_modifier = cleared_land
+					}
+				}
+			}
+		}
+	}
+
+
+	keep_trigger = { always = yes }
+
+	tier_0 = {
+		upgrade_time = { months = 0 }
+
+		cost_to_upgrade = { factor = 0 }
+
+		province_modifiers = {}
+
+		area_modifier = {}
+
+		country_modifiers = {}
+
+		on_upgraded = {}
+	}
+
+	tier_1 = {
+		upgrade_time = { months = 120 }
+
+		cost_to_upgrade = { factor = 1000 }
+
+		province_modifiers = {
+			province_trade_power_modifier = 0.25
+			province_trade_power_value = 1
+		}
+
+		area_modifier = {
+		}
+		
+		region_modifier = {
+			local_colonial_growth = 40
+		}
+
+		country_modifiers = {
+		}
+
+		on_upgraded = {
+			owner = {
+				country_event = {
+					id = sarhalevents.302
+				}
+			}
+		}
+	}
+
+	tier_2 = {
+		upgrade_time = { months = 120 }
+
+		cost_to_upgrade = { factor = 2500 }
+
+		province_modifiers = {
+			province_trade_power_modifier = 0.25
+			province_trade_power_value = 2
+		}
+
+		area_modifier = {
+		}
+		
+		region_modifier = {
+			local_colonial_growth = 40
+		}
+
+		country_modifiers = {
+			trade_company_investment_cost = -0.1
+		}
+
+		on_upgraded = {
+			owner = {
+				country_event = {
+					id = sarhalevents.303
+				}
+			}
+		}
+	}
+
+	tier_3 = {
+		upgrade_time = { months = 120 }
+
+		cost_to_upgrade = { factor = 5000 }
+
+		province_modifiers = {
+			province_trade_power_modifier = 0.5
+			province_trade_power_value = 3
+		}
+
+		area_modifier = {
+		}
+		
+		region_modifier = {
+			local_colonial_growth = 40
+			local_autonomy = -0.1
+		}
+
+		country_modifiers = {
+			trade_company_investment_cost = -0.2
+			trade_company_governing_cost = -0.1
+		}
+
+		on_upgraded = {
+			owner = {
+				custom_tooltip = kazakesh_ananoma_bonus_tt
+				tooltip = {
+					add_province_modifier = {
+						name = kazakesh_ananoma_boon
+						duration = -1
+					}
+				}
+				hidden_effect = {
+					every_owned_province = {
+						limit = {
+							OR = {
+								has_province_modifier = ananoma_improved
+								has_province_modifier = ananoma_improved_more
+								has_province_modifier = ananoma_standart
+							}
+						}
+						add_province_modifier = {
+							name = kazakesh_ananoma_boon
+							duration = -1
+						}
+					}
+				}
+				country_event = {
+					id = sarhalevents.304
+				}
+			}
+		}
+	}
+}
+
+#Krahgradir
+krahgradir = {
+
+	start = 5477 #Krahilzin
+	
+	date = 1001.01.01
+
+	time = { months = 12 }
+
+	build_cost = 1
+
+	can_be_moved = no
+
+	starting_tier = 1
+
+	type = monument
+
+	on_built = {}
+
+	on_destroyed = {}
+
+	build_trigger = { }
+
+	can_use_modifiers_trigger = { 
+		culture_group = gnollish
+		owner = {
+			culture_group = gnollish 
+			NOT = { has_country_modifier = the_abolish_slavery_act }
+		}
+	}
+
+	can_upgrade_trigger = { 
+		culture_group = gnollish
+		owner = {
+			culture_group = gnollish 
+			NOT = { has_country_modifier = the_abolish_slavery_act }
+		}
+		if = {
+			limit = {
+				has_great_project = { type = krahgradir tier = 1 }
+				NOT = { has_great_project = { type = krahgradir tier = 2 } }
+			}
+			owner = {
+				OR = {
+					custom_trigger_tooltip = {
+						tooltip = krahgradir_two_tributaries_tooltip
+						calc_true_if = { 
+							amount = 2 
+							all_subject_country = {
+								is_right_subject_type_xhazobkult = yes 
+								is_right_development_xhazobkult = yes
+							} 
+						}
+					}
+					num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = { value = 4 trade_goods = slaves }
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				has_great_project = { type = krahgradir tier = 2 }
+			}
+			owner = {
+				OR = {
+					custom_trigger_tooltip = {
+						tooltip = krahgradir_five_tributaries_tooltip
+						calc_true_if = { 
+							amount = 5 
+							all_subject_country = {
+								is_right_subject_type_xhazobkult = yes 
+								is_right_development_xhazobkult = yes
+							} 
+						}
+					}
+					num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = { value = 10 trade_goods = slaves }
+				}
+			}
+		}
+	}
+
+	keep_trigger = { always = yes }
+
+	tier_0 = {
+		upgrade_time = { months = 0 }
+
+		cost_to_upgrade = { factor = 0 }
+
+		province_modifiers = {
+		}
+
+		area_modifier = {}
+
+		country_modifiers = {
+		}
+
+		on_upgraded = {}
+	}
+
+	tier_1 = {
+		upgrade_time = { months = 120 }
+
+		cost_to_upgrade = { factor = 1000 }
+
+		province_modifiers = {
+			trade_value_modifier = 0.15
+			local_friendly_movement_speed = 0.1
+		}
+
+		area_modifier = {
+		}
+		
+		region_modifier = {
+		}
+
+		country_modifiers = {
+			liberty_desire_from_subject_development = -0.1
+		}
+
+		on_upgraded = { }
+	}
+
+	tier_2 = {
+		upgrade_time = { months = 120 }
+
+		cost_to_upgrade = { factor = 2500 }
+
+		province_modifiers = {
+			trade_value_modifier = 0.3
+			local_friendly_movement_speed = 0.2
+		}
+
+		area_modifier = {
+		}
+		
+		region_modifier = {
+		}
+
+		country_modifiers = {
+			liberty_desire_from_subject_development = -0.2
+		}
+
+		on_upgraded = {
+			custom_tooltip = krahgradir_slave_bonus_1_tooltip
+			hidden_effect = {
+				owner = {
+					every_owned_province = {
+						limit = { trade_goods = slaves }
+						add_province_modifier = { name = krahgradir_slave_bonus_1 duration = -1 hidden = yes }
+					}
+				}
+			}
+			center_of_trade = 1
+		}
+	}
+
+	tier_3 = {
+		upgrade_time = { months = 120 }
+
+		cost_to_upgrade = { factor = 5000 }
+
+		province_modifiers = {
+		}
+
+		area_modifier = {
+			trade_value_modifier = 0.5
+			local_friendly_movement_speed = 0.4
+		}
+		
+		region_modifier = {
+		}
+
+		country_modifiers = {
+			liberty_desire_from_subject_development = -0.25
+			monarch_power_tribute = 1
+		}
+
+		conditional_modifier = {
+			trigger = {
+				owner = {
+					OR = {
+						production_leader = { trade_goods = slaves }
+						trading_bonus = { trade_goods = slaves value = yes }
+					}
+				}
+
+			 }
+			modifier = { 
+				merchants = 1
+				trade_steering = 0.1
+			}
+		}
+
+		on_upgraded = {
+			custom_tooltip = krahgradir_slave_bonus_2_tooltip
+			hidden_effect = {
+				owner = {
+					every_owned_province = {
+						limit = { has_province_modifier = krahgradir_slave_bonus_1 }
+						remove_province_modifier = krahgradir_slave_bonus_1
+						add_province_modifier = { name = krahgradir_slave_bonus_2 duration = -1 hidden = yes }
+					}
+				}
+			}
 		}
 	}
 }

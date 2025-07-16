@@ -74,6 +74,7 @@ merc_onyx_legion = {
 
 #Patrician Guard (Escann) - elite warriors for the Castonath patrician
 merc_patrician_guard = {
+	mercenary_desc_key = FREE_OF_ARMY_PROFESSIONALISM_COST
     regiments_per_development = 0.02
 	artillery_weight = 0.1
 	home_province = 833
@@ -567,40 +568,6 @@ merc_dishonoured = {
 	}
 }
 
-merc_wineport_watchers = {
-	regiments_per_development = 0.05
-	cavalry_weight = 0.1
-	artillery_weight = 0
-	cavalry_cap = 8
-	home_province = 101 # Wineport
-	sprites = { easterngfx_sprite_pack }
-    trigger = {
-		has_unlocked_merc_company = { merc_company = merc_wineport_watchers }
-		owns_core_province = 101
-	}
-	cost_modifier = 1.0
-	modifier = {
-		shock_damage_received = -0.10 # Trained to fight Lorents Cavalry
-	}
-}
-
-merc_foxalley_foxes = {
-	regiments_per_development = 0.025
-	cavalry_weight = 0.1
-	artillery_weight = 0
-	cavalry_cap = 8
-	home_province = 81 # Foxalley
-	sprites = { easterngfx_sprite_pack }
-    trigger = {
-		has_unlocked_merc_company = { merc_company = merc_foxalley_foxes }
-		owns_core_province = 81
-	}
-	cost_modifier = 1.0
-	modifier = {
-		movement_speed_onto_off_boat_modifier = 0.33 # These guys are sailors first and foremost (essentially marines)
-	}
-}
-
 #Malacnari Cannorian Artillery, unlocked via "The Secret of Gunpowder" mission.
 merc_malacnari_cannorian_artillery = {
     regiments_per_development = 0.05
@@ -621,7 +588,6 @@ merc_malacnari_cannorian_artillery = {
 
 #Nomsgaetir, unlocked via the Reverian MT (A05_gnomes_in_the_army)
 merc_nomsgaetir = {
-	mercenary_desc_key = FREE_OF_ARMY_PROFESSIONALISM_COST
     regiments_per_development = 0.05
 	cavalry_weight = 0
 	cavalry_cap = 0
@@ -1852,26 +1818,6 @@ merc_landshark_flamemarked_gnoll = {
 	}
 }
 
-#Boars of Dinh - Chien Binhrung MT
-merc_chien_boarsofdinh = {
-	mercenary_desc_key = FREE_OF_ARMY_PROFESSIONALISM_COST
-	regiments_per_development = 0.04
-	cavalry_weight = 0.15
-	cavalry_cap = 8
-	artillery_weight = 0
-	home_province = 4955 #Keoaden
-	sprites = { south_kai_sprite_pack }
-	trigger = {
-		has_unlocked_merc_company = { merc_company = merc_chien_boarsofdinh }
-	}
-	cost_modifier = 0.5
-	modifier = {
-		discipline = 0.075
-		shock_damage_received = 0.1
-		shock_damage = 0.1
-	}
-}
-
 # Gor Burad Engineering Corps
 merc_steam_baron_engineering_corps = {
     regiments_per_development = 0.02
@@ -1929,42 +1875,6 @@ merc_deepwoods_orc_rangers = {
 		shock_damage_received = -0.1
 		movement_speed = 0.2
 	}
-}
-
-merc_karakhanbari_grenadiers = { 
-	mercenary_desc_key = FREE_OF_ARMY_PROFESSIONALISM_COST 
-	mercenary_desc_key = FREE_OF_FORCELIMIT_COST 
-	regiments_per_development = 0.05 
-	cavalry_weight = 0 
-	cavalry_cap = 0 
-	artillery_weight = 0.2
-	counts_towards_force_limit = no
-	sprites = { karakhanbar_sprite_pack } 
-	trigger = { 
-		has_country_flag = karakhanbar_might_makes_right_effect_mercenary_idea_reward_flag 
-	} 
-	cost_modifier = 0.50 
-	modifier = { 
-		fire_damage = 0.2 
-	} 
-} 
- 
-merc_karakhanbari_elven_rangers = { 
-	mercenary_desc_key = FREE_OF_ARMY_PROFESSIONALISM_COST 
-	regiments_per_development = 0.03 
-	cavalry_weight = 0 
-	cavalry_cap = 0 
-	artillery_weight = 0 
-	sprites = { moon_elf_sprite_pack } 
-	trigger = { 
-		has_country_flag = karakhanbar_elven_mercenaries 
-	} 
-	cost_modifier = 0.75 
-	modifier = { 
-		discipline = 0.1 
-		movement_speed = 0.1 
-		manpower_recovery_speed = -0.25 
-	} 
 }
 
 # Eordand Religion Mercs
@@ -2086,455 +1996,75 @@ merc_border_guards = {
 	}
 }
 
-#Maghargama
-merc_wolfguard = {
-	mercenary_desc_key = FREE_OF_ARMY_PROFESSIONALISM_COST
-	regiments_per_development = 0.1
-	home_province = 5253
-	cavalry_weight = 0.1
-	cavalry_cap = 0.2
-	artillery_weight = 0.5
-	sprites = { triunicgfx_sprite_pack }
+#Xanzerbexis
+merc_brainmarrow_pact = {
+	regiments_per_development = 0.05
+	home_province = 377
+	cavalry_weight = 0
+	cavalry_cap = 0
+	artillery_weight = 0
+	sprites = { gnoll_sprite_pack }
 	trigger = {
-		has_country_flag = I90_unlock_wolfguard
+		has_country_flag = A49_unlocked_merc_brainmarrow_pact
 	}
-	cost_modifier = 0.6
+	cost_modifier = 0.8
 	modifier = {
-		loot_amount = 0.4
-		shock_damage = 0.15
+		infantry_power = 0.1
+		discipline = 0.05
 	}
+	max_size = 20
 }
 
-#Wyvernheart Burnbloods
-merc_wyvernheart_burnblood_company_1 = {
-    mercenary_desc_key = FREE_OF_ARMY_PROFESSIONALISM_COST
-
-    regiments_per_development = 0
-    cost_modifier = 0.5
-
-    cavalry_weight = 0
-    artillery_weight = 0
-
-    cavalry_cap = 0
-
-    sprites = { easterngfx_sprite_pack }
-
-    trigger = {
-        has_country_flag = wyvernheart_burnblood_1
-    }
-
-    modifier = {
-        shock_damage = 0.10
-		shock_damage_received = 0.20
-		reinforce_speed = 0.25
-    }
-
-    min_size = 10
-    max_size = 10
-    manpower_pool = 20
+merc_brass_gnolls = {
+	regiments_per_development = 0.07
+	home_province = 365
+	cavalry_weight = 0
+	cavalry_cap = 0
+	artillery_weight = 0
+	sprites = { gnoll_sprite_pack }
+	trigger = {
+		has_country_flag = A49_unlocked_merc_merc_brass_gnolls
+	}
+	cost_modifier = 1.5
+	modifier = {
+		land_morale = 0.15
+		reserves_organisation = 0.1
+	}
+	max_size = 32
 }
 
-merc_wyvernheart_burnblood_company_2_1 = {
-    mercenary_desc_key = FREE_OF_ARMY_PROFESSIONALISM_COST
-
-    regiments_per_development = 0
-    cost_modifier = 0.5
-
-    cavalry_weight = 0
-    artillery_weight = 0
-
-    cavalry_cap = 0
-
-    sprites = { easterngfx_sprite_pack }
-
-    trigger = {
-        has_country_flag = wyvernheart_burnblood_2
-    }
-
-    modifier = {
-        shock_damage = 0.10
-		shock_damage_received = 0.10
-		reinforce_speed = 0.25
-    }
-
-    min_size = 10
-    max_size = 10
-    manpower_pool = 20
+merc_tellumite_pink_barkers = {
+	regiments_per_development = 0.1
+	home_province = 417
+	cavalry_weight = 0
+	cavalry_cap = 0
+	artillery_weight = 0.4
+	sprites = { gnoll_sprite_pack }
+	trigger = {
+		has_country_flag = A49_unlocked_merc_tellumite_pink_barkers
+	}
+	cost_modifier = 1
+	modifier = {
+		fire_damage = 0.2
+		female_advisor_chance = 0.5
+	}
+	max_size = 28
 }
 
-merc_wyvernheart_burnblood_company_2_2 = {
-    mercenary_desc_key = FREE_OF_ARMY_PROFESSIONALISM_COST
-
-    regiments_per_development = 0
-    cost_modifier = 0.5
-
-    cavalry_weight = 0
-    artillery_weight = 0
-
-    cavalry_cap = 0
-
-    sprites = { easterngfx_sprite_pack }
-
-    trigger = {
-        has_country_flag = wyvernheart_burnblood_2
-    }
-
-    modifier = {
-        shock_damage = 0.10
-		shock_damage_received = 0.10
-		reinforce_speed = 0.25
-    }
-
-    min_size = 10
-    max_size = 10
-    manpower_pool = 20
+merc_heroes_of_the_folly = {
+	regiments_per_development = 0.1
+	home_province = 451
+	cavalry_weight = 0
+	cavalry_cap = 0
+	artillery_weight = 0.3
+	sprites = { gnoll_sprite_pack }
+	trigger = {
+		has_country_flag = A49_unlocked_merc_heroes_of_the_folly
+	}
+	cost_modifier = 2
+	modifier = {
+		land_morale = 0.15
+		discipline = 0.10
+	}
+	max_size = 52
 }
-merc_wyvernheart_burnblood_company_3_1 = {
-    mercenary_desc_key = FREE_OF_ARMY_PROFESSIONALISM_COST
-
-    regiments_per_development = 0
-    cost_modifier = 0.5
-
-    cavalry_weight = 0
-    artillery_weight = 0
-
-    cavalry_cap = 0
-
-    sprites = { easterngfx_sprite_pack }
-
-    trigger = {
-        has_country_flag = wyvernheart_burnblood_3
-    }
-
-    modifier = {
-        shock_damage = 0.10
-		shock_damage_received = 0.10
-		fire_damage = 0.10
-		morale_damage_received = -0.10
-		reinforce_speed = 0.25
-    }
-
-    min_size = 15
-    max_size = 15
-    manpower_pool = 30
-}
-
-merc_wyvernheart_burnblood_company_3_2 = {
-    mercenary_desc_key = FREE_OF_ARMY_PROFESSIONALISM_COST
-
-    regiments_per_development = 0
-    cost_modifier = 0.5
-
-    cavalry_weight = 0
-    artillery_weight = 0
-
-    cavalry_cap = 0
-
-    sprites = { easterngfx_sprite_pack }
-
-    trigger = {
-        has_country_flag = wyvernheart_burnblood_3
-    }
-
-    modifier = {
-        shock_damage = 0.10
-		shock_damage_received = 0.10
-		fire_damage = 0.10
-		morale_damage_received = -0.10
-		reinforce_speed = 0.25
-    }
-
-    min_size = 15
-    max_size = 15
-    manpower_pool = 30
-}
-
-merc_wyvernheart_burnblood_company_4_1 = {
-    mercenary_desc_key = FREE_OF_ARMY_PROFESSIONALISM_COST
-
-    regiments_per_development = 0
-    cost_modifier = 0.8
-
-    cavalry_weight = 0
-    artillery_weight = 0.33
-
-    cavalry_cap = 0
-
-    sprites = { easterngfx_sprite_pack }
-
-    trigger = {
-        has_country_flag = wyvernheart_burnblood_4
-    }
-
-    modifier = {
-        shock_damage = 0.10
-		shock_damage_received = 0.10
-		fire_damage = 0.10
-		morale_damage_received = -0.10
-		reinforce_speed = 0.25
-    }
-
-    min_size = 30
-    max_size = 30
-    manpower_pool = 60
-}
-
-merc_wyvernheart_burnblood_company_4_2 = {
-    mercenary_desc_key = FREE_OF_ARMY_PROFESSIONALISM_COST
-
-    regiments_per_development = 0
-    cost_modifier = 0.8
-
-    cavalry_weight = 0
-    artillery_weight = 0.33
-
-    cavalry_cap = 0
-
-    sprites = { easterngfx_sprite_pack }
-
-    trigger = {
-        has_country_flag = wyvernheart_burnblood_4
-    }
-
-    modifier = {
-        shock_damage = 0.10
-		shock_damage_received = 0.10
-		fire_damage = 0.10
-		morale_damage_received = -0.10
-		reinforce_speed = 0.25
-    }
-
-    min_size = 30
-    max_size = 30
-    manpower_pool = 60
-}
-
-merc_wyvernheart_burnblood_company_4_3 = {
-    mercenary_desc_key = FREE_OF_ARMY_PROFESSIONALISM_COST
-
-    regiments_per_development = 0
-    cost_modifier = 0.8
-
-    cavalry_weight = 0
-    artillery_weight = 0.33
-
-    cavalry_cap = 0
-
-    sprites = { easterngfx_sprite_pack }
-
-    trigger = {
-        has_country_flag = wyvernheart_burnblood_4
-    }
-
-    modifier = {
-        shock_damage = 0.10
-		shock_damage_received = 0.10
-		fire_damage = 0.10
-		morale_damage_received = -0.10
-		reinforce_speed = 0.25
-    }
-
-    min_size = 30
-    max_size = 30
-    manpower_pool = 60
-}
-
-merc_wyvernheart_burnblood_company_5_1 = {
-    mercenary_desc_key = FREE_OF_ARMY_PROFESSIONALISM_COST
-
-    regiments_per_development = 0
-    cost_modifier = 0.8
-
-    cavalry_weight = 0
-    artillery_weight = 0.33
-
-    cavalry_cap = 0
-
-    sprites = { easterngfx_sprite_pack }
-
-    trigger = {
-        has_country_flag = wyvernheart_burnblood_5
-    }
-
-    modifier = {
-        shock_damage = 0.20
-		fire_damage = 0.10
-		morale_damage_received = -0.10
-		reinforce_speed = 0.25
-    }
-
-    min_size = 30
-    max_size = 30
-    manpower_pool = 90
-}
-merc_wyvernheart_burnblood_company_5_2 = {
-    mercenary_desc_key = FREE_OF_ARMY_PROFESSIONALISM_COST
-
-    regiments_per_development = 0
-    cost_modifier = 0.8
-
-    cavalry_weight = 0
-    artillery_weight = 0.33
-
-    cavalry_cap = 0
-
-    sprites = { easterngfx_sprite_pack }
-
-    trigger = {
-        has_country_flag = wyvernheart_burnblood_5
-    }
-
-    modifier = {
-        shock_damage = 0.20
-		fire_damage = 0.10
-		morale_damage_received = -0.10
-		reinforce_speed = 0.25
-    }
-
-    min_size = 30
-    max_size = 30
-    manpower_pool = 90
-}
-merc_wyvernheart_burnblood_company_5_3 = {
-    mercenary_desc_key = FREE_OF_ARMY_PROFESSIONALISM_COST
-
-    regiments_per_development = 0
-    cost_modifier = 0.8
-
-    cavalry_weight = 0
-    artillery_weight = 0.33
-
-    cavalry_cap = 0
-
-    sprites = { easterngfx_sprite_pack }
-
-    trigger = {
-        has_country_flag = wyvernheart_burnblood_5
-    }
-
-    modifier = {
-        shock_damage = 0.20
-		fire_damage = 0.10
-		morale_damage_received = -0.10
-		reinforce_speed = 0.25
-    }
-
-    min_size = 30
-    max_size = 30
-    manpower_pool = 90
-}
-
-merc_wyvernheart_burnblood_company_6_1 = {
-    mercenary_desc_key = FREE_OF_ARMY_PROFESSIONALISM_COST
-
-    regiments_per_development = 0
-    cost_modifier = 0.8
-
-    cavalry_weight = 0
-    artillery_weight = 0.33
-
-    cavalry_cap = 0
-
-    sprites = { easterngfx_sprite_pack }
-
-    trigger = {
-        has_country_flag = wyvernheart_burnblood_6
-    }
-
-    modifier = {
-        shock_damage = 0.20
-		fire_damage = 0.10
-		morale_damage_received = -0.10
-		reinforce_speed = 0.25
-    }
-
-    min_size = 40
-    max_size = 40
-    manpower_pool = 120
-}
-merc_wyvernheart_burnblood_company_6_2 = {
-    mercenary_desc_key = FREE_OF_ARMY_PROFESSIONALISM_COST
-
-    regiments_per_development = 0
-    cost_modifier = 0.8
-
-    cavalry_weight = 0
-    artillery_weight = 0.33
-
-    cavalry_cap = 0
-
-    sprites = { easterngfx_sprite_pack }
-
-    trigger = {
-        has_country_flag = wyvernheart_burnblood_6
-    }
-
-    modifier = {
-        shock_damage = 0.20
-		fire_damage = 0.10
-		morale_damage_received = -0.10
-		reinforce_speed = 0.25
-    }
-
-    min_size = 40
-    max_size = 40
-    manpower_pool = 120
-}
-merc_wyvernheart_burnblood_company_6_3 = {
-    mercenary_desc_key = FREE_OF_ARMY_PROFESSIONALISM_COST
-
-    regiments_per_development = 0
-    cost_modifier = 0.8
-
-    cavalry_weight = 0
-    artillery_weight = 0.33
-
-    cavalry_cap = 0
-
-    sprites = { easterngfx_sprite_pack }
-
-    trigger = {
-        has_country_flag = wyvernheart_burnblood_6
-    }
-
-    modifier = {
-        shock_damage = 0.20
-		fire_damage = 0.10
-		morale_damage_received = -0.10
-		reinforce_speed = 0.25
-    }
-
-    min_size = 40
-    max_size = 40
-    manpower_pool = 120
-}
-merc_wyvernheart_burnblood_company_6_4 = {
-    mercenary_desc_key = FREE_OF_ARMY_PROFESSIONALISM_COST
-
-    regiments_per_development = 0
-    cost_modifier = 0.8
-
-    cavalry_weight = 0
-    artillery_weight = 0.33
-
-    cavalry_cap = 0
-
-    sprites = { easterngfx_sprite_pack }
-
-    trigger = {
-        has_country_flag = wyvernheart_burnblood_6
-    }
-
-    modifier = {
-        shock_damage = 0.20
-		fire_damage = 0.10
-		morale_damage_received = -0.10
-		reinforce_speed = 0.25
-    }
-
-    min_size = 40
-    max_size = 40
-    manpower_pool = 120
-}
-
-

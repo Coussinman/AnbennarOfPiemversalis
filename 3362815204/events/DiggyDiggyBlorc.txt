@@ -1,6 +1,6 @@
 namespace = blorc
 
-###might need to make seperate events for the trophies so i'm leaving a huge gap in IDs
+###might need to make separate events for the trophies so i'm leaving a huge gap in IDs
 #Black Orc Trophies
 #khugdihr
 province_event = {
@@ -2345,6 +2345,11 @@ country_event = {
 					blorc_trophy15 = { remove_province_modifier = blorc_trophy15 ROOT = { blorc_plunder_effect = { tax = 75 gain = 75 }  blorc_plunder_effect = { prod = 75 gain = 75 } blorc_plunder_effect = { man = 75 gain = 75 } } }
 				}
 			}
+		}
+		if = { # Masked Butcher Bloodied Altar Moonlight modifier upgrade
+			limit = { OR = { tag = H81 was_tag = H81 } 4033 = { has_province_flag = mb_moonlight_province_flg } }
+			custom_tooltip = moonlight_upgrade_tt
+			hidden_effect = { country_event = { id = flavour_maskedbutcher.101 } }
 		}
 	}
 

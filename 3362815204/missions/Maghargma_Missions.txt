@@ -287,7 +287,10 @@ maghargma_dynamic_westmarches_1 = {
 				has_building = ramparts
 				OR = {
 					local_autonomy = 10
-					NOT = { has_province_modifier = autonomy_decreased } 
+					AND = {
+						local_autonomy = 10
+						NOT = { has_province_modifier = autonomy_decreased } 
+					}
 				}
 			}
 		}
@@ -403,7 +406,11 @@ maghargma_dynamic_westmarches_2 = {
 						limit = { NOT = { has_terrain = city_terrain }  } 
 						add_core = J51
 					}
-					release = J51
+					release_with_religion_and_culture = {
+						tag = J51
+						culture = metsamic
+						religion = kodave_followers
+					}
 					J51 = {
 						maghargma_create_special_subject = yes
 					}
@@ -540,9 +547,9 @@ maghargma_one_post_westmarches = {
 			region = serpents_vale_region
 			OR = {
 				NOT = { country_or_non_sovereign_subject_holds = ROOT }
-				OR = {
-					has_influencing_fort = no
-					any_neighbor_province = { has_influencing_fort = no }
+				NOT = {
+					has_influencing_fort = yes
+					any_neighbor_province = { owned_by = ROOT has_influencing_fort = yes }
 				}
 			}
 		} 
@@ -693,12 +700,21 @@ maghargma_two = {
 		} 
 
 		trigger = {
-			all_subject_country = {
-				OR = {
-					NOT = { culture_group = ogre }
-					AND = {
-						has_50_opinion_improved_relation = { target = ROOT }
-						NOT = { liberty_desire = 25 }
+			custom_trigger_tooltip = {
+				tooltip = maghargma_the_carrot_tt
+				all_subject_country = {
+					OR = {
+						NOT = { culture_group = ogre }
+						AND = {
+							OR = {
+								has_50_opinion_improved_relation = { target = ROOT }
+								has_opinion = {
+									who = ROOT
+									value = 190
+								}
+							}
+							NOT = { liberty_desire = 25 }
+						}
 					}
 				}
 			}
@@ -917,7 +933,11 @@ maghargma_dynamic_heartlands_2 = {
 						limit = { NOT = { has_terrain = city_terrain }  } 
 						add_core = J50
 					}
-					release = J50
+					release_with_religion_and_culture = {
+						tag = J50
+						culture = metsamic
+						religion = yukel_followers
+					}
 					J50 = {
 						maghargma_create_special_subject = yes
 					}
@@ -1104,28 +1124,29 @@ maghargma_dynamic_trolls_2 = {
 		provinces_to_highlight = {  
 			continent = europe
 			owned_by = ROOT
-			has_troll_minority_trigger = yes
+			has_any_troll_pop_trigger = yes
 			OR = {
 				has_tax_building_trigger = no
-				OR = {
-					has_influencing_fort = no
-					any_neighbor_province = { has_influencing_fort = no }
+				NOT = {
+					has_influencing_fort = yes
+					any_neighbor_province = { owned_by = ROOT has_influencing_fort = yes }
 				}
 			}
 		} 
 
 		trigger = {  
-			all_owned_province = {
-				OR = {
-					AND = {
+			custom_trigger_tooltip = {
+				tooltip = maghargma_a_new_kind_of_livestock_tt
+				all_owned_province = {
+					OR = {
 						NOT = { continent = europe }
-						NOT = { has_troll_minority_trigger = yes }
-					}
-					AND = {
-						has_tax_building_trigger = yes
-						OR = {
-							has_influencing_fort = yes
-							any_neighbor_province = { has_influencing_fort = yes }
+						NOT = { has_any_troll_pop_trigger = yes }
+						AND = {
+							has_tax_building_trigger = yes
+							OR = {
+								has_influencing_fort = yes
+								any_neighbor_province = { has_influencing_fort = yes }
+							}
 						}
 					}
 				}
@@ -1289,12 +1310,7 @@ maghargma_two_post_trolls = {
 				name = I90_cannorian_cannons
 				duration = -1
 			}
-			custom_tooltip = maghargma_lords_of_frost_tt
-			hidden_effect = {
-				europe = { 
-					add_permanent_claim = ROOT 
-				}
-			}
+			anb_gain_permanent_claims_on_continent = { cannor = yes }
 		}
 	}
 }
@@ -1428,7 +1444,7 @@ maghargma_three = {
 			}
 			add_country_modifier = {
 				name = I90_securing_the_north
-				duration = 36525 #100 Years
+				duration = 36500 #100 Years
 			}
 		}
 	}
@@ -1834,7 +1850,8 @@ maghargma_three = {
 					name = goblin_military
 					duration = -1
 					hidden = yes
-				}				
+				}
+				change_unit_type = tech_cave_goblin	
 				custom_tooltip = update_unit_sprites_tooltip
 				hidden_effect = { update_unit_sprites_for_racial_mil = yes }
 				west_dwarovar_region = { 
@@ -1892,14 +1909,14 @@ maghargma_three = {
 			}
 			serpents_vale_region = {
 				limit = { has_building = farm_estate } 
-				add_province_modifier = {
+				add_permanent_province_modifier = {
 					name = I90_industrial_farming
 					duration = -1
 				}
 			}
 			amldihr_area = {
 				limit = { has_building = farm_estate } 
-				add_province_modifier = {
+				add_permanent_province_modifier = {
 					name = I90_industrial_farming
 					duration = -1
 				}
@@ -2076,6 +2093,10 @@ maghargma_four = {
 						}
 						cede_province = ROOT
 						add_core = ROOT
+						add_permanent_province_modifier = {
+							name = I90_greener_grass
+							duration = 10950 #30 years
+						}
 					}
 				}
 			}
@@ -2153,12 +2174,13 @@ maghargma_four = {
 			if = {
 				limit = {
 					calc_true_if = {
-						all_subject_country = {
+						all_known_country = {
 							culture_group = centaur
 							capital_scope = { region = east_forbidden_plains_region } 
 						}
 						amount = 2
 					}
+					religion = feast_of_the_gods
 				}
 				custom_trigger_tooltip = {
 					tooltip = maghargma_lord_of_the_plains_tt
@@ -2305,7 +2327,7 @@ maghargma_four = {
 							trade_goods = mithril
 						}
 					}
-					add_province_modifier = {
+					add_permanent_province_modifier = {
 						name = I90_strip_mining
 						duration = -1
 					}
@@ -2313,9 +2335,9 @@ maghargma_four = {
 			}
 			if = {
 				limit = { ROOT = { mission_completed = maghargma_new_subjects } }
-				add_goblin_minority_size_effect = yes
+				nuzurbokh_region = { add_goblin_minority_size_effect = yes }
 			}
-			add_ogre_minority_size_effect = yes
+			nuzurbokh_region = { add_ogre_minority_size_effect = yes }
 		}
 	}
 }
@@ -2433,7 +2455,11 @@ maghargma_dynamic_brightmarch_1 = {
 						limit = { NOT = { has_terrain = city_terrain }  } 
 						add_core = J50
 					}
-					release = J50
+					release_with_religion_and_culture = {
+						tag = J50
+						culture = metsamic
+						religion = yukel_followers
+					}
 					J50 = {
 						maghargma_create_special_subject = yes
 					}
@@ -2659,8 +2685,10 @@ maghargma_dynamic_ancestor_1 = {
 				province_id = 6847
 				province_id = 6834
 			}
-			NOT = { development = 20 }
-			NOT = { has_building = university }
+			OR = {
+				NOT = { development = 20 }
+				NOT = { has_building = university }
+			}
 		} 
 
 		trigger = {  
@@ -2761,9 +2789,9 @@ maghargma_four_post_ancestor = {
 		required_missions = { maghargma_the_final_piece } 
 		provinces_to_highlight = {  
 			region = demon_hills_region
-			OR = {
-				has_influencing_fort = no
-				any_neighbor_province = { has_influencing_fort = no }
+			NOT = {
+				has_influencing_fort = yes
+				any_neighbor_province = { owned_by = ROOT has_influencing_fort = yes }
 			}
 		} 
 
@@ -2775,25 +2803,34 @@ maghargma_four_post_ancestor = {
 					has_influencing_fort = yes
 				}
 			}
-			OR = {	
-				custom_trigger_tooltip = {
-					tooltip = rending_has_not_happened
-					NOT = { has_global_flag = rending_happened }
+			if = {
+				limit = { NOT = { has_global_flag = rending_over } }
+				OR = {	
+					custom_trigger_tooltip = {
+						tooltip = rending_has_not_happened
+						NOT = { has_global_flag = rending_happened }
+					}
+					has_country_modifier = hokuma_scoured_modifier
 				}
-				has_country_modifier = hokuma_scoured_modifier
+			}
+			else = {
+				adm_power = 20
+				dip_power = 20
+				mil_power = 20
 			}
 		}
 
 		effect = {
-			custom_tooltip = maghargma_lords_of_stone_tt
-			hidden_effect = {
-				asia = {
-					add_permanent_claim = ROOT 
-				} 
-			}
+			anb_gain_permanent_claims_on_continent = { haless = yes }
 			add_country_modifier = {
 				name = I90_continental_claims
 				duration = -1
+			}
+			if = { 
+				limit = { has_global_flag = rending_over }
+				add_adm_power = -20
+				add_dip_power = -20
+				add_mil_power = -20
 			}
 		}
 	}
@@ -2822,6 +2859,7 @@ maghargma_five = {
 						}
 						amount = 2
 					}
+					religion = feast_of_the_gods
 				}
 				custom_trigger_tooltip = {
 					tooltip = maghargma_sieze_the_serpent_tt
@@ -2869,7 +2907,7 @@ maghargma_five = {
 			5102 = {
 				add_trade_modifier = {
 					who = ROOT
-					duration = 36525 # Years
+					duration = 36500 #100 Years
 					key = "Serpent Dominance"
 					power = 50
 				}
@@ -3070,7 +3108,7 @@ maghargma_five = {
 					}
 					cede_province = ROOT 
 					add_core = ROOT
-					add_province_modifier = {
+					add_permanent_province_modifier = {
 						name = I90_serpentspine_plantations
 						duration  = -1
 					}
@@ -3271,7 +3309,11 @@ maghargma_dynamic_amberlands_2 = {
 						} 
 						add_core = J52
 					}
-					release = J52
+					release_with_religion_and_culture = {
+						tag = J52
+						culture = khamgunai
+						religion = enuuk_followers
+					}
 					J52 = {
 						maghargma_create_special_subject = yes
 					}

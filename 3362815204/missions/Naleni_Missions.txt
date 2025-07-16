@@ -141,24 +141,18 @@ Naleni_branch_two = {
 						area = emot_nepas_area
 						area = riyiwedeb_area
 					}
-					OR = {
-						AND = {
-							culture = ofehibi
-							NOT = { has_tax_building_trigger = yes } 
-						}
-						NOT = { country_or_non_sovereign_subject_holds = ROOT } 
-					}
+					NOT = { country_or_non_sovereign_subject_holds = ROOT }
 				}
 				AND = {
-					superregion = east_sarhal_superregion
-					owned_by = ROOT
 					culture = ofehibi
-					NOT = {
-						has_tax_building_trigger = yes
+					owned_by = ROOT
+					OR = {
+						NOT = { has_tax_building_trigger = yes } 
+						unrest = 0.01
 					}
 				}
 			}
-		}
+		}	
 
 		trigger = {
 			emot_nepas_area = {
@@ -175,7 +169,7 @@ Naleni_branch_two = {
 					AND = {
 						culture = ofehibi
 						has_tax_building_trigger = yes
-						NOT = { unrest = 0 } 
+						NOT = { unrest = 0.01 } 
 					}
 				}
 			}
@@ -217,6 +211,13 @@ Naleni_branch_two = {
 				}
 				add_permanent_claim = ROOT
 			}
+			ascension_cape_area = {
+				limit = {
+					NOT = { is_core = ROOT } 
+					NOT = { owned_by = ROOT } 
+				}
+				add_permanent_claim = ROOT
+			}
 		}
 	}
 
@@ -245,7 +246,7 @@ Naleni_branch_two = {
 			5446 = {
 				OR = {
 					culture = metobesebi
-					has_province_modifier = harpy_roost
+					harpy_roost_st_has_non_fledgling_roost = yes
 				}
 				has_tax_building_trigger = yes
 			}
@@ -354,6 +355,7 @@ Naleni_branch_three = {
 				OR = {
 					has_province_modifier = slaves_raided
 					has_building = naval_battery
+					has_building = coastal_defence
 					country_or_non_sovereign_subject_holds = ROOT
 				}
 			}
@@ -382,7 +384,7 @@ Naleni_branch_three = {
 		trigger = {
 			5530 = {
 				has_tax_building_trigger = yes
-				has_province_modifier = harpy_roost
+				harpy_roost_st_has_non_fledgling_roost = yes
 				has_building = fort_15th
 				num_of_times_improved = 2
 			}
@@ -487,7 +489,7 @@ Naleni_branch_four = {
 
 		trigger = {
 			has_won_war_against = {
-				who = L57
+				who = R04
 				max_years_since = -1
 			}
 			capital_scope = { has_building = temple } 
@@ -521,7 +523,7 @@ Naleni_branch_four = {
 				duration = -1
 			}
 			if = {
-				limit = { NOT = { navy_tradition = 30 }  } 
+				limit = { NOT = { navy_tradition = 25 }  } 
 				add_dip_power = -100
 			}
 		}
@@ -608,7 +610,7 @@ Naleni_branch_four = {
 			region = rahen_coast_region
 			NOT = { has_province_modifier = slaves_raided } 
 			has_port = yes
-			NOT = { owned_by = ROOT } 
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 		}
 
 		trigger = {
@@ -617,10 +619,11 @@ Naleni_branch_four = {
 			rahen_coast_region = {
 				type = all
 				OR = {
-					owned_by = L55
+					country_or_non_sovereign_subject_holds = ROOT
 					has_province_modifier = slaves_raided
 					has_port = no
 					has_building = naval_battery
+					has_building = coastal_defence
 				}
 			}
 		}
@@ -816,7 +819,7 @@ naleni_branch_two_p2 = {
 		trigger = {
 			num_of_owned_provinces_with = {
 				value = 18
-				OR = { culture = metobesebi } 
+				culture = metobesebi
 				has_tax_building_trigger = yes
 			}
 			OR = {
@@ -934,7 +937,7 @@ naleni_branch_two_p2 = {
 				development = 30
 				has_tax_building_trigger = yes
 				has_courthouse_building_trigger = yes
-				has_province_modifier = harpy_roost
+				harpy_roost_st_has_non_fledgling_roost = yes
 				has_great_project = {
 					type = crater_of_the_martyr
 					tier = 1
@@ -1493,7 +1496,7 @@ naleni_branch_four_p2 = {
 				NOT = { has_dock_building_trigger = yes } 
 				NOT = { has_shipyard_building_trigger = yes } 
 				NOT = { has_building = temple } 
-				NOT = { has_province_modifier = harpy_roost } 
+				NOT = { harpy_roost_st_has_non_fledgling_roost = yes } 
 				NOT = { owned_by = L55 } 
 				NOT = { is_core = L55 } 
 				NOT = { development = 30 } 
@@ -1507,7 +1510,7 @@ naleni_branch_four_p2 = {
 				has_dock_building_trigger = yes
 				has_shipyard_building_trigger = yes
 				has_tax_building_trigger = yes
-				has_province_modifier = harpy_roost
+				harpy_roost_st_has_non_fledgling_roost = yes
 				owned_by = L55
 				is_core = L55
 				development = 30

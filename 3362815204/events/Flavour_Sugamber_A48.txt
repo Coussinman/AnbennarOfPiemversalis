@@ -2,69 +2,10 @@
 ######################################
 #  Sugamber Succession War Disaster  #
 ######################################
+
 namespace = flavor_sugamber
 
-#Lisolette died after marrying Wex's heir/ruler
-country_event = {
-	id = flavor_sugamber.500
-	title = flavor_sugamber.500.t
-	desc = flavor_sugamber.500.d
-	picture = KING_SICK_IN_BED_eventPicture
-
-	fire_only_once = yes
-
-	is_triggered_only = yes
-
-	mean_time_to_happen = {
-		days = 1
-	}
-
-	trigger = {
-		tag = A48
-		has_country_flag = A30_lisolette_will_marry
-		government = monarchy
-		is_free_or_tributary_trigger = yes
-		has_ruler = "Ewald II"
-		has_heir = "Lisolette"
-	}
-
-	option = {
-		name = flavor_sugamber.500.a
-		ai_chance = { factor = 100 }
-		add_legitimacy = -10
-		clr_country_flag = A30_lisolette_will_marry
-		A30 = {
-			country_event = {
-				id = flavor_sugamber.501
-			}
-		}
-	}
-}
-
-#Lisolette died, Wex proclaims Sugamber belongs to the Sil Wex heir/ruler
-country_event = {
-	id = flavor_sugamber.501
-	title = flavor_sugamber.501.t
-	desc = flavor_sugamber.501.d
-	picture = KING_SICK_IN_BED_eventPicture
-
-	is_triggered_only = yes
-
-	option = {
-		name = flavor_sugamber.501.a
-		ai_chance = { factor = 100 }
-		break_marriage = A48
-		add_stability_or_adm_power = yes
-		clr_country_flag = A30_lisolette_will_marry
-		add_casus_belli = {
-			target = A48
-			type = cb_restore_personal_union
-			months = 240
-		}
-	}
-}
-
-#Legitimacy of Lisolette called into question
+#Legitamacy of Lisolette called into question
 country_event = {
 	id = flavor_sugamber.999
 	title = flavor_sugamber.999.t
@@ -81,22 +22,11 @@ country_event = {
 		is_free_or_tributary_trigger = yes
 		has_ruler = "Lisolette"
 	}
-
 	option = {
 		name = flavor_sugamber.999.a
 		ai_chance = { factor = 100 }
-		if = {
-			limit = {
-				has_country_flag = A30_lisolette_will_marry
-			}
-			A30 = {
-				create_union = A48
-			}
-		}
-		else = {
 		add_legitimacy = -20
 	}
-}
 }
 
 #Helper events for disaster to trigger correct start
@@ -142,13 +72,7 @@ country_event = {
 	option = {
 		ai_chance = { factor = 100 }
 		trigger = {
-			OR = {
 			has_ruler = "Lisolette"
-				AND = {
-					junior_union_with = A30
-					has_country_flag = A30_lisolette_will_marry
-				}
-			}
 		}
 		country_event = { id = flavor_sugamber.0 }
 	}
@@ -184,17 +108,9 @@ country_event = {
 		hidden_effect = {
 			random_list = { 
 				35 = { 
-					modifier = {
-						factor = 0
-						has_country_flag = A30_lisolette_will_marry
-					}
 				set_country_flag = A48_stabbed
 				}
 				35 = { 
-					modifier = {
-						factor = 0
-						has_country_flag = A30_lisolette_will_marry
-					}
 				set_country_flag = A48_poisoned
 				}
 				30 = {
@@ -216,10 +132,6 @@ country_event = {
 				set_country_flag = A48_generic
 				}
 				30 = {
-					modifier = {
-						factor = 0
-						has_country_flag = A30_lisolette_will_marry
-					}
 				set_country_flag = A48_crossbow
 				}
 			}
@@ -273,7 +185,7 @@ country_event = {
 		country_event = { id = flavor_sugamber.2 days = 7 random = 7 }
 		define_ruler = {
 			name = "Ethelbert"
-			dynasty = "of Rupellion"
+			dynasty = "of Vaduham"
 			adm = 4
 			dip = 4
 			mil = 5
@@ -396,7 +308,7 @@ country_event = {
 		name = flavor_sugamber.3.a
 		if = {
 			limit = {
-				owns = 317		#Rupellion
+				owns = 317		#Vaduham
 				317 = {
 					NOT = { units_in_province = 1 }
 				}
@@ -406,7 +318,7 @@ country_event = {
 				spawn_rebels = {
 					type = pretender_rebels
 					size = 1.8
-					leader = "Ethelbert of Rupellion"
+					leader = "Ethelbert of Vaduham"
 					win = yes
 				}
 			}
@@ -422,7 +334,7 @@ country_event = {
 				spawn_rebels = {
 					type = pretender_rebels
 					size = 1.8
-					leader = "Ethelbert of Rupellion"
+					leader = "Ethelbert of Vaduham"
 					win = yes
 				}
 			}
@@ -437,7 +349,7 @@ country_event = {
 			spawn_rebels = {
 				type = pretender_rebels
 				size = 1.2
-				leader = "Ethelbert of Rupellion"
+				leader = "Ethelbert of Vaduham"
 				win = yes
 			}
 		}
@@ -493,7 +405,7 @@ country_event = {
 				spawn_rebels = {
 					type = pretender_rebels
 					size = 1.8
-					leader = "Ethelbert of Rupellion"
+					leader = "Ethelbert of Vaduham"
 					win = yes
 				}
 			}
@@ -507,7 +419,7 @@ country_event = {
 				spawn_rebels = {
 					type = pretender_rebels
 					size = 1.2
-					leader = "Ethelbert of Rupellion"
+					leader = "Ethelbert of Vaduham"
 					win = yes
 				}
 			}
@@ -584,8 +496,7 @@ country_event = {
 	
 	trigger = {
 		tag = A48
-		OR	= {
-			has_country_flag = sugamber_baldwin_rebellion
+		OR	= {	has_country_flag = sugamber_baldwin_rebellion
 				has_country_flag = sugamber_ethelbert_rebellion
 		}
 	}
@@ -756,14 +667,7 @@ country_event = {
 
 	trigger = {
 		is_neighbor_of = A48
-		NOT = {
-			AND = {
-				tag = A30
-				A48 = {
-					junior_union_with = A30
-				}
-			}
-		}
+		
 		NOT = { has_country_flag = support_rebels }
 		NOT = { has_country_flag = no_support_for_rebels }
 		A48 = {
@@ -988,10 +892,12 @@ country_event = {
 			AND = {
 				has_country_flag = sugamber_ethelbert_rebellion
 				NOT = {
+					calc_true_if = {
 						has_ruler = "Ewald II"
 						has_ruler = "Lisolette"
 						has_ruler = "Baldwin"
-					junior_union_with = A30
+						amount = 1
+					}
 				}
 			}
 		}
@@ -1019,15 +925,17 @@ country_event = {
 			limit = { 
 				has_country_flag = sugamber_ethelbert_rebellion
 				NOT = {
+					calc_true_if = {
 						has_ruler = "Ewald II"
 						has_ruler = "Lisolette"
 						has_ruler = "Baldwin"
-					junior_union_with = A30
+						amount = 1
+					}
 				}
 			}
 			define_ruler = {
 				name = "Ethelbert"
-				dynasty = "of Rupellion"
+				dynasty = "of Vaduham"
 				adm = 4
 				dip = 4
 				mil = 5
@@ -1448,7 +1356,7 @@ country_event = {
 		}
 		add_years_of_income = -1
 		A34 = {
-			country_event = { id = flavor_sugamber.22 days = 1 } # We recieved tribute from Sugamber
+			country_event = { id = flavor_sugamber.22 days = 1 } # We received tribute from Sugamber
 		}
 	}
 
@@ -1543,7 +1451,7 @@ country_event = {
 		}
 		add_years_of_income = -1
 		A56 = {
-			country_event = { id = flavor_sugamber.22 days = 1 } # We recieved tribute from Sugamber
+			country_event = { id = flavor_sugamber.22 days = 1 } # We received tribute from Sugamber
 		}
 	}
 
@@ -1560,7 +1468,7 @@ country_event = {
 	}
 }
 
-# We recieved tribute from Sugamber
+# We received tribute from Sugamber
 country_event = {
 	id = flavor_sugamber.22
 	title = flavor_sugamber.22.t

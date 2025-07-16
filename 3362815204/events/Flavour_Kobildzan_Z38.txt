@@ -363,6 +363,136 @@ country_event = { #Twin Empires
 			subject = H24
 		}
 		hidden_effect = {
+			if = {
+				limit = {
+					any_subject_country = {
+						is_colonial_nation_of = ROOT
+						capital_scope = {
+							colonial_region = colonial_broken_sea
+						}
+					}
+				}
+				every_subject_country = {
+					limit = {
+						is_colonial_nation_of = ROOT
+						capital_scope = {
+							NOT = { colonial_region = colonial_broken_sea }
+							superregion = ynn_superregion
+						}
+					}
+					every_owned_province = {
+						limit = {
+							colonial_region = colonial_broken_sea
+						}
+						add_core = ROOT
+						cede_province = ROOT
+					}
+				}
+			}
+			if = {
+				limit = {
+					any_subject_country = {
+						is_colonial_nation_of = ROOT
+						capital_scope = {
+							colonial_region = colonial_dalaire
+						}
+					}
+				}
+				every_subject_country = {
+					limit = {
+						is_colonial_nation_of = ROOT
+						capital_scope = {
+							NOT = { colonial_region = colonial_dalaire }
+							superregion = ynn_superregion
+						}
+					}
+					every_owned_province = {
+						limit = {
+							colonial_region = colonial_dalaire
+						}
+						add_core = ROOT
+						cede_province = ROOT
+					}
+				}
+			}
+			if = {
+				limit = {
+					any_subject_country = {
+						is_colonial_nation_of = ROOT
+						capital_scope = {
+							colonial_region = colonial_noruin
+						}
+					}
+				}
+				every_subject_country = {
+					limit = {
+						is_colonial_nation_of = ROOT
+						capital_scope = {
+							NOT = { colonial_region = colonial_noruin }
+							superregion = ynn_superregion
+						}
+					}
+					every_owned_province = {
+						limit = {
+							colonial_region = colonial_noruin
+						}
+						add_core = ROOT
+						cede_province = ROOT
+					}
+				}
+			}
+			if = {
+				limit = {
+					any_subject_country = {
+						is_colonial_nation_of = ROOT
+						capital_scope = {
+							colonial_region = colonial_eordand
+						}
+					}
+				}
+				every_subject_country = {
+					limit = {
+						is_colonial_nation_of = ROOT
+						capital_scope = {
+							NOT = { colonial_region = colonial_eordand }
+							superregion = ynn_superregion
+						}
+					}
+					every_owned_province = {
+						limit = {
+							colonial_region = colonial_eordand
+						}
+						add_core = ROOT
+						cede_province = ROOT
+					}
+				}
+			}
+			if = {
+				limit = {
+					any_subject_country = {
+						is_colonial_nation_of = ROOT
+						capital_scope = {
+							colonial_region = colonial_haraf
+						}
+					}
+				}
+				every_subject_country = {
+					limit = {
+						is_colonial_nation_of = ROOT
+						capital_scope = {
+							NOT = { colonial_region = colonial_haraf }
+							superregion = ynn_superregion
+						}
+					}
+					every_owned_province = {
+						limit = {
+							colonial_region = colonial_haraf
+						}
+						add_core = ROOT
+						cede_province = ROOT
+					}
+				}
+			}
 			every_subject_country = {
 				every_owned_province = {
 					limit = {
@@ -759,7 +889,7 @@ country_event = { #The Dragon's Roar
 					duration = 7300
 				}  
 			}
-			dinesck_area = {
+			coast_of_vics_area = {
 				add_base_tax = -3
 				add_base_production = -3
 				add_base_manpower = -3
@@ -1447,6 +1577,7 @@ country_event = { #A Surgical Conversation
 			}
 		}
 		artifice_granted_20 = yes
+		hidden_effect = { change_variable = { which = ArtificeDynamicInventionCost value = 20 } }
 	}
 	option = { #We must become dragons!
 		name = flavour_kobildzan.14.b
@@ -1470,6 +1601,7 @@ country_event = { #A Surgical Conversation
 			duration = -1
 		}
 		artifice_granted_20 = yes
+		hidden_effect = { change_variable = { which = ArtificeDynamicInventionCost value = 20 } }
 	}
 }
 
@@ -1498,6 +1630,7 @@ country_event = { #Interview with a Different Dragon
 			}
 		}
 		artifice_granted_20 = yes
+		hidden_effect = { change_variable = { which = ArtificeDynamicInventionCost value = 20 } }
 	}
 	option = { #We inject our scales with ebonsteel!
 		name = flavour_kobildzan.15.b
@@ -1521,6 +1654,7 @@ country_event = { #Interview with a Different Dragon
 			duration = -1
 		}
 		artifice_granted_20 = yes
+		hidden_effect = { change_variable = { which = ArtificeDynamicInventionCost value = 20 } }
 	}
 }
 
@@ -1594,6 +1728,7 @@ country_event = { #To Control Continents
 		}
 		custom_tooltip = biocompatibility_explainer_tt
 		artifice_granted_20 = yes
+		hidden_effect = { change_variable = { which = ArtificeDynamicInventionCost value = 20 } }
 	}
 	option = { #We fly above our subjects!
 		name = flavour_kobildzan.18.b
@@ -1613,6 +1748,7 @@ country_event = { #To Control Continents
 			}
 		}
 		artifice_granted_20 = yes
+		hidden_effect = { change_variable = { which = ArtificeDynamicInventionCost value = 20 } }
 	}
 }
 
@@ -1677,6 +1813,7 @@ country_event = { #Family Reunion
 			}
 		}
 		artifice_granted_20 = yes
+		hidden_effect = { change_variable = { which = ArtificeDynamicInventionCost value = 20 } }
 	}
 	option = { #Holiest flesh
 		name = flavour_kobildzan.19.b
@@ -1711,6 +1848,7 @@ country_event = { #Family Reunion
 			duration = -1
 		}
 		artifice_granted_20 = yes
+		hidden_effect = { change_variable = { which = ArtificeDynamicInventionCost value = 20 } }
 	}
 }
 
@@ -1762,6 +1900,7 @@ country_event = { #A Second Family Reunion
 			}
 		}
 		artifice_granted_20 = yes
+		hidden_effect = { change_variable = { which = ArtificeDynamicInventionCost value = 20 } }
 	}
 }
 
@@ -2009,6 +2148,7 @@ country_event = { #Hidden event for subject ascension
 			limit = { NOT = { has_estate_privilege = artifice_invention_kobildzan_draconic_ascension } }
 			set_estate_privilege = artifice_invention_kobildzan_draconic_ascension
 			artifice_granted_10 = yes
+			hidden_effect = { change_variable = { which = ArtificeDynamicInventionCost value = 10 } }
 		}
 		if = {
 			limit = {
@@ -2017,6 +2157,7 @@ country_event = { #Hidden event for subject ascension
 			}
 			set_country_flag = kobildzan_glidewing_membranes
 			artifice_granted_10 = yes
+			hidden_effect = { change_variable = { which = ArtificeDynamicInventionCost value = 10 } }
 		}
 		else_if = {
 			limit = {
@@ -2029,6 +2170,7 @@ country_event = { #Hidden event for subject ascension
 				duration = -1
 			}
 			artifice_granted_10 = yes
+			hidden_effect = { change_variable = { which = ArtificeDynamicInventionCost value = 10 } }
 		}
 		if = {
 			limit = {
@@ -2037,6 +2179,7 @@ country_event = { #Hidden event for subject ascension
 			}
 			set_country_flag = kobildzan_detachable_extra_limbs
 			artifice_granted_10 = yes
+			hidden_effect = { change_variable = { which = ArtificeDynamicInventionCost value = 10 } }
 		}
 		else_if = {
 			limit = {
@@ -2049,6 +2192,7 @@ country_event = { #Hidden event for subject ascension
 				duration = -1
 			}
 			artifice_granted_10 = yes
+			hidden_effect = { change_variable = { which = ArtificeDynamicInventionCost value = 10 } }
 		}
 		if = {
 			limit = {
@@ -2061,6 +2205,7 @@ country_event = { #Hidden event for subject ascension
 				duration = -1
 			}
 			artifice_granted_10 = yes
+			hidden_effect = { change_variable = { which = ArtificeDynamicInventionCost value = 10 } }
 		}
 		if = {
 			limit = {
@@ -2069,6 +2214,7 @@ country_event = { #Hidden event for subject ascension
 			}
 			set_country_flag = kobildzan_hyperdigestion
 			artifice_granted_10 = yes
+			hidden_effect = { change_variable = { which = ArtificeDynamicInventionCost value = 10 } }
 		}
 		else_if = {
 			limit = {
@@ -2081,6 +2227,7 @@ country_event = { #Hidden event for subject ascension
 				duration = -1
 			}
 			artifice_granted_10 = yes
+			hidden_effect = { change_variable = { which = ArtificeDynamicInventionCost value = 10 } }
 		}
 		if = {
 			limit = {
@@ -2089,6 +2236,7 @@ country_event = { #Hidden event for subject ascension
 			}
 			set_country_flag = kobildzan_biocompatibility
 			artifice_granted_10 = yes
+			hidden_effect = { change_variable = { which = ArtificeDynamicInventionCost value = 10 } }
 		}
 		else_if = {
 			limit = {
@@ -2097,6 +2245,7 @@ country_event = { #Hidden event for subject ascension
 			}
 			set_country_flag = kobildzan_intercontinental_ballistic_kobolds
 			artifice_granted_10 = yes
+			hidden_effect = { change_variable = { which = ArtificeDynamicInventionCost value = 10 } }
 		}	
 		if = {
 			limit = {
@@ -2105,6 +2254,7 @@ country_event = { #Hidden event for subject ascension
 			}
 			set_country_flag = kobildzan_mana_attunement_glands
 			artifice_granted_10 = yes
+			hidden_effect = { change_variable = { which = ArtificeDynamicInventionCost value = 10 } }
 		}	
 		else_if = {
 			limit = {
@@ -2117,6 +2267,7 @@ country_event = { #Hidden event for subject ascension
 				duration = -1
 			}
 			artifice_granted_10 = yes
+			hidden_effect = { change_variable = { which = ArtificeDynamicInventionCost value = 10 } }
 		}
 		if = {
 			limit = {
@@ -2125,6 +2276,7 @@ country_event = { #Hidden event for subject ascension
 			}
 			set_country_flag = kobildzan_the_protean_form
 			artifice_granted_10 = yes
+			hidden_effect = { change_variable = { which = ArtificeDynamicInventionCost value = 10 } }
 		}
 		if = {
 			limit = {
@@ -2137,6 +2289,7 @@ country_event = { #Hidden event for subject ascension
 				duration = -1
 			}
 			artifice_granted_10 = yes
+			hidden_effect = { change_variable = { which = ArtificeDynamicInventionCost value = 10 } }
 		}
 	}
 }

@@ -10,11 +10,9 @@ castellos = {
 	country_admin_power = 1
 	
 	potential = {
-		OR = {
-			religion = cannorian_pantheon
-			religion = regent_court
-		}
+		religion = regent_court
 		NOT = { has_global_flag = "castellos_is_dead_pantheonic_council" }
+		NOT = { has_country_modifier = seed_of_corinism } #Clouded Eye is at an odd stage where they worship Corin yet Corinite doesn't exist as a faith. Represents the transition period.
 	}
 	
 	sprite = 1
@@ -52,10 +50,7 @@ lightfather = {
 	country_admin_power = 1
 	
 	potential = {
-        OR = {
-            religion = cannorian_pantheon
-            religion = regent_court
-        }
+        religion = regent_court
         has_global_flag = "castellos_is_dead_pantheonic_council"
 		AND = {
 			OR = {
@@ -73,98 +68,13 @@ lightfather = {
 	}
 }
 
-#One Armed Skald as RC Deity of the Gerudians. Generally only used by Reveria
-one_armed_skald = {
-	land_morale = 0.1
-	tolerance_heathen = 1
-
-
-	potential = {
-		OR = {
-			religion = cannorian_pantheon
-			religion = regent_court
-		}
-		OR  ={
-			culture_group = gerudian
-			has_country_flag = pearlsedge_gerudia
-		}
-		hidden_trigger = {
-			NOT = { has_global_flag = one_armed_skald_upgraded_flag }
-		}
-	}
-
-	sprite = 34	#temp, to be changed
-
-	ai_will_do = {
-		factor = 1
-		modifier = {
-			factor = 2
-			personality = ai_militarist
-		}
-		modifier = {
-			factor = 7.5
-			ruler_culture = reverian
-		}
-		modifier = {
-			factor = 2
-			OR = {
-				ruler_has_personality = pious_personality
-				ruler_has_personality = bold_fighter_personality
-				ruler_has_personality = inspiring_leader_personality
-			}
-		}
-	}
-}
-
-#One Armed Skald as RC Deity of the Gerudians. Generally only used by Reveria
-one_armed_skald_upgraded = {
-	land_morale = 0.15
-	tolerance_heathen = 2
-	country_military_power = 1
-
-	potential = {
-		OR = {
-			religion = cannorian_pantheon
-			religion = regent_court
-		}
-		culture_group = gerudian
-		hidden_trigger = {
-			has_global_flag = one_armed_skald_upgraded_flag
-		}
-	}
-
-	sprite = 34	#temp, to be changed
-
-	ai_will_do = {
-		factor = 1
-		modifier = {
-			factor = 2
-			personality = ai_militarist
-		}
-		modifier = {
-			factor = 10
-			ruler_culture = reverian
-		}
-		modifier = {
-			factor = 2
-			OR = {
-				ruler_has_personality = pious_personality
-				ruler_has_personality = bold_fighter_personality
-				ruler_has_personality = inspiring_leader_personality
-			}
-		}
-	}
-}
-
 the_dame = {
 	production_efficiency = 0.1
 	idea_cost = -0.05
 	
 	potential = {
-		OR = {
-			religion = cannorian_pantheon
-			religion = regent_court
-		}
+		religion = regent_court
+		NOT = { has_country_modifier = seed_of_corinism }
 	}
 	
 	sprite = 2
@@ -223,16 +133,14 @@ corin = {
 	land_morale = 0.05
 	
 	potential = {
-		OR = {
-			religion = cannorian_pantheon
-			religion = regent_court
-		}
+		religion = regent_court
 		has_global_flag = corins_ascension #Requires 1445 Pantheonic Council event
 		OR = {
 			NOT = { has_global_flag = crimson_deluge } # crimson deluge didn't start yet
 			has_global_flag = upgraded_adean_admin # Adenica MT re-enable it
 			has_government_attribute = two_rulers_one_people
 		}
+		NOT = { has_country_flag = A45_upgraded_corin } #Istralore MT enables a stronger Corin before swapping
 	}
 	
 	sprite = 3
@@ -262,18 +170,32 @@ corin = {
 	}
 }
 
+corin_upgraded = {
+	shock_damage = 0.10
+	land_morale = 0.10
+	
+	potential = {
+		religion = regent_court
+		has_global_flag = corins_ascension #Requires 1445 Pantheonic Council event
+		has_country_flag = A45_upgraded_corin
+	}
+
+	ai_will_do = {
+		factor = 20
+	}
+	sprite = 3
+}
+
 adean = {
 	cavalry_power = 0.15
 	prestige = 1
 	
 	potential = {
-		OR = {
-			religion = cannorian_pantheon
-			religion = regent_court
-		}
+		religion = regent_court
 		# For the Adenica mission tree
 		NOT = { has_global_flag = upgraded_adean_war }
 		NOT = { has_global_flag = upgraded_adean_admin }
+		NOT = { has_country_modifier = seed_of_corinism }
 	}
 	sprite = 4
 	
@@ -308,10 +230,7 @@ adean_upgraded_admin = {
 	country_admin_power = 1
 	
 	potential = {
-		OR = {
-			religion = cannorian_pantheon
-			religion = regent_court
-		}
+		religion = regent_court
 		has_global_flag = upgraded_adean_admin
 	}
 	sprite = 4
@@ -359,10 +278,7 @@ adean_upgraded_war = {
 	land_morale = 0.05
 	
 	potential = {
-		OR = {
-			religion = cannorian_pantheon
-			religion = regent_court
-		}
+		religion = regent_court
 		has_global_flag = upgraded_adean_war
 	}
 	sprite = 4
@@ -397,11 +313,9 @@ munas_moonsinger = {
 	leader_naval_manuever = 1
 	
 	potential = {
-		OR = {
-			religion = cannorian_pantheon
-			religion = regent_court
-		}
+		religion = regent_court
 		NOT = { has_country_flag = upgraded_munas }
+		NOT = { has_country_modifier = seed_of_corinism }
 	}
 	sprite = 5
 	
@@ -440,10 +354,7 @@ munas_upgraded = { #ex munas_moonsinger_ibevar
 	country_diplomatic_power = 1
 	
 	potential = {
-		OR = {
-			religion = cannorian_pantheon
-			religion = regent_court
-		}
+		religion = regent_court
 		has_country_flag = upgraded_munas #From the Seinathíl and Ibevar MTs
 	}
 	sprite = 5
@@ -482,10 +393,8 @@ ara = {
 	global_tax_modifier = 0.1
 	
 	potential = {
-		OR = {
-			religion = cannorian_pantheon
-			religion = regent_court
-		}
+		religion = regent_court
+		NOT = { has_country_modifier = seed_of_corinism }
 	}
 	sprite = 6
 	
@@ -530,12 +439,10 @@ balgar = {
 	defensiveness = 0.1
 	
 	potential = {
-		OR = {
-			religion = cannorian_pantheon
-			religion = regent_court
-		}
+		religion = regent_court
 		# For the Silverforg, Khugdihr, and Hammerhome mission trees
 		NOT = { has_country_flag = upgraded_balgar }
+		NOT = { has_country_modifier = seed_of_corinism }
 	}
 	sprite = 7
 	
@@ -582,10 +489,7 @@ balgar_upgraded = { #ex balgar_khug
 	development_cost = -0.10
 	
 	potential = {
-		OR = {
-			religion = cannorian_pantheon
-			religion = regent_court
-		}
+		religion = regent_court
 		has_country_flag = upgraded_balgar #For Khughdhir, Hammerhome and Silverforge mission trees
 	}
 	sprite = 7
@@ -632,11 +536,9 @@ esmaryal = {
 	advisor_cost = -0.1
 	
 	potential = {
-		OR = {
-			religion = cannorian_pantheon
-			religion = regent_court
-		}
+		religion = regent_court
 		NOT = { has_country_flag = lady_of_flows_esmaryal }
+		NOT = { has_country_modifier = seed_of_corinism }
 	}
 	sprite = 8
 	
@@ -676,10 +578,7 @@ esmaryal_upgraded_themarenn = {
 	advisor_cost = -0.2
 	
 	potential = {
-		OR = {
-			religion = cannorian_pantheon
-			religion = regent_court
-		}
+		religion = regent_court
 		has_country_flag = lady_of_flows_esmaryal
 	}
 	sprite = 8
@@ -724,12 +623,10 @@ ryala = {
 	diplomatic_upkeep = 2
 	
 	potential = {
-		OR = {
-			religion = cannorian_pantheon
-			religion = regent_court
-		}
+		religion = regent_court
 		NOT = { has_country_flag = upgraded_ryala }
 		NOT = { has_country_flag = lady_of_flows_ryala }
+		NOT = { has_country_modifier = seed_of_corinism }
 	}
 	sprite = 9
 	
@@ -759,10 +656,7 @@ ryala_upgraded = {
 	diplomatic_upkeep = 2
 	
 	potential = {
-		OR = {
-			religion = cannorian_pantheon
-			religion = regent_court
-		}
+		religion = regent_court
 		has_country_flag = upgraded_ryala
 	}
 	sprite = 9
@@ -793,10 +687,7 @@ ryala_upgraded_themarenn = {
 	diplomatic_upkeep = 3
 	
 	potential = {
-		OR = {
-			religion = cannorian_pantheon
-			religion = regent_court
-		}
+		religion = regent_court
 		has_country_flag = lady_of_flows_ryala
 	}
 	sprite = 9
@@ -828,10 +719,8 @@ minara = {
 	improve_relation_modifier = 0.15
 	
 	potential = {
-		OR = {
-			religion = cannorian_pantheon
-			religion = regent_court
-		}
+		religion = regent_court
+		NOT = { has_country_modifier = seed_of_corinism }
 	}
 	sprite = 10
 	
@@ -869,12 +758,10 @@ falah = {
 	army_tradition = 0.5
 	
 	potential = {
-		OR = {
-			religion = cannorian_pantheon
-			religion = regent_court
-		}
+		religion = regent_court
 		# For the Freemaches mission tree
 		NOT = { has_country_flag = upgraded_falah  }
+		NOT = { has_country_modifier = seed_of_corinism }
 	}
 	sprite = 11
 	
@@ -918,10 +805,7 @@ falah_upgraded = {
 	infantry_power = 0.1
 	
 	potential = {
-		OR = {
-			religion = cannorian_pantheon
-			religion = regent_court
-		}
+		religion = regent_court
 		# For the Freemaches mission tree
 		has_country_flag = upgraded_falah 
 	}
@@ -965,10 +849,8 @@ nerat = {
 	manpower_recovery_speed = 0.1
 	
 	potential = {
-		OR = {
-			religion = cannorian_pantheon
-			religion = regent_court
-		}
+		religion = regent_court
+		NOT = { has_country_modifier = seed_of_corinism }
 	}
 	sprite = 12
 	
@@ -1005,10 +887,9 @@ nathalyne = {
 	siege_ability = 0.1
 	
 	potential = {
-		OR = {
-			religion = cannorian_pantheon
-			religion = regent_court
-		}
+		religion = regent_court
+		NOT = { has_country_modifier = seed_of_corinism }
+		NOT = { has_country_flag = unlocked_wip_god }
 	}
 	sprite = 13
 	
@@ -1043,11 +924,9 @@ begga = {
 	global_monthly_devastation = -0.1
 	
 	potential = {
-		OR = {
-			religion = cannorian_pantheon
-			religion = regent_court
-		}
+		religion = regent_court
 		NOT = { has_country_flag = upgraded_begga }
+		NOT = { has_country_modifier = seed_of_corinism }
 	}
 	sprite = 14
 	
@@ -1079,10 +958,7 @@ begga_upgraded = {
 	global_prosperity_growth = 1.0
 	
 	potential = {
-		OR = {
-			religion = cannorian_pantheon
-			religion = regent_court
-		}
+		religion = regent_court
 		has_country_flag = upgraded_begga
 	}
 	sprite = 14
@@ -1108,20 +984,58 @@ begga_upgraded = {
 	}
 }
 
+wip = { #Portnamm/Iochand thingy
+	spy_offence = 0.25
+	siege_ability = 0.1
+	global_unrest = -2
+	
+	potential = {
+		religion = regent_court
+		has_country_flag = unlocked_wip_god
+	}
+	sprite = 224
+	
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 2
+			personality = ai_capitalist
+		}
+		modifier = {
+			factor = 2
+			personality = ai_diplomat
+		}
+		modifier = {
+			factor = 1.2
+			government = republic
+		}
+		modifier = {
+			factor = 0.5
+			personality = ai_militarist
+		}
+		modifier = {
+			factor = 5
+			OR = {
+				tag = A80	#Iochand
+				tag = A19	#Portnamm
+			}
+		}
+	}
+	
+}
+
 #Dookan as RC God of Mercenaries. DO NOT use for converted orcs, only for mercs/heavily cannorized half-orcs
 dookan = {
 	mercenary_discipline  = 0.05
 	mercenary_manpower = 0.1
 
 	potential = {
-		OR = {
-			religion = cannorian_pantheon
-			religion = regent_court
-		}
+		religion = regent_court
 		OR = {
 			tag = H58	#Chipped Tooth Company
 			was_tag = H58
-		} 
+			has_country_modifier = seed_of_corinism #Clouded Eye is in the transition from Dookanism to Corinite, only tenuously RC due to Arosha's teachings
+		}
 	}
 
 	sprite = 34	#temp, to be changed

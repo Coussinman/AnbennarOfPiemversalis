@@ -7,6 +7,8 @@ administrative_reform = {
 			local_autonomy = 20
 		}
 		kalsyto_gun_issue = yes #Anbennar
+		is_mteibhar_parliament = no
+		NOT = { has_reform = council_of_the_coast } #Karshyr
 	}
 	on_issue_taken = {
 		if = {
@@ -97,6 +99,8 @@ appoint_a_new_prime_minister = {
 
 	allow = {
 		NOT = { tag = J33 } #Anbennar
+		is_mteibhar_parliament = no
+		NOT = { has_reform = council_of_the_coast } #Karshyr
 	}
 	
 	effect = {
@@ -166,6 +170,8 @@ appropriation_of_land = {
 	allow = {
 		num_of_cities = 6
 		kalsyto_worker_issue = yes #Anbennar
+		is_mteibhar_parliament = no
+		NOT = { has_reform = council_of_the_coast } #Karshyr
 	}
 	
 	on_issue_taken = {
@@ -241,6 +247,8 @@ charter_university = {
 
 	allow = {
 		kalsyto_child_issue = yes #Anbennar
+		is_mteibhar_parliament = no
+		NOT = { has_reform = council_of_the_coast } #Karshyr
 	}
 	on_issue_taken = {
 		if = {
@@ -297,6 +305,8 @@ development_of_infrastructure = {
 
 	allow = {
 		kalsyto_child_issue = yes #Anbennar
+		is_mteibhar_parliament = no
+		NOT = { has_reform = council_of_the_coast } #Karshyr
 	}
 	on_issue_taken = { 
 		if = {
@@ -325,7 +335,7 @@ development_of_infrastructure = {
 		factor = 1
 		modifier = {
 			factor = 2
-			has_idea_group = economic_ideas
+			has_idea_group = infrastructure_ideas
 		}
 	}
 
@@ -341,6 +351,8 @@ election_reform = {
 	allow = {
 		government = republic
 		NOT = { tag = J33 } #Anbennar
+		is_mteibhar_parliament = no
+		NOT = { has_reform = council_of_the_coast } #Karshyr
 	}
 	
 	effect = {
@@ -392,7 +404,9 @@ estates_fund_industrialization = {
 		OR = {
 			has_country_flag = pol_new_issues_tt
 			has_country_flag = thangoya_fund_an_industrial_project #Thangoya MT
+			is_or_was_tag = { tag = B60 }
 		}
+		is_mteibhar_parliament = no
 
 		estate_loyalty = {
 			estate = estate_church
@@ -411,6 +425,7 @@ estates_fund_industrialization = {
 				}
 			}
 		}
+		NOT = { has_reform = council_of_the_coast } #Karshyr
 	}
 	
 	on_issue_taken = {
@@ -473,6 +488,8 @@ fund_expansion_of_bureaucracy = {
 
 	allow = {
 		kalsyto_child_issue = yes #Anbennar
+		is_mteibhar_parliament = no
+		NOT = { has_reform = council_of_the_coast } #Karshyr
 	}
 	on_issue_taken = {
 		if = {
@@ -512,6 +529,8 @@ fund_national_monuments = {
 
 	allow = {
 		kalsyto_worker_issue = yes #Anbennar
+		is_mteibhar_parliament = no
+		NOT = { has_reform = council_of_the_coast } #Karshyr
 	}
 	
 	on_issue_taken = {
@@ -554,6 +573,8 @@ government_debt_reduction = {
 	allow = {
 		num_of_loans = 2
 		NOT = { tag = J33 } #Anbennar
+		is_mteibhar_parliament = no
+		NOT = { has_reform = council_of_the_coast } #Karshyr
 	}
 	
 	effect = {
@@ -599,47 +620,48 @@ government_debt_reduction = {
 	}	
 }
 
-grant_consessions_to_the_brahmins = {
-
-	category = 3
-
-	allow = {
-		has_estate = estate_brahmins
-	}
-	
-	effect = {
-		add_estate_loyalty = {
-			estate = estate_brahmins
-			loyalty = 20
-		}
-	}
-
-	chance = {
-		factor = 1
-		modifier = {
-			factor = 5
-			NOT = { 
-				estate_loyalty = {
-					estate = estate_brahmins
-					loyalty = 40
-				}
-			}
-		}
-	}
-	
-	ai_will_do = {
-		factor = 1
-		modifier = {
-			factor = 2
-			NOT = { 
-				estate_loyalty = {
-					estate = estate_brahmins
-					loyalty = 40
-				}
-			}
-		}		
-	}	
-}
+# grant_consessions_to_the_brahmins = {
+# 
+# 	category = 3
+# 
+# 	allow = {
+# 		has_estate = estate_brahmins
+# 		is_mteibhar_parliament = no
+# 	}
+# 	
+# 	effect = {
+# 		add_estate_loyalty = {
+# 			estate = estate_brahmins
+# 			loyalty = 20
+# 		}
+# 	}
+# 
+# 	chance = {
+# 		factor = 1
+# 		modifier = {
+# 			factor = 5
+# 			NOT = { 
+# 				estate_loyalty = {
+# 					estate = estate_brahmins
+# 					loyalty = 40
+# 				}
+# 			}
+# 		}
+# 	}
+# 	
+# 	ai_will_do = {
+# 		factor = 1
+# 		modifier = {
+# 			factor = 2
+# 			NOT = { 
+# 				estate_loyalty = {
+# 					estate = estate_brahmins
+# 					loyalty = 40
+# 				}
+# 			}
+# 		}		
+# 	}	
+# }
 
 grant_consessions_to_the_burghers = {
 
@@ -648,6 +670,8 @@ grant_consessions_to_the_burghers = {
 	allow = {
 		has_estate = estate_burghers
 		NOT = { tag = J33 } #Anbennar
+		is_mteibhar_parliament = no
+		NOT = { has_reform = council_of_the_coast } #Karshyr
 	}
 	
 	effect = {
@@ -691,6 +715,8 @@ grant_consessions_to_the_church = {
 	allow = {
 		has_estate = estate_church
 		NOT = { tag = J33 } #Anbennar
+		is_mteibhar_parliament = no
+		NOT = { has_reform = council_of_the_coast } #Karshyr
 	}
 	
 	effect = {
@@ -734,6 +760,8 @@ grant_consessions_to_the_cossacks = {
 	allow = {
 		has_estate = estate_cossacks
 		NOT = { tag = J33 } #Anbennar
+		is_mteibhar_parliament = no
+		NOT = { has_reform = council_of_the_coast } #Karshyr
 	}
 	
 	effect = {
@@ -1074,6 +1102,8 @@ guarantee_religious_tolerance = {
 		}
 		NOT = { has_idea_group = religious_ideas }
 		NOT = { tag = J33 } #Anbennar
+		is_mteibhar_parliament = no
+		NOT = { has_reform = council_of_the_coast } #Karshyr
 	}
 	
 	on_issue_taken = {
@@ -1173,6 +1203,8 @@ harmonization_of_laws = {
 		}
 		NOT = { government = monarchy }
 		NOT = { tag = J33 } #Anbennar
+		is_mteibhar_parliament = no
+		NOT = { has_reform = council_of_the_coast } #Karshyr
 	}
 	
 	effect = {
@@ -1226,6 +1258,8 @@ increase_crown_land_share = {
 	allow = {
 		NOT = { crown_land_share = 80 }
 		kalsyto_worker_issue = yes #Anbennar
+		is_mteibhar_parliament = no
+		NOT = { has_reform = council_of_the_coast } #Karshyr
 	}
 	
 	on_issue_taken = {
@@ -1238,9 +1272,9 @@ increase_crown_land_share = {
 		custom_tooltip = add_5_crown_land_share
 		hidden_effect = {
 			change_estate_land_share = {
-			   estate = all
-			   share = -5
-		    }
+				estate = all
+				share = -5
+			}
 		}
 	}
 	
@@ -1291,6 +1325,8 @@ increase_taxes = {
 
 	allow = {
 		kalsyto_gun_issue = yes #Anbennar
+		is_mteibhar_parliament = no
+		NOT = { has_reform = council_of_the_coast } #Karshyr
 	}
 	on_issue_taken = {
 		if = {
@@ -1342,6 +1378,8 @@ reform_government_act = {
 
 	allow = {
 		kalsyto_child_issue = yes #Anbennar
+		is_mteibhar_parliament = no
+		NOT = { has_reform = council_of_the_coast } #Karshyr
 	}
 	on_issue_taken = {
 		if = {
@@ -1400,6 +1438,8 @@ integration_of_minorities = {
 			is_overseas = no
 		}
 		NOT = { has_idea_group = religious_ideas }
+		is_mteibhar_parliament = no
+		NOT = { has_reform = council_of_the_coast } #Karshyr
 	}
 	
 	on_issue_taken = {
@@ -1498,6 +1538,7 @@ issue_investigate_corruption = {
 	allow = {
 		corruption = 0.5
 		NOT = { tag = J33 } #Anbennar
+		NOT = { has_reform = council_of_the_coast } #Karshyr
 	}
 	
 	effect = {
@@ -1548,6 +1589,8 @@ nationwide_census = {
 	allow = {
 		num_of_cities = 6
 		NOT = { tag = J33 } #Anbennar
+		is_mteibhar_parliament = no
+		NOT = { has_reform = council_of_the_coast } #Karshyr
 	}
 	
 	on_issue_taken = {
@@ -1613,6 +1656,8 @@ nationwide_land_survey = {
 	allow = {
 		num_of_cities = 6
 		kalsyto_worker_issue = yes #Anbennar
+		is_mteibhar_parliament = no
+		NOT = { has_reform = council_of_the_coast } #Karshyr
 	}
 	
 	on_issue_taken = {
@@ -1686,6 +1731,8 @@ prohibit_use_of_local_languages = {
 		}
 		NOT = { has_idea_group = humanist_ideas }
 		NOT = { tag = J33 } #Anbennar
+		is_mteibhar_parliament = no
+		NOT = { has_reform = council_of_the_coast } #Karshyr
 	}
 	
 	
@@ -1739,6 +1786,8 @@ propagation_of_state_religion = {
 		#	NOT = { religion = confucianism }
 		#}
 		NOT = { tag = J33 } #Anbennar
+		is_mteibhar_parliament = no
+		NOT = { has_reform = council_of_the_coast } #Karshyr
 	}
 	
 	effect = {
@@ -1834,6 +1883,8 @@ restore_integration = {
 	allow = {
 		has_country_modifier = annexers_legacy
 		NOT = { tag = J33 } #Anbennar
+		is_mteibhar_parliament = no
+		NOT = { has_reform = council_of_the_coast } #Karshyr
 	}
 	
 	on_issue_taken = {
@@ -1871,6 +1922,7 @@ support_ruling_dynasty = {
 				has_dlc = "Mandate of Heaven"
 			}
 		}
+		NOT = { has_reform = council_of_the_coast } #Karshyr
 	}
 	
 	effect = {
@@ -1942,6 +1994,8 @@ treason_act = {
 
 	allow = {
 		kalsyto_gun_issue = yes #Anbennar
+		is_mteibhar_parliament = no
+		NOT = { has_reform = council_of_the_coast } #Karshyr
 	}
 	on_issue_taken = {
 		if = {

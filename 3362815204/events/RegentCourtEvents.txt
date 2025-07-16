@@ -122,6 +122,7 @@ country_event = {
 				ruler_has_personality = well_advised_personality
 			}
 			hidden_trigger = { NOT = { has_global_flag = "castellos_is_dead_pantheonic_council" } }
+			hidden_trigger = { NOT = { has_country_modifier = seed_of_corinism } }
 		}
 		ai_chance = {
 			factor = 1
@@ -161,6 +162,7 @@ country_event = {
 				ruler_has_personality = well_advised_personality
 			}
 			hidden_trigger = { NOT = { has_global_flag = "castellos_is_dead_pantheonic_council" } }
+			hidden_trigger = { NOT = { has_country_modifier = seed_of_corinism } }
 		}
 		ai_chance = {
 			factor = 1
@@ -197,7 +199,9 @@ country_event = {
 				ruler_has_personality = tolerant_personality
 				ruler_has_personality = free_thinker_personality
 				ruler_has_personality = scholar_personality
+				ruler_has_personality = patron_of_arts_personality
 			}
+			hidden_trigger = { NOT = { has_country_modifier = seed_of_corinism } }
 		}
 		ai_chance = {
 			factor = 1
@@ -263,7 +267,9 @@ country_event = {
 				ruler_has_personality = tolerant_personality
 				ruler_has_personality = free_thinker_personality
 				ruler_has_personality = scholar_personality
+				ruler_has_personality = patron_of_arts_personality
 			}
+			hidden_trigger = { NOT = { has_country_modifier = seed_of_corinism } }
 		}
 		ai_chance = {
 			factor = 1
@@ -330,6 +336,7 @@ country_event = {
 					NOT = { has_global_flag = "crimson_deluge" }
 					has_global_flag = "upgraded_adean_admin"
 					has_government_attribute = two_rulers_one_people_rc
+					has_country_flag = A45_upgraded_corin
 				}
 			}
 			NOT = {
@@ -362,7 +369,15 @@ country_event = {
 			}
 		}
 		set_country_flag = regent_court_deity_switch_cooldown
-		change_personal_deity = corin
+		if = {
+			limit = {
+				has_country_flag = A45_upgraded_corin
+			}
+			change_personal_deity = corin_upgraded
+		}
+		else = {
+			change_personal_deity = corin
+		}
 		if = {
 			limit = { has_government_attribute = follower_of_many_gods }
 			improve_relations_with_deity_followers = { deity = corin }
@@ -380,6 +395,7 @@ country_event = {
 					NOT = { has_global_flag = "crimson_deluge" }
 					has_global_flag = "upgraded_adean_admin"
 					has_government_attribute = two_rulers_one_people
+					has_country_flag = A45_upgraded_corin
 				}
 			}
 			OR = {
@@ -412,7 +428,15 @@ country_event = {
 			}
 		}
 		set_country_flag = regent_court_deity_switch_cooldown
-		change_personal_deity = corin
+		if = {
+			limit = {
+				has_country_flag = A45_upgraded_corin
+			}
+			change_personal_deity = corin_upgraded
+		}
+		else = {
+			change_personal_deity = corin
+		}
 		if = {
 			limit = { has_government_attribute = follower_of_many_gods }
 			improve_relations_with_deity_followers = { deity = corin }
@@ -434,6 +458,7 @@ country_event = {
 					has_global_flag = "upgraded_adean_admin"
 				}
 			}
+			hidden_trigger = { NOT = { has_country_modifier = seed_of_corinism } }
 		}
 		ai_chance = {
 			factor = 1
@@ -486,6 +511,7 @@ country_event = {
 					has_global_flag = "upgraded_adean_admin"
 				}
 			}
+			hidden_trigger = { NOT = { has_country_modifier = seed_of_corinism } }
 		}
 		ai_chance = {
 			factor = 1
@@ -738,6 +764,7 @@ country_event = {
 		name = regent_court.2.f
 		trigger = {
 			hidden_trigger = { NOT = { has_country_flag = upgraded_munas } }
+			hidden_trigger = { NOT = { has_country_modifier = seed_of_corinism } }
 			NOT = {
 				ruler_has_personality = navigator_personality
 				ruler_has_personality = expansionist_personality
@@ -786,6 +813,7 @@ country_event = {
 		highlight = yes
 		trigger = {
 			hidden_trigger = { NOT = { has_country_flag = upgraded_munas } }
+			hidden_trigger = { NOT = { has_country_modifier = seed_of_corinism } }
 			OR = {
 				ruler_has_personality = navigator_personality
 				ruler_has_personality = expansionist_personality
@@ -884,6 +912,7 @@ country_event = {
 				ruler_has_personality = entrepreneur_personality
 				ruler_has_personality = industrious_personality
 			}
+			hidden_trigger = { NOT = { has_country_modifier = seed_of_corinism } }
 		}
 		ai_chance = {
 			factor = 1
@@ -937,6 +966,7 @@ country_event = {
 				ruler_has_personality = entrepreneur_personality
 				ruler_has_personality = industrious_personality
 			}
+			hidden_trigger = { NOT = { has_country_modifier = seed_of_corinism } }
 		}
 		ai_chance = {
 			factor = 1
@@ -985,6 +1015,7 @@ country_event = {
 		name = regent_court.2.h
 		trigger = {
 			hidden_trigger = { NOT = { has_country_flag = upgraded_balgar } } #For Khughdhir, Hammerhome and Silverforge mission trees
+			hidden_trigger = { NOT = { has_country_modifier = seed_of_corinism } }
 			NOT = {
 				ruler_has_personality = architectural_visionary_personality
 				ruler_has_personality = industrious_personality
@@ -1029,6 +1060,7 @@ country_event = {
 		highlight = yes
 		trigger = {
 			hidden_trigger = { NOT = { has_country_flag = upgraded_balgar } } #For Khughdhir, Hammerhome and Silverforge mission trees
+			hidden_trigger = { NOT = { has_country_modifier = seed_of_corinism } }
 			OR = {
 				ruler_has_personality = architectural_visionary_personality
 				ruler_has_personality = industrious_personality
@@ -1072,6 +1104,7 @@ country_event = {
 		name = regent_court.2.h
 		trigger = {
 			hidden_trigger = { has_country_flag = upgraded_balgar }
+			hidden_trigger = { NOT = { has_country_modifier = seed_of_corinism } }
 			NOT = {
 				ruler_has_personality = architectural_visionary_personality
 				ruler_has_personality = industrious_personality
@@ -1116,6 +1149,7 @@ country_event = {
 		highlight = yes
 		trigger = {
 			hidden_trigger = { has_country_flag = upgraded_balgar }
+			hidden_trigger = { NOT = { has_country_modifier = seed_of_corinism } }
 			OR = {
 				ruler_has_personality = architectural_visionary_personality
 				ruler_has_personality = industrious_personality
@@ -1159,6 +1193,7 @@ country_event = {
 		name = regent_court.2.i
 		trigger = {
 			hidden_trigger = { NOT = { has_country_flag = lady_of_flows_esmaryal } }
+			hidden_trigger = { NOT = { has_country_modifier = seed_of_corinism } }
 			NOT = {
 				ruler_has_personality = fertile_personality
 				ruler_has_personality = kind_hearted_personality
@@ -1209,6 +1244,7 @@ country_event = {
 		highlight = yes
 		trigger = {
 			hidden_trigger = { NOT = { has_country_flag = lady_of_flows_esmaryal } }
+			hidden_trigger = { NOT = { has_country_modifier = seed_of_corinism } }
 			OR = {
 				ruler_has_personality = fertile_personality
 				ruler_has_personality = kind_hearted_personality
@@ -1358,6 +1394,7 @@ country_event = {
 		trigger = {
 			hidden_trigger = { NOT = { has_country_flag = upgraded_ryala } }
 			hidden_trigger = { NOT = { has_country_flag = lady_of_flows_ryala } }
+			hidden_trigger = { NOT = { has_country_modifier = seed_of_corinism } }
 			NOT = {
 				ruler_has_personality = calm_personality
 				ruler_has_personality = careful_personality
@@ -1618,6 +1655,7 @@ country_event = {
 				ruler_has_personality = silver_tongue_personality
 				ruler_has_personality = fertile_personality
 			}
+			hidden_trigger = { NOT = { has_country_modifier = seed_of_corinism } }
 		}
 		ai_chance = {
 			factor = 1
@@ -1664,6 +1702,7 @@ country_event = {
 				ruler_has_personality = silver_tongue_personality
 				ruler_has_personality = fertile_personality
 			}
+			hidden_trigger = { NOT = { has_country_modifier = seed_of_corinism } }
 		}
 		ai_chance = {
 			factor = 1
@@ -1705,6 +1744,7 @@ country_event = {
 		name = regent_court.2.l
 		trigger = {
 			hidden_trigger = { NOT = { has_country_flag = upgraded_falah } }
+			hidden_trigger = { NOT = { has_country_modifier = seed_of_corinism } }
 			NOT = {
 				ruler_has_personality = tactical_genius_personality
 				ruler_has_personality = incorruptible_personality
@@ -1753,6 +1793,7 @@ country_event = {
 		highlight = yes
 		trigger = {
 			hidden_trigger = { NOT = { has_country_flag = upgraded_falah } }
+			hidden_trigger = { NOT = { has_country_modifier = seed_of_corinism } }
 			OR = {
 				ruler_has_personality = tactical_genius_personality
 				ruler_has_personality = incorruptible_personality
@@ -1899,6 +1940,7 @@ country_event = {
 				ruler_has_personality = lawgiver_personality
 				ruler_has_personality = incorruptible_personality
 			}
+			hidden_trigger = { NOT = { has_country_modifier = seed_of_corinism } }
 		}
 		ai_chance = {
 			factor = 1
@@ -1944,6 +1986,7 @@ country_event = {
 				ruler_has_personality = lawgiver_personality
 				ruler_has_personality = incorruptible_personality
 			}
+			hidden_trigger = { NOT = { has_country_modifier = seed_of_corinism } }
 		}
 		ai_chance = {
 			factor = 1
@@ -1988,6 +2031,8 @@ country_event = {
 				ruler_has_personality = intricate_web_weaver_personality
 				ruler_has_personality = well_connected_personality
 			}
+			hidden_trigger = { NOT = { has_country_modifier = seed_of_corinism } }
+			hidden_trigger = { NOT = { has_country_flag = unlocked_wip_god } }
 		}
 		ai_chance = {
 			factor = 1
@@ -2030,6 +2075,8 @@ country_event = {
 				ruler_has_personality = intricate_web_weaver_personality
 				ruler_has_personality = well_connected_personality
 			}
+			hidden_trigger = { NOT = { has_country_modifier = seed_of_corinism } }
+			hidden_trigger = { NOT = { has_country_flag = unlocked_wip_god } }
 		}
 		ai_chance = {
 			factor = 1
@@ -2062,205 +2109,12 @@ country_event = {
 		}
 	}
 	
-	#ACE
-	#Upgraded Nathalyne
-	option = {
-		name = regent_court.2.o
-		highlight = yes
-		trigger = {
-			always = no
-			#has_country_flag = upgraded_nathalyne
-		}
-		ai_chance = {
-			factor = 1
-			modifier = {
-				factor = 2
-				personality = ai_capitalist
-			}
-			modifier = {
-				factor = 2
-				personality = ai_diplomat
-			}
-			modifier = {
-				factor = 1.2
-				government = republic
-			}
-			modifier = {
-				factor = 0.5
-				personality = ai_militarist
-			}
-			modifier = {
-				factor = 5
-				tag = A74	#Nathalaire
-			}
-		}
-		set_country_flag = regent_court_deity_switch_cooldown
-		#change_personal_deity = upgraded_nathalyne
-		if = {
-			limit = { has_government_attribute = follower_of_many_gods }
-			improve_relations_with_deity_followers = { deity = nathalyne }
-		}
-	}
-	
-	#general comment: Is this whole adean war/peace really needed?
-	#adean peace base
-	option = {
-		name = regent_court.2.e
-		trigger = {
-			hidden_trigger = { has_global_flag = "upgraded_adean_admin" }
-			NOT = {
-				ruler_has_personality = righteous_personality
-				ruler_has_personality = martial_educator_personality
-				ruler_has_personality = strict_personality
-			}
-		}
-		ai_chance = {
-			factor = 1
-			modifier = {
-				factor = 2
-				personality = ai_militarist
-			}
-			modifier = {
-				factor = 0.5
-				personality = ai_colonialist
-			}
-			modifier = {
-				factor = 2
-				culture_group = escanni
-			}
-			modifier = {
-				factor = 1.5
-				culture_group = lencori
-			}
-			modifier = {
-				factor = 3
-				personality = ai_balanced
-			}
-			modifier = {
-				factor = 2
-				personality = ai_capitalist
-			}
-			modifier = {
-				factor = 1.2
-				government = monarchy
-			}
-			modifier = {
-				factor = 10 
-				tag = B58	#Adenica
-			}
-		}
-		set_country_flag = regent_court_deity_switch_cooldown
-		change_personal_deity = adean_upgraded_admin
-	}
-	
-	#adean peace favorable
-	option = {
-		name = regent_court.2.e
-		highlight = yes
-		trigger = {
-			hidden_trigger = { has_global_flag = "upgraded_adean_admin" }
-			OR = {
-				ruler_has_personality = righteous_personality
-				ruler_has_personality = martial_educator_personality
-				ruler_has_personality = strict_personality
-			}
-		}
-		ai_chance = {
-			factor = 1
-			modifier = {
-				factor = 2
-				personality = ai_militarist
-			}
-			modifier = {
-				factor = 0.5
-				personality = ai_colonialist
-			}
-			modifier = {
-				factor = 2
-				culture_group = escanni
-			}
-			modifier = {
-				factor = 1.5
-				culture_group = lencori
-			}
-			modifier = {
-				factor = 3
-				personality = ai_balanced
-			}
-			modifier = {
-				factor = 2
-				personality = ai_capitalist
-			}
-			modifier = {
-				factor = 1.2
-				government = monarchy
-			}
-			modifier = {
-				factor = 10 
-				tag = B58	#Adenica
-			}
-		}
-		set_country_flag = regent_court_deity_switch_cooldown
-		change_personal_deity = adean_upgraded_admin
-	}
-	
-	#adean war base
-	option = {
-		name = regent_court.2.e
-		trigger = {
-			hidden_trigger = { has_global_flag = "upgraded_adean_war" }
-			NOT = {
-				ruler_has_personality = righteous_personality
-				ruler_has_personality = martial_educator_personality
-				ruler_has_personality = strict_personality
-			}
-		}
-		ai_chance = {
-			factor = 1
-			modifier = {
-				factor = 2
-				personality = ai_militarist
-			}
-			modifier = {
-				factor = 0.5
-				personality = ai_colonialist
-			}
-			modifier = {
-				factor = 1.5
-				culture_group = escanni
-			}
-			modifier = {
-				factor = 1.5
-				culture_group = lencori
-			}
-			modifier = {
-				factor = 10 
-				tag = B58	#Adenica
-			}
-		}
-		set_country_flag = regent_court_deity_switch_cooldown
-		change_personal_deity = adean_upgraded_war
-	}
-	
-	#adean war favorable
-	option = {
-		name = regent_court.2.e
-		highlight = yes
-		trigger = {
-			hidden_trigger = { has_global_flag = "upgraded_adean_war" }
-			OR = {
-				ruler_has_personality = righteous_personality
-				ruler_has_personality = martial_educator_personality
-				ruler_has_personality = strict_personality
-			}
-		}
-	}
-	
 	#Begga Base
 	option = {
 		name = regent_court.2.p
 		trigger = {
 			hidden_trigger = { NOT = { has_country_flag = upgraded_begga } }
+			hidden_trigger = { NOT = { has_country_modifier = seed_of_corinism } }
 			NOT = {
 				ruler_has_personality = kind_hearted_personality
 				ruler_has_personality = benevolent_personality
@@ -2301,6 +2155,7 @@ country_event = {
 		highlight = yes
 		trigger = {
 			hidden_trigger = { NOT = { has_country_flag = upgraded_begga } }
+			hidden_trigger = { NOT = { has_country_modifier = seed_of_corinism } }
 			OR = {
 				ruler_has_personality = kind_hearted_personality
 				ruler_has_personality = benevolent_personality
@@ -2423,6 +2278,7 @@ country_event = {
 			OR = {
 				tag = H58	#Chipped Tooth Company
 				was_tag = H58
+				has_country_modifier = seed_of_corinism
 			}
 			#No emulant personalities yet
 			#NOT = {
@@ -2497,115 +2353,89 @@ country_event = {
 	}
 	
 
-	#One-Armed Skald Base
+	#wip base - WIP IS THE NAME OF THE GOD
 	option = {
 		name = regent_court.2.s
 		trigger = {
-			hidden_trigger = { NOT = { has_global_flag = one_armed_skald_upgraded_flag } }
 			NOT = {
-				ruler_has_personality = pious_personality
-				ruler_has_personality = bold_fighter_personality
-				ruler_has_personality = inspiring_leader_personality
+				ruler_has_personality = secretive_personality
+				ruler_has_personality = intricate_web_weaver_personality
+				ruler_has_personality = well_connected_personality
 			}
-			OR = {
-				culture_group = gerudian
-				has_country_flag = pearlsedge_gerudia
-			}
+			hidden_trigger = { has_country_flag = unlocked_wip_god }
 		}
 		ai_chance = {
 			factor = 1
 			modifier = {
 				factor = 2
-				personality = ai_militarist
+				personality = ai_capitalist
 			}
-			modifier = {
-				factor = 3
-				ruler_culture = reverian
-			}
-		}
-		set_country_flag = regent_court_deity_switch_cooldown
-		change_personal_deity = one_armed_skald
-	}
-
-	#One-Armed Skald Favorable
-	option = {
-		name = regent_court.2.s
-		highlight = yes
-		trigger = {
-			hidden_trigger = { NOT = { has_global_flag = one_armed_skald_upgraded_flag } }
-			OR = {
-				ruler_has_personality = pious_personality
-				ruler_has_personality = bold_fighter_personality
-				ruler_has_personality = inspiring_leader_personality
-			}
-		}
-		ai_chance = {
-			factor = 1
 			modifier = {
 				factor = 2
+				personality = ai_diplomat
+			}
+			modifier = {
+				factor = 1.2
+				government = republic
+			}
+			modifier = {
+				factor = 0.5
 				personality = ai_militarist
 			}
 			modifier = {
 				factor = 5
-				ruler_culture = reverian
+				OR = {
+					tag = A80	#Iochand
+					tag = A19	#Portnamm
+				}
 			}
 		}
 		set_country_flag = regent_court_deity_switch_cooldown
-		change_personal_deity = one_armed_skald
+		change_personal_deity = wip
 	}
 
-	#One-Armed Skald Upgraded
+	#wip Favorable - WIP IS THE NAME OF THE GOD
 	option = {
 		name = regent_court.2.s
 		trigger = {
-			hidden_trigger = { has_global_flag = one_armed_skald_upgraded_flag }
-			NOT = {
-				ruler_has_personality = pious_personality
-				ruler_has_personality = bold_fighter_personality
-				ruler_has_personality = inspiring_leader_personality
-			}
-		}
-		ai_chance = {
-			factor = 1
-			modifier = {
-				factor = 2
-				personality = ai_militarist
-			}
-			modifier = {
-				factor = 7.5
-				ruler_culture = reverian
-			}
-		}
-		set_country_flag = regent_court_deity_switch_cooldown
-		change_personal_deity = one_armed_skald_upgraded
-	}
-
-	#One-Armed Skald Upgraded Favorable
-	option = {
-		name = regent_court.2.s
-		highlight = yes
-		trigger = {
-			hidden_trigger = { has_global_flag = one_armed_skald_upgraded_flag }
 			OR = {
-				ruler_has_personality = pious_personality
-				ruler_has_personality = bold_fighter_personality
-				ruler_has_personality = inspiring_leader_personality
+				ruler_has_personality = secretive_personality
+				ruler_has_personality = intricate_web_weaver_personality
+				ruler_has_personality = well_connected_personality
 			}
+			hidden_trigger = { has_country_flag = unlocked_wip_god }
 		}
+		highlight = yes
 		ai_chance = {
 			factor = 1
 			modifier = {
 				factor = 2
+				personality = ai_capitalist
+			}
+			modifier = {
+				factor = 2
+				personality = ai_diplomat
+			}
+			modifier = {
+				factor = 1.2
+				government = republic
+			}
+			modifier = {
+				factor = 0.5
 				personality = ai_militarist
 			}
 			modifier = {
-				factor = 10
-				ruler_culture = reverian
+				factor = 5
+				OR = {
+					tag = A80	#Iochand
+					tag = A19	#Portnamm
+				}
 			}
 		}
 		set_country_flag = regent_court_deity_switch_cooldown
-		change_personal_deity = one_armed_skald_upgraded
+		change_personal_deity = wip
 	}
+
 
 	option = {
 		name = regent_court.2.a

@@ -683,7 +683,12 @@ estate_burghers_access_sea = {
 					}
 					OR = {
 						is_part_of_hre = no
-						NOT = { hre_reform_passed = landfriede }
+						NOT = { 
+							OR = {
+								hre_reform_passed = anbennar_mages_peace
+								hre_reform_passed = anbennar_empower_imperial_diet
+							}
+						}
 						ROOT = { is_part_of_hre = no }
 					}
 				}
@@ -717,7 +722,12 @@ estate_burghers_access_sea = {
 						}
 						OR = {
 							is_part_of_hre = no
-							NOT = { hre_reform_passed = landfriede }
+							NOT = { 
+								OR = {
+									hre_reform_passed = anbennar_mages_peace
+									hre_reform_passed = anbennar_empower_imperial_diet
+								}
+							}
 							ROOT = { is_part_of_hre = no }
 						}
 					}
@@ -739,7 +749,12 @@ estate_burghers_access_sea = {
 						}
 						OR = {
 							is_part_of_hre = no
-							NOT = { hre_reform_passed = landfriede }
+							NOT = { 
+								OR = {
+									hre_reform_passed = anbennar_mages_peace
+									hre_reform_passed = anbennar_empower_imperial_diet
+								}
+							}
 							ROOT = { is_part_of_hre = no }
 						}
 					}
@@ -2836,6 +2851,7 @@ estate_burghers_reduce_corruption = {
 #Protect against Piracy
 estate_burghers_protect_against_piracy = {
 	can_select = {
+		is_emperor = no
 		any_active_trade_node = {
 			trade_share = {
 				country = root
@@ -3005,4 +3021,680 @@ estate_burghers_protect_against_piracy = {
 			duration = 7300
         }
     }
+}
+
+estate_burghers_luna_send_great_man = {
+	max_days_active = 3650
+	can_select = {
+		hre_size = 1
+		has_estate_privilege = estate_burghers_to_outsmart_and_outwit
+	}
+	selection_weight = {
+		factor = 50
+	}
+	task_requirements = {
+		OR = {
+			advisor = natural_scientist
+			advisor = philosopher
+			advisor = artist
+		}
+	}
+	task_completed_effect = {
+		gain_1_sway = yes
+		burghers_sway_agenda = yes
+		add_estate_loyalty = {
+				estate = estate_burghers
+				loyalty = 10
+		}
+		on_completed_agenda_effect = {
+			estate = estate_burghers
+		}
+		if = {
+			limit = {
+				advisor = natural_scientist
+			}
+			remove_advisor = natural_scientist
+			emperor = {
+				define_advisor = {
+					type = natural_scientist
+					skill = 1
+					cost_multiplier = 0.5
+					culture = ROOT
+				}
+			}
+		}
+		if = {
+			limit = {
+				advisor = philosopher
+			}
+			remove_advisor = philosopher
+			emperor = {
+				define_advisor = {
+					type = philosopher
+					skill = 1
+					cost_multiplier = 0.5
+					culture = ROOT
+				}
+			}
+		}
+		if = {
+			limit = {
+				advisor = artist
+			}
+			remove_advisor = artist
+			emperor = {
+				sway_target = yes
+				define_advisor = {
+					type = artist
+					skill = 1
+					cost_multiplier = 0.5
+					culture = ROOT
+				}
+			}
+		}
+	}
+	failing_effect = {
+		on_failed_agenda_effect = yes
+		lose_1_sway = yes
+	}
+
+	invalid_trigger = {
+		NOT = { hre_size = 1 }
+	}
+}
+
+estate_burghers_luna_take_foreign_loans = {
+	max_days_active = 3650
+	can_select = {
+		has_estate_privilege = estate_burghers_to_outsmart_and_outwit
+		NOT = { num_of_loans = 1 }
+		any_known_country = {
+			num_of_loans = 2
+			is_part_of_hre = yes
+		}
+	}
+	selection_weight = {
+		factor = 50
+	}
+	pre_effect = {
+		random_known_country = {
+			limit = {
+				num_of_loans = 2
+				is_part_of_hre = yes
+			}
+			save_event_target_as = agenda_country
+		}
+	}
+	task_requirements = {
+		num_of_loans = 4
+	}
+	task_completed_effect = {
+		gain_1_sway = yes
+		burghers_sway_agenda = yes
+		add_estate_loyalty = {
+			estate = estate_burghers
+			loyalty = 10
+		}
+		on_completed_agenda_effect = {
+			estate = estate_burghers
+		}
+		event_target:agenda_country = {
+			sway_target = yes
+			if = {
+				limit = { num_of_loans = 4 }
+				add_treasury = 200
+			}
+			else_if = {
+				limit = { num_of_loans = 3 }
+				add_treasury = 150
+			}
+			else_if = {
+				limit = { num_of_loans = 2 }
+				add_treasury = 100
+			}
+		}
+	}
+	failing_effect = {
+		on_failed_agenda_effect = yes
+		lose_1_sway = yes
+	}
+
+	invalid_trigger = {
+		NOT = { hre_size = 1 }
+	}
+}
+
+estate_burghers_luna_escort_caravans = {
+	max_days_active = 3650
+	can_select = {
+		hre_size = 1
+		has_estate_privilege = estate_burghers_to_outsmart_and_outwit
+		any_known_country = {
+			is_part_of_hre = yes
+			any_owned_province = {
+				NOT = { region = east_dameshead_region }
+			}
+		}
+	}
+	selection_weight = {
+		factor = 50
+	}
+	pre_effect = {
+		random_known_country = {
+			limit = {
+				is_part_of_hre = yes
+				any_owned_province = {
+					NOT = { region = east_dameshead_region }
+				}
+			}
+			random_owned_province = {
+				limit = { NOT = { region = east_dameshead_region } }
+				save_event_target_as = agenda_province
+			}
+		}
+	}
+	task_requirements = {
+		event_target:agenda_province = {
+			num_of_units_in_province = {
+				who = ROOT
+				amount = 5
+			}
+		}
+	}
+	task_completed_effect = {
+		gain_1_sway = yes
+		burghers_sway_agenda = yes
+		add_estate_loyalty = {
+			estate = estate_burghers
+			loyalty = 10
+		}
+		on_completed_agenda_effect = {
+			estate = estate_burghers
+		}
+		event_target:agenda_province = {
+			owner = {
+				add_treasury = 100
+				sway_target = yes
+			}
+		}
+	}
+	failing_effect = {
+		on_failed_agenda_effect = yes
+		lose_1_sway = yes
+	}
+
+	invalid_trigger = {
+		NOT = { hre_size = 1 }
+	}
+}
+
+estate_burghers_luna_appease_a_city = {
+	max_days_active = 3650
+	can_select = {
+		hre_size = 1
+		has_estate_privilege = estate_burghers_to_outsmart_and_outwit
+		has_country_flag = LRM_leader_flag
+		any_subject_country = {
+			is_luna_river_minor = yes
+		}
+	}
+	selection_weight = {
+		factor = 50
+	}
+	pre_effect = {
+		random_subject_country = {
+			limit = {
+				is_luna_river_minor = yes
+			}
+			save_event_target_as = agenda_country
+		}
+	}
+	task_requirements = {
+		always = yes
+	}
+	task_completed_effect = {
+		gain_1_sway = yes
+		burghers_sway_agenda = yes
+		add_estate_loyalty = {
+			estate = estate_burghers
+			loyalty = 10
+		}
+		on_completed_agenda_effect = {
+			estate = estate_burghers
+		}
+		capital_scope = {
+			add_base_tax = -1
+			add_base_production = -1
+			add_base_manpower = -1
+		}
+		event_target:agenda_country = {
+			add_treasury = 50
+			sway_target = yes
+		}
+	}
+	failing_effect = {
+		on_failed_agenda_effect = yes
+		lose_1_sway = yes
+	}
+
+	invalid_trigger = {
+		NOT = { hre_size = 1 }
+	}
+}
+
+estate_burghers_luna_secure_imperial_trade = {
+	max_days_active = 3650
+	can_select = {
+		hre_size = 1
+		has_estate_privilege = estate_burghers_to_outsmart_and_outwit
+		any_active_trade_node = {
+			any_trade_node_member_country = {
+				is_part_of_hre = no
+			}
+		}
+	}
+	selection_weight = {
+		factor = 50
+	}
+	pre_effect = {
+		random_active_trade_node = {
+			limit = {
+				any_trade_node_member_country = {
+					is_part_of_hre = no
+				}
+			}
+			random_trade_node_member_country = {
+				limit = { is_part_of_hre = no }
+				save_event_target_as = agenda_country
+			}
+		}
+	}
+	task_requirements = {
+		event_target:agenda_country = {
+			trade_embargo_by = ROOT
+		}
+	}
+	task_completed_effect = {
+		gain_1_sway = yes
+		burghers_sway_agenda = yes
+		add_estate_loyalty = {
+			estate = estate_burghers
+			loyalty = 10
+		}
+		on_completed_agenda_effect = {
+			estate = estate_burghers
+		}
+		emperor = {
+			add_treasury = 100
+			sway_target = yes
+		}
+	}
+	failing_effect = {
+		on_failed_agenda_effect = yes
+		lose_1_sway = yes
+	}
+
+	invalid_trigger = {
+		NOT = { hre_size = 1 }
+	}
+}
+
+estate_burghers_stablize_indebted_prince = {
+	can_select = {
+		is_emperor = yes
+		is_great_power = yes
+		any_known_country = {
+			is_part_of_hre = yes
+			is_great_power = no
+			is_bankrupt = no
+			num_of_loans = 3
+		}
+	}
+	selection_weight = {
+		factor = 1
+		modifier = { #AI can't really repay debts
+			factor = 0
+			ai = yes
+		}
+	}
+	pre_effect = {
+		random_known_country = {
+			limit = {
+				is_part_of_hre = yes
+				is_great_power = no
+				is_bankrupt = no
+				num_of_loans = 3
+			}
+			save_event_target_as = agenda_country
+		}
+	}
+	task_requirements = {
+		if = {
+			limit = {
+				has_estate_agenda_auto_completion = {
+					estate = estate_burghers
+				}
+			}
+			has_estate_agenda_auto_completion = {
+				estate = estate_burghers
+			}
+		}
+		else = {
+			event_target:agenda_country = {
+				NOT = { num_of_loans = 1 }
+			}
+		}
+	}
+	provinces_to_highlight = {
+		is_capital = yes
+		owner = { tag = event_target:agenda_country }
+	}
+    task_completed_effect = {
+		on_completed_agenda_effect = {
+			estate = estate_burghers
+		}
+		add_estate_loyalty = {
+			estate = estate_burghers
+			loyalty = 10
+		}
+		add_imperial_influence = 3
+		event_target:agenda_country = { set_country_flag = eoa_emperor_help }
+    }
+    failing_effect = {
+		on_failed_agenda_effect = yes
+		clr_auto_complete_flag = yes
+        add_estate_loyalty_modifier = {
+            estate = estate_burghers
+			desc = EST_VAL_AGENDA_DENIED
+			loyalty = -5
+			duration = 7300
+        }
+    }
+	fail_if = {
+		is_emperor = no
+	}
+}
+
+estate_burghers_emperor_combat_pirates = {
+	#literally just pdx copy paste
+	can_select = {
+		is_emperor = yes
+		any_active_trade_node = {
+			trade_share = {
+				country = root
+				share = 20
+			}
+			privateer_power = {
+				share = 20
+			}
+			NOT = {
+				privateer_power = {
+					share = 1
+					country = root
+				}
+			}
+		}
+	}
+	selection_weight = {
+		factor = 2
+		modifier = {
+			factor = 2
+			any_active_trade_node = {
+				trade_share = {
+					country = root
+					share = 20
+				}
+				privateer_power = {
+					share = 20
+				}
+				NOT = {
+					privateer_power = {
+						share = 1
+						country = root
+					}
+				}
+				OR = {
+					trade_share = {
+						country = root
+						share = 35
+					}
+					privateer_power = {
+						share = 35
+					}
+				}
+			}
+		}
+	}
+	pre_effect = {
+		random_active_trade_node = {
+			limit = {
+				trade_share = {
+					country = root
+					share = 20
+				}
+				privateer_power = {
+					share = 20
+				}
+				NOT = {
+					privateer_power = {
+						share = 1
+						country = root
+					}
+				}
+			}
+			save_event_target_as = agenda_trade_node
+		}
+		random_active_trade_node = {
+			limit = {
+				trade_share = {
+					country = root
+					share = 20
+				}
+				privateer_power = {
+					share = 20
+				}
+				NOT = {
+					privateer_power = {
+						share = 1
+						country = root
+					}
+				}
+				OR = {
+					trade_share = {
+						country = root
+						share = 35
+					}
+					privateer_power = {
+						share = 35
+					}
+				}
+			}
+			save_event_target_as = agenda_trade_node
+			if = {
+				limit = {
+					OR = {
+						is_sea = yes
+						has_port = no #shouldn't ever be the case, but just in case...
+					}
+				}
+				save_event_target_as = agenda_trade_node_sea
+			}
+			else = {
+				sea_zone = {
+					save_event_target_as = agenda_trade_node_sea
+				}
+			}
+		}
+	}
+	provinces_to_highlight = {
+		province_id = event_target:agenda_trade_node
+	}
+	task_requirements = {
+		if = {
+			limit = {
+				has_estate_agenda_auto_completion = {
+					estate = estate_burghers
+				}
+			}
+			has_estate_agenda_auto_completion = {
+				estate = estate_burghers
+			}
+		}
+		else = {
+			event_target:agenda_trade_node = {
+				trade_share = {
+					country = root
+					share = 20
+				}
+			}
+			NOT = {
+				any_country = {
+					event_target:agenda_trade_node = {
+						privateer_power = {
+							share = 3
+							country = PREV
+						}
+					}
+				}
+			}
+		}
+	}
+	fail_if = {
+		OR = {
+			is_emperor = no
+			event_target:agenda_trade_node = {
+				NOT = {
+					trade_share = {
+						country = root
+						share = 10
+					}
+				}
+			}
+		}
+	}
+    task_completed_effect = {
+		on_completed_agenda_effect = {
+			estate = estate_burghers
+		}
+		add_estate_loyalty = {
+			estate = estate_burghers
+			loyalty = 15
+		}
+		add_imperial_influence = 3
+    }
+    failing_effect = {
+		on_failed_agenda_effect = yes
+		clr_auto_complete_flag = yes
+        add_estate_loyalty_modifier = {
+            estate = estate_burghers
+			desc = EST_VAL_AGENDA_DENIED
+			loyalty = -5
+			duration = 7300
+        }
+    }
+}
+
+estate_burghers_support_colonists = {
+	can_select = {
+		is_emperor = yes
+		any_province = {
+			is_colony = yes
+			OR = {
+				continent = south_america
+				continent = north_america
+			}
+			owner = { 
+				is_part_of_hre = yes
+				NOT = { tag = ROOT }
+			}
+		}
+	}
+	selection_weight = {
+		factor = 3
+	}
+	pre_effect = {
+		random_province = {
+			limit = {
+				is_colony = yes
+				OR = {
+					continent = south_america
+					continent = north_america
+				}
+				owner = { 
+					is_part_of_hre = yes 
+					NOT = { tag = ROOT }
+				}
+			}
+			save_event_target_as = agenda_province
+			owner = { save_event_target_as = agenda_country }
+		}
+	}
+	provinces_to_highlight = {
+		is_capital = yes
+		owner = { tag = event_target:agenda_country }
+	} 
+	task_requirements = {
+		if = {
+			limit = {
+				has_estate_agenda_auto_completion = {
+					estate = estate_burghers
+				}
+			}
+			has_estate_agenda_auto_completion = {
+				estate = estate_burghers
+			}
+		}
+		else = {
+			if = {
+				limit = {
+					ai = yes
+				}
+				event_target:agenda_country = {
+					has_opinion = {
+						who = emperor
+						value = 100
+					}
+				}
+			}
+			else = {
+				event_target:agenda_country = {
+					has_20_opinion_sent_gift = { target = ROOT }
+				}
+			}
+			emperor = {
+				manpower = 5
+			}
+		}
+	}
+    task_completed_effect = {
+		on_completed_agenda_effect = {
+			estate = estate_burghers
+		}
+		add_estate_loyalty = {
+			estate = estate_burghers
+			loyalty = 10
+		}
+		add_imperial_influence = 3
+		emperor = {
+			add_manpower = -5
+		}
+		event_target:agenda_province = {
+			add_colonysize = 500
+		}
+		#is somewhat likely to accept revoke/unify cause you helped them
+		event_target:agenda_country = { country_event = { id = flavour_eoa_reforms.24 } }
+    }
+    failing_effect = {
+		on_failed_agenda_effect = yes
+		clr_auto_complete_flag = yes
+        add_estate_loyalty_modifier = {
+            estate = estate_burghers
+			desc = EST_VAL_AGENDA_DENIED
+			loyalty = -5
+			duration = 7300
+        }
+    }
+	fail_if = {
+		is_emperor = no
+	}
 }

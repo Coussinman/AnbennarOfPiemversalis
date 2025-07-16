@@ -360,18 +360,10 @@ adshaw_1_missions_nc = {
 				if = {
 					limit = {
 						Z26 = {
-							religion = corinite
+							religion_group = cannorian
 						}
 					}
-					change_religion = corinite
-				}
-				else_if = {
-					limit = {
-						Z26 = {
-							religion = ravelian
-						}
-					}
-					change_religion = ravelian
+					change_religion = ROOT
 				}
 			}
 		}
@@ -1148,8 +1140,16 @@ adshaw_2_missions_nc = {
 		}
 		
 		provinces_to_highlight = {
-			area = frostbridges_area
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+			OR = {
+				AND = {
+					area = frostbridges_area
+					NOT = { country_or_non_sovereign_subject_holds = ROOT }
+				}
+				AND = {
+					province_id = 953 #Vuglborg
+					has_any_ongoing_construction = yes
+				}
+			}
 		}
 		
 		trigger = {
@@ -1157,6 +1157,7 @@ adshaw_2_missions_nc = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
+			953 = { has_any_ongoing_construction = no } #Vuglborg
 		}
 		
 		effect = {
@@ -1181,7 +1182,7 @@ adshaw_2_missions_nc = {
 				}
 				add_permanent_claim = ROOT
 			}
-			953 = {
+			953 = { #Vuglborg
 				add_building_construction = {
 					building = fort_15th
 					speed = 0.5
@@ -1376,7 +1377,7 @@ adshaw_2_missions_nce = {
 		effect = {
 			add_years_of_income = -2
 			981 = {
-				add_permanent_province_modifier = { #Is not mispelled
+				add_permanent_province_modifier = { #Is not misspelled
 					name = Z26_silferhall
 					duration = -1
 				}
@@ -1679,13 +1680,13 @@ adshaw_3_missions_s = {
 		provinces_to_highlight = {
 			OR = {
 				area = northern_greatwoods_area 
-				area = dinesck_area 
+				area = coast_of_vics_area 
 			}
 			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		
 		trigger = {
-			dinesck_area = {
+			coast_of_vics_area = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
@@ -2712,7 +2713,17 @@ adshaw_4_missions_m = {
 					}
 					release_with_religion_and_culture = { tag = Z39 religion = regent_court culture = visfoot_halfling }
 				}
-				set_government_rank = 1
+				if = {
+					limit = { ai = yes }
+					# give the rest to Gerwick
+					every_owned_province = {
+						add_core = B83
+					}
+					release_with_religion_and_culture = { tag = B83 religion = ROOT culture = gawedi }
+				}
+				else = {
+					set_government_rank = 1
+				}
 			}
 			add_prestige = 20
 			custom_tooltip = adshaw_gawed_burns
@@ -2932,18 +2943,30 @@ adshaw_4_missions_e = {
 		
 		provinces_to_highlight = {
 			province_id = 696
-			OR = {
-				NOT = { development = 45 }
-				NOT = { has_dock_building_trigger = yes }
-				NOT = { has_shipyard_building_trigger = yes }
+			NOT = {
+				AND = {
+					has_shipyard_building_trigger = yes
+					OR = {
+						development = 45
+						AND = {
+							has_building = drydock
+							development = 25
+						}
+					}
+				}
 			}
 		}
 		
 		trigger = {
 			696 = {
-				development = 45
-				has_building = drydock 
 				has_shipyard_building_trigger = yes
+				OR = {
+					development = 45
+					AND = {
+						has_building = drydock 
+						development = 25
+					}
+				}
 			}
 		}
 		
@@ -3309,7 +3332,7 @@ adshaw_5_missions_mcv = {
 					OR = {
 						area = serpentshead_area
 						area = northern_greatwoods_area
-						area = dinesck_area
+						area = coast_of_vics_area
 						area = west_chillsbay_area
 					}
 					NOT = { country_or_non_sovereign_subject_holds = ROOT }
@@ -3339,7 +3362,7 @@ adshaw_5_missions_mcv = {
 					type = all
 					country_or_non_sovereign_subject_holds = ROOT
 				}
-				dinesck_area = {
+				coast_of_vics_area = {
 					type = all
 					country_or_non_sovereign_subject_holds = ROOT
 				}
@@ -4010,18 +4033,30 @@ adshaw_5_missions_e = {
 		
 		provinces_to_highlight = {
 			province_id = 718
-			OR = {
-				NOT = { development = 40 }
-				NOT = { has_building = university }
-				NOT = { has_courthouse_building_trigger = yes }
+			NOT = {
+				AND = {
+					has_courthouse_building_trigger = yes
+					OR = {
+						development = 40
+						AND = {
+							development = 30
+							has_building = university
+						}
+					}
+				}	
 			}
 		}
 		
 		trigger = {
 			718 = {
-				development = 40
-				has_building = university
 				has_courthouse_building_trigger = yes
+				OR = {
+					development = 40
+					AND = {
+						development = 30
+						has_building = university
+					}
+				}
 			}
 		}
 		

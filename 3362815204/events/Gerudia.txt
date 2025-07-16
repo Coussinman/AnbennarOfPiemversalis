@@ -1894,13 +1894,17 @@ country_event = { #taric return home receive
 
 	option = { #say no
 		name = gerudia.31.a
+		trigger = { NOT = { AND = { tag = Z88 ai = no } } } 
 		custom_tooltip = taric_option_a_tt
+		ai_chance = { factor = 25 }
 		generic_increase_of_racial_tolerance_effect = { race = orcish small = yes }
 		hidden_effect = { set_country_flag = taric_option_a }
 	}
 	option = { #say yes
 		name = gerudia.31.b
+		trigger = { NOT = { AND = { tag = Z88 ai = no } } }
 		custom_tooltip = taric_option_b_tt
+		ai_chance = { factor = 60 }
 		hidden_effect = {
 			set_country_flag = taric_option_b
 			every_owned_province = {
@@ -1910,6 +1914,7 @@ country_event = { #taric return home receive
 						region = olavlund_region
 						region = gerudian_frontier_region
 					}
+					is_capital = no
 				}
 				taric_hidden_event_flips = yes
 			}
@@ -1924,6 +1929,8 @@ country_event = { #taric return home receive
 	option = { #say yes and release
 		name = gerudia.31.c
 		custom_tooltip = taric_option_c_tt
+		ai_chance = { factor = 15 }
+		trigger = { NOT = { exists = Z91 } }
 		hidden_effect = {
 			set_country_flag = taric_option_c
 			every_owned_province = {
@@ -1933,6 +1940,7 @@ country_event = { #taric return home receive
 						region = olavlund_region
 						region = gerudian_frontier_region
 					}
+					is_capital = no
 				}
 				taric_hidden_event_flips = yes
 			}
@@ -1942,6 +1950,8 @@ country_event = { #taric return home receive
 	option = { #say yes and play as
 		name = gerudia.31.1
 		custom_tooltip = taric_option_d_tt
+		ai_chance = { factor = 0 }
+		trigger = { NOT = { exists = Z91 } }
 		hidden_effect = {
 			set_country_flag = taric_option_d
 			every_owned_province = {
@@ -1951,6 +1961,7 @@ country_event = { #taric return home receive
 						region = olavlund_region
 						region = gerudian_frontier_region
 					}
+					is_capital = no
 				}
 				taric_hidden_event_flips = yes
 			}
@@ -2008,18 +2019,21 @@ country_event = { #cagodic return home receive
 	option = { #say no
 		name = gerudia.33.a
 		custom_tooltip = cagodic_option_a_tt
+		ai_chance = { factor = 25 }
 		generic_increase_of_racial_tolerance_effect = { race = orcish small = yes }
 		hidden_effect = { set_country_flag = cagodic_option_a }
 	}
 	option = { #say yes
 		name = gerudia.33.b
 		custom_tooltip = cagodic_option_b_tt
+		ai_chance = { factor = 60 }
 		hidden_effect = {
 			set_country_flag = cagodic_option_b
 			every_owned_province = {
 				limit = {
 					province_group = taric_and_cagodic_conversion_provinces
 					region = northern_pass_region
+					is_capital = no
 				}
 				cagodic_hidden_event_flips = yes
 			}
@@ -2034,12 +2048,15 @@ country_event = { #cagodic return home receive
 	option = { #say yes and release
 		name = gerudia.33.c
 		custom_tooltip = cagodic_option_c_tt
+		ai_chance = { factor = 15 }
+		trigger = { NOT = { exists = Z92 } }
 		hidden_effect = {
 			set_country_flag = cagodic_option_c
 			every_owned_province = {
 				limit = {
 					province_group = taric_and_cagodic_conversion_provinces
 					region = northern_pass_region
+					is_capital = no
 				}
 				cagodic_hidden_event_flips = yes
 			}
@@ -2049,12 +2066,15 @@ country_event = { #cagodic return home receive
 	option = { #say yes and play as
 		name = gerudia.33.1
 		custom_tooltip = cagodic_option_d_tt
+		ai_chance = { factor = 0 }
+		trigger = { NOT = { exists = Z92 } }
 		hidden_effect = {
 			set_country_flag = cagodic_option_d
 			every_owned_province = {
 				limit = {
 					province_group = taric_and_cagodic_conversion_provinces
 					region = northern_pass_region
+					is_capital = no
 				}
 				cagodic_hidden_event_flips = yes
 			}

@@ -388,8 +388,6 @@ kob_3_a = {
 					tag = Z38
 				}
 			}
-			accepted_culture = bluescale_kobold
-			accepted_culture = redscale_kobold
 
 			OR = {
 				estate_loyalty = {
@@ -497,6 +495,7 @@ kob_3_a = {
 		}
 
 		trigger = {
+			is_at_war = no
 			189 = {
 				check_variable = { dragon_cult_hoard = 2000 }
 			}
@@ -539,6 +538,7 @@ kob_3_a = {
 				}
 				change_tag = Z38
 				hidden_effect = { restore_country_name = yes }
+				custom_tooltip = tooltip_missions_extended
 				custom_tooltip = tooltip_kobildzani_culture_provinces
 				hidden_effect = {
 					every_owned_province = {
@@ -936,7 +936,7 @@ kob_1_b = {
 		provinces_to_highlight = {
 			OR = {
 				AND = {
-					region = dalaire_region
+					region = dolindha_region
 					is_city = yes
 					OR = {
 						NOT = { owned_by_subject_of = ROOT }
@@ -1069,7 +1069,18 @@ kob_2_b = {
 		}
 
 		trigger = {
-			innovativeness = 15
+			if = {
+				limit = { has_dlc = "Rule Britannia" }
+				innovativeness = 15
+			}
+			else = {
+				custom_trigger_tooltip = {
+					tooltip = anb_tech_be_equal_or_ahead_ct_tt
+					all_neighbor_country = {
+						NOT = {	tech_difference = 1 } # Equal or ahead
+					}
+				}
+			}
 			126 = { religion = kobold_dragon_cult }
 			167 = { religion = kobold_dragon_cult }
 			169 = { religion = kobold_dragon_cult }
@@ -1116,6 +1127,7 @@ kob_2_b = {
 				has_estate_privilege = artifice_invention_prehensile_tail_attachments
 				has_estate_privilege = artifice_invention_artificial_egg_surrogates
 				tier_2_artificer_estate = yes
+				tier_3_artificer_estate = yes
 			}
 		}
 
@@ -1142,6 +1154,7 @@ kob_2_b = {
 				}
 			}
 			artifice_granted_10 = yes
+			hidden_effect = { change_variable = { which = ArtificeDynamicInventionCost value = 10 } }
 		}
 	}
 
@@ -1196,6 +1209,7 @@ kob_2_b = {
 				}
 			}
 			artifice_granted_10 = yes
+			hidden_effect = { change_variable = { which = ArtificeDynamicInventionCost value = 10 } }
 			custom_tooltip = haraf_claims_tt
 			hidden_effect = {
 				H30 = { every_owned_province = { add_permanent_claim = ROOT } }
@@ -1240,6 +1254,7 @@ kob_2_b = {
 					}
 				}	
 			}
+			has_country_modifier = racial_focus_ruinborn
 			H24 = {
 				capital_scope = {
 					OR = {
@@ -1251,7 +1266,6 @@ kob_2_b = {
 					}
 				}
 			}
-			has_country_modifier = racial_focus_ruinborn
 		}
 
 		effect = {
@@ -1522,6 +1536,7 @@ kob_3_b = {
 				duration = -1
 			}
 			artifice_granted_10 = yes
+			hidden_effect = { change_variable = { which = ArtificeDynamicInventionCost value = 10 } }
 		}
 	}
 
@@ -1728,6 +1743,7 @@ kob_4_b = {
 				AND = {
 					has_terrain = cavern
 					owned_by = ROOT
+					region = dragon_coast_region
 					OR = {
 						NOT = { is_prosperous = yes }
 						NOT = { num_of_buildings_in_province = 1 }
@@ -1749,6 +1765,7 @@ kob_4_b = {
 				all_owned_province = {
 					OR = {
 						NOT = { has_terrain = cavern }
+						NOT = { region = dragon_coast_region }
 						AND = {
 							is_prosperous = yes
 							num_of_buildings_in_province = 1
@@ -2464,7 +2481,6 @@ Kob_5b = {
 			dragonhills_area = { add_kobold_minority_size_effect = yes add_kobold_minority_size_effect = yes }
 
 			frostbridges_area = { add_permanent_claim = ROOT }
-			serpentshead_area = { add_permanent_claim = ROOT }
 			bjarnland_area = { add_permanent_claim = ROOT }
 			revrland_area = { add_permanent_claim = ROOT }
 		}
@@ -2490,7 +2506,7 @@ kob_1_c = {
 		}
 
 		provinces_to_highlight = {
-			superregion = ynn_superregion
+			region = sarda_region
 			is_empty = no
 			OR = {
 				NOT = { owned_by_subject_of = ROOT }
@@ -2499,7 +2515,7 @@ kob_1_c = {
 		}
 
 		trigger = {
-			ynn_superregion = {
+			sarda_region = {
 				type = all
 				OR = {
 					AND = {
@@ -3129,14 +3145,14 @@ kob_3_c = {
 		}
 	
 		trigger = {
-			NOT = {
-				any_owned_province = {
-					unrest = 0.5
+			OR = {
+				religious_unity = 1
+				NOT = {
+					any_owned_province = {
+						unrest = 0.5
+					}
 				}
 			}
-
-			religious_unity = 1
-			
 				custom_trigger_tooltip = {
 					tooltip = unlocked_all_aspects_tt 
 					has_country_flag = unlocked_red_dragon_2_base
@@ -3346,7 +3362,18 @@ kob_4_c = {
 			crown_land_share = 70
 			check_variable = { which = MaxArtificePoints value = 100 }
 			OR = {
-				innovativeness = 100
+				if = {
+					limit = { has_dlc = "Rule Britannia" }
+					innovativeness = 100
+				}
+				else = {
+					custom_trigger_tooltip = {
+						tooltip = anb_tech_be_three_techs_ahead_1nest_ct_tt
+						all_neighbor_country = {
+							NOT = { tech_difference = -2 } #3 or greater techs ahead
+						}
+					}
+				}
 				army_tradition = 90
 				army_professionalism = 1
 			}

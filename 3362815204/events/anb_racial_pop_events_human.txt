@@ -528,7 +528,9 @@ country_event = {
 		}
 	
 		add_country_modifier = { name = non_primary_refugees duration = 1825 }
-		event_target:destination_province = { racial_pop_migration_arrive = { race = human } }
+		event_target:destination_province = { 
+			racial_pop_migration_arrive = { race = human } 
+		}
 		generic_increase_of_racial_tolerance_effect = { race = human small = yes }
 	}
 	
@@ -563,7 +565,9 @@ country_event = {
 			var_effect_granular = { effect = add_manpower var = manpower_gained_on_exploit sign = + }
 		}
 		remove_country_modifier = non_primary_refugees
-		event_target:destination_province = { racial_pop_migration_arrive = { race = human } }
+		event_target:destination_province = { 
+			racial_pop_migration_arrive = { race = human } 
+		}
 		generic_decrease_of_racial_tolerance_effect = { race = human medium = yes }
 	}
 
@@ -687,7 +691,9 @@ country_event = {
 	
 		#Add Minority to New Province
 		add_country_modifier = { name = non_primary_refugees duration = 1825 }
-		event_target:destination_province = { racial_pop_migration_arrive = { race = human } }
+		event_target:destination_province = { 
+			racial_pop_migration_arrive = { race = human } 
+		}
 		generic_increase_of_racial_tolerance_effect = { race = human small = yes }
 	}
 	
@@ -724,7 +730,9 @@ country_event = {
 		remove_country_modifier = non_primary_refugees
 	
 		#Add Minority to New Province
-		event_target:destination_province = { racial_pop_migration_arrive = { race = human } }
+		event_target:destination_province = { 
+			racial_pop_migration_arrive = { race = human } 
+		}
 		generic_decrease_of_racial_tolerance_effect = { race = human medium = yes }
 	}
 
@@ -782,7 +790,9 @@ country_event = {
 		
 		random = {
 			chance = 50
-			event_target:destination_province = { racial_pop_migration_arrive = { race = human} }
+			event_target:destination_province = { 
+				racial_pop_migration_arrive = { race = human} 
+			}
 		}
 		add_mil_power = -30
 		if = {
@@ -1084,6 +1094,7 @@ country_event = {
 		name = racial_pop_events_all_races.12.c
 		trigger = {
 			has_country_modifier = racial_pop_human_purge
+			NOT = { has_country_flag = cannot_end_human_purge }
 			adm_power = 100
 		}
 		
@@ -1178,11 +1189,21 @@ country_event = {
 		name = racial_pop_events_all_races.12.dd
 		trigger = {
 			has_country_modifier = racial_pop_human_purge
-			NOT = { adm_power = 100 }
+			OR = {
+				NOT = { adm_power = 100 }
+				has_country_flag = cannot_end_human_purge
+			}
 		}
 		ai_chance = { factor = 0 }
 		custom_tooltip = pop_menu_purge_desc_tt
-		custom_tooltip = pop_menu_cannot_stop_purge_not_enough_adm_tt
+		if = {
+			limit = { has_country_flag = cannot_end_human_purge }
+			custom_tooltip = purge_cannot_end_tt
+		}
+		if = {
+			limit = { NOT = { adm_power = 100 } }
+			custom_tooltip = pop_menu_cannot_stop_purge_not_enough_adm_tt 
+		}
 		hidden_effect = {
 			country_event = { id = racial_pop_events_human.24 }
 		}
@@ -1564,7 +1585,7 @@ country_event = {
 		name = racial_pop_events_all_races.12.z
 		trigger = { ai = no }
 		hidden_effect = {
-			country_event = { id = racial_pop_misc.3 }
+			country_event = { id = racial_pop_misc.1 }
 		}
 	}
 }	
@@ -1733,10 +1754,6 @@ country_event = {
 	
 	mean_time_to_happen = {
 		days = 1825
-		modifier = { #ACE
-			factor = 0.5
-			has_country_flag = magmascale_faster_human_purging
-		}
 		modifier = {
 			factor = 0.5
 			has_country_modifier = racial_focus_human
@@ -2064,10 +2081,6 @@ country_event = {
 	
 	mean_time_to_happen = {
 		days = 2737
-		modifier = { #ACE
-			factor = 0.5
-			has_country_flag = magmascale_faster_human_purging
-		}
 		modifier = {
 			factor = 0.5
 			has_country_modifier = racial_focus_human
@@ -2394,10 +2407,6 @@ country_event = {
 	
 	mean_time_to_happen = {
 		days = 3650
-		modifier = { #ACE
-			factor = 0.5
-			has_country_flag = magmascale_faster_human_purging
-		}
 		modifier = {
 			factor = 0.5
 			has_country_modifier = racial_focus_human
@@ -2642,10 +2651,6 @@ country_event = {
 	
 	mean_time_to_happen = {
 		days = 5475
-		modifier = { #ACE
-			factor = 0.5
-			has_country_flag = magmascale_faster_human_purging
-		}
 		modifier = {
 			factor = 0.5
 			has_country_modifier = racial_focus_human
@@ -2899,10 +2904,6 @@ country_event = {
 	
 	mean_time_to_happen = {
 		days = 1825
-		modifier = { #ACE
-			factor = 0.5
-			has_country_flag = magmascale_faster_human_purging
-		}
 		modifier = {
 			factor = 0.5
 			has_country_modifier = racial_focus_human
@@ -3202,10 +3203,6 @@ country_event = {
 	
 	mean_time_to_happen = {
 		days = 2555
-		modifier = { #ACE
-			factor = 0.5
-			has_country_flag = magmascale_faster_human_purging
-		}
 		modifier = {
 			factor = 0.5
 			has_country_modifier = racial_focus_human
@@ -3540,10 +3537,6 @@ country_event = {
 	
 	mean_time_to_happen = {
 		days = 1850
-		modifier = { #ACE
-			factor = 0.5
-			has_country_flag = magmascale_faster_human_purging
-		}
 		modifier = {
 			factor = 0.5
 			has_country_modifier = racial_focus_human
@@ -3780,3 +3773,4 @@ country_event = {
 		name = racial_pop_events_human.99.a
 	}
 }
+

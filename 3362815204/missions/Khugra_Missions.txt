@@ -4,13 +4,7 @@ khugra_1_missions = {
 	ai = yes 
 	has_country_shield = yes
 	potential = {
-		OR = {
-			tag = L70
-			AND = { #this should be removed when Khatalashya gets unique missions
-				tag = S81
-				was_tag = L70
-			}
-		}
+		tag = L70
 	}
 
 	L70_khugra_our_time_to_rule = {
@@ -175,20 +169,8 @@ khugra_1_missions = {
 		}
 
 		provinces_to_highlight = {	
-			OR = {
-				AND = {
-					region = katala_raz_region
-					NOT = { country_or_non_sovereign_subject_holds = ROOT } 
-				}
-				AND = {
-					region = odu_kherass_region
-					NOT = { country_or_non_sovereign_subject_holds = ROOT } 
-				}
-				AND = {
-					region = throden_gokad_region
-					NOT = { country_or_non_sovereign_subject_holds = ROOT } 
-				}
-			}
+			superregion = taneyas_superregion
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 		}
 
 		trigger = {
@@ -202,11 +184,7 @@ khugra_1_missions = {
 			diplomatic_reputation = 8
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
 				value = 100
-				OR =  { 
-					region = throden_gokad_region
-					region = odu_kherass_region
-					region = katala_raz_region
-				}
+				superregion = taneyas_superregion
 			}
 		}
 
@@ -227,13 +205,7 @@ khugra_2_missions = {
 	ai = yes 
 	has_country_shield = yes
 	potential = {
-		OR = {
-			tag = L70
-			AND = { #this should be removed when Khatalashya gets unique missions
-				tag = S81
-				was_tag = L70
-			}
-		}
+		tag = L70
 	}
 
 	L70_khugra_shattered_red = {
@@ -430,12 +402,15 @@ khugra_2_missions = {
 				}
 				5914 = { num_of_times_expanded_infrastructure = 2 }
 			}
-			africa = {
-				type = all
-				OR = {
-					NOT = { higher_development_than = 5914 }
-					province_id = 526
-				
+			custom_trigger_tooltip  = {
+				tooltip  = trigger_sapphire_of_sarhal_70_tt
+				africa = {
+					type = all
+					OR = {
+						NOT = { higher_development_than = 5914 }
+						province_id = 526
+					
+					}
 				}
 			}
 		}
@@ -468,13 +443,7 @@ khugra_3_missions = {
 	ai = yes 
 	has_country_shield = yes
 	potential = {
-		OR = {
-			tag = L70
-			AND = { #this should be removed when Khatalashya gets unique missions
-				tag = S81
-				was_tag = L70
-			}
-		}
+		tag = L70
 	}
 
 	L70_khugra_we_wont_back_down = {
@@ -856,13 +825,7 @@ khugra_4_missions = {
 	ai = yes 
 	has_country_shield = yes
 	potential = {
-		OR = {
-			tag = L70
-			AND = { #this should be removed when Khatalashya gets unique missions
-				tag = S81
-				was_tag = L70
-			}
-		}
+		tag = L70
 	}
 
 	L70_khugra_tarnished_gold = {
@@ -1568,13 +1531,7 @@ khugra_5_missions = {
 	ai = yes 
 	has_country_shield = yes
 	potential = {
-		OR = {
-			tag = L70
-			AND = { #this should be removed when Khatalashya gets unique missions
-				tag = S81
-				was_tag = L70
-			}
-		}
+		tag = L70
 	}
 
 	L70_khugra_the_islands_of_the_littlefolk = {
@@ -1587,7 +1544,7 @@ khugra_5_missions = {
 		provinces_to_highlight = {  
 			OR = { 
 				AND = { 
-					area = velanynosy_area
+					area = sombimofo_area
 					NOT = { owned_by = ROOT }
 				}
 				AND = { 
@@ -1596,6 +1553,10 @@ khugra_5_missions = {
 				}
 				AND = { 
 					area = sil_berkhens_land_area
+					NOT = { owned_by = ROOT }
+				}
+				AND = { 
+					area = far_uelos_isles_area
 					NOT = { owned_by = ROOT }
 				}
 			}
@@ -1607,7 +1568,8 @@ khugra_5_missions = {
 				OR = { 
 					area = pikakely_area
 					area = sil_berkhens_land_area
-					area = velanynosy_area
+					area = sombimofo_area
+					area = far_uelos_isles_area
 				}
 			}
 			native_policy = native_policy_trade
@@ -1653,7 +1615,24 @@ khugra_5_missions = {
 					change_trade_goods = cloves
 				}
 			}
-			velanynosy_area = { 
+			sombimofo_area = { 
+				if = {
+					limit = {
+						owned_by = ROOT
+						trade_goods = cloves
+					}
+					
+					add_base_production = 2
+				}
+				else_if = {
+					limit = {
+						owned_by = ROOT
+						NOT = { trade_goods = cloves }
+					}
+					change_trade_goods = cloves
+				}
+			}
+			far_uelos_isles_area = { 
 				if = {
 					limit = {
 						owned_by = ROOT
@@ -1883,13 +1862,7 @@ khugra_missions_3b = {
 	ai = yes
 	has_country_shield = yes
 	potential = {
-		OR = {
-			tag = L70
-			AND = { #this should be removed when Khatalashya gets unique missions
-				tag = S81
-				was_tag = L70
-			}
-		}
+		tag = L70
 		has_country_flag = L70_khugra_searched_in_every_corner
 	}
 	

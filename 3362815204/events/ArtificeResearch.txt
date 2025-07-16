@@ -1,23 +1,24 @@
 namespace = artifice_research
 
-#_______________________________________________________________#
-#		:Files to edit when adding inventions Checklist:		#
-#			1. estate_privleges/estate_artifice_privileges.txt	#
-#			2. estates/99_artificers.txt						#
-#			3. scripted_effects/artifice_scripted_effects.txt	#
-#			4. events/ArtificeResearch.txt						#
-#			5. common/custom_gui/countrydecisionsview.txt		#
-#			6. Don't forget to localize your work				#
-#---------------------------------------------------------------#
-#			:OPTIONAL: GFX/GUI editers only:					#
-#			7. interface/countrydecisionsview.gui				#
-#			8. interface/countrydecisionsview.gfx				#
-#																#
-#			:GFX Assets Folder: 								#
-#			9. gfx/interface/custom_gui/artificery				#
-#																#
-#			Written By: Tators/River Doge						#
-#_______________________________________________________________#
+#___________________________________________________________________#
+#		:Files to edit when adding inventions Checklist:			#
+#			1. estate_privleges/estate_artifice_privileges.txt		#
+#			2. estates/99_artificers.txt							#
+#			3. scripted_effects/artifice_scripted_effects.txt		#
+#			4. events/ArtificeResearch.txt							#
+#			5. common/custom_gui/countrydecisionsview.txt			#
+#			6. scripted_triggers/anb_scripted_triggers_artifice.txt	#
+#			7. Don't forget to localize your work					#
+#-------------------------------------------------------------------#
+#			:OPTIONAL: GFX/GUI editers only:						#
+#			7. interface/countrydecisionsview.gui					#
+#			8. interface/countrydecisionsview.gfx					#
+#																	#
+#			:GFX Assets Folder: 									#
+#			9. gfx/interface/custom_gui/artificery					#
+#																	#
+#			Written By: Tators/River Doge							#																																																		Noobody will see it ~Ziwik
+#___________________________________________________________________#
 
 #Are you sure event
 country_event = {
@@ -32,7 +33,7 @@ country_event = {
 		set_country_flag = artifice_research_menu_open
 
 		#sets the correct research speed
-		research_speed = yes
+		update_research_speed = yes
 	}
 
 	#Gimme that research
@@ -155,7 +156,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_spell_in_a_box
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -171,7 +172,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_fine_print_obfuscator
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -187,7 +188,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_automated_translator
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -203,7 +204,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_wine_ageifier
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -219,7 +220,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_pearl_cultivators
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -235,7 +236,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_great_processor
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -251,7 +252,23 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_self_cleaning_parchment
 		}
-				ai_chance = {
+		ai_chance = {
+			factor = 5
+		}
+	}
+	#Superfast Elevators
+	option = {
+		name = artifice_research.3.i20
+		trigger = {
+			has_country_flag = research_artifice_invention_superfast_elevators
+		}
+		hidden_effect = {
+			set_country_flag = researching_artifice_invention_superfast_elevators
+		}
+		tooltip = {
+			set_estate_privilege = artifice_invention_superfast_elevators
+		}
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -283,7 +300,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_market_mender
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -299,7 +316,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_arcane_battery_capital_complex
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -315,7 +332,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_plane_of_water_teleporter
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -333,7 +350,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_portable_turrets
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -349,7 +366,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_sparkdrive_rifles
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -365,7 +382,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_vorpal_bullets
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -381,7 +398,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_magic_missile_deployer
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -397,7 +414,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_ancestral_golems
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -413,7 +430,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_antimagic_field_generator
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -623,7 +640,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_centipedal_chests
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -687,7 +704,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_fey_spray
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -703,7 +720,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_scrapperclaws
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -719,7 +736,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_conversation_calibrator
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -738,7 +755,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_growth_beans
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -754,7 +771,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_vendorless_stall
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -770,7 +787,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_brass_prosthesis
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -786,7 +803,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_gene_food_cultivation
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -802,7 +819,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_prehensile_tail_attachments
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -818,7 +835,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_chi_cultivation
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -834,7 +851,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_city_maintenance_bots
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -850,7 +867,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_artificial_egg_surrogates
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -866,7 +883,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_subterrenes
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -883,7 +900,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_wandlocks
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -899,7 +916,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_balloonboost_packs
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -915,7 +932,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_prototype_tanks
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -931,7 +948,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_war_golems
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -947,7 +964,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_arcane_blaster
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -963,7 +980,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_wind_invokers
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -979,7 +996,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_avatar_supersoldier_serum
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -995,7 +1012,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_lullaby_cannon
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1011,7 +1028,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_giantshape_warframe
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1027,23 +1044,23 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_controlled_rage_serum
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
-	#Codorran Powered Exoskeleton
+	#Coddorran Powered Exoskeleton
 	option = {
 		name = artifice_research.3.m211
 		trigger = {
-			has_country_flag = research_artifice_invention_codorran_powered_exosuit
+			has_country_flag = research_artifice_invention_coddorran_powered_exosuit
 		}
 		hidden_effect = {
-			set_country_flag = researching_artifice_invention_codorran_powered_exosuit
+			set_country_flag = researching_artifice_invention_coddorran_powered_exosuit
 		}
 		tooltip = {
-			set_estate_privilege = artifice_invention_codorran_powered_exosuit
+			set_estate_privilege = artifice_invention_coddorran_powered_exosuit
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1059,7 +1076,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_eplusplus_compound
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1075,7 +1092,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_elemental_gunpowder
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1091,7 +1108,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_gyrocopters
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1107,7 +1124,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_kaydhano_powered_vessels
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1123,7 +1140,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_warfare_simulator
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1139,10 +1156,11 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_gu_boats
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
+	#Veykoda Rune Protections
 	option = {
 		name = artifice_research.3.m218
 		trigger = {
@@ -1154,7 +1172,23 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_veykoda_rune_protections
 		}
-				ai_chance = {
+		ai_chance = {
+			factor = 5
+		}
+	}
+	#Platinum Warsuit
+	option = {
+		name = artifice_research.3.m219
+		trigger = {
+			has_country_flag = research_artifice_invention_platinum_warsuit
+		}
+		hidden_effect = {
+			set_country_flag = researching_artifice_invention_platinum_warsuit
+		}
+		tooltip = {
+			set_estate_privilege = artifice_invention_platinum_warsuit
+		}
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1171,7 +1205,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_remedial_tinctures
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1187,7 +1221,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_arithmatons
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1203,7 +1237,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_burrower_arms
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1219,7 +1253,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_god_fragment_decoder
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1235,7 +1269,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_talking_god_temples
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1251,7 +1285,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_think_thought_transmitters
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1267,7 +1301,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_mirage_detector_3000
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1283,7 +1317,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_empire_engine
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1298,7 +1332,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_game_of_khet
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1314,7 +1348,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_soarwing_grafts
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1332,7 +1366,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_pathway_transmutation
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1348,7 +1382,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_elemental_locomotives
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1364,7 +1398,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_high_velocity_irrigation
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1380,7 +1414,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_weather_predicticator
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1396,7 +1430,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_artifice_powered_magnate_factories
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1412,7 +1446,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_prefabricated_city_constructors
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1428,7 +1462,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_t_wave_transceivers
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1445,7 +1479,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_black_damestear_bullets
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1461,7 +1495,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_artillery_autoloader
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1477,7 +1511,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_bioartificed_ascension
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1493,7 +1527,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_personal_mageshields
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1509,7 +1543,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_military_sky_galleons
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1525,7 +1559,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_naval_mageshields
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1541,7 +1575,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_demonflame_flamethrowers
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1557,7 +1591,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_chase_em_rockets
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1573,7 +1607,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_dragonblood_gene_warriors
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1589,7 +1623,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_damestear_reactor_megacannon
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1606,7 +1640,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_crierless_crier_device
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1622,7 +1656,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_bureaucratizer
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1638,7 +1672,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_divendancer_speedboat
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1654,7 +1688,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_runethought_network
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1670,7 +1704,23 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_negotiation_nexus
 		}
-				ai_chance = {
+		ai_chance = {
+			factor = 5
+		}
+	}
+	#Thinkquik drink mix
+	option = {
+		name = artifice_research.3.s36
+		trigger = {
+			has_country_flag = research_artifice_invention_think_quik_drink_mix
+		}
+		hidden_effect = {
+			set_country_flag = researching_artifice_invention_think_quik_drink_mix
+		}
+		tooltip = {
+			set_estate_privilege = artifice_invention_think_quik_drink_mix
+		}
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1688,7 +1738,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_feiten_farsight_telescopes
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1704,7 +1754,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_feiten_porcelain_caged_firebirds
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1720,7 +1770,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_feiten_specialized_construction_arms
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1736,7 +1786,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_feiten_steel_rudders
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1752,7 +1802,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_feiten_expanding_storage_holds
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1768,7 +1818,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_feiten_electroplated_armor
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1784,7 +1834,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_feiten_ivory_conduits
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1800,7 +1850,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_feiten_silken_cladding
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1816,7 +1866,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_feiten_damestear_ribbing
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1832,7 +1882,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_feiten_long_rockets
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1848,7 +1898,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_feiten_lightning_amplifier
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1864,7 +1914,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_feiten_skywriting
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1883,7 +1933,7 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_allclan_drill_shells
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1899,72 +1949,52 @@ country_event = {
 		tooltip = {
 			set_estate_privilege = artifice_invention_allclan_super_boots
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
-	#ACE
-	#Gerudian Autorowers
-	option = { #Gerudian Culture Group
-		name = artifice_research.3.aceger1
+	option = {	#Celmaldor
+		name = artifice_research.3.y3
 		trigger = {
-			has_country_flag = research_artifice_invention_gerudian_autorowers
+			has_country_flag = research_artifice_invention_innate_windshaping
 		}
 		hidden_effect = {
-			set_country_flag = researching_artifice_invention_gerudian_autorowers
+			set_country_flag = researching_artifice_invention_innate_windshaping
 		}
 		tooltip = {
-			set_estate_privilege = artifice_invention_gerudian_autorowers
+			set_estate_privilege = artifice_invention_innate_windshaping
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
-	#Gerudian Axepistol
-	option = { #Gerudian Culture Group
-		name = artifice_research.3.aceger2
+	option = {	#Celmaldor
+		name = artifice_research.3.y4
 		trigger = {
-			has_country_flag = research_artifice_invention_gerudian_axepistol
+			has_country_flag = research_artifice_invention_icestorm_cannons
 		}
 		hidden_effect = {
-			set_country_flag = researching_artifice_invention_gerudian_axepistol
+			set_country_flag = researching_artifice_invention_icestorm_cannons
 		}
 		tooltip = {
-			set_estate_privilege = artifice_invention_gerudian_axepistol
+			set_estate_privilege = artifice_invention_icestorm_cannons
 		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
-	#Gerudian Weightless Holds
-	option = { #Gerudian Culture Group
-		name = artifice_research.3.aceger3
+	option = {	#Celmaldor
+		name = artifice_research.3.y5
 		trigger = {
-			has_country_flag = research_artifice_invention_gerudian_weightless_holds
+			has_country_flag = research_artifice_invention_sustaining_arks
 		}
 		hidden_effect = {
-			set_country_flag = researching_artifice_invention_gerudian_weightless_holds
+			set_country_flag = researching_artifice_invention_sustaining_arks
 		}
 		tooltip = {
-			set_estate_privilege = artifice_invention_gerudian_weightless_holds
+			set_estate_privilege = artifice_invention_sustaining_arks
 		}
-				ai_chance = {
-			factor = 5
-		}
-	}
-	#Tale Generator
-	option = { #Skaldhyrric Faith
-		name = artifice_research.3.aceger4
-		trigger = {
-			has_country_flag = research_artifice_invention_skaldhyrric_tale_generator
-		}
-		hidden_effect = {
-			set_country_flag = researching_artifice_invention_skaldhyrric_tale_generator
-		}
-		tooltip = {
-			set_estate_privilege = artifice_invention_skaldhyrric_tale_generator
-		}
-				ai_chance = {
+		ai_chance = {
 			factor = 5
 		}
 	}
@@ -1995,6 +2025,16 @@ country_event = {
 			factor = 1
 		}
 	}
+	option = { #All research done
+		name = artifice_research.final
+		custom_tooltip = artifice_research.4.tt 
+		trigger = {
+			artifice_invention_researched_all = yes
+		}
+		ai_chance = {
+			factor = 1
+		}
+	}
 
 	after = {
 		clr_country_flag = artifice_researching_economic
@@ -2002,9 +2042,7 @@ country_event = {
 		clr_country_flag = artifice_researching_society
 
 		#Tier 1 Economic
-		clr_country_flag = research_artifice_invention_artificer_exo_arms
 		clr_country_flag = research_artifice_invention_spell_in_a_box
-		clr_country_flag = research_artifice_invention_commercial_sky_galleons
 		clr_country_flag = research_artifice_invention_fine_print_obfuscator
 		clr_country_flag = research_artifice_invention_automated_translator
 		clr_country_flag = research_artifice_invention_wine_ageifier
@@ -2012,6 +2050,9 @@ country_event = {
 		clr_country_flag = research_artifice_invention_arcane_battery_capital_complex
 		clr_country_flag = research_artifice_invention_market_mender
 		clr_country_flag = research_artifice_invention_plane_of_water_teleporter
+		clr_country_flag = research_artifice_invention_self_cleaning_parchment
+		clr_country_flag = research_artifice_invention_superfast_elevators
+		clr_country_flag = research_artifice_invention_sustaining_arks
 
 		#Tier 1 Military
 		clr_country_flag = research_artifice_invention_portable_turrets
@@ -2029,6 +2070,8 @@ country_event = {
 		clr_country_flag = research_artifice_invention_war_rigs
 		clr_country_flag = research_artifice_invention_sunbeam_armaments
 		clr_country_flag = research_artifice_invention_power_fists
+		clr_country_flag = research_artifice_invention_commercial_sky_galleons
+		clr_country_flag = research_artifice_invention_artificer_exo_arms
 
 		#Tier 1 Society
 		clr_country_flag = research_artifice_invention_viewcatcher
@@ -2053,6 +2096,7 @@ country_event = {
 		clr_country_flag = research_artifice_invention_city_maintenance_bots
 		clr_country_flag = research_artifice_invention_artificial_egg_surrogates
 		clr_country_flag = research_artifice_invention_subterrenes
+		clr_country_flag = research_artifice_invention_innate_windshaping
 
 		#Tier 2 Military
 		clr_country_flag = research_artifice_invention_wandlocks
@@ -2065,13 +2109,16 @@ country_event = {
 		clr_country_flag = research_artifice_invention_lullaby_cannon
 		clr_country_flag = research_artifice_invention_giantshape_warframe
 		clr_country_flag = research_artifice_invention_controlled_rage_serum
-		clr_country_flag = research_artifice_invention_codorran_powered_exosuit
+		clr_country_flag = research_artifice_invention_coddorran_powered_exosuit
 		clr_country_flag = research_artifice_invention_eplusplus_compound
 		clr_country_flag = research_artifice_invention_elemental_gunpowder
 		clr_country_flag = research_artifice_invention_gyrocopters
 		clr_country_flag = research_artifice_invention_kaydhano_powered_vessels
 		clr_country_flag = research_artifice_invention_warfare_simulator
 		clr_country_flag = research_artifice_invention_gu_boats
+		clr_country_flag = research_artifice_invention_veykoda_rune_protections
+		clr_country_flag = research_artifice_invention_platinum_warsuit
+		clr_country_flag = research_artifice_invention_icestorm_cannons
 
 		#Tier 2 Society
 		clr_country_flag = research_artifice_invention_remedial_tinctures
@@ -2112,6 +2159,7 @@ country_event = {
 		clr_country_flag = research_artifice_invention_bureaucratizer
 		clr_country_flag = research_artifice_invention_runethought_network
 		clr_country_flag = research_artifice_invention_negotiation_nexus
+		clr_country_flag = research_artifice_invention_think_quik_drink_mix
 
 		#Feiten
 		clr_country_flag = research_feiten_invention_farsight_telescopes
@@ -2126,12 +2174,6 @@ country_event = {
 		clr_country_flag = research_feiten_invention_long_rockets
 		clr_country_flag = research_feiten_invention_lightning_amplifier
 		clr_country_flag = research_feiten_invention_skywriting
-
-		#ACE
-		clr_country_flag = research_artifice_invention_gerudian_autorowers
-		clr_country_flag = research_artifice_invention_gerudian_axepistol
-		clr_country_flag = research_artifice_invention_gerudian_weightless_holds
-		clr_country_flag = research_artifice_invention_skaldhyrric_tale_generator
 
 		#Misc
 		clr_country_flag = research_unlocked_artifice_invention_drill_shells
@@ -2256,6 +2298,14 @@ country_event = {
 			clr_country_flag = researching_artifice_invention_pearl_cultivators
 			country_event = {
 				id = artifice_inventions.804
+			}
+		}
+		if = {
+			limit = { has_country_flag = researching_artifice_invention_superfast_elevators }
+			set_country_flag = unlocked_artifice_invention_superfast_elevators
+			clr_country_flag = researching_artifice_invention_superfast_elevators
+			country_event = {
+				id = artifice_inventions.805
 			}
 		}
 		if = {
@@ -2615,6 +2665,14 @@ country_event = {
 			}
 		}
 		if = {
+			limit = { has_country_flag = researching_artifice_invention_antimagic_field_generator }
+			set_country_flag = unlocked_artifice_invention_antimagic_field_generator
+			clr_country_flag = researching_artifice_invention_antimagic_field_generator
+			country_event = {
+				id = artifice_inventions.318
+			}
+		}
+		if = {
 			limit = { has_country_flag = researching_artifice_invention_lullaby_cannon }
 			set_country_flag = unlocked_artifice_invention_lullaby_cannon
 			clr_country_flag = researching_artifice_invention_lullaby_cannon
@@ -2639,9 +2697,9 @@ country_event = {
 			}
 		}
 		if = {
-			limit = { has_country_flag = researching_artifice_invention_codorran_powered_exosuit }
-			set_country_flag = unlocked_artifice_invention_codorran_powered_exosuit
-			clr_country_flag = researching_artifice_invention_codorran_powered_exosuit
+			limit = { has_country_flag = researching_artifice_invention_coddorran_powered_exosuit }
+			set_country_flag = unlocked_artifice_invention_coddorran_powered_exosuit
+			clr_country_flag = researching_artifice_invention_coddorran_powered_exosuit
 			country_event = {
 				id = artifice_inventions.307
 			}
@@ -2702,6 +2760,14 @@ country_event = {
 				id = artifice_inventions.608
 			}
 		}
+		if = {
+			limit = { has_country_flag = researching_artifice_invention_platinum_warsuit }
+			set_country_flag = unlocked_artifice_invention_platinum_warsuit
+			clr_country_flag = researching_artifice_invention_platinum_warsuit
+			country_event = {
+				id = artifice_inventions.904
+			}
+		}
 		#Tier 2 Society
 		if = {
 			limit = { has_country_flag = researching_artifice_invention_remedial_tinctures }
@@ -2741,6 +2807,14 @@ country_event = {
 			clr_country_flag = researching_artifice_invention_talking_god_temples
 			country_event = {
 				id = artifice_inventions.108
+			}
+		}
+		if = {
+			limit = { has_country_flag = researching_artifice_invention_think_quik_drink_mix}
+			set_country_flag = unlocked_artifice_invention_thinkquik_drink_mix
+			clr_country_flag = researching_artifice_invention_think_quik_drink_mix
+			country_event = {
+				id = artifice_inventions.109
 			}
 		}
 		if = {
@@ -3060,39 +3134,6 @@ country_event = {
 				id = flavor_feiten.254
 			}
 		}
-		#ACE
-		if = {
-			limit = { has_country_flag = researching_artifice_invention_gerudian_autorowers }
-			set_country_flag = unlocked_artifice_invention_gerudian_autorowers
-			clr_country_flag = researching_artifice_invention_gerudian_autorowers
-			country_event = {
-				id = reveria.97
-			}
-		}
-		if = {
-			limit = { has_country_flag = researching_artifice_invention_gerudian_axepistol }
-			set_country_flag = unlocked_artifice_invention_gerudian_axepistol
-			clr_country_flag = researching_artifice_invention_gerudian_axepistol
-			country_event = {
-				id = reveria.98
-			}
-		}
-		if = {
-			limit = { has_country_flag = researching_artifice_invention_gerudian_weightless_holds }
-			set_country_flag = unlocked_artifice_invention_gerudian_weightless_holds
-			clr_country_flag = researching_artifice_invention_gerudian_weightless_holds
-			country_event = {
-				id = reveria.99
-			}
-		}
-		if = {
-			limit = { has_country_flag = researching_artifice_invention_skaldhyrric_tale_generator }
-			set_country_flag = unlocked_artifice_invention_skaldhyrric_tale_generator
-			clr_country_flag = researching_artifice_invention_skaldhyrric_tale_generator
-			country_event = {
-				id = reveria.100
-			}
-		}
 
 		#Misc
 		if = {
@@ -3111,8 +3152,30 @@ country_event = {
 				id = allclan.1002
 			}
 		}
-
-
+		if = {
+			limit = { has_country_flag = researching_artifice_invention_innate_windshaping }
+			set_country_flag = unlocked_artifice_invention_innate_windshaping
+			clr_country_flag = researching_artifice_invention_innate_windshaping
+			country_event = {
+				id = flavour_celmaldor.1001
+			}
+		}
+		if = {
+			limit = { has_country_flag = researching_artifice_invention_icestorm_cannons }
+			set_country_flag = unlocked_artifice_invention_icestorm_cannons
+			clr_country_flag = researching_artifice_invention_icestorm_cannons
+			country_event = {
+				id = flavour_celmaldor.1002
+			}
+		}
+		if = {
+			limit = { has_country_flag = researching_artifice_invention_sustaining_arks }
+			set_country_flag = unlocked_artifice_invention_sustaining_arks
+			clr_country_flag = researching_artifice_invention_sustaining_arks
+			country_event = {
+				id = flavour_celmaldor.1003
+			}
+		}
 	}
 
 	option = {

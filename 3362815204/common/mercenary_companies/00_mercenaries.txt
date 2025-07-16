@@ -549,6 +549,24 @@ merc_vernmen_adventurers = {
 	}
 }
 
+#Rectorate's Finest (The Borders)
+merc_rectorates_finest = {
+    regiments_per_development = 0.04	#humans and elves and helfs, for Sarosh
+	home_province = 423
+	cavalry_weight = 0.1
+	artillery_weight = 0.3
+	cavalry_cap = 10
+	sprites = { westerngfx_sprite_pack }
+    trigger = {
+		tag = A77
+		has_country_flag = call_of_god
+	}
+	cost_modifier = 1.1
+	modifier = {
+		morale_damage_received = -0.1
+	}
+}
+
 #Moonspears (East Dameshead) - moonhaven mercenaries
 merc_moonspears = {
     regiments_per_development = 0.01	#long lived mercs are smaller
@@ -2185,7 +2203,10 @@ merc_varaendi_war_kotakompu = {
 	home_province = 2554
 	sprites = { yodhanpir_sprite_pack }
     trigger = {
-		NOT = { has_country_modifier = monstrous_nation }
+		NOT = {
+			has_country_modifier = monstrous_nation
+			has_country_flag = armoured_kotakompus
+		}
 		OR = {
 			capital_scope = {
 				OR = {

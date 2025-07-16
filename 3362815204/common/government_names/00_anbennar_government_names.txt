@@ -61,14 +61,11 @@ baashidi_theocracy = {
 	}
 	
 	trigger = {
-		NOT = { has_reform = baashidi_adventurer_reform }
-		AND = {
-			OR = {
-				culture_group = baashidi
-				religion = rinta_seekers
-			}
-			government = theocracy
+		OR = {
+			culture_group = baashidi
+			religion = rinta_seekers
 		}
+		government = theocracy
 	}
 }
 
@@ -142,13 +139,8 @@ baashidi_other = {
 	
 	trigger = {
 		culture_group = baashidi
-		NOT = {
-			government = monarchy
-		}
-		OR = {
-			NOT = { government = theocracy }
-			has_reform = baashidi_adventurer_reform
-		}
+		NOT = { government = monarchy }
+		NOT = { government = theocracy }
 	}
 }
 
@@ -709,6 +701,77 @@ trading_company = {
 	}
 }
 
+the_great_salla_title = {
+	rank = {
+		1 = WOOD_ELF_CLAN
+		2 = WOOD_ELF_CLAN
+		3 = WOOD_ELF_CLAN
+	}
+	
+	ruler_male = {
+		1 = WOOD_ELF_CLAN_LEADER_MALE
+		2 = WOOD_ELF_CLAN_LEADER_MALE
+		3 = WOOD_ELF_CLAN_LEADER_MALE
+	}
+	
+	ruler_female = {
+		1 = WOOD_ELF_CLAN_LEADER_FEMALE
+		2 = WOOD_ELF_CLAN_LEADER_FEMALE
+		3 = WOOD_ELF_CLAN_LEADER_FEMALE
+	}
+	trigger = {
+		has_reform = the_great_salla
+		is_monarchists_in_power = yes
+	}
+}
+
+autocracy_reform_sf_title = {
+	rank = {
+		1 = WOOD_ELF_CLAN
+		2 = WOOD_ELF_CLAN
+		3 = WOOD_ELF_CLAN
+	}
+	
+	ruler_male = {
+		1 = FEALGARN_AUTOCRACY_MALE
+		2 = FEALGARN_AUTOCRACY_MALE
+		3 = FEALGARN_AUTOCRACY_MALE
+	}
+	
+	ruler_female = {
+		1 = FEALGARN_AUTOCRACY_FEMALE
+		2 = FEALGARN_AUTOCRACY_FEMALE
+		3 = FEALGARN_AUTOCRACY_FEMALE
+	}
+	trigger = {
+		has_reform = autocracy_reform_sf
+	}
+}
+
+the_great_salla_republic_title = {
+	rank = {
+		1 = WOOD_ELF_CLAN
+		2 = WOOD_ELF_CLAN
+		3 = WOOD_ELF_CLAN
+	}
+	
+	ruler_male = {
+		1 = GREAT_SALLA_REPUBLIC_MALE
+		2 = GREAT_SALLA_REPUBLIC_MALE
+		3 = GREAT_SALLA_REPUBLIC_MALE
+	}
+	
+	ruler_female = {
+		1 = GREAT_SALLA_REPUBLIC_FEMALE
+		2 = GREAT_SALLA_REPUBLIC_FEMALE
+		3 = GREAT_SALLA_REPUBLIC_FEMALE
+	}
+	trigger = {
+		has_reform = the_great_salla
+		is_statists_in_power = yes
+	}
+}
+
 roilsardi_elective_title = {	#Still consider themselves Kings/Kingdom even if they're elected
 	rank = {
 		1 = DUCHY
@@ -1217,15 +1280,15 @@ adventurer_government = {
 	}
 
 	heir_male = {
-		1 = HEIR
-		2 = HEIR
-		3 = HEIR
+		1 = SECOND
+		2 = SECOND
+		3 = SECOND
 	}
 
 	heir_female = {
-		1 = HEIR
-		2 = HEIR
-		3 = HEIR
+		1 = SECOND
+		2 = SECOND
+		3 = SECOND
 	}
 	trigger = {
 		has_adventurer_reform = yes
@@ -2724,8 +2787,15 @@ senapti = {
 	}
 
 	trigger = {
-		has_reform = senapti_reform
-		NOT = { has_country_flag = raj_vizier }
+		OR = {
+			has_reform = senapti_reform
+			AND = {
+				overlord = { mission_completed = L62_cooperation_with_mengi }
+				culture_group = mengi
+				is_march = yes
+			}
+		}
+		NOT = { is_subject_of_type = vizier_vassal }
 	}
 }
 
@@ -2752,8 +2822,13 @@ prabhi = {
 		OR = {
 			has_reform = prabhi_reform
 			has_reform = indep_prabhi_reform
+			AND = {
+				overlord = { mission_completed = L62_cooperation_with_mengi }
+				culture_group = mengi
+				is_march = no
+			}
 		}
-		NOT = { has_country_flag = raj_vizier }
+		NOT = { is_subject_of_type = vizier_vassal }
 	}
 }
 
@@ -2777,36 +2852,7 @@ raj_vizier_senapti = {
 	}
 
 	trigger = {
-		has_reform = senapti_reform
-		has_country_flag = raj_vizier
-	}
-}
-
-raj_vizier_prabhi = {
-	rank = {
-		1 = PRABHI
-		2 = PRABHI
-		3 = PRABHI
-	}
-	
-	ruler_male = {
-		1 = GRAND_VIZIER
-		2 = GRAND_VIZIER
-		3 = GRAND_VIZIER
-	}
-
-	ruler_female = {
-		1 = GRAND_VIZIER
-		2 = GRAND_VIZIER
-		3 = GRAND_VIZIER
-	}
-
-	trigger = {
-		OR = {
-			has_reform = prabhi_reform
-			has_reform = indep_prabhi_reform
-		}
-		has_country_flag = raj_vizier
+		is_subject_of_type = vizier_vassal
 	}
 }
 
@@ -2906,55 +2952,51 @@ shuvuush_horde = {
 	}
 }
 
-odheongun_kingdom = {
+gowon = {
 	rank = {
-		1 = GULBAEJUN
-		2 = JAENGUN
-		3 = DAJAENGUN
+		1 = BAEHINARA
+		2 = HORON
+		3 = AMBAHORON
 	}
 	
 	ruler_male = {
-		1 = HWALBAEJ
-		2 = JAENG
-		3 = DAEJAENG
+		1 = HWALBAEK
+		2 = WANG
+		3 = HWANGJE
 	}
 	
 	ruler_female = {
-		1 = HWALEI
-		2 = WAENBU
-		3 = DAEWAENBU
+		1 = NIMGEUM
+		2 = YEOWANG
+		3 = YEOJE
 	}
 	
 	consort_male = {
-		1 = HWALBAEJ
-		2 = JAENG
-		3 = DAEJAENG
+		1 = BAEKJIABI
+		2 = WANGSEO
+		3 = HWANGSEO
 	}
 	
 	consort_female = {
-		1 = HWALEI
-		2 = WAENBU
-		3 = DAEWAENBU
+		1 = BUIN
+		2 = WANGHU
+		3 = HWANGHU
 	}
 	
 	heir_male = {
-		1 = BOJAEJ
-		2 = BOJAENG
-		3 = NOPOJAENG
+		1 = YEORIBAEK
+		2 = TAEJA
+		3 = HWANGTAEJA
 	}
 	
 	heir_female = {
-		1 = BOJEI
-		2 = BOJAENBU
-		3 = NOPAENBU
+		1 = ASSI
+		2 = GONGJU
+		3 = HWANGTAENYEO
 	}
 	
 	trigger = {
-		government = monarchy
-		OR = {
-			primary_culture = menjeotaen
-			primary_culture = sangsogha
-		}
+		culture_group = gowon
 	}
 }
 
@@ -3957,15 +3999,15 @@ eagle_hobgoblins_searching_reform = {
 	}
 	
 	ruler_male = {
-		1 = EMAGE_MALE
-		2 = EMAGE_MALE
-		3 = EMAGE_MALE
+		1 = AHSAGE
+		2 = AHSAGE_ENLIGHTENMENT
+		3 = AHSAGE_ENLIGHTENMENT
 	}
 	
 	ruler_female = {
-		1 = EMAGE_FEMALE
-		2 = EMAGE_FEMALE
-		3 = EMAGE_FEMALE
+		1 = AHSAGE
+		2 = AHSAGE_ENLIGHTENMENT
+		3 = AHSAGE_ENLIGHTENMENT
 	}
 	
 	trigger = {
@@ -3989,7 +4031,7 @@ heroic_realm_reform_hero = {
         3 = HERO_EMPRESS
     }
     trigger = {
-        has_reform = heroic_realm_reform
+		has_government_attribute = is_heroic_realm
 		is_monarch_leader = yes
     }
 } 
@@ -4011,7 +4053,7 @@ heroic_realm_reform = {
         3 = EMPRESS
     }
     trigger = {
-        has_reform = heroic_realm_reform
+		has_government_attribute = is_heroic_realm
     }
 } 
 
@@ -4084,5 +4126,219 @@ grombari_council_reform = {
 	 
 	trigger = { 
 		has_reform = grombari_council_reform 
+	}
+}
+
+silver_republic = {
+	rank = {
+		1 = SILVER_REPUBLIC
+		2 = SILVER_REPUBLIC
+		3 = SILVER_REPUBLIC
+	}
+	
+	ruler_male = {
+		1 = AMSACHEL
+		2 = AMSACHEL
+		3 = AMSACHEL
+	}
+	
+	ruler_female = {
+		1 = AMSAKAS
+		2 = AMSAKAS
+		3 = AMSAKAS
+	}
+	
+	consort_male = {
+		1 = AMSACHEL
+		2 = AMSACHEL
+		3 = AMSACHEL
+	}
+	
+	consort_female = {
+		1 = AMSAKAS
+		2 = AMSAKAS
+		3 = AMSAKAS
+	}
+	
+	trigger = {
+		culture_group = akasi
+		government = republic
+	}
+}
+
+mteibhar_delathine_confederation = {
+	rank = {
+		1 = DELATHINE_CONFEDERATION
+		2 = DELATHINE_CONFEDERATION
+		3 = DELATHINE_CONFEDERATION
+	}
+	ruler_male = { 
+		1 = EHRABULATH 
+		2 = EHRABULATH 
+		3 = EHRABULATH 
+	} 
+	 
+	ruler_female = { 
+		1 = EHRABULAZA 
+		2 = EHRABULAZA 
+		3 = EHRABULAZA 
+	} 
+	 
+	trigger = { 
+		has_reform = mteibhar_delathine_confederation 
+	}
+	
+}
+
+mteibhar_centralized_delath = {
+	rank = {
+		1 = CENTRALIZED_DELATH
+		2 = CENTRALIZED_DELATH
+		3 = CENTRALIZED_DELATH
+	}
+	ruler_male = { 
+		1 = EHRABULATH 
+		2 = EHRABULATH 
+		3 = EHRABULATH 
+	} 
+	 
+	ruler_female = { 
+		1 = EHRABULAZA 
+		2 = EHRABULAZA 
+		3 = EHRABULAZA 
+	} 
+	 
+	trigger = { 
+		has_reform = mteibhar_centralized_delath
+	}
+	
+}
+
+mteibhar_grand_confederation = {
+	rank = {
+		1 = GRAND_CONFEDERATION
+		2 = GRAND_CONFEDERATION
+		3 = GRAND_CONFEDERATION
+	}
+	ruler_male = { 
+		1 = RABULATH_SHOLANSHAZ
+		2 = RABULATH_SHOLANSHAZ
+		3 = RABULATH_SHOLANSHAZ
+	} 
+	 
+	ruler_female = { 
+		1 = RABULATH_SHOLANSHAZA
+		2 = RABULATH_SHOLANSHAZA
+		3 = RABULATH_SHOLANSHAZA
+	} 
+	 
+	trigger = { 
+		has_reform = mteibhar_grand_confederation
+	}
+	
+}
+
+the_mazukxiem = {
+	rank = {
+		1 = GNOLLISH_TRIARCHY
+		2 = GNOLLISH_TRIARCHY
+		3 = GNOLLISH_TRIARCHY
+	}
+	
+	ruler_male = {
+		1 = EKXIEMGO
+		2 = EKXIEMGO
+		3 = EKXIEMGO
+	}
+	
+	ruler_female = {
+		1 = EKXIEMGO
+		2 = EKXIEMGO
+		3 = EKXIEMGO
+	}
+	
+	trigger = {
+		has_reform = the_mazukxiem 
+	}
+}
+
+the_Gongmin_lianbang = {
+	rank = {
+		1 = GONGMIN_LIANBANG
+		2 = GONGMIN_LIANDAO
+		3 = GONGMIN_LIANDAO
+	}
+	
+	ruler_male = {
+		1 = ZONGZHANG
+		2 = ZONGJIANG
+		3 = ZONGSHUAI
+	}
+	
+	ruler_female = {
+		1 = ZONGZHANG
+		2 = ZONGJIANG
+		3 = ZONGSHUAI
+	}
+	
+	trigger = {
+		has_reform = gongmin_lianbang
+	}
+}
+space_colony_government = {
+	rank = {
+		1 = SPACE_COLONY_RANK
+		2 = SPACE_COLONY_RANK
+		3 = SPACE_COLONY_RANK
+	}
+	
+	ruler_male = {
+		1 = SPACE_COLONY_MALE
+		2 = SPACE_COLONY_MALE
+		3 = SPACE_COLONY_MALE
+	}
+	
+	ruler_female = {
+		1 = SPACE_COLONY_FEMALE
+		2 = SPACE_COLONY_FEMALE
+		3 = SPACE_COLONY_FEMALE
+	}
+	
+	trigger = {
+		has_reform = space_colony_government
+		NOT = {
+			S81 = {
+				has_disaster = the_hivemind
+			}
+		}
+	}
+}
+
+the_hivemind_names = {
+	rank = {
+		1 = THE_HIVEMIND_RANK
+		2 = THE_HIVEMIND_RANK
+		3 = THE_HIVEMIND_RANK
+	}
+	
+	ruler_male = {
+		1 = THE_HIVEMIND_MALE
+		2 = THE_HIVEMIND_MALE
+		3 = THE_HIVEMIND_MALE
+	}
+	
+	ruler_female = {
+		1 = THE_HIVEMIND_FEMALE
+		2 = THE_HIVEMIND_FEMALE
+		3 = THE_HIVEMIND_FEMALE
+	}
+	
+	trigger = {
+		AND = {
+			has_reform = space_colony_government
+			S81 = {
+				has_disaster = the_hivemind
+			}
+		}
 	}
 }

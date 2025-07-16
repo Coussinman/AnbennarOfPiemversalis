@@ -20,9 +20,6 @@ country_event = {
 					who = ROOT
 					amount = 1
 				}
-				owner = { #homebrew
-					NOT = { has_idea = festung7 }
-				}
 			}
 			hidden_effect = {
 				save_event_target_as = spell_target_province	#this works yo
@@ -99,7 +96,10 @@ country_event = {
 	option = {
 		name = magic_ruler.5.c	#available
 		trigger = {
-			has_ruler_flag = evocation_1
+			OR = {
+				has_ruler_flag = evocation_1
+				has_ruler_flag = zokka_phoenix_flag
+			}
 		}
 		ai_chance = {
 			factor = 50
@@ -1720,6 +1720,7 @@ country_event = {
 						}
 						OR = {
 							has_ruler_flag = evocation_2
+							has_ruler_flag = zokka_phoenix_flag
 							AND = {
 								has_ruler_flag = evocation_1
 								OR = {
@@ -1771,6 +1772,7 @@ country_event = {
 						}
 						OR = {
 							has_ruler_flag = evocation_2
+							has_ruler_flag = zokka_phoenix_flag
 							AND = {
 								has_ruler_flag = evocation_1
 								OR = {
@@ -1829,6 +1831,7 @@ country_event = {
 						}
 						OR = {
 							has_ruler_flag = evocation_2
+							has_ruler_flag = zokka_phoenix_flag
 							AND = {
 								has_ruler_flag = evocation_1
 								OR = {
@@ -1870,6 +1873,7 @@ country_event = {
 						}
 						OR = {
 							has_ruler_flag = evocation_2
+							has_ruler_flag = zokka_phoenix_flag
 							AND = {
 								has_ruler_flag = evocation_1
 								OR = {

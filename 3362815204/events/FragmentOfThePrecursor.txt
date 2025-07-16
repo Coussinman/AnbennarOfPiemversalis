@@ -955,7 +955,12 @@ province_event = {
         name = fragments.203.c
         ai_chance = { factor = 100 }
 		trigger = { 
-			FROM = { is_abjuration_2 = yes }
+			FROM = {
+				OR = {
+					is_abjuration_2 = yes
+					is_abjuration_3 = yes
+				}
+			}
 		}
 		FROM = {
 			hidden_effect = {
@@ -1943,6 +1948,12 @@ province_event = {
 		add_base_manpower = 3
 		
 		set_global_flag = god_fragment_found
+	}
+	after = {
+		province_event = {
+			id = ravelian.7
+			days = 1825
+		}
 	}
 }
 

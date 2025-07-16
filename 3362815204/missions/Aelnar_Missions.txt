@@ -257,7 +257,7 @@ aelnar_5_sicrheior_1 = {
 		has_country_flag = rianvisa_sicrheior_rule
 	}
 	
-	Z43_independant_justice = {
+	Z43_independent_justice = {
 		icon = mission_missive
 		position = 1
 		
@@ -294,7 +294,7 @@ aelnar_5_sicrheior_1 = {
 				add_adm_power = -500
 			}
 			add_country_modifier = {
-				name = aelnar_independant_justice
+				name = aelnar_independent_justice
 				duration = -1
 			}
 		}
@@ -304,7 +304,7 @@ aelnar_5_sicrheior_1 = {
 		icon = mission_mediterranean_islands
 		position = 2
 		required_missions = {
-			Z43_independant_justice
+			Z43_independent_justice
 			Z43_a_new_constitution
 		}
 		
@@ -1335,7 +1335,7 @@ aelnar_1_sicrheior_2 = {
 		trigger = {
 			stability = 3
 			legitimacy = 95
-			average_effective_unrest = 3
+			NOT = { average_unrest = 1 }
 			custom_trigger_tooltip = {
 				tooltip = sicrheior_son_tooltip
 				has_ruler_flag = sicrheior_son
@@ -5726,7 +5726,7 @@ aelnar_5_elissa_magy = {
 		position = 17
 		
 		provinces_to_highlight = {
-			province_id = 1015
+			is_capital_of = ROOT
 			OR = {
 				NOT = { is_capital_of = ROOT }
 				NOT = { culture = star_elf }
@@ -5743,8 +5743,7 @@ aelnar_5_elissa_magy = {
 				tooltip = abjuration_3_tooltip
 				has_ruler_flag = abjuration_3
 			}
-			1015 = {
-				is_capital_of = ROOT
+			capital_scope = {
 				culture = star_elf
 				development = 60
 			}

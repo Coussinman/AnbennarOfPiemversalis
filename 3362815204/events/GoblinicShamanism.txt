@@ -3217,6 +3217,7 @@ country_event = {
 		hidden_effect = { 
 			clr_country_flag = uses_primary_cult
 			clr_country_flag = has_selected_a_primary_cult
+			set_country_flag = goblinic_shamanism_invalid
 		}
 	}
 }
@@ -3233,326 +3234,521 @@ country_event = {
 
 	option = { 
 		name = goblinic_shamanism_flavor.603.a
+		custom_tooltip = tooltip_kroozmuta_zemna_cult
 		trigger = {
-			has_unlocked_cult = kroozmuta_zemna_cult
+			OR = {
+				has_unlocked_cult = kroozmuta_zemna_cult
+				dwarovar_goblin_culture_primary = yes
+				primary_culture = cave_troll
+			}
 			NOT = { has_adopted_cult = kroozmuta_zemna_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = kroozmuta_zemna_cult } }
 		else = { change_cult = kroozmuta_zemna_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = { 
 		name = goblinic_shamanism_flavor.603.b
+		custom_tooltip = tooltip_kroozbuto_nubo_cult
 		trigger = {
-			has_unlocked_cult = kroozbuto_nubo_cult
+			OR = {
+				has_unlocked_cult = kroozbuto_nubo_cult
+				dwarovar_goblin_culture_primary = yes
+				primary_culture = cave_troll
+			}
 			NOT = { has_adopted_cult = kroozbuto_nubo_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = kroozbuto_nubo_cult } }
 		else = { change_cult = kroozbuto_nubo_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = { 
 		name = goblinic_shamanism_flavor.603.c
+		custom_tooltip = tooltip_tewaka_sunka_cult
 		trigger = {
-			has_unlocked_cult = tewaka_sunka_cult
+			OR = {
+				primary_culture = exodus_goblin
+				has_unlocked_cult = tewaka_sunka_cult
+			}
 			NOT = { has_adopted_cult = tewaka_sunka_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = tewaka_sunka_cult } }
 		else = { change_cult = tewaka_sunka_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = { 
 		name = goblinic_shamanism_flavor.603.d
+		custom_tooltip = tooltip_muta_mestika_cult
 		trigger = {
 			has_unlocked_cult = muta_mestika_cult
 			NOT = { has_adopted_cult = muta_mestika_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = muta_mestika_cult } }
 		else = { change_cult = muta_mestika_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = { 
 		name = goblinic_shamanism_flavor.603.e
+		custom_tooltip = tooltip_apzarko_hrom_cult
 		trigger = {
-			has_unlocked_cult = apzarko_hrom_cult
+			OR = {
+				has_unlocked_cult = apzarko_hrom_cult
+				primary_culture = common_goblin
+			}
 			NOT = { has_adopted_cult = apzarko_hrom_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = apzarko_hrom_cult } }
 		else = { change_cult = apzarko_hrom_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = { 
 		name = goblinic_shamanism_flavor.603.f
+		custom_tooltip = tooltip_vortza_lesa_cult
 		trigger = {
-			has_unlocked_cult = vortza_lesa_cult
+			OR = {
+				has_unlocked_cult = vortza_lesa_cult
+				primary_culture = forest_goblin
+			}
 			NOT = { has_adopted_cult = vortza_lesa_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = vortza_lesa_cult } }
 		else = { change_cult = vortza_lesa_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = { 
 		name = goblinic_shamanism_flavor.603.g
+		custom_tooltip = tooltip_vortzo_laukuno_cult
 		trigger = {
-			has_unlocked_cult = vortzo_laukuno_cult
+			OR = {
+				has_unlocked_cult = vortzo_laukuno_cult
+				primary_culture = exodus_goblin
+			}
 			NOT = { has_adopted_cult = vortzo_laukuno_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = vortzo_laukuno_cult } }
 		else = { change_cult = vortzo_laukuno_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = { 
 		name = goblinic_shamanism_flavor.603.h
+		custom_tooltip = tooltip_vortza_krpa_cult
 		trigger = {
-			has_unlocked_cult = vortza_krpa_cult
+			OR = {
+				has_unlocked_cult = vortza_krpa_cult	
+				dwarovar_goblin_culture_primary = yes
+				primary_culture = cave_troll
+			}
 			NOT = { has_adopted_cult = vortza_krpa_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = vortza_krpa_cult } }
 		else = { change_cult = vortza_krpa_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = { 
 		name = goblinic_shamanism_flavor.603.i
+		custom_tooltip = tooltip_zvaiko_udenzo_cult
 		trigger = {
-			has_unlocked_cult = zvaiko_udenzo_cult
+			OR = {
+				has_unlocked_cult = zvaiko_udenzo_cult
+				primary_culture = exodus_goblin
+			}
 			NOT = { has_adopted_cult = zvaiko_udenzo_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = zvaiko_udenzo_cult } }
 		else = { change_cult = zvaiko_udenzo_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = { 
 		name = goblinic_shamanism_flavor.603.j
+		custom_tooltip = tooltip_zvaika_kirba_cult
 		trigger = {
-			has_unlocked_cult = zvaika_kirba_cult
+			OR = {
+				has_unlocked_cult = zvaika_kirba_cult
+				primary_culture = common_goblin
+			}
 			NOT = { has_adopted_cult = zvaika_kirba_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = zvaika_kirba_cult } }
 		else = { change_cult = zvaika_kirba_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = { 
 		name = goblinic_shamanism_flavor.603.k
+		custom_tooltip = tooltip_vortzo_liezmo_cult
 		trigger = {
-			has_unlocked_cult = vortzo_liezmo_cult
+			OR = {
+				has_unlocked_cult = vortzo_liezmo_cult
+				dwarovar_goblin_culture_primary = yes
+				primary_culture = cave_troll
+			}
 			NOT = { has_adopted_cult = vortzo_liezmo_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = vortzo_liezmo_cult } }
 		else = { change_cult = vortzo_liezmo_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = {
 		name = goblinic_shamanism_flavor.603.ag
+		custom_tooltip = tooltip_muta_kroozpauz_cult
 		trigger = {
 			has_unlocked_cult = muta_kroozpauz_cult
 			NOT = { has_adopted_cult = muta_kroozpauz_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = muta_kroozpauz_cult } }
 		else = { change_cult = muta_kroozpauz_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = { 
 		name = goblinic_shamanism_flavor.603.l
+		custom_tooltip = tooltip_cannorian_cult
 		trigger = {
 			has_unlocked_cult = cannorian_cult
 			NOT = { has_adopted_cult = cannorian_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = cannorian_cult } }
 		else = { change_cult = cannorian_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = { 
 		name = goblinic_shamanism_flavor.603.m
+		custom_tooltip = tooltip_ancestor_worship_cult
 		trigger = {
 			has_unlocked_cult = ancestor_worship_cult
 			NOT = { has_adopted_cult = ancestor_worship_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = ancestor_worship_cult } }
 		else = { change_cult = ancestor_worship_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = { 
 		name = goblinic_shamanism_flavor.603.n
+		custom_tooltip = tooltip_gnomish_cult
 		trigger = {
 			has_unlocked_cult = gnomish_cult
 			NOT = { has_adopted_cult = gnomish_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = gnomish_cult } }
 		else = { change_cult = gnomish_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = { 
 		name = goblinic_shamanism_flavor.603.o
+		custom_tooltip = tooltip_gnomish_cult
 		trigger = {
 			has_unlocked_cult = godlost_cult
 			NOT = { has_adopted_cult = godlost_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = godlost_cult } }
 		else = { change_cult = godlost_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = { 
 		name = goblinic_shamanism_flavor.603.p
+		custom_tooltip = tooltip_khetist_cult
 		trigger = {
 			has_unlocked_cult = khetist_cult
 			NOT = { has_adopted_cult = khetist_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = khetist_cult } }
 		else = { change_cult = khetist_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = { 
 		name = goblinic_shamanism_flavor.603.q
+		custom_tooltip = tooltip_gnollish_cult
 		trigger = {
 			has_unlocked_cult = gnollish_cult
 			NOT = { has_adopted_cult = gnollish_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = gnollish_cult } }
 		else = { change_cult = gnollish_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = { 
 		name = goblinic_shamanism_flavor.603.r
+		custom_tooltip = tooltip_elven_cult
 		trigger = {
 			has_unlocked_cult = elven_cult
 			NOT = { has_adopted_cult = elven_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = elven_cult } }
 		else = { change_cult = elven_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = { 
 		name = goblinic_shamanism_flavor.603.s
+		custom_tooltip = tooltip_bulwari_cult
 		trigger = {
 			has_unlocked_cult = bulwari_cult
 			NOT = { has_adopted_cult = bulwari_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = bulwari_cult } }
 		else = { change_cult = bulwari_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = { 
 		name = goblinic_shamanism_flavor.603.t
+		custom_tooltip = tooltip_gerudian_cult
 		trigger = {
 			has_unlocked_cult = gerudian_cult
 			NOT = { has_adopted_cult = gerudian_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = gerudian_cult } }
 		else = { change_cult = gerudian_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = { 
 		name = goblinic_shamanism_flavor.603.u
+		custom_tooltip = tooltip_orcish_cult
 		trigger = {
 			has_unlocked_cult = orcish_cult
 			NOT = { has_adopted_cult = orcish_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = orcish_cult } }
 		else = { change_cult = orcish_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = { 
 		name = goblinic_shamanism_flavor.603.v
+		custom_tooltip = tooltip_harpy_cult
 		trigger = {
 			has_unlocked_cult = harpy_cult
 			NOT = { has_adopted_cult = harpy_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = harpy_cult } }
 		else = { change_cult = harpy_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = { 
 		name = goblinic_shamanism_flavor.603.w
+		custom_tooltip = tooltip_fey_cult
 		trigger = {
 			has_unlocked_cult = fey_cult
 			NOT = { has_adopted_cult = fey_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = fey_cult } }
 		else = { change_cult = fey_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = { 
 		name = goblinic_shamanism_flavor.603.x
+		custom_tooltip = tooltip_raheni_cult
 		trigger = {
 			has_unlocked_cult = raheni_cult
 			NOT = { has_adopted_cult = raheni_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = raheni_cult } }
 		else = { change_cult = raheni_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = { 
 		name = goblinic_shamanism_flavor.603.y
+		custom_tooltip = tooltip_giantkin_cult
 		trigger = {
 			has_unlocked_cult = giantkin_cult
 			NOT = { has_adopted_cult = giantkin_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = giantkin_cult } }
 		else = { change_cult = giantkin_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = { 
 		name = goblinic_shamanism_flavor.603.z
+		custom_tooltip = tooltip_centaur_cult
 		trigger = {
 			has_unlocked_cult = centaur_cult
 			NOT = { has_adopted_cult = centaur_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = centaur_cult } }
 		else = { change_cult = centaur_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = { 
 		name = goblinic_shamanism_flavor.603.aa
+		custom_tooltip = tooltip_kobold_cult
 		trigger = {
 			has_unlocked_cult = kobold_cult
 			NOT = { has_adopted_cult = kobold_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = kobold_cult } }
 		else = { change_cult = kobold_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = {
-		name = goblinic_shamanism_flavor.603.ac	
+		name = goblinic_shamanism_flavor.603.ac
+		custom_tooltip = tooltip_cube_cult	
 		trigger = {
 			has_unlocked_cult = cube_cult
 			NOT = { has_adopted_cult = cube_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = cube_cult } }
 		else = { change_cult = cube_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = {
 		name = goblinic_shamanism_flavor.603.ad
+		custom_tooltip = tooltip_bulgu_cult	
 		trigger = {
 			has_unlocked_cult = bulgu_cult
 			NOT = { has_adopted_cult = bulgu_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = bulgu_cult } }
 		else = { change_cult = bulgu_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = {
 		name = goblinic_shamanism_flavor.603.ae
+		custom_tooltip = tooltip_grobilazk_cult
 		trigger = {
 			has_unlocked_cult = grobilazk_cult
 			NOT = { has_adopted_cult = grobilazk_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = grobilazk_cult } }
 		else = { change_cult = grobilazk_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = {
 		name = goblinic_shamanism_flavor.603.af
+		custom_tooltip = tooltip_scribble_cult
 		trigger = {
 			has_unlocked_cult = scribble_cult
 			NOT = { has_adopted_cult = scribble_cult }
 		}
 		if = { limit = { has_country_flag = uses_primary_cult } clear_previous_primary_cults = yes select_primary_cult = { cult = scribble_cult } }
 		else = { change_cult = scribble_cult }
+		hidden_effect = {
+			clr_country_flag = switched_active_cult_cooldown
+			set_country_flag = switched_active_cult_cooldown
+		}
 	}
 
 	option = {
 		name = goblinic_shamanism_flavor.603.ab
+		increase_legitimacy_large_effect = yes
 	}
 
 	after = {

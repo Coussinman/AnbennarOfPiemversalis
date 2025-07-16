@@ -1317,6 +1317,7 @@ country_event = {	# kharunyana_appeasement
 		highlight = yes
 		trigger = {
 			hidden_trigger = {
+				NOT = { has_country_flag = rending_quest_third }
 				4492 = {
 					country_or_non_sovereign_subject_holds = ROOT
 					has_building = university
@@ -2442,17 +2443,18 @@ country_event = {	# hengdu_bowu_appeasement
 		trigger = {
 			hidden_trigger = {
 				NOT = { has_country_flag = rending_quest_second }
-				hengdu_bowu_spirit_area = {
-					type = all
-					OR = {
-						province_has_current_tech_fort_trigger = no
-						any_neighbor_province = {
-							has_influencing_fort = no
+				NOT = {
+					hengdu_bowu_spirit_area = {
+						type = all
+						OR = {
+							province_has_current_tech_fort_trigger = yes
+							AND = {
+								has_fort_building_trigger = no
+								any_neighbor_province = {
+									has_influencing_fort = yes
+								}
+							}
 						}
-					}
-					OR = {
-						has_fort_building_trigger = yes
-						province_has_current_tech_fort_trigger = no
 					}
 				}
 			}
@@ -2474,13 +2476,12 @@ country_event = {	# hengdu_bowu_appeasement
 					type = all
 					OR = {
 						province_has_current_tech_fort_trigger = yes
-						any_neighbor_province = {
-							has_influencing_fort = yes
+						AND = {
+							has_fort_building_trigger = no
+							any_neighbor_province = {
+								has_influencing_fort = yes
+							}
 						}
-					}
-					OR = {
-						has_fort_building_trigger = no
-						province_has_current_tech_fort_trigger = yes
 					}
 				}
 			}
@@ -2899,12 +2900,23 @@ country_event = {	# hukai_telebei_appeasement
 		trigger = {
 			hidden_trigger = {
 				OR = {
-					NOT = { has_country_flag = rending_quest_second }
+					AND = {
+						NOT = { has_country_flag = rending_quest_second }
+						has_country_modifier = rending_lost_art_contest
+					}
 					has_country_flag = rending_art_contest_flag
 				}
 			}
 		}
-		custom_tooltip = hukai_telebei_quest_2_tt
+		if = { 
+			limit = {
+				has_country_modifier = rending_lost_art_contest
+			} 
+			custom_tooltip = hukai_telebei_quest_2_lost_tt
+		}
+		else = {
+			custom_tooltip = hukai_telebei_quest_2_tt
+		}
 		hidden_effect = {
 			country_event = {
 				id = rending.505
@@ -2964,14 +2976,12 @@ country_event = {	# hukai_telebei_appeasement
 		name = rending.335.i
 		trigger = {
 			hidden_trigger = {
-				OR = {
-					NOT = { has_country_flag = rending_quest_fourth }
-					NOT = { 
-						4592 = {
-							has_great_project = {
-								type = budanphre_canal
-								tier = 3
-							} 
+				NOT = { has_country_flag = rending_quest_fourth }
+				NOT = { 
+					4592 = {
+						has_great_project = {
+							type = budanphre_canal
+							tier = 3
 						}
 					}
 				}
@@ -3006,18 +3016,16 @@ country_event = {	# hukai_telebei_appeasement
 		name = rending.335.k
 		trigger = {
 			hidden_trigger = {
+				NOT = { has_country_flag = rending_quest_fifth }
 				OR = {
-					NOT = { has_country_flag = rending_quest_fifth }
-					NOT = {
-						owns = 4391
-						owns = 4485
-						owns = 5503
-						owns = 4409
-						treasury = 10000
-						OR = {
-							owns = 5424
-							alliance_with = Y63
-						}
+					NOT = { owns = 4391 }
+					NOT = { owns = 4485 }
+					NOT = { owns = 5503 }
+					NOT = { owns = 4409 }
+					NOT = { treasury = 10000 }
+					AND = {
+						NOT = { owns_or_subject_of = 5424 }
+						NOT = { alliance_with = Y63 }
 					}
 				}
 			}
@@ -3041,7 +3049,7 @@ country_event = {	# hukai_telebei_appeasement
 				owns = 4409
 				treasury = 10000
 				OR = {
-					owns = 5424
+					owns_or_subject_of = 5424
 					alliance_with = Y63
 				}
 			}
@@ -3196,28 +3204,64 @@ country_event = {	# phokhao_appeasement (rending.506)
 		set_country_flag = rending_quest_third
 		clr_country_flag = rending_appeasement_menu_open
 	}
-	 option = { # Quest 4 desc
-	 	name = rending.336.h
-	 	trigger = {
-	 		NOT = { has_country_flag = rending_quest_fourth }
-			NOT = { treasury = 20000 }
-			has_country_flag = phokhao_expedition_finished
-	 	}
-	 	custom_tooltip = phokhao_quest_4_tt
-	 	hidden_effect = {
+	option = { # Quest 4 desc
+		name = rending.336.h
+		trigger = {
+			hidden_trigger = {
+				NOT = { has_country_flag = rending_quest_fourth }
+				has_country_flag = phokhao_expedition_finished
+				NOT = {
+					owns = 14
+					owns = 736
+					owns = 5229
+					AND = {
+						NOT = { has_global_flag = delete_cannor_region }
+						treasury = 20000
+					}
+					AND = {
+						NOT = { has_global_flag = delete_forbidden_plains_region }
+						treasury = 40000
+					}
+					AND = {
+						has_global_flag = delete_cannor_region
+						has_global_flag = delete_forbidden_plains_region
+						treasury = 50000
+					}
+				}
+			}
+		}
+		custom_tooltip = phokhao_quest_4_tt
+		hidden_effect = {
 	 		country_event = {
 	 			id = rending.506
 	 		}
 	 	}
-	 }
+	}
 	option = { # Quest 4 handin
 		name = rending.336.i
 		highlight = yes
 		trigger = {
 			hidden_trigger = {
-			NOT = { has_country_flag = rending_quest_fourth }
-			has_country_flag = phokhao_expedition_finished
-			treasury = 20000
+				NOT = { has_country_flag = rending_quest_fourth }
+				has_country_flag = phokhao_expedition_finished
+				OR = {
+					owns = 14
+					owns = 736
+					owns = 5229
+					AND = {
+						NOT = { has_global_flag = delete_cannor_region }
+						treasury = 20000
+					}
+					AND = {
+						NOT = { has_global_flag = delete_forbidden_plains_region }
+						treasury = 40000
+					}
+					AND = {
+						has_global_flag = delete_cannor_region
+						has_global_flag = delete_forbidden_plains_region
+						treasury = 50000
+					}
+				}
 			}
 		}
 		custom_tooltip = phokhao_quest_4_tt
@@ -3726,6 +3770,10 @@ country_event = {	# lupulan_appeasement
 									religion = mystic_accord
 									religion = accretive_path
 									religion = transmutative_path
+									AND = {
+										religion = anzalkatsa
+										has_country_flag = 333_appease_lizo
+									}
 								}
 							}
 						}
@@ -3757,6 +3805,10 @@ country_event = {	# lupulan_appeasement
 								religion = mystic_accord
 								religion = accretive_path
 								religion = transmutative_path
+								AND = {
+									religion = anzalkatsa
+									has_country_flag = 333_appease_lizo
+								}
 							}
 						}
 					}
@@ -3822,7 +3874,7 @@ country_event = {	# cinulau_appeasement 509
 							share = 10
 						}
 					}
-					1374 = { #Odheongu
+					1374 = { #Gowon
 						has_privateer_share_in_trade_node = {
 							who = PREV
 							share = 10
@@ -3882,7 +3934,7 @@ country_event = {	# cinulau_appeasement 509
 								share = 10
 							}
 						}
-						1374 = { #Odheongu
+						1374 = { #Gowon
 							has_privateer_share_in_trade_node = {
 								who = PREV
 								share = 10
@@ -4008,12 +4060,15 @@ country_event = {	# cinulau_appeasement 509
 			hidden_trigger = {
 				NOT = { has_country_flag = rending_quest_fourth }
 				NOT = {
-					cinulau_spirit_area = {
-						has_dock_building_trigger = yes
-						has_shipyard_building_trigger = yes
-						has_building = impressment_offices
-					} 
-					sailors = 75000
+					AND = {
+						cinulau_spirit_area = {
+							type = all
+							has_dock_building_trigger = yes
+							has_shipyard_building_trigger = yes
+							has_building = impressment_offices
+						} 
+						sailors = 75000
+					}
 				}
 			}
 		}
@@ -4031,6 +4086,7 @@ country_event = {	# cinulau_appeasement 509
 			hidden_trigger = {
 				NOT = { has_country_flag = rending_quest_fourth }
 				cinulau_spirit_area = {
+					type = all
 					has_dock_building_trigger = yes
 					has_shipyard_building_trigger = yes
 					has_building = impressment_offices
@@ -4293,13 +4349,12 @@ country_event = {	# yanhe_appeasement 510
 		trigger = {
 			hidden_trigger = {
 				NOT = { has_country_flag = rending_quest_fourth }
-				OR = {
-					NOT = {
+				NOT = {
+					AND = {
 						yanhe_spirit_area = {
+							type = all
 							country_or_non_sovereign_subject_holds = ROOT
 						}
-					}
-					NOT = {
 						OR = {
 							R62 = {
 								all_owned_province = {
@@ -4309,11 +4364,11 @@ country_event = {	# yanhe_appeasement 510
 							NOT = { exists = R62 }
 						}
 					}
-					NOT = {
-						war_score_against = {
-							who = R62
-							value = 100
-						}
+				}
+				NOT = {
+					war_score_against = {
+						who = R62
+						value = 100
 					}
 				}
 			}
@@ -4333,7 +4388,8 @@ country_event = {	# yanhe_appeasement 510
 				NOT = { has_country_flag = rending_quest_fourth }
 				OR = {
 					AND = {
-							yanhe_spirit_area = {
+						yanhe_spirit_area = {
+							type = all
 							country_or_non_sovereign_subject_holds = ROOT
 						}
 						OR = {
@@ -4368,6 +4424,7 @@ country_event = {	# yanhe_appeasement 510
 							limit = {
 								culture = shamadhan
 							}
+							add_core = R78
 							cede_province = R78
 						}
 						every_owned_province = {
@@ -4380,6 +4437,7 @@ country_event = {	# yanhe_appeasement 510
 									area = nadida_area
 								}
 							}
+							add_core = R78
 							cede_province = R78
 						}
 					}
@@ -4392,6 +4450,7 @@ country_event = {	# yanhe_appeasement 510
 							limit = {
 								culture = kamtarhid
 							}
+							add_core = R79
 							cede_province = R79
 						}
 						every_owned_province = {
@@ -4403,6 +4462,7 @@ country_event = {	# yanhe_appeasement 510
 									area = tamvihar_area
 								}
 							}
+							add_core = R79
 							cede_province = R79
 						}
 					}
@@ -4415,6 +4475,7 @@ country_event = {	# yanhe_appeasement 510
 							limit = {
 								culture = khedarid
 							}
+							add_core = R11
 							cede_province = R11
 						}
 						every_owned_province = {
@@ -4426,6 +4487,7 @@ country_event = {	# yanhe_appeasement 510
 									area = khadisrapur_area
 								}
 							}
+							add_core = R11
 							cede_province = R11
 						}
 					}
@@ -4599,19 +4661,21 @@ country_event = {	# hokuma_appeasement
 		highlight = yes
 		trigger = {
 			hidden_trigger = {
-			NOT = { has_country_flag = rending_quest_first }
-			adm_power = 200
-			dip_power = 200
-			mil_power = 200
+				NOT = { has_country_flag = rending_quest_first }
+				adm_power = 200
+				dip_power = 200
+				mil_power = 200
 			}
 		}
-		add_country_modifier = {
-			name = hokuma_recovery_mana_drain
-			duration = 3650
+		hidden_effect = {
+			add_country_modifier = {
+				name = hokuma_recovery_mana_drain
+				duration = 3650
+			}
+			add_adm_power = -200
+			add_dip_power = -200
+			add_mil_power = -200
 		}
-		add_adm_power = -200
-		add_dip_power = -200
-		add_mil_power = -200
 		custom_tooltip = hokuma_quest_1_tt
 		set_country_flag = rending_quest_first
 		clr_country_flag = rending_appeasement_menu_open
@@ -4667,7 +4731,15 @@ country_event = {	# hokuma_appeasement
 						}
 					}
 					NOT = {
-						hokuma_spirit_area = {
+						vimdatrong_superregion = {
+							type = all
+							NOT = {
+								religion = devouring_path
+							}
+						}
+					}
+					NOT = {
+						rahen_superregion = {
 							type = all
 							NOT = {
 								religion = devouring_path
@@ -4696,7 +4768,13 @@ country_event = {	# hokuma_appeasement
 						religion = devouring_path
 					}
 				}
-				hokuma_spirit_area = {
+				vimdatrong_superregion = {
+					type = all
+					NOT = {
+						religion = devouring_path
+					}
+				}
+				rahen_superregion = {
 					type = all
 					NOT = {
 						religion = devouring_path
@@ -4757,7 +4835,6 @@ country_event = {	# hokuma_appeasement
 				}
 			}
 		}
-
 		custom_tooltip = hokuma_quest_4_tt
 		set_country_flag = rending_quest_fourth
 		clr_country_flag = rending_appeasement_menu_open
@@ -6602,7 +6679,6 @@ country_event = {
 
 	option = {
 		name = rending.574.a
-		highlight = yes
 		trigger = {
 			check_variable = {
 				which = rending_art_contest
@@ -6617,7 +6693,6 @@ country_event = {
 	}
 	option = {
 		name = rending.574.b
-		highlight = yes
 		trigger = {
 			check_variable = {
 				which = rending_art_contest
@@ -6639,7 +6714,6 @@ country_event = {
 	}
 	option = {
 		name = rending.574.c
-		highlight = yes
 		trigger = {
 			check_variable = {
 				which = rending_art_contest
@@ -6660,8 +6734,7 @@ country_event = {
 		}
 	}
 	option = {
-		name = rending.574.f
-		highlight = yes
+		name = rending.574.e
 		trigger = {
 			NOT = {
 				check_variable = {
@@ -6691,29 +6764,39 @@ country_event = {
 	is_triggered_only = yes
 
 	immediate = {
-		damespearl_area = {
-			discover_country = root
-		}
-		vrorenmarch_area = {
-			discover_country = root
-		}
-		shik_dozein_area = {
-			discover_country = root
+		hidden_effect = {
+			damespearl_area = {
+				discover_country = root
+			}
+			vrorenmarch_area = {
+				discover_country = root
+			}
+			shik_dozein_area = {
+				discover_country = root
+			}
 		}
 	}
 
 	option = {
 		name = rending.575.a
-		add_treasury = -20000
 		trigger = {
 			NOT = { has_global_flag = delete_cannor_region }
+			NOT = { owns = 14 }
 		}
-		hidden_effect = {
-		14 = { owner = { add_treasury = 20000 } }
-		set_country_flag = rending_quest_fourth
+		goto = 14
+		if = {
+			limit = { treasury = 20000 }
+			add_treasury = -20000
+			hidden_effect = {
+				14 = { owner = { add_treasury = 20000 } }
+				set_country_flag = rending_quest_fourth
+			}
+			14 = { cede_province = ROOT add_core = ROOT }
 		}
-		14 = { cede_province = ROOT add_core = ROOT }
-		
+		else = {
+			custom_tooltip = phokhao_we_are_broke_tt
+			add_prestige = -10
+		}
 	}
 	option = {
 		name = rending.575.b
@@ -6721,6 +6804,7 @@ country_event = {
 		trigger = {
 			owns = 14
 		}
+		goto = 14
 		hidden_effect = {
 			set_country_flag = rending_quest_fourth
 		}
@@ -6729,13 +6813,22 @@ country_event = {
 		name = rending.575.c
 		trigger = {
 			NOT = { has_global_flag = delete_cannor_region }
+			NOT = { owns = 736 }
 		}
-		add_treasury = -30000
-		hidden_effect = {
-			736 = { owner = { add_treasury = 30000 } }
-			set_country_flag = rending_quest_fourth
+		goto = 736
+		if = {
+			limit = { treasury = 30000 }
+			add_treasury = -30000
+			hidden_effect = {
+				736 = { owner = { add_treasury = 30000 } }
+				set_country_flag = rending_quest_fourth
+			}
+			736 = { cede_province = ROOT add_core = ROOT }
 		}
-		736 = { cede_province = ROOT add_core = ROOT }
+		else = {
+			custom_tooltip = phokhao_we_are_broke_tt
+			add_prestige = -10
+		}
 	}
 	option = {
 		name = rending.575.e
@@ -6743,6 +6836,7 @@ country_event = {
 		trigger = {
 			owns = 736
 		}
+		goto = 736
 		hidden_effect = {
 			set_country_flag = rending_quest_fourth
 		}
@@ -6751,13 +6845,22 @@ country_event = {
 		name = rending.575.f
 		trigger = {
 			NOT = { has_global_flag = delete_forbidden_plains_region }
+			NOT = { owns = 5229 }
 		}
-		add_treasury = -40000
-		hidden_effect = {
-			5229 = { owner = { add_treasury = 40000 } }
-			set_country_flag = rending_quest_fourth
+		goto = 5229
+		if = {
+			limit = { treasury = 40000 }
+			add_treasury = -40000
+			hidden_effect = {
+				5229 = { owner = { add_treasury = 40000 } }
+				set_country_flag = rending_quest_fourth
+			}
+			5229 = { cede_province = ROOT add_core = ROOT }
 		}
-		5229 = { cede_province = ROOT add_core = ROOT }
+		else = {
+			custom_tooltip = phokhao_we_are_broke_tt
+			add_prestige = -10
+		}
 	}
 	option = {
 		name = rending.575.g
@@ -6765,6 +6868,7 @@ country_event = {
 		trigger = {
 			owns = 5229
 		}
+		goto = 5229
 		hidden_effect = {
 			set_country_flag = rending_quest_fourth
 		}
@@ -6782,9 +6886,16 @@ country_event = {
 				has_global_flag = delete_forbidden_plains_region
 			}
 		}
-		add_treasury = -50000
-		hidden_effect = {
-			set_country_flag = rending_quest_fourth
+		if = {
+			limit = { treasury = 50000 }
+			add_treasury = -50000
+			hidden_effect = {
+				set_country_flag = rending_quest_fourth
+			}
+		}
+		else = {
+			custom_tooltip = phokhao_we_are_broke_tt
+			add_prestige = -10
 		}
 	}
 }
@@ -6919,12 +7030,18 @@ country_event = {
 				}
 				extend_golden_age = 600
 			}
-			else = {
+			else_if = {
+				limit = {
+					has_had_golden_age = yes
+				}
 				reset_golden_age = yes
+			}
+			else = {
+				set_country_flag = kharunyana_golden_age_reward_primary
 			}
 			set_country_flag = kharunyana_appeased
 			set_country_flag = rending_primary_done
-			custom_tooltip = kharunyana_reward_tt
+			custom_tooltip = kharunyana_reward_primary_tt
 			country_event = { id = rending.200 days = 5 }
 			hidden_effect = {
 				kharunyana_spirit_area = {
@@ -6943,8 +7060,15 @@ country_event = {
 				}
 				extend_golden_age = 300
 			}
-			else = {
+			else_if = {
+				limit = {
+					has_had_golden_age = yes
+				}
+				set_country_flag = kharunyana_golden_age_reward_halved
 				reset_golden_age = yes
+			}
+			else = {
+				set_country_flag = kharunyana_golden_age_reward
 			}
 			custom_tooltip = kharunyana_reward_tt
 			set_country_flag = kharunyana_appeased
@@ -7439,8 +7563,49 @@ country_event = {
 	}
 }
 
+country_event = {
+	id = rending.700
+	title = rending.700.t
+	desc = rending.700.d
+	picture = MIRACLE_MONK_eventPicture
+	is_triggered_only = yes
+	hidden = yes
+	
+	trigger = {
+		has_country_flag = kharunyana_appeased
+		in_golden_age = yes
+		OR = {
+			has_country_flag = kharunyana_golden_age_reward_primary
+			has_country_flag = kharunyana_golden_age_reward_halved
+			has_country_flag = kharunyana_golden_age_reward
+		}
+	}
 
-
+	option = {
+		name = rending.700.a
+		if = {
+			limit = {
+				has_country_flag = kharunyana_golden_age_reward_primary
+			}
+			clr_country_flag = kharunyana_golden_age_reward_primary
+			extend_golden_age = 600
+		}
+		else_if = {
+			limit = {
+				has_country_flag = kharunyana_golden_age_reward_halved
+			}
+			clr_country_flag = kharunyana_golden_age_reward_halved
+			extend_golden_age = -300
+		}
+		else_if = {
+			limit = {
+				has_country_flag = kharunyana_golden_age_reward
+			}
+			clr_country_flag = kharunyana_golden_age_reward
+			extend_golden_age = 300
+		}
+	}
+}
 
 #Easter Egg
 country_event = {
@@ -7550,12 +7715,62 @@ country_event = {
 					value = 10000
 				}
 			}
+			if = {
+				limit = { NOT = { has_country_flag = kharunyana_primary } }
+				if = {
+					limit = {
+						in_golden_age = yes
+					}
+					extend_golden_age = 300
+				}
+				else_if = {
+					limit = {
+						has_had_golden_age = yes
+					}	
+					set_country_flag = kharunyana_golden_age_reward_halved
+					reset_golden_age = yes
+				}
+				else_if = {
+					limit = {
+						has_country_flag = kharunyana_golden_age_reward_halved
+					}
+					clr_country_flag = kharunyana_golden_age_reward_halved
+				}
+				else_if = {
+					limit = {
+						has_country_flag = kharunyana_golden_age_reward
+					}
+					clr_country_flag = kharunyana_golden_age_reward
+					set_country_flag = kharunyana_golden_age_reward_primary
+				}
+			}
+			every_owned_province = {
+				if = {
+					limit = {
+						OR = {
+							has_terrain = jungle
+							has_climate = tropical
+						}
+					}
+					add_province_modifier = {
+						name = lupulan_primary_modifier
+						duration = -1
+					}
+				}
+				if = {
+					limit = {
+						has_province_modifier = lupulan_modifier
+					}
+					remove_province_modifier = lupulan_modifier
+				}
+			}
 			clr_country_flag = rending_hukai_telebei_reward
 			clr_country_flag = tughayasa_reward
 			clr_country_flag = rending_gehet_ketine_reward
 			clr_country_flag = rending_lupulan_reward
 			remove_country_modifier = marutha_modifier
 			remove_country_modifier = hengdu_bowu_modifier
+			remove_country_modifier = hengdu_bowu_modifier_spirit_mil
 			remove_country_modifier = phokhao_modifier
 			remove_country_modifier = gehet_ketine_modifier
 			remove_country_modifier = cinulau_modifier
@@ -7568,8 +7783,21 @@ country_event = {
 				name = marutha_primary_modifier
 				duration = -1
 			}
+			if = {
+				limit = { has_country_modifier = spirit_military }
+				add_country_modifier = {
+					name = hengdu_bowu_primary_modifier_spirit_mil
+					duration = -1
+				}
+			}
+			else = {
+				add_country_modifier = {
+					name = hengdu_bowu_primary_modifier
+					duration = -1
+				}
+			}
 			add_country_modifier = {
-				name = hengdu_bowu_primary_modifier
+				name = phokhao_primary_modifier
 				duration = -1
 			}
 			add_country_modifier = {
@@ -7585,11 +7813,11 @@ country_event = {
 				duration = -1
 			}
 			add_country_modifier = {
-				name = yanhe_primary_modifier
+				name = hokuma_primary_modifier
 				duration = -1
 			}
 			add_country_modifier = {
-				name = hokuma_primary_modifier
+				name = huszien_primary_modifier
 				duration = -1
 			}
 			add_country_modifier = {

@@ -18,7 +18,6 @@ EscannGob0 = {
 				superregion = gerudia_superregion
 			}
 		}
-		NOT = { map_setup = map_setup_random }
 		NOT = { is_year = 1445 }
 	}
 	has_country_shield = yes
@@ -120,7 +119,13 @@ EscannGob0 = {
 		trigger = {
 			army_size = 15
 			num_of_artillery = 5
-			innovativeness = 10
+			if = {
+				limit = { has_dlc = "Rule Britannia" }
+				innovativeness = 10
+			}
+			else = {
+				prestige = 55
+			}
 		}
 		effect = {
 			add_country_modifier = {
@@ -154,7 +159,6 @@ EscannGob1 = {
 				superregion = gerudia_superregion
 			}
 		}
-		NOT = { map_setup = map_setup_random }
 		NOT = { is_year = 1445 }
 	}
 	has_country_shield = yes
@@ -258,8 +262,11 @@ EscannGob1 = {
 			##PROVINCESHIGHLIGHTCODE
 		}
 		trigger = {
-		prestige = 40
-			innovativeness = 5
+			prestige = 40
+			if = {
+				limit = { has_dlc = "Rule Britannia" }
+				innovativeness = 5
+			}
 		}
 		effect = {
 			add_country_modifier = {
@@ -323,7 +330,6 @@ EscannGob2 = {
 				superregion = gerudia_superregion
 			}
 		}
-		NOT = { map_setup = map_setup_random }
 		NOT = { is_year = 1445 }
 	}
 	has_country_shield = yes
@@ -537,7 +543,6 @@ EscannGob3 = {
 				superregion = gerudia_superregion
 			}
 		}
-		NOT = { map_setup = map_setup_random }
 		NOT = { is_year = 1445 }
 	}
 	has_country_shield = yes
@@ -664,7 +669,6 @@ EscannGob4 = {
 				superregion = gerudia_superregion
 			}
 		}
-		NOT = { map_setup = map_setup_random }
 		NOT = { is_year = 1445 }
 	}
 	has_country_shield = yes
@@ -749,7 +753,13 @@ EscannGob4 = {
 		}
 		trigger = {
 			mil_tech = 7
-			innovativeness = 5
+			if = {
+				limit = { has_dlc = "Rule Britannia" }
+				innovativeness = 5
+			}
+			else = {
+				prestige = 50
+			}
 		}
 		effect = {
 			change_government_reform_progress = 20

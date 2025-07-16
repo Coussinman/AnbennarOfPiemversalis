@@ -654,7 +654,7 @@ country_event = {
 			}
 			hidden_effect = { country_event = { id = anb_ruler.2 } }
 		}
-		hidden_effect = { country_event = { id = anb_ruler.3 random = 365 } country_event = { id = anb_ruler.4 random = 365 } }
+		hidden_effect = { country_event = { id = anb_ruler.3 days = 1 random = 365 } country_event = { id = anb_ruler.4 days = 1 random = 365 } }
 	}
 }
 
@@ -849,10 +849,7 @@ country_event = {
 			AND = {
 				ruler_is_immortal = yes
 				OR = {
-					had_country_flag = {
-						flag = vampire_ruler_has_coffin
-						days = 29200
-					}
+					vampire_age = { greater_than_or_equal_to = 29200 } #80 years
 					had_country_flag = {
 						flag = lich_ruler_has_phylactery
 						days = 29200
@@ -1239,6 +1236,7 @@ country_event = {
 	trigger = {
 		has_consort = yes
 		consort_age = 20
+		NOT = { has_country_modifier =  anb_consort_cannot_die }
 	}
 
 	mean_time_to_happen = {
@@ -1849,6 +1847,7 @@ country_event = {
 	trigger = {
 		has_heir = yes
 		heir_age = 20
+		NOT = { has_country_modifier =  anb_heir_cannot_die }
 	}
 
 	mean_time_to_happen = {
@@ -2560,14 +2559,8 @@ country_event = {
 			has_country_flag = J84_is_mihaela_flag #Taychendi Empire
 		}
 		if = {
-			limit = {
-				has_ruler_modifier = vampire_ruler
-			}
-			has_country_flag = exposed_vampire_ruler
-			had_country_flag = {
-				flag = vampire_ruler_has_coffin
-				days = 54750 # 150 Years
-			}
+			limit = { ruler_is_vampire = yes }
+			vampire_age = { greater_than_or_equal_to = 54750 } #150 Years
 		}
 		ruler_age = 200
 	}

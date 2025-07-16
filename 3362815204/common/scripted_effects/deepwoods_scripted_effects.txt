@@ -152,3 +152,223 @@ hunt_lord_cleanup = {
 		clear_global_event_target = hunt_location
 	}
 }
+
+#Rangers
+estate_action_CALL_THE_HUNT_ACTION = {
+	add_estate_loyalty = {
+		estate = estate_adventurers
+		loyalty = -15
+	}
+	custom_tooltip = call_the_hunt_effect_tt
+	hidden_effect = {
+		if = {
+			limit = {
+				num_of_owned_provinces_with = {
+					value = 20
+					has_province_modifier = deepwoods_rangers_camp
+				}
+			}
+			add_yearly_manpower = 2
+		}
+		else = {
+			every_owned_province = {
+				limit = {
+					has_province_modifier = deepwoods_rangers_camp
+				}
+				owner = { add_yearly_manpower = 0.1 }
+			}
+		}
+	}
+}
+
+apply_strategy_effect = {
+	custom_tooltip = deepwoods_rangers_strategy_effect_tt
+	hidden_effect = {
+		if = {
+			limit = {
+				owner = { has_estate_privilege = estate_adventurers_rangers_ayeth_strategy }
+			}
+			add_province_modifier = {
+				name = deepwoods_rangers_ayeth_strategy_mod
+				duration = -1
+			}
+			every_neighbor_province = {
+				limit = { owned_by = FROM }
+				add_province_modifier = {
+					name = deepwoods_rangers_ayeth_strategy_mod
+					duration = -1
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				owner = { has_estate_privilege = estate_adventurers_rangers_scotha_strategy }
+				OR = {
+					trade_goods = dyes
+					trade_goods = ivory
+					trade_goods = cloth
+					trade_goods = spices
+					trade_goods = silk
+					trade_goods = sugar
+				}
+			}
+			add_province_modifier = {
+				name = deepwoods_rangers_scotha_strategy_mod
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = {
+				owner = { has_estate_privilege = estate_mages_rangers_drennen_strategy }
+			}
+			add_province_modifier = {
+				name = deepwoods_rangers_drennen_strategy_mod
+				duration = -1
+			}
+		}
+	}
+}
+
+remove_strategy_effect = {
+	remove_province_modifier = deepwoods_rangers_ayeth_strategy_mod
+	every_neighbor_province = {
+    limit = {
+        owned_by = FROM 
+        NOT = {
+            any_neighbor_province = {
+                owned_by = FROM
+                has_province_modifier = deepwoods_rangers_camp
+            }
+        }
+    }
+    remove_province_modifier = deepwoods_rangers_ayeth_strategy_mod
+}
+	remove_province_modifier = deepwoods_rangers_scotha_strategy_mod
+	remove_province_modifier = deepwoods_rangers_drennen_strategy_mod
+}
+# Annexes all wood elf vassals, changes player to cyranvar, locks admin, updates MT
+form_cyranvar = {
+	change_tag = I45
+	hidden_effect = { 
+		restore_country_name = yes
+		every_subject_country = {
+			limit = {
+				primary_culture = wood_elf
+				capital_scope = { superregion = deepwoods_superregion }
+			}
+			I45 = { inherit = PREV }
+		}
+	}
+	swap_non_generic_missions = yes
+	remove_non_electors_emperors_from_empire_effect = yes
+	if = {
+		limit = {
+			NOT = { government_rank = 2 }
+		}
+		set_government_rank = 2
+	}
+	custom_tooltip = unite_deepwoods_tooltip
+	country_event = { id = ideagroups.1 } #Swap Ideas
+	lock_racial_admin = yes
+	add_country_modifier = {
+		name = "centralization_modifier"
+		duration = 7300
+	}
+}
+#Salla Ayeth MT Effects
+increase_grief_of_elaria = {
+	custom_tooltip = I33_increase_grief_of_elaria_tt
+	hidden_effect = {
+		change_variable = {
+			which = ayethGriefOfElaria
+			value = 1
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = ayethGriefOfElaria
+					value = 8
+				}
+			}
+			country_event = {
+				id = flavour_ayeth.21
+			}
+		}
+		if = {
+			limit = {
+                NOT = {
+                    check_variable = {
+                        which = ayethGriefOfElaria
+                        value = 8
+                    }
+                }
+				check_variable = {
+					which = ayethGriefOfElaria
+					value = 6
+				}
+			}
+			country_event = {
+				id = flavour_ayeth.20
+			}
+		}
+		if = {
+			limit = {
+                NOT = {
+                    check_variable = {
+                        which = ayethGriefOfElaria
+                        value = 6
+                    }
+                }
+				check_variable = {
+					which = ayethGriefOfElaria
+					value = 4
+				}
+			}
+			country_event = {
+				id = flavour_ayeth.19
+			}
+		}
+		if = {
+			limit = {
+                NOT = {
+                    check_variable = {
+                        which = ayethGriefOfElaria
+                        value = 4
+                    }
+                }
+				check_variable = {
+					which = ayethGriefOfElaria
+					value = 2
+				}
+			}
+			country_event = {
+				id = flavour_ayeth.18
+			}
+		}
+	}
+}
+
+increase_kill_count = {
+	custom_tooltip = I33_increase_kill_count_tt
+	hidden_effect = {
+		change_variable = {
+			which = ayethKillCount
+			value = 1
+		}
+	}
+}
+
+occupy_capital_grove_effect = {
+	trigger_switch = {
+		on_trigger = province_group
+		deepwoods_arrow_grove = { deepwoods_arrow_grove = { limit = { owned_by = FROM } change_controller = I33 } }
+		deepwoods_bone_grove = { deepwoods_bone_grove = { limit = { owned_by = FROM } change_controller = I33 } }
+		deepwoods_lake_grove = { deepwoods_lake_grove = { limit = { owned_by = FROM } change_controller = I33 } }
+		deepwoods_mountain_grove = { deepwoods_mountain_grove = { limit = { owned_by = FROM } change_controller = I33 } }
+		deepwoods_thorn_grove = { deepwoods_thorn_grove = { limit = { owned_by = FROM } change_controller = I33 } }
+		deepwoods_hunter_grove = { deepwoods_hunter_grove = { limit = { owned_by = FROM } change_controller = I33 } }
+		deepwoods_river_grove = { deepwoods_river_grove = { limit = { owned_by = FROM } change_controller = I33 } }
+		deepwoods_flower_grove = { deepwoods_flower_grove = { limit = { owned_by = FROM } change_controller = I33 } } 
+		deepwoods_shadow_grove = { deepwoods_shadow_grove = { limit = { owned_by = FROM } change_controller = I33 } }
+	}
+}

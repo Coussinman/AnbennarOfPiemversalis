@@ -144,7 +144,7 @@ country_event = {
 				}
 			}
 			#An Ogre Mage Seeks Damestear
-			5 = {
+			2 = {
 				trigger = {
 					any_owned_province = {
 						fast_has_pop_of_race = {
@@ -642,6 +642,7 @@ country_event = {
 	desc = ogre_flavour_events.4.d
 	picture = FEAST_eventPicture
 	is_triggered_only = yes
+	goto = ogre_tolerance_target
 	immediate = {
 		hidden_effect = {
 			random_owned_province = {
@@ -678,18 +679,19 @@ country_event = {
 	}
 	option = {
 		name = ogre_flavour_events.4.b
-		random = {
-			chance = 50
-			event_target:ogre_tolerance_target = {
-				add_devastation = 20
-			}
-		}
 		event_target:ogre_tolerance_target = {
-			every_province_in_state = {
-				random = {
-					chance = 20
-					add_devastation = 10
+			custom_tooltip = ogre_flavour_events.4.b_tt
+			hidden_effect = {
+				every_province_in_state = {
+					random = {
+						chance = 20
+						add_devastation = 10
+					}
 				}
+			}
+			random = {
+				chance = 50
+				add_devastation = 20
 			}
 		}
 		random = {
@@ -754,14 +756,17 @@ country_event = {
 			}
 		}
 		event_target:ogre_tolerance_target = {
-			every_province_in_state = {
-				random = {
-					chance = 20
-					add_random_development = -1
-				}
-				add_province_modifier = {
-					name = ogre_flavour_satiated_celebrations
-					duration = 1825
+			custom_tooltip = ogre_flavour_events.4.f_tt
+			hidden_effect = {
+				every_province_in_state = {
+					random = {
+						chance = 20
+						add_random_development = -1
+					}
+					add_province_modifier = {
+						name = ogre_flavour_satiated_celebrations
+						duration = 1825
+					}
 				}
 			}
 		}
@@ -769,7 +774,8 @@ country_event = {
 		complex_dynamic_effect_without_alternative = {
 			first_custom_tooltip = fotg_unreformed_tt
 			first_limit = "religion = feast_of_the_gods"
-			first_effect = "add_doom = -15"
+			first_effect = "custom_tooltip = ogre_flavour_events.4.f_hunger_tt
+							hidden_effect = { add_doom = -15 }"
 			second_custom_tooltip = fotg_reformed_tt
 			second_limit = "religion = reformed_feast_of_the_gods"
 			second_effect = "add_prestige = 25"
@@ -1314,7 +1320,7 @@ country_event = {
 		add_doom = 5
 	}
 	option = {
-		name = ogre_flavour_events.10.d
+		name = ogre_flavour_events.10.e
 		ai_chance = {
 			factor = 5
 		}
@@ -1482,7 +1488,7 @@ country_event = {
 				has_global_flag = ogre_flavour_giants_khaashalg
 				has_global_flag = ogre_flavour_giants_nomsyulhan
 				has_global_flag = ogre_flavour_giants_shuvuushudi
-				has_global_flag = ogre_flavour_giants_odheongu
+				has_global_flag = ogre_flavour_giants_gowon
 				has_global_flag = ogre_flavour_giants_north_yanshen
 				has_global_flag = ogre_flavour_giants_lower_yanshen
 				has_global_flag = ogre_flavour_giants_upper_yanshen
@@ -1673,11 +1679,11 @@ country_event = {
 				}
 				1 = {
 					ogre_flavour_giants_region = {
-						region = odheongu
+						region = gowon
 					}
 					trigger = {
 						NOT = {
-							has_global_flag = ogre_flavour_giants_odheongu
+							has_global_flag = ogre_flavour_giants_gowon
 						}
 					}
 				}

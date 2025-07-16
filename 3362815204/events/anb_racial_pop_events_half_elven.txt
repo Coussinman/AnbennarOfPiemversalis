@@ -528,7 +528,9 @@ country_event = {
 		}
 	
 		add_country_modifier = { name = non_primary_refugees duration = 1825 }
-		event_target:destination_province = { racial_pop_migration_arrive = { race = half_elven } }
+		event_target:destination_province = { 
+			racial_pop_migration_arrive = { race = half_elven } 
+		}
 		generic_increase_of_racial_tolerance_effect = { race = half_elven small = yes }
 	}
 	
@@ -563,7 +565,9 @@ country_event = {
 			var_effect_granular = { effect = add_manpower var = manpower_gained_on_exploit sign = + }
 		}
 		remove_country_modifier = non_primary_refugees
-		event_target:destination_province = { racial_pop_migration_arrive = { race = half_elven } }
+		event_target:destination_province = { 
+			racial_pop_migration_arrive = { race = half_elven } 
+		}
 		generic_decrease_of_racial_tolerance_effect = { race = half_elven medium = yes }
 	}
 
@@ -576,7 +580,9 @@ country_event = {
 		}
 		ai_chance = { factor = 1000 }
 		add_prestige = 5
-		event_target:destination_province = { racial_pop_migration_arrive = { race = half_elven } }
+		event_target:destination_province = { 
+			racial_pop_migration_arrive = { race = half_elven } 
+		}
 	}
 	
 	#There's no room for you here!
@@ -680,7 +686,9 @@ country_event = {
 	
 		#Add Minority to New Province
 		add_country_modifier = { name = non_primary_refugees duration = 1825 }
-		event_target:destination_province = { racial_pop_migration_arrive = { race = half_elven } }
+		event_target:destination_province = { 
+			racial_pop_migration_arrive = { race = half_elven } 
+		}
 		generic_increase_of_racial_tolerance_effect = { race = half_elven small = yes }
 	}
 	
@@ -717,7 +725,9 @@ country_event = {
 		remove_country_modifier = non_primary_refugees
 	
 		#Add Minority to New Province
-		event_target:destination_province = { racial_pop_migration_arrive = { race = half_elven } }
+		event_target:destination_province = { 
+			racial_pop_migration_arrive = { race = half_elven } 
+		}
 		generic_decrease_of_racial_tolerance_effect = { race = half_elven medium = yes }
 	}
 
@@ -730,7 +740,9 @@ country_event = {
 		}
 		ai_chance = { factor = 1000 }
 		add_prestige = 5
-		event_target:destination_province = { racial_pop_migration_arrive = { race = half_elven } }
+		event_target:destination_province = { 
+			racial_pop_migration_arrive = { race = half_elven }
+		}
 	}
 	
 	#Prevent them with force, if necessary
@@ -768,7 +780,9 @@ country_event = {
 		
 		random = {
 			chance = 50
-			event_target:destination_province = { racial_pop_migration_arrive = { race = half_elven} }
+			event_target:destination_province = { 
+				racial_pop_migration_arrive = { race = half_elven} 
+			}
 		}
 		add_mil_power = -30
 		if = {
@@ -1078,6 +1092,7 @@ country_event = {
 		name = racial_pop_events_all_races.12.c
 		trigger = {
 			has_country_modifier = racial_pop_half_elven_purge
+			NOT = { has_country_flag = cannot_end_half_elven_purge }
 			adm_power = 100
 		}
 		
@@ -1172,11 +1187,21 @@ country_event = {
 		name = racial_pop_events_all_races.12.dd
 		trigger = {
 			has_country_modifier = racial_pop_half_elven_purge
-			NOT = { adm_power = 100 }
+			OR = {
+				NOT = { adm_power = 100 }
+				has_country_flag = cannot_end_half_elven_purge
+			}
 		}
 		ai_chance = { factor = 0 }
 		custom_tooltip = pop_menu_purge_desc_tt
-		custom_tooltip = pop_menu_cannot_stop_purge_not_enough_adm_tt
+		if = {
+			limit = { has_country_flag = cannot_end_half_elven_purge }
+			custom_tooltip = purge_cannot_end_tt
+		}
+		if = {
+			limit = { NOT = { adm_power = 100 } }
+			custom_tooltip = pop_menu_cannot_stop_purge_not_enough_adm_tt 
+		}
 		hidden_effect = {
 			country_event = { id = racial_pop_events_half_elven.24 }
 		}
@@ -1554,7 +1579,7 @@ country_event = {
 		name = racial_pop_events_all_races.12.z
 		trigger = { ai = no }
 		hidden_effect = {
-			country_event = { id = racial_pop_misc.3 }
+			country_event = { id = racial_pop_misc.1 }
 		}
 	}
 }	

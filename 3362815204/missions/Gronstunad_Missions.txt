@@ -1078,7 +1078,7 @@ gronstunad_2 = {
 			}
 			num_of_owned_provinces_with = {
 				value = 5
-				has_gem_type_goods = yes
+				trade_goods = gems
 				has_production_building_trigger = yes
 			}
 			has_estate_privilege = estate_nobles_nobility_primacy
@@ -1339,7 +1339,7 @@ gronstunad_2 = {
 				trade_goods = copper
 				trade_goods = iron
 				trade_goods = mithril
-				has_gem_type_goods = yes
+				trade_goods = gems
 				trade_goods = salt
 				trade_goods = damestear
 				trade_goods = coal
@@ -1368,7 +1368,7 @@ gronstunad_2 = {
 					limit = { NOT = { trade_goods = mithril } }
 					change_trade_goods = copper
 				}
-				change_province_name = "ï¿½ryï¿½rthad"
+				change_province_name = "Îryôrthad"
 			}
 		}
 	}
@@ -1504,7 +1504,7 @@ gronstunad_2 = {
 
 		provinces_to_highlight = {
 			region = jade_mines_region
-			has_gem_type_goods = yes
+			trade_goods = gems
 			NOT = { has_province_modifier = gronstunad_upgraded_mining_operation }
 			NOT = { province_group = hold_province }
 			NOT = { has_terrain = dwarven_road }
@@ -1523,7 +1523,7 @@ gronstunad_2 = {
 					type = all
 					OR = {
 						has_province_modifier = gronstunad_upgraded_mining_operation
-						NOT = { has_gem_type_goods = yes }
+						NOT = { trade_goods = gems }
 						NOT = { has_terrain = cavern }
 					}
 				}
@@ -1535,7 +1535,7 @@ gronstunad_2 = {
 			add_treasury = -1000
 			jade_mines_region = {
 				limit = {
-					has_gem_type_goods = yes
+					trade_goods = gems
 				}
 				add_permanent_province_modifier = {
 					name = gronstunad_jade_gems
@@ -1565,7 +1565,7 @@ gronstunad_2 = {
 								trade_goods = copper
 								trade_goods = iron
 								trade_goods = mithril
-								has_gem_type_goods = yes
+								trade_goods = gems
 								trade_goods = salt
 								trade_goods = damestear
 								trade_goods = coal
@@ -1594,7 +1594,7 @@ gronstunad_2 = {
 						trade_goods = copper
 						trade_goods = iron
 						trade_goods = mithril
-						has_gem_type_goods = yes
+						trade_goods = gems
 						trade_goods = salt
 						trade_goods = damestear
 						trade_goods = coal
@@ -2340,7 +2340,6 @@ gronstunad_3 = {
 								trade_goods = iron
 								trade_goods = mithril
 								trade_goods = gems
-								trade_goods = jade
 								trade_goods = salt
 								trade_goods = damestear
 								trade_goods = coal
@@ -2351,7 +2350,6 @@ gronstunad_3 = {
 							3 = { change_trade_goods = copper }
 							2 = { change_trade_goods = salt }
 							1 = { change_trade_goods = gems }
-							1 = { change_trade_goods = jade }
 							1 = { change_trade_goods = gold }
 						}
 					}
@@ -2387,7 +2385,6 @@ gronstunad_3 = {
 								trade_goods = iron
 								trade_goods = mithril
 								trade_goods = gems
-								trade_goods = jade
 								trade_goods = salt
 								trade_goods = damestear
 								trade_goods = coal
@@ -2398,7 +2395,6 @@ gronstunad_3 = {
 							3 = { change_trade_goods = copper }
 							2 = { change_trade_goods = salt }
 							1 = { change_trade_goods = gems }
-							1 = { change_trade_goods = jade }
 							1 = { change_trade_goods = gold }
 						}
 					}
@@ -3277,14 +3273,14 @@ gronstunad_4 = {
 			}
 			custom_trigger_tooltip = {
 				tooltip = gronstunad_roads_tt
-			all_owned_province = {
-				OR = {
-					AND = {
-						has_province_modifier = autonomy_increased
-						has_state_edict = edict_encourage_development
-					}
-					NOT = { has_terrain = dwarven_road }
-					NOT = { development = 7 }
+				all_owned_province = {
+					OR = {
+						AND = {
+							has_province_modifier = autonomy_increased
+							has_state_edict = edict_encourage_development
+						}
+						NOT = { has_terrain = dwarven_road }
+						NOT = { development = 7 }
 					}
 				}
 			}
@@ -4311,26 +4307,19 @@ gronstunad_5 = {
 					}
 				}
 			}
-			custom_tooltip = I98_ae_tt
-			hidden_effect = {
-				every_known_country = {
-					limit = {
-						NOT = { has_country_modifier = monstrous_nation }
+			add_ae_for_known_countries_with_limit = {
+				desc = not_monstrous_nation
+				limit = "NOT = { has_country_modifier = monstrous_nation }"
+				value = -15
+				effect = "
+					if = {
+						limit = { is_subject_of = ROOT }
+						add_aggressive_expansion = {
+							who = ROOT
+							value = -50
+						}
 					}
-					add_aggressive_expansion = {
-						who = ROOT
-						value = -15
-					}
-                    if = {
-                        limit = {
-                            is_subject_of = ROOT
-                        }
-                        add_aggressive_expansion = {
-                            who = ROOT
-                            value = -50
-                        }
-                    }
-				}
+				"
 			}
 		}
 	}
@@ -5033,7 +5022,7 @@ gronstunad_5 = {
 
 		trigger = {
 			OR = {
-				has_global_flag = godswall_tunnel_opened
+				godswall_is_open = yes
 				treasury = 1000
 			}
 			nomsyulhan_region = {

@@ -114,7 +114,10 @@ country_event = {
 
 	immediate = {
 		hidden_effect = {
-			4284 = { add_core = I19 }
+			4284 = {
+				add_core = I19
+				change_culture = granite_dwarf	#need it to have nationalist rebels
+			}
 		}
 	}
 		
@@ -135,7 +138,37 @@ country_event = {
 		
 		hidden_effect = {
 			set_country_flag = chaingrasper_fought_goblinsbane
+			4284 = { change_culture = undergrowth_goblin }
 		}
+	}
+}
+
+country_event = {
+	id = flavor_chaingrasper.203 #Goblinsbane winning cleanup
+	title = flavor_chaingrasper.203.t
+	desc = flavor_chaingrasper.203.d
+	picture = BORDER_TENSION_eventPicture
+	
+	hidden = yes
+	is_triggered_only = yes	
+	fire_only_once = yes
+
+	trigger = {
+		has_country_flag = chaingrasper_fought_goblinsbane
+	}
+	immediate = {
+		hidden_effect = {
+			4284 = {
+				add_core = I19
+			}
+			release_with_religion_and_culture = { tag = I19 religion = dwarven_pantheon culture = granite_dwarf }
+		}
+	}
+		
+	option = { #Goblinsbane Cleanup
+		name = flavor_chaingrasper.2.a
+		ai_chance = { factor = 100 }
+		
 	}
 }
 
@@ -152,13 +185,17 @@ country_event = {
 		has_country_flag = chaingrasper_fought_goblinsbane
 		#NOT = { has_spawned_rebels = particularist_rebels }
 		NOT = { num_of_rebel_armies = 1 }
+		NOT = { exists = I19 }  
 	}
 		
 	option = { #We finally got rid of him!
 		name = flavor_chaingrasper.3.a
 		ai_chance = { factor = 100 }
 		add_prestige = 25
-		4284 = { remove_core = I19 }
+		4284 = {
+			remove_core = I19
+			hidden_effect = { remove_racial_minority_any_size = { race = dwarven } }
+		}
 	}
 }
 
@@ -175,7 +212,6 @@ country_event = {
 		name = flavor_chaingrasper.4.a
 		ai_chance = { factor = 100 }
 		add_prestige = -5
-
 		hidden_effect = {
 			country_event = {
 				id = flavor_chaingrasper.5
@@ -201,6 +237,21 @@ country_event = {
 		ai_chance = { factor = 100 }
 		set_estate_privilege = estate_mages_organization_state
 		artifice_magic_switch_to_mixed_mode = yes
+		
+		if = {
+			limit = {
+				estate_loyalty = {
+					estate = estate_mages
+					loyalty = 60
+				}
+			}
+			add_adm_power = 100
+			add_stability = 1
+		}
+		else = {
+			add_stability = 2
+			add_adm_power = 200
+		}
 	}
 }
 
@@ -246,6 +297,27 @@ country_event = {
 			}
 			country_event = { #Add a couple of resistance debuffs to random non-hold provinces with 10+ dev
 				id = flavor_chaingrasper.500
+			}
+			if = {
+				limit = {
+					NOT = { has_estate_privilege = estate_artificers_organization_international_gommo }
+				}
+				if = {
+					limit = {
+						estate_loyalty = {
+							estate = estate_artificers
+							loyalty = 60
+						}
+					}
+					add_dip_power = 100
+					add_stability = 1
+					set_estate_privilege = estate_artificers_organization_international_gommo
+				}
+				else = {
+					add_stability = 2
+					add_dip_power = 200
+					set_estate_privilege = estate_artificers_organization_international_gommo
+				}
 			}
 		}
 	}
@@ -413,6 +485,10 @@ country_event = {
 	
 	is_triggered_only = yes	
 	fire_only_once = yes
+
+	trigger = {
+		NOT = { tag = H74 }
+	}
 		
 	option = { #Why are those goblins so mean?
 		name = flavor_chaingrasper.200.a
@@ -432,6 +508,10 @@ country_event = {
 	
 	is_triggered_only = yes	
 	fire_only_once = yes
+
+	trigger = {
+		NOT = { tag = H74 }
+	}
 		
 	option = { #Why are those goblins so mean?
 		name = flavor_chaingrasper.201.a
@@ -462,6 +542,10 @@ country_event = {
 	
 	is_triggered_only = yes	
 	fire_only_once = yes
+
+	trigger = {
+		NOT = { tag = H74 }
+	}
 		
 	option = { #Why are those goblins so mean?
 		name = flavor_chaingrasper.202.a

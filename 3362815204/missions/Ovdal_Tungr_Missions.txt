@@ -963,26 +963,10 @@ uthojdihr_a = {
 		effect = {  
 			add_country_modifier = { name = F23_reform_progress_mod_1 duration = -1 }
 			unlock_government_reform = { government_reform = F23_trading_post_oversight }
-
-			if = { limit = { has_reform = union_of_states_reform }
-				add_government_reform = F23_trading_post_oversight
-			}
-
-			if = { limit = { OR = { full_idea_group = naval_ideas full_idea_group = maritime_ideas } } 
-				custom_tooltip = F23_divenhal_dominion_tt_true
-				add_country_modifier = { name = "thalassocracy" duration = -1 }
-				unlock_government_reform = { government_reform = thalassocracy_reform }
-			}
-			else = {
-				custom_tooltip = F23_divenhal_dominion_tt_false
-				tooltip = {
-					add_country_modifier = { name = "thalassocracy" duration = -1 }
-					unlock_government_reform = { government_reform = thalassocracy_reform }
-				}
-				custom_tooltip = F23_divenhal_dominion_tt_false_2
-				hidden_effect = { set_country_flag = confirm_thalassocracy_trade_node_req_bypass }
-			}
-			custom_tooltip = F23_divenhal_dominion_tt_tiers
+			
+			hidden_effect = { set_country_flag = confirm_thalassocracy_trade_node_req_bypass }
+			
+			custom_tooltip = F23_divenhal_dominion_tt
 		} 
 	}
 }
@@ -1060,8 +1044,10 @@ uthojdihr_b = {
 				}
 				AND = {
 					area = mothers_delta_area
-					NOT = { base_production = 10 }
-					NOT = { has_manufactory_trigger = yes }
+					OR = {
+						NOT = { base_production = 10 }
+						NOT = { has_manufactory_trigger = yes }
+					}
 				}
 			}
 		} 
@@ -1293,7 +1279,7 @@ overseas_a = { # Done. Probably. Sweetport culture event needs testing.
 				area = far_uelos_isles_area
 				area = sil_berkhens_land_area
 				area = pikakely_area
-				area = velanynosy_area
+				area = sombimofo_area
 			}
 			NOT = {
 				F23_owned_by_friendly_nation = yes
@@ -1312,7 +1298,7 @@ overseas_a = { # Done. Probably. Sweetport culture event needs testing.
 			far_uelos_isles_area = { type = all F23_owned_by_friendly_nation = yes }
 			sil_berkhens_land_area = { type = all F23_owned_by_friendly_nation = yes }
 			pikakely_area = { type = all F23_owned_by_friendly_nation = yes }
-			velanynosy_area = { type = all F23_owned_by_friendly_nation = yes }
+			sombimofo_area = { type = all F23_owned_by_friendly_nation = yes }
 			trade_goods_produced_amount = { trade_goods = cloves amount = 50 }
 		} 
 
@@ -2070,6 +2056,7 @@ bulwar_e = { # Copper Offer missions could probably do with custom tooltips. Cas
 				is_subject = no
 				NOT = { has_country_modifier = monstrous_nation }
 				NOT = { tag = U17 }
+				NOT = { tag = ROOT}
 				NOT = { has_opinion_modifier = { who = ROOT modifier = sent_gift value = 25 } }
 			}
 		} 
@@ -2089,6 +2076,7 @@ bulwar_e = { # Copper Offer missions could probably do with custom tooltips. Cas
 						any_known_country = {
 							capital_scope = { superregion = bulwar_superregion }
 							is_subject = no
+							NOT = { tag = ROOT }
 							NOT = { has_country_modifier = monstrous_nation }
 							NOT = { has_opinion_modifier = { who = ROOT modifier = sent_gift value = 25 } }
 						}
@@ -2627,7 +2615,6 @@ strongbellow_c_1 = { # Done, other than highlighting.
 			526 = { 
 				kill_units = { who = ROOT type = infantry amount = 5 }
 				remove_province_modifier = F23_flooded_depths
-				hidden_effect = { clr_province_flag = cannot_dig }
 				add_permanent_province_modifier = { name = F23_strongbellow_pumps_mod duration = -1 }
 			}
 		} 

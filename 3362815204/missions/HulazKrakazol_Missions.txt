@@ -437,8 +437,8 @@ krakazol_4 = {
 		effect = {
 			4266 = {
 				if = {
-					limit = { NOT = { trade_goods = beer } }
-					change_trade_goods = beer
+					limit = { NOT = { trade_goods = wine } }
+					change_trade_goods = wine
 				}
 				add_permanent_province_modifier = { name = krakazol_amethyst_ale duration = -1 }
 				set_province_flag = serpentsmited
@@ -685,8 +685,8 @@ krakazol_2b = {
 		trigger = {
 			4284 = {
 				base_production = 15
-				has_production_building_trigger = yes
 				has_manufactory_trigger = yes
+				has_production_or_gold_building_trigger = yes
 			}
 			krakazol_is_drunk = { Sober = yes }
 		}
@@ -1141,11 +1141,8 @@ krakazol_1c = {
 			adm_power = 100
 			4265 = {
 				owned_by = ROOT
-				if = {
-					limit = { NOT = { trade_goods = gold } }
-					has_production_building_trigger = yes
-					has_manufactory_trigger = yes
-				}
+				has_manufactory_trigger = yes
+				has_production_or_gold_building_trigger = yes
 				has_state_edict = edict_advancement_effort
 			}
 		}
@@ -1843,7 +1840,10 @@ krakazol_3c = {
 			}
 			else = {
 				owned_by = ROOT
-				has_metal_goods = yes
+				OR = {
+					trade_goods = iron
+					trade_goods = copper
+				}
 				NOT = {
 					province_group = hold_province
 					area = ibran_pass_area
@@ -1858,7 +1858,13 @@ krakazol_3c = {
 		}
 
 		trigger = {
-			innovativeness = 5
+			if = {
+				limit = { has_dlc = "Rule Britannia" }
+				innovativeness = 5
+			}
+			else = {
+				prestige = 50
+			}
 			if = {
 				limit = { 
 					any_owned_province = {
@@ -1881,7 +1887,10 @@ krakazol_3c = {
 			}
 			else = {
 				any_owned_province = {
-					has_metal_goods = yes
+					OR = {
+						trade_goods = iron
+						trade_goods = copper
+					}
 					base_production = 8
 					has_manufactory_trigger = yes
 					NOT = { 
@@ -1898,7 +1907,10 @@ krakazol_3c = {
 				limit = { NOT = { mithril = 1 } }
 				random_owned_province = {
 					limit = {
-						has_metal_goods = yes
+						OR = {
+							trade_goods = iron
+							trade_goods = copper
+						}
 						base_production = 8
 						has_manufactory_trigger = yes
 						NOT = { 
@@ -1987,8 +1999,8 @@ krakazol_3c = {
 								any_owned_province = { 
 									OR = { 
 										superregion = rahen_superregion
-										superregion = north_haless_superregion 
-										superregion = south_haless_superregion
+										superregion = gozengun_superregion 
+										superregion = vimdatrong_superregion
 									} 
 								}
 							}
@@ -2472,11 +2484,8 @@ krakazol_4c = {
 							development = 6
 						}
 						trade_goods = gems
-						trade_goods = tin
-						trade_goods = iron
-						trade_goods = lead
-						trade_goods = zinc
 						trade_goods = copper
+						trade_goods = iron
 						trade_goods = gold
 						trade_goods = mithril
 						trade_goods = cloth
@@ -3124,11 +3133,11 @@ krakazol_1d = {
 			}
 			if = {
 				limit = { exists = Y02 }
-				add_casus_belli = { type = cb_humiliate target = Y02  months = 300 }
+				add_casus_belli = { type = cb_humiliate_triggered target = Y02  months = 300 }
 			}
 			else_if = {
 				limit = { NOT = { owns = 4842 } }
-				4842 = { owner = { ROOT = { add_casus_belli = { type = cb_humiliate target = PREV months = 300 } } } } 
+				4842 = { owner = { ROOT = { add_casus_belli = { type = cb_humiliate_triggered target = PREV months = 300 } } } } 
 			}
 			else = { add_stability_or_adm_power = yes add_splendor = 200 }
 		}
@@ -3403,7 +3412,7 @@ krakazol_3d = {
 					} 
 				}
 				add_spy_network_in = { who = Y01 value = -30 }
-				add_casus_belli = { type = cb_humiliate target = Y01 months = 300 }
+				add_casus_belli = { type = cb_humiliate_triggered target = Y01 months = 300 }
 			}
 			else_if = {
 				limit = { owns = 5430 }
@@ -3414,7 +3423,7 @@ krakazol_3d = {
 					owner = {
 						ROOT = {
 							add_spy_network_in = { who = PREV value = -30 }
-							add_casus_belli = { type = cb_humiliate target = PREV months = 300 }
+							add_casus_belli = { type = cb_humiliate_triggered target = PREV months = 300 }
 						}
 					}
 				}
@@ -3439,7 +3448,7 @@ krakazol_3d = {
 			else = {
 				region = demon_hills_region
 				owner = { owns = 5430 }
-				#is_looted = no shit doesn't work
+				#is_looted = no doesn't work
 			}
 		}
 
