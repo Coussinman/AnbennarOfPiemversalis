@@ -1,295 +1,216 @@
-vaengheim_ebonfrost_dwarves_effect = {
-	custom_tooltip = vaengheim_ebonfrost_dwarves_effect_tt
+Z88_hunt_success_increase = {
+	custom_tooltip = hunt_success_increase_tt
 	hidden_effect = {
-		973 = {
-			change_culture = silver_dwarf
-			add_base_production = 2
-		}
-		6271 = {
-			add_dwarven_minority_size_effect = yes
-		}
-		2830 = {
-			add_dwarven_minority_size_effect = yes
-		}
-		6276 = {
-			add_dwarven_minority_size_effect = yes
-		}
-		984 = {
-			add_dwarven_minority_size_effect = yes
+		change_variable = {
+			which = Z88_journey_success
+			value = 1
 		}
 	}
 }
 
-vaengheim_skaldol_ebonforge_tower_effect = {
-	custom_tooltip = vaengheim_smidafjall_ebonforge_tower_effect_tt 
+Z88_hunt_success_decrease = {
+	custom_tooltip = hunt_success_decrease_tt
 	hidden_effect = {
-		6270 = {
-			add_province_triggered_modifier = mage_tower_ebonforge
-			add_base_production = 2
-			add_base_manpower = 2
+		change_variable = {
+			which = Z88_journey_success
+			value = -1
 		}
 	}
 }
 
-vaengheim_blue_reach_good_effect = {
-	custom_tooltip = vaengheim_blue_reach_tolerance_effect_tt
+Z88_hunt_progress_increase = {
+	custom_tooltip = hunt_progress_increase_tt
 	hidden_effect = {
-		serpentshead_area = {
-			type = all
-			add_nationalism = -5
-			add_province_modifier = {
-				name = vaengheim_blue_reach_tolerance
-				duration = -1
-			}
+		change_variable = {
+			which = Z88_journey_progress
+			value = 1
 		}
-		northern_greatwoods_area = {
-			type = all
-			add_nationalism = -5
-			add_province_modifier = {
-				name = vaengheim_blue_reach_tolerance
-				duration = -1
-			}
-		}
-		dinesck_area = { 
-			type = all
-			add_nationalism = -5
-			add_province_modifier = {
-				name = vaengheim_blue_reach_tolerance
-				duration = -1
-			}
-		}
-		west_chillsbay_area = {
-			type = all
-			add_nationalism = -5
-			add_province_modifier = {
-				name = vaengheim_blue_reach_tolerance
-				duration = -1
-			}
-		}
-	}
-	add_government_power = {
-		mechanic_type = ace_vaengheim_court_power_share
-		power_type = vaengheim_power_share
-		value = 10
 	}
 }
 
-vaengheim_blue_reach_bad_effect = {
-	custom_tooltip = vaengheim_blue_reach_conversions_effect_tt
+Z88_hunt_progress_decrease = {
+	custom_tooltip = hunt_progress_decrease_tt
 	hidden_effect = {
-		random_owned_province = {
-			limit = {
-				area = serpentshead_area
-			}
-			change_religion = skaldhyrric_faith
+		change_variable = {
+			which = Z88_journey_progress
+			value = -1
 		}
-		serpentshead_area = {
-			type = all
-			add_province_modifier = {
-				name = vaengheim_blue_reach_conversions
-				duration = 3650
-			}
-		}
-		random_owned_province = {
-			limit = {
-				area = northern_greatwoods_area
-			}
-			change_religion = skaldhyrric_faith
-		}
-		northern_greatwoods_area = {
-			type = all
-			add_province_modifier = {
-				name = vaengheim_blue_reach_conversions
-				duration = 3650
-			}
-		}
-		random_owned_province = {
-			limit = {
-				area = dinesck_area
-			}
-			change_religion = skaldhyrric_faith
-		}
-		dinesck_area = {
-			type = all
-			add_province_modifier = {
-				name = vaengheim_blue_reach_conversions
-				duration = 3650
-			}
-		}
-		random_owned_province = {
-			limit = {
-				area = west_chillsbay_area
-			}
-			change_religion = skaldhyrric_faith
-		}
-		west_chillsbay_area = {
-			type = all
-			add_province_modifier = {
-				name = vaengheim_blue_reach_conversions
-				duration = 3650
-			}
-		}
-	}
-	add_government_power = {
-		mechanic_type = ace_vaengheim_court_power_share
-		power_type = vaengheim_power_share
-		value = -10
 	}
 }
 
-vaengheim_troll_allt_area = {
-	allt_area = {
-		limit = { 
-			NOT = { 
-				OR = { 
-					culture = ROOT 
-					culture_group = gerudian 
-				}
-			}
-		}
-			add_devastation = 30
-			change_culture = west_dalr 
-			change_religion = ROOT
-			kill_units = { who = ROOT amount = 1 }
-			add_harpy_minority_size_effect = yes
-	}
-}
-
-vaengheim_troll_dalrfjall_area = {
-	dalrfjall_area = {
-		limit = { 
-			NOT = { 
-				OR = { 
-					culture = ROOT 
-					culture_group = gerudian 
-				}
-			}
-		}
-			add_devastation = 30
-			change_culture = west_dalr 
-			change_religion = ROOT
-			kill_units = { who = ROOT amount = 1 }
-			add_harpy_minority_size_effect = yes
-	}
-}
-
-vaengheim_gnomes_effect = {
-	custom_tooltip = vaengheim_gnomes_effect_tt
-	custom_tooltip = " "
-	define_advisor = {
-		type = spymaster
-		skill = 2
-		culture = cliff_gnome
-		religion = the_thought
-		cost_multiplier = 0.25
-	}
-	custom_tooltip = " "
-	medium_increase_of_gnomish_tolerance_effect = yes
-	custom_tooltip = " "
-	add_government_power = {
-		mechanic_type = ace_vaengheim_court_power_share
-		power_type = vaengheim_power_share
-		value = 5
-	}
-	custom_tooltip = " "
-	for = {
-		amount = 5
-		effect = "
-		random_owned_province = {
-			limit = { has_active_triggered_province_modifier = harpy_roost }
-			add_gnomish_minority_size_effect = yes
-		}
-		"
-	}
-}
-
-vaengheim_kobolds_effect = {
-	custom_tooltip = vaengheim_kobolds_effect_tt
-	custom_tooltip = " "
-	define_advisor = {
-		type = fortification_expert
-		skill = 2
-		culture = greenscale_kobold
-		religion = kobold_dragon_cult
-		cost_multiplier = 0.25
-	}
-	custom_tooltip = " "
-	medium_increase_of_kobold_tolerance_effect = yes
-	custom_tooltip = " "
-	add_government_power = {
-		mechanic_type = ace_vaengheim_court_power_share
-		power_type = vaengheim_power_share
-		value = 5
-	}
-	for = {
-		amount = 5
-		effect = "
-		random_owned_province = {
-			limit = { has_active_triggered_province_modifier = harpy_roost }
-			add_kobold_minority_size_effect = yes
-		}
-		"
-	}
-}
-
-vaengheim_govreward_1_effect = {
+Z88_heros_upgrade_effect = {
 	if = {
 		limit = {
-			has_country_modifier = vaengheim_olavlund_modifier_1
+			has_country_flag = Z88_heros_upgrade_1
 		}
-		remove_country_modifier = vaengheim_olavlund_modifier_1
+		clr_country_flag = Z88_heros_upgrade_1
+		set_country_flag = Z88_heros_upgrade_2
+		set_country_flag = Z88_heros_upgrade_2_mod
+		custom_tooltip = Z88_upgrade_heros_priv_tt
+	}
+	else_if = {
+		limit = {
+			has_country_flag = Z88_heros_upgrade_2
+		}
+		custom_tooltip = Z88_upgrade_heros_priv_tt
+		clr_country_flag = Z88_heros_upgrade_2
+		set_country_flag = Z88_heros_upgrade_3
+		set_country_flag = Z88_heros_upgrade_3_mod
+	}
+	else_if = {
+		limit = {
+			has_country_flag = Z88_heros_upgrade_3
+		}
+		custom_tooltip = Z88_upgrade_heros_mod_tt
+		clr_country_flag = Z88_heros_upgrade_3
+		set_country_flag = Z88_heros_upgrade_4
 		add_country_modifier = {
-			name = vaengheim_gov_reward_1
+			name = Z88_tales_of_heroism_1
 			duration = -1
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_flag = Z88_heros_upgrade_4
+		}
+		custom_tooltip = Z88_upgrade_heros_mod_tt
+		clr_country_flag = Z88_heros_upgrade_4
+		set_country_flag = Z88_heros_upgrade_5
+		hidden_effect = {
+			remove_country_modifier = Z88_tales_of_heroism_1
+		}
+		add_country_modifier = {
+			name = Z88_tales_of_heroism_2
+			duration = -1
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_flag = Z88_heros_upgrade_5
+		}
+		custom_tooltip = Z88_upgrade_heros_mod_tt
+		clr_country_flag = Z88_heros_upgrade_5
+		set_country_flag = Z88_heros_upgrade_6
+		hidden_effect = {
+			remove_country_modifier = Z88_tales_of_heroism_2
+		}
+		add_country_modifier = {
+			name = Z88_tales_of_heroism_3
+			duration = -1
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_flag = Z88_heros_upgrade_6
+		}
+		custom_tooltip = Z88_upgrade_heros_mod_tt
+		clr_country_flag = Z88_heros_upgrade_6
+		set_country_flag = Z88_heros_upgrade_7
+		hidden_effect = {
+			remove_country_modifier = Z88_tales_of_heroism_3
+		}
+		add_country_modifier = {
+			name = Z88_tales_of_heroism_4
+			duration = -1
+		}
+	}
+	else = {
+		custom_tooltip = Z88_upgrade_heros_priv_tt
+		set_country_flag = Z88_heros_upgrade_1
+		set_country_flag = Z88_heros_upgrade_1_mod
+	}
+}
+
+Z88_max_seat_increase = {
+	custom_tooltip = Z88_seat_count_1_tt
+	hidden_effect = {
+		change_variable = {
+			which = Z88_current_max_seats
+			value = 1
 		}
 	}
 	if = {
 		limit = {
-			has_country_modifier = vaengheim_olavlund_modifier_2
+			has_country_modifier = Z88_seat_count_1
 		}
-		remove_country_modifier = vaengheim_olavlund_modifier_2
-		add_country_modifier = {
-			name = vaengheim_gov_reward_3
-			duration = -1
+		hidden_effect = {
+			remove_country_modifier = Z88_seat_count_1
+			add_country_modifier = {
+				name = Z88_seat_count_2
+				duration = -1
+			}
 		}
 	}
-}
-
-vaengheim_govreward_2_effect = {
-	if = {
+	else_if = {
 		limit = {
-			has_country_modifier = vaengheim_olavlund_modifier_1
+			has_country_modifier = Z88_seat_count_2
 		}
-		remove_country_modifier = vaengheim_olavlund_modifier_1
-		add_country_modifier = {
-			name = vaengheim_gov_reward_3
-			duration = -1
+		hidden_effect = {
+			remove_country_modifier = Z88_seat_count_2
+			add_country_modifier = {
+				name = Z88_seat_count_3
+				duration = -1
+			}
 		}
 	}
-	if = {
+	else_if = {
 		limit = {
-			has_country_modifier = vaengheim_olavlund_modifier_2
+			has_country_modifier = Z88_seat_count_3
 		}
-		remove_country_modifier = vaengheim_olavlund_modifier_2
-		add_country_modifier = {
-			name = vaengheim_gov_reward_2
-			duration = -1
+		hidden_effect = {
+			remove_country_modifier = Z88_seat_count_3
+			add_country_modifier = {
+				name = Z88_seat_count_4
+				duration = -1
+			}
 		}
 	}
-}
-
-vaengheim_color_effect_1 = {
-	change_country_color = { color = { 67  109  192 }}
-	every_subject_country = {
-		limit = { is_colonial_nation_of = ROOT }
-		change_country_color = { color = { 67  109  192 }}
+	else_if = {
+		limit = {
+			has_country_modifier = Z88_seat_count_4
+		}
+		hidden_effect = {
+			remove_country_modifier = Z88_seat_count_4
+			add_country_modifier = {
+				name = Z88_seat_count_5
+				duration = -1
+			}
+		}
 	}
-}
-
-vaengheim_color_effect_2 = {
-	change_country_color = { color = { 32 3 90 }}
-	every_subject_country = {
-		limit = { is_colonial_nation_of = ROOT }
-		change_country_color = { color = { 32 3 90 }}
+	else_if = {
+		limit = {
+			has_country_modifier = Z88_seat_count_5
+		}
+		hidden_effect = {
+			remove_country_modifier = Z88_seat_count_5
+			add_country_modifier = {
+				name = Z88_seat_count_6
+				duration = -1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_modifier = Z88_seat_count_6
+		}
+		hidden_effect = {
+			remove_country_modifier = Z88_seat_count_6
+			add_country_modifier = {
+				name = Z88_seat_count_7
+				duration = -1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_modifier = Z88_seat_count_7
+		}
+		hidden_effect = {
+			remove_country_modifier = Z88_seat_count_7
+			add_country_modifier = {
+				name = Z88_seat_count_8
+				duration = -1
+			}
+		}
 	}
 }

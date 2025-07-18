@@ -95,9 +95,12 @@ country_event = {
 		NOT = { has_reform = abyssal_otardom_reform }
 		NOT = { has_reform = forge_council_reform }
 		NOT = { has_reform = ameion_republic }
-
 		#ACE
 		NOT = { has_reform = toarnaire_bloodcourt_reform }
+		NOT = { has_reform = exemplar_state }
+		NOT = { has_reform = z22_prince_elect }
+		NOT = { has_reform = z22_prince_elect_improved }
+		is_mteibhar_parliament = no
 	}
 
 	immediate = {
@@ -367,12 +370,21 @@ country_event = {
 				}
 			}
 		}
+		
+		if = { #Ikogshaantus
+			limit = { has_reform = ikogshaantus_khantaar_industrial_council }
+			add_estate_loyalty = {
+				estate = all
+				loyalty = -3
+			}
+		}
 	}
 	option = {
 		name = "EVTOPTB700"	# An administrator type
 		ai_chance = { factor = 20 }
 		trigger = {
 			NOT = {
+				has_ruler_flag = is_holi
 				has_country_flag = ynn_forced_reelection
 				AND = {
 					ai = yes
@@ -460,6 +472,7 @@ country_event = {
 		name = "EVTOPTC700"	# A diplomat
 		trigger = {
 			NOT = {
+				has_ruler_flag = is_holi
 				has_country_flag = ynn_forced_reelection
 				AND = {
 					ai = yes
@@ -549,6 +562,7 @@ country_event = {
 		ai_chance = { factor = 20 }
 		trigger = {
 			NOT = {
+				has_ruler_flag = is_holi
 				has_country_flag = ynn_forced_reelection
 				AND = {
 					ai = yes
@@ -919,7 +933,7 @@ country_event = {
 			20 = { add_ruler_personality = obsessive_perfectionist_personality }
 			20 = { }
 		}
-		}
+	}
 	#silver republic stuff
 	option = { #Ekha 
 		name = "EVTOPTK700"
@@ -1061,6 +1075,16 @@ country_event = {
 			}
 		}
 	}
+	option = { #Yinquan, Holi retire
+		trigger = { 
+		    has_ruler_flag = is_holi
+		}
+		name = "EVTOPTY700"
+		hidden_effect = {
+			country_event = { id = flavour_yinquan.40 }
+		}
+		ai_chance = { factor = 10 }
+	}
 }
 
 # Election!
@@ -1120,6 +1144,7 @@ country_event = {
 		NOT = { has_reform = varamhar_eternal_empire_mandate }
 		NOT = { has_reform = trollsbayer_pluralism_reform }
 		NOT = { has_reform = dakinshi_warlord_reform }
+		NOT = {	has_country_flag = g27_drozmasrecat_flag }
 		NOT = { has_reform = besolaki_chaotic_republicanism }
 		NOT = {	#From Bulwar MT
 			AND = {
@@ -1132,7 +1157,7 @@ country_event = {
 		NOT = { has_reform = land_of_thousand_shrines}
 		NOT = { has_reform = bulwari_temple_reform }
 		NOT = { has_reform = mountainshark_govzenszel }
-		OR = { NOT = { has_ruler_flag = is_holi } has_country_flag = Y26_election_loop }
+		OR = { NOT = { has_ruler_flag = is_holi } has_country_flag = Y26_election_allowed }
 		NOT = { has_reform = pentapandemonium_reform }
 		NOT = { has_reform = brelar_ynnic_dynastic_republic }
 		NOT = { AND = { tag = U04 OR = { has_country_modifier = aakheta_uprising_modifier has_country_modifier = aakheta_uprising_modifier_ai } } }
@@ -1153,10 +1178,13 @@ country_event = {
 		NOT = { has_reform = abyssal_otardom_reform }
 		NOT = { has_reform = forge_council_reform }
 		NOT = { has_reform = ameion_republic }
-
-		#ACE
-		NOT = { has_reform = toarnaire_bloodcourt_reform }
- 	}
+		NOT = { has_reform = the_mazukxiem }
+		NOT = { has_reform = exemplar_state }
+		is_mteibhar_parliament = no
+		NOT = { has_government_attribute = enables_corrivalry }
+		NOT = { has_reform = z22_prince_elect }
+		NOT = { has_reform = z22_prince_elect_improved }
+	}
 
 	immediate = {
 		hidden_effect = {
@@ -1916,10 +1944,6 @@ country_event = {
 		desc = elections.720.raithtall
 	}
 	
-	desc = { #ACE
-		trigger = { has_reform = amldihr_dutch_republic_reform }
-		desc = elections.720.amldihr
-	}
 	# desc = {
 	# 	trigger = { 
 	# 		NOT = {
@@ -1951,9 +1975,6 @@ country_event = {
 			NOT = { has_reform = feuillant_reform }
 			NOT = { has_reform = damescrown_republic_reform }
 			NOT = { has_reform = feiten_reformist_movement }
-
-			#ACE
-			NOT = { has_reform = amldihr_dutch_republic_reform }
 		}
 		if = {
 			limit = {
@@ -2043,9 +2064,6 @@ country_event = {
 					has_reform = monastic_elections_reform
 					has_reform = damescrown_republic_reform
 					has_reform = raithtall_twilight_court_reform
-
-					#ACE
-					has_reform = amldihr_dutch_republic_reform
 				}
 			} 
 			NOT = { has_reform = feiten_reformist_movement }
@@ -2199,74 +2217,6 @@ country_event = {
 		set_ruler_flag = raithtallTwilightTheocrat
 		change_statists_vs_orangists = 0.2
 	}
-	#ACE Amldihr Reformists
-	option = {
-		name = elections.720.y
-		trigger = { has_reform = amldihr_dutch_republic_reform }
-		ai_chance = {
-			factor = 50
-		}
-		define_ruler = {
-			dynasty = "of Amldihr"
-			change_adm = 1
-			change_dip = 1
-			change_mil = 1
-			min_age = 35
-			max_age = 195
-		}
-		change_statists_vs_orangists = -0.20
-	}
-	#ACE Amldihr Clans
-	option = {
-		name = elections.720.z
-		trigger = { has_reform = amldihr_dutch_republic_reform }
-		ai_chance = {
-			factor = 50
-		}
-		random_list = {
-            25 = {
-				define_ruler = {
-					dynasty = "Adstunad" 
-					change_adm = 2
-					change_dip = 0
-					change_mil = 1
-					min_age = 35
-					max_age = 195
-					}
-				}
-            25 = {
-					define_ruler = {
-					dynasty = "Azgheled"
-					change_adm = 0
-					change_dip = 2
-					change_mil = 1
-					min_age = 35
-					max_age = 195
-					}
-				}
-            25 = {
-					define_ruler = {
-					dynasty = "Nezvelad" 
-					change_adm = 0
-					change_dip = 1
-					change_mil = 2
-					min_age = 35
-					max_age = 195
-					}
-				}
-            25 = {
-					define_ruler = {
-					dynasty = "Shazstun" 
-					change_adm = 1
-					change_dip = 0
-					change_mil = 2
-					min_age = 35
-					max_age = 195
-					}
-				}
-		}
-		change_statists_vs_orangists = 0.20
-	}
 }
 
 country_event = {
@@ -2304,11 +2254,6 @@ country_event = {
 		desc = elections.721.raithtall
 	}
 	
-	desc = { #ACE
-		trigger = { has_reform = amldihr_dutch_republic_reform }
-		desc = elections.721.amldihr
-	}
-	
 	# desc = {
 	# 	trigger = {
 	# 		NOT = {
@@ -2330,6 +2275,7 @@ country_event = {
 		NOT = { 
 			ruler_can_revive = yes
 			has_reform = medasi_reform
+			has_reform = the_great_salla
 		}
 	}
 	
@@ -2341,9 +2287,6 @@ country_event = {
 			NOT = { has_reform = damescrown_republic_reform }
 			NOT = { has_reform = feiten_reformist_movement }
 			NOT = { has_reform = raithtall_twilight_court_reform }
-
-			#ACE
-			NOT = { has_reform = amldihr_dutch_republic_reform }
 		}
 		if = {
 			limit = {
@@ -2422,9 +2365,6 @@ country_event = {
 					has_reform = damescrown_republic_reform
 					has_reform = feiten_reformist_movement
 					has_reform = raithtall_twilight_court_reform
-
-					#ACE
-					has_reform = amldihr_dutch_republic_reform
 				} 
 			}
 		}
@@ -2539,75 +2479,6 @@ country_event = {
 		set_ruler_flag = raithtallTwilightTheocrat
 		change_statists_vs_orangists = 0.2
 	}
-	#Amldihr Reformists
-	option = {
-		name = elections.720.y
-		trigger = { has_reform = amldihr_dutch_republic_reform }
-		ai_chance = {
-			factor = 50
-		}
-		define_ruler = {
-			dynasty = "of Amldihr"
-			change_adm = 1
-			change_dip = 1
-			change_mil = 1
-			min_age = 35
-			max_age = 195
-		}
-		change_statists_vs_orangists = -0.20
-	}
-
-	#ACE Amldihr Clans
-	option = {
-		name = elections.720.z
-		trigger = { has_reform = amldihr_dutch_republic_reform }
-		ai_chance = {
-			factor = 50
-		}
-		random_list = {
-            25 = {
-				define_ruler = {
-					dynasty = "Adstunad" 
-					change_adm = 2
-					change_dip = 0
-					change_mil = 1
-					min_age = 35
-					max_age = 195
-					}
-				}
-            25 = {
-					define_ruler = {
-					dynasty = "Azgheled"
-					change_adm = 0
-					change_dip = 2
-					change_mil = 1
-					min_age = 35
-					max_age = 195
-					}
-				}
-            25 = {
-					define_ruler = {
-					dynasty = "Nezvelad" 
-					change_adm = 0
-					change_dip = 1
-					change_mil = 2
-					min_age = 35
-					max_age = 195
-					}
-				}
-            25 = {
-					define_ruler = {
-					dynasty = "Shazstun" 
-					change_adm = 1
-					change_dip = 0
-					change_mil = 2
-					min_age = 35
-					max_age = 195
-					}
-				}
-		}
-		change_statists_vs_orangists = 0.20
-	}
 }
 
 # Lottery Election by Daniel Tolman
@@ -2639,6 +2510,7 @@ country_event = {
 		# NOT = { has_disaster =  bonfire_of_the_vanities_disaster }
 		NOT = { AND = { tag = Y86 has_ruler_flag = is_hiderion } }
 		NOT = { has_reform = shadow_horde }
+		OR = { NOT = { has_ruler_flag = is_holi } has_country_flag = Y26_election_allowed }
 	}
 	
 	immediate = {
@@ -2966,6 +2838,7 @@ country_event = {
 			change_dip = 1
 			change_mil = 1
 		}
+		holi_retirement_flag_clearance = yes #Yinquan
 	}
 	
 	option = {
@@ -3289,6 +3162,7 @@ country_event = { #Technocracy Election
 	option = {
 		trigger = {
 			NOT = { has_country_flag = technocracy_death_election }
+			has_regency = no
 		}
 		name = elections.900.a # Current ruler stays
 		ai_chance = { factor = 50 }
@@ -3358,23 +3232,9 @@ country_event = { #Technocracy Election
 
 		if = {
 			limit = {
-				ai = no 
-				OR = {
-					AND = {
-						has_ruler_flag = brillite_ruler
-						faction_in_power = tec_brilliance
-					}
-					AND = {
-						has_ruler_flag = technomancy_ruler
-						faction_in_power = tec_technomancy
-					}
-					AND = {
-						has_ruler_flag = mechanists_ruler
-						faction_in_power = tec_mechanists
-					}
-				}
+				ai = no
 			}
-			custom_tooltip = wrong_ruler_faction_tooltip
+			# half RT price for technocracy re-elections
 			if = {	#long-lived races
 				limit = {
 					OR = {
@@ -3383,18 +3243,18 @@ country_event = { #Technocracy Election
 						has_country_modifier = dwarven_administration
 					}
 				}
-				add_scaled_republican_tradition = -3
+				add_scaled_republican_tradition = -1.5
 			}
 			else = {
 				if = {
 					limit = {
 						has_country_flag = increased_election_cost
 					}
-					add_scaled_republican_tradition = -15
+					add_scaled_republican_tradition = -7.5
 					clr_country_flag = increased_election_cost
 				}
 				else = {
-					add_scaled_republican_tradition = -10
+					add_scaled_republican_tradition = -5
 				}
 			}
 		}
@@ -3540,6 +3400,12 @@ country_event = { #Technocracy Election
 			}
 			giberd_leader_clean_bonus = yes
 			giberd_leader_brillites_bonus = yes
+		}
+		if = {
+			limit = { has_government_attribute = elections_influence_estates }
+			add_estate_loyalty_by_class_adm = {
+				loyalty = 10
+			}
 		}
 		ai_chance = {
 			factor = 1
@@ -3692,6 +3558,12 @@ country_event = { #Technocracy Election
 		hidden_effect = {
 			set_ruler_flag = technomancy_ruler
 		}
+		if = {
+			limit = { has_government_attribute = elections_influence_estates }
+			add_estate_loyalty_by_class_dip = {
+				loyalty = 10
+			}
+		}
 		ai_chance = {
 			factor = 1
 			modifier = {
@@ -3842,6 +3714,12 @@ country_event = { #Technocracy Election
 		hidden_effect = {
 			set_ruler_flag = mechanists_ruler
 		}
+		if = {
+			limit = { has_government_attribute = elections_influence_estates }
+			add_estate_loyalty_by_class_mil = {
+				loyalty = 10
+			}
+		}
 		ai_chance = {
 			factor = 1
 			modifier = {
@@ -3978,6 +3856,7 @@ country_event = { #Racial tolerance
 		name = elections.1001.a # Keep current ruler
 		trigger = {
 			NOT = { has_ruler_flag = racial_election_ruler_dead_flag }
+			has_regency = no
 		}
 		change_adm = 1
 		change_dip = 1
@@ -4207,7 +4086,7 @@ country_event = { #Racial tolerance
 			change_adm = 1
 			change_dip = 1
 			change_mil = 1
-		} #I guess, idk might work from mechanical sence better
+		} #I guess, idk might work from mechanical sense better
 		add_ruler_modifier = { 
 			name = racial_tolerance_half_elf_ruler
 			duration = -1  

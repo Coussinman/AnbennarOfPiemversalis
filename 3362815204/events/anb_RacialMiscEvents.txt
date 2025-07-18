@@ -80,6 +80,12 @@ country_event = {
 			}
 			set_heir_culture = grombar_half_orc
 		}
+		else_if = {
+			limit = {
+				primary_culture = ungulan_half_orc
+			}
+			set_heir_culture = ungulan_half_orc
+		}
 		else = {
 			set_heir_culture = half_orc
 		}
@@ -212,13 +218,19 @@ country_event = {
 			set_heir_culture = kai_half_elf
 		}
 		else_if = {
-			limit = { 
-				or = {
+			limit = {
+				OR = {
 					ruler_is_kelino_human = yes
 					consort_is_kelino_human = yes
 				}
 			}
-			set_heir_culture = kelino_half_elf
+			if = {
+				limit = { NOT = { has_global_flag = arawkeling_cannorianised_helf } }
+				set_heir_culture = jahe_half_elf
+			}
+			else = {
+				set_heir_culture = jahe_half_elf_cannorianise
+			}
 		}
 		else = {
 			set_heir_culture = half_elf
@@ -251,6 +263,7 @@ country_event = {
 			}
 		}
 		has_heir = yes
+		NOT = { is_or_was_tag = { tag = B60 } }
 		NOT = { heir_is_human = yes }
 		NOT = { has_heir_flag = set_heir_race }
 	}
@@ -289,6 +302,24 @@ country_event = { #Harpy Heir
 
 	is_triggered_only = yes
 
+	immediate = {
+		if = {
+			limit = {
+				has_ruler_modifier = heir_mage_personality_mod
+			}
+			set_country_flag = make_heir_magic
+		}
+	}
+
+	after = {
+		if = {
+			limit = {
+				has_country_flag = make_heir_magic
+			}
+			set_heir_mage_effect = yes
+			clr_country_flag = make_heir_magic
+		}
+	}
 
 	trigger = {
 		consort_is_harpy = yes
@@ -308,14 +339,16 @@ country_event = { #Harpy Heir
 	option = {	#Good 
 		name = racial_misc.4.a
 		hidden_effect = {
-			kill_heir = { allow_new_heir = no }
-			define_heir = {
-				female = yes
+			if = {
+				limit = { has_female_heir = no }
+				define_heir = {
+					female = yes
+				}
 			}
 			set_heir_culture = new_variable:consort_culture
 			clear_fast_heir_flags = yes
 			set_heir_flag = harpy_heir
-			set_heir_flag = set_heir_race #this has to be here because we make a new heir—it'll trigger racial_misc.10 otherwise
+			set_heir_flag = set_heir_race #this has to be here because we make a new heir - it'll trigger racial_misc.10 otherwise
 		}
 	}
 }

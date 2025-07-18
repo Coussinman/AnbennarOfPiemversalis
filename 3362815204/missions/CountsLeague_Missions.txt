@@ -190,17 +190,26 @@ countsleague_first_slot = {
 		required_missions = { cl_dragon_cannot_hear } 
 		provinces_to_highlight = {  } 
 
-		trigger = { 
-			all_subject_country = { 
-				NOT = { liberty_desire = 50 }
-				has_opinion = {
-					who = B55
-					value = 170
-				}
-			}
+		trigger = {
 			OR = {
-				has_estate_privilege = estate_nobles_strong_duchies
-				NOT = { num_of_subjects = 2 }
+				AND = {
+					num_of_subjects = 1
+					all_subject_country = { 
+						NOT = { liberty_desire = 50 }
+						has_opinion = {
+							who = B55
+							value = 170
+						}
+					}
+					OR = {
+						has_estate_privilege = estate_nobles_strong_duchies
+						NOT = { num_of_subjects = 2 }
+					}
+				}
+				inner_castanor_region = {
+					type = all
+					owned_by = ROOT
+				}
 			}
 		 } 
 
@@ -545,9 +554,9 @@ countsleague_third_slot = {
 				custom_tooltip = reinstated_patricians_tt
 				custom_tooltip = remove_burghers_for_patricians_tt
 			}
-			custom_tooltip = cl_semi_patrician_tt
+			custom_tooltip = semi_patrician_tt
 			hidden_effect = {
-				set_country_flag = cl-semi-patrician
+				set_country_flag = semi_patrician
 				831 = {
 					remove_province_modifier = castonath_patrician_influence_full
 					remove_province_modifier = castonath_patrician_influence_significant

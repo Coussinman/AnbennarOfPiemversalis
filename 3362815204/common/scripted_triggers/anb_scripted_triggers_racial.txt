@@ -54,6 +54,7 @@ cannot_enslave_orcs = {
 		has_country_modifier = the_abolish_slavery_act
 		has_country_modifier = orcish_administration
 		has_country_modifier = half_orcish_administration
+		has_country_flag = banned_orc_slaves
 	}
 }
 
@@ -142,6 +143,11 @@ has_unmatching_administration_to_primary_culture = {
 	}
 }
 
+# If you make changes here, please make similar changes to the following scipted_effects/triggers:
+## racial_mil_military_change_tech
+## reset_racial_military_via_administration
+## racial_modifiers.6
+## has_unmatching_military_to_unit
 has_unmatching_military_to_unit = {
 	OR = {
 		AND = {
@@ -156,7 +162,8 @@ has_unmatching_military_to_unit = {
 		}
 		AND = {
 			has_country_modifier = dwarven_military
-			NOT = { unit_type = tech_dwarven }
+			NOT = { unit_type = tech_west_dwarven }
+			NOT = { unit_type = tech_east_dwarven }
 		}
 		AND = {
 			has_country_modifier = gnollish_military
@@ -170,17 +177,32 @@ has_unmatching_military_to_unit = {
 			has_country_modifier = goblin_military
 			NOT = { unit_type = tech_goblin }
 			NOT = { unit_type = tech_forest_goblin }
-			NOT = { unit_type = tech_cave_goblin }
 			NOT = { unit_type = tech_exodus_goblin }
+			NOT = { unit_type = tech_cave_goblin }
+			NOT = { unit_type = tech_east_cave_goblin }
 		}
 		AND = {
 			has_country_modifier = half_elven_military
+			NOT = { unit_type = tech_bulwari }
+			NOT = { unit_type = tech_salahadesi }
+			NOT = { unit_type = tech_inyaswarosa }
 			NOT = { unit_type = tech_cannorian }
+			NOT = { unit_type = tech_gerudian }
+			NOT = { unit_type = tech_raheni }
+			NOT = { unit_type = tech_halessi }
+			NOT = { unit_type = tech_triunic }
+			NOT = { unit_type = tech_ynnsmen }
+			NOT = { unit_type = tech_east_sarhaly }
+			NOT = { unit_type = tech_west_sarhaly }
+			NOT = { unit_type = tech_south_sarhaly }
+			NOT = { unit_type = tech_baashidi }
+			NOT = { unit_type = tech_shuvuush }
 		}
 		AND = {
 			has_country_modifier = half_orcish_military
 			NOT = { unit_type = tech_cannorian }
 			NOT = { unit_type = tech_gerudian }
+			NOT = { unit_type = tech_raheni }
 		}
 		AND = {
 			has_country_modifier = halfling_military
@@ -194,7 +216,6 @@ has_unmatching_military_to_unit = {
 			NOT = { unit_type = tech_nzeri_harpy }
 			NOT = { unit_type = tech_pezarangi_harpy }
 			NOT = { unit_type = tech_nuzenapu_harpy }
-			NOT = { unit_type = tech_jarnklo_harpy_ace }
 		}
 		AND = {
 			has_country_modifier = human_military
@@ -262,6 +283,7 @@ has_unmatching_military_to_unit = {
 			NOT = { unit_type = tech_ogre }
 			NOT = { unit_type = tech_eastern_ogre }
 			NOT = { unit_type = tech_soulseeker_ogre }
+			NOT = { unit_type = tech_dunesole_ogre }
 		}
 		AND = {
 			has_country_modifier = lizardfolk_military
@@ -615,10 +637,10 @@ ruler_is_half_elven = {
 			ruler_culture = bulwari_half_elf
 			ruler_culture = bom_half_elf
 			ruler_culture = kai_half_elf
-			ruler_culture = kelino_half_elf
-
 			#ACE
 			employed_advisor = { culture = parian }
+			ruler_culture = jahe_half_elf
+			ruler_culture = jahe_half_elf_cannorianise
 		}
 	}
 }
@@ -635,6 +657,7 @@ ruler_is_elven = {
 			ruler_culture = dawn_elf
 			ruler_culture = horizon_elf
 			ruler_culture = wood_elf
+			ruler_culture = eclipse_elf
 			ruler_culture = sea_elf
 			ruler_culture = sunrise_elf
 			ruler_culture = sunset_elf
@@ -786,10 +809,12 @@ ruler_is_human = {
 			ruler_culture = tijarikheti
 			ruler_culture = irsmahapan
 			ruler_culture = horakheti
+			ruler_culture = asbaiwix
 			#Akasi
 			ruler_culture = desha
 			ruler_culture = far_akasi
 			ruler_culture = khasani
+			ruler_culture = enigrax
 			#Lencori
 			ruler_culture = high_lorentish
 			ruler_culture = low_lorentish
@@ -802,7 +827,7 @@ ruler_is_human = {
 			ruler_culture = thornish
 			ruler_culture = criodhi
 			ruler_culture = arbcoster
-			ruler_culture = tretunic
+			ruler_culture = cromorri
 			#Reachman
 			ruler_culture = blue_reachman_r
 			ruler_culture = white_reachman_r
@@ -817,6 +842,9 @@ ruler_is_human = {
 			ruler_culture = talderannic
 			ruler_culture = perlatter
 			ruler_culture = elnarfolk
+			ruler_culture = skamvin
+			ruler_culture = taric_gerudian
+			ruler_culture = gerudian_reachman
 			#Bulwari
 			ruler_culture = bahari
 			ruler_culture = gelkar
@@ -908,14 +936,16 @@ ruler_is_human = {
 			ruler_culture = shuokyuan
 			ruler_culture = luoxian
 			ruler_culture = naamzau
-			#Odheongun
-			ruler_culture = menjeotaen
-			ruler_culture = sangsogha
+			#Gowon
+			ruler_culture = giteuni
+			ruler_culture = wonju
 			ruler_culture = guwaadun
+			ruler_culture = dudimkkun
 			#Khantaar
 			ruler_culture = shuvuush
 			ruler_culture = runsukhi
 			ruler_culture = plateau_runsukhi
+			ruler_culture = kuuldaar
 			#Khudi
 			ruler_culture = oinukhudi
 			ruler_culture = anarkhudi
@@ -999,6 +1029,7 @@ ruler_is_half_orcish = {
 		OR = {
 			has_ruler_flag = half_orcish_ruler
 			ruler_culture = half_orc
+			ruler_culture = ungulan_half_orc
 			ruler_culture = grombar_half_orc
 			ruler_culture = chippengarder_half_orc
 			ruler_culture = wuhyun_half_orc
@@ -1061,6 +1092,7 @@ ruler_is_gnollish = {
 			ruler_culture = dovesworn_gnoll
 			ruler_culture = suncrown_gnoll
 			ruler_culture = sorrowmane_gnoll
+			ruler_culture = khetfeaster_gnoll
 		}
 	}
 }
@@ -1079,9 +1111,10 @@ ruler_is_kobold = {
 			ruler_culture = dragonfire_kobold
 			ruler_culture = steelscale_kobold
 			ruler_culture = vrendzani_kobold
-
 			#ACE
 			ruler_culture = magmascale_kobold
+			ruler_culture = dragonmask_kobold
+			ruler_culture = whitescale_kobold
 		}
 	}
 }
@@ -1103,6 +1136,11 @@ ruler_is_lizardfolk = {
 			ruler_culture = adzalanas_lizardfolk
 			ruler_culture = itayzemby_lizardfolk
 			ruler_culture = cyazizeta_lizardfolk
+			ruler_culture = irikin_lizardfolk
+			ruler_culture = draktaya_lizardfolk
+			ruler_culture = hishakaya_lizardfolk
+			ruler_culture = shyashkay_lizardfolk
+			ruler_culture = ahzdara_lizardfolk
 		}
 	}
 }
@@ -1129,6 +1167,7 @@ ruler_is_halfling = {
 			ruler_culture = visfoot_halfling
 			ruler_culture = towerfoot_halfling
 			ruler_culture = pipefoot_halfling
+			ruler_culture = creekfoot_halfling
 			ruler_culture = amezatany
 			ruler_culture = mboala
 			ruler_culture = mazava
@@ -1197,6 +1236,7 @@ ruler_is_ogre = {
 			ruler_culture = bloodtooth_ogre
 			ruler_culture = horned_ogre
 			ruler_culture = soulseeker_ogre
+			ruler_culture = dunesole_ogre
 		}
 	}
 }
@@ -1208,6 +1248,7 @@ ruler_is_harpy = {
 			has_ruler_flag = harpy_ruler
 			ruler_culture = firanyan_harpy
 			ruler_culture = siadunan_harpy
+			ruler_culture = stonewing_harpy
 			ruler_culture = pezarangi_harpy
 			ruler_culture = reishao_harpy
 			ruler_culture = naleni_harpy
@@ -1274,6 +1315,7 @@ ruler_is_ruinborn = {
 			ruler_culture = advakhalla
 			ruler_culture = sarihaddi
 			ruler_culture = bekauta
+			ruler_culture = vaikazelhi
 			#Kheionai
 			ruler_culture = degabhen
 			ruler_culture = oktibhen
@@ -1320,7 +1362,7 @@ ruler_is_ruinborn = {
 			ruler_culture = effe
 			ruler_culture = laii
 			ruler_culture = thamvoii
-			ruler_culture = oronoii
+			ruler_culture = oonoi
 			ruler_culture = duguihi
 			#Veykodan
 			ruler_culture = veykodan
@@ -1333,6 +1375,7 @@ ruler_is_ruinborn = {
 			ruler_culture = seedthrall
 			ruler_culture = berrirghe
 			ruler_culture = mteirghe
+			ruler_culture = macamairghe
 		}
 	}
 }
@@ -1495,10 +1538,10 @@ consort_is_half_elven = {
 			consort_culture = bulwari_half_elf
 			consort_culture = bom_half_elf
 			consort_culture = kai_half_elf
-			consort_culture = kelino_half_elf
-
 			#ACE
 			employed_advisor = { culture = parian }
+			consort_culture = jahe_half_elf
+			consort_culture = jahe_half_elf_cannorianise
 		}
 	}
 }
@@ -1514,6 +1557,7 @@ consort_is_elven = {
 			consort_culture = dawn_elf
 			consort_culture = horizon_elf
 			consort_culture = wood_elf
+			consort_culture = eclipse_elf
 			consort_culture = sea_elf
 			consort_culture = sunrise_elf
 			consort_culture = sunset_elf
@@ -1662,10 +1706,12 @@ consort_is_human = {
 			consort_culture = tijarikheti
 			consort_culture = irsmahapan
 			consort_culture = horakheti
+			consort_culture = asbaiwix
 			#Akasi
 			consort_culture = desha
 			consort_culture = far_akasi
 			consort_culture = khasani
+			consort_culture = enigrax
 			#Lencori
 			consort_culture = high_lorentish
 			consort_culture = low_lorentish
@@ -1678,7 +1724,7 @@ consort_is_human = {
 			consort_culture = thornish
 			consort_culture = criodhi
 			consort_culture = arbcoster
-			consort_culture = tretunic
+			consort_culture = cromorri
 			#Reachman
 			consort_culture = blue_reachman_r
 			consort_culture = white_reachman_r
@@ -1693,6 +1739,9 @@ consort_is_human = {
 			consort_culture = talderannic
 			consort_culture = perlatter
 			consort_culture = elnarfolk
+			consort_culture = skamvin
+			consort_culture = taric_gerudian
+			consort_culture = gerudian_reachman
 			#Bulwari
 			consort_culture = bahari
 			consort_culture = gelkar
@@ -1784,14 +1833,16 @@ consort_is_human = {
 			consort_culture = shuokyuan
 			consort_culture = luoxian
 			consort_culture = naamzau
-			#Odheongun
-			consort_culture = menjeotaen
-			consort_culture = sangsogha
+			#Gowon
+			consort_culture = giteuni
+			consort_culture = wonju
 			consort_culture = guwaadun
+			consort_culture = dudimkkun
 			#Khantaar
 			consort_culture = shuvuush
 			consort_culture = runsukhi
 			consort_culture = plateau_runsukhi
+			consort_culture = kuuldaar
 			#Khudi
 			consort_culture = oinukhudi
 			consort_culture = anarkhudi
@@ -1874,6 +1925,7 @@ consort_is_half_orcish = {
 		tooltip = consort_is_half_orc_tt
 		OR = {
 			consort_culture = half_orc
+			consort_culture = ungulan_half_orc
 			consort_culture = grombar_half_orc
 			consort_culture = chippengarder_half_orc
 			consort_culture = wuhyun_half_orc
@@ -1933,6 +1985,7 @@ consort_is_gnollish = {
 			consort_culture = dovesworn_gnoll
 			consort_culture = suncrown_gnoll
 			consort_culture = sorrowmane_gnoll
+			consort_culture = khetfeaster_gnoll
 		}
 	}
 }
@@ -1950,9 +2003,10 @@ consort_is_kobold = {
 			consort_culture = dragonfire_kobold
 			consort_culture = steelscale_kobold
 			consort_culture = vrendzani_kobold
-
 			#ACE
 			consort_culture = magmascale_kobold
+			consort_culture = dragonmask_kobold
+			consort_culture = whitescale_kobold
 		}
 	}
 }
@@ -1973,6 +2027,11 @@ consort_is_lizardfolk = {
 			consort_culture = adzalanas_lizardfolk
 			consort_culture = itayzemby_lizardfolk
 			consort_culture = cyazizeta_lizardfolk
+			consort_culture = irikin_lizardfolk
+			consort_culture = draktaya_lizardfolk
+			consort_culture = hishakaya_lizardfolk
+			consort_culture = shyashkay_lizardfolk
+			consort_culture = ahzdara_lizardfolk
 		}
 	}
 }
@@ -1997,6 +2056,7 @@ consort_is_halfling = {
 			consort_culture = visfoot_halfling
 			consort_culture = towerfoot_halfling
 			consort_culture = pipefoot_halfling
+			consort_culture = creekfoot_halfling
 			consort_culture = amezatany
 			consort_culture = mboala
 			consort_culture = mazava
@@ -2061,6 +2121,7 @@ consort_is_ogre = {
 			consort_culture = bloodtooth_ogre
 			consort_culture = horned_ogre
 			consort_culture = soulseeker_ogre
+			consort_culture = dunesole_ogre
 		}
 	}
 }
@@ -2071,6 +2132,7 @@ consort_is_harpy = {
 		OR = {
 			consort_culture = firanyan_harpy
 			consort_culture = siadunan_harpy
+			consort_culture = stonewing_harpy
 			consort_culture = pezarangi_harpy
 			consort_culture = reishao_harpy
 			consort_culture = naleni_harpy
@@ -2133,6 +2195,7 @@ consort_is_ruinborn = {
 			consort_culture = kalavendhi
 			consort_culture = thekvrystana
 			consort_culture = bekauta
+			consort_culture = vaikazelhi
 			#Kheionai
 			consort_culture = degabhen
 			consort_culture = oktibhen
@@ -2178,7 +2241,7 @@ consort_is_ruinborn = {
 			consort_culture = effe
 			consort_culture = laii
 			consort_culture = thamvoii
-			consort_culture = oronoii
+			consort_culture = oonoi
 			#Veykodan
 			consort_culture = veykodan
 			#Degenerated
@@ -2190,6 +2253,7 @@ consort_is_ruinborn = {
 			consort_culture = seedthrall
 			consort_culture = berrirghe
 			consort_culture = mteirghe
+			consort_culture = macamairghe
 		}
 	}
 }
@@ -2347,10 +2411,10 @@ heir_is_half_elven = {
 			heir_culture = bulwari_half_elf
 			heir_culture = bom_half_elf
 			heir_culture = kai_half_elf
-			heir_culture = kelino_half_elf
-
 			#ACE
 			employed_advisor = { culture = parian }
+			heir_culture = jahe_half_elf
+			heir_culture = jahe_half_elf_cannorianise
 		}
 	}
 }
@@ -2366,6 +2430,7 @@ heir_is_elven = {
 			heir_culture = dawn_elf
 			heir_culture = horizon_elf
 			heir_culture = wood_elf
+			heir_culture = eclipse_elf
 			heir_culture = sea_elf
 			heir_culture = sunrise_elf
 			heir_culture = sunset_elf
@@ -2514,10 +2579,12 @@ heir_is_human = {
 			heir_culture = tijarikheti
 			heir_culture = irsmahapan
 			heir_culture = horakheti
+			heir_culture = asbaiwix
 			#Akasi
 			heir_culture = desha
 			heir_culture = far_akasi
 			heir_culture = khasani
+			heir_culture = enigrax
 			#Lencori
 			heir_culture = high_lorentish
 			heir_culture = low_lorentish
@@ -2530,7 +2597,7 @@ heir_is_human = {
 			heir_culture = thornish
 			heir_culture = criodhi
 			heir_culture = arbcoster
-			heir_culture = tretunic
+			heir_culture = cromorri
 			#Reachman
 			heir_culture = blue_reachman_r
 			heir_culture = white_reachman_r
@@ -2545,6 +2612,9 @@ heir_is_human = {
 			heir_culture = talderannic
 			heir_culture = perlatter
 			heir_culture = elnarfolk
+			heir_culture = skamvin
+			heir_culture = taric_gerudian
+			heir_culture = gerudian_reachman
 			#Bulwari
 			heir_culture = bahari
 			heir_culture = gelkar
@@ -2636,14 +2706,16 @@ heir_is_human = {
 			heir_culture = shuokyuan
 			heir_culture = luoxian
 			heir_culture = naamzau
-			#Odheongun
-			heir_culture = menjeotaen
-			heir_culture = sangsogha
+			#Gowon
+			heir_culture = giteuni
+			heir_culture = wonju
 			heir_culture = guwaadun
+			heir_culture = dudimkkun
 			#Khantaar
 			heir_culture = shuvuush
 			heir_culture = runsukhi
 			heir_culture = plateau_runsukhi
+			heir_culture = kuuldaar
 			#Khudi
 			heir_culture = oinukhudi
 			heir_culture = anarkhudi
@@ -2705,7 +2777,6 @@ heir_is_human = {
 			#Tyvorkan
 			heir_culture = taric
 			heir_culture = cagodic
-
 			#ACE
 			heir_culture = morbani
 			heir_culture = divenori
@@ -2726,6 +2797,7 @@ heir_is_half_orcish = {
 		tooltip = heir_is_half_orc_tt
 		OR = {
 			heir_culture = half_orc
+			heir_culture = ungulan_half_orc
 			heir_culture = grombar_half_orc
 			heir_culture = chippengarder_half_orc
 			heir_culture = wuhyun_half_orc
@@ -2785,6 +2857,7 @@ heir_is_gnollish = {
 			heir_culture = dovesworn_gnoll
 			heir_culture = suncrown_gnoll
 			heir_culture = sorrowmane_gnoll
+			heir_culture = khetfeaster_gnoll
 		}
 	}
 }
@@ -2802,9 +2875,10 @@ heir_is_kobold = {
 			heir_culture = dragonfire_kobold
 			heir_culture = steelscale_kobold
 			heir_culture = vrendzani_kobold
-
 			#ACE
 			heir_culture = magmascale_kobold
+			heir_culture = dragonmask_kobold
+			heir_culture = whitescale_kobold
 		}
 	}
 }
@@ -2825,6 +2899,11 @@ heir_is_lizardfolk = {
 			heir_culture = adzalanas_lizardfolk
 			heir_culture = itayzemby_lizardfolk
 			heir_culture = cyazizeta_lizardfolk
+			heir_culture = irikin_lizardfolk
+			heir_culture = draktaya_lizardfolk
+			heir_culture = hishakaya_lizardfolk
+			heir_culture = shyashkay_lizardfolk
+			heir_culture = ahzdara_lizardfolk
 		}
 	}
 }
@@ -2849,6 +2928,7 @@ heir_is_halfling = {
 			heir_culture = visfoot_halfling
 			heir_culture = towerfoot_halfling
 			heir_culture = pipefoot_halfling
+			heir_culture = creekfoot_halfling
 			heir_culture = amezatany
 			heir_culture = mboala
 			heir_culture = mazava
@@ -2913,6 +2993,7 @@ heir_is_ogre = {
 			heir_culture = bloodtooth_ogre
 			heir_culture = horned_ogre
 			heir_culture = soulseeker_ogre
+			heir_culture = dunesole_ogre
 		}
 	}
 }
@@ -2923,6 +3004,7 @@ heir_is_harpy = {
 		OR = {
 			heir_culture = firanyan_harpy
 			heir_culture = siadunan_harpy
+			heir_culture = stonewing_harpy
 			heir_culture = pezarangi_harpy
 			heir_culture = reishao_harpy
 			heir_culture = naleni_harpy
@@ -2985,6 +3067,7 @@ heir_is_ruinborn = {
 			heir_culture = kalavendhi
 			heir_culture = thekvrystana
 			heir_culture = bekauta
+			heir_culture = vaikazelhi
 			#Kheionai
 			heir_culture = degabhen
 			heir_culture = oktibhen
@@ -3030,7 +3113,7 @@ heir_is_ruinborn = {
 			heir_culture = effe
 			heir_culture = laii
 			heir_culture = thamvoii
-			heir_culture = oronoii
+			heir_culture = oonoi
 			#Veykodan
 			heir_culture = veykodan
 			#Degenerated
@@ -3042,6 +3125,7 @@ heir_is_ruinborn = {
 			heir_culture = seedthrall
 			heir_culture = berrirghe
 			heir_culture = mteirghe
+			heir_culture = macamairghe
 		}
 	}
 }
@@ -3257,7 +3341,7 @@ culture_is_short_lived = {
 		culture_group = kelino
 		culture_group = yanglam
 		culture_group = yan
-		culture_group = odheongun
+		culture_group = gowon
 		culture_group = khantaar
 		culture_group = besholgi
 		culture_group = khudi
@@ -3269,7 +3353,6 @@ culture_is_short_lived = {
 		culture_group = vurebindu
 		culture_group = west_sarhaly
 		culture_group = akasi
-
 		#ACE
 		culture_group = wexorenti
 	}
@@ -3355,9 +3438,9 @@ culture_is_half_elven = {
 		culture = bulwari_half_elf
 		culture = bom_half_elf
 		culture = kai_half_elf
-		culture = kelino_half_elf
+		culture = jahe_half_elf
+		culture = jahe_half_elf_cannorianise
 		#this should contain half elves of other culture groups?
-
 		#ACE
 		culture = parian
 	}
@@ -3366,6 +3449,7 @@ culture_is_half_elven = {
 culture_is_half_orcish = {
 	OR = {
 		culture = half_orc
+		culture = ungulan_half_orc
 		culture = grombar_half_orc
 		culture = chippengarder_half_orc
 		culture = wuhyun_half_orc
@@ -3408,7 +3492,7 @@ culture_is_human = {
 			culture_group = kelino
 			culture_group = yanglam
 			culture_group = yan
-			culture_group = odheongun
+			culture_group = gowon
 			culture_group = khantaar
 			culture_group = besholgi
 			culture_group = wuhyun
@@ -3420,7 +3504,6 @@ culture_is_human = {
 			culture_group = vurebindu
 			culture_group = khudi
 			culture_group = tyvorkan
-
 			#ACE
 			culture_group = wexorenti
 		}
@@ -3587,6 +3670,7 @@ has_elven_advisor = {
 			employed_advisor = { culture = dawn_elf }
 			employed_advisor = { culture = horizon_elf }
 			employed_advisor = { culture = wood_elf }
+			employed_advisor = { culture = eclipse_elf }
 			employed_advisor = { culture = sea_elf }
 			employed_advisor = { culture = sunrise_elf }
 			employed_advisor = { culture = sunset_elf }
@@ -3605,6 +3689,7 @@ has_elven_advisor_of_category = {
 			employed_advisor = { category = $category$ culture = dawn_elf }
 			employed_advisor = { category = $category$ culture = horizon_elf }
 			employed_advisor = { category = $category$ culture = wood_elf }
+			employed_advisor = { category = $category$ culture = eclipse_elf }
 			employed_advisor = { category = $category$ culture = sea_elf }
 			employed_advisor = { category = $category$ culture = sunrise_elf }
 			employed_advisor = { category = $category$ culture = sunset_elf }
@@ -3627,6 +3712,7 @@ has_gnollish_advisor = {
 			employed_advisor = { culture = dovesworn_gnoll }
 			employed_advisor = { culture = suncrown_gnoll }
 			employed_advisor = { culture = sorrowmane_gnoll }
+			employed_advisor = { culture = khetfeaster_gnoll }
 		}
 	}
 }
@@ -3646,6 +3732,7 @@ has_gnollish_advisor_of_category = {
 			employed_advisor = { category = $category$ culture = dovesworn_gnoll }
 			employed_advisor = { category = $category$ culture = suncrown_gnoll }
 			employed_advisor = { category = $category$ culture = sorrowmane_gnoll }
+			employed_advisor = { category = $category$ culture = khetfeaster_gnoll }
 		}
 	}
 }
@@ -3723,10 +3810,10 @@ has_half_elven_advisor = {
 			employed_advisor = { culture = bulwari_half_elf }
 			employed_advisor = { culture = bom_half_elf }
 			employed_advisor = { culture = kai_half_elf }
-			employed_advisor = { culture = kelino_half_elf }
-
 			#ACE
 			employed_advisor = { culture = parian }
+			employed_advisor = { culture = jahe_half_elf }
+			employed_advisor = { culture = jahe_half_elf_cannorianise }
 		}
 	}
 }
@@ -3744,10 +3831,11 @@ has_half_elven_advisor_of_category = {
 			employed_advisor = { category = $category$ culture = bulwari_half_elf }
 			employed_advisor = { category = $category$ culture = bom_half_elf }
 			employed_advisor = { category = $category$ culture = kai_half_elf }
-			employed_advisor = { category = $category$ culture = kelino_half_elf }
 
 			#ACE
 			employed_advisor = { culture = parian }
+			employed_advisor = { category = $category$ culture = jahe_half_elf }
+			employed_advisor = { category = $category$ culture = jahe_half_elf_cannorianise }
 		}
 	}
 }
@@ -3757,6 +3845,7 @@ has_half_orcish_advisor = {
 		tooltip = has_half_orcish_advisor_tt
 		OR = {
 			employed_advisor = { culture = half_orc }
+			employed_advisor = { culture = ungulan_half_orc }
 			employed_advisor = { culture = grombar_half_orc }
 			employed_advisor = { culture = chippengarder_half_orc }
 			employed_advisor = { culture = wuhyun_half_orc }
@@ -3770,6 +3859,7 @@ has_half_orcish_advisor_of_category = {
 		tooltip = has_half_orcish_advisor_$category$_tt
 		OR = {
 			employed_advisor = { category = $category$ culture = half_orc }
+			employed_advisor = { category = $category$ culture = ungulan_half_orc }
 			employed_advisor = { category = $category$ culture = grombar_half_orc }
 			employed_advisor = { category = $category$ culture = chippengarder_half_orc }
 			employed_advisor = { category = $category$ culture = wuhyun_half_orc }
@@ -3789,6 +3879,7 @@ has_halfling_advisor = {
 			employed_advisor = { culture = visfoot_halfling }
 			employed_advisor = { culture = towerfoot_halfling }
 			employed_advisor = { culture = pipefoot_halfling }
+			employed_advisor = { culture = creekfoot_halfling }
 			employed_advisor = { culture = amezatany }
 			employed_advisor = { culture = mboala }
 			employed_advisor = { culture = mazava }
@@ -3810,6 +3901,7 @@ has_halfling_advisor_of_category = {
 			employed_advisor = { category = $category$ culture = visfoot_halfling }
 			employed_advisor = { category = $category$ culture = towerfoot_halfling }
 			employed_advisor = { category = $category$ culture = pipefoot_halfling }
+			employed_advisor = { category = $category$ culture = creekfoot_halfling }
 			employed_advisor = { category = $category$ culture = amezatany }
 			employed_advisor = { category = $category$ culture = mboala }
 			employed_advisor = { category = $category$ culture = mazava }
@@ -3856,6 +3948,7 @@ has_harpy_advisor = {
 		OR = {
 			employed_advisor = { culture = firanyan_harpy }
 			employed_advisor = { culture = siadunan_harpy }
+			employed_advisor = { culture = stonewing_harpy }
 			employed_advisor = { culture = pezarangi_harpy }
 			employed_advisor = { culture = reishao_harpy }
 			employed_advisor = { culture = naleni_harpy }
@@ -3873,6 +3966,7 @@ has_harpy_advisor_of_category = {
 		OR = {
 			employed_advisor = { category = $category$ culture = firanyan_harpy }
 			employed_advisor = { category = $category$ culture = siadunan_harpy }
+			employed_advisor = { category = $category$ culture = stonewing_harpy }
 			employed_advisor = { category = $category$ culture = pezarangi_harpy }
 			employed_advisor = { category = $category$ culture = reishao_harpy }
 			employed_advisor = { category = $category$ culture = naleni_harpy }
@@ -3993,9 +4087,11 @@ has_human_advisor = {
 			employed_advisor = { culture = tijarikheti }
 			employed_advisor = { culture = irsmahapan }
 			employed_advisor = { culture = horakheti }
+			employed_advisor = { culture = asbaiwix }
 			employed_advisor = { culture = desha }
 			employed_advisor = { culture = far_akasi }
 			employed_advisor = { culture = khasani }
+			employed_advisor = { culture = enigrax }
 			employed_advisor = { culture = high_lorentish }
 			employed_advisor = { culture = low_lorentish }
 			employed_advisor = { culture = derannic }
@@ -4007,6 +4103,7 @@ has_human_advisor = {
 			employed_advisor = { culture = thornish }
 			employed_advisor = { culture = criodhi }
 			employed_advisor = { culture = arbcoster }
+			employed_advisor = { culture = cromorri }
 			employed_advisor = { culture = blue_reachman_r }
 			employed_advisor = { culture = white_reachman_r }
 			employed_advisor = { culture = moorman_r }
@@ -4097,12 +4194,14 @@ has_human_advisor = {
 			employed_advisor = { culture = shuokyuan }
 			employed_advisor = { culture = luoxian }
 			employed_advisor = { culture = naamzau }
-			employed_advisor = { culture = menjeotaen }
-			employed_advisor = { culture = sangsogha }
+			employed_advisor = { culture = giteuni }
+			employed_advisor = { culture = wonju }
+			employed_advisor = { culture = dudimkkun }
 			employed_advisor = { culture = guwaadun }
 			employed_advisor = { culture = shuvuush }
 			employed_advisor = { culture = runsukhi }
 			employed_advisor = { culture = plateau_runsukhi }
+			employed_advisor = { culture = kuuldaar }
 			employed_advisor = { culture = oinukhudi }
 			employed_advisor = { culture = anarkhudi }
 			employed_advisor = { culture = tuugalak }
@@ -4148,7 +4247,6 @@ has_human_advisor = {
 			employed_advisor = { culture = wakoodak }
 			employed_advisor = { culture = taric }
 			employed_advisor = { culture = cagodic }
-
 			#ACE
 			employed_advisor = { culture = morbani }
 			employed_advisor = { culture = divenori }
@@ -4160,6 +4258,9 @@ has_human_advisor = {
 
 			employed_advisor = { culture = wexonard_dual }
 			employed_advisor = { culture = high_lorentish_dual }
+			employed_advisor = { culture = skamvin }
+			employed_advisor = { culture = taric_gerudian }
+			employed_advisor = { culture = gerudian_reachman }
 		}
 	}
 }
@@ -4239,9 +4340,11 @@ has_human_advisor_of_category = {
 			employed_advisor = { category = $category$ culture = tijarikheti }
 			employed_advisor = { category = $category$ culture = irsmahapan }
 			employed_advisor = { category = $category$ culture = horakheti }
+			employed_advisor = { category = $category$ culture = asbaiwix }
 			employed_advisor = { category = $category$ culture = desha }
 			employed_advisor = { category = $category$ culture = far_akasi }
 			employed_advisor = { category = $category$ culture = khasani }
+			employed_advisor = { category = $category$ culture = enigrax }
 			employed_advisor = { category = $category$ culture = high_lorentish }
 			employed_advisor = { category = $category$ culture = low_lorentish }
 			employed_advisor = { category = $category$ culture = derannic }
@@ -4253,6 +4356,7 @@ has_human_advisor_of_category = {
 			employed_advisor = { category = $category$ culture = thornish }
 			employed_advisor = { category = $category$ culture = criodhi }
 			employed_advisor = { category = $category$ culture = arbcoster }
+			employed_advisor = { category = $category$ culture = cromorri }
 			employed_advisor = { category = $category$ culture = blue_reachman_r }
 			employed_advisor = { category = $category$ culture = white_reachman_r }
 			employed_advisor = { category = $category$ culture = moorman_r }
@@ -4343,12 +4447,14 @@ has_human_advisor_of_category = {
 			employed_advisor = { category = $category$ culture = shuokyuan }
 			employed_advisor = { category = $category$ culture = luoxian }
 			employed_advisor = { category = $category$ culture = naamzau }
-			employed_advisor = { category = $category$ culture = menjeotaen }
-			employed_advisor = { category = $category$ culture = sangsogha }
+			employed_advisor = { category = $category$ culture = giteuni }
+			employed_advisor = { category = $category$ culture = wonju }
+			employed_advisor = { category = $category$ culture = dudimkkun }
 			employed_advisor = { category = $category$ culture = guwaadun }
 			employed_advisor = { category = $category$ culture = shuvuush }
 			employed_advisor = { category = $category$ culture = runsukhi }
 			employed_advisor = { category = $category$ culture = plateau_runsukhi }
+			employed_advisor = { category = $category$ culture = kuuldaar }
 			employed_advisor = { category = $category$ culture = anarkhudi }
 			employed_advisor = { category = $category$ culture = oinukhudi }
 			employed_advisor = { category = $category$ culture = tuugalak }
@@ -4394,7 +4500,6 @@ has_human_advisor_of_category = {
 			employed_advisor = { category = $category$ culture = wakoodak }
 			employed_advisor = { category = $category$ culture = taric }
 			employed_advisor = { category = $category$ culture = cagodic }
-
 			#ACE
 			employed_advisor = { category = $category$ culture = morbani }
 			employed_advisor = { category = $category$ culture = divenori }
@@ -4406,6 +4511,9 @@ has_human_advisor_of_category = {
 
 			employed_advisor = { category = $category$ culture = wexonard_dual }
 			employed_advisor = { category = $category$ culture = high_lorentish_dual }
+			employed_advisor = { category = $category$ culture = skamvin }
+			employed_advisor = { category = $category$ culture = taric_gerudian }
+			employed_advisor = { category = $category$ culture = gerudian_reachman }
 		}
 	}
 }
@@ -4423,9 +4531,10 @@ has_kobold_advisor = {
 			employed_advisor = { culture = dragonfire_kobold }
 			employed_advisor = { culture = steelscale_kobold }
 			employed_advisor = { culture = vrendzani_kobold }
-
 			#ACE
 			employed_advisor = { culture = magmascale_kobold }
+			employed_advisor = { culture = dragonmask_kobold }
+			employed_advisor = { culture = whitescale_kobold }
 		}
 	}
 }
@@ -4446,6 +4555,8 @@ has_kobold_advisor_of_category = {
 
 			#ACE
 			employed_advisor = { category = $category$ culture = magmascale_kobold }
+			employed_advisor = { category = $category$ culture = dragonmask_kobold }
+			employed_advisor = { category = $category$ culture = whitescale_kobold }
 		}
 	}
 }
@@ -4466,6 +4577,11 @@ has_lizardfolk_advisor = {
 			employed_advisor = { culture = adzalanas_lizardfolk }
 			employed_advisor = { culture = itayzemby_lizardfolk } 
 			employed_advisor = { culture = cyazizeta_lizardfolk }
+			employed_advisor = { culture = irikin_lizardfolk }
+			employed_advisor = { culture = draktaya_lizardfolk }
+			employed_advisor = { culture = hishakaya_lizardfolk }
+			employed_advisor = { culture = shyashkay_lizardfolk }
+			employed_advisor = { culture = ahzdara_lizardfolk }
 		}
 	}
 }
@@ -4486,6 +4602,11 @@ has_lizardfolk_advisor_of_category = {
 			employed_advisor = { category = $category$ culture = adzalanas_lizardfolk }
 			employed_advisor = { category = $category$ culture = itayzemby_lizardfolk } 
 			employed_advisor = { category = $category$ culture = cyazizeta_lizardfolk }
+			employed_advisor = { category = $category$ culture = irikin_lizardfolk }
+			employed_advisor = { category = $category$ culture = draktaya_lizardfolk }
+			employed_advisor = { category = $category$ culture = hishakaya_lizardfolk }
+			employed_advisor = { category = $category$ culture = shyashkay_lizardfolk }
+			employed_advisor = { category = $category$ culture = ahzdara_lizardfolk }
 		}
 	}
 }
@@ -4517,6 +4638,7 @@ has_ogre_advisor = {
 			employed_advisor = { culture = bloodtooth_ogre }
 			employed_advisor = { culture = horned_ogre }
 			employed_advisor = { culture = soulseeker_ogre }
+			employed_advisor = { culture = dunesole_ogre }
 		}
 	}
 }
@@ -4530,6 +4652,7 @@ has_ogre_advisor_of_category = {
 			employed_advisor = { category = $category$ culture = bloodtooth_ogre }
 			employed_advisor = { category = $category$ culture = horned_ogre }
 			employed_advisor = { category = $category$ culture = soulseeker_ogre }
+			employed_advisor = { category = $category$ culture = dunesole_ogre }
 		}
 	}
 }
@@ -4622,6 +4745,7 @@ has_ruinborn_advisor = {
 			employed_advisor = { culture = kalavendhi }
 			employed_advisor = { culture = thekvrystana }
 			employed_advisor = { culture = bekauta }
+			employed_advisor = { culture = vaikazelhi }
 			employed_advisor = { culture = degabhen }
 			employed_advisor = { culture = oktibhen }
 			employed_advisor = { culture = kherkabhen }
@@ -4661,7 +4785,7 @@ has_ruinborn_advisor = {
 			employed_advisor = { culture = effe }
 			employed_advisor = { culture = laii }
 			employed_advisor = { culture = thamvoii }
-			employed_advisor = { culture = oronoii }
+			employed_advisor = { culture = oonoi }
 			employed_advisor = { culture = veykodan }
 			employed_advisor = { culture = leechmen }
 			employed_advisor = { culture = bloodfeeders }
@@ -4671,6 +4795,7 @@ has_ruinborn_advisor = {
 			employed_advisor = { culture = seedthrall }
 			employed_advisor = { culture = berrirghe }
 			employed_advisor = { culture = mteirghe }
+			employed_advisor = { culture = macamairghe }
 		}
 	}
 }
@@ -4705,6 +4830,7 @@ has_ruinborn_advisor_of_category = {
 			employed_advisor = { category = $category$ culture = kalavendhi }
 			employed_advisor = { category = $category$ culture = thekvrystana }
 			employed_advisor = { category = $category$ culture = bekauta }
+			employed_advisor = { category = $category$ culture = vaikazelhi }
 			employed_advisor = { category = $category$ culture = degabhen }
 			employed_advisor = { category = $category$ culture = oktibhen }
 			employed_advisor = { category = $category$ culture = kherkabhen }
@@ -4744,7 +4870,7 @@ has_ruinborn_advisor_of_category = {
 			employed_advisor = { category = $category$ culture = effe }
 			employed_advisor = { category = $category$ culture = laii }
 			employed_advisor = { category = $category$ culture = thamvoii }
-			employed_advisor = { category = $category$ culture = oronoii }
+			employed_advisor = { category = $category$ culture = oonoi }
 			employed_advisor = { category = $category$ culture = veykodan }
 			employed_advisor = { category = $category$ culture = leechmen }
 			employed_advisor = { category = $category$ culture = bloodfeeders }
@@ -4754,6 +4880,179 @@ has_ruinborn_advisor_of_category = {
 			employed_advisor = { category = $category$ culture = seedthrall }
 			employed_advisor = { category = $category$ culture = berrirghe }
 			employed_advisor = { category = $category$ culture = mteirghe }
+			employed_advisor = { category = $category$ culture = macamairghe }
+		}
+	}
+}
+
+has_ruinborn_advisor_of_skill_category = {
+	# category = ADM | DIP | MIL, all in uppercase skill = 1-5
+	custom_trigger_tooltip = {
+		tooltip = has_ruinborn_advisor_$category$_$skill$_tt
+		OR = {
+			employed_advisor = { category = $category$ skill = $skill$  culture = boek }
+			employed_advisor = { category = $category$ skill = $skill$  culture = kwineh }
+			employed_advisor = { category = $category$ skill = $skill$  culture = cheshoshi }
+			employed_advisor = { category = $category$ skill = $skill$  culture = duskers }
+			employed_advisor = { category = $category$ skill = $skill$  culture = starborn }
+			employed_advisor = { category = $category$ skill = $skill$  culture = teira }
+			employed_advisor = { category = $category$ skill = $skill$  culture = soruinic }
+			employed_advisor = { category = $category$ skill = $skill$  culture = rzentur }
+			employed_advisor = { category = $category$ skill = $skill$  culture = old_rzentur }
+			employed_advisor = { category = $category$ skill = $skill$  culture = dolindhan }
+			employed_advisor = { category = $category$ skill = $skill$  culture = sarda }
+			employed_advisor = { category = $category$ skill = $skill$  culture = malacnari }
+			employed_advisor = { category = $category$ skill = $skill$  culture = brelari }
+			employed_advisor = { category = $category$ skill = $skill$  culture = selphereg }
+			employed_advisor = { category = $category$ skill = $skill$  culture = caamas }
+			employed_advisor = { category = $category$ skill = $skill$  culture = peitar }
+			employed_advisor = { category = $category$ skill = $skill$  culture = tuathak }
+			employed_advisor = { category = $category$ skill = $skill$  culture = snecboth }
+			employed_advisor = { category = $category$ skill = $skill$  culture = fograc }
+			employed_advisor = { category = $category$ skill = $skill$  culture = larankarha }
+			employed_advisor = { category = $category$ skill = $skill$  culture = advakhalla }
+			employed_advisor = { category = $category$ skill = $skill$  culture = sarihaddi }
+			employed_advisor = { category = $category$ skill = $skill$  culture = yodhanpir }
+			employed_advisor = { category = $category$ skill = $skill$  culture = kalavendhi }
+			employed_advisor = { category = $category$ skill = $skill$  culture = thekvrystana }
+			employed_advisor = { category = $category$ skill = $skill$  culture = bekauta }
+			employed_advisor = { category = $category$ skill = $skill$  culture = vaikazelhi }
+			employed_advisor = { category = $category$ skill = $skill$  culture = degabhen }
+			employed_advisor = { category = $category$ skill = $skill$  culture = oktibhen }
+			employed_advisor = { category = $category$ skill = $skill$  culture = kherkabhen }
+			employed_advisor = { category = $category$ skill = $skill$  culture = lokebhen }
+			employed_advisor = { category = $category$ skill = $skill$  culture = ormabhen }
+			employed_advisor = { category = $category$ skill = $skill$  culture = arpebhen }
+			employed_advisor = { category = $category$ skill = $skill$  culture = ambhen }
+			employed_advisor = { category = $category$ skill = $skill$  culture = kimabhen }
+			employed_advisor = { category = $category$ skill = $skill$  culture = empkhebhen }
+			employed_advisor = { category = $category$ skill = $skill$  culture = besolabhen }
+			employed_advisor = { category = $category$ skill = $skill$  culture = enebhen }
+			employed_advisor = { category = $category$ skill = $skill$  culture = deyebhen }
+			employed_advisor = { category = $category$ skill = $skill$  culture = apikhobhen }
+			employed_advisor = { category = $category$ skill = $skill$  culture = keyobhen }
+			employed_advisor = { category = $category$ skill = $skill$  culture = anisibhen }
+			employed_advisor = { category = $category$ skill = $skill$  culture = amgrebhen }
+			employed_advisor = { category = $category$ skill = $skill$  culture = eltibhen }
+			employed_advisor = { category = $category$ skill = $skill$  culture = klereyen }
+			employed_advisor = { category = $category$ skill = $skill$  culture = astolbhen }
+			employed_advisor = { category = $category$ skill = $skill$  culture = eltibhar }
+			employed_advisor = { category = $category$ skill = $skill$  culture = harafe }
+			employed_advisor = { category = $category$ skill = $skill$  culture = kooras }
+			employed_advisor = { category = $category$ skill = $skill$  culture = mayte }
+			employed_advisor = { category = $category$ skill = $skill$  culture = epednar }
+			employed_advisor = { category = $category$ skill = $skill$  culture = chiunife }
+			employed_advisor = { category = $category$ skill = $skill$  culture = quchamar }
+			employed_advisor = { category = $category$ skill = $skill$  culture = chaqanel }
+			employed_advisor = { category = $category$ skill = $skill$  culture = quruwei }
+			employed_advisor = { category = $category$ skill = $skill$  culture = chamullach }
+			employed_advisor = { category = $category$ skill = $skill$  culture = banche }
+			employed_advisor = { category = $category$ skill = $skill$  culture = faalte }
+			employed_advisor = { category = $category$ skill = $skill$  culture = mteibhar }
+			employed_advisor = { category = $category$ skill = $skill$  culture = basobhar }
+			employed_advisor = { category = $category$ skill = $skill$  culture = chendhyan }
+			employed_advisor = { category = $category$ skill = $skill$  culture = duguihi }
+			employed_advisor = { category = $category$ skill = $skill$  culture = parura }
+			employed_advisor = { category = $category$ skill = $skill$  culture = effe }
+			employed_advisor = { category = $category$ skill = $skill$  culture = laii }
+			employed_advisor = { category = $category$ skill = $skill$  culture = thamvoii }
+			employed_advisor = { category = $category$ skill = $skill$  culture = oonoi }
+			employed_advisor = { category = $category$ skill = $skill$  culture = veykodan }
+			employed_advisor = { category = $category$ skill = $skill$  culture = leechmen }
+			employed_advisor = { category = $category$ skill = $skill$  culture = bloodfeeders }
+			employed_advisor = { category = $category$ skill = $skill$  culture = silent_watchers }
+			employed_advisor = { category = $category$ skill = $skill$  culture = cursed_ones }
+			employed_advisor = { category = $category$ skill = $skill$  culture = ice_sleepers }
+			employed_advisor = { category = $category$ skill = $skill$  culture = seedthrall }
+			employed_advisor = { category = $category$ skill = $skill$  culture = berrirghe }
+			employed_advisor = { category = $category$ skill = $skill$  culture = mteirghe }
+			employed_advisor = { category = $category$ skill = $skill$  culture = macamairghe }
+		}
+	}
+}
+
+has_ruinborn_advisor_of_skill = {
+	# Skill = 1-5
+	custom_trigger_tooltip = {
+		tooltip = has_ruinborn_advisor_$skill$_tt
+		OR = {
+			employed_advisor = { skill = $skill$  culture = boek }
+			employed_advisor = { skill = $skill$  culture = kwineh }
+			employed_advisor = { skill = $skill$  culture = cheshoshi }
+			employed_advisor = { skill = $skill$  culture = duskers }
+			employed_advisor = { skill = $skill$  culture = starborn }
+			employed_advisor = { skill = $skill$  culture = teira }
+			employed_advisor = { skill = $skill$  culture = soruinic }
+			employed_advisor = { skill = $skill$  culture = rzentur }
+			employed_advisor = { skill = $skill$  culture = old_rzentur }
+			employed_advisor = { skill = $skill$  culture = dolindhan }
+			employed_advisor = { skill = $skill$  culture = sarda }
+			employed_advisor = { skill = $skill$  culture = malacnari }
+			employed_advisor = { skill = $skill$  culture = brelari }
+			employed_advisor = { skill = $skill$  culture = selphereg }
+			employed_advisor = { skill = $skill$  culture = caamas }
+			employed_advisor = { skill = $skill$  culture = peitar }
+			employed_advisor = { skill = $skill$  culture = tuathak }
+			employed_advisor = { skill = $skill$  culture = snecboth }
+			employed_advisor = { skill = $skill$  culture = fograc }
+			employed_advisor = { skill = $skill$  culture = larankarha }
+			employed_advisor = { skill = $skill$  culture = advakhalla }
+			employed_advisor = { skill = $skill$  culture = sarihaddi }
+			employed_advisor = { skill = $skill$  culture = yodhanpir }
+			employed_advisor = { skill = $skill$  culture = kalavendhi }
+			employed_advisor = { skill = $skill$  culture = thekvrystana }
+			employed_advisor = { skill = $skill$  culture = bekauta }
+			employed_advisor = { skill = $skill$  culture = vaikazelhi }
+			employed_advisor = { skill = $skill$  culture = degabhen }
+			employed_advisor = { skill = $skill$  culture = oktibhen }
+			employed_advisor = { skill = $skill$  culture = kherkabhen }
+			employed_advisor = { skill = $skill$  culture = lokebhen }
+			employed_advisor = { skill = $skill$  culture = ormabhen }
+			employed_advisor = { skill = $skill$  culture = arpebhen }
+			employed_advisor = { skill = $skill$  culture = ambhen }
+			employed_advisor = { skill = $skill$  culture = kimabhen }
+			employed_advisor = { skill = $skill$  culture = empkhebhen }
+			employed_advisor = { skill = $skill$  culture = besolabhen }
+			employed_advisor = { skill = $skill$  culture = enebhen }
+			employed_advisor = { skill = $skill$  culture = deyebhen }
+			employed_advisor = { skill = $skill$  culture = apikhobhen }
+			employed_advisor = { skill = $skill$  culture = keyobhen }
+			employed_advisor = { skill = $skill$  culture = anisibhen }
+			employed_advisor = { skill = $skill$  culture = amgrebhen }
+			employed_advisor = { skill = $skill$  culture = eltibhen }
+			employed_advisor = { skill = $skill$  culture = klereyen }
+			employed_advisor = { skill = $skill$  culture = astolbhen }
+			employed_advisor = { skill = $skill$  culture = eltibhar }
+			employed_advisor = { skill = $skill$  culture = harafe }
+			employed_advisor = { skill = $skill$  culture = kooras }
+			employed_advisor = { skill = $skill$  culture = mayte }
+			employed_advisor = { skill = $skill$  culture = epednar }
+			employed_advisor = { skill = $skill$  culture = chiunife }
+			employed_advisor = { skill = $skill$  culture = quchamar }
+			employed_advisor = { skill = $skill$  culture = chaqanel }
+			employed_advisor = { skill = $skill$  culture = quruwei }
+			employed_advisor = { skill = $skill$  culture = chamullach }
+			employed_advisor = { skill = $skill$  culture = banche }
+			employed_advisor = { skill = $skill$  culture = faalte }
+			employed_advisor = { skill = $skill$  culture = mteibhar }
+			employed_advisor = { skill = $skill$  culture = basobhar }
+			employed_advisor = { skill = $skill$  culture = chendhyan }
+			employed_advisor = { skill = $skill$  culture = duguihi }
+			employed_advisor = { skill = $skill$  culture = parura }
+			employed_advisor = { skill = $skill$  culture = effe }
+			employed_advisor = { skill = $skill$  culture = laii }
+			employed_advisor = { skill = $skill$  culture = thamvoii }
+			employed_advisor = { skill = $skill$  culture = oonoi }
+			employed_advisor = { skill = $skill$  culture = veykodan }
+			employed_advisor = { skill = $skill$  culture = leechmen }
+			employed_advisor = { skill = $skill$  culture = bloodfeeders }
+			employed_advisor = { skill = $skill$  culture = silent_watchers }
+			employed_advisor = { skill = $skill$  culture = cursed_ones }
+			employed_advisor = { skill = $skill$  culture = ice_sleepers }
+			employed_advisor = { skill = $skill$  culture = seedthrall }
+			employed_advisor = { skill = $skill$  culture = berrirghe }
+			employed_advisor = { skill = $skill$  culture = mteirghe }
+			employed_advisor = { skill = $skill$  culture = macamairghe }
 		}
 	}
 }
@@ -4864,10 +5163,12 @@ has_human_accepted_culture = {
 		accepted_culture = tijarikheti
 		accepted_culture = irsmahapan
 		accepted_culture = horakheti
+		accepted_culture = asbaiwix
 		#Akasi
 		accepted_culture = desha
 		accepted_culture = far_akasi
 		accepted_culture = khasani
+		accepted_culture = enigrax
 		#Lencori
 		accepted_culture = high_lorentish
 		accepted_culture = low_lorentish
@@ -4880,7 +5181,7 @@ has_human_accepted_culture = {
 		accepted_culture = thornish
 		accepted_culture = criodhi
 		accepted_culture = arbcoster
-		accepted_culture = tretunic
+		accepted_culture = cromorri
 		#Reachman
 		accepted_culture = blue_reachman_r
 		accepted_culture = white_reachman_r
@@ -4895,6 +5196,9 @@ has_human_accepted_culture = {
 		accepted_culture = talderannic
 		accepted_culture = perlatter
 		accepted_culture = elnarfolk
+		accepted_culture = skamvin
+		accepted_culture = gerudian_reachman
+		accepted_culture = taric_gerudian
 		#Bulwari
 		accepted_culture = bahari
 		accepted_culture = gelkar
@@ -4986,14 +5290,16 @@ has_human_accepted_culture = {
 		accepted_culture = shuokyuan
 		accepted_culture = luoxian
 		accepted_culture = naamzau
-		#Odheongun
-		accepted_culture = menjeotaen
-		accepted_culture = sangsogha
+		#Gowon
+		accepted_culture = giteuni
+		accepted_culture = wonju
 		accepted_culture = guwaadun
+		accepted_culture = dudimkkun
 		#Shuvuush
 		accepted_culture = shuvuush
 		accepted_culture = runsukhi
 		accepted_culture = plateau_runsukhi
+		accepted_culture = kuuldaar
 		#Khudi
 		accepted_culture = oinukhudi
 		accepted_culture = anarkhudi
@@ -5067,7 +5373,6 @@ has_human_accepted_culture = {
 
 		accepted_culture = wexonard_dual
 		accepted_culture = high_lorentish_dual
-
 		# Break in case of emergency!
 		# accepted_culture = nurcestiran
 		# accepted_culture = nurcestiran
@@ -5109,6 +5414,7 @@ has_elven_accepted_culture = {
 		accepted_culture = dawn_elf
 		accepted_culture = horizon_elf
 		accepted_culture = wood_elf
+		accepted_culture = eclipse_elf
 		accepted_culture = sea_elf
 		accepted_culture = sunrise_elf
 		accepted_culture = sunset_elf
@@ -5193,6 +5499,7 @@ has_halfling_accepted_culture = {
 		accepted_culture = visfoot_halfling
 		accepted_culture = towerfoot_halfling
 		accepted_culture = pipefoot_halfling
+		accepted_culture = creekfoot_halfling
 		accepted_culture = amezatany
 		accepted_culture = mboala
 		accepted_culture = mazava
@@ -5225,16 +5532,17 @@ has_half_elven_accepted_culture = {
 		accepted_culture = bulwari_half_elf
 		accepted_culture = bom_half_elf
 		accepted_culture = kai_half_elf
-		accepted_culture = kelino_half_elf
-
 		#ACE
 		employed_advisor = { culture = parian }
+		accepted_culture = jahe_half_elf
+		accepted_culture = jahe_half_elf_cannorianise
 	}
 }
 
 has_half_orcish_accepted_culture = {
 	OR = {
 		accepted_culture = half_orc
+		accepted_culture = ungulan_half_orc
 		accepted_culture = grombar_half_orc
 		accepted_culture = chippengarder_half_orc
 		accepted_culture = wuhyun_half_orc
@@ -5271,9 +5579,10 @@ has_kobold_accepted_culture = {
 		accepted_culture = dragonfire_kobold
 		accepted_culture = steelscale_kobold
 		accepted_culture = vrendzani_kobold
-
 		#ACE
 		accepted_culture = magmascale_kobold
+		accepted_culture = dragonmask_kobold
+		accepted_culture = whitescale_kobold
 	}
 }
 
@@ -5291,6 +5600,11 @@ has_lizardfolk_accepted_culture = {
 		accepted_culture = adzalanas_lizardfolk
 		accepted_culture = itayzemby_lizardfolk
 		accepted_culture = cyazizeta_lizardfolk
+		accepted_culture = irikin_lizardfolk
+		accepted_culture = draktaya_lizardfolk
+		accepted_culture = hishakaya_lizardfolk
+		accepted_culture = shyashkay_lizardfolk
+		accepted_culture = ahzdara_lizardfolk
 	}
 }
 
@@ -5314,6 +5628,7 @@ has_harpy_accepted_culture = {
 	OR = {
 		accepted_culture = firanyan_harpy
 		accepted_culture = siadunan_harpy
+		accepted_culture = stonewing_harpy
 		accepted_culture = pezarangi_harpy
 		accepted_culture = reishao_harpy
 		accepted_culture = naleni_harpy
@@ -5358,6 +5673,7 @@ has_ruinborn_accepted_culture = {
 		accepted_culture = kalavendhi
 		accepted_culture = thekvrystana
 		accepted_culture = bekauta
+		accepted_culture = vaikazelhi
 		#Kheionai
 		accepted_culture = degabhen
 		accepted_culture = oktibhen
@@ -5382,6 +5698,7 @@ has_ruinborn_accepted_culture = {
 		accepted_culture = eltibhar
 		accepted_culture = berrirghe
 		accepted_culture = mteirghe
+		accepted_culture = macamairghe
 		#Harafic
 		accepted_culture = harafe
 		accepted_culture = kooras
@@ -5405,7 +5722,7 @@ has_ruinborn_accepted_culture = {
 		accepted_culture = effe
 		accepted_culture = laii
 		accepted_culture = thamvoii
-		accepted_culture = oronoii
+		accepted_culture = oonoi
 		#Degenerated
 		accepted_culture = leechmen
 		accepted_culture = bloodfeeders
@@ -5463,6 +5780,7 @@ has_taychendi_ruinborn_accepted_culture = {
 		accepted_culture = kalavendhi
 		accepted_culture = thekvrystana
 		accepted_culture = bekauta
+		accepted_culture = vaikazelhi
 	}
 }
 
@@ -5495,6 +5813,7 @@ has_elthibari_ruinborn_accepted_culture = {
 		accepted_culture = eltibhar
 		accepted_culture = berrirghe
 		accepted_culture = mteirghe
+		accepted_culture = macamairghe
 	}
 }
 
@@ -5536,7 +5855,7 @@ has_effelai_ruinborn_accepted_culture = {
 		accepted_culture = effe
 		accepted_culture = laii
 		accepted_culture = thamvoii
-		accepted_culture = oronoii
+		accepted_culture = oonoi
 	}
 }
 
@@ -5565,6 +5884,7 @@ has_gnollish_accepted_culture = {
 		accepted_culture = dovesworn_gnoll
 		accepted_culture = suncrown_gnoll
 		accepted_culture = sorrowmane_gnoll
+		accepted_culture = khetfeaster_gnoll
 	}
 }
 
@@ -5614,6 +5934,7 @@ has_ogre_accepted_culture = {
 		accepted_culture = bloodtooth_ogre
 		accepted_culture = horned_ogre
 		accepted_culture = soulseeker_ogre
+		accepted_culture = dunesole_ogre
 	}
 }
 
@@ -10029,6 +10350,9 @@ is_chosen_country = {
 		OR = {
 			ruler_culture = sun_elf
 			ruler_culture = dawn_elf
+			#Bypass cause they can elect ruinborns
+			tag = H66 #Jaherian Exemplars
+			tag = H67 #Rezankand
 		}
 		OR = {
 			primary_culture = sun_elf
@@ -10212,16 +10536,6 @@ is_not_expelling_any_race_trigger = {
 			has_country_modifier = racial_pop_harpy_expulsion
 			has_country_modifier = racial_pop_troll_expulsion
 			has_country_modifier = racial_pop_ogre_expulsion
-		}
-	}
-}
-
-is_not_purging_or_expelling_race_trigger = {
-	custom_trigger_tooltip = {
-		tooltip = is_not_purging_or_expelling_$race$_tt
-		NOT = {
-			has_country_modifier = racial_pop_$race$_expulsion
-			has_country_modifier = racial_pop_$race$_purge
 		}
 	}
 }
@@ -10653,7 +10967,7 @@ ruler_is_lencori_human = {
 			ruler_culture = roilsardi
 			ruler_culture = iochander
 			ruler_culture = carnetori
-			ruler_culture = tretunic
+			ruler_culture = cromorri
 		}
 	}
 }
@@ -10670,7 +10984,7 @@ consort_is_lencori_human = {
 			consort_culture = roilsardi
 			consort_culture = iochander
 			consort_culture = carnetori
-			consort_culture = tretunic
+			consort_culture = cromorri
 		}
 	}
 }
@@ -10783,7 +11097,6 @@ ruler_is_escanni_human = {
 			ruler_culture = esthili
 			ruler_culture = rosanda
 			ruler_culture = corintari
-			ruler_culture = farrani
 			ruler_culture = black_demesner
 		}
 	}
@@ -10815,7 +11128,6 @@ consort_is_escanni_human = {
 			consort_culture = esthili
 			consort_culture = rosanda
 			consort_culture = corintari
-			consort_culture = farrani
 			consort_culture = black_demesner
 		}
 	}
@@ -10969,6 +11281,7 @@ is_cannorian_halfling_primary_culture = {
 			primary_culture = visfoot_halfling
 			primary_culture = towerfoot_halfling
 			primary_culture = pipefoot_halfling
+			primary_culture = creekfoot_halfling
 		}
 	}
 }
@@ -10984,6 +11297,7 @@ is_cannorian_halfling_culture = {
 			culture = visfoot_halfling
 			culture = towerfoot_halfling
 			culture = pipefoot_halfling
+			culture = creekfoot_halfling
 		}
 	}
 }
@@ -11113,4 +11427,32 @@ has_high_tolerance_and_pop_with_all_races = {
 	fast_owns_num_pops_of_race = { race = orcish amount = 1 }
 	fast_owns_num_pops_of_race = { race = ruinborn amount = 1 }
 	fast_owns_num_pops_of_race = { race = troll amount = 1 }
+}
+has_num_minorities_in_province = {
+	custom_trigger_tooltip = {
+		tooltip = has_$num$_minorities_in_province_tt
+		calc_true_if = {
+			amount = $num$
+			has_dwarven_minority_trigger = yes
+			has_elven_minority_trigger = yes
+			has_halfling_minority_trigger = yes
+			has_gnomish_minority_trigger = yes
+			has_half_orcish_minority_trigger = yes
+			has_kobold_minority_trigger = yes
+			has_orcish_minority_trigger = yes
+			has_human_minority_trigger = yes
+			has_gnollish_minority_trigger = yes
+			has_ruinborn_minority_trigger = yes
+			has_goblin_minority_trigger = yes
+			has_harpy_minority_trigger = yes
+			has_troll_minority_trigger = yes
+			has_half_elven_minority_trigger = yes
+			has_ogre_minority_trigger = yes
+			has_harimari_minority_trigger = yes
+			has_centaur_minority_trigger = yes
+			has_hobgoblin_minority_trigger = yes
+			has_lizardfolk_minority_trigger = yes
+			has_mechanim_minority_trigger = yes
+		}
+	}
 }

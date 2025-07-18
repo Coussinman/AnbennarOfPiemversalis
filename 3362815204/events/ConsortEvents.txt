@@ -444,13 +444,18 @@ country_event = {
 	option = {
 		name = consort_events.3.b #Refuse
 		custom_tooltip = consort_events.3.b.tt
-		set_ruler_flag = refused_to_help_spouses_family
-		add_prestige = -10
-		random_owned_province = {
+		if = {
 			limit = {
-				has_province_modifier = domain_of_spouses_family
+				NOT = { has_country_flag = farranean_advisor_negatives_nullified }
 			}
-			add_local_autonomy = 25
+			set_ruler_flag = refused_to_help_spouses_family
+			add_prestige = -10
+			random_owned_province = {
+				limit = {
+					has_province_modifier = domain_of_spouses_family
+				}
+				add_local_autonomy = 25
+			}
 		}
 		clr_country_flag = develop_seat_province
 		clr_country_flag = pay_money
@@ -797,13 +802,18 @@ country_event = {
 	option = {
 		name = consort_events.5.b #Refuse
 		custom_tooltip = consort_events.5.b.tt
-		set_ruler_flag = refused_to_help_consort_regents_family
-		add_prestige = -10
-		random_owned_province = {
+		if = {
 			limit = {
-				has_province_modifier = domain_of_spouses_family
+				NOT = { has_country_flag = farranean_advisor_negatives_nullified }
 			}
-			add_local_autonomy = 35
+			set_ruler_flag = refused_to_help_consort_regents_family
+			add_prestige = -10
+			random_owned_province = {
+				limit = {
+					has_province_modifier = domain_of_spouses_family
+				}
+				add_local_autonomy = 35
+			}
 		}
 		clr_country_flag = develop_seat_province
 		clr_country_flag = pay_money
@@ -1161,9 +1171,14 @@ country_event = {
 	option = {
 		name = consort_events.53.b # The ruler openly doubt their consort
 		custom_tooltip = consort_events.53.b.tt
-		add_ruler_modifier = {
-			name = "without_spouse_advice"
-			duration = 1825
+		if = {
+			limit = {
+				NOT = { has_country_flag = farranean_advisor_negatives_nullified }
+			}
+			add_ruler_modifier = {
+				name = "without_spouse_advice"
+				duration = 1825
+			}
 		}
 	}
 }
@@ -2085,7 +2100,7 @@ country_event = {
 	}
 }
 	
-#Recieved aid	
+#Received aid	
 country_event = {
 	id = consort_events.58
 	title = consort_events.58.t
@@ -4479,6 +4494,7 @@ country_event = {
 		NOT = { has_reform = harpy_matriarchy_ayarallen_early_gov_mechanic_reform }
 		NOT = { has_reform = harpy_queendom_reform }
 		NOT = { has_reform = covenblad_covenant_arbiters }	
+		NOT = { has_reform = technocracy_republic_reform }
 		consort_dip = 3
 		consort_mil = 3
 		consort_adm = 3
@@ -5096,11 +5112,13 @@ country_event = {
 		is_lesser_in_union = no
 		has_consort = yes
 		has_consort_regency = no
+		NOT = { has_country_flag = disabled_consort_events }
 		NOT = { has_government_attribute = has_harem_events }
 		NOT = { has_reform = harpy_matriarchy_reform }
 		NOT = { has_reform = harpy_matriarchy_ayarallen_early_gov_mechanic_reform }
 		NOT = { has_reform = harpy_queendom_reform }
 		NOT = { has_reform = covenblad_covenant_arbiters }	
+		NOT = { has_country_flag = farranean_advisor_negatives_nullified }
 		NOT = { has_country_flag = a95_bad_consort } #themarenn
 		NOT = {
 			any_owned_province = {

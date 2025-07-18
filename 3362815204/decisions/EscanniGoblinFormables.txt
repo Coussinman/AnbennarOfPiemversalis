@@ -7,7 +7,10 @@ country_decisions = {
 		potential = {
 			primary_culture = common_goblin
 			capital_scope = {
-				superregion = escann_superregion
+				OR = {
+					superregion = escann_superregion
+					area = gulletpeak_area
+				}
 			}	
 			NOT = { tag = B79 }
 			NOT = { exists = B79 }
@@ -18,7 +21,10 @@ country_decisions = {
 		}
 
 		provinces_to_highlight = {
-			superregion = escann_superregion
+			OR = {
+				superregion = escann_superregion
+				area = gulletpeak_area
+			}
 		}
 
 		allow = { 
@@ -27,11 +33,17 @@ country_decisions = {
 			}
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
 				value = 20
-				superregion = escann_superregion
+				OR = {
+					superregion = escann_superregion
+					area = gulletpeak_area
+				}
 			}
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
 				value = 10
-				superregion = escann_superregion
+				OR = {
+					superregion = escann_superregion
+					area = gulletpeak_area
+				}
 				culture_is_goblin = yes
 			}
 			is_at_war = no
@@ -45,13 +57,23 @@ country_decisions = {
 			country_event = { id = ideagroups.1 } #Swap Ideas
 			set_country_flag = formed_escanni_goblin_nation_flag
 
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			
 			every_subject_country = {
 				limit = {
 					OR = {
 						primary_culture = common_goblin
 						primary_culture = forest_goblin
 					}
-					capital_scope = { superregion = escann_superregion }
+					capital_scope = {
+						OR = {
+							superregion = escann_superregion
+							area = gulletpeak_area
+						}
+					}
 				}
 				every_owned_province = {
 					add_core = ROOT

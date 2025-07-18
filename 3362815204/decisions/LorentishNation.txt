@@ -29,26 +29,21 @@ country_decisions = {
 			normal_or_historical_nations = yes
 			was_never_end_game_tag_trigger = yes
 			NOT = { has_country_flag = formed_enteben }
+			NOT = { has_country_flag = wineport_upgraded_ideas }
 		}
 		provinces_to_highlight = {
-			OR = {
-				province_id = 67	# Lorentaine
-				province_id = 74	# Kyliande
-				province_id = 69	# Rewanfork
-				province_id = 61	# Lorenith
-				province_id = 68	# Redfort
-			}
+			area = upper_bloodwine_area
 			OR = {
 				NOT = { owned_by = ROOT }
 				NOT = { is_core = ROOT }
 			}
 		}
 		allow = {
-			owns_core_province = 67	# Lorentaine
-			owns_core_province = 74	# Kyliande
-			owns_core_province = 69	# Rewanfork
-			owns_core_province = 61	# Lorenith
-			owns_core_province = 68	# Redfort
+			upper_bloodwine_area = {
+				type = all
+				owned_by = ROOT
+				is_core = ROOT
+			}
 			is_at_war = no
 			is_free_or_tributary_trigger = yes
 			NOT = { exists = A01 }			

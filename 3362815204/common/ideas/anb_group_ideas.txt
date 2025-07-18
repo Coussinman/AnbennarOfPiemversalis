@@ -271,7 +271,7 @@ aelantir_adventurer_ideas = {
 	aelantir_adventurer_homesteader_initiatives = {
 		colonists = 1
 	}
-	aelantir_adventurer_cultural_dominance= {
+	aelantir_adventurer_cultural_dominance = {
 		culture_conversion_cost = -0.2
 		war_exhaustion = -0.02
 	}
@@ -1057,7 +1057,7 @@ gerudian_ideas = {
 		trade_efficiency = 0.10
 	}
 	gerudian_naval_lifestyle = {
-		leader_naval_manuever = 1.0
+		leader_naval_manuever = 1
 	}
 }
 
@@ -1830,9 +1830,8 @@ prabhi_ideas = {
 	}
 	trigger = {
 		OR = {
-			has_reform = prabhi_reform
-			has_reform = indep_prabhi_reform
-			has_reform = senapti_reform
+			has_government_attribute = is_raja_subject
+			has_reform = indep_prabhi_reform			
 		}
 		culture_group = harimari
 	}
@@ -2220,7 +2219,9 @@ birb_ideas = {
 	trigger = {
 		OR = {
 			primary_culture = shuvuush
+			primary_culture = kuuldaar
 			tag = V03
+			tag = Y92
 		}
 	}
 	free = yes
@@ -2235,7 +2236,7 @@ birb_ideas = {
 	birb_legacy_of_the_husuusing = { #Ash March, their migration after their old homeland went fallow
 		land_attrition = -0.15
 	}
-	birb_stone_eggs_of_odheongu = {
+	birb_stone_eggs_of_gowon = {
 		cavalry_cost = -0.1
 	}
 	birb_three_families = {
@@ -2310,7 +2311,7 @@ parura_ideas = {
 	parura_navigators_of_effelai = {
 		caravan_power = 0.2 # Can travel throughout Effelai un/less hindered than anyone else
 	}
-	parura_huntmaster_crowns	= {
+	parura_huntmaster_crowns = {
 		monarch_military_power = 1 # Rulers are proven warriors who have obtained the most trophies
 	}
 	parura_trials_of_assimilation = {
@@ -2343,7 +2344,7 @@ yeteferen_ideas = {
 	free = yes		#will be added at load.
 	
 	yeteferen_holy_land = {	#concept that mengi lands is holy in their religion. and yeteferen lands is the very heart of it
-		manpower_in_true_faith_provinces= 0.15
+		manpower_in_true_faith_provinces = 0.15
 	}
 	yeteferen_the_prosperous_ones = {	#translation of yeteferen means this as they got awesome genie boons. general stuff about them being most richest, with most cities, best farms, etc
 		global_tax_modifier = 0.1
@@ -2354,7 +2355,7 @@ yeteferen_ideas = {
 	yeteferen_cities_on_the_river_yet = {	#that river is the civilization central of the mengi and theres lots of cities there
 		build_cost = -0.1
 	}
-	yeteferen_rain_prayers	= {	#their God is a sky god of rain and shizz, so they pray a lot to them which makes their farms bountiful
+	yeteferen_rain_prayers = {	#their God is a sky god of rain and shizz, so they pray a lot to them which makes their farms bountiful
 		global_trade_goods_size_modifier = 0.1
 	}
 	yeteferen_market_processions = { #mimicry of the ardimya the genie's great procession, yeteferen lords whenever they travel do a procession, but its less giving away stuff but its a walking market of everything for sale from that kingdom
@@ -2389,7 +2390,7 @@ talilibeti_ideas = {
 	talilibeti_ditchfields = {	#roaming trolls are very dangerous, so a lot of the Talilibeti lands have Ditchfields which are big holes hidden that trolls can fall through.
 		hostile_attrition = 1
 	}
-	talilibeti_a_talili_at_every_court	= {	#theres one at every court across the mengi to relay messages about latest goings on of the frontier and to allow talilibeti lands to be defended via alliances
+	talilibeti_a_talili_at_every_court = {	#theres one at every court across the mengi to relay messages about latest goings on of the frontier and to allow talilibeti lands to be defended via alliances
 		diplomats = 1
 	}
 	talilibeti_earthworks = {	#later they built simple but effective dirt earthworks to actually hold their ground from trolls, instead of running away
@@ -2455,7 +2456,7 @@ metobesebi_ideas = {
 	metobesebi_black_maned_lion_dreadlocks = {	#black maned lions are in these mountains, and are imitated by metobesebi and later on mengi warriors as a whole. Its dreadlocks
 		shock_damage = 0.10
 	}
-	metobesebi_hundred_families	= {	#metobesebi means this. they are tight-knit families and bonds throughout the land. despite opportunities elsewhere, the most important thing here is FAMILY a la vin diesel
+	metobesebi_hundred_families = {	#metobesebi means this. they are tight-knit families and bonds throughout the land. despite opportunities elsewhere, the most important thing here is FAMILY a la vin diesel
 		same_culture_advisor_cost = -0.15
 	}
 	metobesebi_terrace_palaces = {	#the many clans of the Metosebi divide themselves in farming communities centered in palaces ruled by local lords which grow wheat in the mountains and hills
@@ -2673,44 +2674,5 @@ vyzemby_ideas = {
 	}
 	vyzemby_animal_shrines = { #different animals are seen as sacred and are associated with specific gods. Such shrines commonplace in the islands
 		tolerance_own = 2
-	}
-}
-
-#Tanizu Lizards
-beastfolk_ideas = {
-	start = {
-		land_forcelimit_modifier = 0.15
-		num_accepted_cultures = 2
-	}
-	bonus = {
-		global_unrest = -2
-	}
-	trigger = { 
-		culture = cyazizeta_lizardfolk 
-		NOT = { tag = S83 } #Katiradiga
-	}
-	free = yes
-	
-	beastfolk_lizards_and_tanizu = {
-		idea_cost = -0.1
-	}
-	beastfolk_the_storyscales = {
-		stability_cost_modifier = -0.15
-	}
-	beastfolk_warrior_prowess = {
-		discipline = 0.025
-		shock_damage_received = -0.05
-	}
-	beastfolk_sacred_bond = {
-		diplomatic_upkeep = 1
-	}
-	beastfolk_nomadic_tradition = {
-		movement_speed = 0.15
-	}
-	beastfolk_friendship_drink = {
-		improve_relation_modifier = 0.2
-	}
-	beastfolk_kin_wars = {
-		war_exhaustion = -0.03
 	}
 }

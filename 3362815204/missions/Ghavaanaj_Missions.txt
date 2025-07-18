@@ -1160,8 +1160,8 @@ ghavaanaj_3_2 = {
 		
 		trigger = {
 			OR = {
-				has_government_attribute = is_raja
-				NOT = { any_known_country = { has_government_attribute = is_raja } }
+				is_the_raja = yes
+				NOT = { any_known_country = { is_the_raja = yes } }
 			}
 			capital_scope = { development = 40 }
 		}
@@ -1398,7 +1398,7 @@ ghavaanaj_4_2 = {
 				limit = { is_subject = yes }
 				overlord = {
 					country_event = {
-						id = rahenraj.401
+						id = ghavaanaj.401
 					}
 				}
 			}
@@ -1461,24 +1461,53 @@ ghavaanaj_4_2 = {
 		}
 		
 		effect = {
-			hidden_effect = {
-				west_rajnadhaga_area = { add_core = R73 }
-				east_rajnadhaga_area = { add_core = R73 }
-				khadirnadi_area = { add_core = R73 }
-				middle_nadimraj_area = { add_core = R73 }
-				tilathi_area = { add_core = R73 }
-				bidhilar_area = { add_core = R73 }
-				khadisrapur_area = { add_core = R73 }
-				release_with_religion_and_culture = { tag = R73 religion = high_philosophy culture = shandibad }
-				create_subject = {
-					subject_type = autonomous_vassal
-					subject = R73
+			if = {
+				limit = {
+					tag = R73
+				}
+				custom_tooltip = ghavaanaj_4_roles_reversed_bypass_tt
+				tooltip = {
+					hidden_effect = {
+						west_rajnadhaga_area = { add_core = R73 }
+						east_rajnadhaga_area = { add_core = R73 }
+						khadirnadi_area = { add_core = R73 }
+						middle_nadimraj_area = { add_core = R73 }
+						tilathi_area = { add_core = R73 }
+						bidhilar_area = { add_core = R73 }
+						khadisrapur_area = { add_core = R73 }
+						release_with_religion_and_culture = { tag = R73 religion = high_philosophy culture = shandibad }
+						create_subject = {
+							subject_type = autonomous_vassal
+							subject = R73
+						}
+					}
+					custom_tooltip = ghavaanaj_4_roles_reversed_tt
+					add_country_modifier = {
+						name = ghavaanaj_lord_of_the_nadimraj
+						duration = -1
+					}
 				}
 			}
-			custom_tooltip = ghavaanaj_4_roles_reversed_tt
-			add_country_modifier = {
-				name = ghavaanaj_lord_of_the_nadimraj
-				duration = -1
+			else = {
+				hidden_effect = {
+					west_rajnadhaga_area = { add_core = R73 }
+					east_rajnadhaga_area = { add_core = R73 }
+					khadirnadi_area = { add_core = R73 }
+					middle_nadimraj_area = { add_core = R73 }
+					tilathi_area = { add_core = R73 }
+					bidhilar_area = { add_core = R73 }
+					khadisrapur_area = { add_core = R73 }
+					release_with_religion_and_culture = { tag = R73 religion = high_philosophy culture = shandibad }
+					create_subject = {
+						subject_type = autonomous_vassal
+						subject = R73
+					}
+				}
+				custom_tooltip = ghavaanaj_4_roles_reversed_tt
+				add_country_modifier = {
+					name = ghavaanaj_lord_of_the_nadimraj
+					duration = -1
+				}
 			}
 		}
 	}

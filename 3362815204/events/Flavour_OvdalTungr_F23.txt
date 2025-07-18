@@ -329,6 +329,7 @@ country_event = {
 		name = flavour_ovdal_tungr.121.a
 		ai_chance = { factor = 100 }
 		521 = { 
+			add_province_modifier = { name = F23_religious_tolerance duration = -1 }
 			add_dwarven_minority_size_effect = yes 
 			if = { limit = { province_has_center_of_trade_of_level = 3 }
 				owner = { add_treasury = 100 }
@@ -512,7 +513,7 @@ country_event = {
 		custom_tooltip = F23_tugged_two_ways_tt_2
 	}
 }
-# Safe Sarhali Seas
+# Safe Sarhaly Seas
 country_event = {
 	id = flavour_ovdal_tungr.1
 	title = flavour_ovdal_tungr.1.t
@@ -530,9 +531,6 @@ country_event = {
 			add_country_modifier = { name = F23_reform_progress_mod_2 duration = -1 }
 		}
 
-		#if = { limit = { mission_completed = F23_steamers }
-		#	custom_tooltip = F23_upstream_trade_unlock_tt
-		#}
 		if = { limit = { has_dlc = "Domination" }
 			custom_tooltip = F23_safe_sarhali_seas_tt
 		}
@@ -554,12 +552,9 @@ country_event = {
 
 		custom_tooltip = F23_reform_progress_mod_augmentation
 		hidden_effect = {
-			remove_country_modifier = F23_reform_progress_mod_1
-			add_country_modifier = { name = F23_reform_progress_mod_2 duration = -1 }
+			remove_country_modifier = F23_reform_progress_mod_2
+			add_country_modifier = { name = F23_reform_progress_mod_3 duration = -1 }
 		}
-		#if = { limit = { mission_completed = F23_steamers }
-		#	custom_tooltip = F23_upstream_trade_unlock_tt
-		#}
 		if = { limit = { has_dlc = "Leviathan" }
 			custom_tooltip = F23_the_copper_seaway_tt
 		}
@@ -822,7 +817,7 @@ country_event = {
 			add_country_modifier = { name = F23_maritime_hegemony duration = -1 }
 		}
 		custom_tooltip = F23_capstone_sea_hold_upgrade
-		hidden_effect = { change_variable = { which = sea_hold_var_slots value = 1 } }
+		hidden_effect = { change_variable = { which = sea_hold_var_slots value = 2 } }
 	}
 }
 
@@ -1994,6 +1989,19 @@ country_event = {
 			is_subject_of = F23
 		}
 	}
+
+	immediate = {
+		hidden_effect = {
+			export_to_variable = {
+				which = cash_cost
+				value = monthly_income
+			}
+			multiply_variable = {
+				which = cash_cost
+				value = 300 # 25 years of income.
+			}
+		}
+	}
 	
 	option = { # Yes (independent or non-trade protectorate subject)
 		trigger = { NOT = { OR = { 
@@ -2007,20 +2015,20 @@ country_event = {
 
 	option = { # Yes (trade protectorate)
 		trigger = { is_subject_of_type_with_overlord = { who = F23 type = trade_protectorate } }
-		name = flavour_ovdal_tungr.60.b
+		name = flavour_ovdal_tungr.60.a
 		ai_chance = { factor = 100 }
 		F23 = { country_event = { id = flavour_ovdal_tungr.62 } }
 	}
 
 	option = { # Yes (loyal trade protectorate)
 		trigger = { is_subject_of_type_with_overlord = { who = F23 type = loyal_trade_protectorate } }
-		name = flavour_ovdal_tungr.60.c
+		name = flavour_ovdal_tungr.60.a
 		ai_chance = { factor = 100 }
 		F23 = { country_event = { id = flavour_ovdal_tungr.63 } }
 	}
 
 	option = { # No
-		name = flavour_ovdal_tungr.60.e
+		name = flavour_ovdal_tungr.60.b
 		ai_chance = { factor = 0 }
 	}
 }
@@ -2034,29 +2042,16 @@ country_event = {
 	
 	is_triggered_only = yes
 
-	immediate = {
-		hidden_effect = {
-			export_to_variable = {
-				which = cash_cost
-				value = monthly_income
-				who = FROM
-			}
-			multiply_variable = {
-				which = cash_cost
-				value = 300 # 25 years of income.
-			}
-		}
-	}
-
 	option = { # Become trade protectorate.
 		name = flavour_ovdal_tungr.61.a
 		ai_chance = { factor = 0 }
 
+		hidden_effect = { set_variable = { which = cash_cost which = FROM } }
 		currency_effect = { currency = treasury takeFrom = ROOT which = cash_cost }
-
 		custom_tooltip = bankruptcy_bailout
 
 		create_subject = { subject_type = trade_protectorate subject = FROM }
+		add_truce_with = FROM
 		FROM = {
 			remove_country_modifier = bankruptcy
 		}
@@ -2077,29 +2072,16 @@ country_event = {
 	
 	is_triggered_only = yes
 
-	immediate = {
-		hidden_effect = {
-			export_to_variable = {
-				which = cash_cost
-				value = monthly_income
-				who = FROM
-			}
-			multiply_variable = {
-				which = cash_cost
-				value = 300 # 25 years of income.
-			}
-		}
-	}
-
 	option = { # Become loyal trade protectorate.
 		name = flavour_ovdal_tungr.62.a
 		ai_chance = { factor = 0 }
 
+		hidden_effect = { set_variable = { which = cash_cost which = FROM } }
 		currency_effect = { currency = treasury takeFrom = ROOT which = cash_cost }
-
 		custom_tooltip = bankruptcy_bailout
 
 		create_subject = { subject_type = loyal_trade_protectorate subject = FROM }
+		add_truce_with = FROM
 		FROM = {
 			remove_country_modifier = bankruptcy
 			hidden_effect = { every_ally = { break_alliance = FROM } }
@@ -2121,26 +2103,12 @@ country_event = {
 	
 	is_triggered_only = yes
 
-	immediate = {
-		hidden_effect = {
-			export_to_variable = {
-				which = cash_cost
-				value = monthly_income
-				who = FROM
-			}
-			multiply_variable = {
-				which = cash_cost
-				value = 300 # 25 years of income.
-			}
-		}
-	}
-
 	option = { # Already indebted
 		name = flavour_ovdal_tungr.63.a
 		ai_chance = { factor = 0 }
 
+		hidden_effect = { set_variable = { which = cash_cost which = FROM } }
 		currency_effect = { currency = treasury takeFrom = ROOT which = cash_cost }
-
 		custom_tooltip = bankruptcy_bailout
 
 		FROM = {
@@ -2632,5 +2600,27 @@ country_event = {
 		name = flavour_ovdal_tungr.201.a
 		ai_chance = { factor = 100 }
 		country_event = { id = flavour_ovdal_tungr.200 }
+	}
+}
+
+# Event turning Crathanor into regular vassal if Ovdal Tungr is annexed by someone else.
+country_event = {
+	id = flavour_ovdal_tungr.9999
+	title = flavour_ovdal_tungr.9999.t
+	desc = flavour_ovdal_tungr.9999.d
+	picture = DIPLOMACY_eventPicture
+	
+	is_triggered_only = yes
+	hidden = yes
+
+	trigger = {
+		always = yes
+	}
+	
+	option = {
+		name = flavour_ovdal_tungr.9999.a
+		ai_chance = { factor = 1 }
+		
+		overlord = { create_subject = { subject_type = vassal subject = ROOT } }
 	}
 }

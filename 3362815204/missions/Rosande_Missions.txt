@@ -187,7 +187,7 @@ rosande_1_missions = {
 			808 = {
 				trade_share = {
 					country = Z35
-					share = 60
+					share = 50
 				}
 			}
 			229 = {
@@ -207,18 +207,12 @@ rosande_1_missions = {
 			OR = {
 				owns_or_non_sovereign_subject_of = 216
 				216 = {
-					owner = { 
-						total_development = 200 
-						OR = {
-							has_spy_network_from = {
-								who = ROOT
-								value = 70
-							}
-							has_opinion = {
-								who = ROOT
-								value = 200
-							}
+					owner = {
+						has_spy_network_from = {
+							who = ROOT
+							value = 70
 						}
+						trade_embargo_by = ROOT
 					}
 				}
 			}
@@ -428,19 +422,22 @@ rosande_1_2_missions = {
 			}
 			custom_tooltip = rosande_those_who_escaped.tt.2
 			set_country_flag = rosande_out_of_the_woods	
-			west_deepwoods_region = {
-				limit = { 
-					fast_has_pop_of_race = { race = orcish } 
-					NOT = { country_or_non_sovereign_subject_holds = ROOT }
+			custom_tooltip = rosande_those_who_escaped.t.3
+			hidden_effect = {
+				west_deepwoods_region = {
+					limit = { 
+						fast_has_pop_of_race = { race = orcish } 
+						NOT = { country_or_non_sovereign_subject_holds = ROOT }
+					}
+					add_permanent_claim = ROOT
 				}
-				add_permanent_claim = ROOT
-			}
-			east_deepwoods_region = {
-				limit = { 
-					fast_has_pop_of_race = { race = orcish } 
-					NOT = { country_or_non_sovereign_subject_holds = ROOT }
+				east_deepwoods_region = {
+					limit = { 
+						fast_has_pop_of_race = { race = orcish } 
+						NOT = { country_or_non_sovereign_subject_holds = ROOT }
+					}
+					add_permanent_claim = ROOT
 				}
-				add_permanent_claim = ROOT
 			}
 		}
 	}
@@ -598,7 +595,6 @@ rosande_2_missions = {
 				AND = {
 					OR = {
 						area = merescker_area
-						area = nortmerewood_area
 						area = upcreek_area
 						area = verteben_area
 						area = valefort_area
@@ -679,21 +675,26 @@ rosande_2_missions = {
 					duration = -1
 				}
 			}
-			729 = {
-				owner = {
-					reverse_add_casus_belli = {
-						target = ROOT
-						type = cb_trade_conflict
-						months = 240
+			custom_tooltip = rosande_balmire_athfork.tt
+			hidden_effect = {
+				729 = { #Athfork
+					owner = {
+						reverse_add_casus_belli = {
+							target = ROOT
+							type = cb_trade_conflict
+							months = 240
+						}
 					}
 				}
 			}
-			229 = { #Bal Mire
-				owner = {
-					reverse_add_casus_belli = {
-						target = ROOT
-						type = cb_trade_conflict
-						months = 240
+			hidden_effect = {
+				229 = { #Bal Mire
+					owner = {
+						reverse_add_casus_belli = {
+							target = ROOT
+							type = cb_trade_conflict
+							months = 240
+						}
 					}
 				}
 			}
@@ -835,7 +836,7 @@ rosande_2_2_missions = {
 				region = west_deepwoods_region
 			}
 			NOT = { 
-				has_building = courthouse
+				has_courthouse_building_trigger = yes
 			}
 			owned_by = ROOT
 		}
@@ -852,7 +853,7 @@ rosande_2_2_missions = {
 						region = east_deepwoods_region
 						region = west_deepwoods_region
 					}
-					has_building = courthouse
+					has_courthouse_building_trigger = yes
 				}
 				num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
 					value = 10
@@ -901,10 +902,19 @@ rosande_2_2_missions = {
 		}
 
 		trigger = {
-			827 = { #Ionntras
-				development = 30
-				num_of_buildings_in_province = 6
-				num_of_times_expanded_infrastructure = 3
+			if = {
+				limit = { NOT = { has_dlc = "Leviathan" } }
+				827 = { #Ionntras
+					development = 35
+					num_of_buildings_in_province = 6
+				}
+			}
+			else = {
+				827 = { #Ionntras
+					development = 30
+					num_of_buildings_in_province = 6
+					num_of_times_expanded_infrastructure = 2
+				}
 			}
 			humacvord_area = { is_prosperous = yes }
 			custom_trigger_tooltip = {
@@ -1004,6 +1014,9 @@ rosande_3_missions = {
 							base_production = 6
 						}
 					}
+					NOT = {
+						province_id = 819
+					}
 				}
 			}
 		}
@@ -1033,6 +1046,9 @@ rosande_3_missions = {
 				area = blademarch_area
 				has_production_building_trigger = yes
 				base_production = 6
+				NOT = {
+					province_id = 819
+				}
 			}
 			num_of_owned_provinces_with = {
 				value = 2
@@ -1045,6 +1061,7 @@ rosande_3_missions = {
 
 		effect = {
 			custom_tooltip = rosande_rattling_chains.tt
+			custom_tooltip = rosande_rattling_chains.tt.2 
 			hidden_effect = {
 				random_owned_province = {
 					limit = {
@@ -1260,7 +1277,7 @@ rosande_3_missions = {
 				add_nationalism = -5
 			}
 			812 = { #Beastgrave
-				add_province_modifier = {
+				add_permanent_province_modifier = {
 					name = Z35_orcish_workforce
 					duration = -1
 				}
@@ -1270,7 +1287,7 @@ rosande_3_missions = {
 				add_devastation = 80
 			}
 			808 = { #Vernham
-				add_province_modifier = {
+				add_permanent_province_modifier = {
 					name = Z35_orcish_workforce
 					duration = -1
 				}
@@ -1361,16 +1378,27 @@ rosande_3_missions = {
 		}
 
 		trigger = {
+			treasury = 500
 			castonath_area = {
 				type = all
 				NOT = { devastation = 25 }
 			}
-			831 = { #South Castonath
-				AND = {
-					development = 25
-					has_manufactory_trigger = yes
-					has_production_building_trigger = yes
-					num_of_times_expanded_infrastructure = 1
+			if = {
+				limit = { NOT = { has_dlc = "Leviathan" } }
+				831 = { #South Castonath
+					AND = {
+						development = 25
+						has_production_building_trigger = yes
+					}
+				}
+			}
+			else = {
+				831 = { #South Castonath
+					AND = {
+						development = 25
+						has_production_building_trigger = yes
+						num_of_times_expanded_infrastructure = 1
+					}
 				}
 			}
 			production_leader = { trade_goods = wine }
@@ -1392,7 +1420,16 @@ rosande_3_missions = {
 						cost = 0
 					}
 				}
+				if = {
+					limit = { NOT = { has_building = weapons } }
+					add_building_construction = {
+						building = weapons
+						speed = 1
+						cost = 0
+					}
+				}
 			}
+			add_treasury = -500
 			custom_tooltip = rosande_grandest_winery.tt
 			set_country_flag = castanor_unlock_grand_bazaar_early
 			hidden_effect = {
@@ -1804,14 +1841,14 @@ rosande_4_missions = {
 				}
 				AND = {
 					province_id = 827 #Ionntras
-					NOT = { has_building = courthouse }
+					NOT = { has_courthouse_building_trigger = yes}
 				}
 			}
 		}
 
 		trigger = {
 			827 = {
-				has_building = courthouse
+				has_courthouse_building_trigger = yes
 			}
 			stability = 2
 			monthly_income = 40
@@ -1861,18 +1898,35 @@ rosande_4_missions = {
 		}
 
 		provinces_to_highlight = {
-			province_id = 4097 #Marrhold
+			OR = {
+				AND = {
+					OR = {
+						region = south_castanor_region
+						region = inner_castanor_region
+						region = west_castanor_region
+					}
+					owned_by = B36
+				}
+				province_id = 4097 #Marrhold
+			}
+			
 		}
 
 		trigger = {
-			NOT = {
-				exists = B36
+			B36 = { #Marrhold
+				NOT = {
+					any_owned_province = {
+						region = south_castanor_region
+						region = inner_castanor_region
+						region = west_castanor_region
+					}
+				}
 			}
 			4097 = { #Marrhold
 				OR = {
 					AND = {
 						development = 30
-						has_building = courthouse
+						has_courthouse_building_trigger = yes
 					}
 					has_building = state_house
 				}
@@ -1994,13 +2048,11 @@ rosande_4_2_missions = {
 		}
 
 		provinces_to_highlight = {
+			owned_by = ROOT
+			has_province_modifier = Z35_grand_orcish_workforce
 			AND = {
-				owned_by = ROOT
-				has_province_modifier = Z35_grand_orcish_workforce
-				OR = {
-					local_autonomy = 20
-					NOT = { has_province_modifier = autonomy_decreased }
-				}
+				local_autonomy = 20
+				NOT = { has_province_modifier = autonomy_decreased }
 			}
 		}
 
@@ -2053,13 +2105,11 @@ rosande_5_missions = {
 			819 = { #Stewards Hold
 				development = 20
 				OR = {
-					AND = {
-						has_production_building_trigger = yes
-						has_manufactory_trigger = yes
-					}
+					has_production_building_trigger = yes
 					trade_goods = gold
 				}
 			}
+			treasury = 500
 			OR = {
 				num_of_cavalry = 16
 				cavalry_fraction = 0.40
@@ -2067,7 +2117,7 @@ rosande_5_missions = {
 		}
 
 		effect = {
-			819= {
+			819 = {
 				add_permanent_province_modifier = {
 					name = Z35_crimson_forge
 					duration = -1
@@ -2076,7 +2126,17 @@ rosande_5_missions = {
 					limit = { NOT = { trade_goods = iron } }
 					change_trade_goods = iron
 				}
+				if = {
+					limit = { NOT = { has_building = weapons } }
+					add_building_construction = {
+						building = weapons
+						speed = 1
+						cost = 0
+					}
+				}
+				rosande_add_workforce_effect = yes
 			}
+			add_treasury = -500
 			custom_tooltip = rosande_crimson_forge.tt
 			if = {
 				limit = {
@@ -2115,6 +2175,7 @@ rosande_5_missions = {
 					power_projection = 50
 					prestige = 50
 				}
+				prestige = 90
 			}
 			has_global_modifier_value = {
 				which = discipline

@@ -1,41 +1,4 @@
 country_decisions = {
-	taychend_hire_ships = {
-		potential = {
-			OR = {
-				religion = gods_of_the_taychend
-				religion = oren_nayiru
-			}
-			NOT = { government = tribal }
-			num_of_total_ports = 1
-			NOT = { has_country_flag = taychend_shipping }
-			OR = {
-				ai = no
-				NOT = { navy_size_percentage = 1 }
-				NOT = { sailors_percentage = 0.50 }
-			}
-		}
-		
-		provinces_to_highlight = {
-			owned_by = ROOT
-			has_port = yes
-		}
-		
-		allow = {
-			hidden_trigger = {
-				OR = {
-					religion = gods_of_the_taychend
-					religion = oren_nayiru
-				}
-			}
-			treasury = 10
-			NOT = { has_country_modifier = taychend_hired_ships }
-		}
-		
-		effect = {
-			set_country_flag = taychend_shipping
-			country_event = { id = taychendi.5 }
-		}
-	}
 	taychend_kingdom = {
 		potential = {
 			OR = {
@@ -46,7 +9,10 @@ country_decisions = {
 		}
 		
 		provinces_to_highlight = {
-			NOT = { owned_by = ROOT }
+			NOT = {
+				owned_by = ROOT
+				owner = { is_subject_of = ROOT }
+			}
 			if = {
 				limit = { ROOT = { capital_scope = { region = larankarha_highlands_region } } }
 				region = larankarha_highlands_region
@@ -78,8 +44,8 @@ country_decisions = {
 				}
 			}
 			custom_trigger_tooltip = {
-				tooltip = gods_of_the_taychend_reform_2_buy
-				has_country_flag = got_reform_1
+				tooltip = gods_of_the_taychend_reform_2_buy_tt
+				has_country_flag = taychendi_passed_reform_1
 			}
 			if = {
 				limit = { capital_scope = { region = larankarha_highlands_region } }
@@ -289,7 +255,7 @@ country_decisions = {
 				religion = gods_of_the_taychend_reformed
 			}
 			if = {
-				limit = { has_country_flag = G64_lower_taychend_dev_flag }
+				limit = { has_country_flag = lower_taychend_dev_by_200_flag }
 				development_in_provinces = {
 					value = 700
 					superregion = taychend_superregion
@@ -361,6 +327,13 @@ country_decisions = {
 					duration = -1
 				}
 			}
+			if = {
+				limit = { is_or_was_tag = { tag = J78 } }
+				add_country_modifier = {
+					name = uesrennu_sated_swarm
+					duration = 10950
+				}
+			}
 			hidden_effect = {
 				set_variable = {
 					which = J84_num_of_farm_estates_var
@@ -378,6 +351,10 @@ country_decisions = {
 					days = 1825 #5 years
 				}
 				if = {
+					limit = { has_country_flag = J81_changed_name_to_rakulacimai_flag }
+					override_country_name = RAKULACIMAI
+				}
+				else_if = {
 					limit = {
 						has_country_flag = G81_changed_name_to_dumrusvarn_flag
 					}
@@ -774,18 +751,17 @@ country_decisions = {
 				estate = estate_mages
 				loyalty = 50
 			}
-			any_army = {
+			any_province = {
+				units_in_province = ROOT
+				unit_in_siege = yes 
+				fort_level = 1
 				OR = {
-					is_ruler_commanding_unit = yes
-					ROOT = { is_female = yes }
+					has_ruler_leader_from = ROOT
 					custom_trigger_tooltip = {
 						tooltip = J84_mihaela_is_ruler_tt
 						ROOT = { has_country_flag = J84_is_mihaela_flag }
 					}
-				}
-				location = { 
-					unit_in_siege = yes 
-					fort_level = 1
+					ROOT = { is_female = yes }
 				}
 			}
 			mil_power = 50
@@ -801,7 +777,10 @@ country_decisions = {
 		effect = {
 			random_province = {
 				limit = {
-					has_ruler_leader_from = ROOT
+					OR = {
+						has_ruler_leader_from = ROOT
+						ROOT = { is_female = yes }
+					}
 					sieged_by = ROOT
 					fort_level = 1
 				}
@@ -820,34 +799,95 @@ country_decisions = {
 		}
 	}
 
-	change_rule_style = {
+	taychend_ai_reform_cult = {
 		potential = {
-			tag = J84 #Taychendi Empire
-			religion = gods_of_the_taychend_reformed
+			OR = {
+				religion = gods_of_the_taychend
+				religion = oren_nayiru
+			}
+			ai = yes
 		}
 		
 		provinces_to_highlight = {
 		}
 		
 		allow = {
-			hidden_trigger = {
-				tag = J84 #Taychendi Empire
-				religion = gods_of_the_taychend_reformed
+			OR = {
+				religion = gods_of_the_taychend
+				religion = oren_nayiru
 			}
+			ai = yes
+			is_at_war = no
+			stability = 1
+			NOT = { num_of_rebel_armies = 1 }
 			if = {
-				limit = { has_country_flag = J84_changed_rule_style_flag }
-				had_country_flag = {
-					flag = J84_changed_rule_style_flag
-					days = 7300 #20 years
+				limit = { NOT = { has_country_flag = taychendi_passed_reform_1 } }
+				total_development = 100
+				calc_true_if = {
+					all_subject_country = { NOT = { liberty_desire = 50 } }
+					amount = 2
+				}
+			}
+			else_if = {
+				limit = { NOT = { has_country_flag = taychendi_passed_reform_2 } }
+				total_development = 200
+				calc_true_if = {
+					all_subject_country = { NOT = { liberty_desire = 50 } }
+					amount = 3
+				}
+			}
+			else_if = {
+				limit = { NOT = { has_country_flag = taychendi_passed_reform_3 } }
+				total_development = 300
+				calc_true_if = {
+					all_subject_country = { NOT = { liberty_desire = 50 } }
+					amount = 4
+				}
+			}
+			else_if = {
+				limit = { NOT = { has_country_flag = taychendi_passed_reform_4 } }
+				total_development = 400
+				calc_true_if = {
+					all_subject_country = { NOT = { liberty_desire = 50 } }
+					amount = 5
+				}
+			}
+			else_if = {
+				limit = { NOT = { has_country_flag = taychendi_passed_reform_5 } }
+				total_development = 500
+				calc_true_if = {
+					all_subject_country = { NOT = { liberty_desire = 50 } }
+					amount = 6
 				}
 			}
 		}
 		
 		effect = {
-			country_event = {
-				id = taychendi_empire_events.0
+			if = {
+				limit = { NOT = { has_country_flag = taychendi_passed_reform_1 } }
+				set_country_flag = taychendi_passed_reform_1
+				country_event = { id = taychendi.1000 }
+			}
+			else_if = {
+				limit = { NOT = { has_country_flag = taychendi_passed_reform_2 } }
+				set_country_flag = taychendi_passed_reform_2
+				country_event = { id = taychendi.1001 }
+			}
+			else_if = {
+				limit = { NOT = { has_country_flag = taychendi_passed_reform_3 } }
+				set_country_flag = taychendi_passed_reform_3
+				country_event = { id = taychendi.1002 }
+			}
+			else_if = {
+				limit = { NOT = { has_country_flag = taychendi_passed_reform_4 } }
+				set_country_flag = taychendi_passed_reform_4
+				country_event = { id = taychendi.1003 }
+			}
+			else_if = {
+				limit = { NOT = { has_country_flag = taychendi_passed_reform_5 } }
+				set_country_flag = taychendi_passed_reform_5
+				country_event = { id = taychendi.1004 }
 			}
 		}
 	}
-
 }

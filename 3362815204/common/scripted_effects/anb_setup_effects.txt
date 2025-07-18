@@ -40,8 +40,8 @@ setup_vision = {
 						area = gifrbygd_area
 						area = zeindalr_area
 						area = southern_giants_tears_area
-						area = gerudian_area
-						area = gerudia1_area
+						area = jotunsdalr_area
+						area = feigrvegrholt_area
 						province_id = 988
 						province_id = 989
 						province_id = 2426
@@ -480,6 +480,7 @@ setup_vision = {
 					capital_scope = {
 						region = ourdia_region
 					}
+					tag = F55
 				}
 				NOT = { tag = R03 } #Davharral
 				NOT = { tag = U12 } #Oubbligschild
@@ -603,8 +604,27 @@ setup_vision = {
 			west_dameshead_region = {
 				discover_country = ROOT
 			}
-			lencenor_region = {
-				discover_country = ROOT
+			if = {
+				limit = {
+					NOT = {
+						OR = {
+							tag = F56
+							tag = F55
+							tag = F54
+							tag = F50
+							tag = F49
+							tag = F48
+							tag = F46
+							tag = F29
+						}
+					}
+				}
+				lencenor_region = {
+					discover_country = ROOT
+				}
+				westcoast_region = {
+					discover_country = ROOT
+				}
 			}
 			small_country_region = {
 				discover_country = ROOT
@@ -617,9 +637,6 @@ setup_vision = {
 			}
 			
 			dameshead_sea_region = {
-				discover_country = ROOT
-			}
-			westcoast_region = {
 				discover_country = ROOT
 			}
 			4162 = {
@@ -679,6 +696,9 @@ setup_vision = {
 				gol_region = {
 					discover_country = ROOT
 				}
+				dao_nako_group = {
+					discover_country = ROOT
+				}
 				#coast
 				1279 = {
 					discover_country = ROOT
@@ -690,9 +710,6 @@ setup_vision = {
 					discover_country = ROOT
 				}
 				#wastelands
-				5778 = {
-					discover_country = ROOT
-				}
 				5717 = {
 					discover_country = ROOT
 				}
@@ -736,6 +753,95 @@ setup_vision = {
 					discover_country = ROOT
 				}
 				1909 = {
+					discover_country = ROOT
+				}
+			}
+			#For countries around Dasmatus
+			if = {
+				limit = {
+					OR = {
+						tag = F56
+						tag = F55
+						tag = F54
+						tag = F50
+						tag = F49
+						tag = F48
+						tag = F46
+						tag = F29
+					}
+				}
+				gazraak_region = {
+					discover_country = ROOT
+				}
+				###
+				westcoast_area = {
+					discover_country = ROOT
+				}
+				southcoast_area = {
+					discover_country = ROOT
+				}
+				sorncost_vines_area = {
+					discover_country = ROOT
+				}
+				upper_bloodwine_area = {
+					discover_country = ROOT
+				}
+				lower_bloodwine_area = {
+					discover_country = ROOT
+				}
+				upper_winebay_area = {
+					discover_country = ROOT
+				}
+				eastern_winebay_area = {
+					discover_country = ROOT
+				}
+				lower_winebay_area = {
+					discover_country = ROOT
+				}
+				sornhills_area = {
+					discover_country = ROOT
+				}
+				shrouded_coast_area = {
+					discover_country = ROOT
+				}
+				venail_area = {
+					discover_country = ROOT
+				}
+				###
+				gol_region = {
+					limit = {
+						NOT = {
+							area = saqraxat_area
+							area = jagab_faru_area
+							area = kaxatan_area
+							area = grixzakr_area
+						}
+					}
+					discover_country = ROOT
+				}
+				###
+				dreksaret_region = {
+					discover_country = ROOT
+				}
+				bedaphire_area = {
+					discover_country = ROOT
+				}
+				irkan_eparta_area = {
+					discover_country = ROOT
+				}
+				emot_nepas_area = {
+					discover_country = ROOT
+				}
+				riyiwedeb_area = {
+					discover_country = ROOT
+				}
+				medifat_area = {
+					discover_country = ROOT
+				}
+				dakmender_area = {
+					discover_country = ROOT
+				}
+				telekenid_islands_area = {
 					discover_country = ROOT
 				}
 			}
@@ -792,6 +898,9 @@ setup_vision = {
 				discover_country = ROOT
 			}
 			far_salahad_region = {
+				discover_country = ROOT
+			}
+			dao_nako_group = {
 				discover_country = ROOT
 			}
 			6105 = { 
@@ -863,9 +972,6 @@ setup_vision = {
 			1650 = {
 				discover_country = ROOT
 			}
-			5778 = {
-				discover_country = ROOT
-			}
 			406 = {
 				undiscover_country = ROOT
 			}
@@ -892,12 +998,10 @@ setup_vision = {
 		#Gazraak
 		if = {
 			limit = {
-				OR = {
-					capital_scope = {
-						region = gazraak_region
-					}
-					tag = F54
+				capital_scope = {
+					region = gazraak_region
 				}
+				NOT = { tag = F55 }
 			}
 			
 			
@@ -1110,6 +1214,9 @@ setup_vision = {
 			far_salahad_region = {
 				discover_country = ROOT
 			}
+			dao_nako_group = {
+				discover_country = ROOT
+			}
 			6105 = { 
 				discover_country = ROOT
 			}
@@ -1138,9 +1245,6 @@ setup_vision = {
 				discover_country = ROOT
 			}
 			1922 = { 
-				discover_country = ROOT
-			}
-			5778 = {
 				discover_country = ROOT
 			}
 			5717 = {
@@ -1249,8 +1353,12 @@ setup_vision = {
 		#Far Salahad - undiscover some bits of Cannor, discover Rahen
 		if = {
 			limit = {
-				capital_scope = {
-					region = far_salahad_region
+				OR = {
+					capital_scope = {
+						region = far_salahad_region
+					}
+					tag = F55
+					tag = F29
 				}
 			}
 			small_country_region = {
@@ -1931,7 +2039,7 @@ setup_vision = {
 			shuvuushudi_region = {
 				discover_country = ROOT
 			}
-			odheongu_region = {
+			gowon_region = {
 				discover_country = ROOT
 			}
 			gulf_of_rahen_region = {
@@ -2100,7 +2208,7 @@ setup_vision = {
 				capital_scope = {
 					OR = {
 						region = shuvuushudi_region
-						region = odheongu_region
+						region = gowon_region
 					}
 				}
 			}
@@ -2110,7 +2218,7 @@ setup_vision = {
 			shuvuushudi_region = {
 				discover_country = ROOT
 			}
-			odheongu_region = {
+			gowon_region = {
 				discover_country = ROOT
 			}
 			northeast_haless_coast_region = {
@@ -2536,7 +2644,7 @@ setup_vision = {
 			475 = {
 				discover_country = ROOT
 			}
-			5778 = {
+			dao_nako_group = {
 				discover_country = ROOT
 			}
 			6107 = {
@@ -2648,10 +2756,10 @@ setup_vision = {
 			outer_rankaty_islands_area = {
 				discover_country = ROOT
 			}
-			6033 = {
+			dao_nako_group = {
 				discover_country = ROOT
 			}
-			5778 = {
+			6033 = {
 				discover_country = ROOT
 			}
 			5717 = {
@@ -2841,6 +2949,9 @@ setup_vision = {
 			outer_rankaty_islands_area = {
 				discover_country = ROOT
 			}
+			dao_nako_group = {
+				discover_country = ROOT
+			}
 			475 = {
 				discover_country = ROOT
 			}
@@ -2848,9 +2959,6 @@ setup_vision = {
 				discover_country = ROOT
 			}
 			6100 = {
-				discover_country = ROOT
-			}
-			5778 = {
 				discover_country = ROOT
 			}
 			5717 = {
@@ -3106,10 +3214,10 @@ setup_vision = {
 			garpix_brrtekuh_area = {
 				discover_country = ROOT
 			}
-			6100 = {
+			dao_nako_group = {
 				discover_country = ROOT
 			}
-			5778 = {
+			6100 = {
 				discover_country = ROOT
 			}
 			5717 = {
@@ -3261,7 +3369,7 @@ setup_vision = {
 			east_sarhal_superregion = {
 				discover_country = ROOT
 			}
-			yezel_mora_region = {
+			shadow_swamp_region = {
 				undiscover_country = ROOT
 			}
 			gulf_of_rahen_area = {
@@ -3486,10 +3594,10 @@ setup_vision = {
 		if = {
 			limit = {
 				capital_scope = {
-					region = yezel_mora_region
+					region = shadow_swamp_region
 				}
 			}
-			yezel_mora_region = {
+			shadow_swamp_region = {
 				discover_country = ROOT
 			}
 			yetefesefi_region = {
@@ -3574,7 +3682,7 @@ setup_vision = {
 			bamaliwuni_region = {
 				discover_country = ROOT
 			}
-			yezel_mora_region = {
+			shadow_swamp_region = {
 				undiscover_country = ROOT
 			}
 			rahen_coast_region = {
@@ -5505,9 +5613,9 @@ setup_vision = {
 			limit = {
 				capital_scope = {
 					OR = {
-						area = west_plateau_area
-						area = north_wall_area
-						area = south_wall_area
+						area = bazuniezar_area
+						area = northern_peaks_area
+						area = southern_shield_area
 					}
 				}
 				NOT = { 
@@ -5517,13 +5625,13 @@ setup_vision = {
 			nomsyulhan_region = {
 				discover_country = ROOT
 			}
-			west_plateau_area = {
+			bazuniezar_area = {
 				discover_country = ROOT
 			}
-			north_wall_area = {
+			northern_peaks_area = {
 				discover_country = ROOT
 			}
-			south_wall_area = {
+			southern_shield_area = {
 				discover_country = ROOT
 			}
 			5407 = {
@@ -5535,13 +5643,13 @@ setup_vision = {
 			churgyund_area = {
 				discover_country = ROOT
 			}
-			area_2_area = {
+			chaneuusk_area = {
 				discover_country = ROOT
 			}
-			area_3_area = {
+			rushing_river_area = {
 				discover_country = ROOT
 			}
-			area_4_area = {
+			four_peaks_area = {
 				discover_country = ROOT
 			}
 			#Wasteland
@@ -5612,7 +5720,7 @@ setup_vision = {
 			shuvuushudi_region = {
 				discover_country = ROOT
 			}
-			odheongu_region = {
+			gowon_region = {
 				limit = {
 					NOT = {
 						province_id = 6511
@@ -5630,7 +5738,7 @@ setup_vision = {
 			baizoi_area = {
 				discover_country = ROOT
 			}
-			area_1_area = {
+			ilabomar_area = {
 				discover_country = ROOT
 			}
 			zoital_area = {
@@ -5710,10 +5818,10 @@ setup_vision = {
 			baizoi_area = {
 				discover_country = ROOT
 			}
-			area_1_area = {
+			ilabomar_area = {
 				discover_country = ROOT
 			}
-			area_7_area = {
+			red_vale_area = {
 				discover_country = ROOT
 			}
 			kokevdan_area = {
@@ -5740,13 +5848,13 @@ setup_vision = {
 			portal_west_area = {
 				discover_country = ROOT
 			}
-			valley_west_lower_area = {
+			sanctuary_area = {
 				discover_country = ROOT
 			}
-			valley_west_mid_area = {
+			iona_saothar_area = {
 				discover_country = ROOT
 			}
-			valley_west_upper_area = {
+			overgrowth_area = {
 				discover_country = ROOT
 			}
 			5197 = {

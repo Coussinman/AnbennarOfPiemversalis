@@ -960,3 +960,279 @@ incident_the_magisteriums_censorship = {
 		}
 	}
 }
+
+incident_the_turning_of_the_purple_river = {
+	event = flavour_LRM.1700
+	default_option = 1
+
+	can_stop = { always = no }
+	
+	0 = { #No
+		factor = 1
+		modifier = {
+			factor = 5
+			OR = {
+				ai_attitude = {
+					who = event_target:LRM_leader
+					attitude = attitude_rivalry
+				}
+				ai_attitude = {
+					who = event_target:LRM_leader
+					attitude = attitude_hostile
+				}
+				ai_attitude = {
+					who = event_target:LRM_leader
+					attitude = attitude_threatened
+				}
+				ai_attitude = {
+					who = event_target:LRM_leader
+					attitude = attitude_outraged
+				}
+				ai_attitude = {
+					who = event_target:LRM_leader
+					attitude = attitude_rebellious
+				}
+			}
+		}
+		modifier = {
+			factor = 3
+			NOT = {
+				has_opinion = {
+					who = event_target:LRM_leader
+					value = 0
+				}
+			}
+		}
+		modifier = {
+			factor = 0
+			is_luna_river_minor = yes
+		}
+	}
+	
+	1 = { #Allow Unification
+		factor = 1
+		modifier = {
+			factor = 2
+			has_opinion = {
+				who = event_target:LRM_leader
+				value = 0
+			}
+			NOT = {
+				has_opinion = {
+					who = event_target:LRM_leader
+					value = 50
+				}
+			}
+		}
+		modifier = {
+			factor = 5
+			has_global_flag = LRM_used_10_sway
+		}
+		modifier = {
+			factor = 10
+			has_global_flag = LRM_used_5_sway
+		}
+	}
+	
+	2 = { #Allow Unification and grant Elector
+		factor = 1
+		modifier = {
+			factor = 3
+			OR = {
+				has_opinion = {
+					who = event_target:LRM_leader
+					value = 50
+				}				
+				ai_attitude = {
+					who = event_target:LRM_leader
+					attitude = attitude_friendly
+				}
+				ai_attitude = {
+					who = event_target:LRM_leader
+					attitude = attitude_loyal
+				}
+				ai_attitude = {
+					who = event_target:LRM_leader
+					attitude = attitude_allied
+				}
+			}
+		}
+		modifier = {
+			factor = 10
+			is_luna_river_minor = yes
+		}
+		modifier = {
+			factor = 5
+			has_global_flag = LRM_used_5_sway
+		}
+		modifier = {
+			factor = 10
+			has_global_flag = LRM_used_10_sway
+		}
+	}
+}
+
+incident_the_legacy_of_bellac = {
+	event = verne.501
+	default_option = 1
+
+	can_stop = { always = no }
+	
+	0 = { #Support
+		factor = 1
+		modifier = {
+			factor = 3
+			has_opinion = {
+				who = A33
+				value = 100
+			}
+		}
+		modifier = {
+			factor = 4
+			alliance_with = A33
+		}
+		modifier = {
+			factor = 4
+			A33 = { is_threat = ROOT }
+		}
+		modifier = {
+			factor = 3
+			A33 = { has_ruler_flag = verne_is_alvar_IV }
+		}
+		modifier = {
+			factor = 2.5
+			NOT = { army_size = A33 }
+		}
+		modifier = {
+			factor = 2.5
+			NOT = { navy_size = A33 }
+		}
+		modifier = {
+			factor = 4
+			great_power_rank = 1
+			NOT = { great_power_rank = 5 }
+		}
+
+		modifier = {
+			factor = 0.5
+			NOT = {
+				has_opinion = {
+					who = A33
+					value = 100
+				}
+			}
+		}
+		modifier = {
+			factor = 0.2
+			any_owned_province = {
+				province_group = luna_river_basin
+			}
+		}
+		modifier = {
+			factor = 0.1
+			is_rival = A33
+		}
+		modifier = {
+			factor = 0.5
+			NOT = {
+				has_opinion = {
+					who = A33
+					value = 0
+				}
+			}	
+		}
+	}
+	
+	1 = { #Allow
+		factor = 2
+		modifier = {
+			factor = 2
+			has_opinion = {
+				who = A33
+				value = 50
+			}
+			NOT = {
+				has_opinion = {
+					who = A33
+					value = 100
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			alliance_with = A33
+		}
+		modifier = {
+			factor = 2
+			A33 = { is_threat = ROOT }
+		}
+		modifier = {
+			factor = 1.5
+			NOT = { 
+				any_owned_province = {
+					province_group = luna_river_basin
+				}
+			}
+		}
+
+		modifier = {
+			factor = 0.5
+			any_owned_province = {
+				province_group = luna_river_basin
+			}
+		}
+		modifier = {
+			factor = 0.1
+			is_rival = A33
+		}
+		modifier = {
+			factor = 0.5
+			NOT = {
+				has_opinion = {
+					who = A33
+					value = 0
+				}
+			}	
+		}
+	}
+	
+	2 = { #Defend
+		factor = 4
+		modifier = {
+			factor = 2
+			any_owned_province = {
+				province_group = luna_river_basin
+			}	
+		}	
+		modifier = {
+			factor = 4
+			is_rival = A33
+		}
+		modifier = {
+			factor = 0.5
+			has_opinion = {
+				who = A33
+				value = 50
+			}
+		}
+		modifier = {
+			factor = 0.5
+			has_opinion = {
+				who = A33
+				value = 100
+			}
+		}
+		modifier = {
+			factor = 0.2
+			alliance_with = A33
+		}
+		modifier = {
+			factor = 0.25
+			A33 = { is_threat = ROOT }
+		}
+		modifier = {
+			factor = 0.5
+			A33 = { has_ruler_flag = verne_is_alvar_IV }
+		}
+	}
+}

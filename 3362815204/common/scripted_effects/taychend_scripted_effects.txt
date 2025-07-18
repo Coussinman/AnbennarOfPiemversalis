@@ -96,12 +96,14 @@ taychend_capacity_release = {
 				any_owned_province = {
 					any_core_country = { exists = no }
 					NOT = { has_province_flag = taychend_capital_area }
+					controlled_by = ROOT
 				}
 			}
 			random_owned_province = {
 				limit = {
 					any_core_country = { exists = no }
 					NOT = { has_province_flag = taychend_capital_area }
+					controlled_by = ROOT
 				}
 				random_core_country = {
 					limit = { exists = no }
@@ -116,6 +118,11 @@ taychend_capacity_release = {
 					}
 				}
 			}
+		}
+		every_subject_country = { #Released tags dont join ongoing wars
+			limit = { is_at_war = no }
+			join_all_defensive_wars_of = ROOT
+			join_all_offensive_wars_of = ROOT
 		}
 	}
 }
@@ -173,7 +180,7 @@ taychend_capacity_feed = {
 
 taychend_ruler_general = {
 	if = {
-		limit = { NOT = { is_monarch_leader = yes } }
+		limit = { NOT = { is_monarch_leader = yes has_ruler_modifier = exceptional_willpower_100 } }
 		if = {
 			limit = { is_female = yes }
 			convert_female_ruler_to_general = yes
@@ -301,8 +308,36 @@ update_kamrayakvals_war_modifier = {
 }
 
 free_taychend_reform_effect = {
-	custom_tooltip = free_taychend_reform_tt
-	hidden_effect = { set_country_flag = free_taychend_reform_flag }
+	custom_tooltip = free_taychend_reform_$amount$_tt
+	hidden_effect = { 
+		ROOT = {
+			change_variable = {
+				which = taychendi_free_reform
+				value = $amount$
+			}
+		} 
+	}
+}
+
+taychend_remove_free_reform = {
+	hidden_effect = {
+		if = {
+			limit = { has_country_flag = taychend_free_reform_$reform$ }
+			clr_country_flag = taychend_free_reform_$reform$
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					which = taychendi_free_reform
+					value = 1
+				}
+			}
+			change_variable = {
+				which = taychendi_free_reform
+				value = -1
+			}
+		}
+	}
 }
 
 #####################################

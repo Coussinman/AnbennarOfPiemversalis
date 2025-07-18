@@ -1,21 +1,22 @@
-#_______________________________________________________________#
-#		:Files to edit when adding inventions Checklist:		#
-#			1. estate_privleges/estate_artifice_privileges.txt	#
-#			2. estates/99_artificers.txt						#
-#			3. scripted_effects/artifice_scripted_effects.txt	#
-#			4. events/ArtificeResearch.txt						#
-#			5. common/custom_gui/countrydecisionsview.txt		#
-#			6. Don't forget to localize your work				#
-#---------------------------------------------------------------#
-#			:OPTIONAL: GFX/GUI editers only:					#
-#			7. interface/countrydecisionsview.gui				#
-#			8. interface/countrydecisionsview.gfx				#
-#																#
-#			:GFX Assets Folder: 								#
-#			9. gfx/interface/custom_gui/artificery				#
-#																#
-#			Written By: Tators/River Doge						#
-#_______________________________________________________________#
+#___________________________________________________________________#
+#		:Files to edit when adding inventions Checklist:			#
+#			1. estate_privleges/estate_artifice_privileges.txt		#
+#			2. estates/99_artificers.txt							#
+#			3. scripted_effects/artifice_scripted_effects.txt		#
+#			4. events/ArtificeResearch.txt							#
+#			5. common/custom_gui/countrydecisionsview.txt			#
+#			6. scripted_triggers/anb_scripted_triggers_artifice.txt	#
+#			7. Don't forget to localize your work					#
+#-------------------------------------------------------------------#
+#			:OPTIONAL: GFX/GUI editers only:						#
+#			7. interface/countrydecisionsview.gui					#
+#			8. interface/countrydecisionsview.gfx					#
+#																	#
+#			:GFX Assets Folder: 									#
+#			9. gfx/interface/custom_gui/artificery					#
+#																	#
+#			Written By: Tators/River Doge							#
+#___________________________________________________________________#
 estate_artificers = {
 	icon = 6
 
@@ -261,12 +262,17 @@ estate_artificers = {
 			has_country_flag = karakhanbar_orcish_artificers
 		}
 	}
-
-	custom_name = { #ACE
-		desc = estate_magmascales_artificers
+	
+	custom_name = {
+		desc = estate_xalgazelag
 		trigger = {
-			has_country_flag = AC5_lava_engineers
+			is_or_was_tag = { tag = A49 }
 		}
+	}
+
+	custom_name = {
+		desc = S15_aquaculture_guild
+		trigger = { tag = S15 }
 	}
 
 	color = { 191 78 10 }
@@ -314,6 +320,12 @@ estate_artificers = {
 		estate_artificers_focus_on_artificer_units
 		estate_artificers_draft_artificers #no effect, what is this?
 		estate_artifice_wishcrafters_lazzaward #Mount Lazzaward Reward
+		estate_artificers_organization_strict_state_supervision #Pashaine
+
+		#estate_artificers_karshyr
+		#estate_artificers_karshyr_improved
+
+		z22_steady_iteration_privilege
 		
 		# Inventions
 		
@@ -460,7 +472,7 @@ estate_artificers = {
 		artifice_invention_scrap_mechs
 		#20
 		artifice_invention_controlled_rage_serum
-		artifice_invention_codorran_powered_exosuit
+		artifice_invention_coddorran_powered_exosuit
 		artifice_invention_giantshape_warframe
 		artifice_invention_gu_boats
 		artifice_invention_eplusplus_compound
@@ -581,7 +593,7 @@ estate_artificers = {
 		#Missions Misc
 		artifice_invention_vg_musket_precursor_edition #30
 		artifice_invention_spirit_proof_exoskeleton #Arawekelin 10
-		artifice_invention_yingzhen_antibeacons #Yingzhin 10
+		artifice_invention_yingzhen_antibeacons #Yingzhen 10
 		artifice_invention_asra_model_golem_peacekeepers #Khugdihr 20
 		artifice_invention_asra_model_golem_army #Khugdihr 20
 		artifice_invention_honsai_reinforced_cannons #Hon Sai 20
@@ -601,17 +613,19 @@ estate_artificers = {
 		artifice_invention_spirit_capture_tech #Maghargma 20
 		artifice_invention_bramble_burners #Brambleskinner 10
 		artifice_invention_kobildzan_draconic_ascension #Kobildzan 10
-
-		#ACE
-		artifice_invention_gerudian_autorowers #Gerudians 20
-		artifice_invention_gerudian_axepistol #Gerudians 20
-		artifice_invention_gerudian_weightless_holds #Gerudians 20
-		artifice_invention_skaldhyrric_tale_generator #Skaldhyrric Faith 20
-		artifice_invention_obsidian_settlement_generation_kit #Magmascales 30
-		artifice_invention_bioartificed_fireplants #Magmascales 20
-		artifice_invention_flamewoven_clothing #Magmascales 30
-		artifice_invention_rock_melter_mk1 #Magmascales 20
-		AC5_engineer_bureaucracy #Magmascales not invention
+		artifice_invention_rezankand_phoenix #Rezankand 10
+		artifice_invention_sunplate_armors #Rezankand 20
+		artifice_invention_light_matrix_supply #Rezankand 20
+		artifice_invention_light_matrix_logistic #Rezankand 20
+		artifice_invention_rezankand_colossus #Rezankand 20
+		artifice_invention_wyvern_blood_tincture #Xanzerbexis 20
+		artifice_invention_gnollverns #Xanzerbexis 30
+		artifice_invention_wyvern_reactive_mage_shield #Verne 20
+		artifice_invention_wyvern_mithril_scale_plating #Verne 20
+		artifice_invention_wyvern_incendiary_nebulizers #Verne 20
+		artifice_invention_innate_windshaping #Celmaldor 20
+		artifice_invention_icestorm_cannons #Celmaldor 20
+		artifice_invention_sustaining_arks #Celmaldor 10 
 	}
 	
 	agendas = {

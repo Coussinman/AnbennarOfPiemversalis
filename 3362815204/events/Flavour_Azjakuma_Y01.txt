@@ -173,7 +173,6 @@ country_event = {
 				id = flavor_azjakuma.18
 			}
 		}
-		hidden_effect = { clr_country_flag = oni_truce_happened }
 	}
 	option = {
 		name = flavor_azjakuma.15.b #do not make truce offer
@@ -186,7 +185,6 @@ country_event = {
 				days = 365
 			}
 		}
-		hidden_effect = { clr_country_flag = oni_truce_happened }
 	}
 }
 
@@ -239,7 +237,7 @@ country_event = {#command rejects
 	}
 }
 
-country_event = { #Azjakuma Deal initial offer recieved
+country_event = { #Azjakuma Deal initial offer received
 	id = flavor_azjakuma.18
 	title = flavor_azjakuma.18.t
 	desc = flavor_azjakuma.18.d
@@ -250,14 +248,15 @@ country_event = { #Azjakuma Deal initial offer recieved
 
 	option = { #accept offer
 		name = flavor_azjakuma.18.a
-		ai_chance = {
-			factor = 100
-		}
+		ai_chance = { factor = 1 }
 		highlight = yes
 		
 		custom_tooltip = command_check_gov_bar_hint_tt
 		add_truce_with = Y01
-		add_truce_with = Y89 #yuantsai
+		if = {
+			limit = { Y89 = { ai = yes } }
+			add_truce_with = Y89 #yuanszi
+		}
 		add_government_power = {
 			mechanic_type = command_korashi_mechanic
 			power_type = korashi_reserves
@@ -365,7 +364,10 @@ country_event = {
 		has_country_flag = oni_birb_immigration_allowed
 		any_owned_province = {
 			is_core = ROOT
-			culture = shuvuush
+			OR = {
+				culture = shuvuush
+				culture = kuuldaar
+			}
 			trade_goods = grain
 			NOT = {
 				has_province_modifier = ogre_minority_integrated_large
@@ -378,7 +380,10 @@ country_event = {
 		hidden_effect = {
 			random_core_province = {
 				limit = {
-					culture = shuvuush
+					OR = {
+						culture = shuvuush
+						culture = kuuldaar
+					}
 					trade_goods = grain
 					NOT = {
 						has_province_modifier = ogre_minority_integrated_large
@@ -650,7 +655,7 @@ country_event = {
 	fire_only_once = yes
 
 	#the cost (stab/rebels) is affected by the flags set in events 30 and 31
-	option = { #demon empire, this will expand into yanshen, xianjie, shuvuushudi, odheongu, and up to the yanhe in shamakhad
+	option = { #demon empire, this will expand into yanshen, xianjie, shuvuushudi, gowon, and up to the yanhe in shamakhad
 		name = flavor_azjakuma.32.b #how to tell paths were cut, the only option is labeled 'b'
 		ai_chance = { factor = 25 }
 
@@ -1147,7 +1152,7 @@ country_event = { #azjakuma renew truce with command
 	}
 }
 
-country_event = { #command recieves renewal
+country_event = { #command receives renewal
 	id = flavor_azjakuma.106
 	title = flavor_azjakuma.106.t
 	desc = flavor_azjakuma.106.d
@@ -1209,7 +1214,7 @@ country_event = { #command recieves renewal
 	}
 }
 
-country_event = { #command doesn't recieve renewal
+country_event = { #command doesn't receive renewal
 	id = flavor_azjakuma.107
 	title = flavor_azjakuma.107.t
 	desc = flavor_azjakuma.107.d
@@ -1497,7 +1502,7 @@ country_event = { #Shinukhorchi Menu
 		}
 
 		add_country_modifier = {
-			name = estate_shinukhorchi_korashi_talisman_mod #-15% shock damage recieved
+			name = estate_shinukhorchi_korashi_talisman_mod #-15% shock damage received
 			duration = 3650 #10 years
 		}
 		
@@ -3719,7 +3724,10 @@ province_event = {
 				has_country_flag = oni_birb_caution_setup
 			}
 		}
-		culture = shuvuush
+		OR = {
+			culture = shuvuush
+			culture = kuuldaar
+		}
 		OR = {
 			NOT = {
 				has_province_modifier = azjakuma_birb_rejection #-10 mis strength, +3 unrest
@@ -3746,7 +3754,10 @@ province_event = {
 			owner = {
 				every_owned_province = {
 					limit = {
-						culture = shuvuush
+						OR = {
+							culture = shuvuush
+							culture = kuuldaar
+						}
 						NOT = {
 							has_province_modifier = azjakuma_birb_rejection
 						}
@@ -3773,7 +3784,10 @@ province_event = {
 			owner = {
 				every_owned_province = {
 					limit = {
-						culture = shuvuush
+						OR = {
+							culture = shuvuush
+							culture = kuuldaar
+						}
 						NOT = {
 							has_province_modifier = azjakuma_birb_caution
 						}
@@ -4961,7 +4975,7 @@ country_event = {
 }
 
 country_event = {
-	#yuantsai recieves event
+	#yuantsai receives event
 	id = flavor_azjakuma.2651
 	title = flavor_azjakuma.2651.t
 	desc = flavor_azjakuma.2651.d
@@ -6165,7 +6179,7 @@ country_event = {
 	trigger = { any_owned_province = { NOT = { religion = devouring_path } } }
 
 	option = {
-		name = flavor_azjakuma.2702
+		name = flavor_azjakuma.2702.a
 		random_owned_province = {
 			limit = { NOT = { religion = devouring_path } }
 			spawn_rebels = {

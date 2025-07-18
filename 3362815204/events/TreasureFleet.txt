@@ -286,7 +286,7 @@ province_event = {
 	}
 }
 
-#Somyonghon Outcome
+#Nakseseom Outcome
 province_event = {
 	id = treasurefleet.4
 	title = treasurefleet.4.t
@@ -314,7 +314,7 @@ province_event = {
 				10 = {
 					modifier = {
 						factor = 3
-						has_global_flag = JY_LF_somyonghon_caught_first
+						has_global_flag = JY_LF_nakseseom_caught_first
 					}
 					modifier = {
 						factor = 3
@@ -324,7 +324,7 @@ province_event = {
 						}
 					}
 					if = {
-						limit = { owner = { has_country_flag = JY_LF_somyonghon_caught_first } }
+						limit = { owner = { has_country_flag = JY_LF_nakseseom_caught_first } }
 						JY_LF_damage_ship = yes
 						owner = { country_event = { id = treasurefleet.6 } }
 					}
@@ -348,16 +348,16 @@ province_event = {
 	}
 }
 
-#Caught Fleet looting Somyonghon (1st time per country)
+#Caught Fleet looting Nakseseom (1st time per country)
 country_event = {
 	id = treasurefleet.5
 	title = treasurefleet.5.t
 	desc = {
-		trigger = { religion = bangujonsi }
+		trigger = { religion = neokttareum }
 		desc = "treasurefleet.5.d1"
 	}
 	desc = {
-		trigger = { NOT = { religion = bangujonsi } }
+		trigger = { NOT = { religion = neokttareum } }
 		desc = "treasurefleet.5.d2"
 	}
 	picture = TREASURE_FLEET_SHIP_eventPicture
@@ -366,28 +366,28 @@ country_event = {
 	
 	option = {
 		name = treasurefleet.5.a
-		trigger = { religion = bangujonsi }
+		trigger = { religion = neokttareum }
 		custom_tooltip = JY_LF_watchful
-		set_country_flag = JY_LF_somyonghon_caught_first
+		set_country_flag = JY_LF_nakseseom_caught_first
 		set_global_flag = JY_LF_som_news
 	}
 	option = {
 		name = treasurefleet.5.b
 		trigger = {
 			NOT = {
-				religion = bangujonsi
+				religion = neokttareum
 				tag = Y15
 			}
 		}
 		custom_tooltip = JY_LF_watchful
-		set_country_flag = JY_LF_somyonghon_caught_first
+		set_country_flag = JY_LF_nakseseom_caught_first
 		set_global_flag = JY_LF_som_news
 	}
 	option = {
 		name = treasurefleet.5.c
-		trigger = { NOT = { religion = bangujonsi } }
+		trigger = { NOT = { religion = neokttareum } }
 		custom_tooltip = JY_LF_invited
-		set_country_flag = JY_LF_somyonghon_caught_first
+		set_country_flag = JY_LF_nakseseom_caught_first
 		set_global_flag = JY_LF_som_news
 		set_global_flag = JY_LF_som_yes
 		5419 = {
@@ -399,7 +399,7 @@ country_event = {
 	}
 }
 
-#Caught Fleet looting Somyonghon (Successive times)
+#Caught Fleet looting Nakseseom (Successive times)
 country_event = {
 	id = treasurefleet.6
 	title = treasurefleet.6.t
@@ -415,7 +415,7 @@ country_event = {
 	}
 }
 
-#Sail Past Buogoj
+#Sail Past Onman
 province_event = {
 	id = treasurefleet.7
 	title = treasurefleet.7.t
@@ -1008,6 +1008,62 @@ province_event = {
 #	}
 #}
 
+#Centaur stow-away
+province_event = {
+	id = treasurefleet.25
+	title = treasurefleet.25.t
+	desc = treasurefleet.25.d
+	picture = TREASURE_FLEET_SHIP_eventPicture
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		JY_LF_visit = yes
+	}
+	
+	option = {
+		name = treasurefleet.25.a
+		trigger = {
+			owner = { has_idea_group = exploration_ideas }
+		}
+		highlight = yes
+		owner = {
+			define_explorer = {
+				shock = 0
+				fire = 0
+				manuever = 0
+				siege = 0
+				name = "Ushen Shingyuul"
+			}
+			medium_increase_of_centaur_tolerance_effect = yes
+		}
+		JY_LF_trade = yes
+	}
+	
+	option = {
+		name = treasurefleet.25.b
+		owner = {
+			add_sailors = 1
+			small_increase_of_centaur_tolerance_effect = yes
+		}
+		JY_LF_trade = yes
+	}
+	
+	option = {
+		name = treasurefleet.25.c
+		owner = {
+			define_general = {
+				shock = 3
+				fire = 0
+				manuever = 4
+				siege = 0
+				name = "Ushen Shingyuul"
+			}
+			small_decrease_of_centaur_tolerance_effect = yes
+		}
+	}
+}
+
 #Decide next location
 province_event = {
 	id = treasurefleet.90
@@ -1024,7 +1080,7 @@ province_event = {
 	
 	option = {
 		name = treasurefleet.90.a
-		if = { #Buogoj, closed at start
+		if = { #Onman, closed at start
 			limit = {
 				5356 = {
 					has_province_modifier = JY_LF_port
@@ -1322,6 +1378,18 @@ province_event = {
 						#	}
 						#	province_event = { id = treasurefleet.24 days = 30 }
 						#}
+						5 = {		#need to keep this rare, but if more events get made should bump this up a bit
+							modifier = {
+								factor = 0
+								NOT = {
+									owner = {
+										has_country_modifier = racial_pop_centaur_expulsion
+										has_country_modifier = racial_pop_centaur_purge
+									}
+								}
+							}
+							province_event = { id = treasurefleet.25 days = 30 }
+						}
 						1 = { province_event = { id = treasurefleet.8 days = 30 } } #Normal Encounter (included in case no other flavor event is possible)
 					}
 				}
@@ -1496,7 +1564,7 @@ country_event = {
 			add_treasury = 10
 		}
 		if = {
-			limit = { has_global_flag = JY_LF_somyonghon_caught_first }
+			limit = { has_global_flag = JY_LF_nakseseom_caught_first }
 			country_event = { id = treasurefleet.101 }
 		}
 		custom_tooltip = JY_LF_cash

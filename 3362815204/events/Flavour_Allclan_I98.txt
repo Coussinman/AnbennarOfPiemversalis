@@ -7,7 +7,7 @@ country_event = {
 	id = allclan.1
 	title = allclan.1.title
 	desc = allclan.1.desc
-	picture = CIVIL_WAR_eventPicture
+	picture = ARTIFICE_GEAR_eventPicture
 
 	fire_only_once = yes
 
@@ -39,38 +39,7 @@ country_event = {
 						NOT = { has_country_flag = no_longer_monstrous }
 					}
 				}
-				every_country = {
-				    limit = { has_opinion_modifier = { who = ROOT modifier = semi_monstrous } }
-				    remove_opinion = { who = ROOT modifier = semi_monstrous }
-				    reverse_remove_opinion = { who = ROOT modifier = semi_monstrous }
-				}
-				every_country = {
-				    limit = { has_opinion_modifier = { who = ROOT modifier = both_monstrous } }
-				    remove_opinion = { who = ROOT modifier = both_monstrous }
-				    reverse_remove_opinion = { who = ROOT modifier = both_monstrous }
-				}
-				every_subject_country = {
-				    limit = { is_colonial_nation = yes NOT = { has_country_flag = no_longer_monstrous } }
-				    set_country_flag = no_longer_monstrous
-				    clr_country_flag = removing_monstrous
-				    every_country = {
-				        limit = { has_opinion_modifier = { who = ROOT modifier = root_monstrous } }
-				        remove_opinion = { who = ROOT modifier = root_monstrous }
-				        reverse_remove_opinion = { who = ROOT modifier = root_monstrous }
-				    }
-				    every_country = {
-				        limit = { has_opinion_modifier = { who = ROOT modifier = semi_monstrous } }
-				        remove_opinion = { who = ROOT modifier = semi_monstrous }
-				        reverse_remove_opinion = { who = ROOT modifier = semi_monstrous }
-				    }
-				    every_country = {
-				        limit = { has_opinion_modifier = { who = ROOT modifier = both_monstrous } }
-				        remove_opinion = { who = ROOT modifier = both_monstrous }
-				        reverse_remove_opinion = { who = ROOT modifier = both_monstrous }
-				    }
-				}
-				clr_country_flag = removing_monstrous
-				set_country_flag = no_longer_monstrous
+				hidden_effect = { finish_demonsterization_effect = yes }
 			}
 		}
 	}
@@ -115,7 +84,7 @@ country_event = {
 	id = allclan.2
 	title = allclan.2.title
 	desc = allclan.2.desc
-	picture = CIVIL_WAR_eventPicture
+	picture = GOBLINS_AND_SPIDER_eventPicture
 
 	is_triggered_only = yes
 	
@@ -3973,7 +3942,7 @@ country_event = {
 				days = 180
 			}
 		}
-		custom_tooltip = "Current ruler dies"
+		custom_tooltip = allclan.2000.a_tt
 	}
 }
 
@@ -4716,7 +4685,7 @@ country_event = {
 						has_tax_building_trigger = yes
 					}
 					if = {
-						limit = { adm_tech = 19 }
+						limit = { ROOT = { adm_tech = 19 } }
 						add_building = cathedral
 					}
 					else = {
@@ -4729,11 +4698,11 @@ country_event = {
 						has_trade_building_trigger = yes
 					}
 					if = {
-						limit = { dip_tech = 22 }
+						limit = { ROOT = { dip_tech = 22 } }
 						add_building = stock_exchange
 					}
 					else_if = {
-						limit = { dip_tech = 17 }
+						limit = { ROOT = { dip_tech = 17 } }
 						add_building = trade_depot
 					}
 					else = {
@@ -4746,7 +4715,7 @@ country_event = {
 						has_production_building_trigger = yes
 					}
 					if = {
-						limit = { adm_tech = 24 }
+						limit = { ROOT = { adm_tech = 24 } }
 						add_building = counting_house
 					}
 					else = {
@@ -4759,7 +4728,7 @@ country_event = {
 						has_manpower_building_trigger = yes
 					}
 					if = {
-						limit = { mil_tech = 16 }
+						limit = { ROOT = { mil_tech = 16 } }
 						add_building = training_fields
 					}
 					else = {
@@ -4772,7 +4741,7 @@ country_event = {
 						has_forcelimit_building_trigger = yes
 					}
 					if = {
-						limit = { mil_tech = 22 }
+						limit = { ROOT = { mil_tech = 22 } }
 						add_building = conscription_center
 					}
 					else = {
@@ -4785,7 +4754,7 @@ country_event = {
 						has_courthouse_building_trigger = yes
 					}
 					if = {
-						limit = { adm_tech = 22 }
+						limit = { ROOT = { adm_tech = 22 } }
 						add_building = town_hall
 					}
 					else = {

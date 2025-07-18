@@ -560,6 +560,7 @@ country_event = {
 			duration = -1
 		}
 		clr_country_flag = B47_elrac_in_rebellion
+		give_bladeskeep_monument_worthy_reward = yes
 	}
 }
 
@@ -2027,12 +2028,9 @@ country_event = {
 	option = {	
 		name = "flavor_stalbor.29.e"
 		ai_chance = { factor = 0 }
-		every_known_country = { 
-			add_aggressive_expansion = {
-				who = ROOT
-				value = -5
-				apply_calc = yes
-			}
+		add_ae_for_known_countries_with_limit = {
+			value = -5
+			apply_calc = yes
 		}
 		country_event = { 
 			id = flavor_stalbor.30
@@ -2486,7 +2484,7 @@ country_event = {
 		add_racial_minority_and_dev_preferred_terrain = { race = kobold dev_amount = 1 }
 		hidden_effect = {
 			country_event = {
-				id = flavor_stalbor.35
+				id = flavor_stalbor.40
 				days = 1460
 			}
 		}

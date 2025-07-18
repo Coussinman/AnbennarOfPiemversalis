@@ -1,101 +1,4 @@
-custom_button = {
-    name = dig_deeper_capital
-    potential = {
-		OR = {
-			has_terrain = dwarven_hold
-			has_terrain = dwarven_hold_surface
-		}
-		#Owner needs to be you, and also not be native/horde since raze/settle buttons get in the way.
-		owner = {
-			tag = FROM
-			NOT = {
-				government = native
-				is_nomad = yes
-			}
-		}
-		#Blorcs can't repair non-capital holds
-		OR = {
-			is_capital = yes
-			NOT = { owner = { dwarovar_orc_culture_primary = yes } }
-		}
-	}
-	trigger = {
-		#Can use button to repair non-capital holds, but not dig non-capital holds without centralizing hold operations
-		if = {
-			limit = {
-				NOT = {
-					is_capital = yes
-					has_province_modifier = ruined_hold
-					has_province_modifier = partially_ruined_hold
-					has_province_modifier = damaged_hold
-					has_province_modifier = infested_hold
-				}
-			}
-			custom_trigger_tooltip = {
-				tooltip = has_centralized_hold_operations_tt
-				OR = {
-					owner = {
-						has_country_flag = hold_operation
-						}
-					AND = {
-						province_id = 4039
-						owner = {
-							mission_completed = AC5_exploit_fissures
-						}
-					}
-				}
-			}
-		}
-	}
-	effect = {
-		hidden_effect = {
-			if = {
-				limit = { NOT = { has_province_flag = diggy_diggy_estimate_flag } }
-				#Open digging menu
-				set_province_flag = diggy_diggy_estimate_flag
-				#Set up the digging preview cost and time.
-				if = {
-					limit = {
-						OR = {
-							has_province_modifier = ruined_hold
-							has_province_modifier = partially_ruined_hold
-							has_province_modifier = damaged_hold
-						}
-					}
-					owner = {
-						PREV = {
-							setup_restoration_speed = yes
-						}
-					}
-				}
-				else = {
-					if = {
-						limit = { is_capital = yes }
-						owner = {
-							PREV = {
-								setup_digging_deeper_capital = yes
-							}
-						}
-					}
-					else = {
-						owner = {
-							PREV = {
-								setup_digging_deeper_non_capital = yes
-							}
-						}
-					}
-				}
-			}
-		
-			else = {
-				clr_province_flag = diggy_diggy_estimate_flag
-			}
-		}
-
-	}
-	tooltip = dig_hold_button_tt
-}
-
+### Diggy System Stuff
 custom_icon = {
     name = diggy_diggy_estimate
     potential = {
@@ -124,17 +27,12 @@ custom_button = {
 		has_subterranean_race = yes
 		owner = {
 			if = {
-				limit = {
-					NOT = {
-						has_country_modifier = dwarven_administration
-					}
-				}
+				limit = { NOT = { has_country_modifier = dwarven_administration } }
 				if = {
 					limit = {
 						OR = {
 							dwarovar_goblin_culture_primary = yes
 							primary_culture = darkscale_kobold
-							primary_culture = magmascale_kobold
 						}
 					}
 					adm_tech = 5
@@ -171,14 +69,10 @@ custom_button = {
 			limit = { has_province_modifier = incomplete_hold }
 			NOT = { has_province_modifier = incomplete_hold }
 		}
-		if = {
-			limit = { has_province_flag = cannot_dig } # Generalized inability to dig.
-			if = {
-				limit = { owner = { tag = F23 } }
-				custom_trigger_tooltip = {
-					tooltip = F23_cannot_dig_why
-					always = no
-				}
+		if = { limit = { has_province_modifier = F23_flooded_depths }
+			custom_trigger_tooltip = {
+				tooltip = F23_cannot_dig_why
+				always = no
 			}
 		}
 		hidden_trigger = { NOT = { has_province_modifier = incomplete_hold_0 } }
@@ -558,4 +452,1053 @@ custom_icon = {
 		}
 	}
 	tooltip = diggy_hole_progress_tt
+}
+
+custom_icon = {
+	name = add_parliament_forbidden
+	potential = {
+		owned_by = FROM
+		has_seat_in_parliament = no
+		FROM = { has_country_flag = cant_manually_add_parliament_seats }
+	}
+	tooltip = add_parliament_forbidden_tt
+}
+
+
+
+##############################################################################################################################################################################
+### PROVINCE UI GLOBAL
+##############################################################################################################################################################################
+# to add a button here you need to add a new one in the appropriate slot below the others
+# these behave like decisions
+# after that you need to add them in provinceview.gui, in three spots, do it like it's already done there to find the places CTRL+F 'province button UI' in the gui file
+##############################################################################################################################################################################
+
+#generic assets
+custom_button = { #Button for the UI when building UI is closed
+	name = province_button_button
+	tooltip = ""
+	potential = {
+		owner = {
+			OR = {
+				tag = FROM
+				is_subject_of = FROM
+				AND = {
+					FROM = { is_or_was_tag = { tag = Z22 } }
+					is_giesadh_or_trade_league_member = yes
+				}
+			}
+			FROM = {
+				NOT = { has_country_flag = province_button_UI_opened }
+			}
+		}
+	}
+	trigger = { }
+	effect = { FROM = { set_country_flag = province_button_UI_opened } }
+}
+custom_button = { #Button to close the UI when building UI is closed
+	name = province_button_close_button
+	tooltip = ""
+	potential = { }
+	trigger = { }
+	effect = { FROM = { clr_country_flag = province_button_UI_opened } }
+}
+custom_window = { #Window for the UI when building UI is closed
+    name = province_button_window_closed
+    potential = {
+        owner = {
+            OR = {
+                tag = FROM
+                is_subject_of = FROM
+				AND = {
+					FROM = { is_or_was_tag = { tag = Z22 } }
+					is_giesadh_or_trade_league_member = yes
+				}
+            }
+            FROM = {
+                has_country_flag = province_button_UI_opened
+            }
+        }
+    }
+}
+custom_window = { #Window for the UI when building UI is open and no monument
+    name = province_button_window_no_monument
+    potential = {
+		owner = {
+			OR = {
+				tag = FROM
+				is_subject_of = FROM
+				AND = {
+					FROM = { is_or_was_tag = { tag = Z22 } }
+					is_giesadh_or_trade_league_member = yes
+				}
+			}
+		}
+    }
+}
+custom_window = { #Window for the UI when building UI is open and there is a monument
+    name = province_button_window_with_monument
+    potential = {
+		has_great_project = {
+			type = any
+			tier = 0
+		}
+		owner = {
+			OR = {
+				tag = FROM
+				is_subject_of = FROM
+				AND = {
+					FROM = { is_or_was_tag = { tag = Z22 } }
+					is_giesadh_or_trade_league_member = yes
+				}
+			}
+		}
+    }
+}
+
+#Slot 1 - Continent wide button
+custom_button = { #Dummy closed
+	name = GFX_province_button_dummy_1
+	potential = { }
+	trigger = {
+		always = no
+	}
+	effect = { }
+	tooltip = unified_province_ui_no_continent_button_tt
+}
+custom_button = { #Sedentarization closed
+	name = sedentarization_make_outpost
+	tooltip = sed_establish_outpost_button
+	potential = {
+		has_province_modifier = sed_forbidden
+		owner = {
+			tag = FROM
+			culture_is_centaur = no
+		}
+		NOT = { has_province_modifier = sed_system_completed }
+	}
+	trigger = {
+		# Hide the normal requirements if there's already an outpost
+		if = {
+			limit = { sedentarization_province_has_outpost = no }
+			FROM = { sedentarization_country_can_place_outpost = yes }
+			sedentarization_province_can_recieve_outpost = { owner_scope = FROM }
+			if = {
+				limit = {
+					OR = {
+						has_province_flag = sed_incomplete_sedentarization
+						has_province_flag = sed_semi_complete_sedentarization
+					}
+					owner = { has_country_flag = sed_placing_new_phase_two_outpost }
+				}
+				custom_trigger_tooltip = {
+					tooltip = sed_placing_new_phase_two_outpost_tt
+					always = no
+				}
+			}
+		}
+		# Show the system explainer instead. (TODO probably temporary)
+		else = {
+			custom_trigger_tooltip = {
+				tooltip = sedentarization_explainer_tt
+				always = no
+			}
+		}
+	}
+	effect = {
+		if = {
+			limit = { sedentarization_province_has_outpost = no }
+			sedentarization_place_brand_new_outpost = yes
+		}
+	}
+}
+custom_button = { #Merfolk Settlements
+	name = merfolk_settlement_button
+	tooltip = merfolk_settlement_tt
+	potential = {
+		owner = {
+			tag = FROM
+		}
+		if = { #generate
+			limit = { owner = { has_country_flag = merfolk_opinion_allied } }
+			province_group = dynamic_merfolk_region
+			NOT = { has_province_flag = merfolk_settlement }
+		}
+		else = { #interact
+			has_province_flag = merfolk_settlement
+			owner = { NOT = { has_country_flag = merfolk_opinion_allied } }
+		}
+	}
+	trigger = {
+		if = { #generate
+			limit = { owner = { has_country_flag = merfolk_opinion_allied } }
+			province_group = dynamic_merfolk_region
+			NOT = { has_province_flag = merfolk_settlement }
+			owner = { has_country_flag = merfolk_opinion_allied }
+			development = 15
+			has_trade_building_trigger = yes
+			OR = { has_shipyard_building_trigger = yes has_dock_building_trigger = yes }
+			
+			if = {
+				limit = { region = fahvanosy_region }
+				NOT = { 6678 = { check_variable = { which = fahvanosyMerfolkCap value = 2 } } }
+			}
+			else_if = {
+				limit = { region = odu_kherass_region }
+				NOT = { 6678 = { check_variable = { which = oduKherassMerfolkCap value = 2 } } }
+			}
+			else_if = {
+				limit = { region = ishyamtumu_region }
+				NOT = { 6678 = { check_variable = { which = ishyamtumuMerfolkCap value = 1 } } }
+			}
+			else_if = {
+				limit = { region = ringlet_isles_region }
+				NOT = { 6678 = { check_variable = { which = ringletIslesMerfolkCap value = 3 } } }
+			}
+			else_if = {
+				limit = { region = bamaliwuni_region }
+				NOT = { 6678 = { check_variable = { which = bamaliwuniMerfolkCap value = 1 } } }
+			}
+			else_if = {
+				limit = { region = throden_gokad_region }
+				NOT = { 6678 = { check_variable = { which = throdenGokadMerfolkCap value = 4 } } }
+			}
+			else_if = {
+				limit = { region = ardimya_region }
+				NOT = { 6678 = { check_variable = { which = ardimyaMerfolkCap value = 7 } } }
+			}
+			else_if = {
+				limit = { region = jasiir_jadid_region }
+				NOT = { 6678 = { check_variable = { which = jasiirJadidMerfolkCap value = 7 } } }
+			}
+		}
+		else = { #interact
+			custom_trigger_tooltip = {
+				tooltip = improve_merfolk_five_years_tt
+				NOT = { has_province_modifier = merfolk_recently_interacted }
+			}
+		}
+	}
+
+	effect = {
+		if = { #generate
+			limit = { owner = { has_country_flag = merfolk_opinion_allied } }
+			province_event = { id = merfolk_events.7 } 
+		}
+		else = { #interact
+			hidden_effect = { add_permanent_province_modifier = { name = merfolk_recently_interacted duration = 1825 } }
+			province_event = { id = merfolk_events.0 }
+		}
+	}
+}
+
+#Slot 2 - Province type button
+custom_button = { #Dummy closed
+	name = GFX_province_button_dummy_2
+	potential = { }
+	trigger = {
+		always = no
+	}
+	effect = { }
+	tooltip = unified_province_ui_no_province_specific_button_tt
+}
+custom_button = { #Diggy with ui closed
+	name = dig_deeper_capital
+    potential = {
+		OR = {
+			has_terrain = dwarven_hold
+			has_terrain = dwarven_hold_surface
+		}
+		#Owner needs to be you, and also not be native/horde since raze/settle buttons get in the way.
+		owner = {
+			tag = FROM
+		}
+		#Blorcs can't repair non-capital holds
+		OR = {
+			is_capital = yes
+			NOT = { owner = { dwarovar_orc_culture_primary = yes } }
+		}
+	}
+	trigger = { #not a scripted trigger because the first if stops at it's first check (is capital)
+		if = {
+			limit = {
+				NOT = {
+					is_capital = yes
+					has_province_modifier = ruined_hold
+					has_province_modifier = partially_ruined_hold
+					has_province_modifier = damaged_hold
+					has_province_modifier = infested_hold
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = has_centralized_hold_operations_tt
+				owner = { has_country_flag = hold_operation }
+			}
+		}
+		if = {
+			limit = { owner = { is_nomad = yes } }
+			owner = { NOT = { is_nomad = yes } }
+		}
+		if = {
+			limit = { owner = { government = native } }
+			owner = { NOT = { government = native } }
+		}
+	}
+	effect = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_province_flag = diggy_diggy_estimate_flag } }
+				#Open digging menu
+				set_province_flag = diggy_diggy_estimate_flag
+				#Set up the digging preview cost and time.
+				if = {
+					limit = {
+						OR = {
+							has_province_modifier = ruined_hold
+							has_province_modifier = partially_ruined_hold
+							has_province_modifier = damaged_hold
+						}
+					}
+					owner = {
+						PREV = {
+							setup_restoration_speed = yes
+						}
+					}
+				}
+				else = {
+					if = {
+						limit = { is_capital = yes }
+						owner = {
+							PREV = {
+								setup_digging_deeper_capital = yes
+							}
+						}
+					}
+					else = {
+						owner = {
+							PREV = {
+								setup_digging_deeper_non_capital = yes
+							}
+						}
+					}
+				}
+			}
+		
+			else = {
+				clr_province_flag = diggy_diggy_estimate_flag
+			}
+		}
+	}
+	tooltip = dig_hold_button_tt
+}
+custom_button = { #Ebonsteel Expand Infra replacement for players without DLC
+	name = ebonsteel_expand_infra_button
+	potential = {
+		province_group = ebonsteel_provinces
+		NOT = { has_dlc = "Leviathan" }
+		owner = {
+			OR = {
+				AND = {
+					capital_scope = { superregion = gerudia_superregion }
+					OR = {
+						AND = {
+							culture_group = gerudian
+							NOT = { primary_culture = reverian }			
+						}
+						primary_culture = blue_reachman
+						primary_culture = fjord_troll
+						primary_culture = jarnklo_harpy
+					}
+				}
+				has_country_modifier = ebonforging_rediscovered
+			}
+		}
+	}
+	trigger = {
+		if = { 
+			limit = {
+				owner = { NOT = { has_country_modifier = ebonforging_rediscovered } }
+			}
+			owner = { has_country_modifier = ebonforging_rediscovered }
+		}
+		if = {
+			limit = { has_province_modifier = ebonsteel_expand_infra_10 }
+			custom_trigger_tooltip = {
+				tooltip = ebonsteel_max_expand_infra_tt
+				always = no
+			}
+		}
+		else_if = {
+			limit = { has_province_modifier = ebonsteel_expand_infra_9 }
+			development = 150
+		}
+		else_if = {
+			limit = { has_province_modifier = ebonsteel_expand_infra_8 }
+			development = 135
+		}
+		else_if = {
+			limit = { has_province_modifier = ebonsteel_expand_infra_7 }
+			development = 120
+		}
+		else_if = {
+			limit = { has_province_modifier = ebonsteel_expand_infra_6 }
+			development = 105
+		}
+		else_if = {
+			limit = { has_province_modifier = ebonsteel_expand_infra_5 }
+			development = 90
+		}
+		else_if = {
+			limit = { has_province_modifier = ebonsteel_expand_infra_4 }
+			development = 75
+		}
+		else_if = {
+			limit = { has_province_modifier = ebonsteel_expand_infra_3 }
+			development = 60
+		}
+		else_if = {
+			limit = { has_province_modifier = ebonsteel_expand_infra_2 }
+			development = 45
+		}
+		else_if = {
+			limit = { has_province_modifier = ebonsteel_expand_infra_1 }
+			development = 30
+		}
+		else = {
+			development = 15
+		}
+		if = {
+			limit = { NOT = { has_province_modifier = ebonsteel_expand_infra_10 } }
+			owner = { treasury = 25 }
+		}
+	}
+	effect = {
+		if = {
+			limit = { has_province_modifier = ebonsteel_expand_infra_9 }
+			remove_province_modifier = ebonsteel_expand_infra_9
+			add_province_modifier = {
+				name = ebonsteel_expand_infra_10
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = { has_province_modifier = ebonsteel_expand_infra_8 }
+			remove_province_modifier = ebonsteel_expand_infra_8
+			add_province_modifier = {
+				name = ebonsteel_expand_infra_9
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = { has_province_modifier = ebonsteel_expand_infra_7 }
+			remove_province_modifier = ebonsteel_expand_infra_7
+			add_province_modifier = {
+				name = ebonsteel_expand_infra_8
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = { has_province_modifier = ebonsteel_expand_infra_6 }
+			remove_province_modifier = ebonsteel_expand_infra_6
+			add_province_modifier = {
+				name = ebonsteel_expand_infra_7
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = { has_province_modifier = ebonsteel_expand_infra_5 }
+			remove_province_modifier = ebonsteel_expand_infra_5
+			add_province_modifier = {
+				name = ebonsteel_expand_infra_6
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = { has_province_modifier = ebonsteel_expand_infra_4 }
+			remove_province_modifier = ebonsteel_expand_infra_4
+			add_province_modifier = {
+				name = ebonsteel_expand_infra_5
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = { has_province_modifier = ebonsteel_expand_infra_3 }
+			remove_province_modifier = ebonsteel_expand_infra_3
+			add_province_modifier = {
+				name = ebonsteel_expand_infra_4
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = { has_province_modifier = ebonsteel_expand_infra_2 }
+			remove_province_modifier = ebonsteel_expand_infra_2
+			add_province_modifier = {
+				name = ebonsteel_expand_infra_3
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = { has_province_modifier = ebonsteel_expand_infra_1 }
+			remove_province_modifier = ebonsteel_expand_infra_1
+			add_province_modifier = {
+				name = ebonsteel_expand_infra_2
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = { #to avoid weird tooltips
+				NOT = { has_province_modifier = ebonsteel_expand_infra_10 }
+				owner = { has_country_modifier = ebonforging_rediscovered }
+			} 
+			add_province_modifier = {
+				name = ebonsteel_expand_infra_1
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				NOT = { has_province_modifier = ebonsteel_expand_infra_10 }
+				owner = { has_country_modifier = ebonforging_rediscovered }
+			} 
+			owner = { add_treasury = -25 }
+		}
+	}
+	tooltip = ebonsteel_expand_infra_button_tt
+}
+
+#Slot 3 - Religion specific button
+custom_button = { #Dummy closed
+	name = GFX_province_button_dummy_3
+	potential = { }
+	trigger = {
+		always = no
+	}
+	effect = { }
+	tooltip = unified_province_ui_no_religion_button_tt
+}
+custom_button = { #Transmutative Path UI closed
+	name = transmutative_path_infuse_chi_button
+	potential = {
+		owner = {
+			tag = FROM
+			religion = transmutative_path
+		}
+	}
+	trigger = {
+		hidden_trigger = {
+			owner = {
+				NOT = {
+					OR = {
+						has_country_flag = transmutative_path_infuse_chi_menu_open
+						has_country_flag = transmutative_path_infuse_trade_goods_menu_open
+					}
+				}
+			}
+		}
+	}
+	effect = {
+		province_event = { id = transmutative_path.1 }
+	}
+	tooltip = infuse_chi_button_tt
+}
+
+#Slot 4 - Culture specific button
+custom_button = { #Dummy closed
+	name = GFX_province_button_dummy_4
+	potential = { }
+	trigger = {
+		always = no
+	}
+	effect = { }
+	tooltip = unified_province_ui_no_culture_button_tt
+}
+
+custom_button = {
+	name = harpy_roost_button
+	tooltip = harpy_roost_tt
+	potential = { 
+		owner = {
+			tag = FROM
+			culture_group = harpy
+			has_country_flag = harpy_roost_setup_completed # Won't work properly if setup hasn't been completed.
+		}
+		OR = {
+			NOT = { has_province_flag = harpy_roost_present }
+			AND = {
+				has_province_modifier = harpy_roost_mod_roost_fledgling
+				NOT = { has_province_modifier = harpy_roost_under_construction }
+			}
+			harpy_roost_st_can_build_tier_3_roost_potential = yes
+		}
+	}
+	frame = {
+		number = 1
+		trigger = {
+			NOT = { has_province_flag = harpy_roost_present }
+		}
+	}
+	frame = {
+		number = 2
+		trigger = {
+			has_province_modifier = harpy_roost_mod_roost_fledgling 
+		}
+	}
+	frame = {
+		number = 3
+		trigger = {
+			has_province_modifier = harpy_roost_mod_roost_flourishing_active
+			owner = {
+				has_country_flag = harpy_roost_tier_3_unlocked
+				NOT = {
+					is_or_was_tag = {
+						tag = Z88
+					}
+				}
+			}
+		}
+	}
+	frame = {
+		number = 4
+		trigger = {
+			has_province_modifier = harpy_roost_mod_roost_flourishing_active
+			owner = {
+				has_country_flag = harpy_roost_tier_3_unlocked
+				is_or_was_tag = {
+					tag = Z88
+				}
+			}
+		}
+	}
+	trigger = { 
+		if = { limit = { NOT = { has_province_flag = harpy_roost_present } }
+			harpy_roost_st_terrain_is_valid = yes
+			FROM = { adm_power = 20 }
+			controlled_by = owner
+		}
+		else_if = { limit = { has_province_modifier = harpy_roost_mod_roost_fledgling NOT = { has_province_modifier = harpy_roost_under_construction } } 
+			harpy_roost_st_terrain_is_valid = yes
+			FROM = { 
+				hidden_trigger = { adm_power = 50 } # Tooltip becomes cleaner like this.
+				variable_arithmetic_trigger = {
+					custom_tooltip = harpy_roost_st_dev_threshold_tt
+					export_to_variable = {
+						which = harpy_roost_own_and_subject_development
+						value = trigger_value:total_own_and_non_tributary_subject_development
+					}
+					check_variable = { which = harpy_roost_own_and_subject_development which = harpy_roost_var_next_threshold }
+				}
+			}
+			controlled_by = owner
+		}
+		else = {
+			harpy_roost_st_can_build_tier_3_roost_allow = yes
+			controlled_by = owner
+		}
+	}
+	effect = { 
+		if = { limit = { NOT = { has_province_flag = harpy_roost_present } }
+			harpy_roost_se_add_roost_tier_1 = yes
+		}
+		else_if = { limit = { has_province_modifier = harpy_roost_mod_roost_fledgling NOT = { has_province_modifier = harpy_roost_under_construction } } 
+			harpy_roost_se_add_roost_tier_2 = yes 
+		}
+		else = {
+			harpy_roost_se_add_roost_tier_3 = yes
+		}
+	}
+}
+
+custom_button = { #Wood Elf Ranger Camps
+	name = deepwoods_rangers_button
+	potential = {
+		owner = {
+			tag = FROM
+			primary_culture = wood_elf
+			OR = {
+				has_reform = wood_elf_salla
+				has_reform = the_great_salla
+				has_reform = autocracy_reform_sf
+				has_reform = oak_monarchy_reform
+			}
+		}
+		OR = {
+			superregion = deepwoods_superregion
+			region = domandrod_region
+		}
+		NOT = { has_terrain = fey_gladeway }
+		NOT = { has_terrain = gladeway }
+	}
+	trigger = {
+		if = { #If/Else for proper tooltips
+			limit = { NOT = { has_province_modifier = deepwoods_rangers_camp } }
+			is_below_grove_limit_trigger = yes
+			owner = {
+				mil_power = 10
+				treasury = 25
+			}
+			base_manpower = 5
+		}
+		else = { has_province_modifier = deepwoods_rangers_camp }
+	}
+	effect = {
+		if = {
+			limit = { NOT = { has_province_modifier = deepwoods_rangers_camp } }
+			owner = {
+				add_mil_power = -10
+				add_treasury = -25
+			}
+			add_province_modifier = {
+				name = deepwoods_rangers_camp
+				duration = -1
+			}
+			apply_strategy_effect = yes
+		}
+		else = {
+			owner = { add_mil_power = 5 }
+			remove_province_modifier = deepwoods_rangers_camp
+			remove_strategy_effect = yes
+		}
+	}
+	tooltip = deepwoods_rangers_button_tt
+}
+
+#Slot 5 - Tag specific button
+custom_button = { #Dummy closed
+	name = GFX_province_button_dummy_5
+	potential = { }
+	trigger = {
+		always = no
+	}
+	effect = { }
+	tooltip = unified_province_ui_no_tag_button_tt
+}
+custom_button = { #333 empire planets
+	name = khatalashya_province_button
+	tooltip = khatalashya_province_button_tt
+	potential = {
+		owner = {
+			tag = S81
+		}
+		has_province_flag = khatalashya_ready_to_be_colonized
+	}
+	trigger = {
+		if = {
+			limit = {
+				has_province_flag = khatalashya_colonized_province
+			}
+			custom_trigger_tooltip = {
+				tooltip = khatalashya_we_can_only_wait
+				always = no
+			}
+		}
+		else = {
+			khatalashya_can_colonize_this_planet = yes
+		}
+		NOT = { S81 = { has_country_modifier = khatalashya_colonization_in_progress } }
+		if = {
+			limit = { S81 = { has_country_flag = the_hivemind_can_start } }
+			custom_trigger_tooltip = {
+				tooltip = khatalashya_something_is_stirring
+				always = no
+			}
+		}
+	}
+	effect = {
+		khatalashya_planetary_effects = yes
+	}
+}
+custom_button = { #Xanzerbexis Wyvern Farms
+	name = A49_create_wyvern_farm_button
+	tooltip = A49_wyvern_farm_button_tt
+	potential = {
+		owner = {
+			tag = FROM
+			has_country_flag = A49_wyvern_farms_unlocked
+		}
+		A49_valid_wyvern_farm_province = yes
+	}
+	trigger = {
+		owner = {
+			treasury = 500
+		}
+		if = {
+			limit = { has_dlc = "Leviathan" }
+			num_of_times_expanded_infrastructure = 1
+		}
+		else = {
+			development = 15
+			has_production_building_trigger = yes
+		}
+	}
+	effect = {
+		owner = { 
+			add_treasury = -500
+		}
+		set_province_flag = A49_created_wyvern_farm
+		add_province_modifier = {
+			name = A49_makeshift_hatchery
+			duration = 3650
+		}
+		custom_tooltip = A49_decision_wyvern_farm_tt
+		tooltip = {
+			add_province_modifier = {
+				name = A49_wyvern_farm
+				duration = -1
+			}
+		}
+		if = {
+			limit = { owner = { has_country_flag = A49_wyvern_farm_upgrade_unlocked } }
+			custom_tooltip = A49_decision_wyvern_farm_upgrade_tt
+		}
+		hidden_effect = {
+			province_event = {
+				id = flavour_xanzerbexis.1000 #Upgrade to finished wyvern farm
+				days = 3650
+			}
+		}
+	}
+}
+custom_button = { #Arawkelin Deforestation
+	name = arawkelin_deforestation_button
+	tooltip = arawkelin_deforestation_button_title_tt
+    potential = {
+		owner = {
+			tag = Y65
+			tag = FROM
+			has_country_flag = arawkelin_deforestation_unlocked
+		}
+		OR = {
+			has_terrain = jungle
+			has_terrain = marsh
+			has_terrain = ancient_forest
+		}
+		OR = {
+			region = lupulan_rainforest_region
+			AND = {
+				owner = {
+					has_country_flag = arawkelin_deforestation_ringlet_isles_unlocked
+				}
+				region = ringlet_isles_region
+			}
+			AND = {
+				owner = {
+					has_country_flag = arawkelin_deforestation_bamaliwuni_unlocked
+				}
+				region = bamaliwuni_region
+			}
+			AND = {
+				owner = {
+					has_country_flag = arawkelin_deforestation_ishyamtumu_unlocked
+				}
+				region = ishyamtumu_region
+			}
+		}
+		NOT = {
+			OR = {
+				has_province_modifier = arawkelin_artificial_farmland
+				has_province_modifier = arawkelin_furniture_manufactories
+				has_province_modifier = arawkelin_half_deforestation
+				has_province_modifier = arawkelin_full_deforestation
+				has_province_modifier = arawkelin_deforestation_in_progress
+			}
+		}
+	}
+
+	trigger = {
+		owner = {
+			treasury = 50
+			adm_power = 50
+		}
+		base_production = 8
+		has_production_building_trigger = yes
+	}
+	effect = {
+		owner = {
+			add_treasury = -50
+			add_adm_power = -50
+		}
+		add_province_modifier = {
+			name = arawkelin_deforestation_in_progress
+			duration = -1
+		}
+		hidden_effect = {
+			set_province_flag = arawkelin_deforestation_start
+			province_event = {
+				id = flavour_arawkelin.101
+				days = 3650
+			}
+		}
+	}
+}
+custom_button = { #Verne Port of Adventure
+	name = verne_port_of_adventure_button
+	tooltip = verne_port_of_adventure_button_tt
+	potential = {
+		owner = {
+			OR = {
+				has_country_flag = verne_unlock_port_of_adventure_button
+				overlord = { has_country_flag = verne_unlock_port_of_adventure_button }
+			}
+		}
+		country_or_subject_holds = FROM
+		OR = {
+			continent = africa
+			continent = south_america
+			continent = north_america
+			region = ringlet_isles_region
+		}
+		has_port = yes
+	}
+	trigger = {
+		province_has_center_of_trade_of_level = 2
+		num_of_units_in_province = {
+			amount = 5
+			type = infantry
+			who = FROM
+		}
+		NOT = { has_province_modifier = verne_port_of_adventure }
+	}
+	effect = {
+		kill_units = { who = FROM type = infantry amount = 5 }
+		create_port_of_adventure = yes
+		if = {
+			limit = { has_province_flag = merfolk_settlement }
+			merfolk_add_opinion_effect_small = yes
+		}
+		if = {
+			limit = {
+				region_for_scope_province = {
+					is_empty = yes
+					has_port = yes
+				}
+			}
+			custom_tooltip = verne_port_of_adventure_button_effect_tt
+			hidden_effect = {
+				region = {
+					limit = {
+						is_empty = yes
+						has_port = yes
+					}
+					type = random
+					amount = 1
+					add_siberian_construction = 100
+				}
+			}
+		}
+	}
+}
+
+custom_button = { #Chaqway
+	name = chaqway_markets_button
+	potential = {
+		owner = {
+			is_or_was_tag = { tag = G87 }
+			tag = FROM
+		}
+	}
+	trigger = {
+		if = {
+			limit = { owner = { has_country_flag = qhatuway_everywhere } }
+			OR = {
+				province_has_center_of_trade_of_level = 1
+				has_river_estuary_trigger = yes
+			}
+		}
+		else = { province_group = umas_fulcra }
+		NOT = { has_province_modifier = chaqway_markets }
+		owner = { dip_power = 50 }
+	}
+	effect = {
+		if = {
+			limit = { owner = { has_country_flag = qhatuway_everywhere } }
+			chaqway_merchants = yes
+		}
+		else = {
+			province_event = {
+				id = chaqway.2
+			}
+		}
+	}
+	tooltip = estabilish_qhatuway
+}
+
+custom_button = {
+	name = S15_aquaculture_button
+	potential = {
+		owner = {
+			tag = S15
+			tag = FROM
+			NOT = { has_country_flag = S15_opened_menu }
+		}
+		has_port = yes
+	}
+	trigger = {
+		owner = {
+			OR = {
+				mission_completed = S15_the_great_pearl_cave
+				mission_completed = S15_rebuild_karassk
+			}
+		}
+		has_port = yes
+		NOT = {
+			province_id = 5834
+			province_id = 5895
+			province_id = 5898
+			province_id = 5914
+			province_id = 5941
+			province_id = 5949
+			province_id = 6060
+		}
+		custom_trigger_tooltip = {
+			tooltip = S15_aquaculture_building_tt
+			NOT = { has_province_flag = S15_aquaculture }
+		}
+	}
+	effect = {
+		owner = {
+			country_event = {
+				id = flavour_karshyr.100
+			}
+		}
+	}
+	tooltip = S15_aquaculture_tt
+}
+
+custom_button = {	#celmaldor trade league investment
+	name = celmaldor_trade_league_investment
+	tooltip = z22_trade_league_investment_tt
+	potential = { 
+		has_global_flag = z22_trade_league_investment
+		FROM = {
+			is_or_was_tag = { tag = Z22 }
+		}
+		owner = {
+			is_giesadh_or_trade_league_member = yes 
+			NOT = {
+				has_global_flag = z22_in_investment_screen
+			}
+		}
+	}
+	trigger = {
+		NOT = {
+			has_any_ongoing_construction = yes
+		}
+		num_free_building_slots = 1
+		FROM = {
+			is_or_was_tag = { tag = Z22 }
+			treasury = 100
+		}
+	}
+	effect = {
+		set_global_flag = z22_in_investment_screen
+		set_province_flag = z22_investment_province_chosen
+		hidden_effect = {
+			save_event_target_as = z22_investment_province_target
+		}
+		FROM = {
+			country_event = {
+				id = flavour_celmaldor.71
+			}
+		}
+	}
 }

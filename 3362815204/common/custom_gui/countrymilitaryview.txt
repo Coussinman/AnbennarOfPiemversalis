@@ -6,7 +6,14 @@ custom_button = {
 	trigger = {
 		hidden_trigger = {
 			OR = {
-				is_monarch_leader = no
+				OR = {
+					NOT = { 
+						has_leader_with = {
+							is_monarch_leader = yes
+						}
+					}
+					is_monarch_leader = no
+				}
 				AND = {
 					has_ruler_flag = allow_war_wizard_after_exile #is_monarch_leader will always return true if a monarch leader is exiled and returned
 					NOT = { has_ruler_modifier = allow_war_wizard_after_exile_delay } #define_ruler_to_general doesn't work after exile until 1 day has passed or the game has reloaded
@@ -21,6 +28,20 @@ custom_button = {
 			}
 			NOT = { has_ruler_flag = pursuing_artificery }
 			NOT = { has_ruler_flag = ruler_choosing_artificery }
+		}
+		if = { 
+			limit = { has_government_attribute = rulers_cant_be_war_wizards } 
+			custom_trigger_tooltip = {
+				NOT = { has_government_attribute = rulers_cant_be_war_wizards }
+				tooltip = cant_be_war_wizard_tt
+			}
+		}
+		if = {
+			limit = { has_country_flag = horutep_arrived NOT = { mission_completed = konolkhatep_bring_legions } }
+			custom_trigger_tooltip = {
+				NOT = { has_country_flag = horutep_arrived }
+				tooltip = horutep_no_war_wizard_tt
+			}
 		}
 	}
 	effect = {
@@ -54,7 +75,14 @@ custom_button = {
 	}
 	trigger = {
 		hidden_trigger = {
-			is_monarch_leader = no
+			OR = {
+				NOT = { 
+					has_leader_with = {
+						is_monarch_leader = yes
+					}
+				}
+				is_monarch_leader = no
+			}
 			is_lesser_in_union = no
 			has_consort_regency = no
 			has_regency = no
@@ -79,7 +107,11 @@ custom_button = { #disables button for 1 day for exiled rulers returning (if the
 	}
 	trigger = {
 		hidden_trigger = {
-			is_monarch_leader = no
+			NOT = { has_ruler_modifier = may_not_make_ruler_general }
+			OR = {
+				NOT = {  has_leader_with = { is_monarch_leader = yes } }
+				is_monarch_leader = no
+			}
 			OR = {
 				is_female = no
 				has_global_modifier_value = {

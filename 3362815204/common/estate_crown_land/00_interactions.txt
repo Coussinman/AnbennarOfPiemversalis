@@ -213,6 +213,7 @@ interaction = { # Sale of Titles
         crown_land_share = 10
         NOT = { num_of_rebel_armies = 1 }
 		NOT = { num_of_rebel_controlled_provinces = 1 }
+		hidden_trigger = { NOT = { has_country_flag = farranean_estates_harmony } }
 		hidden_trigger = { has_any_estates = yes }
 		if = {
 			limit = { 
@@ -253,7 +254,6 @@ interaction = { # Sale of Titles
 		}
 		if = {
 			limit = {
-				NOT = { has_estate_privilege = estate_lorentish_elite_harmonize_feudal_laws }
 				NOT = { has_government_attribute = can_sell_crownland_to_single_estates }
 				NOT = { has_country_flag = can_sell_crownland_to_estates_targeted_flag }
 			}
@@ -400,7 +400,18 @@ interaction = { # Summon Diet
     effect = {
         custom_tooltip = ESTATES_SUMMON_THE_DIET_DESC
         hidden_effect = {
-	        country_event = { id = estate_privileges_and_agendas_events.3 }
+	        if = {
+				limit = {
+					NOT = { has_anzalkatsa_naga = yes }
+				}
+			
+			
+			country_event = { id = estate_privileges_and_agendas_events.3 }
+			}
+			else = {
+				clr_country_flag = Invalidate_NagaAgenda
+				country_event = { id = estate_privileges_and_agendas_events.14 }
+			}
 			if = {
 				limit = {
 					ai = yes
@@ -422,7 +433,12 @@ interaction = { # Summon Diet
 		set_country_flag = recent_estate_agenda
 
         if = {
-			limit = { NOT = { has_government_attribute = diet_increases_not_influence } }
+			limit = {
+				NOT = {
+					has_government_attribute = diet_increases_not_influence
+					has_estate_privilege = estate_burghers_to_outsmart_and_outwit
+				}  
+			}
 			add_estate_influence_modifier = {
 				estate = all
 				desc = EST_VAL_DIET_SUMMONED
@@ -442,6 +458,47 @@ interaction = { # Summon Diet
 			}
 			add_scaled_republican_tradition = 2
 		}
+		if = {
+			limit = { 
+				owns = 394
+				394 = { #can use modifier trigger
+					baths_of_verinus_are_active = yes #scripted so bypasses can be added
+				}
+			}
+			if = {
+				limit = { 394 = { has_great_project = { type = baths_of_verinus tier = 3 } } }
+				hidden_effect = {
+					random_list = {
+						1 = { define_random_adm_advisor_effect = { skill = 3 cost_multiplier = 0.5 culture = ROOT } }
+						1 = { define_random_dip_advisor_effect = { skill = 3 cost_multiplier = 0.5 culture = ROOT } }
+						1 = { define_random_mil_advisor_effect = { skill = 3 cost_multiplier = 0.5 culture = ROOT } }
+					}
+				}
+			}
+			else_if = {
+				limit = { 394 = { has_great_project = { type = baths_of_verinus tier = 2 } } }
+				hidden_effect = {
+					random_list = {
+						1 = { define_random_adm_advisor_effect = { skill = 2 cost_multiplier = 0.5 culture = ROOT } }
+						1 = { define_random_dip_advisor_effect = { skill = 2 cost_multiplier = 0.5 culture = ROOT } }
+						1 = { define_random_mil_advisor_effect = { skill = 2 cost_multiplier = 0.5 culture = ROOT } }
+					}
+				}
+			}
+			else_if = {
+				limit = { 394 = { has_great_project = { type = baths_of_verinus tier = 1 } } }
+				hidden_effect = {
+					random_list = {
+						1 = { define_random_adm_advisor_effect = { skill = 1 cost_multiplier = 0.5 culture = ROOT } }
+						1 = { define_random_dip_advisor_effect = { skill = 1 cost_multiplier = 0.5 culture = ROOT } }
+						1 = { define_random_mil_advisor_effect = { skill = 1 cost_multiplier = 0.5 culture = ROOT } }
+					}
+				}
+			}
+		}
+
+		#Pashaine
+		pashaine_add_clue = yes
     }
 	ai_will_do = {
 		# Only use if it will bring loyalty above 50 for all estates
@@ -486,20 +543,20 @@ interaction = { # Seize Land
         NOT = { num_of_rebel_armies = 1 }
 		NOT = { num_of_rebel_controlled_provinces = 1 }
 		#The following if/else_if-statements match those in estate_privileges_and_agendas_events.2.a. If those change, these should too.
+		# if = {
+		# 	limit = {
+		# 		OR = {
+		# 			has_estate_privilege = estate_brahmins_statutory_rights
+		# 			#AND = {
+		# 			#	religion = hinduism
+		# 			#	has_estate = estate_brahmins
+		# 			#}
+		# 		}
+		# 		has_estate = estate_brahmins
+		# 	}
+		# 	NOT = { has_estate_privilege = estate_brahmins_statutory_rights }
+		# }
 		if = {
-			limit = {
-				OR = {
-					has_estate_privilege = estate_brahmins_statutory_rights
-					#AND = {
-					#	religion = hinduism
-					#	has_estate = estate_brahmins
-					#}
-				}
-				has_estate = estate_brahmins
-			}
-			NOT = { has_estate_privilege = estate_brahmins_statutory_rights }
-		}
-		else_if = {
 			limit = {
 				OR = {
 					has_estate_privilege = estate_nobles_statutory_rights
@@ -558,7 +615,6 @@ interaction = { # Seize Land
 		set_country_flag = recent_land_seizure
 		if = {
 			limit = {
-				NOT = { has_estate_privilege = estate_lorentish_elite_harmonize_feudal_laws }
 				NOT = { has_government_attribute = can_seize_crownland_of_single_estates }
 				NOT = { has_country_flag = can_seize_crownland_to_estates_targeted_flag }
 			}
@@ -566,6 +622,16 @@ interaction = { # Seize Land
 			take_estate_land_share_massive = { estate = all }
 			custom_tooltip = SEPERATOR_TOOLTIP
 			if = {
+				limit = {
+					has_country_flag = farranean_estates_harmony 
+				}
+				add_estate_loyalty = {
+					estate = all
+					loyalty = 1
+					short = yes
+				}
+			}
+			else_if = {
 				limit = {
 					has_government_attribute = seizing_land_loyalty
 				}
@@ -601,6 +667,8 @@ interaction = { # Seize Land
 						loyalty = 30
 					}
 				}
+				#ANB this used to not display unless you were under 30 loyalty
+				custom_tooltip = estate_seize_land_interaction_tooltip_generic
 			}
 			else_if = { 
 				limit = {
@@ -633,7 +701,14 @@ interaction = { # Seize Land
 			limit = { has_government_attribute = theocratic_monarchy_mechanic }
 			change_statists_vs_orangists = 0.05
 		}
-		on_seize_land_effect = yes
+
+		if = {
+			limit = {
+				has_country_modifier = khadisrapur_empower_merchants_mod
+				mission_completed = R11_embassies_guild
+			}
+			change_estate_land_share = { estate = estate_adventurers share = 1 }
+		}
 	}
 	ai_will_do = {
 		factor = 50

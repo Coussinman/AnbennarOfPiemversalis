@@ -29,7 +29,12 @@ country_event = {
 
 		every_country = {
 			limit = { has_country_modifier = monstrous_nation }
-			set_country_flag = setup_monstrous_opinion 
+			add_country_modifier = {
+				name = setup_monstrous_opinion
+				duration = -1
+				hidden = yes
+			}
+			# must be a modifier and not a flag so it disappears if the nation is annexed and released again
 			every_country = {
 				limit = { NOT = { tag = PREV } } # not the same nation
 				if = {
@@ -97,40 +102,46 @@ country_event = {
 					limit = {
 						NOT = {
                             tag = PREV
-							has_opinion_modifier = { who = PREV modifier = ace_moon_party_enemy }
-							has_opinion_modifier = { who = PREV modifier = ace_rose_party_ally }
+							has_opinion_modifier = { who = PREV modifier = lilac_wars_rose_party_member }
+                            has_opinion_modifier = { who = PREV modifier = lilac_wars_rose_party_enemy }
 						}
 					}
                     if = {
                         limit = { has_country_flag = lilac_wars_moon_party } # 'ate moon
-						add_opinion = { who = PREV modifier = ace_moon_party_enemy }
+                        add_opinion = { who = PREV modifier = lilac_wars_rose_party_enemy }
                     }
                     else_if = {
                         limit = { has_country_flag = lilac_wars_rose_party }  # luv rose
-						add_opinion = { who = PREV modifier = ace_rose_party_ally }
+					    add_opinion = { who = PREV modifier = lilac_wars_rose_party_member }
                     }
 				}
 			}
+
+			# If you're a member of the Moon Party
 			else_if = {
 				limit = {
 					has_country_flag = lilac_wars_moon_party
+				}
+				add_country_modifier = { 
+					name = lilac_wars_moon_party_member_Elect
+					duration = 10950 
 				}	
 				every_country = {
 					limit = {
 						NOT = {
                             tag = PREV
-							has_opinion_modifier = { who = PREV modifier = ace_moon_party_ally }
-							has_opinion_modifier = { who = PREV modifier = ace_rose_party_enemy }
+							has_opinion_modifier = { who = PREV modifier = lilac_wars_moon_party_member }
+                            has_opinion_modifier = { who = PREV modifier = lilac_wars_moon_party_enemy }
 						}
 					}
 
                     if = {
                         limit = { has_country_flag = lilac_wars_moon_party } # luv moon
-						add_opinion = { who = PREV modifier = ace_moon_party_ally }
+					    add_opinion = { who = PREV modifier = lilac_wars_moon_party_member }
                     }
                     else_if = {
                         limit = { has_country_flag = lilac_wars_rose_party } # 'ate rose
-						add_opinion = { who = PREV modifier = ace_rose_party_enemy }
+                        add_opinion = { who = PREV modifier = lilac_wars_moon_party_enemy }
                     }
 				}
 			}
@@ -213,10 +224,66 @@ country_event = {
 
 	option = {
 		name = "anbennar_setup.5.a"
+		
 		every_country = {	#remove all monstrous opinion
 			remove_opinion = { who = ROOT modifier = both_monstrous }
 			remove_opinion = { who = ROOT modifier = root_monstrous }
 		}
+		# every_country = {	#If you're not a monstrous nation you hate monstrous nations
+			# limit = {
+				# #NOT = { has_country_modifier = monstrous_nation }
+				# NOT = {
+					# has_opinion_modifier = { who = ROOT modifier = root_monstrous }
+				# }
+			# }
+			# remove_opinion = { who = ROOT modifier = root_monstrous }
+		# }
+		# every_country = {	#If you're a monstrous nation you like other monstrous nations
+			# limit = {
+				# has_country_modifier = monstrous_nation
+				# NOT = {
+					# has_opinion_modifier = { who = ROOT modifier = root_monstrous }
+				# }
+			# }
+			# remove_opinion = { who = ROOT modifier = root_monstrous }
+		# }
+        # if = {
+            # limit = {
+                # has_country_modifier = monstrous_nation
+            # }
+			# every_country = {	#If you're a monstrous nation you like other monstrous nations
+				# limit = {
+					# #has_country_modifier = monstrous_nation
+					# NOT = {
+						# has_opinion_modifier = { who = ROOT modifier = both_monstrous }
+					# }
+				# }
+				# remove_opinion = { who = ROOT modifier = both_monstrous }
+			# }
+			# every_country = {	#If you're not a monstrous nation you hate monstrous nations
+				# limit = {
+					# #NOT = { has_country_modifier = monstrous_nation }
+					# NOT = {
+						# has_opinion_modifier = { who = ROOT modifier = root_monstrous }
+					# }
+				# }
+				# remove_opinion = { who = ROOT modifier = root_monstrous }
+			# }
+		# }
+        # if = {
+            # limit = {
+                # NOT = { has_country_modifier = monstrous_nation }
+            # }
+			# every_country = {	#If you're a monstrous nation you like other monstrous nations
+				# limit = {
+					# has_country_modifier = monstrous_nation
+					# NOT = {
+						# has_opinion_modifier = { who = ROOT modifier = root_monstrous }
+					# }
+				# }
+				# remove_opinion = { who = ROOT modifier = root_monstrous }
+			# }
+		# }
 	}
 }
 
@@ -589,6 +656,9 @@ country_event = {
 		if = {
 			limit = {
 				culture_is_half_elven = yes
+				NOT = {
+					tag = Y65
+				}
 			}
 			add_country_modifier = {
 				name = half_elven_administration
@@ -601,6 +671,24 @@ country_event = {
 				hidden = yes
 			}
 		}
+		#Arawkelin
+		if = {
+			limit = {
+				culture_is_half_elven = yes
+				tag = Y65
+			}
+			add_country_modifier = {
+				name = half_elven_administration
+				duration = -1
+				hidden = yes
+			}
+			add_country_modifier = {
+				name = human_military
+				duration = -1
+				hidden = yes
+			}
+		}
+
 		#half_orcish
 		if = {
 			limit = {
@@ -1092,8 +1180,10 @@ country_event = { #it would be better to have this happen on a five year pulse
 				limit = {
 					capital_scope = {
 						NOT = {
+							OR = {
 								has_terrain = dwarven_hold
 								has_terrain = dwarven_hold_surface
+							}
 						}
 					}
 				}
@@ -1413,34 +1503,10 @@ country_event = {
 	is_triggered_only = yes
 	
 	trigger = {
-		always = yes
 	}
 	
 	immediate = {
 		set_up_artifice_system = yes
-	}
-	
-	option = {
-		name = anbennar_setup.17.a
-	}
-}
-
-#update points when we load the game
-country_event = {
-	id =  anbennar_setup.20
-	title =  anbennar_setup.20.t
-	desc =  anbennar_setup.20.d
-	picture = WAR_OF_THE_ROSES_eventPicture
-	
-	hidden = yes
-	is_triggered_only = yes
-	
-	trigger = {
-		always = yes
-	}
-	
-	immediate = {
-		update_artifice_points = yes
 	}
 	
 	option = {

@@ -921,13 +921,13 @@ A99_column_4_part_1 = {
 		provinces_to_highlight = {
 			province_id = 309			#Varainé (province)
 			NOT = {
-				base_production = 10
+				base_production = 8
 			}
 		}
 		trigger = {
 			309 = {
 				#Varainé (province)
-				base_production = 10
+				base_production = 8
 			}
 		}
 		effect = {
@@ -2459,15 +2459,22 @@ A99_column_5_part_2 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-			always = yes
+			custom_trigger_tooltip = {
+				tooltip = A99_water_breathing_potion_tt
+				any_owned_province = {
+					region = esmaria_region
+					has_port = yes
+				}
+				OR = {
+					any_owned_province = { has_province_flag = merfolk_settlement }
+					any_ally = { any_owned_province = { has_province_flag = merfolk_settlement } }
+					any_subject_country = { any_owned_province = { has_province_flag = merfolk_settlement } }
+				}
+			}
 		}
 		effect = {
-			# country_event = {
-			# 	id = flavor_varaine.700
-			# }
-			custom_tooltip = A99_unlocked_invention_water_potions
-			hidden_effect = {
-				set_country_flag = unlocked_artifice_invention_water_potion
+			country_event = {
+			 	id = flavor_varaine.700
 			}
 		}
 	}

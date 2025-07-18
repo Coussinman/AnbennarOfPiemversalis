@@ -1,6 +1,12 @@
+########################################
+# Events for Religious Leagues
+#
+# written by Martin Anward
+########################################
+
 namespace = religious_leagues
 
-#Adeanic Emperor Won
+# The Emperor Triumphant (regent_court)
 country_event = {
 	id = religious_leagues.1
 	title = "religious_leagues.1.t"
@@ -20,25 +26,10 @@ country_event = {
 			set_global_flag = league_war_complete
 			set_hre_religion_locked = yes
 			emperor = {
-				country_event = {
-					id = religious_leagues.9
-				}
+				country_event = { id = religious_leagues.9 }
 			}
 			every_known_country = {
-				limit = {
-					is_part_of_hre = yes
-				}
-				country_event = {
-					id = religious_leagues.13
-				}
-			}
-			every_known_country = {
-				limit = {
-					is_part_of_hre = no
-				}
-				country_event = {
-					id = religious_leagues.11
-				}
+				country_event = { id = religious_leagues.11 }
 			}
 		}
 	}
@@ -50,13 +41,20 @@ country_event = {
 			set_hre_religion = regent_court
 			set_hre_religion_locked = yes
 		}
+		if = { limit = { religion = regent_court }
+			add_country_modifier = { name = hre_dominant_regent_court duration = -1 }
+		}
+	}
+	after = {
 		if = {
 			limit = {
-				religion = regent_court
+				has_global_flag = ravelians_have_god_fragment
 			}
-			add_country_modifier = {
-				name = hre_dominant_regent_court
-				duration = -1
+			8 = {
+				province_event = {
+					id = ravelian.10
+					days = 1825
+				}
 			}
 		}
 	}
@@ -76,19 +74,14 @@ country_event = {
 		has_dlc = "Art of War"
 		hre_religion = regent_court
 		OR = {
-			NOT = {
-				has_country_flag = hre_religion_changed
-			}
-			had_country_flag = {
-				flag = hre_religion_changed
-				days = 30
-			}
+			NOT = { has_country_flag = hre_religion_changed }
+			had_country_flag = { flag = hre_religion_changed days = 30 }
 		}
 	}
 	
 	immediate = {
-		set_country_flag = hre_religion_changed
 		hidden_effect = {
+			set_country_flag = hre_religion_changed
 			set_global_flag = league_war_complete
 			#set to treaty first so we can set everything else without elections being called at the wrong time
 			set_hre_religion_treaty = yes
@@ -97,26 +90,7 @@ country_event = {
 			#now set it to locked once we've completed the tasks
 			set_hre_religion_locked = yes
 			every_known_country = {
-				limit = {
-					is_part_of_hre = yes
-				}
-				country_event = {
-					id = religious_leagues.13
-				}
-			}
-			every_known_country = {
-				limit = {
-					is_part_of_hre = no
-				}
-				country_event = {
-					id = religious_leagues.11
-				}
-			}
-			emperor = {
-				country_event = {
-					id = religious_leagues.101
-					days = 30
-				}
+				country_event = { id = religious_leagues.11 }
 			}
 		}
 	}
@@ -158,6 +132,17 @@ country_event = {
 				value = 0
 			}
 		}
+		if = {
+			limit = {
+				has_global_flag = ravelians_have_god_fragment
+			}
+			8 = {
+				province_event = {
+					id = ravelian.10
+					days = 1825
+				}
+			}
+		}
 	}
 }
 
@@ -181,33 +166,14 @@ country_event = {
 	}
 	
 	immediate = {
-		set_country_flag = hre_religion_changed
 		hidden_effect = {
+			set_country_flag = hre_religion_changed
 			set_global_flag = league_war_complete
 			set_hre_heretic_religion = corinite
 			set_hre_religion = regent_court
 			set_hre_religion_locked = yes
 			every_known_country = {
-				limit = {
-					is_part_of_hre = yes
-				}
-				country_event = {
-					id = religious_leagues.13
-				}
-			}
-			every_known_country = {
-				limit = {
-					is_part_of_hre = no
-				}
-				country_event = {
-					id = religious_leagues.11
-				}
-			}
-			emperor = {
-				country_event = {
-					id = religious_leagues.100
-					days = 30
-				}
+				country_event = { id = religious_leagues.11 }
 			}
 		}
 	}
@@ -218,13 +184,20 @@ country_event = {
 			set_hre_heretic_religion = corinite	
 			set_hre_religion = regent_court
 			set_hre_religion_locked = yes
-			if = {
-				limit = {
-					religion = regent_court
-				}
-				add_country_modifier = {
-					name = hre_dominant_regent_court
-					duration = -1
+			if = { limit = { religion = regent_court }
+				add_country_modifier = { name = hre_dominant_regent_court duration = -1 }
+			}
+		}
+	}
+	after = {
+		if = {
+			limit = {
+				has_global_flag = ravelians_have_god_fragment
+			}
+			8 = {
+				province_event = {
+					id = ravelian.10
+					days = 1825
 				}
 			}
 		}
@@ -250,9 +223,7 @@ country_event = {
 			set_hre_religion_treaty = yes
 			set_global_flag = peace_of_esmaria
 			every_known_country = {
-				country_event = {
-					id = religious_leagues.13
-				}
+				country_event = { id = religious_leagues.11 }
 			}
 		}
 	}
@@ -261,6 +232,19 @@ country_event = {
 		name = "religious_leagues.4.a"
 		tooltip = { 
 			set_hre_religion_treaty = yes
+		}
+	}
+	after = {
+		if = {
+			limit = {
+				has_global_flag = ravelians_have_god_fragment
+			}
+			8 = {
+				province_event = {
+					id = ravelian.10
+					days = 1825
+				}
+			}
 		}
 	}
 }
@@ -286,11 +270,11 @@ country_event = {
 		NOT = { has_global_flag = evangelical_union_happened }
 		hre_leagues_enabled = no
 		hre_religion_locked = no
+		# hre_religion_treaty = no
 		is_emperor = yes		
-		OR = {
 		is_year = 1550
-			has_global_flag = crimson_deluge_is_over
-		}
+		# religion = regent_court
+		#has_global_flag = counter_reformation
 		OR = {
 			AND = {
 				religion = regent_court
@@ -312,74 +296,12 @@ country_event = {
 				}
 			}
 		}
-		NOT = { hre_reform_passed = erbkaisertum }
+		NOT = { hre_reform_passed = anbennar_imperial_dynasty }
 		NOT = { has_global_flag = great_peasants_war_flag }
 	}
 	
 	mean_time_to_happen = {
 		months = 120
-		modifier = {
-			factor = 0.25
-			has_global_flag = crimson_deluge_is_over
-		}
-		modifier = {
-			factor = 0.5
-			OR = {
-				AND = {
-					emperor = {
-						religion = regent_court
-					}
-					calc_true_if = {
-						amount = 10
-						all_country = {
-							religion = corinite
-							is_part_of_hre = yes
-						}
-					}
-				}
-				AND = {
-					emperor = {
-						religion = corinite
-					}
-					calc_true_if = {
-						amount = 10
-						all_country = {
-							religion = regent_court
-							is_part_of_hre = yes
-						}
-					}
-				}
-			}
-		}
-		modifier = {
-			factor = 0.5
-			OR = {
-				AND = {
-					emperor = {
-						religion = regent_court
-					}
-					calc_true_if = {
-						amount = 20
-						all_country = {
-							religion = corinite
-							is_part_of_hre = yes
-						}
-					}
-				}
-				AND = {
-					emperor = {
-						religion = corinite
-					}
-					calc_true_if = {
-						amount = 20
-						all_country = {
-							religion = regent_court
-							is_part_of_hre = yes
-						}
-					}
-				}
-			}
-		}
 		modifier = {
 			factor = 0.5
 			is_year = 1575
@@ -399,6 +321,13 @@ country_event = {
 		}
 		enable_hre_leagues = yes
 		set_global_flag = evangelical_union_happened
+		hidden_effect = {
+			A49 = { #Xanzerbexis
+				country_event = { #Petty Squabbles
+					id = flavour_xanzerbexis.33
+				}
+			}
+		}
 	}
 }
 
@@ -458,20 +387,7 @@ country_event = {
 		hidden_effect = {
 			set_global_flag = league_war_complete
 			every_known_country = {
-				limit = {
-					is_part_of_hre = yes
-				}
-				country_event = {
-					id = religious_leagues.13
-				}
-			}
-			every_known_country = {
-				limit = {
-					is_part_of_hre = no
-				}
-				country_event = {
-					id = religious_leagues.11
-				}
+				country_event = { id = religious_leagues.11 }
 			}
 		}
 	}
@@ -479,6 +395,19 @@ country_event = {
 	option = {
 		name = "religious_leagues.6.a"
 		set_hre_religion_locked = yes
+	}
+	after = {
+		if = {
+			limit = {
+				has_global_flag = ravelians_have_god_fragment
+			}
+			8 = {
+				province_event = {
+					id = ravelian.10
+					days = 1825
+				}
+			}
+		}
 	}
 }
 
@@ -535,20 +464,7 @@ country_event = {
 		hidden_effect = {
 			set_global_flag = league_war_complete
 			every_known_country = {
-				limit = {
-					is_part_of_hre = yes
-				}
-				country_event = {
-					id = religious_leagues.13
-				}
-			}
-			every_known_country = {
-				limit = {
-					is_part_of_hre = no
-				}
-				country_event = {
-					id = religious_leagues.11
-				}
+				country_event = { id = religious_leagues.11 }
 			}
 		}
 	}
@@ -557,9 +473,22 @@ country_event = {
 		name = "religious_leagues.7.a"
 		set_hre_religion_locked = yes
 	}
+	after = {
+		if = {
+			limit = {
+				has_global_flag = ravelians_have_god_fragment
+			}
+			8 = {
+				province_event = {
+					id = ravelian.10
+					days = 1825
+				}
+			}
+		}
+	}
 }
 
-#Corinite Emperor won
+# The Emperor Triumphant (corinite)
 country_event = {
 	id = religious_leagues.8
 	title = "religious_leagues.8.t"
@@ -579,25 +508,7 @@ country_event = {
 			set_global_flag = league_war_complete
 			set_hre_religion_locked = yes
 			every_known_country = {
-				limit = {
-					is_part_of_hre = yes
-				}
-				country_event = {
-					id = religious_leagues.13
-				}
-			}
-			every_known_country = {
-				limit = {
-					is_part_of_hre = no
-				}
-				country_event = {
-					id = religious_leagues.11
-				}
-			}
-			emperor = {
-				country_event = {
-					id = religious_leagues.14
-				}
+				country_event = { id = religious_leagues.11 }
 			}
 		}
 	}
@@ -609,13 +520,20 @@ country_event = {
 			set_hre_religion = corinite
 			set_hre_religion_locked = yes
 		}
+		if = { limit = { religion = corinite }
+			add_country_modifier = { name = hre_dominant_corinite duration = -1 }
+		}
+	}
+	after = {
 		if = {
 			limit = {
-				religion = corinite
+				has_global_flag = ravelians_have_god_fragment
 			}
-			add_country_modifier = {
-				name = hre_dominant_corinite
-				duration = -1
+			8 = {
+				province_event = {
+					id = ravelian.10
+					days = 1825
+				}
 			}
 		}
 	}
@@ -635,41 +553,19 @@ country_event = {
 	trigger = {
 		has_dlc = "Art of War"
 	}
+
+	option = {
+		name = "religious_leagues.9.a" #don't remove centers
+		ai_chance = {
+			factor = 0
+		}
+	}
 	option = {
 		name = "religious_leagues.9.b" #remove centers
-		ai_chance = {
-			factor = 1
-		}
-		custom_tooltip = ACE_remove_religious_zeal_tooltip
-		hidden_effect = {
-			every_province = {
-				limit = {
-					owner = {
-						is_part_of_hre = yes
-					}
-					is_part_of_hre = yes
-					religion = regent_court
-				}
-				add_province_modifier = {
-					name = religious_zeal_at_conv
-					duration = 10950
-				}
-			}
-			every_province = {
-				limit = {
-					owner = {
-						is_part_of_hre = yes
-					}
-					is_part_of_hre = yes
-					NOT {
-						religion = regent_court
-					}
-				}
-				remove_province_modifier = religious_zeal_at_conv
-			}
-		}
-
 		custom_tooltip = remove_centers_tooltip
+		ai_chance = {
+			factor = 90
+		}
 		add_country_modifier = {
 			name = "removed_corinite_centers"
 			duration = 10950
@@ -679,112 +575,6 @@ country_event = {
 				is_part_of_hre = yes
 			}
 			remove_reform_center = corinite
-		}
-
-		#West Dameshead reform center
-		if = {
-			limit = {
-				43 = {
-					owner = {
-						religion = regent_court
-					}
-				}
-			}
-			43 = {
-				change_religion = regent_court
-				add_reform_center = regent_court
-			}
-		}
-		else_if = {
-			limit = {
-				10 = {
-					owner = {
-						religion = regent_court
-					}
-				}
-			}
-			10 = {
-				change_religion = regent_court
-				add_reform_center = regent_court
-			}
-		}
-		else_if = {
-			limit = {
-				151 = {
-					owner = {
-						religion = regent_court
-					}
-				}
-			}
-			151 = {
-				change_religion = regent_court
-				add_reform_center = regent_court
-			}
-		}
-		else = {
-			random_province = {
-				limit = {
-					religion = regent_court
-					region = west_dameshead_region
-					owner = {
-						religion = regent_court
-					}
-				}
-				add_reform_center = regent_court
-			}
-		}
-
-		#Damescrown reform center
-		if = {
-			limit = {
-				249 = {
-					owner = {
-						religion = regent_court
-					}
-				}
-			}
-			249 = {
-				change_religion = regent_court
-				add_reform_center = regent_court
-			}
-		}
-		else_if = {
-			limit = {
-				234 = {
-					owner = {
-						religion = regent_court
-					}
-				}
-			}
-			234 = {
-				change_religion = regent_court
-				add_reform_center = regent_court
-			}
-		}
-		else_if = {
-			limit = {
-				915 = {
-					owner = {
-						religion = regent_court
-					}
-				}
-			}
-			915 = {
-				change_religion = regent_court
-				add_reform_center = regent_court
-			}
-		}
-		else = {
-			random_province = {
-				limit = {
-					religion = regent_court
-					region = esmaria_region
-					owner = {
-						religion = regent_court
-					}
-				}
-				add_reform_center = regent_court
-			}
 		}
 	}
 }
@@ -808,6 +598,7 @@ country_event = {
 
 	option = {
 		name = "religious_leagues.10.a"
+		
 		set_hre_religion_treaty = yes
 	}
 }
@@ -858,10 +649,7 @@ country_event = {
 				hre_religion = regent_court
 				hre_religion_treaty = no
 			}
-			add_country_modifier = {
-				name = hre_dominant_regent_court
-				duration = -1
-			}
+			add_country_modifier = { name = hre_dominant_regent_court duration = -1 }
 		}
 		else_if = {
 			limit = {
@@ -869,10 +657,7 @@ country_event = {
 				hre_religion = corinite
 				hre_religion_treaty = no
 			}
-			add_country_modifier = {
-				name = hre_dominant_corinite
-				duration = -1
-			}
+			add_country_modifier = { name = hre_dominant_corinite duration = -1 }
 		}
 		else_if = {
 			limit = {
@@ -880,10 +665,7 @@ country_event = {
 				hre_religion = ravelian
 				hre_religion_treaty = no
 			}
-			add_country_modifier = {
-				name = hre_dominant_ravelian
-				duration = -1
-			}
+			add_country_modifier = { name = hre_dominant_ravelian duration = -1 }
 		}
 	}
 }
@@ -907,210 +689,5 @@ country_event = {
 	option = {
 		name = "religious_leagues.12.a"
 		add_country_modifier = { name = corinite_during_active_league_war duration = -1 }
-	}
-}
-
-# religion triumphant modifier
-country_event = {
-	id = religious_leagues.13
-	title = religious_leagues.13.t
-	desc = {
-		trigger = {
-			hre_religion = regent_court
-		}
-		desc = "religious_leagues.13.d"
-	}
-	desc = {
-		trigger = {
-			hre_religion = corinite
-		}
-		desc = "religious_leagues.13.e"
-	}
-	picture = {
-		trigger = { hre_religion = corinite }
-		picture = CORINITE_WAR_eventPicture
-	}
-	picture = {
-		trigger = { hre_religion = regent_court }
-		picture = ADEANIC_WAR_eventPicture
-	}
-	is_triggered_only = yes
-	trigger = {
-		has_dlc = "Art of War"
-		has_global_flag = league_war_complete
-	}
-	option = {
-		name = religious_leagues.13.a
-		if = {
-			limit = {
-				religion = regent_court
-				hre_religion = regent_court
-				hre_religion_treaty = no
-			}
-			add_country_modifier = {
-				name = hre_dominant_regent_court
-				duration = -1
-			}
-		}
-		else_if = {
-			limit = {
-				religion = corinite
-				hre_religion = corinite
-				hre_religion_treaty = no
-			}
-			add_country_modifier = {
-				name = hre_dominant_corinite
-				duration = -1
-			}
-		}
-		else_if = {
-			limit = {
-				religion = ravelian
-				hre_religion = ravelian
-				hre_religion_treaty = no
-			}
-			add_country_modifier = {
-				name = hre_dominant_ravelian
-				duration = -1
-			}
-		}
-		if = {
-			limit = {
-				is_part_of_hre = yes
-				NOT = {
-					religion = regent_court
-				}
-				hre_religion = regent_court
-				hre_religion_treaty = no
-			}
-			add_country_modifier = {
-				name = eoa_religious_league_loser
-				duration = 10950
-			}
-			custom_tooltip = ACE_lost_league_war
-		}
-		else_if = {
-			limit = {
-				is_part_of_hre = yes
-				NOT = {
-					religion = corinite
-				}
-				hre_religion = corinite
-				hre_religion_treaty = no
-			}
-			add_country_modifier = {
-				name = eoa_religious_league_loser
-				duration = 10950
-			}
-			custom_tooltip = ACE_lost_league_war_tooltip
-		}
-		else_if = {
-			limit = {
-				is_part_of_hre = yes
-				NOT = {
-					religion = ravelian
-				}
-				hre_religion = ravelian
-				hre_religion_treaty = no
-			}
-			add_country_modifier = {
-				name = eoa_religious_league_loser
-				duration = 10950
-			}
-			custom_tooltip = ACE_lost_league_war
-		}
-	}
-}
-#Anbennar
-# The Emperor removes Corinite reformation centers
-country_event = {
-	id = religious_leagues.14
-	title = religious_leagues.14.t
-	desc = religious_leagues.14.d
-	picture = VIKING_KING_eventPicture
-	major = yes
-	is_triggered_only = yes
-	trigger = {
-		has_dlc = "Art of War"
-	}
-	option = {
-		name = religious_leagues.14.a
-		ai_chance = {
-			factor = 1
-		}
-		custom_tooltip = ACE_remove_religious_zeal_tooltip
-		hidden_effect = {
-			every_province = {
-				limit = {
-					owner = {
-						is_part_of_hre = yes
-					}
-					is_part_of_hre = yes
-					religion = corinite
-				}
-				add_province_modifier = {
-					name = religious_zeal_at_conv
-					duration = 10950
-				}
-			}
-			every_province = {
-				limit = {
-					owner = {
-						is_part_of_hre = yes
-					}
-					is_part_of_hre = yes
-					NOT {
-						religion = corinite
-					}
-				}
-				remove_province_modifier = religious_zeal_at_conv
-			}
-		}
-	}
-}
-
-#helper event
-country_event = {
-	id = religious_leagues.100
-	title = religious_leagues.100.t
-	desc = religious_leagues.100.d
-	picture = KING_SICK_IN_BED_eventPicture
-	is_triggered_only = yes
-	hidden = yes
-	trigger = {
-		has_dlc = "Art of War"
-	}
-	immediate = {
-		emperor = {
-			country_event = {
-				id = religious_leagues.9
-			}
-		}
-	}
-	option = {
-		name = religious_leagues.100.a
-	}
-}
-
-#helper event
-country_event = {
-	id = religious_leagues.101
-	title = religious_leagues.101.t
-	desc = religious_leagues.101.d
-	picture = KING_SICK_IN_BED_eventPicture
-	is_triggered_only = yes
-	hidden = yes
-	trigger = {
-		has_dlc = "Art of War"
-	}
-	immediate = {
-		emperor = {
-			country_event = {
-				id = religious_leagues.14
-			}
-		}
-	}
-	option = {
-		name = religious_leagues.101.a
 	}
 }

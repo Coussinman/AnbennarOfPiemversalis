@@ -75,7 +75,10 @@ country_decisions = {
 		potential = {
 			OR = {
 				has_government_attribute = can_force_election
-				religion = kheionism
+				AND = {
+					religion = kheionism
+					government = republic #So that this doesn't show up for monarchy kheionist
+				}
 			}
 			NOT = { has_reform = ameion_republic }
 			NOT = { has_reform = forge_council_reform }
@@ -112,6 +115,24 @@ country_decisions = {
 				limit = { has_reform = besolaki_chaotic_republicanism }
 				country_event = {
 					id = besolaki_events.100
+				}
+			}
+			else_if = {
+				limit = { has_reform = the_mazukxiem } #Brrtekuh
+				country_event = {
+					id = flavour_brrtekuh.1000
+				}
+			}
+			else_if = {
+				limit = { has_reform = z22_prince_elect }
+				country_event = {
+					id = flavour_celmaldor.700
+				}
+			}
+			else_if = {
+				limit = { has_reform = z22_prince_elect_improved }
+				country_event = {
+					id = flavour_celmaldor.702
 				}
 			}
 			else_if = {

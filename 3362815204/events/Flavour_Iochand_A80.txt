@@ -11,6 +11,9 @@ country_event = {
 	
 	option = { #Queen Orra
 		name = iochand.1.a
+		trigger = {
+			NOT = { dynasty = "síl Southroy" }
+		}
 		ai_chance = { factor = 0 }
 		define_ruler = {
 					name = "Orra"
@@ -34,6 +37,9 @@ country_event = {
 	}
 	option = { #King Fizwick IV
 		name = iochand.1.b
+		trigger = {
+			NOT = { dynasty = "síl Southroy" }
+		}
 		ai_chance = { factor = 0 }
 		define_ruler = {
 					name = "Fizwick IV"
@@ -54,8 +60,87 @@ country_event = {
 			remove_heir = {  }
 		}
 	}
-	option = { #sil Southroys will stay
+
+	option = { #Queen Orra with consort Mindi
 		name = iochand.1.c
+		trigger = {
+		dynasty = "síl Southroy"
+		}
+		ai_chance = { factor = 0 }
+		define_ruler = {
+				name = "Orra"
+				dynasty = "síl Iochand"
+				adm = 5
+				dip = 3
+				mil = 2
+				age = 30
+				culture = creek_gnome
+				religion = regent_court
+				female = yes
+			}
+		set_ruler_flag = long_lived_ruler
+		add_ruler_personality = scholar_personality
+		if = {
+			limit = {
+				has_heir = yes
+			}
+			remove_heir = {  }
+		}
+	
+		define_consort = {
+			name = "Mindi"
+			dynasty = "síl Southroy"
+			culture = creek_gnome
+			age = 81
+			adm = 2
+			dip = 2
+			mil = 5
+			female = yes
+		}
+		set_consort_flag = is_long_lived_consort
+		add_queen_personality = strict_personality
+	}
+
+	option = { #King Fizwick IV with consort Mindi
+		name = iochand.1.e
+		trigger = {
+			dynasty = "síl Southroy"
+		}
+		ai_chance = { factor = 0 }
+		define_ruler = {
+					name = "Fizwick IV"
+					dynasty = "síl Iochand"
+					adm = 2
+					dip = 6
+					mil = 3
+					age = 56
+					culture = creek_gnome
+					religion = regent_court
+				}
+		set_ruler_flag = long_lived_ruler
+		add_ruler_personality = charismatic_negotiator_personality
+		if = {
+			limit = {
+				has_heir = yes
+			}
+			remove_heir = {  }
+		}
+		define_consort = {
+			name = "Mindi"
+			dynasty = "síl Southroy"
+			culture = creek_gnome
+			age = 81
+			adm = 2
+			dip = 2
+			mil = 5
+			female = yes
+		}
+		set_consort_flag = is_long_lived_consort
+		add_queen_personality = strict_personality
+	}
+
+	option = { #sil Southroys will stay
+		name = iochand.1.f
 		highlight = yes
 		trigger = {
 			dynasty = "síl Southroy"
@@ -68,4 +153,113 @@ country_event = {
 	}
 }
 
+
+
+#Humans Move In
+province_event = {
+	id = iochand.2
+	title = iochand.2.t
+	desc = iochand.2.d
+	picture = COURT_INTRIGUE_eventPicture
+
+	is_triggered_only = yes
+
+	option = {
+		name = iochand.2.a
+		ai_chance = {
+			factor = 1
+		}
+		change_culture = iochander
+		custom_tooltip = iochand_colony_finished_tt
+		owner = {
+			set_country_flag = hide_iochand_colony_shift
+		}
+	}
+}
+
+#Iochander colonies flip culture
+province_event = {
+	id = iochand.3
+	title = iochand.3.t
+	desc = iochand.3.d
+	picture = COURT_INTRIGUE_eventPicture
+	hidden = yes
+
+
+	is_triggered_only = yes
+
+	option = {
+		name = iochand.3.a
+		ai_chance = {
+			factor = 120
+		}
+		change_culture = iochander
+		remove_gnomish_minority_size_effect = yes
+	}
+	option = {
+		name = iochand.3.b
+		ai_chance = {
+			factor = 40
+		}
+		change_culture = creekfoot_halfling
+		remove_gnomish_minority_size_effect = yes
+	}
+	option = {
+		name = iochand.3.c
+		ai_chance = {
+			factor = 10
+		}
+		change_culture = creek_gnome
+		add_human_minority_size_effect = yes
+	}
+	option = {
+		name = iochand.3.e
+		ai_chance = {
+			factor = 30
+		}
+		trigger = {
+			owner = { has_country_flag = dragonmask_kobolds_integrated }
+		}
+		change_culture = dragonmask_kobold
+		remove_gnomish_minority_size_effect = yes
+	}
+	option = {
+		name = iochand.3.f
+		ai_chance = {
+			factor = 60
+		}
+		change_culture = iochander
+		remove_gnomish_minority_size_effect = yes
+		remove_gnomish_minority_size_effect = yes
+	}
+	option = {
+		name = iochand.3.g
+		ai_chance = {
+			factor = 20
+		}
+		change_culture = creekfoot_halfling
+		remove_gnomish_minority_size_effect = yes
+		remove_gnomish_minority_size_effect = yes
+	}
+	option = {
+		name = iochand.3.h
+		ai_chance = {
+			factor = 5
+		}
+		change_culture = creek_gnome
+		add_halfling_minority_size_effect = yes
+	}
+	option = {
+		name = iochand.3.i
+		ai_chance = {
+			factor = 15
+		}
+		trigger = {
+			owner = { has_country_flag = dragonmask_kobolds_integrated }
+		}
+		change_culture = dragonmask_kobold
+		remove_gnomish_minority_size_effect = yes
+		remove_gnomish_minority_size_effect = yes
+	}
+}
 

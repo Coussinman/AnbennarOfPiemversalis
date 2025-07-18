@@ -1,0 +1,56 @@
+rezankand_exemplar_mechanic = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 18
+	available = {
+		has_reform = mission_of_exemplary
+	}
+
+	interactions = {
+		summon_ecaris = {
+			gui = rezankand_exemplar_button
+			icon = GFX_rezankand_exemplar_summon_ecaris
+			potential = {
+				NOT = { has_ruler_flag = ruler_is_ecaris }
+			}
+			trigger = {
+				if = {
+					limit = { mission_completed = rezankand_an_oath_fulfilled } #Hiding this to not spoil the ending
+					custom_trigger_tooltip = {
+						tooltip = rezankand_cant_summon_ecaris_tt
+						NOT = { mission_completed = rezankand_an_oath_fulfilled }
+					}
+				}
+				else = {
+					NOT = { has_leader = "Ecaris Ecarizuir" }
+				}
+			}
+			effect = {
+				define_general = {
+                    fire = 3
+                    shock = 10
+                    manuever = 3
+                    siege = 6
+                    trait = war_wizard_personality
+                    name = "Ecaris Ecarizuir"
+                }
+				#hidden_effect = { #Uncommenting this for now, incase its changed how ecaris dies
+				#	country_event = { id = flavor_rezankand.35 }
+				#}
+            }
+            cooldown_years = 30
+		}
+		move_diranhria = {
+			gui = rezankand_exemplar_button
+			icon = GFX_rezankand_exemplar_move_diranhria
+			trigger = {
+				custom_trigger_tooltip = {
+					tooltip = diranhria_trigger_tt
+					NOT = { has_country_modifier = rezankand_diranhria_cd }
+				}
+			}
+			effect = {
+				country_event = { id = flavor_rezankand.1001 } #Move The Diranhira
+			}
+		}
+	}
+}

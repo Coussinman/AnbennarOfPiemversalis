@@ -22,7 +22,6 @@ sugamber_1_missions = {
 		}
 		
 		trigger = {
-			adm_power = 50
 			410 = {
 				owned_by = ROOT
 			}
@@ -38,26 +37,33 @@ sugamber_1_missions = {
 		}
 		
 		effect = {
-			add_adm_power = -50
+			if = {
+				limit = { ai = no }
+				add_adm_power = -300
+			}
 			410 = {
+				add_core = ROOT
 				add_province_modifier = {
 					name = "faster_integration"
 					duration = 7300
 				}
 			}
 			411 = {
+				add_core = ROOT
 				add_province_modifier = {
 					name = "faster_integration"
 					duration = 7300
 				}
 			}
 			315 = {
+				add_core = ROOT
 				add_province_modifier = {
 					name = "faster_integration"
 					duration = 7300
 				}
 			}
 			913 = {
+				add_core = ROOT
 				add_province_modifier = {
 					name = "faster_integration"
 					duration = 7300
@@ -279,6 +285,7 @@ sugamber_1_missions = {
 					duration = 7300
 				}
 			}
+			add_imperial_influence = 10
 		}
 	}
 	
@@ -1249,7 +1256,7 @@ sugamber_4_missions = {
 					spymaster = 1
 					dip_power = 100
 					any_known_country = {
-						owns = 601
+						owns_or_subject_of = 601
 						has_spy_network_from = {
 							who = ROOT
 							value = 50

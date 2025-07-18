@@ -118,16 +118,7 @@ country_decisions = {
 		major = yes
 		potential = {
 			religion = devouring_path
-			OR = {
-				AND = {
-					NOT = { tag = Y01 }
-					has_country_flag = devouring_temple_secrets
-				}
-				AND = {
-					tag = Y01
-					mission_completed = Y01_way_forward
-				}
-			}
+			has_country_flag = devouring_temple_secrets
 			NOT = { has_country_flag = temple_corruption_menu_open }
 		}
 		
@@ -142,18 +133,7 @@ country_decisions = {
 		
 		allow = {
 			religion = devouring_path
-			any_owned_province = {
-				OR = {
-					has_province_modifier = temple_complex
-					has_province_modifier = damaged_temple_complex
-					has_province_modifier = derelict_temple_complex
-				}
-				is_core = ROOT
-			}
-			custom_trigger_tooltip = {
-				tooltip = dvp_discovered_heart_tooltip
-				any_owned_province = { has_province_modifier = temple_heart_discovered has_non_ruined_or_corrupted_temple_complex = yes }
-			}
+			hidden_trigger = { has_country_flag = owns_high_temple }
 			is_at_war = no
 			adm_power = 50
 			dip_power = 50
@@ -175,6 +155,18 @@ country_decisions = {
 					estate = estate_khelorvalshi
 					loyalty = 30
 				}
+			}
+			any_owned_province = {
+				OR = {
+					has_province_modifier = temple_complex
+					has_province_modifier = damaged_temple_complex
+					has_province_modifier = derelict_temple_complex
+				}
+				is_core = ROOT
+			}
+			custom_trigger_tooltip = {
+				tooltip = dvp_discovered_heart_tooltip
+				any_owned_province = { has_province_modifier = temple_heart_discovered has_non_ruined_or_corrupted_temple_complex = yes }
 			}
 		}
 		
@@ -256,6 +248,7 @@ country_decisions = {
 		allow = {
 			hidden_trigger = {
 				has_global_flag = korashi_drill_invented_flag
+				has_country_flag = owns_high_temple
 			}
 			has_estate_privilege = artifice_invention_korashi_drills
 			any_owned_province = {

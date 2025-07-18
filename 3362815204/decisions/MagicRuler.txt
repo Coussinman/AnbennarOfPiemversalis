@@ -6,7 +6,10 @@ country_decisions = {
 		major = yes
 		
 		potential = {
-			ruler_has_mage_personality = yes
+			OR = {
+				ruler_has_mage_personality = yes
+				has_ruler_flag = zokka_phoenix_flag
+			}
 			NOT = { has_ruler_flag = magic_menu_opened }
 			NOT = { has_ruler_flag = pursuing_artificery }
 		}
@@ -18,6 +21,7 @@ country_decisions = {
 					has_ruler_flag = evocation_1
 					has_ruler_flag = transmutation_2
 					has_ruler_flag = enchantment_3
+					has_ruler_flag = zokka_phoenix_flag
 				}
 			}
 			is_at_war = yes
@@ -28,9 +32,6 @@ country_decisions = {
 					fort_level = 1
 					sieged_by = ROOT
 					unit_has_leader = yes
-					owner = { #homebrew
-						NOT = { has_idea = festung7 }
-					}					
 				}
 			}
 			hidden_trigger = {
@@ -227,7 +228,7 @@ country_decisions = {
 			#Allows for vampires that become mages naturally
 			hidden_effect = {
 				if = { 
-					limit = { has_ruler_flag = is_a_vampire }
+					limit = { ruler_is_vampire = yes }
 					set_country_flag = mage_vampire
 				}
 			}
@@ -314,6 +315,22 @@ country_decisions = {
 					tooltip = pursuing_aritificery_general_tt
 				}
 			}
+			if = {
+				limit =  {
+					has_government_attribute = rulers_cant_be_war_wizards
+				}
+				custom_trigger_tooltip = {
+					NOT = { has_government_attribute = rulers_cant_be_war_wizards }
+					tooltip = cant_be_war_wizard_tt
+				}	
+			}
+			if = {
+				limit = { has_country_flag = horutep_arrived NOT = { mission_completed = konolkhatep_bring_legions } }
+				custom_trigger_tooltip = {
+					NOT = { has_country_flag = horutep_arrived }
+					tooltip = horutep_no_war_wizard_tt
+				}
+			}
 		}
 		effect = {
 			custom_tooltip = make_ruler_general_tooltip
@@ -380,10 +397,13 @@ country_decisions = {
 			is_lesser_in_union = no
 		}
 		allow = {
-			has_ruler_flag = spirit_patron_delayed
+			custom_trigger_tooltip = {
+				tooltip = seek_patron_delayed_tt
+				has_ruler_flag = spirit_patron_delayed
+			}
 		}
 		effect = {
-			country_event = { id = patrons_events.2 }
+			country_event = { id = patrons_on_action.1 }
 		}
 		ai_will_do = {
 			factor = 0 # Will never delay in first place

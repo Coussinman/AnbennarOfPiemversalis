@@ -2233,6 +2233,7 @@ jaddari_the_jadd = {
 						}
 						country_event = { 
 							id = jaddari_missions.1
+							days = 1
 							random = 365
 						}
 					}
@@ -2686,6 +2687,7 @@ jaddari_the_jadd_4 = {
 		trigger = {
 			dip_power = 100
 			4420 = {
+				owned_by = ROOT
 				NOT = {
 					nationalism = 1
 					unrest = 0
@@ -2711,10 +2713,20 @@ jaddari_the_jadd_4 = {
 			has_country_modifier = jaddari_lightbringers
 			if = {
 				limit = { has_dlc = "Golden Century" }
-				num_of_owned_provinces_with = {
-					value = 10
-					superregion = rahen_superregion
-					holy_order = lightbringers_order
+				if = {
+					limit = { has_country_flag = the_jadd_holy_order_reformed }
+					num_of_owned_provinces_with = {
+						value = 10
+						superregion = rahen_superregion
+						holy_order = lightbringers_order_upgraded
+					}
+				}
+				else = {
+					num_of_owned_provinces_with = {
+						value = 10
+						superregion = rahen_superregion
+						holy_order = lightbringers_order
+					}
 				}
 			}
 			else = {
@@ -3464,10 +3476,20 @@ jaddari_diplomatic = {
 			has_country_modifier = jaddari_lightbringers
 			if = {
 				limit = { has_dlc = "Golden Century" }
-				num_of_owned_provinces_with = {
-					value = 10
-					superregion = bulwar_superregion
-					holy_order = lightbringers_order
+				if = {
+					limit = { has_country_flag = the_jadd_holy_order_reformed }
+					num_of_owned_provinces_with = {
+						value = 10
+						superregion = bulwar_superregion
+						holy_order = lightbringers_order_upgraded
+					}
+				}
+				else = {
+					num_of_owned_provinces_with = {
+						value = 10
+						superregion = bulwar_superregion
+						holy_order = lightbringers_order
+					}
 				}
 			}
 			else = {
@@ -5030,7 +5052,7 @@ jaddari_eastward_5 = {
 		
 		effect = {
 			define_general = {
-				name = "Vehari of the Bright Claw"
+				name = "Sitarayar of the Bright Claw"
 				fire = 1
 				shock = 6
 				manuever = 3

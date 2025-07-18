@@ -1,0 +1,2491 @@
+namespace = noukahi_pantheon
+
+# ruler flag for on pilgrimage
+# ruler flag for completed pilgrimage
+# variable for journey progress
+# variable for success chance
+# each destination is saved as a flag
+# don't forget to clean up the varibles displaying in the event text
+# the handler event needs to be setup for each flag reward...
+
+
+# handler event for journeys - all new journey events need adding to the random list.
+# random list events need to be marked NOT = has_country_flag = nkp_capital if they are incongruent.
+
+country_event = {
+	id = noukahi_pantheon.0
+	title = noukahi_pantheon.0.t
+	desc = noukahi_pantheon.0.d
+	picture = indiangfx_CULTURE_eventPicture
+	is_triggered_only = yes
+	hidden = yes
+
+	trigger = {
+		NOT = {
+			check_variable = {
+				which = np_journey_progress
+				value = 5
+			}
+		}
+	}
+
+	immediate = {
+		change_variable = {
+			which = np_journey_progress
+			value = 1
+		}
+	}
+	
+	option = {
+		name = noukahi_pantheon.0
+		if = {
+			limit = {
+				check_variable = {
+					which = np_journey_progress
+					value = 4
+				}
+			}
+			if = {
+				limit = { 	
+					check_variable = {
+						which = np_journey_success
+						value = 3
+					} 
+				}
+				if = {
+					limit = {
+						has_ruler_flag = np_gamyi
+					}
+					country_event = {
+						id = noukahi_pantheon.3
+					}
+				}
+				else_if = {
+					limit = {
+						has_ruler_flag = np_lelanan
+					}
+					country_event = {
+						id = noukahi_pantheon.4
+					}
+				}
+				else_if = {
+					limit = {
+						has_ruler_flag = np_junansuar
+					}
+					country_event = {
+						id = noukahi_pantheon.5
+					}
+				}
+				else_if = {
+					limit = {
+						has_ruler_flag = np_nazhni
+					}
+					country_event = {
+						id = noukahi_pantheon.6
+					}
+				}
+				else_if = {
+					limit = {
+						has_ruler_flag = np_ardimqarast
+					}
+					country_event = {
+						id = noukahi_pantheon.7
+					}
+				}
+				else_if = {
+					limit = {
+						has_ruler_flag = np_kunolo
+					}
+					country_event = {
+						id = noukahi_pantheon.8
+					}
+				}
+				else_if = {
+					limit = {
+						has_ruler_flag = np_niramit
+					}
+					country_event = {
+						id = noukahi_pantheon.9
+					}
+				}
+				else_if = {
+					limit = {
+						has_ruler_flag = np_sprigitwani
+					}
+					country_event = {
+						id = noukahi_pantheon.10
+					}
+				}
+				else_if = {
+					limit = {
+						has_ruler_flag = np_jezarpizu
+					}
+					country_event = {
+						id = noukahi_pantheon.12
+					}
+				}
+				else_if = {
+					limit = {
+						has_ruler_flag = np_kheterat
+					}
+					country_event = {
+						id = noukahi_pantheon.11
+					}
+				}
+				#NEW DESTINATIONS NEED TO GO IN HERE AS ABOVE 
+				# else = {
+				# }
+			}
+			else = {
+				country_event = {
+					id = noukahi_pantheon.2
+				}
+			}
+		}
+		else = {
+			random_list = {
+				1 = {
+					trigger = {
+					}
+					country_event = { 
+						id = noukahi_pantheon.100
+					}
+				}
+				1 = {
+					trigger = {
+					}
+					country_event = { 
+						id = noukahi_pantheon.101 #should increment up
+					}
+				}
+				1 = {
+					trigger = {
+					}
+					country_event = { 
+						id = noukahi_pantheon.102 #should increment up
+					}
+				}
+				1 = {
+					trigger = {
+					}
+					country_event = { 
+						id = noukahi_pantheon.103 #should increment up
+					}
+				}
+				1 = {
+					trigger = {
+						ai = no
+						NOT = { has_global_flag = noukahi_seal_attack_happened }
+					}
+					country_event = { 
+						id = noukahi_pantheon.104 #should increment up
+					}
+				}
+				1 = {
+					trigger = {
+					}
+					country_event = { 
+						id = noukahi_pantheon.105 #should increment up
+					}
+				}
+				1 = {
+					trigger = {
+						any_owned_province = { can_build = temple }
+					}
+					country_event = { 
+						id = noukahi_pantheon.106 #should increment up
+					}
+				}
+				1 = {
+					trigger = {
+					}
+					country_event = { 
+						id = noukahi_pantheon.107 #should increment up
+					}
+				}
+				1 = {
+					trigger = {
+					}
+					country_event = { 
+						id = noukahi_pantheon.108 #should increment up
+					}
+				}
+				1 = {
+					trigger = {
+					}
+					country_event = { 
+						id = noukahi_pantheon.109 #should increment up
+					}
+				}
+				1 = {
+					trigger = {
+					}
+					country_event = { 
+						id = noukahi_pantheon.110 #should increment up
+					}
+				}
+				1 = {
+					trigger = {
+					}
+					country_event = { 
+						id = noukahi_pantheon.111 #should increment up
+					}
+				}
+				1 = {
+					trigger = {
+					}
+					country_event = { 
+						id = noukahi_pantheon.112 #should increment up
+					}
+				}
+				1 = {
+					trigger = {
+					}
+					country_event = { 
+						id = noukahi_pantheon.113 #should increment up
+					}
+				}
+				1 = {
+					trigger = {
+					}
+					country_event = { 
+						id = noukahi_pantheon.114 #should increment up
+					}
+				}
+				1 = {
+					trigger = {
+					}
+					country_event = { 
+						id = noukahi_pantheon.115 #should increment up
+					}
+				}
+				1 = {
+					trigger = {
+					}
+					country_event = { 
+						id = noukahi_pantheon.116 #should increment up
+					}
+				}
+				1 = {
+					trigger = {
+					}
+					country_event = { 
+						id = noukahi_pantheon.117 #should increment up
+					}
+				}
+				# 1 = {
+				# 	trigger = {
+				# 	}
+				# 	country_event = { 
+				# 		id = noukahi_pantheon.118 #should increment up
+				# 	}
+				# }
+				# 1 = {
+				# 	trigger = {
+				# 	}
+				# 	country_event = { 
+				# 		id = noukahi_pantheon.119 #should increment up
+				# 	}
+				# }
+				# 1 = {
+				# 	trigger = {
+				# 	}
+				# 	country_event = { 
+				# 		id = noukahi_pantheon.120 #should increment up
+				# 	}
+				# }
+				# 1 = {
+				# 	trigger = {
+				# 	}
+				# 	country_event = { 
+				# 		id = noukahi_pantheon.121 #should increment up
+				# 	}
+				# }
+				# 1 = {
+				# 	trigger = {
+				# 	}
+				# 	country_event = { 
+				# 		id = noukahi_pantheon.122 #should increment up
+				# 	}
+				# }
+				# 1 = {
+				# 	trigger = {
+				# 	}
+				# 	country_event = { 
+				# 		id = noukahi_pantheon.123 #should increment up
+				# 	}
+				# }
+				1 = {
+					trigger = {
+					}
+					country_event = { 
+						id = noukahi_pantheon.124 #should increment up
+					}
+				}
+				1 = {
+					trigger = {
+					}
+					country_event = { 
+						id = noukahi_pantheon.125 #should increment up
+					}
+				}
+			}
+		}
+	}
+}
+
+#failure
+country_event = {
+	id = noukahi_pantheon.2
+	title = noukahi_pantheon.2.t
+	desc = noukahi_pantheon.2.d
+	picture = muslimgfx_COMET_SIGHTED_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = noukahi_pantheon.2.a
+		add_stability = -1
+		add_prestige = -25
+		add_legitimacy_equivalent = { amount = -25 republican_tradition = -12 }
+	}
+	
+	option = {
+		name = noukahi_pantheon.2.b
+		highlight = yes
+		trigger = {
+			OR = {
+				ruler_has_personality = greedy_personality
+				ruler_has_personality = embezzler_personality
+			}
+		}
+		add_stability = -1
+		add_prestige = -25
+		add_legitimacy_equivalent = { amount = -25 republican_tradition = -12 }
+		add_years_of_income = -0.5
+		if = {
+			limit = {
+				ruler_has_personality = greedy_personality
+			}
+			remove_ruler_personality = greedy_personality
+			random = { 
+				chance = 50 
+				add_ruler_personality = midas_touched_personality
+			} 
+		}
+		if = {
+			limit = {
+				ruler_has_personality = embezzler_personality
+			}
+			remove_ruler_personality = embezzler_personality
+			random = { 
+				chance = 50 
+				add_ruler_personality = incorruptible_personality
+			} 
+		}
+	}
+	
+	option = {
+		name = noukahi_pantheon.2.c
+		highlight = yes
+		trigger = {
+			OR = {
+				ruler_has_personality = naive_personality
+				ruler_has_personality = loose_lips_personality
+				ruler_has_personality = babbling_buffoon_personality
+			}
+		}
+		add_stability = -1
+		add_prestige = -25
+		add_legitimacy_equivalent = { amount = -25 republican_tradition = -12 }
+		add_dip_power = -75
+		if = {
+			limit = {
+				ruler_has_personality = naive_personality
+			}
+			remove_ruler_personality = naive_personality
+			random = { 
+				chance = 50 
+				add_ruler_personality = silver_tongue_personality
+			} 
+		}
+		if = {
+			limit = {
+				ruler_has_personality = loose_lips_personality
+			}
+			remove_ruler_personality = loose_lips_personality
+			random = { 
+				chance = 50 
+				add_ruler_personality = secretive_personality
+			} 
+		}
+		if = {
+			limit = {
+				ruler_has_personality = babbling_buffoon_personality
+			}
+			remove_ruler_personality = babbling_buffoon_personality
+			random = { 
+				chance = 50 
+				add_ruler_personality = charismatic_negotiator_personality
+			} 
+		}
+	}
+	
+	option = {
+		name = noukahi_pantheon.2.e
+		highlight = yes
+		trigger = {
+			ruler_has_personality = drunkard_personality
+		}
+		add_stability = -1
+		add_prestige = -25
+		add_legitimacy_equivalent = { amount = -25 republican_tradition = -12 }
+		add_adm_power = -75
+		if = {
+			limit = {
+				ruler_has_personality = drunkard_personality
+			}
+			remove_ruler_personality = drunkard_personality
+			random = { 
+				chance = 50 
+				add_ruler_personality = entrepreneur_personality
+			} 
+		}
+	}
+	option = {
+		name = noukahi_pantheon.2.f
+		highlight = yes
+		trigger = {
+			ruler_has_personality = obsessive_perfectionist_personality
+		}
+		add_stability = -1
+		add_prestige = -25
+		add_legitimacy_equivalent = { amount = -25 republican_tradition = -12 }
+		add_adm_power = -75
+		if = {
+			limit = {
+				ruler_has_personality = obsessive_perfectionist_personality
+			}
+			remove_ruler_personality = obsessive_perfectionist_personality
+			random = { 
+				chance = 50 
+				add_ruler_personality = architectural_visionary_personality
+			} 
+		}
+	}
+	option = {
+		name = noukahi_pantheon.2.g
+		highlight = yes
+		trigger = {
+			ruler_has_personality = craven_personality
+		}
+		add_stability = -1
+		add_prestige = -25
+		add_legitimacy_equivalent = { amount = -25 republican_tradition = -12 }
+		add_mil_power = -75
+		if = {
+			limit = {
+				ruler_has_personality = craven_personality
+			}
+			remove_ruler_personality = craven_personality
+			random = { 
+				chance = 50 
+				add_ruler_personality = inspiring_leader_personality
+			} 
+		}
+	}
+	option = {
+		name = noukahi_pantheon.2.h
+		highlight = yes
+		trigger = {
+			ruler_has_personality = sinner_personality
+		}
+		add_stability = -1
+		add_prestige = -50
+		add_legitimacy_equivalent = { amount = -25 republican_tradition = -12 }
+		if = {
+			limit = {
+				ruler_has_personality = sinner_personality
+			}
+			remove_ruler_personality = sinner_personality
+			random = { 
+				chance = 50 
+				add_ruler_personality = zealot_personality
+			} 
+		}
+		
+	}
+	option = {
+		name = noukahi_pantheon.2.i
+		highlight = yes
+		trigger = {
+			OR = {
+				ruler_has_personality = cruel_personality
+				ruler_has_personality = malevolent_personality
+				ruler_has_personality = petty_personality
+			}
+		}
+		add_stability = -1
+		add_prestige = -25
+		add_legitimacy_equivalent = { amount = -25 republican_tradition = -12 }
+		random_owned_province = { add_local_autonomy = 15 }
+		random_owned_province = { add_local_autonomy = 15 }
+		random_owned_province = { add_local_autonomy = 15 }
+		random_owned_province = { add_local_autonomy = 15 }
+		random_owned_province = { add_local_autonomy = 15 }
+		if = {
+			limit = {
+				ruler_has_personality = cruel_personality
+			}
+			remove_ruler_personality = cruel_personality
+			random = { 
+				chance = 50 
+				add_ruler_personality = kind_hearted_personality
+			} 
+		}
+		if = {
+			limit = {
+				ruler_has_personality = malevolent_personality
+			}
+			remove_ruler_personality = malevolent_personality
+			random = { 
+				chance = 50 
+				add_ruler_personality = benevolent_personality
+			} 
+		}
+		if = {
+			limit = {
+				ruler_has_personality = petty_personality
+			}
+			remove_ruler_personality = petty_personality
+			random = { 
+				chance = 50 
+				add_ruler_personality = humane_personality
+			} 
+		}
+	}
+	option = {
+		name = noukahi_pantheon.2.j
+		highlight = yes
+		trigger = {
+			NOT = {
+				adm = 3
+				mil = 3
+				dip = 3
+			}
+		}
+		add_stability = -1
+		add_prestige = -25
+		add_legitimacy_equivalent = { amount = -25 republican_tradition = -12 }
+		custom_tooltip = noukahi_failure_stupid_tooltip
+		hidden_effect = { set_ruler_flag = noukahi_so_stupid_pilgrimages_are_easier }
+	}
+
+
+	after = {
+		clr_ruler_flag = np_on_pilgrimage
+		clr_ruler_flag = np_gamyi
+		clr_ruler_flag = np_lelanan
+		clr_ruler_flag = np_junansuar
+		clr_ruler_flag = np_nazhni
+		clr_ruler_flag = np_ardimqarast
+		clr_ruler_flag = np_kunolo
+		clr_ruler_flag = np_sprigitwani
+		clr_ruler_flag = np_niramit
+		clr_ruler_flag = np_kheterat
+		clr_ruler_flag = np_jezarpizu
+	}
+
+}
+
+#success for gamyi
+country_event = {
+	id = noukahi_pantheon.3
+	title = noukahi_pantheon.3.t
+	desc = noukahi_pantheon.3.d
+	picture = BIG_STAR_IN_SKY_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = noukahi_pantheon.3.a
+		set_ruler_flag = np_completed_pilgrimage
+		clr_ruler_flag = np_on_pilgrimage
+		clr_ruler_flag = np_gamyi
+		remove_country_modifier = np_on_pilgrimage_mod
+		add_ruler_modifier = { 
+			name = np_gamyi_pilgrimage
+			duration = -1  
+		}
+		if = {
+			limit = {
+				ruler_has_personality = bold_fighter_personality
+			}
+			change_mil = 1
+		}
+		if = {
+			limit = {
+				NOT = { has_country_flag = noukahi_gamyi_pilgrimage_completed_at_least_once }
+			}
+			set_country_flag = noukahi_gamyi_pilgrimage_completed_at_least_once
+		}
+	}
+	
+	after = {
+		
+	}
+
+}
+
+#success for lelanan
+country_event = {
+	id = noukahi_pantheon.4
+	title = noukahi_pantheon.4.t
+	desc = noukahi_pantheon.4.d
+	picture = BIG_STAR_IN_SKY_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = noukahi_pantheon.4.a
+		set_ruler_flag = np_completed_pilgrimage
+		clr_ruler_flag = np_on_pilgrimage
+		clr_ruler_flag = np_lelanan
+		remove_country_modifier = np_on_pilgrimage_mod
+		if = {
+			limit = {
+				ruler_has_personality = kind_hearted_personality
+			}
+			change_dip = 1
+		}
+		add_ruler_modifier = { 
+			name = np_lelanan_pilgrimage
+			duration = -1  
+		}
+		if = {
+			limit = {
+				NOT = { has_country_flag = noukahi_lelanan_pilgrimage_completed_at_least_once }
+			}
+			set_country_flag = noukahi_lelanan_pilgrimage_completed_at_least_once
+		}
+	}
+	
+	after = {
+		
+	}
+}
+
+#success for junansuar
+country_event = {
+	id = noukahi_pantheon.5
+	title = noukahi_pantheon.5.t
+	desc = noukahi_pantheon.5.d
+	picture = BIG_STAR_IN_SKY_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = noukahi_pantheon.5.a
+		set_ruler_flag = np_completed_pilgrimage
+		clr_ruler_flag = np_on_pilgrimage
+		clr_ruler_flag = np_junansuar
+		remove_country_modifier = np_on_pilgrimage_mod
+		if = {
+			limit = {
+				ruler_has_personality = industrious_personality
+			}
+			change_dip = 1
+		}
+		add_ruler_modifier = { 
+			name = np_junansuar_pilgrimage
+			duration = -1  
+		}
+		if = {
+			limit = {
+				NOT = { has_country_flag = noukahi_junansuar_pilgrimage_completed_at_least_once }
+			}
+			set_country_flag = noukahi_junansuar_pilgrimage_completed_at_least_once
+		}
+	}
+	
+	after = {
+		
+	}
+}
+
+#success for nazhni
+country_event = {
+	id = noukahi_pantheon.6
+	title = noukahi_pantheon.6.t
+	desc = noukahi_pantheon.6.d
+	picture = BIG_STAR_IN_SKY_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = noukahi_pantheon.6.a
+		set_ruler_flag = np_completed_pilgrimage
+		clr_ruler_flag = np_on_pilgrimage
+		clr_ruler_flag = np_nazhni
+		remove_country_modifier = np_on_pilgrimage_mod
+		if = {
+			limit = {
+				ruler_has_personality = architectural_visionary_personality
+			}
+			change_adm = 1
+		}
+		add_ruler_modifier = { 
+			name = np_nazhni_pilgrimage
+			duration = -1
+		}
+		if = {
+			limit = {
+				NOT = { has_country_flag = noukahi_nazhni_pilgrimage_completed_at_least_once }
+			}
+			set_country_flag = noukahi_nazhni_pilgrimage_completed_at_least_once
+		}
+	}
+	
+	after = {
+		
+	}
+
+}
+
+#success for ardimqarast
+country_event = {
+	id = noukahi_pantheon.7
+	title = noukahi_pantheon.7.t
+	desc = noukahi_pantheon.7.d
+	picture = BIG_STAR_IN_SKY_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = noukahi_pantheon.7.a
+		set_ruler_flag = np_completed_pilgrimage
+		clr_ruler_flag = np_on_pilgrimage
+		clr_ruler_flag = np_ardimqarast
+		remove_country_modifier = np_on_pilgrimage_mod
+		if = {
+			limit = {
+				ruler_has_personality = free_thinker_personality
+			}
+			change_adm = 1
+		}
+		add_ruler_modifier = { 
+			name = np_ardimqarast_pilgrimage
+			duration = -1  
+		}
+		if = {
+			limit = {
+				NOT = { has_country_flag = noukahi_ardimqarast_pilgrimage_completed_at_least_once }
+			}
+			set_country_flag = noukahi_ardimqarast_pilgrimage_completed_at_least_once
+		}
+	}
+	
+	after = {
+		
+	}
+
+}
+
+#success for kunolo
+country_event = {
+	id = noukahi_pantheon.8
+	title = noukahi_pantheon.8.t
+	desc = noukahi_pantheon.8.d
+	picture = BIG_STAR_IN_SKY_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = noukahi_pantheon.8.a
+		set_ruler_flag = np_completed_pilgrimage
+		clr_ruler_flag = np_on_pilgrimage
+		clr_ruler_flag = np_kunolo
+		remove_country_modifier = np_on_pilgrimage_mod
+		if = {
+			limit = {
+				ruler_has_personality = careful_personality
+			}
+			change_dip = 1
+		}
+		add_ruler_modifier = { 
+			name = np_kunolo_pilgrimage
+			duration = -1  
+		}
+		if = {
+			limit = {
+				NOT = { has_country_flag = noukahi_kunolo_pilgrimage_completed_at_least_once }
+			}
+			set_country_flag = noukahi_kunolo_pilgrimage_completed_at_least_once
+		}
+	}
+	
+	after = {
+		
+	}
+
+}
+
+#success for niramit
+country_event = {
+	id = noukahi_pantheon.9
+	title = noukahi_pantheon.9.t
+	desc = noukahi_pantheon.9.d
+	picture = BIG_STAR_IN_SKY_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = noukahi_pantheon.9.a
+		set_ruler_flag = np_completed_pilgrimage
+		clr_ruler_flag = np_on_pilgrimage
+		clr_ruler_flag = np_niramit
+		remove_country_modifier = np_on_pilgrimage_mod
+		if = {
+			limit = {
+				ruler_has_personality = tolerant_personality
+			}
+			change_adm = 1
+		}
+		add_ruler_modifier = { 
+			name = np_niramit_pilgrimage
+			duration = -1  
+		}
+		if = {
+			limit = {
+				NOT = { has_country_flag = noukahi_niramit_pilgrimage_completed_at_least_once }
+			}
+			set_country_flag = noukahi_niramit_pilgrimage_completed_at_least_once
+		}
+	}
+	
+	after = {
+		
+	}
+
+}
+
+#success for spirigitwani
+country_event = {
+	id = noukahi_pantheon.10
+	title = noukahi_pantheon.10.t
+	desc = noukahi_pantheon.10.d
+	picture = BIG_STAR_IN_SKY_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = noukahi_pantheon.10.a
+		set_ruler_flag = np_completed_pilgrimage
+		clr_ruler_flag = np_on_pilgrimage
+		clr_ruler_flag = np_sprigitwani
+		remove_country_modifier = np_on_pilgrimage_mod
+		if = {
+			limit = {
+				ruler_has_personality = zealot_personality
+			}
+			change_mil = 1
+		}
+		add_ruler_modifier = { 
+			name = np_sprigitwani_pilgrimage
+			duration = -1
+		}
+		if = {
+			limit = {
+				NOT = { has_country_flag = noukahi_sprigitwani_pilgrimage_completed_at_least_once }
+			}
+			set_country_flag = noukahi_sprigitwani_pilgrimage_completed_at_least_once
+		}
+	}
+	
+	after = {
+		
+	}
+}
+
+#success for kheterat
+country_event = {
+	id = noukahi_pantheon.11
+	title = noukahi_pantheon.11.t
+	desc = noukahi_pantheon.11.d
+	picture = BIG_STAR_IN_SKY_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = noukahi_pantheon.11.a
+		set_ruler_flag = np_completed_pilgrimage
+		clr_ruler_flag = np_on_pilgrimage
+		clr_ruler_flag = np_kheterat
+		remove_country_modifier = np_on_pilgrimage_mod
+		if = {
+			limit = {
+				ruler_has_personality = righteous_personality
+			}
+			change_adm = 1
+		}
+		add_ruler_modifier = { 
+			name = np_kheterat_pilgrimage
+			duration = -1  
+		}
+	}
+	
+	after = {
+		
+	}
+}
+
+#success for jezarpizu
+country_event = {
+	id = noukahi_pantheon.12
+	title = noukahi_pantheon.12.t
+	desc = noukahi_pantheon.12.d
+	picture = HARPY_TOWN_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = noukahi_pantheon.12.a
+		set_ruler_flag = np_completed_pilgrimage
+		clr_ruler_flag = np_on_pilgrimage
+		clr_ruler_flag = np_jezarpizu
+		remove_country_modifier = np_on_pilgrimage_mod
+		if = {
+			limit = {
+				ruler_has_personality = inspiring_leader_personality
+			}
+			change_mil = 1
+		}
+		add_ruler_modifier = { 
+			name = np_jezarpizu_pilgrimage
+			duration = -1  
+		}
+		set_country_flag = np_jezarpizu_pilgrimage_complete
+	}
+	
+	after = {
+		
+	}
+
+}
+
+#journey events from 100
+
+# journey event Something Unwell with the Wells
+country_event = {
+	id = noukahi_pantheon.100
+	title = noukahi_pantheon.100.t
+	desc = noukahi_pantheon.100.d
+	picture = FAMINE_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = noukahi_pantheon.100.a
+		pilgrimage_success_increase = yes
+		add_years_of_income = -0.2
+		if = {
+			limit = {
+				ruler_has_personality = greedy_personality
+			}
+			random = { 
+				chance = 75 
+				remove_ruler_personality = greedy_personality
+			}
+		}
+	}
+
+	option = {
+		name = noukahi_pantheon.100.b
+	}
+
+	option = {
+		name = noukahi_pantheon.100.c
+		pilgrimage_success_decrease = yes
+		add_years_of_income = 0.2
+		if = {
+			limit = {
+				ruler_has_personality = greedy_personality
+			}
+			add_years_of_income = 0.5
+		}
+	}
+	
+	option = {
+		name = noukahi_pantheon.100.d1
+		highlight = yes
+		trigger = {
+			OR = {
+				ruler_has_personality = pious_personality
+				ruler_has_personality = zealot_personality
+			}
+		}
+		pilgrimage_success_increase = yes
+	}
+
+	after = {
+		country_event = { 
+			id = noukahi_pantheon.0
+			days = 180
+		}
+	}
+}
+
+
+#journey the serpopard and the warrior
+country_event = {
+	id = noukahi_pantheon.101
+	title = noukahi_pantheon.101.t
+	desc = noukahi_pantheon.101.d
+	picture = ASKIA_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = noukahi_pantheon.101.a
+		pilgrimage_success_increase = yes
+		add_army_tradition = -5
+		add_mil_power = -50
+	}
+
+	option = {
+		name = noukahi_pantheon.101.b
+	}
+
+	option = {
+		name = noukahi_pantheon.101.c
+		pilgrimage_success_decrease = yes
+		create_leader_scaling_with_tradition = {
+			leader = general
+			type = army
+		}
+	}
+	option = {
+		name = noukahi_pantheon.101.d1
+		highlight = yes
+		trigger = {
+			mil = 1
+		}
+		pilgrimage_success_increase = yes
+		add_prestige = 10
+		if = {
+			limit = {
+				ruler_has_personality = craven_personality
+			}
+			random = { 
+				chance = 50 
+				remove_ruler_personality = craven_personality
+			}
+		}
+		random_list = {
+			70 = {
+				if = {
+					limit = {
+						OR = {
+							ruler_has_max_personalities = yes
+							ruler_has_personality = inspiring_leader_personality
+						}
+					}
+					add_mil_power = 30
+				}
+				else = {
+					add_ruler_personality = inspiring_leader_personality
+				}
+			}
+			25 = {
+				add_ruler_modifier = { 
+					name = noukahi_pilgrimage_injury_ruler_modifier 
+					duration = 1825  
+				}
+			}
+			5 = {
+				trigger = { NOT = { mil = 5 } }
+				modifier = {
+					factor = 2
+					mil = 3
+					NOT = { mil = 4 }
+				}
+				modifier = {
+					factor = 3
+					mil = 2
+					NOT = { mil = 3 }
+				}
+				modifier = {
+					factor = 4
+					NOT = { mil = 2 }
+				}
+				kill_ruler = yes
+			}
+		}
+	}
+
+	after = {
+		country_event = { 
+			id = noukahi_pantheon.0
+			days = 180
+		}
+	}
+}
+
+#journey event an aged memory
+country_event = {
+	id = noukahi_pantheon.102
+	title = noukahi_pantheon.102.t
+	desc = noukahi_pantheon.102.d
+	picture = AFRICAN_BAD_WITH_MONARCH_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = noukahi_pantheon.102.a
+		add_prestige = -15
+		pilgrimage_success_increase = yes
+		add_country_modifier = {
+			name = noukahi_pilgrimage_legitimacy
+			duration = 3650 #10 years
+		}
+	}
+
+	option = {
+		name = noukahi_pantheon.102.b
+	}
+
+	option = {
+		name = noukahi_pantheon.102.c
+		pilgrimage_success_decrease = yes
+		add_prestige = 15
+	}
+	
+	option = {
+		name = noukahi_pantheon.102.d1
+		highlight = yes
+		trigger = {
+			ruler_has_personality = silver_tongue_personality
+		}
+		pilgrimage_success_increase = yes
+		add_prestige = 5
+	}
+		
+	option = {
+		name = noukahi_pantheon.102.e
+		highlight = yes
+		trigger = {
+			ruler_has_personality = kind_hearted_personality
+		}
+		pilgrimage_success_increase = yes
+		define_advisor = {
+			type = artist
+			skill = 1
+			discount = yes
+			age = 78
+		}
+	}
+
+	after = {
+		country_event = { 
+			id = noukahi_pantheon.0
+			days = 180
+		}
+	}
+}
+
+#journey event neutral mediator?
+country_event = {
+	id = noukahi_pantheon.103
+	title = noukahi_pantheon.103.t
+	desc = noukahi_pantheon.103.d
+	picture = CENTRAL_AFRICAN_COURT_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = noukahi_pantheon.103.a
+		add_legitimacy_equivalent = { amount = -10 republican_tradition = -5 }
+		pilgrimage_success_increase = yes
+	}
+
+	option = {
+		name = noukahi_pantheon.103.b
+	}
+
+	option = {
+		name = noukahi_pantheon.103.c
+		pilgrimage_success_decrease = yes
+		add_treasury = 100
+		if = {
+			limit = {
+				ruler_has_personality = incorruptible_personality
+			}
+			random = { 
+				chance = 50 
+				remove_ruler_personality = incorruptible_personality
+			}
+		}
+	}
+
+	after = {
+		country_event = { 
+			id = noukahi_pantheon.0
+			days = 180
+		}
+	}
+}
+
+#journey event seal attack
+country_event = {
+	id = noukahi_pantheon.104
+	title = noukahi_pantheon.104.t
+	desc = noukahi_pantheon.104.d
+	picture = CROSSROAD_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = noukahi_pantheon.104.a
+		custom_tooltip = noukahi_seal_attack_1
+		pilgrimage_success_increase = yes
+		if = {
+			limit = {
+				ruler_has_personality = craven_personality
+			}
+			random = { 
+				chance = 50 
+				remove_ruler_personality = craven_personality
+			}
+		}
+		random = { 
+			chance = 50 
+			add_ruler_modifier = { 
+				name = noukahi_pilgrimage_sealious_injury_ruler_modifier 
+				duration = 1825  
+			}
+		}
+		
+	}
+
+	option = {
+		name = noukahi_pantheon.104.b
+		custom_tooltip = noukahi_seal_attack_2
+	}
+
+	option = {
+		name = noukahi_pantheon.104.c
+		custom_tooltip = noukahi_seal_attack_3
+		pilgrimage_success_decrease = yes
+		add_dip_power = 50
+	}
+	
+	option = {
+		name = noukahi_pantheon.104.d1
+		highlight = yes
+		trigger = {
+			ruler_has_personality = scholar_personality
+		}
+		pilgrimage_success_increase = yes
+		custom_tooltip = noukahi_seal_attack_4
+		add_prestige = 20
+	}
+	after = {
+		country_event = { 
+			id = noukahi_pantheon.0
+			days = 180
+		}
+		set_global_flag = noukahi_seal_attack_happened #need this since it's trigger only once, to put it in the manager event random list option trigger so it doesnt land on it after it happens and softlock you
+	}
+}
+
+#journey event a drink too many
+country_event = {
+	id = noukahi_pantheon.105
+	title = noukahi_pantheon.105.t
+	desc = noukahi_pantheon.105.d
+	picture = muslimgfx_FEAST_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = noukahi_pantheon.105.a
+		add_mil_power = -25
+		add_dip_power = -25
+		add_adm_power = -25
+		pilgrimage_success_increase = yes
+		if = {
+			limit = {
+				ruler_has_personality = drunkard_personality
+			}
+			random = { 
+				chance = 50 
+				remove_ruler_personality = drunkard_personality
+			}
+		}
+	}
+
+	option = {
+		name = noukahi_pantheon.105.b
+	}
+		
+	option = {
+		name = noukahi_pantheon.105.c
+		pilgrimage_success_decrease = yes
+		custom_tooltip = noukahi_drinking_buddy
+		generate_scaled_advisor_of_type_and_cost_effect = { type = natural_scientist cost_multiplier = 0.5 }
+	}
+	
+	after = {
+		country_event = { 
+			id = noukahi_pantheon.0
+			days = 180
+		}
+	}
+}
+
+#journey event a modest shrine
+country_event = {
+	id = noukahi_pantheon.106
+	title = noukahi_pantheon.106.t
+	desc = noukahi_pantheon.106.d
+	picture = CHURCH_ESTATE_UPSET_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = noukahi_pantheon.106.a
+
+		pilgrimage_success_increase = yes
+		add_treasury = -200
+		random_owned_province = {
+			limit = {
+				can_build = temple
+			}
+			add_building_construction = {
+				building = temple
+				speed = 2
+				cost = 0
+			}
+		}
+	}
+
+	option = {
+		name = noukahi_pantheon.106.b
+	}
+	
+	after = {
+		country_event = { 
+			id = noukahi_pantheon.0
+			days = 180
+		}
+	}
+}
+
+#journey event the spear of a hero?
+country_event = {
+	id = noukahi_pantheon.107
+	title = noukahi_pantheon.107.t
+	desc = noukahi_pantheon.107.d
+	picture = MARAVI_FURNACE_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = noukahi_pantheon.107.a
+	}
+
+	option = {
+		name = noukahi_pantheon.107.b
+		custom_tooltip = noukahi_bought_spear
+		add_years_of_income = -0.25
+		random_list = {
+			99= { }
+			1 = {
+				increase_ruler_adm_effect = yes
+				increase_ruler_dip_effect = yes
+				increase_ruler_mil_effect = yes
+				increase_ruler_adm_effect = yes
+				increase_ruler_dip_effect = yes
+				increase_ruler_mil_effect = yes
+				increase_ruler_adm_effect = yes
+				increase_ruler_dip_effect = yes
+				increase_ruler_mil_effect = yes
+				increase_ruler_adm_effect = yes
+				increase_ruler_dip_effect = yes
+				increase_ruler_mil_effect = yes
+				increase_ruler_adm_effect = yes
+				increase_ruler_dip_effect = yes
+				increase_ruler_mil_effect = yes
+				increase_ruler_adm_effect = yes
+				increase_ruler_dip_effect = yes
+				increase_ruler_mil_effect = yes
+			}
+		}
+	}
+	
+	option = {
+		name = noukahi_pantheon.107.c
+		pilgrimage_success_decrease = yes
+		custom_tooltip = noukahi_stole_spear
+		add_mil_power = 50
+	}
+	
+	after = {
+		country_event = { 
+			id = noukahi_pantheon.0
+			days = 180
+		}
+	}
+}
+
+#journey event a feast of vultures
+country_event = {
+	id = noukahi_pantheon.108
+	title = noukahi_pantheon.108.t
+	desc = noukahi_pantheon.108.d
+	picture = AFRICAN_REVOLT_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = noukahi_pantheon.108.a
+		pilgrimage_success_increase = yes
+		add_stability = -1
+	}
+
+	option = {
+		name = noukahi_pantheon.108.b
+	}
+	
+	after = {
+		country_event = { 
+			id = noukahi_pantheon.0
+			days = 180
+		}
+	}
+}
+
+#journey event the woes of a peasant
+country_event = {
+	id = noukahi_pantheon.109
+	title = noukahi_pantheon.109.t
+	desc = noukahi_pantheon.109.d
+	picture = MARCHING_PEASANTS_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = noukahi_pantheon.109.a
+		pilgrimage_success_increase = yes
+		add_ruler_modifier = { 
+			name = noukahi_pilgrimage_increased_peasants_rights 
+			duration = 7300  
+		}
+	}
+
+	option = {
+		name = noukahi_pantheon.109.b
+		add_treasury = -50
+	}
+	
+	option = {
+		name = noukahi_pantheon.109.c
+		pilgrimage_success_decrease = yes
+	}
+	
+	option = {
+		name = noukahi_pantheon.109.d1
+		highlight = yes
+		trigger = {
+			OR = {
+				ruler_has_personality = cruel_personality
+				ruler_has_personality = malevolent_personality
+			}
+		}
+		pilgrimage_success_decrease = yes
+		pilgrimage_success_decrease = yes
+		add_ruler_modifier = { 
+			name = noukahi_pilgrimage_scourge_of_the_peasants
+			duration = 7300  
+		}
+	}
+	
+	after = {
+		country_event = { 
+			id = noukahi_pantheon.0
+			days = 180
+		}
+	}
+}
+
+#Roadside Inn
+country_event = {
+	id = noukahi_pantheon.110
+	title = noukahi_pantheon.110.t
+	desc = noukahi_pantheon.110.d
+	picture = MARCHING_PEASANTS_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = noukahi_pantheon.110.a
+		pilgrimage_success_increase = yes
+		create_general = {
+			tradition = 40
+		}
+		add_treasury = -40
+	}
+
+	option = {
+		name = noukahi_pantheon.110.b
+		pilgrimage_success_increase = yes
+		change_mil = 1
+	}
+	
+	option = {
+		name = noukahi_pantheon.110.c
+		highlight = yes
+		trigger = {
+			OR = {
+				ruler_has_personality = cruel_personality
+				ruler_has_personality = malevolent_personality
+			}
+		}
+		pilgrimage_success_decrease = yes
+		add_prestige = 10
+		add_years_of_income = 0.1
+	}
+	
+	option = {
+		name = noukahi_pantheon.110.d1
+		add_dip_power = 10
+		add_mil_power = 10
+		add_prestige = -5
+	}
+	
+	after = {
+		country_event = { 
+			id = noukahi_pantheon.0
+			days = 180
+		}
+	}
+}
+
+#Sword Beggar
+country_event = {
+	id = noukahi_pantheon.111
+	title = noukahi_pantheon.111.t
+	desc = noukahi_pantheon.111.d
+	picture = MARCHING_PEASANTS_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = noukahi_pantheon.111.a
+		highlight = yes
+		trigger = { ruler_has_personality = inspiring_leader_personality }
+		pilgrimage_success_increase = yes
+		add_mil_power = 50
+	}
+
+	option = {
+		name = noukahi_pantheon.111.b
+		pilgrimage_success_increase = yes
+		add_prestige = -20
+		add_legitimacy = -10
+		add_ruler_personality = careful_personality
+	}
+	
+	option = {
+		name = noukahi_pantheon.111.c
+		add_treasury = 100
+	}
+	
+	option = {
+		name = noukahi_pantheon.111.d1
+		add_mil_power = 25
+	}
+
+	option = {
+		name = noukahi_pantheon.111.e
+		pilgrimage_success_decrease = yes
+		add_years_of_income = 0.2
+		add_mil_power = 50
+	}
+	
+	after = {
+		country_event = { 
+			id = noukahi_pantheon.0
+			days = 180
+		}
+	}
+}
+
+#Roadside Hospital
+country_event = {
+	id = noukahi_pantheon.112
+	title = noukahi_pantheon.112.t
+	desc = noukahi_pantheon.112.d
+	picture = MARCHING_PEASANTS_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = noukahi_pantheon.112.a
+		pilgrimage_success_increase = yes
+		add_years_of_income = -0.5
+		add_ruler_personality = just_personality
+	}
+
+	option = {
+		name = noukahi_pantheon.112.b
+		pilgrimage_success_increase = yes
+		add_dip_power = -50
+		add_ruler_personality = kind_hearted_personality
+	}
+	
+	option = {
+		name = noukahi_pantheon.112.c
+		add_treasury = -10
+	}
+	
+	option = {
+		name = noukahi_pantheon.112.d1
+		highlight = yes
+		trigger = {
+			OR = {
+				ruler_has_personality = cruel_personality
+				ruler_has_personality = sinner_personality
+			}
+		}
+		pilgrimage_success_decrease = yes
+		if = {
+			limit = { monthly_income = 52 }
+			add_treasury = 500
+		} else = { add_years_of_income = 0.8 }
+	}
+	
+	after = {
+		country_event = { 
+			id = noukahi_pantheon.0
+			days = 180
+		}
+	}
+}
+
+#Bottle on Beach
+country_event = {
+	id = noukahi_pantheon.113
+	title = noukahi_pantheon.113.t
+	desc = noukahi_pantheon.113.d
+	picture = MARCHING_PEASANTS_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = noukahi_pantheon.113.a
+		pilgrimage_success_decrease = yes
+		random_list = {
+			1 = { change_adm = -1 }
+			1 = { change_dip = -1 }
+			1 = { change_mil = -1 }
+		}
+		country_event = {
+			id = genie_cult.4
+		}
+	}
+
+	option = {
+		name = noukahi_pantheon.113.b
+		pilgrimage_success_decrease = yes
+		add_adm_power = -100
+		add_dip_power = -100
+		add_mil_power = -100
+		add_ruler_modifier = { name = noukahi_pilgrimage_bottle_kept }
+	}
+	
+	option = {
+		name = noukahi_pantheon.113.c
+		pilgrimage_success_increase = yes
+		if = {
+			limit = { ruler_has_bad_personality = yes }
+			remove_random_bad_ruler_personality = yes
+			random_list = {
+				1 = { add_ruler_personality = zealot_personality }
+				1 = { add_ruler_personality = pious_personality }
+				1 = { add_ruler_personality = righteous_personality }
+			}
+			add_adm_power = -50
+			add_dip_power = -50
+			add_mil_power = -50
+		} else = {
+			add_ruler_modifier = { name = noukahi_pilgrimage_bottle_purified }
+		}
+	}
+	
+	after = {
+		country_event = { 
+			id = noukahi_pantheon.0
+			days = 180
+		}
+	}
+}
+
+#Blacksmith-monk
+country_event = {
+	id = noukahi_pantheon.114
+	title = noukahi_pantheon.114.t
+	desc = noukahi_pantheon.114.d
+	picture = MARCHING_PEASANTS_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = noukahi_pantheon.114.a
+		highlight = yes
+		trigger = { ruler_has_personality = charismatic_negotiator_personality }
+		pilgrimage_success_increase = yes
+		add_mil_power = 25
+	}
+
+	option = {
+		name = noukahi_pantheon.114.b
+		pilgrimage_success_increase = yes
+		if = {
+			limit = { monthly_income = 41 }
+			add_treasury = -500
+		} else = { add_years_of_income = -1 }
+		add_mil_power = 25
+	}
+	
+	option = { 	name = noukahi_pantheon.114.c }
+	
+	option = {
+		name = noukahi_pantheon.114.d1
+		pilgrimage_success_decrease = yes
+		add_mil_power = 50
+		random = {
+			chance = 20
+			if = {
+				limit = { ruler_has_personality = cruel_personality }
+				add_mil_power = 100
+			} else = { add_ruler_personality = cruel_personality }
+		}
+	}
+	
+	after = {
+		country_event = { 
+			id = noukahi_pantheon.0
+			days = 180
+		}
+	}
+}
+
+#Mojobaa priest
+country_event = {
+	id = noukahi_pantheon.115
+	title = noukahi_pantheon.115.t
+	desc = noukahi_pantheon.115.d
+	picture = MARCHING_PEASANTS_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = noukahi_pantheon.115.a
+		highlight = yes
+		trigger = {
+			OR = {
+				ruler_has_personality = well_connected_personality
+				ruler_has_personality = zealot_personality
+			}
+		}
+		pilgrimage_success_increase = yes
+		define_advisor = {
+			type = natural_scientist
+			discount = yes
+		}
+	}
+
+	option = {
+		name = noukahi_pantheon.115.b
+		pilgrimage_success_increase = yes
+		add_dip_power = -100
+		random_list = {
+			1 = { add_ruler_personality = industrious_personality }
+			1 = { add_ruler_personality = midas_touched_personality }
+		}
+	}
+	
+	option = {
+		name = noukahi_pantheon.115.c
+		add_treasury = -25
+		add_adm_power = 10
+	}
+	
+	option = {
+		name = noukahi_pantheon.115.d1
+		pilgrimage_success_decrease = yes
+		add_treasury = 50
+		random_list = {
+			1 = { add_ruler_personality = sinner_personality }
+			1 = { add_ruler_personality = greedy_personality }
+			6 = {}
+		}
+	}
+	
+	after = {
+		country_event = { 
+			id = noukahi_pantheon.0
+			days = 180
+		}
+	}
+}
+
+#Lizardfolk Warrior
+country_event = {
+	id = noukahi_pantheon.116
+	title = noukahi_pantheon.116.t
+	desc = noukahi_pantheon.116.d
+	picture = MARCHING_PEASANTS_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = noukahi_pantheon.116.a
+		highlight = yes
+		trigger = {
+			OR = {
+				ruler_has_personality = bold_fighter_personality
+				ruler_has_personality = conqueror_personality
+			}
+		}
+		pilgrimage_success_increase = yes
+		random = {
+			chance = 10
+			add_ruler_modifier = {
+				name = noukahi_pilgrimage_injury_ruler_modifier
+				duration = 1825 #5 years
+			}
+		}
+		add_prestige = 5
+		add_mil_power = 100
+	}
+
+	option = {
+		name = noukahi_pantheon.116.b
+		pilgrimage_success_increase = yes
+		random = {
+			chance = 50
+			add_ruler_modifier = {
+				name = noukahi_pilgrimage_injury_ruler_modifier
+				duration = 1825 #5 years
+			}
+		}
+		trigger = {
+			NOT = {
+				ruler_has_personality = bold_fighter_personality
+				ruler_has_personality = conqueror_personality
+			}
+		}
+		add_mil_power = -50
+		add_prestige = 10
+		random_list = {
+			1 = { add_ruler_personality = bold_fighter_personality }
+			1 = { add_ruler_personality = inspiring_leader_personality }
+		}
+	}
+	
+	option = {
+		name = noukahi_pantheon.116.c
+		add_prestige = -5
+	}
+	
+	option = {
+		name = noukahi_pantheon.116.d1
+		pilgrimage_success_decrease = yes
+		add_years_of_income = 0.25
+		random_list = {
+			1 = { add_ruler_personality = cruel_personality }
+			1 = { add_ruler_personality = embezzler_personality }
+		}
+	}
+	
+	after = {
+		country_event = { 
+			id = noukahi_pantheon.0
+			days = 180
+		}
+	}
+}
+
+#Port City
+country_event = {
+	id = noukahi_pantheon.117
+	title = noukahi_pantheon.117.t
+	desc = noukahi_pantheon.117.d
+	picture = MARCHING_PEASANTS_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = noukahi_pantheon.117.a
+		pilgrimage_success_increase = yes
+		if = {
+			limit = { monthly_income = 250 }
+			add_treasury = -750
+		} else = { add_years_of_income = -0.25 }
+		random_list = {
+			1 = {
+				random_owned_province = {
+					limit = { province_has_center_of_trade_of_level = 1 }
+					add_base_production = 2
+				}
+			}
+			1 = { capital_scope = { add_base_production = 1 } }
+		}
+	}
+
+	option = {
+		name = noukahi_pantheon.117.b
+		pilgrimage_success_increase = yes
+		if = {
+			limit = { monthly_income = 250 }
+			add_treasury = -750
+		} else = { add_years_of_income = -0.25 }
+		random_list = {
+			1 = { add_ruler_personality = scholar_personality }
+			1 = { add_ruler_personality = architectural_visionary_personality }
+		}
+	}
+	
+	option = { name = noukahi_pantheon.117.c }
+	
+	option = {
+		name = noukahi_pantheon.117.d1
+		pilgrimage_success_decrease = yes
+		highlight = yes
+		trigger = {
+			OR = {
+				ruler_has_personality = greedy_personality
+				ruler_has_personality = obsessive_perfectionist_personality
+			}
+		}
+		add_years_of_income = 0.5
+	}
+	
+	after = {
+		country_event = { 
+			id = noukahi_pantheon.0
+			days = 180
+		}
+	}
+}
+
+# COMMENTED OUT BECAUSE LOC UNFINISHED 
+# #Philosophers
+# country_event = {
+# 	id = noukahi_pantheon.118
+# 	title = noukahi_pantheon.118.t
+# 	desc = noukahi_pantheon.118.d
+# 	picture = MARCHING_PEASANTS_eventPicture
+	
+# 	is_triggered_only = yes
+	
+# 	option = {
+# 		name = noukahi_pantheon.118.a
+# 		pilgrimage_success_increase = yes
+# 		highlight = yes
+# 		trigger = {
+# 			OR = {
+# 				ruler_has_personality = free_thinker_personality
+# 				ruler_has_personality = scholar_personality
+# 			}
+# 		}
+# 		add_adm_power = 25
+# 		add_dip_power = 25
+# 		add_mil_power = 25
+# 		add_prestige = 5
+# 	}
+
+# 	option = {
+# 		name = noukahi_pantheon.118.b
+# 		pilgrimage_success_increase = yes
+# 		add_dip_power = -50
+# 		add_ruler_personality = charismatic_negotiator_personality
+# 	}
+	
+# 	option = {
+# 		name = noukahi_pantheon.118.c
+# 		pilgrimage_success_increase = yes
+# 		add_adm_power = -25
+# 		add_mil_power = -25
+# 		random_list = {
+# 			1 = { add_ruler_personality = careful_personality }
+# 			1 = { add_ruler_personality = conqueror_personality }
+# 		}
+# 	}
+	
+# 	option = { name = noukahi_pantheon.118.d1 }
+
+# 	option = {
+# 		name = noukahi_pantheon.118.e
+# 		pilgrimage_success_decrease = yes
+# 		add_mil_power = 100
+# 		add_yearly_manpower = 0.2
+# 		random_list = {
+# 			1 = { add_ruler_personality = cruel_personality }
+# 			1 = { add_ruler_personality = malevolent_personality }
+# 		}
+# 	}
+	
+# 	after = {
+# 		country_event = { 
+# 			id = noukahi_pantheon.0
+# 			days = 180
+# 		}
+# 	}
+# }
+
+# #Bridge
+# country_event = {
+# 	id = noukahi_pantheon.119
+# 	title = noukahi_pantheon.119.t
+# 	desc = noukahi_pantheon.119.d
+# 	picture = MARCHING_PEASANTS_eventPicture
+	
+# 	is_triggered_only = yes
+	
+# 	option = {
+# 		name = noukahi_pantheon.119.a
+# 		pilgrimage_success_increase = yes
+# 		highlight = yes
+# 		trigger = {
+# 			OR = {
+# 				ruler_has_personality = free_thinker_personality
+# 				ruler_has_personality = architectural_visionary_personality
+# 			}
+# 		}
+# 		add_adm_power = 25
+# 		add_dip_power = 25
+# 		add_mil_power = 25
+# 	}
+
+# 	option = {
+# 		name = noukahi_pantheon.119.b
+# 		pilgrimage_success_increase = yes
+# 		add_years_of_income = -0.5
+# 		add_adm_power = -50
+# 		remove_random_bad_ruler_personality = yes
+# 		add_ruler_personality = patron_of_arts_personality
+# 	}
+	
+# 	option = {
+# 		name = noukahi_pantheon.119.c
+# 		pilgrimage_success_increase = yes
+# 		add_dip_power = -50
+# 		if = {
+# 			limit = { monthly_income = 166 }
+# 			add_treasury = -1000
+# 		} else = { add_years_of_income = -0.5 }
+# 		add_ruler_personality = well_connected_personality
+# 	}
+	
+# 	option = {
+# 		name = noukahi_pantheon.119.d1
+# 		add_ruler_personality = obsessive_perfectionist_personality
+# 		add_prestige = -5
+# 	}
+
+# 	option = {
+# 		name = noukahi_pantheon.119.e
+# 		pilgrimage_success_decrease = yes
+# 		random_list = {
+# 			1 = { add_ruler_personality = cruel_personality }
+# 			1 = { add_ruler_personality = malevolent_personality }
+# 		}
+# 	}
+	
+# 	after = {
+# 		country_event = { 
+# 			id = noukahi_pantheon.0
+# 			days = 180
+# 		}
+# 	}
+# }
+
+# #Kunolo priest
+# country_event = {
+# 	id = noukahi_pantheon.120
+# 	title = noukahi_pantheon.120.t
+# 	desc = noukahi_pantheon.120.d
+# 	picture = MARCHING_PEASANTS_eventPicture
+	
+# 	is_triggered_only = yes
+	
+# 	option = {
+# 		name = noukahi_pantheon.120.a
+# 		pilgrimage_success_increase = yes
+# 		add_dip_power = -100
+# 		random_list = {
+# 			1 = {
+# 				trigger = { ruler_has_personality = babbling_buffoon_personality }
+# 				remove_ruler_personality = babbling_buffoon_personality
+# 				add_ruler_personality = charismatic_negotiator_personality
+# 			}
+# 			1 = {
+# 				trigger = { ruler_has_personality = embezzler_personality }
+# 				remove_ruler_personality = embezzler_personality
+# 				add_ruler_personality = incorruptible_personality
+# 			}
+# 			1 = {
+# 				trigger = { ruler_has_personality = infertile_personality }
+# 				remove_ruler_personality = infertile_personality
+# 				add_ruler_personality = fertile_personality
+# 			}
+# 			1 = {
+# 				trigger = { ruler_has_personality = drunkard_personality }
+# 				remove_ruler_personality = drunkard_personality
+# 				add_ruler_personality = entrepreneur_personality
+# 			}
+# 			1 = {
+# 				trigger = { ruler_has_personality = sinner_personality }
+# 				remove_ruler_personality = sinner_personality
+# 				add_ruler_personality = zealot_personality
+# 			}
+# 			1 = {
+# 				trigger = { ruler_has_personality = greedy_personality }
+# 				remove_ruler_personality = greedy_personality
+# 				add_ruler_personality = midas_touched_personality
+# 			}
+# 			1 = {
+# 				trigger = { ruler_has_personality = cruel_personality }
+# 				remove_ruler_personality = cruel_personality
+# 				add_ruler_personality = just_personality
+# 			}
+# 			1 = {
+# 				trigger = { ruler_has_personality = naive_personality }
+# 				remove_ruler_personality = naive_personality
+# 				add_ruler_personality = silver_tongue_personality
+# 			}
+# 			1 = {
+# 				trigger = { ruler_has_personality = craven_personality }
+# 				remove_ruler_personality = craven_personality
+# 				add_ruler_personality = inspiring_leader_personality
+# 			}
+# 			1 = {
+# 				trigger = { ruler_has_personality = loose_lips_personality }
+# 				remove_ruler_personality = loose_lips_personality
+# 				add_ruler_personality = secretive_personality
+# 			}
+# 			1 = {
+# 				trigger = { ruler_has_personality = obsessive_perfectionist_personality }
+# 				remove_ruler_personality = obsessive_perfectionist_personality
+# 				add_ruler_personality = architectural_visionary_personality
+# 			}
+# 			1 = {
+# 				trigger = { ruler_has_personality = malevolent_personality }
+# 				remove_ruler_personality = malevolent_personality
+# 				add_ruler_personality = benevolent_personality
+# 			}
+# 			1 = {
+# 				trigger = { ruler_has_personality = petty_personality }
+# 				remove_ruler_personality = petty_personality
+# 				add_ruler_personality = humane_personality
+# 			}
+# 		}
+# 	}
+
+# 	option = {
+# 		name = noukahi_pantheon.120.b
+# 		pilgrimage_success_increase = yes
+# 		add_adm_power = -10
+# 		add_legitimacy = -5
+# 		add_ruler_personality = calm_personality
+# 	}
+	
+# 	option = { name = noukahi_pantheon.120.c }
+	
+# 	option = {
+# 		name = noukahi_pantheon.120.d1
+# 		pilgrimage_success_decrease = yes
+# 		add_dip_power = 100
+# 		add_ruler_personality = drunkard_personality
+# 	}
+	
+# 	after = {
+# 		country_event = { 
+# 			id = noukahi_pantheon.0
+# 			days = 180
+# 		}
+# 	}
+# }
+
+# #Trial
+# country_event = {
+# 	id = noukahi_pantheon.121
+# 	title = noukahi_pantheon.121.t
+# 	desc = noukahi_pantheon.121.d
+# 	picture = MARCHING_PEASANTS_eventPicture
+	
+# 	is_triggered_only = yes
+	
+# 	option = {
+# 		name = noukahi_pantheon.121.a
+# 		pilgrimage_success_increase = yes
+# 		highlight = yes
+# 		trigger = {
+# 			OR = {
+# 				ruler_has_personality = scholar_personality
+# 				ruler_has_personality = patron_of_arts_personality
+# 			}
+# 		}
+# 		add_prestige = 20
+# 		add_adm_power = 5
+# 		add_dip_power = 5
+# 		add_mil_power = 5
+# 	}
+
+# 	option = {
+# 		name = noukahi_pantheon.121.b
+# 		pilgrimage_success_increase = yes
+# 		add_adm_power = -25
+# 		add_dip_power = -25
+# 		add_ruler_personality = scholar_personality
+# 	}
+	
+# 	option = {
+# 		name = noukahi_pantheon.121.c
+# 		pilgrimage_success_decrease = yes
+# 		random_list = {
+# 			1 = { add_ruler_personality = babbling_buffoon_personality }
+# 			1 = { add_ruler_personality = naive_personality }
+# 		}
+# 	}
+	
+# 	option = {
+# 		name = noukahi_pantheon.121.d1
+# 		pilgrimage_success_decrease = yes
+# 		add_treasury = 50
+# 		random_list = {
+# 			1 = { add_ruler_personality = greedy_personality }
+# 			1 = { add_ruler_personality = embezzler_personality }
+# 		}
+# 	}
+	
+# 	after = {
+# 		country_event = { 
+# 			id = noukahi_pantheon.0
+# 			days = 180
+# 		}
+# 	}
+# }
+
+# #Bandited Woman
+# country_event = {
+# 	id = noukahi_pantheon.122
+# 	title = noukahi_pantheon.122.t
+# 	desc = noukahi_pantheon.122.d
+# 	picture = MARCHING_PEASANTS_eventPicture
+	
+# 	is_triggered_only = yes
+	
+# 	option = {
+# 		name = noukahi_pantheon.122.a
+# 		pilgrimage_success_increase = yes
+# 		highlight = yes
+# 		trigger = { mil = 3 }
+# 		add_treasury = 50
+# 		add_ruler_personality = bold_fighter_personality
+# 	}
+
+# 	option = {
+# 		name = noukahi_pantheon.122.b
+# 		pilgrimage_success_increase = yes
+# 		add_treasury = -50
+# 	}
+	
+# 	option = { name = noukahi_pantheon.122.c }
+	
+# 	option = {
+# 		name = noukahi_pantheon.122.d1
+# 		pilgrimage_success_decrease = yes
+# 		add_dip_power = 50
+# 		random_list = {
+# 			1 = { add_ruler_personality = craven_personality }
+# 			1 = {}
+# 		}
+# 	}
+	
+# 	after = {
+# 		country_event = { 
+# 			id = noukahi_pantheon.0
+# 			days = 180
+# 		}
+# 	}
+# }
+
+# #Inn
+# country_event = {
+# 	id = noukahi_pantheon.123
+# 	title = noukahi_pantheon.123.t
+# 	desc = noukahi_pantheon.123.d
+# 	picture = MARCHING_PEASANTS_eventPicture
+	
+# 	is_triggered_only = yes
+	
+# 	option = {
+# 		name = noukahi_pantheon.123.a
+# 		pilgrimage_success_increase = yes
+# 		add_treasury = -25
+# 		add_prestige = 10
+# 	}
+
+# 	option = {
+# 		name = noukahi_pantheon.123.b
+# 		pilgrimage_success_increase = yes
+# 		add_treasury = -10
+# 		add_prestige = 5
+# 	}
+	
+# 	option = { name = noukahi_pantheon.123.c }
+	
+# 	option = {
+# 		name = noukahi_pantheon.123.d1
+# 		pilgrimage_success_decrease = yes
+# 		add_treasury = 50
+# 		random_list = {
+# 			1 = { add_ruler_personality = cruel_personality }
+# 			1 = { add_ruler_personality = malevolent_personality }
+# 		}
+# 	}
+	
+# 	after = {
+# 		country_event = { 
+# 			id = noukahi_pantheon.0
+# 			days = 180
+# 		}
+# 	}
+# }
+
+#Riddle
+country_event = {
+	id = noukahi_pantheon.124
+	title = noukahi_pantheon.124.t
+	desc = noukahi_pantheon.124.d
+	picture = MARCHING_PEASANTS_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = noukahi_pantheon.124.a
+		pilgrimage_success_increase = yes
+		add_adm_power = -25
+		add_dip_power = -25
+		add_mil_power = -25
+		random_list = {
+			1 = { add_ruler_personality = pious_personality }
+			1 = { add_ruler_personality = righteous_personality }
+		}
+	}
+	
+	option = { name = noukahi_pantheon.124.b }
+	
+	option = {
+		name = noukahi_pantheon.124.c
+		pilgrimage_success_decrease = yes
+		add_adm_power = 50
+		add_dip_power = 50
+		add_mil_power = 50
+		add_years_of_income = 3
+		kill_heir = {}
+		define_heir = {
+			adm = 4
+			dip = 4
+			mil = 4
+			religion = shadow_pact
+		}
+		add_heir_personality = mage_personality
+		capital_scope = {
+			change_religion = shadow_pact
+			add_province_modifier = {
+				name = religious_zeal_at_conv
+				duration = 10950 #30 years
+			}
+		}
+	}
+	
+	after = {
+		country_event = { 
+			id = noukahi_pantheon.0
+			days = 180
+		}
+	}
+}
+
+#Dilapidated Shrine
+country_event = {
+	id = noukahi_pantheon.125
+	title = noukahi_pantheon.125.t
+	desc = noukahi_pantheon.125.d
+	picture = MARCHING_PEASANTS_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = noukahi_pantheon.125.a
+		highlight = yes
+		trigger = {
+			adm = 5
+			dip = 5
+			mil = 5
+			ruler_has_personality = zealot_personality
+			ruler_has_personality = just_personality
+		}
+		pilgrimage_success_increase = yes
+		add_adm_power = -50
+		add_dip_power = -50
+		add_mil_power = -50
+		add_treasury = -100
+		add_prestige = 25
+		random_list = {
+			1 = { change_adm = 1 }
+			1 = { change_dip = 1 }
+			1 = { change_mil = 1 }
+		}
+	}
+
+	option = {
+		name = noukahi_pantheon.125.b
+		pilgrimage_success_increase = yes
+		if = {
+			limit = { monthly_income = 83 }
+			add_treasury = -1000
+		} else = { add_years_of_income = -1 }
+		add_dip_power = -25
+		add_prestige = 25
+		add_ruler_personality = righteous_personality
+	}
+	
+	option = { name = noukahi_pantheon.125.c }
+	
+	option = {
+		name = noukahi_pantheon.125.d1
+		pilgrimage_success_decrease = yes
+		add_years_of_income = 0.5
+		add_adm_power = 25
+		add_dip_power = 25
+		add_mil_power = 25
+		random_list = {
+			1 = { add_ruler_personality = greedy_personality }
+			1 = { add_ruler_personality = sinner_personality }
+		}
+	}
+	
+	after = {
+		country_event = { 
+			id = noukahi_pantheon.0
+			days = 180
+		}
+	}
+}

@@ -546,10 +546,10 @@ G79_shared_4 = {
 		provinces_to_highlight = {
 			OR = {
 				area = sibisimra_area
-					area = tirsin_area
-					area = nagarchend_area
-					area = sthanan_ith_vussam_area
-					area = vuls_tenvach_area
+				area = tirsin_area
+				area = nagarchend_area
+				area = sthanan_ith_vussam_area
+				area = vuls_tenvach_area
 			}
 			OR = {
 				trade_goods = grain
@@ -934,7 +934,7 @@ G79_expanded_3 = {
 				limit = { NOT = { army_professionalism = 0.2 } }
 				add_mil_power = -100
 			}
-			add_innovativeness_or_monarch_power = yes
+			add_innovativeness_or_monarch_power_anb = { amount = 5 }
 			custom_tooltip = G79_ameioni_lessons_effect_tt
 			for = {
 				amount = 10
@@ -1388,24 +1388,30 @@ G79_taychendi_5 = {
 					limit = {
 						has_personal_deity = taychend_glory_5
 					}
-					for = {
-						amount = 3
-						effect = "every_subject_country = { capital_scope = { add_random_development = -1 } overlord = { capital_scope = { add_random_development = 1 } } }"
+					every_subject_country = {
+						capital_scope = { add_random_development = -3 }
+						overlord = { 
+							capital_scope = { add_random_development = 3 }
+						}
 					}
 				}
 				else_if = {
 					limit = {
 						has_personal_deity = taychend_glory_3
 					}
-					for = {
-						amount = 2
-						effect = "every_subject_country = { capital_scope = { add_random_development = -1 } overlord = { capital_scope = { add_random_development = 1 } } }"
+					every_subject_country = {
+						capital_scope = { add_random_development = -2 }
+						overlord = { 
+							capital_scope = { add_random_development = 2 }
+						}
 					}
 				}
 				else = {
-					for = {
-						amount = 1
-						effect = "every_subject_country = { capital_scope = { add_random_development = -1 } overlord = { capital_scope = { add_random_development = 1 } } }"
+					every_subject_country = {
+						capital_scope = { add_random_development = -1 }
+						overlord = { 
+							capital_scope = { add_random_development = 1 }
+						}
 					}
 				}
 			}

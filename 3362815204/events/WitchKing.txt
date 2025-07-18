@@ -237,6 +237,7 @@ country_event = {
 		#had_ruler_flag = { flag = witch_king_flag days = 12 }
 		has_country_flag = witch_king_flag
 		NOT = { ruler_is_immortal = yes }
+		NOT = { has_country_flag = Y26_sado_elected_once }
 		NOT = { has_country_flag = nsc_ruler_will_come_back }	#nsc event that temporally exile your ruler should not trigger this
 	}
 
@@ -319,7 +320,7 @@ country_event = {
 	trigger = {
 		OR = {
 			has_country_flag = witch_king_flag
-			has_country_flag = exposed_vampire_ruler
+			ruler_is_exposed_vampire = yes
 			has_country_flag = exposed_lich_ruler
 			religion = infernal_court
 		}
@@ -408,7 +409,7 @@ country_event = {
 			clr_country_flag = witch_king_flag
 		
 			#Vampire
-			clear_ruler_vampire_flags = yes
+			remove_vampire_immortality = yes
 			clr_country_flag = vampire_heir
 			
 			#Lich
@@ -478,7 +479,7 @@ country_event = {
 		hidden_effect = {
 			country_event = {
 				id = witch_king.6
-				days = 1
+				days = 2
 			}
 		}
 	}
@@ -597,6 +598,7 @@ country_event = {
 		NOT = {
 			war_with = emperor
 		}
+		has_saved_global_event_target = imperial_witch_king
 	}
 	
 	option = { # We will join the emperor
@@ -701,6 +703,8 @@ country_event = {
 		current_age = age_of_absolutism
 		has_country_modifier = witch_king_modifier
 		NOT = { religion = black_doctrine }
+		NOT = { tag = F53 }
+		NOT = { has_country_flag = supernaturally_bound_faith }
 	}
 
 	option = {
@@ -719,6 +723,29 @@ country_event = {
 		name = witch_king.7.b
 		ai_chance = {
 			factor = 0
+		}
+	}
+}
+
+province_event = { #delayed event for Black Doctrine to end the month tick
+	id = witch_king.66
+	title = witch_king.66.t
+	desc = witch_king.66.d
+	picture = BIG_BOOK_eventPicture
+
+	hidden = yes
+	is_triggered_only = yes
+
+	trigger = {
+		has_province_modifier = bd_illusory_conversion_helper
+	}
+
+	option = {
+		name = witch_king.66
+		add_province_modifier = {
+			name = bd_illusory_conversion_unhelper
+			duration = 1
+			hidden = yes
 		}
 	}
 }

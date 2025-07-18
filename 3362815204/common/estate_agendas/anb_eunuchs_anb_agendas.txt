@@ -16,6 +16,7 @@ estate_eunuchs_anb_develop_x = {
 				random_owned_province = {
 					limit = {
 						is_state_core = root
+						estate_province_intended_to_dev = yes #anbennar
 						area_for_scope_province = {
 							is_capital_of = root
 						}
@@ -27,6 +28,7 @@ estate_eunuchs_anb_develop_x = {
 				trigger = {
 					any_owned_province = {
 						is_state_core = root
+						estate_province_intended_to_dev = yes #anbennar
 						OR = {
 							AND = {
 								religion = root
@@ -44,6 +46,7 @@ estate_eunuchs_anb_develop_x = {
 				random_owned_province = {
 					limit = {
 						is_state_core = root
+						estate_province_intended_to_dev = yes #anbennar
 						OR = {
 							AND = {
 								religion = root
@@ -64,6 +67,7 @@ estate_eunuchs_anb_develop_x = {
 				random_owned_province = {
 					limit = {
 						is_state_core = root
+						estate_province_intended_to_dev = yes #anbennar
 					}
 					save_event_target_as = agenda_province
 				}
@@ -1680,12 +1684,12 @@ estate_eunuchs_anb_support_independence = {
 		is_at_war = no
 		is_subject = no
 		any_rival_country = {
-			# NOT = { has_reform = daimyo }
 			#Anbennar
-			NOT = { has_government_attribute = is_raja }
-			NOT = { has_reform = wulin }
 			NOT = { ROOT = { truce_with = prev } }
 			any_subject_country = {
+				NOT = { has_government_attribute = is_raja_subject }
+				NOT = { has_reform = xiaken }
+				NOT = { is_subject_of_type = ynnic_iosahar }
 				is_subject_other_than_tributary_trigger = yes
 				liberty_desire = 50
 				has_opinion = {
@@ -1706,7 +1710,9 @@ estate_eunuchs_anb_support_independence = {
 			limit = {
 				NOT = { ROOT = { truce_with = prev } }
 				any_subject_country = {
-					# NOT = { has_reform = daimyo }
+					NOT = { has_government_attribute = is_raja_subject }
+					NOT = { has_reform = xiaken }
+					NOT = { is_subject_of_type = ynnic_iosahar }
 					is_subject_other_than_tributary_trigger = yes
 					liberty_desire = 50
 					has_opinion = {
@@ -1721,7 +1727,9 @@ estate_eunuchs_anb_support_independence = {
 			save_event_target_as = agenda_rival_country
 			random_subject_country = {
 				limit = {
-					# NOT = { has_reform = daimyo }
+					NOT = { has_government_attribute = is_raja_subject }
+					NOT = { has_reform = xiaken }
+					NOT = { is_subject_of_type = ynnic_iosahar }
 					is_subject_other_than_tributary_trigger = yes
 					liberty_desire = 50
 					has_opinion = {
@@ -1803,7 +1811,12 @@ estate_eunuchs_anb_protect_our_culture = {
 					NOT = { ROOT = { truce_with = prev } }
 					OR = {
 						is_part_of_hre = no
-						NOT = { hre_reform_passed = landfriede }
+						NOT = { 
+							OR = {
+								hre_reform_passed = anbennar_mages_peace
+								hre_reform_passed = anbennar_empower_imperial_diet
+							}
+						}
 						ROOT = { is_part_of_hre = no }
 					}
 				}
@@ -1838,7 +1851,12 @@ estate_eunuchs_anb_protect_our_culture = {
 						NOT = { ROOT = { truce_with = prev } }
 						OR = {
 							is_part_of_hre = no
-							NOT = { hre_reform_passed = landfriede }
+							NOT = { 
+								OR = {
+									hre_reform_passed = anbennar_mages_peace
+									hre_reform_passed = anbennar_empower_imperial_diet
+								}
+							}
 							ROOT = { is_part_of_hre = no }
 						}
 					}
@@ -1861,7 +1879,12 @@ estate_eunuchs_anb_protect_our_culture = {
 						NOT = { ROOT = { truce_with = prev } }
 						OR = {
 							is_part_of_hre = no
-							NOT = { hre_reform_passed = landfriede }
+							NOT = { 
+								OR = {
+									hre_reform_passed = anbennar_mages_peace
+									hre_reform_passed = anbennar_empower_imperial_diet
+								}
+							}
 							ROOT = { is_part_of_hre = no }
 						}
 					}
@@ -2023,7 +2046,12 @@ estate_eunuchs_anb_vassalise_vulnerable_country = {
 			}
 			OR = {
 				is_part_of_hre = no
-				NOT = { hre_reform_passed = landfriede }
+				NOT = { 
+					OR = {
+						hre_reform_passed = anbennar_mages_peace
+						hre_reform_passed = anbennar_empower_imperial_diet
+					}
+				}
 				ROOT = { is_part_of_hre = no }
 			}
 			any_owned_province = {
@@ -2092,7 +2120,12 @@ estate_eunuchs_anb_vassalise_vulnerable_country = {
 				}
 				OR = {
 					is_part_of_hre = no
-					NOT = { hre_reform_passed = landfriede }
+					NOT = { 
+						OR = {
+							hre_reform_passed = anbennar_mages_peace
+							hre_reform_passed = anbennar_empower_imperial_diet
+						}
+					}
 					ROOT = { is_part_of_hre = no }
 				}
 				any_owned_province = {

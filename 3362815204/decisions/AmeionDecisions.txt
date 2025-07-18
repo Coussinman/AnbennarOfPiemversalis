@@ -187,6 +187,12 @@ country_decisions = {
 				army_size = 40
 			}
 			else = { army_size = 30 }
+			NOT = {
+				alliance_with = U38
+				alliance_with = U36
+				alliance_with = U35
+				alliance_with = U34
+			}
 		}
 		effect = {
 			set_country_flag = G52_G63_consolidation_flag
@@ -211,45 +217,59 @@ country_decisions = {
 				U34 = {
 					break_alliance = G63
 				}
-				G63 = {
-					if = {
-						limit = { U38 = { any_owned_province = { is_core = G63 } } }
-						2663 = { cede_province = U38 }
-						declare_war_with_cb = {
-							who = U38
-							casus_belli = cb_core
-							war_goal_province = 2663
-						}
+				if = {
+					limit = { U38 = { any_owned_province = { is_core = G63 } } }
+					2663 = { 
+						cede_province = U38
+						add_core = G52
 					}
-					if = {
-						limit = { U36 = { any_owned_province = { is_core = G63 } } }
-						2646 = { cede_province = U36 }
-						declare_war_with_cb = {
-							who = U36
-							casus_belli = cb_core
-							war_goal_province = 2646
-						}
-					}
-					if = {
-						limit = { U35 = { any_owned_province = { is_core = G63 } } }
-						2631 = { cede_province = U35 }
-						declare_war_with_cb = {
-							who = U35
-							casus_belli = cb_core
-							war_goal_province = 2631
-						}
-					}
-					if = {
-						limit = { U34 = { any_owned_province = { is_core = G63 } } }
-						2647 = { cede_province = U34 }
-						declare_war_with_cb = {
-							who = U34
-							casus_belli = cb_core
-							war_goal_province = 2647
-						}
+					declare_war_with_cb = {
+						who = U38
+						casus_belli = cb_core
+						war_goal_province = 2663
 					}
 				}
-				join_all_offensive_wars_of = G63
+				if = {
+					limit = { U36 = { any_owned_province = { is_core = G63 } } }
+					2646 = { 
+						cede_province = U36
+						add_core = G52
+					}
+					declare_war_with_cb = {
+						who = U36
+						casus_belli = cb_core
+						war_goal_province = 2646
+					}
+				}
+				if = {
+					limit = { U35 = { any_owned_province = { is_core = G63 } } }
+					2631 = { 
+						cede_province = U35
+						add_core = G52
+					}
+					declare_war_with_cb = {
+						who = U35
+						casus_belli = cb_core
+						war_goal_province = 2631
+					}
+				}
+				if = {
+					limit = { U34 = { any_owned_province = { is_core = G63 } } }
+					2647 = { 
+						cede_province = U34
+						add_core = G52
+					}
+					declare_war_with_cb = {
+						who = U34
+						casus_belli = cb_core
+						war_goal_province = 2647
+					}
+				}
+				G63 = { join_all_offensive_wars_of = ROOT }
+				2663 = { remove_core = ROOT }
+				2646 = { remove_core = ROOT }
+				2631 = { remove_core = ROOT }
+				2647 = { remove_core = ROOT }
 			}
 		}
 		ai_will_do = {

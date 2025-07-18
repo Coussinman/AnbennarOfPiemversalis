@@ -35,6 +35,13 @@ country_event = {
 					duration = -1
 				}
 			}
+			F55 = {
+				every_owned_province = {
+					discover_country = F29
+				}
+			}
+			anb_block_heir_death = { ruler = yes duration = -1 }
+			set_country_flag = zokka_zokka_heir_of_zokka_flag
 			#Jaddar
 			F46 = {
 				define_ruler_to_general = {
@@ -185,6 +192,19 @@ country_event = {
 		
 		hidden_effect = {
 			F48 = { country_event = { id = flavour_siadan.2 days = 1 } }
+
+			#Start of Dasmatus goes Jadd/What to do with a problem like Koggraffa event chain
+			add_truce_with = F54
+			add_truce_with = F55
+			F56 = { country_event = { id = zokka_jaddari_war.101 } }
+			F55 = {
+				country_event = { id = zokka_jaddari_war.106 } 
+				add_truce_with = F46
+			}
+			F54 = { 
+				country_event = { id = zokka_jaddari_war.106 } 
+				add_truce_with = F46
+			}
 		}
 		
 		hidden_effect = { #Jaddar flag for Vacyntassi mission
@@ -238,9 +258,7 @@ country_event = {
 			}
 			capital_scope = { cede_province = F46 }
 		}
-		every_owned_province = {
-			cede_province = F28
-		}
+
 		F28 = {
 			country_event = {
 				id = zokka_jaddari_war.10
@@ -285,12 +303,6 @@ country_event = {
 			cede_province = F48 #Siadan
 		}
 		
-		country_event = {
-			id = zokka_jaddari_war.7
-			days = 30
-			random = 60
-		}
-		
 		hidden_effect = {
 			F48 = { country_event = { id = flavour_siadan.1 days = 1 } }
 			F46 = { country_event = { id = zokka_jaddari_war.5 days = 1 } }
@@ -300,6 +312,9 @@ country_event = {
 			2912 = { change_culture = masnsih add_core = F79 }
 		}	
 		
+		1348 = { change_province_name = "Sea of Zokka" }
+		add_patriarch_authority = 0.2
+
 		ai_chance = {
 			factor = 1
 		}
@@ -410,74 +425,6 @@ country_event = {
 					duration = 3650
 				}
 			}
-		}
-	}
-}
-
-#Zokka-Jaddari war: The Matter of the Elves
-country_event = {
-	id = zokka_jaddari_war.7
-	title = zokka_jaddari_war.7.t
-	desc = zokka_jaddari_war.7.d
-	picture = WOUNDED_SOLDIERS_eventPicture
-	
-	is_triggered_only = yes
-	fire_only_once = yes
-	
-	option = {
-		name = zokka_jaddari_war.7.a #Feast on their flesh!
-		ai_chance = {
-			factor = 1
-		}
-		#! Make them more monstrous
-		keruhar_area = {
-			limit = { owned_by = ROOT }
-			remove_elven_minority_size_effect = yes
-			add_devastation = 30
-		}
-		saranza_area = {
-			limit = { owned_by = ROOT }
-			remove_elven_minority_size_effect = yes
-			add_devastation = 30
-		}
-		2923 = {
-			add_core = root
-			change_culture = root
-			change_religion = root
-		}
-		2927 = {
-			add_core = root
-			change_culture = root
-			change_religion = root
-		}
-		add_country_modifier = {
-			name = zokka_monsters_among_the_monsters
-			duration = 7200
-		}
-		add_legitimacy = 10
-	}
-	
-	option = {
-		name = zokka_jaddari_war.7.b #They'll make good slaves
-		ai_chance = {
-			factor = 1
-		}
-		
-		2927 = {
-			change_trade_goods = slaves
-		}
-		2923 = {
-			change_trade_goods = slaves
-		}
-		2928 = {
-			change_trade_goods = slaves
-		}
-		capital_scope = {
-			add_base_production = 2
-		}
-		add_country_modifier = {
-			name = zokka_influx_of_fresh_slaves
-			duration = 7200
 		}
 	}
 }
@@ -608,7 +555,11 @@ country_event = {
 		ai_chance = {
 			factor = 1
 		}
-		
+		F29 = {
+			every_owned_province = {
+				cede_province = F28
+			}
+		}
 		add_manpower = 10
 		add_country_modifier = {
 			name = tluukt_receiving_zokka_refugees
@@ -713,3 +664,573 @@ country_event = {
 		custom_tooltip = jaddar_start_tooltip
 	}
 }
+#Dasmatus goes Jadd/What to do with a problem like Koggraffa event chain
+country_event = { #Menager
+	id = zokka_jaddari_war.100
+	title = zokka_jaddari_war.100.t
+	desc = zokka_jaddari_war.100.d 
+	picture = HORDE_ON_HORSEBACK_eventPicture
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	hidden = yes
+	
+	option = {
+		name = zokka_jaddari_war.100.a
+		if = {
+			limit = {
+				F54 = {
+					vassal_of = F72
+				}
+			}
+			F72 = {
+				country_event = {
+					id = zokka_jaddari_war.110
+				}
+			}
+		}
+		else = {
+			F54 = { 
+				country_event = {
+					id = zokka_jaddari_war.111
+				} 
+			}
+		}
+
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+
+country_event = {
+	id = zokka_jaddari_war.101 #Dasmatus
+	title = zokka_jaddari_war.101.t
+	desc = zokka_jaddari_war.101.d 
+	picture = muslimgfx_COURT_eventPicture
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = { #Help from Jad
+		name = zokka_jaddari_war.101.a 
+		F46 = {
+			country_event = {
+				id = zokka_jaddari_war.102
+				days = 32
+			}
+		}
+		custom_tooltip = zokka_jaddari_war.101.tt
+		ai_chance = {
+			factor = 1
+		}
+	}
+	option = { #We stand alone
+		name = zokka_jaddari_war.101.b	
+		country_event = {
+			id = zokka_jaddari_war.103
+			days = 32
+		}
+		ai_chance = {
+			factor = 0
+		}
+	}
+	after = {
+		hidden_effect = {
+			country_event = {
+				id = zokka_jaddari_war.100
+				days = 1460
+			}
+			REB = {
+				country_event = {
+					id = zokka_jaddari_war.113
+					days = 3650
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = zokka_jaddari_war.102 #Jadd asked for help
+	title = zokka_jaddari_war.102.t
+	desc = zokka_jaddari_war.102.d 
+	picture = muslimgfx_DIPLOMACY_eventPicture
+
+	is_triggered_only = yes
+	
+	option = { #We will help
+		name = zokka_jaddari_war.102.a 
+		add_historical_friend = F56
+		create_alliance = F56
+		F56 = { 
+			change_religion = the_jadd
+			capital_scope = {
+				change_religion = the_jadd
+			}
+		}
+		F56 = {
+			country_event = {
+				id = zokka_jaddari_war.104
+			}
+		}
+		custom_tooltip = zokka_jaddari_war.102.tt
+		ai_chance = {
+			factor = 1
+		}
+	}
+	option = { #Oh Fuck Them
+		name = zokka_jaddari_war.102.b
+		F56 = {
+			country_event = {
+				id = zokka_jaddari_war.103
+			}
+		}
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+
+country_event = {
+	id = zokka_jaddari_war.103 #Dasmatus alone
+	title = zokka_jaddari_war.103.t
+	desc = zokka_jaddari_war.103.d 
+	picture = MULTI_RACIAL_MERC_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = zokka_jaddari_war.103.a 
+		add_country_modifier = {
+			name = dasmatus_stand_alone
+			duration = -1
+		}
+		hidden_effect = {
+			F54 = {
+				country_event = {
+					id = zokka_jaddari_war.107
+					days = 365
+				}
+			}
+		}
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+
+country_event = {
+	id = zokka_jaddari_war.104 #Jadd support
+	title = zokka_jaddari_war.104.t
+	desc = zokka_jaddari_war.104.d 
+	picture = SUN_CULT_PRIEST_event_picture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = zokka_jaddari_war.104.a 
+		add_historical_friend = F46
+		add_country_modifier = {
+			name = dasmatus_help_jadd
+			duration = -1
+		}
+		hidden_effect = {
+			F54 = {
+				country_event = {
+					id = zokka_jaddari_war.107
+					days = 365
+				}
+			}
+		}
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+
+country_event = { 
+	id = zokka_jaddari_war.105
+	title = zokka_jaddari_war.105.t
+	desc = zokka_jaddari_war.105.d 
+	picture = muslimgfx_NAVAL_MILITARY_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = { #To WAAR!
+		name = zokka_jaddari_war.105.a 
+		declare_war_with_cb = {
+			who = F54
+			casus_belli = cb_core
+			war_goal_province = 5434
+		}
+		
+		hidden_effect = {
+			if = {
+				limit = { alliance_with = F46 }
+				set_country_flag = dasmatus_easier_victory
+				F46 = {
+					country_event = {
+						id = zokka_jaddari_war.114
+					}
+					join_all_offensive_wars_of = ROOT
+				}
+			}
+		}
+
+		ai_chance = {
+			factor = 70
+		}
+	}
+	option = { #Chicken
+		name = zokka_jaddari_war.105.b 
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 0
+				OR = {
+					F56 = { NOT = { alliance_with = F46 } }
+					F54 = { NOT = { vassal_of = F72 } }
+				}
+			}
+		}
+	}
+}
+
+country_event = { #For both Gnolls
+	id = zokka_jaddari_war.106
+	title = zokka_jaddari_war.106.t
+	desc = zokka_jaddari_war.106.d 
+	picture = IMPALED_SOLDIERS_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = zokka_jaddari_war.106.a 
+		if = {
+			limit = { tag = F54 }
+			tooltip = {
+				create_alliance = F55
+			}
+		}
+		if = {
+			limit = { tag = F55 }
+			create_alliance = F54
+		}
+		every_owned_province = {
+			limit = {
+				has_human_majority_trigger = yes
+			}
+			add_province_modifier = {
+				name = koggraffa_human_unrest_large
+				duration = -1
+			}
+		}
+		every_owned_province = {
+			limit = {
+				has_human_minority_trigger = yes
+			}
+			add_province_modifier = {
+				name = koggraffa_human_unrest_normal
+				duration = -1
+			}
+		}
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+
+country_event = { #For F54 Gnoll next to Dasmatusu
+	id = zokka_jaddari_war.107
+	title = zokka_jaddari_war.107.t
+	desc = zokka_jaddari_war.107.d 
+	picture = muslimgfx_ANGRY_MOB_eventPicture
+
+	is_triggered_only = yes
+
+	option = { #We will stand alone
+		name = zokka_jaddari_war.107.a 
+
+		ai_chance = {
+			factor = 30
+		}
+	}
+	option = { #Seek support from big Gnoll
+		name = zokka_jaddari_war.107.b 
+		custom_tooltip = zokka_jaddari_war.107.b_tt
+		F72 = {
+			country_event = {
+				id = zokka_jaddari_war.108
+			}
+		}
+		ai_chance = {
+			factor = 70
+		}
+	}
+}
+
+country_event = { #For Big Gnoll south
+	id = zokka_jaddari_war.108
+	title = zokka_jaddari_war.108.t
+	desc = zokka_jaddari_war.108.d 
+	picture = muslimgfx_MILITARY_CAMP_eventPicture
+
+	is_triggered_only = yes
+
+	option = { #Take them into protection
+		name = zokka_jaddari_war.108.a 
+		vassalize = F54
+		F54 = { change_religion = kvangahga }
+		F55 = {
+			country_event = {
+				id = zokka_jaddari_war.109
+			}
+		}
+
+		ai_chance = {
+			factor = 80
+		}
+	}
+	option = { #Nope I will not defend you 
+		name = zokka_jaddari_war.108.b
+
+		ai_chance = {
+			factor = 20
+		}
+	}
+}
+
+country_event = { #F55: Okay this is serious maybe we should be vassals too
+	id = zokka_jaddari_war.109
+	title = zokka_jaddari_war.109.t
+	desc = zokka_jaddari_war.109.d 
+	picture = HORDE_ON_HORSEBACK_eventPicture
+
+	is_triggered_only = yes
+	
+	option = { #YES
+		name = zokka_jaddari_war.109.a 
+		F72 = {
+			vassalize = ROOT
+		}
+		change_religion = kvangahga
+		ai_chance = {
+			factor = 100
+		}
+	}
+	option = { #Nah we are fine
+		name = zokka_jaddari_war.109.b
+		custom_tooltip = zokka_jaddari_war.109.btt
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+
+country_event = {
+	id = zokka_jaddari_war.110 #Should Big Gnoll sell his vassals or fight?
+	title = zokka_jaddari_war.110.t
+	desc = zokka_jaddari_war.110.d 
+	picture = muslimgfx_BORDER_TENSION_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = zokka_jaddari_war.110.a 
+
+		F56 = {
+			country_event = {
+				id = zokka_jaddari_war.105
+				days = 400
+			}
+		}
+
+		ai_chance = {
+			factor = 65
+		}
+	}
+	option = {
+		name = zokka_jaddari_war.110.b 
+		F54 = {
+			if = {
+				limit = { vassal_of = F72 }
+				every_owned_province = {
+					limit = {
+						OR = {
+							area = dasmatus_area
+							area = zallirkor_area
+						}
+					}
+					cede_province = F56
+				}
+			}
+		}
+		F55 = {
+			if = {
+				limit = { vassal_of = F72 }
+				every_owned_province = {
+					limit = {
+						OR = {
+							area = dasmatus_area
+							area = zallirkor_area
+						}
+					}
+					cede_province = F56
+				}
+			}
+		}
+		hidden_effect = {
+			zokka_jaddari_war_100_clr = yes
+		}
+		ai_chance = {
+			factor = 35
+			modifier = {
+				factor = 0
+				F56 = { NOT = { alliance_with = F46 } }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = zokka_jaddari_war.111 #We stand alone but should we fight?
+	title = zokka_jaddari_war.111.t
+	desc = zokka_jaddari_war.111.d 
+	picture = muslimgfx_MILITARY_CAMP_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = zokka_jaddari_war.111.b 
+
+		F56 = {
+			country_event = {
+				id = zokka_jaddari_war.105
+				days = 400
+			}
+		}
+
+		ai_chance = {
+			factor = 65
+		}
+	}
+	option = {
+		name = zokka_jaddari_war.111.a
+		custom_tooltip = zokka_jaddari_war.111.a_tt
+		every_owned_province = {
+			limit = {
+				OR = {
+					area = dasmatus_area
+					area = zallirkor_area
+				}
+			}
+			cede_province = F56
+		}
+		hidden_effect = {
+			zokka_jaddari_war_100_clr = yes
+		}
+		
+		ai_chance = {
+			factor = 35
+			modifier = {
+				factor = 0
+				F56 = { NOT = { alliance_with = F46 } }
+			}
+		}
+	}
+}
+
+country_event = { #Dasmatus war victory special
+	id = zokka_jaddari_war.112
+	title = zokka_jaddari_war.112.t
+	desc = zokka_jaddari_war.112.d 
+	picture = SURAKES_SUN_GARDEN_eventPicture
+	
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			every_war_enemy_country = {
+				limit = {
+					is_in_war = {
+						casus_belli = cb_core
+					}
+				}
+				white_peace = F56
+			}
+			if = {
+				limit = { 
+					F55 = { 
+						NOT = { 
+							vassal_of = F72
+							alliance_with = F54
+						} 
+					} 
+				}
+				zallirkor_area = {
+					add_claim = F56
+				}
+			}
+			else = {
+				F55 = {
+					every_owned_province = {
+						limit = {
+							area = zallirkor_area
+						}
+						cede_province = F56
+					}
+				}
+			}
+			F54 = {
+				every_owned_province = {
+					cede_province = F56
+				}
+			}
+			zokka_jaddari_war_100_clr = yes
+		}
+	}
+	
+	option = {
+		name = zokka_jaddari_war.112.a 
+
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+country_event = { #clear after 10 years
+	id = zokka_jaddari_war.113
+	title = zokka_jaddari_war.113.t
+	desc = zokka_jaddari_war.113.d 
+	picture = HORDE_ON_HORSEBACK_eventPicture
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	hidden = yes
+	
+	option = {
+		name = zokka_jaddari_war.113.a
+		zokka_jaddari_war_100_clr = yes
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+country_event = { #Information event for Jadd
+	id = zokka_jaddari_war.114
+	title = zokka_jaddari_war.114.t
+	desc = zokka_jaddari_war.114.d 
+	picture = HORDE_ON_HORSEBACK_eventPicture
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = zokka_jaddari_war.114.a
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+########

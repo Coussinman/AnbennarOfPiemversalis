@@ -69,6 +69,18 @@ decrease_nsc_isolation_level = {
 	}
 }
 
+#Role Increase is negative value, Role Decrease positive value (Gilly's way of doing it)
+nsc_update_incident_value = { 
+	[[increase]
+		custom_tooltip = nsc_chosen_role_up_tt
+		add_incident_variable_value = { incident = $incident$ value = -1 }
+	]
+	[[decrease]
+		custom_tooltip = nsc_chosen_role_down_tt
+		add_incident_variable_value = { incident = $incident$ value = 1 }
+	]
+}
+
 update_nsc_level_secondary_effects = { 								#This effect can be triggered by a NSC level change. a new ruler. a vassalisation. an overlord's new ruler or a conversion
 	if = {
 		limit = {
@@ -145,9 +157,18 @@ refresh_nsc_incidents_ui = {
 			religion = bulwari_sun_cult
 			has_dlc = "Mandate of Heaven"
 		}
+		#This and below is done because, adventurers have the monastic attribute which affects your devotion when changing religions
+		#Thus NSC adventurers would basically have their devotion set to 0 whenever this is called
+		if = {
+			limit = { has_adventurer_reform = yes }
+			export_to_variable = {
+				which = nsc_devotion
+				value = trigger_value:devotion
+			}
+		}
 		set_country_flag = updating_isolationism_window
 		if = { limit = { is_defender_of_faith = yes } set_country_flag = updating_isolationism_dotf }
-		change_religion = cannorian_pantheon
+		change_religion = etchings_of_the_deep
 		change_religion = bulwari_sun_cult
 		if = {
 			limit = { has_country_flag = updating_isolationism_dotf }
@@ -155,6 +176,15 @@ refresh_nsc_incidents_ui = {
 			clr_country_flag = updating_isolationism_dotf
 		}
 		clr_country_flag = updating_isolationism_window
+		#See above for reason
+		if = {
+			limit = { has_adventurer_reform = yes }
+			var_effect = {
+				var = nsc_devotion
+				effect = add_devotion
+				sign = +
+			}
+		}
 	}
 }
 
@@ -172,6 +202,8 @@ end_all_nsc_incidents = {
 	end_incident = incident_teachings_szal_fazil
 	end_incident = incident_thirteenth_night
 	end_incident = incident_whisper_shadows
+	end_incident = incident_trapped_in_shadows
+	end_incident = incident_one_sun
 	
 	clr_country_flag = active_nsc_incident_flag
 	
@@ -290,107 +322,6 @@ end_all_nsc_incidents = {
 	remove_country_modifier = nsc_third_calamity_modifier
 	remove_country_modifier = nsc_fifth_calamity_modifier
 }
-
-#For the disasters
-
-# nsc_disaster_province_conversion_effect = {
-	# if = {
-		# limit = {
-			# OR = {
-				# religion = old_bulwari_sun_cult
-				# religion = the_jadd
-			# }
-		# }
-		# set_province_flag = dukeldar_conversion
-	# }
-	# else_if = { limit = { religion = bulwari_sun_cult }
-		# if = { limit = { has_province_flag = dukeldar_conversion }
-			# owner = {
-				# export_to_variable = { which = numOfCitiesVar value = num_of_cities }
-				# if = { limit = { check_variable = { which = numOfCitiesVar value = 30 } }
-					# set_variable = { which = numOfCitiesVar value = 30 }
-				# }
-				# set_variable = { which = tempNscDisasterScoreVar value = 30 }
-				# divide_variable = { which = tempNscDisasterScoreVar which = numOfCitiesVar }
-				# change_variable = { which = nscDisasterConversionScoreVar which = tempNscDisasterScoreVar }
-			# }
-		# }
-	# }
-	# else = {
-		# clr_province_flag = dukeldar_conversion
-	# }
-# }
-
-# nsc_update_monthly_disaster_score = {
-	# set_variable = { which = monthlyNscDisasterScoreVar value = 0 }
-	# if = { limit = { employed_advisor = { category = ADM } }
-		# change_variable = { which = monthlyNscDisasterScoreVar value = 0.25 }
-	# }
-	# if = { limit = { employed_advisor = { category = DIP } }
-		# change_variable = { which = monthlyNscDisasterScoreVar value = 0.25 }
-	# }
-	# if = { limit = { employed_advisor = { category = MIL } }
-		# change_variable = { which = monthlyNscDisasterScoreVar value = 0.25 }
-	# }
-	# if = { limit = { stability = 1 }
-		# change_variable = { which = monthlyNscDisasterScoreVar value = 0.5 }
-	# }
-	# if = { limit = { stability = 3 }
-		# change_variable = { which = monthlyNscDisasterScoreVar value = 1 }
-	# }
-	# if = { limit = { has_disaster = nsc_dinam_elutur }
-		# if = { limit = { estate_loyalty = { estate = estate_church loyalty = 50 } }
-			# change_variable = { which = monthlyNscDisasterScoreVar value = 0.5 }
-		# }
-		# else_if = { limit = { estate_loyalty = { estate = estate_church loyalty = 30 } }
-			# change_variable = { which = monthlyNscDisasterScoreVar value = 0.25 }
-		# }
-		# else = {
-			# change_variable = { which = monthlyNscDisasterScoreVar value = -0.1 }
-		# }
-		# if = { limit = { estate_loyalty = { estate = estate_nobles loyalty = 50 } }
-			# change_variable = { which = monthlyNscDisasterScoreVar value = 0.5 }
-		# }
-		# else_if = { limit = { estate_loyalty = { estate = estate_nobles loyalty = 30 } }
-			# change_variable = { which = monthlyNscDisasterScoreVar value = 0.25 }
-		# }
-		# else = {
-			# change_variable = { which = monthlyNscDisasterScoreVar value = -0.1 }
-		# }
-	# }
-	
-	# export_to_variable = { which = numOfRebelArmiesVar value = num_of_rebel_armies }
-	# export_to_variable = { which = numOfRebelProvincesVar value = num_of_rebel_controlled_provinces }
-	
-	# if = {
-		# limit = {
-			# OR = { 
-				# check_variable = { which = numOfRebelArmiesVar value = 1 }
-				# check_variable = { which =  numOfRebelProvincesVar value = 1 }
-			# }
-		# }
-		# set_variable = { which = disasterRebelArmiesScoreVar which = numOfRebelArmiesVar }
-		# multiply_variable = { which = disasterRebelArmiesScoreVar value = -0.25 }
-		# change_variable = { which = monthlyNscDisasterScoreVar which = disasterRebelArmiesScoreVar }
-		# set_variable = { which = disasterRebelProvincesScoreVar which = numOfRebelProvincesVar }
-		# multiply_variable = { which = disasterRebelProvincesScoreVar value = -0.1 }
-		# change_variable = { which = monthlyNscDisasterScoreVar which = disasterRebelProvincesScoreVar }
-	# }
-	# else = {
-		# change_variable = { which = monthlyNscDisasterScoreVar value = 0.5 }
-	# }
-# }
-
-# nsc_calculate_total_disaster_score = {
-	# nsc_update_monthly_disaster_score = yes
-	# change_variable = { which = totalMonthlyNscDisasterScoreVar which = monthlyNscDisasterScoreVar }
-	# set_variable = { which = nscDisasterScoreVar which = totalMonthlyNscDisasterScoreVar }
-	# if = { limit = { has_disaster = nsc_dukeldar }
-		# change_variable = { which = nscDisasterScoreVar which = nscDisasterConversionScoreVar }
-	# }
-	# change_variable = { which = nscDisasterScoreVar which = nscDisasterBattleWonScoreVar }
-	# subtract_variable = { which = nscDisasterScoreVar which = nscDisasterBattleLostScoreVar }
-# }
 
 #Shadow on the sun incident
 nsc_define_influenceable_vassals = {
@@ -571,7 +502,7 @@ nsc_calculate_pledge_score = {
 			}
 		}
 		if = { limit = { tag = F42 }
-			set_variable = { which = ProvincesToGetVar value = 16 } #nb of provinces in target province group x2
+			set_variable = { which = ProvincesToGetVar value = 18 } #nb of provinces in target province group x2
 			nsc_incident_target_varamhar = {
 				if = { limit = { owner = { religion = bulwari_sun_cult } }
 					F42 = { change_variable = { which = ScoreRightReligionVar value = 1 } }

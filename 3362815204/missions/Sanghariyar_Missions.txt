@@ -793,12 +793,14 @@ davharral_1_missions = {
 			2913 = {
 				has_dock_building_trigger = yes
 				has_shipyard_building_trigger = yes
-				num_of_units_in_province = { who = ROOT type = galley amount = 10 }
+				galleys_in_province = 10
+				hidden_trigger = { galleys_in_province = ROOT }
 			}
 			5505 = {
 				has_dock_building_trigger = yes
 				has_shipyard_building_trigger = yes
-				num_of_units_in_province = { who = ROOT type = galley amount = 10 }
+				galleys_in_province = 10
+				hidden_trigger = { galleys_in_province = ROOT }
 			}
 		}
 
@@ -1679,7 +1681,7 @@ shenral_1_missions = {
 
 		effect = {
 			custom_tooltip = golden_highway_discount_tt
-			set_country_flag = golden_highway_discount_flag
+			set_country_flag = golden_highway_discount50_flag
 		}
 	}
 }
@@ -3629,7 +3631,14 @@ sanghariyar_3_missions = {
 			}
 			if = {
 				limit = { has_dlc = "Emperor" }
-				is_hegemon_of_type = naval_hegemon
+				if = {
+					limit = { is_or_was_tag = { tag = R01 } }
+					OR = {
+						is_hegemon_of_type = economic_hegemon
+						is_hegemon_of_type = naval_hegemon
+					}
+				}
+				else = { is_hegemon_of_type = naval_hegemon }
 			}
 			else = {
 				num_of_heavy_ship = 250
@@ -4352,20 +4361,14 @@ sanghariyar_5_missions = {
 			OR = {
 				has_global_flag = destroyed_raj
 				any_known_country = {
-					custom_trigger_tooltip = {
-						tooltip = mechanic_is_raja_yes
-						has_government_attribute = is_raja
-					}
+					is_the_raja = yes
 					NOT = { army_strength = { who = ROOT value = 0.8 } }
 				}
 			}
 			OR = {
 				owns_or_non_sovereign_subject_of = 4411
 				any_known_country = {
-					custom_trigger_tooltip = {
-						tooltip = mechanic_is_raja_yes
-						has_government_attribute = is_raja
-					}
+					is_the_raja = yes
 					has_opinion_modifier = { who = ROOT modifier = scornfully_insulted }
 				}
 			}

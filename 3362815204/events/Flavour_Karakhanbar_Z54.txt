@@ -23,6 +23,9 @@ country_event = { #What We Have Lost
 	}
 
 	option = {
+		trigger = {
+			NOT = { is_or_was_tag  = { tag = I40 } }
+		}
 		name = flavour_karakhanbar.1.b
 		clr_country_flag = Z54_moderate_branch
 		set_country_flag = Z54_hardliner_branch
@@ -1803,12 +1806,7 @@ country_event = { #Changing Role of Shamans
 		name = flavour_karakhanbar.61.a
 		if = {
 			limit = { has_country_flag = karakhanbar_static_artificery_cap_increase_potential }
-			ROOT = {
-				change_variable = {
-					which = MaxArtificePoints
-					value = 10
-				}
-			}
+			mission_reward_artifice_points_10 = yes
 		}
 		else = {
 			set_country_flag = karakhanbar_static_artificery_cap_increase_potential
@@ -1873,12 +1871,10 @@ country_event = {
 
 	trigger = {
 		tag = Z54
-		has_country_flag = constructing_dam
 		676 = {
 			OR = {
-				has_province_flag = dam_1
-				has_province_flag = dam_2
-				has_province_flag = dam_3
+				has_great_project = { type = jorkad_dam tier = 1 }
+				has_great_project = { type = jorkad_dam tier = 2 }
 			}
 		}
 	}
@@ -1993,6 +1989,10 @@ country_event = { #Debug Event - Gov. Button
 	hidden = yes
 	immediate = {
 		clr_country_flag = karakhanbar_gov_interaction_reset
+		set_variable = {
+			which = karakhanbarGovButtonCost
+			value = 0
+		}
 	}
 
 	option = {

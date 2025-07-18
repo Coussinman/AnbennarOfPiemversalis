@@ -910,6 +910,8 @@ harpy_define_pop_to_take = {
 				has_hobgoblin_majority_trigger = yes
 				has_orcish_majority_trigger = yes
 				has_ruinborn_majority_trigger = yes
+				has_half_elven_majority_trigger = yes
+				has_half_orcish_majority_trigger = yes
 			}
 		}
 		set_province_flag = harpy_pop_@ROOT
@@ -928,6 +930,8 @@ harpy_define_pop_to_take = {
 				AND = { has_hobgoblin_majority_trigger = yes ROOT = { capital_scope = { NOT = { has_hobgoblin_minority_trigger = yes } } } }
 				AND = { has_orcish_majority_trigger = yes ROOT = { capital_scope = { NOT = { has_orcish_minority_trigger = yes } } } }
 				AND = { has_ruinborn_majority_trigger = yes ROOT = { capital_scope = { NOT = { has_ruinborn_minority_trigger = yes } } } }
+				AND = { has_half_elven_majority_trigger = yes ROOT = { capital_scope = { NOT = { has_half_elven_minority_trigger = yes } } } }
+				AND = { has_half_orcish_majority_trigger = yes ROOT = { capital_scope = { NOT = { has_half_orcish_minority_trigger = yes } } } }
 			}
 		}
 		set_province_flag = harpy_pop_@ROOT
@@ -946,6 +950,8 @@ harpy_define_pop_to_take = {
 				has_hobgoblin_majority_trigger = yes
 				has_orcish_majority_trigger = yes
 				has_ruinborn_majority_trigger = yes
+				has_half_elven_majority_trigger = yes
+				has_half_orcish_majority_trigger = yes
 			}
 		}
 		set_province_flag = harpy_pop_@ROOT
@@ -964,6 +970,8 @@ harpy_define_pop_to_take = {
 				has_hobgoblin_majority_trigger = yes
 				has_orcish_majority_trigger = yes
 				has_ruinborn_majority_trigger = yes
+				has_half_elven_majority_trigger = yes
+				has_half_orcish_majority_trigger = yes
 			}
 		}
 		set_province_flag = harpy_pop_@ROOT
@@ -982,6 +990,8 @@ harpy_define_pop_to_take = {
 				has_hobgoblin_majority_trigger = yes
 				has_orcish_majority_trigger = yes
 				has_ruinborn_majority_trigger = yes
+				has_half_elven_majority_trigger = yes
+				has_half_orcish_majority_trigger = yes
 			}
 		}
 		set_province_flag = harpy_pop_@ROOT
@@ -1000,6 +1010,8 @@ harpy_define_pop_to_take = {
 				has_hobgoblin_majority_trigger = yes
 				has_orcish_majority_trigger = yes
 				has_ruinborn_majority_trigger = yes
+				has_half_elven_majority_trigger = yes
+				has_half_orcish_majority_trigger = yes
 			}
 		}
 		set_province_flag = harpy_pop_@ROOT
@@ -1100,6 +1112,38 @@ harpy_move_pop_to_capital_effect = {
 				}
 				else = {
 					add_human_minority_size_effect = yes
+				}
+			}
+		}
+	}
+	else_if = { limit = { has_half_elven_majority_trigger = yes }
+		ROOT = {
+			capital_scope = {
+				if = { limit = { has_large_half_elven_minority_trigger = yes }
+					random_list = {
+						33 = { add_base_tax = 1 }
+						33 = { add_base_production = 1 }
+						33 = { add_base_manpower = 1 }
+					}
+				}
+				else = {
+					add_half_elven_minority_size_effect = yes
+				}
+			}
+		}
+	}
+	else_if = { limit = { has_half_orcish_majority_trigger = yes }
+		ROOT = {
+			capital_scope = {
+				if = { limit = { has_large_half_orcish_minority_trigger = yes }
+					random_list = {
+						33 = { add_base_tax = 1 }
+						33 = { add_base_production = 1 }
+						33 = { add_base_manpower = 1 }
+					}
+				}
+				else = {
+					add_half_orcish_minority_size_effect = yes
 				}
 			}
 		}
@@ -1420,399 +1464,6 @@ harpy_hunt_raid_option = {
 	}
 }
 
-harpy_build_roost_region = {
-	random_owned_province = {
-		limit = {
-			fort_level = 1
-			NOT = { has_province_modifier = harpy_roost }
-			NOT = { has_province_modifier = harpy_roost_under_construction }
-			is_city = yes
-			OR = {
-				has_terrain = mountain
-				has_terrain = highlands
-				has_terrain = hills
-			}
-			NOT = {
-				region_for_scope_province = {
-					has_province_flag = harpy_roost_region_@ROOT
-				}
-			}
-		}
-		set_province_flag = harpy_roost_region_@ROOT
-		save_event_target_as = harpy_roost_region1
-	}
-	if = { limit = { has_saved_event_target = harpy_roost_region1 }
-		random_owned_province = {
-			limit = {
-				fort_level = 1
-				NOT = { has_province_modifier = harpy_roost }
-				NOT = { has_province_modifier = harpy_roost_under_construction }
-				is_city = yes
-				OR = {
-					has_terrain = mountain
-					has_terrain = highlands
-					has_terrain = hills
-				}
-				NOT = {
-					region_for_scope_province = {
-						has_province_flag = harpy_roost_region_@ROOT
-					}
-				}
-			}
-			set_province_flag = harpy_roost_region_@ROOT
-			save_event_target_as = harpy_roost_region2
-		}
-		if = { limit = { has_saved_event_target = harpy_roost_region2 }
-			random_owned_province = {
-				limit = {
-					fort_level = 1
-					has_harpy_majority_trigger = yes
-					NOT = { has_province_modifier = harpy_roost }
-					NOT = { has_province_modifier = harpy_roost_under_construction }
-					is_city = yes
-					OR = {
-						has_terrain = mountain
-						has_terrain = highlands
-						has_terrain = hills
-					}
-					NOT = {
-						region_for_scope_province = {
-							has_province_flag = harpy_roost_region_@ROOT
-						}
-					}
-				}
-				set_province_flag = harpy_roost_region_@ROOT
-				save_event_target_as = harpy_roost_region3
-			}
-			if = { limit = { has_saved_event_target = harpy_roost_region3 }
-				random_owned_province = {
-					limit = {
-						fort_level = 1
-						has_harpy_majority_trigger = yes
-						NOT = { has_province_modifier = harpy_roost }
-						NOT = { has_province_modifier = harpy_roost_under_construction }
-						is_city = yes
-						OR = {
-							has_terrain = mountain
-							has_terrain = highlands
-							has_terrain = hills
-						}
-						NOT = {
-							region_for_scope_province = {
-								has_province_flag = harpy_roost_region_@ROOT
-							}
-						}
-					}
-					set_province_flag = harpy_roost_region_@ROOT
-					save_event_target_as = harpy_roost_region4
-				}
-				if = { limit = { has_saved_event_target = harpy_roost_region4 }
-					random_owned_province = {
-						limit = {
-							fort_level = 1
-							has_harpy_majority_trigger = yes
-							NOT = { has_province_modifier = harpy_roost }
-							NOT = { has_province_modifier = harpy_roost_under_construction }
-							is_city = yes
-							OR = {
-								has_terrain = mountain
-								has_terrain = highlands
-								has_terrain = hills
-							}
-							NOT = {
-								region_for_scope_province = {
-									has_province_flag = harpy_roost_region_@ROOT
-								}
-							}
-						}
-						set_province_flag = harpy_roost_region_@ROOT
-						save_event_target_as = harpy_roost_region5
-					}
-					if = { limit = { has_saved_event_target = harpy_roost_region5 }
-						random_owned_province = {
-							limit = {
-								fort_level = 1
-								has_harpy_majority_trigger = yes
-								NOT = { has_province_modifier = harpy_roost }
-								NOT = { has_province_modifier = harpy_roost_under_construction }
-								is_city = yes
-								OR = {
-									has_terrain = mountain
-									has_terrain = highlands
-									has_terrain = hills
-								}
-								NOT = {
-									region_for_scope_province = {
-										has_province_flag = harpy_roost_region_@ROOT
-									}
-								}
-							}
-							set_province_flag = harpy_roost_region_@ROOT
-							save_event_target_as = harpy_roost_region6
-						}
-						if = { limit = { has_saved_event_target = harpy_roost_region6 }
-							random_owned_province = {
-								limit = {
-									fort_level = 1
-									has_harpy_majority_trigger = yes
-									NOT = { has_province_modifier = harpy_roost }
-									NOT = { has_province_modifier = harpy_roost_under_construction }
-									is_city = yes
-									OR = {
-										has_terrain = mountain
-										has_terrain = highlands
-										has_terrain = hills
-									}
-									NOT = {
-										region_for_scope_province = {
-											has_province_flag = harpy_roost_region_@ROOT
-										}
-									}
-								}
-								set_province_flag = harpy_roost_region_@ROOT
-								save_event_target_as = harpy_roost_region7
-							}
-							if = { limit = { has_saved_event_target = harpy_roost_region7 }
-								random_owned_province = {
-									limit = {
-										fort_level = 1
-										has_harpy_majority_trigger = yes
-										NOT = { has_province_modifier = harpy_roost }
-										NOT = { has_province_modifier = harpy_roost_under_construction }
-										is_city = yes
-										OR = {
-											has_terrain = mountain
-											has_terrain = highlands
-											has_terrain = hills
-										}
-										NOT = {
-											region_for_scope_province = {
-												has_province_flag = harpy_roost_region_@ROOT
-											}
-										}
-									}
-									set_province_flag = harpy_roost_region_@ROOT
-									save_event_target_as = harpy_roost_region8
-								}
-								if = { limit = { has_saved_event_target = harpy_roost_region8 }
-									random_owned_province = {
-										limit = {
-											fort_level = 1
-											has_harpy_majority_trigger = yes
-											NOT = { has_province_modifier = harpy_roost }
-											NOT = { has_province_modifier = harpy_roost_under_construction }
-											is_city = yes
-											OR = {
-												has_terrain = mountain
-												has_terrain = highlands
-												has_terrain = hills
-											}
-											NOT = {
-												region_for_scope_province = {
-													has_province_flag = harpy_roost_region_@ROOT
-												}
-											}
-										}
-										set_province_flag = harpy_roost_region_@ROOT
-										save_event_target_as = harpy_roost_region9
-									}
-								}
-								if = { limit = { has_saved_event_target = harpy_roost_region9 }
-									random_owned_province = {
-										limit = {
-											fort_level = 1
-											has_harpy_majority_trigger = yes
-											NOT = { has_province_modifier = harpy_roost }
-											NOT = { has_province_modifier = harpy_roost_under_construction }
-											is_city = yes
-											OR = {
-												has_terrain = mountain
-												has_terrain = highlands
-												has_terrain = hills
-											}
-											NOT = {
-												region_for_scope_province = {
-													has_province_flag = harpy_roost_region_@ROOT
-												}
-											}
-										}
-										set_province_flag = harpy_roost_region_@ROOT
-										save_event_target_as = harpy_roost_region10
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-}
-
-harpy_build_roost_province = {
-	owner = {
-		random_owned_province = {
-			limit = {
-				region = ROOT
-				fort_level = 1
-				NOT = { has_province_modifier = harpy_roost }
-				NOT = { has_province_modifier = harpy_roost_under_construction }
-				is_city = yes
-				OR = {
-					has_terrain = mountain
-					has_terrain = highlands
-					has_terrain = hills
-				}
-			}
-			set_province_flag = harpy_roost_@PREV
-			save_event_target_as = harpy_roost1
-		}
-		if = { limit = { has_saved_event_target = harpy_roost1 }
-			random_owned_province = {
-				limit = {
-					region = ROOT
-					fort_level = 1
-					NOT = { has_province_modifier = harpy_roost }
-					NOT = { has_province_modifier = harpy_roost_under_construction }
-					NOT = { has_province_flag = harpy_roost_@PREV }
-					is_city = yes
-					OR = {
-						has_terrain = mountain
-						has_terrain = highlands
-						has_terrain = hills
-					}
-				}
-				set_province_flag = harpy_roost_@PREV
-				save_event_target_as = harpy_roost2
-			}
-			if = { limit = { has_saved_event_target = harpy_roost2 }
-				random_owned_province = {
-					limit = {
-						region = ROOT
-						fort_level = 1
-						NOT = { has_province_modifier = harpy_roost }
-						NOT = { has_province_modifier = harpy_roost_under_construction }
-						NOT = { has_province_flag = harpy_roost_@PREV }
-						is_city = yes
-						OR = {
-							has_terrain = mountain
-							has_terrain = highlands
-							has_terrain = hills
-						}
-					}
-					set_province_flag = harpy_roost_@PREV
-					save_event_target_as = harpy_roost3
-				}
-				if = { limit = { has_saved_event_target = harpy_roost3 }
-					random_owned_province = {
-						limit = {
-							region = ROOT
-							fort_level = 1
-							NOT = { has_province_modifier = harpy_roost }
-							NOT = { has_province_modifier = harpy_roost_under_construction }
-							NOT = { has_province_flag = harpy_roost_@PREV }
-							is_city = yes
-							OR = {
-								has_terrain = mountain
-								has_terrain = highlands
-								has_terrain = hills
-							}
-						}
-						set_province_flag = harpy_roost_@PREV
-						save_event_target_as = harpy_roost4
-					}
-					if = { limit = { has_saved_event_target = harpy_roost4 }
-						random_owned_province = {
-							limit = {
-								region = ROOT
-								fort_level = 1
-								NOT = { has_province_modifier = harpy_roost }
-								NOT = { has_province_modifier = harpy_roost_under_construction }
-								NOT = { has_province_flag = harpy_roost_@PREV }
-								is_city = yes
-								OR = {
-									has_terrain = mountain
-									has_terrain = highlands
-									has_terrain = hills
-								}
-							}
-							set_province_flag = harpy_roost_@PREV
-							save_event_target_as = harpy_roost5
-						}
-						if = { limit = { has_saved_event_target = harpy_roost5 }
-							random_owned_province = {
-								limit = {
-									region = ROOT
-									fort_level = 1
-									NOT = { has_province_modifier = harpy_roost }
-									NOT = { has_province_modifier = harpy_roost_under_construction }
-									NOT = { has_province_flag = harpy_roost_@PREV }
-									is_city = yes
-									OR = {
-										has_terrain = mountain
-										has_terrain = highlands
-										has_terrain = hills
-									}
-								}
-								set_province_flag = harpy_roost_@PREV
-								save_event_target_as = harpy_roost6
-							}
-							if = { limit = { has_saved_event_target = harpy_roost6 }
-								random_owned_province = {
-									limit = {
-										region = ROOT
-										fort_level = 1
-										NOT = { has_province_modifier = harpy_roost }
-										NOT = { has_province_modifier = harpy_roost_under_construction }
-										NOT = { has_province_flag = harpy_roost_@PREV }
-										is_city = yes
-										OR = {
-											has_terrain = mountain
-											has_terrain = highlands
-											has_terrain = hills
-										}
-									}
-									set_province_flag = harpy_roost_@PREV
-									save_event_target_as = harpy_roost7
-								}
-								if = { limit = { has_saved_event_target = harpy_roost7 }
-									random_owned_province = {
-										limit = {
-											region = ROOT
-											fort_level = 1
-											NOT = { has_province_modifier = harpy_roost }
-											NOT = { has_province_modifier = harpy_roost_under_construction }
-											NOT = { has_province_flag = harpy_roost_@PREV }
-											is_city = yes
-											OR = {
-												has_terrain = mountain
-												has_terrain = highlands
-												has_terrain = hills
-											}
-										}
-										set_province_flag = harpy_roost_@PREV
-										save_event_target_as = harpy_roost8
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-}
-
-update_roost_count = {
-	hidden_effect = {
-		set_variable = { built_roosts = 0 }
-		every_owned_province = {
-			limit = { has_province_modifier = harpy_roost }
-			owner = { change_variable = { built_roosts = 1 } }
-		}
-	}
-}
-
 set_harpy_heir_father_race = {	#used for the harpy's father bond event
 	random_list = {
 		1 = { trigger = { capital_scope = { has_any_elven_pop_trigger = yes } } set_heir_flag = elven_father }
@@ -2068,6 +1719,7 @@ clear_adventurers_organization_effect = {
 		remove_estate_privilege = estate_adventurers_organization_exploration_society
 		remove_estate_privilege = estate_adventurers_suhuskar_palace
 		remove_estate_privilege = estate_adventurers_organization_stone_army
+		remove_estate_privilege = estate_adventurers_organization_heroes_guild
 	}
 }
 
@@ -2081,6 +1733,7 @@ clear_artificers_organization_effect = {
 		remove_estate_privilege = estate_artificers_organization_sun_elf
 		remove_estate_privilege = estate_artificers_organization_feiten_shuimu_cadre
 		remove_estate_privilege = estate_artificers_organization_vazhatun_enhanced_astronomy
+		remove_estate_privilege = estate_artificers_organization_strict_state_supervision #Pashaine
 	}
 }
 
@@ -2618,6 +2271,93 @@ destroy_province_permanently = {
 	}
 }
 
+decrease_monstrous_50 = {
+	if = {
+		limit = { has_country_flag = removing_monstrous has_country_modifier = monstrous_nation }
+		custom_tooltip = decrease_monstrous_10_tooltip
+		hidden_effect = { subtract_variable = { monstrousPoints = 50 } }
+		if = {
+			limit = {
+				OR = {
+					has_government_attribute = forced_evolution_reform_effect
+					has_estate_privilege = estate_monstrous_tribes_gozlamoir_system
+				}
+			}
+			hidden_effect = { subtract_variable = { monstrousPoints = 10 } }
+		}
+		hidden_effect = {
+			country_event = { id = monstrous.3 }
+			country_event = { id = monstrous.7 }
+		}
+	}
+}
+
+decrease_monstrous_25 = {
+	if = {
+		limit = { has_country_flag = removing_monstrous has_country_modifier = monstrous_nation }
+		custom_tooltip = decrease_monstrous_10_tooltip
+		hidden_effect = { subtract_variable = { monstrousPoints = 25 } }
+		if = {
+			limit = {
+				OR = {
+					has_government_attribute = forced_evolution_reform_effect
+					has_estate_privilege = estate_monstrous_tribes_gozlamoir_system
+					has_country_flag = took_forced_evolution_reform
+				}
+			}
+			hidden_effect = { subtract_variable = { monstrousPoints = 5 } }
+		}
+		hidden_effect = {
+			country_event = { id = monstrous.3 }
+			country_event = { id = monstrous.7 }
+		}
+	}
+}
+
+decrease_monstrous_20 = {
+	if = {
+		limit = { has_country_flag = removing_monstrous has_country_modifier = monstrous_nation }
+		custom_tooltip = decrease_monstrous_10_tooltip
+		hidden_effect = { subtract_variable = { monstrousPoints = 20 } }
+		if = {
+			limit = {
+				OR = {
+					has_government_attribute = forced_evolution_reform_effect
+					has_estate_privilege = estate_monstrous_tribes_gozlamoir_system
+					has_country_flag = took_forced_evolution_reform
+				}
+			}
+			hidden_effect = { subtract_variable = { monstrousPoints = 5 } }
+		}
+		hidden_effect = {
+			country_event = { id = monstrous.3 }
+			country_event = { id = monstrous.7 }
+		}
+	}
+}
+
+decrease_monstrous_15 = {
+	if = {
+		limit = { has_country_flag = removing_monstrous has_country_modifier = monstrous_nation }
+		custom_tooltip = decrease_monstrous_10_tooltip
+		hidden_effect = { subtract_variable = { monstrousPoints = 15 } }
+		if = {
+			limit = {
+				OR = {
+					has_government_attribute = forced_evolution_reform_effect
+					has_estate_privilege = estate_monstrous_tribes_gozlamoir_system
+					has_country_flag = took_forced_evolution_reform
+				}
+			}
+			hidden_effect = { subtract_variable = { monstrousPoints = 5 } }
+		}
+		hidden_effect = {
+			country_event = { id = monstrous.3 }
+			country_event = { id = monstrous.7 }
+		}
+	}
+}
+
 decrease_monstrous_10 = {
 	if = {
 		limit = { has_country_flag = removing_monstrous has_country_modifier = monstrous_nation }
@@ -2628,9 +2368,36 @@ decrease_monstrous_10 = {
 				OR = {
 					has_government_attribute = forced_evolution_reform_effect
 					has_estate_privilege = estate_monstrous_tribes_gozlamoir_system
+					has_country_flag = took_forced_evolution_reform
 				}
 			}
 			hidden_effect = { subtract_variable = { monstrousPoints = 4 } }
+		}
+		hidden_effect = {
+			country_event = { id = monstrous.3 }
+			country_event = { id = monstrous.7 }
+		}
+	}
+}
+
+decrease_monstrous_8 = {
+	if = {
+		limit = { has_country_flag = removing_monstrous has_country_modifier = monstrous_nation }
+		custom_tooltip = decrease_monstrous_10_tooltip
+		hidden_effect = { subtract_variable = { monstrousPoints = 8 } }
+		if = {
+			limit = {
+				OR = {
+					has_government_attribute = forced_evolution_reform_effect
+					has_estate_privilege = estate_monstrous_tribes_gozlamoir_system
+					has_country_flag = took_forced_evolution_reform
+				}
+			}
+			hidden_effect = { subtract_variable = { monstrousPoints = 3 } }
+		}
+		hidden_effect = {
+			country_event = { id = monstrous.3 }
+			country_event = { id = monstrous.7 }
 		}
 	}
 }
@@ -2645,9 +2412,14 @@ decrease_monstrous_5 = {
 				OR = {
 					has_government_attribute = forced_evolution_reform_effect
 					has_estate_privilege = estate_monstrous_tribes_gozlamoir_system
+					has_country_flag = took_forced_evolution_reform
 				}
 			}
 			hidden_effect = { subtract_variable = { monstrousPoints = 3 } }
+		}
+		hidden_effect = {
+			country_event = { id = monstrous.3 }
+			country_event = { id = monstrous.7 }
 		}
 	}
 }
@@ -2662,9 +2434,14 @@ decrease_monstrous_3 = {
 				OR = {
 					has_government_attribute = forced_evolution_reform_effect
 					has_estate_privilege = estate_monstrous_tribes_gozlamoir_system
+					has_country_flag = took_forced_evolution_reform
 				}
 			}
 			hidden_effect = { subtract_variable = { monstrousPoints = 2 } }
+		}
+		hidden_effect = {
+			country_event = { id = monstrous.3 }
+			country_event = { id = monstrous.7 }
 		}
 	}
 }
@@ -2679,9 +2456,14 @@ decrease_monstrous_2 = {
 				OR = {
 					has_government_attribute = forced_evolution_reform_effect
 					has_estate_privilege = estate_monstrous_tribes_gozlamoir_system
+					has_country_flag = took_forced_evolution_reform
 				}
 			}
 			hidden_effect = { subtract_variable = { monstrousPoints = 1 } }
+		}
+		hidden_effect = {
+			country_event = { id = monstrous.3 }
+			country_event = { id = monstrous.7 }
 		}
 	}
 }
@@ -2696,9 +2478,25 @@ decrease_monstrous_1 = {
 				OR = {
 					has_government_attribute = forced_evolution_reform_effect
 					has_estate_privilege = estate_monstrous_tribes_gozlamoir_system
+					has_country_flag = took_forced_evolution_reform
 				}
 			}
 			hidden_effect = { subtract_variable = { monstrousPoints = 1 } }
+		}
+		hidden_effect = {
+			country_event = { id = monstrous.3 }
+			country_event = { id = monstrous.7 }
+		}
+	}
+}
+
+increase_monstrous_8 = {
+	if = {
+		limit = { has_country_flag = removing_monstrous has_country_modifier = monstrous_nation }
+		custom_tooltip = increase_monstrous_5_tooltip
+		hidden_effect = {
+			change_variable = { monstrousPoints = 8 }
+			country_event = { id = monstrous.5 }
 		}
 	}
 }
@@ -2707,7 +2505,10 @@ increase_monstrous_5 = {
 	if = {
 		limit = { has_country_flag = removing_monstrous has_country_modifier = monstrous_nation }
 		custom_tooltip = increase_monstrous_5_tooltip
-		hidden_effect = { change_variable = { monstrousPoints = 5 } }
+		hidden_effect = {
+			change_variable = { monstrousPoints = 5 }
+			country_event = { id = monstrous.5 }
+		}
 	}
 }
 
@@ -2715,7 +2516,10 @@ increase_monstrous_3 = {
 	if = {
 		limit = { has_country_flag = removing_monstrous has_country_modifier = monstrous_nation }
 		custom_tooltip = increase_monstrous_3_tooltip
-		hidden_effect = { change_variable = { monstrousPoints = 3 } }
+		hidden_effect = {
+			change_variable = { monstrousPoints = 3 }
+			country_event = { id = monstrous.5 }
+		}
 	}
 }
 
@@ -2723,7 +2527,10 @@ increase_monstrous_2 = {
 	if = {
 		limit = { has_country_flag = removing_monstrous has_country_modifier = monstrous_nation }
 		custom_tooltip = increase_monstrous_2_tooltip
-		hidden_effect = { change_variable = { monstrousPoints = 2 } }
+		hidden_effect = {
+			change_variable = { monstrousPoints = 2 }
+			country_event = { id = monstrous.5 }
+		}
 	}
 }
 
@@ -2731,7 +2538,92 @@ increase_monstrous_1 = {
 	if = {
 		limit = { has_country_flag = removing_monstrous has_country_modifier = monstrous_nation }
 		custom_tooltip = increase_monstrous_1_tooltip
-		hidden_effect = { change_variable = { monstrousPoints = 1 } }
+		hidden_effect = {
+			change_variable = { monstrousPoints = 1 }
+			country_event = { id = monstrous.5 }
+		}
+	}
+}
+
+clear_monstrous_opinion_effect = {
+	hidden_effect = {
+		every_country = {
+			if = { limit = { has_opinion_modifier = { who = ROOT modifier = root_monstrous } }
+				remove_opinion = { who = ROOT modifier = root_monstrous }
+				reverse_remove_opinion = { who = ROOT modifier = root_monstrous }
+			}
+			else_if = { limit = { has_opinion_modifier = { who = ROOT modifier = semi_monstrous } }
+				remove_opinion = { who = ROOT modifier = semi_monstrous }
+				reverse_remove_opinion = { who = ROOT modifier = semi_monstrous }
+			}
+			else_if = {
+				limit = { has_opinion_modifier = { who = ROOT modifier = both_monstrous } }
+				remove_opinion = { who = ROOT modifier = both_monstrous }
+				reverse_remove_opinion = { who = ROOT modifier = both_monstrous }
+			}
+		}
+		remove_country_modifier = setup_monstrous_opinion
+	}
+}
+
+start_demonsterization_effect = {
+	if = {
+		limit = {
+			has_country_modifier = monstrous_nation
+			NOT = { has_country_flag = removing_monstrous }
+			NOT = { has_country_flag = no_longer_monstrous }
+		}
+		hidden_effect = {
+			set_country_flag = removing_monstrous
+			if = {
+				limit = { has_country_flag = semi_monstrous }
+				set_variable = { monstrousPoints = 50 }
+			}
+			else = { set_variable = { monstrousPoints = 100 } }
+		}
+		custom_tooltip = start_demonsterization
+	}
+}
+
+monstrous_to_semi_monstrous_effect = {
+	if = {
+		limit = {
+			has_country_modifier = monstrous_nation
+			NOT = { has_country_flag = semi_monstrous }
+		}
+		hidden_effect = {
+			set_country_flag = semi_monstrous
+			country_event = { id = monstrous.6 } #opinion update
+		}
+		custom_tooltip = semi_monstrous_tooltip
+		if = {
+			limit = {
+				has_country_flag = removing_monstrous
+				check_variable = { monstrousPoints = 51 }
+			}
+			hidden_effect = { set_variable = { monstrousPoints = 50 } }
+		}
+	}
+}
+
+finish_demonsterization_effect = {
+	custom_tooltip = no_longer_monstrous_tooltip
+	remove_country_modifier = monstrous_nation
+	hidden_effect = {
+		set_country_flag = no_longer_monstrous
+		clr_country_flag = removing_monstrous
+		clr_country_flag = semi_monstrous
+		clear_monstrous_opinion_effect = yes
+		country_event = { id = monstrous.1 } #opinion setup
+		every_subject_country = {
+			limit = { is_colonial_nation = yes NOT = { has_country_flag = no_longer_monstrous } }
+			set_country_flag = no_longer_monstrous
+			clr_country_flag = removing_monstrous
+			clr_country_flag = semi_monstrous
+			remove_country_modifier = monstrous_nation
+			clear_monstrous_opinion_effect = yes
+			country_event = { id = monstrous.1 } #opinion setup
+		}
 	}
 }
 
@@ -4165,6 +4057,7 @@ calc_tributary_dev_proportion = {
 			OR = {
 				is_subject_of_type = tributary_state
 				is_subject_of_type = tributary_state_anb
+				is_subject_of_type_with_overlord = { who = F29 type = slave_state }
 			} 
 		}
 		ROOT = {
@@ -4294,41 +4187,29 @@ revival_stat_loss = {
 	}
 }
 
-save_ruler_dynasty = {
+save_ruler_dynasty = { #Make clear this guy is fake, give him the name "Interregnum"
 	hidden_effect = {
-		if = {
-			limit = { has_heir = yes }
-			exile_heir_as = temp_exile_@ROOT
-			set_country_flag = had_heir_exiled
-		}
-		define_heir = {
+		define_exiled_ruler = {
+			exiled_as = dynastic_interregnum_@ROOT
+			name = "Interregnum"
 			dynasty = ROOT
-			age = 16
-			adm = 6
-			dip = 6
-			mil = 6
-		}
-		exile_ruler_as = { name = temp_exile_ruler_@ROOT }
-		add_stability = 1
-		define_heir = {
-			dynasty = ROOT
-			age = 16
-			adm = 0
-			dip = 0
-			mil = 0
-		}
-		exile_ruler_as = { name = dynastic_heir_@ROOT }
-		add_stability = 1
-		set_ruler = temp_exile_ruler_@ROOT
-		if = {
-			limit = { has_country_flag = had_heir_exiled }
-			set_heir = temp_exile_@ROOT
-			clr_country_flag = had_heir_exiled
-		}
-		else = {
-			remove_heir = {}
+			age = 30
+			max_random_adm = 0
+			max_random_dip = 0
+			max_random_mil = 0
 		}
 	}
+}
+
+restore_saved_dynasty = { #Fire after you performed save_ruler_dynasty at some point in the past
+	hidden_effect = {
+		set_ruler = dynastic_interregnum_@ROOT
+		if = {
+			limit = { NOT = { has_ruler = "Interregnum" } } #In case you tag-swapped
+			define_ruler = { age = 30 name = "Interregnum" dynasty = ROOT max_random_adm  = 0 max_random_dip  = 0 max_random_mil  = 0 hide_skills = yes }
+		}
+	}
+	save_ruler_dynasty = yes #generate another exiled interregnum
 }
 
 add_legitimacy_or_monarch_power = {
@@ -4600,32 +4481,11 @@ add_mercantilism_excess_to_diplo_power_effect = {
 	}
 }
 
-#Skurkokli
-ogre_battle_count_win = {
-	if = {
-		limit = { tag = J47 has_ruler_flag = is_rancor }
-		change_variable = { nbCharge = 1 }
-		change_variable = { totalBattle = 1 }
-		set_variable = {
-			which = battleWinRate
-			which = nbCharge
-		}
-		divide_variable = {
-			which = battleWinRate
-			which = totalBattle
-		}
-		multiply_variable = {
-			which = battleWinRate
-			value = 100
-		}
-	}
-}
-
-add_mercantilism_excess_to_diplo_power_effect = {
+add_mercantilism_excess_to_50_dip = {
 	tooltip = { add_mercantilism = $VAL$ }
 	custom_tooltip = add_mercantilism_excess_to_diplo_power_effect_tt
 	hidden_effect = {
-		change_variable = {
+		set_variable = {
 			which = left_to_convert
 			value = $VAL$
 		}
@@ -4638,7 +4498,7 @@ add_mercantilism_excess_to_diplo_power_effect = {
 			}
 			if = {
 				limit = { mercantilism = 100 }
-				add_dip_power = 100
+				add_dip_power = 50
 			}
 			else = { add_mercantilism = 1 }
 
@@ -4649,6 +4509,19 @@ add_mercantilism_excess_to_diplo_power_effect = {
 		}
 	}
 }
+
+add_mercantilism_excess_to_50_dip_simple = {
+	tooltip = { add_mercantilism = 1 }
+	custom_tooltip = add_mercantilism_excess_to_diplo_power_effect_tt
+	hidden_effect = {
+		if = {
+			limit = { mercantilism = 100 }
+			add_dip_power = 50
+		}
+		else = { add_mercantilism = 1 }
+	}
+}
+
 
 set_vampire_masquerade_opinion = {
 	every_country = {
@@ -5204,10 +5077,125 @@ anb_on_development_effect = {
 			add_base_manpower = 1
 		}
 	}
+	#Wyvernheart
+	if = {
+		limit = { has_province_modifier = estate_wyvernheart_culture_of_the_heart_mod has_construction = mage_tower }
+		add_construction_progress = 0.10
+	}
+
+	if = {
+		limit = {
+			owner = { has_estate_privilege = estate_lowercastes_khedarid_architecture }
+			development = 30
+		}
+		add_province_modifier = { name = lowercastes_khedarid_architecture_mod_2 duration = -1 }
+	}
+
+	#Ikogshaantus
+	if = {
+		limit = { has_province_modifier = J52_conglomerate_people_into_cities_good_mod }
+		random = {
+			chance = 33
+			add_base_$development$ = 1
+			add_next_institution_embracement_scaled = 5
+		}
+	}
+	
+	if = {
+		limit = { province_group = infernal_court_temples }
+		infernal_deity_upgrade_effect = yes
+	}
+	#Xanzerbexis
+	if = {
+		limit = {
+			owner = { has_country_flag = A49_wyvern_farm_upgrade_unlocked }
+			development = 40
+			has_province_modifier = A49_wyvern_farm
+		}
+		remove_province_modifier = A49_wyvern_farm
+		add_province_modifier = {
+			name = A49_artificer_barracks
+			duration = -1
+		}
+	}
+
+	# sponsored adventurers
+	if = {
+		limit = {
+			owner = { 
+				has_reform = sponsored_adventurer_reform
+				total_development = 250
+			}
+		}
+		owner = {
+			overlord = {
+				country_event = {
+					id = sponsored_adventurers.101
+				}
+			}
+		}
+	}
+
+	#sponsored adventurers
+	#not bothering taking it away if it goes below 15
+	if = {
+		limit = {
+			owner = {
+				has_government_attribute = reform_progress_from_development
+			}
+			development = 15
+			NOT = { has_province_flag = reform_progress_from_dev_granted }
+		}
+		owner = {
+			change_variable = {
+				which = reform_progress_dev_variable
+				value = 1
+			}
+		}
+		set_province_flag = reform_progress_from_dev_granted
+	}
+	if = {
+		limit = {
+			NOT = { has_global_flag = firstNonImperialCityMade }
+			owner = { religion = anzalkatsa }
+			development = 30
+			superregion = taneyas_superregion
+			NOT = { has_global_flag = 333rdformed } 
+			NOT = {
+				province_group = imperial_332_cities
+			}
+		}
+		
+		anb_lizardfolk_clash_change_variable_plus = yes
+		
+		every_country = {
+			limit = {
+				religion = anzalkatsa
+			}
+			country_event = {
+				id = AnzalkatsaSchoolFightEvents.11
+			}
+		}
+		set_global_flag = firstNonImperialCityMade
+		
+	}
+
+	#Pashaine
+	if = {
+		limit = {
+			owner = {
+				has_country_flag = pashaine_bonus_dev_on_anbennarian
+			}
+			culture_group = anbennarian
+		}
+		random = {
+			chance = 10
+			add_base_$development$ = 1
+		}
+	}
 }
 
 create_vassal_with_religion_and_culture = {
-	create_vassal = $tag$
 	hidden_effect = {
 		$tag$ = {
 			change_religion = $religion$
@@ -5215,17 +5203,19 @@ create_vassal_with_religion_and_culture = {
 			change_primary_culture = $culture$
 		}
 	}
+	create_vassal = $tag$
 }
 
 release_with_religion_and_culture = {
-	release = $tag$
 	hidden_effect = {
-		$tag$ = { 
+		$tag$ = {
 			change_religion = $religion$
 			remove_country_modifier = conversion_zeal
 			change_primary_culture = $culture$
+			remove_country_modifier = restructuring_administration
 		}
 	}
+	release = $tag$
 }
 
 estate_action_CAVERN_EXPLORATION_INITIATIVE_ADVENTURERS = {
@@ -5651,11 +5641,22 @@ golden_highway_start_construction = {
 	[[bulwar_proper]
 		set_global_flag = golden_highway_bulwar_proper_started
 		if = {
-			limit = {
+			limit = {  
 				has_golden_highway_discount_50_percent = yes
+				has_golden_highway_discount_25_percent = yes
 			}
+			add_treasury = -487 # 13 provs
+			add_adm_power = -50
+		}
+		else_if = {
+			limit = { has_golden_highway_discount_50_percent = yes }
 			add_treasury = -975 # 13 provs
 			add_adm_power = -100
+		}
+		else_if = {
+			limit = { has_golden_highway_discount_25_percent = yes }
+			add_treasury = -1462 # 13 provs
+			add_adm_power = -150
 		}
 		else = {
 			add_treasury = -1950 # 13 provs
@@ -5672,11 +5673,22 @@ golden_highway_start_construction = {
 	[[far_bulwar]
 		set_global_flag = golden_highway_far_bulwar_started
 		if = {
-			limit = {
+			limit = {  
 				has_golden_highway_discount_50_percent = yes
+				has_golden_highway_discount_25_percent = yes
 			}
+			add_treasury = -487 # 13 provs
+			add_adm_power = -50
+		}
+		else_if = {
+			limit = { has_golden_highway_discount_50_percent = yes }
 			add_treasury = -975 # 13 provs
 			add_adm_power = -100
+		}
+		else_if = {
+			limit = { has_golden_highway_discount_25_percent = yes }
+			add_treasury = -1462 # 13 provs
+			add_adm_power = -150
 		}
 		else = {
 			add_treasury = -1950 # 13 provs
@@ -5694,10 +5706,29 @@ golden_highway_start_construction = {
 		set_global_flag = golden_highway_far_salahad_started
 		if = {
 			limit = {
-				has_golden_highway_discount_50_percent = yes
+				OR = {
+					has_golden_highway_discount_50_percent = yes
+					has_country_flag = mulen_highway_discount
+				}
+				has_golden_highway_discount_25_percent = yes
+			}
+			add_treasury = -262 # 7 provs
+			add_adm_power = -50
+		}
+		else_if = {
+			limit = { 
+				OR = {
+					has_golden_highway_discount_50_percent = yes
+					has_country_flag = mulen_highway_discount
+				}
 			}
 			add_treasury = -525 # 7 provs
 			add_adm_power = -100
+		}
+		else_if = {
+			limit = { has_golden_highway_discount_25_percent = yes }
+			add_treasury = -787 # 7 provs
+			add_adm_power = -150
 		}
 		else = {
 			add_treasury = -1050 # 7 provs
@@ -5714,11 +5745,22 @@ golden_highway_start_construction = {
 	[[rahen_coast]
 		set_global_flag = golden_highway_rahen_coast_started
 		if = {
-			limit = {
+			limit = {  
 				has_golden_highway_discount_50_percent = yes
+				has_golden_highway_discount_25_percent = yes
 			}
+			add_treasury = -562 # 15 provs
+			add_adm_power = -50
+		}
+		else_if = {
+			limit = { has_golden_highway_discount_50_percent = yes }
 			add_treasury = -1125 # 15 provs
 			add_adm_power = -100
+		}
+		else_if = {
+			limit = { has_golden_highway_discount_25_percent = yes }
+			add_treasury = -1687 # 15 provs
+			add_adm_power = -150
 		}
 		else = {
 			add_treasury = -2250 # 15 provs
@@ -5735,11 +5777,22 @@ golden_highway_start_construction = {
 	[[dhujat]
 		set_global_flag = golden_highway_dhujat_started
 		if = {
-			limit = {
+			limit = {  
 				has_golden_highway_discount_50_percent = yes
+				has_golden_highway_discount_25_percent = yes
 			}
+			add_treasury = -262 # 7 provs
+			add_adm_power = -50
+		}
+		else_if = {
+			limit = { has_golden_highway_discount_50_percent = yes }
 			add_treasury = -525 # 7 provs
 			add_adm_power = -100
+		}
+		else_if = {
+			limit = { has_golden_highway_discount_25_percent = yes }
+			add_treasury = -787 # 7 provs
+			add_adm_power = -150
 		}
 		else = {
 			add_treasury = -1050 # 7 provs
@@ -5756,14 +5809,25 @@ golden_highway_start_construction = {
 	[[xianjie]
 		set_global_flag = golden_highway_xianjie_started
 		if = {
-			limit = {
+			limit = {  
 				has_golden_highway_discount_50_percent = yes
+				has_golden_highway_discount_25_percent = yes
 			}
-			add_treasury = -1050 # 14 provs
+			add_treasury = -525 # 15 provs
+			add_adm_power = -50
+		}
+		else_if = {
+			limit = { has_golden_highway_discount_50_percent = yes }
+			add_treasury = -1050 # 15 provs
 			add_adm_power = -100
 		}
+		else_if = {
+			limit = { has_golden_highway_discount_25_percent = yes }
+			add_treasury = -1575 # 15 provs
+			add_adm_power = -150
+		}
 		else = {
-			add_treasury = -2100 # 14 provs
+			add_treasury = -2100 # 15 provs
 			add_adm_power = -200
 		}
 		4470 = {
@@ -5777,11 +5841,22 @@ golden_highway_start_construction = {
 	[[upper_yanshen]
 		set_global_flag = golden_highway_upper_yanshen_started
 		if = {
-			limit = {
+			limit = {  
 				has_golden_highway_discount_50_percent = yes
+				has_golden_highway_discount_25_percent = yes
 			}
+			add_treasury = -375 # 10 provs
+			add_adm_power = -50
+		}
+		else_if = {
+			limit = { has_golden_highway_discount_50_percent = yes }
 			add_treasury = -725 # 10 provs
 			add_adm_power = -100
+		}
+		else_if = {
+			limit = { has_golden_highway_discount_25_percent = yes }
+			add_treasury = -1125 # 10 provs
+			add_adm_power = -150
 		}
 		else = {
 			add_treasury = -1500 # 10 provs
@@ -5798,11 +5873,22 @@ golden_highway_start_construction = {
 	[[yanshen_coast]
 		set_global_flag = golden_highway_yanshen_coast_started
 		if = {
-			limit = {
+			limit = {  
 				has_golden_highway_discount_50_percent = yes
+				has_golden_highway_discount_25_percent = yes
 			}
+			add_treasury = -225 # 6 provs
+			add_adm_power = -50
+		}
+		else_if = {
+			limit = { has_golden_highway_discount_50_percent = yes }
 			add_treasury = -450 # 6 provs
 			add_adm_power = -100
+		}
+		else_if = {
+			limit = { has_golden_highway_discount_25_percent = yes }
+			add_treasury = -675 # 6 provs
+			add_adm_power = -150
 		}
 		else = {
 			add_treasury = -900 # 6 provs
@@ -5819,12 +5905,23 @@ golden_highway_start_construction = {
 	[[shamakhad]
 		set_global_flag = golden_highway_shamakhad_started
 		if = {
-			limit = {
+			limit = {  
 				has_golden_highway_discount_50_percent = yes
+				has_golden_highway_discount_25_percent = yes
 			}
+			add_treasury = -875 # 15 provs
+			add_adm_power = -75
+		}
+		else_if = {
+			limit = { has_golden_highway_discount_50_percent = yes }
 			add_treasury = -1750 # 15 provs
 			add_adm_power = -150
-		}	
+		}
+		else_if = {
+			limit = { has_golden_highway_discount_25_percent = yes }
+			add_treasury = -2625 # 15 provs
+			add_adm_power = -225
+		}
 		else = {
 			add_treasury = -3500 # 15 provs
 			add_adm_power = -300
@@ -5840,17 +5937,60 @@ golden_highway_start_construction = {
 	[[south_haless]
 		set_global_flag = golden_highway_south_haless_started
 		if = {
-			limit = {
+			limit = {  
 				has_golden_highway_discount_50_percent = yes
+				has_golden_highway_discount_25_percent = yes
 			}
+			add_treasury = -875 # 15 provs
+			add_adm_power = -75
+		}
+		else_if = {
+			limit = { has_golden_highway_discount_50_percent = yes }
 			add_treasury = -1750 # 15 provs
 			add_adm_power = -150
-		}	
+		}
+		else_if = {
+			limit = { has_golden_highway_discount_25_percent = yes }
+			add_treasury = -2625 # 15 provs
+			add_adm_power = -225
+		}
 		else = {
 			add_treasury = -3500 # 15 provs
 			add_adm_power = -300
 		}
 		4600 = {
+			add_permanent_province_modifier = {
+				name = golden_highway_under_construction
+				duration = -1
+			}
+			hidden_effect = { province_event = { id = golden_highway.1 days = 180 random = 365 } }
+		}
+	]
+	[[south_salahad]
+		set_global_flag = golden_highway_south_salahad_started
+		if = {
+			limit = {  
+				has_golden_highway_discount_50_percent = yes
+				has_golden_highway_discount_25_percent = yes
+			}
+			add_treasury = -875 # 15 provs
+			add_adm_power = -75
+		}
+		else_if = {
+			limit = { has_golden_highway_discount_50_percent = yes }
+			add_treasury = -1750 # 15 provs
+			add_adm_power = -150
+		}
+		else_if = {
+			limit = { has_golden_highway_discount_25_percent = yes }
+			add_treasury = -2625 # 15 provs
+			add_adm_power = -225
+		}
+		else = {
+			add_treasury = -3500 # 15 provs
+			add_adm_power = -300
+		}
+		684 = {
 			add_permanent_province_modifier = {
 				name = golden_highway_under_construction
 				duration = -1
@@ -6103,43 +6243,79 @@ switch_bayvic_to_bayvek = {
 }
 
 select_highest_dev_province_with_limit = {
-	set_variable = {
-		which = highest_province_dev
-		value = 0
-	}
 	every_owned_province = {
 		limit = { $limit$ }
-		export_to_variable = {
-			which = temp_dev_check
-			value = development
-		}
-		ROOT = {
-			set_variable = {
-				which = temp_dev_check
-				which = PREV
-			}
-		}
 		if = {
-			limit = {
-				ROOT = {
-					check_variable = {
-						which = temp_dev_check
-						which = highest_province_dev
-					}
-				}
+			limit = { has_saved_event_target = highest_dev_province_with_limit$index$ }
+			if = {
+				limit = { higher_development_than = event_target:highest_dev_province_with_limit$index$ }
+				save_event_target_as = highest_dev_province_with_limit$index$
 			}
-			ROOT = {
-				set_variable = {
-					which = highest_province_dev
-					which = temp_dev_check
-				}
-			}
-			save_event_target_as = highest_dev_province_with_limit
 		}
+		else = { save_event_target_as = highest_dev_province_with_limit$index$ }
 	}
-	[[effect] event_target:highest_dev_province_with_limit = { $effect$ }]
+	if = {
+		limit = { has_saved_event_target = highest_dev_province_with_limit$index$ }
+		[[effect] event_target:highest_dev_province_with_limit$index$ = { $effect$ } ]
+	}
 }
 
+select_highest_dev_known_country_with_limit = {
+	every_known_country = {
+		limit = { $limit$ }
+		if = {
+			limit = { has_saved_event_target = highest_dev_known_country_with_limit$index$ }
+			if = {
+				limit = { total_own_and_non_tributary_subject_development = event_target:highest_dev_known_country_with_limit$index$ }
+				save_event_target_as = highest_dev_known_country_with_limit$index$
+			}
+		}
+		else = { save_event_target_as = highest_dev_known_country_with_limit$index$ }
+	}
+	if = {
+		limit = { has_saved_event_target = highest_dev_known_country_with_limit$index$ }
+		[[effect] event_target:highest_dev_known_country_with_limit$index$ = { $effect$ } ]
+	}
+}
+
+select_highest_dev_province_in_location_with_limit = {
+	$location$ = {
+		type = all
+		limit = { $limit$ }
+		if = {
+			limit = { has_saved_event_target = highest_dev_province_in_$location$$index$ }
+			if = {
+				limit = { higher_development_than = event_target:highest_dev_province_in_$location$$index$ }
+				save_event_target_as = highest_dev_province_in_$location$$index$
+			}
+		}
+		else = {
+			save_event_target_as = highest_dev_province_in_$location$$index$
+		}
+	}
+	if = {
+		limit = { has_saved_event_target = highest_dev_province_in_$location$$index$ }
+		[[effect]
+			event_target:highest_dev_province_in_$location$$index$ = { $effect$ }
+		]
+	}
+}
+
+add_ae_for_known_countries_with_limit = {
+	custom_tooltip = add_$value$_ae_tt
+	[[desc] custom_tooltip = $desc$ ]
+	hidden_effect = {
+		every_known_country = {
+			[[limit] limit = { $limit$ } ]
+			add_aggressive_expansion = {
+				who = PREV
+				value = $value$
+				[[apply_calc] apply_calc = $apply_calc$ ]
+			}
+			[[effect] $effect$]
+		}
+	}
+}
 
 #only does base-game modifications rn. do modded ones by surrounding this effect with the set and remove flag
 create_flagship_with_modifications = {
@@ -6229,15 +6405,15 @@ select_highest_opinion_country_with_limit = {
 
 add_random_estate_loyalty = { #Used like add_random_estate_loyalty = { amount = X }
 	pick_random_estate_if_present = { flag = loyalty }
+	# if = {
+	# 	limit = { has_country_flag = estate_brahmins_loyalty }
+	# 	add_estate_loyalty = {
+	# 		estate = estate_brahmins
+	# 		loyalty = $amount$
+	# 	}
+	# 	clr_country_flag = estate_brahmins_loyalty
+	# }
 	if = {
-		limit = { has_country_flag = estate_brahmins_loyalty }
-		add_estate_loyalty = {
-			estate = estate_brahmins
-			loyalty = $amount$
-		}
-		clr_country_flag = estate_brahmins_loyalty
-	}
-	else_if = {
 		limit = { has_country_flag = estate_church_loyalty }
 		add_estate_loyalty = {
 			estate = estate_church
@@ -6487,7 +6663,7 @@ add_random_estate_loyalty = { #Used like add_random_estate_loyalty = { amount = 
 	}
 }
 
-force_ai_convert = { #Stops the ai from converting back immediatly if their RU is too low
+force_ai_convert = { #Stops the ai from converting back immediately if their RU is too low
 	if = {
 		limit = { ai = yes }
 		force_converted = yes
@@ -6812,6 +6988,16 @@ anb_colony_becomes_human = {
 				}
 			}
 			change_culture = thornish
+		}
+		else_if = {
+			limit = {
+				owner = {
+					capital_scope = {
+						culture = cromorri
+					}
+				}
+			}
+			change_culture = cromorri
 		}
 		else = {
 			change_culture = high_lorentish
@@ -7323,6 +7509,12 @@ anb_changed_ways_effect = {
 			}
 			change_primary_culture = thornish
 		}
+		else_if = {
+			limit = {
+				dominant_culture = cromorri
+			}
+			change_primary_culture = cromorri
+		}
 	}
 	else_if = {
 		limit = {
@@ -7583,12 +7775,6 @@ anb_changed_ways_effect = {
 				dominant_culture = estairey
 			}
 			change_primary_culture = estairey
-		}
-		else_if = {
-			limit = {
-				dominant_culture = anbenlander
-			}
-			change_primary_culture = anbenlander
 		}
 		else_if = {
 			limit = {
@@ -7928,7 +8114,7 @@ prepare_months_of_trade_income = {
 			which = trade_income_share
 		}
 		multiply_variable = {
-			which = current_treade_income
+			which = current_trade_income
 			value = $months$
 		}
 		round_variable = {
@@ -7961,4 +8147,1299 @@ pirate_republic_estate_crownland_setup = {
 		estate = estate_mages
 		share = 30
 	}
+}
+
+anb_block_heir_death = { #Blocks heirs from dying, barring events
+	[[country] #Is only removable through effects or expiration
+		add_country_modifier = {
+			name = anb_heir_cannot_die
+			duration = $duration$
+			hidden = yes
+		}
+	]
+	[[ruler] #Removed through effects or when ruler dies and expiration (Yes, using has_country_modifier works on this )
+		add_ruler_modifier = {
+			name = anb_heir_cannot_die
+			duration = $duration$
+			hidden = yes
+		}
+	]
+}
+
+anb_block_consort_death = {  #Blocks consorts from dying, barring events
+	[[country] #Is only removable through effects or expiration
+		add_country_modifier = {
+			name = anb_consort_cannot_die
+			duration = $duration$
+			hidden = yes
+		}
+	]
+	[[ruler] #Removed through effects or when ruler dies and expiration (Yes, using has_country_modifier works on this )
+		add_ruler_modifier = {
+			name = anb_consort_cannot_die
+			duration = $duration$
+			hidden = yes
+		}
+	]
+}
+
+anb_allow_heir_death = { #Allows heirs to die again
+	remove_country_modifier = anb_heir_cannot_die
+}
+
+anb_allow_consort_death = { #Allows consorts to die again (P.S if consort is above 100, they are removed from existence, no notif)
+	remove_country_modifier = anb_consort_cannot_die
+}
+
+remove_random_manufactory = {
+	random_list = {
+		1 = {
+			trigger = { has_building = wharf }
+			remove_building = wharf
+		}
+		1 = {
+			trigger = { has_building = weapons }
+			remove_building = weapons
+		}
+		1 = {
+			trigger = { has_building = textile }
+			remove_building = textile
+		}
+		1 = {
+			trigger = { has_building = plantations }
+			remove_building = plantations
+		}
+		1 = {
+			trigger = { has_building = tradecompany }
+			remove_building = tradecompany
+		}
+		1 = {
+			trigger = { has_building = farm_estate }
+			remove_building = farm_estate
+		}
+		1 = {
+			trigger = { has_building = mills }
+			remove_building = mills
+		}
+		1 = {
+			trigger = { has_building = furnace }
+			remove_building = furnace
+		}
+		1 = {
+			trigger = { has_building = ramparts }
+			remove_building = ramparts
+		}
+		1 = {
+			trigger = { has_building = soldier_households }
+			remove_building = soldier_households
+		}
+		1 = {
+			trigger = { has_building = impressment_offices }
+			remove_building = impressment_offices
+		}
+		1 = {
+			trigger = { has_building = state_house }
+			remove_building = state_house
+		}
+		1 = {
+			trigger = { has_building = mage_tower }
+			remove_building = mage_tower
+		}
+	}
+}
+
+anb_aelantir_cultural_union = { #Might need an update if there's new cultures in the future
+	[[taychendi]
+		custom_tooltip = anb_aelantir_cultural_union_taychendi_tt
+		hidden_effect = {
+			anb_add_accepted_culture_or_dip_power = { culture = larankarha free = yes } 
+			anb_add_accepted_culture_or_dip_power = { culture = advakhalla free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = sarihaddi free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = yodhanpir free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = kalavendhi free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = thekvrystana free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = bekauta free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = vaikazelhi free = yes }
+		}
+	]
+	[[kheionai]
+		custom_tooltip = anb_aelantir_cultural_union_kheionai_tt
+		hidden_effect = {
+			anb_add_accepted_culture_or_dip_power = { culture = degabhen free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = oktibhen free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = kherkabhen free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = lokebhen free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = ormabhen free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = arpebhen free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = ambhen free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = kimabhen free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = empkhebhen free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = besolabhen free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = enebhen free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = deyebhen free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = apikhobhen free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = keyobhen free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = anisibhen free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = amgrebhen free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = eltibhen free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = klereyen free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = astolbhen free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = eltibhar free = yes }
+		}
+	]
+	[[devand]
+		custom_tooltip = anb_aelantir_cultural_union_devand_tt
+		hidden_effect = {
+			anb_add_accepted_culture_or_dip_power = { culture = mteibhar free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = basobhar free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = chendhyan free = yes }
+		}
+	]
+	[[amadia]
+		custom_tooltip = anb_aelantir_cultural_union_amadia_tt
+		hidden_effect = {
+			anb_add_accepted_culture_or_dip_power = { culture = quchamar free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = chaqanel free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = quruwei free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = chamullach free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = banche free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = faalte free = yes }
+		}
+	]
+	[[north]
+		custom_tooltip = anb_aelantir_cultural_union_north_tt
+		hidden_effect = {
+			anb_add_accepted_culture_or_dip_power = { culture = boek free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = kwineh free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = duskers free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = starborn free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = cheshoshi free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = teira free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture = veykodan free = yes }
+		}
+	]
+	[[south]
+		custom_tooltip = anb_aelantir_cultural_union_south_tt
+		hidden_effect = {
+			anb_add_accepted_culture_or_dip_power = { culture = soruinic free = yes }
+		}
+	]
+	[[ynnic]
+		custom_tooltip = anb_aelantir_cultural_union_ynnic_tt
+		hidden_effect = {
+			anb_add_accepted_culture_or_dip_power = { culture =  rzentur free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture =  old_rzentur free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture =  dolindhan free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture =  sarda free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture =  malacnari free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture =  brelari free = yes }
+		}
+	]
+	[[eordan]
+		custom_tooltip = anb_aelantir_cultural_union_eordan_tt
+		hidden_effect = {
+			anb_add_accepted_culture_or_dip_power = { culture =  selphereg free = yes }	
+			anb_add_accepted_culture_or_dip_power = { culture =  caamas free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture =  peitar free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture =  tuathak free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture =  snecboth free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture =  fograc free = yes }
+		}
+	]
+	[[harafic]
+		custom_tooltip = anb_aelantir_cultural_union_harafic_tt
+		hidden_effect = {
+			anb_add_accepted_culture_or_dip_power = { culture =  harafe free = yes  }
+			anb_add_accepted_culture_or_dip_power = { culture =  kooras free = yes  }
+			anb_add_accepted_culture_or_dip_power = { culture =  mayte free = yes  }
+			anb_add_accepted_culture_or_dip_power = { culture =  epednar free = yes  }
+			anb_add_accepted_culture_or_dip_power = { culture =  chiunife free = yes  }
+		}
+	]
+	[[effelai]
+		custom_tooltip = anb_aelantir_cultural_union_effelai_tt
+		hidden_effect = {
+			anb_add_accepted_culture_or_dip_power = { culture =  duguihi free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture =  effe free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture =  laii free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture =  parura free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture =  thamvoii free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture =  oonoi free = yes }
+		}
+	]
+	[[degenerate]
+		custom_tooltip = anb_aelantir_cultural_union_degenarate_tt
+		hidden_effect = {
+			anb_add_accepted_culture_or_dip_power = { culture =  bloodfeeders free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture =  silent_watchers free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture =  cursed_ones free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture =  leechmen free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture =  seedthrall free = yes }
+			anb_add_accepted_culture_or_dip_power = { culture =  ice_sleepers free = yes }
+		}
+	]
+}
+
+anb_imperial_cultural_union = { #Accept all EoA imperial cultures for free without taking a slot
+	custom_tooltip = anb_imperial_cultural_union_tt
+	hidden_effect = {
+		anb_add_accepted_culture_or_dip_power = { culture = anbenncoster free = yes }
+		anb_add_accepted_culture_or_dip_power = { culture = half_elf free = yes }
+		anb_add_accepted_culture_or_dip_power = { culture = west_damerian free = yes }
+		anb_add_accepted_culture_or_dip_power = { culture = east_damerian free = yes }
+		anb_add_accepted_culture_or_dip_power = { culture = pearlsedger free = yes }
+		anb_add_accepted_culture_or_dip_power = { culture = crownsman free = yes }
+		anb_add_accepted_culture_or_dip_power = { culture = vernman free = yes }
+		anb_add_accepted_culture_or_dip_power = { culture = exwesser free = yes }
+		anb_add_accepted_culture_or_dip_power = { culture = arbarani free = yes }
+		anb_add_accepted_culture_or_dip_power = { culture = esmari free = yes }
+		anb_add_accepted_culture_or_dip_power = { culture = arannese free = yes }
+		anb_add_accepted_culture_or_dip_power = { culture = uelairey free = yes }
+		anb_add_accepted_culture_or_dip_power = { culture = aldresian free = yes }
+		anb_add_accepted_culture_or_dip_power = { culture = telgeiran free = yes }
+		anb_add_accepted_culture_or_dip_power = { culture = pashainey free = yes }
+		anb_add_accepted_culture_or_dip_power = { culture = havoric free = yes }
+		anb_add_accepted_culture_or_dip_power = { culture = imperial_halfling free = yes }
+		anb_add_accepted_culture_or_dip_power = { culture = imperial_gnome free = yes }
+		anb_add_accepted_culture_or_dip_power = { culture = dovesworn_gnoll free = yes }
+		anb_add_accepted_culture_or_dip_power = { culture = moon_elf free = yes }
+		anb_add_accepted_culture_or_dip_power = { culture = silver_dwarf free = yes }
+		anb_add_accepted_culture_or_dip_power = { culture = wexonard free = yes }
+		anb_add_accepted_culture_or_dip_power = { culture = vertesker free = yes }
+	}
+}
+
+anb_gain_permanent_claims_on_continent = {
+	[[north_aelantir]
+	custom_tooltip = anb_gain_permanent_claim_on_north_aelantir_tt
+	hidden_effect = {
+		north_america = {
+			limit = {
+				NOT = {
+					is_wasteland = yes
+					is_sea = yes
+				}
+			}
+			add_permanent_claim = ROOT
+		}
+	}
+	]
+
+	[[south_aelantir]
+	custom_tooltip = anb_gain_permanent_claim_on_south_aelantir_tt
+	hidden_effect = {
+		south_america = {
+			limit = {
+				NOT = {
+					is_wasteland = yes
+					is_sea = yes
+				}
+			}
+			add_permanent_claim = ROOT
+		}
+	}
+	]
+
+	[[cannor]
+	custom_tooltip = anb_gain_permanent_claim_on_cannor_tt
+	hidden_effect = {
+		europe = {
+			limit = {
+				NOT = {
+					is_wasteland = yes
+					is_sea = yes
+				}
+			}
+			add_permanent_claim = ROOT
+		}
+	}
+	]
+
+	[[sarhal]
+	custom_tooltip = anb_gain_permanent_claim_on_sarhal_tt
+	hidden_effect = {
+		africa = {
+			limit = {
+				NOT = {
+					is_wasteland = yes
+					is_sea = yes
+				}
+			}
+			add_permanent_claim = ROOT
+		}
+	}
+	]
+
+	[[haless]
+	custom_tooltip = anb_gain_permanent_claim_on_haless_tt
+	hidden_effect = {
+		asia = {
+			limit = {
+				NOT = {
+					is_wasteland = yes
+					is_sea = yes
+				}
+			}
+			add_permanent_claim = ROOT
+		}
+	}
+	]
+
+	[[serpentspine]
+	custom_tooltip = anb_gain_permanent_claim_on_serpentspine_tt
+	hidden_effect = {
+		serpentspine = {
+			limit = {
+				NOT = {
+					is_wasteland = yes
+					is_sea = yes
+				}
+			}
+			add_permanent_claim = ROOT
+		}
+	}
+	]
+
+	[[insyaa]
+	custom_tooltip = anb_gain_permanent_claim_on_insyaa_tt
+	hidden_effect = {
+		oceania = {
+			limit = {
+				NOT = {
+					is_wasteland = yes
+					is_sea = yes
+				}
+			}
+			add_permanent_claim = ROOT
+		}
+	}
+	]
+}
+
+anb_remove_all_power = {
+	add_adm_power = -$VAL$
+	add_dip_power = -$VAL$
+	add_mil_power = -$VAL$
+}
+
+irdaeos_worship_clear_aspects = {
+	clr_country_flag = irdaeos_tournament_scarrification
+	clr_country_flag = irdaeos_tournament_headhunting
+	clr_country_flag = irdaeos_tournament_drawn
+	clr_country_flag = irdaeos_festivals_herbalism
+	clr_country_flag = irdaeos_festivals_ornamentation
+	clr_country_flag = irdaeos_festivals_hospitality
+	clr_country_flag = irdaeos_rite_hunting
+	clr_country_flag = irdaeos_rite_falconry
+	clr_country_flag = irdaeos_rite_judicial
+	clr_country_flag = irdaeos_communion_shaping
+	clr_country_flag = irdaeos_communion_tatooing
+	clr_country_flag = irdaeos_communion_night
+}
+
+zaradyrra_invite_scholar = {
+	add_adm_power = -25
+	clear_religious_scholar_modifiers_effect = yes
+	zaradyrra_invite_$scholar$_effect = yes
+}
+zaradyrra_invite_blade_and_needle_effect = {
+    custom_tooltip = zaradyrra_invite_blade_and_needle_scholar_tt
+    if = {
+        limit = {
+            religious_school = {
+                group = lizardfolk_religion
+                school = humble_zeal_school
+            }
+        }
+        country_event = { id = zaradyrra.11 days = 3650 }
+    }
+    if = {
+        limit = {
+            religious_school = {
+                group = lizardfolk_religion
+                school = soul_song_school
+            }
+        }
+        country_event = { id = zaradyrra.12 days = 3650 }
+    }
+    if = {
+        limit = {
+            religious_school = {
+                group = lizardfolk_religion
+                school = colors_of_life_school
+            }
+        }
+        country_event = { id = zaradyrra.10 days = 3650 }
+    }
+	custom_tooltip = zaradyrra_deity_tt
+    add_country_modifier = { name = blade_and_needle_scholar_modifier duration = 3650 }
+}
+zaradyrra_invite_great_cycle_effect = {
+    custom_tooltip = zaradyrra_invite_great_cycle_scholar_tt
+	if = {
+		limit = {
+			religious_school = {
+				group = lizardfolk_religion
+				school = humble_zeal_school
+			}
+		}
+		country_event = { id = zaradyrra.15 days = 3650 }
+	}
+	if = {
+		limit = {
+			religious_school = {
+				group = lizardfolk_religion
+				school = soul_song_school
+			}
+		}
+		country_event = { id = zaradyrra.16 days = 3650 }
+	}
+	if = {
+		limit = {
+			religious_school = {
+				group = lizardfolk_religion
+				school = colors_of_life_school
+			}
+		}
+		country_event = { id = zaradyrra.13 days = 3650 }
+	}
+	custom_tooltip = zaradyrra_deity_tt
+    add_country_modifier = { name = great_cycle_scholar_modifier duration = 3650 }
+}
+zaradyrra_invite_humble_zeal_effect = {
+    custom_tooltip = zaradyrra_invite_humble_zeal_scholar_tt
+	if = {
+		limit = {
+			religious_school = {
+				group = lizardfolk_religion
+				school = blade_and_needle_school
+			}
+		}
+		country_event = { id = zaradyrra.11 days = 3650 }
+	}
+	if = {
+		limit = {
+			religious_school = {
+				group = lizardfolk_religion
+				school = great_cycle_school
+			}
+		}
+		country_event = { id = zaradyrra.15 days = 3650 }
+	}
+	if = {
+		limit = {
+			religious_school = {
+				group = lizardfolk_religion
+				school = soul_song_school
+			}
+		}
+		country_event = { id = zaradyrra.17 days = 3650 }
+	}
+	if = {
+		limit = {
+			religious_school = {
+				group = lizardfolk_religion
+				school = colors_of_life_school
+			}
+		}
+		country_event = { id = zaradyrra.14 days = 3650 }
+	}
+	custom_tooltip = zaradyrra_deity_tt
+    add_country_modifier = { name = humble_zeal_scholar_modifier duration = 3650 }
+}
+zaradyrra_invite_soul_song_effect = {
+    custom_tooltip = zaradyrra_invite_soul_song_scholar_tt
+	if = {
+		limit = {
+			religious_school = {
+				group = lizardfolk_religion
+				school = blade_and_needle_school
+			}
+		}
+		country_event = { id = zaradyrra.12 days = 3650 }
+	}
+	if = {
+		limit = {
+			religious_school = {
+				group = lizardfolk_religion
+				school = great_cycle_school
+			}
+		}
+		country_event = { id = zaradyrra.16 days = 3650 }
+	}
+	if = {
+		limit = {
+			religious_school = {
+				group = lizardfolk_religion
+				school = humble_zeal_school
+			}
+		}
+		country_event = { id = zaradyrra.17 days = 3650 }
+	}
+	custom_tooltip = zaradyrra_deity_tt
+    add_country_modifier = { name = soul_song_scholar_modifier duration = 3650 }
+}
+zaradyrra_invite_colors_of_life_effect = {
+    custom_tooltip = zaradyrra_invite_colors_of_life_scholar_tt
+	if = {
+		limit = {
+			religious_school = {
+				group = lizardfolk_religion
+				school = blade_and_needle_school
+			}
+		}
+		country_event = { id = zaradyrra.10 days = 3650 }
+	}
+	if = {
+		limit = {
+			religious_school = {
+				group = lizardfolk_religion
+				school = great_cycle_school
+			}
+		}
+		country_event = { id = zaradyrra.13 days = 3650 }
+	}
+	if = {
+		limit = {
+			religious_school = {
+				group = lizardfolk_religion
+				school = humble_zeal_school
+			}
+		}
+		country_event = { id = zaradyrra.14 days = 3650 }
+	}
+	custom_tooltip = zaradyrra_deity_tt
+    add_country_modifier = { name = colors_of_life_scholar_modifier duration = 3650 }
+}
+zaradyrra_festivals_of_blood_effect = {
+	if = {
+			limit = {
+				OR = {
+					has_country_flag = ashhana_festivals_of_blood_effect
+					has_country_flag = ashhana_festivals_of_blood_effect_part_2
+				}
+			}
+			add_country_modifier = {
+				name = festivals_of_blood_army_size
+				duration = 3650
+			}
+			capital_scope = {
+				create_units_of_type_in_province = {
+					amount = 5
+					who = ROOT
+					unit_type = infantry
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = ashhana_festivals_of_blood_effect
+				}
+				clr_country_flag = ashhana_festivals_of_blood_effect
+				set_country_flag = ashhana_festivals_of_blood_effect_part_2
+			}
+			else = {
+				clr_country_flag = ashhana_festivals_of_blood_effect_part_2
+			}
+		}
+}
+
+
+give_bladeskeep_monument_worthy_reward = {
+    custom_tooltip = bladeskeep_monument_can_use.tt
+    hidden_effect = {
+        set_country_flag = bladeskeep_monument_is_worthy
+        if = {
+            limit = { owns = 817 }
+            817 = {
+                remove_province_modifier = bladeskeep_monument_not_steward
+                add_province_modifier = {
+                    name = bladeskeep_monument_steward
+                    duration = -1
+                }
+            }
+        }
+    }
+}
+gain_yearly_tribute = { #Effect similar to the yearly tribute
+	hidden_effect = {
+		[[ducats]
+			#12.5% of yearly income rounded down
+			export_to_variable = {
+				which = tributary_monthly_income
+				value = trigger_value:monthly_income
+			}
+			multiply_variable = {
+				which = tributary_monthly_income
+				value = 12
+			}
+			multiply_variable = {
+				which = tributary_monthly_income
+				value = 0.125
+			}
+			round_variable = {
+				which = tributary_monthly_income
+				value = -1
+			}
+			overlord = {
+				set_variable = {
+					which = tributary_monthly_income
+					which = PREV
+				}
+				var_effect = { effect = add_treasury var = tributary_monthly_income sign = + }
+			}
+		]
+		[[manpower]
+		#25% of yearly manpower - (Max Manpower * (1 + Manpower Recovery Speed))/10
+			export_to_variable = {
+				which = tributary_max_manpower
+				value = trigger_value:max_manpower
+			}
+			export_to_variable = {
+				which = tributary_manpower_recovery
+				value = modifier:manpower_recovery_speed
+			}
+			change_variable = {
+				which = tributary_manpower_recovery
+				value = 1
+			}
+			multiply_variable = {
+				which = tributary_max_manpower
+				which = tributary_manpower_recovery
+			}
+			divide_variable = {
+				which = tributary_max_manpower
+				value = 10
+			}
+			multiply_variable = {
+				which = tributary_max_manpower
+				value = 0.25
+			}
+			overlord = {
+				set_variable = {
+					which = tributary_max_manpower
+					which = PREV
+				}
+				var_effect_granular = { effect = add_manpower var = tributary_max_manpower sign = + }
+			}
+		]
+		[[mana]
+			#Adm/Dip/Mil - Total Development/33 (Max 12 + Monarch Power Tribute) 
+			export_to_variable = {
+				which = tributary_total_dev
+				value = trigger_value:total_development
+			}
+			divide_variable = {
+				which = tributary_total_dev
+				value = 33
+			}
+			export_to_variable = {
+				which = overlord_bonus_tribute_power
+				value = modifier:monarch_power_tribute
+				who = overlord
+			}
+			if = { #If the total monarch power is above 12, decrease it
+				limit = {
+					check_variable = {
+						which = tributary_total_dev
+						value = 12
+					}
+				}
+				set_variable = {
+					which = tributary_total_dev
+					value = 12
+				}
+			}
+			change_variable = {
+				which = tributary_total_dev
+				which = overlord_bonus_tribute_power
+			}
+			while = {
+				limit = {
+					check_variable = {
+						which = tributary_total_dev
+						value = 1
+					}
+				}
+				overlord = {
+					random_list = {
+						1 = { add_adm_power = 1 }
+						1 = { add_dip_power = 1 }
+						1 = { add_mil_power = 1 }
+					}
+				}
+				change_variable = {
+					which = tributary_total_dev
+					value = -1
+				}
+			}
+		]
+	}
+}
+
+#School Variable Change Anzalkatsa Addition
+anb_lizardfolk_clash_change_variable_plus = {
+	if = {
+		limit = {
+			6150 = {
+				NOT = { is_variable_equal = { which = lizSchoolFightVar value = 3 } }
+			}
+			NOT = { has_global_flag = 333rdformed }  
+		}
+		6150 = {
+			change_variable = {
+				which = lizSchoolFightVar
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				6150 = { is_variable_equal = { which = lizSchoolFightVar value = 2 } }
+			}
+			every_country = {
+				limit = {
+					religion = anzalkatsa
+				}
+				if = {
+					limit = {
+						OR = {
+							religious_school = {
+								group = lizardfolk_religion
+								school = fate_sculptors_school
+							}
+							religious_school = {
+								group = lizardfolk_religion
+								school = fate_sculptors_school_humiliated
+							}
+						}
+					}
+					set_religious_school = {
+						group = lizardfolk_religion
+						school = fate_sculptors_school_ascended
+					}
+				}
+				else = {
+					set_religious_school = {
+						group = lizardfolk_religion
+						school = being_sculptors_school_humiliated
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				6150 = { is_variable_equal = { which = lizSchoolFightVar value = -1 } }
+			}
+			every_country = {
+				limit = {
+					religion = anzalkatsa
+				}
+				if = {
+					limit = {
+						OR = {
+							religious_school = {
+								group = lizardfolk_religion
+								school = fate_sculptors_school_humiliated
+							}
+							religious_school = {
+								group = lizardfolk_religion
+								school = fate_sculptors_school_ascended
+							}
+						}
+					}
+					set_religious_school = {
+						group = lizardfolk_religion
+						school = fate_sculptors_school
+					}
+				}
+				else = {
+					set_religious_school = {
+						group = lizardfolk_religion
+						school = being_sculptors_school
+					}
+				}
+				
+			}
+		}
+	}
+} 
+
+#School Variable Change Anzalkatsa subtraction
+anb_lizardfolk_clash_change_variable_minus = {
+	if = {
+		limit = {
+			6150 = {
+				NOT = { is_variable_equal = { which = lizSchoolFightVar value = -3 } }
+			}
+			NOT = { has_global_flag = 333rdformed }  
+		}
+		6150 = {
+			change_variable = {
+				which = lizSchoolFightVar
+				value = -1
+			}
+		}
+		if = {
+			limit = {
+				6150 = { is_variable_equal = { which = lizSchoolFightVar value = -2 } }
+			}
+			every_country = {
+				limit = {
+					religion = anzalkatsa
+				}
+				if = {
+					limit = {
+						OR = {
+							religious_school = {
+								group = lizardfolk_religion
+								school = fate_sculptors_school
+							}
+							religious_school = {
+								group = lizardfolk_religion
+								school = fate_sculptors_school_ascended
+							}
+						}
+					}
+					set_religious_school = {
+						group = lizardfolk_religion
+						school = fate_sculptors_school_humiliated
+					}
+				}
+				else = {
+					set_religious_school = {
+						group = lizardfolk_religion
+						school = being_sculptors_school_ascended
+					}
+				}
+				
+			}
+		}
+		else_if = {
+			limit = {
+				6150 = { is_variable_equal = { which = lizSchoolFightVar value = 1 } }
+			}
+			every_country = {
+				limit = {
+					religion = anzalkatsa
+				}
+				if = {
+					limit = {
+						OR = {
+							religious_school = {
+								group = lizardfolk_religion
+								school = fate_sculptors_school_humiliated
+							}
+							religious_school = {
+								group = lizardfolk_religion
+								school = fate_sculptors_school_ascended
+							}
+						}
+					}
+					set_religious_school = {
+						group = lizardfolk_religion
+						school = fate_sculptors_school
+					}
+				}
+				else = {
+					set_religious_school = {
+						group = lizardfolk_religion
+						school = being_sculptors_school
+					}
+				}
+				
+			}
+		}
+	}
+}
+
+add_historical_friend_mutual = {
+	add_historical_friend = $tag$
+	$tag$ = { add_historical_friend = PREV }
+}
+add_historical_rival_mutual = {
+	add_historical_rival = $tag$
+	$tag$ = { add_historical_rival = PREV }
+}
+disable_demonsterisation = {
+	custom_tooltip = cannot_demonsterise_tt
+	hidden_effect = { set_country_flag = cannot_demonsterise }
+}
+
+#Port Jaher
+ascajar_accepted_culture_modifier = {
+	if = {
+		limit = { 
+			365 = {
+				has_great_project = {
+					type = ascajar
+					tier = 3
+				}
+			}
+		}
+		remove_province_modifier = ascajar_culture_mod1
+		add_province_modifier = {
+			name = ascajar_culture_mod2
+			duration = -1
+			hidden = yes
+		}
+	}
+	else_if = {
+		limit = {
+			365 = {
+				has_great_project = {
+					type = ascajar
+					tier = 1
+				}
+			}
+		}
+		add_province_modifier = {
+			name = ascajar_culture_mod1
+			duration = -1
+			hidden = yes
+		}
+	}
+}
+ascajar_remove_culture_modifier = {
+	remove_province_modifier = ascajar_culture_mod1
+	remove_province_modifier = ascajar_culture_mod2
+}
+oasis_dream_add_religion_modifier = {
+	if = {
+		limit = { 
+			6098 = {
+				has_great_project = {
+					type = water_dreams_oasis
+					tier = 3
+				}
+			}
+		}
+		remove_province_modifier = oasis_of_water_dreams_fmk_mod1
+		remove_province_modifier = oasis_of_water_dreams_fmk_mod2
+		add_province_modifier = {
+			name = oasis_of_water_dreams_fmk_mod3
+			duration = -1
+			hidden = yes
+		}
+	}
+	else_if = {
+		limit = { 
+			6098 = {
+				has_great_project = {
+					type = water_dreams_oasis
+					tier = 2
+				}
+			}
+		}
+		remove_province_modifier = oasis_of_water_dreams_fmk_mod1
+		add_province_modifier = {
+			name = oasis_of_water_dreams_fmk_mod2
+			duration = -1
+			hidden = yes
+		}
+	}
+	else_if = {
+		limit = {
+			6098 = {
+				has_great_project = {
+					type = water_dreams_oasis
+					tier = 1
+				}
+			}
+		}
+		add_province_modifier = {
+			name = oasis_of_water_dreams_fmk_mod1
+			duration = -1
+			hidden = yes
+		}
+	}
+}
+oasis_dream_remove_religion_modifier = {
+	remove_province_modifier = oasis_of_water_dreams_fmk_mod1
+	remove_province_modifier = oasis_of_water_dreams_fmk_mod2
+	remove_province_modifier = oasis_of_water_dreams_fmk_mod3
+}
+dendugma_monastery_ironwood_modifier = {
+	if = {
+		limit = { 
+			5808 = {
+				has_great_project = {
+					type = dendugma_monastery
+					tier = 3
+				}
+			}
+		}
+		remove_province_modifier = dendugma_monastery_ironwood_mod1
+		add_province_modifier = {
+			name = dendugma_monastery_ironwood_mod2
+			duration = -1
+			hidden = yes
+		}
+	}
+	else_if = {
+		limit = { 
+			5808 = {
+				has_great_project = {
+					type = dendugma_monastery
+					tier = 2
+				}
+			}
+		}
+		add_province_modifier = {
+			name = dendugma_monastery_ironwood_mod1
+			duration = -1
+			hidden = yes
+		}
+	}
+}
+dendugma_monastery_remove_modifier = {
+	remove_province_modifier = dendugma_monastery_ironwood_mod1
+	remove_province_modifier = dendugma_monastery_ironwood_mod2
+}
+jadd_holy_order_reformed = {
+	every_owned_province = {
+		limit = {
+			holy_order = lightbringers_order
+		}
+		set_province_flag = lightbringers_order_was_here
+	}
+	every_owned_province = {
+		limit = {
+			holy_order = jasienes_daughters_order
+		}
+		set_province_flag = jasienes_daughters_was_here
+	}
+	every_owned_province = {
+		limit = {
+			holy_order = militant_jadd_order
+		}
+		set_province_flag = militant_jadd_order_was_here
+	}
+	set_country_flag = the_jadd_holy_order_reformed
+	every_owned_province = {
+		limit = {
+			has_province_flag = lightbringers_order_was_here
+		}
+		every_province_in_state = {
+			clr_province_flag = lightbringers_order_was_here
+		}
+		holy_order = lightbringers_order_upgraded
+	}
+	every_owned_province = {
+		limit = {
+			has_province_flag = jasienes_daughters_was_here
+		}
+		every_province_in_state = {
+			clr_province_flag = jasienes_daughters_was_here
+		}
+		holy_order = jasienes_daughters_order_upgraded
+	}
+	every_owned_province = {
+		limit = {
+			has_province_flag = militant_jadd_order_was_here
+		}
+		every_province_in_state = {
+			clr_province_flag = jasienes_daughters_was_here
+		}
+		holy_order = militant_jadd_order_upgraded
+	}
+}
+
+every_country_in_hre = {
+	custom_tooltip = every_country_in_hre
+	tooltip = { emperor = { $effect$ } }
+	hidden_effect = {
+		every_country = {
+			limit = { is_part_of_hre = yes }
+			$effect$
+		}
+	}
+}
+
+every_free_city = {
+	custom_tooltip = every_free_city
+	tooltip = { emperor = { $effect$ } }
+	hidden_effect = {
+		every_country = {
+			limit = { has_reform = free_city }
+			$effect$
+		}
+	}
+}
+#Refuge of the glasslords monument
+add_glasslord_network = {
+	if = {
+		limit = { check_variable = { which = glasslord_wine_CoTs value = 10 } }
+		add_province_modifier = {
+			name = glasslord_network_10
+			duration = -1
+		}
+	}
+	else_if = {
+		limit = { check_variable = { which = glasslord_wine_CoTs value = 9 } }
+		add_province_modifier = {
+			name = glasslord_network_9
+			duration = -1
+		}
+	}
+	else_if = {
+		limit = { check_variable = { which = glasslord_wine_CoTs value = 8 } }
+		add_province_modifier = {
+			name = glasslord_network_8
+			duration = -1
+		}
+	}
+	else_if = {
+		limit = { check_variable = { which = glasslord_wine_CoTs value = 7 } }
+		add_province_modifier = {
+			name = glasslord_network_7
+			duration = -1
+		}
+	}
+	else_if = {
+		limit = { check_variable = { which = glasslord_wine_CoTs value = 6 } }
+		add_province_modifier = {
+			name = glasslord_network_6
+			duration = -1
+		}
+	}
+	else_if = {
+		limit = { check_variable = { which = glasslord_wine_CoTs value = 5 } }
+		add_province_modifier = {
+			name = glasslord_network_5
+			duration = -1
+		}
+	}
+	else_if = {
+		limit = { check_variable = { which = glasslord_wine_CoTs value = 4 } }
+		add_province_modifier = {
+			name = glasslord_network_4
+			duration = -1
+		}
+	}
+	else_if = {
+		limit = { check_variable = { which = glasslord_wine_CoTs value = 3 } }
+		add_province_modifier = {
+			name = glasslord_network_3
+			duration = -1
+		}
+	}
+	else_if = {
+		limit = { check_variable = { which = glasslord_wine_CoTs value = 2 } }
+		add_province_modifier = {
+			name = glasslord_network_2
+			duration = -1
+		}
+	}
+	else_if = {
+		limit = { check_variable = { which = glasslord_wine_CoTs value = 1 } }
+		add_province_modifier = {
+			name = glasslord_network_1
+			duration = -1
+		}
+	}
+}
+clear_glasslord_network = {
+	remove_province_modifier = glasslord_network_1
+	remove_province_modifier = glasslord_network_2
+	remove_province_modifier = glasslord_network_3
+	remove_province_modifier = glasslord_network_4
+	remove_province_modifier = glasslord_network_5
+	remove_province_modifier = glasslord_network_6
+	remove_province_modifier = glasslord_network_7
+	remove_province_modifier = glasslord_network_8
+	remove_province_modifier = glasslord_network_9
+	remove_province_modifier = glasslord_network_10
+}
+count_church_agendas_current_ruler_effect = {
+	hidden_effect = {
+		if = {
+			limit = {
+				has_country_flag = count_church_agendas_current_ruler_flag
+			}
+			change_variable = {
+				which = count_church_agendas_current_ruler
+				value = 1
+			}
+		}
+	}
+}
+
+
+anb_add_trust_to_every_ally = {
+	custom_tooltip = add_$value$_trust_to_every_ally_tt
+	hidden_effect = {
+		every_ally = {
+			add_trust = {
+				who = $who$
+				value = $value$
+				[[mutual] mutual = $mutual$ ]
+			}
+		}
+	}
+}
+
+anb_make_prosperous = {
+	custom_tooltip = becomes_prosperous_tt
+	hidden_effect = { add_prosperity = 100 }
+}
+
+anb_lose_autonomy_everywhere = { #Supports up to 25, with 5 intervals
+	custom_tooltip = anb_lose_$amount$_autonomy_tt
+	hidden_effect = {
+		every_owned_province = {
+			add_local_autonomy = -$amount$
+		}
+	}
+}
+
+add_yearly_income_capped = {
+	hidden_effect = {
+		export_to_variable = {
+			which = monthly_income
+			value = trigger_value:monthly_income
+		}
+		multiply_variable = { 
+			which = monthly_income
+			value = 12
+		}
+		multiply_variable = { #This is yearly
+			which = monthly_income
+			value = $years$
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = monthly_income
+					value = $cap$
+				}
+			}
+			set_variable = {
+				which = monthly_income
+				value = $cap$
+			}
+		}
+		var_effect = { effect = add_treasury var = monthly_income sign = $sign$ }
+	}
+}
+
+disable_mage_estate = {
+	custom_tooltip = anb_mage_estate_disabled_tt
+	set_country_flag = banned_magic
+}
+
+allow_double_radical_reforms = {
+	custom_tooltip = GER_can_have_radical_reforms_twice
+	if = {
+		limit = {
+			NOT = { has_country_flag = radical_mercantilist_reforms }
+		}
+		set_country_flag = can_have_radical_reforms_twice
+	}
+	else = {
+		clr_country_flag = radical_mercantilist_reforms
+	}
+}
+
+change_propagate_religion_trade_power_to = {
+	custom_tooltip = change_propagate_religion_trade_power_to_$amount$_tt
+	set_country_flag = $amount$_trade_power_for_propogate_religion
 }

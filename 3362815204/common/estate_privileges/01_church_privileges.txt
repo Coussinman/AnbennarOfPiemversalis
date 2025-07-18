@@ -2,7 +2,8 @@ estate_church_land_rights = {
 	icon = privilege_grant_autonomy
 	land_share = 5
 	max_absolutism = -5
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
 	loyalty = 0.05
 	influence = 0.05
 	is_valid = { NOT = { OR = { religion = gods_of_the_taychend religion = oren_nayiru } } }
@@ -33,6 +34,13 @@ estate_church_land_rights = {
 		modifier = {
 			governing_capacity = 100
 			max_absolutism = 5
+		}
+	}
+	conditional_modifier = {
+		trigger = { has_country_flag = h35_clergy_land_bonus }
+		modifier = { 
+			governing_capacity = 100
+			regiment_recruit_speed = -0.1
 		}
 	}
 	#conditional_modifier = {
@@ -169,10 +177,10 @@ estate_church_land_rights = {
 		#	NOT = { adm_tech = 17 }
 		#}
 		#Has already a similar privilege active
-		modifier = {
-			factor = 0.75
-			has_estate_privilege = estate_brahmins_land_rights
-		}
+		# modifier = {
+		# 	factor = 0.75
+		# 	has_estate_privilege = estate_brahmins_land_rights
+		# }
 		modifier = {
 			factor = 0.75
 			has_estate_privilege = estate_nobles_land_rights
@@ -216,7 +224,8 @@ estate_church_religious_state = {
 	icon = privilege_admin_power
 	land_share = 10
 	max_absolutism = -5
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
 	loyalty = -0.05
 	can_select = {
 		can_select_monarch_power_privilege = {
@@ -246,6 +255,10 @@ estate_church_religious_state = {
 	conditional_modifier = {
 		trigger = { has_country_flag = religious_state_no_loyalty_penalty }
 		modifier = { church_loyalty_modifier = 0.05 }
+	}
+	conditional_modifier = {
+		trigger = { has_country_flag = farranean_mana_privileges }
+		modifier = { church_loyalty_modifier = 0.1 }
 	}
 	#conditional_modifier = {
 	#	trigger = { has_government_mechanic = ottoman_decadence_mechanic }
@@ -289,9 +302,11 @@ estate_church_religious_state = {
 estate_church_independent_inquisition = {
 	icon = privilege_empty_throne
 	max_absolutism = -5
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
 	influence = 0.05
 	loyalty = 0.05
+	is_valid = { NOT = { has_country_flag = rayaz_upgraded_clerical_education }  } #Anbennar
 	can_select = {
 		NOT = { has_estate_privilege = estate_eunuchs_anb_advisors }	#Anbennar
 	}
@@ -329,13 +344,17 @@ estate_church_independent_inquisition = {
 estate_church_new_world_mission = {
 	icon = privilege_new_world_mission
 	max_absolutism = -5
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
 	loyalty = 0.05
 	influence = 0.05
 	is_valid = {
 		OR = {
 			num_of_colonists = 1
 			num_of_colonies = 1
+		}
+		NOT = { #Rezankand
+			mission_completed = rezankand_land_of_sunlight 
 		}
 	}
 	penalties = {
@@ -400,7 +419,8 @@ estate_church_new_world_mission = {
 #estate_church_papal_emissary = {
 #	icon = privilege_send_emissary_to_pope
 #	max_absolutism = -5
-#	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+#	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+#	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
 #	loyalty = 0.05
 #	influence = 0.05
 #	is_valid = {
@@ -462,7 +482,8 @@ estate_church_new_world_mission = {
 estate_church_clerical_ministers = {
 	icon = privilege_recruit_minister
 	max_absolutism = -5
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
 	influence = 0.10
 	conditional_modifier = {
 		trigger = {
@@ -602,6 +623,10 @@ estate_church_clerical_ministers = {
 			yearly_patriarch_authority = 0.005
 		}
 	}
+	conditional_modifier = {
+		trigger = { has_country_flag = U10_buff_clerical_ministers }
+		modifier = { tolerance_own = 1 }
+	}
 	# conditional_modifier = {
 	# 	trigger = {
 	# 		religion = orthodox
@@ -623,6 +648,7 @@ estate_church_clerical_ministers = {
 	conditional_modifier = {
 		trigger = {
 			has_dlc = "Rule Britannia"
+			NOT = { mission_completed = S57_friends_in_holy_places } #shelokmengi S57 MT
 			OR = {
 				#Anbennar
 				religion = great_dookan
@@ -643,6 +669,16 @@ estate_church_clerical_ministers = {
 			church_power_modifier = 0.1
 		}
 	}
+	#shelokmengi S57 MT reward
+	conditional_modifier = {
+		trigger = {
+			has_dlc = "Rule Britannia"
+			mission_completed = S57_friends_in_holy_places
+		}
+    	modifier = {
+        	church_power_modifier = 0.2
+    	}
+}
 	conditional_modifier = {
 		trigger = {
 			has_dlc = "Origins"
@@ -700,7 +736,8 @@ estate_church_clerical_ministers = {
 #estate_church_freedom_of_interpretation = {
 #	icon = privilege_recruit_minister
 #	max_absolutism = -5
-#	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+#	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+#	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
 #	influence = 0.10
 #	is_valid = {
 #		has_dlc = "Cradle of Civilization"
@@ -748,7 +785,8 @@ estate_church_clerical_ministers = {
 estate_church_clerical_oversight = {
 	icon = privilege_tolerance_heathen
 	max_absolutism = -10
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 10 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 2 } }
 	loyalty = 0.1
 	influence = 0.1
 	penalties = {
@@ -758,6 +796,10 @@ estate_church_clerical_oversight = {
 	conditional_modifier = {
 		trigger = { has_government_mechanic = russian_modernization_mechanic }
 		modifier = { monthly_russian_modernization = -0.03 }
+	}
+	conditional_modifier = {
+		trigger = { has_country_flag = LRM_better_clergy }
+		modifier = { tolerance_own = 2 }
 	}
 	#conditional_modifier = {
 	#	trigger = { has_government_mechanic = ottoman_decadence_mechanic }
@@ -776,7 +818,8 @@ estate_church_inwards_perfection = {
 	icon = privilege_grant_autonomy
 	land_share = 5
 	max_absolutism = -5
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
 	loyalty = 0.05
 	influence = 0.1
 	is_valid = {
@@ -859,7 +902,8 @@ estate_church_inwards_perfection = {
 estate_church_enforced_one_faith = {
 	icon = privilege_recruit_inouisitor
 	max_absolutism = -5
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
 	loyalty = 0.05
 	is_valid = {
 		OR = {
@@ -873,6 +917,7 @@ estate_church_enforced_one_faith = {
 		NOT = { has_estate_privilege = estate_burghers_enforced_interfaith_dialogue }
 		NOT = { has_estate_privilege = estate_dhimmi_tolerance }
 		NOT = { has_estate_privilege = estate_dhimmi_guarantee_of_traditions }
+		NOT = { has_estate_privilege = estate_castonath_patricians_recognize_beliefs } #Anbennar
 	}
 	penalties = {
 		tolerance_heathen = -2
@@ -919,10 +964,12 @@ estate_church_administrative_privileges = {
 	icon = privilege_land_rights
 	land_share = 5
 	max_absolutism = -5
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
 	loyalty = 0.1
 	influence = 0.1
 	is_valid = {
+		NOT = { has_country_flag = disable_administrative_privileges } #Anbennar
 	}
 	can_select = {
 	}
@@ -963,7 +1010,8 @@ estate_church_administrative_privileges = {
 estate_church_monopoly_of_incense = {
 	icon = privilege_monopoly_of_goods_incence
 	max_absolutism = -10
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 10 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 2 } }
 	loyalty = 0.05
 	is_valid = {
 		OR = {
@@ -1075,7 +1123,8 @@ estate_church_monopoly_of_incense = {
 estate_church_monopoly_of_wool = {
 	icon = privilege_monopoly_of_goods_wool
 	max_absolutism = -10
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 10 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 2 } }
 	loyalty = 0.05
 	is_valid = {
 		OR = {
@@ -1187,7 +1236,8 @@ estate_church_monopoly_of_wool = {
 estate_church_monopoly_of_wine = {
 	icon = privilege_monopoly_of_goods_wine
 	max_absolutism = -10
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 10 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 2 } }
 	loyalty = 0.05
 	is_valid = {
 		OR = {
@@ -1300,14 +1350,16 @@ estate_church_monopoly_of_wine = {
 estate_church_monopoly_of_slaves = {
 	icon = privilege_monopoly_of_goods_slaves
 	max_absolutism = -10
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 10 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 2 } }
 	loyalty = 0.05
 	is_valid = {
+		# Enabled for Brrtekuh
+		has_country_flag = U10_slavery_monopoly
 		OR = {
 			has_dlc = "Emperor"
 			has_country_flag = buffed_monopolies
 		}
-		always = no
 		#religion = nahuatl
 		any_owned_province = {
 			trade_goods = slaves
@@ -1414,7 +1466,8 @@ estate_church_monopoly_of_slaves = {
 estate_church_for_the_faith = {
 	icon = privilege_recruit_inouisitor
 	max_absolutism = -5
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
 	conditional_modifier = { trigger = { mission_completed = L03_isagumze_a_god_for_an_empire } modifier = { max_absolutism = 5 } }
 	is_valid = {
 		OR = {
@@ -1443,6 +1496,10 @@ estate_church_for_the_faith = {
 	}
 	on_granted = {
 		if = {
+			limit = { has_country_flag = J52_improved_expansionist_zealotry_flag }
+			custom_tooltip = J52_estate_church_for_the_faith_effect_tooltip
+		}
+		else_if = {
 			limit = { has_government_attribute = free_expansionist_zealotry }
 			custom_tooltip = estate_church_for_the_faith_effect_tooltip_a
 		}
@@ -1452,6 +1509,10 @@ estate_church_for_the_faith = {
 	}
 	on_revoked = {
 		if = {
+			limit = { has_country_flag = J52_improved_expansionist_zealotry_flag }
+			custom_tooltip = J52_estate_church_for_the_faith_effect_tooltip
+		}
+		else_if = {
 			limit = { has_government_attribute = free_expansionist_zealotry }
 			custom_tooltip = estate_church_for_the_faith_effect_tooltip_a
 		}
@@ -1465,7 +1526,10 @@ estate_church_for_the_faith = {
 				NOT = { religion = root }
 				war_with = root
 			}
-			NOT = { has_country_flag = improved_expansionist_zealotry }
+			NOT = { 
+				has_country_flag = improved_expansionist_zealotry 
+				has_country_flag = J52_improved_expansionist_zealotry_flag 
+			}
 		}
 		modifier = {
 			church_loyalty_modifier = 0.1
@@ -1485,6 +1549,17 @@ estate_church_for_the_faith = {
 			land_morale = 0.15
 			war_exhaustion = -0.05
 			max_absolutism = 5
+		}
+	}
+	conditional_modifier = {
+		trigger = {
+			has_country_flag = J52_improved_expansionist_zealotry_flag
+			at_war_with_religious_enemy = yes
+		}
+		modifier = {
+			church_loyalty_modifier = 0.1
+			land_morale = 0.05
+			shock_damage_received = -0.1
 		}
 	}
 	conditional_modifier = {
@@ -1535,7 +1610,8 @@ estate_church_for_the_faith = {
 estate_church_statutory_rights = {
 	icon = privilege_grant_autonomy
 	max_absolutism = -5
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
 	influence = 0.1
 	is_valid = {
 		has_estate_privilege = estate_church_statutory_rights
@@ -1655,7 +1731,8 @@ estate_church_statutory_rights = {
 estate_church_karma_temples = {
 	icon = privilege_build_jain_temple
 	max_absolutism = -5
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
 	loyalty = 0.05
 	influence = 0.05
 	is_valid = {
@@ -1711,7 +1788,8 @@ estate_church_karma_temples = {
 #estate_church_influence_temples = {
 #	icon = privilege_promoto_dhimmi_nobles
 #	max_absolutism = -5
-#	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+#	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+#	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
 #	loyalty = 0.05
 #	influence = 0.05
 #	is_valid = {
@@ -1821,10 +1899,12 @@ estate_church_karma_temples = {
 estate_church_religious_diplomats = {
 	icon = privilege_religious_diplomats
 	max_absolutism = -10
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 10 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 2 } }
 	influence = 0.1
 	loyalty = 0
 	is_valid = {
+		NOT = { has_country_flag = LRM_bellacaire_privilege }
 	}
 	can_select = {
 	}
@@ -1877,6 +1957,16 @@ estate_church_religious_diplomats = {
 			yearly_harmony = 0.25
 		}
 	}
+	conditional_modifier = { #Helmod
+		trigger = {
+			has_country_flag = Z88_religious_diplomats_upgrade
+		}
+		modifier = {
+			church_loyalty_modifier = 0.05
+			relation_with_same_religion = 20
+			reverse_relation_with_same_religion = 20
+		}
+	}
 	#conditional_modifier = {
 	#	trigger = { has_government_mechanic = ottoman_decadence_mechanic }
 	#	modifier = { monthly_ottoman_decadence = 0.02 }
@@ -1896,19 +1986,36 @@ estate_church_religious_diplomats = {
 estate_church_one_faith_one_culture = {
 	icon = privilege_one_faith_one_culture
 	max_absolutism = -5
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
 	conditional_modifier = { trigger = { mission_completed = L03_isagumze_a_god_for_an_empire } modifier = { max_absolutism = 5 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	conditional_modifier = { 
+		trigger = { 
+			OR = {
+				mission_completed = L03_isagumze_a_god_for_an_empire
+				has_country_flag = Z88_religious_culture_upgrade
+			}
+		} 
+		modifier = { max_absolutism = 5 } 
+	}
 	influence = 0.1
 	loyalty = 0.05
 	land_share = 5
 	is_valid = {
+		NOT = { has_country_flag = farranean_shades_of_tolerant_leaves }
 		NOT = { has_estate_privilege = estate_wyvernheart_culture_of_the_heart }
+		hidden_trigger = { NOT = { has_estate_privilege = estate_church_corinsfield_society } }	
 		NOT = { AND = { tag = Z99 was_tag = B39 } }
 	}
 	can_select = {
 	}
 	on_granted = {
-		custom_tooltip = estate_church_one_faith_one_culture_gta
+		if = {
+			limit = { has_country_flag = J52_improved_religious_culture_flag } #Ikogshaantus
+			custom_tooltip = J52_estate_church_one_faith_one_culture_tt
+		}
+		else = { custom_tooltip = estate_church_one_faith_one_culture_gta }
 		custom_tooltip = estate_church_one_faith_one_culture_gtb
 	}
 	on_granted_province = {
@@ -1937,26 +2044,55 @@ estate_church_one_faith_one_culture = {
 							has_country_flag = L08_multi_confessional_culture
 						}
 					}
+					AND = {
+						OR = {
+							religion = sky_domain
+							religion = kvangahga
+						}
+						owner = {
+							has_country_flag = S23_two_faiths #hisost yamok
+						}
+					}
 				}
 				OR = {
 					has_owner_accepted_culture = yes
 					culture_group = ROOT
 				}
 			}
-			add_province_modifier = {
-				name = estate_church_united_faith_and_culture
-				duration = -1
+			if = {
+				limit = {
+					ROOT = { has_country_flag = J52_improved_religious_culture_flag } #Ikogshaantus
+				}
+				add_province_modifier = {
+					name = J52_improved_religious_culture_mod
+					duration = -1
+				}
+			}
+			else = {
+				add_province_modifier = {
+					name = estate_church_united_faith_and_culture
+					duration = -1
+				}
 			}
 		}
 		else_if = {
 			limit = {
-				has_province_modifier = estate_church_united_faith_and_culture
+				OR = {
+					has_province_modifier = J52_improved_religious_culture_mod
+					has_province_modifier = estate_church_united_faith_and_culture
+				}
 			}
 			remove_province_modifier = estate_church_united_faith_and_culture
+			remove_province_modifier = J52_improved_religious_culture_mod
 		}
 		if = {
 			limit = {
-				NOT = { culture_group = ROOT }
+				NOT = { 
+					culture_group = ROOT
+					ROOT = {
+						has_country_flag = Z88_religious_culture_upgrade
+					}
+				}
 				has_owner_accepted_culture = no
 			}
 			add_province_modifier = {
@@ -1978,6 +2114,12 @@ estate_church_one_faith_one_culture = {
 	on_revoked_province = {
 		if = {
 			limit = {
+				has_province_modifier = J52_improved_religious_culture_mod
+			}
+			remove_province_modifier = J52_improved_religious_culture_mod
+		}
+		if = {
+			limit = {
 				has_province_modifier = estate_church_united_faith_and_culture
 			}
 			remove_province_modifier = estate_church_united_faith_and_culture
@@ -1994,6 +2136,12 @@ estate_church_one_faith_one_culture = {
 		custom_tooltip = estate_church_one_faith_one_culture_rtb
 	}
 	on_invalid_province = {
+		if = {
+			limit = {
+				has_province_modifier = J52_improved_religious_culture_mod
+			}
+			remove_province_modifier = J52_improved_religious_culture_mod
+		}
 		if = {
 			limit = {
 				has_province_modifier = estate_church_united_faith_and_culture
@@ -2021,7 +2169,12 @@ estate_church_one_faith_one_culture = {
 		}
 	}
 	conditional_modifier = {
-		trigger = { has_country_flag = J33_kukatodic_conversion }
+		trigger = {
+			OR = {
+				has_country_flag = Z88_religious_culture_upgrade
+				has_country_flag = J33_kukatodic_conversion
+			}
+		}
 		modifier = {
 			global_missionary_strength = 0.02
 		}
@@ -2095,12 +2248,157 @@ estate_church_one_faith_one_culture = {
 	}
 }
 
+estate_church_corinsfield_society = {
+	icon = privilege_one_faith_one_culture
+	max_absolutism = 0
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
+	influence = 0.1
+	loyalty = 0.1
+	land_share = 0
+	is_valid = {
+		has_country_flag = h35_upstanding_society
+		NOT = { has_estate_privilege = estate_church_one_faith_one_culture }
+	}
+	can_select = {
+		NOT = { has_estate_privilege = estate_church_one_faith_one_culture }
+	}
+	on_granted = {
+		custom_tooltip = h35_religious_society.tt
+	}
+	on_granted_province = {	
+		if = {
+			limit = {
+				religion = ROOT
+				OR = {
+					has_owner_accepted_culture = yes
+					culture_group = ROOT
+				}
+			}
+			remove_province_modifier = h35_downstanding_society
+			add_province_modifier = { name = h35_upstanding_society duration = -1 } 
+		}
+		else = {
+			remove_province_modifier = h35_upstanding_society
+			add_province_modifier = { name = h35_downstanding_society duration = -1 } 
+		}
+	}
+	on_revoked = {
+		custom_tooltip = estate_church_one_faith_one_culture_rta
+		custom_tooltip = estate_church_one_faith_one_culture_rtb
+	}
+	on_revoked_province = {
+		if = {
+			limit = {
+				has_province_modifier = h35_upstanding_society
+			}
+			remove_province_modifier = h35_upstanding_society
+		}
+		if = {
+			limit = {
+				has_province_modifier = h35_downstanding_society
+			}
+			remove_province_modifier = h35_downstanding_society
+		}
+	}
+	on_invalid = {
+		custom_tooltip = estate_church_one_faith_one_culture_rta
+		custom_tooltip = estate_church_one_faith_one_culture_rtb
+	}
+	on_invalid_province = {
+		if = {
+			limit = {
+				has_province_modifier = h35_upstanding_society
+			}
+			remove_province_modifier = h35_upstanding_society
+		}
+		if = {
+			limit = {
+				has_province_modifier = h35_downstanding_society
+			}
+			remove_province_modifier = h35_downstanding_society
+		}
+	}
+	penalties = {
+		tolerance_heathen = -2
+		tolerance_heretic = -2
+	}
+	benefits = {
+		global_missionary_strength = 0.02
+		monthly_corinsfield_paranoia_power = -0.25
+	}
+	conditional_modifier = {
+		trigger = { has_government_attribute = free_religious_culture }
+		modifier = {
+			church_influence_modifier = -0.2
+		}
+	}
+	conditional_modifier = {
+		trigger = { has_country_flag = J33_kukatodic_conversion }
+		modifier = {
+			global_missionary_strength = 0.02
+		}
+	}
+	# conditional_modifier = {
+	# 	trigger = {
+	# 		has_global_flag = wahabism_founded
+	# 		religious_school = {
+	# 			group = muslim
+	# 			school = hanbali_school
+	# 		}
+	# 	}
+	# 	modifier = {
+	# 		tolerance_own = 2
+	# 	}
+	# }
+	conditional_modifier = {
+		trigger = { has_government_mechanic = russian_modernization_mechanic }
+		modifier = { monthly_russian_modernization = -0.03 }
+	}
+	#conditional_modifier = {
+	#	trigger = { has_government_mechanic = ottoman_decadence_mechanic }
+	#	modifier = { monthly_ottoman_decadence = 0.02 }
+	#}
+	cooldown_years = 15
+	ai_will_do = {
+		factor = 10
+		modifier = {
+			factor = 0
+			NOT = { dominant_religion = ROOT }
+		}
+		modifier = {
+			factor = 0
+			NOT = { dominant_culture = ROOT }
+		}
+		# Anbennar - changed this to Anbennar religions
+		modifier = {
+			factor = 0
+			NOT = { religion = the_thought }
+		}
+		modifier = {
+			factor = 100
+			NOT = { average_autonomy = 15 }
+			dominant_religion = ROOT
+			dominant_culture = ROOT
+		}
+		#Anbennar - no vanilla tags
+		# modifier = {
+			# factor = 10
+			# tag = PAP
+		# }
+		modifier = {
+			factor = 0.1
+			is_absolutism_active = yes
+		}
+	}
+}
+
 ###FETISHIST PRIVILEGES###
 #Privilege to enable cults for heirs
 # estate_church_heir_shrine = {
 # 	icon = privilege_heir_cult
 # 	max_absolutism = -10
-# 	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } }
+#	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 10 } }
+# 	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 2 } }
 # 	influence = 0.1
 # 	loyalty = 0
 # 	is_valid = {
@@ -2152,12 +2450,14 @@ estate_church_one_faith_one_culture = {
 estate_church_embrace_singluar_cult = {
 	icon = privilege_singular_cult
 	max_absolutism = -5
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
 	influence = 0.1
 	loyalty = 0
 	is_valid = {
 		religion = goblinic_shamanism
 		has_dlc = "Rights of Man"
+		NOT = { has_country_flag = goblinic_shamanism_invalid }
 	}
 	can_select = {
 		custom_trigger_tooltip = {
@@ -2191,6 +2491,7 @@ estate_church_embrace_singluar_cult = {
 	}
 	on_invalid = {
 		disable_primary_cult = yes
+		clr_country_flag = goblinic_shamanism_invalid
 	}
 	penalties = {
 	}
@@ -2216,7 +2517,8 @@ estate_church_embrace_singluar_cult = {
 # estate_church_flexible_cults = {
 # 	icon = privilege_switch_hindu_deity
 # 	max_absolutism = -10
-# 	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } }
+#	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 10 } }
+# 	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 2 } }
 # 	influence = 0.05
 # 	is_valid = {
 # 		religion = goblinic_shamanism
@@ -2255,7 +2557,8 @@ estate_church_embrace_singluar_cult = {
 #estate_church_scholar_connections = {
 #	icon = privilege_recruit_minister
 #	max_absolutism = -5
-#	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+#	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+#	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
 #	influence = 0.05
 #	loyalty = 0
 #	is_valid = {
@@ -2299,7 +2602,8 @@ estate_church_embrace_singluar_cult = {
 # estate_church_integrated_school = {
 	# icon = privilege_seek_support_of_clergy
 	# max_absolutism = -5
-	# conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	# conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+	# conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
 	# influence = 0.05
 	# loyalty = 0
 	# is_valid = {
@@ -2342,7 +2646,8 @@ estate_church_embrace_singluar_cult = {
 #estate_church_yakobs_churches = {
 #	icon = privilege_recruit_inouisitor
 #	max_absolutism = -5
-#	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+#	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+#	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
 #	influence = 0.1
 #	loyalty = 0.1
 #	is_valid = {
@@ -2389,7 +2694,8 @@ estate_church_embrace_singluar_cult = {
 #estate_church_anti_heresy_act = {
 #	icon = privilege_recruit_inouisitor
 #	max_absolutism = -5
-#	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+#	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+#	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
 #	loyalty = 0.05
 #	influence = 0.05
 #	is_valid = {
@@ -2432,7 +2738,8 @@ estate_church_embrace_singluar_cult = {
 estate_church_lands_of_riga = {
 	icon = privilege_devotion_red
 	max_absolutism = -20
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 4 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 20 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 4 } }
 	influence = 0.05
 	land_share = 6
 	loyalty = 0.25
@@ -2472,7 +2779,8 @@ estate_church_lands_of_riga = {
 estate_church_bishopric_of_dorpat = {
 	icon = privilege_devotion_green
 	max_absolutism = -20
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 4 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 20 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 4 } }
 	influence = 0.06
 	land_share = 1
 	loyalty = 0
@@ -2501,7 +2809,8 @@ estate_church_bishopric_of_dorpat = {
 estate_church_bishopric_of_osel_wiek = {
 	icon = privilege_devotion_yellow
 	max_absolutism = -20
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 4 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 20 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 4 } }
 	influence = 0.06
 	land_share = 1
 	loyalty = 0
@@ -2530,7 +2839,8 @@ estate_church_bishopric_of_osel_wiek = {
 estate_church_bishopric_of_courland = {
 	icon = privilege_devotion_purple
 	max_absolutism = -20
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 4 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 20 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 4 } }
 	influence = 0.05
 	land_share = 1
 	loyalty = 0
@@ -2559,7 +2869,8 @@ estate_church_bishopric_of_courland = {
 estate_church_bishopric_of_reval = {
 	icon = privilege_devotion_blue
 	max_absolutism = -20
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 4 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 20 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 4 } }
 	influence = 0.05
 	land_share = 1
 	loyalty = 0
@@ -2589,7 +2900,8 @@ estate_church_bishopric_of_reval = {
 estate_church_japanese_christian_communities_privilege = {
 	icon = estate_church_japanese_christian_communities_privilege
 	max_absolutism = -5
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
 	loyalty = 0.05
 	influence = 0.05
 	is_valid = {
@@ -2627,7 +2939,8 @@ estate_church_development_of_temples = {
 	loyalty = 0.1
 	influence = 0.05
 	max_absolutism = -5
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
 	is_valid = {
 		has_dlc = "Domination"
 	}
@@ -2723,15 +3036,17 @@ estate_church_expand_the_theology = {
 	loyalty = 0.0
 	influence = 0.05
 	max_absolutism = -5
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
 	is_valid = {
 		has_dlc = "Domination"
 	}
 	can_select = {
-		if = {
-			limit = { has_estate = estate_brahmins }
-			NOT = { has_estate_privilege = estate_brahmins_expand_the_theology }
-		}
+		always = yes
+		#if = {
+		#	limit = { has_estate = estate_brahmins }
+		#	NOT = { has_estate_privilege = estate_brahmins_expand_the_theology }
+		#}
 	}
 	on_granted = {
 		enable_estate_action = {
@@ -2776,15 +3091,17 @@ estate_church_clerical_education = {
 	loyalty = 0.0
 	influence = 0.05
 	max_absolutism = -5
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
 	is_valid = {
 		has_dlc = "Domination"
 	}
 	can_select = {
-		if = {
-			limit = { has_estate = estate_brahmins }
-			NOT = { has_estate_privilege = estate_brahmins_clerical_education }
-		}
+		# if = {
+		# 	limit = { has_estate = estate_brahmins }
+		# 	NOT = { has_estate_privilege = estate_brahmins_clerical_education }
+		# }
+		NOT = { has_estate_privilege = estate_church_rayaz_imperial_advisors }
 		if = {
 			limit = { has_estate = estate_dhimmi }
 			NOT = { has_estate_privilege = estate_dhimmi_dhimmi_education }
@@ -2880,9 +3197,11 @@ estate_church_religious_delegation = {
 	loyalty = 0.0
 	influence = 0.05
 	max_absolutism = -5
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
 	is_valid = {
 		has_dlc = "Domination"
+		NOT = { has_anzalkatsa_naga = yes }
 	}
 	on_granted = {
 		enable_estate_action = {
@@ -2912,7 +3231,8 @@ estate_church_institutionalized_clergy = {
 	loyalty = 0.0
 	influence = 0.05
 	max_absolutism = -5
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
 	is_valid = {
 		has_dlc = "Domination"
 	}
@@ -2952,7 +3272,8 @@ estate_church_donation_right = {
 	loyalty = 0.0
 	influence = 0.05
 	max_absolutism = -5
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
 	is_valid = {
 		has_dlc = "Domination"
 	}
@@ -3010,6 +3331,8 @@ estate_church_subsidized_cult_hunters = {
 	icon = privilege_recruit_inouisitor
 	land_share = 0
 	max_absolutism = -5
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
 	loyalty = 0.05
 	influence = 0.05
 	is_valid = {
@@ -3047,7 +3370,8 @@ estate_church_subsidized_cult_hunters = {
 estate_church_monastic_schism = {
 	icon = privilege_grant_autonomy
 	max_absolutism = -5
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
 	influence = 0.05
 	loyalty = -0.05
 	is_valid = {
@@ -3055,7 +3379,7 @@ estate_church_monastic_schism = {
 		religion_group = raheni
 	}
 	on_granted = {
-		custom_tooltip = estate_church_guaranteed_autonomy_effect_tooltip
+		custom_tooltip = estate_church_guaranteed_autonomy_effect_tooltip_cangji
 	}
 	on_granted_province = {
 		if = {
@@ -3107,7 +3431,8 @@ estate_church_monastic_schism = {
 estate_church_beast_memory_guaranteed_autonomy = {
 	icon = privilege_grant_autonomy
 	max_absolutism = -5
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
 	loyalty = 0.05
 	influence = 0.05
 	is_valid = {
@@ -3175,6 +3500,482 @@ estate_church_beast_memory_guaranteed_autonomy = {
 		land_forcelimit_modifier = 0.1
 	}
 	ai_will_do = {
+		factor = 100
+	}
+}
+estate_church_corinsfield_church_raisings = {
+	icon = privilege_devotion_green
+	land_share = 0
+	max_absolutism = 0
+	loyalty = 0.15
+	influence = 0.1
+	is_valid = {
+		has_country_flag = h35_goodmen
+	}
+	can_select = {
+		has_country_flag = h35_goodmen
+	}
+	on_granted = {
+		custom_tooltip = h35_tax_from_temple.tt
+	}
+	penalties = {
+	}
+	benefits = {
+		build_time = 0.1
+		global_tax_modifier = 0.1
+	}
+	ai_will_do = {
+		factor = 10
+		modifier = {
+			factor = 10000
+			OR = {
+				ruler_has_personality = pious_personality
+				ruler_has_personality = zealot_personality
+			}
+		}
+	}
+}
+
+estate_church_uelos_cult_guaranteed_autonomy = {
+	icon = privilege_grant_autonomy
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_country_flag = estate_church_no_absolutism_cost } modifier = { max_absolutism = 5 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_country_flag = estate_church_no_absolutism_cost } } modifier = { max_absolutism = 1 } }
+	loyalty = 0.05
+	influence = 0.05
+	is_valid = {
+		has_country_flag = tolerates_cult
+	}
+	on_granted = {
+		custom_tooltip = estate_church_uelos_cult_guaranteed_autonomy_effect_tooltip
+	}
+	on_granted_province = {
+		if = {
+			limit = {
+				religion = uelos_cult
+			}
+			add_province_modifier = {
+				name = estate_uelos_cult_guaranteed_autonomy_mod
+				duration = -1
+			}
+		}
+		else = {
+			remove_province_modifier = estate_uelos_cult_guaranteed_autonomy_mod
+		}
+	}
+	can_revoke = {
+		stability = 3
+		hidden_trigger = {
+			ai = no
+		}
+	}
+	on_revoked = {
+		add_stability = -3
+		custom_tooltip = estate_church_uelos_cult_guaranteed_autonomy_revoke_effect_tooltip
+	}
+	on_revoked_province = {
+		if = {
+			limit = {
+				has_province_modifier = estate_uelos_cult_guaranteed_autonomy_mod
+			}
+			remove_province_modifier = estate_uelos_cult_guaranteed_autonomy_mod
+		}
+	}
+	on_invalid = {
+		custom_tooltip = estate_uelos_cult_guaranteed_autonomy_revoke_effect_tooltip
+	}
+	on_invalid_province = {
+		if = {
+			limit = {
+				has_province_modifier = estate_uelos_cult_guaranteed_autonomy_mod
+			}
+			remove_province_modifier = estate_uelos_cult_guaranteed_autonomy_mod
+		}
+	}
+	penalties = {
+	}
+	benefits = {
+	}
+	ai_will_do = {
 		factor = 1000
 	}
+
+}
+#Brrtekuh
+estate_church_U10_purification_posts_along_the_sorrow = {
+	icon = privilege_build_jain_temple
+	land_share = 10
+	max_absolutism = -10
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } }
+	is_valid = {
+		has_country_flag = U10_purification_privileges_enabled
+	}
+	can_select = {
+		crown_land_share = 40
+		calc_true_if = {
+			desc = estate_church_U10_purification_posts_trigger_tt
+			all_states = {
+				any_province_in_state = {
+					province_group = mothers_sorrow_group
+					has_building = mage_tower
+				}
+			}
+			amount = 5
+		}
+		OR = {
+			estate_influence = {
+				estate = estate_mages
+				influence = 50
+			}
+			is_evocation_3 = yes
+			is_abjuration_3 = yes
+			is_divination_3 = yes
+		}
+	}
+	on_granted = {
+		khetarchs_curse_decrease_effect = yes
+		hidden_effect = {
+			check_clergy_on_the_move = yes
+		}
+		every_owned_province = {
+			limit = { has_province_modifier = U10_mothers_ichor }
+			remove_province_modifier = U10_mothers_ichor
+		}
+		custom_tooltip = estate_church_U10_purification_posts_along_the_sorrow_tt
+		tooltip = {
+			add_province_modifier = {
+				name = U10_containment_array
+				duration = -1
+			}
+		}
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					has_fort_building_trigger = yes
+					has_building = mage_tower
+				}
+				add_province_modifier = {
+					name = U10_containment_array
+					duration = -1
+				}
+			}
+		}
+	}
+	penalties = {
+	}
+	benefits = {
+		church_privilege_slots = 1
+	}
+	on_invalid = {
+		khetarchs_curse_increase_effect = yes
+		every_owned_province = {
+			limit = {
+				has_province_modifier = U10_containment_array
+			}
+			remove_province_modifier = U10_containment_array
+		}
+	}
+	on_revoked = {
+		every_owned_province = {
+			limit = {
+				has_province_modifier = U10_containment_array
+			}
+			remove_province_modifier = U10_containment_array
+		}
+		khetarchs_curse_increase_effect = yes
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	mechanics = {
+		exempt_from_seize_land
+	}
+}
+estate_church_U10_potent_exorcists = {
+	icon = privilege_cast_spell
+	land_share = 0
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	influence = 0.1
+	is_valid = {
+		has_country_flag = U10_purification_privileges_enabled
+	}
+	can_select = {
+		calc_true_if = {
+			trading_bonus = {
+				trade_goods = damestear
+				value = yes
+			}
+			trading_bonus = {
+				trade_goods = ivory
+				value = yes
+			}
+			trading_bonus = {
+				trade_goods = incense
+				value = yes
+			}
+			trading_bonus = {
+				trade_goods = coffee
+				value = yes
+			}
+			amount = 2
+		}
+	}
+	on_granted = {
+		hidden_effect = {
+			check_clergy_on_the_move = yes
+		}
+		khetarchs_curse_decrease_effect = yes
+	}
+	penalties = {
+	}
+	benefits = {
+		church_privilege_slots = 1
+		leader_land_shock = 1
+		mages_loyalty_modifier = 0.1
+		mages_influence_modifier = 0.1
+	}
+	on_invalid = {
+		khetarchs_curse_increase_effect = yes
+	}
+	on_revoked = {
+		khetarchs_curse_increase_effect = yes
+	}
+	ai_will_do = {
+		factor = 100
+	}
+}
+estate_church_U10_ignorance_campaigns = {
+	icon = privilege_tolerance_own
+	land_share = 0
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	influence = 0.1
+	is_valid = {
+		has_country_flag = U10_purification_privileges_enabled
+	}
+	can_select = {
+		has_institution = printing_press
+		trading_bonus = {
+			trade_goods = paper
+			value = yes
+		}
+		NOT = {
+			any_province = {
+				continent = africa
+				OR = {
+					religion = nirakhetist
+					religion = elikhetist
+				}
+			}
+		}
+	}
+	on_granted = {
+		khetarchs_curse_decrease_effect = yes
+		hidden_effect = {
+			check_clergy_on_the_move = yes
+		}
+	}
+	penalties = {
+	}
+	benefits = {
+		church_power_modifier = 0.2
+		church_privilege_slots = 1
+		tolerance_own = 2
+	}
+	on_invalid = {
+		khetarchs_curse_increase_effect = yes
+	}
+	on_revoked = {
+		khetarchs_curse_increase_effect = yes
+	}
+	ai_will_do = {
+		factor = 100
+	}
+}
+
+estate_church_U10_charms_of_protection = {
+	icon = privilege_tolerance_own
+	land_share = 0
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	influence = 0.1
+	is_valid = {
+		has_country_flag = U10_purification_privileges_enabled
+	}
+	can_select = {
+		is_abjuration_2 = yes
+		calc_true_if = {
+			trading_bonus = {
+				trade_goods = spices
+				value = yes
+			}
+			trading_bonus = {
+				trade_goods = salt
+				value = yes
+			}
+			## exclude_from_progress makes the triggers within return 0 to the calc_true_if.
+			## Without it, 2 gold producing provinces would satisfy the calc_true_if, since
+			## many triggers return their values to the parent calc_true_if.
+			## Nesting the trigger within an OR = { } ensures only a value of 1 is returned,
+			## thus satisfying the intent of putting a trigger here, however it makes the
+			## tooltip difficult to interpret, so it is hidden.
+			## Combining these two functions keeps the tooltip readable and functional
+			exclude_from_progress = {
+				num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+					value = 7
+					trade_goods = gold
+				}
+			}
+			hidden_trigger = {
+				OR = {
+					num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+						value = 7
+						trade_goods = gold
+					}
+				}
+			}
+			amount = 2
+		}
+	}
+	on_granted = {
+		khetarchs_curse_decrease_effect = yes
+		hidden_effect = {
+			check_clergy_on_the_move = yes
+		}
+	}
+	penalties = {
+	}
+	benefits = {
+		church_privilege_slots = 1
+		morale_damage_received = -0.1
+		fire_damage_received = -0.1
+	}
+	on_invalid = {
+		khetarchs_curse_increase_effect = yes
+	}
+	on_revoked = {
+		khetarchs_curse_increase_effect = yes
+	}
+	ai_will_do = {
+		factor = 100
+	}
+}
+estate_church_farranean_shades_of_many_leaves = {
+	icon = privilege_one_faith_one_culture
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	influence = 0.1
+	loyalty = 0.05
+	is_valid = {
+		has_country_flag = farranean_shades_of_tolerant_leaves
+	}
+	can_select = {
+	}
+	on_granted = {
+		custom_tooltip = farranean_leaves_shaded_tt
+		tooltip = {
+			add_province_modifier = {
+				name = estate_church_united_faith_and_culture
+				duration = -1
+			}
+		}
+	}
+	on_granted_province = {
+		if = {
+			limit = {
+				OR = {
+					has_owner_accepted_culture = yes
+					culture_group = ROOT
+				}
+			}
+			add_province_modifier = {
+				name = estate_church_united_faith_and_culture
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = {
+				has_province_modifier = estate_church_united_faith_and_culture
+			}
+			remove_province_modifier = estate_church_united_faith_and_culture
+		}
+	}
+	on_revoked = {
+		custom_tooltip = farranean_leaves_shaded_revoked_invalid_tt
+	}
+	on_revoked_province = {
+		if = {
+			limit = {
+				has_province_modifier = estate_church_united_faith_and_culture
+			}
+			remove_province_modifier = estate_church_united_faith_and_culture
+		}
+	}
+	on_invalid = {
+		custom_tooltip = farranean_leaves_shaded_revoked_invalid_tt
+	}
+	on_invalid_province = {
+		if = {
+			limit = {
+				has_province_modifier = estate_church_united_faith_and_culture
+			}
+			remove_province_modifier = estate_church_united_faith_and_culture
+		}
+	}
+	penalties = {
+	}
+	benefits = {
+	}
+	conditional_modifier = {
+		trigger = { has_government_attribute = free_religious_culture }
+		modifier = {
+			church_influence_modifier = -0.2
+		}
+	}
+	cooldown_years = 15
+	ai_will_do = {
+		factor = 10
+		modifier = {
+			factor = 0
+			NOT = { dominant_religion = ROOT }
+		}
+		modifier = {
+			factor = 0
+			NOT = { dominant_culture = ROOT }
+		}
+		modifier = {
+			factor = 0
+			NOT = { religion = the_thought }
+		}
+		modifier = {
+			factor = 100
+			NOT = { average_autonomy = 15 }
+			dominant_religion = ROOT
+			dominant_culture = ROOT
+		}
+	}
+}
+
+
+estate_church_woodwell_resurgence = {
+    icon = privilege_send_emissary_to_pope
+    max_absolutism = -10
+    conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } }
+    loyalty = 0.1
+    influence = 0.1
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 0
+			NOT = { has_absolutism_reduction_for_estate_privileges = no }
+		}
+	}
+    is_valid = {
+        has_country_flag = a88_resurgence_available
+    }
+    benefits = {
+        stability_cost_modifier = -0.1
+        prestige = 1
+    }
 }

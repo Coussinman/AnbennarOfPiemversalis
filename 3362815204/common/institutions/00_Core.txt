@@ -44,7 +44,7 @@ feudalism = {
 						technology_group = tech_cannorian
 						technology_group = tech_halfling
 						technology_group = tech_gerudian
-						technology_group = tech_dwarven
+						technology_group = tech_west_dwarven
 						technology_group = tech_east_dwarven
 						technology_group = tech_elven
 						technology_group = tech_east_elven
@@ -59,6 +59,7 @@ feudalism = {
 						technology_group = tech_east_kobold
 						technology_group = tech_pezarangi_harpy
 						technology_group = tech_jarnklo_harpy_ace
+						technology_group = tech_jarnklo_harpy
 						technology_group = tech_eastern_ogre
 						technology_group = tech_halessi
 						technology_group = tech_east_harimari
@@ -283,6 +284,7 @@ renaissance = {
 		is_year = 1450
 		is_institution_enabled = feudalism
 		if = { limit = { NOT = { has_global_flag = delete_cannor_region } }
+			superregion = western_cannor_superregion
 			OR = {
 				region = lencenor_region
 				region = esmaria_region
@@ -444,6 +446,7 @@ renaissance = {
 			factor = 0.5
 			scale = yes
 			potential = {
+				superregion = western_cannor_superregion
 				OR = {
 					region = lencenor_region
 					region = esmaria_region
@@ -454,6 +457,7 @@ renaissance = {
 			}
 			custom_trigger_tooltip = {
 				tooltip = tooltip_lencenor_esmaria_dameshead
+				superregion = western_cannor_superregion
 				OR = {
 					region = lencenor_region
 					region = esmaria_region
@@ -2038,6 +2042,12 @@ enlightenment = {
 					DIP = 5
 				}
 			}
+		}
+		if = {
+			limit = {
+				F66 = { mission_completed = konolkhatep_open_eyes }
+			}
+			is_capital_of = F66
 		}
 	}
 	start_chance = 10		#in 100 for when a province can_start

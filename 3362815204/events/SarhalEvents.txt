@@ -232,13 +232,22 @@ country_event = {
     }
     option = {
         name = sarhalevents.3.h #Way of Bones
-        ai_chance = { factor = 1 }
+        ai_chance = {
+            factor = 1
+            modifier = {
+                factor = 100
+                U10 = { mission_completed = U10_commence_the_endgame }
+            }
+        }
         trigger = { 
             religion = kvangahga
-            num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-                value = 5
-                culture = windhowler_gnoll
-                region = west_salahad_region
+            OR = {
+                num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+                    value = 5
+                    culture = windhowler_gnoll
+                    region = west_salahad_region
+                }
+                U10 = { mission_completed = U10_commence_the_endgame }
             }
         }
         
@@ -434,7 +443,7 @@ country_event = {
     id = sarhalevents.20
     title = sarhalevents.20.t
     desc = sarhalevents.20.d
-    picture = BANKRUPTCY_eventPicture
+    picture = HAGS_ILFANI_eventPicture
     
     is_triggered_only = yes
     trigger = {}
@@ -494,7 +503,7 @@ country_event = {
     id = sarhalevents.21
     title = sarhalevents.21.t
     desc = sarhalevents.21.d
-    picture = LOOMING_DEATH_eventPicture
+    picture = HAGS_ILFANI_eventPicture
 
     is_triggered_only = yes
     trigger = {}
@@ -520,6 +529,7 @@ country_event = {
     #Convert to Shadow Pact
     option = {
 		name = sarhalevents.21.b
+        trigger = { NOT = { has_country_flag = supernaturally_bound_faith } }
         ai_chance = { 
             factor = 1 
             modifier = {
@@ -547,7 +557,7 @@ country_event = {
     id = sarhalevents.22
     title = sarhalevents.22.t
     desc = sarhalevents.22.d
-    picture = CIVIL_WAR_eventPicture
+    picture = HAGS_HIREET_eventPicture
 
     is_triggered_only = yes
     trigger = {}
@@ -597,7 +607,7 @@ country_event = {
     id = sarhalevents.23
     title = sarhalevents.23.t
     desc = sarhalevents.23.d
-    picture = LOOMING_DEATH_eventPicture
+    picture = HAGS_HIREET_eventPicture
 
     is_triggered_only = yes
     trigger = {}
@@ -617,6 +627,7 @@ country_event = {
     #Convert to Shadow Pact
     option = {
 		name = sarhalevents.23.b
+        trigger = { NOT = { has_country_flag = supernaturally_bound_faith } }
         ai_chance = { factor = 1 }
         add_stability = -2
         kill_heir = {}
@@ -643,7 +654,7 @@ country_event = {
     id = sarhalevents.24
     title = sarhalevents.24.t
     desc = sarhalevents.24.d
-    picture = NEW_HEIR_eventPicture
+    picture = HAGS_KOMINA_eventPicture
 
     is_triggered_only = yes
     trigger = {}
@@ -718,7 +729,7 @@ country_event = {
     id = sarhalevents.25
     title = sarhalevents.25.t
     desc = sarhalevents.25.d
-    picture = ASSASSINATION_eventPicture
+    picture = HAGS_KOMINA_eventPicture
 
     is_triggered_only = yes
     trigger = {
@@ -744,7 +755,7 @@ country_event = {
     id = sarhalevents.26
     title = sarhalevents.26.t
     desc = sarhalevents.26.d
-    picture = DEATH_OF_HEIR_eventPicture
+    picture = HAGS_KOMINA_eventPicture
 
     is_triggered_only = yes
     trigger = {
@@ -770,7 +781,7 @@ country_event = {
     id = sarhalevents.27
     title = sarhalevents.27.t
     desc = sarhalevents.27.d
-    picture = LOOMING_DEATH_eventPicture
+    picture = HAGS_KOMINA_eventPicture
 
     is_triggered_only = yes
     trigger = {}
@@ -787,7 +798,11 @@ country_event = {
 		name = sarhalevents.27.a
         ai_chance = { factor = 1 }
         hidden_effect = {
-            exile_heir_as = coven_bargain_present_heir
+            if = {
+                limit = { has_heir = yes } 
+                exile_heir_as = coven_bargain_present_heir
+                save_event_target_as = has_heir
+            }
             set_heir = coven_bargain_exiled_heir
         }
         capital_scope = {
@@ -798,7 +813,10 @@ country_event = {
             }
         }
         hidden_effect = {
-            set_heir = coven_bargain_present_heir
+            if = {
+                limit = { has_saved_event_target = has_heir }
+                set_heir = coven_bargain_present_heir
+            }
         }
         add_stability = -1
         add_ruler_modifier = { name = coven_bargain_declined_offer duration = -1 }
@@ -807,16 +825,19 @@ country_event = {
     #Convert to Shadow Pact
     option = {
 		name = sarhalevents.27.b
+        trigger = { NOT = { has_country_flag = supernaturally_bound_faith } }
         ai_chance = { factor = 1 }
+        set_heir = coven_bargain_exiled_heir
         kill_ruler = yes
-        set_ruler = coven_bargain_exiled_heir
         change_religion = shadow_pact 
         capital_scope = {
             change_religion = shadow_pact
         }
         set_ruler_religion = shadow_pact
-        set_heir_religion = shadow_pact
-        set_consort_religion = shadow_pact
+        if = {
+            limit = { has_heir = yes }
+            set_heir_religion = shadow_pact
+        }
         add_country_modifier = {
             name = coven_bargain_shadow_zealotry
             duration = 7300
@@ -830,7 +851,7 @@ country_event = {
     id = sarhalevents.28
     title = sarhalevents.28.t
     desc = sarhalevents.28.d
-    picture = WESTERNISATION_eventPicture
+    picture = HAGS_ILFANI_eventPicture
 
     is_triggered_only = yes
     trigger = {}
@@ -889,7 +910,7 @@ country_event = {
     id = sarhalevents.29
     title = sarhalevents.29.t
     desc = sarhalevents.29.d
-    picture = LOOMING_DEATH_eventPicture
+    picture = HAGS_ILFANI_eventPicture
 
     is_triggered_only = yes
     trigger = {}
@@ -907,6 +928,7 @@ country_event = {
     #Convert to Shadow Pact
     option = {
 		name = sarhalevents.29.b
+        trigger = { NOT = { has_country_flag = supernaturally_bound_faith } }
         ai_chance = { factor = 1 }
         add_adm_power = -200
         add_dip_power = -200
@@ -931,7 +953,7 @@ country_event = {
     id = sarhalevents.30
     title = sarhalevents.30.t
     desc = sarhalevents.30.d
-    picture = RELIGIOUS_WARS_eventPicture
+    picture = HAGS_KOMINA_eventPicture
 
     is_triggered_only = yes
     trigger = {}
@@ -979,7 +1001,7 @@ country_event = {
     id = sarhalevents.31
     title = sarhalevents.31.t
     desc = sarhalevents.31.d
-    picture = LOOMING_DEATH_eventPicture
+    picture = HAGS_KOMINA_eventPicture
 
     is_triggered_only = yes
     trigger = {}
@@ -1038,6 +1060,7 @@ country_event = {
     #Convert to Shadow Pact
     option = {
 		name = sarhalevents.31.b
+        trigger = { NOT = { has_country_flag = supernaturally_bound_faith } }
         ai_chance = { factor = 1 }
         remove_country_modifier = coven_bargain_tolerance
         capital_scope = {
@@ -1060,7 +1083,7 @@ country_event = {
     id = sarhalevents.32
     title = sarhalevents.32.t
     desc = sarhalevents.32.d
-    picture = FARMING_eventPicture
+    picture = HAGS_HIREET_eventPicture
 
     is_triggered_only = yes
     trigger = {}
@@ -1104,7 +1127,7 @@ country_event = {
     id = sarhalevents.33
     title = sarhalevents.33.t
     desc = sarhalevents.33.d
-    picture = LOOMING_DEATH_eventPicture
+    picture = HAGS_HIREET_eventPicture
 
     is_triggered_only = yes
     trigger = {}
@@ -1126,6 +1149,7 @@ country_event = {
     #Convert to Shadow Pact
     option = {
 		name = sarhalevents.33.b
+        trigger = { NOT = { has_country_flag = supernaturally_bound_faith } }
         ai_chance = { factor = 1 }
         custom_tooltip = coven_bargain_autonomy_more_tt
         hidden_effect = {
@@ -1150,7 +1174,7 @@ country_event = {
     id = sarhalevents.34
     title = sarhalevents.34.t
     desc = sarhalevents.34.d
-    picture = ANGRY_MOB_eventPicture
+    picture = HAGS_HIREET_eventPicture
 
     is_triggered_only = yes
     trigger = {}
@@ -1182,11 +1206,11 @@ country_event = {
             factor = 1 
             modifier = {
                 factor = 2
-                NOT = { manpower_percentage = 25 }
+                NOT = { manpower_percentage = 0.25 }
             }
             modifier = {
                 factor = 2
-                NOT = { manpower_percentage = 1 }
+                NOT = { manpower_percentage = 0.01 }
             }
         }
         add_stability = 2
@@ -1200,7 +1224,7 @@ country_event = {
     id = sarhalevents.35
     title = sarhalevents.35.t
     desc = sarhalevents.35.d
-    picture = LOOMING_DEATH_eventPicture
+    picture = HAGS_HIREET_eventPicture
 
     is_triggered_only = yes
     trigger = {}
@@ -1232,6 +1256,7 @@ country_event = {
     #Convert to Shadow Pact
     option = {
 		name = sarhalevents.35.b
+        trigger = { NOT = { has_country_flag = supernaturally_bound_faith } }
         ai_chance = { factor = 1 }
         if = {
             limit = { total_development = 200 }
@@ -1277,7 +1302,7 @@ country_event = {
         NOT = { has_country_modifier = coven_bargain_declined_offer }
         NOT = { religion = shadow_pact }
         NOT = { religion = night_coven }
-        NOT = { has_country_flag = is_great_xhaz }
+        NOT = { has_country_flag = supernaturally_bound_faith }
     }
 
     option = {
@@ -1305,7 +1330,13 @@ country_event = {
                         trigger = {
                             OR = {
                                 government = monarchy
-                                government = tribal
+                                AND = {
+                                    government = tribal
+                                    NOT = { #Tribals with elections in Sarhal
+                                        has_reform = namasoguziza_reform 
+                                        has_reform = haraagtsedi_pack_league
+                                    }
+                                }
                             }
                             ruler_age = 40
                             is_female = no
@@ -1360,3 +1391,139 @@ country_event = {
     }
 }
 
+########
+#Lizard Monuments Events
+########
+
+country_event = {
+	id = sarhalevents.300
+	title = sarhalevents.300.t
+	desc = sarhalevents.300.d
+	picture = ARTWORK_eventPicture
+	
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			set_country_flag = anzalkatsa_menu_open
+		}
+	}
+
+	option = {
+		name = sarhalevents.300.a
+		highlight = yes
+	}
+	option = {
+		name = sarhalevents.300.b
+		change_personal_deity = the_sovereign
+	}
+
+	option = {
+		name = sarhalevents.300.c
+		change_personal_deity = the_storm
+	}
+
+	option = {
+		name = sarhalevents.300.n
+		change_personal_deity = the_anchor 
+	}
+
+	option = {
+		name = sarhalevents.300.e
+		change_personal_deity = the_erudite
+	}
+    option = {
+		name = sarhalevents.300.f
+		change_personal_deity = the_sail
+	}
+    option = {
+		name = sarhalevents.300.g
+		change_personal_deity = lizard_the_river
+	}
+
+    after = { clr_country_flag = anzalkatsa_menu_open }
+}
+
+country_event = {
+	id = sarhalevents.301
+	title = sarhalevents.301.t
+	desc = sarhalevents.301.d
+	picture = ARTWORK_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = sarhalevents.301.a
+        set_global_flag = gate_of_earth_revealed
+		5650 = {
+            destroy_great_project = {
+                type = dummy_shalazar_spire
+            }
+            add_great_project_tier = {
+                type = gate_of_earth
+                tier = 1
+            }
+            cancel_construction = yes
+        }
+        
+        tiki_shalazar_area = {
+            add_devastation = 50
+        }
+	    tiki_ra_shaga_area = {
+            add_devastation = 50
+        }
+	}
+}
+
+country_event = {
+	id = sarhalevents.302
+	title = sarhalevents.302.t
+	desc = sarhalevents.302.d
+	picture = ARTWORK_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = sarhalevents.302.a
+        add_treasury = 500
+       # Event "Under the Ananoma". Narrative event, grants money (+500 ducats) as a reward for uncovering the spire underground
+	}
+}
+
+country_event = {
+	id = sarhalevents.303
+	title = sarhalevents.303.t
+	desc = sarhalevents.303.d
+	picture = ARTWORK_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = sarhalevents.303.a
+        add_adm_power = 100
+        add_mil_power = 100
+        add_dip_power = 100
+        #Event "Kazakesh ruins". Narrative event, grants mana (+100 in each category) as a reward for recovering Kazakesh, the old Lizardfolk city
+    }
+}
+
+country_event = {
+	id = sarhalevents.304
+	title = sarhalevents.304.t
+	desc = sarhalevents.304.d
+	picture = ARTWORK_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = sarhalevents.304.a
+        5763 = {
+            change_trade_goods = precursor_relics
+        }
+        add_country_modifier = {
+            name = kazakesh_relics
+            duration = -1
+        }
+        #Event "Research Facility of times immemorial". Narrative event, grants permanent bonus to artificer capacity (+10) and change Trade Goods to Precursor Relics
+	}
+}

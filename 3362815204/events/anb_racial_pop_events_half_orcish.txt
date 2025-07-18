@@ -1040,6 +1040,19 @@ country_event = {
 					capital_scope = { superregion = bulwar_superregion }
 				}
 			}
+			
+			#Special Stuff
+			modifier = { #-Special - tolerant Escanni guys who want to integrate half-orcs
+				factor = 0
+				OR = {
+					tag = B02 #Corintar
+					tag = B07 #Sons of Dameria
+					tag = B37 #Rogieria
+					tag = B13 #Stalwart Band
+					was_tag = B13 #edge case where Stalwart Band forms Blademarches - they'd want to stick to their tolerant ideas
+					tag = B47 #Stalbor
+				}
+			}
 
         }
 		hidden_effect = {
@@ -1078,6 +1091,7 @@ country_event = {
 		name = racial_pop_events_all_races.12.c
 		trigger = {
 			has_country_modifier = racial_pop_half_orcish_purge
+			NOT = { has_country_flag = cannot_end_half_orcish_purge }
 			adm_power = 100
 		}
 		
@@ -1172,11 +1186,21 @@ country_event = {
 		name = racial_pop_events_all_races.12.dd
 		trigger = {
 			has_country_modifier = racial_pop_half_orcish_purge
-			NOT = { adm_power = 100 }
+			OR = {
+				NOT = { adm_power = 100 }
+				has_country_flag = cannot_end_half_orcish_purge
+			}
 		}
 		ai_chance = { factor = 0 }
 		custom_tooltip = pop_menu_purge_desc_tt
-		custom_tooltip = pop_menu_cannot_stop_purge_not_enough_adm_tt
+		if = {
+			limit = { has_country_flag = cannot_end_half_orcish_purge }
+			custom_tooltip = purge_cannot_end_tt
+		}
+		if = {
+			limit = { NOT = { adm_power = 100 } }
+			custom_tooltip = pop_menu_cannot_stop_purge_not_enough_adm_tt 
+		}
 		hidden_effect = {
 			country_event = { id = racial_pop_events_half_orcish.24 }
 		}
@@ -1353,6 +1377,17 @@ country_event = {
 			modifier = { #+Special - Slave States of The Command encouraged to displace
 				factor = 2
 				is_subject_of_type = slave_state 
+			}
+			modifier = { #-Special - tolerant Escanni guys who want to integrate half-orcs
+				factor = 0
+				OR = {
+					tag = B02 #Corintar
+					tag = B07 #Sons of Dameria
+					tag = B37 #Rogieria
+					tag = B13 #Stalwart Band
+					was_tag = B13 #edge case where Stalwart Band forms Blademarches - they'd want to stick to their tolerant ideas
+					tag = B47 #Stalbor
+				}
 			}
 			modifier = { #-Humanists dont do it
 				factor = 0
@@ -1554,7 +1589,7 @@ country_event = {
 		name = racial_pop_events_all_races.12.z
 		trigger = { ai = no }
 		hidden_effect = {
-			country_event = { id = racial_pop_misc.3 }
+			country_event = { id = racial_pop_misc.1 }
 		}
 	}
 }	

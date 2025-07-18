@@ -1,38 +1,31 @@
 
 #Subamber Succession War
 #Organizing the event chain into a more coherent disaster but keeping the general structure the same
+
 sugamber_succession_war = {
 	potential = {
 		tag = A48
 		NOT = { has_country_flag = had_sugamber_succession_war }
 		government = monarchy
-		OR = {
 		is_free_or_tributary_trigger = yes
-			junior_union_with = A30
-		}
 	}
+
+
 	can_start = {
 		has_any_disaster = no
 		current_age = age_of_discovery
 		is_at_war = no
-		OR = {
 		is_lesser_in_union = no
-			junior_union_with = A30
-		}
 		OR = {
 			AND = {
 				has_ruler = "Ewald II"
 				has_heir = no
 			}
 			has_ruler = "Lisolette"
-			AND = {
-				junior_union_with = A30
-				A30 = {
-					has_country_flag = A30_lisolette_disaster
 		}
 	}
-		}
-	}
+
+
 	can_stop = {
 		OR = {
 			AND = {
@@ -45,19 +38,12 @@ sugamber_succession_war = {
 				legitimacy = 100
 				stability = 3
 			}
-			AND = {
 			is_lesser_in_union = yes
-				NOT = {
-					junior_union_with = A30
-				}
-			}
 		}
 	}
+
+
 	progress = {
-		modifier = {
-			factor = 100
-			junior_union_with = A30
-		}
 		modifier = {
 			factor = 2
 			NOT = { legitimacy = 90 }
@@ -75,21 +61,31 @@ sugamber_succession_war = {
 			revolt_percentage = 0.10
 		}
 	}
+
+
 	can_end = {
 		custom_trigger_tooltip = {
 			tooltip = sugamber_succession_war_end
 			has_country_flag = had_sugamber_succession_war
 		}
 	}
+
+
 	modifier = {
 		stability_cost_modifier = 0.50
 		global_unrest = 5
 		war_exhaustion = 0.05
 	}
+
+
 	on_start = flavor_sugamber.1000
 	on_end = flavor_sugamber.14
+
+
 	on_monthly = {
-		events = {		}
+		events = {
+
+		}
 		random_events = {
 			100 = 0
 			5 = flavor_sugamber.6 #Civil war hurts agriculture

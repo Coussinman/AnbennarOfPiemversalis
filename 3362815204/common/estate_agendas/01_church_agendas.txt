@@ -2,6 +2,7 @@
 #This one or the next one will always be valid
 estate_church_hire_advisor = {
 	can_select = {
+		NOT = { has_anzalkatsa_naga = yes }
 		NOT = {
 			employed_advisor = {
 				category = ADM
@@ -52,6 +53,7 @@ estate_church_hire_advisor = {
 
 estate_church_fire_advisor = {
 	can_select = {
+		NOT = { has_anzalkatsa_naga = yes }
 		employed_advisor = {
 			category = ADM
 		}
@@ -141,6 +143,7 @@ estate_church_fire_advisor = {
 #Convert a province
 estate_church_convert_province_x = {
 	can_select = {
+		NOT = { has_anzalkatsa_naga = yes }
 		num_of_missionaries = 1
 		NOT = { religion = the_thought }	#replaces confucianism
 		# NOT = { religion = tengri_pagan_reformed }
@@ -151,6 +154,8 @@ estate_church_convert_province_x = {
 			NOT = { has_province_modifier = expelled_minority }
 			NOT = { has_province_modifier = religious_migration }
 			NOT = { has_province_modifier = ahati_aakheta_base }
+			NOT = { has_province_modifier = U10_mothers_ichor }
+			NOT = { has_province_modifier = U10_khet_resistance }
 			NOT = { religion = secondary }
 			has_missionary = no
 			missionary_strength = 0.01
@@ -212,6 +217,8 @@ estate_church_convert_province_x = {
 				NOT = { has_province_modifier = expelled_minority }
 				NOT = { has_province_modifier = religious_migration }
 				NOT = { has_province_modifier = ahati_aakheta_base }
+				NOT = { has_province_modifier = U10_mothers_ichor }
+				NOT = { has_province_modifier = U10_khet_resistance }
 				NOT = { religion = secondary }
 				has_missionary = no
 			}
@@ -225,6 +232,8 @@ estate_church_convert_province_x = {
 				NOT = { has_province_modifier = expelled_minority }
 				NOT = { has_province_modifier = religious_migration }
 				NOT = { has_province_modifier = ahati_aakheta_base }
+				NOT = { has_province_modifier = U10_mothers_ichor }
+				NOT = { has_province_modifier = U10_khet_resistance }
 				NOT = { religion = secondary }
 				has_missionary = no
 				development = 10
@@ -327,6 +336,7 @@ estate_church_convert_province_x = {
 #Reduce War Exhaustion
 estate_church_reduce_war_exhaustion = {
 	can_select = {
+		NOT = { has_anzalkatsa_naga = yes }
 		war_exhaustion = 5
 		is_at_war = no
 		NOT = { has_country_modifier = national_recovery }
@@ -388,6 +398,7 @@ estate_church_reduce_war_exhaustion = {
 #Stabilise Country
 estate_church_recover_stability = {
 	can_select = {
+		NOT = { has_anzalkatsa_naga = yes }
 		NOT = { stability = 0 }
 	}
 	selection_weight = {
@@ -437,6 +448,7 @@ estate_church_recover_stability = {
 #Stabilise Country II
 estate_church_increase_stability = {
 	can_select = {
+		NOT = { has_anzalkatsa_naga = yes } 
 		NOT = { stability = 2 }
 		stability = 1
 	}
@@ -486,6 +498,7 @@ estate_church_increase_stability = {
 #Reduce overextension
 estate_church_reduce_overextension = {
 	can_select = {
+		NOT = { has_anzalkatsa_naga = yes }
 		overextension_percentage = 0.50
 	}
 	selection_weight = {
@@ -543,6 +556,7 @@ estate_church_reduce_overextension = {
 #Restore devotion
 estate_church_restore_devotion = {
 	can_select = {
+		NOT = { has_anzalkatsa_naga = yes }
 		has_dlc = "Common Sense"
 		NOT = { legitimacy_equivalent = 65 }
 		government = theocracy
@@ -606,6 +620,7 @@ estate_church_restore_devotion = {
 #Root out heresy in X
 estate_church_root_out_heresy = {
 	can_select = {
+		NOT = { has_anzalkatsa_naga = yes }
 		cb_on_religious_enemies = yes
 		is_free_or_tributary_trigger = yes
 		num_of_cities = 10
@@ -641,7 +656,12 @@ estate_church_root_out_heresy = {
 			}
 			OR = {
 				is_part_of_hre = no
-				NOT = { hre_reform_passed = landfriede }
+				NOT = { 
+					OR = {
+						hre_reform_passed = anbennar_mages_peace
+						hre_reform_passed = anbennar_empower_imperial_diet
+					}
+				}
 				ROOT = { is_part_of_hre = no }
 			}
 		}
@@ -692,7 +712,12 @@ estate_church_root_out_heresy = {
 				}
 				OR = {
 					is_part_of_hre = no
-					NOT = { hre_reform_passed = landfriede }
+					NOT = { 
+						OR = {
+							hre_reform_passed = anbennar_mages_peace
+							hre_reform_passed = anbennar_empower_imperial_diet
+						}
+					}
 					ROOT = { is_part_of_hre = no }
 				}
 			}
@@ -989,6 +1014,7 @@ estate_church_root_out_heresy = {
 #Crush Revolts (heretics)
 estate_church_crush_religious_revolts = {
 	can_select = {
+		NOT = { has_anzalkatsa_naga = yes }
 		num_of_rebel_armies = 1
 		OR = {
 			has_spawned_rebels = heretic_rebels
@@ -1057,6 +1083,7 @@ estate_church_crush_religious_revolts = {
 #Protect Brethren in X (religion)
 estate_church_protect_brethren = {
 	can_select = {
+		NOT = { has_anzalkatsa_naga = yes }
 		is_free_or_tributary_trigger = yes
 		is_at_war = no
 		any_neighbor_country = {
@@ -1078,7 +1105,12 @@ estate_church_protect_brethren = {
 					NOT = { ROOT = { truce_with = prev } }
 					OR = {
 						is_part_of_hre = no
-						NOT = { hre_reform_passed = landfriede }
+						NOT = { 
+							OR = {
+								hre_reform_passed = anbennar_mages_peace
+								hre_reform_passed = anbennar_empower_imperial_diet
+							}
+						}
 						ROOT = { is_part_of_hre = no }
 					}
 				}
@@ -1117,7 +1149,12 @@ estate_church_protect_brethren = {
 						NOT = { ROOT = { truce_with = prev } }
 						OR = {
 							is_part_of_hre = no
-							NOT = { hre_reform_passed = landfriede }
+							NOT = { 
+								OR = {
+									hre_reform_passed = anbennar_mages_peace
+									hre_reform_passed = anbennar_empower_imperial_diet
+								}
+							}
 							ROOT = { is_part_of_hre = no }
 						}
 					}
@@ -1140,7 +1177,12 @@ estate_church_protect_brethren = {
 						NOT = { ROOT = { truce_with = prev } }
 						OR = {
 							is_part_of_hre = no
-							NOT = { hre_reform_passed = landfriede }
+							NOT = { 
+								OR = {
+									hre_reform_passed = anbennar_mages_peace
+									hre_reform_passed = anbennar_empower_imperial_diet
+								}
+							}
 							ROOT = { is_part_of_hre = no }
 						}
 					}
@@ -1278,6 +1320,7 @@ estate_church_protect_brethren = {
 #Anbennar - changes this to ravelian
 estate_church_propagate_religion = {
 	can_select = {
+		NOT = { has_anzalkatsa_naga = yes }
 		has_dlc = "Cradle of Civilization"
 		religion = ravelian
 		dominant_religion = root
@@ -1408,6 +1451,7 @@ estate_church_propagate_religion = {
 #Relations with DotF
 estate_church_relations_with_dotf = {
 	can_select = {
+		NOT = { has_anzalkatsa_naga = yes }
 		any_country = {
 			religion = root
 			NOT = { tag = root }
@@ -1541,3 +1585,332 @@ estate_church_relations_with_dotf = {
         }
     }
 }
+
+estate_church_luna_appease_the_temple = {
+	max_days_active = 3650
+	can_select = {
+		religion = regent_court
+		NOT = { has_anzalkatsa_naga = yes }
+		hre_size = 1
+		has_estate_privilege = estate_burghers_to_outsmart_and_outwit
+		OR = {
+			AND = {
+				exists = A10
+				A10 = {
+					NOT = {
+						has_opinion = {
+							who = ROOT
+							value = 100
+						}
+					}
+				}
+			}
+			AND = {
+				exists = A41
+				A41 = {
+					NOT = {
+						has_opinion = {
+							who = ROOT
+							value = 100
+						}
+					}
+				}
+			}
+			AND = {
+				exists = A43
+				A43 = {
+					NOT = {
+						has_opinion = {
+							who = ROOT
+							value = 100
+						}
+					}
+				}
+			}
+			AND = {
+				exists = A53
+				A53 = {
+					NOT = {
+						has_opinion = {
+							who = ROOT
+							value = 100
+						}
+					}
+				}
+			}
+		}
+	}
+	pre_effect = {
+		random_known_country = {
+			limit = {
+				NOT = {
+					has_opinion = {
+						who = ROOT
+						value = 100
+					}
+				}
+				OR = {
+					tag = A10
+					tag = A41
+					tag = A43
+					tag = A53
+				}
+			}
+			save_event_target_as = agenda_country
+		}
+	}
+	provinces_to_highlight = {
+		owned_by = event_target:agenda_country
+	}
+	selection_weight = {
+		factor = 50
+	}
+	task_requirements = {
+		event_target:agenda_country = {
+			has_opinion = {
+				who = ROOT
+				value = 100
+			}
+			if = {
+				limit = { tag = A10 }
+				ROOT = { has_personal_deity = minara }
+			}
+			else_if = {
+				limit = { tag = A41 }
+				ROOT = { has_personal_deity = the_dame }
+			}
+			else_if = {
+				limit = { tag = A43 }
+				ROOT = { has_personal_deity = ryala }
+			}
+			else_if = {
+				limit = { tag = A53 }
+				ROOT = { has_personal_deity = ara }
+			}
+		}
+	}
+	task_completed_effect = {
+		gain_1_sway = yes
+		clergy_sway_agenda = yes
+		event_target:agenda_country = { sway_target = yes }
+		add_estate_loyalty = {
+			estate = estate_church
+			loyalty = 10
+		}
+		on_completed_agenda_effect = {
+			estate = estate_church
+		}
+		trigger_switch = {
+			on_trigger = has_personal_deity
+			minara = { A10 = { add_devotion = 10 add_prestige = 10 } }
+			the_dame = { A41 = { add_devotion = 10 add_prestige = 10 } }
+			ryala = { A43 = { add_devotion = 10 add_prestige = 10 } }
+			ara = { A53 = { add_devotion = 10 add_prestige = 10 } }
+		}
+	}
+	failing_effect = {
+		on_failed_agenda_effect = yes
+		lose_1_sway = yes
+	}
+
+	invalid_trigger = {
+		OR = {
+			NOT = { hre_size = 1 }
+			event_target:agenda_country = {
+				exists = no
+			}
+		}
+	}
+}
+
+estate_church_luna_fight_heresy = {
+	max_days_active = 3650
+	can_select = {
+		NOT = { has_anzalkatsa_naga = yes }
+		hre_size = 1
+		has_estate_privilege = estate_burghers_to_outsmart_and_outwit
+		NOT = { has_idea_group = humanist_ideas }
+		emperor = { has_matching_religion = ROOT }
+		is_religion_enabled = corinite
+	}
+	provinces_to_highlight = {
+		owner = {
+			NOT = { has_matching_religion = ROOT }
+		}
+	}
+	selection_weight = {
+		factor = 50
+	}
+	task_requirements = {
+		at_war_with_religious_enemy = yes
+	}
+	task_completed_effect = {
+		gain_1_sway = yes
+		clergy_sway_agenda = yes
+		emperor = { sway_target = yes }
+		add_estate_loyalty = {
+			estate = estate_church
+			loyalty = 10
+		}
+		on_completed_agenda_effect = {
+			estate = estate_church
+		}
+	}
+	failing_effect = {
+		on_failed_agenda_effect = yes
+		lose_1_sway = yes
+	}
+
+	invalid_trigger = {
+		NOT = { hre_size = 1 }
+	}
+}
+
+estate_church_enforce_eoa_religion = {
+	can_select = {
+		hre_religion_locked = yes
+		is_emperor = yes
+		any_known_country = {
+			is_part_of_hre = yes
+			NOT = { religion = emperor }
+		}
+		NOT = { has_anzalkatsa_naga = yes }
+	}
+	provinces_to_highlight = {
+	   	is_capital = yes
+		owner = { tag = event_target:agenda_country }
+	}
+	selection_weight = {
+		factor = 5
+	}
+	pre_effect = {
+		random_known_country = {
+			limit = {
+				is_part_of_hre = yes
+				NOT = { religion = emperor }
+			}
+			save_event_target_as = agenda_country
+		}
+	}
+	task_requirements = {
+		if = {
+			limit = {
+				has_estate_agenda_auto_completion = {
+					estate = estate_church
+				}
+			}
+			has_estate_agenda_auto_completion = {
+				estate = estate_church
+			}
+		}
+		else = {
+			event_target:agenda_country = { religion = emperor }
+		}
+		
+	}
+	task_completed_effect = {
+		add_estate_loyalty = {
+			estate = estate_church
+			loyalty = 10
+		}
+		on_completed_agenda_effect = {
+			estate = estate_church
+		}
+		add_imperial_influence = 3
+	}
+	failing_effect = {
+		on_failed_agenda_effect = yes
+		clr_auto_complete_flag = yes
+        add_estate_loyalty_modifier = {
+            estate = estate_church
+			desc = EST_VAL_AGENDA_DENIED
+			loyalty = -5
+			duration = 7300
+        }
+	}
+	fail_if = {
+		is_emperor = no
+	}
+}
+
+estate_church_improve_with_temple = {
+	can_select = {
+		hre_religion_locked = yes
+		is_emperor = yes
+		any_known_country = {
+			is_part_of_hre = yes
+			OR = {
+				has_reform = leading_clergy_reform
+				owns = 52
+				owns = 266
+				owns = 97
+			}
+		}
+		NOT = { has_anzalkatsa_naga = yes }
+	}
+	provinces_to_highlight = {
+	   	is_capital = yes
+        owner = { tag = event_target:agenda_country }
+	}
+	selection_weight = {
+		factor = 5
+	}
+	pre_effect = {
+		random_known_country = {
+			limit = {
+				is_part_of_hre = yes
+				OR = {
+					has_reform = leading_clergy_reform
+					owns = 52
+					owns = 266
+					owns = 97
+				}
+			}
+			save_event_target_as = agenda_country
+		}
+	}
+	task_requirements = {
+		if = {
+			limit = {
+				has_estate_agenda_auto_completion = {
+					estate = estate_church
+				}
+			}
+			has_estate_agenda_auto_completion = {
+				estate = estate_church
+			}
+		}
+		else = {
+			event_target:agenda_country = {
+				has_opinion = {
+					who = ROOT
+					value = 100
+				}
+			}
+		}
+	}
+	task_completed_effect = {
+		add_estate_loyalty = {
+			estate = estate_church
+			loyalty = 10
+		}
+		on_completed_agenda_effect = {
+			estate = estate_church
+		}
+		add_imperial_influence = 3
+	}
+	failing_effect = {
+		on_failed_agenda_effect = yes
+		clr_auto_complete_flag = yes
+        add_estate_loyalty_modifier = {
+            estate = estate_church
+			desc = EST_VAL_AGENDA_DENIED
+			loyalty = -5
+			duration = 7300
+        }
+	}
+	fail_if = {
+		is_emperor = no
+	}
+}
+

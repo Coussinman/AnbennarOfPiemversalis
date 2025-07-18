@@ -148,12 +148,27 @@ country_decisions = {
 				has_country_flag = rending_quest_fourth  # fourth condition
 				has_country_flag = rending_quest_fifth  # fifth condition
 			}
+			if = {
+				limit = { tag = Y26 NOT = { has_country_flag = huszien_appeased } }
+				custom_trigger_tooltip = {
+					tooltip = Y26_rending_quest_ttt
+					has_country_flag = huszien_appeased
+				}
+			}
 		}
 		effect = {
-			custom_tooltip = rending_appease_and_dominate_tt
-			hidden_effect = {
+			if = {
+				limit = { has_country_flag = 333_appease_lizo }
 				country_event = {
-					id = rending.600
+					id = empire_333.13
+				}
+			}
+			else = {
+				custom_tooltip = rending_appease_and_dominate_tt
+				hidden_effect = {
+					country_event = {
+						id = rending.600
+					}
 				}
 			}
 			set_country_flag = rending_appeasement_menu_open
@@ -234,7 +249,7 @@ country_decisions = {
 				NOT = { has_country_flag = appeasement_choice_menu }
 			}
 			if = {
-				limit = { tag = Y26 }
+				limit = { tag = Y26 NOT = { has_country_flag = huszien_appeased } }
 				custom_trigger_tooltip = {
 					tooltip = Y26_rending_quest_ttt
 					has_country_flag = huszien_appeased

@@ -524,11 +524,33 @@ magic_ruler_initialize_schools = {
 		value = 0
 	}
 
+	# Ovdal-az-An guaranteed legendary (non-necromancy) school
+	# Put here at the front as to not "waste" the upgrade on a spell that's already legendary.
+	if = {
+		limit = { mission_completed = az_an_veneration }
+		random_list = {
+			1 = { magic_study_level_up_abjuration = yes 	magic_study_level_up_abjuration = yes 		magic_study_level_up_abjuration = yes}
+			1 = { magic_study_level_up_conjuration = yes 	magic_study_level_up_conjuration = yes 		magic_study_level_up_conjuration = yes}
+			1 = { magic_study_level_up_divination = yes 	magic_study_level_up_divination = yes 		magic_study_level_up_divination = yes}
+			1 = { magic_study_level_up_enchantment = yes 	magic_study_level_up_enchantment = yes 		magic_study_level_up_enchantment = yes}
+			1 = { magic_study_level_up_evocation = yes 		magic_study_level_up_evocation = yes 		magic_study_level_up_evocation = yes}
+			1 = { magic_study_level_up_illusion = yes 		magic_study_level_up_illusion = yes 		magic_study_level_up_illusion = yes}
+			1 = { magic_study_level_up_transmutation = yes 	magic_study_level_up_transmutation = yes 	magic_study_level_up_transmutation = yes}
+		}
+	} 
+
 	magic_ruler_give_random_spell_school = yes
 
 	if = {
 		limit = {
 			ruler_has_personality = scholar_personality
+		}
+		magic_ruler_give_random_spell_school = yes
+	}
+
+	if = {
+		limit = {
+			has_country_flag = aldresia_renowned_proficiency
 		}
 		magic_ruler_give_random_spell_school = yes
 	}
@@ -734,34 +756,7 @@ magic_ruler_initialize_schools = {
 		effelai_parura_mage_heir_divination_scripted_effect = yes
 	}
 
-	#Caylen powerful mage
-	if = {
-		limit = {
-			has_ruler_flag = caylen_sil_wex
-			has_ruler_flag = caylen_schools
-		}
-		magic_ruler_give_random_spell_school = yes
-		magic_ruler_give_random_spell_school = yes
-	}
 
-	#Wex Magisterium Reform
-	if = {
-		limit = {
-			has_reform = wex_magisterium_reform
-		}
-		magic_ruler_give_random_spell_school = yes
-		magic_ruler_give_random_spell_school = yes
-	}
-	#Tretun
-	if = {
-		limit = {
-			has_country_flag = tretun_mages
-		}
-
-		magic_study_level_up_evocation = yes
-		magic_study_level_up_divination = yes
-	}
-	
 	set_ruler_flag = initialized_magic_flags
 }
 
@@ -2660,6 +2655,17 @@ change_patron_approval = {
 			}
 		}
 	]
+}
+
+clear_magic_patron = {
+	clr_ruler_flag = $name_key$_patron
+	custom_tooltip = lose_patron_tt
+	hidden_effect = {
+		[[favoured_school_1] clr_ruler_flag = patron_favored_$favoured_school_1$ ]
+		[[favoured_school_2] clr_ruler_flag = patron_favored_$favoured_school_2$ ]
+		[[disfavoured_school_1] clr_ruler_flag = patron_disfavored_$disfavoured_school_1$ ]
+		[[disfavoured_school_2] clr_ruler_flag = patron_disfavored_$disfavoured_school_2$ ]
+	}
 }
 
 kill_adm_homunculus = {

@@ -63,9 +63,10 @@ elven_military = {
 	drill_gain_modifier = 1			#1 B / to promote drilling gameplay
 	movement_speed = 0.15			#1.5 C / swift elves
 	army_tradition_decay = -0.01 	#1 B / long lives - long to forget
+	land_attrition = -0.15
 	
 	navy_tradition_decay = -0.02 	#2 B / long lives - long to forget
-	light_ship_power = 0.1			#1 E / for their unified time in the remnant fleet
+	transport_attrition = -0.2			#1 E / for their unified time in the remnant fleet
 	naval_attrition = -0.25			#1 D / for their unified time in the remnant fleet
 	
 	
@@ -233,7 +234,7 @@ gnollish_military = {
 }
 
 gnomish_administration = {
-	#At its very core, gnomish states value organization and progress where ideas and theories flow freely (which are often seen as the highest marker of achievement). Despite their witty and prankster-like demeanor, in matters of state tight scrutiny is kept over all corners of gnomish goverment - which, while effective, may turn a country into a bureaucratic mess. While gnomes are seen as weaker than other races, gnomish administrations account for this by preferring pre-emptive measures, often dealing with issues and conflicts before they even occur through indirect or means of subterfuge.
+	#At its very core, gnomish states value organization and progress where ideas and theories flow freely (which are often seen as the highest marker of achievement). Despite their witty and prankster-like demeanor, in matters of state tight scrutiny is kept over all corners of gnomish government - which, while effective, may turn a country into a bureaucratic mess. While gnomes are seen as weaker than other races, gnomish administrations account for this by preferring pre-emptive measures, often dealing with issues and conflicts before they even occur through indirect or means of subterfuge.
 	#Gameplay: play careful and tech-up. Plan well and use your spies to cause havoc on yoiur enemies
 
 	#Positives
@@ -303,7 +304,7 @@ gnomish_military_artificer_buff = {
 }
 
 goblin_administration = {
-	#Goblins governments rely first and foremost on the survival of the fittest, harkening back to their origin skulking in the darkness of Dwarovar. Strength is appreciated, sure, but ingenuity and intrigue, also known as smarts, is what makes a goblin stand out from the thousands of others like him. Succesful later goblin administrations are however marked with opulence and greed, with many industrial "smart" goblins who profit from vast killing machines and factories taking a slice of gold pie for themselves.
+	#Goblins governments rely first and foremost on the survival of the fittest, harkening back to their origin skulking in the darkness of Dwarovar. Strength is appreciated, sure, but ingenuity and intrigue, also known as smarts, is what makes a goblin stand out from the thousands of others like him. Successful later goblin administrations are however marked with opulence and greed, with many industrial "smart" goblins who profit from vast killing machines and factories taking a slice of gold pie for themselves.
 	#Gameplay: Use intrigue to cause chaos as a vanguard for your invasion. Develop a strong homeland and out-tech your enemies in battle.
 	
 	#Positives	
@@ -436,7 +437,7 @@ half_orcish_military = {
 }
 
 halfling_administration = {
-	#Like their families, halfling administrations and tightly knit and communal - with many halflings returning home after a life of adventure abroad to impart their wisdom on the young. Succesful halfling countries are marked with the ability to make well with what you have (considering the history of halfling subjugation) and to work well with others around you (lest they put their hungry gaze on halfling soil). As such, trade is the livelihood for many halflings, with those cultivating farming tradition, their famous culinary arts or even the penchant for thievery and skullduggery to benefit themselves in the tall wide world.\n\nSadly, in the eyes of the tall world, halflings are seen as the laughing stock - and any would-be halfling ruler would need to fill shoes twice their size to prove themselves a conqueror.
+	#Like their families, halfling administrations and tightly knit and communal - with many halflings returning home after a life of adventure abroad to impart their wisdom on the young. Successful halfling countries are marked with the ability to make well with what you have (considering the history of halfling subjugation) and to work well with others around you (lest they put their hungry gaze on halfling soil). As such, trade is the livelihood for many halflings, with those cultivating farming tradition, their famous culinary arts or even the penchant for thievery and skullduggery to benefit themselves in the tall wide world.\n\nSadly, in the eyes of the tall world, halflings are seen as the laughing stock - and any would-be halfling ruler would need to fill shoes twice their size to prove themselves a conqueror.
 	#Gameplay: Make do with what you have and be friends with everyone. Earn wealth with trade rather than conquest
 	
 	#luck of halflings
@@ -502,7 +503,8 @@ harpy_administration = {
 		
 	#Negatives	
  	global_tax_modifier = -0.1			#-1 B / dont really care for material wealth
-	development_cost = 0.1				#-1 S / due to nomadic life, they dont see the point of building stuff or infrastructure unless needed... they fly yo
+	build_cost = 0.1
+	build_time = 0.1				#-1 S / due to nomadic life, they dont see the point of building stuff or infrastructure unless needed... they fly yo
 	#vassal_income = -0.25				#-1 C / harpies dont cover wealth or great power - and they prefer another form of tribute instead	#removed as it gives negative
 	advisor_cost = 0.1					#-1 A / 
 	
@@ -519,7 +521,7 @@ harpy_military = {
 	#Positives	
 	movement_speed = 0.33				#3 C / fast moving as they can get over terrain hurdles
 	shock_damage_received = -0.1		#1 B / theyre flying so it is way easier for them to dodge a charge 
-	fire_damage_received = -0.1			#1 B / theyre flying which makes it harder to hit them with guns
+	fire_damage = 0.1					#1 B / theyre flying which makes it easier for them to shoot well
 	land_attrition = -0.1				#1 D / they can easily grab a meal on the go
 	siege_ability = 0.1					#1 B / they can literally fly over walls regardless of the location
 	
@@ -530,8 +532,8 @@ harpy_military = {
 	#Negatives
 	artillery_power = -0.1				#-1 A / they don't like fighting with heavy cumbersome weapons that reduce mobility
 	morale_damage_received = 0.1				#-2 B / harder to reform as its very easy to run
-	defensiveness = -0.25					#-1 B / not really defensive, they have always opted to flee and fly rather than hold ground
-	
+	defensiveness = -0.10					#-1 B / not really defensive, they have always opted to flee and fly rather than hold ground
+	fort_maintenance_modifier = 0.1			#they don't build stuff well
 	naval_morale = -0.05				#-1 A / they arent really naval
 	
 	#1 + 1.5 + 1.5 + 1 = 5
@@ -994,9 +996,10 @@ lizardfolk_administration = {
 	
 	production_efficiency = 0.15			#1.5 A / They are naturally cunning artisans and each lizardfolk is able to craft tools and weapons from even simplest materials. If they develop their skills they can became truly masterful artisans.
 	
-	same_culture_advisor_cost = -0.15		#1.5 B / Advisors of the ruler, if they are diligent and dedicated, can be considered legitimate successors like ruler's own children. Thus, they are eager to join the court
 	advisor_pool = 1						#2 E / Advisors of the ruler, if they are diligent and dedicated, can be considered legitimate successors like ruler's own children. Thus, they are eager to join the court
 	
+	same_religion_advisor_cost = -0.1		# trust their own people more than other races, naturally distrustful
+
 	free_adm_policy = 1
 	
 	
@@ -1010,7 +1013,7 @@ lizardfolk_administration = {
 
 	stability_cost_modifier = 0.10			#1 D / Constant struggles between heirs and advisors destabilize their countries
 	
-	build_cost = 0.1
+	build_time = 0.1
 	
 	#0.5 + 1 + 1 + 1 + 0.15 + 1.5 + 0.4 = 5.55
 	picture = "racial_adm_lizard"
@@ -1033,10 +1036,12 @@ lizardfolk_military = {
 	
 	#Negatives
 	cavalry_cost = 0.2					#2 B / Hard to find fitting mount, they must be expensive
+	morale_damage_received = 0.05			#Take losing badly, fatalistic
+	global_regiment_cost = 0.1			#Feeding mostly carnivorous armies costs a lot - dats a lotta tchokens!
 	siege_ability = -0.1				#1 B / They prefer to fight in the open field, where they can use their stealthiness and strength
 	reinforce_speed = -0.15				#1.66 B / They take defeats really badly, because they are too proud
 	recover_army_morale_speed = -0.05
-	global_ship_trade_power = -0.5
+	
 	
 	# 1.5 + 1.5 + 0.75 + 0.5 + 1.25 = 5.5
 	picture = "racial_mil_lizard"
@@ -1064,7 +1069,7 @@ mechanim_administration = {
 	diplomatic_upkeep = -1
 	max_terms = 5
 	
-	picture = "racial_adm_lizard"
+	picture = "racial_adm_mechanim"
 }
 
 mechanim_military = {
@@ -1090,54 +1095,54 @@ mechanim_military = {
 	sailors_recovery_speed = -0.15
 
 	
-	picture = "racial_mil_lizard"
+	picture = "racial_mil_mechanim"
 }
 
-undead_military = {                #Zombies and skeletons created with necromancy
-    # global_manpower_modifier = 1.5  #Deleting Manpower modifier
-    regiment_manpower_usage = -0.75 #We only need 250 necromancer to raise 750 dead
-    infantry_cost = -0.5 
-    mercenary_manpower = -0.25
-    land_forcelimit_modifier = 1.5
-    land_attrition = -0.75
-	mercenary_discipline = -0.5     
-    
-    # manpower_recovery_speed = 0.1 #Regiment manpower usage instead
-    # sailors_recovery_speed = 0.5 #Regiment manpower usage instead
-    reinforce_speed = 3 
-    reinforce_cost_modifier = -0.5 
-    
-    movement_speed = -0.4 
-    drill_gain_modifier = -0.75 
-    
-    infantry_power = -0.2 #Basically bone wall
-    cavalry_power = 0.2 #Death knight rise from the dead
-    artillery_power = -0.3 #Recoil kill your own unit
-    
-    land_morale = 0.1
-    naval_morale = 0.1
-    discipline = -0.05 #Nerf discipline but not -10
-    
-    movement_speed_onto_off_boat_modifier = 0.5
-    
-    sunk_ship_morale_hit_recieved = -0.33
-    
-    recover_army_morale_speed = 0.5 
-    recover_navy_morale_speed = 0.5 
-    
-    reserves_organisation = 4         
-    # morale_damage_received = -0.9 
-    shock_damage_received = 0.3 #Paper army
-    # shock_damage = -0.3 #Regular damage
-    # fire_damage = -0.3 #Regular damage
-    fire_damage_received = 0.15 #Paper army
-    
-    war_exhaustion = -0.02    #negates attrition war exhaustion
-    
-    hostile_attrition = 2    #undead dudes harassing em
-    
-    global_unrest = 2
-    picture = "racial_mil_undead"
+undead_military = {				#Zombies and skeletons created with necromancy
+	global_manpower_modifier = 1.5	#1.2 B
+	infantry_cost = -0.5 #5 A
+	mercenary_manpower = -0.25
+	land_forcelimit_modifier = 1.5 #4 S
+	land_attrition = -0.75	#3.3 D
+	
+	manpower_recovery_speed = 0.1 #10 A
+	sailors_recovery_speed = 0.5 #Lol I'm not counting this
+	reinforce_speed = 3 #0.66 B
+	reinforce_cost_modifier = -0.5 #2 B
+	
+	#5 + 0.6 + 4 + 3.3  + 10 + 0.66 + 2 - 7.5 - 0.5 = 17.56
+	
+	movement_speed = -0.4 #-7.5 B
+ 	drill_gain_modifier = -0.75 #-0.5 B
+	
+ 	# infantry_power = -0.2
+	# cavalry_power = 0.2
+ 	artillery_power = -0.1
+	
+	land_morale = 0.1 #1 A
+	naval_morale = 0.1
+	# discipline = -0.1
+	
+	movement_speed_onto_off_boat_modifier = 0.5
+	
+	sunk_ship_morale_hit_recieved = -0.33
+	
+	recover_army_morale_speed = 0.5 #2 E
+	recover_navy_morale_speed = 0.5
+	
+	reserves_organisation = 4 		# 4 D Unbreakable
+	# morale_damage_received = -0.9 # 4 A Unbreakable
+	# shock_damage_received = -0.3
+	shock_damage = -0.3
+	fire_damage = -0.3
+	# fire_damage_received = -0.3
+	
+	war_exhaustion = -0.02	#negates attrition war exhaustion
+	
+	hostile_attrition = 2	#undead dudes harassing em
+	
+	global_unrest = 2
+	picture = "racial_mil_undead"
 }
 
 spirit_military = {

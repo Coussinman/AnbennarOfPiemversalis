@@ -85,6 +85,7 @@ wyvernheart_column_1 = {
 				select_highest_dev_province_with_limit = { 
 					limit = "OR = { trade_goods = copper trade_goods = iron }" 
 					effect = " add_building_construction = { building = weapons speed = 0.25 cost = 0 }  "
+					index = 1
 				}
 			}
 			custom_tooltip = wyvernheart_weapons_of_adventure_war_tt2
@@ -647,16 +648,52 @@ wyvernheart_column_2 = {
 			756 = { num_of_units_in_province = { who = ROOT amount = 7 } } 
 			729 = { num_of_units_in_province = { who = ROOT amount = 7 } }
 			dip_power = 100
-			OR = {
-				has_spy_network_in = {
-					who = A13
-					value = 60
+			if = {
+				limit = { A13 = { is_subject = yes } }
+				OR = {
+					custom_trigger_tooltip = {
+						tooltip = wyvernheart_B4_trigger_tt_1
+						A13 = {
+							overlord = {
+								ROOT = {
+									has_spy_network_in = {
+										who = PREV
+										value = 60
+									}
+								}
+							}
+						}
+					}
+					AND = {
+						advisor = spymaster
+						custom_trigger_tooltip = {
+							tooltip = wyvernheart_B4_trigger_tt_2
+							A13 = {
+								overlord = {
+									ROOT = {
+										has_spy_network_in = {
+											who = PREV
+											value = 30
+										}
+									}
+								}
+							}
+						}
+					}
 				}
-				AND = {
-					advisor = spymaster
+			}
+			else = {
+				OR = {
 					has_spy_network_in = {
 						who = A13
-						value = 30
+						value = 60
+					}
+					AND = {
+						advisor = spymaster
+						has_spy_network_in = {
+							who = A13
+							value = 30
+						}
 					}
 				}
 			}
@@ -794,6 +831,7 @@ wyvernheart_column_2 = {
 			add_power_projection_mission = {
 				amount = 20
 			}
+			custom_tooltip = wyvenheart_B6_effect_tt
 		} 
 	}
 
@@ -820,15 +858,17 @@ wyvernheart_column_2 = {
 				}
 				custom_trigger_tooltip = {
 					tooltip = wyvernheart_bioimproved_mages_trigger_b
-					employed_advisor = {
-						category = ADM
-						skill = 3
-						type = court_mage
-					}
-					employed_advisor = {
-						category = ADM
-						skill = 3
-						type = philosopher
+					OR = {
+						employed_advisor = {
+							category = ADM
+							skill = 3
+							type = court_mage
+						}
+						employed_advisor = {
+							category = ADM
+							skill = 3
+							type = philosopher
+						}
 					}
 				}
 			}
@@ -915,7 +955,7 @@ wyvernheart_column_3 = {
 				estate = estate_mages
 				loyalty = 60
 			}
-			estate_influence = { #check with testers
+			estate_influence = {
 				estate = estate_mages
 				influence = 30
 			}
@@ -940,12 +980,18 @@ wyvernheart_column_3 = {
 				estate = estate_church
 				loyalty = -10
 			}
-			set_estate_privilege = estate_mages_organization_state
+			if = {
+				limit = { NOT = { has_estate_privilege = estate_mages_organization_state } }
+				set_estate_privilege = estate_mages_organization_state
+			}
+			else = {
+				change_government_reform_progress = 50
+			}
 			define_general = {
 				shock = 7
-				fire = 1
+				fire = 2
 				manuever = 3
-				siege = 1
+				siege = 3
 				trait = war_wizard_personality #MAGICREWORK
 			}
 		} 
@@ -1546,9 +1592,12 @@ wyvernheart_column_4 = {
 				estate = estate_adventurers
 				loyalty = 60
 			}
-			any_hired_mercenary_company = {
-				location = {
-					province_id = 725
+			custom_trigger_tooltip = {
+				tooltip = wyvernheart_the_lands_of_the_north_tt
+				any_hired_mercenary_company = {
+					location = {
+						province_id = 725
+					}
 				}
 			}
 		} 
@@ -1570,33 +1619,36 @@ wyvernheart_column_4 = {
 			else = {
 				add_prestige = -10
 			}
-			if = {
-				limit = {
-					711 = {
-						NOT = { owned_by = ROOT }
-					}
-				}
-				711 = {
-					owner = {
-						add_casus_belli = {
-							type = cb_trade_war
-							target = ROOT
-							months = 12
+			custom_tooltip = wyvernheart_D2_effect_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						711 = {
+							NOT = { owned_by = ROOT }
 						}
-						add_historical_rival = ROOT
+					}
+					711 = {
+						owner = {
+							add_casus_belli = {
+								type = cb_trade_war
+								target = ROOT
+								months = 12
+							}
+							add_historical_rival = ROOT
+						}
 					}
 				}
-			}
-			wudhal_area = {
-				discover_country = ROOT
-				add_permanent_claim = ROOT
-			}
-			cedesck_area = {
-				discover_country = ROOT
-				add_permanent_claim = ROOT
-			}
-			gulletpeak_area = {
-				add_permanent_claim = ROOT
+				wudhal_area = {
+					discover_country = ROOT
+					add_permanent_claim = ROOT
+				}
+				cedesck_area = {
+					discover_country = ROOT
+					add_permanent_claim = ROOT
+				}
+				gulletpeak_area = {
+					add_permanent_claim = ROOT
+				}
 			}
 		} 
 	}
@@ -1662,9 +1714,6 @@ wyvernheart_column_4 = {
 		provinces_to_highlight = {  } 
 
 		trigger = {
-			hidden_trigger = {
-				ai = no
-			}
 			custom_trigger_tooltip = {
 				tooltip = wyvernheart_D5_trigger_tt
 				has_global_flag = crimson_deluge
@@ -1731,9 +1780,12 @@ wyvernheart_column_4 = {
 			}
 			custom_trigger_tooltip = {
 				tooltip = wyvernheart_D6_trigger_tt
-				check_variable = {
-					which = pointsWitchKing
-					value = 1
+				OR = {
+					check_variable = {
+						which = pointsWitchKing
+						value = 1
+					}
+					has_ruler_modifier = witch_king_modifier
 				}
 			}
 			treasury = 500
@@ -1773,9 +1825,10 @@ wyvernheart_column_4 = {
 					duration = -1
 				}
 			}
-			custom_tooltip = wyvernheart_D6_effect_tt
-			hidden_effect = {
-				set_country_flag = wyvernheart_cheaper_bloodbrand_power_30
+			add_government_power = {
+				mechanic_type = floodborn_council_mechanic
+				power_type = bloodbrand_power
+				value = 30
 			}
 		} 
 	}
@@ -1787,7 +1840,7 @@ wyvernheart_column_4 = {
 		provinces_to_highlight = {  } 
 
 		trigger = {
-			is_legendary_mage = yes
+			is_legendary_mage = yes #MAGICREWORK
 			adm_power = 100
 			dip_power = 100
 			estate_loyalty = {
@@ -1948,7 +2001,17 @@ wyvernheart_column_5 = {
 			towards_the_sea
 		}
 		provinces_to_highlight = {
-			owner = { religion = skaldhyrric_faith }
+			OR = {
+				owner = { religion = skaldhyrric_faith }
+				AND = {
+					province_id = 736
+					OR = {
+						NOT = { owned_by = ROOT }
+						NOT = { is_core = ROOT }
+						NOT = { has_building = mage_tower }
+					}
+				}
+			}
 		} 
 
 		trigger = {
@@ -2194,11 +2257,11 @@ wyvernheart_column_5 = {
 		}
 
 		trigger = {
-			custom_trigger_tooltip = {
+			custom_trigger_tooltip = {#MAGICREWORK
 				tooltip = is_divination_3_tt
 				has_ruler_flag = divination_3
 			}
-			custom_trigger_tooltip = {
+			custom_trigger_tooltip = {#MAGICREWORK
 				tooltip = is_evocation_3_tt
 				has_ruler_flag = evocation_3
 			}
@@ -2217,6 +2280,9 @@ wyvernheart_column_5 = {
 		effect = {
 			country_event = {
 				id = flavour_wyvernheart.110
+			}
+			hidden_effect = {
+				hide_ambient_object = trialmount
 			}
 		} 
 	}
@@ -2387,6 +2453,7 @@ wyvernheart_column_3_endgame = {
 				tooltip = wyvernheart_C10_trigger_tt
 				any_hired_mercenary_company = {
 					OR = {
+						template = merc_wyvernheart_burnblood_company_4_1
 						template = merc_wyvernheart_burnblood_company_5_1
 						template = merc_wyvernheart_burnblood_company_6_1
 						template = merc_wyvernheart_burnblood_company_6_4
@@ -2397,6 +2464,7 @@ wyvernheart_column_3_endgame = {
 				}
 				any_hired_mercenary_company = {
 					OR = {
+						template = merc_wyvernheart_burnblood_company_4_2
 						template = merc_wyvernheart_burnblood_company_5_2
 						template = merc_wyvernheart_burnblood_company_6_2
 						template = merc_wyvernheart_burnblood_company_6_4
@@ -2407,6 +2475,7 @@ wyvernheart_column_3_endgame = {
 				}
 				any_hired_mercenary_company = {
 					OR = {
+						template = merc_wyvernheart_burnblood_company_4_3
 						template = merc_wyvernheart_burnblood_company_5_3
 						template = merc_wyvernheart_burnblood_company_6_3
 						template = merc_wyvernheart_burnblood_company_6_4
@@ -2429,12 +2498,10 @@ wyvernheart_column_3_endgame = {
 		}
 
 		effect = {
-			every_known_country = {
-				limit = { capital_scope = { province_group = escann_proper } }
-				add_aggressive_expansion = {
-					who = ROOT
-					value = 15
-				}
+			add_ae_for_known_countries_with_limit = {
+				desc = if_in_escann
+				limit = "capital_scope = { province_group = escann_proper }"
+				value = 15
 			}
 			define_advisor = {
 				type = commandant
@@ -2472,7 +2539,7 @@ wyvernheart_column_3_endgame = {
 			escann_proper = {
 				type = all
 				OR = {
-					province_id = 896
+					province_id = 4097
 					AND = {
 						owned_by = ROOT
 						is_core = ROOT
@@ -2528,7 +2595,7 @@ wyvernheart_column_5_endgame = {
 				}
 				AND = {
 					region = alenic_reach_region
-					NOT = { area = dinesck_area }
+					NOT = { area = coast_of_vics_area }
 					NOT = { area = northern_greatwoods_area }
 					NOT = { area = serpentshead_area }
 				}
@@ -2594,7 +2661,7 @@ wyvernheart_column_5_endgame = {
 				alenic_reach_region = {
 					type = all
 					OR = {
-						area = dinesck_area
+						area = coast_of_vics_area
 						area = serpentshead_area
 						area = northern_greatwoods_area
 						AND = {

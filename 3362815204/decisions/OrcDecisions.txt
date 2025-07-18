@@ -25,7 +25,7 @@ country_decisions = {
 			is_at_war = no
 			if = {
 				limit = { tag = Z18 }
-				ANd = {
+				AND = {
 					NOT = {
 						exists = Z19
 					}
@@ -59,5 +59,87 @@ country_decisions = {
 			factor = 1
 		}
 		ai_importance = 100
+	}
+
+	unsheathe_shaman_u_yakh = {
+		potential = {
+			is_or_was_tag = { tag = Z18 }
+			has_country_flag = z18_shaman_sword
+			NOT = { has_country_modifier = frozenmaw_unsheathed_sword }
+		}
+
+		allow = {
+			always = yes
+		}
+		effect = {
+			add_ruler_modifier = {
+				name = frozenmaw_unsheathed_sword
+				duration = -1
+			}
+			if = {
+				limit = {
+					NOT = { has_ruler_modifier = frozenmaw_frozen_soul }
+				}
+				add_ruler_modifier = {
+					name = frozenmaw_frozen_soul
+					duration = -1
+				}
+			}
+		}
+	}
+
+	foresee_future = {
+		major = yes
+		potential = {
+			has_estate_privilege = estate_mages_the_clouded_eye
+			NOT = { 
+				OR = {
+					has_country_modifier = ce_war
+					has_country_modifier = ce_economy
+					has_country_modifier = ce_religion
+				}
+			}
+		}
+		allow = {
+			is_at_war = no
+		}
+		effect = {
+			country_event = {
+				id = flavor_clouded_eye.22
+			}
+		}
+	}
+
+	orc_change_religion_corinite = {
+		major = yes
+		potential = {
+			culture_group = orcish
+			religion = great_dookan
+			is_religion_enabled = corinite
+			is_free_or_tributary_trigger = yes
+			is_force_converted = no
+			capital_scope = { continent = europe }
+		}
+		allow = {
+			stability = 2
+		}
+		effect = {
+			country_event = {
+				id = orc_flavor.7
+			}
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				capital_scope = {
+					region = west_castanor_region
+				}
+				factor = 0.1
+			}
+			modifier = {
+				tag = Z51
+				factor = 0
+			}
+		}
 	}
 }

@@ -374,7 +374,7 @@ country_event = { # cult of vherenar ambushes caravan
 		
 		add_estate_influence_modifier = {
 			estate = estate_burghers
-			desc = tf_taychend_ambushed_caravans
+			desc = EST_VAL_TF_AMBUSHED_CARAVAN
 			influence = 10
 			duration = 3650
 		}
@@ -885,11 +885,38 @@ country_event = { # A little liquid glory
 
 	trigger = {
 		culture_group = taychendi_ruinborn_elf
-		any_owned_province = {
+		num_of_owned_provinces_with = {
+			value = 2
 			trade_goods = tea
 			NOT = {
-				province_id = 2481 # ahartadyam
-				province_id = 2556 # marhed rayodana
+				province_id = 2481 #Ahartadyam
+				province_id = 2556 #Marhed Rayodana
+			}
+		}
+	}
+
+	immediate = {
+		hidden_effect = {
+			random_owned_province = {
+				limit = {
+					trade_goods = tea
+					NOT = {
+						province_id = 2481 #Ahartadyam
+						province_id = 2556 #Marhed Rayodana
+					}
+				}
+				save_event_target_as = taychend_tea_event_target_1
+			}
+			random_owned_province = {
+				limit = {
+					trade_goods = tea
+					NOT = {
+						province_id = 2481 #Ahartadyam
+						province_id = 2556 #Marhed Rayodana
+						province_id = event_target:taychend_tea_event_target_1
+					}
+				}
+				save_event_target_as = taychend_tea_event_target_2
 			}
 		}
 	}
@@ -906,37 +933,20 @@ country_event = { # A little liquid glory
 	option = { # replace tea plantations with vineyards
 		name = taychend_flavour.11.b
 		
-		random_owned_province = {
-			limit = {
-				trade_goods = tea
-				NOT = {
-					province_id = 2481
-					province_id = 2556
-				}
-			}
+		event_target:taychend_tea_event_target_1 = {
 			change_trade_goods = wine
 			add_province_modifier = {
 				name = tf_cultivating_taychendi_vineyards
 				duration = 9125
 			}
-			set_province_flag = tfflag_taychendi_wine_1
 		}
 		
-		random_owned_province = {
-			limit = {
-				trade_goods = tea
-				NOT = {
-					province_id = 2481
-					province_id = 2556
-					has_province_flag = tfflag_taychendi_wine_1
-				}
-			}
+		event_target:taychend_tea_event_target_2 = {
 			change_trade_goods = wine
 			add_province_modifier = {
 				name = tf_cultivating_taychendi_vineyards
 				duration = 9125
 			}
-			set_province_flag = tfflag_taychendi_wine_2
 		}
 		
 		country_event = { 
@@ -1001,7 +1011,7 @@ country_event = { # peasants move into devastated areas
 			value = 3
 			superregion = taychend_superregion
 			base_manpower = 3
-			NOT = { devastation = 0 }
+			NOT = { devastation = 1 }
 		}
 		OR = {
 			num_of_owned_provinces_with = {
@@ -1126,8 +1136,8 @@ country_event = { # old slave warrens uncovered
 		add_manpower = -3
 		add_treasury = -50
 		add_estate_influence_modifier = {
-			estate = estate_nobles
-			desc = tf_sent_adventurers_on_warren_expedition
+			estate = estate_adventurers
+			desc = EST_VAL_WARREN_EXPEDITION
 			influence = 10
 			duration = 3650
 		}
@@ -1171,8 +1181,8 @@ country_event = { # old slave warrens uncovered
 		add_mil_power = -75
 		add_treasury = -75
 		add_estate_influence_modifier = {
-			estate = estate_nobles
-			desc = tf_sent_adventurers_on_warren_expedition
+			estate = estate_adventurers
+			desc = EST_VAL_WARREN_EXPEDITION
 			influence = 10
 			duration = 3650
 		}
@@ -1283,10 +1293,46 @@ country_event = { # old slave warrens uncovered
 country_event = { # warren expedition destroyed
 	id = taychend_flavour.14
 	title = taychend_flavour.14.t
-	desc = taychend_flavour.14.d
 	picture = CONQUEST_eventPicture
+
+	desc = { 
+		trigger = { has_country_flag = warren_expedition_died_desc_1 }
+		desc = taychend_flavour.14.da
+	}
+
+	desc = { 
+		trigger = { has_country_flag = warren_expedition_died_desc_2 }
+		desc = taychend_flavour.14.db
+	}
+
+	desc = { 
+		trigger = { has_country_flag = warren_expedition_died_desc_3 }
+		desc = taychend_flavour.14.dd
+	}
+
+	desc = { 
+		trigger = { has_country_flag = warren_expedition_died_desc_4 }
+		desc = taychend_flavour.14.de
+	}
+
+	desc = { 
+		trigger = { has_country_flag = warren_expedition_died_desc_5 }
+		desc = taychend_flavour.14.df
+	}
 	
 	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			random_list = {
+				1 = { set_country_flag = warren_expedition_died_desc_1 }
+				1 = { set_country_flag = warren_expedition_died_desc_2 }
+				1 = { set_country_flag = warren_expedition_died_desc_3 }
+				1 = { set_country_flag = warren_expedition_died_desc_4 }
+				1 = { set_country_flag = warren_expedition_died_desc_5 }
+			}
+		}
+	}
 
 	option = { # mount another normal expedition
 		name = taychend_flavour.14.a
@@ -1412,6 +1458,14 @@ country_event = { # warren expedition destroyed
 		}
 		lose_taychend_glory_effect = { amount = 10 }
 		clear_global_event_target = tf_slave_warren_target
+	}
+
+	after = {
+		clr_country_flag = warren_expedition_died_desc_1
+		clr_country_flag = warren_expedition_died_desc_2
+		clr_country_flag = warren_expedition_died_desc_3
+		clr_country_flag = warren_expedition_died_desc_4
+		clr_country_flag = warren_expedition_died_desc_5
 	}
 }
 
@@ -1915,43 +1969,47 @@ country_event = { # incoming chendhyan raid
 
 	option = { # attempt to fight off the raid
 		name = taychend_flavour.26.a
-		random_list = {
-			30 = {
-				country_event = { 
-					id = taychend_flavour.28 # chendhyan raid defeated
-					days = 90
-				}
-				modifier = {
-					factor = 1.5
-					num_of_cavalry = 10 # tag has 10 cav regiments
-				}
-				modifier = {
-					factor = 1.5
-					tag = J75 # is rakkabuttai
-				}
-				modifier = {
-					factor = 1.5
-					mil = 5 # monarch has mil skill of >5
-				}
-				modifier = {
-					num_of_owned_provinces_with = {
-						value = 3
-						fort_level = 2 # tag has forts in gauraddhi + affected areas
-						OR = {
-							region = gauraddhi_region 
-							area = korrimutren_area
-							area = darkalyndar_area
-							area = marhed_rayodana_area
-							area = urvand_area
-							area = clematar_area 
+		add_mil_power = -5
+		hidden_effect = {
+			random_list = {
+				30 = {
+					country_event = { 
+						id = taychend_flavour.28 # chendhyan raid defeated
+						days = 90
+					}
+					modifier = {
+						factor = 1.5
+						num_of_cavalry = 10 # tag has 10 cav regiments
+					}
+					modifier = {
+						factor = 1.5
+						tag = J75 # is rakkabuttai
+					}
+					modifier = {
+						factor = 1.5
+						mil = 5 # monarch has mil skill of >5
+					}
+					modifier = {
+						factor = 1.5
+						num_of_owned_provinces_with = {
+							value = 3
+							fort_level = 2 # tag has forts in gauraddhi + affected areas
+							OR = {
+								region = gauraddhi_region 
+								area = korrimutren_area
+								area = darkalyndar_area
+								area = marhed_rayodana_area
+								area = urvand_area
+								area = clematar_area 
+							}
 						}
 					}
 				}
-			}
-			70 = {
-				country_event = { 
-					id = taychend_flavour.27 # chendhyan raid victorious
-					days = 90
+				70 = {
+					country_event = { 
+						id = taychend_flavour.27 # chendhyan raid victorious
+						days = 90
+					}
 				}
 			}
 		}
@@ -1971,7 +2029,7 @@ country_event = { # incoming chendhyan raid
 					area = clematar_area 
 				}
 			}
-			add_devastation = 0.15
+			add_devastation = 15
 			add_province_modifier = {
 				name = tf_raided_by_chendhyans_mod
 				duration = 1825
@@ -2012,7 +2070,7 @@ country_event = { # chendhyan raid victorious
 					area = clematar_area 
 				}
 			}
-			add_devastation = 0.15
+			add_devastation = 15
 			add_province_modifier = {
 				name = tf_raided_by_chendhyans_mod
 				duration = 1825
@@ -2318,7 +2376,7 @@ country_event = { # caergarae does surf
 			2465 = {
 				owner = {
 					add_opinion = {
-						who = PREV
+						who = ROOT
 						modifier = tf_caergarae_surfed
 					}
 				}
@@ -2332,7 +2390,7 @@ country_event = { # caergarae does surf
 			2595 = {
 				owner = {
 					add_opinion = {
-						who = PREV
+						who = ROOT
 						modifier = tf_caergarae_surfed
 					}
 				}
@@ -2485,7 +2543,7 @@ country_event = { # sarihaddu and chendhyan tribes squabble
 	option = { # force a compromise
 		name = taychend_flavour.34.c
 		
-		event_target:tf_sarihaddhi_squabble_target = {
+		event_target:tf_sarihaddi_squabble_target = {
 			add_unrest = 4
 		}
 		

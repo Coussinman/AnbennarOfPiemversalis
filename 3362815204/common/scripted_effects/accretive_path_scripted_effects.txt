@@ -9,7 +9,11 @@ accretive_path_generic_chi_stacking_effect = {
 		limit = {
 			religion = accretive_path
 			NOT = {
-				culture_group = yan
+				primary_culture = jiangszun
+				primary_culture = beikling
+				primary_culture = gangim
+				primary_culture = naamjyut
+				primary_culture = jiangyang
 				culture_group = upper_raheni
 				culture_group = harimari
 				culture = goldscale_kobold
@@ -27,7 +31,7 @@ accretive_path_jiangszun_chi_stacking_effect = {
 	if = {
 		limit = {
 			religion = accretive_path
-			culture = jiangszun
+			primary_culture = jiangszun
 			NOT = {
 				has_reform = xiaken
 				has_reform = indep_xiaken
@@ -43,7 +47,7 @@ accretive_path_gangim_chi_stacking_effect = {
 	if = {
 		limit = {
 			religion = accretive_path
-			culture = gangim
+			primary_culture = gangim
 			NOT = {
 				has_reform = xiaken
 				has_reform = indep_xiaken
@@ -59,7 +63,7 @@ accretive_path_naamjyut_chi_stacking_effect = {
 	if = {
 		limit = {
 			religion = accretive_path
-			culture = naamjyut
+			primary_culture = naamjyut
 			NOT = {
 				has_reform = xiaken
 				has_reform = indep_xiaken
@@ -75,7 +79,7 @@ accretive_path_beikling_chi_stacking_effect = {
 	if = {
 		limit = {
 			religion = accretive_path
-			culture = beikling
+			primary_culture = beikling
 			NOT = {
 				has_reform = xiaken
 				has_reform = indep_xiaken
@@ -91,7 +95,7 @@ accretive_path_jiangyang_chi_stacking_effect = {
 	if = {
 		limit = {
 			religion = accretive_path
-			culture = jiangyang
+			primary_culture = jiangyang
 			NOT = {
 				has_reform = xiaken
 				has_reform = indep_xiaken
@@ -107,7 +111,7 @@ accretive_path_goldscale_kobold_chi_stacking_effect = {
 	if = {
 		limit = {
 			religion = accretive_path
-			culture = goldscale_kobold
+			primary_culture = goldscale_kobold
 			NOT = {
 				has_reform = xiaken
 				has_reform = indep_xiaken
@@ -183,22 +187,22 @@ accretive_path_jiangszun_advisor_chi_stacking_fired_effect = {
 		limit = { THIS = { religion = accretive_path culture = jiangszun NOT = { has_reform = xiaken has_reform = indep_xiaken has_reform = wulin has_reform = one_xia } } }
 		if = {
 			limit = { employed_advisor = { category = $category$ skill = 5 } }
-			add_church_power = -25
+			add_church_power = -50
 		}
 		else_if = {
 			limit = { employed_advisor = { category = $category$ skill = 4 } }
-			add_church_power = -20
+			add_church_power = -40
 		}
 		else_if = {
 			limit = { employed_advisor = { category = $category$ skill = 3 } }
-			add_church_power = -15
+			add_church_power = -30
 		}
 		else_if = {
 			limit = { employed_advisor = { category = $category$ skill = 2 } }
-			add_church_power = -10
+			add_church_power = -20
 		}
 		else = {
-			add_church_power = -5
+			add_church_power = -10
 		}
 	}
 }
@@ -208,22 +212,22 @@ accretive_path_jiangszun_advisor_chi_stacking_hired_effect = {
 		limit = { THIS = { religion = accretive_path culture = jiangszun NOT = { has_reform = xiaken has_reform = indep_xiaken has_reform = wulin has_reform = one_xia } } }
 		if = {
 			limit = { employed_advisor = { category = $category$ skill = 5 } }
-			add_church_power = 25
+			add_church_power = 50
 		}
 		else_if = {
 			limit = { employed_advisor = { category = $category$ skill = 4 } }
-			add_church_power = 20
+			add_church_power = 40
 		}
 		else_if = {
 			limit = { employed_advisor = { category = $category$ skill = 3 } }
-			add_church_power = 15
+			add_church_power = 30
 		}
 		else_if = {
 			limit = { employed_advisor = { category = $category$ skill = 2 } }
-			add_church_power = 10
+			add_church_power = 20
 		}
 		else = {
-			add_church_power = 5
+			add_church_power = 10
 		}
 	}
 }
@@ -233,23 +237,23 @@ accretive_path_upper_raheni_advisor_chi_stacking_fired_effect = {
 		limit = { THIS = { religion = accretive_path culture_group = upper_raheni NOT = { has_reform = xiaken has_reform = indep_xiaken has_reform = wulin has_reform = one_xia } } }
 		if = {
 			limit = { employed_advisor = { type = trader skill = 5 } }
-			add_church_power = -25
+			add_church_power = -50
 		}
 		else_if = {
 			limit = { employed_advisor = { type = trader skill = 4 } }
-			add_church_power = -20
+			add_church_power = -40
 		}
 		else_if = {
 			limit = { employed_advisor = { type = trader skill = 3 } }
-			add_church_power = -15
+			add_church_power = -30
 		}
 		else_if = {
 			limit = { employed_advisor = { type = trader skill = 2 } }
-			add_church_power = -10
+			add_church_power = -20
 		}
 		else_if = {
 			limit = { employed_advisor = { type = trader skill = 1 } }
-			add_church_power = -5
+			add_church_power = -10
 		}
 	}
 }
@@ -259,23 +263,23 @@ accretive_path_upper_raheni_advisor_chi_stacking_hired_effect = {
 		limit = { THIS = { religion = accretive_path culture_group = upper_raheni NOT = { has_reform = xiaken has_reform = indep_xiaken has_reform = wulin has_reform = one_xia } } }
 		if = {
 			limit = { employed_advisor = { type = trader skill = 5 } }
-			add_church_power = 25
+			add_church_power = 50
 		}
 		else_if = {
 			limit = { employed_advisor = { type = trader skill = 4 } }
-			add_church_power = 20
+			add_church_power = 40
 		}
 		else_if = {
 			limit = { employed_advisor = { type = trader skill = 3 } }
-			add_church_power = 15
+			add_church_power = 30
 		}
 		else_if = {
 			limit = { employed_advisor = { type = trader skill = 2 } }
-			add_church_power = 10
+			add_church_power = 20
 		}
 		else_if = {
 			limit = { employed_advisor = { type = trader skill = 1 } }
-			add_church_power = 5
+			add_church_power = 10
 		}
 	}
 }
@@ -414,6 +418,13 @@ accretive_path_reapply_major_aspect_effect = {
 		add_church_aspect = accretive_path_sages_of_the_misty_mountains_major_improved
 		set_country_flag = accretive_path_major_aspect_flag
 	}
+	else_if = {
+		limit = {
+			has_country_flag = improved_accretive_path_temples_for_warriors_reapply_flag
+		}
+		add_church_aspect = accretive_path_temples_for_warriors_major_improved
+		set_country_flag = accretive_path_major_aspect_flag
+	}
 	accretive_path_clear_reapply_flags_effect = yes
 }
 
@@ -437,4 +448,5 @@ accretive_path_clear_reapply_flags_effect = {
 	clr_country_flag = improved_accretive_path_tea_ceremonies_reapply_flag
 	clr_country_flag = improved_accretive_path_teachings_of_balris_reapply_flag
 	clr_country_flag = improved_accretive_path_sages_of_the_misty_mountains_reapply_flag
+	clr_country_flag = improved_accretive_path_temples_for_warriors_reapply_flag
 }

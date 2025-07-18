@@ -45,9 +45,20 @@ can_claim_defender_of_faith = {
 		tooltip = "regent_court_defender_tooltip"
 		potential = {
 			religion = regent_court
+			NOT = { is_religion_enabled = corinite }
 		}
 		allow = {
 			always = no
+		}
+	}
+	condition = {
+		tooltip = "corinite_verne_only_tooltip"
+		potential = {
+			religion = corinite
+			has_global_flag = verne_only_dotf
+		}
+		allow = {
+			is_or_was_tag = { tag = A33 }
 		}
 	}
 	condition = {
@@ -288,6 +299,29 @@ can_move_capital = {
 			#NOT = { province_group = triunic_cities }
 		}
 		allow = { always = no }
+	}
+	condition = {
+		tooltip = sed_block_move_capital
+		potential = { has_province_modifier = sed_forbidden }
+		allow = {
+			OR = {
+				has_province_modifier = sed_entrenched_centaur_nomadism
+				sedentarization_province_has_outpost = yes
+				has_province_modifier = sed_centaur_tributary_system
+				has_province_modifier = sed_nomadic_governance
+			}
+		}
+	}
+	condition = {
+		tooltip = "NO_CAPITAL_MOVE_ZOKKA"
+		potential = {
+			FROM = {
+				has_country_flag = zokka_block_capital_move_flag
+			}
+		}
+		allow = {
+			always = no
+		}
 	}
 }
 
@@ -646,6 +680,16 @@ can_add_seat_in_parliament = {
 			always = no
 		}
 	}
+
+	condition = {
+		tooltip = NO_ADD_SEAT_IKOGSHAANTUS
+		potential = {
+			FROM = { has_reform = ikogshaantus_assembly_of_guilds }
+		}
+		allow = {
+			always = no
+		}
+	}
 }
 
 #1.35
@@ -654,6 +698,16 @@ can_remove_seat_in_parliament = {
 		tooltip = "NO_SEAT_KALSYTO"
 		potential = {
 			FROM = { has_reform = united_federation }
+		}
+		allow = {
+			always = no
+		}
+	}
+
+	condition = {
+		tooltip = NO_REMOVE_SEAT_IKOGSHAANTUS
+		potential = {
+			FROM = { has_reform = ikogshaantus_assembly_of_guilds }
 		}
 		allow = {
 			always = no
@@ -712,7 +766,12 @@ will_demand_annexation = {
 			is_elector = yes
 		}
 		allow = {
-			NOT = { hre_reform_passed = landfriede }
+			NOT = { 
+				OR = {
+					hre_reform_passed = anbennar_mages_peace
+					hre_reform_passed = anbennar_empower_imperial_diet
+				}
+			}
 		}
 	}
 }

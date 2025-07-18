@@ -122,15 +122,10 @@ country_event = {
 			name = jaddari_harpy_march
 			duration = -1
 		}
-
+		
+		start_demonsterization_effect = yes
 		hidden_effect = {
-			set_country_flag = removing_monstrous
-			set_variable = { monstrousPoints = 50 }
 			decrease_monstrous_10 = yes
-		}
-		custom_tooltip = start_demonsterization
-
-		hidden_effect = {
 			F46 = {
 				country_event = {
 					id = jaddari_missions.3
@@ -370,7 +365,7 @@ country_event = {
 	}
 }
 
-#Succesful expedition through the tunnels!
+#Successful expedition through the tunnels!
 country_event = {
 	id = jaddari_missions.9
 	title = jaddari_missions.9.t
@@ -2379,7 +2374,7 @@ country_event = {
 	id = jaddari_missions.60
 	title = jaddari_missions.60.t
 	desc = jaddari_missions.60.d
-	picture = GOOD_WITH_MONARCH_eventPicture
+	picture = HARPY_IMMORTAL_eventPicture
 	
 	trigger = {
 		has_ruler_flag = is_jaddar
@@ -2418,7 +2413,10 @@ country_event = {
 	trigger = {
 		has_ruler_flag = is_jaddar
 		had_global_flag = { flag = jaddar_defeated_zokka days = 3650 }
-		medium_tolerance_gnollish_race_trigger = yes
+		OR = {
+			medium_tolerance_gnollish_race_trigger = yes
+			high_tolerance_gnollish_race_trigger = yes
+		}
 	}
 
 	fire_only_once = yes
@@ -4108,7 +4106,7 @@ province_event = {
 	is_triggered_only = yes
 	hidden = yes
 
-	option = { #Succesfully sway
+	option = { #Successfully sway
 		name = jaddari_missions.1.a
 		ai_chance = {
 			factor = 1
@@ -4271,8 +4269,8 @@ country_event = {
 		}
 		else = {
 			add_government_power = {
-				mechanic_type = tribal_federation_mechanic
-				power_type = tribal_allegiance
+				mechanic_type = desert_legion_mechanic
+				power_type = jaddari_zealotry
 				value = 30
 			}
 		}

@@ -1088,6 +1088,7 @@ country_event = {
 		name = racial_pop_events_all_races.12.c
 		trigger = {
 			has_country_modifier = racial_pop_hobgoblin_purge
+			NOT = { has_country_flag = cannot_end_hobgoblin_purge }
 			adm_power = 100
 		}
 		
@@ -1182,11 +1183,21 @@ country_event = {
 		name = racial_pop_events_all_races.12.dd
 		trigger = {
 			has_country_modifier = racial_pop_hobgoblin_purge
-			NOT = { adm_power = 100 }
+			OR = {
+				NOT = { adm_power = 100 }
+				has_country_flag = cannot_end_hobgoblin_purge
+			}
 		}
 		ai_chance = { factor = 0 }
 		custom_tooltip = pop_menu_purge_desc_tt
-		custom_tooltip = pop_menu_cannot_stop_purge_not_enough_adm_tt
+		if = {
+			limit = { has_country_flag = cannot_end_hobgoblin_purge }
+			custom_tooltip = purge_cannot_end_tt
+		}
+		if = {
+			limit = { NOT = { adm_power = 100 } }
+			custom_tooltip = pop_menu_cannot_stop_purge_not_enough_adm_tt 
+		}
 		hidden_effect = {
 			country_event = { id = racial_pop_events_hobgoblin.24 }
 		}
@@ -1555,7 +1566,7 @@ country_event = {
 		name = racial_pop_events_all_races.12.z
 		trigger = { ai = no }
 		hidden_effect = {
-			country_event = { id = racial_pop_misc.3 }
+			country_event = { id = racial_pop_misc.1 }
 		}
 	}
 }	
@@ -1727,6 +1738,10 @@ country_event = {
 		modifier = {
 			factor = 0.5
 			has_country_modifier = racial_focus_hobgoblin
+		}
+		modifier = {
+			factor = 0.5
+			has_country_flag = mission_faster_hobgoblin_expulsion
 		}
 		modifier = {
 			factor = 0.1
@@ -2056,6 +2071,10 @@ country_event = {
 			has_country_modifier = racial_focus_hobgoblin
 		}
 		modifier = {
+			factor = 0.5
+			has_country_flag = mission_faster_hobgoblin_expulsion
+		}
+		modifier = {
 			factor = 0.1
 			fast_owns_num_pops_of_race = { race = hobgoblin amount = 100 } # this must at least be true for the below to be true, and is much faster
 			calc_true_if = {
@@ -2382,6 +2401,10 @@ country_event = {
 			has_country_modifier = racial_focus_hobgoblin
 		}
 		modifier = {
+			factor = 0.5
+			has_country_flag = mission_faster_hobgoblin_purging
+		}
+		modifier = {
 			factor = 0.1
 			fast_owns_num_pops_of_race = { race = hobgoblin amount = 100 } # this must at least be true for the below to be true, and is much faster
 			calc_true_if = {
@@ -2624,6 +2647,10 @@ country_event = {
 		modifier = {
 			factor = 0.5
 			has_country_modifier = racial_focus_hobgoblin
+		}
+		modifier = {
+			factor = 0.5
+			has_country_flag = mission_faster_hobgoblin_purging
 		}
 		modifier = {
 			factor = 0.1
@@ -2877,6 +2904,10 @@ country_event = {
 		modifier = {
 			factor = 0.5
 			has_country_modifier = racial_focus_hobgoblin
+		}
+		modifier = {
+			factor = 0.5
+			has_country_flag = mission_faster_hobgoblin_purging
 		}
 		modifier = {
 			factor = 0.1
@@ -3176,6 +3207,10 @@ country_event = {
 		modifier = {
 			factor = 0.5
 			has_country_modifier = racial_focus_hobgoblin
+		}
+		modifier = {
+			factor = 0.5
+			has_country_flag = mission_faster_hobgoblin_purging
 		}
 		modifier = {
 			factor = 0.1

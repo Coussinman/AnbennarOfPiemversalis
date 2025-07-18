@@ -86,7 +86,7 @@ moonhaven_annbencost_missions = {
 			province_id = 52
 			OR = {
 				NOT = { owned_by = A31 } 
-				NOT = { development = 45 } 
+				NOT = { development = 40 } 
 				num_free_building_slots = 2
 				NOT = { has_fort_building_trigger = yes } 
 			}
@@ -95,7 +95,7 @@ moonhaven_annbencost_missions = {
 		trigger = {
 			52 = {
 				owned_by = A31
-				development = 45
+				development = 40
 				NOT = { num_free_building_slots = 2 } 
 				has_fort_building_trigger = yes
 			}
@@ -385,7 +385,11 @@ moonhaven_regent_court_missions = {
 			}
 			adm_power = 200
 			treasury = 1000
-			any_ally = { is_emperor = yes } 
+			OR = {
+				any_ally = { is_emperor = yes } 
+				ROOT = { is_emperor = yes }
+				eoa_is_dismantled = yes
+			}
 			has_country_modifier = hre_dominant_regent_court
 		}
 
@@ -617,6 +621,7 @@ moonhaven_corinite_missions = {
 				custom_trigger_tooltip = {
 					tooltip = A31_elven_provinces_corinite.tt
 					starting_elf_provinces = {
+						type = all
 						culture = moon_elf
 						religion = corinite
 					}
@@ -667,11 +672,13 @@ moonhaven_ravelian_missions = {
 
 		trigger = {
 			calc_true_if = {
-				europe = {
-					type = ALL
-					is_part_of_hre = yes
-					culture = moon_elf
-					religion = ravelian
+				custom_trigger_tooltip = {
+					tooltip = A31_elven_provinces_ravelian.tt
+					starting_elf_provinces = {
+						type = all
+						culture = moon_elf
+						religion = ravelian
+					}
 				}
 				amount = 7
 			}
@@ -813,7 +820,10 @@ moonhaven_ravelian_missions = {
 			OR = {
 				AND = {
 					hre_religion = ravelian
-					emperor = { alliance_with = ROOT } 
+					OR = {
+						any_ally = { is_emperor = yes } 
+						ROOT = { is_emperor = yes }
+					}
 				}
 				AND = {
 					Z97 = { alliance_with = ROOT } 
@@ -969,12 +979,12 @@ moonhaven_sarhal_missions = {
 		provinces_to_highlight = {  } 
 
 		trigger = {
+			custom_trigger_tooltip =  {
+				tooltip = A31_crimson_deluge_over
+				has_global_flag = crimson_deluge_is_over
+			}
 			OR = {
 				AND = {
-					custom_trigger_tooltip =  { 
-						tooltip = A31_crimson_deluge_over
-						has_global_flag = crimson_deluge_over
-					}
 					religion = regent_court
 					calc_true_if = {
 						all_ally = {
@@ -988,14 +998,12 @@ moonhaven_sarhal_missions = {
 					}
 				}
 				AND = {
-					custom_trigger_tooltip =  { 
-						tooltip = A31_crimson_deluge_over
-						has_global_flag = crimson_deluge_over
-					}
 					religion = corinite
-					has_opinion = {
-						who = A45
-						value = 200
+					A45 = {
+						has_opinion = {
+							who = ROOT
+							value = 180
+						}
 					}
 					calc_true_if = {
 						all_ally = {
@@ -1501,7 +1509,7 @@ moonhaven_development_missions = {
 			}
 			52 = {
 				owned_by = ROOT
-				base_production = 15
+				base_production = 12
 				has_production_building_trigger = yes
 			}
 		}
@@ -1860,7 +1868,7 @@ moonhaven_colonial_missions = {
 				}
 				add_country_modifier = {
 					name = "A31_empire_colonial_office"
-					duration = 10950
+					duration = -1
 				}
 				custom_tooltip = A31_lose_colo_bonus.tt
 			}
@@ -1949,7 +1957,7 @@ moonhaven_colonial_missions = {
 				} 
 				add_country_modifier = {
 					name = "A31_traders_invest_economy"
-					duration = 18250
+					duration = -1
 				}
 				custom_tooltip = A31_lose_colo_bonus.tt
 			}
@@ -2024,8 +2032,8 @@ moonhaven_colonial_missions = {
 			num_of_heavy_ship = 20
 			OR = {
 				AND = {
-					has_idea_group = homebrew_highseas_ideas
-					homebrew_highseas_ideas = 3
+					has_idea_group = naval_ideas
+					naval_ideas = 3
 				}
 				AND = {
 					has_idea_group = maritime_ideas
@@ -2044,7 +2052,7 @@ moonhaven_colonial_missions = {
 				limit = {
 					NOT = {
 						OR = {
-							homebrew_highseas_ideas = 3
+							naval_ideas = 3
 							maritime_ideas = 3
 						}
 					}
@@ -2103,10 +2111,7 @@ moonhaven_colonial_missions = {
 		position = 12
 		required_missions = { A31_east } 
 		provinces_to_highlight = {
-			OR = {
-				superregion = yanshen_superregion
-				superregion = taychend_superregion
-			}
+			superregion = yanshen_superregion
 			trade_goods = tea
 			NOT = { owned_by = ROOT } 
 			has_discovered = ROOT
@@ -2116,10 +2121,7 @@ moonhaven_colonial_missions = {
 			treasury = 500
 			num_of_owned_provinces_with = {
 				value = 5
-				OR = {
 				superregion = yanshen_superregion
-				superregion = taychend_superregion
-				}
 				trade_goods = tea
 			}
 		}
@@ -2388,7 +2390,10 @@ moonhaven_exploration_missions = {
 				capital_scope = { colonial_region = colonial_taychend } 
 			}
 			any_known_country = {
-				culture_group = taychendi_ruinborn_elf
+				OR = {
+					culture_group = taychendi_ruinborn_elf
+					tag = G52
+				}
 				truce_with = ROOT
 			}
 		}
@@ -2491,7 +2496,17 @@ moonhaven_exploration_missions = {
 		trigger = {
 			capital_scope = { has_building = state_house } 
 			calc_true_if = {
-				all_subject_country = { capital_scope = { has_building = state_house }  } 
+				all_subject_country = { 
+					capital_scope = { 
+						OR = {
+							has_building = state_house 
+							AND = {
+								has_courthouse_building_trigger = yes
+								development = 15
+							}
+						}
+					}  
+				} 
 				amount = 5
 			}
 		}
@@ -2531,9 +2546,6 @@ moonhaven_exploration_missions = {
 						value = 120
 					}
 				}
-				any_owned_province = {
-					region = ardimya_region
-				}
 			}
 		}
 		effect = {
@@ -2563,7 +2575,6 @@ moonhaven_exploration_missions = {
 					OR = {
 						superregion = rahen_superregion
 						superregion = vimdatrong_superregion
-						superregion = taychend_superregion
 					}
 					trade_goods = tea
 				}
@@ -2572,7 +2583,6 @@ moonhaven_exploration_missions = {
 						OR = {
 							superregion = rahen_superregion
 							superregion = vimdatrong_superregion
-							superregion = taychend_superregion
 						}
 					}
 					has_spy_network_from = {

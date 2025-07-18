@@ -9,26 +9,28 @@ country_decisions = {
 			mission_completed = rosande_knightly_slave_hunters
 		}
 		provinces_to_highlight = {
-			AND = {
-				fast_has_pop_of_race = { race = orcish }
-				NOT = {
-					has_province_modifier = Z35_orcish_workforce
-					has_province_modifier = Z35_grand_orcish_workforce 
-				}
-				NOT = {
-					area_for_scope_province = {
-						OR = {
-							has_province_modifier = Z35_orcish_workforce
-							has_province_modifier = Z35_grand_orcish_workforce 
-						}
+			owned_by = ROOT
+			fast_has_pop_of_race = { race = orcish }
+			NOT = {
+				has_province_modifier = Z35_orcish_workforce
+				has_province_modifier = Z35_grand_orcish_workforce 
+			}
+			NOT = {
+				area_for_scope_province = {
+					OR = {
+						has_province_modifier = Z35_orcish_workforce
+						has_province_modifier = Z35_grand_orcish_workforce 
 					}
 				}
-				NOT = {
-					num_of_units_in_province = {
-						who = ROOT
-						amount = 10
-					}
+			}
+			NOT = {
+				num_of_units_in_province = {
+					who = ROOT
+					amount = 10
 				}
+			}
+			NOT = {
+				has_terrain = city_terrain
 			}
 		}
 		allow = {
@@ -59,6 +61,9 @@ country_decisions = {
 						who = ROOT
 						amount = 10
 					}
+					NOT = {
+						has_terrain = city_terrain
+					}
 				}
 			}
 			custom_trigger_tooltip = {
@@ -78,6 +83,9 @@ country_decisions = {
 						has_province_modifier = Z35_orcish_workforce
 						has_province_modifier = Z35_grand_orcish_workforce 
 					}
+					NOT = {
+						has_terrain = city_terrain
+					}
 					area_for_scope_province = {
 						NOT = {
 							has_province_modifier = Z35_orcish_workforce
@@ -90,6 +98,7 @@ country_decisions = {
 					}
 				}
 				rosande_add_workforce_effect = yes
+				custom_tooltip = rosande_plantation.tt.3
 				if = {
 					limit = { culture_is_orcish = yes }
 					change_culture = ROOT

@@ -1322,9 +1322,9 @@ A60_vampire_intermediate_group = {
 				spymaster = 2
 				diplomat = 2
 			}
-			custom_trigger_tooltip = {
-				tooltip = corvuria_not_exposed
-				NOT = { has_country_flag = exposed_vampire_ruler }
+			OR = {
+				ruler_is_not_vampire = yes
+				ruler_is_hidden_vampire = yes
 			}
 		}
 		
@@ -1344,6 +1344,7 @@ A60_vampire_intermediate_group = {
 						limit = {
 							has_country_flag = has_vampires_estate
 							NOT = { tag = ROOT } #don't invite ourselves
+							NOT = { is_or_was_tag = { tag = H81 } } #don't invite Masked Butchers!
 						}
 						country_event = {
 							id = corvuria.4
@@ -1907,13 +1908,13 @@ A60_development_chunk_one = {
 			province_id = 311
 			OR = {
 				NOT = { owned_by = ROOT }
-				NOT = { development = 18 }
+				NOT = { development = 16 }
 			}
 		}
 
 		trigger = {
 			311 = {
-				development = 18
+				development = 16
 				owned_by = ROOT
 			}
 		}
@@ -1933,14 +1934,14 @@ A60_development_chunk_one = {
 			province_id = 311
 			OR = {
 				NOT = { owned_by = ROOT }
-				NOT = { base_production = 8 }
+				NOT = { base_production = 7 }
 				NOT = { has_production_building_trigger = yes }
 			}
 		}
 
 		trigger = {
 			311 = {
-				base_production = 8
+				base_production = 7
 				has_production_building_trigger = yes
 				owned_by = ROOT
 			}
@@ -1966,6 +1967,7 @@ A60_development_chunk_one = {
 			OR = {
 				NOT = { owned_by = ROOT }
 				NOT = { base_production = 4 }
+				has_any_ongoing_construction = yes
 			}
 		}
 		
@@ -1974,6 +1976,7 @@ A60_development_chunk_one = {
 			320 = {
 				base_production = 4
 				owned_by = ROOT
+				has_any_ongoing_construction = no
 			}
 		}
 		
@@ -1995,12 +1998,12 @@ A60_development_chunk_one = {
 		
 		provinces_to_highlight = {
 			province_id = 310	
-			NOT = { base_production = 5 }
+			NOT = { base_production = 4 }
 		}
 		
 		trigger = {
 			treasury = 70
-			310 = { base_production = 5 }
+			310 = { base_production = 4 }
 		}
 		
 		effect = {

@@ -39,7 +39,7 @@ accretive_path_acts_of_hermitage_major_unimproved = {
 		legitimacy = 1
 		republican_tradition = 0.3
 		devotion = 1
-		state_governing_cost = 0.15
+		state_maintenance_modifier = 0.25
 	}
 	effect = {
 		hidden_effect = {
@@ -510,7 +510,7 @@ accretive_path_leadership_of_hero_monks_minor = {
 		}
 	}
 	modifier = {
-		leader_land_shock = 1
+		shock_damage = 0.025
 	}
 	effect = {
 		hidden_effect = {
@@ -532,7 +532,7 @@ accretive_path_leadership_of_hero_monks_major_unimproved = {
 		}
 	}
 	modifier = {
-		leader_land_shock = 2
+		leader_land_shock = 1
 		general_cost = 0.3
 	}
 	effect = {
@@ -555,7 +555,7 @@ accretive_path_leadership_of_hero_monks_major_improved = {
 		}
 	}
 	modifier = {
-		leader_land_shock = 2
+		leader_land_shock = 1
 	}
 	effect = {
 		hidden_effect = {
@@ -651,8 +651,7 @@ accretive_path_liberation_of_the_mind_major_unimproved = {
 		}
 	}
 	modifier = {
-		country_admin_power = 2
-		country_diplomatic_power = -1
+		country_admin_power = 1
 		country_military_power = -1
 	}
 	effect = {
@@ -663,6 +662,10 @@ accretive_path_liberation_of_the_mind_major_unimproved = {
 	monarch_power = adm
 	ai_will_do = {
 		factor = 15
+		modifier = {
+			factor = 2
+			NOT = { adm = 5 }
+		}
 	}
 }
 accretive_path_liberation_of_the_mind_major_improved = {
@@ -688,6 +691,10 @@ accretive_path_liberation_of_the_mind_major_improved = {
 	monarch_power = adm
 	ai_will_do = {
 		factor = 15
+		modifier = {
+			factor = 2
+			NOT = { adm = 5 }
+		}
 	}
 }
 accretive_path_liberation_of_the_soul_major_unimproved = {
@@ -703,9 +710,8 @@ accretive_path_liberation_of_the_soul_major_unimproved = {
 		}
 	}
 	modifier = {
-		country_diplomatic_power = 2
+		country_diplomatic_power = 1
 		country_admin_power = -1
-		country_military_power = -1
 	}
 	effect = {
 		hidden_effect = {
@@ -715,6 +721,10 @@ accretive_path_liberation_of_the_soul_major_unimproved = {
 	monarch_power = dip
 	ai_will_do = {
 		factor = 15
+		modifier = {
+			factor = 2
+			NOT = { dip = 5 }
+		}
 	}
 }
 accretive_path_liberation_of_the_soul_major_improved = {
@@ -740,6 +750,10 @@ accretive_path_liberation_of_the_soul_major_improved = {
 	monarch_power = dip
 	ai_will_do = {
 		factor = 15
+		modifier = {
+			factor = 2
+			NOT = { dip = 5 }
+		}
 	}
 }
 accretive_path_liberation_of_the_body_major_unimproved = {
@@ -755,8 +769,7 @@ accretive_path_liberation_of_the_body_major_unimproved = {
 		}
 	}
 	modifier = {
-		country_military_power = 2
-		country_admin_power = -1
+		country_military_power = 1
 		country_diplomatic_power = -1
 	}
 	effect = {
@@ -767,6 +780,10 @@ accretive_path_liberation_of_the_body_major_unimproved = {
 	monarch_power = mil
 	ai_will_do = {
 		factor = 15
+		modifier = {
+			factor = 2
+			NOT = { mil = 5 }
+		}
 	}
 }
 accretive_path_liberation_of_the_body_major_improved = {
@@ -792,6 +809,10 @@ accretive_path_liberation_of_the_body_major_improved = {
 	monarch_power = mil
 	ai_will_do = {
 		factor = 15
+		modifier = {
+			factor = 2
+			NOT = { mil = 5 }
+		}
 	}
 }
 accretive_path_river_flows_in_you_minor = {
@@ -815,7 +836,7 @@ accretive_path_river_flows_in_you_minor = {
 		}
 	}
 	modifier = {
-		trade_steering = 0.05
+		trade_efficiency = 0.05
 	}
 	effect = {
 		hidden_effect = {
@@ -844,8 +865,8 @@ accretive_path_river_flows_in_you_major_unimproved = {
 		}
 	}
 	modifier = {
-		trade_steering = 0.1
-		global_trade_goods_size_modifier = -0.1
+		trade_efficiency = 0.1
+		global_trade_goods_size_modifier = -0.05
 	}
 	effect = {
 		hidden_effect = {
@@ -874,7 +895,7 @@ accretive_path_river_flows_in_you_major_improved = {
 		}
 	}
 	modifier = {
-		trade_steering = 0.1
+		trade_efficiency = 0.1
 	}
 	effect = {
 		hidden_effect = {
@@ -1087,11 +1108,11 @@ accretive_path_the_second_ascension_minor = {
 				accretive_path_major_aspect_scripted_trigger = no
 			}
 			has_church_aspect = accretive_path_the_second_ascension_major_unimproved
-			has_church_aspect = accretive_path_river_flows_in_you_major_improved
+			has_church_aspect = accretive_path_the_second_ascension_major_improved
 		}
 	}
 	modifier = {
-		monarch_lifespan = 0.75
+		monarch_lifespan = 0.075
 	}
 	effect = {
 		hidden_effect = {
@@ -1183,7 +1204,7 @@ accretive_path_tea_ceremonies_minor = {
 		}
 	}
 	modifier = {
-		global_own_trade_power = 0.5
+		global_own_trade_power = 0.05
 	}
 	effect = {
 		hidden_effect = {
@@ -1305,7 +1326,7 @@ accretive_path_teachings_of_balris_major_unimproved = {
 	}
 	modifier = {
 		prestige_decay = -0.01
-		inflation_reduction = 0.1
+		inflation_reduction = -0.1
 	}
 	effect = {
 		hidden_effect = {
@@ -1394,7 +1415,7 @@ accretive_path_sages_of_the_misty_mountains_major_unimproved = {
 		}
 	}
 	modifier = {
-		own_territory_dice_roll_bonus = 1
+		attack_bonus_in_capital_terrain = 1
 		land_forcelimit_modifier = -0.1
 	}
 	effect = {
@@ -1405,6 +1426,13 @@ accretive_path_sages_of_the_misty_mountains_major_unimproved = {
 	monarch_power = mil
 	ai_will_do = {
 		factor = 15
+		modifier = {
+			factor = 5
+			OR = {
+				is_at_war = yes
+				NOT = { is_year = 1450 }
+			}
+		}
 	}
 }
 accretive_path_sages_of_the_misty_mountains_major_improved = {
@@ -1423,7 +1451,7 @@ accretive_path_sages_of_the_misty_mountains_major_improved = {
 		}
 	}
 	modifier = {
-		own_territory_dice_roll_bonus = 1
+		attack_bonus_in_capital_terrain = 1
 	}
 	effect = {
 		hidden_effect = {
@@ -1433,5 +1461,57 @@ accretive_path_sages_of_the_misty_mountains_major_improved = {
 	monarch_power = mil
 	ai_will_do = {
 		factor = 15
+		modifier = {
+			factor = 5
+			OR = {
+				is_at_war = yes
+				NOT = { is_year = 1450 }
+			}
+		}
+	}
+}
+accretive_path_temples_for_warriors_major_unimproved = {
+	cost = 200
+	potential = {
+		accretive_path_major_aspect_scripted_trigger = no
+		owns = 4559
+		4559 = { has_great_project = { type = jiangliubao tier = 2 } }
+		NOT = { has_country_flag = improved_accretive_path_temples_for_warriors }
+		NOT = { has_government_attribute = is_in_xia }
+	}
+	modifier = {
+		has_samurai = yes
+		global_tax_modifier = -0.1
+	}
+	effect = {
+		hidden_effect = {
+			set_country_flag = accretive_path_major_aspect_flag
+		}
+	}
+	monarch_power = mil
+	ai_will_do = {
+		factor = 20
+	}
+}
+accretive_path_temples_for_warriors_major_improved = {
+	cost = 200
+	potential = {
+		accretive_path_major_aspect_scripted_trigger = no
+		owns = 4559
+		4559 = { has_great_project = { type = jiangliubao tier = 2 } }
+		has_country_flag = improved_accretive_path_temples_for_warriors
+		NOT = { has_government_attribute = is_in_xia }
+	}
+	modifier = {
+		has_samurai = yes
+	}
+	effect = {
+		hidden_effect = {
+			set_country_flag = accretive_path_major_aspect_flag
+		}
+	}
+	monarch_power = mil
+	ai_will_do = {
+		factor = 20
 	}
 }

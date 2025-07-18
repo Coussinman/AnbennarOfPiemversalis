@@ -56,6 +56,7 @@ country_event = {
 	
 	trigger = {
 		current_age = age_of_absolutism
+		NOT = { has_global_flag = incense_magic_boom }
 		capital_scope = { continent = europe }
 		OR = {
 			incense = 3
@@ -63,7 +64,6 @@ country_event = {
 				incense = 3
 			}
 		}
-		NOT = { has_global_flag = incense_magic_boom }
 	}
 	
 	option = {
@@ -95,7 +95,6 @@ country_event = {
 	}
 	
 	trigger = {
-		NOT = { has_global_flag = prevent_incense_price_drop } #ACE
 		current_age = age_of_revolutions
 		capital_scope = { continent = europe }
 	}
@@ -128,6 +127,7 @@ country_event = {
 
 	trigger = {
 		has_institution = global_trade
+		NOT = { has_global_flag = perfume_industry }
 		any_owned_province = {
 			has_terrain = farmlands #Flowers must grow here
 			is_capital = no
@@ -136,7 +136,6 @@ country_event = {
 			is_city = yes
 			province_without_special_goods_produced_trigger = yes
 		}
-		NOT = { has_global_flag = perfume_industry }
 	}
 	
 	immediate = {
@@ -235,6 +234,7 @@ country_event = {
 	}
 	
 	trigger = {
+		NOT = { has_global_flag = green_slave_demand }
 		OR = {
 			colony = 2
 			
@@ -250,7 +250,6 @@ country_event = {
 			}
 		}
 		capital_scope = { continent = europe }
-		NOT = { has_global_flag = green_slave_demand }
 	}
 	
 	option = {
@@ -264,7 +263,38 @@ country_event = {
 			value = 0.875
 			duration = -1
 		}
-		hidden_effect = { set_global_flag = green_slave_demand }
+		hidden_effect = {
+			set_global_flag = green_slave_demand
+			216 = { province_event = { id = orc_slavery.8 days = 365 random = 365 } }
+			451 = { province_event = { id = orc_slavery.9 days = 180 random = 730 } }
+			8 = { province_event = { id = flavor_anbenncost.2 days = 180 random = 730 } }
+			north_america = {
+				limit = {
+					is_city = yes
+					owner = { NOT = { has_country_modifier = ruinborn_administration } }
+				}
+				if = {
+					limit = { owner = { is_colonial_nation = yes } }
+					owner = { overlord = { country_event = { id = orc_slavery.10 days = 1 } } }
+				}
+				else = {
+					owner = { country_event = { id = orc_slavery.10 days = 1 } }
+				}
+			}
+			south_america = {
+				limit = {
+					is_city = yes
+					owner = { NOT = { has_country_modifier = ruinborn_administration } }
+				}
+				if = {
+					limit = { owner = { is_colonial_nation = yes } }
+					owner = { overlord = { country_event = { id = orc_slavery.10 days = 1 } } }
+				}
+				else = {
+					owner = { country_event = { id = orc_slavery.10 days = 1 } }
+				}
+			}
+		}
 	}
 }
 
@@ -281,7 +311,12 @@ country_event = {
 
 	trigger = {
 		has_country_modifier = the_abolish_slavery_act
+		OR = {
+			NOT = { tag = A33 }
+			is_year = 1550
+		}
 		NOT = { has_global_flag = abolitionism_happened }
+		NOT = { has_global_flag = abolitionism_blocked }
 	}
 	mean_time_to_happen = {
 		years = 1
@@ -312,32 +347,23 @@ country_event = {
 	major = yes
 
 	trigger = {
-		NOT = { 
-			OR = {
-				has_global_flag = wex_slavery_continues
-				has_global_flag = nathalaire_slave_trade
-				has_global_flag = orcish_slave_trade_banned_in_cannor
-			}
-		}
-		OR = {
-			AND = {
-				#capital_scope = { superregion = escann_superregion }
 		is_year = 1580
+		#capital_scope = { superregion = escann_superregion }
 		is_great_power = yes
 		num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
 			value = 5
 			trade_goods = slaves
 			superregion = escann_superregion
 		}
-			}
-		}
+
 	}
 	mean_time_to_happen = {
 		years = 5
 	}
 	
+	
 	option = {
-		name = anb_price.45.a
+		name = anb_price.49.a
 		change_price = {
 			trade_goods = slaves
 			key = ORCISH_SLAVE_TRADE_BANNED_IN_CANNOR
@@ -346,10 +372,12 @@ country_event = {
 		}
 		
 		add_years_of_income = -1 
-		
 		custom_tooltip = tooltip_orcish_slave_trade_banned_in_cannor 
-		
 		set_global_flag = orcish_slave_trade_banned_in_cannor 
+		hidden_effect = {
+			216 = { province_event = { id = orc_slavery.11 days = 365 random = 365 } }
+			451 = { province_event = { id = orc_slavery.12 days = 180 random = 730 } }
+		}
 	}
 }
 
@@ -371,12 +399,12 @@ country_event = {
 	
 	trigger = {
 		current_age = age_of_absolutism
+		NOT = { has_global_flag = cannor_noble_fashion }
 		capital_scope = { continent = europe }
 		OR = {
 			dyes = 1
 			any_subject_country = { dyes = 1 }
 		}
-		NOT = { has_global_flag = cannor_noble_fashion }
 	}
 	
 	option = {
@@ -455,8 +483,8 @@ country_event = {
 
 	trigger = {
 		dip_tech = 11 #1544
-		cloth = 1
 		NOT = { has_global_flag = new_draperies_happened }
+		cloth = 1
 	}
 	mean_time_to_happen = {
 		months = 1
@@ -494,7 +522,6 @@ country_event = {
 
 	trigger = {
 		mil_tech = 21 #1674
-		uniforms = 3
 		NOT = { has_global_flag = regulated_uniforms_happened }
 	}
 	mean_time_to_happen = {
@@ -513,13 +540,13 @@ country_event = {
 		change_price = {
 			trade_goods = wool
 			key = REGULATED_UNIFORMS
-			value = 0.15
+			value = 0.1
 			duration = -1
 		}
 		change_price = {
 			trade_goods = dyes
 			key = REGULATED_UNIFORMS
-			value = 0.3
+			value = 0.25
 			duration = -1
 		}
 		hidden_effect = { set_global_flag = regulated_uniforms_happened }
@@ -543,8 +570,8 @@ country_event = {
 
 	trigger = {
 		owns = 221 #Gaweton
-		capital_scope = { continent = europe }
 		NOT = { has_global_flag = depleted_beaver_happened }
+		capital_scope = { continent = europe }
 		is_year = 1570
 	}
 	mean_time_to_happen = {
@@ -556,12 +583,6 @@ country_event = {
 		name = anb_price.10.a
 		change_price = {
 			trade_goods = fur
-			key = DEPLETION_OF_CANNORIAN_BEAVER
-			value = 0.5
-			duration = -1
-		}
-		change_price = {
-			trade_goods = fur_clothing
 			key = DEPLETION_OF_CANNORIAN_BEAVER
 			value = 0.5
 			duration = -1
@@ -584,21 +605,15 @@ country_event = {
 	major = yes
 
 	trigger = {
+		NOT = { has_global_flag = felt_hats_happened }
 		OR = {
 			capital_scope = { continent = europe }
 			is_colonial_nation = yes
 		}
-		OR = {
-			any_owned_province = {
-				trade_goods = fur
-				continent = north_america
-			}
-			any_owned_province = {
-				trade_goods = fur
-				continent = new_world
-			}
+		any_owned_province = {
+			trade_goods = fur
+			continent = north_america
 		}
-		NOT = { has_global_flag = felt_hats_happened }
 	}
 	mean_time_to_happen = {
 		months = 3
@@ -610,13 +625,7 @@ country_event = {
 		change_price = {
 			trade_goods = fur
 			key = FELT_HATS
-			value = 0.3
-			duration = -1
-		}
-		change_price = {
-			trade_goods = fur_clothing
-			key = FELT_HATS
-			value = 0.3
+			value = 0.375
 			duration = -1
 		}
 		hidden_effect = { set_global_flag = felt_hats_happened }
@@ -635,6 +644,7 @@ country_event = {
 	major = yes
 
 	trigger = {
+		NOT = { has_global_flag = esmari_fashion_happened }
 		capital_scope = { continent = europe }
 		OR = {
 			has_country_flag = esmari_fashion_early
@@ -646,7 +656,6 @@ country_event = {
 				}
 			}
 		}
-		NOT = { has_global_flag = esmari_fashion_happened }
 	}
 	mean_time_to_happen = {
 		months = 3
@@ -686,8 +695,8 @@ country_event = {
 
 	trigger = {
 		dip_tech = 22
-		num_of_ports = 3
 		NOT = { has_global_flag = permanent_navies_happened }
+		num_of_ports = 3
 	}
 	mean_time_to_happen = {
 		months = 1
@@ -712,18 +721,6 @@ country_event = {
 			trade_goods = livestock
 			key = PERMANENT_NAVIES
 			value = 0.10
-			duration = -1
-		}
-		change_price = {
-			trade_goods = tar
-			key = PERMANENT_NAVIES
-			value = 0.3
-			duration = -1
-		}
-		change_price = {
-			trade_goods = citrus
-			key = PERMANENT_NAVIES
-			value = 0.3
 			duration = -1
 		}
 		hidden_effect = { set_global_flag = permanent_navies_happened }
@@ -768,18 +765,6 @@ country_event = {
 			value = 0.15
 			duration = 36500
 		}
-		change_price = {
-			trade_goods = tar
-			key = FLEETS_TO_AELANTIR
-			value = 0.15
-			duration = 36500
-		}
-		change_price = {
-			trade_goods = citrus
-			key = FLEETS_TO_AELANTIR
-			value = 0.15
-			duration = 36500
-		}
 		hidden_effect = { set_global_flag = fleets_to_aelantir_happened }
 	}
 }
@@ -802,8 +787,8 @@ country_event = {
 
 	trigger = {
 		mil_tech = 7 #1492
-		copper = 1
 		NOT = { has_global_flag = bronze_cannons_happened }
+		copper = 1
 	}
 	mean_time_to_happen = {
 		months = 1
@@ -814,12 +799,6 @@ country_event = {
 		name = anb_price.13.a
 		change_price = {
 			trade_goods = copper
-			key = BRONZE_CANNONS
-			value = 0.5
-			duration = -1
-		}
-		change_price = {
-			trade_goods = tin
 			key = BRONZE_CANNONS
 			value = 0.5
 			duration = -1
@@ -844,6 +823,7 @@ country_event = {
 	major = yes
 
 	trigger = {
+		NOT = { has_global_flag = popularization_of_sugar_happened }
 		OR = {
 			capital_scope = { continent = europe }
 			AND = {
@@ -867,7 +847,6 @@ country_event = {
 				value = 0.05
 			}
 		}
-		NOT = { has_global_flag = popularization_of_sugar_happened }
 	}
 	mean_time_to_happen = {
 		months = 1
@@ -903,6 +882,7 @@ country_event = {
 	trigger = {
 		capital_scope = { continent = europe }
 		dip_tech = 18 #1635
+		NOT = { has_global_flag = popular_silk_happened }
 		OR = {
 			1361 = { #Gulf of Rahen
 				trade_share = {
@@ -917,7 +897,6 @@ country_event = {
 				}
 			}
 		}
-		NOT = { has_global_flag = popular_silk_happened }
 	}
 	mean_time_to_happen = {
 		months = 1
@@ -950,6 +929,7 @@ country_event = {
 	trigger = {
 		capital_scope = { continent = asia }
 		has_institution = manufactories
+		NOT = { has_global_flag = mass_silk_production_happened }
 		num_of_owned_provinces_with = {
 			value = 5
 			trade_goods = silk
@@ -959,7 +939,6 @@ country_event = {
 			flag = popular_silk_happened
 			days = 18250
 		}
-		NOT = { has_global_flag = mass_silk_production_happened }
 	}
 	mean_time_to_happen = {
 		months = 1
@@ -998,25 +977,15 @@ country_event = {
 
 	trigger = {
 		is_year = 1570
-		OR = {
-			current_age = age_of_reformation #Not before this
-			current_age = age_of_absolutism
-			current_age = age_of_revolutions
-		}
-		tropical_wood = 15
 		NOT = { has_global_flag = veneering_happened }
+		NOT = { current_age = age_of_discovery }
+		tropical_wood = 15
 	}
 	
 	option = {
 		name = anb_price.16.a
 		change_price = {
 			trade_goods = tropical_wood
-			key = VENEERING
-			value = 0.5
-			duration = -1
-		}
-		change_price = {
-			trade_goods = ebony
 			key = VENEERING
 			value = 0.5
 			duration = -1
@@ -1043,8 +1012,8 @@ country_event = {
 
 	trigger = {
 		mil_tech = 18 #1635
-		iron = 1
 		NOT = { has_global_flag = iron_working_happened }
+		iron = 1
 	}
 	mean_time_to_happen = {
 		months = 1
@@ -1062,19 +1031,7 @@ country_event = {
 		change_price = {
 			trade_goods = copper
 			key = IRON_WORKING
-			value = -0.2
-			duration = -1
-		}
-		change_price = {
-			trade_goods = tin
-			key = IRON_WORKING
-			value = -0.2
-			duration = -1
-		}
-		change_price = {
-			trade_goods = lead
-			key = IRON_WORKING
-			value = -0.2
+			value = -0.35
 			duration = -1
 		}
 		hidden_effect = { 
@@ -1100,6 +1057,7 @@ country_event = {
 	major = yes
 
 	trigger = {
+		NOT = { has_global_flag = serpentspine_abundance_happened }
 		capital_scope = { continent = serpentspine }
 		iron = 1
 		copper = 1
@@ -1111,15 +1069,11 @@ country_event = {
 				OR = {
 					trade_goods = copper
 					trade_goods = iron
-					trade_goods = tin
-					trade_goods = zinc
-					trade_goods = lead
 				}
 			}
 			
 			amount = 200
 		}
-		NOT = { has_global_flag = serpentspine_abundance_happened }
 	}
 	mean_time_to_happen = {
 		years = 15
@@ -1164,24 +1118,6 @@ country_event = {
 			value = -0.35
 			duration = -1
 		}
-		change_price = {
-			trade_goods = tin
-			key = SERPENTSPINE_ABUNDANCE
-			value = -0.35
-			duration = -1
-		}
-		change_price = {
-			trade_goods = zinc
-			key = SERPENTSPINE_ABUNDANCE
-			value = -0.35
-			duration = -1
-		}
-		change_price = {
-			trade_goods = lead
-			key = SERPENTSPINE_ABUNDANCE
-			value = -0.35
-			duration = -1
-		}
 		add_years_of_income = 1
 		add_dip_power = 100
 		hidden_effect = { set_global_flag = serpentspine_abundance_happened }
@@ -1203,6 +1139,7 @@ country_event = {
 	trigger = {
 		has_reform = technocracy_republic_reform
 		current_age = age_of_revolutions
+		NOT = { has_global_flag = artificiers_inventions_happened }
 		any_owned_province = {
 			development = 30
 			has_building = university
@@ -1210,7 +1147,6 @@ country_event = {
 			is_city = yes
 			province_without_special_goods_produced_trigger = yes
 		}
-		NOT = { has_global_flag = artificiers_inventions_happened }
 	}
 	mean_time_to_happen = {
 		years = 10
@@ -1294,24 +1230,6 @@ country_event = {
 			duration = -1
 		}
 		change_price = {
-			trade_goods = tin
-			key = ARTIFICIERS_INVENTIONS
-			value = 0.20
-			duration = -1
-		}
-		change_price = {
-			trade_goods = lead
-			key = ARTIFICIERS_INVENTIONS
-			value = 0.20
-			duration = -1
-		}
-		change_price = {
-			trade_goods = zinc
-			key = ARTIFICIERS_INVENTIONS
-			value = 0.20
-			duration = -1
-		}
-		change_price = {
 			trade_goods = glass
 			key = ARTIFICIERS_INVENTIONS
 			value = 0.20
@@ -1346,17 +1264,16 @@ country_event = {
 
 	trigger = {
 		dip_tech = 16 #1609
+		NOT = { has_global_flag = hot_chocolate_happened }
 		any_subject_country = {
 			is_colonial_nation = yes
 			OR = {
 				capital_scope = { continent = north_america }
 				capital_scope = { continent = south_america }
-				capital_scope = { continent = new_world }
 			}
 			cocoa = 5
 			sugar = 1
 		}
-		NOT = { has_global_flag = hot_chocolate_happened }
 	}
 	mean_time_to_happen = {
 		months = 1
@@ -1397,7 +1314,6 @@ country_event = {
 			OR = {
 				capital_scope = { continent = north_america }
 				capital_scope = { continent = south_america }
-				capital_scope = { continent = new_world }
 			}
 			tobacco = 4
 		}
@@ -1444,10 +1360,10 @@ country_event = {
 
 	trigger = {
 		has_institution = printing_press
+		NOT = { has_global_flag = printing_paper_prices_rise }
 		any_owned_province = {
 			has_province_modifier = birthplace_of_printing_press
 		}
-		NOT = { has_global_flag = printing_paper_prices_rise }
 	}
 	
 	mean_time_to_happen = {
@@ -1531,6 +1447,7 @@ country_event = {
 
 	trigger = {
 		has_institution = manufactories
+		NOT = { has_global_flag = hollender_beater_flag }
 		any_owned_province = {
 			province_without_special_goods_produced_trigger = yes
 			is_state = yes
@@ -1548,7 +1465,6 @@ country_event = {
 			NOT = { has_building = textile }
 			NOT = { has_building = wharf }
 		}
-		NOT = { has_global_flag = hollender_beater_flag }
 	}
 	
 	mean_time_to_happen = {
@@ -1581,7 +1497,7 @@ country_event = {
 				limit = {
 					province_without_special_goods_produced_trigger = yes
 					is_state = yes
-					num_free_building_slots = 1 #prefered but not required
+					num_free_building_slots = 1 #preferred but not required
 					OR = { #Somewhere reasonable for windmills 
 						has_building = workshop
 						has_building = counting_house
@@ -1702,6 +1618,7 @@ country_event = {
 	major = yes
 
 	trigger = {
+		NOT = { has_global_flag = paper_in_bureaucracies }
 		adm_tech = 6 #1479
 		has_institution = feudalism
 		OR = {
@@ -1724,7 +1641,6 @@ country_event = {
 				any_owned_province = { NOT = { continent = asia } }
 			}
 		}
-		NOT = { has_global_flag = paper_in_bureaucracies }
 	}
 	
 	mean_time_to_happen = {
@@ -1757,11 +1673,11 @@ country_event = {
 
 	trigger = {
 		has_institution = enlightenment
+		NOT = { has_global_flag = popular_literacy }
 		OR = {
 			full_idea_group = innovativeness_ideas
 			university = 5
 		}
-		NOT = { has_global_flag = popular_literacy }
 	}
 	
 	immediate = {
@@ -1849,6 +1765,7 @@ country_event = {
 	major = yes
 
 	trigger = {
+		NOT = { has_global_flag = faceting_happened }
 		has_institution = renaissance
 		prestige = 50
 		any_owned_province = {
@@ -1856,7 +1773,6 @@ country_event = {
 			OR = {
 				trade_goods = glass
 				trade_goods = gems
-				trade_goods = amber
 			}
 			development = 15
 			is_state = yes
@@ -1866,7 +1782,6 @@ country_event = {
 				has_latent_trade_goods = coal
 			}
 		}
-		NOT = { has_global_flag = faceting_happened }
 	}
 	
 	mean_time_to_happen = {
@@ -1881,7 +1796,6 @@ country_event = {
 					OR = {
 						trade_goods = glass
 						trade_goods = gems
-						trade_goods = amber
 					}
 					development = 15
 					is_state = yes
@@ -1925,20 +1839,6 @@ country_event = {
 			value = 0.25
 			duration = -1
 		}
-		
-		change_price = {
-			trade_goods = amber
-			key = FACETING
-			value = 0.25
-			duration = -1
-		}
-		
-		change_price = {
-			trade_goods = pearls
-			key = FACETING
-			value = 0.25
-			duration = -1
-		}
 		hidden_effect = { set_global_flag = faceting_happened }
 	}
 }
@@ -1955,6 +1855,7 @@ country_event = {
 	major = yes
 
 	trigger = {
+		NOT = { has_global_flag = serpentspine_gems_happened }
 		NOT = { current_age = age_of_discovery }
 		capital_scope = { continent = serpentspine }
 		gems = 5
@@ -1963,7 +1864,6 @@ country_event = {
 			serpentspine = { type = all trade_goods = gems }
 			amount = 20
 		}
-		NOT = { has_global_flag = serpentspine_gems_happened }
 	}
 	
 	mean_time_to_happen = {
@@ -2001,12 +1901,12 @@ country_event = {
 
 	trigger = {
 		has_institution = enlightenment
+		NOT = { has_global_flag = selective_breeding_happened }
 		livestock = 5
 		any_owned_province = {
 			enlightenment = 100
 			trade_goods = livestock
 		}
-		NOT = { has_global_flag = selective_breeding_happened }
 	}
 	
 	mean_time_to_happen = {
@@ -2057,12 +1957,12 @@ country_event = {
 
 	trigger = {
 		dip_tech = 18 #1635
+		NOT = { has_global_flag = development_of_optics }
 		has_institution = global_trade
 		any_owned_province = {
 			trade_goods = glass
 			has_building = mills
 		}
-		NOT = { has_global_flag = development_of_optics }
 	}
 	
 	mean_time_to_happen = {
@@ -2075,12 +1975,6 @@ country_event = {
 		add_innovativeness_small_effect = yes
 		change_price = {
 			trade_goods = glass
-			key = MODERN_OPTICS
-			value = 0.25
-			duration = -1
-		}
-		change_price = {
-			trade_goods = optics
 			key = MODERN_OPTICS
 			value = 0.25
 			duration = -1
@@ -2104,6 +1998,7 @@ country_event = {
 	trigger = {
 		dip_tech = 18
 		has_institution = manufactories
+		NOT = { has_global_flag = lead_crystal_happened }
 		any_owned_province = {
 			manufactories = 100
 			is_state = yes
@@ -2114,7 +2009,6 @@ country_event = {
 			}
 			province_without_special_goods_produced_trigger = yes
 		}
-		NOT = { has_global_flag = lead_crystal_happened }
 	}
 	
 	immediate = {
@@ -2153,12 +2047,6 @@ country_event = {
 			value = -0.5
 			duration = -1
 		}
-		change_price = {
-			trade_goods = lead
-			key = LEAD_CRYSTAL
-			value = 0.5
-			duration = -1
-		}
 		hidden_effect = { set_global_flag = lead_crystal_happened } #Checked by industrialization events for RB
 	}
 }
@@ -2175,13 +2063,13 @@ country_event = {
 	major = yes
 
 	trigger = {
+		NOT = { has_global_flag = potion_for_adventurers }
 		capital_scope = { superregion = western_cannor_superregion }
 		OR = {
 			is_year = 1470
 			has_country_flag = A99_potion_seller_completed
 		}
 		glass = 1
-		NOT = { has_global_flag = potion_for_adventurers }
 	}
 	
 	mean_time_to_happen = {
@@ -2223,12 +2111,12 @@ country_event = {
 		has_country_flag = watt_steam_engine_flag #Set by Industrialization Events
 		has_country_flag = coke_blast_furnaces_flag #Set by Industrialization Events.
 		has_institution = enlightenment
+		NOT = { has_global_flag = steam_engine_happened }
 		any_owned_province = {
 			trade_goods = coal
 			has_building = furnace
 		}
 		coal = 5
-		NOT = { has_global_flag = steam_engine_happened }
 	}
 	
 	immediate = {
@@ -2309,12 +2197,12 @@ country_event = {
 
 	trigger = {
 		capital_scope = { continent = europe }
+		NOT = { has_global_flag = mage_coffee_happened }
 		any_subject_country = {
 			is_colonial_nation = yes
 			coffee = 4
 		}
 		NOT = { current_age = age_of_revolutions }
-		NOT = { has_global_flag = mage_coffee_happened }
 	}
 	
 	mean_time_to_happen = {
@@ -2349,8 +2237,8 @@ country_event = {
 
 	trigger = {
 		has_global_flag = mage_coffee_happened
-		capital_scope = { continent = europe }
 		current_age = age_of_absolutism
+		capital_scope = { continent = europe }
 		NOT = { has_global_flag = bad_side_effect_happened }
 	}
 	
@@ -2388,6 +2276,7 @@ country_event = {
 	fire_only_once = yes
 
 	trigger = {
+		NOT = { has_global_flag = cotton_imports_global }
 		is_year = 1500
 		NOT = { capital_scope = { continent = asia } }
 		OR = {
@@ -2417,21 +2306,10 @@ country_event = {
 			}
 		}
 		#NOT = { has_country_flag = cotton_imports }
-		NOT = { has_global_flag = cotton_imports_global }
 	}
 	
 	mean_time_to_happen = {
 		months = 1
-	}
-
-
-	immediate = {
-		hidden_effect = { set_global_flag = cotton_imports_global }
-	}
-	
-	
-	immediate = {
-		hidden_effect = { set_global_flag = cotton_imports_global }
 	}
 	
 	option = {
@@ -2537,23 +2415,20 @@ country_event = {
 	major = yes
 	
 	trigger = {
+		NOT = { has_global_flag = age_of_wine_happened }
 		OR = {
 			AND = {
-				is_year = 1600
 				production_leader = { trade_goods = wine }
 				capital_scope = { superregion = western_cannor_superregion }
+				is_year = 1600
 				num_of_owned_provinces_with = {
 					value = 5
 					trade_goods = wine
 					has_manufactory_trigger = yes
 				}
-		production_leader = { trade_goods = wine }
 				has_institution = global_trade
 			}
 			has_country_flag = rosande_age_wine
-		}
-		NOT = {
-			has_global_flag = age_of_wine_happened
 		}
 	}
 	
@@ -2587,9 +2462,9 @@ country_event = {
 
 	trigger = {
 		dip_tech = 20 #1661
+		NOT = { has_global_flag = wine_corks_happened }
 		wine = 1
 		glass = 1
-		NOT = { has_global_flag = wine_corks_happened }
 	}
 	mean_time_to_happen = {
 		months = 1
@@ -2631,9 +2506,9 @@ country_event = {
 
 	trigger = {
 		is_year = 1580
+		NOT = { has_global_flag = porcelain_popularity_happened }
 		chinaware = 1
 		capital_scope = { continent = asia }
-		NOT = { has_global_flag = porcelain_popularity_happened }
 		4247 = { #Tree of Stone
 			NOT = { strongest_trade_power = { OR = { has_country_modifier = orcish_administration has_country_modifier = goblin_administration } } }
 		}
@@ -2723,6 +2598,7 @@ country_event = {
 	trigger = {
 		current_age = age_of_revolutions
 		capital_scope = { superregion = escann_superregion }
+		NOT = { has_global_flag = porcelain_in_escann_happened }
 		any_owned_province = {
 			has_terrain = city_terrain
 			superregion = escann_superregion
@@ -2739,7 +2615,6 @@ country_event = {
 		}
 		NOT = { has_country_modifier = orcish_administration }
 		NOT = { has_country_modifier = goblin_administration }
-		NOT = { has_global_flag = porcelain_in_escann_happened }
 	}
 	mean_time_to_happen = {
 		years = 1
@@ -2790,8 +2665,8 @@ country_event = {
 	major = yes
 
 	trigger = {
-		capital_scope = { continent = serpentspine }
 		is_year = 1790
+		capital_scope = { continent = serpentspine }
 		fungi = 15
 		NOT = { has_global_flag = fungi_remedy_happened }
 	}
@@ -2878,11 +2753,11 @@ country_event = {
 	trigger = {
 		capital_scope = { continent = serpentspine }
 		mithril = 5
+		NOT = { has_global_flag = mithril_abundance_happened }
 		calc_true_if = {
 			serpentspine = { type = all trade_goods = mithril }
 			amount = 15
 		}
-		NOT = { has_global_flag = mithril_abundance_happened }
 	}
 	mean_time_to_happen = {
 		months = 1
@@ -2917,9 +2792,8 @@ country_event = {
 	major = yes
 
 	trigger = {
-		small_country_region = {
-			owned_by = ROOT
-		}
+		NOT = { has_global_flag = small_country_devastation_happened }
+		owns = 66
 		calc_true_if = {
 			small_country_region = {
 				type = all
@@ -2927,7 +2801,6 @@ country_event = {
 			}
 			amount = 4
 		}
-		NOT = { has_global_flag = small_country_devastation_happened }
 	}
 	mean_time_to_happen = {
 		days = 1
@@ -2961,8 +2834,9 @@ country_event = {
 	major = yes
 
 	trigger = {
-		capital_scope = { continent = europe }
 		dip_tech = 20 #1661
+		capital_scope = { continent = europe }
+		NOT = { has_global_flag = tea_and_sugar_happened }
 		OR = {
 			any_subject_country = {
 				is_colonial_nation = yes
@@ -2972,15 +2846,10 @@ country_event = {
 			}
 			any_owned_province = {
 				trade_goods = sugar
-				continent = new_world
-			}
-			any_owned_province = {
-				trade_goods = sugar
-				continent = north_america
-			}
-			any_owned_province = {
-				trade_goods = sugar
-				continent = south_america
+				OR = {
+					continent = north_america
+					continent = south_america
+				}
 			}
 		}
 		OR = {
@@ -2994,7 +2863,6 @@ country_event = {
 				trade_goods = tea
 			}
 		}
-		NOT = { has_global_flag = tea_and_sugar_happened }
 	}
 	
 	mean_time_to_happen = {
@@ -3034,13 +2902,14 @@ country_event = {
 	major = yes
 
 	trigger = {
-		has_institution = renaissance
+		NOT = { has_global_flag = damerian_tea_culture_happened }
+		is_part_of_hre = yes
 		OR = {
 			primary_culture = west_damerian
 			primary_culture = east_damerian
 		}
+		has_institution = renaissance
 		prestige = 50
-		NOT = { has_global_flag = damerian_tea_culture_happened }
 	}
 	mean_time_to_happen = {
 		months = 1
@@ -3106,12 +2975,6 @@ country_event = {
 			value = 0.1
 			duration = -1
 		}
-		change_price = {
-			trade_goods = sea_turtle
-			key = RUINREEF_SHOALS
-			value = 0.1
-			duration = -1
-		}
 		add_years_of_income = 0.5
 		hidden_effect = { set_global_flag = ruined_slopes_fisheries_happened }
 	}
@@ -3160,12 +3023,6 @@ country_event = {
 		name = anb_price.51.a
 		change_price = {
 			trade_goods = ivory
-			key = IVORY_WANDS
-			value = 0.25
-			duration = -1
-		}
-		change_price = {
-			trade_goods = elephants
 			key = IVORY_WANDS
 			value = 0.25
 			duration = -1

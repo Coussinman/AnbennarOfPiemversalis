@@ -41,10 +41,7 @@ country_event = {
 	
 	trigger = {
 		num_of_cities = 2
-		OR = {
 		precursor_relics_can_spawn = yes
-			has_idea = AIG_prospector_mages
-		}
 		any_owned_province = {
 			is_city = yes
 			NOT = {
@@ -110,9 +107,6 @@ country_event = {
 					set_add_ruin_count = yes
 				}
 			}
-		}
-		if = { limit = { has_idea = AIG_mining_regulations }
-			set_province_flag = homebrew_permanent_precursor_relics
 		}
 		set_add_relics_count = yes
 	}
@@ -181,11 +175,6 @@ country_event = {
 				has_province_modifier = aelnar_exclusive_trade
 				has_province_modifier = H33_containment_mod
 				has_province_flag = permanent_precursor_relics
-				#homebrew
-				if = {
-					limit = { has_province_flag = homebrew_permanent_precursor_relics }
-					base_production = 11
-				}
 			}
 		}
 		REB = { check_variable = { num_precursor_relics = 5 } }
@@ -257,7 +246,13 @@ province_event = {
 		remove_province_modifier = dwindling_resources
 		if = {
 			limit = { trade_goods = precursor_relics }
-			set_from_saved_trade_goods = yes
+			if = {
+				limit = { has_silverforge_surface_mine = yes }
+				silverforge_precursor_relics_depletion = yes
+			}
+			else = {
+				set_from_saved_trade_goods = yes
+			}
 		}
 		if = {
 			limit = { NOT = { has_province_modifier = eordan_expedition_site } }
@@ -438,5 +433,3 @@ country_event = {
 		}
 	}
 }
-
-#homebrew price drop unnecessary, since pricechanges rely on a shortage (you can hoard relics, but at a certain point it'll prevent pricechanges from happening)

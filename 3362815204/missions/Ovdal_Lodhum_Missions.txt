@@ -1127,7 +1127,7 @@ lodhum_feywoods_branch_1 = {
 						add_core = I33
 						cede_province = I33
 					}
-					#seperate so it also removes stuff you didn't conquer
+					#separate so it also removes stuff you didn't conquer
 					every_core_province = {
 						limit = { superregion = deepwoods_superregion }
 						remove_core = ROOT
@@ -1752,7 +1752,7 @@ lodhum_bulwar_branch_5 = {
 						add_core = F26
 						cede_province = F26
 					}
-					#seperate so it also removes stuff you didn't conquer
+					#separate so it also removes stuff you didn't conquer
 					every_core_province = {
 						limit = { superregion = bulwar_superregion NOT = { OR = { area = gelkalis_area area = tungr_mountains_area area = medbahar_area area = crathanor_area area = reuyel_area } } }
 						remove_core = ROOT
@@ -2883,14 +2883,8 @@ lodhum_part2_5 = {
 								limit = { has_heir = yes }
 								add_heir_personality = free_thinker_personality
 							}
-							#set up from the decision, 50 instead of 100 because boost
-							if = {
-								limit = { NOT = { has_country_flag = removing_monstrous } }
-								set_country_flag = removing_monstrous
-								set_variable = { which = monstrousPoints value = 50 }
-							}
-							#already demonsterizing, just give boost
-							else = { change_variable = { which = monstrousPoints value = -50 } }
+							start_demonsterization_effect = yes
+							decrease_monstrous_20 = yes
 						}
 					}
 				}
@@ -3251,7 +3245,7 @@ lodhum_part3_2 = {
 						add_core = F23
 						cede_province = F23
 					}
-					#seperate so it also removes stuff you didn't conquer
+					#separate so it also removes stuff you didn't conquer
 					every_core_province = {
 						limit = {
 							OR = {
