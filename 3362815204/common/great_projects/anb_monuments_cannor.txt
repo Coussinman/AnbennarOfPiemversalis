@@ -33,45 +33,45 @@ bal_vertesk = {
 	can_upgrade_trigger = {
 		NOT = { has_province_modifier = ruined_castanorian_citadel }
 		owner = {
-			OR = {
-				primary_culture = vertesker
-				accepted_culture = vertesker
-				}
-			}
-			hidden_trigger = {
-				AND = {
-					culture = vertesker_new
-					owner = {
-						accepted_culture = vertesker_new
+				OR = {
+					OR = {
+					primary_culture = vertesker
+					accepted_culture = vertesker
 					}
+					hidden_trigger = {
+						AND = {
+							culture = vertesker_new
+							owner = {
+								accepted_culture = vertesker_new
+							}
+						}
+					}
+					hidden_trigger = {
+						has_country_flag = vaengheim_can_use_balvertesk
+					}
+				holds_castanor_legacy = yes
 				}
 			}
-			hidden_trigger = {
-				has_country_flag = vaengheim_can_use_balvertesk
-			}
-				holds_castanor_legacy = yes
-			}
-		}
 	}
 
 	can_use_modifiers_trigger = {
 		owner = {
 			OR = {
-				primary_culture = vertesker
-				accepted_culture = vertesker
+				OR = {
+					primary_culture = vertesker
+					accepted_culture = vertesker
 				}
-			}
-			hidden_trigger = {
-				AND = {
-					culture = vertesker_new
-					owner = {
-						accepted_culture = vertesker_new
+				hidden_trigger = {
+					AND = {
+						culture = vertesker_new
+						owner = {
+							accepted_culture = vertesker_new
+						}
 					}
 				}
-			}
-			hidden_trigger = {
-				has_country_flag = vaengheim_can_use_balvertesk
-			}
+				hidden_trigger = {
+					has_country_flag = vaengheim_can_use_balvertesk
+				}
 				holds_castanor_legacy = yes
 			}	
 		}
@@ -663,24 +663,25 @@ bal_dostan = {
 		on_upgraded = {
 			add_base_manpower = 3
 			owner = {
-			if = {
-					limit = {
-						has_estate = estate_nobles
+				if = {
+						limit = {
+							has_estate = estate_nobles
+						}
+						add_estate_loyalty = {
+							estate = estate_nobles
+							loyalty = 15
+						}
 					}
-					add_estate_loyalty = {
-						estate = estate_nobles
-						loyalty = 15
-					}
-				}
 				if = {
 					limit = {
 						has_estate = estate_castonath_patricians
 					}
-				limit = { owner = { has_estate = estate_castonath_patricians } }
-				owner = {
-					add_estate_loyalty = {
-						estate = estate_castonath_patricians
-						loyalty = 15
+					limit = { owner = { has_estate = estate_castonath_patricians } }
+					owner = {
+						add_estate_loyalty = {
+							estate = estate_castonath_patricians
+							loyalty = 15
+						}
 					}
 				}
 				if = {
@@ -966,31 +967,34 @@ bal_hyl = {
 				culture = wexonard
 				owner = {
 					accepted_culture = wexonard
-				}
-			}
-			hidden_trigger = {
-				AND = {
-					culture = wexonard_new
-					owner = {
-						accepted_culture = wexonard_new
 					}
 				}
-			}
-			hidden_trigger = {
-				AND = {
-					culture = wexonard_dual
-					owner = {
-						accepted_culture = wexonard_dual
-					PREV = { 
-						area_for_scope_province = { 
-							type = all 
-							country_or_non_sovereign_subject_holds = PREV 
-						} 
+				hidden_trigger = {
+					AND = {
+						culture = wexonard_new
+						owner = {
+							accepted_culture = wexonard_new
+						}
 					}
 				}
-				holds_castanor_legacy = yes
-			owner = {
-				mission_completed = AC7_iron_ziggurat
+				hidden_trigger = {
+					AND = {
+						culture = wexonard_dual
+						owner = {
+							accepted_culture = wexonard_dual
+							PREV = { 
+							area_for_scope_province = { 
+								type = all 
+								country_or_non_sovereign_subject_holds = PREV 
+								}	 
+							}
+						}
+						holds_castanor_legacy = yes
+					}
+				}
+				owner = {
+							mission_completed = AC7_iron_ziggurat
+						}
 			}
 		}
 	}
@@ -1004,31 +1008,34 @@ bal_hyl = {
 				culture = wexonard
 				owner = {
 					accepted_culture = wexonard
-				}
-			}
-			hidden_trigger = {
-				AND = {
-					culture = wexonard_new
-					owner = {
-						accepted_culture = wexonard_new
 					}
 				}
-			}
-			hidden_trigger = {
-				AND = {
-					culture = wexonard_dual
-					owner = {
-						accepted_culture = wexonard_dual
-					PREV = { 
-						area_for_scope_province = { 
-							type = all 
-							country_or_non_sovereign_subject_holds = PREV 
-						} 
+				hidden_trigger = {
+					AND = {
+						culture = wexonard_new
+						owner = {
+							accepted_culture = wexonard_new
+						}
 					}
 				}
-				holds_castanor_legacy = yes
-			owner = {
-				mission_completed = AC7_iron_ziggurat
+				hidden_trigger = {
+					AND = {
+						culture = wexonard_dual
+						owner = {
+							accepted_culture = wexonard_dual
+						PREV = { 
+							area_for_scope_province = { 
+								type = all 
+								country_or_non_sovereign_subject_holds = PREV 
+							} 
+						}
+					}
+					holds_castanor_legacy = yes
+					}
+				}
+				owner = {
+					mission_completed = AC7_iron_ziggurat
+				}
 			}
 		}
 	}
@@ -1212,6 +1219,7 @@ bal_mire = {
 	on_destroyed = {	
 	}
 	can_use_modifiers_trigger = {
+	}
 
 	can_upgrade_trigger = {
 		NOT = { has_province_modifier = ruined_castanorian_citadel }
@@ -4839,9 +4847,9 @@ lorenans_rest = {
 					OR = {
 						dynasty = "Siloriel"
 						dynasty = "Silmuna"
-						dynasty = "síl Rubenaire"
-						dynasty = "síl Eilísin"
-						dynasty = "síl Kyliande"
+						dynasty = "sÃ­l Rubenaire"
+						dynasty = "sÃ­l EilÃ­sin"
+						dynasty = "sÃ­l Kyliande"
 					}
 				}
 			}
@@ -4860,9 +4868,9 @@ lorenans_rest = {
 					OR = {
 						dynasty = "Siloriel"
 						dynasty = "Silmuna"
-						dynasty = "síl Rubenaire"
-						dynasty = "síl Eilísin"
-						dynasty = "síl Kyliande"
+						dynasty = "sÃ­l Rubenaire"
+						dynasty = "sÃ­l EilÃ­sin"
+						dynasty = "sÃ­l Kyliande"
 					}
 				}
 			}
