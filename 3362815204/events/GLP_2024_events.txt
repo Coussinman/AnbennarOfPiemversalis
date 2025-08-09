@@ -604,6 +604,40 @@ country_event = {
             }
         }
     }
+
+    option = {
+        name = "glp_2024_events.EVTOPTY7"
+        trigger = {
+            FROM = {
+                owner = {
+                    NOT = { has_country_flag = mythical_conqueror_flag }
+                }
+            }
+        }
+        FROM = {
+            owner = {
+                country_event = { id = glp_2024_events.10 }
+                set_country_flag = glp_artifact_granted_mythical_conqueror_modifier
+            }
+        }
+    }
+
+    option = {
+        name = "glp_2024_events.EVTOPTZ7"
+        trigger = {
+            FROM = {
+                owner = {
+                    NOT = { has_country_flag = great_conqueror_flag }
+                }
+            }
+        }
+        FROM = {
+            owner = {
+                country_event = { id = glp_2024_events.10 }
+                set_country_flag = glp_artifact_granted_great_conqueror_modifier
+            }
+        }
+    }
 }
 
 country_event = {
@@ -864,6 +898,83 @@ country_event = {
     }
 }
 
+country_event = {
+    id = glp_2024_events.10
+    title = "glp_2024_events.EVTNAME10"
+    desc = "glp_2024_events.EVTDESC10"
+    picture = SENCRATIC_ALTER_eventPicture
+
+    is_triggered_only = yes
+
+    trigger = {
+    }
+
+    mean_time_to_happen = {
+    }
+
+    option = {
+        name = "glp_2024_events.EVTOPTA10"
+        if = {
+            limit = {
+                has_country_flag = glp_artifact_granted_mythical_conqueror_modifier
+            }
+            clr_country_flag = glp_artifact_granted_mythical_conqueror_modifier
+            custom_tooltip = glp_artifact_granted
+            add_ruler_personality = mythical_conqueror_personality
+			add_ruler_modifier = {
+				name = mythical_conqueror_modifier
+				duration = -1
+			}
+			set_ai_personality = {
+				personality = ai_militarist
+				locked = yes
+			}
+			add_stability = 3
+			change_dip = 3
+			change_adm = 3
+			change_mil = 3
+			# Back-end
+			set_country_flag = mythical_conqueror_flag
+			REB = { change_variable = { nbGC = 1 } }
+			export_to_variable = {
+				which = ownDev
+				value = total_development
+				who = ROOT
+			}
+			log = "MYTHICAL CONQUEROR ---------------- [Root.GetName] |[Root.ownDev.GetValue]| became a Mythical Conqueror in [GetYear] [GetMonth]. It's a [Root.GovernmentName] | Number of GC: [REB.nbGC.GetValue]"
+        }
+        if = {
+            limit = {
+                has_country_flag = glp_artifact_granted_great_conqueror_modifier
+            }
+            clr_country_flag = glp_artifact_granted_great_conqueror_modifier
+            custom_tooltip = glp_artifact_granted
+            add_ruler_personality = great_conqueror_personality
+			add_ruler_modifier = {
+				name = great_conqueror_modifier
+				duration = -1
+			}
+			set_ai_personality = {
+				personality = ai_militarist
+				locked = yes
+			}
+			add_stability = 1
+			change_dip = 1
+			change_adm = 1
+			change_mil = 1
+			
+			# Back-end
+			set_country_flag = great_conqueror_flag
+			REB = { change_variable = { nbGC = 1 } }
+			export_to_variable = {
+				which = ownDev
+				value = development
+				who = ROOT
+			}
+			log = "GREAT CONQUEROR ---------------- [Root.GetName] |[Root.ownDev.GetValue]| became a Great Conqueror in [GetYear] [GetMonth]. It's a [Root.GovernmentName] | Number of GC: [REB.nbGC.GetValue]"
+        }
+    }
+}
 
 #Blood Feud/Request Duel
 country_event = {
