@@ -3736,6 +3736,137 @@ country_event = {
 			}
 		}
 	}
+	#option = {
+	#	name = "glp_save_edit_events.EVTFIXINGNUKEWARNING"
+	#	custom_tooltip = MJ_nuke_threat_tt
+	#	
+	#}
+	option = {
+		name = "glp_save_edit_events.EVTFIXINGNUKE"
+		custom_tooltip = MJ_nuke_tt
+		FROM = {
+			save_event_target_as = MJ_nuke
+		}
+		country_event = { id = glp_save_edit_events_NUKE.1 }
+	}
+}
+
+#The last reflection
+country_event = {
+	id = glp_save_edit_events_NUKE.1
+	title = glp_save_edit_events_NUKE.EVTNAME1
+	desc = glp_save_edit_events_NUKE.EVTDESC1
+	picture = BIG_STAR_IN_SKY_eventPicture
+
+	is_triggered_only = yes
+
+	trigger = {
+	}
+
+	mean_time_to_happen = {
+	}
+
+	option = {
+		name = glp_save_edit_events_NUKE.EVTOPTZZ1
+		hidden_effect = {
+			clear_global_event_target = MJ_nuke
+		}
+	}
+	option = {
+		name = glp_save_edit_events_NUKE.EVTOPTA01
+		event_target:MJ_nuke = { owner = { country_event = { id = glp_save_edit_events_NUKE.2 } } }
+	}
+	option = {
+		name = glp_save_edit_events_NUKE.EVTOPTA02
+		event_target:MJ_nuke = { owner = { country_event = { id = glp_save_edit_events_NUKE.3 } } }
+	}
+}
+
+#Saved from the MJ wrath
+country_event = {
+	id = glp_save_edit_events_NUKE.2
+	title = glp_save_edit_events_NUKEWARNING.EVTNAME1
+	desc = glp_save_edit_events_NUKEWARNING.EVTDESC1
+	picture = BANKRUPTCY_eventPicture
+
+	is_triggered_only = yes
+
+	trigger = {
+	}
+
+	mean_time_to_happen = {
+	}
+
+	option = {
+		name = glp_save_edit_events_NUKEWARNING.EVTOPTA01
+	}
+	option = {
+		name = glp_save_edit_events_NUKEWARNING.EVTOPTA02
+	}
+	option = {
+		name = glp_save_edit_events_NUKEWARNING.EVTOPTA03
+	}
+	after = {
+		hidden_effect = {
+			clear_global_event_target = MJ_nuke
+		}
+	}
+}
+
+#It exploded...
+country_event = {
+	id = glp_save_edit_events_NUKE.3
+	title = glp_save_edit_events_NUKEEXPLODED.EVTNAME1
+	desc = glp_save_edit_events_NUKEEXPLODED.EVTDESC1
+	picture = BIG_STAR_IN_SKY_eventPicture
+
+	is_triggered_only = yes
+
+	trigger = {
+	}
+
+	mean_time_to_happen = {
+	}
+
+	immediate = {
+		hidden_effect = {
+			event_target:MJ_nuke = {
+				add_devastation = 100
+				if = {
+					limit = { base_tax = 2 }
+					set_base_tax = 1
+				}
+				if = {
+					limit = { base_production = 2 }
+					set_base_production = 1
+				}
+				if = {
+					limit = { base_manpower = 2 }
+					set_base_manpower = 1
+				}
+				kill_units = {
+					who = enemy
+				}
+				kill_units = {
+					who = owner
+				} 
+				kill_units = {
+					who = controller
+				}
+				remove_all_buildings = yes
+			}
+		}
+	}
+
+	option = {
+		name = glp_save_edit_events_NUKEEXPLODED.EVTOPTA01
+	}
+
+	after = {
+		hidden_effect = {
+			clear_global_event_target = MJ_nuke
+		}
+	}
 }
 
 
@@ -6919,233 +7050,178 @@ country_event = {
 	option = {
 		name = "glp_save_edit_events.EVTBATZZ1"
 	}
-
-	option = {
-		name = "glp_save_edit_events.EVTBATA01"
-		FROM = {
-				add_building = mills
-		}
-	}
-
-	option = {
-		name = "glp_save_edit_events.EVTBATAA01"
-		FROM = {
-				add_building = wharf
-		}
-	}
-
-	option = {
-		name = "glp_save_edit_events.EVTBATAB01"
-		FROM = {
-				add_building = weapons
-		}
-	}
-
-	option = {
-		name = "glp_save_edit_events.EVTBATAC01"
-		FROM = {
-				add_building = textile
-		}
-	}
-
-	option = {
-		name = "glp_save_edit_events.EVTBATAD01"
-		FROM = {
-				add_building = plantations
-		}
-	}
-
-	option = {
-		name = "glp_save_edit_events.EVTBATAE01"
-		FROM = {
-				add_building = tradecompany
-		}
-	}
-
-	option = {
-		name = "glp_save_edit_events.EVTBATAF01"
-		FROM = {
-				add_building = farm_estate
-		}
-	}
-
-	option = {
-		name = "glp_save_edit_events.EVTBATAG01"
-		FROM = {
-				add_building = furnace
-		}
-	}
-
-	option = {
-		name = "glp_save_edit_events.EVTBATAH01"
-		FROM = {
-				add_building = ramparts
-		}
-	}
 	
-	option = {
-		name = "glp_save_edit_events.EVTBATAI01"
+	immediate = {
 		FROM = {
-				add_building = soldier_households
+			save_event_target_as = glp_builder_nation
 		}
 	}
 
 	option = {
-		name = "glp_save_edit_events.EVTBATAJ01"
-		FROM = {
-				add_building = impressment_offices
-		}
+		name = glp_save_edit_events.EVTBATA01
+		
+		country_event = { id = glp_save_edit_events.72 }
 	}
-
 	option = {
-		name = "glp_save_edit_events.EVTBATAK01"
-		FROM = {
-				add_building = state_house
-		}
+		name = glp_save_edit_events.EVTBATA02
+		country_event = { id = glp_save_edit_events.73 }
 	}
-
-
 	option = {
-		name = "glp_save_edit_events.EVTBATA02"
-		FROM = {
-				limit = {
-					has_manufactory_trigger = yes
-				}
-				remove_building = manufactory
-		}
+		name = glp_save_edit_events.EVTBATA03
+		country_event = { id = glp_save_edit_events.74 }
 	}
-
 	option = {
-		name = "glp_save_edit_events.EVTBATA03"
-		FROM = {
-				add_building = temple
-		}
+		name = glp_save_edit_events.EVTBATA04
+		country_event = { id = glp_save_edit_events.75 }
 	}
-
-	option = {
-		name = "glp_save_edit_events.EVTBATA04"
-		FROM = {
-				add_building = workshop
-		}
-	}
-
 	option = {
 		name = "glp_save_edit_events.EVTBATA05"
 		FROM = {
-			add_building = cathedral
+			remove_all_buildings = yes
 		}
+		clear_global_event_target = glp_builder_nation
+	}
+}
+
+country_event = {
+	id = glp_save_edit_events.72
+	title = "glp_save_edit_events.EVTNAME72"
+	desc = "glp_save_edit_events.EVTDESC72"
+	picture = CITY_DEVELOPMENT_eventPicture
+
+	is_triggered_only = yes
+
+	trigger = {
 	}
 
+	mean_time_to_happen = {
+	}
 	option = {
-		name = "glp_save_edit_events.EVTBATA06"
-		FROM = {
-			add_building = counting_house
+		name = "glp_save_edit_events.BUILDINGZZ1"
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA01"
+		event_target:glp_builder_nation = {
+			add_building = temple
 		}
 	}
-
 	option = {
-		name = "glp_save_edit_events.EVTBATA07"
-		FROM = {
-			add_building = barracks
-		}
-	}
-
-	option = {
-		name = "glp_save_edit_events.EVTBATA08"
-		FROM = {
-			add_building = regimental_camp
-		}
-	}
-
-	option = {
-		name = "glp_save_edit_events.EVTBATA09"
-		FROM = {
-			add_building = conscription_center
-		}
-	}
-
-	option = {
-		name = "glp_save_edit_events.EVTBATA10"
-		FROM = {
-			add_building = training_fields
-		}
-	}
-
-	option = {
-		name = "glp_save_edit_events.EVTBATA11"
-		FROM = {
+		name = "glp_save_edit_events.BUILDINGA02"
+		event_target:glp_builder_nation = {
 			if = {
 				limit = {
 					has_building = temple
 				}
 				remove_building = temple
+				add_building = cathedral
 			}
-			else_if = {
-				limit = {
-					has_building = cathedral
-				}
-				remove_building = cathedral
+			else = {
+				add_building = cathedral
 			}
 		}
 	}
-
 	option = {
-		name = "glp_save_edit_events.EVTBATA12"
-		FROM = {
+		name = "glp_save_edit_events.BUILDINGA03"
+		event_target:glp_builder_nation = {
+			add_building = workshop
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA04"
+		event_target:glp_builder_nation = {
 			if = {
 				limit = {
 					has_building = workshop
 				}
 				remove_building = workshop
+				add_building = counting_house
 			}
-			else_if = {
-				limit = {
-					has_building = counting_house
-				}
-				remove_building = counting_house
+			else = {
+				add_building = counting_house
 			}
 		}
 	}
-
 	option = {
-		name = "glp_save_edit_events.EVTBATA13"
-		FROM = {
+		name = "glp_save_edit_events.BUILDINGA05"
+		event_target:glp_builder_nation = {
+			add_building = marketplace
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA06"
+		event_target:glp_builder_nation = {
 			if = {
 				limit = {
-					has_building = barracks
+					has_building = marketplace
 				}
-				remove_building = barracks
+				remove_building = marketplace
+				add_building = trade_depot
 			}
-			else_if = {
-				limit = {
-					has_building = training_fields
-				}
-				remove_building = training_fields
+			else = {
+				add_building = trade_depot
 			}
 		}
 	}
-
 	option = {
-		name = "glp_save_edit_events.EVTBATA14"
-		FROM = {
+		name = "glp_save_edit_events.BUILDINGA07"
+		event_target:glp_builder_nation = {
 			if = {
 				limit = {
-					has_building = regimental_camp
+					has_building = trade_depot
 				}
-				remove_building = regimental_camp
+				remove_building = trade_depot
+				add_building = stock_exchange
 			}
 			else_if = {
 				limit = {
-					has_building = conscription_center
+					has_building = marketplace
 				}
-				remove_building = conscription_center
+				remove_building = marketplace
+				add_building = stock_exchange
+			}
+			else = {
+				add_building = stock_exchange
 			}
 		}
 	}
-
 	option = {
-		name = "glp_save_edit_events.EVTBATA15"
-		FROM = {
+		name = "glp_save_edit_events.BUILDINGA08"
+		event_target:glp_builder_nation = {
+			add_building = courthouse
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA09"
+		event_target:glp_builder_nation = {
+			if = {
+				limit = {
+					has_building = courthouse
+				}
+				remove_building = courthouse
+				add_building = town_hall
+			}
+			else = {
+				add_building = town_hall
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA10"
+		event_target:glp_builder_nation = {
+			add_building = university
+		}
+	}
+	#Dirt Roads
+	option = {
+		name = "glp_save_edit_events.BUILDINGA11"
+		event_target:glp_builder_nation = {
+			add_building = early_road
+		}
+	}
+	#Gravel Roads
+	option = {
+		name = "glp_save_edit_events.BUILDINGA12"
+		event_target:glp_builder_nation = {
 			if = {
 				limit = {
 					has_building = early_road
@@ -7153,7 +7229,16 @@ country_event = {
 				remove_building = early_road
 				add_building = gravel_road
 			}
-			else_if = {
+			else = {
+				add_building = gravel_road
+			}
+		}
+	}
+	#Cobbelstone Roads
+	option = {
+		name = "glp_save_edit_events.BUILDINGA13"
+		event_target:glp_builder_nation = {
+			if = {
 				limit = {
 					has_building = gravel_road
 				}
@@ -7162,260 +7247,761 @@ country_event = {
 			}
 			else_if = {
 				limit = {
+					has_building = early_road
+				}
+				remove_building = early_road
+				add_building = royal_road
+			}
+			else = {
+				add_building = royal_road
+			}
+		}
+	}
+	#Dwarven Roads
+	option = {
+		name = "glp_save_edit_events.BUILDINGA14"
+		event_target:glp_builder_nation = {
+			if = {
+				limit = {
+					has_building = gravel_road
+				}
+				remove_building = gravel_road
+				add_building = macadam_road
+			}
+			else_if = {
+				limit = {
+					has_building = early_road
+				}
+				remove_building = early_road
+				add_building = macadam_road
+			}
+			else_if = {
+				limit = {
 					has_building = royal_road
 				}
 				remove_building = royal_road
 				add_building = macadam_road
 			}
-			else_if = {
+			else = {
+				add_building = macadam_road
+			}
+		}
+	}
+	#Railroads
+	option = {
+		name = "glp_save_edit_events.BUILDINGA15"
+		event_target:glp_builder_nation = {
+			if = {
 				limit = {
 					has_building = macadam_road
 				}
 				remove_building = macadam_road
 				add_building = railroad
 			}
+			else_if = {
+				limit = {
+					has_building = gravel_road
+				}
+				remove_building = gravel_road
+				add_building = railroad
+			}
+			else_if = {
+				limit = {
+					has_building = early_road
+				}
+				remove_building = early_road
+				add_building = railroad
+			}
+			else_if = {
+				limit = {
+					has_building = royal_road
+				}
+				remove_building = royal_road
+				add_building = railroad
+			}
 			else = {
-				add_building = early_road
+				add_building = railroad
 			}
 		}
 	}
-
+	#Manufactories
 	option = {
-		name = "glp_save_edit_events.EVTBATA16"
-		FROM = {
+		name = "glp_save_edit_events.BUILDINGA16"
+		event_target:glp_builder_nation = {		
 			add_building = mage_tower
 		}
 	}
-
 	option = {
-		name = "glp_save_edit_events.EVTBATA17"
-		FROM = {
+		name = "glp_save_edit_events.BUILDINGA17"
+		event_target:glp_builder_nation = {		
+			add_building = farm_estate
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA18"
+		event_target:glp_builder_nation = {		
+			add_building = textile
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA19"
+		event_target:glp_builder_nation = {		
+			add_building = plantations
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA20"
+		event_target:glp_builder_nation = {		
+			add_building = mills
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA21"
+		event_target:glp_builder_nation = {		
+			add_building = furnace
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA22"
+		event_target:glp_builder_nation = {		
+			add_building = wharf
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA23"
+		event_target:glp_builder_nation = {		
+			add_building = tradecompany
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA24"
+		event_target:glp_builder_nation = {		
+			add_building = weapons
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA25"
+		event_target:glp_builder_nation = {		
+			add_building = state_house
+		}
+	}	
+
+	after = {
+		clear_global_event_target = glp_builder_nation
+	}
+}
+
+country_event = {
+	id = glp_save_edit_events.73
+	title = "glp_save_edit_events.EVTNAME73"
+	desc = "glp_save_edit_events.EVTDESC73"
+	picture = CITY_DEVELOPMENT_eventPicture
+
+	is_triggered_only = yes
+
+	trigger = {
+	}
+
+	mean_time_to_happen = {
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGZZ2"
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA26"
+		event_target:glp_builder_nation = {		
+			add_building = barracks
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA27"
+		event_target:glp_builder_nation = {
 			if = {
 				limit = {
-					has_building = mage_tower
+					has_building = barracks
 				}
-				add_building = mage_tower
+				remove_building = barracks
+				add_building = training_fields
+			}
+			else = {
+				add_building = training_fields
 			}
 		}
 	}
-
 	option = {
-		name = "glp_save_edit_events.EVTBATA18"
-		FROM = {
+		name = "glp_save_edit_events.BUILDINGA28"
+		event_target:glp_builder_nation = {		
+			add_building = regimental_camp 
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA29"
+		event_target:glp_builder_nation = {
+			if = {
+				limit = {
+					has_building = regimental_camp
+				}
+				remove_building = regimental_camp
+				add_building = conscription_center 
+			}
+			else = {
+				add_building = conscription_center
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA30"
+		event_target:glp_builder_nation = {		
+			add_building = dock
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA31"
+		event_target:glp_builder_nation = {
+			if = {
+				limit = {
+					has_building = dock
+				}
+				remove_building = dock
+				add_building = drydock
+			}
+			else = {
+				add_building = drydock
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA32"
+		event_target:glp_builder_nation = {
+			add_building = shipyard
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA33"
+		event_target:glp_builder_nation = {
+			if = {
+				limit = {
+					has_building = shipyard
+				}
+				remove_building = shipyard
+				add_building = grand_shipyard
+			}
+			else = {
+				add_building = grand_shipyard
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA34"
+		event_target:glp_builder_nation = {
+			add_building = coastal_defence
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA35"
+		event_target:glp_builder_nation = {
+			if = {
+				limit = {
+					has_building = coastal_defence
+				}
+				remove_building = coastal_defence
+				add_building = naval_battery
+			}
+			else = {
+				add_building = naval_battery
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA36"
+		event_target:glp_builder_nation = {
+			add_building = soldier_households
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA37"
+		event_target:glp_builder_nation = {
+			add_building = ramparts
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA38"
+		event_target:glp_builder_nation = {
+			add_building = impressment_offices
+		}
+	}
+	#Magic forteress
+	option = {
+		name = "glp_save_edit_events.BUILDINGA39"
+		event_target:glp_builder_nation = {
 			add_building = fort_magic
 		}
 	}
-
+	#Castle
 	option = {
-		name = "glp_save_edit_events.EVTBATA19"
-		FROM = {
-			if = {
-				limit = {
-					has_building = fort_magic
-				}
-				add_building = fort_magic
-			}
-		}
-	}
-	
-	option = {
-		name = "glp_save_edit_events.EVTBATA20"
-		FROM = {
+		name = "glp_save_edit_events.BUILDINGA40"
+		event_target:glp_builder_nation = {
 			add_building = fort_15th
 		}
 	}
-
+	#Bastion
 	option = {
-		name = "glp_save_edit_events.EVTBATA21"
-		FROM = {
-			add_building = fort_16th
-		}
-	}
-
-	option = {
-		name = "glp_save_edit_events.EVTBATA22"
-		FROM = {
-			add_building = fort_17th
-		}
-	}
-
-	option = {
-		name = "glp_save_edit_events.EVTBATA23"
-		FROM = {
-			add_building = fort_18th
-		}
-	}
-
-	option = {
-		name = "glp_save_edit_events.EVTBATA24"
-		FROM = {
+		name = "glp_save_edit_events.BUILDINGA41"
+		event_target:glp_builder_nation = {
 			if = {
 				limit = {
 					has_building = fort_15th
 				}
 				remove_building = fort_15th
+				add_building = fort_16th
+			}
+			else = {
+				add_building = fort_16th
+			}
+		}
+	}
+	#Star fort
+	option = {
+		name = "glp_save_edit_events.BUILDINGA42"
+		event_target:glp_builder_nation = {
+			if = {
+				limit = {
+					has_building = fort_16th
+				}
+				remove_building = fort_16th
+				add_building = fort_17th
+			}
+			else_if = {
+				limit = {
+					has_building = fort_15th
+				}
+				remove_building = fort_15th
+				add_building = fort_17th
+			}
+			else = {
+				add_building = fort_17th
+			}
+		}
+	}
+	#Fortress
+	option = {
+		name = "glp_save_edit_events.BUILDINGA43"
+		event_target:glp_builder_nation = {
+			if = {
+				limit = {
+					has_building = fort_17th
+				}
+				remove_building = fort_17th
+				add_building = fort_18th
 			}
 			else_if = {
 				limit = {
 					has_building = fort_16th
 				}
 				remove_building = fort_16th
+				add_building = fort_18th
 			}
 			else_if = {
 				limit = {
-					has_building = fort_17th
+					has_building = fort_15th
 				}
-				remove_building = fort_17th
+				remove_building = fort_15th
+				add_building = fort_18th
 			}
-			else_if = {
-				limit = {
-					has_building = fort_18th
-				}
-				remove_building = fort_18th
+			else = {
+				add_building = fort_18th
 			}
 		}
 	}
-	
-	option = {
-		name = "glp_save_edit_events.EVTBATA25"
-		FROM = {
-			add_building = marketplace
-		}
+}
+
+country_event = {
+	id = glp_save_edit_events.74
+	title = "glp_save_edit_events.EVTNAME74"
+	desc = "glp_save_edit_events.EVTDESC74"
+	picture = CITY_DEVELOPMENT_eventPicture
+
+	is_triggered_only = yes
+
+	trigger = {
 	}
 
-	option = {
-		name = "glp_save_edit_events.EVTBATA26"
-		FROM = {
-			add_building = trade_depot
-		}
-	}
-
-	option = {
-		name = "glp_save_edit_events.EVTBATA27"
-		FROM = {
-			add_building = stock_exchange
-		}
+	mean_time_to_happen = {
 	}
 	option = {
-		name = "glp_save_edit_events.EVTBATA28"
-		FROM = {
-			if = {
-				limit = {
-					has_building = marketplace
-				}
-				remove_building = marketplace
-			}
-			else_if = {
-				limit = {
-					has_building = trade_depot
-				}
-				remove_building = trade_depot
-			}
-			else_if = {
-				limit = {
-					has_building = stock_exchange
-				}
-				remove_building = stock_exchange
-			}
+		name = "glp_save_edit_events.BUILDINGZZ3"
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA44"
+		event_target:glp_builder_nation = {
+			remove_building = temple
 		}
 	}
 	option = {
-		name = "glp_save_edit_events.EVTBATA29"
-		FROM = {
-			add_building = courthouse
+		name = "glp_save_edit_events.BUILDINGA45"
+		event_target:glp_builder_nation = {
+			remove_building = cathedral
 		}
 	}
 	option = {
-		name = "glp_save_edit_events.EVTBATA30"
-		FROM = {
-			add_building = town_hall
+		name = "glp_save_edit_events.BUILDINGA46"
+		event_target:glp_builder_nation = {
+			remove_building = workshop
 		}
 	}
 	option = {
-		name = "glp_save_edit_events.EVTBATA31"
-		FROM = {
-			if = {
-				limit = {
-					has_building = courthouse
-				}
-				remove_building = courthouse
-			}
-			else_if = {
-				limit = {
-					has_building = town_hall
-				}
-				remove_building = town_hall
-			}
+		name = "glp_save_edit_events.BUILDINGA47"
+		event_target:glp_builder_nation = {
+			remove_building = counting_house
 		}
 	}
 	option = {
-		name = "glp_save_edit_events.EVTBATA32"
-		FROM = {
-			add_building = university
+		name = "glp_save_edit_events.BUILDINGA48"
+		event_target:glp_builder_nation = {
+			remove_building = marketplace
 		}
 	}
 	option = {
-		name = "glp_save_edit_events.EVTBATA33"
-		FROM = {
+		name = "glp_save_edit_events.BUILDINGA49"
+		event_target:glp_builder_nation = {
+			remove_building = trade_depot
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA50"
+		event_target:glp_builder_nation = {
+			remove_building = stock_exchange
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA51"
+		event_target:glp_builder_nation = {
+			remove_building = courthouse
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA52"
+		event_target:glp_builder_nation = {
+			remove_building = town_hall
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA53"
+		event_target:glp_builder_nation = {
 			remove_building = university
 		}
 	}
 	option = {
-		name = "glp_save_edit_events.EVTBATA34"
-		FROM = {
-			add_building = shipyard
+		name = "glp_save_edit_events.BUILDINGA54"
+		event_target:glp_builder_nation = {
+			remove_building = early_road
 		}
 	}
 	option = {
-		name = "glp_save_edit_events.EVTBATA35"
-		FROM = {
-			add_building = grand_shipyard
+		name = "glp_save_edit_events.BUILDINGA55"
+		event_target:glp_builder_nation = {
+			remove_building = gravel_road
 		}
 	}
 	option = {
-		name = "glp_save_edit_events.EVTBATA36"
-		FROM = {
-			if = {
-				limit = {
-					has_building = shipyard
-				}
-				remove_building = shipyard
-			}
-			else_if = {
-				limit = {
-					has_building = grand_shipyard
-				}
-				remove_building = grand_shipyard
-			}
+		name = "glp_save_edit_events.BUILDINGA56"
+		event_target:glp_builder_nation = {
+			remove_building = royal_road
 		}
 	}
 	option = {
-		name = "glp_save_edit_events.EVTBATA37"
-		FROM = {
-			add_building = dock
+		name = "glp_save_edit_events.BUILDINGA57"
+		event_target:glp_builder_nation = {
+			remove_building = macadam_road
 		}
 	}
 	option = {
-		name = "glp_save_edit_events.EVTBATA38"
-		FROM = {
-			add_building = drydock
+		name = "glp_save_edit_events.BUILDINGA58"
+		event_target:glp_builder_nation = {
+			remove_building = railroad
 		}
 	}
 	option = {
-		name = "glp_save_edit_events.EVTBATA39"
+		name = "glp_save_edit_events.BUILDINGA59"
+		event_target:glp_builder_nation = {
+			remove_building = mage_tower
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA60"
+		event_target:glp_builder_nation = {
+			remove_building = farm_estate
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA61"
+		event_target:glp_builder_nation = {
+			remove_building = textile
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA62"
+		event_target:glp_builder_nation = {
+			remove_building = plantations
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA63"
+		event_target:glp_builder_nation = {
+			remove_building = mills
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA64"
+		event_target:glp_builder_nation = {
+			remove_building = furnace
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA65"
+		event_target:glp_builder_nation = {
+			remove_building = wharf
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA66"
+		event_target:glp_builder_nation = {
+			remove_building = tradecompany
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA67"
+		event_target:glp_builder_nation = {
+			remove_building = weapons
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA68"
+		event_target:glp_builder_nation = {
+			remove_building = state_house
+		}
+	}
+	after = {
+		clear_global_event_target = glp_builder_nation
+	}
+}
+country_event = {
+	id = glp_save_edit_events.75
+	title = "glp_save_edit_events.EVTNAME75"
+	desc = "glp_save_edit_events.EVTDESC75"
+	picture = CITY_DEVELOPMENT_eventPicture
+
+	is_triggered_only = yes
+
+	trigger = {
+	}
+
+	mean_time_to_happen = {
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGZZ4"
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA69"
+		event_target:glp_builder_nation = {
+			remove_building = barracks
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA70"
+		event_target:glp_builder_nation = {
+			remove_building = training_fields
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA71"
+		event_target:glp_builder_nation = {
+			remove_building = regimental_camp
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA72"
+		event_target:glp_builder_nation = {
+			remove_building = conscription_center
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA73"
+		event_target:glp_builder_nation = {
+			remove_building = dock
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA74"
+		event_target:glp_builder_nation = {
+			remove_building = drydock
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA75"
+		event_target:glp_builder_nation = {
+			remove_building = shipyard
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA76"
+		event_target:glp_builder_nation = {
+			remove_building = grand_shipyard
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA77"
+		event_target:glp_builder_nation = {
+			remove_building = coastal_defence
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA78"
+		event_target:glp_builder_nation = {
+			remove_building = naval_battery
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA79"
+		event_target:glp_builder_nation = {
+			remove_building = soldier_households
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA80"
+		event_target:glp_builder_nation = {
+			remove_building = ramparts
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA81"
+		event_target:glp_builder_nation = {
+			remove_building = impressment_offices
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA82"
+		event_target:glp_builder_nation = {
+			remove_building = fort_magic
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA83"
+		event_target:glp_builder_nation = {
+			remove_building = fort_15th
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA84"
+		event_target:glp_builder_nation = {
+			remove_building = fort_16th
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA85"
+		event_target:glp_builder_nation = {
+			remove_building = fort_17th
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.BUILDINGA86"
+		event_target:glp_builder_nation = {
+			remove_building = fort_18th
+		}
+	}
+	after = {
+		clear_global_event_target = glp_builder_nation
+	}
+}
+
+
+country_event = {
+	id = glp_save_edit_events.76
+	title = "glp_save_edit_events.EVTNAME76"
+	desc = "glp_save_edit_events.EVTDESC76"
+	picture = DIET_eventPicture
+
+	is_triggered_only = yes
+
+	trigger = {
+	}
+
+	mean_time_to_happen = {
+	}
+
+	option = {
+		name = "glp_save_edit_events.EVTDEVOPTZZ1"
+	}
+	option = {
+		name = "glp_save_edit_events.EVTDEVOPTA01"
 		FROM = {
-			if = {
-				limit = {
-					has_building = dock
-				}
-				remove_building = dock
-			}
-			else_if = {
-				limit = {
-					has_building = drydock
-				}
-				remove_building = drydock
-			}
+			add_base_tax = 1
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTDEVOPTA02"
+		FROM = {
+			add_base_production = 1
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTDEVOPTA03"
+		FROM = {
+			add_base_manpower = 1
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTDEVOPTA04"
+		FROM = {
+			add_base_tax = 10
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTDEVOPTA05"
+		FROM = {
+			add_base_production = 10
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTDEVOPTA06"
+		FROM = {
+			add_base_manpower = 10
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTDEVOPTA07"
+		FROM = {
+			add_base_tax = -1
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTDEVOPTA08"
+		FROM = {
+			add_base_production = -1
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTDEVOPTA09"
+		FROM = {
+			add_base_manpower = -1
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTDEVOPTA10"
+		FROM = {
+			add_base_tax = -10
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTDEVOPTA11"
+		FROM = {
+			add_base_production = -10
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTDEVOPTA12"
+		FROM = {
+			add_base_manpower = -10
 		}
 	}
 }

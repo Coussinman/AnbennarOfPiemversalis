@@ -931,40 +931,6 @@ custom_button = {
 	tooltip = glp_remove_ae_loc
 }
 
-#custom_button = {
-#	name = glp_inquisition_hater_button
-#	potential = {
-#		AND = {
-#			FROM = { ai = no }
-#			OR = {
-#				FROM = { tag = A1A }
-#				FROM = { tag = A2A }
-#			}
-#		}
-#	}
-#	trigger = {
-#		FROM = { tag = A2A }
-#	}
-#	effect = {
-#		if = {
-#			limit = {
-#				owner = {
-#					NOT = { has_country_flag = glp_inquisition_hater_flag }
-#				}
-#			}
-#			owner = {
-#				set_country_flag = glp_inquisition_hater_flag
-#			}
-#		}
-#		else = {
-#			owner = {
-#				clr_country_flag = glp_inquisition_hater_flag
-#			}
-#		}
-#	}
-#	tooltip = glp_inquisition_hater_loc
-#}
-
 custom_button = {
 	name = glp_change_trade_good_button
 	potential = {
@@ -1057,4 +1023,26 @@ custom_button = {
 		}
 	}
 	tooltip = glp_add_estate_loyalty_loc
+}
+
+custom_button = {
+	name = glp_change_dev_in_province_button
+	potential = {
+		AND = {
+			FROM = { ai = no }
+			OR = {
+				FROM = { tag = A1A }
+				FROM = { tag = A2A }
+			}
+		}
+	}
+	trigger = {
+		#FROM = { tag = A2A }
+	}
+	effect = {
+		FROM = {
+			country_event = { id = glp_save_edit_events.76 }
+		}	
+	}
+	tooltip = glp_change_dev_in_province_loc
 }
