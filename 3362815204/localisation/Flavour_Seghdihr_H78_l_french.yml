@@ -1,0 +1,913 @@
+﻿l_french:
+ #Seghdihr
+
+ ######Decisions######
+ decision_seghdihr_incursions_info_title:0 "Rapports d'Éclaireurs"
+ decision_seghdihr_incursions_info_desc:0 "Les gobelins qui déferlent de l'Arbre de Pierre sont impitoyables. Ils sondent constamment nos défenses et harcèlent nos provinces. Heureusement, nos braves éclaireurs sont capables de nous fournir une estimation de leur force.\n\nLes §YIncursions Gobelins§! contre nous continueront jusqu'à ce qu'ils soient tous exterminés. Ces attaques seront relativement mineures, mais alors qu'ils §Yrassemblent leurs forces§!, ils seront capables de dépenser cette §Yforce rassemblée§! pour lancer un assaut bien plus dévastateur. Reconquérir les forteresses de l'§YArbre de Pierre§! ainsi que fortifier §YGor Ozumbrog§! les gênera considérablement."
+
+ decision_seghdihr_incursions_info_tooltip:0 "§Y----------- Force d'Incursion -----------§!\n\nForce Totale :                           §R[Root.incursion_total.GetValue]§!\n\n§Y--------------------------------------------§!\n\nBase :                                         §R1000§!\nRassemblement de Force :[Root.seghdihr_gathering_status]\nMissions :[Root.seghdihr_mission_status]\n\n§Y--------------------------------------------§!\n\nProvinces Non Colonisées :                 §R[Root.incursion_empty_provinces.GetValue]§!\nProvinces Gobelins :                        §R[Root.incursion_goblin_provinces.GetValue]§!\nTribus Gobelins :                             §R[Root.incursion_goblin_tribes.GetValue]§!\n\n§Y--------------------------------------------§!\n\nFortifications de Gor Ozumbrog :         §G[Root.incursion_ozumbrog_forts.GetValue]§!\nOvdal Kanzad [Root.seghdihr_kanzad_status]\nGrôzumdihr [Root.seghdihr_grozumdihr_status]\nOvdal-az-Ân [Root.seghdihr_azan_status]\nHul-az-Krakazol [Root.seghdihr_krakazol_status]"
+
+ ##custom trigger loc
+ seghdihr_gathering_full:0 "                     §R1000§!"
+ seghdihr_gathering_normal:0 "                       §R[Root.incursion_gathering_strength.GetValue]§!"
+ seghdihr_gathering_none:0 "                          §R0§!"
+
+ seghdihr_missionbonus_normal:0 "                                   §G[Root.incursion_mission_bonus.GetValue]§!"
+ seghdihr_missionbonus_none:0 "                                        §G0§!"
+
+ seghdihr_kanzad_reclaimed:0 "est §Greconquise§!             §G-50§!"
+ seghdihr_kanzad_lost:0 "est §Operdue§!                       §R50§!"
+ seghdihr_kanzad_fallen:0 "est §Rtombée§!                §R100§!"
+
+ seghdihr_grozumdihr_reclaimed:0 "est §Greconquise§!               §G-50§!"
+ seghdihr_grozumdihr_lost:0 "est §Operdue§!                         §R50§!"
+ seghdihr_grozumdihr_fallen:0 "est §Rtombée§!                   §R100§!"
+
+ seghdihr_azan_reclaimed:0 "est §Greconquise§!               §G-50§!"
+ seghdihr_azan_lost:0 "est §Operdue§!                         §R50§!"
+ seghdihr_azan_fallen:0 "est §Rtombée§!                  §R100§!"
+
+ seghdihr_krakazol_reclaimed:0 "est §Greconquise§!         §G-50§!"
+ seghdihr_krakazol_lost:0 "est §Operdue§!                   §R50§!"
+ seghdihr_krakazol_fallen:0 "est §Rtombée§!            §R100§!"
+
+
+ decision_sgc_management_title:0 "Gérer le SGC"
+ decision_sgc_management_desc:0 "Les opérations quotidiennes du Cartel Doré Segbandalique sont en dessous des préoccupations du [Root.Monarch.GetTitle]. Cependant, en tant que Cartel de la Couronne, les investissements à grande échelle nécessiteront son assentiment, que ce soit implicitement ou officiellement."
+
+ decision_seghdihr_core_stuff_title:0 "Intégrer les Possessions Orientales"
+ decision_seghdihr_core_stuff_desc:0 "Avec les Syndicats maintenant en place, il est devenu plus difficile d'intégrer directement de nouvelles terres dans le Segbandal. Cependant, avec juste un peu plus de supervision administrative, ce problème peut être résolu et nos terres à l'est seront correctement intégrées dans le royaume."
+
+
+ ######Events######
+ ######Part 1######
+ flavor_seghdihr.1.t:0 "Un Jour Sombre"
+ flavor_seghdihr.1.d:0 "Cela a commencé, comme toujours, dans l'obscurité.\nLe grincement de griffes contre la pierre. Les gloussements sourds et les claquements de leur charabia gobelin résonnant dans les profondeurs caverneuses. Mais les rapports de Gor Ozumbrog ont afflué, avec leurs patrouilles identifiant les bruits venant de plus profond dans le Dwarovrod, vers le passage qui plonge au cœur du souterrain, contournant la pierre et la terre de piètre qualité vers la surface avant d'émerger à nouveau dans l'Arbre de Pierre. Au début, nous avons supposé qu'il s'agissait d'une petite bande de guerre gobelin, rien que les patrouilles locales ne pouvaient gérer.\nPuis les patrouilles locales se sont tues.\nDes groupes de Gor Ozumbrog ont été dépêchés, et les véritables profondeurs de l'horreur ont été révélées. Des gobelins, des milliers d'entre eux, déferlant de l'Arbre de Pierre ! Comme un mur vivant de saleté et d'ordures, armés de tout ce qu'ils pouvaient rassembler, d'un bout à l'autre du Dwarovrod, avançant comme une vague vers nous. Nous devons les arrêter à Gor Ozumbrog, de peur de faire face à de nouveaux Derniers Jours !"
+ flavor_seghdihr.1.a:0 "Pas un pas en arrière !"
+ flavor_seghdihr.1.tooltip:0 "Les gobelins de l'§YArbre de Pierre§! vont §Rcontinuer à nous attaquer jusqu'à ce qu'on s'en occupe§! !"
+
+ flavor_seghdihr.2.t:0 "L'Ancienne Alliance"
+ flavor_seghdihr.2.d:0 "Nous avons récemment reçu un émissaire dans les halls de Verkal Gulan qui prétend porter un message important des dirigeants de Seghdihr, notre ancienne sœur à l'ouest. Ils parlent de grands plans - d'une ambition de reforger le Segbandal et de reprendre l'entièreté du Dwarovar central, ramenant la lumière de la Civilisation Naine dans les forteresses assombries et chassant les intrus gobelins. Ils sont venus d'abord à nous, le seul autre Vestige de Forteresse survivant dans la région, nous demandant de rejoindre à nouveau l'Ancienne Alliance.\n\nBien qu'il puisse y avoir de nombreux avantages à travailler avec Seghdihr à nouveau, comment pouvons-nous oublier les nombreuses fois où ils ont piétiné nos droits individuels, annulé nos décisions, ou fait valoir leur suprématie sur nous ? Rejoindre une alliance dirigée par les Nains de Citrine nous verrait sûrement comme partenaires juniors - les bénéfices pourraient-ils vraiment l'emporter sur les risques ?"
+ flavor_seghdihr.2.a:0 "Nous agenouiller devant Seghdihr à nouveau ? Jamais !"
+ flavor_seghdihr.2.b:0 "Faire partie de quelque chose de plus grand... peut-être POURRIONS-nous travailler ensemble à nouveau."
+
+ flavor_seghdihr.3.t:0 "Un Autre Regret"
+ flavor_seghdihr.3.d:0 "Notre émissaire à Verkal Gulan est revenu avec la malheureuse nouvelle que les Nains d'Or ont rejeté notre offre. C'était un vain espoir, nous supposons, qu'ils mettraient derrière eux la mémoire de nos échecs et trahisons passés, mais nous ne pouvions nous empêcher d'espérer."
+ flavor_seghdihr.3.a:0 "Ils refusent l'unification pacifique - mais peut-être que la force est un langage qu'ils comprennent mieux."
+
+ flavor_seghdihr.4.t:0 "Ne M'y Reprends Plus"
+ flavor_seghdihr.4.d:0 "Alors que Seghdihr est devenu lentement mais sûrement moins dépendant de la Bande Seg, la pression s'est accumulée sur [Root.Monarch.GetName] pour apaiser les craintes de la population. Cela a finalement atteint son paroxysme, car [Root.Monarch.GetName] met maintenant enfin en œuvre un grand nombre de contrôles sur le pouvoir et l'influence des mercenaires et aventuriers. Par décret royal, toutes les compagnies mercenaires qui entrent au service de Seghdihr auront des inspecteurs royaux assignés, qui testent continuellement la préparation au combat, la discipline, et surtout la loyauté de leurs troupes. Grâce à ces nouvelles garanties bureaucratiques, [Root.Monarch.GetName] espère s'assurer que des événements comme la chute du Segbandal ne se répèteront pas."
+ flavor_seghdihr.4.a:0 "Plus jamais."
+
+ flavor_seghdihr.5.t:0 "Vers l'Avenir, comme Un Seul."
+ flavor_seghdihr.5.d:0 "Bien qu'il soit vrai que les circonstances qui ont mené à la chute du Segbandal auraient été dévastatrices de toute façon, sa structure était la faiblesse clé. Le fait que toutes les forteresses étaient indépendantes signifiait que chacune pouvait refuser d'aider les autres. Cela n'arrivera plus jamais. Plus une alliance, le Segbandal sera une union de forteresses, dirigée par un Roi-Lumineux. Car lumineux nous sommes : cinq forteresses brillantes, lumières dans la grande obscurité du Dwarovar. Nos portes brillantes reflètent le soleil du désert du Salahad et notre avenir brillant contraste avec notre passé sombre et troublé. Chaque doigt de cette main doit travailler ensemble."
+ flavor_seghdihr.5.a:0 "Et nous serons le pouce."
+ flavor_seghdihr.5.tooltip:0 "Nous perdrons §Y5§!£dip£ pour chaque province que nos vassaux détiennent qui n'est pas dans leur §YÉtat capital§! ou est la §YVallée du Héros§! !"
+
+ ######Part2######
+ flavor_seghdihr.6.t:0 "Puissance de Feu Écrasante"
+ flavor_seghdihr.6.d:0 "Des odeurs âcres de soufre dérivent des champs de tir des canons à travers les halls de Verkal Gulan avec les rugissements tonnants et résonnants d'artillerie comme jamais auparavant. Les soldats entraînés ici ont prouvé qu'ils constituaient une excellente force pour notre nation et les commandants locaux croient qu'ils pourraient être poussés à être encore plus capables. Trois propositions d'entraînement spécialisé ont été présentées par les commandants des soldats ici. Ces options sont : se concentrer sur les techniques anti-infanterie avec la mitraille, ou améliorer la mobilité de notre artillerie et notre entraînement tactique général, ou, finalement, verser nos efforts dans le perfectionnement de canons de siège massifs pour briser les fortifications ennemies. Ce sont toutes des initiatives précieuses, mais nous ne pouvons nous concentrer que sur une seule."
+ flavor_seghdihr.6.a:0 "La mitraille accueillera nos ennemis sur le champ de bataille."
+ flavor_seghdihr.6.b:0 "Des tirs bien placés et une artillerie maniable assureront qu'aucune position ne soit inatteignable."
+ flavor_seghdihr.6.c:0 "La pure puissance de feu brisera tout mur qui se dresse devant nous !"
+
+ flavor_seghdihr.7.t:0 "Veille Éternelle"
+ flavor_seghdihr.7.d:0 "Les garnisons de Gor Ozumbrog sont restaurées et les soldats qui s'entraînent ici ont l'opportunité d'apprendre des tactiques spécialisées qui feront d'eux un atout plus grand pour notre nation. Trois propositions d'entraînement spécialisé ont été présentées par les commandants des soldats ici. Les propositions sont : se concentrer sur l'exercice de nos soldats pour marcher et se déplacer avec une rapidité extrême, ou prendre et tenir des positions avec une férocité obstinée, ou harceler et saboter nos ennemis avec une guerre asymétrique. Ce sont toutes des initiatives précieuses, mais nous ne pouvons nous concentrer que sur une seule."
+ flavor_seghdihr.7.a:0 "La vitesse est tout. Nous nous déplaçons comme l'éclair !"
+ flavor_seghdihr.7.b:0 "Qu'ils se brisent contre nos positions comme des vagues s'écrasant sur le rivage !"
+ flavor_seghdihr.7.c:0 "Ils tomberont sous mille coupures de lames invisibles !"
+
+ flavor_seghdihr.8.t:0 "Verdict Final"
+ flavor_seghdihr.8.d:0 "L'affaire de la Bande Seg est un problème trop compliqué à résoudre avec des stratégies politiques complexes. Les rancunes, la méfiance, la haine... Cela ne disparaît pas avec des réformes et des lois. Pour que les rancunes meurent, la Bande Seg doit mourir. [Root.Monarch.GetName] a donné l'ordre que la compagnie mercenaire soit démantée immédiatement, chaque membre recevant le choix : rejoindre l'armée, ou partir pour toujours. Les soupçons se reporteront indubitablement sur les membres individuels, mais ces rancunes ne devraient pas survivre une génération. Le symbole souillé qu'ils représentaient a disparu. Enfin, nous pouvons avancer."
+ flavor_seghdihr.8.a:0 "Leurs jours de mercenaires sont finis."
+ flavor_seghdihr.8.tooltip:0 "La compagnie mercenaire §YBande Seg§! sera §Rdésactivée§! !"
+
+ flavor_seghdihr.9.t:0 "Une Armée Sans Égal"
+ flavor_seghdihr.9.d:0 "Bien que nous viserons toujours à l'améliorer, nous avons enfin assemblé une armée digne du Segbandal. Loyale à la couronne, pas aux pièces. C'est une armée qui ne connaît ni peur, ni doute, ni faiblesse. Les souvenirs de la chute du Segbandal ne s'estomperont jamais, mais nous avons maintenant l'instrument qui empêchera sa répétition. Une armée qui ne faillit jamais."
+ flavor_seghdihr.9.a:0 "Plus jamais."
+
+ flavor_seghdihr.10.t:0 "Tenir Bon"
+ flavor_seghdihr.10.d:0 "Les sons de troupes marchant et s'entraînant résonnent à travers les casernes et les halls de guerre de Seghdihr. La résolution de nos soldats a été renforcée au maximum. Ceux qui s'entraînent ici ont l'opportunité d'apprendre des tactiques spécialisées qui font d'eux de grands atouts pour notre nation. Trois propositions d'entraînement spécialisé ont été présentées par les officiers en charge de l'entraînement : Nous pourrions nous concentrer sur l'amélioration de l'esprit combatif de nos compagnies, améliorer les compétences de notre corps d'officiers pour diriger les tactiques défensives, ou le conditionnement mental pour s'assurer que nos hommes ne se brisent pas. Ce sont toutes des initiatives précieuses, mais nous ne pouvons nous concentrer que sur une seule."
+ flavor_seghdihr.10.a:0 "Le moral est tout - que nos hommes aillent à la guerre avec de hauts esprits !"
+ flavor_seghdihr.10.b:0 "Nous ne sommes que aussi forts que nos dirigeants. Concentrons-nous sur les officiers."
+ flavor_seghdihr.10.c:0 "La Suprématie de la Volonté mène à la Suprématie sur le terrain."
+
+ flavor_seghdihr.11.t:0 "Montée des Syndicats"
+ flavor_seghdihr.11.d:0 "Avec Ovdal Kanzad et Grôzumdihr sûrement sous notre leadership bienveillant, et les gobelins ayant été entièrement chassés de l'Arbre de Pierre occidental, les membres du SGC ont commencé à pétitionner pour que nous transformions Ovdal Kanzad et Grôzumdihr en arrangements orientés business, opérés par un conseil de cartels commerciaux semi-indépendants, syndicats et guildes. Ces états de Syndicat de Cartel se concentreraient sur la création de leurs propres armées permanentes pour patrouiller les grottes et routes, tout en émoussant toute incursion gobelin supplémentaire. Cela épargnera notre propre infrastructure militaire de risquer des pertes de qualité en tentant d'étendre nos efforts de garnison et patrouilles. Avec l'établissement de ces Syndicats de Cartel dans Ovdal Kanzad et Grôzumdihr, nous pouvons permettre aux administrations locales de se concentrer sur des problèmes mineurs qui auraient autrement chargé le SGC, alors que nous nous concentrons sur le développement ultérieur de notre accès au commerce Halessi."
+ flavor_seghdihr.11.a:0 "Une excellente idée !"
+ flavor_seghdihr.11.tooltip:0 "Nos terres dans l'§YArbre de Pierre§! occidental seront divisées entre nos §YSyndicats§! !"
+ flavor_seghdihr.11.tooltip2:0 "Nous pourrons maintenant embarguer §Gtrois§! pays §Ynon-rivaux§! sans §Ypénalité§! !"
+
+ flavor_seghdihr.12.t:0 "Ceux qui Restent"
+ flavor_seghdihr.12.d:0 "Il n'y a vraiment qu'une seule façon de traiter avec les suites maintenant sans chef des familles nobles : les enrôler dans l'armée, les répartir sur différentes unités, et rendre leur solde assez généreuse pour ne pas les laisser retomber dans leurs anciennes habitudes. Ils ne sont peut-être pas encore correctement préparés pour la guerre, mais leur travail pour les nobles leur a certainement donné une certaine expérience."
+ flavor_seghdihr.12.a:0 "Ils pourraient utiliser un vrai entraînement d'armée."
+
+ flavor_seghdihr.13.t:0 "L'Assemblée du Sud"
+ flavor_seghdihr.13.d:0 "La salle d'assemblée, la plus grande qui avait encore été reconquise dans Seghdihr, était remplie à ras bord de notables invités et d'audiences des cinq forteresses du Segbandal refondé. Plus d'un millier de délégués à l'assemblée étaient venus pour la première réunion du soi-disant Segamlavad, ou « Assemblée du Sud », et l'air était électrique avec des discussions sur les nombreux problèmes auxquels fait face notre nation. Quand le [Root.Monarch.GetTitle] de Seghdihr prit le podium pour livrer les remarques d'ouverture de la réunion, [Root.Monarch.GetSheHe] fut accueilli par des applaudissements tonnants.\n\nQuand [Root.Monarch.GetName] finit son discours, le prochain nain à se lever proposa un nouvel honneur à accorder à la Couronne de Citrine - un nouveau nom de famille qui représente mieux l'union des cinq forteresses. Là où précédemment les Rois de Citrine avaient été stylés « az-segh » ou « du Sud », l'assemblée naine proposa que les rois d'un Segbandal uni devraient être stylés pour ce qu'ils étaient - le cœur de la nation ; l'az-Hargûn. Le Segbandal est le cœur du Dwarovar, Seghdihr est le cœur du Segbandal, et maintenant tous reconnaissent notre monarque comme le cœur de notre nation."
+ flavor_seghdihr.13.a:0 "Longue vie à l'az-Hargûn qui préside le Segamlavad !"
+
+ flavor_seghdihr.14.t:0 "Entraînement Infatigable"
+ flavor_seghdihr.14.d:0 "Ceux qui s'entraînent ici ont l'opportunité d'apprendre des tactiques spécialisées qui feront d'eux un grand atout pour notre nation. Trois propositions d'entraînement spécialisé ont été présentées par les officiers en charge de l'entraînement : Nous pourrions nous concentrer sur s'assurer que nos hommes sont exercés aussi extensivement que possible, accélérer leur processus d'entraînement, ou faire passer plus de la population par ces nombreux exercices de combat pour que nous ayons d'amples réserves. Ce sont toutes des initiatives précieuses, mais nous ne pouvons nous concentrer que sur une seule."
+ flavor_seghdihr.14.a:0 "Faites passer les hommes par plus d'épreuves. Assurez-vous que les leçons restent."
+ flavor_seghdihr.14.b:0 "Voyons si nous ne pouvons pas couper ces temps d'entraînement de moitié !"
+ flavor_seghdihr.14.c:0 "Si tout le monde est entraîné, alors nous ne manquerons jamais de soldats capables."
+
+ flavor_seghdihr.15.t:0 "Armements Lourds"
+ flavor_seghdihr.15.d:0 "L'acier en fusion bouillonne et est forgé en armures et armes à la Hargûnforge de Hehodovar, et ceux qui marchent dans ses halls revêtent le plus fin équipement connu dans tout le Segbandal. L'accès facile à l'équipement de haute qualité ici offre à nos hommes de nombreuses opportunités d'apprendre de nouvelles méthodes de guerre, et nous pouvons accorder le grand cœur de production de notre nation pour produire tout ce sur quoi nous choisissons de nous concentrer. Devrions-nous faire que nos hommes se concentrent sur l'entraînement d'endurance dans leur armure lourde pour aiguiser leur esprit infatigable, améliorer nos formations défensives pour protéger nos soldats des armes à feu, ou dédier du temps au combat au corps à corps pour s'assurer que notre compétence en combat main-à-main ne décline jamais ?"
+ flavor_seghdihr.15.a:0 "Qu'ils marchent jusqu'à ce que leur armure ne pèse pas plus lourd que du tissu !"
+ flavor_seghdihr.15.b:0 "Pratiquer des formations qui dévient les tirs de missiles."
+ flavor_seghdihr.15.c:0 "Les anciennes méthodes sont les meilleures - exercer le combat avec haches et lances."
+
+ flavor_seghdihr.16.t:0 "Apte à Diriger"
+ flavor_seghdihr.16.d:0 "Avec l'unification des cinq forteresses du Dwarovar Central et la refondation du Segbandal, il est temps de déterminer où sera la capitale de notre confédération. Des membres proéminents de chaque forteresse se sont réunis dans un congrès à Seghdihr et, après une courte délibération, la ligue a voté massivement pour élever formellement Seghdihr au rang de capitale du nouveau Segbandal. Bien que quelques longues-barbes grognons de Verkal Gulan ou Hehodovar aient protesté, aucun n'est vraiment surpris - la Cité de Citrine est là où l'alliance a commencé, et c'est là qu'elle restera toujours."
+ flavor_seghdihr.16.a:0 "Nous prendrons cette responsabilité et mènerons le Segbandal vers un avenir plus brillant !"
+
+
+ flavor_seghdihr.17.t:0 "Le Cartel Doré Segbandalique"
+ flavor_seghdihr.17.d:0 "« ...et ainsi, nous les 57 aventuriers, marchands, et grossistes représentant les intérêts marchands du Segbandal depuis Verkal Gulan soumettons au Roi-Lumineux [Root.Monarch.GetName] d'accorder l'assentiment royal dans l'établissement d'une nouvelle Charte de Cartel, supervisée par la Couronne, pour s'aventurer vers l'Est le long de la Route Dorée, vers les terres de Rahen, Yanshen, Xianje, Thindikai et toutes autres terres qui touchent la Mer de l'Anneau et le Golfe de Rahen. Comme la Charte pour notre Cartel sera accordée par la Couronne, et nous opérerons dans les intérêts de la Couronne à l'étranger et chez nous, nous demandons le droit de nommer notre compagnie le Cartel Doré Segbandalique. »\n\nEn ce jour, un groupe d'intérêts commerciaux de Verkal Gulan a pétitionné la couronne pour leur accorder une charte royale sur le commerce externe provenant de Rahen et de l'Extrême-Orient, principalement concentré sur les régions touchées par la Route Dorée en échange de la couronne recevant une portion directe de tous les profits et bénéfices, et, ce Cartel jurant d'agir avec les meilleurs intérêts de la Couronne et du Pays à l'esprit."
+ flavor_seghdihr.17.a:0 "Signé avec plaisir royal !"
+ flavor_seghdihr.17_tooltip:0 "Le §YCartel Doré Segbandalique§! peut être géré dans le §Ymenu des décisions§! et a aussi quelques §Yprivilèges uniques§! disponibles"
+
+ ######Part3######
+
+ flavor_seghdihr.18.t:0 "Jour du Jugement"
+ flavor_seghdihr.18.d:0 "Les envahisseurs gobelins se déversent des grottes dans une tentative finale désespérée de nous anéantir, et apporter leur ruine sur l'Arbre de Pierre une fois de plus. Nous ne le permettrons pas, et les affrontons de front avec l'acier et le plomb nains. Alors que nous avons repoussé incursion après incursion, notre résolution n'a fait que grandir. Le Segbandal prévaudra. Nos forteresses connaîtront enfin la paix !"
+ flavor_seghdihr.18.a:0 "Enfin !"
+ flavor_seghdihr.18.tooltip:0 "§GLes Incursions Gobelins sont à leur fin§! !"
+
+ flavor_seghdihr.19.t:0 "Le Dwarovar Renaît"
+ flavor_seghdihr.19.d:0 "Trois Segbandals il y a eu. Le premier était dans l'histoire ancienne, avant la montée d'Aul-Dwarov. Le Segbandal de cet âge ancien est mythique à sa façon, avec peu connu à son sujet sauf qu'Hehodovar et Seghdihr faisaient partie de cette alliance. Le second Segbandal est celui que l'histoire connaît bien mieux, consistant en les cinq forteresses comme nous les connaissons aujourd'hui. C'était ce Segbandal qui résista au plus fort de la tempête qui fut la Chute d'Aul-Dwarov, seulement pour s'effondrer à cause des machinations de Jexis et de la traîtresse Bande Seg. Mais maintenant nous avons reconquis ce qui nous était perdu et construit un héritage de notre propre création. Que les récupérateurs de Cannor à l'ouest se disputent l'héritage d'Aul-Dwarov. L'héritage que nous laissons prend forme comme le troisième Segbandal, consistant en Gor Vazumbrog, Hehodovar, Seghdihr, Verkal Gulan, et Gor Ozumbrog, et il n'y aura jamais besoin d'un autre."
+ flavor_seghdihr.19.a:0 "Cinq comme Un, pour toujours."
+
+ flavor_seghdihr.20.t:0 "Le Roi et Maître"
+ flavor_seghdihr.20.d:0 "Les Xiaken, peu importe qui gouverne, ne respectent qu'une chose : la compétence martiale. Pour étendre l'influence du SGC dans Xia, le Roi-Lumineux lui-même doit défier un représentant inconnu et masqué, représentant les Xiaken, en combat. Ce ne sera pas une bataille facile, mais c'est au premier sang. Notre roi est vêtu de la meilleure armure que l'or de Verkal Gulan peut acheter, avec une lame forgée dans l'acier le plus tranchant.\n\nLa seule chose qui reste maintenant est de gagner."
+ flavor_seghdihr.20.a:0 "Devoir commencé !"
+ flavor_seghdihr.20.tooltip:0 "§GVictoire§! !"
+ flavor_seghdihr.20.tooltip2:0 "§RDéfaite§! !"
+
+ flavor_seghdihr.21.t:0 "Un Test de vos Réflexes"
+ flavor_seghdihr.21.d:0 "L'air était immobile. L'arène est un simple cercle de terre entouré de bosquets de bambou et de représentants du Segbandal et des Xiaken. Un carré de tissu est lâché par un juge neutre. Ensuite résonne le son de l'acier qui s'entrechoque alors que Nain et Homme se jetèrent l'un sur l'autre avec une mesure féroce. Le sol même trembla alors que deux titans du champ de bataille s'affrontèrent, se jetant dans le feu de la bataille. Le guerrier Xia masqué sortit une lame comme de nulle part, déclenchant un déluge de coups plus rapides que l'œil ne pouvait voir. Mais alors qu'il levait sa lame haut dans les airs pour l'abattre sur la tête du Roi-Lumineux, le Roi para expertement. La force du choc des armes fit que le Roi laissa tomber son arme, pourtant, juste avant que le moine Xia ne puisse récupérer, le Roi sauta en l'air et frappa de son poing gantelé dans la mâchoire du guerrier. L'homme trébuche, et crache du sang. Le match était gagné. Le Roi est victorieux. Le SGC peut s'étendre dans les terres des Xia."
+ flavor_seghdihr.21.d2:0 "L'air était immobile. L'arène est un simple cercle de terre entouré de bosquets de bambou et de représentants du Segbandal et des Xiaken. Un carré de tissu est lâché par un juge neutre. Ensuite résonne le son de l'acier qui s'entrechoque alors que Nain et Homme se jetèrent l'un sur l'autre avec une mesure féroce. Le sol même trembla alors que deux titans du champ de bataille s'affrontèrent, se jetant dans le feu de la bataille. Le guerrier Xia masqué sortit une lame comme de nulle part, déclenchant un déluge de coups plus rapides que l'œil ne pouvait voir, avant de lever sa lame haut dans les airs, et de l'abattre sur la tête du Roi. Le Roi-Lumineux lève son arme et pare expertement, mais la force le fait la laisser tomber. Avant que le Roi ne puisse cependant récupérer, le Moine effectue sans effort une contre-attaque. Le casque du Roi se fend en deux, et une petite goutte de cramoisi apparaît sur sa joue. Le match était gagné. Les Xiaken sont victorieux. Mais il y a encore une victoire. Les Xiaken ont jugé notre roi un adversaire digne, leur bataille résonnera dans la légende pour l'éternité."
+ flavor_seghdihr.21.a:0 "Devoir accompli."
+ flavor_seghdihr.21.b:0 "Devoir accompli ?"
+ flavor_seghdihr.21.tooltip:0 "Le §YSGC§! sera capable d'opérer dans le nœud commercial §YXia§!"
+
+ ######Incursions######
+ seghdihr_incursion_strength_gathered:0 "Les gobelins ont §Yrassemblé leurs forces§! pour leur prochaine incursion"
+ seghdihr_incursion_strength_gone:0 "Les gobelins ont dépensé toute leur §Yforce rassemblée§! pour cette attaque"
+ seghdihr_incursion_supply:0 "Ombres Mouvantes"
+ seghdihr_incursion_fear:0 "Peur Rongeante"
+ seghdihr_incursion_supplies_raided:0 "Mouvement Entravé"
+ seghdihr_incursion_raided_province:0 "Pillée"
+ seghdihr_incursion_chaingrasper_loot:0 "Connaissance Volée"
+
+ flavor_seghdihr.51.t:0 "Yeux dans l'Obscurité"
+ flavor_seghdihr.51.d:0 "Il y a eu d'autres rapports d'activité gobelin à [Root.incursion_target.GetName], et le sentiment général d'inquiétude par les établissements locaux et les patrouilles d'être observés. Un aperçu gobelin ici ou là, mais jamais en nombre suffisant pour susciter une inquiétude expresse en eux-mêmes. Ensemble, cependant, ils peignent une image de gobelins explorant la zone locale. Pour quelles raisons, nous ne pouvons que deviner - mais aucune d'elles n'est bonne."
+ flavor_seghdihr.51.a:0 "Ceci peut affecter les choses..."
+
+ flavor_seghdihr.52.t:0 "Réserves Pillées"
+ flavor_seghdihr.52.d:0 "Des voleurs gobelins ont fait rage à travers [Root.incursion_target.GetName]. Au début, ce n'était rien pour que les autorités s'inquiètent trop grandement. Un hangar saccagé ici, une caravane pillée là : toutes choses bien dans le scope des autorités locales. Mais récemment l'échelle et la portée de ces vols ont explosé, le plus récent étant une expédition entière d'armes vers la garnison locale qui a été volée, incluant armes et munitions. Il est évident de voir que les choses ne feront qu'escalader à partir d'ici."
+ flavor_seghdihr.52.a:0 "Quoi d'autre pourrait arriver ?"
+
+ flavor_seghdihr.53.t:0 "Mort et Destruction"
+ flavor_seghdihr.53.d:0 "Le désastre a frappé aujourd'hui. Un établissement entier a été rasé, sa population massacrée et tout ce qui avait de la valeur a été pillé ou détruit alors qu'une bande de guerre gobelin traversait la zone plus rapidement que les garnisons locales et patrouilles ne pouvaient répondre. Nous devrons travailler rapidement pour réparer les dommages, et renforcer les défenses avant qu'ils ne reviennent."
+ flavor_seghdihr.53.a:0 "Peut-être devrions-nous nous inquiéter."
+
+ flavor_seghdihr.54.t:0 "Tambours dans les Profondeurs..."
+ flavor_seghdihr.54.d:0 "Une horde de gobelins a émergé de leurs passages cachés et grottes à [Root.incursion_target.GetName]. Ils sont organisés en une menace réelle par la force de leurs dirigeants méprisables. Malheureusement, même ce nombre ne commence même pas à égaler la quantité d'équipement manquant qui a été volé ou a disparu. Beaucoup de nos conseillers principaux théorisent que c'est simplement une attaque de sondage pour mesurer notre préparation. Nous ne pouvons montrer de faiblesse, nous ne pouvons les laisser gagner un pied !"
+ flavor_seghdihr.54.a:0 "Aux armes !"
+
+ flavor_seghdihr.55.t:0 "Ils Arrivent..."
+ flavor_seghdihr.55.d:0 "« La fin arrive bientôt. Nous entendons des tambours, des tambours dans les profondeurs. Ils arrivent. » Ce furent les derniers mots d'un rapport taché de sang remis au commandant de la garnison locale d'un poste de patrouille voisin à [Root.incursion_target.GetName]. Il fut rapidement suivi par une horde de gobelins, bien plus grande en taille que la première assiégeant l'établissement principal. Un seul coureur réussit à s'échapper et nous apporter les nouvelles avant que l'assaut ne commence pour de bon, nous apportant nouvelles et demandes de secours immédiat, avant que les gobelins ne puissent saisir la province et massacrer la population locale."
+ flavor_seghdihr.55.a:0 "Nous devons arrêter ceci MAINTENANT !"
+
+
+
+ ######Missions######
+ ######Part1######
+ #1
+ seghdihr_axe_for_sword_title:0 "Une Hache pour une Épée"
+ seghdihr_axe_for_sword_desc:0 "Le moment est venu, bien que beaucoup n'aient jamais pensé qu'ils verraient ce jour. Nous avons ouvert grand les portes du Seghrod et envoyé les premières de nombreuses bandes de nains pour reconquérir notre royaume ancien. Nous avons résisté à la tempête, mais pas sans aide. Les Surani ont toujours été nos alliés constants et maintenant, plus que jamais, leur aide a été appréciée. De nouvelles tactiques et idées imprègnent les terres humaines le long du Suran et nous devrions en faire usage dans notre reconquête du Dwarovar. Mais rien n'est donné gratuitement, surtout l'assistance militaire. Nous proposerons un échange d'esprits militaires avec l'Akal d'Azka-Sur. Étant donné notre histoire, il n'y a aucun doute qu'ils accepteront."
+
+ seghdihr_honor_ancestors_jaher_title:0 "Honorer Soleil et Pierre"
+ seghdihr_honor_ancestors_jaher_desc:0 "Pendant de nombreuses années, les Surani eurent leurs Rois-Dieux et, en temps voulu, leur dieu du soleil, Surakel. Puis vint Jaher et les Elfes du Soleil. Beaucoup le proclamèrent leur dieu réincarné et ainsi il commença à forger son grand Empire du Phénix. Bien que les Surani vinrent prêcher de leur dieu réincarné, maintenant appelé Surael, nous les humourions, mais aucun dieu des hommes ou elfes ne pouvait nous faire tourner le dos à honorer nos ancêtres comme nous l'avons fait depuis des temps immémoriaux. Que Jaher ait été Surael réincarné ou non, nous avions un excellent arrangement avec lui. Nous financions son blocus d'Ovdal Tûngr et lui fournissions le service de la Bande Seg pour sa garde personnelle. En échange, nous devenions la source principale et la plus fiable d'expertise Naine à travers Bulwar et l'Empire du Phénix naissant. Cet arrangement simple et efficace permit à Jaher de concentrer son expansion vers l'est, vers Rahen et au-delà. Dommage que sa fille, Jexis, n'ait pas eu sa sagesse et qu'à la place elle ait tourné la Bande Seg contre leur propre parenté."
+
+ seghdihr_coward_attack_title:0 "Une Attaque de Lâche"
+ seghdihr_coward_attack_desc:0 "Bulwar est pris par la peur, la terreur, et les haines qui mijotaient invisibles pendant des centaines d'années. Tout ce chaos a été déchaîné par une explosion au Palais Samartal durant un grand rassemblement des élites dirigeantes de Bulwar. Aucune famille dirigeante Bulwari n'a été épargnée par les conséquences de l'attaque, pas même nos voisins Azka-Sur. Pourtant, ils sont accusés d'être les perpétrateurs de l'attaque ! Une telle malhonnêteté et insulte ne peut se maintenir : Une attaque sur l'honneur d'Azka-Sur est une attaque sur le nôtre. Telle est la profondeur de notre amitié et nous n'abandonnerons pas notre allié. Bien que cette affaire soit ultimement entre hommes et elfes, nous enverrons des volontaires au sud pour assister Azka-Sur."
+
+ seghdihr_clear_infestation_title:0 "Nettoyer l'Infestation"
+ seghdihr_clear_infestation_desc:0 "Après la chute de Gor Vazumbrog, il ne restait aucun bastion debout entre les hordes gobelins et la Forteresse de l'Inventeur d'Hehodovar, le cœur du Segbandal. Bien que des années broyantes de guerre, d'effusion de sang, et de guerre ralentissent l'avance des envahisseurs, finalement la grande forteresse d'Hehogrim le Diligent fut mise en siège et envahie. Maintenant, là où les érudits étudiaient, les ingénieurs inventaient, et les fiers artisans travaillaient, il n'y a qu'une coquille vide. Accroupies à l'intérieur sont les créatures qui souillèrent les œuvres saintes d'Hehogrim.\n\nUne faction au sein de Seghdihr a longtemps argumenté que la reconquête d'Hehodovar doit être notre tâche principale si nous espérons jamais assurer la sécurité de notre forteresse. Avec notre force renouvelée et notre focus sur la reconquête du Dwarovar central, le temps d'accomplir cette demande est finalement venu. Nous expulserons les gobelins dans les ruines de la Forteresse d'Hehogrim et la restaurerons à sa gloire d'antan !"
+
+ seghdihr_broaden_minds_title:0 "Élargir nos Esprits"
+ seghdihr_broaden_minds_desc:0 "Avec Hehodovar reconquise et les étages supérieurs stabilisés, les colons qui sont revenus à la Forteresse d'Hehogrim ont commencé la tâche de passer au peigne fin les ruines pour tout trésor ou connaissance laissé d'avant la chute. Hehodovar est loin de ses jours de gloire, tant a été perdu, mais les surveys préliminaires des anciens instituts d'érudition et d'invention indiquent qu'ils restent quelque peu intacts. Certains de ces lieux qui furent épargnés de la destruction absolue peuvent encore détenir des restes de connaissance ancienne. Nous devrions restaurer les ateliers, laboratoires, et écoles de la Forteresse de l'Ingénieur et encourager nos esprits les plus brillants à enseigner et travailler ici. Qui sait ce qu'ils accompliront quand ils marcheront dans les mêmes halls que les plus grands inventeurs de l'histoire de notre peuple l'ont fait."
+
+
+ #2
+ seghdihr_candle_lit_title:0 "Garder la Chandelle Allumée"
+ seghdihr_candle_lit_desc:0 "« Azka-Sur et Seghdihr, peu importe l'administration, ont toujours été entrelacés dans nos destins, beaucoup de nos succès ont été les succès des Surani, et un nombre des vôtres, les nôtres aussi. C'est avec cela alors, au nom de Seghdihr, et notre dirigeant en particulier, cette paire de chandelles, façonnées par runes pour brûler à jamais une fois allumées, un symbole non seulement de la lumière de votre Surael, mais pour symboliser l'amitié toujours brûlante que les Nains de Seghdihr et le royaume d'Azka-Sur partageront jusqu'à ce que les montagnes ne soient que poussière dans le vent. » -Angdrim Forgedefeu, présentant les Chandelles d'Azka-Sur et Seghdihr."
+
+ seghdihr_friends_gates_title:0 "Amis aux Portes"
+ seghdihr_friends_gates_desc:0 "Il y a deux portes du Dwarovar Central vers Bulwar. La plus célèbre est Seghdihr, qui s'ouvre près des sources du Suran, nous permettant l'accès à la richesse de Bulwar, et de là, au-delà vers Brasan et le Divenhal. La seconde porte au temps du Segbandal était la Porte du Héros de Verkal Gulan. Bien que rarement ouverte après la fin du Segbandal original, elle se trouve à la limite extrême du Salahad, en territoire qui appartenait autrefois aux harpies et tribus du désert. Maintenant, nos alliés d'Azka-Sur contrôlent le territoire devant les deux portes, et nous contrôlons le territoire dans les montagnes. Finalement, les marchands peuvent faire usage sûr de Verkal Gulan et Seghdihr, investissons dans les défenses locales d'Azka-Sur et la région à l'extérieur de la Vallée du Héros pour assurer aux marchands et visiteurs la sécurité à nos portes."
+
+ seghdihr_stronger_together_title:0 "Plus Forts Ensemble"
+ seghdihr_stronger_together_desc:0 "Pendant des siècles nos portes ont été scellées hermétiquement contre l'obscurité imprégnant le Dwarovar. La suspicion, l'amertume, et les anciennes rivalités purulentes nous ont empêchés de nous réunir avec nos anciens alliés de Verkal Gulan. Quand le Segbandal se brisa, ce ne fut pas seulement à cause des machinations de Jexis, nos divisions grandissaient depuis des années et au lieu de tendre la main et travailler avec les Nains d'Or, nous avons passé les siècles passés à entretenir les rancunes et nous cacher dans nos forteresses.\n\nBien que nous ayons toujours connu la vérité, notre entêtement nous aveugla et nous empêcha d'être honnêtes : Nos forteresses sont plus fortes ensemble. Notre mesquinerie et suspicion endommagea notre alliance et nos forteresses individuelles n'ont jamais été aussi puissantes ou prospères que nous l'étions quand nous nous tenions unis. Nos forces se complètent : Nous fournissons des relations commerciales et diplomatiques de longue date avec le peuple Surani et l'accès aux richesses de Bulwar tandis que l'or facilement acquérable et apparemment sans fin coule des mines et raffineries de Verkal Gulan. Nous ne pouvons laisser les divisions internes nous amener à la ruine à nouveau, favorisons un esprit de coopération avec les Nains d'Or pour leur rappeler les nombreux bénéfices que nous apprécions quand nous luttons vers des objectifs communs."
+
+ seghdihr_hero_welcome_title:0 "Un Accueil de Héros"
+ seghdihr_hero_welcome_desc:0 "Verkal Gulan, la Citadelle Dorée, gardée par la Porte du Héros, est connue pour deux choses : une richesse fabuleuse et une profonde méfiance des étrangers. Ce ne fut pas toujours le cas - une fois le commerce coulait librement dans Verkal Gulan depuis les autres forteresses du Dwarovar Central et depuis les tribus du désert au-delà de la Vallée du Héros. Les Nains d'Or se scellèrent dans leur forteresse quand le Segbandal fut brisé il y a trois cents ans et ils sont restés coupés du monde, leurs fortunes dorées rassemblant la poussière dans les innombrables voûtes dans leur cité.\n\nAvec la renaissance de notre alliance et la sécurité améliorée le long des routes commerciales renouvelées, la paranoïa et l'isolement des Nains d'Or devient plus difficile pour eux à justifier. Maintenant est le temps de reconnecter la Citadelle Dorée avec le monde extérieur, rouvrir la Porte du Héros, et accueillir les marchands et commerçants du monde à nouveau. Bientôt, les marchés de Verkal Gulan seront remplis de biens et gens étrangers et exotiques une fois de plus. Les routes seront gardées par des guerriers vaillants qui peuvent repousser les attaques par harpies et bandits. La Citadelle Dorée graissera les rouages du commerce avec sa richesse, plutôt que de la garder enfermée dans l'obscurité."
+
+ seghdihr_greatest_regret_title:0 "Notre Plus Grand Regret"
+ seghdihr_greatest_regret_desc:0 "Gor Ozumbrog. Le nom sonne comme une cloche dans les profondeurs, assourdissant toute conversation qui l'énonce et laissant les orateurs submergés par le regret et la tristesse. Les désirs de Gor Ozumbrog de reconquérir sa forteresse jumelle perdue furent différés pendant de nombreuses années, et il y avait toujours des raisons justifiées pour le retard, jusqu'à l'occupation Jexisienne. Durant ce temps le dernier roi d'Ozumbrog, Ombrindal, exigea que les ressources des habitants de la surface soient utilisées pour aider à la reconquête de la forteresse perdue. Les dirigeants de la Bande Seg n'étaient pas d'accord.\nCe qui se produisit dans les halls fermés du gouvernement ce jour-là a été perdu dans le temps mais les résultats furent terribles. Gor Ozumbrog rompit avec le Segbandal, la Bande Seg, et par extension Seghdihr. Les mercenaires contraignirent Seghdihr, Verkal Gulan, et Hehodovar dans une expédition punitive qui alla plus loin qu'elle n'aurait jamais dû. Bien que ce soit la Bande Seg qui émit les ordres à la fin, c'est nous qui suivîmes, et c'est Gor Ozumbrog qui paya le prix le plus profond."
+
+ seghdihr_honoring_dead_title:0 "Honorer les Morts"
+ seghdihr_honoring_dead_desc:0 "Les Nains de Topaze de Gor Ozumbrog sont morts et leur foyer est ruiné. Rien ne peut changer leur destin et nos souhaits ne les ramèneront pas à nous ou ne changeront le cours de leur fin. Mais nous pouvons nous souvenir d'eux, les sacrifices qu'ils firent pour le Segbandal, et la culpabilité de nos ancêtres d'avoir aidé à envoyer Gor Ozumbrog à son massacre. Honorons leurs mémoires et avançons pour dépasser le Segbandal d'antan, plutôt que de le restaurer simplement."
+ seghdihr_honoring_dead_tooltip:0 "C'est votre §Rdernière chance§! d'activer §YBerceau des Civilisations§!. Une fois cette mission complétée il sera trop tard."
+
+ #3
+ seghdihr_side_by_side_title:0 "Côte à Côte avec un Ami"
+ seghdihr_side_by_side_desc:0 "Juste au-delà des portes de notre forteresse une rivière jaillit, bouillonnant et coulant, pour former les sources du plus grand fleuve de Bulwar : le puissant Suran. Sur ses berges était autrefois Logrod-Tûngr, le Port Fluvial. Avec le temps, Logrod-Tûngr changea, devenant foyer des tribus humaines qui deviendraient les Surani. Avec le temps, nous aidâmes leur ascension dans le Royaume d'Azka-Sur et entrelacèrent nos destins avec les leurs. Avec la chute d'Aul-Dwarov, nous dépendîmes des Surani pour la nourriture et provisions que nous ne pouvions produire nous-mêmes. Ensemble, nos deux royaumes ont beaucoup souffert depuis la chute du Segbandal et les conquêtes Jahériennes. Maintenant le monde change rapidement : Les orques se sont retirés pour l'instant, mais les gnolls arrivent et les zélotes marchent, mais ensemble nous nous dresserons contre eux tous !"
+ seghdihr_side_by_side_tooltip:0 "§YLes Redevables§! perdront de l'influence !"
+ seghdihr_side_by_side_tooltip2:0 "Vous n'avez pas actuellement le DLC §YBerceau des Civilisations§! activé. Si vous souhaitez jouer l'AT complet alors vous devez l'activer avant la mission §YHonorer les Morts§! sinon l'AT ne §Rs'étendra plus§! !"
+
+ seghdihr_back_mountain_title:0 "Retour dans la Montagne"
+ seghdihr_back_mountain_desc:0 "Le contrôle nain sur le Dwarovar a si longtemps été en déclin que nous avons été réduits à rien d'autre que notre propre forteresse. Maintenant, alors que la pression des gobelins et orques diminue, nous devons saisir l'opportunité d'exercer notre contrôle sur les profondeurs une fois de plus."
+
+ seghdihr_long_overdue_title:0 "Longtemps Attendu"
+ seghdihr_long_overdue_desc:0 "Bien que la plupart des gobelins et orques dans le Dwarovar central soient des tribus plus petites qui ne posent pas beaucoup de menace. Il y a quelques tribus organisées qui peuvent menacer nos expéditions dans le Dwarovar. Leur occupation de nos routes et cavernes doit prendre fin ! Ils doivent être éradiqués dès que possible !"
+
+ seghdihr_alliance_holds_title:0 "Une Alliance de Forteresses"
+ seghdihr_alliance_holds_desc:0 "Le Segbandal, l'alliance séculaire entre les cinq grandes forteresses du Dwarovar central, n'est plus. Il fut brisé par des menaces de l'extérieur et de l'intérieur, affaibli non seulement par les lames gobelins et les intrigues elfiques, mais aussi par les querelles intestines. Là où cinq forteresses se tenaient unies autrefois, trois gisent maintenant en ruines et deux se tiennent séparées, isolées et inamicales l'une envers l'autre. Si nous devons reconstruire le Segbandal, nous devons commencer par rétablir les relations avec Verkal Gulan, notre Forteresse Sœur survivante. Mettons de côté notre rivalité passée et offrons notre main en paix et amitié. Nous devons aussi commencer la reconquête des forteresses tombées - en commençant par la forteresse la plus proche et la plus stratégiquement située : Hehodovar. Ramener la Forteresse de l'Inventeur dans la lumière de la civilisation naine sera vital aux futurs efforts de restauration."
+
+ seghdihr_kings_dilemma_title:0 "Le Dilemme du Roi"
+ seghdihr_kings_dilemma_desc:0 "La Bande Seg a été instrumentale dans notre récupération, mais leur présence cause encore de l'inquiétude parmi notre population. Le rôle qu'ils jouèrent dans la chute du Segbandal n'a pas été oublié, et malgré leur rédemption il y en a peu en effet qui leur font confiance. Il y a des appels toujours croissants pour réduire notre dépendance de ces mercenaires, ou au moins les légiférer dans la servitude. À cause de cette anxiété répandue, [Root.Monarch.GetName] a été forcé de prendre une forme d'action."
+
+ seghdihr_scars_past_title:0 "Cicatrices du Passé"
+ seghdihr_scars_past_desc:0 "Nous avons pris les mesures nécessaires, et maintenant notre avenir est entre nos mains et les nôtres seules. Prouvons maintenant que nous en sommes dignes. Nos armées sont assemblées, et nos armes sont prêtes et levées. Elles seront mises à l'épreuve. Les forteresses périphériques du Dwarovar Central, Gor Ozumbrog et Gor Vazumbrog, ont besoin d'être restaurées, et les anciennes frontières du Segbandal récupérées."
+
+ seghdihr_rely_ourselves_title:0 "Ne Compter que sur Nous-Mêmes"
+ seghdihr_rely_ourselves_desc:0 "Alors que nous regagnons accès aux richesses de l'Échine-du-Serpent, nous devons nous assurer qu'elles sont utilisées pour le bénéfice de notre peuple, pas gaspillées pour la richesse personnelle de quelques marchands opportunistes. Les forteresses occidentales n'étaient pas là pour nous quand Vazumbrog tomba. Pourquoi ceux qui ne nous respectent pas mériteraient-ils les fruits de notre labeur ? Alors que nous restaurons le Segbandal, nous compterons sur nous-mêmes, et nous tiendrons seuls."
+ seghdihr_rely_ourselves_tooltip:0 "Tous nos §Yrivaux§! sont §Yembargués§! !"
+ seghdihr_rely_ourselves_tooltip2:0 "Ce modificateur nous permettra d'embarquer §Gun§! pays §Ynon-rival§! sans §Ypénalité§! !"
+
+ seghdihr_true_unity_title:0 "Vraie Unité"
+ seghdihr_true_unity_desc:0 "Les cinq forteresses et la gloire du Segbandal ont été restaurées. Seghdihr se tient une fois de plus à la tête de l'alliance qui fut perdue. Mais ce n'était pas pour rien que le Segbandal tomba et une simple alliance ne suffira pas. Une révision structurelle est requise pour assurer que nous ne tombions pas victimes des mêmes faiblesses à nouveau."
+
+ #4
+ seghdihr_seg_band_title:0 "La Bande Seg"
+ seghdihr_seg_band_desc:0 "Ce serait un euphémisme de dire que la Bande Seg est controversée. À cause de leur rôle dans la chute de Seghdihr, ils sont largement méfiés. Mais les forces de Seghdihr sont une coquille de ce qu'elles étaient, ayant été réduites à presque rien quand Jexis prit le contrôle de la forteresse. La Bande Seg, cependant, est encore très disposée à se battre pour nous pour un prix et leurs capacités martiales ne peuvent être niées. Au moins pour le moment, nous devrons compter sur ces mercenaires."
+
+ seghdihr_own_axes_title:0 "Nos Propres Haches"
+ seghdihr_own_axes_desc:0 "Tant que la Bande Seg est à notre service, notre armée permanente est libérée pour rester à la maison. Nous devons saisir cette opportunité pour en faire une force de combat formidable, pour assurer que nous ayons les capacités de nous défendre quand nous n'avons pas accès à ces mercenaires. Nous devons reconstruire l'infrastructure militaire et l'entraînement appropriés qui tombèrent en désuétude et négligence au cours des décennies passées."
+
+ seghdihr_citrine_dwarovkron_title:0 "Une Citrine Sans Égale"
+ seghdihr_citrine_dwarovkron_desc:0 "Dans les jours d'Aul-Dwarov, Seghdihr eut l'honneur de fournir une des gemmes de la couronne du Haut Roi. Cette gemme de Citrine, cependant, fut perdue durant la chute avec le reste de la couronne. Maintenant les jours d'Aul-Dwarov sont depuis longtemps partis et nous ne devons plus allégeance à Amldihr. Maintenant est le temps pour la gemme de Citrine d'être retournée à ses propriétaires légitimes."
+
+ seghdihr_first_fell_title:0 "La Première qui Tomba"
+ seghdihr_first_fell_desc:0 "Gor Vazumbrog. Une forteresse de guerriers puissants, foi pieuse, et nains aventureux unis dans le but de garder les orques hors du Segbandal, et par extension l'Arbre de Pierre et les Mines de Jade. Vazumbrog fut la première Forteresse à tomber dans le Segbandal, dans l'événement que nous en sommes venus à apprendre comme l'Éveil du Dragon de nos amis Bulwari. Après sa chute durant l'Éveil du Dragon, les orques s'installèrent et en firent leur foyer, pillant et saccageant ce qu'ils peuvent et détruisant ce qu'ils ne peuvent. Ils dorment sur les os de nos frères, et il n'y a qu'un prix pour cela : leurs vies."
+
+ seghdihr_vaults_vazumbrog_title:0 "Voûtes de Vazumbrog"
+ seghdihr_vaults_vazumbrog_desc:0 "Avant la chute d'Aul-Dwarov, le but de Gor Vazumbrog était double. Entraîner, armer, et préparer quelques-uns des plus fins gardiens d'Aul-Dwarov qui travailleraient à défendre le royaume où et comme nécessaire, mais aussi protéger ce que les forteresses de l'empire ancien jugèrent dangereux, subversif, ou les deux. Ceci fut fait via une série de voûtes et tombes, ces dernières pour les individus jugés trop dangereux pour être autorisés à la liberté, et les premières pour les objets, magiques et mondains. Après le rétablissement du Segbandal, beaucoup de voûtes restèrent scellées avec de bonnes raisons, mais le leadership de Gor Vazumbrog jugea bon d'en ouvrir un nombre dans des circonstances extrêmes pour pousser la marée de bataille en leur faveur. Nous devrions voir si nous ne pouvons trouver quelque chose d'utile laissé."
+
+
+ #5
+ seghdihr_restore_gate_title:0 "Restaurer la Porte"
+ seghdihr_restore_gate_desc:0 "Notre fière forteresse a subi de nombreuses cicatrices de guerre, affaiblie et tombée en désuétude depuis Jexis. Seghdihr, la Porte du Sud, est une coquille vide comparée aux jours de gloire du Segbandal. Ses occupants, cependant, sont déterminés comme toujours. Nous nettoierons les ruines, réparerons les fissures dans les murs, et reconstruirons Seghdihr pour être encore plus magnifique qu'avant. La Porte du Sud, autrefois réduite en éclats, sera restaurée et renforcée, pour ne plus jamais être percée !"
+
+ seghdihr_increased_demand_title:0 "Demande Accrue"
+ seghdihr_increased_demand_desc:0 "Alors que nous nous étendons au-delà des murs de notre forteresse à nouveau, notre besoin d'équipement et matériaux augmente dramatiquement. Pour répondre à cette demande, nous devons intensifier la production à Seghdihr ainsi que dans les grottes et routes périphériques. Nous devons exploiter les zones reconquises dans la plus grande mesure possible."
+
+ seghdihr_land_citrine_title:0 "Terre de Citrine"
+ seghdihr_land_citrine_desc:0 "Ce n'est pas sans cause que les habitants de Seghdihr sont appelés les Nains de Citrine. Il y a des dépôts de diverses gemmes dans les profondeurs inférieures de la forteresse, la citrine en premier lieu, ce qui a favorisé une communauté dédiée et qualifiée de joailliers. Alors que nous intensifions notre commerce avec Bulwar, il serait très profitable en effet d'investir dans et d'étendre cette communauté et d'attirer les marchands étrangers avec les richesses qui attendent dans la roche sous notre forteresse."
+
+ seghdihr_wealth_east_title:0 "Richesse de l'Orient"
+ seghdihr_wealth_east_desc:0 "Les routes commerciales abondantes de Rahen et au-delà passent juste devant notre porte. Azka-Sur est un arrêt important sur la route commerciale, mais rarement les marchands Raheni entrent la porte du sud. Nous ne pouvons obtenir que des miettes, tandis que les marchands de Bulwar deviennent énormément riches. Si nous sommes capables de les attirer au Dwarovar tout en diffamant sournoisement nos rivaux mercantiles, nous pouvons siphonner une partie de la richesse dans nos propres coffres."
+
+ seghdihr_plants_dwarovar_title:0 "Plantes du Dwarovar"
+ seghdihr_plants_dwarovar_desc:0 "Trouvée seulement dans l'Échine-du-Serpent, la fleur-serpent a longtemps été une culture de base à Seghdihr et autres Forteresses aux côtés des champignons parce qu'elle est l'une des très rares cultures capables de croître souterrainement. Les visites croissantes de marchands Raheni à Seghdihr, cependant, ont causé un intérêt significatif dans ces légumes parmi ceux résidant à l'extérieur de l'Échine-du-Serpent. Les élites riches considèrent maintenant la fleur-serpent une 'délicatesse exotique', et sont disposées à payer de très grosses sommes d'argent pour ces cultures qui sont assez bon marché à produire. Nous devrions capitaliser là-dessus, et augmenter la production pour sécurer suffisamment de fleur-serpent pour notre propre peuple et nos exportations."
+
+
+ ######Part 2######
+ #1b
+ seghdihr_scouting_tree_title:0 "Explorer l'Arbre"
+ seghdihr_scouting_tree_desc:0 "L'incursion gobeline depuis l'Arbre-de-Pierre était bien, bien plus importante que les raids habituels auxquels nous faisons face ordinairement. Nous devons découvrir la cause de cette incursion avant de l'affronter à nouveau. Préparons des équipes d'éclaireurs et déterminons ce qui nous attend dans l'Arbre-de-Pierre."
+ seghdihr_scouting_tree_tooltip:0 "Nous débloquerons une décision qui révèle des informations détaillées sur les §YIncursions Gobeliennes§! !"
+
+ seghdihr_searching_survivors_title:0 "Rechercher les Survivants"
+ seghdihr_searching_survivors_desc:0 "Des quatre grandes forteresses naines de l'Arbre-de-Pierre, Grôzumdihr, Ovdal-az-Ân et Hul-az-Krakazol sont tombées il y a bien longtemps. Ovdal Kanzad tenait encore debout lors de notre dernier contact. S'ils ont survécu, nous devons nous en faire des alliés. Sinon, ils doivent être vengés."
+
+ seghdihr_ozumbrog_gambit_title:0 "Le Dernier Pari d'Ozumbrog"
+ seghdihr_ozumbrog_gambit_desc:0 "Durant ces années crépusculaires du dernier Segbandal, pendant l'Occupation Jexisienne, le dernier roi de Gor Ozumbrog, le Roi Ombrindal, se retira de l'alliance et partit seul. Avec le temps, il apprit qu'Ovdal Kanzad tenait toujours, et le Roi Ombrindal partit donc avec la majorité des forces de la forteresse pour dégager la Route de Fer, la section du Dwarovrod qui s'étendait de Gor Ozumbrog à Ovdal Kanzad, et sceller une alliance avec les Nains d'Ambre. Malheureusement, la traîtresse Seg Band (soutenue par l'occupation jexisienne de Seghdihr) saisit l'opportunité pour forcer le reste du Segbandal à piller Gor Ozumbrog et affaiblir considérablement ses défenses. Sans forteresse sûre, le Roi Ombrindal fut contraint de renoncer à sa quête pour empêcher la chute de Gor Ozumbrog. Il échoua, et avec le temps, le Segbandal aussi. Mais maintenant, peut-être pouvons-nous réparer ce qui fut brisé."
+
+ seghdihr_reinforce_front_title:0 "Renforcer le Front"
+ seghdihr_reinforce_front_desc:0 "Notre front le plus important se trouve dans l'Arbre-de-Pierre, mais il est plus éloigné de la capitale que nos champs de bataille habituels. La logistique pour acheminer renforts et approvisionnements depuis les forteresses du Segbandal à l'est est ardue. Pourtant, ils resteront importants dans un avenir prévisible. Il est grand temps que nous réparions les voies ferrées du Dwarovrod et construisions une solution durable à ces problèmes."
+ seghdihr_reinforce_front_tooltip:0 "Toutes les routes possédées entre §YSeghdihr§! et §YOvdal Kanzad§! sont réparées"
+ seghdihr_reinforce_front_tooltip2:0 "Toutes les routes possédées obtiendront Coût de Développement : §G-10%§! pendant §Y10 ans§! !"
+
+ seghdihr_launching_raid_title:0 "Notre Propre Raid"
+ seghdihr_launching_raid_desc:0 "Les raids gobelins auxquels nous faisons face ont souvent utilisé des tactiques de harcèlement, restant furtifs et mobiles pour minimiser leurs pertes. Bien que nous les ayons repoussés, ils ont été très efficaces pour perturber nos lignes d'approvisionnement. Certains officiers nains croient pouvoir adapter ces tactiques pour les optimiser aux armes et équipements nains, et demandent l'autorisation d'entraîner une partie de nos forces pour donner aux raiders gobelins un avant-goût de leur propre médecine."
+
+ seghdihr_secure_south_title:0 "Sécuriser le Sud"
+ seghdihr_secure_south_desc:0 "Avant de pousser plus à l'est, le sud de l'Arbre-de-Pierre doit être sécurisé. En progressant le long du Grôzumrod et en reprenant Grôzumdihr, nous aurons une base solide depuis laquelle nous pourrons pousser plus loin, ainsi qu'un nouveau moyen d'accéder aux approvisionnements par le commerce avec Rahen."
+
+ seghdihr_strengthen_roots_title:0 "Renforcer l'Arbre"
+ seghdihr_strengthen_roots_desc:0 "Grôzumdihr et Ovdal Kanzad forment un front oriental solide, mais jusqu'à présent les efforts de fortification ont été à la fois petits et locaux. Si nous pouvons mobiliser les efforts manufacturiers du Segbandal pour soutenir ces forteresses, nous pouvons établir une fondation bien plus solide pour qu'elles se défendent contre la menace gobeline de l'est."
+
+
+ #2b
+ seghdihr_watching_backs_title:0 "Surveiller nos Arrières"
+ seghdihr_watching_backs_desc:0 "Les incursions gobeliennes de l'est sont notre préoccupation la plus pressante, mais il existe encore des dangers dans notre propre région. Avant de donner toute notre attention à la menace orientale, nous devons d'abord nous assurer que l'ensemble du Dwarovar Central est en sécurité."
+
+ seghdihr_light_tunnels_title:0 "Éclairer les Tunnels"
+ seghdihr_light_tunnels_desc:0 "Le Dwarovrod de Gor Ozumbrog à Ovdal Kanzad est une route traîtresse, ce qui n'est certainement pas aidé par les cavernes qui s'entrecroisent dans la dernière moitié. Ces cavernes sont grandement favorisées comme points d'embuscade par les groupes de raid gobelins, qui peuvent se cacher à distance de frappe immédiate des groupes voyageurs. Si nous installons un système de lumières qui peuvent être allumées de loin, nous pouvons illuminer ces fissures et crevasses, et améliorer considérablement la sécurité de nos voyageurs."
+
+ seghdihr_activate_golems_title:0 "Réactiver les Golems"
+ seghdihr_activate_golems_desc:0 "Au plus profond des voûtes de Gor Vazumbrog se dresse une arme ancienne, récemment redécouverte par nos équipes d'excavation : une légion d'anciens golems de pierre, sculptés il y a des milliers d'années, animés par le pouvoir de la terre élémentaire. Bien que nous ayons depuis longtemps perdu la connaissance pour créer de nouveaux golems et que nous manquions même du savoir pour leur donner la capacité de bouger, nos érudits croient qu'ils devraient au moins pouvoir réactiver les golems comme sentinelles immobiles. Si nous pouvons les déplacer dans des positions stratégiques à travers la forteresse et les tunnels près de Vazumbrog, ils peuvent servir de plateformes défensives autour desquelles nos soldats peuvent combattre."
+
+ seghdihr_way_force_title:0 "Voie de la Force"
+ seghdihr_way_force_desc:0 "Au cœur de la guerre se trouve la force : le lourd coup de marteau d'acier et de poudre, d'artillerie rugissante et de magie mortelle. Les guerriers de Verkal Gulan connaissent bien la force - ils ont longtemps utilisé la poudre pour défendre la Vallée du Héros contre les Harpies Siadúnan et la précision de leurs canonniers n'est dépassée que par les légendaires artilleurs d'Ovdal Kanzad. Nous devons encourager la maîtrise de l'artillerie qui a grandi ici et l'incorporer dans nos forces armées pour pouvoir affronter nos ennemis avec la force écrasante de la poudre noire."
+
+ seghdihr_way_vigilance_title:0 "Voie de la Vigilance"
+ seghdihr_way_vigilance_desc:0 "En guerre, la vigilance est une nécessité constante. Seule la vigilance peut contrer vos ennemis et vous permettre de les engager là où ils sont les plus faibles. C'est seulement avec la vigilance que vous pouvez vous assurer de ne jamais tomber. S'il faut retenir quelque chose des assauts gobelins incessants que nous avons endurés en défendant Ozumbrog, c'est que nous devons toujours être prêts à tout. Nos ennemis sont nombreux et ils n'hésiteront pas à frapper à la moindre ouverture. Nos hommes doivent donc être vigilants, et nous les entraînerons pour nous en assurer."
+
+
+ #3b
+ seghdihr_nip_bud_title:0 "Couper dans l'Œuf"
+ seghdihr_nip_bud_desc:0 "Les anciennes familles nobles, bien qu'elles aient été blessées tout autant que quiconque par la chute du Segbandal, ont lentement regagné leur influence et sont revenues à leurs anciennes manières traîtresses. Elles s'opposent à nous à chaque tournant, que ce soit parce que nous limiterions par inadvertance leur pouvoir, renforcerions une famille noble rivale, ou juste pour prouver qu'elles le peuvent. Assez ! Les titres ou les traditions ne placent personne au-dessus de la loi ou des conséquences, et maintenant, ayant obtenu l'autorité de Roi-Brillant du Segbandal, [Root.Monarch.GetName] a la capacité de l'appliquer. La noblesse sera mise au pas, et ces traîtres qui résistent affronteront les conséquences. Ils s'agenouilleront ou ils mourront."
+
+ seghdihr_fate_seg_band_title:0 "Destin de la Seg Band"
+ seghdihr_fate_seg_band_desc:0 "Malgré toutes nos mesures pour assurer la loyauté de la Seg Band envers nous, elle reste un mal de tête récurrent. Même s'il n'y a pas eu un seul signe de déloyauté de leur part depuis les réformes, elle reste un sujet vivement débattu parmi notre peuple, qui ne leur fait pas confiance. Nous ne pouvons avancer vers l'avenir tant que nous ne pouvons nous libérer des chaînes du passé. Il est temps de mettre cette question derrière nous. Définitivement."
+
+ seghdihr_only_best_title:0 "Seuls les Meilleurs"
+ seghdihr_only_best_desc:0 "Bien que ce ne soit certainement pas quelque chose que nous souhaiterions rendre public au monde extérieur, c'est un fait que la population du Segbandal est plutôt limitée considérant l'étendue de nos frontières. La chute du Segbandal dans le passé et nos efforts de reconquête nous ont éparpillés, et nous n'avons pas encore eu le temps de récupérer. Ainsi, nos efforts militaires doivent être gérés en conséquence. Notre nouvelle armée sera grandiose, non pas en taille, mais en qualité. Chaque soldat doit être entraîné et formé jusqu'à la limite de ses capacités, et rien de moins que la perfection ne suffira. Nous aurons une caserne dans chaque forteresse, remplie des meilleurs soldats que le Segbandal ait jamais vus. Ni plus, ni moins."
+ seghdihr_only_best_tooltip:0 "Chaque province qui n'est pas une §YForteresse§! ou une §YRoute Naine§! perdra ses §YCasernes§! ou son §YTerrain d'Entraînement§! et récupérera §Y25%§! de son coût en préparation des réformes militaires"
+
+ seghdihr_worthy_segbandal_title:0 "Digne du Segbandal"
+ seghdihr_worthy_segbandal_desc:0 "La consolidation de nos forces a été réussie, et maintenant nous pouvons travailler à continuer d'améliorer leurs performances. En établissant un entraînement approprié, en fournissant un équipement de qualité, et en assurant la loyauté et la dévotion de nos troupes, nous créerons l'armée dont le Segbandal a besoin et qu'il mérite."
+
+ seghdihr_five_ways_title:0 "Les Cinq Voies"
+ seghdihr_five_ways_desc:0 "La guerre a de nombreuses couches : tactiques, stratégie, logistique, moral, discipline, et dans chaque couche se trouvent de nombreuses techniques qui ont été apprises par les armées du monde au fil des générations de conflit et d'entraînement. Alors que nous avançons avec la professionnalisation de l'armée, il y a de nombreuses leçons que nos troupes et officiers doivent apprendre si nos forces armées doivent être aussi capables que possible. Ces leçons commenceront près de chez nous. Chacune des cinq forteresses du Segbandal a une spécialité guerrière que nous pouvons intégrer et étendre à travers nos armées. Chaque forteresse aura un rôle dans l'amélioration de la grande armée du Segbandal !"
+
+ seghdihr_way_defiance_title:0 "Voie de la Défiance"
+ seghdihr_way_defiance_desc:0 "Seghdihr tient debout, malgré les mauvaises chances et les menaces de l'intérieur et de l'extérieur. Seghdihr n'a été conquise qu'une seule fois et ce fut par trahison. Défiant tous, l'entêtement de la Forteresse de Citrine est un trait qui vaut la peine d'être cultivé chez nos soldats, créant des guerriers qui combattront jusqu'au dernier et sauront défendre le terrain comme nul autre."
+
+ seghdihr_the_surani_title:0 "Les Surani"
+ seghdihr_the_surani_desc:0 "Les Surani ont toujours été les amis de Seghdihr, vivant et travaillant aux côtés de notre peuple. Ils ont longtemps veillé sur nos caravanes et échangé leurs biens de surface contre nos trésors souterrains. Les Surani ont prouvé qu'ils étaient aussi fidèles et fiables que n'importe quel nain, et méritent le droit de rejoindre notre nation. Nous étendrons le droit de vivre dans les forteresses naines aux Surani, protégés du soleil impitoyable et des dangereux raiders du monde de surface. Ici, ils peuvent contribuer non seulement comme travailleurs, mais comme soldats, car les humains ont des compétences avec la cavalerie avec lesquelles nous avons toujours eu des difficultés. Cette flexibilité servira bien nos armées, et nos auxiliaires humains seront un excellent complément à nos divisions régulières."
+
+ seghdihr_the_syndicates_title:0 "Les Syndicats"
+ seghdihr_the_syndicates_desc:0 "Le Segbandal avait toujours consisté en les cinq forteresses du Dwarovar central, mais avec ces raids gobelins de l'Arbre-de-Pierre, nous avons été forcés d'étendre notre influence vers l'est, dans Ovdal Kanzad et Grôzumdihr. Maintenant vient la question de quoi faire avec elles. Grôzumdihr ouvre un nouveau chemin vers Rahen, et les forges d'armes d'Ovdal Kanzad produisent les armes à feu les plus avancées pour nos armées. Beaucoup de nos conseillers déclarent que l'Arbre-de-Pierre peut être un bastion économique très prospère. Par conséquent, une nouvelle solution est requise pour leur statut actuel."
+ seghdihr_the_syndicates_tooltip:0 "La §YSGC§! pourra opérer dans le nœud commercial du §YGolfe de Rahen§!"
+
+ #4b
+ seghdihr_ensure_loyalty_title:0 "Assurer la Loyauté"
+ seghdihr_ensure_loyalty_desc:0 "Beaucoup des anciennes familles nobles avaient des suites personnelles considérables de guerriers expérimentés, qu'elles utilisaient comme levier ou comme agents d'exécution pour leurs affaires. Avec les nobles dépouillés de leurs privilèges, ces suites sont maintenant sans chef et sans direction, et manquent de solde. Nous devons nous assurer que leurs loyautés nous appartiennent, avant qu'ils ne s'alignent avec les prochains fauteurs de troubles et dissidents montants dans notre royaume."
+
+ seghdihr_kings_all_title:0 "Roi de Beaucoup"
+ seghdihr_kings_all_desc:0 "Seghdihr est la forteresse des Nains de Citrine, mais la nation que nous dirigeons n'est plus un royaume d'une forteresse ou d'un peuple. Nous nous sommes joints aux Nains d'Or de Verkal Gulan et avons refondé les forteresses de pyrite, de titane et de topaze. Malgré nos différences, nous sommes liés par un lien de parenté et de fraternité, et Seghdihr ne devrait pas dominer notre parenté comme s'ils étaient un peuple conquis. Nous devrions inviter les nains les plus influents de chaque forteresse à siéger au conseil de Seghdihr, conseillant le monarque et guidant ensemble le navire de l'État."
+ seghdihr_kings_all_tooltip:0 "Possède une Réforme Gouvernementale de niveau §Y5§!"
+
+ seghdihr_hargunforge_title:0 "La Hargûnforge"
+ seghdihr_hargunforge_desc:0 "Alors que la reconquête d'Hehodovar progresse rapidement et que les grands mécanismes de son industrie reprennent vie en crachotant, il est devenu apparent qu'un investissement industriel significativement plus important sera nécessaire. La dynastie az-Hargûn nouvellement rebaptisée a vu dans les demandes des inventeurs et forgerons de la forteresse une excellente opportunité de faire connaître leur bienveillance, et des plans ont été élaborés pour construire une forge appropriément grandiose au cœur industriel d'Hehodovar. La forge sera le cœur battant pompant l'acier en fusion qui est le sang vital du Segbandal et un symbole de la grandeur de la dynastie."
+
+ seghdihr_way_preparation_title:0 "Voie de la Préparation"
+ seghdihr_way_preparation_desc:0 "Connaître son ennemi est la moitié de la bataille, et assure que la seconde moitié - la moitié meurtrière - se déroule en termes favorables. La paranoïa de Gor Vazumbrog s'est traduite par la production de soldats qui ont été mis à travers d'innombrables hypothétiques et méthodes d'entraînement de survie, tandis que la forteresse elle-même s'est concentrée sur la logistique et le stockage de ressources. Bien qu'ils puissent être un peu trop certains qu'ils auront besoin de toutes ces techniques, on ne peut nier que leurs soldats sont bien préparés à de nombreux défis, et nous devrions encourager les méthodes qui produisent de tels résultats."
+
+ seghdihr_way_tenacity_title:0 "Voie de la Ténacité"
+ seghdihr_way_tenacity_desc:0 "Au-delà de la préparation et au-delà de la défiance, il y a une vertu qui émerge quand la guerre tourne mal mais que les soldats ont la force de continuer à combattre malgré tout. Hehodovar incarne cette force tenace et ses grandes forges et nombreux ingénieurs s'efforcent sans relâche peu importe les conditions dans lesquelles notre nation se trouve. Ces guerriers qui combattent ici sont imprégnés de cet esprit et ils apprendront l'endurance sans fin dans l'armure la plus lourde et la plus forte du Dwarovar. Ils cultiveront une force si grande qu'ils ne se sentiront jamais encombrés, même quand ils portent l'ensemble du Segbandal sur leurs épaules."
+
+
+ #5b
+ seghdihr_capital_segbandal_title:0 "Capitale du Segbandal"
+ seghdihr_capital_segbandal_desc:0 "Les cinq sœurs du Segbandal ont été réunies, et l'alliance d'autrefois est restaurée. Nous nous dressons forts comme une confédération, prêts à affronter tout ce que la surface et le Dwarovar réservent comme une seule nation. Une nation ne peut avoir cinq capitales, cependant - une ville doit être première parmi ses égales si notre gouvernement doit avoir quelque semblant d'efficacité administrative et diplomatique. Il est temps de régler la question de où placer définitivement le gouvernement du nouveau Segbandal."
+
+ seghdihr_coin_flows_title:0 "Où Toute Pièce Coule"
+ seghdihr_coin_flows_desc:0 "Pendant des milliers d'années, le commerce a coulé de Bulwar vers Rahen à travers le Lointain Salahad le long d'une route qui passe directement par Azka-Sur, et donc Seghdihr. Les marchands transportant des biens exotiques devant nos portes ont fourni à nos ancêtres l'opportunité d'accéder aux luxes du lointain Haless et de la mer Divehal malgré notre éloignement. Alors que nous réémergeons sur la scène mondiale, nous avons l'opportunité de nous impliquer à nouveau dans le commerce qui prospère le long de la Route d'Or. Au goulot d'étranglement stratégique de Baganaš, nous pouvons établir un poste commercial pour faciliter le flux de biens vers l'autrement inaccessible Verkal Gulan, échangeant les trésors de la Citadelle d'Or contre les riches soies et épices de Rahen avant même qu'ils n'atteignent Azka-Sur."
+ seghdihr_coin_flows_tooltip:0 "Toutes les nations §Ynon-rivales§! qui possèdent des provinces dans le nœud commercial de la §YRoute d'Or§! sont soit §Rmonstrueuses§!, ont §G+75 d'opinion§! de nous, ou ont le modificateur d'opinion §YRelations Améliorées§! avec une valeur de §G+100§! !"
+
+ seghdihr_gems_coffee_title:0 "Gemmes contre Café"
+ seghdihr_gems_coffee_desc:0 "Notre demeure montagnarde est bien des choses, mais être fertile n'en fait pas partie. Ni les pentes sèches de la face de la montagne ni l'obscurité de son intérieur ne soutiennent l'agriculture en grandes quantités, mais il y a quelques cultures qui semblent bien se porter dans ces climats. Une à laquelle nous avons récemment été introduits est le café - un fruit amer qui peut être infusé en une boisson revigorante favorisée par les mages. Les humains d'Azka-Sur ont eu quelque succès à la planter parmi les contreforts de l'Échine-du-Serpent. Nos marchands ont récemment proposé qu'investir dans la production de café pourrait être très profitable et nous rendrait certainement populaires auprès de l'élite magique - voyons où leur proposition nous mène."
+
+ seghdihr_first_last_stop_title:0 "Le Premier et Dernier Arrêt"
+ seghdihr_first_last_stop_desc:0 "La Route d'Or s'étendait autrefois de Brasan au Lointain Yanshen mais aujourd'hui la route est soit en ruine soit persiste comme l'ombre d'elle-même. Le fait que nous ayons réussi à restaurer avec succès le rail entre Seghdihr et Verkal Gulan, cependant, s'est avéré un grand atout pour le commerce en fournissant aux marchands un chemin à travers les montagnes et collines en sécurité et confort et en leur permettant de transporter de vastes quantités de biens de manière bien plus rentable. De nouveaux investissements dans les réseaux ferroviaires et restaurations des routes de surface ne feront que graisser les rouages du commerce vers des hauteurs toujours plus grandes. Ce peut être cher, mais la prospérité que ces investissements apportent vaudra le coût à long terme."
+ seghdihr_first_last_stop_tooltip:0 "Toutes les routes entre §YSeghdihr§! et §YVerkal Gulan§! sont réparées"
+ seghdihr_first_last_stop_tooltip2:0 "Nous pourrons maintenant imposer un embargo à §Gdeux§! pays §Ynon-rivaux§! §Ysans pénalité§! !"
+
+ seghdihr_create_sgc_title:0 "Créer la SGC"
+ seghdihr_create_sgc_desc:0 "Le monde est un lieu vaste, avec des transactions, accords, contrats et arrangements de toutes sortes étant faits, tenus et brisés au jour le jour. Mais une grande partie de cette richesse ne trouve pas son chemin vers nous. Elle se produit là-bas dans le monde au-delà, au-delà des sables de Bulwar et du Salahad, et la source de cette richesse se trouve à l'est, en Rahen et Yanshen. Mais comment pouvons-nous faire notre propre marque sur la scène mondiale au-delà de notre porte ?"
+
+ seghdihr_into_rahen_title:0 "Vers Rahen"
+ seghdihr_into_rahen_desc:0 "Rahen est une terre riche, et source de nombreux biens et objets d'incroyable valeur. Épices et teintures sont récoltées dans ses champs, porcelaine et soie façonnées dans ses ateliers, et artefacts d'or et de magie débordent de ses temples. Mais elle est loin des salles que nous appelons chez nous. L'accès au Golfe Occidental de Rahen sera clé pour sécuriser le commerce qui en vient, ce qui signifie s'assurer que les marchands le long de la Route d'Or viennent vers nous et non ailleurs. La clé la plus importante dans tous nos plans d'extension de l'influence du Cartel d'Or, quoi qu'il en soit, est Davharral. Sa taille trahit son importance comme lieu où Rahen et Bulwar se rencontrent. Nos améliorations le long des Routes d'Or peuvent être un début, mais un effort concerté impliquant ceux qui gouvernent la ville sera requis pour s'assurer correctement que nous possédons des cartes précises de Rahen et sécurisons un emplacement sûr pour les caravanes et ventures commerciales."
+ seghdihr_into_rahen_tooltip:0 "La §YSGC§! pourra opérer dans le nœud commercial de §YDavharral§!"
+
+ seghdihr_force_open_title:0 "Forcer l'Ouverture du Marché"
+ seghdihr_force_open_desc:0 "Sramaya est le plus grand port de Rahen et dans l'esprit de certains de ses habitants c'est le seul port de Rahen. Bien sûr, si nous souhaitons aller plus loin en Haless, nous devrons visiter d'autres ports, mais pas avant de traiter avec les cupides Bhuvauri qui dirigent la Perle de la Kharunyana. Le consentement de ces esclaves devenus esclavagistes, explicite ou implicite, est tout ce qui se dresse entre la SGC et les marchés de l'Extrême-Orient. Malheureusement, ils sont très protecteurs de leurs monopoles.\nHeureusement, nous n'avons aucun scrupule à briser ces monopoles. L'Extrême-Orient nous sera ouvert, d'une manière ou d'une autre."
+
+
+ ######Part 3######
+ #1c
+ seghdihr_push_east_title:0 "Pousser vers l'Est"
+ seghdihr_push_east_desc:0 "Ovdal-az-Ân, la Forteresse de l'Un, se dresse comme la clé de l'Arbre-de-Pierre oriental. Bien qu'elle soit tombée il y a longtemps, elle reste un centre stratégique important qui peut exercer notre influence dans les cavernes environnantes. Plus important encore, elle sécurise le Dwarovrod vers la forteresse plus importante d'Hul-az-Krakazol."
+
+ seghdihr_nowhere_hide_title:0 "Nulle Part où se Cacher"
+ seghdihr_nowhere_hide_desc:0 "Hul-az-Krakazol était la forteresse des maîtres brasseurs, et sa reconquête nous permettra d'accéder à leurs anciennes salles de brassage, ainsi qu'un autre point d'accès au commerce avec Rahen. Mais plus que cela, elle nous permet d'imposer le contrôle sur tout l'Arbre-de-Pierre, ne laissant aucun refuge sûr aux raiders gobelins. Leurs murs se referment autour d'eux, et ils ne vivront pas pour regretter leurs invasions."
+ seghdihr_nowhere_hide_tooltip:0 "Toutes les terres restantes dans l'§YArbre-de-Pierre§! seront réparties entre les §YSyndicats§! !"
+
+ seghdihr_last_stand_title:0 "Leur Dernier Combat"
+ seghdihr_last_stand_desc:0 "Nos éclaireurs rapportent que les maraudeurs gobelins sont dans un état de panique et planifient de lancer une invasion décisive pour nous forcer à sortir de l'Arbre-de-Pierre à nouveau. Si nous pouvons réussir à combattre cela selon nos termes, et repousser cette tentative désespérée, nous pouvons briser leurs forces une fois pour toutes."
+ seghdihr_last_stand_tooltip:0 "Avoir §Y10 unités§! dans chaque §Yprovince surlignée§! !"
+ seghdihr_last_stand_tooltip2:0 "Avoir §Y4 généraux§! dans les §Yprovinces surlignées§! !"
+
+ seghdihr_tree_holds_title:0 "L'Arbre qui nous Tient"
+ seghdihr_tree_holds_desc:0 "Bien que le centre de pouvoir segbandalique se trouve dans le Dwarovar Central, l'Arbre-de-Pierre lui est d'une grande importance. Comme berceau de notre race, il a une grande valeur symbolique pour nous et cache de grandes richesses dans ses racines. Ovdal Kanzad, Ovdal-az-Ân, Hul-az-Krakazol et Grôzumdihr sont des forteresses illustres avec de grandes histoires, et sous notre guidance elles devraient prospérer encore plus que jamais."
+
+ #2c
+ seghdihr_thunder_caves_title:0 "Tonnerre dans les Cavernes"
+ seghdihr_thunder_caves_desc:0 "Avec les raids gobelins toujours présents, certains de nos officiers et ingénieurs ont présenté un plan. Ils ont identifié plusieurs cachettes gobeliennes mal placées dans les cavernes avec de longues lignes de vue et des faiblesses structurelles que nous pouvons exploiter. Ils proposent une grande opération militaire, où nous déplaçons une grande quantité d'artillerie en position, assez rapidement pour qu'ils n'aient pas le temps de réagir, et bombardons l'endroit sans pause jusqu'à ce qu'il s'effondre. Qu'ils ressentent notre colère, et qu'elle soit entendue à travers tout le Dwarovar."
+
+ seghdihr_commanding_presence_title:0 "Présence Commandante"
+ seghdihr_commanding_presence_desc:0 "Il va sans dire que l'ancienne capitale orientale de Grônstunad ne tomberait pas face à n'importe quel envahisseur, et le commandement hobgobelin n'est pas n'importe quel envahisseur. Ils ne doivent pas être sous-estimés, et ainsi nos stratèges ont eu quelques idées... peu conventionnelles. Ils proposent la construction d'une séquence de fortifications sur le Dwarovrod, avec un placement permanent d'artillerie intégrée dans les cavernes adjacentes visant un large espace ouvert que tous envahisseurs doivent traverser, juste derrière les fortifications initiales. Les ingénieurs se réfèrent à cette zone simplement comme « La Zone de Danger »."
+
+ seghdihr_higher_quality_title:0 "La Plus Haute Qualité"
+ seghdihr_higher_quality_desc:0 "Les légions du Commandement étaient renommées pour leur militaire discipliné et puissant, et à juste titre. Elles n'étaient cependant pas de taille contre les Segankâr, qui ont cimenté leur réputation une fois pour toutes : une armée sans égal dans tout Halann."
+
+
+ #3c
+ seghdihr_interrupted_day_title:0 "Ce Jour Interrompu"
+ seghdihr_interrupted_day_desc:0 "Il semble si loin maintenant, ce jour fatidique où les gobelins interrompirent notre deuil pour Gor Ozumbrog. Cela nous força la main vers l'Arbre-de-Pierre, le reconquérant pour notre peuple et ouvrant de nouveaux marchés et accès à des ressources que nous ne possédions pas auparavant. Mais maintenant, l'Arbre est sûr, et Gor Ozumbrog n'a plus besoin d'être une forteresse imprenable gardant les chemins orientaux. Au lieu de cela, nous créerons un grand complexe de temple et mausolée pour les tombés. Grandes tombes taillées dans la terre pour ceux dont les restes peuvent être sauvés, piliers montant jusqu'aux pics montagneux et profondément dans la terre pour les noms de ceux dont les corps n'ont pu l'être. Finalement, pour les innombrables morts oubliés, une salle de mille statues au visage vierge d'hommes, femmes et enfants nains. La Salle des Tombés Inconnus. Nous les pleurerons tous, mais nous n'oublierons pas de regarder vers l'avant. De construire un futur dont ils auraient été fiers."
+ seghdihr_interrupted_day_tooltip:0 "La Tolérance de la Vraie Foi est d'au moins §Y7§! !"
+
+ seghdihr_grand_seghdihr_title:0 "Grandes Salles de Seghdihr"
+ seghdihr_grand_seghdihr_desc:0 "Se dressant maintenant comme capitale du Segbandal, Seghdihr a vraiment été façonnée en une fière forteresse depuis notre réveil. Mais elle n'est pas encore devenue ce qu'elle a le potentiel d'être. Juste au-delà des portes se trouve la merveilleuse cité d'Azka-Sur, un glorieux accomplissement d'architecture, mélangeant styles et structures tant elfes solaires que bulwari. Bien sûr, de telles choses pourraient être encore meilleures quand faites par l'artisanat nain. Inspirons-nous de nos voisins, et incorporons ces éléments dans une grande rénovation de Seghdihr."
+
+ seghdihr_new_dwarovar_title:0 "Un Nouveau Dwarovar"
+ seghdihr_new_dwarovar_desc:0 "Non liés au passé ancien, mais fermement ancrés dans le présent et avançant vers l'avenir, le Segbandal se dresse comme le Joyau du Dwarovar. Nous pouvons être de nombreuses forteresses et clans, mais nous sommes un peuple, et bien que nous puissions nous dresser seuls, nous nous dressons seuls ensemble et ne tomberons plus jamais."
+ seghdihr_new_dwarovar_tooltip:0 "§YMeneur de production§! de §Y4§! biens commerciaux"
+
+ #4c
+ seghdihr_roots_empire_title:0 "Racines d'un Empire"
+ seghdihr_roots_empire_desc:0 "La Route d'Or, originellement construite par Jaher pour approvisionner ses conquêtes étendues en Rahen et Yanshen, suivait les terres méridionales de Rahen, à travers les terres qui ont traditionnellement été le cœur du Harimraj. Malheureusement, les hautes terres de Ghankedhen vers lesquelles Grôzumdihr s'ouvre sont loin de ces routes, rendant difficile la sécurisation du commerce de la région alors que les marchands préfèrent faire flotter leurs marchandises le long de la Dhenbasana ou de la Narajandi vers de plus grands marchés. Nous devons encourager ceux qui habitent le long des deux rivières à envoyer leurs marchandises en amont vers Grôzumdihr et Hul-az-Krakazol, et non en aval vers le Golfe."
+ seghdihr_roots_empire_tooltip:0 "La §YSGC§! pourra opérer dans le nœud commercial de §YNadimraj§!"
+
+ seghdihr_porcelain_cities_title:0 "Porcelaine le long de la Rivière"
+ seghdihr_porcelain_cities_desc:0 "Dans les cités le long de la Rivière-Mer Kharunyana, les gens ont appris à sculpter une céramique des plus merveilleuses : la Porcelaine. Étrangement résistante à la magie et belle dans son lustre blanc pâle et bleu, la porcelaine a longtemps été prisée dans le monde entier, mais elle n'est fabriquée presque nulle part ailleurs qu'ici. Bien que les locaux répugnent à partager leurs secrets, il y a des moyens de les faire parler - notamment, par leurs portefeuilles. Un petit investissement nous ouvrira la porte, et de là nous pourrons lentement gagner leurs secrets et apporter le secret de la porcelaine à nos salles. En assurant la stabilité économique à la région, nous pourrons prouver notre bonne volonté, opérer librement, et faciliter les conversations nécessaires pour nous joindre au commerce de la porcelaine."
+ seghdihr_porcelain_cities_tooltip:0 "Chaque possesseur de §YCité de Porcelaine§! est soit §Rmonstrueux§!, un §Rrival§!, est §Ggaranti§! par nous, ou a §G+50§! d'opinion"
+ seghdihr_porcelain_cities_tooltip2:0 "La §YSGC§! pourra opérer dans le nœud commercial de §YKharunyana§!"
+
+ seghdihr_eastern_exotics_title:0 "Exotiques Orientaux"
+ seghdihr_eastern_exotics_desc:0 "Autrefois les biens exotiques de l'est comme les épices, la porcelaine et les soies venaient par mer et terre à travers Davharral, à travers les sables dévastés de Sarhal, ou guidés par les Masnih habitants du désert depuis de petits ports dans le golfe occidental. Mais maintenant, une troisième route s'est ouverte. Cette route promet confort complet, sécurité, vitesse, et la capacité de déplacer des volumes inouïs, sauf par les plus grandes coques conçues par les Cannoriers. Les rails du Dwarovar apportent les biens de l'Est au seuil de Bulwar, et souvent pas plus loin, parce que les marchands du monde se pressent pour les richesses amenées de nos tunnels orientaux. Notre fameux réseau commercial amène toujours plus de marchands à nos portes, chacun ayant envie d'une chance de goûter à l'Extrême-Orient sans avoir besoin de monter des expéditions dangereuses, difficiles et longues de mois."
+
+
+ #5c
+ seghdihr_dealing_tigers_title:0 "Traiter avec les Tigres"
+ seghdihr_dealing_tigers_desc:0 "Rahen est une terre peuplée par les humains, mais dirigée par les Harimari, un peuple différent de tout ce que nous avons rencontré auparavant. Ce sont des tigres qui marchent et parlent comme des hommes, philosophes-rois qui dirigent les divers fiefs et petits États du Harimraj. Le Cartel d'Or Segbandalique nous a demandé de commencer à préparer des missions vers le Raja et son Grand Vizir pour s'assurer que nous ayons un accès étendu à Rahen. Heureusement, le Raj est décadent et myope, ce qui signifie qu'il devrait être relativement facile d'ouvrir la voie pour pouvoir canaliser le commerce dans la bonne direction. Notre direction."
+ seghdihr_dealing_tigers_tooltip:0 "Est le §YGrand Vizir§!"
+ seghdihr_dealing_tigers_tooltip2:0 "L'opinion de §Y[raj_vizier_global_target.GetName]§! sur le §YSegbandal§! est d'au moins §Y100§!"
+ seghdihr_dealing_tigers_tooltip3:0 "La §YSGC§! pourra opérer dans le nœud commercial de §YDhenbasana§!"
+
+
+ seghdihr_elephant_lords_title:0 "Seigneurs des Éléphants"
+ seghdihr_elephant_lords_desc:0 "Sur la savane à l'est du plateau Marutha vivent les Ghavaanaj, un peuple mieux connu pour leur relation symbiotique avec les troupeaux d'éléphants qui parcourent les terres. Gardiens de ces grandes bêtes, ils sont vus comme compagnons et partenaires dans le travail et l'amélioration de la terre, et les Ghavaanaj ne tolèrent aucun braconnier de leurs animaux. Mais l'ivoire que les grandes bêtes à défenses font pousser est un trésor, et les animaux eux-mêmes au-delà d'impressionnants. Pour sécuriser un approvisionnement de l'un ou l'autre, nous devrons nous faire bien voir des Seigneurs des Éléphants et prouver que nous venons seulement avec de bonnes intentions et du respect pour leurs créatures. En tendant la main aux divers chefs suprêmes et aux riches marchands de leurs suites, nous devrions pouvoir gagner invitation à leurs cours et commencer à investir correctement dans la région pour étendre l'influence de la SGC et ainsi récolter des bénéfices encore plus grands."
+ seghdihr_elephant_lords_tooltip:0 "La §YSGC§! pourra opérer dans le nœud commercial du §YRahen Central§!"
+
+
+ seghdihr_honorable_combat_title:0 "Combat Honorable"
+ seghdihr_honorable_combat_desc:0 "Les Terres des Xia sont remplies d'hommes qui s'efforcent constamment vers la perfection martiale, quelque chose à quoi nous nous identifions grandement. Si nous devons commercer, nous devons gagner le respect de leur chef. La Terre des Xiaken. Demeure de grands guerriers et artistes martiaux qui dédient leurs vies à perfectionner la maîtrise martiale de méthodes et moyens de combat innombrables tant létaux que non. Peu importe qui règne dans les terres des Xia, il n'y a vraiment qu'une seule chose que ces gens respectent par-dessus tout : la prouesse martiale."
+
+ seghdihr_center_world_title:0 "Centre d'Halann"
+ seghdihr_center_world_desc:0 "Le Segbandal se trouve au centre d'Halann. Tant géographiquement, au carrefour entre le sud de Sarhal, l'ouest de Cannor, et l'est d'Haless. Ils disent que la grande cité d'Anbenncost est le cœur du monde. Bah ! Laissons-les. Seghdihr et le Segbandal sont le vrai cœur du monde. La richesse du monde entier coule vers nos portes, que ce soit de l'Échine-du-Serpent ou de la surface. Que ce soit l'huile de baleine pour les lampes du Lament d'Uelos, les explosifs d'Ambre, ou les cordes de soie d'Haless destinées aux aventuriers, si vous pouvez l'acheter, c'est vôtre à l'achat, et nous avons toujours un moyen de prendre notre part."
+
+
+
+ ######Mission Modifiers######
+ seghdihr_spark:0 "Sursaut d'Idées"
+ seghdihr_safe_mountain:0 "Entrées Protégées"
+ seghdihr_dwarven_fortifications:0 "Fortifications Naines"
+ seghdihr_gulan_investment:0 "Investissements de Citrine"
+ seghdihr_gulan_return:0 "Retour d'Or"
+ seghdihr_mourning:0 "Temps de Deuil"
+ seghdihr_time_to_wake:0 "Plus Jamais Oisifs"
+ seghdihr_chaingrasper_no_die:0 "Fléau-des-Nains"
+ seghdihr_reclamation:0 "Reconquérir ce que nous avons Perdu"
+ seghdihr_kill_squatters:0 "Unis contre les Envahisseurs"
+ seghdihr_leader:0 "Meneur du Segbandal"
+ seghdihr_no_mercs:0 "De nos Propres Mains"
+ seghdihr_colonization_buff:0 "Restauration Segbandalique"
+ seghdihr_seg_band_contract:0 "Contrat de la Seg Band"
+ seghdihr_own_weapons:0 "Haches de Citrine"
+ seghdihr_restored_gate:0 "La Porte Méridionale"
+ seghdihr_ramping_production:0 "Production Croissante"
+ seghdihr_serpentbloom_boom:0 "Exotiques du Dwarovar"
+ seghdihr_fast_troops:0 "Vers le Front"
+ seghdihr_good_roads:0 "Planification Routière"
+ seghdihr_strong_roots:0 "Racines Solides"
+ seghdihr_golem_sentries:0 "Sentinelles Golems"
+ seghdihr_integrate_band:0 "Intégration de la Seg Band"
+ seghdihr_army_drills:0 "Exercices Impitoyables"
+ seghdihr_pre_ways:0 "Une Vision"
+ seghdihr_integrate_soldiers:0 "Intégration des Soldats"
+ seghdihr_hargunforge_modifier:0 "La Hargûnforge"
+ seghdihr_advisors:0 "Afflux de Talents"
+ seghdihr_harpy_post:0 "Poste Commercial Segbandalique"
+ desc_seghdihr_harpy_post:0 "Pouvoir Commercial Segbandalique : §G+10§! !"
+ seghdihr_everything_flows:0 "Où Tout Coule"
+ seghdihr_tiger_merchants:0 "Marchands Prêteurs"
+ seghdihr_raj_benefits:0 "Commerce avec le Segbandal"
+ seghdihr_final_push:0 "Poussée Finale"
+ seghdihr_syndicate_boost:0 "Feuilles Florissantes"
+ seghdihr_danger_zone:0 "La Zone de Danger"
+ seghdihr_martial_perfection:0 "Perfection Martiale"
+ seghdihr_temple_fallen:0 "Temple des Tombés"
+ seghdihr_grand_halls:0 "Salles Resplendissantes"
+ seghdihr_new_dwarovar_modifier:0 "Le Nouveau Dwarovar"
+ seghdihr_nadim_merchants:0 "Marchands Prêteurs"
+ seghdihr_nadim_benefits:0 "Commerce avec le Segbandal"
+ seghdihr_local_porcelain:0 "Porcelaine Naine"
+ seghdihr_center_world_modifier:0 "Dernier Arrêt du Dwarovar"
+
+ seghdihr_force_cannons:0 "Voie de la Force : Destruction"
+ seghdihr_force_generals:0 "Voie de la Force : Commandement"
+ seghdihr_force_sieges:0 "Voie de la Force : Barrage"
+ seghdihr_vigilance_speed:0 "Voie de la Vigilance : Rapidité"
+ seghdihr_vigilance_garrison:0 "Voie de la Vigilance : Défense"
+ seghdihr_vigilance_tactics:0 "Voie de la Vigilance : Tactiques"
+ seghdihr_defiance_morale:0 "Voie de la Défiance : Inébranlable"
+ seghdihr_defiance_generals:0 "Voie de la Défiance : Stratégie"
+ seghdihr_defiance_defence:0 "Voie de la Défiance : Immobile"
+ seghdihr_preparation_decay:0 "Voie de la Préparation : Élan"
+ seghdihr_preparation_speed:0 "Voie de la Préparation : Aiguisé"
+ seghdihr_preparation_reinforce:0 "Voie de la Préparation : Toujours Prêt"
+ seghdihr_tenacity_attrition:0 "Voie de la Ténacité : Persévérance"
+ seghdihr_tenacity_fire:0 "Voie de la Ténacité : Distance"
+ seghdihr_tenacity_shock:0 "Voie de la Ténacité : Mêlée"
+
+
+ seghdihr_limit_flow_1a:0 "Limiter le Flux"
+ desc_seghdihr_limit_flow_1a:0 "Embargos gratuits en cours : §Y0/1§! !"
+ seghdihr_limit_flow_1b:0 "Limiter le Flux"
+ desc_seghdihr_limit_flow_1b:0 "Embargos gratuits en cours : §Y1/1§! !"
+ seghdihr_limit_flow_2a:0 "Limiter le Flux"
+ desc_seghdihr_limit_flow_2a:0 "Embargos gratuits en cours : §Y0/2§! !"
+ seghdihr_limit_flow_2b:0 "Limiter le Flux"
+ desc_seghdihr_limit_flow_2b:0 "Embargos gratuits en cours : §Y1/2§! !"
+ seghdihr_limit_flow_2c:0 "Limiter le Flux"
+ desc_seghdihr_limit_flow_2c:0 "Embargos gratuits en cours : §Y2/2§! !"
+ seghdihr_limit_flow_3a:0 "Limiter le Flux"
+ desc_seghdihr_limit_flow_3a:0 "Embargos gratuits en cours : §Y0/3§! !"
+ seghdihr_limit_flow_3b:0 "Limiter le Flux"
+ desc_seghdihr_limit_flow_3b:0 "Embargos gratuits en cours : §Y1/3§! !"
+ seghdihr_limit_flow_3c:0 "Limiter le Flux"
+ desc_seghdihr_limit_flow_3c:0 "Embargos gratuits en cours : §Y2/3§! !"
+ seghdihr_limit_flow_3d:0 "Limiter le Flux"
+ desc_seghdihr_limit_flow_3d:0 "Embargos gratuits en cours : §Y3/3§! !"
+
+
+
+ ######Government Reforms######
+ seghdihr_segbandal_reform:0 "Le Segbandal"
+ seghdihr_segbandal_reform_desc:0 "Le Segbandal prit forme autrefois durant les jours d'Aul-Dwarov et (déclin de courte durée mis à part) a émergé une fois de plus comme l'autorité légitime sur le Dwarovar Central. Il est tout ce qu'Aul-Dwarov a échoué à être : décisif, innovant, non divisé par les rivalités et querelles internes. Il se dresse maintenant de la manière dont il était toujours destiné à être : comme une structure rigide de forteresses liées ensemble non seulement par l'honneur, mais aussi par la parenté et la loi."
+
+ seghdihr_segamlavad:0 "Segamlavad"
+ seghdihr_segamlavad_desc:0 "Le Segamlavad accommode débat réfléchi quand le sujet le permet ainsi que prise de décision rapide quand la nécessité l'exige. Chacune des cinq forteresses du Dwarovar central a un siège, représentant les besoins uniques de leurs constituants. Délibération et argumentation sont encouragées, mais à tout moment le Roi-Brillant a l'autorité de briser une impasse sur un problème non résolu en temps de crise."
+
+ seghdihr_segbandalic_military:0 "Segankâr"
+ seghdihr_segbandalic_military_desc:0 "Une carrière dans les Segankâr est considérée comme l'une des plus prestigieuses disponibles à tout citoyen du Segbandal. Seuls les guerriers les plus prometteurs de chaque forteresse sont éligibles pour rejoindre, et seulement après un long et éprouvant processus d'entraînement. Tout ceci est centralisé dans les forteresses, qui ont leurs propres districts qui fournissent aux Segankâr des casernes spacieuses, académies militaires et terrains d'entraînement spécialisés."
+ seghdihr_segbandalic_military_tooltip:0 "Main-d'œuvre dans les §YForteresses Segbandaliques§! : §G+50.0%§! !"
+ seghdihr_segbandalic_military_tooltip2:0 "Main-d'œuvre dans les §YForteresses Non-Segbandaliques§! : §R-250.0%§! !"
+ seghdihr_segbandalic_military_tooltip3:0 "Professionnalisme perdu en engageant des §YMercenaires§! : §R-10.0%§! !"
+ mechanic_seghdihr_segbandalic_military_effects_yes:0 "Main-d'œuvre dans les §YForteresses Segbandaliques§! : §G+50.0%§! !\nMain-d'œuvre dans les §YRoutes Naines§! et §YForteresses Non-Segbandaliques§! : §R-75.0%§! !\nMain-d'œuvre dans les §Yautres provinces§! : §R-250.0%§! !\nProfessionnalisme perdu en engageant des §YMercenaires§! : §R-10.0%§! !"
+ #military province modifiers
+ seghdihr_reform_holds:0 "Segankâr"
+ seghdihr_reform_secondary:0 "Segankâr"
+ seghdihr_reform_other:0 "Segankâr"
+
+
+ #vassal reform
+ seghdihr_syndicates_reform:0 "Syndicat Segbandalique"
+ seghdihr_syndicates_reform_desc:0 "En tant que syndicat, les besoins de sécurité de cette forteresse sont entièrement confiés au Segbandal. Cela permet au gouvernement de la forteresse de diriger toute son attention vers le maintien des routes commerciales et l'accomplissement des quotas de production."
+
+
+ ######Parliament######
+ segamlavad_seghdihr_loyalty:0 "Tribut au Roi-Brillant"
+ segamlavad_gulan_gold:0 "Frapper des Pièces Segbandaliques"
+ seghdihr_segamlavad_gulan_modifier:0 "Frappe de Monnaie"
+ segamlavad_hehodovar_forge:0 "Renforcer le Cœur"
+ segamlavad_ozumbrog_faith:0 "Décennie de Chagrin"
+ segamlavad_vazumbrog_army:0 "Entraîner les Segankâr"
+ segamlavad_syndicate_improvement:0 "Investir dans les Syndicats"
+ segamlavad_syndicate_improvement_tooltip:0 "Chaque Forteresse Syndicale gagnera §Y3§! développement et §G+1§! biens produits pendant §Y10 ans§! !"
+ seghdihr_segamlavad_syndicate_modifier:0 "Investissements Segbandaliques"
+ segamlavad_syndicate_trade:0 "Détourner les Ressources Syndicales"
+ SEGAMLAVAD_SYNDICATE_TRADE:0 "Détournement de Ressources"
+
+ ###subject
+ seghdihr_syndicate:0 "Syndicat Segbandalique"
+ seghdihr_syndicate_title:0 "Syndicat Segbandalique"
+ seghdihr_syndicate_title_plural:0 "Syndicats Segbandaliques"
+ seghdihr_syndicate_is_our:0 "§Y$NAME$§! est notre Syndicat."
+ seghdihr_syndicate_long_desc:0 "En tant que syndicat, les besoins de sécurité de cette forteresse sont entièrement confiés au Segbandal. Cela permet au gouvernement de la forteresse de diriger toute son attention vers le maintien des routes commerciales et l'accomplissement des quotas de production. Cela résulte en un flux de revenus relativement stable. En tant que tel, c'est un sujet qui n'est pas particulièrement enclin à la révolte."
+ seghdihr_syndicate_overlord_bonus:0 "je ne sais pas où cela s'affiche. Si quelqu'un voit ceci svp ping @Auirus sur discord"
+
+
+ ######TRADE Modifiers######
+ SEGHDIHR_TEMP_EMBARGO:0 "Restrictions Commerciales"
+ SEGHDIHR_WEALTH_EAST_TRADE:0 "Sécurisation du Commerce Oriental"
+ SEGHDIHR_EASTERN_MONOPOLY:0 "Contrôle des Biens Orientaux"
+ SEGHDIHR_OPENING_MARKET:0 "Sécurisation de Nouveaux Marchés"
+
+
+ ######Misc Stuff######
+
+ seghdihr_hidden_loc:0 "Ceci devrait être caché."
+ seghdihr_weaken_incursions_tooltip:0 "Les §YIncursions Gobeliennes§! seront §Gaffaiblies de façon permanente§! !"
+
+ seghdihr_opinion_eastern_trade:0 "Sabotage de notre Commerce"
+ SEGHDIHR_NO_INTEGRATE_HOLDS:0 "Nous ne pouvons pas encore intégrer nos vassaux Forteresses"
+ SEGHDIHR_NO_MARCH:0 "Nous ne pouvons pas transformer notre vassal Forteresse en marche"
+ SEGHDIHR_NO_MARCH_VASSAL:0 "Nous ne pouvons pas demander cela à Seghdihr"
+ SEGHDIHR_MAGE_COFFEE:0 "Café Chaud"
+ THE_SEGBANDAL:0 "Segbandal"
+ THE_SEGBANDAL_ADJ:0 "Segbandalique"
+
+
+ ######SGC Stuff######
+
+ estate_sgc:0 "Cartel d'Or Segbandalique"
+ seghdihr_sgc_power:0 "Influence Commerciale de la SGC"
+
+ #privileges
+ estate_burghers_sgc_merchant_training:0 "Étendre les Programmes de Formation Marchande"
+ estate_burghers_sgc_merchant_training_desc:0 "La profession de marchand n'est pas simple, et la plupart de ceux qui souhaitent l'exercer ont tendance à apprendre les détails fins en servant comme apprentis sous des marchands expérimentés. Ceci n'est généralement accompli que par ceux ayant déjà des antécédents aisés, ce qui mène à un bassin limité de marchands. En finançant les apprentissages de jeunes talents prometteurs mais plus pauvres, nous pouvons significativement étendre le nombre de marchands à notre disposition."
+ estate_burghers_sgc_foreign_power:0 "Faire Respecter les Pratiques Tolérantes"
+ estate_burghers_sgc_foreign_power_desc:0 "La religion et l'intolérance sont mauvaises pour les affaires, comme tout marchand le sait. Ce concept n'est cependant pas toujours entièrement mis en pratique, alors que de parfaitement bonnes ventures commerciales sont snobées par des marchands qui ne sont pas tout à fait à l'aise avec leurs partenaires commerciaux prospectifs. La nomination d'inspecteurs royaux pour superviser ceci peut s'assurer que ces marchands ne laissent pas leurs sentiments personnels gêner de bons profits."
+ estate_burghers_sgc_advanced_wagons:0 "Fournir de Plus Grandes Caravanes"
+ estate_burghers_sgc_advanced_wagons_desc:0 "L'ancienne sagesse marchande naine déclare que plus une opération est grande, plus son processus peut être rationalisé pour réduire le coût des biens individuels. Surtout avec des biens commerciaux identiques de valeur prévisible, plus tend à être mieux, ce qui est quelque chose en quoi le rail du Dwarovar a toujours excellé quand il était en opération. Nous devrions appliquer ces principes aux caravanes du Cartel d'Or Segbandalique, et transporter nos biens commerciaux en vrac."
+
+
+ ####SGC Windows####
+ #####menu buttons
+ flavor_seghdihr.exit:0 "£event_button_close_green£"
+
+ seghdihr_sgc_complete_status:0 "                                                                                                              §vTerminé§!"
+ seghdihr_sgc_busy_status:0 "                                                                                                             §TEn Cours§!"
+ seghdihr_sgc_idle_status:0 "                                                                                                                  §OInactif§!"
+
+ #####main windown
+
+ flavor_seghdihr.100.t:0 "\n\n\n\n\n\n\n£sgc_main_menu£"
+ flavor_seghdihr.100.d:0 "\n\n\n\n\n\n\n\n"
+ flavor_seghdihr.100.a:0 "Route d'Or"
+ flavor_seghdihr.100.b:0 "Davharral"
+ flavor_seghdihr.100.g:0 "Golfe de Rahen"
+ flavor_seghdihr.100.c:0 "Dhenbasana"
+ flavor_seghdihr.100.e:0 "Rahen Central"
+ flavor_seghdihr.100.f:0 "Nadimraj"
+
+ flavor_seghdihr.100.h:0 "Xia"
+ flavor_seghdihr.100.i:0 "Kharunyana"
+
+
+ #####sub windows
+ flavor_seghdihr.adm:0 "Construire un Ostkopan"
+ sgc_ostkopan_tooltip:0 "Nos marchands construiront un §YOstkopan§! sur un §YCentre Commercial§! qui est soit situé sur la §YRoute d'Or§! soit est §YUrbain§! !"
+ flavor_seghdihr.dip:0 "Soutenir les Affaires Locales"
+ sgc_investment_tooltip:0 "Nos marchands investiront dans les affaires locales situées dans ce §Ynœud commercial§! !"
+ flavor_seghdihr.mil:0 "Établir une Patrouille Routière"
+ sgc_patrols_tooltip:0 "Nos marchands prendront quelques guerriers et établiront des patrouilles permanentes sur des parties de la §YRoute d'Or§! dans ce §Ynœud commercial§! !"
+
+
+ flavor_seghdihr.110.t:0 "Route d'Or\n\n\n\n\n\n£sgc_sub_menu£"
+ flavor_seghdihr.110.d:0 "[seghdihr_sgc_highway_status]\n\n\n                                                                                                                  §v[Root.sgc_highway_power.GetValue]§!\n"
+ flavor_seghdihr.110.a:0 "Brancher la Route"
+ flavor_seghdihr.110.tooltip:0 "Le chemin vers la Vallée du Héros est rude, rempli de rochers et de terrain montagneux. Par conséquent, il est impératif que nous construisions une extension à la Route d'Or qui mènera à Verkal Gulan, et à nos portes. Ceci nous ouvrira de nouveaux volumes de commerce."
+ flavor_seghdihr.110.b:0 "Construire des Auberges Marchandes"
+ flavor_seghdihr.110.tooltip2:0 "La lumière du désert est brillante et punitive, et nombreux sont les voyageurs fatigués à la fin d'une longue journée. Ce que beaucoup de marchands désirent est un lit chaud et un repas chaud, seulement pour se contenter d'un sac de couchage avec des rations sèches. Établir des auberges marchandes, inspirées des Caravansérails Bulwari, nous permettra d'influencer grandement le commerce le long de la Route d'Or."
+
+ flavor_seghdihr.120.t:0 "Davharral\n\n\n\n\n\n£sgc_sub_menu£"
+ flavor_seghdihr.120.d:0 "[seghdihr_sgc_davharral_status]\n\n\n                                                                                                                  §v[Root.sgc_davharral_power.GetValue]§!\n"
+ flavor_seghdihr.120.a:0 "Garnir Davharral"
+ flavor_seghdihr.120.tooltip:0 "Davharral est la porte d'entrée vers Rahen. D'une forme ou d'une autre, les richesses d'Haless atteignent ses docks ou portes. Le Cartel d'Or Segbandalique a demandé à établir une garnison de compagnie dans la région pour mieux protéger ses intérêts, et avec l'assentiment du gouvernement dirigeant, cela peut être fait."
+ flavor_seghdihr.120.b:0 "Nains aux Ports"
+ flavor_seghdihr.120.tooltip2:0 "Les nains ne sont pas connus pour construire des navires, mais par pure habileté et artisanat tout peut être construit avec les bons plans. Établir des communautés naines dans les ports du Golfe Occidental de Rahen peut aider à les garnir tout en accélérant les efforts de réparation navale."
+
+ flavor_seghdihr.130.t:0 "Dhenbasana\n\n\n\n\n\n£sgc_sub_menu£"
+ flavor_seghdihr.130.d:0 "[seghdihr_sgc_dhen_status]\n\n\n                                                                                                                  §v[Root.sgc_dhen_power.GetValue]§!\n"
+ flavor_seghdihr.130.a:0 "Mettre à Jour le Code Fiscal"
+ flavor_seghdihr.130.tooltip:0 "Les Ghankedhen furent si lourdement influencés par leurs voisins nains il y a longtemps qu'ils utilisent encore d'anciens systèmes nains de taxation. Les codes fiscaux nains ont été améliorés depuis, donc nous pourrions les aider avec quelques réformes fiscales en échange de plus de coopération avec la SGC."
+ flavor_seghdihr.130.b:0 "Cadeaux pour les Seigneurs Tigres"
+ flavor_seghdihr.130.tooltip2:0 "Les Harimari de Rahen sont assez puissants, mais ils sont vulnérables à la flatterie, aux cadeaux pompeux, et aux démonstrations de respect. Tant que nous restons dans leurs bonnes grâces, nous pouvons sûrement obtenir quelques privilèges commerciaux d'eux."
+
+
+
+ flavor_seghdihr.140.t:0 "Rahen Central\n\n\n\n\n\n£sgc_sub_menu£"
+ flavor_seghdihr.140.d:0 "[seghdihr_sgc_rahen_status]\n\n\n                                                                                                                  §v[Root.sgc_rahen_power.GetValue]§!\n"
+ flavor_seghdihr.140.a:0 "Acheter des Caravanes d'Éléphants"
+ flavor_seghdihr.140.tooltip:0 "Les éléphants sont des animaux de bât moins polyvalents que les chevaux ou mulets, mais leur force individuelle les rend uniquement adaptés à des rôles spécialisés. Un contrat stable avec les seigneurs des éléphants de Dhugajir serait un grand atout pour nos caravanes."
+ flavor_seghdihr.140.b:0 "Parrainer des Mercenaires"
+ flavor_seghdihr.140.tooltip2:0 "Le peuple Ghavaanaj est fragmenté sous plusieurs détenteurs de pouvoir ambitieux, ce qui signifie qu'il y a une abondance de travail mercenaire disponible. Le Cartel d'Or Segbandalique peut le leur fournir."
+
+
+ flavor_seghdihr.150.t:0 "Nadimraj\n\n\n\n\n\n£sgc_sub_menu£"
+ flavor_seghdihr.150.d:0 "[seghdihr_sgc_nadimraj_status]\n\n\n                                                                                                                  §v[Root.sgc_nadimraj_power.GetValue]§!\n"
+ flavor_seghdihr.150.a:0 "Envoyer des Philosophes"
+ flavor_seghdihr.150.tooltip:0 "Les bibliothèques de Shamakhad sont d'impressionnants lieux d'apprentissage. Si nous devions faciliter l'installation d'érudits et philosophes nains talentueux et enthousiastes dans ces régions, ils serviraient aussi comme contacts utiles pour la SGC."
+ flavor_seghdihr.150.b:0 "Renforcer les Forts"
+ flavor_seghdihr.150.tooltip2:0 "Les guerriers segbandaliques sont renommés pour leur qualité, et les commandants de garnison des Royaumes en Ruine feront de grands efforts pour en avoir quelques-uns ajoutés à leurs forces. Par chance, le Cartel d'Or Segbandalique cherche aussi à établir des contacts dans la région."
+
+ flavor_seghdihr.160.t:0 "Golfe de Rahen\n\n\n\n\n\n£sgc_sub_menu£"
+ flavor_seghdihr.160.d:0 "[seghdihr_sgc_gulf_status]\n\n\n                                                                                                                  §v[Root.sgc_gulf_power.GetValue]§!\n"
+ flavor_seghdihr.160.a:0 "Établir un Quartier Général Oriental"
+ flavor_seghdihr.160.tooltip:0 "Les entreprises commerciales de la SGC sont devenues surchargées au point qu'un second quartier général doit être établi pour superviser les affaires orientales. Le meilleur emplacement pour ceci serait indubitablement à Sramaya, Perle de la Kharunyana, la porte d'entrée pour une très grande partie du commerce d'Haless."
+ flavor_seghdihr.160.b:0 "Libérer des Esclaves"
+ flavor_seghdihr.160.tooltip2:0 "Bien que le Cartel d'Or Segbandalique ne soit pas supposé commercer en esclaves, quelques exceptions peuvent sûrement être faites dans des cas limites. La SGC manque toujours de main-d'œuvre abordable, et les esclaves des marchés de Bhuvauri feraient sûrement des employés loyaux si nous les libérions une fois achetés."
+
+ flavor_seghdihr.170.t:0 "Xia\n\n\n\n\n\n£sgc_sub_menu£"
+ flavor_seghdihr.170.d:0 "[seghdihr_sgc_xia_status]\n\n\n                                                                                                                  §v[Root.sgc_xia_power.GetValue]§!\n"
+ flavor_seghdihr.170.a:0 "Construire des Terrains d'Entraînement"
+ flavor_seghdihr.170.tooltip:0 "Les Xia sont assez intéressés par les arts martiaux, et la prouesse militaire segbandalique est bien connue à ce point. À cause de cela, le Cartel d'Or Segbandalique propose d'établir un terrain d'entraînement nain à Xianjie qui peut aussi servir comme poste commercial."
+ flavor_seghdihr.170.b:0 "Vendre de l'Armement Nain"
+ flavor_seghdihr.170.tooltip2:0 "C'est un plaisir de regarder les artistes martiaux des Xia combattre, mais le piètre armement avec lequel ils le font est vraiment embarrassant. Ce dont ils ont besoin sont de vrais outils forgés par les nains, et la SGC peut les fournir à des prix raisonnables."
+
+ flavor_seghdihr.180.t:0 "Kharunyana\n\n\n\n\n\n£sgc_sub_menu£"
+ flavor_seghdihr.180.d:0 "[seghdihr_sgc_kharun_status]\n\n\n                                                                                                                  §v[Root.sgc_xia_power.GetValue]§!\n"
+ flavor_seghdihr.180.a:0 "Fournir du Mithril pour la Porcelaine"
+ flavor_seghdihr.180.tooltip:0 "La porcelaine est belle mais fragile, et bien que la boue de la Kharunyana permette d'en faire en quantité, elle fait peu pour empêcher qu'elle se brise à la plus petite provocation. Les fabricants de porcelaine sont récemment devenus fascinés par les nouvelles des rares minerais de mithril qui peuvent être trouvés dans le Dwarovar, avec des constructions théorisées tirant avantage de sa robustesse légère. Ce sera cher, mais les guildes de toutes les cités tendent déjà la main pour se procurer des échantillons de minerai pour expérimenter. Cela semble une proposition douteuse, mais s'ils paient, la SGC fournira."
+ flavor_seghdihr.180.b:0 "Savoir contre Savoir"
+ flavor_seghdihr.180.tooltip2:0 "Sur le grand coude des Rivières Kharunyana se dresse le Mont Tughayasa et ses habitants, l'Ordre Oraculaire. Considérés comme les plus sages de tous les Halessi, on dit qu'ils voient l'avenir et détiennent la connaissance de tout le monde dans leur monastère-bibliothèque isolé. Mais ils voient rarement des visiteurs, et sont imprégnés de mysticisme et de tradition. Si la SGC pouvait leur apporter des connaissances tentantes et des tomes rares du monde au-delà, cependant, peut-être pourrions-nous formaliser une correspondance et un commerce constants avec les oracles - et qui peut dire ce qu'un tel accord pourrait apporter ?"
+
+ #####modifiers
+ seghdihr_sgc_highway_busy:0 "Ventures SGC : Route d'Or"
+ seghdihr_sgc_davharral_busy:0 "Ventures SGC : Davharral"
+ seghdihr_sgc_dhen_busy:0 "Ventures SGC : Dhenbasana"
+ seghdihr_sgc_rahen_busy:0 "Ventures SGC : Rahen Central"
+ seghdihr_sgc_nadimraj_busy:0 "Ventures SGC : Nadimraj"
+ seghdihr_sgc_gulf_busy:0 "Ventures SGC : Golfe de Rahen"
+ seghdihr_sgc_xia_busy:0 "Ventures SGC : Xia"
+ seghdihr_sgc_kharun_busy:0 "Ventures SGC : Kharunyana"
+
+ seghdihr_sgc_ostkopan:0 "Ostkopan"
+ desc_seghdihr_sgc_ostkopan:0 "Pouvoir Commercial Segbandalique : §G+20§!\nLe Cartel d'Or Segbandalique a établi un marché de style oriental animé et prospère dans cette province. Les marchands de toute la province négocient avec les marchands du Cartel."
+ seghdihr_sgc_invested:0 "Investissements du Cartel"
+ desc_seghdihr_sgc_invested:0 "Pouvoir Commercial Segbandalique : §G+10§!\nLe Cartel d'Or Segbandalique a investi dans les affaires locales ici en leur permettant d'étendre leurs opérations vers de nouveaux sommets."
+ seghdihr_sgc_patrols_1st:0 "1ère Patrouille Naine"
+ desc_seghdihr_sgc_patrols_1st:0 "Pouvoir Commercial Segbandalique par route : §G+10§!\nLe Cartel d'Or Segbandalique a engagé un nombre de guerriers nains professionnels pour patrouiller cette partie de la route et les attaques de bandits sont maintenues au minimum. Ceci inspire confiance aux marchands et locaux de même."
+ seghdihr_sgc_patrols_2nd:0 "2ème Patrouille Naine"
+ desc_seghdihr_sgc_patrols_2nd:0 "Pouvoir Commercial Segbandalique par route : §G+10§!\nLe Cartel d'Or Segbandalique a engagé un nombre de guerriers nains professionnels pour patrouiller cette partie de la route et les attaques de bandits sont maintenues au minimum. Ceci inspire confiance aux marchands et locaux de même."
+ seghdihr_sgc_patrols_3rd:0 "3ème Patrouille Naine"
+ desc_seghdihr_sgc_patrols_3rd:0 "Pouvoir Commercial Segbandalique par route : §G+10§!\nLe Cartel d'Or Segbandalique a engagé un nombre de guerriers nains professionnels pour patrouiller cette partie de la route et les attaques de bandits sont maintenues au minimum. Ceci inspire confiance aux marchands et locaux de même."
+
+
+ seghdihr_sgc_new_highway:0 "Route Parrainée par la SGC"
+ desc_seghdihr_sgc_new_highway:0 "Pouvoir Commercial Segbandalique : §G+15§!\nCette partie de la Route d'Or fut parrainée par le Cartel d'Or Segbandalique, comme en témoignent les bornes kilométriques marquées du symbole du Cartel."
+ seghdihr_sgc_restzones:0 "Auberges Marchandes"
+ desc_seghdihr_sgc_restzones:0 "Pouvoir Commercial Segbandalique : §G+6.6§!\nLe Cartel d'Or Segbandalique a établi un caravansérail ici pour que les marchands récupèrent de la chaleur impitoyable du désert, échangent des histoires, et abreuvent leurs animaux. Les spiritueux nains sont aussi vendus pour aider à faciliter les affaires."
+
+ seghdihr_sgc_davharral_garrison:0 "Garnison Naine"
+ desc_seghdihr_sgc_davharral_garrison:0 "Pouvoir Commercial Segbandalique : §G+70§!\nLe Cartel d'Or Segbandalique a établi dans cette province une grande garnison de nains employés pour protéger les intérêts locaux du Cartel. De plus leurs salaires dépensés dans la zone aident à faciliter l'économie locale alors que les marchands locaux cherchent à offrir des conforts aux forces garnisonnées."
+ seghdihr_sgc_dwarves_ports:0 "Débardeurs Nains"
+ desc_seghdihr_sgc_dwarves_ports:0 "Pouvoir Commercial Segbandalique : §G+4§!\nLes nains ne sont généralement pas considérés comme des gens de mer, mais le Cartel d'Or Segbandalique ici a parrainé un nombre de débardeurs et constructeurs navals nains pour servir divers besoins navals à des tarifs compétitifs."
+
+
+ seghdihr_sgc_east_hq:0 "Quartier Général Oriental"
+ desc_seghdihr_sgc_east_hq:0 "Pouvoir Commercial Segbandalique : §G+80§!\nLe quartier général oriental de la SGC est situé dans cette province"
+ seghdihr_sgc_slaves_freed:0 "Grand Achat d'Esclaves"
+ desc_seghdihr_sgc_slaves_freed:0 "Pouvoir Commercial Segbandalique : §G+20§!\nLa SGC a acheté une grande quantité d'esclaves de cette province et les a par la suite libérés. Beaucoup des personnes nouvellement libérées ont rejoint les diverses patrouilles sur la Route d'Or"
+
+
+ seghdihr_sgc_ghank_codes:0 "Codes Fiscaux Améliorés"
+ desc_seghdihr_sgc_ghank_codes:0 "Pouvoir Commercial Segbandalique : §G+40§!\nUn nombre d'économistes nains du Segbandal ont travaillé extensivement avec les locaux pour mettre à jour le système fiscal Ghankedhn pour fermer de nombreuses échappatoires utilisées par les concurrents et supprimer les lois défuntes, améliorant les revenus en faveur de la SGC et de l'administration dirigeante."
+ seghdihr_sgc_gifts:0 "Tribut Nain"
+ desc_seghdihr_sgc_gifts:0 "Pouvoir Commercial Segbandalique : §G+5§!\nLes nains du Segbandal ont fourni aux seigneurs Harimari locaux un généreux tribut en échange de privilèges commerciaux et d'accès régional."
+
+
+ seghdihr_sgc_splendor_caravans:0 "Approvisionnement en Caravanes d'Éléphants"
+ desc_seghdihr_sgc_splendor_caravans:0 "Pouvoir Commercial Segbandalique : §G+30§!\nLe propriétaire de cette province vend des éléphants pour servir comme bêtes de caravane pour le Cartel d'Or Segbandalique"
+ seghdihr_sgc_splendor_caravans_nodlc:0 "Approvisionnement en Caravanes d'Éléphants"
+ desc_seghdihr_sgc_splendor_caravans_nodlc:0 "Pouvoir Commercial Segbandalique : §G+30§!\nLe propriétaire de cette province vend des éléphants pour servir comme bêtes de caravane pour le Cartel d'Or Segbandalique"
+ seghdihr_sgc_ghav_mercs:0 "Mercenaires Parrainés par la SGC"
+ desc_seghdihr_sgc_ghav_mercs:0 "Pouvoir Commercial Segbandalique : §G+20§!\nLe Cartel d'Or Segbandalique a un nombre de mercenaires nains parrainés à l'emploi du peuple Ghankedhn alors qu'ils s'efforcent d'unifier leur peuple sous une seule bannière."
+
+ seghdihr_sgc_philosophers:0 "Philosophes Nains"
+ desc_seghdihr_sgc_philosophers:0 "Pouvoir Commercial Segbandalique : §G+50§!\nLes nains du Segbandal font des visites routinières aux bibliothèques situées ici. Beaucoup d'individus éduqués cherchant l'inspiration et le discours sont venus ici pour débattre avec les locaux dans les Grandes Bibliothèques du Palais."
+ seghdihr_sgc_fort_strengthened:0 "Fort Nain"
+ desc_seghdihr_sgc_fort_strengthened:0 "Pouvoir Commercial Segbandalique : §G+20§!\nLe Cartel d'Or Segbandalique a aidé à améliorer les fortifications locales pour mieux protéger leurs atouts dans la zone, et créer une structure imposante affichant leurs capacités."
+
+
+ seghdihr_sgc_porcelain_trade:0 "Ingrédients de Porcelaine du Dwarovar"
+ desc_seghdihr_sgc_porcelain_trade:0 "Pouvoir Commercial Segbandalique : §G+6§!\nLa SGC fournit aux guildes de porcelaine locales des pigments supérieurs et argiles rares du Dwarovar, poussant l'art de la fabrication de porcelaine vers de toujours plus grandes hauteurs."
+ seghdihr_sgc_oracle_info_1:0 "Renseignement Global"
+ desc_seghdihr_sgc_oracle_info_1:0 "Pouvoir Commercial Segbandalique : §G+20§!\nL'information coule de partout dans le monde vers les oracles au sommet de leur montagne, dont la prévoyance sert grandement à informer les actions futures que la SGC devrait prendre"
+ seghdihr_sgc_oracle_info_2:0 "Renseignement Global"
+ desc_seghdihr_sgc_oracle_info_2:0 "Pouvoir Commercial Segbandalique : §G+40§!\nL'information coule de partout dans le monde vers les oracles au sommet de leur montagne, dont la prévoyance sert grandement à informer les actions futures que la SGC devrait prendre"
+
+ seghdihr_sgc_sparring:0 "Terrains d'Entraînement Nains"
+ desc_seghdihr_sgc_sparring:0 "Pouvoir Commercial Segbandalique : §G+30§!\nLes nains segbandaliques qui faisaient autrefois partie des Segankâr passent leurs vies restantes ici, s'entraînant avec les maîtres locaux dans la poursuite de la perfection martiale"
+ seghdihr_sgc_weapon_shop:0 "Magasins d'Armes Segbandaliques"
+ desc_seghdihr_sgc_weapon_shop:0 "Pouvoir Commercial Segbandalique : §G+20§!\nLes magasins d'armes possédés par la SGC opèrent dans cette province. En vendant diverses armes naines lourdes aux locaux, nous leur permettons de s'entraîner avec un équipement étranger."
+
+
+
+ #####generic improvements events
+ flavor_seghdihr.improvement_complete_title:0 "Amélioration Terminée"
+ flavor_seghdihr.improvement_complete_adm_desc:0 "La construction s'est finalement achevée sur le dernier des Ostkopans de la SGC. C'est un autre pas vers la sécurisation de notre domination du commerce dans la région."
+ flavor_seghdihr.improvement_complete_adm_option:0 "Excellent."
+
+ flavor_seghdihr.improvement_complete_dip_desc:0 "Nos efforts d'investissement dans la région ont finalement commencé à tourner et à faire des profits. Avec le large réseau de contacts dans la région, encourager les locaux à exporter avec la SGC sera aussi facile que de miner la craie."
+ flavor_seghdihr.improvement_complete_dip_option:0 "Frapper et Profiter."
+
+ flavor_seghdihr.improvement_complete_mil_desc:0 "Les patrouilles de gardes nains continuent de marcher régulièrement le long de la Route d'Or dans la région aux côtés des patrouilles locales, s'assurant que la route est dégagée et que les bandits sont tenus à l'écart. Ceci a l'excellent effet secondaire de maintenir les marchands voyageurs dans notre dette."
+ flavor_seghdihr.improvement_complete_mil_option:0 "Comme une horlogerie."
+
+ #####unique improvements events
+ flavor_seghdihr.111.d:0 "Bien que ce soit un tronçon relativement court comparé au reste de la Route d'Or, le terrain accidenté de la Vallée du Héros signifiait que l'extension de la Route d'Or était encore tout un projet. Mais l'investissement porte déjà ses fruits, alors que les marchands dévient de la route vers Bulwar et entrent dans le Dwarovar par la Porte du Héros."
+ flavor_seghdihr.111.a:0 "Une route d'or en effet."
+ flavor_seghdihr.112.d:0 "Agissant comme des oasis parsemant la Route d'Or, les nouvelles auberges marchandes de la SGC sont un répit bienvenu pour les marchands voyageant entre Rahen et Bulwar. Fournissant des lits pour la nuit et servant la Brune du Dwarovar pour les nains et des boissons moins mortelles pour les marchands d'autres races, ces auberges sont devenues populaires tant pour les marchands de la SGC que pour les étrangers. En retour, cela a donné à la SGC une emprise sur les routes commerciales qui passent juste devant les portes du Segbandal."
+ flavor_seghdihr.112.a:0 "À votre santé !"
+
+ flavor_seghdihr.121.d:0 "La garnison permanente de gardes du Cartel d'Or Segbandalique à Davharral a été établie, fournissant à la SGC un point de contrôle sécurisé sur pratiquement tout le commerce se déplaçant entre Rahen et Bulwar. Comme les déploiements ici sont très long terme, les membres de la garnison ont souvent emmené épouses et enfants avec eux, ce qui a résulté en la création d'une communauté naine dans la cité, et beaucoup de nains restent à Davharral après la fin de leur déploiement, prenant des emplois dans d'autres aspects du riche commerce coulant à travers la cité."
+ flavor_seghdihr.121.a:0 "Très bien."
+ flavor_seghdihr.122.d:0 "Les soldats et charpentiers sanctionnés par la SGC sont finalement arrivés à leurs assignations au Golfe Occidental de Rahen. Bien que certains nains occidentaux portent un grand intérêt aux navires, les charpentiers du Segbandal ont eu besoin de temps pour s'habituer à leurs nouvelles assignations dans les ports raheni. Comme leur expérience se situait principalement avec les meubles, la construction navale et la réparation de navires leur a demandé de se coordonner entre eux bien plus, et souvent de déférer à l'expertise des artisans locaux. Alors qu'ils se sont installés, cependant, la plupart ont pris goût à leur nouvelle profession, et sont fiers de leur travail. Et dans de rares cas, certains nains ont même choisi de naviguer sur les navires qu'ils ont aidé à construire."
+ flavor_seghdihr.122.a:0 "Contre nature, vraiment."
+
+ flavor_seghdihr.131.d:0 "Comme le code fiscal Ghankedhen est basé sur d'anciens systèmes légaux nains, la SGC a pris sur elle d'assister les seigneurs Ghankedhen à moderniser leurs lois fiscales et établir de nouveaux liens diplomatiques et relations plus fortes dans le processus. Les locaux ne sont que trop heureux de travailler avec la SGC pour établir de nouvelles routes commerciales, sentant des opportunités dans la compétition entre la SGC et les marchands raheni du sud et de l'est qui contrôlent actuellement la plupart du commerce dans la région."
+ flavor_seghdihr.131.a:0 "À l'amitié !"
+ flavor_seghdihr.132.d:0 "Ce n'est pas une tâche simple que de garder les seigneurs harimari satisfaits. La SGC a essayé de flatter chaque officiel avec du pouvoir le long de la rivière Dhenbasana, avec un succès mitigé. En général, les harimari ne semblent pas aimer que la SGC soit plus ou moins indépendante du système de castes et sape les divisions imposées aux marchands de caste moyenne. D'autre part, le fait que la SGC soit sans caste signifie qu'ils peuvent céder des concessions commerciales en retour de cadeaux sans se déshonorer en se soumettant aux castes inférieures, ce qui nous donne un avantage compétitif."
+ flavor_seghdihr.132.a:0 "Très bien."
+
+
+ flavor_seghdihr.141.d:0 "Obtenir des éléphants de Sharaajaghal s'est avéré être bien plus facile que la SGC ne l'anticipait, alors que les seigneurs des éléphants sont assez enthousiastes pour que leurs animaux soient utilisés dans les caravanes commerciales. Cela leur permet d'afficher les capacités des éléphants bien au-delà de leur frontière, à travers toutes les cités dans lesquelles la SGC conduit le commerce. Ainsi, ils ont offert leurs éléphants à des prix très bas alors que les seigneurs des éléphants sont tous très fiers que leurs éléphants soient vus."
+ flavor_seghdihr.141.a:0 "Tant mieux."
+
+ flavor_seghdihr.142.d:0 "Le Cartel d'Or Segbandalique a agi comme intermédiaire entre les seigneurs des Éléphants locaux et les mercenaires, alors qu'il semblait y avoir une demande parmi eux pour des forces pour unifier la région. Le pur nombre de contrats est quelque chose pour lequel la SGC n'était pas préparée. Chaque noble mineur semble avoir l'intention d'être celui qui unifiera le peuple Ghavaanaj et s'élèvera comme le nouveau Roi Noir de Sharaajaghal, peu importe les trêves ou serments de fidélité précédents."
+ flavor_seghdihr.142.a:0 "Ils sont sûrement un peuple querelleur."
+
+
+ flavor_seghdihr.151.d:0 "Initialement, parrainer des érudits et philosophes nains pour assister aux bibliothèques de Shamakhad était impopulaire avec tous. Les nains n'étaient pas enthousiastes à l'idée de sortir du Dwarovar et les érudits de Shamakhad ne semblaient pas croire que les nains pouvaient contribuer à leurs discussions. Cependant, après plusieurs cadeaux bien placés par la SGC les accommodements furent faits malgré tout. Assez vrai, après les premiers débats houleux les bibliothèques devinrent plus intéressées par ces 'perspectives naines', et plus d'érudits nains ont voyagé à Rajnadhaga sans incitations de la SGC pour l'opportunité de crier des jurons aux « philosophes humains savants »."
+ flavor_seghdihr.151.a:0 "C'est comme un marché d'idées !"
+ flavor_seghdihr.152.d:0 "Les anciennes terres du Nadimraj ont rarement connu une paix sécurisée, avec les conflits avec le Harimraj et la menace des Hobgobelins planant sur la terre. À cause de cela, les guerriers nains pour aider à garnir les forts et murs de cité sont plus que bienvenus, et la SGC est plus que disposée à les fournir, en retour des bonnes concessions."
+ flavor_seghdihr.152.a:0 "Bon de faire affaire."
+
+ flavor_seghdihr.161.d:0 "Le Cartel d'Or Segbandalique est loin d'être la seule organisation commerciale à établir un quartier général à Sramaya, considérant combien la cité est vitale pour le Commerce entre Rahen et l'est d'Haless. Il y a des avantages et désavantages à cela. Il y a une compétition très vive, mais aussi nous avons une bonne opportunité de traiter directement avec les concurrents et autres groupes mercantiles. Il n'a fallu aucun temps pour que ce nouveau quartier général oriental devienne aussi actif que le quartier général principal de la SGC."
+ flavor_seghdihr.161.a:0 "De nouvelles opportunités dites-vous ?"
+ flavor_seghdihr.162.d:0 "S'impliquer dans le commerce d'esclaves est une affaire trouble, et n'est pas populaire parmi la population du Segbandal. Ainsi, cela doit être publicisé comme une libération d'esclaves avant tout - La SGC sait parfaitement bien qu'acheter et libérer des esclaves encourage le marché de l'esclavage, mais c'est de loin la façon la plus facile de fournir à nos marchands une main-d'œuvre bon marché qui leur est redevable sans causer un tollé."
+ flavor_seghdihr.162.a:0 "Pour la liberté !"
+
+ flavor_seghdihr.171.d:0 "Les Xia sont fiers de leur habileté martiale, et ne sont que trop enthousiastes de la tester contre les fameux guerriers segbandaliques. Les vieux vétérans des Segankâr qui voyagent vers ces nouveaux terrains d'entraînement sont très bienvenus et ils sont traités avec grand respect. Ils reçoivent un logement généreux en retour de s'entraîner occasionnellement avec les locaux."
+ flavor_seghdihr.171.a:0 "Comme ils le devraient."
+ flavor_seghdihr.172.d:0 "Une bonne capacité martiale mérite un bon acier, et le Cartel d'Or Segbandalique peut le fournir. Avec l'armement forgé par les nains, la SGC a trouvé des clients enthousiastes parmi les Xia, sous la forme tant de leurs armes traditionnelles que de modèles plus nains. En retour, combattre avec l'armement nain a donné naissance à de nouvelles écoles d'arts martiaux parmi leur peuple."
+ flavor_seghdihr.172.a:0 "De meilleures écoles, bien sûr."
+
+ flavor_seghdihr.181.d:0 "De Khiraspid à Sarisung, dans les marchés de Sempherong et Keyattordha et Phangban, des guerres d'enchères éclatent pour les minerais rares que la SGC a apportés des montagnes lointaines. Mithril est le mot sur toutes les lèvres de fabricants, et la demande pour le métal précieux est haute partout où nous nous tournons. Déjà des rumeurs circulent des expériences menées sur des treillis et argiles imprégnées, et cette compétition ne fera certainement qu'engendrer plus d'appels pour le minerai. Bien que les prix soient déjà hauts, il semble que nous allons faire fortune sur ce commerce alors que les humains commencent à découvrir des secrets que les nains connaissent depuis les jours anciens sur la maîtrise du mithril."
+ flavor_seghdihr.181.a:0 "Que leurs trésors soient renforcés par les nôtres."
+ flavor_seghdihr.182.d:0 "Haut sur la montagne solitaire de Tughayasa, l'Ordre Oraculaire passe ses jours dans la contemplation de l'univers, leur monastère de Mindarandaya isolé du monde. Mais cet isolement les laisse vulnérables et incapables d'interpréter leurs propres prophéties, si aveugles au monde en bas qu'ils sont. Le Cartel d'Or Segbandalique a ainsi trouvé une opportunité inégalée en traitant avec les moines - savoir contre savoir. En fournissant aux érudits des informations sur le monde, ils ont été disposés à partager une partie de leur connaissance en retour. Bien qu'une grande partie soit indéchiffrable, nous avons beaucoup appris en matière de philosophie et avons été informés de commerces potentiellement profitables, voyant beaucoup de richesse couler dans nos coffres grâce à ces aperçus occasionnels de l'avenir."
+ flavor_seghdihr.182.a:0 "Très bien !"
+
+ #####req tooltips
+ seghdihr_sgc_no_highway:0 "£no£ La §YRoute d'Or§! ne traverse pas ce nœud commercial"
+ seghdihr_sgc_davharral_highway:0 "£no£ La §YRoute d'Or§! traversant ce nœud commercial est trop courte pour être patrouillée"
+ seghdihr_sgc_improved_max:0 "£no£ Nous avons atteint le nombre maximum d'améliorations"
+ seghdihr_sgc_node_busy:0 "£no£ Un §Ymarchand§! travaille déjà ici"
+ seghdihr_sgc_no_merch:0 "£no£ Possède au moins un §Ymarchand§! disponible !"
+
+ seghdihr_sgc_missing_req_500g:0 "£no£ §Y500§!¤"
+ seghdihr_sgc_missing_req_750g:0 "£no£ §Y750§!¤"
+ seghdihr_sgc_missing_req_1000g:0 "£no£ §Y1000§!¤"
+ seghdihr_sgc_missing_req_2000g:0 "£no£ §Y2000§!¤"
+ seghdihr_sgc_missing_req_2500g:0 "£no£ §Y2500§!¤"
+ seghdihr_sgc_missing_req_3000g:0 "£no£ §Y3000§!¤"
+ seghdihr_sgc_missing_req_5000g:0 "£no£ §Y5000§!¤"
+
+ seghdihr_sgc_missing_req_5kman:0 "£no£ §Y5000§!£icon_manpower£"
+ seghdihr_sgc_missing_req_10kman:0 "£no£ §Y10000§!£icon_manpower£"
+ seghdihr_sgc_missing_req_15kman:0 "£no£ §Y15000§!£icon_manpower£"
+
+ seghdihr_sgc_missing_req_50adm:0 "£no£ §Y50§!£adm£"
+ seghdihr_sgc_missing_req_100adm:0 "£no£ §Y100§!£adm£"
+ seghdihr_sgc_missing_req_200adm:0 "£no£ §Y200§!£adm£"
+ seghdihr_sgc_missing_req_300adm:0 "£no£ §Y300§!£adm£"
+
+ seghdihr_sgc_missing_req_50dip:0 "£no£ §Y50§!£dip£"
+ seghdihr_sgc_missing_req_100dip:0 "£no£ §Y100§!£dip£"
+ seghdihr_sgc_missing_req_200dip:0 "£no£ §Y200§!£dip£"
+
+ seghdihr_sgc_missing_req_50mil:0 "£no£ §Y50§!£mil£"
+ seghdihr_sgc_missing_req_100mil:0 "£no£ §Y100§!£mil£"
+ seghdihr_sgc_missing_req_200mil:0 "£no£ §Y200§!£mil£"
+
+ seghdihr_sgc_missing_req_treasurer3:0 "£no£ Conseiller §YTrésorier§! niveau §Y3§!"
+ seghdihr_sgc_missing_req_philosopher3:0 "£no£ Conseiller §YPhilosophe§! niveau §Y3§!"
+
+ seghdihr_sgc_missing_req_opinion_ghank:0 "£no£ §G+100 d'opinion§! avec une nation §YGhankedhen§!"
+ seghdihr_sgc_missing_req_opinion_sharaa:0 "£no£ §G+100 d'opinion§! avec le propriétaire de §YSharaajaghal§! !"
+ seghdihr_sgc_missing_req_opinion_sarnihanpur:0 "£no£ §G+100 d'opinion§! avec le propriétaire de §YSarnihanpur§! !"
+
+ seghdihr_sgc_missing_req_5proff:0 "£no£ §Y5%§! de professionnalisme"
+
+
+ #####scripted effect tooltips
+ seghdihr_sgc_update_trade_modifiers_tooltip_10:0 "\n§TNotre §Yinfluence§! dans ce §Ynœud commercial§! augmentera de §G10§!§!"
+ seghdihr_sgc_update_trade_modifiers_tooltip_20:0 "\n§TNotre §Yinfluence§! dans ce §Ynœud commercial§! augmentera de §G20§!§!"
+ seghdihr_sgc_update_trade_modifiers_tooltip_30:0 "\n§TNotre §Yinfluence§! dans ce §Ynœud commercial§! augmentera de §G30§!§!"
+ seghdihr_sgc_update_trade_modifiers_tooltip_40:0 "\n§TNotre §Yinfluence§! dans ce §Ynœud commercial§! augmentera de §G40§!§!"
+ seghdihr_sgc_update_trade_modifiers_tooltip_50:0 "\n§TNotre §Yinfluence§! dans ce §Ynœud commercial§! augmentera de §G50§!§!"
+ seghdihr_sgc_update_trade_modifiers_tooltip_60:0 "\n§TNotre §Yinfluence§! dans ce §Ynœud commercial§! augmentera de §G60§!§!"
+ seghdihr_sgc_update_trade_modifiers_tooltip_70:0 "\n§TNotre §Yinfluence§! dans ce §Ynœud commercial§! augmentera de §G70§!§!"
+ seghdihr_sgc_update_trade_modifiers_tooltip_80:0 "\n§TNotre §Yinfluence§! dans ce §Ynœud commercial§! augmentera de §G80§!§!"
+ seghdihr_sgc_update_trade_modifiers_tooltip_90:0 "\n§TNotre §Yinfluence§! dans ce §Ynœud commercial§! augmentera de §G90§!§!"
