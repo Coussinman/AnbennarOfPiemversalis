@@ -1,0 +1,4310 @@
+namespace = verne
+namespace = verne_flavor_ace
+
+country_event = {
+	id = verne.100
+	title = verne.100.t
+	desc = verne.100.d
+	picture = LAND_MILITARY_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		tag = A33
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = verne.100.a
+		add_prestige = 5
+		set_estate_privilege = estate_A33_adventurers_heroes_in_the_army
+		add_country_modifier = {
+			name = verne_prowess_knows_no_bounds
+			duration = -1
+		}
+		hidden_effect = {
+			add_army_tradition = 15
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.1
+	title = verne_flavor_ace.1.t
+	desc = verne_flavor_ace.1.d
+	picture = MAGES_ESTATE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.1.a 
+		enable_branching_mission_review_without_ai = {
+			key = VER
+		}
+	}
+}
+country_event = {
+	id = verne_flavor_ace.2
+	title = verne_flavor_ace.2.t
+	desc = verne_flavor_ace.2.d
+	picture = LAND_MILITARY_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.2.a 
+		khenak_area = {
+			add_province_modifier = {
+				name = hill_gnolls_exploited
+				duration = 5475
+			}
+			add_local_autonomy = -20
+		}
+		add_adm_power = -50
+	}
+	option = {
+		name = verne_flavor_ace.2.b
+		large_increase_of_gnollish_tolerance_effect = yes
+		add_accepted_culture = hill_gnoll
+		khenak_area = {
+			add_local_autonomy = 5
+		}
+	}
+}
+country_event = {
+	id = verne_flavor_ace.3
+	title = verne_flavor_ace.3.t
+	desc = verne_flavor_ace.3.d
+	picture = DIPLOMACY_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.3.a 
+		add_treasury = -400
+		331 = {
+			owner = {
+				country_event = {
+					id = verne_flavor_ace.4
+				}
+			}
+		}
+	}
+	option = {
+		name = verne_flavor_ace.3.b
+		add_treasury = -600
+		add_dip_power = -50
+		331 = {
+			owner = {
+				set_country_flag = verne_upped_ante
+				country_event = {
+					id = verne_flavor_ace.4
+				}
+			}
+		}
+	}
+}
+country_event = {
+	id = verne_flavor_ace.4
+	title = verne_flavor_ace.4.t
+	desc = verne_flavor_ace.4.d
+	picture = DIPLOMACY_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.4.a 
+		ai_chance = {
+			factor = 70
+		}
+		add_treasury = 400
+		if = {
+			limit = { has_country_flag = verne_upped_ante }
+			add_treasury = 200
+		}
+		331 = {
+			cede_province = A33
+			add_core = A33
+		}
+		A33 = {
+			country_event = {
+				id = verne_flavor_ace.5
+			}
+		}
+	}
+	option = {
+		name = verne_flavor_ace.4.b
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 0
+				has_country_flag = verne_upped_ante
+			}
+		}
+		A33 = {
+			country_event = {
+				id = verne_flavor_ace.6
+			}
+		}
+	}
+}
+country_event = {
+	id = verne_flavor_ace.5
+	title = verne_flavor_ace.5.t
+	desc = verne_flavor_ace.5.d
+	picture = DIPLOMACY_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.5.a 
+		331 = {
+			add_province_modifier = {
+				name = A33_starter_sanctuary
+				duration = -1
+			}
+		}
+	}
+}
+country_event = {
+	id = verne_flavor_ace.6
+	title = verne_flavor_ace.6.t
+	desc = verne_flavor_ace.6.d
+	picture = DIPLOMACY_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.6.a 
+		331 = {
+			add_core = root
+		}
+		add_adm_power = -30
+		add_dip_power = -30
+		add_treasury = -75
+		capital_scope = {
+			add_province_modifier = {
+				name = A33_starter_sanctuary
+				duration = -1
+			}
+		}
+	}
+}
+country_event = {
+	id = verne_flavor_ace.7
+	title = verne_flavor_ace.7.t
+	desc = verne_flavor_ace.7.d
+	picture = DIPLOMACY_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.7.a 
+		add_mil_power = 50
+		A47 = {
+			add_mil_power = 50
+		}
+	}
+	option = {
+		name = verne_flavor_ace.7.b 
+		add_dip_power = 50
+		A47 = {
+			add_dip_power = 50
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.8
+	title = verne_flavor_ace.8.t
+	desc = verne_flavor_ace.8.d
+	picture = DIPLOMACY_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.8.a 
+		country_event = {
+			days = 90
+			random = 30
+			id = verne_flavor_ace.9
+		}
+		set_variable = {
+			which = verne_eborthil_chance
+			value = 1
+		}
+		custom_tooltip = A33_eborthil_vassal_process
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.9
+	title = verne_flavor_ace.9.t
+	desc = verne_flavor_ace.9.d
+	picture = DIPLOMACY_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.9.a 
+		add_dip_power = -75
+		change_variable = {
+			which = verne_eborthil_chance
+			value = 2
+		}
+		country_event = {
+			days = 120
+			random = 30
+			id = verne_flavor_ace.10
+		}
+	}
+	option = {
+		name = verne_flavor_ace.9.b 
+		add_adm_power = -25
+		change_variable = {
+			which = verne_eborthil_chance
+			value = 1
+		}
+		country_event = {
+			days = 120
+			random = 30
+			id = verne_flavor_ace.10
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.10
+	title = verne_flavor_ace.10.t
+	desc = verne_flavor_ace.10.d
+	picture = DIPLOMACY_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.10.a 
+		add_years_of_income = -0.5
+		change_variable = {
+			which = verne_eborthil_chance
+			value = 2
+		}
+		country_event = {
+			days = 90
+			random = 30
+			id = verne_flavor_ace.11
+		}
+	}
+	option = {
+		name = verne_flavor_ace.10.b 
+		country_event = {
+			days = 90
+			random = 30
+			id = verne_flavor_ace.11
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.11
+	title = verne_flavor_ace.11.t
+	desc = verne_flavor_ace.11.d
+	picture = DIPLOMACY_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.11.a
+		add_yearly_manpower = -1.5
+		change_variable = {
+			which = verne_eborthil_chance
+			value = 2
+		}
+		country_event = {
+			days = 90
+			random = 30
+			id = verne_flavor_ace.12
+		}
+	}
+	option = {
+		name = verne_flavor_ace.11.b 
+		add_mil_power = -50
+		country_event = {
+			days = 90
+			random = 30
+			id = verne_flavor_ace.12
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.12
+	title = verne_flavor_ace.12.t
+	desc = verne_flavor_ace.12.d
+	picture = DIPLOMACY_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.12.a
+		change_variable = {
+			which = verne_eborthil_chance
+			value = 2
+		} 
+		custom_tooltip = A33_eborthili_chain_1
+		A47 = {
+			set_country_flag = A33_autonomous_proposal
+		}
+		country_event = {
+			days = 90
+			random = 30
+			id = verne_flavor_ace.13
+		}
+	}
+	option = {
+		name = verne_flavor_ace.12.b 
+		country_event = {
+			days = 90
+			random = 30
+			id = verne_flavor_ace.13
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.13
+	title = verne_flavor_ace.13.t
+	desc = verne_flavor_ace.13.d
+	picture = DIPLOMACY_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.13.a 
+		trigger = {
+			check_variable = {
+				which = verne_eborthil_chance
+				value = 3
+			}
+			NOT = {
+				check_variable = {
+					which = verne_eborthil_chance
+					value = 5
+				}
+			}
+		}
+		custom_tooltip = A33_eborthili_chain_2
+		A47 = {
+			set_country_flag = verne_eborthil_pact_3
+			country_event = {
+				id = verne_flavor_ace.14
+			}
+		}
+	}
+	option = {
+		name = verne_flavor_ace.13.b 
+		trigger = {
+			check_variable = {
+				which = verne_eborthil_chance
+				value = 5
+			}
+			NOT = {
+				check_variable = {
+					which = verne_eborthil_chance
+					value = 7
+				}
+			}
+		}
+		custom_tooltip = A33_eborthili_chain_3
+		A47 = {
+			set_country_flag = verne_eborthil_pact_5
+			country_event = {
+				id = verne_flavor_ace.14
+			}
+		}
+	}
+	option = {
+		name = verne_flavor_ace.13.b 
+		trigger = {
+			check_variable = {
+				which = verne_eborthil_chance
+				value = 7
+			}
+		}
+		custom_tooltip = A33_eborthili_chain_4
+		A47 = {
+			set_country_flag = verne_eborthil_pact_7
+			country_event = {
+				id = verne_flavor_ace.14
+			}
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.14
+	title = verne_flavor_ace.14.t
+	desc = verne_flavor_ace.14.d
+	picture = DIPLOMACY_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.14.a 
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 1.4
+				has_country_flag = verne_eborthil_pact_5
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = A33_autonomous_proposal
+			}
+			A33 = {
+				create_subject = {
+					subject_type = autonomous_vassal
+					subject = A47
+				}
+			}
+		}
+		else = {
+			A33 = {
+				create_subject = {
+					subject_type = vassal
+					subject = A47
+				}
+			}
+		}
+
+	}
+	option = {
+		name = verne_flavor_ace.14.b 
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				has_country_flag = verne_eborthil_pact_7
+			}
+			modifier = {
+				factor = 0.6
+				has_country_flag = verne_eborthil_pact_5
+			}
+		}
+		A33 = {
+			country_event = {
+				id = verne_flavor_ace.15
+			}
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.15
+	title = verne_flavor_ace.15.t
+	desc = verne_flavor_ace.15.d
+	picture = DIPLOMACY_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.15.a 
+		add_casus_belli = {
+			target = A47
+			type = cb_vassalize_mission
+			months = 120
+		}
+		if = {
+			limit = { 
+				check_variable = {
+					which = verne_eborthil_chance
+					value = 5
+				}	
+			}
+			add_dip_power = 50
+			add_mil_power = 50
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.16
+	title = verne_flavor_ace.16.t
+	desc = verne_flavor_ace.16.d
+	picture = DIPLOMACY_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.16.a
+		set_country_flag = verne_better_regiments
+		random_owned_province = {
+			limit = {
+				has_province_modifier = A33_starter_sanctuary
+			}
+			add_province_modifier = {
+				name = A33_better_sanctuary_2
+				duration = -1
+			}
+		}
+		
+	}
+	option = {
+		name = verne_flavor_ace.16.b 
+		set_country_flag = verne_wyvern_army
+		random_owned_province = {
+			limit = {
+				has_province_modifier = A33_starter_sanctuary
+			}
+			add_province_modifier = {
+				name = A33_better_sanctuary
+				duration = -1
+			}
+		}
+
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.17
+	title = verne_flavor_ace.17.t
+	desc = verne_flavor_ace.17.d
+	picture = HIGH_TEMPLE_IN_DISTANCE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.17.a 
+		add_prestige_or_monarch_power = { amount = 30 }
+		country_event = {
+			id = verne_flavor_ace.18
+			days = 240
+			random = 60
+		}
+	}
+	option = {
+		name = verne_flavor_ace.17.b
+		add_treasury = -150
+		add_prestige_or_monarch_power = { amount = 50 }
+		country_event = {
+			id = verne_flavor_ace.18
+			days = 180
+			random = 60
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.18
+	title = verne_flavor_ace.18.t
+	desc = verne_flavor_ace.18.d
+	picture = PROTESTANT_CATHOLIC_DEBATE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.18.a 
+		add_dip_power = 50
+		country_event = {
+			id = verne_flavor_ace.19
+			days = 180
+			random = 60
+		}
+	}
+	option = {
+		name = verne_flavor_ace.18.b 
+		add_adm_power = 50
+		country_event = {
+			id = verne_flavor_ace.19
+			days = 180
+			random = 60
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.19
+	title = verne_flavor_ace.19.t
+	desc = verne_flavor_ace.19.d
+	picture = NORSE_TEMPLE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.19.a 
+		random_list = {
+			60 = {
+				country_event = {
+					id = verne_flavor_ace.20
+					days = 80
+					random = 10
+				}
+				custom_tooltip = A33_high_temp_red
+			}
+			40 = {
+				country_event = {
+					id = verne_flavor_ace.21
+					days = 80
+					random = 10
+				}
+				custom_tooltip = A33_high_temp_green
+			}
+		}
+	}
+	option = {
+		name = verne_flavor_ace.19.b 
+		random_list = {
+			20 = {
+				country_event = {
+					id = verne_flavor_ace.23
+					days = 80
+					random = 10
+				}
+				custom_tooltip = A33_high_temp_green
+			}
+			80 = {
+				country_event = {
+					id = verne_flavor_ace.22
+					days = 80
+					random = 10
+				}
+				custom_tooltip = A33_high_temp_yellow
+			}
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.20
+	title = verne_flavor_ace.20.t
+	desc = verne_flavor_ace.20.d
+	picture = BATTLE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.20.a 
+		country_event = {
+			id = verne_flavor_ace.24
+			days = 240
+			random = 40
+		}
+		add_prestige = -10
+		add_treasury = -100
+	}
+	
+}
+
+country_event = {
+	id = verne_flavor_ace.21
+	title = verne_flavor_ace.21.t
+	desc = verne_flavor_ace.21.d
+	picture = INCA_CITY_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.21.a 
+		country_event = {
+			id = verne_flavor_ace.24
+			days = 30
+			random = 5
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.22
+	title = verne_flavor_ace.22.t
+	desc = verne_flavor_ace.22.d
+	picture = FALUN_COPPER_MINE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.22.a 
+		country_event = {
+			id = verne_flavor_ace.24
+			days = 300
+			random = 50
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.23
+	title = verne_flavor_ace.23.t
+	desc = verne_flavor_ace.23.d
+	picture = CAVE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.23.a 
+		country_event = {
+			id = verne_flavor_ace.24
+			days = 60
+			random = 10
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.24
+	title = verne_flavor_ace.24.t
+	desc = verne_flavor_ace.24.d
+	picture = TRADEGOODS_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.24.a 
+		country_event = {
+			id = verne_flavor_ace.27
+			days = 120
+			random = 20
+		}
+	}
+	option = {
+		name = verne_flavor_ace.24.b 
+		random_list = {
+			50 = {
+				country_event = {
+					id = verne_flavor_ace.25
+					days = 80
+					random = 10
+				}
+				custom_tooltip = A33_high_temp_red
+			}
+			50 = {
+				country_event = {
+					id = verne_flavor_ace.26
+					days = 80
+					random = 10
+				}
+				custom_tooltip = A33_high_temp_green
+			}
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.25
+	title = verne_flavor_ace.25.t
+	desc = verne_flavor_ace.25.d
+	picture = TRADE_GOODS_METALS_AND_MINING_EQUIPENT_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.25.a 
+		country_event = {
+			id = verne_flavor_ace.27
+			days = 300
+			random = 50
+		}
+		add_prestige = -10
+		add_treasury = -100
+	}
+	
+}
+
+country_event = {
+	id = verne_flavor_ace.26
+	title = verne_flavor_ace.26.t
+	desc = verne_flavor_ace.26.d
+	picture = indiangfx_COUNTRY_COLLAPSE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.26.a 
+		country_event = {
+			id = verne_flavor_ace.27
+			days = 60
+			random = 10
+		}
+		add_legitimacy_equivalent = {
+			amount = 20
+			republican_tradition = 10
+		}
+		mission_reward_artifice_points_3 = yes
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.27
+	title = verne_flavor_ace.27.t
+	desc = verne_flavor_ace.27.d
+	picture = ARMY_WITH_MONASTERY_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.27.a 
+		set_estate_privilege = artifice_invention_korashi_drills
+		add_prestige_or_monarch_power = { amount = 50 }
+		mission_reward_artifice_points_5 = yes
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.28
+	title = verne_flavor_ace.28.t
+	desc = verne_flavor_ace.28.d
+	picture = EXPLORERS_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.28.a 
+		custom_tooltip = A33_khen_chain_st
+		country_event = {
+			id = verne_flavor_ace.29
+			days = 180
+			random = 30
+		}
+	}
+}
+
+
+country_event = {
+	id = verne_flavor_ace.29
+	title = verne_flavor_ace.29.t
+	desc = verne_flavor_ace.29.d
+	picture = muslimgfx_EXPLORERS_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.29.a 
+		add_treasury = -25
+		add_dip_power = -25
+		country_event = {
+			id = verne_flavor_ace.30
+			days = 180
+			random = 30
+		}
+	}
+	option = {
+		name = verne_flavor_ace.29.b
+		add_mil_power = -50
+		add_treasury = -150
+		hidden_effect = {
+			kheionai_superregion = {
+				discover_country = root
+			}
+		}
+		custom_tooltip = A33_disco_khen
+		country_event = {
+			id = verne_flavor_ace.30
+			days = 240
+			random = 40
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.30
+	title = verne_flavor_ace.30.t
+	desc = verne_flavor_ace.30.d
+	picture = BYZ_FORT_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.30.a 
+		country_event = {
+			id = verne_flavor_ace.31
+			days = 180
+			random = 30
+		}
+	}
+	option = {
+		name = verne_flavor_ace.30.b
+		set_country_flag = A33_expo_xtra_men
+		custom_tooltip = A33_extra_men
+		add_mil_power = -100
+		add_treasury = -150
+		country_event = {
+			id = verne_flavor_ace.31
+			days = 240
+			random = 40
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.31
+	title = verne_flavor_ace.31.t
+	desc = verne_flavor_ace.31.d
+	picture = southamericagfx_EXPLORERS_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.31.a 
+		add_country_modifier = {
+			name = A33_jobs_fo
+			duration = 5475
+		}
+		custom_tooltip = A33_nepo_colony
+		country_event = {
+			id = verne_flavor_ace.32
+			days = 120
+			random = 30
+		}
+	}
+	option = {
+		name = verne_flavor_ace.31.b
+		custom_tooltip = A33_nepo_colony_1
+		add_adm_power = -45
+		add_dip_power = -45
+		add_mil_power = -45
+		country_event = {
+			id = verne_flavor_ace.32
+			days = 120
+			random = 30
+		}
+	}
+	
+}
+
+country_event = {
+	id = verne_flavor_ace.32
+	title = verne_flavor_ace.32.t
+	desc = verne_flavor_ace.32.d
+	picture = BATTLE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.32.a 
+		hidden_effect = {
+			unlock_merc_company = {
+				merc_company = merc_A33_pizzaro_band
+			}
+		}
+		2682 = {
+			cede_province = A33
+			add_core = A33
+			custom_tooltip = A33_pizzaro
+		}
+		if = {
+			limit = { has_country_flag = A33_expo_xtra_men }
+			2682 = {
+				infantry = ROOT
+				infantry = ROOT
+				infantry = ROOT
+				infantry = ROOT
+				infantry = ROOT
+				infantry = ROOT
+			}
+		}
+		if = {
+			limit = { 
+				has_country_flag = A33_expo_xtra_men 
+				mil_tech = 7
+			}
+			2682 = {
+				artillery = ROOT
+				artillery = ROOT
+			}
+		}
+		else = {
+			2682 = {
+				large_cast_bronze_mortar = ROOT
+				large_cast_bronze_mortar = ROOT
+			}
+		}
+		if = {
+			limit = { has_country_modifier = A33_jobs_fo }
+			2682 = {
+				add_permanent_province_modifier = {
+					name = A33_expo_stab
+					duration = 1234 #todo
+				}
+				custom_tooltip = A33_expo_stab_tt
+			}
+			hidden_effect = {
+				country_event = {
+					id = verne_flavor_ace.200
+					days = 5475
+				}
+			}
+		}
+		else = {
+			add_country_modifier = {
+				name = A33_expo_mil
+				duration = 5475
+			}
+		}
+		besolaki_area = {
+			limit = { 	
+				NOT = { is_core = ROOT } 
+				NOT = { owned_by = ROOT } 
+			}
+			add_permanent_claim = ROOT 
+		}
+		eneion_area = {
+			limit = { 	
+				NOT = { is_core = ROOT } 
+				NOT = { owned_by = ROOT } 
+			}
+			add_permanent_claim = ROOT 
+		}
+		apikhoxi_area = {
+			limit = { 	
+				NOT = { is_core = ROOT } 
+				NOT = { owned_by = ROOT } 
+			}
+			add_permanent_claim = ROOT 
+		}
+		remove_country_modifier = A33_start_expo
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.33
+	title = verne_flavor_ace.33.t
+	desc = verne_flavor_ace.33.d
+	picture = CONQUISTADORS_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.33.a 
+		custom_tooltip = A33_tay_chain_st
+		country_event = {
+			id = verne_flavor_ace.34
+			days = 180
+			random = 30
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.34
+	title = verne_flavor_ace.34.t
+	desc = verne_flavor_ace.34.d
+	picture = muslimgfx_EXPLORERS_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.34.a 
+		country_event = {
+			id = verne_flavor_ace.35
+			days = 180
+			random = 30
+		}
+	}
+	option = {
+		name = verne_flavor_ace.34.b
+		add_years_of_income = -0.33
+		add_dip_power = -15
+		custom_tooltip = A33_tay_logi
+		country_event = {
+			id = verne_flavor_ace.35
+			days = 240
+			random = 40
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.35
+	title = verne_flavor_ace.35.t
+	desc = verne_flavor_ace.35.d
+	picture = SWEDEN_LEAGUE_WAR_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.35.a 
+		custom_tooltip = A33_tay_men
+		set_country_flag = A33_tay1
+		country_event = {
+			id = verne_flavor_ace.36
+			days = 240
+			random = 40
+		}
+	}
+	option = {
+		name = verne_flavor_ace.35.b
+		country_event = {
+			id = verne_flavor_ace.36
+			days = 180
+			random = 30
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.36
+	title = verne_flavor_ace.36.t
+	desc = verne_flavor_ace.36.d
+	picture = DIPLOMACY_eventPicture
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			random_country = {
+				limit = {
+					is_rival = root
+				}
+				save_event_target_as = taychend_36_target
+			}
+		}
+	}
+
+	option = {
+		name = verne_flavor_ace.36.a 
+		country_event = {
+			id = verne_flavor_ace.37
+			days = 180
+			random = 30
+		}
+	}
+	option = {
+		name = verne_flavor_ace.36.b
+		add_treasury = -250
+		add_dip_power = -20 
+		event_target:taychend_36_target = {
+			add_treasury = 250
+			add_dip_power = 50
+		}
+		hidden_effect = {
+			taychend_superregion = {
+				discover_country = root
+			}
+		}
+		custom_tooltip = A33_disco_tay
+		country_event = {
+			id = verne_flavor_ace.37
+			days = 180
+			random = 30
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.37
+	title = verne_flavor_ace.37.t
+	desc = verne_flavor_ace.37.d
+	picture = EXPLORERS_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.37.a 
+		hidden_effect = {
+			unlock_merc_company = {
+				merc_company = merc_A33_cortes_band
+			}
+		}
+		2510 = {
+			cede_province = A33
+			add_core = A33
+			custom_tooltip = A33_pizzaro
+		}
+		if = {
+			limit = { has_country_flag = A33_tay1 }
+			2510 = {
+				infantry = ROOT
+				infantry = ROOT
+				infantry = ROOT
+				infantry = ROOT
+				infantry = ROOT
+				infantry = ROOT
+				infantry = ROOT
+				infantry = ROOT
+			}
+		}
+		if = {
+			limit = { 
+				has_country_flag = A33_tay1 
+				mil_tech = 7
+			}
+			2510 = {
+				artillery = ROOT
+			}
+		}
+		else = {
+			2510 = {
+				large_cast_bronze_mortar = ROOT
+			}
+		}
+		if = {
+			limit = { has_country_flag = A33_tay1 }
+			add_country_modifier = {
+				name = A33_expo_mil1
+				duration = 3650
+			}
+		}
+		
+		katelperai_area = {
+			limit = { 	
+				NOT = { is_core = ROOT } 
+				NOT = { owned_by = ROOT } 
+			}
+			add_permanent_claim = ROOT 
+		}
+		orenkoraim_area = {
+			limit = { 	
+				NOT = { is_core = ROOT } 
+				NOT = { owned_by = ROOT } 
+			}
+			add_permanent_claim = ROOT 
+		}
+		remove_country_modifier = A33_start_expo
+	}
+	
+}
+
+country_event = {
+	id = verne_flavor_ace.38
+	title = verne_flavor_ace.38.t
+	desc = verne_flavor_ace.38.d
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.38.a 
+		custom_tooltip = A33_upgrade_col_1tt
+		set_country_flag = A33_colony_upgrade1
+	}
+	option = {
+		name = verne_flavor_ace.38.b
+		custom_tooltip = A33_upgrade_col_2tt
+		set_country_flag = A33_colony_upgrade2
+	}
+	option = {
+		name = verne_flavor_ace.38.c
+		custom_tooltip = A33_upgrade_col_3tt
+		set_country_flag = A33_colony_upgrade3
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.39
+	title = verne_flavor_ace.39.t
+	desc = verne_flavor_ace.39.d
+	picture = CONQUEST_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.39.a 
+		unlock_merc_company = {
+			merc_company = merc_A33_cortes_band_2
+		}
+		unlock_merc_company = {
+			merc_company = merc_A33_pizzaro_band_1
+		}
+		add_splendor = 200
+		add_country_modifier = {
+			name = A33_conquistadors_leg
+			duration = -1
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.40
+	title = verne_flavor_ace.40.t
+	desc = verne_flavor_ace.40.d
+	picture = SIERRA_DE_LA_PLATA_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.40.a 
+		artifice_inventions_give_basket = yes
+		clr_country_flag = artifice_inventions_basket_received
+	}
+	option = {
+		name = verne_flavor_ace.40.b
+		376 = {
+			change_trade_goods = precursor_relics
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.41
+	title = verne_flavor_ace.41.t
+	desc = verne_flavor_ace.41.d
+	picture = DIPLOMACY_SIGNING_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.41.a 
+		unlock_merc_company = {
+			merc_company = merc_A33_yinnic_mariners
+		}
+		2757 = {
+			cede_province = A33
+			add_core = A33
+			custom_tooltip = A33_ynn_1_tt
+		}
+	}
+	option = {
+		name = verne_flavor_ace.41.b
+		unlock_merc_company = {
+			merc_company = merc_A33_yinnic_rangers
+		}
+		2757 = {
+			cede_province = A33
+			add_core = A33
+			custom_tooltip = A33_ynn_2_tt
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.42
+	title = verne_flavor_ace.42.t
+	desc = verne_flavor_ace.42.d
+	picture = GENERALS_DISCUSSING_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.42.a 
+		2042 = {
+			owner = { 
+				country_event = { 
+					id = verne_flavor_ace.43 
+					days = 365
+				} 
+			}
+			add_great_project = {
+				type = domandrod_summer_gate
+				instant = yes
+			}
+		}
+		set_country_flag = eord_domandrod_opened
+		dearktir_area = {
+			limit = { 	
+				NOT = { is_core = ROOT } 
+				NOT = { owned_by = ROOT } 
+			}
+			add_permanent_claim = ROOT
+		}
+		sidmargbal_area = {
+			limit = { 	
+				NOT = { is_core = ROOT } 
+				NOT = { owned_by = ROOT } 
+			}
+			add_permanent_claim = ROOT
+		}
+		2023 = {
+			cede_province = A33
+			add_core = A33
+			custom_tooltip = A33_eordland_tt
+		}
+		unlock_merc_company = {
+			merc_company = merc_A33_eord_rangers
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.43
+	title = verne_flavor_ace.43.t
+	desc = verne_flavor_ace.43.d
+	picture = DIPLOMACY_eventPicture
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = verne_flavor_ace.43.a 
+		set_country_flag = eord_domandrod_opened
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.44
+	title = verne_flavor_ace.44.t
+	desc = verne_flavor_ace.44.d
+	picture = DIPLOMACY_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.44.a
+		custom_tooltip = A33_ynn_adven_tt 
+		hidden_effect = {
+			root = {
+				save_event_target_as = A33_ynn_overlord
+			}
+			every_country = {
+				limit = {
+					capital_scope = {
+						superregion = ynn_superregion
+					}
+					religion = regent_court
+					religion = corinite
+					religion = ravelian
+				}
+				capital_scope = {
+					set_province_flag = A33_diplo_ynn
+				}
+			}
+			every_country = {
+				limit = {
+					capital_scope = {
+						superregion = ynn_superregion
+					}
+					religion = regent_court
+					religion = corinite
+					religion = ravelian
+				}
+				country_event = {
+					id = verne_flavor_ace.45
+				}	
+			}
+			
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.45
+	title = verne_flavor_ace.45.t
+	desc = verne_flavor_ace.45.d
+	major = yes
+	picture = DIPLOMACY_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.45.a 
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 1.5
+				has_opinion = {
+					who = event_target:A33_ynn_overlord
+					value = 100
+				}
+				
+			}
+			modifier = {
+				factor = 2
+				has_opinion = {
+					who = event_target:A33_ynn_overlord
+					value = 150
+				}
+			}
+		}
+		event_target:A33_ynn_overlord = {
+			create_subject = {
+				subject_type = vassal
+				subject = root
+			}
+		}
+		hidden_effect = {
+			every_owned_province = {
+				random_list = {
+					75 = {}
+					25 = {
+						add_core = event_target:A33_ynn_overlord
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = verne_flavor_ace.45.b
+		ai_chance = {
+			factor = 60
+		}
+		every_owned_province = {
+			random_list = {
+				75 = {
+					add_permanent_claim = event_target:A33_ynn_overlord
+				}
+				25 = {
+					add_core = event_target:A33_ynn_overlord
+				}
+			}
+		}
+	}
+}
+###################################
+#monarchypath
+###########################
+country_event = {
+	id = verne_flavor_ace.46
+	title = verne_flavor_ace.46.t
+	desc = verne_flavor_ace.46.d
+	picture = DIPLOMACY_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.46.a 
+		add_country_modifier = {
+			name = A33_verne_staletes_1
+			duration = 5475
+		}
+		if = {
+			limit = { exists = A84 }
+			A84 = {
+				inherit = A82
+				inherit = A55
+				45 = {
+					add_permanent_claim = A84
+				}
+				25 = {
+					add_permanent_claim = A84
+				}
+				906 = {
+					add_permanent_claim = A84
+				}
+			}
+			root = {
+				create_subject = {
+					subject_type = autonomous_vassal
+					subject = A84
+				}
+			}
+		}
+	}
+	option = {
+		name = verne_flavor_ace.46.b
+		add_country_modifier = {
+			name = A33_verne_staletes_2
+			duration = 5475
+		}
+		if = {
+			limit = { exists = A55 }
+			A55 = {
+				inherit = A82
+				inherit = A84
+				45 = {
+					add_permanent_claim = A55
+				}
+				25 = {
+					add_permanent_claim = A55
+				}
+				906 = {
+					add_permanent_claim = A55
+				}
+			}
+			root = {
+				create_subject = {
+					subject_type = autonomous_vassal
+					subject = A55
+				}
+			}
+		}
+	}
+	option = {
+		name = verne_flavor_ace.46.c
+		add_country_modifier = {
+			name = A33_verne_staletes_3
+			duration = 5475
+		}
+		if = {
+			limit = { exists = A82 }
+			A82 = {
+				inherit = A55
+				inherit = A84
+				45 = {
+					add_permanent_claim = A82
+				}
+				25 = {
+					add_permanent_claim = A82
+				}
+				906 = {
+					add_permanent_claim = A82
+				}
+			}
+			root = {
+				create_subject = {
+					subject_type = autonomous_vassal
+					subject = A82
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.47
+	title = verne_flavor_ace.47.t
+	desc = verne_flavor_ace.47.d
+	picture = DEBATE_REPUBLICAN_eventPicture
+	is_triggered_only = yes
+	immediate = {
+		root = {
+			save_event_target_as = A33_vk_buy
+		}
+	}
+	option = {
+		name = verne_flavor_ace.47.a
+		285 = {
+			owner = {
+				country_event = {
+					id = verne_flavor_ace.48
+					days = 90
+					random = 20
+				}
+			}
+		}
+		add_treasury = -100
+	}
+	option = {
+		name = verne_flavor_ace.47.b
+		custom_tooltip = A33_vk_guarenteed
+		285 = {
+			owner = {
+				set_country_flag = A33_vk_up_bid
+				country_event = {
+					id = verne_flavor_ace.48
+					days = 90
+					random = 20
+				}
+			}
+		}
+		add_treasury = -200
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.48
+	title = verne_flavor_ace.48.t
+	desc = verne_flavor_ace.48.d
+	picture = DIPLOMACY_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.48.a 
+		ai_chance = {
+			factor = 50
+		}
+		285 = {
+			add_core = event_target:A33_vk_buy
+			cede_province = event_target:A33_vk_buy
+		}
+		if = {
+			limit = { has_country_flag = A33_vk_up_bid }
+			add_treasury = 200
+		}
+		else = {
+			add_treasury = 100
+		}
+	}
+	option = {
+		name = verne_flavor_ace.48.b
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				has_country_flag = A33_vk_up_bid
+			}
+		}
+		event_target:A33_vk_buy = {
+			country_event = {
+				id = verne_flavor_ace.49
+			}
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.49
+	title = verne_flavor_ace.49.t
+	desc = verne_flavor_ace.49.d
+	picture = PROTESTANT_CATHOLIC_DEBATE_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.49.a 
+		285 = {
+			add_territorial_core = event_target:A33_vk_buy
+		}
+		add_treasury = 50
+		add_prestige = -10
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.50
+	title = verne_flavor_ace.50.t
+	desc = verne_flavor_ace.50.d
+	picture = NUSANTARA_THRONE_eventPicture
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			random_country = {
+				limit = {  
+					is_part_of_hre = yes
+					capital_scope = {
+						or = {
+							area = east_damesear_area
+							area = the_commons_area
+						} 
+					}
+				}
+				save_event_target_as = A33_dam_annex_prince
+			}
+		}
+		
+	}
+	option = {
+		trigger = {
+			exists = A45
+		}
+		name = verne_flavor_ace.50.a 
+		add_army_professionalism = 0.05
+		add_country_modifier = {
+			name = A33_marshals_seat
+			duration = 5475
+		}
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = A45
+		}
+		custom_tooltip = A33_inherit_dam_1
+		hidden_effect = {
+			every_country = {
+				limit  ={  
+					capital_scope = {
+						or = {
+							area = west_damesear_area
+							area = east_damesear_area
+							area = damerian_dales_area
+							area = the_commons_area
+							area = silverwoods_area
+						} 
+					}
+				}
+				A45 = {
+					inherit = prev
+				}
+			}
+		}	
+		A45 = {
+			change_tag = A58
+			hidden_effect = { restore_country_name = yes }
+			swap_non_generic_missions = yes
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 }
+			}
+		}
+		
+	}
+	option = {
+		trigger = {
+			exists = A85
+		}
+		name = verne_flavor_ace.50.b
+		add_estate_loyalty = {
+			estate = estate_mages
+			loyalty = 10
+		}
+		random_list = {
+			25 ={
+				add_ruler_personality = mage_personality
+			}
+			25 = {
+				add_heir_personality = mage_personality
+			}
+			50 = {
+				add_estate_loyalty = {
+					estate = estate_mages
+					loyalty = 10
+				}
+			}
+		}
+		add_country_modifier = {
+			name = A33_mages_seat
+			duration = 5475
+		}
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = A85
+		}
+		custom_tooltip = A33_inherit_dam_2
+		hidden_effect = {
+			every_country = {
+				limit  ={  
+					capital_scope = {
+						or = {
+							area = west_damesear_area
+							area = east_damesear_area
+							area = damerian_dales_area
+							area = the_commons_area
+							area = silverwoods_area
+						} 
+					}
+				}
+				A85 = {
+					inherit = prev
+				}
+			}
+		}
+		A85 = {
+			change_tag = A58
+			hidden_effect = { restore_country_name = yes }
+			swap_non_generic_missions = yes
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 }
+			}
+		}
+	}
+	option = {
+		trigger = {
+			exists = A31
+		}
+		name = verne_flavor_ace.50.c
+		add_estate_loyalty = {
+			estate = estate_nobles
+			loyalty = 20
+		}
+		add_prestige_or_monarch_power = { amount = 33 }
+		add_country_modifier = {
+			name = A33_elven_seat
+			duration = 5475
+		}
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = A31
+		}
+		custom_tooltip = A33_inherit_dam_3
+		hidden_effect = {
+			every_country = {
+				limit  ={  
+					capital_scope = {
+						or = {
+							area = west_damesear_area
+							area = east_damesear_area
+							area = damerian_dales_area
+							area = the_commons_area
+							area = silverwoods_area
+						} 
+					}
+				}
+				A31 = {
+					inherit = prev
+				}
+			}
+		}
+		A31 = {
+			change_tag = A58
+			hidden_effect = { restore_country_name = yes }
+			swap_non_generic_missions = yes
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 }
+			}
+		}
+	}
+	option = {
+		name = verne_flavor_ace.50.d1
+		add_imperial_influence = 10
+		add_country_modifier = {
+			name = A33_princes_seat
+			duration = 5475
+		}
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = event_target:A33_dam_annex_prince
+		}
+		custom_tooltip = A33_inherit_dam_4
+		hidden_effect = {
+			every_country = {
+				limit  ={  
+					capital_scope = {
+						or = {
+							area = west_damesear_area
+							area = east_damesear_area
+							area = damerian_dales_area
+							area = the_commons_area
+							area = silverwoods_area
+						} 
+					}
+				}
+				event_target:A33_dam_annex_prince = {
+					inherit = prev
+				}
+			}
+		}
+		event_target:A33_dam_annex_prince = {
+			change_tag = A58
+			hidden_effect = { restore_country_name = yes }
+			swap_non_generic_missions = yes
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 }
+			}
+			elector = yes
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.51
+	title = verne_flavor_ace.51.t
+	desc = verne_flavor_ace.51.d
+	picture = NUSANTARA_THRONE_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.51.a 
+		trigger = { exists = a30 }
+		add_country_modifier = {
+			name = A33_wex_wex
+			duration = 3650
+		}
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = A30
+		}
+		custom_tooltip = A33_reorganize_wex_1
+		A30 = {
+			inherit = A48
+			inherit = A34
+			inherit = Z04
+			inherit = Z02
+			override_country_name = AA4
+		}	
+		hidden_effect = {
+			every_country = {
+				limit = { is_part_of_hre = yes }
+				add_aggressive_expansion = {
+					who = ROOT
+					value = 15
+					apply_calc = no
+				}
+			}
+		}
+	}
+	option = {
+		name = verne_flavor_ace.51.b
+		trigger = { exists = a48 }
+		add_country_modifier = {
+			name = A33_sugam_wex
+			duration = 3650
+		}
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = A48
+		}
+		A48 = {
+			inherit = A30
+			inherit = A34
+			inherit = Z04
+			inherit = Z02
+			override_country_name = AA4
+		}
+		custom_tooltip = A33_reorganize_wex_2
+		hidden_effect = {
+			every_country = {
+				limit = { is_part_of_hre = yes }
+				add_aggressive_expansion = {
+					who = ROOT
+					value = 8
+					apply_calc = no
+				}
+			}
+		}
+	}
+	option = {
+		name = verne_flavor_ace.51.c
+		trigger = { exists = a34 }
+		add_country_modifier = {
+			name = A33_bisanese_wex
+			duration = 3650
+		}
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = A34
+		}
+		A34 = {
+			inherit = A30
+			inherit = A48
+			inherit = Z04
+			inherit = Z02
+			override_country_name = AA4
+		}
+		custom_tooltip = A33_reorganize_wex_1
+		hidden_effect = {
+			every_country = {
+				limit = { is_part_of_hre = yes }
+				add_aggressive_expansion = {
+					who = ROOT
+					value = 15
+					apply_calc = no
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.52
+	title = verne_flavor_ace.52.t
+	desc = verne_flavor_ace.52.d
+	picture = NUSANTARA_THRONE_eventPicture
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			random_country = {
+				limit = {  
+					is_part_of_hre = yes
+					capital_scope = {
+						area = highcliff_area 
+					}
+				}
+				save_event_target_as = A33_dam_annex_prince
+			}
+		}
+	}
+	option = {
+		name = verne_flavor_ace.52.a 
+		trigger = { exists = A72 }
+		add_country_modifier = {
+			name = A33_border_arannen
+			duration = 5475
+		}
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = A72
+		}
+		every_country = {
+			limit = {
+				capital_scope = {
+					or = {
+						region = the_borders_region
+						area = ashfields_area
+					}
+				}
+				not = { culture = wexonard }
+			}
+			A72 = {
+				inherit = prev
+				override_country_name = AA5
+			}
+		}
+	}
+	option = {
+		name = verne_flavor_ace.52.b
+		trigger = { exists = A60 }
+		add_country_modifier = {
+			name = A33_arannen
+			duration = 5475
+		}
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = A60
+		}
+		every_country = {
+			limit = {
+				capital_scope = {
+					or = {
+						region = the_borders_region
+						area = ashfields_area
+					}
+				}
+				not = { culture = wexonard }
+			}
+			A60 = {
+				inherit = prev
+				override_country_name = AA5
+			}
+		}
+	}
+	option = {
+		name = verne_flavor_ace.52.c
+		trigger = { exists = event_target:A33_dam_annex_prince }
+		add_country_modifier = {
+			name = A33_coastal_border
+			duration = 5475
+		}
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = event_target:A33_dam_annex_prince
+		}
+		every_country = {
+			limit = {
+				capital_scope = {
+					or = {
+						region = the_borders_region
+						area = ashfields_area
+					}
+				}
+				not = { culture = wexonard }
+			}
+			event_target:A33_dam_annex_prince = {
+				inherit = prev
+				override_country_name = AA5
+			}
+		}
+	}
+	option = {
+		name = verne_flavor_ace.52.d1
+		trigger = { exists = A86 }
+		add_country_modifier = {
+			name = A33_tellum_border
+			duration = 5475
+		}
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = A86
+		}
+		every_country = {
+			limit = {
+				capital_scope = {
+					or = {
+						region = the_borders_region
+						area = ashfields_area
+					}
+				}
+				not = { culture = wexonard }
+			}
+			A86 = {
+				inherit = prev
+				override_country_name = AA5
+			}
+		}
+	}
+}
+
+
+country_event = {
+	id = verne_flavor_ace.53
+	title = verne_flavor_ace.53.t
+	desc = verne_flavor_ace.53.d
+	picture = NUSANTARA_THRONE_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.53.a 
+		trigger = { exists = A59 }
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = A59
+		}
+		every_country = {
+			limit = {
+				capital_scope = {
+					or = {
+						region = dostanor_region
+						region = daravans_folly_region
+						region = ourdia_region
+					}
+				}
+				religion_group = cannorian
+			}
+			A59 = {
+				inherit = prev
+			}
+		}
+		A59 = {
+			change_tag = Z07
+			hidden_effect = { restore_country_name = yes }
+			if = {
+				limit = { NOT = { government_rank = 2 } }
+				set_government_rank = 2
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = { has_owner_culture = yes }
+					change_culture = dostanorian
+				}
+			}
+			primary_and_ruler_culture_change = { race = human new_culture = dostanorian }
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 } #Swap Ideas
+				set_country_flag = formed_dostanor
+			}
+		}
+		unlock_estate_privilege = {
+			estate_privilege = verne_korvid_offer
+		}
+		set_estate_privilege = verne_korvid_offer
+	}
+	option = {
+		name = verne_flavor_ace.53.b
+		trigger = { exists = U16 }
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = U16
+		}
+		every_country = {
+			limit = {
+				capital_scope = {
+					or = {
+						region = dostanor_region
+						region = daravans_folly_region
+						region = ourdia_region
+					}
+				}
+				religion_group = cannorian
+			}
+			U16 = {
+				inherit = prev
+				510 = {
+					if = {
+						limit = {
+							not = {
+								has_great_project = {
+									type = bal_ouord
+									tier = 3
+								}
+							}
+						}
+						add_great_project_tier = {
+							type = bal_ouord
+							tier = 1
+						}
+					}
+					else = {
+						add_base_manpower = 4
+						add_base_production = 4
+						add_base_tax = 4
+					}
+				}
+			}
+		}
+		U16 = {
+			change_tag = Z07
+			hidden_effect = { restore_country_name = yes }
+			if = {
+				limit = { NOT = { government_rank = 2 } }
+				set_government_rank = 2
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = { has_owner_culture = yes }
+					change_culture = dostanorian
+				}
+			}
+			primary_and_ruler_culture_change = { race = human new_culture = dostanorian }
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 } #Swap Ideas
+				set_country_flag = formed_dostanor
+			}
+		}
+	}
+	option = {
+		name = verne_flavor_ace.53.c
+		trigger = { exists = A74 }
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = A74
+		}
+		every_country = {
+			limit = {
+				capital_scope = {
+					or = {
+						region = dostanor_region
+						region = daravans_folly_region
+						region = ourdia_region
+					}
+				}
+				religion_group = cannorian
+			}
+			A74 = {
+				inherit = prev
+				every_province = {
+					limit = {
+						region = daravans_folly_region
+					}
+					add_permanent_province_modifier = {
+						name = A33_rebuild_flooded
+						duration = 1234 #todo
+					}
+				}
+			}
+		}
+		A74 = {
+			change_tag = Z07
+			hidden_effect = { restore_country_name = yes }
+			if = {
+				limit = { NOT = { government_rank = 2 } }
+				set_government_rank = 2
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = { has_owner_culture = yes }
+					change_culture = dostanorian
+				}
+			}
+			primary_and_ruler_culture_change = { race = human new_culture = dostanorian }
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 } #Swap Ideas
+				set_country_flag = formed_dostanor
+			}
+		}
+		add_country_modifier = {
+			name = A33_nathalarie
+			duration = 18250
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.54
+	title = verne_flavor_ace.54.t
+	desc = verne_flavor_ace.54.d
+	picture = DIPLOMACY_SIGNING_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.54.a 
+		set_country_flag = vertesk_dames_crown
+		custom_tooltip = A33_vertesk_dames_crown_tt
+		country_event_with_option_insight = {
+			id = verne_flavor_ace.55
+			option_1 = "custom_tooltip = A33_vertesk_dames_crown_tt_1"
+			option_2 = "custom_tooltip = A33_vertesk_dames_crown_tt_2"
+			option_3 = "custom_tooltip = A33_vertesk_dames_crown_tt_3"
+			option_4 = "custom_tooltip = A33_vertesk_dames_crown_tt_4"
+		}
+	}
+	option = {
+		name = verne_flavor_ace.54.b
+		country_event_with_option_insight = {
+			id = verne_flavor_ace.55
+			option_1 = "custom_tooltip = A33_vertesk_dames_crown_tt_2"
+			option_2 = "custom_tooltip = A33_vertesk_dames_crown_tt_3"
+			option_3 = "custom_tooltip = A33_vertesk_dames_crown_tt_4"
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.55
+	title = verne_flavor_ace.55.t
+	desc = verne_flavor_ace.55.d
+	picture = NUSANTARA_THRONE_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.55.a 
+		trigger = { has_country_flag = vertesk_dames_crown }
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = A23
+		}
+		every_country = {
+			limit = {
+				is_part_of_hre = yes
+				or = {
+					and = {
+						tag = A23
+						root = {
+							has_country_flag = vertesk_dames_crown
+						}
+					}
+					tag = A36
+					culture = crownsman
+				}
+			}
+			A23 = {
+				inherit = prev
+				override_country_name = AA6
+				216 = {
+					if = {
+						limit = {
+							not = {
+								has_great_project = {
+									type = bal_vertesk
+									tier = 3
+								}
+							}
+						}
+						add_great_project_tier = {
+							type = bal_vertesk
+							tier = 2
+						}
+					}
+					else = {
+						add_base_manpower = 4
+						add_base_production = 4
+						add_base_tax = 4
+					}
+				}
+			}
+		}
+		country_event = {
+			id = verne_flavor_ace.56
+		}
+	}
+	option = {
+		name = verne_flavor_ace.55.b
+		add_mercantilism_or_monarch_power = { amount = 5 }
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = A25
+		}
+		every_country = {
+			limit = {
+				is_part_of_hre = yes
+				or = {
+					and = {
+						tag = A23
+						root = {
+							has_country_flag = vertesk_dames_crown
+						}
+					}
+					tag = A36
+					culture = crownsman
+				}
+			}
+			A25 = {
+				inherit = prev
+				override_country_name = AA6
+			}
+		}
+		country_event = {
+			id = verne_flavor_ace.56
+		}
+	}
+	option = {
+		name = verne_flavor_ace.55.c
+		add_country_modifier = {
+			name = A33_imp_mint
+			duration = 5475
+		}
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = A53
+		}
+		every_country = {
+			limit = {
+				is_part_of_hre = yes
+				or = {
+					and = {
+						tag = A23
+						root = {
+							has_country_flag = vertesk_dames_crown
+						}
+					}
+					tag = A36
+					culture = crownsman
+				}
+			}
+			A53 = {
+				inherit = prev
+				override_country_name = AA6
+			}
+		}
+		country_event = {
+			id = verne_flavor_ace.56
+		}
+	}
+	option = {
+		name = verne_flavor_ace.55.d1
+		change_government_reform_progress = 50
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = A54
+		}
+		every_country = {
+			limit = {
+				is_part_of_hre = yes
+				or = {
+					and = {
+						tag = A23
+						root = {
+							has_country_flag = vertesk_dames_crown
+						}
+					}
+					tag = A36
+					culture = crownsman
+				}
+			}
+			A54 = {
+				inherit = prev
+				override_country_name = AA6
+			}
+		}
+		country_event = {
+			id = verne_flavor_ace.56
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.56
+	title = verne_flavor_ace.56.t
+	desc = verne_flavor_ace.56.d
+	picture = MERCHANTS_TALKING_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.56.a 
+		custom_tooltip = A33_telg_dames_crown_tt
+		hidden_effect = {
+			random_subject_country = {
+				limit = {
+					or = {
+						tag = A23
+						tag = A36
+						culture = crownsman
+					}
+				}
+				inherit = A62
+			}
+		}
+		add_dip_power = 50
+		country_event_with_option_insight = {
+			id = verne_flavor_ace.57
+			option_1 = "custom_tooltip = A33_vertesk_dames_crown_tt_5"
+			option_2 = "custom_tooltip = A33_vertesk_dames_crown_tt_6"
+			option_3 = "custom_tooltip = A33_vertesk_dames_crown_tt_7"
+			option_4 = "custom_tooltip = A33_vertesk_dames_crown_tt_8"
+		}
+	}
+	option = {
+		name = verne_flavor_ace.56.b
+		add_adm_power = 50
+		custom_tooltip = A33_telg_dames_crown_tt_1
+		set_country_flag = A33_telgir_esmaria
+		country_event_with_option_insight = {
+			id = verne_flavor_ace.57
+			option_1 = "custom_tooltip = A33_vertesk_dames_crown_tt_5"
+			option_2 = "custom_tooltip = A33_vertesk_dames_crown_tt_6"
+			option_3 = "custom_tooltip = A33_vertesk_dames_crown_tt_7"
+			option_4 = "custom_tooltip = A33_vertesk_dames_crown_tt_8"
+		}
+	}
+	option = {
+		name = verne_flavor_ace.56.c
+		trigger = {
+			not = { mission_completed = A33_empire_anbennar_alenic  }
+		}
+		add_mil_power = 50
+		custom_tooltip = A33_telg_dames_crown_tt_2
+		set_country_flag = A33_telgir_gawed
+		country_event_with_option_insight = {
+			id = verne_flavor_ace.57
+			option_1 = "custom_tooltip = A33_vertesk_dames_crown_tt_5"
+			option_2 = "custom_tooltip = A33_vertesk_dames_crown_tt_6"
+			option_3 = "custom_tooltip = A33_vertesk_dames_crown_tt_7"
+			option_4 = "custom_tooltip = A33_vertesk_dames_crown_tt_8"
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.57
+	title = verne_flavor_ace.57.t
+	desc = verne_flavor_ace.57.d
+	picture = NUSANTARA_THRONE_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.57.a 
+		add_country_modifier = {
+			name = A33_imp_thermaia
+			duration = 3650
+		}
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = A95
+		}
+		every_country = {
+			limit = {
+				or = {
+					and = {
+						tag = A62
+						root = {
+							has_country_flag = A33_telgir_esmaria
+						}
+					}
+					capital_scope = {
+						region = esmaria_region
+						not = { area = ashfields_area }
+						not = { owned_by = A62 }
+					}
+				}
+			}
+			A95 = {
+				inherit = prev
+			}
+		}
+		A95 = {
+			change_tag = Z46
+		}
+	}
+	option = {
+		name = verne_flavor_ace.57.b
+		add_country_modifier = {
+			name = A33_imp_silverforge
+			duration = 3650
+		}
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = A73
+		}
+		every_country = {
+			limit = {
+				or = {
+					and = {
+						tag = A62
+						root = {
+							has_country_flag = A33_telgir_esmaria
+						}
+					}
+					capital_scope = {
+						region = esmaria_region
+						not = { area = ashfields_area }
+						not = { owned_by = A62 }
+					}
+				}
+			}
+			A73 = {
+				inherit = prev
+			}
+		}
+		A73 = {
+			change_tag = Z46
+		}
+	}
+	option = {
+		name = verne_flavor_ace.57.c
+		add_imperial_influence = 10
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = A93
+		}
+		every_country = {
+			limit = {
+				or = {
+					and = {
+						tag = A62
+						root = {
+							has_country_flag = A33_telgir_esmaria
+						}
+					}
+					capital_scope = {
+						region = esmaria_region
+						not = { area = ashfields_area }
+						not = { owned_by = A62 }
+					}
+				}
+			}
+			A93 = {
+				inherit = prev
+			}
+		}
+		A93 = {
+			change_tag = Z46
+		}
+	}
+	option = {
+		name = verne_flavor_ace.57.d1
+		mission_reward_artifice_points_2 = yes
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = A81
+		}
+		every_country = {
+			limit = {
+				or = {
+					and = {
+						tag = A62
+						root = {
+							has_country_flag = A33_telgir_esmaria
+						}
+					}
+					capital_scope = {
+						region = esmaria_region
+						not = { area = ashfields_area }
+						not = { owned_by = A62 }
+					}
+				}
+			}
+			A81 = {
+				inherit = prev
+			}
+		}
+		A81 = {
+			change_tag = Z46
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.58
+	title = verne_flavor_ace.58.t
+	desc = verne_flavor_ace.58.d
+	picture = NUSANTARA_THRONE_eventPicture
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			random_country = {
+				limit = {  
+					culture_group = halfling
+					is_part_of_hre = yes
+					has_opinion = {
+						who = root
+						value = 150
+					}
+					trust = {
+						who = root
+						value = 70
+					}
+					not = { tag = A12 }
+				}
+				save_event_target_as = A33_halfling_prince
+			}
+		}
+	}
+
+	option = {
+		name = verne_flavor_ace.58.a 
+		trigger = { A12 = { exists = yes } }
+		add_mercantilism_or_monarch_power = { amount = 5 }
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = A12
+		}
+		every_country = {
+			limit = {
+				culture_group = halfling
+				is_part_of_hre = yes
+			}
+			A12 = {
+				inherit = prev
+				override_country_name = AA7
+			}
+		}
+	}
+	option = {
+		name = verne_flavor_ace.58.b
+		add_imperial_influence = 5
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = event_target:A33_halfling_prince
+		}
+		every_country = {
+			limit = {
+				culture_group = halfling
+				is_part_of_hre = yes
+			}
+			event_target:A33_halfling_prince = {
+				inherit = prev
+				override_country_name = AA7
+			}
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.59
+	title = verne_flavor_ace.59.t
+	desc = verne_flavor_ace.59.d
+	picture = DIPLOMACY_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.59.a 
+		set_country_flag = A33_silver_in_elfrealm
+		country_event_with_option_insight = {
+			id = verne_flavor_ace.60
+			option_1 = " custom_tooltip = A33_empire_elfrealm_2_1_tt " 
+			option_2 = " custom_tooltip = A33_empire_elfrealm_2_2_tt " 
+			option_3 = " custom_tooltip = A33_empire_elfrealm_2_3_tt " 
+		}
+	}
+	option = {
+		name = verne_flavor_ace.59.b
+		country_event_with_option_insight = {
+			id = verne_flavor_ace.60
+			option_1 = " custom_tooltip = A33_empire_elfrealm_2_4_tt " 
+			option_2 = " custom_tooltip = A33_empire_elfrealm_2_5_tt " 
+			option_3 = " custom_tooltip = A33_empire_elfrealm_2_6_tt " 
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.60
+	title = verne_flavor_ace.60.t
+	desc = verne_flavor_ace.60.d
+	picture = NUSANTARA_THRONE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = verne_flavor_ace.60.a
+		add_adm_power = 50
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = A32
+		}
+		A32 = {
+			inherit = A46
+			inherit = A83
+			override_country_name = AA8
+			change_religion = ROOT
+		}
+		if = {
+			limit = { has_country_flag = A33_silver_in_elfrealm }
+			56 = { cede_province = A32 }
+			55 = { cede_province = A32 }
+			54 = { cede_province = A32 }
+			53 = { cede_province = A32 }
+			52 = { cede_province = A32 }
+		}
+	}
+	option = {
+		name = verne_flavor_ace.60.b
+		add_mil_power = 50
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = A46
+		}
+		A46 = {
+			inherit = A32
+			inherit = A83
+			override_country_name = AA8
+		}
+		if = {
+			limit = { has_country_flag = A33_silver_in_elfrealm }
+			56 = { cede_province = A46 }
+			55 = { cede_province = A46 }
+			54 = { cede_province = A46 }
+			53 = { cede_province = A46 }
+			52 = { cede_province = A46 }
+		}
+	}
+	option = {
+		name = verne_flavor_ace.60.c
+		add_dip_power = 50
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = A83
+		}
+		A83 = {
+			inherit = A32
+			inherit = A46
+			override_country_name = AA8
+		}
+		if = {
+			limit = { has_country_flag = A33_silver_in_elfrealm }
+			56 = { cede_province = A83 }
+			55 = { cede_province = A83 }
+			54 = { cede_province = A83 }
+			53 = { cede_province = A83 }
+			52 = { cede_province = A83 }
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.61
+	title = verne_flavor_ace.61.t
+	desc = verne_flavor_ace.61.d
+	picture = NUSANTARA_THRONE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.61.a 
+		add_yearly_manpower = 1
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = A04
+		}
+		custom_tooltip = A33_wesdam_west_dameria_tt
+		hidden_effect = {
+			A11 = {
+				elector = no
+			}
+			every_country = {
+				limit = {
+					or = {
+						primary_culture = west_damerian
+						primary_culture = pearlsedger
+					}
+					is_part_of_hre = yes
+				}
+				A04 = {
+					inherit = prev
+					override_country_name = AA9
+				}
+			}
+		}
+		A04 = {
+			elector = yes
+		}
+	}
+	option = {
+		name = verne_flavor_ace.61.b
+		add_imperial_influence = 5
+		remove_historical_rival = A11
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = A11
+		}
+		custom_tooltip = A33_pearlsedge_west_dameria_tt
+		hidden_effect = {
+			every_country = {
+				limit = {
+					or = {
+						primary_culture = west_damerian
+						primary_culture = pearlsedger
+						tag = A04
+					}
+					is_part_of_hre = yes
+				}
+				A11 = {
+					inherit = prev
+					override_country_name = AA9
+					remove_historical_rival = ROOT
+				}
+			}
+			
+		}
+		tooltip = {
+			A11 = {
+				remove_historical_rival = ROOT
+			}
+		}
+	}
+	option = {
+		name = verne_flavor_ace.61.c
+		add_navy_tradition = 20
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = A22
+		}
+		custom_tooltip = A33_neckcliffe_west_dameria_tt
+		hidden_effect = {
+			A11 = {
+				elector = no
+			}
+			every_country = {
+				limit = {
+					or = {
+						primary_culture = west_damerian
+						primary_culture = pearlsedger
+						tag = A04
+					}
+					is_part_of_hre = yes
+				}
+				A22 = {
+					inherit = prev
+					override_country_name = AA9
+				}
+			}
+		}
+		A22 = {
+			elector = yes
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.62
+	title = verne_flavor_ace.62.t
+	desc = verne_flavor_ace.62.d
+	picture = NUSANTARA_THRONE_eventPicture
+	immediate = {
+		hidden_effect = {
+			random_country = {
+				limit = {
+					capital_scope = {
+						region = lencenor_region
+					}
+					has_opinion = {
+						who = root
+						value = 150
+					}
+					is_part_of_hre = yes
+				}
+				save_event_target_as = A33_lencenor_prince
+			}
+		}
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.62.a 
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = event_target:A33_lencenor_prince
+		}
+		every_country = {
+			limit = {
+				capital_scope = {
+					region = lencenor_region
+				}
+				has_opinion = {
+					who = root
+					value = 150
+				}
+				is_part_of_hre = yes
+			}
+			event_target:A33_lencenor_prince = {
+				inherit = prev
+				override_country_name = AB1
+			} 
+		}
+		add_power_projection = {
+			type = 10_permanent_power_projection
+			amount = 10
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.63
+	title = verne_flavor_ace.63.t
+	desc = verne_flavor_ace.63.d
+	picture = NEGOTIATIONS_LUBLIN_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.63.a 
+		set_country_flag = A33_telgir_gawed
+		country_event = {
+			id = verne_flavor_ace.64
+		}
+
+	}
+	option = {
+		name = verne_flavor_ace.63.b
+		country_event = {
+			id = verne_flavor_ace.64
+		}
+
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.64
+	title = verne_flavor_ace.64.t
+	desc = verne_flavor_ace.64.d
+	picture = HISPANIC_MONARCHY_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.64.a 
+		set_country_flag = A33_vertesk_gawed
+		country_event = {
+			id = verne_flavor_ace.65
+		}
+
+	}
+	option = {
+		name = verne_flavor_ace.64.b
+		country_event = {
+			id = verne_flavor_ace.65
+		}
+
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.65
+	title = verne_flavor_ace.65.t
+	desc = verne_flavor_ace.65.d
+	picture = NUSANTARA_THRONE_eventPicture
+	
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			random_country = {
+				limit = {
+					capital_scope = {
+						region = alenic_reach_region
+					}
+					has_opinion = {
+						who = root
+						value = 150
+					}
+					is_part_of_hre = yes
+				}
+				save_event_target_as = A33_lencenor_prince
+			}
+		}
+	}
+
+	option = {
+		name = verne_flavor_ace.65.a 
+		trigger = {
+			has_country_flag = A33_vertesk_gawed
+		}
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = A23
+		}
+		every_country = {
+			limit = {
+				capital_scope = {
+					region = alenic_reach_region
+				}
+				has_opinion = {
+					who = root
+					value = 150
+				}
+				is_part_of_hre = yes
+			}
+			A23 = {
+				inherit = prev
+				override_country_name = AB2
+			} 
+		}
+		if = {
+			limit = { has_country_flag = A33_telgir_gawed }
+			A23 = {
+				inherit = A62
+			}
+		}
+	}
+	option = {
+		name = verne_flavor_ace.65.b
+		trigger = {
+			has_country_flag = A33_telgir_gawed
+		}
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = A62
+		}
+		every_country = {
+			limit = {
+				capital_scope = {
+					region = alenic_reach_region
+				}
+				has_opinion = {
+					who = root
+					value = 150
+				}
+				is_part_of_hre = yes
+			}
+			A62 = {
+				inherit = prev
+				override_country_name = AB2
+			} 
+		}
+		if = {
+			limit = { has_country_flag = A33_vertesk_gawed }
+			A62 = {
+				inherit = A23
+			}
+		}
+	}
+	option = {
+		name = verne_flavor_ace.65.c
+		create_subject = {
+			subject_type = A33_grand_duchy
+			subject = event_target:A33_lencenor_prince
+		}
+		every_country = {
+			limit = {
+				capital_scope = {
+					region = alenic_reach_region
+				}
+				has_opinion = {
+					who = root
+					value = 150
+				}
+				is_part_of_hre = yes
+			}
+			event_target:A33_lencenor_prince = {
+				inherit = prev
+				override_country_name = AB2
+			} 
+		}
+		if = {
+			limit = { has_country_flag = A33_telgir_gawed }
+			event_target:A33_lencenor_prince = {
+				inherit = A62
+			}
+		}
+		if = {
+			limit = { has_country_flag = A33_vertesk_gawed }
+			event_target:A33_lencenor_prince = {
+				inherit = A23
+			}
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.66
+	title = verne_flavor_ace.66.t
+	desc = verne_flavor_ace.66.d
+	picture = muslimgfx_DEBATE_REPUBLICAN_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.66.a 
+		unlock_estate_privilege = {
+			estate_privilege = verne_high_priest_governor
+		}
+	}
+	option = {
+		name = verne_flavor_ace.66.b
+		set_emperor_of_china = ROOT
+		if = {
+			limit = { tag = L28 }
+			add_government_reform = koroshesh_league_reform
+		}
+		dismantle_empire_of_china = no
+		hidden_effect = { save_global_event_target_as = EmperorOfChina clr_global_flag = empire_of_china_dismantled }
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.67
+	title = verne_flavor_ace.67.t
+	desc = verne_flavor_ace.67.d
+	picture = LAND_MILITARY_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.67.a 
+		
+	}
+	option = {
+		name = verne_flavor_ace.67.b
+		
+	}
+}
+
+
+
+
+
+
+
+
+
+#####disaster
+#start
+country_event = {
+	id = verne_flavor_ace.68
+	title = verne_flavor_ace.68.t
+	desc = verne_flavor_ace.68.d
+	picture = indiangfx_CIVIL_WAR_eventPicture
+	immediate = { set_country_flag = A33_disaster_start }
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.68.a 
+		reduce_stability_or_adm_power = yes
+		reduce_stability_or_adm_power = yes
+		hidden_effect = {
+			A33_chose_old_money = yes
+		}
+		random_subject_country = {
+			limit = {
+				capital_scope = {
+					continent = north_america
+				}
+			}
+			capital_scope = {
+				spawn_rebels = {
+					type = independence_rebels
+					size = 30
+				}
+			}
+			random_owned_province = {
+				spawn_rebels = {
+					type = noble_rebels
+					size = 10
+				}
+			}
+			random_owned_province = {
+				spawn_rebels = {
+					type = independence_rebels
+					size = 20
+				}
+			}
+			random_owned_province = {
+				spawn_rebels = {
+					type = anti_tax_rebels
+					size = 20
+				}
+			}
+		}
+		random_subject_country = {
+			limit = {
+				capital_scope = {
+					continent = south_america
+				}
+			}
+			capital_scope = {
+				spawn_rebels = {
+					type = independence_rebels
+					size = 30
+				}
+			}
+			random_owned_province = {
+				spawn_rebels = {
+					type = noble_rebels
+					size = 10
+				}
+			}
+			random_owned_province = {
+				spawn_rebels = {
+					type = independence_rebels
+					size = 20
+				}
+			}
+			random_owned_province = {
+				spawn_rebels = {
+					type = anti_tax_rebels
+					size = 20
+				}
+			}
+		}
+	}
+	option = {
+		name = verne_flavor_ace.68.b
+		reduce_stability_or_adm_power = yes
+		reduce_stability_or_adm_power = yes
+		hidden_effect = {
+			A33_chose_new_money = yes
+		}
+		capital_scope = {
+			spawn_rebels = {
+				type = noble_rebels
+				size = 50
+			}
+		}
+		random_province = {
+			limit = { continent = europe }
+			spawn_rebels = {
+				type = noble_rebels
+				size = 30
+			}
+		}
+		random_province = {
+			spawn_rebels = {
+				type = anti_tax_rebels
+				size = 25
+			}
+		}random_province = {
+			spawn_rebels = {
+				type = anti_tax_rebels
+				size = 25
+			}
+		}
+		random_province = {
+			limit = { continent = europe }
+			spawn_rebels = {
+				type = anti_tax_rebels
+				size = 30
+			}
+		}
+		random_province = {
+			limit = { continent = europe }
+			spawn_rebels = {
+				type = noble_rebels
+				size = 30
+			}
+		}
+		random_province = {
+			limit = { continent = europe }
+			spawn_rebels = {
+				type = noble_rebels
+				size = 30
+			}
+		}
+	}
+}
+
+
+
+
+
+#end
+country_event = {
+	id = verne_flavor_ace.69
+	title = verne_flavor_ace.69.t
+	desc = verne_flavor_ace.69.d
+	picture = {
+		trigger = { has_country_flag = A33_sided_new_money_won }
+		picture = BYZ_REVOLUTION_eventPicture
+	}
+	picture = {
+		trigger = { has_country_flag = A33_sided_old_money_won }
+		picture = FAILED_REVOLUTION_eventPicture
+	}
+	picture = {
+		trigger = { 
+			NOT = { has_country_flag = A33_sided_old_money_won }
+			NOT = { has_country_flag = A33_sided_new_money_won } 
+		}
+		picture = BYZ_CIVIL_WAR_eventPicture
+	}
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.69.a 
+		trigger = {
+			has_country_flag = A33_sided_new_money_won
+		}
+		set_country_flag = A33_finished_disaster
+	}
+	option = {
+		name = verne_flavor_ace.69.b
+		trigger = {
+			has_country_flag = A33_sided_old_money_won
+		}
+		set_country_flag = A33_finished_disaster
+	}
+	option = {
+		name = verne_flavor_ace.69.c
+		trigger = {
+			NOT = { has_country_flag = A33_sided_old_money_won }
+			NOT = { has_country_flag = A33_sided_new_money_won }
+		}
+		set_country_flag = A33_finished_disaster
+	}
+}
+
+
+country_event = {
+	id = verne_flavor_ace.70
+	title = verne_flavor_ace.70.t
+	desc = verne_flavor_ace.70.d
+	picture = LAND_MILITARY_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		any_province = { has_province_modifier = new_money_hideout }
+	}
+
+	option = {
+		name = verne_flavor_ace.70.a 
+		random_province = {
+			limit = {
+				has_province_modifier = new_money_hideout
+			}
+			spawn_rebels = {
+				type = noble_rebels
+				size = 30
+			}
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.71
+	title = verne_flavor_ace.71.t
+	desc = verne_flavor_ace.71.d
+	picture = REVOLUTION_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		any_province = { has_province_modifier = old_money_hideout }
+	}
+
+	option = {
+		name = verne_flavor_ace.70.a 
+		random_province = {
+			limit = {
+				has_province_modifier = old_money_hideout
+			}
+			spawn_rebels = {
+				type = revolutionary_rebels
+				size = 30
+			}
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.72
+	title = verne_flavor_ace.72.t
+	desc = verne_flavor_ace.72.d
+	picture = ROYAL_STRESS_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.72.a 
+		add_yearly_manpower = -0.3
+	}
+
+}
+
+country_event = {
+	id = verne_flavor_ace.73
+	title = verne_flavor_ace.73.t
+	desc = verne_flavor_ace.73.d
+	picture = PARLIAMENT_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.73.a 
+		add_imperial_influence = -10
+		add_dip_power = -50
+	}
+
+}
+
+country_event = {
+	id = verne_flavor_ace.74
+	title = verne_flavor_ace.74.t
+	desc = verne_flavor_ace.74.d
+	picture = HRE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.74.a 
+		add_years_of_income = 0.1
+		add_imperial_influence = -2
+	}
+	option = {
+		name = verne_flavor_ace.74.b
+		add_yearly_manpower = 0.2
+		add_imperial_influence = -2
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.75
+	title = verne_flavor_ace.75.t
+	desc = verne_flavor_ace.75.d
+	picture = LAND_MILITARY_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.75.a 
+		add_yearly_manpower = 0.2
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.76
+	title = verne_flavor_ace.76.t
+	desc = verne_flavor_ace.76.d
+	picture = SCOTTISH_MERCENARIES_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.76.a 
+		random_owned_province = {
+			spawn_rebels = {
+				type = anti_tax_rebels
+				size = 30
+			}
+		}
+	}
+	option = {
+		name = verne_flavor_ace.76.b
+		add_years_of_income = -0.15
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.77
+	title = verne_flavor_ace.77.t
+	desc = verne_flavor_ace.77.d
+	picture = ACCUSATION_eventPicture
+	trigger = {
+		has_reform = A33_nobles_adventurers_gov
+	}
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.77.a 
+		if = {
+			limit = { has_government_mechanic = A33_adven_vs_nobl_mechanic_1 }
+			add_government_power = {
+				mechanic_type = A33_adven_vs_nobl_mechanic_1
+				power_type = A33_gov_power
+				value = -20
+			}
+		}
+		else = {
+			add_government_power = {
+				mechanic_type = A33_adven_vs_nobl_mechanic
+				power_type = A33_gov_power
+				value = -20
+			}
+		}
+		remove_advisor = random
+	}
+	option = {
+		name = verne_flavor_ace.77.b
+		if = {
+			limit = { has_government_mechanic = A33_adven_vs_nobl_mechanic_1 }
+			add_government_power = {
+				mechanic_type = A33_adven_vs_nobl_mechanic_1
+				power_type = A33_gov_power
+				value = 20
+			}
+		}
+		else = {
+			add_government_power = {
+				mechanic_type = A33_adven_vs_nobl_mechanic
+				power_type = A33_gov_power
+				value = 20
+			}
+		}
+		add_corruption = 0.2
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.78
+	title = verne_flavor_ace.78.t
+	desc = verne_flavor_ace.78.d
+	picture = PROTESTANT_CATHOLIC_DEBATE_eventPicture
+
+	trigger = {
+		has_reform = A33_nobles_adventurers_gov
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.78.a 
+		if = {
+			limit = { has_government_mechanic = A33_adven_vs_nobl_mechanic_1 }
+			add_government_power = {
+				mechanic_type = A33_adven_vs_nobl_mechanic_1
+				power_type = A33_gov_power
+				value = -20
+			}
+		}
+		else = {
+			add_government_power = {
+				mechanic_type = A33_adven_vs_nobl_mechanic
+				power_type = A33_gov_power
+				value = -20
+			}
+		}
+		generate_scaled_advisor_of_type_and_religion_effect = {
+			type = diplomat
+			religion = root
+			discount = yes
+		}
+	}
+	option = {
+		name = verne_flavor_ace.78.b
+		if = {
+			limit = { has_government_mechanic = A33_adven_vs_nobl_mechanic_1 }
+			add_government_power = {
+				mechanic_type = A33_adven_vs_nobl_mechanic_1
+				power_type = A33_gov_power
+				value = 20
+			}
+		}
+		else = {
+			add_government_power = {
+				mechanic_type = A33_adven_vs_nobl_mechanic
+				power_type = A33_gov_power
+				value = 20
+			}
+		}
+		add_adm_power = 15
+		add_dip_power = 15
+		add_mil_power = 15
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.79
+	title = verne_flavor_ace.79.t
+	desc = verne_flavor_ace.79.d
+	picture = KING_SICK_IN_BED_eventPicture
+	trigger = {
+		has_reform = A33_nobles_adventurers_gov
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.79.a 
+		if = {
+			limit = { has_government_mechanic = A33_adven_vs_nobl_mechanic_1 }
+			add_government_power = {
+				mechanic_type = A33_adven_vs_nobl_mechanic_1
+				power_type = A33_gov_power
+				value = -20
+			}
+		}
+		else = {
+			add_government_power = {
+				mechanic_type = A33_adven_vs_nobl_mechanic
+				power_type = A33_gov_power
+				value = -20
+			}
+		}
+	}
+	option = {
+		name = verne_flavor_ace.79.b
+		change_estate_land_share = {
+			estate = all
+			share = -2.5
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.80
+	title = verne_flavor_ace.80.t
+	desc = verne_flavor_ace.80.d
+	picture = NOBLE_ESTATE_DEMANDS_eventPicture
+	trigger = {
+		has_reform = A33_nobles_adventurers_gov
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.80.a 
+		if = {
+			limit = { has_government_mechanic = A33_adven_vs_nobl_mechanic_1 }
+			add_government_power = {
+				mechanic_type = A33_adven_vs_nobl_mechanic_1
+				power_type = A33_gov_power
+				value = 20
+			}
+		}
+		else = {
+			add_government_power = {
+				mechanic_type = A33_adven_vs_nobl_mechanic
+				power_type = A33_gov_power
+				value = 20
+			}
+		}
+	}
+	option = {
+		name = verne_flavor_ace.80.b
+		add_adm_power = 15
+		add_dip_power = 15
+		add_mil_power = 15
+	}
+}
+
+
+country_event = {
+	id = verne_flavor_ace.200
+	title = verne_flavor_ace.200.t
+	desc = verne_flavor_ace.200.d
+	picture = DIPLOMACY_eventPicture
+	hidden = yes
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.200.a 
+		2682 = {
+			remove_province_modifier = A33_expo_stab
+		}
+	}
+	
+}
+
+country_event = {
+	id = verne_flavor_ace.100
+	title = verne.13.t
+	desc = verne.13.d
+	picture = EXPLORERS_eventPicture
+	
+	trigger = {
+		any_owned_province = {
+			or = {
+				has_province_modifier = A33_starter_sanctuary
+				has_province_modifier = A33_better_sanctuary
+			}
+		}
+		has_country_flag = lvl1_wyvren_aces
+	}
+		
+	mean_time_to_happen = {
+		months = 960
+	}
+	
+	option = {
+		name = verne.13.a
+		if = {
+			limit = {
+				army_tradition = 0.00
+				NOT = { army_tradition = 20 }
+			}
+			random_list = {
+				50 = {
+					define_conquistador = {
+						fire = 2
+						shock = 6
+						manuever = 3
+						siege = 2
+						trait = wyvern_rider_personality
+					}
+				}
+				50 = {
+					define_conquistador = {
+						fire = 2
+						shock = 6
+						manuever = 3
+						siege = 2
+						trait = wyvern_rider_personality
+						female = yes
+					}
+				}
+			}
+		}
+		
+		if = {
+			limit = {
+				army_tradition = 20
+				NOT = { army_tradition = 40 }
+			}
+			random_list = {
+				50 = {
+					define_conquistador = {
+						fire = 3
+						shock = 7
+						manuever = 4
+						siege = 3
+						trait = wyvern_rider_personality
+					}
+				}
+				50 = {
+					define_conquistador = {
+						fire = 3
+						shock = 7
+						manuever = 4
+						siege = 3
+						trait = wyvern_rider_personality
+						female = yes
+					}
+				}
+			}
+		}
+		
+		if = {
+			limit = {
+				army_tradition = 40
+				NOT = { army_tradition = 60 }
+			}
+			random_list = {
+				50 = {
+					define_conquistador = {
+						fire = 4
+						shock = 8
+						manuever = 6
+						siege = 4
+						trait = wyvern_rider_personality
+						name = root_name_male
+					}
+				}
+				50 = {
+					define_conquistador = {
+						fire = 4
+						shock = 8
+						manuever = 6
+						siege = 4
+						trait = wyvern_rider_personality
+						female = yes
+					}
+				}
+			}
+		}
+		
+		if = {
+			limit = {
+				army_tradition = 60
+				NOT = { army_tradition = 80 }
+			}
+			random_list = {
+				50 = {
+					define_conquistador = {
+						fire = 5
+						shock = 9
+						manuever = 6
+						siege = 5
+						trait = wyvern_rider_personality
+					}
+				}
+				50 = {
+					define_conquistador = {
+						fire = 5
+						shock = 9
+						manuever = 6
+						siege = 5
+						trait = wyvern_rider_personality
+						female = yes
+					}
+				}
+			}
+		}
+		
+		if = {
+			limit = {
+				army_tradition = 80
+			}
+			random_list = {
+				50 = {
+					define_conquistador = {
+						fire = 6
+						shock = 10
+						manuever = 6
+						siege = 6
+						trait = wyvern_rider_personality
+						name = root_name_male
+					}
+				}
+				50 = {
+					define_conquistador = {
+						fire = 6
+						shock = 10
+						manuever = 6
+						siege = 6
+						trait = wyvern_rider_personality
+						female = yes
+					}
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = verne.13.b
+		ai_chance = { factor = 0 }
+		random_list = {
+			50 = {
+				define_advisor = {
+				type = army_reformer
+				skill = 3
+				cost_multiplier = 0.25
+				culture = vernman	
+				name = root_name_male
+				}
+			}
+			50 = {
+				define_advisor = {
+				type = army_reformer
+				skill = 3
+				cost_multiplier = 0.25
+				culture = vernman	
+				female = yes
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.101
+	title = verne.13.t
+	desc = verne.13.d
+	picture = EXPLORERS_eventPicture
+	
+	trigger = {
+		any_owned_province = {
+			or = {
+				has_province_modifier = A33_starter_sanctuary
+				has_province_modifier = A33_better_sanctuary
+			}
+		}
+		has_country_flag = lvl2_wyvren_aces
+	}
+		
+	mean_time_to_happen = {
+		months = 780
+	}
+	
+	option = {
+		name = verne.13.a
+		if = {
+			limit = {
+				army_tradition = 0.00
+				NOT = { army_tradition = 20 }
+			}
+			random_list = {
+				50 = {
+					define_conquistador = {
+						fire = 2
+						shock = 7
+						manuever = 3
+						siege = 2
+						trait = wyvern_rider_personality
+					}
+				}
+				50 = {
+					define_conquistador = {
+						fire = 2
+						shock = 7
+						manuever = 3
+						siege = 2
+						trait = wyvern_rider_personality
+						female = yes
+					}
+				}
+			}
+		}
+		
+		if = {
+			limit = {
+				army_tradition = 20
+				NOT = { army_tradition = 40 }
+			}
+			random_list = {
+				50 = {
+					define_conquistador = {
+						fire = 3
+						shock = 8
+						manuever = 4
+						siege = 3
+						trait = wyvern_rider_personality
+					}
+				}
+				50 = {
+					define_conquistador = {
+						fire = 3
+						shock = 8
+						manuever = 4
+						siege = 3
+						trait = wyvern_rider_personality
+						female = yes
+					}
+				}
+			}
+		}
+		
+		if = {
+			limit = {
+				army_tradition = 40
+				NOT = { army_tradition = 60 }
+			}
+			random_list = {
+				50 = {
+					define_conquistador = {
+						fire = 4
+						shock = 9
+						manuever = 6
+						siege = 4
+						trait = wyvern_rider_personality
+					}
+				}
+				50 = {
+					define_conquistador = {
+						fire = 4
+						shock = 9
+						manuever = 6
+						siege = 4
+						trait = wyvern_rider_personality
+						female = yes
+					}
+				}
+			}
+		}
+		
+		if = {
+			limit = {
+				army_tradition = 60
+				NOT = { army_tradition = 80 }
+			}
+			random_list = {
+				50 = {
+					define_conquistador = {
+						fire = 5
+						shock = 10
+						manuever = 6
+						siege = 5
+						trait = wyvern_rider_personality
+					}
+				}
+				50 = {
+					define_conquistador = {
+						fire = 5
+						shock = 10
+						manuever = 6
+						siege = 5
+						trait = wyvern_rider_personality
+						female = yes
+					}
+				}
+			}
+		}
+		
+		if = {
+			limit = {
+				army_tradition = 80
+			}
+			random_list = {
+				50 = {
+					define_conquistador = {
+						fire = 6
+						shock = 11
+						manuever = 6
+						siege = 6
+						trait = wyvern_rider_personality
+					}
+				}
+				50 = {
+					define_conquistador = {
+						fire = 6
+						shock = 11
+						manuever = 6
+						siege = 6
+						trait = wyvern_rider_personality
+						female = yes
+						female = yes
+					}
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = verne.13.b
+		ai_chance = { factor = 0 }
+		random_list = {
+			50 = {
+				define_advisor = {
+				type = army_reformer
+				skill = 5
+				cost_multiplier = 0.15
+				culture = vernman	
+				}
+			}
+			50 = {
+				define_advisor = {
+				type = army_reformer
+				skill = 5
+				cost_multiplier = 0.15
+				culture = vernman	
+				female = yes
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = verne_flavor_ace.112
+	title = verne_flavor_ace.112.t
+	desc = verne_flavor_ace.112.desc
+	picture = DIPLOMACY_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = verne_flavor_ace.112.a 
+		add_years_of_income = -0.1
+		add_navy_tradition = 10
+		add_country_modifier = {
+			name = A33_regatta_standard
+			duration = 5475
+		}
+		add_country_modifier = {
+			name = A33_regatta_off
+			duration = 5475
+		}
+		clr_country_flag = A33_in_regatta_menu
+	}
+	option = {
+		name = verne_flavor_ace.112.b
+		trigger = { has_country_flag = A33_regatta_starter_flg_1 }
+		add_years_of_income = -0.4
+		add_navy_tradition = 15
+		add_country_modifier = {
+			name = A33_regatta_fangaula
+			duration = 3650
+		}
+		add_country_modifier = {
+			name = A33_regatta_off
+			duration = 5475
+		}
+		clr_country_flag = A33_in_regatta_menu
+	}
+	option = {
+		name = verne_flavor_ace.112.c
+		trigger = { has_country_flag = A33_regatta_starter_flg_2 }
+		add_years_of_income = -0.6
+		add_mercantilism_or_monarch_power = { amount = 3 }
+		add_country_modifier = {
+			name = A33_regatta_cloves
+			duration = 3650
+		}
+		add_country_modifier = {
+			name = A33_regatta_off
+			duration = 5475
+		}
+		clr_country_flag = A33_in_regatta_menu
+	}
+	option = {
+		name = verne_flavor_ace.112.d
+		trigger = { has_country_flag = A33_regatta_starter_flg_3 }
+		add_years_of_income = -0.6
+		add_navy_tradition = 10
+		add_country_modifier = {
+			name = A33_regatta_armdiya
+			duration = 3650
+		}
+		add_country_modifier = {
+			name = A33_regatta_off
+			duration = 5475
+		}
+		clr_country_flag = A33_in_regatta_menu
+	}
+	option = {
+		name = verne_flavor_ace.112.e
+		trigger = { has_country_flag = A33_regatta_starter_flg_4 }
+		add_years_of_income = -0.75
+		add_mercantilism_or_monarch_power = { amount = 4 }
+		add_country_modifier = {
+			name = A33_regatta_halless
+			duration = 3650
+		}
+		add_country_modifier = {
+			name = A33_regatta_off
+			duration = 5475
+		}
+		clr_country_flag = A33_in_regatta_menu
+	}
+	option = {
+		name = verne_flavor_ace.112.f
+		trigger = { has_country_flag = A33_regatta_starter_flg_5 }
+		add_years_of_income = -1.2
+		add_navy_tradition = 10
+		add_mercantilism_or_monarch_power = { amount = 2 }
+		add_country_modifier = {
+			name = A33_regatta_world
+			duration = 3650
+		}
+		add_country_modifier = {
+			name = A33_regatta_off
+			duration = 7300
+		}
+		clr_country_flag = A33_in_regatta_menu
+	}
+	option = {
+		name = verne_flavor_ace.112.f2
+		trigger = { has_country_flag = A33_regatta_starter_flg_6 }
+		add_years_of_income = -1
+		add_navy_tradition = 15
+		add_sailors = -1000
+		add_country_modifier = {
+			name = A33_regatta_world
+			duration = 3650
+		}
+		add_country_modifier = {
+			name = A33_regatta_off
+			duration = 7300
+		}
+		clr_country_flag = A33_in_regatta_menu
+	}
+	option = {
+		name = verne_flavor_ace.112.g
+		clr_country_flag = A33_in_regatta_menu
+	}
+}

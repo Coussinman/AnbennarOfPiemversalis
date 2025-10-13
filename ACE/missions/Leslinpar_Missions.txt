@@ -1,0 +1,1737 @@
+#Made by Slick
+A92_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = A92
+			tag = AD1
+		}
+	}
+	A92_heal_the_wounds = {
+		icon = mission_early_game_buildings
+		position = 1
+		provinces_to_highlight = {
+			owned_by = ROOT
+			devastation = 1
+		}
+		trigger = {
+			all_owned_province = {
+				NOT = {
+					devastation = 1
+				}
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = A92_restoration_efforts
+				duration = 3650
+			}
+		}
+	}
+	A92_the_forestry_guild = {
+		icon = mission_expand_into_the_forest
+		position = 2
+		required_missions = {
+			A92_heal_the_wounds
+		}
+		provinces_to_highlight = {
+			has_terrain = woods
+			owned_by = ROOT
+			NOT = {
+				has_production_building_trigger = yes
+			}
+		}
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = A92_the_forestry_guild_tooltip2
+				all_owned_province = {
+					OR = {
+						NOT = {
+							has_terrain = woods
+						}
+						has_production_building_trigger = yes
+					}
+				}
+			}
+		}
+		effect = {
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						has_terrain = woods
+					}
+					add_province_modifier = {
+						name = A92_leslinpar_forestry
+						duration = -1
+						hidden = yes
+					}
+				}
+				set_country_flag = leslinpar_woods_expansion
+			}
+			custom_tooltip = A92_leslinpar_forestry_tooltip
+			tooltip = {
+				add_province_modifier = {
+					name = A92_leslinpar_forestry
+					duration = -1
+				}
+			}
+		}
+	}
+	A92_gardens_leslinpar = {
+		icon = mission_southern_frontier_lotn
+		position = 3
+		required_missions = {
+			A92_the_forestry_guild
+		}
+		provinces_to_highlight = {
+			province_id = 901
+		}
+		trigger = {
+			901 = {
+				development = 30
+				has_courthouse_building_trigger = yes
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = A92_gardens_leslinpar
+				duration = -1
+			}
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = A92_gardens_leslinpar_tooltip
+				first_limit = "prestige = 50
+				"
+				first_effect = "add_country_modifier = {
+						name = A92_improving_image
+						duration = 9125
+					}
+				"
+			}
+		}
+	}
+	A92_leslinpar_renaissance = {
+		icon = mlo_renaissance_city
+		position = 4
+		required_missions = {
+			A92_gardens_leslinpar
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = high_esmar_area
+				area = hearthswood_area
+			}
+			NOT = {
+				is_prosperous = yes
+				unrest = 1
+			}
+		}
+		trigger = {
+			high_esmar_area = {
+				type = all
+				is_prosperous = yes
+				NOT = {
+					unrest = 1
+				}
+			}
+			hearthswood_area = {
+				type = all
+				is_prosperous = yes
+				NOT = {
+					unrest = 1
+				}
+			}
+			OR = {
+				employed_advisor = {
+					type = artist
+				}
+				employed_advisor = {
+					type = philosopher
+				}
+				employed_advisor = {
+					type = natural_scientist
+				}
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = A92_leslinpar_renaissance
+				duration = -1
+			}
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = A92_leslinpar_renaissance_tooltip
+				first_limit = "NOT = {
+						capital_scope = {
+							any_province = {
+								is_part_of_hre = yes
+								higher_development_than = PREV
+							}
+						}
+					}
+				"
+				first_effect = "capital_scope = {
+						add_building = university
+					}
+				"
+			}
+		}
+	}
+	A92_parian_identity = {
+		icon = mission_conquer_5_states
+		position = 6
+		required_missions = {
+			A92_leslinpar_renaissance
+			A92_helf_administration
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			stability = 1
+			custom_trigger_tooltip = {
+				tooltip = A92_parian_supremacy_tooltip
+				employed_advisor = {
+					category = ADM
+					skill = 3
+				}
+				employed_advisor = {
+					category = DIP
+					skill = 3
+				}
+				employed_advisor = {
+					category = MIL
+					skill = 3
+				}
+			}
+		}
+		effect = {
+			custom_tooltip = flavor_leslinpar.17.tt
+			capital_scope = {
+				change_culture = parian
+			}
+			add_country_modifier = {
+				name = A92_promote_parian_supremacy
+				duration = -1
+			}
+			every_known_country = {
+				limit = {
+					culture = esmari
+				}
+				add_opinion = {
+					who = ROOT
+					modifier = proclaimed_cultural_supremacy
+				}
+			}
+		}
+	}
+	A92_parian_countryside = {
+		icon = mission_rice_field
+		position = 7
+		required_missions = {
+			A92_parian_identity
+		}
+		provinces_to_highlight = {
+			owned_by = ROOT
+			culture = parian
+			NOT = {
+				development = 15
+			}
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				development = 15
+				culture = parian
+			}
+		}
+		effect = {
+			for = {
+				amount = 5
+				custom_tooltip = A92_parian_countryside_tooltip2
+				effect = "random_owned_province = {
+						limit = {
+							region = esmaria_region
+							NOT = {culture = parian}
+						}
+						change_culture = parian
+					}
+				"
+			}
+			custom_tooltip = A92_parian_countryside_tooltip
+			set_country_flag = A92_parian_countryside
+			tooltip = {
+				add_province_modifier = {
+					name = A92_promoting_parian_culture
+					duration = 3650
+				}
+			}
+		}
+	}
+	A92_textile_production = {
+		icon = ned_cloth_trading
+		position = 8
+		required_missions = {
+			A92_parian_countryside
+		}
+		provinces_to_highlight = {
+			owned_by = ROOT
+			trade_goods = cloth
+			NOT = {
+				has_production_building_trigger = yes
+				base_production = 8
+			}
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				trade_goods = cloth
+				has_production_building_trigger = yes
+				base_production = 8
+			}
+		}
+		effect = {
+			change_price = {
+				trade_goods = cloth
+				key = parian_fashion
+				value = 0.2
+				duration = -1
+			}
+			custom_tooltip = A92_textile_production_tooltip2
+			hidden_effect = {
+				for = {
+					amount = 3
+					effect = "random_owned_province = {
+							limit = {
+								region = esmaria_region
+								OR = {
+									trade_goods = livestock
+									trade_goods = grain
+								}
+								NOT = {
+									area = hearthswood_area
+									area = high_esmar_area
+									area = low_esmar_area
+								}
+							}
+							change_trade_goods = cloth
+						}
+					"
+				}
+			}
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = A92_textile_production_tooltip
+				first_limit = "num_of_owned_provinces_with = {
+						value = 10
+						trade_goods = cloth
+						has_production_building_trigger = yes
+						base_production = 8
+					}
+				"
+				first_effect = "
+					change_price = {
+						trade_goods = silk
+						key = parian_fashion
+						value = 0.1
+						duration = -1
+					}
+					A92_cloth = yes
+				"
+			}
+		}
+	}
+	A92_fires_of_industry = {
+		icon = industrialized_rhineland
+		position = 9
+		required_missions = {
+			A92_textile_production
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				has_manufactory_trigger = yes
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = A92_fires_of_industry
+				duration = 9125
+			}
+			custom_tooltip = A92_fires_of_industry_tooltip2
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						has_manufactory_trigger = yes
+					}
+					add_base_production = 1
+				}
+			}
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = A92_fires_of_industry_tooltip
+				first_limit = "911 = {
+						development = 40
+						has_manufactory_no_custom_tooltip_trigger = yes
+					}
+				"
+				first_effect = "911 = {
+						hidden_effect = {
+							remove_building = weapons
+							add_building = furnace
+						}
+						change_trade_goods = coal
+					}
+				"
+			}
+		}
+	}
+}
+
+A92_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = A92
+			tag = AD1
+		}
+	}
+	A92_ale_of_leslinpar = {
+		icon = mission_wine_monopolies
+		position = 2
+		required_missions = {
+			A92_heal_the_wounds
+		}
+		provinces_to_highlight = {
+			province_id = 901
+		}
+		trigger = {
+			901 = {
+				base_production = 10
+				has_production_building_trigger = yes
+			}
+		}
+		effect = {
+			901 = {
+				add_province_modifier = {
+					name = A92_ale
+					duration = -1
+				}
+			}
+			complex_dynamic_effect = {
+				first_custom_tooltip = A92_ale_tooltip
+				first_limit = "treasury = 300
+				"
+				first_effect = "add_treasury = -300
+					901 = {
+						add_building = farm_estate
+					}
+				"
+			}
+		}
+	}
+	A92_perfecting_our_grain = {
+		icon = mission_a_million_rice_fields
+		position = 4
+		required_missions = {
+			A92_ale_of_leslinpar
+			A92_dwarves
+		}
+		provinces_to_highlight = {
+			owned_by = ROOT
+			trade_goods = grain
+		}
+		trigger = {
+			trade_goods_produced_amount = {
+				trade_goods = grain
+				amount = 20
+			}
+			num_of_owned_provinces_with = {
+				value = 3
+				trade_goods = grain
+				has_building = farm_estate
+			}
+			development_in_provinces = {
+				value = 100
+				trade_goods = grain
+			}
+		}
+		effect = {
+			custom_tooltip = A92_leslinpar_grain_tooltip
+			tooltip = {
+				add_province_modifier = {
+					name = A92_leslinpar_grain
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				set_country_flag = leslinpar_grain_expansion
+				every_owned_province = {
+					limit = {
+						trade_goods = grain
+						OR = {
+							area = hearthswood_area
+							area = high_esmar_area
+							area = low_esmar_area
+						}
+						NOT = {
+							province_id = 901
+						}
+					}
+					add_province_modifier = {
+						name = A92_leslinpar_grain
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+	A92_helf_administration = {
+		icon = imperial_ascendancy
+		position = 5
+		required_missions = {
+			A92_leslinpar_renaissance
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			government_reform_progress = 100
+			num_of_owned_provinces_with = {
+				value = 5
+				has_courthouse_building_trigger = yes
+			}
+			num_of_estate_agendas_completed = {
+				estate = estate_nobles
+				value = 3
+			}
+		}
+		effect = {
+			change_government_reform_progress = -100
+			custom_tooltip = A92_helf_administration_tooltip
+			change_primary_culture = parian
+			add_accepted_culture = esmari
+		}
+	}
+	A92_parian_cities = {
+		icon = mission_hanseatic_city
+		position = 7
+		required_missions = {
+			A92_parian_identity
+		}
+		provinces_to_highlight = {
+			culture = parian
+			owned_by = ROOT
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 3
+				development = 40
+				culture = parian
+				num_of_buildings_in_province = 6
+			}
+			num_of_owned_provinces_with = {
+				value = 1
+				province_has_center_of_trade_of_level = 3
+			}
+		}
+		effect = {
+			custom_tooltip = A92_parian_cities_tooltip
+			set_country_flag = A92_parian_cities
+			for = {
+				amount = 3
+				custom_tooltip = A92_parian_cities_tooltip2
+				effect = "random_owned_province = {
+						limit = {
+							development = 40
+							culture = parian
+							NOT = {
+								has_province_modifier = A92_parian_city
+							}
+						}
+						add_province_modifier = {
+							name = A92_parian_city
+							duration = -1
+						}
+					}
+				"
+			}
+			tooltip = {
+				add_province_modifier = {
+					name = A92_parian_city
+					duration = -1
+				}
+			}
+		}
+	}
+	A92_esmarian_trade = {
+		icon = mission_high_income
+		position = 8
+		required_missions = {
+			A92_parian_cities
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				has_trade_building_trigger = yes
+			}
+		}
+		effect = {
+			for = {
+				amount = 5
+				custom_tooltip = A92_esmarian_trade_tooltip
+				effect = "random_owned_province = {
+						limit = {
+							has_trade_building_trigger = yes
+						}
+						upgrade_building = {trade = yes}
+					}
+				"
+			}
+			911 = {
+				center_of_trade = 1
+			}
+			add_country_modifier = {
+				name = A92_esmarian_trade
+				duration = -1
+			}
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = A92_esmarian_trade_tooltip2
+				first_limit = "901 = {
+						trade_share = {
+							country = ROOT
+							share = 65
+						}
+					}
+				"
+				first_effect = "add_years_of_income = 1
+				"
+			}
+		}
+	}
+	A92_parian_nationalism = {
+		position = 10
+		icon = mission_italian_condottiere
+		required_missions = {
+			A92_fires_of_industry
+			A92_esmarian_trade
+		}
+		provinces_to_highlight = {
+			culture = parian
+			owned_by = ROOT
+		}
+		trigger = {
+			development_in_provinces = {
+				value = 500
+				culture = parian
+			}
+			monthly_dip = 12
+			prestige = 50
+		}
+		effect = {
+			add_country_modifier = {
+				name = A92_parian_nationalism
+				duration = -1
+			}
+		}
+	}
+}
+
+A92_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = A92
+			tag = AD1
+		}
+	}
+	A92_unite_esmar = {
+		icon = imperial_capitals
+		position = 2
+		required_missions = {
+			A92_recover_army
+		}
+		provinces_to_highlight = {
+			province_id = 309
+		}
+		trigger = {
+			309 = {
+				owned_by = ROOT
+			}
+		}
+		effect = {
+			add_mil_power = 100
+			add_country_modifier = {
+				name = A92_varaine_knowledge
+				duration = 5475
+			}
+			309 = {
+				add_local_autonomy = -30
+			}
+		}
+	}
+	A92_dwarves = {
+		icon = mission_brazilian_bandeirantes
+		position = 3
+		required_missions = {
+			A92_unite_esmar
+		}
+		provinces_to_highlight = {
+			is_capital_of = A73
+			OR = {
+				province_id = 308
+				province_id = 912
+			}
+		}
+		trigger = {
+			OR = {
+				AND = {
+					308 = {
+						country_or_non_sovereign_subject_holds = root
+					}
+					912 = {
+						country_or_non_sovereign_subject_holds = root
+					}
+				}
+				A73 = {
+					is_rival = root
+					has_spy_network_from = {
+						who = ROOT
+						value = 30
+					}
+				}
+				A73 = {
+					alliance_with = ROOT
+					has_100_opinion_improved_relation = {
+						target = ROOT
+					}
+				}
+			}
+		}
+		effect = {
+			leslinpar_dwarf = yes
+			complex_dynamic_effect = {
+				first_custom_tooltip = A92_dwarves_tooltip4
+				first_limit = "A73 = {
+						is_subject_of = ROOT
+					}
+				"
+				first_effect = "A73 = {
+						add_country_modifier = {
+							name = A92_loyal_dwarf
+							duration = -1
+						}
+					}
+				"
+			}
+		}
+	}
+	A92_fixing_administration = {
+		icon = mission_muslim_administrators
+		position = 4
+		required_missions = {
+			A92_dwarves
+			A92_stabilize_rule
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			employed_advisor = {
+				category = ADM
+			}
+			employed_advisor = {
+				category = DIP
+			}
+			employed_advisor = {
+				category = MIL
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = A92_administration
+				duration = 7300
+			}
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = A92_administration_tooltip
+				first_limit = "stability = 1
+				"
+				first_effect = "add_stability_or_adm_power = yes
+				"
+			}
+		}
+	}
+	A92_sabalian_warfare = {
+		icon = gory_to_the_black_army
+		position = 6
+		required_missions = {
+			A92_rise_leslinpar
+			A92_helf_administration
+		}
+		trigger = {
+			mil_power = 300
+			army_professionalism = 0.5
+			any_known_country = {
+				ROOT = {
+					has_won_war_against = {
+						who = PREV
+						max_years_since = 10
+					}
+				}
+			}
+		}
+		effect = {
+			clear_racial_military = yes
+			hidden_effect = {
+				add_country_modifier = {
+					name = half_elven_military
+					duration = -1
+					hidden = yes
+				}
+			}
+			tooltip = {
+				add_country_modifier = {
+					name = half_elven_military
+					duration = -1
+				}
+			}
+			add_country_modifier = {
+				name = restructuring_military
+				duration = 3650
+			}
+		}
+	}
+	A92_army_state = {
+		icon = army_reforms
+		position = 7
+		required_missions = {
+			A92_sabalian_warfare
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			all_known_country = {
+				capital_scope = {
+					continent = europe
+				}
+				NOT = {
+					land_forcelimit = ROOT
+				}
+			}
+			any_rival_country = {
+				ROOT = {
+					has_won_war_against = {
+						who = PREV
+						max_years_since = 10
+					}
+				}
+			}
+			army_professionalism = 0.7
+		}
+		effect = {
+			custom_tooltip = A92_army_state_tooltip
+			add_country_modifier = {
+				name = A92_parian_strategy
+				duration = -1
+			}
+			add_mil_tech = 1
+		}
+	}
+	A92_coop_dwarves = {
+		icon = mission_iron_and_copper
+		position = 8
+		required_missions = {
+			A92_the_hills
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 270
+				province_id = 263
+			}
+		}
+		trigger = {
+			ROOT = {
+				high_tolerance_dwarven_race_trigger = yes
+			}
+			270 = {
+				base_production = 6
+				has_production_building_trigger = yes
+			}
+			263 = {
+				base_production = 10
+				has_production_building_trigger = yes
+			}
+		}
+		effect = {
+			270 = {
+				change_trade_goods = iron
+				add_dwarven_minority_size_effect = yes
+				add_province_modifier = {
+					name = A92_dwarven_cooperation
+					duration = -1
+				}
+			}
+			263 = {
+				add_dwarven_minority_size_effect = yes
+				add_building = weapons
+				add_province_modifier = {
+					name = A92_dwarven_cooperation
+					duration = -1
+				}
+			}
+			complex_dynamic_effect = {
+				first_custom_tooltip = A92_coop_dwarves
+				first_limit = "A73 = {
+						is_subject_of = ROOT
+					}
+				"
+				first_effect = "custom_tooltip = A92_coop_dwarves2
+					create_subject = {
+						subject_type = march
+						subject = A73
+					}
+					A73 = {
+						add_country_modifier = {
+							name = A92_dwarven_sappers
+							duration = -1
+						}
+					}
+
+				"
+			}
+		}
+	}
+	A92_northern_coast = {
+		icon = mission_market_place_with_asian_traders
+		position = 10
+		required_missions = {
+			A92_a_duchy_reborn
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = heartland_borders_area
+				area = damescrown_area
+				area = derwing_area
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		trigger = {
+			heartland_borders_area = {
+				type = all
+				owned_by = ROOT
+			}
+			damescrown_area = {
+				type = all
+				owned_by = ROOT
+			}
+			derwing_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		effect = {
+			add_adm_power = 100
+			add_mercantilism = 5
+			254 = {
+				add_great_project_tier = {
+					type = calascandar
+					tier = 1
+				}
+			}
+			custom_tooltip = A92_northern_coast_tooltip
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						has_port = yes
+					}
+					add_base_tax = 1
+				}
+			}
+		}
+	}
+	A92_ports = {
+		icon = mission_establish_high_seas_navy
+		position = 11
+		required_missions = {
+			A92_northern_coast
+		}
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_port = yes
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				has_dock_building_trigger = yes
+				has_shipyard_building_trigger = yes
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = A92_new_navy
+				duration = 7300
+			}
+			random_owned_province = {
+				limit = {
+					has_port = yes
+				}
+				add_unit_construction = {
+					type = galley
+					amount = 10
+					speed = 0.5
+					cost = 0
+				}
+			}
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = A92_ports_tooltip
+				first_limit = "all_known_country = {
+						capital_scope = {
+							continent = europe
+						}
+						NOT = {
+							navy_size = root
+						}
+					}
+				"
+				first_effect = "216 = {
+						add_permanent_claim = ROOT
+					}
+					151 = {
+						add_permanent_claim = ROOT
+					}
+					8 = {
+						add_permanent_claim = ROOT
+					}
+					24 = {
+						add_permanent_claim = ROOT
+					}
+					52 = {
+						add_permanent_claim = ROOT
+					}
+					26 = {
+						add_permanent_claim = ROOT
+					}
+				"
+			}
+		}
+	}
+}
+
+A92_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = A92
+			tag = AD1
+		}
+	}
+	A92_recover_army = {
+		icon = gory_to_the_black_army
+		position = 1
+		provinces_to_highlight = {
+		}
+		trigger = {
+			army_size_percentage = 1
+		}
+		effect = {
+			add_country_modifier = {
+				name = A92_renewed_army
+				duration = 7300
+			}
+			low_esmar_area = {
+				add_permanent_claim = ROOT
+			}
+			high_esmar_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	A92_royal_tragedy = {
+		icon = mission_restore_faith_in_the_throne
+		position = 2
+		required_missions = {
+			A92_recover_army
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = A92_royal_tragedy_tooltip
+				has_country_flag = leslinpar_disaster_done
+			}
+			legitimacy_equivalent = 50
+		}
+		effect = {
+			add_stability_or_adm_power = yes
+			add_country_modifier = {
+				name = A92_crisis_averted
+				duration = 7300
+			}
+		}
+	}
+	A92_stabilize_rule = {
+		icon = mission_monarch_in_throne_room
+		position = 3
+		required_missions = {
+			A92_royal_tragedy
+		}
+		provinces_to_highlight = {
+			owned_by = ROOT
+			local_autonomy = 30
+		}
+		trigger = {
+			legitimacy_equivalent = 90
+			all_owned_province = {
+				NOT = {
+					local_autonomy = 30
+				}
+			}
+			calc_true_if = {
+				amount = 2
+				all_known_country = {
+					alliance_with = ROOT
+					has_100_opinion_improved_relation = {
+						target = ROOT
+					}
+				}
+			}
+		}
+		effect = {
+			add_prestige = 10
+			every_known_country = {
+				limit = {
+					alliance_with = ROOT
+				}
+				add_trust = {
+					who = ROOT
+					value = 10
+					mutual = yes
+				}
+			}
+			add_country_modifier = {
+				name = A92_recovery_period
+				duration = 7300
+			}
+		}
+	}
+	A92_rise_leslinpar = {
+		icon = mission_unite_home_region
+		position = 5
+		required_missions = {
+			A92_inspire_loyalty
+			A92_stabilize_rule
+			A92_fixing_administration
+		}
+		provinces_to_highlight = {
+			owned_by = ROOT
+			OR = {
+				unrest = 1
+				devastation = 1
+			}
+		}
+		trigger = {
+			monthly_income = 10
+			manpower = 15
+			all_owned_province = {
+				NOT = {
+					unrest = 1
+					devastation = 1
+				}
+			}
+		}
+		effect = {
+			custom_tooltip = A92_rise_leslinpar_tooltip2
+			set_country_flag = leslinpar_rise
+			esmaria_region = {
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = A92_rise_leslinpar
+				duration = -1
+			}
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = A92_rise_leslinpar_tooltip
+				first_limit = "A73 = {
+						alliance_with = ROOT
+						trust = { who = ROOT value = 85 }
+					}
+				"
+				first_effect = "create_subject = {
+						subject_type = autonomous_vassal
+						subject = A73
+					}
+				"
+			}
+		}
+	}
+	A92_the_hills = {
+		icon = mlo_renaissance_city
+		position = 7
+		required_missions = {
+			A92_rise_leslinpar
+		}
+		provinces_to_highlight = {
+			area = bennonhill_area
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		trigger = {
+			bennonhill_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = root
+			}
+		}
+		effect = {
+			add_mil_power = 100
+			
+			271 = {
+				center_of_trade = 1
+			}
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = A92_hills_tooltip
+				first_limit = "ROOT = {
+						high_tolerance_gnomish_race_trigger = yes
+					}
+				"
+				first_effect = "909 = {
+						change_trade_goods = glass
+					}
+				"
+			}
+		}
+	}
+	A92_a_duchy_reborn = {
+		icon = mission_assemble_an_army
+		position = 9
+		required_missions = {
+			A92_the_hills
+			A92_forts_forges
+		}
+		provinces_to_highlight = {
+			region = esmaria_region
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		trigger = {
+			primary_culture = parian
+			esmaria_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = root
+			}
+		}
+		effect = {
+			force_add_ruler_personality = {
+				personality = iron_crowned_personality
+			}
+			random_list = {
+				33 = {
+					change_adm = 1
+				}
+				33 = {
+					change_dip = 1
+				}
+				33 = {
+					change_mil = 1
+				}
+			}
+			esmaria_region = {
+				add_province_modifier = {
+					name = A92_crack_down
+					duration = 3650
+				}
+			}
+			country_event_with_effect_insight = {
+				id = flavor_leslinpar.16
+				effect = "
+					change_tag = AD1
+					add_country_modifier = {
+						name = A92_parian_campaign
+						duration = -1
+					}
+					set_in_empire = no
+				"
+			}
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = A92_everyone_must_serve_tooltip
+				first_limit = "all_country = {
+						OR = {
+							NOT = {
+								is_part_of_hre = yes
+							}
+							NOT ={
+								army_size = ROOT
+							}
+						}
+					}
+				"
+				first_effect = "custom_tooltip = A92_a_duchy_reborn_tooltip2
+					hidden_effect = {
+						every_elector = {
+							capital_scope = {
+								add_permanent_claim = ROOT
+							}
+						}
+						emperor = {
+							capital_scope = {
+								add_permanent_claim = ROOT
+							}
+						}
+					}
+				"
+			}
+		}
+	}
+	A92_imperial_fate = {
+		icon = humiliate_austria
+		position = 10
+		required_missions = {
+			A92_a_duchy_reborn
+		}
+		provinces_to_highlight = {
+			is_capital_of = emperor
+		}
+		trigger = {
+			eoa_is_dismantled = yes
+		}
+		effect = {
+			if = {
+				limit = {
+					NOT = {
+						government_rank = 3
+					}
+				}
+				set_government_rank = 3
+			}
+			change_mil = 1
+			add_ruler_modifier = {
+				name = A92_bane_of_the_dove
+				duration = -1
+			}
+		}
+	}
+	A92_the_buffer_zone = {
+		icon = fight_bosnian_heresies
+		position = 11
+		required_missions = {
+			A92_secure_east
+			A92_northern_coast
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = golden_plains_area
+				area = arbaran_area
+				area = cestir_area
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		trigger = {
+			golden_plains_area = {
+				type = all
+				owned_by = ROOT
+			}
+			arbaran_area = {
+				type = all
+				owned_by = ROOT
+			}
+			cestir_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		effect = {
+			add_mil_power = 100
+			349 = {
+				center_of_trade = 1
+			}
+			country_event_with_option_insight = {
+				id = flavor_leslinpar.19
+
+				option_1 = "
+					alenic_frontier_region = {
+						add_permanent_claim = ROOT
+					}
+
+					add_country_modifier = {
+						name = A92_war_against_north
+						duration = 10950
+					}
+				"
+
+				option_2 = "
+					custom_tooltip = flavor_leslinpar.19.b.tt
+					tooltip = {
+						add_province_modifier = {
+							name = A92_northern_bulwark
+							duration = -1
+						}
+					}
+				"
+			}
+		}
+	}
+}
+
+A92_4_2 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = AD1
+		has_country_flag = leslinpar_castanor_flag
+	}
+	A92_parian_victory = {
+		icon = mission_assemble_an_army
+		position = 13
+		provinces_to_highlight = {
+			superregion = escann_superregion
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		required_missions = {
+			A92_the_buffer_zone
+			A92_march_escann
+		}
+		trigger = {
+			south_castanor_region = {
+				type = all
+				owned_by = ROOT
+			}
+			west_castanor_region = {
+				type = all
+				owned_by = ROOT
+			}
+			inner_castanor_region = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		effect = {
+			custom_tooltip = flavor_leslinpar.18.a.tt
+			add_country_modifier = {
+				name = A92_conquerors_of_escann
+				duration = -1
+			}
+			add_country_modifier = {
+				name = A92_securing_escann
+				duration = 7300
+			}
+		}
+	}
+}
+
+A92_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = A92
+			tag = AD1
+		}
+	}
+	A92_avenge_tendergrove = {
+		icon = mission_cannons_firing
+		position = 2
+		required_missions = {
+			A92_recover_army
+		}
+		provinces_to_highlight = {
+			area = low_esmar_area
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		trigger = {
+			low_esmar_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		effect = {
+			280 = {
+				add_devastation = 20
+				add_base_manpower = -4
+				add_base_production = -4
+				add_base_tax = -4
+			}
+			901 = {
+				add_base_manpower = 4
+				add_base_production = 4
+				add_base_tax = 4
+			}
+			custom_tooltip = A92_avenge_tendergrove_tooltip
+			hidden_effect = {
+				every_known_country = {
+					limit = {
+						is_part_of_hre = yes
+					}
+					add_aggressive_expansion = {
+						who = ROOT
+						value = -15
+					}
+				}
+			}
+			add_country_modifier = {
+				name = A92_rival_bested
+				duration = 3650
+			}
+			low_esmar_area = {
+				add_province_modifier = {
+					name = A92_tighten_control
+					duration = 5475
+				}
+			}
+		}
+	}
+	A92_inspire_loyalty = {
+		icon = mission_assemble_an_army
+		position = 4
+		required_missions = {
+			A92_avenge_tendergrove
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			num_of_rebel_armies = 0
+			num_of_owned_provinces_with = {
+				value = 5
+				has_manpower_building_trigger = yes
+			}
+			army_professionalism = 0.1
+		}
+		effect = {
+			add_country_modifier = {
+				name = A92_protect_our_home
+				duration = -1
+			}
+		}
+	}
+	A92_military_infrastructure = {
+		icon = mission_assemble_an_army
+		position = 5
+		required_missions = {
+			A92_inspire_loyalty
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				has_manpower_building_trigger = yes
+				has_forcelimit_building_trigger = yes
+				base_manpower = 10
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = A92_military_infrastucture
+				duration = -1
+			}
+		}
+	}
+	A92_bards_scholars = {
+		icon = mission_african_gold
+		position = 6
+		required_missions = {
+			A92_rise_leslinpar
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = konwell_area
+				area = songbarges_area
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		trigger = {
+			konwell_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = root
+			}
+			songbarges_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = root
+			}
+		}
+		effect = {
+			
+			275 = {
+				add_base_tax = 2
+				add_center_of_trade_level = 1
+			}
+			add_country_modifier = {
+				name = A92_imperial_archives
+				duration = 18250
+			}
+			emperor = {
+				add_opinion = {
+					who = ROOT
+					modifier = seized_imperial_archives
+				}
+			}
+		}
+	}
+	A92_forts_forges = {
+		icon = mission_african_gold
+		position = 8
+		required_missions = {
+			A92_bards_scholars
+			A92_the_hills
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = cann_esmar_area
+				area = ryalanar_area
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		trigger = {
+			cann_esmar_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = root
+			}
+			ryalanar_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = root
+			}
+		}
+		effect = {
+			add_dip_power = 100
+
+			add_country_modifier = {
+				name = A92_mass_produced_arms
+				duration = 7300
+			}
+			
+			country_event_with_option_insight = {
+				id = flavor_leslinpar.13
+
+				option_1 = "
+					set_capital = 266
+					266 = {
+						add_province_modifier = {
+							name = A92_new_capital
+							duration = 9125
+						}
+					}
+				"
+				option_2 = "set_capital = 267
+					267 = {
+						add_province_modifier = {
+							name = A92_new_capital
+							duration = 9125
+						}
+					}
+				"
+				option_3 = "capital_scope = {
+						add_base_tax = 1
+						add_base_production = 1
+						add_base_manpower = 1
+					}
+				"
+			}
+		
+		}
+	}
+	A92_secure_east = {
+		icon = mission_conquer_5_states
+		position = 10
+		required_missions = {
+			A92_a_duchy_reborn
+		}
+		provinces_to_highlight = {
+			region = forlorn_vale_region
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		trigger = {
+			forlorn_vale_region = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		effect = {
+			add_dip_power = 100
+			country_event_with_option_insight = {
+				id = flavor_leslinpar.18
+				option_1 = "
+					custom_tooltip = flavor_leslinpar.18.a.tt3
+					custom_tooltip = flavor_leslinpar.18.a.tt2
+
+				"
+				option_2 = "
+					custom_tooltip = flavor_leslinpar.18.b.tt
+					tooltip = {
+						add_local_autonomy = -50
+						add_province_modifier = {
+							name = A92_secure_east
+							duration = 18250
+						}
+					}
+				"
+			}
+		}
+	}
+}
+
+A92_5_2 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = AD1
+		has_country_flag = leslinpar_castanor_flag
+	}
+	A92_march_escann = {
+		icon = mission_conquer_5_states
+		position = 12
+		required_missions = {
+			A92_secure_east
+		}
+		provinces_to_highlight = {
+			superregion = escann_superregion
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 100
+				superregion = escann_superregion
+				owned_by = ROOT
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = escann_integration
+				duration = -1
+			}
+			add_government_power = {
+				mechanic_type = prussian_militarization_mechanic_1
+				power_type = prussian_militarized_society_1
+				value = 50
+			}
+		}
+	}
+}

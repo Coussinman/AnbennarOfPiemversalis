@@ -1,0 +1,105 @@
+country_decisions = {
+	establish_zsk = {
+		major = yes
+		potential = {
+			tag = AB2
+			has_country_flag = AB2_fahvanosy_company
+			NOT = { has_country_flag = established_zsk_flag }
+		}
+		allow = {
+			num_of_owned_provinces_with = {
+				region = fahvanosy_region
+				value = 4
+			}
+		}
+		effect = {
+			custom_tooltip = NED_ESTABLISH_VOC_IN_INDIA
+			hidden_effect = {
+				set_country_flag = established_zsk_flag
+				every_owned_province = {
+					limit = {
+						region = fahvanosy_region
+						NOT = {
+							area = sombimofo_area
+							area = pikakely_area
+						}
+					}
+					cede_province = AB3
+					add_core = AB3
+				}
+				
+				create_subject = {
+					subject_type = commercial_enterprise
+					subject = AB3
+				}
+				AB3 = {
+					set_capital = 3239
+					change_government = republic
+					add_government_reform = trade_company_government
+					change_religion = ROOT
+					change_primary_culture = ROOT
+					add_adm_power = 100
+					add_dip_power = 100
+					add_mil_power = 100
+					add_treasury = 200
+					set_prestige_to_zero = yes
+					add_republican_tradition = 100
+					swap_free_idea_group = yes
+					change_technology_group = tech_east_elven
+					change_unit_type = tech_east_elven
+				}
+				fahvanosy_region = { 
+					limit = { 	
+						NOT = {
+							is_core = AB3
+							country_or_non_sovereign_subject_holds = AB3
+						} 
+					}
+					add_permanent_claim = AB3 
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	expand_zsk = {
+		major = yes
+		potential = {
+			AB3 = {
+				is_subject_of_type_with_overlord = { who = ROOT type = commercial_enterprise }
+			}
+		}
+		allow = {
+			num_of_owned_provinces_with = {
+				OR = {
+					superregion = fanguala_superregion
+					superregion = tanib_dajek_superregion
+					superregion = taneyas_superregion
+				}
+				value = 1
+			}
+		}
+		effect = {
+			custom_tooltip = NED_CEDE_PROVINCES_TO_VOC
+			hidden_effect = {
+				set_country_flag = established_zsk_flag
+				every_owned_province = {
+					limit = {
+						OR = {
+							superregion = fanguala_superregion
+							superregion = tanib_dajek_superregion
+							superregion = taneyas_superregion
+						}
+					}
+					cede_province = AB3
+					add_core = AB3
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}

@@ -4185,6 +4185,12 @@ on_battle_won_country_effect = {
 		}
 		country_event = { id = flavour_tiboktsamo.9 }
 	}
+
+	#ACE
+	change_variable = {
+		which = num_of_battles_won_var
+		value = 1
+	}
 }
 
 on_battle_lost_country_effect = {
@@ -6104,6 +6110,14 @@ remove_all_age_of_discovery_modifiers = {
 			limit = { 1001 = { has_province_modifier = z22_last_homely_harbour } }
 			1001 = { remove_province_modifier = z22_last_homely_harbour }
 		}
+
+		#ACE
+		if = {
+			limit = {
+				has_country_modifier = age_of_wex
+			}
+			remove_country_modifier = age_of_wex
+		}
 	}
 }
 remove_all_age_of_reformation_modifiers = {
@@ -6282,12 +6296,27 @@ on_harmonized_effect = {
 		}
 	}
 	if = {
+		limit = { religion = the_thought }
+
+		if = {
+			limit = { any_subject_country = { religion = the_thought } }
+			country_event = { id = thought_harmonize.203 }
+		}
+		if = {
+			limit = { is_subject = yes overlord = { religion = the_thought } }
+			overlord = { country_event = { id = thought_harmonize.203 } }
+		}
+	}
+
+	#ACE
+	if = {
 		limit = { has_country_flag = ACE_reveria_harmonic_subjects_flag }
 		every_subject_country = {
 			limit = { religion = the_thought }
 			reveria_pan_harmonize = yes
 		}
 	}
+
 	if = {
 		limit = { 
 			is_subject_of = A05
@@ -6890,6 +6919,67 @@ on_province_culture_change_effect = {
 		}
 		else = {
 			remove_province_modifier = medasi_peak_civilization_reform_modifier
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_estate_privilege = estate_lorentish_elite_lorentization
+			}
+			OR = {
+				region = lencenor_region
+				region = west_dameshead_region
+				area = lorenans_reach_area
+			}
+			OR = {
+				has_owner_accepted_culture = yes
+				has_owner_culture = yes
+				culture_is_high_lorentish = yes
+			}
+		}
+		remove_province_modifier = lorentish_education
+	}
+	if = {
+		limit = {
+			owner = {
+				has_estate_privilege = estate_lorentish_elite_lorentization
+			}
+			OR = {
+				region = lencenor_region
+				region = west_dameshead_region
+				area = lorenans_reach_area
+			}
+			NOT = {
+				has_owner_accepted_culture = yes
+				has_owner_culture = yes
+				culture_is_high_lorentish = yes
+			}
+		}
+		add_province_modifier = {
+			name = lorentish_education
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				tag = AC0
+				has_global_flag = wexorenti_group
+			}
+			culture = high_lorentish
+		}
+		change_culture = high_lorentish_dual
+	}
+	else_if = {
+		if = {
+			limit = {
+				owner = {
+					tag = AC0
+					has_global_flag = wexorenti_group
+				}
+				culture = wexonard
+			}
+			change_culture = wexonard_dual
 		}
 	}
 }
@@ -7958,6 +8048,88 @@ on_development_effect = {
 			value = 1
 		}
 	}
+
+	#ACE
+	if = {
+		limit = {
+			owner = {
+				OR = {
+					tag = A30
+					was_tag = A30
+				}
+			}
+			has_province_modifier = wexonard_settlers
+		}
+		add_nationalism = -1
+	}
+
+	if = {
+		limit = {
+			owner = {
+				tag = AC5
+				mission_completed = AC5_kobold_lifestyle
+				has_country_modifier = AC5_new_forges
+			}
+			province_id = 2949
+		}
+		owner = {
+			extend_country_modifier = {
+				name = AC5_new_forges
+				duration = 365
+			}
+		}
+	}
+
+	if = {
+		limit = {
+			owner = {
+				tag = AC5
+				mission_completed = AC5_kobold_lifestyle
+				has_country_modifier = AC5_lava_garden
+			}
+			province_id = 4040
+		}
+		owner = {
+			extend_country_modifier = {
+				name = AC5_lava_garden
+				duration = 365
+			}
+		}
+	}
+
+	if = {
+		limit = {
+			owner = {
+				tag = AC5
+				mission_completed = AC5_kobold_lifestyle
+				has_country_modifier = AC5_healthy_younglings
+			}
+			province_id = 4041
+		}
+		owner = {
+			extend_country_modifier = {
+				name = AC5_healthy_younglings
+				duration = 365
+			}
+		}
+	}
+
+	if = {
+		limit = {
+			owner = {
+				tag = AC5
+				mission_completed = AC5_kobold_lifestyle
+				has_country_modifier = AC5_constructive_conflict
+			}
+			province_id = 4042
+		}
+		owner = {
+			extend_country_modifier = {
+				name = AC5_constructive_conflict
+				duration = 365
+			}
+		}
+	}
 }
 
 # THIS = Province, FROM = Country, ROOT = Merc Unit
@@ -7966,6 +8138,7 @@ on_mercenary_recruited_effect = {
 		limit = {
 			FROM = { has_not_free_mercs_trait = yes }
 			is_not_free_merc_company = yes
+			is_not_free_merc_company_ace = yes
 			OR = {
 				FROM = { NOT = { has_country_flag = oyo_cavalry_do_not_consume_ap } }
 				ROOT = { NOT = { mercenary_company = merc_oyo_cavalry } }
@@ -9394,6 +9567,7 @@ startup_1444_effects = {
 
 		if = {
 			limit = {
+				religion_group = cannorian
 				OR = {
 					has_reform = adventurer_reform
 					tag = B55
@@ -10406,6 +10580,26 @@ startup_1444_effects = {
 				province_event = { id = empire_333.98 days = 717 } #333 empire Thraxis timer set
 			}
 		}
+
+		#ACE
+		if = {
+			limit = {
+				has_reform = pearl_monarchy
+			}
+			every_owned_province = {
+				limit = {
+					OR = {
+						trade_goods = gems
+						trade_goods = pearls
+					}
+				}
+				add_province_modifier = {
+					name = gem_lord
+					duration = -1
+					hidden = yes
+				}
+			}
+		}
 	}
 }
 
@@ -10517,6 +10711,7 @@ on_province_owner_change_effect = {
 			hidden = yes
 		}
 	}
+
 	#ACE
 	if = {
 		limit = {
@@ -10555,6 +10750,7 @@ on_province_owner_change_effect = {
 		}
 	}
 	#ACE DONE
+
 	if = {
 		limit = {
 			NOT = { has_province_modifier = livestock_boost_frontier }
@@ -12060,6 +12256,11 @@ on_province_owner_change_effect = {
 			FROM = { country_event = { id = fahvanosy.11 } } #Check if FROM owns a valid shrine before removing the ruler mod
 		}
 		nakavy_avo_shrines_deactivate_all_province_effect = yes #deactivate all because only 1/12 chance to keep even if avo nakavy
+		
+		if = {
+			limit = { owner = { has_reform = shrine_guardians_reform } }
+			add_province_modifier = { name = shrine_guard_garisson duration = -1 }
+		}
 		
 		if = {
 			limit = { owner = { religion = nakavy_avo } }

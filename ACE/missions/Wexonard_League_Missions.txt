@@ -1,0 +1,1576 @@
+INDL_initial_branch_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { is_or_was_tag = { tag = Z04 } } 
+
+	INDL_1_1 = {
+		icon = mission_fire_of_london
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			903 = {
+				development = 12
+				num_of_units_in_province = {
+					who = ROOT
+					amount = 7
+				}
+			}
+			A91 = {
+				OR = { 
+					has_50_opinion_improved_relation = { target = ROOT }
+					alliance_with = ROOT
+				}
+			}
+		} 
+
+		effect = {
+			A91 = { add_historical_friend = ROOT }
+			ROOT = { add_historical_friend = A91 }
+			903 = {
+				add_province_modifier = {
+					name = WL_clearing_indlebury
+					duration = 3650
+				}
+			}
+		} 
+	}
+
+	INDL_1_2 = {
+		icon = mission_early_game_buildings
+		position = 3
+		required_missions = { 
+			INDL_1_1 
+			INDL_2_1
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			custom_trigger_tooltip = {
+				tooltip = WL_forts_check_tt
+				if = {
+					limit = {
+						check_variable = {
+							which = Indlebury_NumofForts
+							value = 0
+						}
+					}
+					treasury = 350
+				}
+				else_if = {
+					check_variable = {
+						which = Indlebury_NumofForts
+						value = 1
+					}
+					treasury = 300
+				}
+				else_if = {
+					check_variable = {
+						which = Indlebury_NumofForts
+						value = 2
+					}
+					treasury = 250
+				}
+				else_if = {
+					check_variable = {
+						which = Indlebury_NumofForts
+						value = 3
+					}
+					treasury = 200
+				}
+				else_if = {
+					check_variable = {
+						which = Indlebury_NumofForts
+						value = 4
+					}
+					treasury = 150
+				}
+				else_if = {
+					check_variable = {
+						which = Indlebury_NumofForts
+						value = 5
+					}
+					treasury = 100
+				}
+				else_if = {
+					check_variable = {
+						which = Indlebury_NumofForts
+						value = 6
+					}
+					treasury = 50
+				}
+				else_if = {
+					check_variable = {
+						which = Indlebury_NumofForts
+						value = 7
+					}
+				}
+			}
+		} 
+
+		effect = {
+			if = {
+				limit = {
+					check_variable = {
+						which = Indlebury_NumofForts
+						value = 0
+					}
+				}
+				add_treasury = -350
+			}
+			else_if = {
+				limit = {
+					check_variable = {
+						which = Indlebury_NumofForts
+						value = 1
+					}
+				}
+				add_treasury = -300
+			}
+			else_if = {
+				limit = {
+					check_variable = {
+						which = Indlebury_NumofForts
+						value = 2
+					}
+				}
+				add_treasury = -250
+			}
+			else_if = {
+				limit = {
+					check_variable = {
+						which = Indlebury_NumofForts
+						value = 3
+					}
+				}
+				add_treasury = -200
+			}
+			else_if = {
+				limit = {
+					check_variable = {
+						which = Indlebury_NumofForts
+						value = 4
+					}
+				}
+				add_treasury = -150
+			}
+			else_if = {
+				limit = {
+					check_variable = {
+						which = Indlebury_NumofForts
+						value = 5
+					}
+				}
+				add_treasury = -100
+			}
+			else_if = {
+				limit = {
+					check_variable = {
+						which = Indlebury_NumofForts
+						value = 6
+					}
+				}
+				add_treasury = -50
+			}
+			else_if = {
+				limit = {
+					check_variable = {
+						which = Indlebury_NumofForts
+						value = 7
+					}
+				}
+				add_adm_power = 20
+				add_dip_power = 20
+				add_mil_power = 20
+			}
+			set_country_flag = WL_old_bury_rebuilt
+			WL_indlebury_lower_unrest_effect = yes
+			903 = {
+				add_or_upgrade_fort_building = yes
+				add_permanent_province_modifier = {
+					name = WL_old_bury_rebuilt_modifier
+					duration = -1
+				}
+			}
+		} 
+	}
+
+	INDL_1_3 = {
+		icon = mission_alone_in_the_forest
+		position = 4
+		required_missions = { 
+			INDL_1_2
+			INDL_2_2
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			prestige = 50
+			has_institution = renaissance
+			903 = {
+				NOT = { devastation = 1 }
+			}
+		} 
+
+		effect = {  
+			903 = { 
+				center_of_trade = 1
+				change_trade_goods = fungi
+				add_permanent_province_modifier = {
+					name = WL_indlebury_truffles
+					duration = -1
+				}
+			}
+			set_country_flag = WL_indlebury_expanding_infrastructure
+			custom_tooltip = WL_indl_retrospective_effect_of_expanding_infrastructure_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						if = {
+							limit = {
+								has_dlc = "Leviathan"
+							}
+							num_of_times_expanded_infrastructure = 1
+						}
+						else = {
+							development = 15
+						}
+					}
+					add_halfling_minority_size_effect = yes
+				}
+			}
+		} 
+	}
+
+	INDL_1_4 = {
+		icon = mission_eastern_european_city
+		position = 5
+		required_missions = { 
+			INDL_1_3
+			WL_3_3
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			high_tolerance_halfling_race_trigger = yes
+			903 = {
+				development = 30
+				NOT = { devastation = 1 }
+				province_has_center_of_trade_of_level = 2
+			}
+			294 = {
+				NOT = { devastation = 1 }
+				province_has_center_of_trade_of_level = 2
+			}
+		}
+
+		effect = {
+			largest_increase_of_half_elven_tolerance_effect = yes
+			903 = {
+				add_half_elven_minority_size_effect = yes
+				add_or_upgrade_manpower_building = yes
+				add_permanent_province_modifier = {
+					name = WL_indlebury_modifier
+					duration = -1
+				}
+			}
+			294 = {
+				add_halfling_minority_size_effect = yes
+				add_permanent_province_modifier = {
+					name = WL_indlebury_modifier
+					duration = -1
+				}
+			}
+		} 
+	}
+}
+
+MAGD_initial_branch_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { is_or_was_tag = { tag = Z02 } } 
+
+	MAGD_1_1 = {
+		icon = mission_elf_smiling
+		position = 3
+		provinces_to_highlight = {  
+			OR = {
+				AND = {
+					province_id = 294
+					NOT = { development = 30 }
+				}
+				AND = {
+					is_capital = yes
+					owner = {
+						has_country_modifier = half_elven_administration
+						NOT = { has_50_opinion_improved_relation = { target = ROOT } }
+					}
+				}
+				AND = {
+					is_capital = yes
+					owner = {
+						has_country_modifier = elven_administration
+						NOT = { has_50_opinion_improved_relation = { target = ROOT } }
+					}
+				}
+			}
+		} 
+		required_missions = { 
+			MAGD_2_1
+		}
+		trigger = {  
+			294 = {
+				development = 30
+			}
+			OR = {
+				any_known_country = {
+					has_50_opinion_improved_relation = { target = ROOT }
+					has_country_modifier = half_elven_administration
+				}
+				any_known_country = {
+					has_50_opinion_improved_relation = { target = ROOT }
+					has_country_modifier = elven_administration
+				}
+			}
+		} 
+		effect = {  
+			define_advisor = {
+				type = diplomat
+				culture = alenic_half_elf
+				skill = 1
+				cost_multiplier = 0.5
+			}
+			complex_dynamic_effect_ace = {
+				first_custom_tooltip = WL_elven_admin_tt
+				first_limit = "
+					any_known_country = {
+						has_50_opinion_improved_relation = { target = ROOT }
+						has_country_modifier = elven_administration
+					}
+				"
+				first_effect = "
+					294 = {
+						add_elven_minority_size_effect = yes
+					}
+					medium_increase_of_elven_tolerance_effect = yes
+				"
+				second_custom_tooltip = WL_half_elven_admin_tt
+				second_limit = "
+					any_known_country = {
+						has_50_opinion_improved_relation = { target = ROOT }
+						has_country_modifier = half_elven_administration
+					}
+				"
+				second_effect = "
+					294 = {
+						add_half_elven_minority_size_effect = yes
+					}
+					medium_increase_of_half_elven_tolerance_effect = yes
+				"
+			}
+		} 
+	}
+
+	MAGD_1_2 = {
+		icon = friends_in_high_places
+		position = 5
+		required_missions = { 
+			MAGD_1_1
+			WL_3_3
+		}
+		provinces_to_highlight = {  
+			OR = {
+				AND = {
+					province_id = 294
+					devastation = 1
+					NOT = {
+						num_of_buildings_in_province = 3
+					}
+				}
+				AND = {
+					province_id = 903
+					devastation = 1
+					NOT = {
+						num_of_buildings_in_province = 3
+					}
+				}
+			}
+		} 
+
+		trigger = { 
+			294 = {
+				num_of_buildings_in_province = 3
+				NOT = { devastation = 1 }
+			}
+			903 = {
+				num_of_buildings_in_province = 3
+				NOT = { devastation = 1 }
+			}
+			high_tolerance_half_elven_race_trigger = yes
+		} 
+
+		effect = {
+			largest_increase_of_halfling_tolerance_effect = yes
+			294 = {
+				add_permanent_province_modifier = {
+					name = WL_magdalaire_modifier
+					duration = -1
+				}
+				add_halfling_minority_size_effect = yes
+			}
+			903 = {
+				add_permanent_province_modifier = {
+					name = WL_magdalaire_modifier
+					duration = -1
+				}
+				add_half_elven_minority_size_effect = yes
+			}
+		} 
+	}
+}
+
+MAGD_initial_branch_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { is_or_was_tag = { tag = Z02 } } 
+
+	MAGD_2_1 = {
+		icon = mission_restore_trade_superiority
+		position = 2
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			294 = {
+				province_trade_power = 20
+			}
+		} 
+
+		effect = {  
+			294 = {
+				add_or_upgrade_trade_building = yes
+				add_trade_node_income = 24
+			}
+			complex_dynamic_effect_ace = {
+				first_custom_tooltip = WL_branch_5_mission_not_completed_tt
+				first_limit = "
+					NOT = { mission_completed = MAGD_5_1 }
+				"
+				first_effect = "
+					294 = {
+						add_base_tax = 1
+						add_base_manpower = 1
+						add_base_production = 1
+					}
+				"
+			}
+		} 
+	}
+
+	MAGD_2_2 = {
+		icon = renaissance_city
+		position = 4
+		required_missions = { 
+			MAGD_2_1
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			prestige = 50
+			has_institution = renaissance
+		} 
+
+		effect = {
+			anb_add_accepted_culture_or_dip_power = { culture = alenic_half_elf free = yes }
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = WL_first_to_renaissance_tt
+				first_limit = "
+					any_known_country = { NOT = { has_institution = renaissance } }
+				"
+				first_effect = "
+					add_country_modifier = {
+						name = WL_first_to_renaissance_modifier
+						duration = 10950
+					}
+				"
+				second_custom_tooltip = WL_not_first_to_renaissance_tt
+				second_limit = "
+					any_known_country = { has_institution = renaissance }
+				"
+				second_effect = "
+					add_country_modifier = {
+						name = WL_lame_renaissance_modifier
+						duration = 5475
+					}
+				"
+			}
+		} 
+	}
+}
+INDL_initial_branch_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { is_or_was_tag = { tag = Z04 } }
+
+	INDL_2_1 = {
+		icon = mission_dwarf_close_up
+		position = 2
+		required_missions = { 
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			employed_advisor = { category = ADM }
+			have_cast_aid_construction = yes
+			A55 = {
+				OR = {
+					alliance_with = ROOT
+					has_50_opinion_improved_relation = { target = ROOT }
+				}
+			}
+		} 
+
+		effect = {  
+			WL_indlebury_lower_unrest_effect = yes
+			medium_decrease_of_dwarven_tolerance_effect = yes
+			903 = {
+				add_devastation = -10
+				add_dwarven_minority_size_effect = yes
+			}
+			hidden_effect = {
+				remove_province_modifier = WL_indlebury_starting
+			}
+			custom_tooltip = WL_targeted_indlebury_development_tt
+			set_country_flag = WL_targeted_indlebury_development
+			country_event = { id = wl.21 }
+		} 
+	}
+	INDL_2_2 = {
+		icon = mission_halflings
+		position = 3
+		required_missions = {
+			INDL_2_1
+			WL_3_2 
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			332 = {
+				num_of_buildings_in_province = 1
+				NOT = { devastation = 1 }
+			}
+			300 = {
+				num_of_buildings_in_province = 1
+				NOT = { devastation = 1 }
+			}
+			579 = {
+				num_of_buildings_in_province = 1
+				NOT = { devastation = 1 }
+			}
+			any_known_country = {
+				culture_group = halfling
+				OR = {
+					has_50_opinion_improved_relation = { target = ROOT }
+					alliance_with = ROOT
+				}
+			}
+		} 
+
+		effect = {
+			medium_increase_of_halfling_tolerance_effect = yes
+			WL_indlebury_lower_unrest_effect = yes
+			west_bisan_area = {
+				add_province_modifier = {
+					name = WL_indlebury_halflings
+					duration = 7300
+				}
+			}
+			300 = {
+				add_province_modifier = {
+					name = WL_indlebury_halflings
+					duration = 7300
+				}
+			}
+			579 = {
+				add_province_modifier = {
+					name = WL_indlebury_halflings
+					duration = 7300
+				}
+			}
+		} 
+	}
+}
+
+WL_common_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential = { 
+		OR = {
+			is_or_was_tag = { tag = Z02 }
+			is_or_was_tag = { tag = Z04 } 
+		} 
+	}
+
+	WL_2_2 = {
+		icon = conquer_sugamber
+		position = 5
+		required_missions = { WL_3_3 }
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			A48 = { exists = no }
+		} 
+
+		effect = {  
+			add_splendor = 200
+			add_prestige_or_monarch_power = { amount = 25 }
+			every_owned_province = {
+				limit = { is_core = A48 }
+				add_nationalism = -5
+			}
+			custom_tooltip = WL_lower_ae_tt
+			hidden_effect = {
+				every_known_country = {
+					limit = {
+						is_part_of_hre = yes
+					}
+					add_aggressive_expansion = {
+						who = ROOT
+						value = -20
+						apply_calc = no
+					}
+				}
+			}
+		} 
+	}
+}
+WL_common_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = { 
+		OR = {
+			is_or_was_tag = { tag = Z02 }
+			is_or_was_tag = { tag = Z04 } 
+		} 
+	} 
+
+	WL_3_1 = {
+		icon = swiss_mercenaries
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			army_size_percentage = 0.9
+			diplomatic_reputation = 4
+			if = {
+				limit = { is_or_was_tag = { tag = Z02 } }
+				Z04 = {
+					has_25_opinion_improved_relation = {
+						target = ROOT
+					}
+				}
+			}
+			else_if = {
+				limit = { is_or_was_tag = { tag = Z04 } }
+				Z02 = {
+					has_25_opinion_improved_relation = {
+						target = ROOT
+					}
+				}
+			}
+		} 
+
+		effect = {  
+			if = {
+				limit = { is_or_was_tag = { tag = Z02 } }
+				add_historical_friend = Z04
+				Z04 = {
+					add_trust = {
+						who = ROOT
+						value = 10
+						mutual = yes
+					}
+					add_historical_friend = ROOT
+				}
+			}
+			else_if = {
+				limit = { is_or_was_tag = { tag = Z04 } }
+				add_historical_friend = Z02
+				Z02 = {
+					add_trust = {
+						who = ROOT
+						value = 10
+						mutual = yes
+					}
+					add_historical_friend = ROOT
+				}
+			}
+			west_bisan_area = {
+				add_permanent_claim = ROOT
+			}
+			east_bisan_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	WL_3_2 = {
+		icon = mission_hundred_years_war
+		position = 2
+		required_missions = { WL_3_1 }
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			A34 = { exists = no }
+			if = {
+				limit = {
+					is_or_was_tag = { tag = Z04 }
+				}
+				923 = {
+					owned_by = ROOT
+				}
+				332 = {
+					owned_by = ROOT
+				}
+			}
+			else = {
+				west_bisan_area = {
+					type = all
+					owned_by = ROOT
+				}
+			}	
+			579 = {
+				owned_by = ROOT
+			}
+			300 = {
+				owned_by = ROOT
+			}
+		} 
+
+		effect = {
+			country_event = {
+				id = wl.1
+			}
+		} 
+	}
+
+	WL_3_3 = {
+		icon = mission_diplomatic_relation
+		position = 4
+		required_missions = { 
+			WL_3_2
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = WL_has_every_advisor_lvl1_tt
+				employed_advisor = { category = ADM }
+				employed_advisor = { category = DIP }
+				employed_advisor = { category = MIL }
+			}
+			if = {
+				limit = { is_or_was_tag = { tag = Z02 } }
+				Z04 = {
+					has_opinion = {
+						who = ROOT
+						value = 150
+					}
+				}
+			}
+			else_if = {
+				limit = { is_or_was_tag = { tag = Z04 } }
+				Z02 = {
+					has_opinion = {
+						who = ROOT
+						value = 150
+					}
+				}
+			}
+			all_owned_province = {
+				NOT = { unrest = 1 }
+			}
+		}
+
+		effect = { 
+			if = {
+				limit = { is_or_was_tag = { tag = Z02 } }
+				create_subject = {
+					subject_type = autonomous_vassal
+					subject = Z04
+				}
+			}
+			else_if = {
+				limit = { is_or_was_tag = { tag = Z04 } }
+				create_subject = {
+					subject_type = autonomous_vassal
+					subject = Z02
+				}
+			}
+			hidden_effect = {
+				set_variable = {
+					which = WL_elector_support
+					value = 0
+				}
+				set_variable = {
+					which = WL_free_city_support
+					value = 0
+				}
+			}
+			custom_tooltip = WL_unlocked_parliament_petition_tt
+			set_country_flag = WL_unlocked_parliament_petition
+		} 
+	}
+}
+MAGD_initial_branch_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { is_or_was_tag = { tag = Z02 } }
+
+	MAGD_3_4 = {
+		icon = mission_three_elve
+		position = 5
+		required_missions = { 
+			WL_3_3
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			has_country_flag = WL_moonhaven_support
+			has_country_flag = WL_istralore_support
+		} 
+
+		effect = {
+			medium_increase_of_half_elven_tolerance_effect = yes
+			create_general_with_pips = {
+				tradition = 60
+				add_shock = 2
+			}
+			add_country_modifier = {
+				name = WL_elven_support
+				duration = 7300
+			}
+		} 
+	}
+	MAGD_3_5 = {
+		icon = mission_among_the_great_powers
+		position = 6
+		required_missions = {
+			MAGD_1_2
+			WL_2_2
+			WL_4_2 
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			europe = {
+				NOT = { 
+					any_province = { 
+						culture = wexonard 
+						NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+					}
+				} 
+			}
+			custom_trigger_tooltip = {
+				tooltip = WL_has_every_advisor_lvl2_tt
+				employed_advisor = { category = ADM skill = 2 }
+				employed_advisor = { category = DIP skill = 2 }
+				employed_advisor = { category = MIL skill = 2 }
+			}
+			is_in_deficit = no
+			republican_tradition = 80
+		} 
+
+		effect = { 
+			set_country_flag = WL_formed_from_magdalaire
+			change_tag = AD8
+			swap_free_idea_group = yes
+			custom_tooltip = mission_coming_soon
+			# swap_non_generic_missions = yes
+		} 
+	}
+}
+INDL_initial_branch_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { is_or_was_tag = { tag = Z04 } }
+
+	INDL_3_4 = {
+		icon = all_bases_covered
+		position = 5
+		required_missions = { 
+			WL_3_3
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			has_country_flag = WL_silverforge_support
+			has_country_flag = WL_beepeck_support
+		} 
+
+		effect = {
+			create_general_with_pips = {
+				tradition = 60
+				add_siege = 2
+			}
+			medium_decrease_of_dwarven_tolerance_effect = yes
+			medium_increase_of_halfling_tolerance_effect = yes
+			add_country_modifier = {
+				name = WL_halfling_support
+				duration = 7300
+			}
+		} 
+	}
+	INDL_3_5 = {
+		icon = prosperity_for_all
+		position = 6
+		required_missions = {
+			INDL_1_4
+			WL_2_2
+			WL_4_2 
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			europe = {
+				NOT = { 
+					any_province = { 
+						culture = wexonard 
+						NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+					}
+				} 
+			}
+			custom_trigger_tooltip = {
+				tooltip = WL_has_every_advisor_lvl2_tt
+				employed_advisor = { category = ADM skill = 2 }
+				employed_advisor = { category = DIP skill = 2 }
+				employed_advisor = { category = MIL skill = 2 }
+			}
+			is_in_deficit = no
+			republican_tradition = 80
+		} 
+
+		effect = {
+			set_country_flag = WL_formed_from_indlebury
+			change_tag = AD8
+			swap_free_idea_group = yes
+			custom_tooltip = mission_coming_soon
+			# swap_non_generic_missions = yes
+		} 
+	}
+}
+MAGD_initial_branch_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { is_or_was_tag = { tag = Z02 } } 
+
+	MAGD_4_1 = {
+		icon = mission_women_prayer
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			stability = 1
+		} 
+
+		effect = {
+			set_country_flag = WL_magda_reverance_festival
+			custom_tooltip = WL_magda_reverance_festival_tt
+		} 
+	}
+
+	MAGD_4_2 = {
+		icon = mission_white_tower
+		position = 3
+		required_missions = { 
+			WL_3_2
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			have_cast_aid_construction = yes
+			923 = {
+				has_building = mage_tower
+				base_production = 10
+			}
+			west_bisan_area = {
+				NOT = { unrest = 1 }
+			}
+			579 = {
+				NOT = { unrest = 1 }
+			}
+			300 = {
+				NOT = { unrest = 1 }
+			}
+		} 
+
+		effect = {
+			add_estate_loyalty = {
+				estate = estate_mages
+				loyalty = 10
+			}
+			923 = {
+				add_or_upgrade_production_building = yes
+				add_permanent_province_modifier = {
+					name = WL_aelthil
+					duration = -1
+				}
+			}
+			custom_tooltip = WL_magdalaire_expanding_infrastructure_tt
+			set_country_flag = WL_magdalaire_expanding_infrastructure
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						if = {
+							limit = {
+								has_dlc = "Leviathan"
+							}
+							num_of_times_expanded_infrastructure = 1
+						}
+						else = {
+							development = 15
+						}
+					}
+					random_list = {
+						50 = {
+							add_elven_minority_size_effect = yes
+						}
+						50 = {
+							add_half_elven_minority_size_effect = yes
+						}
+					}
+				}
+			}
+			custom_tooltip = " "
+			complex_dynamic_effect_ace = {
+				first_custom_tooltip = WL_magdalaire_tower_tt
+				first_limit = "
+					294 = { has_building = mage_tower }
+				"
+				first_effect = "
+					294 = {
+						change_culture = alenic_half_elf
+						add_permanent_province_modifier = {
+							name = WL_aelthil
+							duration = -1
+						}
+					}
+				"
+			}
+		} 
+	}
+}
+INDL_initial_branch_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { is_or_was_tag = { tag = Z04 } }
+
+	INDL_4_1 = {
+		icon = mission_plc_lifetime_of_war
+		position = 1
+		required_missions = { 
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			stability = 1
+		} 
+
+		effect = {  
+			custom_tooltip = WL_indlebury_emulants_of_indel_tt
+			country_event = { id = wl.26 days = 1 }
+		} 
+	}	
+}
+WL_common_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	potential = { 
+		OR = {
+			is_or_was_tag = { tag = Z02 }
+			is_or_was_tag = { tag = Z04 } 
+		} 
+	}
+
+	WL_4_2 = {
+		icon = mission_lothane_legacy
+		position = 5
+		required_missions = { WL_3_3 }
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			A30 = { exists = no }
+		}
+
+		effect = {
+			add_splendor = 200
+			add_prestige_or_monarch_power = { amount = 25 }
+			every_owned_province = {
+				limit = { is_core = A30 }
+				add_nationalism = -5
+			}
+			custom_tooltip = WL_lower_ae_tt
+			hidden_effect = {
+				every_known_country = {
+					limit = {
+						is_part_of_hre = yes
+					}
+					add_aggressive_expansion = {
+						who = ROOT
+						value = -20
+					}
+				}
+			}
+		} 
+	}
+
+}
+INDL_initial_branch_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { is_or_was_tag = { tag = Z04 } } 
+
+	INDL_5_1 = {
+		icon = mission_whisper
+		position = 2
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			advisor = spymaster
+			OR = {
+				has_spy_network_in = {
+					who = A30
+					value = 10
+				}
+				has_spy_network_in = {
+					who = A49
+					value = 10
+				}
+				has_spy_network_in = {
+					who = A85
+					value = 10
+				}
+				has_spy_network_in = {
+					who = A93
+					value = 10
+				}
+			}
+		}
+
+		effect = {  
+			add_country_modifier = {
+				name = WL_kindlebury_scare
+				duration = 7300
+			}
+			complex_dynamic_effect_ace = {
+				first_custom_tooltip = WL_indlebury_two_spies_tt
+				first_limit = "
+					WL_indlebury_two_spies = yes
+				"
+				first_effect = "
+					903 = {
+						add_devastation = -10
+					}
+					add_estate_loyalty = {
+						estate = all
+						loyalty = 5
+					}
+				"
+			}
+		} 
+	}
+
+	INDL_5_2 = {
+		icon = mission_mounted_battle
+		position = 3
+		required_missions = { 
+			INDL_5_1 
+			WL_3_2
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			all_rival_country = {
+				scornfully_insulted_check = yes
+			}
+			all_owned_province = {
+				NOT = { unrest = 1 }
+			}
+		} 
+
+		effect = {
+			custom_tooltip = WL_kindlebury_cb_unlocked_tt
+			set_country_flag = WL_kindlebury_investigation
+		} 
+	}
+
+	INDL_5_3 = {
+		icon = reform_the_state
+		position = 5
+		required_missions = { 
+			INDL_5_2
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			check_variable = {
+				which = KindleburyCounter
+				value = 2
+			}
+			power_projection = 50
+			land_forcelimit = 20
+		} 
+
+		effect = {
+			WL_indlebury_lower_unrest_effect = yes
+			add_stability = 1
+			hidden_effect = {
+				set_variable = {
+					which = KindleburyCounter
+					value = 0
+				}
+			}
+			clr_country_flag = WL_kindlebury_investigation
+			complex_dynamic_effect_ace = {
+				first_custom_tooltip = WL_indlebury_four_investigations_tt
+				first_limit = "
+					check_variable = {
+						which = KindleburyCounter
+						value = 4
+					}
+				"
+				first_effect = "
+					add_adm_power = 50
+					add_splendor = 200
+					add_permanent_power_projection = {
+						type = 10_permanent_power_projection
+						amount = 10
+					}
+					define_advisor = {
+						type = spymaster
+						culture = wexonard
+						skill = 1
+						cost_multiplier = 0.5
+					}
+				"
+			}
+		} 
+	}
+}
+MAGD_initial_branch_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { is_or_was_tag = { tag = Z02 } } 
+
+	
+	MAGD_5_1 = {
+		icon = mission_priest_church
+		position = 2
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			has_personal_deity = nerat
+			OR = {
+				inquisitor = 1
+				theologian = 1
+			}
+			estate_loyalty = {
+				estate = estate_church
+				loyalty = 60
+			}
+		} 
+
+		effect = {  
+			custom_tooltip = WL_nerat_explanation_tt
+			set_country_flag = WL_nerat_traits
+			add_ruler_personality = just_personality
+			complex_dynamic_effect_ace = {
+				first_custom_tooltip = WL_branch_2_mission_not_completed_tt
+				first_limit = "
+					NOT = { mission_completed = MAGD_2_1 }
+				"
+				first_effect = "
+					A30 = { 
+						add_spy_network_from = {
+							who = ROOT
+							value = 15
+						}
+					}
+					A48 = { 
+						add_spy_network_from = {
+							who = ROOT
+							value = 15
+						}
+					}
+					remove_ruler_personality = craven_personality
+				"
+			}
+		} 
+	}
+
+	MAGD_5_2 = {
+		icon = mission_land_of_churches
+		position = 3
+		required_missions = { 
+			MAGD_5_1
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			num_of_owned_provinces_with = {
+				has_tax_building_trigger = yes
+				value = 5
+			}
+		} 
+
+		effect = { 
+			custom_tooltip = WL_magd_temples_prosperity_tt
+			tooltip = {
+				add_base_tax = 1
+				add_prosperity = 10
+				add_devastation = -5
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = { has_tax_building_trigger = yes }
+					add_base_tax = 1
+					add_prosperity = 10
+					add_devastation = -5
+				}
+			}
+		} 
+	}
+
+	MAGD_5_3 = {
+		icon = mission_reliable_allies
+		position = 4
+		required_missions = { 
+			MAGD_5_2
+			MAGD_4_2
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			calc_true_if = {
+				amount = 2
+				all_known_country = {
+					government = theocracy
+					has_opinion = {
+						who = ROOT
+						value = 50
+					}
+				}
+			}
+			if = { 
+				limit = { 
+					calc_true_if = {
+						amount = 2
+						all_known_country = {
+							government = theocracy
+							has_opinion = {
+								who = ROOT
+								value = 50
+							}
+						}
+					}
+					NOT = {
+						calc_true_if = {
+							amount = 3
+							all_known_country = {
+								government = theocracy
+								has_opinion = {
+									who = ROOT
+									value = 50
+								}
+							}
+						}
+					}
+				}
+				treasury = 200
+			}
+			else_if = {
+				limit = { 
+					calc_true_if = {
+						amount = 3
+						all_known_country = {
+							government = theocracy
+							has_opinion = {
+								who = ROOT
+								value = 50
+							}
+						}
+					}
+					NOT = {
+						calc_true_if = {
+							amount = 4
+							all_known_country = {
+								government = theocracy
+								has_opinion = {
+									who = ROOT
+									value = 50
+								}
+							}
+						}
+					}
+				}
+				treasury = 150
+			}
+			else_if = {
+				limit = { 
+					calc_true_if = {
+						amount = 4
+						all_known_country = {
+							government = theocracy
+							has_opinion = {
+								who = ROOT
+								value = 50
+							}
+						}
+					}
+				}
+				treasury = 100
+			}
+		}
+
+		effect = { 
+			custom_tooltip = WL_magd_theocracies_tt
+			if = { 
+				limit = { 
+					NOT = {
+						calc_true_if = {
+							amount = 3
+							all_known_country = {
+								government = theocracy
+								has_opinion = {
+									who = ROOT
+									value = 50
+								}
+							}
+						}
+					}
+				}
+				add_treasury = -200
+				294 = {
+					add_or_upgrade_tax_building = yes
+				}
+			}
+			else_if = {
+				limit = { 
+					calc_true_if = {
+						amount = 3
+						all_known_country = {
+							government = theocracy
+							has_opinion = {
+								who = ROOT
+								value = 50
+							}
+						}
+					}
+					NOT = {
+						calc_true_if = {
+							amount = 4
+							all_known_country = {
+								government = theocracy
+								has_opinion = {
+									who = ROOT
+									value = 50
+								}
+							}
+						}
+					}
+				}
+				add_treasury = -150
+				294 = {
+					add_or_upgrade_tax_building = yes
+				}
+			}
+			else_if = {
+				limit = { 
+					calc_true_if = {
+						amount = 4
+						all_known_country = {
+							government = theocracy
+							has_opinion = {
+								who = ROOT
+								value = 50
+							}
+						}
+					}
+				}
+				add_treasury = -100
+				294 = {
+					add_or_upgrade_tax_building = yes
+				}
+			}
+		}
+	}
+		
+	MAGD_5_4 = {
+		icon = fund_the_monasteries
+		position = 6
+		required_missions = { 
+			MAGD_5_3
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			332 = {
+				if = {
+					limit = {
+						has_dlc = "Leviathan"
+					}
+					num_of_times_expanded_infrastructure = 1
+				}
+				else = {
+					development = 15
+				}
+				has_great_project = {
+					type = the_necropolis
+					tier = 1
+				}
+			}
+			num_of_owned_provinces_with = {
+				has_tax_building_trigger = yes
+				value = 10
+			}
+		} 
+
+		effect = {  
+			332 = {
+				add_province_modifier = {
+					name = WL_corseton_upgrade
+					duration = 7300
+				}
+			}
+			custom_tooltip = WL_unlock_corseton_conditionals_tt
+			set_estate_privilege = estate_magdalaire_neratic_guardians
+			hidden_effect = {
+				unlock_estate_privilege = {
+					estate_privilege = estate_magdalaire_neratic_guardians
+				}
+			}
+		} 
+	}
+}

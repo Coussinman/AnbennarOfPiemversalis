@@ -1,0 +1,91 @@
+po_ACE_dismantling = {
+	category = 6
+	power_projection = vassalized_rival
+	power_cost_base = 1.0
+	prestige_base = 0.1
+	ae_base = 0.1
+	warscore_cost = {
+		all_provinces = 0.2
+		no_provinces = 20.0
+		owner_keeps = 0.0
+		conquered = 0.0
+		returned_core = 0.0
+		released_nation = 0.0
+		cancelled_subject = 0.0
+		concede_colonial_region = 0.0
+	}
+	warscore_cap = 100
+	requires_demand_independence = yes
+	is_make_subject = yes
+	requires_is_allowed = no
+	is_visible = {
+		is_in_war = {
+			casus_belli = cb_ACE_great_power_dismantlement
+			attacker_leader = ROOT
+		}
+		FROM = {
+			is_in_war = {
+				casus_belli = cb_ACE_great_power_dismantlement
+			}
+		}
+	}
+	is_allowed = {
+		FROM = {
+			capital_scope = {
+					controlled_by = ROOT
+			}
+		}
+	}
+	effect = {
+		ROOT = {
+			hidden_effect = {
+				remove_casus_belli = {
+					target = PREV
+					type = cb_ACE_great_power_dismantlement
+				}
+			}
+			add_dip_power = -400
+			add_ruler_modifier = {
+				name = ACE_dismantler_modifier
+				duration = 7300
+			}
+		}
+		FROM = {
+			add_aggressive_expansion = { who = ROOT value = 200 apply_calc = no }
+			custom_tooltip = ACE_dismantle_gp_tt
+			hidden_effect = {
+				every_owned_province = {
+					random_core_country = {
+						limit = {
+							NOT = { tag = FROM }
+						}
+						PREV = { cede_province = PREV }
+						add_truce_with = FROM
+						add_opinion = {
+							who = ROOT
+							modifier = released_in_peace
+							multiplier = 100
+						}
+					}
+				}
+				every_subject_country = {
+					grant_independence = yes
+				}
+			}
+			every_war_enemy_country = {
+				white_peace = PREV
+				add_opinion = {
+					who = ROOT
+					modifier = released_in_peace
+					multiplier = 50
+				}
+			}
+		}
+	}
+	ai_weight = {
+		export_to_variable = {
+			variable_name = ai_value
+			value = 50
+		}
+	}
+}

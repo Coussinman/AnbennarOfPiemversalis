@@ -1,0 +1,334 @@
+namespace = flavor_milcorissia
+
+
+country_event = { 
+	id = flavor_milcorissia.1
+	title = flavor_milcorissia.1.t
+	desc = flavor_milcorissia.1.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_milcorissia.1.a
+		
+	}
+	
+}
+
+country_event = { 
+	id = flavor_milcorissia.2
+	title = flavor_milcorissia.2.t
+	desc = flavor_milcorissia.2.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_milcorissia.2.a
+		capital_scope = {
+			add_base_tax = 1
+			add_base_production = 1
+			add_base_manpower = 1
+		}
+	}
+	option = {
+		name = flavor_milcorissia.2.b
+		set_capital = 419
+		custom_tooltip = flavor_milcorissia.2.b.tt
+		change_variable = {
+			which = B94_xamarzu_favour_variable
+			value = 1
+		}
+	}
+	option = {
+		name = flavor_milcorissia.2.c
+		set_capital = 306
+		add_army_professionalism = 0.05
+		add_country_modifier = {
+			name = B94_iron_hill
+			duration = 7300
+		}
+	}
+
+	option = {
+		name = flavor_milcorissia.2.f
+		set_capital = 332
+		define_advisor = {
+			type = inquisitor
+			skill = 2
+			discount = yes
+		}
+		add_country_modifier = {
+			name = B94_stewards_of_necropolis
+			duration = 7300
+		}
+	}
+	option = {
+		name = flavor_milcorissia.2.g
+		set_capital = 919
+		add_prestige = 10
+		add_country_modifier = {
+			name = B94_amber_court
+			duration = 7300
+		}
+	}
+}
+
+country_event = {  #B94_xamarzu_favour_menu
+	id = flavor_milcorissia.300
+	title = flavor_milcorissia.300.t
+	desc = flavor_milcorissia.300.desc
+	picture = MYSTIC_IN_PRAYER_eventPicture
+	is_triggered_only = yes
+
+	option = { #go back
+		name = flavor_milcorissia.300.a
+		ai_chance = { factor = 100 }
+		hidden_effect = { clr_country_flag = B94_xamarzu_favour_menu_interface_open_flag }
+		# highlight = yes
+		#goto = 419
+	}
+
+	option = { #religious ceremony
+		name = flavor_milcorissia.300.b
+		ai_chance = { factor = 100 }
+		# hidden_effect = { clr_country_flag = B94_xamarzu_favour_menu_interface_open_flag }
+		# highlight = yes
+		#goto = 419
+		hidden_effect = {
+			country_event = {
+				id = flavor_milcorissia.300
+			}
+		}
+		trigger = { NOT = { has_country_modifier = B94_grand_religious_ceremony_modifier } }
+
+		if = {
+			limit = {
+				church_power = 200
+			}
+			add_church_power = -200
+			change_variable = {
+				which = B94_xamarzu_favour_variable
+				value = 1
+			}
+		}
+		else = {
+			custom_tooltip = B94_religious_ceremony_no_tt
+			tooltip = {
+				add_church_power = -200
+				change_variable = {
+					which = B94_xamarzu_favour_variable
+					value = 1
+				}
+				add_country_modifier = {
+					name = B94_grand_religious_ceremony_modifier
+					duration = 5475
+				}
+			}
+		}
+	}
+
+	option = { #Ask for his blessing
+		name = flavor_milcorissia.300.c
+		ai_chance = { factor = 100 }
+		# hidden_effect = { clr_country_flag = B94_xamarzu_favour_menu_interface_open_flag }
+		# highlight = yes
+		#goto = 419
+		hidden_effect = {
+			country_event = {
+				id = flavor_milcorissia.300
+			}
+		}
+		trigger = {
+			NOT = { 
+				has_ruler_modifier = B94_ruler_blessing_5 
+			}
+		}
+
+		if = {
+			limit = {
+				check_variable = {
+					which = B94_xamarzu_favour_variable
+					value = 1
+				}
+			}
+			change_variable = {
+				which = B94_xamarzu_favour_variable
+				value = -1
+			}
+			B94_increase_xamarzu_blessing_effect = yes
+		}
+		else = {
+			custom_tooltip = B94_blessing_no_tt
+			tooltip = {
+				change_variable = {
+					which = B94_xamarzu_favour_variable
+					value = -1
+				}
+				B94_increase_xamarzu_blessing_effect = yes
+			}
+		}
+	}
+
+	option = { #infest enemy war leader
+		name = flavor_milcorissia.300.e
+		ai_chance = { factor = 100 }
+		# hidden_effect = { clr_country_flag = B94_xamarzu_favour_menu_interface_open_flag }
+		# highlight = yes
+		# goto = 419
+		hidden_effect = {
+			country_event = {
+				id = flavor_milcorissia.300
+			}
+		}
+		# trigger = { is_at_war = yes }
+
+		if = {
+			limit = {
+				is_at_war = yes
+				check_variable = {
+					which = B94_xamarzu_favour_variable
+					value = 1
+				}
+			}
+			change_variable = {
+				which = B94_xamarzu_favour_variable
+				value = -1
+			}
+			B94_infest_war_leader_effect = yes
+		}
+		else = {
+			custom_tooltip = B94_infest_no_tt
+			tooltip = {
+				change_variable = {
+					which = B94_xamarzu_favour_variable
+					value = -1
+				}
+				B94_infest_war_leader_effect = yes
+			}
+		}
+	}
+
+	option = { #speed up armies
+		name = flavor_milcorissia.300.f
+		ai_chance = { factor = 100 }
+		# hidden_effect = { clr_country_flag = B94_xamarzu_favour_menu_interface_open_flag }
+		# highlight = yes
+		# goto = 419
+		hidden_effect = {
+			country_event = {
+				id = flavor_milcorissia.300
+			}
+		}
+		trigger = {
+			NOT = {
+				has_country_modifier = B94_Xamarzus_speed_modifier
+			} 
+		}
+
+		if = {
+			limit = {
+				has_country_modifier = undead_military
+				check_variable = {
+					which = B94_xamarzu_favour_variable
+					value = 1
+				}
+			}
+			change_variable = {
+				which = B94_xamarzu_favour_variable
+				value = -1
+			}
+			add_country_modifier = {
+				name = B94_Xamarzus_speed_modifier
+				duration = 3650
+			}
+		}
+		else = {
+			custom_tooltip = B94_speed_no_tt
+			tooltip = {
+				change_variable = {
+					which = B94_xamarzu_favour_variable
+					value = -1
+				}
+				add_country_modifier = {
+					name = B94_Xamarzus_speed_modifier
+					duration = 3650
+				}
+			}
+		}
+	}
+
+	option = { #use morgurax's Tablets
+		name = flavor_milcorissia.300.g
+		ai_chance = { factor = 100 }
+		# hidden_effect = { clr_country_flag = B94_xamarzu_favour_menu_interface_open_flag }
+		# highlight = yes
+		# goto = 419
+		hidden_effect = {
+			country_event = {
+				id = flavor_milcorissia.300
+			}
+		}
+		trigger = {
+			ruler_has_personality = mage_personality
+			NOT = { 
+				is_necromancy_3 = yes 
+			} 
+		}
+
+		if = {
+			limit = {
+				check_variable = {
+					which = B94_xamarzu_favour_variable
+					value = 1
+				}
+			}
+			change_variable = {
+				which = B94_xamarzu_favour_variable
+				value = -1
+			}
+			B94_buff_necro_or_give_stat_effect = yes
+		}
+		else = {
+			custom_tooltip = B94_tablets_no_tt
+			tooltip = {
+				change_variable = {
+					which = B94_xamarzu_favour_variable
+					value = -1
+				}
+				B94_buff_necro_or_give_stat_effect = yes
+			}
+		}
+	}
+}
+
+country_event = { 
+	id = flavor_milcorissia.301
+	title = flavor_milcorissia.301.t
+	desc = flavor_milcorissia.301.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	fire_only_once = yes
+	
+	trigger = {
+		tag = B94
+		332 = {
+			has_great_project = {
+				type = ACE_religion_labyrinth
+				tier = 1
+			}
+			custom_trigger_tooltip = {
+				tooltip = diggy_no_building #This includes armies and such
+				NOT = { has_construction = any }
+			}
+		}
+	}
+
+	option = {
+		name = flavor_milcorissia.301.a
+		332 = {
+			add_great_project = {
+				type = ACE_kuradaznai_necropolis
+			}
+		}
+	}
+	
+}

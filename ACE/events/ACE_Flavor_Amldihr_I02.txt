@@ -1,0 +1,1161 @@
+namespace = amldihr
+
+#Founding of Nation
+country_event = {
+	id =  amldihr.101
+	title =  amldihr.101.t
+	desc =  amldihr.101.d
+	picture = PROTESTANT_GREAT_REFORMER_eventPicture
+
+	is_triggered_only = yes
+
+	option = { # Amldihr Dutch Republic
+		name = amldihr.101.a
+		ai_chance = {
+			factor = 100 }
+		if = {
+			limit = { NOT = { government = republic } }
+			change_government = republic
+		}
+		if = {
+			limit = { has_country_flag = formed_diggy_formable }
+			add_government_reform = amldihr_dutch_republic_reform
+		}
+		else = {
+			add_government_reform = amldihr_dutch_republic_reform
+		}
+		4119 = {
+			set_seat_in_parliament = yes
+		}
+		hidden_effect = {
+			add_republican_tradition = 100
+			if = {
+				limit = {
+					NOT = {
+						ADM = 6
+					}
+				}
+				change_adm = 1
+			}
+			if = {
+				limit = {
+					NOT = {
+						DIP = 6
+					}
+				}
+				change_dip = 1
+			}
+			if = {
+				limit = {
+					NOT = {
+						MIL = 6
+					}
+				}
+				change_mil = 1
+			}
+			change_statists_vs_orangists = 0.10
+		}
+	}
+}
+
+#The Mithril Forges - Merc Unlock happens in mission script.
+country_event = {
+	id = amldihr.102
+	title = amldihr.102.t
+	desc = amldihr.102.d
+	picture = CONQUEST_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Get Mercs
+		name = amldihr.102.a
+		custom_tooltip = I01_unlock_merc_mithril_royal_guard_tooltip
+	}
+}
+
+#Rail Hub
+country_event = {
+	id = amldihr.103
+	title = amldihr.103.t
+	desc = amldihr.103.d
+	picture = DWARVEN_RAIL_eventPicture #MERCHANTS_TALKING_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Spread of Goods
+		name = amldihr.103.a
+		ai_chance = { factor = 40 }
+		2931 = {
+			add_province_modifier = {
+				name = amldihr_er_natvir_trade_focus
+				duration = 10950
+			}
+		}
+		add_estate_loyalty = {
+			estate = estate_burghers
+			loyalty = 20
+		}
+	}
+	option = { #Spread of Ideas
+		name = amldihr.103.b
+		ai_chance = { factor = 30 }
+
+		2931 = {
+			add_province_modifier = {
+				name = amldihr_er_natvir_ideas_focus
+				duration = 10950
+			}
+		}
+
+		custom_tooltip = amldihr_artificer_er_natvir_tooltip
+		hidden_effect = {
+		if = {
+			limit = { has_estate = estate_artificers }
+			add_estate_loyalty = {
+				estate = estate_artificers
+				loyalty = 20
+			}
+		}
+		else = {
+			add_adm_power = 25
+			add_dip_power = 25
+			add_mil_power = 25
+		}
+		}
+	}
+	option = { #Spread of Religion
+		name = amldihr.103.c
+		ai_chance = { factor = 30 }
+		2931 = {
+			add_province_modifier = {
+				name = amldihr_er_natvir_religion_focus
+				duration = 10950
+			}
+		}
+		add_estate_loyalty = {
+			estate = estate_church
+			loyalty = 20
+			}
+	}
+}
+
+#Bulwark of the North - Cede provinces to make a march, get bonuses.
+country_event = {
+	id = amldihr.104
+	title = amldihr.104.t
+	desc = amldihr.104.d
+	picture = DIPLOMACY_SIGNING_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	#Accept
+	option = {
+		name = amldihr.104.a
+		ai_chance = { factor = 100 }
+
+		hidden_effect = {
+			2868 = {
+				cede_province = I08
+				add_core = I08
+				remove_core = I01
+			}
+			2869 = {
+				cede_province = I08
+				add_core = I08
+				remove_core = I01
+			}
+			4163 = {
+				cede_province = I08
+				add_core = I08
+				remove_core = I01
+			}
+			4022 = {
+				cede_province = I08
+				add_core = I08
+				remove_core = I01
+			}
+			4074 = {
+				cede_province = I08
+				add_core = I08
+				remove_core = I01
+			}
+			4096 = {
+				cede_province = I08
+				add_core = I08
+				remove_core = I01
+			}
+			4553 = {
+				cede_province = I08
+				add_core = I08
+				remove_core = I01
+			}
+			4054 = {
+				cede_province = I08
+				add_core = I08
+				remove_core = I01
+			}
+			4044 = {
+				cede_province = I08
+				add_core = I08
+				remove_core = I01
+			}
+			4045 = {
+				cede_province = I08
+				add_core = I08
+				remove_core = I01
+			}
+			4046 = {
+				cede_province = I08
+				add_core = I08
+				remove_core = I01
+			}
+			4552 = {
+				cede_province = I08
+				add_core = I08
+				remove_core = I01
+			}
+			I01 = { create_march = I08 }
+			add_trust = {
+				who = I08
+				value = 50
+				mutual = yes
+			}
+			add_trust = {
+				who = I01
+				value = 50
+				mutual = yes
+			}
+		}
+		custom_tooltip = amldihr_haraz_march_tooltip
+
+		orldhum_area = {
+			add_province_modifier = {
+				name = amldihr_haraz_march_mod
+				duration = 9125
+			}
+		}
+		fallen_asra_area  = {
+			add_province_modifier = {
+				name = amldihr_haraz_march_mod
+				duration = 9125
+			}
+		}
+		chainlink_mines_area  = {
+			add_province_modifier = {
+				name = amldihr_haraz_march_mod
+				duration = 9125
+			}
+		}
+		add_estate_loyalty = {
+			estate = estate_nobles
+			loyalty = 20
+		}
+		add_prestige = 25
+
+		#Makes sure Haraz is a Platinum Dwarf and stable
+		4119 = { add_province_triggered_modifier =   haraz_triggered_mod_amldihr }
+		hidden_effect = {
+			I08 = {
+				add_prestige = 25
+				add_legitimacy = 100
+				add_republican_tradition = 100
+				add_adm_power = 100
+				add_dip_power = 100
+				add_mil_power = 100
+				add_treasury = 150
+				set_country_flag = formed_diggy_formable
+				clr_country_flag = knightly_order_adventurer
+				every_owned_province = {
+					limit = { culture = ROOT }
+					change_culture = platinum_dwarf
+				}
+				if = {
+					limit = { ruler_culture = ROOT }
+					set_ruler_culture = platinum_dwarf
+				}
+				if = {
+					limit = { has_heir = yes heir_culture = ROOT }
+					set_heir_culture = platinum_dwarf
+				}
+				if = {
+					limit = { has_consort = yes consort_culture = ROOT }
+					set_consort_culture = platinum_dwarf
+				}
+				change_primary_culture = platinum_dwarf
+			}
+		}
+
+	}
+
+	option = { #Reject
+		name = amldihr.104.b
+		ai_chance = { factor = 0 }
+
+		orldhum_area = {
+				add_nationalism = 5
+				add_province_modifier = {
+					name = "amldihr_rejected_march"
+					duration = 10950
+				}
+			}
+		add_estate_loyalty = {
+			estate = estate_nobles
+			loyalty = -10
+			}
+		add_prestige = 25
+		add_absolutism = 10
+	}
+}
+
+#Fractious Disagreement
+country_event = {
+	id = amldihr.105
+	title = amldihr.105.t
+	desc = amldihr.105.d
+	picture = DEBATE_REPUBLICAN_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Side with Krak
+		name = amldihr.105.a
+		ai_chance = { factor = 80 }
+		amldihr_area = {
+				add_province_modifier = {
+					name = "amldihr_side_with_krak"
+					duration = -1
+				}
+		}
+		4208 = {
+				add_province_modifier = {
+					name = "amldihr_side_with_krak"
+					duration = -1
+				}
+		}
+		add_prestige = 25
+		add_treasury = -1000
+		add_adm_power = -25
+		add_dip_power = -50
+		add_mil_power = -75
+	}
+	option = { #Side with Orlazam
+		name = amldihr.105.b
+		ai_chance = { factor = 20 }
+		serpents_vale_region = {
+				add_province_modifier = {
+					name = "amldihr_side_with_orlazam"
+					duration = -1
+				}
+		}
+		4147 = {
+				add_province_modifier = {
+					name = "amldihr_side_with_orlazam"
+					duration = -1
+				}
+		}
+		add_prestige = 25
+		add_treasury = -1000
+		add_adm_power = -75
+		add_dip_power = -50
+		add_mil_power = -25
+	}
+}
+
+#Return of the King
+country_event = {
+	id = amldihr.106
+	title = amldihr.106.t
+	desc = amldihr.106.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Remain a Republic
+		name = amldihr.106.a
+		ai_chance = { factor = 80 }
+
+		add_country_modifier = {
+			name = amldihr_a_new_king_a_new_beg
+			duration = 7300
+		}
+		add_country_modifier = {
+			name = amldihr_a_new_king_a_new_beg_kept_republic
+			duration = 7300
+		}
+		custom_tooltip = recruit_mage_amldihr_republic_action_tooltip
+		add_prestige = 25
+		add_adm_power = 100
+		add_dip_power = 100
+		add_mil_power = 100
+	}
+
+	option = { #Monarchy Reform
+		name = amldihr.106.b
+		ai_chance = { factor = 20 }
+
+		set_government_rank = 3
+			add_prestige = 25
+			if = {
+				limit = {
+					NOT = {
+						government = monarchy
+					}
+				}
+				change_government = monarchy
+			}
+			hidden_effect = { add_legitimacy = 100 }
+			add_government_reform = amldihr_high_monarchy_reform
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			add_country_modifier = {
+			name = amldihr_a_new_king_a_new_beg
+			duration = 7300
+			}
+			I01 = { set_dynasty = "Amldihrus" }
+
+			#Adds all owned holds in West Dwarovar region to parliament seats after forming monarchy removed all seats
+			hidden_effect = {
+				every_owned_province = {
+					if = {
+						limit = {
+							OR = {
+								has_terrain = dwarven_hold
+								has_terrain = dwarven_hold_surface
+							}
+							region = west_dwarovar_region
+						}
+						set_seat_in_parliament = yes
+					}
+				}
+			}
+
+			hidden_effect = { country_event = { id = amldihr.111 } }
+			hidden_effect = { country_event = { id = amldihr.115 days=3650 random=3650} }
+			custom_tooltip = recruit_mage_amldihr_republic_action_tooltip
+	}
+}
+
+#Empire's Gates and Empire's Shield
+country_event = {
+	id = amldihr.107
+	title = amldihr.107.t
+	desc = amldihr.107.d
+	picture = FORGE_eventPicture #FORT_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Do it
+		name = amldihr.107.a
+
+		2878 = {
+					if = {
+						limit = {
+							NOT = {
+								trade_goods = gems
+								trade_goods = gold
+								trade_goods = damestear
+								trade_goods = precursor_relics
+								trade_goods = dyes
+								trade_goods = iron
+								trade_goods = mithril
+								trade_goods = copper
+							}
+						}
+						change_trade_goods = salt
+					}
+					rename_capital = "Empire's Shield"
+					change_province_name = "Empire's Shield"
+					change_culture = ROOT
+					change_religion = ROOT
+					add_base_manpower = 3
+					add_province_modifier = {
+						name = "amldihr_empires_gate"
+						duration = -1
+					}
+					hidden_effect = {
+						cancel_construction = yes
+						remove_building = fort_16th
+					}
+					add_building = fort_17th
+				}
+		2932 = {
+					if = {
+						limit = {
+							NOT = {
+								trade_goods = gems
+								trade_goods = gold
+								trade_goods = damestear
+								trade_goods = precursor_relics
+								trade_goods = dyes
+								trade_goods = iron
+								trade_goods = mithril
+								trade_goods = copper
+							}
+						}
+						change_trade_goods = salt
+					}
+					rename_capital = "Empire's Gate"
+					change_province_name = "Empire's Gate"
+					change_culture = ROOT
+					change_religion = ROOT
+					add_base_manpower = 3
+					add_province_modifier = {
+						name = "amldihr_empires_gate"
+						duration = -1
+					}
+					hidden_effect = {
+						cancel_construction = yes
+						remove_building = fort_16th
+					}
+					add_building = fort_17th
+				}
+		add_treasury = -2000
+		add_mil_power = -200
+		remove_advisor_by_category = ADM
+	}
+}
+
+#Command Buffs - short
+country_event = {
+	id = amldihr.108
+	title = amldihr.108.t
+	desc = amldihr.108.d
+	picture = HORDE_ON_HORSEBACK_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Get Buffs
+		name = amldihr.108.a
+		add_country_modifier = {
+			name = amldihr_command_fight_buffs
+			duration = 1095
+		}
+	}
+}
+
+#Goblins of Earthseed
+country_event = {
+	id = amldihr.109
+	title = amldihr.109.t
+	desc = amldihr.109.d
+	picture = GOBLIN_GUNNER_event_picture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Culture Convert Goblins
+		name = amldihr.109.a
+		ai_chance = { factor = 30 }
+
+		earthseed_area = {
+			add_province_modifier = {
+				name = "amldihr_earthseed_conversions"
+				duration = 9125
+			}
+			type = all
+		}
+
+		4218 = {
+			add_goblin_minority_size_effect = yes
+			add_goblin_minority_size_effect = yes
+		}
+		2914 = {
+			add_goblin_minority_size_effect = yes
+		}
+		4124 = {
+			add_goblin_minority_size_effect = yes
+		}
+		4078 = {
+			add_goblin_minority_size_effect = yes
+		}
+		4217 = {
+			add_goblin_minority_size_effect = yes
+		}
+		small_decrease_of_goblin_tolerance_effect = yes
+		add_dip_power = -100
+	}
+	option = { #Forcibly Remove Goblins
+		name = amldihr.109.b
+		ai_chance = { factor = 20 }
+
+		custom_tooltip = destroy_earthseed_tooltip
+
+		hidden_effect = {
+			4269 = {
+				change_culture = no_culture
+				change_religion = no_religion
+				add_base_tax = -2
+				add_base_production = -2
+				add_base_manpower = -2
+				destroy_province = yes
+			}
+			4272 = {
+				change_culture = no_culture
+				change_religion = no_religion
+				add_base_tax = -2
+				add_base_production = -2
+				add_base_manpower = -2
+				destroy_province = yes
+			}
+			4292 = {
+				change_culture = no_culture
+				change_religion = no_religion
+				add_base_tax = -2
+				add_base_production = -2
+				add_base_manpower = -2
+				destroy_province = yes
+			}
+			4274 = {
+				change_culture = no_culture
+				change_religion = no_religion
+				add_base_tax = -2
+				add_base_production = -2
+				add_base_manpower = -2
+				destroy_province = yes
+			}
+			4275 = {
+				change_culture = no_culture
+				change_religion = no_religion
+				add_base_tax = -2
+				add_base_production = -2
+				add_base_manpower = -2
+				destroy_province = yes
+			}
+			every_country = {
+				limit = {
+					OR = {
+						culture_group = goblin
+						culture_group = hobgoblin
+					}
+					OR = {
+						capital_scope = { region = tree_of_stone_region }
+						capital_scope = { region = jade_mines_region }
+					}
+				}
+				add_opinion = {
+					who = ROOT
+					modifier = opinion_persecuted_race
+				}
+			}
+		}
+		large_decrease_of_goblin_tolerance_effect = yes
+		add_mil_power = -100
+		add_yearly_manpower = -0.5
+	}
+	option = { #Do Nothing
+		name = amldihr.109.c
+		ai_chance = { factor = 50 }
+
+		earthseed_area = {
+				add_province_modifier = {
+					name = "amldihr_earthseed_ambivalence"
+					duration = 7300
+				}
+				add_local_autonomy = 25
+				type = all
+		}
+		add_estate_loyalty = {
+			estate = estate_church
+			loyalty = -10
+			}
+	}
+}
+
+#The Ranger's Captain Logbook - Edited from Base
+country_event = {
+	id = amldihr.110
+	title = amldihr.110.t
+	desc = amldihr.110.d
+	picture = TREANTS_eventPicture #BIG_BOOK_eventPicture
+
+	is_triggered_only = yes
+
+	trigger = {
+		always = yes
+	}
+
+	option = {
+		name = amldihr.110.a
+		ai_chance = { factor = 60 }
+		lonfarch_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_claim = ROOT
+			}
+		ayeth_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_claim = ROOT
+			}
+		scothalar_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_claim = ROOT
+			}
+		scothaear_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_claim = ROOT
+			}
+		yfelorr_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_claim = ROOT
+			}
+		criodharka_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_claim = ROOT
+			}
+		add_country_modifier = {
+				name = amldihr_deepwoods
+				duration = 7300
+			}
+		add_prestige = 15
+	}
+
+	option = {
+		name = amldihr.110.b
+		ai_chance = { factor = 40 }
+		4100 = {
+			add_province_modifier = {
+				name = "amldihr_destroyed_deepwoods"
+				duration = -1
+			}
+			add_building_construction = {
+				building = fort_17th
+				speed = 0.5
+				cost = 0
+			}
+		}
+		add_prestige = 15
+	}
+}
+
+#Dynasty Change Event - Because you need to edit the culture file to have custom dynasty names like "Amldihrus", so these will have to do to keep compatibility.
+country_event = {
+	id =  amldihr.111
+	title =  amldihr.111.t
+	desc =  amldihr.111.d
+	picture = KINGS_CHOICE_eventPicture
+
+	is_triggered_only = yes
+
+	option = { # Underheart
+		name = amldihr.111.a
+		ai_chance = { factor = 20 }
+
+		set_dynasty = "Underheart"
+	}
+
+	option = { # Azduran
+		name = amldihr.111.b
+		ai_chance = { factor = 10 }
+
+		set_dynasty = "Azduran"
+	}
+
+	option = { # Auirdûn or síl Balgarionn
+		name = amldihr.111.c
+		ai_chance = { factor = 10 }
+
+		set_dynasty = "Mauteron"
+	}
+
+	option = { # Throm
+		name = amldihr.111.x
+		ai_chance = { factor = 10 }
+
+		set_dynasty = "Throm"
+	}
+
+	option = { # of Dwarovhul
+		name = amldihr.111.e
+		ai_chance = { factor = 10 }
+
+		set_dynasty = "of Dwarovhul"
+	}
+
+	option = { # az-Dar
+		name = amldihr.111.f
+		ai_chance = { factor = 10 }
+
+		set_dynasty = "az-Dar"
+	}
+
+	option = { # az-Bogig
+		name = amldihr.111.g
+		ai_chance = { factor = 10 }
+
+		set_dynasty = "az-Bogig"
+	}
+
+	option = { # Gembeard
+		name = amldihr.111.h
+		ai_chance = { factor = 20 }
+
+		set_dynasty = "Gembeard"
+	}
+}
+
+#Blue Gold
+country_event = {
+	id = amldihr.112
+	title = amldihr.112.t
+	desc = amldihr.112.d
+	picture = FAT_LOOT_eventPicture
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			5002 = { save_event_target_as = damestear_province }
+		}
+	}
+
+	option = { #Option A
+		name = amldihr.112.a
+		ai_chance = { factor = 100 }
+
+		5002 = {
+			save_trade_goods = yes
+			change_trade_goods = damestear
+			add_permanent_province_modifier = {
+				name = damestear_rich_deposit
+				duration = -1
+			}
+			add_building_construction = {
+				building = counting_house
+				speed = 5
+				cost = 0.5
+			}
+		}
+		set_add_damestear_count = yes
+		add_treasury = -500
+		create_conquistador = { tradition = 100 }
+	}
+}
+
+#A Missive from Beyond Moïtsa
+country_event = {
+	id = amldihr.113
+	title = amldihr.113.t
+	desc = amldihr.113.d
+	picture = PORTUGUESE_MERCHANTS_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Option A
+		name = amldihr.113.a
+		ai_chance = { factor = 100 }
+		yyl_moitsa_east_area = {
+					limit = {
+						is_city = no
+					}
+					add_core = ROOT
+					cede_province = ROOT
+					change_culture = ROOT
+					change_religion = ROOT
+		}
+		central_moitsa_area = {
+					limit = {
+						is_city = no
+					}
+					add_core = ROOT
+					cede_province = ROOT
+					change_culture = ROOT
+					change_religion = ROOT
+		}
+		ogre_valley_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_claim = ROOT }
+				}
+				add_claim = ROOT
+		}
+		yyl_moista_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_claim = ROOT }
+				}
+				add_claim = ROOT
+		}
+	}
+}
+
+#A Harmonious Agreement
+country_event = {
+	id = amldihr.114
+	title = amldihr.114.t
+	desc = amldihr.114.d
+	picture = DWARVEN_RAIL_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Option A
+		name = amldihr.114.a
+		ai_chance = { factor = 25 }
+		dagrinrod_4_6_area = {
+				add_province_modifier = {
+					name = "amldihr_road_improvement_100_for_25"
+					duration = 9125
+				}
+		}
+		dagrinrod_7_9_area = {
+				add_province_modifier = {
+					name = "amldihr_road_improvement_100_for_25"
+					duration = 9125
+				}
+		}
+		orlazam_area = {
+				add_province_modifier = {
+					name = "amldihr_road_improvement_100_for_25"
+					duration = 9125
+				}
+		}
+		dagrinrod_13_15_area = {
+				add_province_modifier = {
+					name = "amldihr_road_improvement_100_for_25"
+					duration = 9125
+				}
+		}
+		vazhatun_area = {
+				add_province_modifier = {
+					name = "amldihr_road_improvement_100_for_25"
+					duration = 9125
+				}
+		}
+		2988 = {
+				add_province_modifier = {
+					name = "amldihr_road_improvement_100_for_25"
+					duration = 9125
+				}
+		}
+	}
+	option = { #Option B
+		name = amldihr.114.b
+		ai_chance = { factor = 25 }
+		dagrinrod_4_6_area = {
+				add_province_modifier = {
+					name = "amldihr_road_improvement_50_for_50"
+					duration = 18250
+				}
+		}
+		dagrinrod_7_9_area = {
+				add_province_modifier = {
+					name = "amldihr_road_improvement_50_for_50"
+					duration = 18250
+				}
+		}
+		orlazam_area = {
+				add_province_modifier = {
+					name = "amldihr_road_improvement_50_for_50"
+					duration = 18250
+				}
+		}
+		dagrinrod_13_15_area = {
+				add_province_modifier = {
+					name = "amldihr_road_improvement_50_for_50"
+					duration = 18250
+				}
+		}
+		vazhatun_area = {
+				add_province_modifier = {
+					name = "amldihr_road_improvement_50_for_50"
+					duration = 18250
+				}
+		}
+		2988 = {
+				add_province_modifier = {
+					name = "amldihr_road_improvement_50_for_50"
+					duration = 18250
+				}
+		}
+	}
+
+	option = { #Option C
+		name = amldihr.114.c
+		ai_chance = { factor = 25 }
+		dagrinrod_4_6_area = {
+				add_province_modifier = {
+					name = "amldihr_road_improvement_25_for_75"
+					duration = 27375
+				}
+		}
+		dagrinrod_7_9_area = {
+				add_province_modifier = {
+					name = "amldihr_road_improvement_25_for_75"
+					duration = 27375
+				}
+		}
+		orlazam_area = {
+				add_province_modifier = {
+					name = "amldihr_road_improvement_25_for_75"
+					duration = 27375
+				}
+		}
+		dagrinrod_13_15_area = {
+				add_province_modifier = {
+					name = "amldihr_road_improvement_25_for_75"
+					duration = 27375
+				}
+		}
+		vazhatun_area = {
+				add_province_modifier = {
+					name = "amldihr_road_improvement_25_for_75"
+					duration = 27375
+				}
+		}
+		2988 = {
+				add_province_modifier = {
+					name = "amldihr_road_improvement_25_for_75"
+					duration = 27375
+				}
+		}
+	}
+
+	option = { #Option D
+		name = amldihr.114.e
+		ai_chance = { factor = 25 }
+		dagrinrod_4_6_area = {
+				add_province_modifier = {
+					name = "amldihr_road_improvement_15_for_100"
+					duration = 36500
+				}
+		}
+		dagrinrod_7_9_area = {
+				add_province_modifier = {
+					name = "amldihr_road_improvement_15_for_100"
+					duration = 36500
+				}
+		}
+		orlazam_area = {
+				add_province_modifier = {
+					name = "amldihr_road_improvement_15_for_100"
+					duration = 36500
+				}
+		}
+		dagrinrod_13_15_area = {
+				add_province_modifier = {
+					name = "amldihr_road_improvement_15_for_100"
+					duration = 36500
+				}
+		}
+		vazhatun_area = {
+				add_province_modifier = {
+					name = "amldihr_road_improvement_15_for_100"
+					duration = 36500
+				}
+		}
+		2988 = {
+				add_province_modifier = {
+					name = "amldihr_road_improvement_15_for_100"
+					duration = 36500
+				}
+		}
+	}
+}
+
+#The Amlavad az Nez Rebellion of $YEAR$
+country_event = {
+	id = amldihr.115
+	title = amldihr.115.t
+	desc = amldihr.115.d
+	picture = DEFENESTRATION_PRAGUE_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Option A
+		name = amldihr.115.a
+		ai_chance = { factor = 100 }
+		random_owned_province = {
+			limit = { has_terrain = dwarven_road }
+			random = {
+				chance = 100
+				spawn_rebels = {
+					size = 1
+					type = amlavadaznez_revolutionaries
+					win = no
+				}
+			}
+		}
+		random_owned_province = {
+			limit = { has_terrain = dwarven_road }
+			random = {
+				chance = 100
+				spawn_rebels = {
+					size = 1
+					type = amlavadaznez_revolutionaries
+					win = no
+				}
+			}
+		}
+		random_owned_province = {
+			limit = { has_terrain = dwarven_road }
+			random = {
+				chance = 100
+				spawn_rebels = {
+					size = 1
+					type = amlavadaznez_revolutionaries
+					win = no
+				}
+			}
+		}
+		random_owned_province = {
+			limit = { has_terrain = dwarven_road }
+			random = {
+				chance = 100
+				spawn_rebels = {
+					size = 1
+					type = amlavadaznez_revolutionaries
+					win = no
+				}
+			}
+		}
+		every_owned_province = {
+			limit = { has_terrain = dwarven_hold }
+			random = {
+				chance = 100
+				spawn_rebels = {
+					size = 3
+					type = amlavadaznez_revolutionaries
+					win = no
+				}
+			}
+		}
+		every_owned_province = {
+			limit = { has_terrain = dwarven_hold_surface }
+			random = {
+				chance = 100
+				spawn_rebels = {
+					size = 3
+					type = amlavadaznez_revolutionaries
+					win = no
+				}
+			}
+		}
+	}
+}

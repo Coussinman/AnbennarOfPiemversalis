@@ -673,6 +673,18 @@ estate_vampires_organize_a_masquerade = {
 	benefits = {
 	}
 	
+	conditional_modifier = {
+		trigger = {
+			NOT = {
+				has_country_flag = introduced_masquerades
+			}
+		}
+		modifier = {
+			max_absolutism = 5
+			global_tax_modifier = 0.1
+			diplomatic_reputation = 1
+		}
+	}
 	cooldown_years = 5
 	on_cooldown_expires = {
 		set_country_flag = remove_vampire_masquerade

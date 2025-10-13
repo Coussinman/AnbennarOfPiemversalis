@@ -1,0 +1,238 @@
+ACE_game_rules_setup_effect = {
+	set_global_flag = ACE_game_rules_multiplayer_flag
+
+	set_variable = {
+		which = ACE_game_rules_page_var
+		value = 1
+	}
+
+	set_variable = {
+		which = ACE_game_rules_north_aelantir_var
+		value = 1
+	}
+	set_variable = {
+		which = ACE_game_rules_south_aelantir_var
+		value = 1
+	}
+	set_variable = {
+		which = ACE_game_rules_cannor_var
+		value = 1
+	}
+	set_variable = {
+		which = ACE_game_rules_deepwoods_var
+		value = 1
+	}
+	set_variable = {
+		which = ACE_game_rules_western_spine_var
+		value = 1
+	}
+	set_variable = {
+		which = ACE_game_rules_forbidden_plains_var
+		value = 1
+	}
+	set_variable = {
+		which = ACE_game_rules_gozengun_var
+		value = 1
+	}
+	set_variable = {
+		which = ACE_game_rules_bulwar_var
+		value = 1
+	}
+	set_variable = {
+		which = ACE_game_rules_rahen_var
+		value = 1
+	}
+	set_variable = {
+		which = ACE_game_rules_east_haless_var
+		value = 1
+	}
+	set_variable = {
+		which = ACE_game_rules_eastern_spine_var
+		value = 1
+	}
+	set_variable = {
+		which = ACE_game_rules_north_salahad_var
+		value = 1
+	}
+	set_variable = {
+		which = ACE_game_rules_west_sarhal_var
+		value = 1
+	}
+	set_variable = {
+		which = ACE_game_rules_east_sarhal_var
+		value = 1
+	}
+
+	set_variable = {
+		which = ACE_game_rules_delete_region_var
+		value = 1
+	}
+	set_variable = {
+		which = ACE_game_rules_achievement_var
+		value = 1
+	}
+	set_variable = {
+		which = ACE_game_rules_todo_3_var
+		value = 1
+	}
+	set_variable = {
+		which = ACE_game_rules_great_conquerors_var
+		value = 1
+	}
+	set_variable = {
+		which = ACE_game_rules_variant_conquerors_var
+		value = 1
+	}
+	set_variable = {
+		which = ACE_game_rules_delayed_conquerors_var
+		value = 1
+	}
+	set_variable = {
+		which = ACE_game_rules_unraveling_var
+		value = 1
+	}
+	set_variable = {
+		which = ACE_game_rules_wex_var
+		value = 1
+	}
+	set_variable = {
+		which = ACE_game_rules_lencenor_var
+		value = 1
+	}
+	set_variable = {
+		which = ACE_game_rules_gawed_var
+		value = 1
+	}
+	set_variable = {
+		which = ACE_game_rules_burning_desert_var
+		value = 1
+	}
+	set_variable = {
+		which = ACE_game_rules_decades_devastation_var
+		value = 1
+	}
+}
+
+ACE_game_rules_back_page_effect = {
+    # hidden_effect = {
+	# 	if = {
+	# 		limit = {
+	# 			is_variable_equal = {
+	# 				which = ACE_game_rules_page_var
+	# 				value = 1
+	# 			}
+	# 		}
+	# 		set_variable = {
+	# 			which = ACE_game_rules_page_var
+	# 			value = 3
+	# 		}
+	# 	}
+	# 	else = {
+	# 		subtract_variable = {
+	# 			which = ACE_game_rules_page_var
+	# 			value = 1
+	# 		}
+	# 	}
+	# }
+}
+
+ACE_game_rules_next_page_effect = {
+    # hidden_effect = {
+	# 	if = {
+	# 		limit = {
+	# 			is_variable_equal = {
+	# 				which = ACE_game_rules_page_var
+	# 				value = 3
+	# 			}
+	# 		}
+	# 		set_variable = {
+	# 			which = ACE_game_rules_page_var
+	# 			value = 1
+	# 		}
+	# 	}
+	# 	else = {
+	# 		change_variable = {
+	# 			which = ACE_game_rules_page_var
+	# 			value = 1
+	# 		}
+	# 	}
+	# }
+}
+
+ACE_game_rules_toggle_region_effect = {
+	hidden_effect = {
+		if = {
+			limit = {
+				is_variable_equal = {
+					which = $var$
+					value = 3
+				}
+			}
+			set_variable = {
+				which = $var$
+				value = 1
+			}
+		}
+		else = {
+			change_variable = {
+				which = $var$
+				value = 1
+			}
+		}
+	}
+}
+
+ACE_game_rules_back_option_effect = {
+	hidden_effect = {
+		if = {
+			limit = {
+				is_variable_equal = {
+					which = $var$
+					value = 1
+				}
+			}
+			set_variable = {
+				which = $var$
+				value = $num$
+			}
+		}
+		else = {
+			subtract_variable = {
+				which = $var$
+				value = 1
+			}
+		}
+	}
+}
+
+ACE_game_rules_next_option_effect = {
+	hidden_effect = {
+		if = {
+			limit = {
+				is_variable_equal = {
+					which = $var$
+					value = $num$
+				}
+			}
+			set_variable = {
+				which = $var$
+				value = 1
+			}
+		}
+		else = {
+			change_variable = {
+				which = $var$
+				value = 1
+			}
+		}
+	}
+}
+
+ACE_game_rules_confirm_effect = {
+
+}
+
+ace_destroy_province = {
+	cede_province = ---
+	add_colonysize = -1000
+}

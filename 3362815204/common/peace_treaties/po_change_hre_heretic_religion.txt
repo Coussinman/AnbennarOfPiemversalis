@@ -1,0 +1,68 @@
+po_change_hre_heretic_religion = {
+	category = 6
+	power_projection = humiliated_rival
+	power_cost_base = 0.0
+	prestige_base = 1.0
+	ae_base = 0.0
+	warscore_cost = {
+		all_provinces = 0.0
+		no_provinces = 1000.0
+		owner_keeps = 0.0
+		conquered = 1.0
+		returned_core = 0.0
+		released_nation = 0.0
+		cancelled_subject = 0.0
+		concede_colonial_region = 0.0
+	}
+	warscore_cap = 25
+	requires_demand_independence = yes
+	is_make_subject = no
+	requires_is_allowed = yes
+	is_visible = {
+		is_in_war = {
+			attacker_leader = THIS
+			casus_belli = cb_sigma_league
+		}
+	}
+	is_allowed = {
+		always = yes
+	}
+	effect = {
+		set_global_flag = sugamber_three_war
+		set_hre_heretic_religion = dalcabba
+		FROM = {
+			add_prestige = -100
+			add_stability = -2
+		}
+		every_country = {
+			limit = {
+				is_in_war = {
+					defenders = THIS
+					casus_belli = cb_religious_league
+				}
+			}
+			white_peace = FROM
+		}
+		every_country = {
+			limit = {
+				is_in_war = {
+					attackers = THIS
+					casus_belli = cb_religious_league
+				}
+			}
+			white_peace = ROOT
+		}
+	}
+	ai_weight = {
+		export_to_variable = {
+			variable_name = ai_value
+			value = trigger_value:always
+		}
+		set_variable = {
+			ai_value = 2000
+		}
+		limit = {
+			always = yes
+		}
+	}
+}

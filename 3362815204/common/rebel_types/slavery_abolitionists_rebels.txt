@@ -1,0 +1,175 @@
+
+######################################################################
+# Hallfredhavn MT rebels. academy rebels who disagree with the new legal code on military conduct
+######################################################################
+slavery_abolitionists_rebels = {
+
+	color = { 230 175 175 }
+
+	area = nation
+#	government = republic			# Desires republic
+#	religion = cannorian
+	defection = none				# Will not defect
+	defect_delay = 120				# Held provinces will auto-defect after 18 months, regardless of accept/enforce demands.
+	independence = none				# Does not strive for independence
+	unit_transfer = no
+	gfx_type = culture_province
+	will_relocate = yes	
+	
+	resilient = no
+	reinforcing = yes
+	general = yes
+	smart = yes
+	
+	artillery = 0.0
+	infantry = 1
+	cavalry = 0.0
+	
+	morale = 1.2
+
+	# Possible handle actions
+	handle_action_negotiate = yes
+#	handle_action_stability = yes
+#	handle_action_build_core = yes
+#	handle_action_send_missionary = yes		
+	
+	# The rebel type with the highest modifier for this province gets picked
+	spawn_chance = {
+		factor = 1
+		modifier = {
+			factor = 0
+			owner = {
+				NOT = {
+					has_estate_privilege = estate_nobles_langeyru_slavery
+				}
+			}
+		}
+		modifier = {
+			factor = 10
+			has_province_modifier = AD5_small_langeyru_slavery
+		}
+		modifier = {
+			factor = 20
+			has_province_modifier = AD5_significant_langeyru_slavery
+		}
+		modifier = {
+			factor = 30
+			has_province_modifier = AD5_huge_langeyru_slavery
+		}
+		modifier = {
+			factor = 20
+			has_province_modifier = AD5_vidarfotar_slave_markets
+		}
+		modifier = {
+			factor = 10
+			owner = {
+				faction_in_power = ad5_faction_pearlsguarders
+			}
+		}
+		modifier = {
+			factor = 10
+			owner = {
+				faction_in_power = ad5_faction_svartskeggs
+			}
+		}
+	}
+ 
+ 	# This is checked for EACH province in the Area of Operations
+	movement_evaluation = {
+		factor = 1
+		modifier = {
+			factor = 0.1
+			units_in_province = 1
+		}
+		modifier = {
+			factor = 0.001
+			controlled_by = REB
+		}
+		modifier = {
+			factor = 100
+			is_capital = yes
+		}
+		modifier = {
+			factor = 1.5
+			unrest = 2
+		}
+		modifier = {
+			factor = 1.5
+			unrest = 4
+		}
+		modifier = {
+			factor = 1.5
+			unrest = 6
+		}
+	}
+ 
+	siege_won_effect = {
+		add_local_autonomy = 15
+		add_devastation = 5
+	}
+
+	can_negotiate_trigger = {
+		has_ruler_modifier = ACE_hallfredhavn_ruler_pearlsguard
+	}
+	
+	# Country scope
+	can_enforce_trigger = {
+		always = yes
+	}
+	
+	# Localisation for their demands
+	demands_description = "slavery_abolitionists_rebels_demand"
+	
+	# Country Scope	
+	demands_enforced_effect = {
+		hidden_effect = {
+			add_country_modifier = {
+				name = just_lost_to_rebels
+				duration = 10
+				hidden = yes
+			}
+		}
+		remove_estate_privilege = estate_nobles_langeyru_slavery
+		add_country_modifier = {
+			name = AD5_forceful_abolition
+			duration = 36500
+		}
+		custom_tooltip = AD5_total_slavery_abolition_tt
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					has_province_modifier = AD5_huge_langeyru_slavery
+				}
+				remove_province_modifier = AD5_huge_langeyru_slavery
+				add_random_development = 3
+			}
+			every_owned_province = {
+				limit = {
+					has_province_modifier = AD5_significant_langeyru_slavery
+				}
+				remove_province_modifier = AD5_significant_langeyru_slavery
+				add_random_development = 2
+			}
+			every_owned_province = {
+				limit = {
+					has_province_modifier = AD5_small_langeyru_slavery
+				}
+				remove_province_modifier = AD5_small_langeyru_slavery
+				add_random_development = 1
+			}
+			every_owned_province = {
+				limit = {
+					has_province_modifier = AD5_vidarfotar_slave_markets
+				}
+				remove_province_modifier = AD5_vidarfotar_slave_markets
+				add_random_development = 1
+			}
+		}
+		every_owned_province = {
+			limit = {
+				has_rebel_faction = REB
+			}
+			add_local_autonomy = 20
+		}
+	}
+}

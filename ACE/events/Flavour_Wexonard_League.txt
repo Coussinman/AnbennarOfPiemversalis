@@ -1,0 +1,1470 @@
+namespace = wl
+
+country_event = {
+	id = wl.1
+	title = wl.1.t
+	desc = wl.1.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = wl.1.a
+		every_owned_province = {
+            add_devastation = -10
+			add_nationalism = -5
+        }
+		every_province = {
+			limit = { is_core = A34 }
+			remove_core = A34
+		}
+	}
+
+    option = {
+		name = wl.1.b
+        highlight = yes
+		trigger = {
+            is_or_was_tag = { tag = Z04 }
+        }
+        change_estate_land_share = {
+			estate = estate_nobles
+			share = -5
+		}
+		add_estate_loyalty = {
+			estate = estate_burghers
+			loyalty = 10
+		}
+		every_owned_province = {
+			limit = { is_core = A34 }
+			add_base_tax = -1
+		}
+		903 = {
+			add_base_tax = 2
+			add_devastation = -20
+		}
+		WL_indlebury_lower_unrest_effect = yes
+	}
+
+    option = {
+		name = wl.1.c
+        highlight = yes
+        trigger = {
+            is_or_was_tag = { tag = Z02 }
+        }
+		change_estate_land_share = {
+			estate = estate_nobles
+			share = -5
+		}
+        add_estate_loyalty = {
+			estate = estate_church
+			loyalty = 10
+		}
+        random_list = {
+			50 = {
+				define_advisor = {
+					type = theologian
+					skill = 1
+					cost_multiplier = 0.25
+				}
+			}
+			50 = {
+				define_advisor = {
+					type = inquisitor
+					skill = 1
+					cost_multiplier = 0.25
+				}
+			}
+		}
+        add_country_modifier = {
+            name = WL_clergy_reassured
+            duration = 7300
+        }
+	}
+}
+
+country_event = {
+	id = wl.2
+	title = wl.2.t
+	desc = wl.2.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+
+	immediate = {
+		set_country_flag = WL_petition_timeout
+	}
+
+	option = { #elector swaying
+		name = wl.2.a
+		country_event = { id = wl.3 }
+	}
+
+    option = { #free cities swaying
+		name = wl.2.b
+		country_event = { id = wl.4 }
+	}
+
+    option = { #launch the petition
+		name = wl.2.c
+		highlight = yes
+		clr_country_flag = WL_unlocked_parliament_petition
+		clr_country_flag = WL_petition_timeout
+		if = {
+			limit = {
+				NOT = {
+					check_variable = {
+						which = WL_elector_support
+						value = 3
+					}
+				}
+			}
+			custom_tooltip = WL_bad_electoral_support_tt
+		}
+		custom_tooltip = " "
+		if = {
+			limit = {
+				NOT = {
+					check_variable = {
+						which = WL_free_city_support
+						value = 3
+					}
+				}
+			}
+			custom_tooltip = WL_bad_free_city_support_tt
+		}
+        country_event = { id = wl.5 days = 365 }
+	}
+	
+	option = { #close the window
+		name = wl.2.dd
+		clr_country_flag = WL_petition_timeout
+	}
+}
+
+country_event = { #elector swaying
+	id = wl.3
+	title = wl.3.t
+	desc = wl.3.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+
+	option = { #exit
+		name = wl.3.z
+		country_event = { id = wl.2 }
+	}
+
+	option = { #pearlsedge no
+		name = wl.3.a
+		trigger = {
+			NOT = { has_country_flag = WL_pearslage_support }
+			A11 = {
+				OR = {
+					NOT = { is_elector = yes }
+					NOT = {
+						OR = {
+							has_50_opinion_improved_relation = {
+								target = ROOT
+							}
+							alliance_with = ROOT
+						}
+					}
+				}
+			}
+		}
+		custom_tooltip = WL_need_pearslage_support_tt
+		hidden_effect = { country_event = { id = wl.10 } }
+	}
+
+	option = { #pearlsedge yes
+		name = wl.3.b
+		highlight = yes
+		trigger = {
+			NOT = { has_country_flag = WL_pearslage_support }
+			A11 = {
+				is_elector = yes
+				OR = {
+					has_50_opinion_improved_relation = {
+						target = ROOT
+					}
+					alliance_with = ROOT
+				}
+			}
+		}
+		set_country_flag = WL_pearslage_support
+		hidden_effect = { 
+			change_variable = {
+				which = WL_elector_support
+				value = 1
+			}
+			country_event = { id = wl.10 } 
+		}
+	}
+
+	option = { #beepeck no
+		name = wl.3.c
+		trigger = {
+			NOT = { has_country_flag = WL_beepeck_support }
+			A12 = {
+				OR = {
+					NOT = { is_elector = yes }
+					NOT = {
+						OR = {
+							has_50_opinion_improved_relation = {
+								target = ROOT
+							}
+							alliance_with = ROOT
+						}
+					}
+				}
+			}
+		}
+		custom_tooltip = WL_need_pearslage_support_tt
+		hidden_effect = { country_event = { id = wl.10 } }
+	}
+
+	option = { #beepeck yes
+		name = wl.3.dd
+		highlight = yes
+		trigger = {
+			NOT = { has_country_flag = WL_beepeck_support }
+			A12 = {
+				is_elector = yes
+				OR = {
+					has_50_opinion_improved_relation = {
+						target = ROOT
+					}
+					alliance_with = ROOT
+				}
+			}
+		}
+		set_country_flag = WL_beepeck_support
+		hidden_effect = { 
+			change_variable = {
+				which = WL_elector_support
+				value = 1
+			}
+			country_event = { id = wl.10 } 
+		}
+	}
+
+	option = { #damescrown no
+		name = wl.3.e
+		trigger = {
+			NOT = { has_country_flag = WL_damescrown_support }
+			A25 = {
+				OR = {
+					NOT = { is_elector = yes }
+					NOT = {
+						OR = {
+							has_50_opinion_improved_relation = {
+								target = ROOT
+							}
+							alliance_with = ROOT
+						}
+					}
+				}
+			}
+		}
+		custom_tooltip = WL_need_pearslage_support_tt
+		hidden_effect = { country_event = { id = wl.10 } }
+	}
+
+	option = { #damescrown yes
+		name = wl.3.f
+		highlight = yes
+		trigger = {
+			NOT = { has_country_flag = WL_damescrown_support }
+			A25 = {
+				is_elector = yes
+				OR = {
+					has_50_opinion_improved_relation = {
+						target = ROOT
+					}
+					alliance_with = ROOT
+				}
+			}
+		}
+		set_country_flag = WL_damescrown_support
+		hidden_effect = { 
+			change_variable = {
+				which = WL_elector_support
+				value = 1
+			}
+			country_event = { id = wl.10 } 
+		}
+	}
+
+	option = { #moonhaven no
+		name = wl.3.g
+		trigger = {
+			NOT = { has_country_flag = WL_moonhaven_support }
+			A31 = {
+				OR = {
+					NOT = { is_elector = yes }
+					NOT = {
+						OR = {
+							has_50_opinion_improved_relation = {
+								target = ROOT
+							}
+							alliance_with = ROOT
+						}
+					}
+				}
+			}
+		}
+		custom_tooltip = WL_need_pearslage_support_tt
+		hidden_effect = { country_event = { id = wl.10 } }
+	}
+
+	option = { #moonhaven yes
+		name = wl.3.h
+		highlight = yes
+		trigger = {
+			NOT = { has_country_flag = WL_moonhaven_support }
+			A31 = {
+				is_elector = yes
+				OR = {
+					has_50_opinion_improved_relation = {
+						target = ROOT
+					}
+					alliance_with = ROOT
+				}
+			}
+		}
+		set_country_flag = WL_moonhaven_support
+		hidden_effect = { 
+			change_variable = {
+				which = WL_elector_support
+				value = 1
+			}
+			country_event = { id = wl.10 } 
+		}
+	}
+
+	option = { #istralore no
+		name = wl.3.i
+		trigger = {
+			NOT = { has_country_flag = WL_istralore_support }
+			A45 = {
+				OR = {
+					NOT = { is_elector = yes }
+					NOT = {
+						OR = {
+							has_50_opinion_improved_relation = {
+								target = ROOT
+							}
+							alliance_with = ROOT
+						}
+					}
+				}
+			}
+		}
+		custom_tooltip = WL_need_pearslage_support_tt
+		hidden_effect = { country_event = { id = wl.10 } }
+	}
+
+	option = { #istralore yes
+		name = wl.3.j
+		highlight = yes
+		trigger = {
+			NOT = { has_country_flag = WL_istralore_support }
+			A45 = {
+				is_elector = yes
+				OR = {
+					has_50_opinion_improved_relation = {
+						target = ROOT
+					}
+					alliance_with = ROOT
+				}
+			}
+		}
+		set_country_flag = WL_istralore_support
+		hidden_effect = { 
+			change_variable = {
+				which = WL_elector_support
+				value = 1
+			}
+			country_event = { id = wl.10 } 
+		}
+	}
+
+	option = { #silverforge no
+		name = wl.3.k
+		trigger = {
+			NOT = { has_country_flag = WL_silverforge_support }
+			A73 = {
+				OR = {
+					NOT = { is_elector = yes }
+					NOT = {
+						OR = {
+							has_50_opinion_improved_relation = {
+								target = ROOT
+							}
+							alliance_with = ROOT
+						}
+					}
+				}
+			}
+		}
+		custom_tooltip = WL_need_pearslage_support_tt
+		hidden_effect = { country_event = { id = wl.10 } }
+	}
+
+	option = { #silverforge yes
+		name = wl.3.l
+		highlight = yes
+		trigger = {
+			NOT = { has_country_flag = WL_silverforge_support }
+			A73 = {
+				is_elector = yes
+				OR = {
+					has_50_opinion_improved_relation = {
+						target = ROOT
+					}
+					alliance_with = ROOT
+				}
+			}
+		}
+		set_country_flag = WL_silverforge_support
+		hidden_effect = { 
+			change_variable = {
+				which = WL_elector_support
+				value = 1
+			}
+			country_event = { id = wl.10 } 
+		}
+	}
+
+	option = { #magisterium no
+		name = wl.3.m
+		trigger = {
+			NOT = { has_country_flag = WL_magisterium_support }
+			A85 = {
+				OR = {
+					NOT = { is_elector = yes }
+					NOT = {
+						OR = {
+							has_50_opinion_improved_relation = {
+								target = ROOT
+							}
+							alliance_with = ROOT
+						}
+					}
+				}
+			}
+		}
+		custom_tooltip = WL_need_pearslage_support_tt
+		hidden_effect = { country_event = { id = wl.10 } }
+	}
+
+	option = { #magisterium yes
+		name = wl.3.n
+		highlight = yes
+		trigger = {
+			NOT = { has_country_flag = WL_magisterium_support }
+			A85 = {
+				is_elector = yes
+				OR = {
+					has_50_opinion_improved_relation = {
+						target = ROOT
+					}
+					alliance_with = ROOT
+				}
+			}
+		}
+		set_country_flag = WL_magisterium_support
+		hidden_effect = { 
+			change_variable = {
+				which = WL_elector_support
+				value = 1
+			}
+			country_event = { id = wl.10 } 
+		}
+	}
+
+	option = { #exit
+		name = wl.3.z
+		country_event = { id = wl.2 }
+	}
+}
+
+country_event = { #free cities swaying
+	id = wl.4
+	title = wl.4.t
+	desc = wl.4.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+
+	option = { #exit
+		name = wl.4.z
+		country_event = { id = wl.2 }
+	}
+
+	option = { #anbenncost no
+		name = wl.4.a
+		trigger = {
+			NOT = { has_country_flag = WL_anbenncost_support }
+			A38 = {
+				OR = {
+					NOT = { has_reform = free_city }
+					NOT = {
+						OR = {
+							has_50_opinion_improved_relation = {
+								target = ROOT
+							}
+							alliance_with = ROOT
+						}
+					}
+				}
+			}
+		}
+		custom_tooltip = WL_need_anbenncost_support_tt
+		hidden_effect = { country_event = { id = wl.11 } }
+	}
+	
+	option = { #anbenncost yes
+		name = wl.4.b
+		highlight = yes
+		trigger = {
+			NOT = { has_country_flag = WL_anbenncost_support }
+			A38 = {
+				has_reform = free_city
+				OR = {
+					has_50_opinion_improved_relation = {
+						target = ROOT
+					}
+					alliance_with = ROOT
+				}
+			}
+		}
+		set_country_flag = WL_anbenncost_support
+		add_country_modifier = {
+			name = WL_anbenncost_support_modifier
+			duration = 7300
+		}
+		hidden_effect = { 
+			change_variable = {
+				which = WL_free_city_support
+				value = 1
+			}
+			country_event = { id = wl.11 }
+		}
+	}
+	
+	option = { #bellacaire no
+		name = wl.4.c
+		trigger = {
+			NOT = { has_country_flag = WL_bellacaire_support }
+			Z03 = {
+				OR = {
+					NOT = { has_reform = free_city }
+					NOT = {
+						OR = {
+							has_50_opinion_improved_relation = {
+								target = ROOT
+							}
+							alliance_with = ROOT
+						}
+					}
+				}
+			}
+		}
+		custom_tooltip = WL_need_anbenncost_support_tt
+		hidden_effect = { country_event = { id = wl.11 } }
+	}
+
+	option = { #bellacaire yes
+		name = wl.4.dd
+		highlight = yes
+		trigger = {
+			NOT = { has_country_flag = WL_bellacaire_support }
+			Z03 = {
+				has_reform = free_city
+				OR = {
+					has_50_opinion_improved_relation = {
+						target = ROOT
+					}
+					alliance_with = ROOT
+				}
+			}
+		}
+		set_country_flag = WL_bellacaire_support
+		hidden_effect = { 
+			change_variable = {
+				which = WL_free_city_support
+				value = 1
+			}
+			country_event = { id = wl.11 }
+		}
+	}
+
+	option = { #bluehart no
+		name = wl.4.e
+		trigger = {
+			NOT = { has_country_flag = WL_bluehart_support }
+			A61 = {
+				OR = {
+					NOT = { has_reform = free_city }
+					NOT = {
+						OR = {
+							has_50_opinion_improved_relation = {
+								target = ROOT
+							}
+							alliance_with = ROOT
+						}
+					}
+				}
+			}
+		}
+		custom_tooltip = WL_need_anbenncost_support_tt
+		hidden_effect = { country_event = { id = wl.11 } }
+	}
+
+	option = { #bluehart yes
+		name = wl.4.f
+		highlight = yes
+		trigger = {
+			NOT = { has_country_flag = WL_bluehart_support }
+			A61 = {
+				has_reform = free_city
+				OR = {
+					has_50_opinion_improved_relation = {
+						target = ROOT
+					}
+					alliance_with = ROOT
+				}
+			}
+		}
+		set_country_flag = WL_bluehart_support
+		hidden_effect = { 
+			change_variable = {
+				which = WL_free_city_support
+				value = 1
+			}
+			country_event = { id = wl.11 }
+		}
+	}
+
+	option = { #crothan no
+		name = wl.4.g
+		trigger = {
+			NOT = { has_country_flag = WL_crothan_support }
+			A54 = {
+				OR = {
+					NOT = { has_reform = free_city }
+					NOT = {
+						OR = {
+							has_50_opinion_improved_relation = {
+								target = ROOT
+							}
+							alliance_with = ROOT
+						}
+					}
+				}
+			}
+		}
+		custom_tooltip = WL_need_anbenncost_support_tt
+		hidden_effect = { country_event = { id = wl.11 } }
+	}
+
+	option = { #crothan yes
+		name = wl.4.h
+		highlight = yes
+		trigger = {
+			NOT = { has_country_flag = WL_crothan_support }
+			A54 = {
+				has_reform = free_city
+				OR = {
+					has_50_opinion_improved_relation = {
+						target = ROOT
+					}
+					alliance_with = ROOT
+				}
+			}
+		}
+		set_country_flag = WL_crothan_support
+		add_country_modifier = {
+			name = WL_crothan_support_modifier
+			duration = 7300
+		}
+		hidden_effect = { 
+			change_variable = {
+				which = WL_free_city_support
+				value = 1
+			}
+			country_event = { id = wl.11 }
+		}
+	}
+
+	option = { #esmaraine no
+		name = wl.4.i
+		trigger = {
+			NOT = { has_country_flag = WL_esmaraine_support }
+			A44 = {
+				OR = {
+					NOT = { has_reform = free_city }
+					NOT = {
+						OR = {
+							has_50_opinion_improved_relation = {
+								target = ROOT
+							}
+							alliance_with = ROOT
+						}
+					}
+				}
+			}
+		}
+		custom_tooltip = WL_need_anbenncost_support_tt
+		hidden_effect = { country_event = { id = wl.11 } }
+	}
+
+	option = { #esmaraine yes
+		name = wl.4.j
+		highlight = yes
+		trigger = {
+			NOT = { has_country_flag = WL_esmaraine_support }
+			A44 = {
+				has_reform = free_city
+				OR = {
+					has_50_opinion_improved_relation = {
+						target = ROOT
+					}
+					alliance_with = ROOT
+				}
+			}
+		}
+		set_country_flag = WL_esmaraine_support
+		hidden_effect = { 
+			change_variable = {
+				which = WL_free_city_support
+				value = 1
+			}
+			country_event = { id = wl.11 }
+		}
+	}
+
+	option = { #giberd no
+		name = wl.4.k
+		trigger = {
+			NOT = { has_country_flag = WL_giberd_support }
+			A81 = {
+				OR = {
+					NOT = { has_reform = free_city }
+					NOT = {
+						OR = {
+							has_50_opinion_improved_relation = {
+								target = ROOT
+							}
+							alliance_with = ROOT
+						}
+					}
+				}
+			}
+		}
+		custom_tooltip = WL_need_anbenncost_support_tt
+		hidden_effect = { country_event = { id = wl.11 } }
+	}
+
+	option = { #giberd yes
+		name = wl.4.l
+		highlight = yes
+		trigger = {
+			NOT = { has_country_flag = WL_giberd_support }
+			A81 = {
+				has_reform = free_city
+				OR = {
+					has_50_opinion_improved_relation = {
+						target = ROOT
+					}
+					alliance_with = ROOT
+				}
+			}
+		}
+		set_country_flag = WL_giberd_support
+		hidden_effect = { 
+			change_variable = {
+				which = WL_free_city_support
+				value = 1
+			}
+			country_event = { id = wl.11 }
+		}
+	}
+
+	option = { #menibor no
+		name = wl.4.m
+		trigger = {
+			NOT = { has_country_flag = WL_menibor_support }
+			A55 = {
+				OR = {
+					NOT = { has_reform = free_city }
+					NOT = {
+						OR = {
+							has_50_opinion_improved_relation = {
+								target = ROOT
+							}
+							alliance_with = ROOT
+						}
+					}
+				}
+			}
+		}
+		custom_tooltip = WL_need_anbenncost_support_tt
+		hidden_effect = { country_event = { id = wl.11 } }
+	}
+
+	option = { #menibor yes
+		name = wl.4.n
+		highlight = yes
+		trigger = {
+			NOT = { has_country_flag = WL_menibor_support }
+			A55 = {
+				has_reform = free_city
+				OR = {
+					has_50_opinion_improved_relation = {
+						target = ROOT
+					}
+					alliance_with = ROOT
+				}
+			}
+		}
+		add_estate_loyalty = {
+			estate = estate_adventurers
+			loyalty = 15
+		}
+		add_country_modifier = {
+			name = WL_menibor_support_modifier
+			duration = 7300
+		}
+		set_country_flag = WL_menibor_support
+		hidden_effect = { 
+			change_variable = {
+				which = WL_free_city_support
+				value = 1
+			}
+			country_event = { id = wl.11 }
+		}
+	}
+
+	option = { #napesbay no
+		name = wl.4.o
+		trigger = {
+			NOT = { has_country_flag = WL_napesbay_support }
+			A82 = {
+				OR = {
+					NOT = { has_reform = free_city }
+					NOT = {
+						OR = {
+							has_50_opinion_improved_relation = {
+								target = ROOT
+							}
+							alliance_with = ROOT
+						}
+					}
+				}
+			}
+		}
+		custom_tooltip = WL_need_anbenncost_support_tt
+		hidden_effect = { country_event = { id = wl.11 } }
+	}
+
+	option = { #napesbay yes
+		name = wl.4.p
+		highlight = yes
+		trigger = {
+			NOT = { has_country_flag = WL_napesbay_support }
+			A82 = {
+				has_reform = free_city
+				OR = {
+					has_50_opinion_improved_relation = {
+						target = ROOT
+					}
+					alliance_with = ROOT
+				}
+			}
+		}
+		set_country_flag = WL_napesbay_support
+		hidden_effect = { 
+			change_variable = {
+				which = WL_free_city_support
+				value = 1
+			}
+			country_event = { id = wl.11 }
+		}
+	}
+
+	option = { #silvelar no
+		name = wl.4.q
+		trigger = {
+			NOT = { has_country_flag = WL_silvelar_support }
+			A42 = {
+				OR = {
+					NOT = { has_reform = free_city }
+					NOT = {
+						OR = {
+							has_50_opinion_improved_relation = {
+								target = ROOT
+							}
+							alliance_with = ROOT
+						}
+					}
+				}
+			}
+		}
+		custom_tooltip = WL_need_anbenncost_support_tt
+		hidden_effect = { country_event = { id = wl.11 } }
+	}
+
+	option = { #silvelar yes
+		name = wl.4.r
+		highlight = yes
+		trigger = {
+			NOT = { has_country_flag = WL_silvelar_support }
+			A42 = {
+				has_reform = free_city
+				OR = {
+					has_50_opinion_improved_relation = {
+						target = ROOT
+					}
+					alliance_with = ROOT
+				}
+			}
+		}
+		set_country_flag = WL_silvelar_support
+		hidden_effect = { 
+			change_variable = {
+				which = WL_free_city_support
+				value = 1
+			}
+			country_event = { id = wl.11 }
+		}
+	}
+
+	option = { #tellum no
+		name = wl.4.s
+		trigger = {
+			NOT = { has_country_flag = WL_tellum_support }
+			A86 = {
+				OR = {
+					NOT = { has_reform = free_city }
+					NOT = {
+						OR = {
+							has_50_opinion_improved_relation = {
+								target = ROOT
+							}
+							alliance_with = ROOT
+						}
+					}
+				}
+			}
+		}
+		custom_tooltip = WL_need_anbenncost_support_tt
+		hidden_effect = { country_event = { id = wl.11 } }
+	}
+
+	option = { #tellum yes
+		name = wl.4.tt
+		highlight = yes
+		trigger = {
+			NOT = { has_country_flag = WL_tellum_support }
+			A86 = {
+				has_reform = free_city
+				OR = {
+					has_50_opinion_improved_relation = {
+						target = ROOT
+					}
+					alliance_with = ROOT
+				}
+			}
+		}
+		custom_tooltip = WL_tellum_support_benefits_tt
+		set_country_flag = WL_tellum_support
+		hidden_effect = { 
+			change_variable = {
+				which = WL_free_city_support
+				value = 1
+			}
+			country_event = { id = wl.11 }
+		}
+	}
+
+	option = { #exit
+		name = wl.4.z
+		country_event = { id = wl.2 }
+	}
+}
+
+country_event = { #proceed with the parliament hearing
+	id = wl.5
+	title = wl.5.t
+	desc = wl.5.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = wl.5.a
+		country_event = { id = wl.6 days = 60 }
+	}
+}
+
+country_event = { #question of arannese and other provinces
+	id = wl.6
+	title = wl.6.t
+	desc = wl.6.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = wl.6.a
+		goto = 411
+		trigger = {
+			NOT = { has_country_flag = WL_screw_celliande }
+		}
+		custom_tooltip = WL_screw_celliande_tt
+		set_country_flag = WL_screw_celliande
+		if = {
+			limit = { has_country_flag = WL_tellum_support }
+			custom_tooltip = WL_calling_in_tellum_favors_tt
+		}
+		hidden_effect = { country_event = { id = wl.12 } }
+	}
+	option = {
+		name = wl.6.b
+		goto = 902
+		trigger = {
+			NOT = { has_country_flag = WL_screw_asheniande }
+		}
+		custom_tooltip = WL_screw_asheniande_tt
+		set_country_flag = WL_screw_asheniande
+		if = {
+			limit = { has_country_flag = WL_tellum_support }
+			custom_tooltip = WL_calling_in_tellum_favors_tt
+		}
+		hidden_effect = { country_event = { id = wl.12 } }
+	}
+	option = {
+		name = wl.6.c
+		goto = 920
+		trigger = {
+			NOT = { has_country_flag = WL_screw_arannen }
+		}
+		custom_tooltip = WL_screw_arannen_tt
+		set_country_flag = WL_screw_arannen
+		if = {
+			limit = { has_country_flag = WL_tellum_support }
+			custom_tooltip = WL_calling_in_tellum_favors_tt
+		}
+		hidden_effect = { country_event = { id = wl.12 } }
+	}
+	option = {
+		name = wl.6.dd
+		goto = 299
+		trigger = {
+			NOT = { has_country_flag = WL_screw_magisterium }
+		}
+		custom_tooltip = WL_screw_magisterium_tt
+		set_country_flag = WL_screw_magisterium
+		clr_country_flag = WL_magisterium_support
+		hidden_effect = { country_event = { id = wl.12 } }
+	}
+	option = {
+		name = wl.6.e
+		highlight = yes
+		if = {
+			limit = {
+				has_country_flag = WL_tellum_support
+				OR = {
+					AND = {
+						has_country_flag = WL_screw_celliande
+						has_country_flag = WL_screw_asheniande
+					}
+					AND = {
+						has_country_flag = WL_screw_arannen
+						has_country_flag = WL_screw_asheniande
+					}
+					AND = {
+						has_country_flag = WL_screw_arannen
+						has_country_flag = WL_screw_celliande
+					}
+					AND = {
+						has_country_flag = WL_screw_arannen
+						has_country_flag = WL_screw_asheniande
+						has_country_flag = WL_screw_celliande
+					}
+				}
+			}
+			clr_country_flag = WL_tellum_support
+			custom_tooltip = WL_arannese_totally_screwed_tt
+			set_country_flag = WL_arannese_totally_screwed
+		}
+		else_if = {
+			limit = {
+				OR = {
+					has_country_flag = WL_screw_arannen
+					has_country_flag = WL_screw_asheniande
+					has_country_flag = WL_screw_celliande
+				}	
+			}
+			custom_tooltip = WL_arannese_totally_screwed_tt
+			set_country_flag = WL_arannese_totally_screwed
+		}
+		country_event = { id = wl.7 days = 60 }
+	}
+}
+
+country_event = { #done
+	id = wl.7
+	title = wl.7.t
+	desc = wl.7.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = wl.7.a
+		set_country_flag = WL_claims_drafted
+		custom_tooltip = WL_calculate_electoral_support_tt
+		if = {
+			limit = {
+				NOT = {
+					check_variable = {
+						which = WL_elector_support
+						value = 3
+					}
+				}
+			}
+			every_province = {
+				limit = { culture = wexonard }
+				add_claim = ROOT
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					which = WL_elector_support
+					value = 3
+				}
+				NOT = {
+					check_variable = {
+						which = WL_elector_support
+						value = 5
+					}
+				}
+			}
+			every_province = {
+				limit = { culture = wexonard }
+				add_claim = ROOT
+			}
+			add_country_modifier = {
+				name = WL_mid_wexonard_claim
+				duration = 10950
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					which = WL_elector_support
+					value = 5
+				}
+				NOT = {
+					check_variable = {
+						which = WL_elector_support
+						value = 7
+					}
+				}
+			}
+			every_province = {
+				limit = { culture = wexonard }
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = WL_strong_wexonard_claim
+				duration = 10950
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					which = WL_elector_support
+					value = 7
+				}
+			}
+			every_province = {
+				limit = { culture = wexonard }
+				add_permanent_claim = ROOT
+			}
+			wexhills_area = {
+				add_core = ROOT
+			}
+			gnollsgate_area = {
+				add_core = ROOT
+			}
+			add_country_modifier = {
+				name = WL_epic_wexonard_claim
+				duration = 10950
+			}
+		}
+		
+		custom_tooltip = WL_calculate_free_cities_support_tt
+		if = {
+			limit = {
+				NOT = {
+					check_variable = {
+						which = WL_free_city_support
+						value = 3
+					}
+				}
+			}
+			add_country_modifier = {
+				name = WL_free_city_fail
+				duration = 10950
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					which = WL_free_city_support
+					value = 3
+				}
+				NOT = {
+					check_variable = {
+						which = WL_free_city_support
+						value = 6
+					}
+				}
+			}
+			add_country_modifier = {
+				name = WL_free_city_middling
+				duration = 10950
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					which = WL_free_city_support
+					value = 6
+				}
+				NOT = {
+					check_variable = {
+						which = WL_free_city_support
+						value = 10
+					}
+				}
+			}
+			add_country_modifier = {
+				name = WL_free_city_strong
+				duration = 10950
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					which = WL_free_city_support
+					value = 10
+				}
+			}
+			add_country_modifier = {
+				name = WL_free_city_epic
+				duration = 10950
+			}
+		}
+		custom_tooltip = WL_other_provinces_tt
+		if = {
+			limit = {
+				NOT = {
+					OR = {
+						has_country_flag = WL_screw_asheniande
+						has_country_flag = WL_screw_celliande
+						has_country_flag = WL_screw_arannen
+					}
+				}
+			}
+			custom_tooltip = WL_nothing_tt
+		}
+		if = {
+			limit = {
+				has_country_flag = WL_screw_asheniande
+			}
+			902 = {
+				add_permanent_claim = ROOT
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = WL_screw_celliande
+			}
+			hawkfields_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = WL_screw_arannen
+			}
+			920 = {
+				add_permanent_claim = ROOT
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = WL_arannese_totally_screwed
+			}
+			add_country_modifier = {
+				name = WL_yet_another_warmonger
+				duration = 7300
+			}
+		}
+	}
+}
+
+
+country_event = { #tech 1
+	id = wl.10
+	title = wl.10.t
+	desc = wl.10.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	hidden = yes
+	is_triggered_only = yes
+
+	option = {
+		name = wl.10.g
+		country_event = { id = wl.3 }
+	}
+}
+
+country_event = { #tech 2
+	id = wl.11
+	title = wl.11.t
+	desc = wl.11.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	hidden = yes
+	is_triggered_only = yes
+
+	option = {
+		name = wl.11.g
+		country_event = { id = wl.4 }
+	}
+}
+
+country_event = { #tech 3
+	id = wl.12
+	title = wl.12.t
+	desc = wl.12.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	hidden = yes
+	is_triggered_only = yes
+
+	option = {
+		name = wl.12.g
+		country_event = { id = wl.6 }
+	}
+}
+
+country_event = { #magda's reverence
+	id = wl.20
+	title = wl.20.t
+	desc = wl.20.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	mean_time_to_happen = {
+		days = 1
+	}
+	option = {
+		name = wl.20.a
+		add_adm_power = 15
+	}
+	option = {
+		name = wl.20.b
+		add_dip_power = 15
+	}
+	option = {
+		name = wl.20.c
+		add_mil_power = 15
+	}
+}
+
+country_event = {
+	id = wl.21
+	title = wl.21.t
+	desc = wl.21.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = wl.21.a
+		change_national_focus = ADM
+	}
+	option = {
+		name = wl.21.b
+		change_national_focus = DIP
+	}
+	option = {
+		name = wl.21.c
+		change_national_focus = MIL
+	}
+	option = {
+		name = wl.21.dd
+	}
+}
+
+country_event = { #kindlebury peace option
+	id = wl.25
+	title = wl.25.t
+	desc = wl.25.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = wl.25.a
+		add_adm_power = 15
+		add_dip_power = 15
+		add_mil_power = 15
+		change_variable = {
+			which = KindleburyCounter
+			value = 1
+		}
+	}
+}
+
+country_event = {
+	id = wl.26
+	title = wl.26.t
+	desc = wl.26.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		mission_completed = INDL_4_1
+	}
+	option = {
+		name = wl.26.a
+		add_ruler_modifier = {
+			name = WL_indel_mercenary
+			duration = -1
+		}
+	}
+	option = {
+		name = wl.26.b
+		add_ruler_modifier = {
+			name = WL_indel_mage
+			duration = -1
+		}
+	}
+	option = {
+		name = wl.26.c
+		add_ruler_modifier = {
+			name = WL_indel_warrior
+			duration = -1
+		}
+	}
+
+	option = {
+		name = wl.26.dd
+		add_ruler_modifier = {
+			name = WL_indel_redemption
+			duration = -1
+		}
+	}
+
+	option = {
+		name = wl.26.e
+		add_ruler_modifier = {
+			name = WL_indel_halfling
+			duration = -1
+		}
+	}
+
+}

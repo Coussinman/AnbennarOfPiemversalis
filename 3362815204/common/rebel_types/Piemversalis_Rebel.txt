@@ -1,0 +1,72 @@
+
+######################################################################
+# Rebels for Game Masters
+######################################################################
+MJ_rebels = {
+
+	color = { 50 85 210 }
+
+	area = nation 				# Sticks to provinces of their religion
+	government = any	
+	defection = none				# Does not defect
+	independence = none				# Does not strive for independence
+	gfx_type = culture_province
+	
+	resilient = yes
+	reinforcing = no
+	general = no
+	smart = no
+	unit_transfer = no
+	will_relocate = yes
+	dynasty = no
+	
+	infantry = 1
+	cavalry = 0
+	artillery = 0
+	
+	morale = 10
+	
+	# Possible handle actions
+	handle_action_negotiate = no
+	handle_action_stability = no
+	handle_action_build_core = no
+	handle_action_send_missionary = no
+	
+	# The rebel type with the highest modifier for this province gets picked
+	spawn_chance = {
+		factor = 0
+	}
+ 
+ 	# This is checked for EACH province in the Area of Operations
+	movement_evaluation = {
+		factor = 1
+	}
+ 
+ 	# Province Scope
+ 	siege_won_trigger = {
+		always = yes
+ 	}
+	siege_won_effect = {
+		add_devastation = 25
+	}
+	
+	# Country scope
+	can_negotiate_trigger = {
+		always = no
+	}
+	
+	# Country scope
+	can_enforce_trigger = {
+		always = yes
+	}
+	
+	# Localisation for their demands
+	demands_description = "MJ_rebels_demand"
+	
+	# Country Scope	
+	demands_enforced_effect = {
+		every_owned_province = {
+			add_devastation = 25
+		}
+	}
+}

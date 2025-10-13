@@ -4640,6 +4640,7 @@ custom_button = {
 						has_country_flag = unlocked_artifice_invention_automated_translator
 						has_country_flag = unlocked_artifice_invention_veykoda_rune_protections
 						has_country_flag = unlocked_artifice_invention_warfare_simulator
+						
 						#ACE
 						has_country_flag = unlocked_artifice_invention_gerudian_autorowers
 					}
@@ -4673,6 +4674,7 @@ custom_button = {
 					has_estate_privilege = artifice_invention_automated_translator
 					has_estate_privilege = artifice_invention_veykoda_rune_protections
 					has_estate_privilege = artifice_invention_warfare_simulator
+						
 					#ACE
 					has_estate_privilege = artifice_invention_gerudian_autorowers
 				}
@@ -4702,6 +4704,7 @@ custom_button = {
 				has_country_flag = unlocked_artifice_invention_automated_translator
 				has_country_flag = unlocked_artifice_invention_veykoda_rune_protections
 				has_country_flag = unlocked_artifice_invention_warfare_simulator
+						
 				#ACE
 				has_country_flag = unlocked_artifice_invention_gerudian_autorowers
 			}
@@ -4732,6 +4735,9 @@ custom_button = {
 				has_estate_privilege = artifice_invention_automated_translator
 				has_estate_privilege = artifice_invention_veykoda_rune_protections
 				has_estate_privilege = artifice_invention_warfare_simulator
+						
+				#ACE
+				has_estate_privilege = artifice_invention_gerudian_autorowers
 			}
 		}
 	}
@@ -4762,6 +4768,7 @@ custom_button = {
 				has_country_flag = unlocked_artifice_invention_automated_translator
 				has_country_flag = unlocked_artifice_invention_veykoda_rune_protections
 				has_country_flag = unlocked_artifice_invention_warfare_simulator
+						
 				#ACE
 				has_country_flag = unlocked_artifice_invention_gerudian_autorowers
 			}
@@ -5740,6 +5747,7 @@ custom_button = {
 		OR = {
 			culture_group = gnomish
 			culture_group = kobold
+			culture_group = gerudian
 		}
 	}
 	frame = {
@@ -8395,6 +8403,78 @@ custom_button = {
 				remove_estate_privilege = artifice_invention_icestorm_cannons
 			}
 		}
+
+		#ACE
+		else_if = {
+			limit = {
+				OR = {
+					tag =  A05
+					was_tag = A05
+				}
+			}
+			if = {
+				limit = {
+					artifice_can_select_invention_20 = yes
+					NOT = {
+						has_estate_privilege = artifice_invention_gu_boats
+					}
+				}
+				set_estate_privilege = artifice_invention_gu_boats
+			}
+			else_if = {
+				limit = {
+					artifice_can_select_invention_20 = no
+					NOT = {
+						has_estate_privilege = artifice_invention_gu_boats
+					}
+				}
+				custom_tooltip = artifice_cannot_afford_invention
+				tooltip = {
+					set_estate_privilege = artifice_invention_gu_boats
+				}
+			}
+			else_if = {
+				limit = {
+					has_estate_privilege = artifice_invention_gu_boats
+				}
+				remove_estate_privilege = artifice_invention_gu_boats
+			}
+		}
+		else_if = {
+			limit = {
+				OR = {
+					tag =  AC5
+					was_tag = AC5
+				}
+			}
+			if = {
+				limit = {
+					artifice_can_select_invention_20 = yes
+					NOT = {
+						has_estate_privilege = artifice_invention_rock_melter_mk1
+					}
+				}
+				set_estate_privilege = artifice_invention_rock_melter_mk1
+			}
+			else_if = {
+				limit = {
+					artifice_can_select_invention_20 = no
+					NOT = {
+						has_estate_privilege = artifice_invention_rock_melter_mk1
+					}
+				}
+				custom_tooltip = artifice_cannot_afford_invention
+				tooltip = {
+					set_estate_privilege = artifice_invention_rock_melter_mk1
+				}
+			}
+			else_if = {
+				limit = {
+					has_estate_privilege = artifice_invention_rock_melter_mk1
+				}
+				remove_estate_privilege = artifice_invention_rock_melter_mk1
+			}
+		}
 	}
 }
 
@@ -8805,6 +8885,76 @@ custom_button = {
 				remove_estate_privilege = artifice_invention_wyvern_mithril_scale_plating
 			}
 		}
+		else_if = {
+			limit = {
+				OR = {
+					tag =  A05
+					was_tag = A05
+				}
+			}
+			if = {
+				limit = {
+					artifice_can_select_invention_20 = yes
+					NOT = {
+						has_estate_privilege = artifice_invention_coddorran_powered_exosuit
+					}
+				}
+				set_estate_privilege = artifice_invention_coddorran_powered_exosuit
+			}
+			else_if = {
+				limit = {
+					artifice_can_select_invention_20 = no
+					NOT = {
+						has_estate_privilege = artifice_invention_coddorran_powered_exosuit
+					}
+				}
+				custom_tooltip = artifice_cannot_afford_invention
+				tooltip = {
+					set_estate_privilege = artifice_invention_coddorran_powered_exosuit
+				}
+			}
+			else_if = {
+				limit = {
+					has_estate_privilege = artifice_invention_coddorran_powered_exosuit
+				}
+				remove_estate_privilege = artifice_invention_coddorran_powered_exosuit
+			}
+		}
+		else_if = {
+			limit = {
+				OR = {
+					tag =  AC5
+					was_tag = AC5
+				}
+			}
+			if = {
+				limit = {
+					artifice_can_select_invention_20 = yes
+					NOT = {
+						has_estate_privilege = artifice_invention_bioartificed_fireplants
+					}
+				}
+				set_estate_privilege = artifice_invention_bioartificed_fireplants
+			}
+			else_if = {
+				limit = {
+					artifice_can_select_invention_20 = no
+					NOT = {
+						has_estate_privilege = artifice_invention_bioartificed_fireplants
+					}
+				}
+				custom_tooltip = artifice_cannot_afford_invention
+				tooltip = {
+					set_estate_privilege = artifice_invention_bioartificed_fireplants
+				}
+			}
+			else_if = {
+				limit = {
+					has_estate_privilege = artifice_invention_bioartificed_fireplants
+				}
+				remove_estate_privilege = artifice_invention_bioartificed_fireplants
+			}
+		}
 	}
 }
 
@@ -8819,6 +8969,9 @@ custom_button = {
 			has_country_flag = unlocked_artifice_invention_gnollverns
 			has_country_flag = unlocked_artifice_invention_wyvern_incendiary_nebulizers
 			has_country_flag = research_artifice_invention_sustaining_arks
+
+			#ACE
+			has_country_flag = unlocked_artifice_invention_flamewoven_clothing
 		}
 		# tag = H61
 	}
@@ -8832,6 +8985,9 @@ custom_button = {
 					has_country_flag = unlocked_artifice_invention_gnollverns
 					has_country_flag = unlocked_artifice_invention_wyvern_incendiary_nebulizers
 					has_country_flag = research_artifice_invention_sustaining_arks
+
+					#ACE
+					has_country_flag = unlocked_artifice_invention_flamewoven_clothing
 				}
 			}
 		}
@@ -8849,6 +9005,9 @@ custom_button = {
 					has_estate_privilege = artifice_invention_gnollverns
 					has_estate_privilege = artifice_invention_wyvern_incendiary_nebulizers
 					has_estate_privilege = artifice_invention_sustaining_arks
+
+					#ACE
+					has_estate_privilege = artifice_invention_flamewoven_clothing
 				}
 			}
 			OR = {
@@ -8857,6 +9016,9 @@ custom_button = {
 				has_country_flag = unlocked_artifice_invention_gnollverns
 				has_country_flag = unlocked_artifice_invention_wyvern_incendiary_nebulizers
 				has_country_flag = research_artifice_invention_sustaining_arks
+
+				#ACE
+				has_country_flag = unlocked_artifice_invention_flamewoven_clothing
 			}
 		}
 	}
@@ -8872,6 +9034,9 @@ custom_button = {
 				has_estate_privilege = artifice_invention_gnollverns
 				has_estate_privilege = artifice_invention_wyvern_incendiary_nebulizers
 				has_estate_privilege = artifice_invention_sustaining_arks
+
+				#ACE
+				has_estate_privilege = artifice_invention_flamewoven_clothing
 			}
 		}
 	}
@@ -8883,6 +9048,9 @@ custom_button = {
 				has_country_flag = unlocked_artifice_invention_gnollverns
 				has_country_flag = unlocked_artifice_invention_wyvern_incendiary_nebulizers
 				has_country_flag = research_artifice_invention_sustaining_arks
+
+				#ACE
+				has_country_flag = unlocked_artifice_invention_flamewoven_clothing				
 			}
 		}
 	}
@@ -9052,6 +9220,41 @@ custom_button = {
 				remove_estate_privilege = artifice_invention_sustaining_arks
 			}
 		}
+		else_if = {
+			limit = {
+				OR = {
+					tag =  AC5
+					was_tag = AC5
+				}
+			}
+			if = {
+				limit = {
+					artifice_can_select_invention_30 = yes
+					NOT = {
+						has_estate_privilege = artifice_invention_flamewoven_clothing
+					}
+				}
+				set_estate_privilege = artifice_invention_flamewoven_clothing
+			}
+			else_if = {
+				limit = {
+					artifice_can_select_invention_30 = no
+					NOT = {
+						has_estate_privilege = artifice_invention_flamewoven_clothing
+					}
+				}
+				custom_tooltip = artifice_cannot_afford_invention
+				tooltip = {
+					set_estate_privilege = artifice_invention_flamewoven_clothing
+				}
+			}
+			else_if = {
+				limit = {
+					has_estate_privilege = artifice_invention_flamewoven_clothing
+				}
+				remove_estate_privilege = artifice_invention_flamewoven_clothing
+			}
+		}
 	}
 }
 
@@ -9062,6 +9265,9 @@ custom_button = {
 		has_country_flag = artifice_invention_menu_open_unique_small 
 		OR = {
 			has_country_flag = unlocked_artifice_invention_innate_windshaping
+			
+			#ACE
+			has_country_flag = unlocked_artifice_invention_obsidian_settlement_generation_kit
 		}
 	}
 	frame = {
@@ -9070,6 +9276,9 @@ custom_button = {
 			NOT = {
 				OR = {
 					has_country_flag = unlocked_artifice_invention_innate_windshaping
+
+					#ACE
+					has_country_flag = unlocked_artifice_invention_obsidian_settlement_generation_kit
 				}
 			}
 		}
@@ -9080,10 +9289,16 @@ custom_button = {
 			NOT = {
 				OR = {
 					has_estate_privilege = artifice_invention_innate_windshaping
+
+					#ACE
+					has_estate_privilege = artifice_invention_obsidian_settlement_generation_kit
 				}
 			}
 			OR = {
 				has_country_flag = unlocked_artifice_invention_innate_windshaping
+
+				#ACE
+				has_country_flag = unlocked_artifice_invention_obsidian_settlement_generation_kit
 			}
 		}
 	}
@@ -9092,6 +9307,9 @@ custom_button = {
 		trigger = {
 			OR = {
 				has_estate_privilege = artifice_invention_innate_windshaping
+
+				#ACE
+				has_estate_privilege = artifice_invention_obsidian_settlement_generation_kit
 			}
 		}
 	}
@@ -9099,6 +9317,9 @@ custom_button = {
 		hidden_trigger = {
 			OR = {
 				has_country_flag = unlocked_artifice_invention_innate_windshaping
+
+				#ACE
+				has_country_flag = unlocked_artifice_invention_obsidian_settlement_generation_kit
 			}
 		}
 	}
@@ -9134,6 +9355,41 @@ custom_button = {
 					has_estate_privilege = artifice_invention_innate_windshaping
 				}
 				remove_estate_privilege = artifice_invention_innate_windshaping
+			}
+		}
+		else_if = {
+			limit = {
+				OR = {
+					tag =  AC5
+					was_tag = AC5
+				}
+			}
+			if = {
+				limit = {
+					artifice_can_select_invention_30 = yes
+					NOT = {
+						has_estate_privilege = artifice_invention_obsidian_settlement_generation_kit
+					}
+				}
+				set_estate_privilege = artifice_invention_obsidian_settlement_generation_kit
+			}
+			else_if = {
+				limit = {
+					artifice_can_select_invention_30 = no
+					NOT = {
+						has_estate_privilege = artifice_invention_obsidian_settlement_generation_kit
+					}
+				}
+				custom_tooltip = artifice_cannot_afford_invention
+				tooltip = {
+					set_estate_privilege = artifice_invention_obsidian_settlement_generation_kit
+				}
+			}
+			else_if = {
+				limit = {
+					has_estate_privilege = artifice_invention_obsidian_settlement_generation_kit
+				}
+				remove_estate_privilege = artifice_invention_obsidian_settlement_generation_kit
 			}
 		}
 	}

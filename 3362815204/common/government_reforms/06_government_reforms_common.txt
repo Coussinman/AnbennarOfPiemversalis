@@ -93,6 +93,9 @@ parliamentary_reform = {
 		NOT = { AND = { tag = S23 NOT = { has_country_flag = s23_disaster_over } } }
 		NOT = { has_reform = the_mazukxiem } #Brrtekuh
 		NOT = { has_reform = council_of_the_coast }
+
+		#ACE
+		NOT = { has_reform = sugamber_amber_court_reform }
 	}
 	modifiers = {
 		global_unrest = -1
@@ -1844,6 +1847,7 @@ shrine_guardians_reform = {
 							NOT = { has_global_flag = begga_canonization }
 						}
 					}
+					has_any_nakavy_avo_shrine_in_province_trigger = yes
 				}
 				add_province_modifier = { 
 					name = shrine_guard_garisson
@@ -6175,7 +6179,10 @@ commercial_trade_empire_reform = {
 superiority_of_the_state_reform = {
 	icon = russian_queen	#TODO
 	potential = {
-		NOT = { has_unlocked_government_reform = { government_reform = divided_aristocracy_reform } }
+		NOT = {
+			has_unlocked_government_reform = { government_reform = divided_aristocracy_reform }
+			has_reform = adventurer_reform
+		}
 	}
 	trigger = {
 		full_idea_group = court_ideas
@@ -7517,6 +7524,7 @@ blackpowder_resistance = {
 		allowed_rev_guard_fraction = 0.25
 		can_recruit_revolutionary_guards = yes
 		max_revolutionary_zeal = 50 
+		may_recruit_female_generals = yes
 	}
 }
 

@@ -1,0 +1,2126 @@
+# Z68_1 = {
+# 	slot = 1
+# 	generic = no
+# 	ai = yes
+# 	has_country_shield = yes
+# 	potential = {
+# 		tag = Z68
+# 		always = no
+# 	}
+# }
+# Z68_1_bloodcourt = {
+# 	slot = 1
+# 	generic = no
+# 	ai = yes
+# 	has_country_shield = yes
+# 	potential = {
+# 		tag = Z68
+# 		NOT = {
+# 			has_country_flag = roilsard_path
+# 		}
+# 		always = no
+# 	}
+
+# 	Z68_befriend_vivins = {
+# 		icon = per_an_asha_empire
+# 		position = 6
+# 		required_missions = {
+# 			Z68_duchy_reforged
+# 		}
+# 		provinces_to_highlight = {}
+
+# 		trigger = {
+# 			OR = {
+# 				A59 = {
+# 					alliance_with = ROOT
+# 					has_100_opinion_improved_relation = {
+# 						target = ROOT
+# 					}
+# 				}
+# 				A60 = {
+# 					alliance_with = ROOT
+# 					has_100_opinion_improved_relation = {
+# 						target = ROOT
+# 					}
+# 				}
+# 				AND = {
+# 					A59 = {
+# 						exists = no
+# 					}
+# 					A60 = {
+# 						exists = no
+# 					}
+# 				}
+# 			}
+# 		}
+
+# 		effect = {
+# 			add_estate_loyalty = {
+# 				estate = estate_vampires
+# 				loyalty = 25
+# 			}
+# 			change_estate_land_share = {
+# 				estate = all
+# 				share = -10
+# 			}
+# 			change_estate_land_share = {
+# 				estate = estate_vampires
+# 				share = 5
+# 			}
+# 			complex_dynamic_effect = {
+# 				first_custom_tooltip = Z78_asheniande_alliance_tooltip
+# 				first_limit = "
+# 					A60 = {
+# 						alliance_with = ROOT
+# 						has_100_opinion_improved_relation = {
+# 							target = ROOT
+# 						}
+# 					}
+# 				"
+# 				first_effect = "
+# 					custom_tooltip = Z68_befriended_asheniande_tooltip
+# 					A60 = {
+# 						set_country_flag = blood_court_member
+# 						add_trust = {
+# 							who = Z68
+# 							value = 10
+# 							mutual = yes
+# 						}
+# 					}
+# 				"
+# 				second_custom_tooltip = Z68_befriended_corvuria_tooltip
+# 				second_limit = "
+# 					A59 = {
+# 						alliance_with = ROOT
+# 						has_100_opinion_improved_relation = {
+# 							target = ROOT
+# 						}
+# 					}
+# 					NOT = {
+# 						A60 = {
+# 							alliance_with = ROOT
+# 							has_100_opinion_improved_relation = {
+# 								target = ROOT
+# 							}
+# 						}
+# 					}
+# 				"
+# 				second_effect = "
+# 					custom_tooltip = Z68_befriended_corvuria_tooltip
+# 					A59 = {
+# 						set_country_flag = blood_court_member
+# 						add_trust = {
+# 							who = Z68
+# 							value = 10
+# 							mutual = yes
+# 						}
+# 					}
+# 				"
+# 			}
+# 		}
+# 	}
+# 	Z68_crimson_aristocracy = {
+# 		icon = mission_court_education
+# 		position = 7
+# 		required_missions = {
+# 			Z68_befriend_vivins
+# 		}
+# 		trigger = {
+# 			stability = 1
+# 			estate_loyalty = {
+# 				estate = estate_vampires
+# 				loyalty = 70
+# 			}
+# 			estate_influence = {
+# 				estate = estate_vampires
+# 				influence = 60
+# 			}
+# 			estate_loyalty = {
+# 				estate = estate_nobles
+# 				loyalty = 60
+# 			}
+# 			estate_influence = {
+# 				estate = estate_nobles
+# 				influence = 50
+# 			}
+# 			33 = {
+# 				development = 25
+# 				num_of_times_expanded_infrastructure = 1
+# 			}
+# 		}
+
+# 		effect = {
+# 			country_event = {
+# 				id = flavor_Toarnaire.1000
+# 			}
+# 			add_government_reform = toarnaire_bloodcourt_reform
+# 			set_estate_privilege = estate_vampires_organization_the_blood_court
+# 			set_estate_privilege = estate_vampires_law_state_collusion_masquerade
+# 			set_country_flag = founded_blood_court
+
+# 			hidden_effect = {
+# 				every_known_country = {
+# 					limit = {
+# 						has_country_flag = blood_court_member
+# 					}
+# 					set_estate_privilege = estate_vampires_organization_the_blood_court
+# 				}
+# 			}
+# 			33 = {
+# 				add_province_modifier = {
+# 					name = bloodcourt_capital
+# 					duration = -1
+# 				}
+# 			}
+# 		}
+# 	}
+# 	Z68_court_of_blood = {
+# 		icon = mission_the_golden_city
+# 		position = 9
+# 		required_missions = {
+# 			Z68_crimson_aristocracy
+# 		}
+# 		provinces_to_highlight = {}
+
+# 		trigger = {
+# 			calc_true_if = {
+# 				amount = 5
+# 				all_known_country = {
+# 					is_part_of_hre = yes
+# 					has_estate_privilege = estate_vampires_organization_the_blood_court
+# 				}
+# 			}
+# 		}
+
+# 		effect = {
+# 			custom_tooltip = court_of_blood_tt
+# 			custom_tooltip = lords_of_the_court_tt
+# 			hidden_effect = {
+# 				every_country = {
+# 					limit = {
+# 						is_part_of_hre = yes
+# 						has_estate_privilege = estate_vampires_organization_the_blood_court
+# 					}
+# 					add_country_modifier = {
+# 						name = empire_infliterated
+# 						duration = -1
+# 					}
+# 				}
+# 			}
+# 			tooltip = {
+# 				add_country_modifier = {
+# 					name = empire_infliterated
+# 					duration = -1
+# 				}
+# 			}
+# 		}
+# 	}
+# 	Z68_imperial_veins = {
+# 		icon = mission_the_golden_city
+# 		position = 11
+# 		required_missions = {
+# 			Z68_court_of_blood
+# 		}
+# 		provinces_to_highlight = {}
+# 		trigger = {
+# 		}
+# 		effect = {
+# 		}
+# 	}
+# 	Z68_setting_up_the_pieces = {
+# 		icon = mission_the_golden_city
+# 		position = 12
+# 		required_missions = {
+# 			Z68_imperial_veins
+# 		}
+# 		provinces_to_highlight = {}
+
+# 		trigger = {
+# 			calc_true_if = {
+# 				amount = 3
+# 				all_known_country = {
+# 					is_elector = yes
+# 					has_estate_privilege = estate_vampires_organization_the_blood_court
+# 					has_100_opinion_improved_relation = {
+# 						target = ROOT
+# 					}
+# 				}
+# 			}
+# 		}
+
+# 		effect = {
+# 			custom_tooltip = setting_up_the_pieces_tt
+# 			custom_tooltip = setting_up_the_pieces_tt2
+# 			hidden_effect = {
+# 				every_known_country = {
+# 					limit = {
+# 						is_elector = yes
+# 						has_estate_privilege = estate_vampires_organization_the_blood_court
+# 					}
+# 					add_trust = {
+# 						who = Z68
+# 						value = 10
+# 						mutual = yes
+# 					}
+# 					spread_random_vamp = yes
+# 				}
+# 			}
+# 		}
+# 	}
+# 	Z68_choosing_the_candidate = {
+# 		icon = mission_the_golden_city
+# 		position = 14
+# 		required_missions = {
+# 			Z68_setting_up_the_pieces
+# 		}
+# 		provinces_to_highlight = {}
+
+# 		trigger = {
+# 			custom_trigger_tooltip = {
+# 				tooltip = choosing_the_canditate_tt3
+# 				OR = {
+# 					A57 = {
+# 						has_estate = estate_vampires
+# 						has_100_opinion_improved_relation = {
+# 							target = ROOT
+# 						}
+# 					}
+# 					AND = {
+# 						A57 = { exists = no }
+# 						any_known_country = {
+# 							is_part_of_hre = yes
+# 							government = monarchy
+# 							has_100_opinion_improved_relation = {
+# 								target = ROOT
+# 							}
+# 							has_estate = estate_vampires
+# 						}
+# 					}
+# 				}
+# 			}
+# 		}
+
+# 		effect = {
+# 			complex_dynamic_effect = {
+# 				first_custom_tooltip = choosing_the_canditate_tt
+# 				first_limit = "
+# 					A57 = {
+# 						exists = yes
+# 						has_estate = estate_vampires
+# 						has_100_opinion_improved_relation = {
+# 							target = ROOT
+# 						}
+# 					}
+# 				"
+# 				first_effect = "
+# 					first_effect = yes
+# 					tooltip = {
+# 						A57 = {
+# 							add_country_modifier = {
+# 								name = puppet_emperor1
+# 								duration = -1
+# 							}
+# 						}
+# 					}
+# 				"
+# 				second_custom_tooltip = choosing_the_canditate_tt2
+# 				second_limit = "
+# 					A57 = { exists = no }
+# 					any_known_country = {
+# 						is_part_of_hre = yes
+# 						government = monarchy
+# 						has_100_opinion_improved_relation = {
+# 							target = ROOT
+# 						}
+# 						has_estate = estate_vampires
+# 					}
+# 				"
+# 				second_effect = "
+# 					second_effect = yes
+# 					tooltip = {
+# 						add_country_modifier = {
+# 							name = puppet_emperor1
+# 							duration = -1
+# 						}
+# 					}
+# 				"
+# 			}
+# 		}
+# 	}
+# }
+
+# Z68_2 = {
+# 	slot = 2
+# 	generic = no
+# 	ai = yes
+# 	has_country_shield = yes
+# 	potential = {
+# 		tag = Z68
+# 		always = no
+# 	}
+
+# 	Z68_gather_support = {
+# 		icon = mission_friends_or_enemies
+# 		position = 1
+# 		provinces_to_highlight = {}
+# 		trigger = {
+# 			any_known_country = {
+# 				is_supporting_independence_of = Z68
+# 				has_opinion = {
+# 					who = Z68
+# 					value = 120
+# 				}
+# 			}
+# 		}
+# 		effect = {
+# 			add_country_modifier = {
+# 				name = Z68_planning
+# 				duration = 3650
+# 			}
+# 		}
+# 	}
+
+# 	Z68_poke_giant = {
+# 		icon = mission_rb_war_of_the_roses
+# 		position = 4
+# 		required_missions = { Z68_own_path }
+# 		provinces_to_highlight = {}
+# 		trigger = {
+# 			OR = {
+# 				59 = {
+# 					owned_by = ROOT
+# 				}
+# 				A01 = {
+# 					exists = no
+# 				}
+# 				AND = {
+# 					any_known_country = {
+# 						is_subject_of = A01
+# 						has_opinion = {
+# 							who = ROOT
+# 							value = 100
+# 						}
+# 					}
+# 					has_spy_network_in = {
+# 						who = A01
+# 						value = 50
+# 					}
+# 					A30 = {
+# 						OR = {
+# 							has_100_opinion_improved_relation = {
+# 								target = ROOT
+# 							}
+# 							NOT = {
+# 								alliance_with = A01
+# 							}
+# 						}
+# 					}
+# 				}
+# 			}
+# 		}
+# 		effect = {
+# 			add_spy_network_in = {
+# 				who = A01
+# 				value = -50
+# 			}
+# 			custom_tooltip = poke_giant_tt
+# 			every_known_country = {
+# 				limit = {
+# 					is_subject_of = A01
+# 					has_opinion = {
+# 						who = ROOT
+# 						value = 100
+# 					}
+# 				}
+# 				declare_war_with_cb = {
+# 					casus_belli = cb_independence_war
+# 					who = overlord
+# 				}
+# 			}
+# 		}
+# 	}
+# }
+# Z68_2_bloodcourt = {
+# 	slot = 2
+# 	generic = no
+# 	ai = yes
+# 	has_country_shield = yes
+# 	potential = {
+# 		tag = Z68
+# 		NOT = {
+# 			has_country_flag = roilsard_path
+# 		}
+# 		always = no
+# 	}
+# 	Z68_finish_wineport = {
+# 		icon = mission_secure_hajj_ports
+# 		position = 6
+# 		required_missions = {
+# 			Z68_duchy_reforged
+# 		}
+# 		provinces_to_highlight = {}
+# 		trigger = {
+# 			lower_winebay_area = {
+# 				type = all
+# 				owned_by = ROOT
+# 			}
+# 			101 = {
+# 				base_production = 10
+# 				has_production_building_trigger = yes
+# 				has_trade_building_trigger = yes
+# 			}
+# 		}
+# 		effect = {
+# 			lower_winebay_area = {
+# 				change_culture = roilsardi
+# 			}
+# 			add_country_modifier = {
+# 				name = wineport
+# 				duration = 7300
+# 			}
+# 			unlock_merc_company = {
+# 				merc_company = merc_wineport_watchers
+# 			}
+# 			unlock_merc_company = {
+# 				merc_company = merc_foxalley_foxes
+# 			}
+
+# 			101 = {
+# 				add_province_modifier = {
+# 					name = second_capital
+# 					duration = -1
+# 				}
+# 			}
+# 		}
+# 	}
+# 	Z68_increase_bottles = {
+# 		icon = mission_the_varangians
+# 		position = 7
+# 		required_missions = {
+# 			Z68_finish_wineport
+# 		}
+# 		provinces_to_highlight = {}
+
+# 		trigger = {
+# 			86 = {
+# 				has_production_building_trigger = yes
+# 				base_production = 6
+# 			}
+# 		}
+
+# 		effect = {
+# 			86 = {
+# 				add_province_modifier = {
+# 					name = glass_cones
+# 					duration = -1
+# 				}
+# 			}
+# 		}
+# 	}
+# 	Z68_hemomancy = {
+# 		icon = mission_blood_sacrifices
+# 		position = 8
+# 		required_missions = {
+# 			Z68_crimson_aristocracy
+# 		}
+# 		provinces_to_highlight = {}
+
+# 		trigger = {
+# 			capital_scope = {
+# 				has_building = mage_tower
+# 			}
+# 			OR = {
+# 				court_mage = 3
+# 				court_mage = 4
+# 				court_mage = 5
+# 			}
+# 			estate_loyalty = {
+# 				estate = estate_mages
+# 				loyalty = 60
+# 			}
+# 		}
+
+# 		effect = {
+# 			custom_tooltip = hemomancy_tt
+# 			set_country_flag = blood_magic
+# 		}
+# 	}
+# 	Z68_blood_to_wine = {
+# 		icon = bohemian_crystal
+# 		position = 10
+# 		required_missions = {
+# 			Z68_court_of_blood
+# 			Z68_hemomancy
+# 		}
+# 		provinces_to_highlight = {}
+# 		trigger = {
+# 			calc_true_if = {
+# 				amount = 3
+# 				all_owned_province = {
+# 					trade_goods = wine
+# 					has_building = mage_tower
+# 				}
+# 			}
+# 		}
+# 		effect = {
+# 			add_adm_power = -100
+# 			add_dip_power = -100
+# 			33 = {
+# 				add_province_modifier = {
+# 					name = blood_to_wine
+# 					duration = -1
+# 				}
+# 			}
+# 			eastern_winebay_area = {
+# 				add_province_modifier = {
+# 					name = lands_of_thorn_and_wine2
+# 					duration = -1
+# 				}
+# 				hidden_effect = {
+# 					remove_province_modifier = lands_of_thorn_and_wine
+# 				}
+# 			}
+# 		}
+# 	}
+# 	Z68_bloodwine = {
+# 		icon = the_viennese_waltz
+# 		position = 12
+# 		required_missions = {
+# 			Z68_imperial_veins
+# 			Z68_blood_to_wine
+# 		}
+# 		provinces_to_highlight = {}
+# 		trigger = {
+# 			dip_power = 200
+# 			adm_power = 200
+# 			manpower = 20
+# 			trade_goods_produced_amount = {
+# 				trade_goods = wine
+# 				amount = 40
+# 			}
+# 		}
+# 		effect = {
+# 			add_dip_power = -200
+# 			add_adm_power = -200
+# 			add_manpower = -20
+# 			33 = {
+# 				remove_province_modifier = blood_to_wine
+# 				add_province_modifier = {
+# 					name = blood_to_wine2
+# 					duration = -1
+# 				}
+# 			}
+# 			eastern_winebay_area = {
+# 				add_province_modifier = {
+# 					name = lands_of_thorn_and_wine3
+# 					duration = -1
+# 				}
+# 				hidden_effect = {
+# 					remove_province_modifier = lands_of_thorn_and_wine2
+# 				}
+# 			}
+# 		}
+# 	}
+# 	Z68_infiltrate_the_order = {
+# 		icon = mission_the_golden_city
+# 		position = 13
+# 		required_missions = {
+# 			Z68_setting_up_the_pieces
+# 		}
+# 		provinces_to_highlight = {}
+# 		trigger = {
+# 			423 = {
+# 				owner = {
+# 					has_estate = estate_vampires
+# 				}
+# 			}
+# 		}
+# 		effect = {
+# 			add_prestige = 20
+# 			custom_tooltip = infiltrate_the_order_tt
+# 		}
+# 	}
+# 	Z68_control_the_necropolis = {
+# 		icon = mission_the_golden_city
+# 		position = 14
+# 		required_missions = {
+# 			Z68_infiltrate_the_order
+# 		}
+# 		provinces_to_highlight = {}
+
+# 		trigger = {
+# 			332 = {
+# 				owner = {
+# 					has_estate = estate_vampires
+# 				}
+# 			}
+# 			calc_true_if = {
+# 				amount = 5
+# 				all_owned_province = {
+# 					has_tax_building_trigger = yes
+# 				}
+# 			}
+# 		}
+
+# 		effect = {
+# 			every_known_country = {
+# 				limit = {
+# 					has_estate = estate_vampires
+# 				}
+# 				add_stability_or_adm_power = yes
+# 				add_country_modifier = {
+# 					name = vampire_clergy
+# 					duration = -1
+# 				}
+# 			}
+# 		}
+# 	}
+# 	Z68_a_shadow_empire = {
+# 		icon = mission_the_golden_city
+# 		position = 14
+# 		required_missions = {
+# 			Z68_choosing_the_candidate
+# 			Z68_control_the_necropolis
+# 		}
+# 		provinces_to_highlight = {}
+# 		trigger = {
+# 			calc_true_if = {
+# 				amount = 15
+# 				all_known_country = {
+# 					is_part_of_hre = yes
+# 					has_estate_privilege = estate_vampires_organization_the_blood_court
+# 				}
+# 			}
+# 			custom_trigger_tooltip = {
+# 				tooltip = shadow_empire_tt
+# 				OR = {
+# 					A57 = {
+# 						is_emperor = yes
+# 					}
+# 					emperor = {
+# 						has_country_flag = chosen_emperor
+# 					}
+# 				}
+# 			}
+# 		}
+# 		effect = {
+# 			custom_tooltip = shadow_empire_tt2
+# 			tooltip = {
+# 				add_country_modifier = {
+# 					name = shadow_empire
+# 					duration = -1
+# 				}
+# 			}
+
+# 			set_country_flag = shadow_empire
+# 			custom_tooltip = shadow_empire_tt3
+# 			custom_tooltip = " "
+# 			custom_tooltip = shadow_empire_tt4
+
+# 		}
+# 	}
+# }
+# Z68_3 = {
+# 	slot = 3
+# 	generic = no
+# 	ai = yes
+# 	has_country_shield = yes
+# 	potential = {
+# 		tag = Z68
+# 		always = no
+# 	}
+
+# 	Z68_final_touches = {
+# 		icon = mission_horde_trade
+# 		position = 2
+# 		required_missions = {
+# 			Z68_scheme_wineport
+# 			Z68_gather_support
+# 		}
+# 		provinces_to_highlight = {
+# 			is_capital_of = A16
+# 		}
+
+# 		trigger = {
+# 			OR = {
+# 				AND = {
+# 					army_size_percentage = 1
+# 					has_spy_network_in = {
+# 						who = A16
+# 						value = 35
+# 					}
+# 					treasury = 25
+# 				}
+# 				AND = {
+# 					is_at_war = no
+# 					is_subject = no
+# 				}
+# 			}
+# 		}
+
+# 		effect = {
+# 			add_spy_network_in = {
+# 				who = A16
+# 				value = -35
+# 			}
+# 			complex_dynamic_effect = {
+# 				first_custom_tooltip = Z68_final_touches_tt1
+# 				first_limit = "
+# 					Z68 = {
+# 						is_subject_of = A16
+# 					}
+# 				"
+# 				first_effect = "
+# 					add_treasury = -25
+# 					add_country_modifier = {
+# 						name = Z68_forced_conscription
+# 						duration = 3650
+# 					}
+# 				"
+# 				second_custom_tooltip = Z68_final_touches_tt2
+# 				second_limit = "
+# 					is_at_war = no
+# 					NOT = {
+# 						Z68 = {
+# 							is_subject_of = A16
+# 						}
+# 					}
+# 				"
+# 				second_effect = "
+# 					add_stability_or_adm_power = yes
+# 					add_war_exhaustion = -1
+# 					add_prestige = 20
+# 				"
+# 			}
+# 		}
+# 	}
+
+# 	Z68_own_path = {
+# 		icon = retake_thessaly
+# 		position = 3
+# 		required_missions = {
+# 			Z68_final_touches
+# 		}
+# 		trigger = {
+# 			is_subject = no
+# 			is_at_war = no
+# 		}
+# 		effect = {
+# 			add_stability = 2
+# 			add_war_exhaustion = -2
+# 			add_prestige = 10
+# 			eastern_winebay_area = {
+# 				add_permanent_claim = ROOT
+# 			}
+# 		}
+# 	}
+
+# 	Z68_remnant = {
+# 		icon = mission_conquer_aden
+# 		position = 4
+# 		required_missions = { Z68_own_path }
+# 		provinces_to_highlight = {
+# 			OR = {
+# 				is_capital_of = A87
+# 				province_id = 32
+# 				province_id = 34
+# 			}
+# 			NOT = {
+# 				owned_by = ROOT
+# 			}
+# 		}
+
+# 		trigger = {
+# 			OR = {
+# 				AND = {
+# 					has_spy_network_in = {
+# 						who = A87
+# 						value = 30
+# 					}
+# 					A87 = {
+# 						is_at_war = no
+# 						scornfully_insulted_check = yes
+# 					}
+# 				}
+# 				AND = {
+# 					32 = {
+# 						owned_by = ROOT
+# 					}
+# 					34 = {
+# 						owned_by = ROOT
+# 					}
+# 				}
+# 			}
+# 		}
+
+# 		effect = {
+# 			complex_dynamic_effect = {
+# 				first_custom_tooltip = Z68_the_remnant_tt1
+# 				first_limit = "
+# 					has_spy_network_in = {
+# 						who = A87
+# 						value = 30
+# 					}
+# 					A87 = {
+# 						scornfully_insulted_check = yes
+# 					}
+# 				"
+# 				first_effect = "
+# 					add_spy_network_in = {
+# 						who = A87
+# 						value = -30
+# 					}
+# 					A87 = {
+# 						declare_war_with_cb = {
+# 							who = Z68
+# 							casus_belli = cb_annex
+# 						}
+# 					}
+# 				"
+# 				second_custom_tooltip = Z68_the_remnant_tt2
+# 				second_limit = "
+# 					32 = {
+# 						owned_by = ROOT
+# 					}
+# 					34 = {
+# 						owned_by = ROOT
+# 					}
+# 				"
+# 				second_effect = "
+# 					add_adm_power = 100
+# 				"
+# 			}
+# 		}
+# 	}
+
+# 	Z68_duchy_reforged = {
+# 		icon = mission_crown_of_wenceslas
+# 		position = 5
+# 		required_missions = {
+# 			Z68_remnant
+# 			Z68_poke_giant
+# 			Z68_rubenaire
+# 		}
+# 		provinces_to_highlight = {}
+
+# 		trigger = {
+# 			eastern_winebay_area = {
+# 				type = all
+# 				owned_by = ROOT
+# 				is_core = ROOT
+# 			}
+# 		}
+
+# 		effect = {
+# 			add_prestige = 10
+# 			eastern_winebay_area = {
+# 				add_province_modifier = {
+# 					name = lands_of_thorn_and_wine
+# 					duration = -1
+# 				}
+# 			}
+# 			complex_dynamic_effect_without_alternative = {
+# 				first_custom_tooltip = Z68_duchy_reforged_tt
+# 				first_limit = "
+# 					NOT = { is_year = 1460 }
+# 				"
+# 				first_effect = "
+# 					hire_advisor = {
+# 						type = treasurer
+# 						name = \"Silvius na Loop\"
+# 						skill = 2
+# 						culture = roilsardi
+# 						discount = yes
+# 					}
+# 				"
+# 			}
+# 		}
+# 	}
+# }
+# Z68_3_bloodcourt = {
+# 	slot = 3
+# 	generic = no
+# 	ai = yes
+# 	has_country_shield = yes
+# 	potential = {
+# 		tag = Z68
+# 		NOT = {
+# 			has_country_flag = roilsard_path
+# 		}
+# 		always = no
+# 	}
+# 	Z68_the_tip = {
+# 		icon = mission_guilds_of_barcelona
+# 		position = 6
+# 		required_missions = {
+# 			Z68_duchy_reforged
+# 		}
+# 		provinces_to_highlight = {}
+
+# 		trigger = {
+# 			upper_winebay_area = {
+# 				type = all
+# 				owned_by = ROOT
+# 			}
+# 			38 = {
+# 				province_has_center_of_trade_of_level = 2
+# 				has_trade_building_trigger = yes
+# 			}
+# 		}
+
+# 		effect = {
+# 			upper_winebay_area = {
+# 				change_culture = roilsardi
+# 			}
+# 			add_country_modifier = {
+# 				name = controlled_trade
+# 				duration = 7300
+# 			}
+# 			38 = {
+# 				add_province_modifier = {
+# 					name = northern_port
+# 					duration = -1
+# 				}
+# 			}
+
+# 			complex_dynamic_effect_without_alternative = {
+# 				first_custom_tooltip = Z68_the_tip_tt
+# 				first_limit = "
+# 					calc_true_if = {
+# 						amount = 4
+# 						all_owned_province = {
+# 							province_has_center_of_trade_of_level = 2
+# 						}
+# 					}
+# 				"
+# 				first_effect = "
+# 					73 = {
+# 						center_of_trade = 1
+# 					}
+# 				"
+# 			}
+# 		}
+# 	}
+# 	Z68_blood_harvest = {
+# 		icon = spa_new_capital
+# 		position = 7
+# 		required_missions = {
+# 			Z68_finish_wineport
+# 			Z68_the_tip
+# 		}
+# 		provinces_to_highlight = {}
+# 		trigger = {
+# 			mil_power = 100
+# 			lower_bloodwine_area = {
+# 				type = all
+# 				owned_by = ROOT
+# 			}
+# 			estate_loyalty = {
+# 				estate = estate_mages
+# 				loyalty = 50
+# 			}
+# 			108 = {
+# 				infantry_in_province = Z68
+# 			}
+
+# 			79 = {
+# 				infantry_in_province = Z68
+# 			}
+# 		}
+# 		effect = {
+# 			add_mil_power = -100
+# 			lower_bloodwine_area = {
+# 				change_culture = roilsardi
+# 			}
+# 			108 = {
+# 				add_base_production = -3
+# 				change_trade_goods = paper
+# 			}
+# 			79 = {
+# 				add_base_production = -3
+# 				change_trade_goods = cloth
+# 			}
+# 			custom_tooltip = duke_crossguard_tt2
+# 			for = {
+# 				amount = 6
+# 				effect = "
+# 					random_owned_province = {
+# 						limit = {
+# 							area = eastern_winebay_area
+# 						}
+# 						add_base_production = 1
+# 					}
+# 				"
+# 			}
+# 			add_country_modifier = {
+# 				name = eilisin_rubenaire_uni
+# 				duration = 10950
+# 			}
+# 		}
+# 	}
+# 	Z68_wine_making = {
+# 		icon = mission_wine_monopolies
+# 		position = 8
+# 		required_missions = {
+# 			Z68_blood_harvest
+# 		}
+# 		provinces_to_highlight = {}
+# 		trigger = {
+# 			adm_power = 100
+# 			dip_power = 100
+# 			calc_true_if = {
+# 				amount = 5
+# 				all_owned_province = {
+# 					trade_goods = wine
+# 					base_production = 10
+# 					has_production_building_trigger = yes
+# 				}
+# 			}
+# 		}
+# 		effect = {
+# 			add_adm_power = -100
+# 			add_dip_power = -100
+# 			59 = {
+# 				add_province_modifier = {
+# 					name = bloody_roilsardi
+# 					duration = -1
+# 				}
+# 			}
+# 			32 = {
+# 				add_province_modifier = {
+# 					name = bloody_roilsardi
+# 					duration = -1
+# 				}
+# 			}
+
+# 			complex_dynamic_effect_without_alternative = {
+# 				first_custom_tooltip = Z68_pearlywine_tt
+# 				first_limit = "
+# 					if = {
+# 						limit = {
+# 							has_ruler_flag = saloren_ruler_flag
+# 						}
+# 					}
+# 				"
+# 				first_effect = "
+# 					add_country_modifier = {
+# 						name = saloren_winemaking
+# 						duration = 7300
+# 					}
+# 				"
+# 			}
+# 		}
+# 	}
+# 	Z68_wine_fields = {
+# 		icon = mission_the_varangians
+# 		position = 9
+# 		required_missions = {
+# 			Z68_wine_making
+# 		}
+# 		provinces_to_highlight = {}
+# 		trigger = {
+# 			any_owned_province = {
+# 				trade_goods = wine
+# 				has_building = farm_estate
+# 				base_production = 10
+# 			}
+# 		}
+# 		effect = {
+# 			add_estate_loyalty_modifier = {
+# 				estate = estate_vampires
+# 				desc = vamp_manors
+# 				loyalty = 20
+# 				duration = -1
+# 			}
+# 			add_country_modifier = {
+# 				name = blood_tax
+# 				duration = 9125
+# 			}
+# 		}
+# 	}
+# 	Z68_seize_the_pearl = {
+# 		icon = mission_conquer_aden
+# 		position = 12
+# 		required_missions = {
+# 			Z68_imperial_trade_rights
+# 		}
+# 		provinces_to_highlight = {}
+
+# 		trigger = {
+# 			14 = {
+# 				owned_by = ROOT
+# 			}
+# 		}
+# 		effect = {
+# 			custom_tooltip = seize_the_pearl_tt
+# 			hidden_effect = {
+# 				8 = {
+# 					every_trade_node_member_country = {
+# 						add_opinion = {
+# 							who = Z68
+# 							modifier = increased_toll_opinion
+
+# 						}
+# 					}
+# 				}
+# 				151 = {
+# 					every_trade_node_member_country = {
+# 						add_opinion = {
+# 							who = Z68
+# 							modifier = increased_toll_opinion
+
+# 						}
+# 					}
+# 				}
+# 				234 = {
+# 					every_trade_node_member_country = {
+# 						add_opinion = {
+# 							who = Z68
+# 							modifier = increased_toll_opinion
+
+# 						}
+# 					}
+# 				}
+# 				216 = {
+# 					every_trade_node_member_country = {
+# 						add_opinion = {
+# 							who = Z68
+# 							modifier = increased_toll_opinion
+
+# 						}
+# 					}
+# 				}
+# 			}
+# 			14 = {
+# 				remove_province_modifier = damespearl_toll
+
+# 				add_permanent_province_modifier = {
+# 					name = increased_toll
+# 					duration = -1
+# 				}
+# 			}
+# 		}
+# 	}
+# 	Z68_introduce_the_masquerades = {
+# 		icon = mission_the_golden_city
+# 		position = 13
+# 		required_missions = {
+# 			Z68_setting_up_the_pieces
+# 		}
+# 		provinces_to_highlight = {}
+
+# 		trigger = {
+# 			A59 = {
+# 				treasury = 100
+# 				has_estate_privilege = estate_vampires_organization_the_blood_court
+# 				trust = {
+# 					who = Z68
+# 					value = 70
+# 				}
+# 			}
+# 		}
+
+# 		effect = {
+# 			add_estate_loyalty_modifier = {
+# 				estate = estate_nobles
+# 				desc = holding_masquerade
+# 				loyalty = 10
+# 				duration = 1825
+# 			}
+# 			custom_tooltip = introduce_the_masquerades_tt
+# 			set_country_flag = introduced_masquerades
+# 			add_stability_or_adm_power = yes
+# 		}
+# 	}
+# 	Z68_hold_a_grand_ball = {
+# 		icon = mission_the_golden_city
+# 		position = 14
+# 		required_missions = { Z68_introduce_the_masquerades }
+# 		provinces_to_highlight = {}
+
+# 		trigger = {
+# 			treasury = 250
+# 			capital_scope = {
+# 				has_courthouse_building_trigger = yes
+# 			}
+# 		}
+
+# 		effect = {
+# 			add_treasury = -250
+# 			custom_tooltip = hold_a_grand_ball_tt
+# 			country_event = {
+# 				id = flavor_Toarnaire.8
+# 			}
+# 		}
+# 	}
+# 	Z68_monstrous_vanguard = {
+# 		icon = mission_the_varangians
+# 		position = 15
+# 		required_missions = {
+# 			Z68_bloodsuckers
+# 		}
+# 		provinces_to_highlight = {}
+# 		trigger = {
+# 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+# 				value = 5
+# 				colonial_region = colonial_leechden
+# 				base_manpower = 6
+# 				has_manpower_building_trigger = yes
+# 			}
+# 		}
+# 		effect = {
+# 			add_country_modifier = {
+# 				name = leechmen_vanguard
+# 				duration = -1
+# 			}
+# 		}
+# 	}
+# }
+# Z68_4 = {
+# 	slot = 4
+# 	generic = no
+# 	ai = yes
+# 	has_country_shield = yes
+# 	potential = {
+# 		tag = Z68
+# 		always = no
+# 	}
+
+# 	Z68_scheme_wineport = {
+# 		icon = Burn_Wooden_Wall
+# 		position = 1
+# 		provinces_to_highlight = {}
+
+# 		trigger = {
+# 			has_spy_network_in = {
+# 				who = A16
+# 				value = 25
+# 			}
+# 		}
+
+# 		effect = { country_event = { id = flavor_Toarnaire.1 }  }
+# 	}
+
+# 	Z68_rubenaire = {
+# 		icon = friends_in_high_places
+# 		position = 4
+# 		required_missions = { Z68_own_path }
+# 		provinces_to_highlight = {
+# 			OR = {
+# 				is_capital_of = A18
+# 				province_id = 40
+# 			}
+# 			NOT = {
+# 				owned_by = ROOT
+# 			}
+# 		}
+
+# 		trigger = {
+# 			OR = {
+# 				AND  = {
+# 					treasury = 100
+# 					has_spy_network_in = {
+# 						who = A18
+# 						value = 25
+# 					}
+# 				}
+# 				40 = {
+# 					owned_by = ROOT
+# 				}
+# 			}
+# 		}
+
+# 		effect = {
+# 			complex_dynamic_effect = {
+# 				first_custom_tooltip = Z68_rubenaire_tt1
+# 				first_limit = "
+# 					treasury = 100
+# 					has_spy_network_in = {
+# 						who = A18
+# 						value = 25
+# 					}
+# 				"
+# 				first_effect = "
+# 					vivinmar_purchase = yes
+# 					add_spy_network_in = {
+# 						who = A18
+# 						value = -25
+# 					}
+# 				"
+# 				second_custom_tooltip = Z68_rubenaire_tt2
+# 				second_limit = "
+# 				40 = {
+# 					owned_by = ROOT
+# 				}
+# 				"
+# 				second_effect = "
+# 					add_adm_power = 50
+# 				"
+# 			}
+# 		}
+# 	}
+# 	Z68_roilsardi_clothing = {
+# 		icon = mission_son_own_develop_clothes_and_salt
+# 		position = 6
+# 		required_missions = {
+# 			Z68_duchy_reforged
+# 		}
+# 		provinces_to_highlight = {}
+
+# 		trigger = {
+# 			34 = {
+# 				base_production = 8
+# 				has_production_building_trigger = yes
+# 			}
+# 			OR = {
+# 				silk = 1
+# 				any_known_country = {
+# 					silk = 1
+# 					OR = {
+# 						has_opinion = {
+# 							who = ROOT
+# 							value = 150
+# 						}
+# 						ROOT = {
+# 							has_spy_network_in = {
+# 								who = PREV
+# 								value = 50
+# 							}
+# 						}
+# 					}
+# 				}
+# 			}
+# 		}
+
+# 		effect = {
+# 			add_prestige = 25
+# 			34 = {
+# 				change_trade_goods = silk
+# 				add_or_upgrade_production_building = yes
+# 				add_province_modifier = {
+# 					name = exporting_fashion
+# 					duration = -1
+# 				}
+# 			}
+# 			complex_dynamic_effect_without_alternative = {
+# 				first_custom_tooltip = Z68_blood_harvest_tt
+# 				first_limit = "
+# 					has_ruler_flag = loop_ruler_flag
+# 				"
+# 				first_effect = "
+# 					change_price = {
+# 						trade_goods = silk
+# 						key = exporting_roilsardi_fashion
+# 						value = 0.25
+# 						duration = 10950
+# 					}
+# 				"
+# 			}
+# 		}
+# 	}
+# }
+# Z68_4_bloodcourt = {
+# 	slot = 4
+# 	generic = no
+# 	ai = yes
+# 	has_country_shield = yes
+# 	potential = {
+# 		tag = Z68
+# 		NOT = {
+# 			has_country_flag = roilsard_path
+# 		}
+# 		always = no
+# 	}
+# 	Z68_search_for_iron = {
+# 		icon = mission_have_manufactories
+# 		position = 7
+# 		required_missions = {
+# 			Z68_restore_prosperity
+# 		}
+# 		provinces_to_highlight = {}
+
+# 		trigger = {
+# 			tretunica_area = {
+# 				type = all
+# 				owned_by = ROOT
+# 			}
+# 			48 = {
+# 				base_production = 6
+# 				has_production_building_trigger = yes
+# 			}
+# 			47 = {
+# 				base_production = 6
+# 				has_production_building_trigger = yes
+# 			}
+# 		}
+
+# 		effect = {
+# 			tretunica_area = {
+# 				change_trade_goods = iron
+# 				change_culture = roilsardi
+# 				add_province_modifier = {
+# 					name = increased_workforce
+# 					duration = -1
+# 				}
+# 			}
+# 			complex_dynamic_effect_without_alternative = {
+# 				first_custom_tooltip = Z68_search_for_iron_tt
+# 				first_limit = "
+# 					has_ruler_flag = vivin_ruler_flag
+# 				"
+# 				first_effect = "
+# 					add_country_modifier = {
+# 						name = strengthened_arms
+# 						duration = 7300
+# 					}
+# 				"
+# 			}
+# 		}
+# 	}
+# 	Z68_pearlywine = {
+# 		icon = centralize_france
+# 		position = 8
+# 		required_missions = {
+# 			Z68_search_for_iron
+# 		}
+# 		provinces_to_highlight = {}
+
+# 		trigger = {
+# 			pearlywine_area = {
+# 				type = all
+# 				owned_by = ROOT
+# 				base_manpower = 6
+# 				has_manpower_building_trigger = yes
+# 			}
+# 		}
+
+# 		effect = {
+# 			41 = {
+# 				change_trade_goods = grain
+# 			}
+# 			49 = {
+# 				change_trade_goods = grain
+# 			}
+# 			add_manpower = 20
+# 			pearlywine_area = {
+# 				change_culture = roilsardi
+# 				add_province_modifier = {
+# 					name = breadbasket
+# 					duration = -1
+# 				}
+# 			}
+# 		}
+# 	}
+# 	Z68_our_bay = {
+# 		icon = mission_seize_north_sea_trade
+# 		position = 9
+# 		required_missions = {
+# 			Z68_wine_making
+# 			Z68_pearlywine
+# 		}
+# 		provinces_to_highlight = {}
+
+# 		trigger = {
+# 			calc_true_if = {
+# 				amount = 5
+# 				all_owned_province = {
+# 					OR = {
+# 						area = lower_winebay_area
+# 						area = lower_bloodwine_area
+# 						area = upper_winebay_area
+# 						area = eastern_winebay_area
+# 					}
+# 					development = 30
+# 				}
+# 			}
+# 		}
+
+# 		effect = {
+# 			add_country_modifier = {
+# 				name = our_bay
+# 				duration = -1
+# 			}
+# 			add_country_modifier = {
+# 				name = united_bay
+# 				duration = 7350
+# 			}
+# 			override_country_name = Crimemare
+# 			custom_tooltip = producing_wine_winelord
+# 			hidden_effect = {
+# 				every_owned_province = {
+# 					if = {
+# 						limit = {
+# 							trade_goods = wine
+# 						}
+# 						add_province_modifier = {
+# 							name = wine_lord_wine
+# 							duration = -1
+# 							hidden = yes
+# 						}
+# 					}
+# 				}
+# 			}
+# 		}
+# 	}
+# 	Z68_imperial_trade_rights = {
+# 		icon = mission_seize_north_sea_trade
+# 		position = 11
+# 		required_missions = {
+# 			Z68_blood_to_wine
+# 			Z68_our_bay
+# 		}
+# 		provinces_to_highlight = {}
+# 		trigger = {
+# 			emperor = {
+# 				has_100_opinion_improved_relation = {
+# 					target = ROOT
+# 				}
+# 			}
+# 			num_ships_protecting_trade = 20
+# 		}
+# 		effect = {
+# 			add_mercantilism = 5
+# 			33 = {
+# 				add_trade_modifier = {
+# 					who = Z68
+# 					duration = 10950
+# 					power = 20
+# 					key = WEST_IMPERIAL_TRADE
+# 				}
+# 			}
+# 			damespearl_area = {
+# 				add_permanent_claim = ROOT
+# 			}
+# 			376 = {
+# 				add_permanent_claim = ROOT
+# 			}
+# 		}
+# 	}
+# 	Z68_invade_ekha = {
+# 		icon = mission_conquer_aden
+# 		position = 12
+# 		required_missions = {
+# 			Z68_expand_the_port
+# 		}
+# 		provinces_to_highlight = {}
+# 		trigger = {
+# 			ekha_area = {
+# 				type = all
+# 				owned_by = ROOT
+# 			}
+# 		}
+# 		effect = {
+# 			add_country_modifier = {
+# 				name = the_toarnaire_company
+# 				duration = 10950
+# 			}
+# 		}
+# 	}
+# 	Z68_north_sarhal_trade_company = {
+# 		icon = mission_seize_north_sea_trade
+# 		position = 13
+# 		required_missions = {
+# 			Z68_seize_the_pearl
+# 			Z68_invade_ekha
+# 		}
+# 		provinces_to_highlight = {}
+# 		trigger = {
+# 			calc_true_if = {
+# 				amount = 15
+# 				all_owned_province = {
+# 					region = akasik_region
+# 					is_owned_by_trade_company = yes
+# 				}
+# 			}
+# 			any_owned_province = {
+# 				region = akasik_region
+# 				province_has_center_of_trade_of_level = 3
+# 			}
+# 		}
+# 		effect = {
+# 			add_country_modifier = {
+# 				name = roilsardi_merchants
+# 				duration = -1
+# 			}
+# 		}
+# 	}
+# 	Z68_bloodsuckers = {
+# 		icon = mission_look_west
+# 		position = 14
+# 		required_missions = {
+# 			Z68_new_plantations
+# 		}
+# 		provinces_to_highlight = {}
+# 		trigger = {
+# 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+# 				value = 5
+# 				colonial_region = colonial_leechden
+# 				is_city = yes
+# 			}
+# 		}
+# 		effect = {
+# 			add_country_modifier = {
+# 				name = colonial_enthusiasm
+# 				duration = 7300
+# 			}
+# 		}
+# 	}
+# 	Z68_city_of_shadows = {
+# 		icon = mission_the_golden_city
+# 		position = 15
+# 		required_missions = { Z68_slave_barons }
+# 		provinces_to_highlight = {}
+# 		trigger = {
+# 			OR = {
+# 				AND = {
+# 					has_100_opinion_improved_relation = {
+# 						target = A74
+# 					}
+# 					A74 = {
+# 						has_estate_privilege = estate_vampires_organization_the_blood_court
+# 					}
+# 				}
+# 				AND = {
+# 					451 = {
+# 						owned_by = ROOT
+# 					}
+# 				}
+# 			}
+# 		}
+# 		effect = {
+# 			if = {
+# 				limit = {
+# 					451 = {
+# 						owned_by = ROOT
+# 					}
+# 				}
+# 				451 = {
+# 					change_trade_goods = slaves
+# 				}
+# 				change_price = {
+# 					trade_goods = slaves
+# 					key = slave_trade
+# 					value = 0.25
+# 					duration = -1
+# 				}
+# 			}
+# 			else = {
+# 				ROOT = {
+# 					create_subject = {
+# 						subject_type = autonomous_vassal
+# 						subject = A74
+# 					}
+# 				}
+# 				451 = {
+# 					change_trade_goods = slaves
+# 				}
+# 				change_price = {
+# 					trade_goods = slaves
+# 					key = slave_trade
+# 					value = 0.25
+# 					duration = -1
+# 				}
+# 			}
+# 		}
+# 	}
+# }
+
+# Z68_5 = {
+# 	slot = 5
+# 	generic = no
+# 	ai = yes
+# 	has_country_shield = yes
+# 	potential = {
+# 		tag = Z68
+# 		always = no
+# 	}
+# }
+
+# Z68_5_bloodcourt = {
+# 	slot = 5
+# 	generic = no
+# 	ai = yes
+# 	has_country_shield = yes
+# 	potential = {
+# 		tag = Z68
+# 		NOT = {
+# 			has_country_flag = roilsard_path
+# 		}
+# 	}
+# 	Z68_restore_prosperity = {
+# 		icon = mission_the_golden_city
+# 		position = 6
+# 		required_missions = { Z68_duchy_reforged }
+# 		provinces_to_highlight = {}
+
+# 		trigger = {
+# 			eastern_winebay_area = {
+# 				type = all
+# 				NOT = { devastation = 1}
+# 				NOT = { unrest = 1}
+# 				NOT = { local_autonomy = 25}
+# 			}
+# 		}
+
+# 		effect = {
+# 			eastern_winebay_area = {
+# 				add_prosperity = 50
+# 			}
+# 			pearlywine_area = {
+# 				add_permanent_claim = ROOT
+# 			}
+# 			tretunica_area = {
+# 				add_permanent_claim = ROOT
+# 			}
+# 			upper_winebay_area = {
+# 				add_permanent_claim = ROOT
+# 			}
+# 		}
+# 	}
+# 	Z68_protect_the_heartland = {
+# 		icon = mission_the_golden_city
+# 		position = 7
+# 		required_missions = {
+# 			Z68_restore_prosperity
+# 		}
+# 		provinces_to_highlight = {
+# 			province_id = 32
+# 		}
+
+# 		trigger = {
+# 			32 = {
+# 				has_fort_building_trigger = yes
+# 				has_manpower_building_trigger = yes
+# 				base_manpower = 6
+# 			}
+# 		}
+
+# 		effect = {
+# 			32 = {
+# 				add_province_modifier = {
+# 					name = fort_of_thorns
+# 					duration = -1
+# 				}
+# 			}
+
+# 			complex_dynamic_effect_without_alternative = {
+# 				first_custom_tooltip = Z68_protect_the_heartland_tt
+# 				first_limit = "
+# 					if = {
+# 						limit = {
+# 							has_ruler_flag = vivin_ruler_flag
+# 						}
+# 					}
+# 				"
+# 				first_effect = "
+# 					add_country_modifier = {
+# 						name = vivin_forts
+# 						duration = 7300
+# 					}
+# 				"
+# 			}
+# 		}
+# 	}
+# 	Z68_vivin_discipline = {
+# 		icon = mission_pf_soldier
+# 		position = 8
+# 		required_missions = {
+# 			Z68_protect_the_heartland
+# 		}
+# 		provinces_to_highlight = {}
+
+# 		trigger = {
+# 			army_size = 10
+# 			40 = {
+# 				base_manpower = 6
+# 				has_manpower_building_trigger = yes
+# 			}
+# 		}
+
+# 		effect = {
+# 			define_general = {
+# 				shock = 3
+# 				fire = 1
+# 				manuever = 2
+# 				siege = 2
+# 				name = "Davan sil Vivin"
+# 			}
+# 			40 = {
+# 				change_trade_goods = grain
+# 			}
+
+# 			complex_dynamic_effect_without_alternative = {
+# 				first_custom_tooltip = Z68_vivin_discipline_tt
+# 				first_limit = "
+# 					40 = {
+# 						base_manpower = 10
+# 					}
+# 				"
+# 				first_effect = "
+# 					40 = {
+# 						add_building = soldier_households
+# 					}
+# 				"
+# 				second_custom_tooltip = Z68_vivin_discipline_tt2
+# 				second_limit = "
+# 					has_ruler_flag = vivin_ruler_flag
+# 				"
+# 				second_effect = "
+# 					add_country_modifier = {
+# 						name = vivin_training
+# 						duration = 7300
+# 					}
+# 				"
+# 			}
+# 		}
+# 	}
+
+# 	Z68_crimson_army = {
+# 		icon = mission_the_varangians
+# 		position = 9
+# 		required_missions = { Z68_vivin_discipline }
+# 		provinces_to_highlight = {}
+
+# 		trigger = {
+# 			army_size = 20
+# 			army_professionalism = 0.2
+# 		}
+
+# 		effect = {
+# 			add_country_modifier = {
+# 				name = crimson_army
+# 				duration = -1
+# 			}
+# 		}
+# 	}
+
+# 	Z68_bloodied_knights = {
+# 		icon = gory_to_the_black_army
+# 		position = 10
+# 		required_missions = { Z68_crimson_army }
+# 		provinces_to_highlight = {}
+
+# 		trigger = {
+# 			army_professionalism = 0.4
+# 			num_of_cavalry = 20
+# 		}
+
+# 		effect = {
+# 			add_country_modifier = {
+# 				name = bloodied_knights
+# 				duration = -1
+# 			}
+# 		}
+# 	}
+# 	Z68_expand_the_port = {
+# 		icon = develop_our_capital
+# 		position = 11
+# 		required_missions = {
+# 		}
+# 		provinces_to_highlight = {}
+
+# 		trigger = {
+# 			num_of_light_ship = 10
+# 			33 = {
+# 				has_trade_building_trigger = yes
+# 				has_dock_building_trigger = yes
+# 			}
+# 		}
+
+# 		effect = {
+# 			add_country_modifier = {
+# 				name = expanded_merchant_navy
+# 				duration = 7300
+# 			}
+# 		}
+# 	}
+# 	Z68_curious_waters = {
+# 		icon = mission_rb_scottish_north_sea_trade
+# 		position = 12
+# 		required_missions = {
+# 			Z68_expand_the_port
+# 		}
+# 		provinces_to_highlight = {}
+
+# 		trigger = {
+# 			has_colonist = yes
+# 		}
+
+# 		effect = {
+# 			create_explorer = { tradition = 50 }
+# 			add_country_modifier = {
+# 				name = curious_waters
+# 				duration = 7300
+# 			}
+# 		}
+# 	}
+
+# 	Z68_new_plantations = {
+# 		icon = mission_portuguese_malabar
+# 		position = 13
+# 		required_missions = { Z68_curious_waters }
+# 		provinces_to_highlight = {}
+
+# 		trigger = {
+# 			any_subject_country = {
+# 				is_colonial_nation_of = ROOT
+# 			}
+# 		}
+
+# 		effect = {
+# 			add_country_modifier = {
+# 				name = colonial_enthusiasm
+# 				duration = 7300
+# 			}
+# 			custom_tooltip = new_plantations_tt
+# 			for = {
+# 				amount = 5
+# 				effect = "
+# 					random_province = {
+# 						limit = {
+# 							owned_by_subject_of = ROOT
+# 							continent = north_america
+# 							OR = {
+# 								has_terrain = grasslands
+# 								has_terrain = farmlands
+# 							}
+# 						}
+# 						change_trade_goods = wine
+# 						add_base_production = 1
+# 					}
+# 				"
+# 			}
+# 		}
+# 	}
+
+# 	Z68_slave_barons = {
+# 		icon = the_viennese_waltz
+# 		position = 14
+# 		required_missions = { Z68_new_plantations }
+# 		provinces_to_highlight = {}
+
+# 		trigger = {
+# 			OR = {
+# 				AND = {
+# 					G95 = { exists = no}
+# 					new_varlosen_area = {
+# 						country_or_non_sovereign_subject_holds = ROOT
+# 					}
+# 				}
+# 				AND = {
+# 					G95 = {
+# 						has_estate_privilege = estate_vampires_organization_the_blood_court
+# 					}
+# 					army_strength = {
+# 						who = G95
+# 						value = 1
+# 					}
+# 				}
+# 			}
+# 		}
+
+# 		effect = {
+# 			ROOT = {
+# 				create_subject = {
+# 					subject_type = autonomous_vassal
+# 					subject = G95
+# 				}
+# 			}
+# 			custom_tooltip = slave_barons_tt
+# 			for = {
+# 				amount = 5
+# 				effect = "
+# 					random_province = {
+# 						limit = {
+# 							owned_by = G95
+# 							NOT = { trade_goods = gold }
+# 						}
+# 						change_trade_goods = slaves
+# 						add_base_production = 1
+# 					}
+# 				"
+# 			}
+# 		}
+# 	}
+
+# 	Z68_back_to_the_fold = {
+# 		icon = mission_trade_with_cathay
+# 		position = 15
+# 		required_missions = { Z68_slave_barons }
+# 		provinces_to_highlight = {}
+
+# 		trigger = {
+# 			G91 = {
+# 				exists = no
+# 			}
+# 			1952 = {
+# 				OR = {
+# 					owned_by = ROOT
+# 					owned_by = G95
+# 				}
+# 			}
+# 		}
+
+# 		effect = {
+# 			1952 = {
+# 				change_trade_goods = slaves
+# 				add_province_modifier = {
+# 					name = slave_port
+# 					duration = -1
+# 				}
+# 			}
+# 			every_owned_province = {
+# 				limit = {
+# 					owned_by_subject_of = ROOT
+# 					OR = {
+# 						region = bloodgroves_region
+# 						region = trollsbay_region
+# 						region = reapers_coast_region
+# 					}
+# 				}
+# 				cede_province = G95
+# 			}
+# 			ROOT = {
+# 				create_subject = {
+# 					subject_type = crown_colony
+# 					subject = G95
+# 				}
+# 			}
+# 		}
+# 	}
+# 	Z68_slaves_for_the_plantations = {
+# 		icon = mission_trade_with_cathay
+# 		position = 16
+# 		required_missions = {
+# 			Z68_back_to_the_fold
+# 			Z68_city_of_shadows
+# 		}
+# 		provinces_to_highlight = {}
+# 		trigger = {
+# 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+# 				value = 5
+# 				trade_goods = slaves
+# 				base_production = 5
+# 			}
+# 		}
+# 		effect = {
+# 			add_country_modifier = {
+# 				name = increased_plantation_efficiency
+# 				duration = -1
+# 			}
+# 			custom_tooltip = slaves_for_the_plantations_tt
+# 			for = {
+# 				amount = 5
+# 				effect = "
+# 					random_owned_province = {
+# 						limit = {
+# 							trade_goods = wine
+# 						}
+# 						add_orcish_minority_size_effect = yes
+# 						add_base_production = 1
+# 					}
+# 				"
+# 			}
+# 		}
+# 	}
+# }

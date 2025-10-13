@@ -1,0 +1,739 @@
+A57_upgrade_roilsardi_settlement = { #province effect for roilsardi migration events
+    if = {
+        limit = {
+            NOT = { has_province_modifier = A57_small_roilsardi_settlement }
+            NOT = { has_province_modifier = A57_big_roilsardi_settlement }
+			NOT = { has_province_modifier = A57_roilsardi_home }
+        }
+		add_nationalism = -2
+        add_province_modifier = {
+            name = A57_small_roilsardi_settlement
+            duration = -1
+        }
+    }
+    else_if = {
+        limit = {
+            has_province_modifier = A57_small_roilsardi_settlement
+        }
+        remove_province_modifier = A57_small_roilsardi_settlement
+		add_nationalism = -2
+        add_province_modifier = {
+            name = A57_big_roilsardi_settlement
+            duration = -1
+        }
+    }
+	if = {
+        limit = {
+            owner = { has_country_flag = A57_improved_settlers }
+        }
+        random_area_province = {
+            limit = {
+                culture = roilsardi
+            }
+            add_random_development = 1
+        }
+        random_area_province = {
+            limit = {
+                culture = roilsardi
+            }
+            add_random_development = 1
+        }
+    }
+	if = {
+		limit = {
+			owner = { has_country_flag = A57_dwarves_friendly }
+		}
+		add_dwarven_minority_size_effect = yes
+	}
+}
+
+A57_upgrade_roilsardi_larp = {
+    if = {
+        limit = {
+            check_variable = {
+                which = NumOfRoilsardiProvinces
+                value = 15
+            }
+            NOT = {
+                check_variable = {
+                    which = NumOfRoilsardiProvinces
+                    value = 30
+                }
+            }
+        }
+        remove_country_modifier = A57_roilsardi_larp
+        add_country_modifier = {
+            name = A57_roilsardi_larp1
+            duration = -1
+        }
+    }
+    else_if = {
+        limit = {
+            check_variable = {
+                which = NumOfRoilsardiProvinces
+                value = 30
+            }
+            NOT = {
+                check_variable = {
+                    which = NumOfRoilsardiProvinces
+                    value = 45
+                }
+            }
+        }
+        remove_country_modifier = A57_roilsardi_larp
+        remove_country_modifier = A57_roilsardi_larp1
+        add_country_modifier = {
+            name = A57_roilsardi_larp2
+            duration = -1
+        }
+    }
+    else_if = {
+        limit = {
+            check_variable = {
+                which = NumOfRoilsardiProvinces
+                value = 45
+            }
+            NOT = {
+                check_variable = {
+                    which = NumOfRoilsardiProvinces
+                    value = 60
+                }
+            }
+        }
+        remove_country_modifier = A57_roilsardi_larp
+        remove_country_modifier = A57_roilsardi_larp1
+        remove_country_modifier = A57_roilsardi_larp2
+        add_country_modifier = {
+            name = A57_roilsardi_larp3
+            duration = -1
+        }
+    }
+    else_if = {
+        limit = {
+            check_variable = {
+                which = NumOfRoilsardiProvinces
+                value = 60
+            }
+            NOT = {
+                check_variable = {
+                    which = NumOfRoilsardiProvinces
+                    value = 80
+                }
+            }
+        }
+        remove_country_modifier = A57_roilsardi_larp
+        remove_country_modifier = A57_roilsardi_larp1
+        remove_country_modifier = A57_roilsardi_larp2
+        remove_country_modifier = A57_roilsardi_larp3
+        add_country_modifier = {
+            name = A57_roilsardi_larp4
+            duration = -1
+        }
+    }
+    else_if = {
+        limit = {
+            check_variable = {
+                which = NumOfRoilsardiProvinces
+                value = 80
+            }
+        }
+        remove_country_modifier = A57_roilsardi_larp
+        remove_country_modifier = A57_roilsardi_larp1
+        remove_country_modifier = A57_roilsardi_larp2
+        remove_country_modifier = A57_roilsardi_larp3
+        remove_country_modifier = A57_roilsardi_larp4
+        add_country_modifier = {
+            name = A57_roilsardi_larp5
+            duration = -1
+        }
+        set_country_flag = A57_roilsardization_end #stops firing the event
+    }
+	if = {
+		limit = {
+			NOT = { primary_culture = roilsardi }
+		}
+		remove_country_modifier = A57_roilsardi_larp
+        remove_country_modifier = A57_roilsardi_larp1
+        remove_country_modifier = A57_roilsardi_larp2
+        remove_country_modifier = A57_roilsardi_larp3
+        remove_country_modifier = A57_roilsardi_larp4
+		remove_country_modifier = A57_roilsardi_larp5
+	}
+}
+
+A57_wine_effect = {
+   if = { #ACE
+        limit = {
+            owner = { has_country_flag = A57_wine_production }
+            base_production = 12
+            OR = {
+                trade_goods = naval_supplies
+                trade_goods = wine
+                trade_goods = grain
+                trade_goods = livestock
+                trade_goods = fish
+                trade_goods = wool
+            }
+        }
+        change_trade_goods = wine
+        add_province_modifier = {
+            name = A57_toarnen_black_modifier
+            duration = -1
+        }
+        hidden_effect = {
+            province_event = {
+				id = flavor_toarnen.104
+				days = 1
+			}
+        }
+    }
+}
+
+########################
+##TOARNEN CHESS AUTISM##
+########################
+ace_chess_tournament_get_participants = {
+	set_country_flag = chess_tournament_participant
+	set_country_flag = chess_tournament_original_participant
+	set_country_flag = chess_tournament_got_invitation
+
+	set_variable = {
+		which = tmp_var
+		value = 15
+	}
+	while = {
+		limit = { 
+			check_variable = {
+				which = tmp_var
+				value = 1
+			}
+		}
+
+		change_variable = {
+			which = tmp_var
+			value = -1
+		}
+
+		random_known_country = {
+			limit = {
+				capital_scope = { continent = europe }
+				NOT = {
+					has_country_flag = chess_tournament_got_invitation
+				}
+				NOT = { has_country_modifier = monstrous_nation }
+			}
+			# ask for participation
+			set_country_flag = chess_tournament_got_invitation
+			country_event = {
+				id = flavor_toarnen.29
+				days = 1
+			}
+		}
+	}
+}
+ace_chess_tournament_create_pairs = {
+
+	set_variable = {
+		which = tmp_var
+		value = 16
+	}
+
+	# random_country doesn't include ROOT?
+	if = {
+		limit = {
+			has_country_flag = chess_tournament_participant
+		}
+
+		change_variable = {
+			which = tmp_var
+			value = -1
+		}
+
+		set_country_flag = chess_tournament_assigned
+		set_country_flag = chess_tournament_pair_1
+	}
+
+
+	while = {
+		limit = { 
+			check_variable = {
+				which = tmp_var
+				value = 0
+			}
+		}
+
+		change_variable = {
+			which = tmp_var
+			value = -1
+		}
+
+		random_country = {
+			limit = {
+				has_country_flag = chess_tournament_participant
+				NOT = {
+					has_country_flag = chess_tournament_assigned
+				}
+			}
+			set_country_flag = chess_tournament_assigned
+			if = {
+				limit = {
+					ROOT = {
+						check_variable = {
+							which = tmp_var
+							value = 14
+						}
+					}
+				}
+				set_country_flag = chess_tournament_pair_1
+			}
+			else_if = {
+				limit = {
+					ROOT = {
+						check_variable = {
+							which = tmp_var
+							value = 12
+						}
+					}
+				}
+				set_country_flag = chess_tournament_pair_2
+			}
+			else_if = {
+				limit = {
+					ROOT = {
+						check_variable = {
+							which = tmp_var
+							value = 10
+						}
+					}
+				}
+				set_country_flag = chess_tournament_pair_3
+			}
+			else_if = {
+				limit = {
+					ROOT = {
+						check_variable = {
+							which = tmp_var
+							value = 8
+						}
+					}
+				}
+				set_country_flag = chess_tournament_pair_4
+			}
+			else_if = {
+				limit = {
+					ROOT = {
+						check_variable = {
+							which = tmp_var
+							value = 6
+						}
+					}
+				}
+				set_country_flag = chess_tournament_pair_5
+			}
+			else_if = {
+				limit = {
+					ROOT = {
+						check_variable = {
+							which = tmp_var
+							value = 4
+						}
+					}
+				}
+				set_country_flag = chess_tournament_pair_6
+			}
+			else_if = {
+				limit = {
+					ROOT = {
+						check_variable = {
+							which = tmp_var
+							value = 2
+						}
+					}
+				}
+				set_country_flag = chess_tournament_pair_7
+			}
+			else_if = {
+				limit = {
+					ROOT = {
+						check_variable = {
+							which = tmp_var
+							value = 0
+						}
+					}
+				}
+				set_country_flag = chess_tournament_pair_8
+			}
+		}
+	}
+}
+ace_chess_tournament_get_your_pair = {
+	if = {
+		limit = {
+			has_country_flag = chess_tournament_pair_1
+		}
+		random_country = {
+			limit = {
+				NOT = {
+					tag = ROOT
+				}
+				has_country_flag = chess_tournament_pair_1
+			}
+			save_event_target_as = tournament_pair
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_flag = chess_tournament_pair_2
+		}
+		random_country = {
+			limit = {
+				NOT = {
+					tag = ROOT
+				}
+				has_country_flag = chess_tournament_pair_2
+			}
+			save_event_target_as = tournament_pair
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_flag = chess_tournament_pair_3
+		}
+		random_country = {
+			limit = {
+				NOT = {
+					tag = ROOT
+				}
+				has_country_flag = chess_tournament_pair_3
+			}
+			save_event_target_as = tournament_pair
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_flag = chess_tournament_pair_4
+		}
+		random_country = {
+			limit = {
+				NOT = {
+					tag = ROOT
+				}
+				has_country_flag = chess_tournament_pair_4
+			}
+			save_event_target_as = tournament_pair
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_flag = chess_tournament_pair_5
+		}
+		random_country = {
+			limit = {
+				NOT = {
+					tag = ROOT
+				}
+				has_country_flag = chess_tournament_pair_5
+			}
+			save_event_target_as = tournament_pair
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_flag = chess_tournament_pair_6
+		}
+		random_country = {
+			limit = {
+				NOT = {
+					tag = ROOT
+				}
+				has_country_flag = chess_tournament_pair_6
+			}
+			save_event_target_as = tournament_pair
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_flag = chess_tournament_pair_7
+		}
+		random_country = {
+			limit = {
+				NOT = {
+					tag = ROOT
+				}
+				has_country_flag = chess_tournament_pair_7
+			}
+			save_event_target_as = tournament_pair
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_flag = chess_tournament_pair_8
+		}
+		random_country = {
+			limit = {
+				NOT = {
+					tag = ROOT
+				}
+				has_country_flag = chess_tournament_pair_8
+			}
+			save_event_target_as = tournament_pair
+		}
+	}
+}
+ace_chess_tournament_get_winner = {
+	if = {
+		limit = {
+			has_country_flag = chess_tournament_adm_move
+		}
+		export_to_variable = {
+			which = chess_tournament_points 
+			value = ADM
+			who = ROOT
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_flag = chess_tournament_dip_move
+		}
+		export_to_variable = {
+			which = chess_tournament_points 
+			value = DIP
+			who = ROOT
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_flag = chess_tournament_mil_move
+		}
+		export_to_variable = {
+			which = chess_tournament_points 
+			value = MIL
+			who = ROOT
+		}
+    }
+	else_if = {
+		limit = {
+			has_country_flag = chess_tournament_grandmaster
+		}
+		change_variable = {
+			which = chess_tournament_points
+			value = 8
+		}
+    }
+	event_target:tournament_pair = {
+		if = {
+			limit = {
+				has_country_flag = chess_tournament_adm_move
+			}
+			ROOT = {
+				export_to_variable = {
+					which = chess_tournament_points_op 
+					value = ADM
+					who = event_target:tournament_pair
+				}
+			}
+            if = {
+                limit = {
+                    has_country_flag = chess_tournament_grandmaster
+                }
+                ROOT = {
+                    change_variable = {
+                        which = chess_tournament_points_op
+                        value = 4
+                    }
+                }
+            }
+		}
+		else_if = {
+			limit = {
+				has_country_flag = chess_tournament_dip_move
+			}
+			ROOT = {
+				export_to_variable = {
+					which = chess_tournament_points_op 
+					value = DIP
+					who = event_target:tournament_pair
+				}
+			}
+            if = {
+                limit = {
+                    has_country_flag = chess_tournament_grandmaster
+                }
+                ROOT = {
+                    change_variable = {
+                        which = chess_tournament_points_op
+                        value = 4
+                    }
+                }
+            }
+		}
+		else_if = {
+			limit = {
+				has_country_flag = chess_tournament_mil_move
+			}
+			ROOT = {
+				export_to_variable = {
+					which = chess_tournament_points_op 
+					value = MIL
+					who = event_target:tournament_pair
+				}
+			}
+            if = {
+                limit = {
+                    has_country_flag = chess_tournament_grandmaster
+                }
+                ROOT = {
+                    change_variable = {
+                        which = chess_tournament_points_op
+                        value = 4
+                    }
+                }
+            }
+		}
+	}
+
+	subtract_variable = {
+		which = chess_tournament_points
+		which = chess_tournament_points_op
+	}
+
+	if = {
+		limit = {
+			has_country_flag = chess_tournament_adm_move
+		}
+		if = {
+			limit = {
+				event_target:tournament_pair = {
+					has_country_flag = chess_tournament_dip_move
+				}
+			}
+			change_variable = {
+				which = chess_tournament_points
+				value = -2
+			}
+		}
+		if = {
+			limit = {
+				event_target:tournament_pair = {
+					has_country_flag = chess_tournament_mil_move
+				}
+			}
+			change_variable = {
+				which = chess_tournament_points
+				value = 2
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_flag = chess_tournament_dip_move
+		}
+		if = {
+			limit = {
+				event_target:tournament_pair = {
+					has_country_flag = chess_tournament_mil_move
+				}
+			}
+			change_variable = {
+				which = chess_tournament_points
+				value = -2
+			}
+		}
+		if = {
+			limit = {
+				event_target:tournament_pair = {
+					has_country_flag = chess_tournament_adm_move
+				}
+			}
+			change_variable = {
+				which = chess_tournament_points
+				value = 2
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_flag = chess_tournament_mil_move
+		}
+		if = {
+			limit = {
+				event_target:tournament_pair = {
+					has_country_flag = chess_tournament_adm_move
+				}
+			}
+			change_variable = {
+				which = chess_tournament_points
+				value = -2
+			}
+		}
+		if = {
+			limit = {
+				event_target:tournament_pair = {
+					has_country_flag = chess_tournament_dip_move
+				}
+			}
+			change_variable = {
+				which = chess_tournament_points
+				value = 2
+			}
+		}
+	}
+	random_list = {
+		50 = {
+			set_country_flag = draw_winner
+			event_target:tournament_pair = {
+				set_country_flag = draw_loser
+			}
+		}
+		50 = {
+			set_country_flag = draw_loser
+			event_target:tournament_pair = {
+				set_country_flag = draw_winner
+			}
+		}
+	}
+	if = {
+		limit = {
+			OR = {
+				check_variable = {
+					which = chess_tournament_points
+					value = 1
+				}
+				AND = {
+					check_variable = {
+						which = chess_tournament_points
+						value = 0
+					}
+					has_country_flag = draw_winner
+				}
+			}
+		}
+		set_country_flag = chess_tournament_round_winner
+		event_target:tournament_pair = {
+			set_country_flag = chess_tournament_round_loser
+		}
+	}
+	else = {
+		set_country_flag = chess_tournament_round_loser
+		event_target:tournament_pair = {
+			set_country_flag = chess_tournament_round_winner
+		}
+	}
+}
+ace_chess_tournament_clear_flags = {
+	clr_country_flag = chess_tournament_participant
+	clr_country_flag = chess_tournament_round_loser
+	clr_country_flag = chess_tournament_adm_move
+	clr_country_flag = chess_tournament_dip_move
+	clr_country_flag = chess_tournament_mil_move
+    clr_country_flag = chess_tournament_grandmaster
+	clr_country_flag = chess_tournament_assigned
+	clr_country_flag = chess_tournament_pair_1
+	clr_country_flag = chess_tournament_pair_2
+	clr_country_flag = chess_tournament_pair_3
+	clr_country_flag = chess_tournament_pair_4
+	clr_country_flag = chess_tournament_pair_5
+	clr_country_flag = chess_tournament_pair_6
+	clr_country_flag = chess_tournament_pair_7
+	clr_country_flag = chess_tournament_pair_8
+}

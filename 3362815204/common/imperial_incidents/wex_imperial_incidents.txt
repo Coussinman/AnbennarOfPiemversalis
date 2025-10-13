@@ -4,7 +4,14 @@ incident_wexonard_crimes = {
 	default_option = 1
 
 	can_stop = {
-		NOT = { exists = A30 }
+		OR = {
+			NOT = {
+				exists = A30
+			}
+			A30 = {
+				is_subject = yes
+			}
+		}
 	}
 
 	0 = { # join the anti-wex coalition
@@ -68,7 +75,14 @@ incident_curtail_wex = {
 	default_option = 1
 
 	can_stop = {
-		NOT = { exists = A30 }
+		OR = {
+			NOT = {
+				exists = A30
+			}
+			A30 = {
+				is_subject = yes
+			}
+		}
 	}
 
 	0 = { #vote in favor of curtailing Wex
@@ -162,5 +176,166 @@ incident_curtail_wex = {
 			}
 		}
 	}
+}
 
+incident_king_in_wex = {
+	event = flavor_sugamber.126
+	default_option = 1
+
+	can_stop = {
+		NOT = {
+			exists = A48
+		}
+	}
+
+	0 = { #accept
+		factor = 1
+		modifier = {
+			factor = 0
+			OR = {
+				is_rival = A48
+				historical_rival_with = A48
+				core_claim = A48
+				ai_attitude = {
+					who = A48
+					attitude = attitude_outraged
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			has_opinion = {
+				who = A48
+				value = 100
+			}
+		}
+		modifier = {
+			factor = 2
+			has_opinion = {
+				who = A48
+				value = 150
+			}
+		}
+		modifier = {
+			factor = 2
+			has_opinion = {
+				who = A48
+				value = 200
+			}
+		}
+		modifier = {
+			factor = 2
+			OR = {
+				alliance_with = A48
+				ai_attitude = {
+					who = A48
+					attitude = attitude_friendly
+				}
+				ai_attitude = {
+					who = A48
+					attitude = attitude_loyal
+				}
+			}
+		}
+	}
+	1 = { #ask for payment
+		factor = 3
+		modifier = {
+			factor = 0
+			OR = {
+				is_rival = A48
+				historical_rival_with = A48
+				core_claim = A48
+				ai_attitude = {
+					who = A48
+					attitude = attitude_outraged
+				}
+			}
+		}
+	}
+	2 = { #vote against
+		factor = 4
+		modifier = {
+			factor = 0.5
+			has_opinion = {
+				who = A48
+				value = 0
+			}
+		}
+		modifier = {
+			factor = 0.5
+			has_opinion = {
+				who = A48
+				value = 50
+			}
+		}
+		modifier = {
+			factor = 0.5
+			A48 = {
+				diplomatic_reputation = 4
+			}
+		}
+		modifier = {
+			factor = 0.5
+			A48 = {
+				diplomatic_reputation = 5
+			}
+		}
+		modifier = {
+			factor = 2
+			NOT = {
+				has_opinion = {
+					who = A48
+					value = 0
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			NOT = {
+				has_opinion = {
+					who = A48
+					value = -50
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			NOT = {
+				has_opinion = {
+					who = A48
+					value = -100
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			NOT = {
+				diplomatic_reputation = 0
+			}
+		}
+		modifier = {
+			factor = 2
+			NOT = {
+				diplomatic_reputation = 1
+			}
+		}
+		modifier = {
+			factor = 2
+			OR = {
+				ai_attitude = {
+					who = A48
+					attitude = attitude_hostile
+				}
+				ai_attitude = {
+					who = A48
+					attitude = attitude_threatened
+				}
+				ai_attitude = {
+					who = A48
+					attitude = attitude_rebellious
+				}
+			}
+		}
+	}
 }

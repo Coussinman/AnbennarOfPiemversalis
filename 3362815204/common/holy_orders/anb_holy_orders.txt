@@ -322,6 +322,15 @@ lightbringers_order = {
     cost_type = adm_power
     per_province_effect = {
         add_base_tax = 1
+        custom_tooltip = removes_slaves_tooltip
+        hidden_effect = {
+            if = {
+                limit = {
+                    trade_goods = slaves
+                }
+                change_trade_goods = unknown
+            }
+        }
     }
     per_province_abandon_effect = {
         add_base_tax = -1
@@ -410,6 +419,15 @@ militant_jadd_order = {
     cost_type = mil_power
     per_province_effect = {
         add_base_manpower = 1
+        custom_tooltip = removes_slaves_tooltip
+        hidden_effect = {
+            if = {
+                limit = {
+                    trade_goods = slaves
+                }
+                change_trade_goods = unknown
+            }
+        }
     }
     per_province_abandon_effect = {
         add_base_manpower = -1
@@ -450,6 +468,15 @@ lightbringers_order_upgraded = {
     cost_type = adm_power
     per_province_effect = {
         add_base_tax = 1
+        custom_tooltip = removes_slaves_tooltip
+        hidden_effect = {
+            if = {
+                limit = {
+                    trade_goods = slaves
+                }
+                change_trade_goods = unknown
+            }
+        }
     }
     per_province_abandon_effect = {
         add_base_tax = -1
@@ -536,6 +563,15 @@ militant_jadd_order_upgraded = {
     cost_type = mil_power
     per_province_effect = {
         add_base_manpower = 1
+        custom_tooltip = removes_slaves_tooltip
+        hidden_effect = {
+            if = {
+                limit = {
+                    trade_goods = slaves
+                }
+                change_trade_goods = unknown
+            }
+        }
     }
     per_province_abandon_effect = {
         add_base_manpower = -1
@@ -939,12 +975,19 @@ dame_order = {
     icon = GFX_holy_order_Corinite_Adm_Order
     trigger = {
         religion = corinite
+	OR = {
 		has_country_flag = dame_order_picked
+            has_country_flag = upgraded_dame
+        }
     }
     cost = 50
     cost_type = adm_power
     per_province_effect = {
         add_base_tax = 1
+        if = {
+            limit = { owner = { has_country_flag = upgraded_dame } }
+            custom_tooltip = dame_order_upgrade_tt
+        }
         if = {
             limit = { has_dlc = "Rule Britannia" }
             custom_tooltip = dame_order_event_tt
@@ -953,6 +996,13 @@ dame_order = {
         if = {
 			limit = { has_dlc = "Common Sense" }
 			custom_tooltip = corinite_adm_order_event_karma_tt
+		}
+        if = {
+            limit = { owner = { has_country_flag = upgraded_dame } }
+            add_permanent_province_modifier = {
+                name = corinite_dame_upgraded
+                duration = -1
+            }
 		}
         if = {
             limit = {
@@ -984,6 +1034,10 @@ dame_order = {
                 limit = { NOT = { base_tax = 1 } }
                 set_base_tax = 1
             }
+        }
+        if = {
+            limit = { has_province_modifier = corinite_dame_upgraded }
+            remove_province_modifier = corinite_dame_upgraded
         }
     }
     modifier = {
@@ -1061,16 +1115,30 @@ nerat_order = {
     icon = GFX_holy_order_Corinite_Adm_Order
     trigger = {
         religion = corinite
+		OR = {
 		has_country_flag = nerat_order_picked
+            has_country_flag = upgraded_nerat
+        }
     }
     cost = 50
     cost_type = adm_power
     per_province_effect = {
         add_base_tax = 1
+        if = {
+            limit = { owner = { has_country_flag = upgraded_nerat } }
+            custom_tooltip = nerat_order_upgrade_tt
+        }
         custom_tooltip = nerat_order_event_tt
         if = {
 			limit = { has_dlc = "Common Sense" }
 			custom_tooltip = corinite_adm_order_event_karma_tt
+		}
+        if = {
+            limit = { owner = { has_country_flag = upgraded_nerat } }
+            add_permanent_province_modifier = {
+                name = corinite_nerat_upgraded
+                duration = -1
+            }
 		}
         if = {
             limit = {
@@ -1102,6 +1170,10 @@ nerat_order = {
                 limit = { NOT = { base_tax = 1 } }
                 set_base_tax = 1
             }
+        }
+        if = {
+            limit = { has_province_modifier = corinite_nerat_upgraded }
+            remove_province_modifier = corinite_nerat_upgraded
         }
     }
     modifier = {

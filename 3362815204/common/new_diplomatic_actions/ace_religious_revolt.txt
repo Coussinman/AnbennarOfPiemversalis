@@ -1,0 +1,95 @@
+religious_revolt_action = {
+	category = covert
+
+	is_visible = {
+		ai = no
+		tag = A34
+		mission_completed = A34_resolution_violence
+		FROM = {
+			capital_scope = {
+				OR = {
+					continent = europe
+					range = ROOT
+				}
+			}
+			NOT = { has_matching_religion = ROOT }
+			from = {
+				religion_group = cannorian
+			}
+		}
+	}
+
+	is_allowed = {
+		root = {
+			mil_power = 200
+			treasury = 100
+		}
+
+		FROM = {
+			has_spy_network_from = {
+				who = ROOT
+				value = 80
+			}
+			NOT = { has_matching_religion = ROOT }
+		}
+	}
+
+	on_accept = {
+		ROOT = {
+			add_mil_power = -200
+			add_treasury = -100
+			add_spy_network_in = {
+				who = FROM
+				value = -50
+			}
+		}
+		from = {
+			set_country_flag = A34_spawned_rebels
+			if = {
+				limit = { ROOT = { mission_completed = A34_righteous_sword } }
+				kill_ruler = yes
+			}
+			if = {
+				limit = {
+					from = {
+						religion = corinite
+					}
+				}
+				for = {
+					amount = 3
+					effect = "
+						random_owned_province = {
+							spawn_rebels = {
+								type = regent_court_rebels
+								size = 2
+								friend = ROOT
+							}
+						}
+					"
+				}
+			}
+			else_if = {
+				limit = { from = { religion = regent_court } }
+				for = {
+					amount = 3
+					effect = "
+						random_owned_province = {
+							spawn_rebels = {
+								type = corinite_rebels
+								size = 2
+								friend = ROOT
+							}
+						}
+					"
+				}
+			}
+		}
+	}
+	on_decline = {
+	
+
+	}
+	ai_will_do = {
+		always = no
+	}
+}

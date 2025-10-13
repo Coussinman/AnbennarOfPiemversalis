@@ -1,0 +1,175 @@
+dissolve_pack = {
+	type = take_capital
+	
+	attacker = {
+		badboy_factor = 1
+		prestige_factor = 1
+		peace_cost_factor = 1.0	
+		
+		allowed_provinces = {
+			OR = {
+				is_claim = ROOT
+				is_core = ROOT
+			}
+		}
+
+		peace_options = {
+			po_demand_provinces
+			po_dissolve_pack
+		}
+		
+		allow_annex = yes
+	}
+	
+	defender = {
+		badboy_factor = 1
+		prestige_factor = 1
+		peace_cost_factor = 1
+
+		peace_options = {
+			po_demand_provinces
+		}
+	}
+
+	war_name = DISSOLVE_PACK_WAR_NAME
+}
+
+annex_country_aakhet = {
+	type = superiority
+	
+	attacker = {
+		badboy_factor = 0.75
+		prestige_factor = 1
+		peace_cost_factor = 1
+		
+		allowed_provinces = {
+			always = yes
+		}
+
+		peace_options = {
+			po_demand_provinces
+		}
+	}
+	
+	defender = {
+		badboy_factor = 0.5
+		prestige_factor = 2
+		peace_cost_factor = 0.75
+
+		peace_options = {
+			po_demand_provinces
+			po_concede_defeat
+			po_release_vassals
+			po_release_annexed
+			po_revoke_cores
+			po_annul_treaties
+			po_humiliate
+			po_humiliate_rival
+		}
+	}
+
+	war_name = PRIMITIVE_WAR_NAME
+}
+
+war_for_kheterata_ace = {
+	type = superiority
+	
+	attacker = {
+		badboy_factor = 0
+		prestige_factor = 0
+		peace_cost_factor = 0.35
+		
+		allowed_provinces = {
+			always = no
+		}
+		
+		peace_options = {
+			po_nirakhetist_uprising_nir_victory
+		}
+		
+		prov_desc = ALL_PROVS
+	}
+	
+	defender = {
+		badboy_factor = 0
+		prestige_factor = 0
+		peace_cost_factor = 0.2
+		
+		allowed_provinces = {
+			always = yes
+		}
+		
+		peace_options = {
+			po_nirakhetist_uprising_sug_victory
+		}
+		
+		prov_desc = ALL_PROVS
+	}	
+	war_name = WAR_FOR_KHETERATA_ACE_WAR_NAME	
+}
+
+superiority_sigma_league = {
+	type = superiority
+	
+	attacker = {
+		badboy_factor = 0.5
+		prestige_factor = 1.5
+		peace_cost_factor = 0.5	
+	
+		peace_options = {
+			po_become_vassal
+			po_demand_provinces
+			po_revoke_cores
+			po_release_vassals
+			po_release_annexed
+			po_change_religion
+			po_gold
+			po_annul_treaties
+			po_change_hre_heretic_religion
+		}
+	}
+	
+	defender = {
+		badboy_factor = 0.5
+		prestige_factor = 1.5
+		peace_cost_factor = 0.5		
+	
+		peace_options = {
+			po_become_vassal
+			po_demand_provinces
+			po_revoke_cores
+			po_release_vassals
+			po_release_annexed
+			po_change_religion
+			po_gold
+			po_annul_treaties
+		}
+	}
+	
+	war_name = RELIGIOUS_LEAGUE_WAR_NAME
+}
+
+end_milcorissia = {
+	type = take_capital
+	attacker = {
+		badboy_factor = 0
+		prestige_factor = 2
+		peace_cost_factor = 1	
+		allowed_provinces = {
+			always = no
+		}
+		peace_options = {
+			po_restore_milcorissia
+		}
+		allow_annex = no
+	}
+	defender = {
+		badboy_factor = 1
+		prestige_factor = 2
+		peace_cost_factor = 1
+		peace_options = {
+			po_end_milcorissia
+		}
+	}
+	war_name = SUGAMBER_MILCORISSIA_WAR_NAME
+}

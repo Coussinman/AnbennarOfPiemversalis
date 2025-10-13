@@ -576,3 +576,1159 @@ magmascale_tunnel = {
 		}
 	}
 }
+
+bisan_bal_hyl = {
+	start = 306
+
+	date = 1900.01.01
+
+	time = {
+		months = 120
+	}
+
+	build_cost = 0
+
+	can_be_moved = no
+
+	starting_tier = 0
+
+	#project type
+	type = monument
+
+	build_trigger = {
+		owner = {
+			mission_completed = A34_dev_wexhills
+		}
+	}
+
+	on_built = {
+	}
+
+	on_destroyed = {
+	}
+
+	can_use_modifiers_trigger = {
+		OR = {
+			culture = wexonard_new
+			culture = bisanese
+		}
+		owner = {
+			OR = {
+				accepted_culture = wexonard_new
+				accepted_culture = bisanese
+			}
+		}
+	}
+
+	can_upgrade_trigger = {
+		OR = {
+			culture = wexonard_new
+			culture = bisanese
+		}
+		owner = {
+			OR = {
+				accepted_culture = wexonard_new
+				accepted_culture = bisanese
+			}
+		}
+	}
+
+	keep_trigger = {
+	}
+
+	#tier data
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+
+		cost_to_upgrade = {
+			factor = 0
+		}
+
+		province_modifiers = {
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+		}
+
+		on_upgraded = {
+		}
+	}
+
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 1000
+		}
+
+		province_modifiers = {
+			local_defensiveness = 0.15
+			local_fort_maintenance_modifier = -0.2
+		}
+
+		area_modifier = {
+			local_development_cost = -0.1
+		}
+
+		country_modifiers = {
+			diplomatic_reputation = 1
+			improve_relation_modifier = 0.1
+		}
+
+		on_upgraded = {	
+		}
+	}
+
+	tier_2 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 2500
+		}
+
+		province_modifiers = {
+			local_defensiveness = 0.25
+			local_fort_maintenance_modifier = -0.4
+		}
+
+		area_modifier = {
+			local_development_cost = -0.15
+		}
+
+		country_modifiers = {
+			diplomatic_reputation = 2
+			improve_relation_modifier = 0.2
+		}
+
+		on_upgraded = {
+			if = {
+				limit = { owner = { has_estate = estate_castonath_patricians } }
+				owner = {
+					add_estate_loyalty = {
+						estate = estate_castonath_patricians
+						loyalty = 10
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_large_half_elven_minority_trigger = no
+				}
+				add_half_elven_minority_size_effect = yes
+			}
+			else = {
+				add_elven_minority_size_effect = yes
+			}		
+		}
+	}
+
+	tier_3 = {
+		
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 5000
+		}
+
+		province_modifiers = {
+			local_defensiveness = 0.25
+			fort_level = 1
+			local_fort_maintenance_modifier = -0.6
+		}
+
+		area_modifier = {
+			local_development_cost = -0.2
+		}
+
+		country_modifiers = {
+			diplomatic_reputation = 3
+			improve_relation_modifier = 0.3
+			can_claim_states = yes
+		}
+
+		on_upgraded = {
+			if = {
+				limit = { owner = { has_estate = estate_castonath_patricians } }
+				owner = {
+					add_estate_loyalty = {
+						estate = estate_castonath_patricians
+						loyalty = 15
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_large_half_elven_minority_trigger = no
+				}
+				add_half_elven_minority_size_effect = yes
+			}
+			else = {
+				add_elven_minority_size_effect = yes
+			}	
+		}
+	}
+}
+
+the_wispcircle = {
+	start = 421
+
+	date = 1900.01.01
+
+	build_cost = 0
+
+	can_be_moved = no
+
+	starting_tier = 0
+
+	#project type
+	type = monument
+
+	build_trigger = {
+		owner = { has_country_flag = z06_wispcircle_flag }
+	}
+
+	on_built = {
+	}
+
+	on_destroyed = {
+	}
+
+	can_upgrade_trigger = {
+		owner = {
+			OR = {
+				tag = Z06
+				was_tag = Z06
+			}
+		}
+	}
+
+	can_use_modifiers_trigger = {
+		owner = {
+			OR = {
+				tag = Z06
+				was_tag = Z06
+			}
+		}
+	}
+
+	keep_trigger = {
+	}
+
+	#tier data
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+
+		cost_to_upgrade = {
+			factor = 0
+		}
+
+		province_modifiers = {
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+		}
+
+		on_upgraded = {
+		}
+	}
+
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 1000
+		}
+
+		province_modifiers = {
+			
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+			spy_offence = 0.1
+			global_rebel_suppression_efficiency = 0.1
+		}
+
+		on_upgraded = {
+			owner = {
+				add_rebel_progress = {
+					value = -100
+				}
+			}
+		}
+	}
+
+	tier_2 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 2500
+		}
+
+		province_modifiers = {
+		}
+
+		area_modifier = {
+			
+		}
+		region_modifier = {
+			local_unrest = -2
+		}
+
+		country_modifiers = {
+			spy_offence = 0.20
+			global_rebel_suppression_efficiency = 0.15
+			harsh_treatment_cost = -0.2
+		}
+
+		on_upgraded = {
+			owner = {
+				add_rebel_progress = {
+					value = -100
+				}
+			}
+		}
+	}
+
+	tier_3 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 5000
+		}
+
+		province_modifiers = {
+		}
+
+		area_modifier = {
+			
+		}
+		region_modifier = {
+			local_unrest = -3
+			local_autonomy = -0.1
+		}
+
+		country_modifiers = {
+			spy_offence = 0.30
+			global_rebel_suppression_efficiency = 0.2
+			harsh_treatment_cost = -0.5
+		}
+
+		on_upgraded = {
+			owner = {
+				add_rebel_progress = {
+					value = -100
+				}
+			}
+		}
+	}
+}
+
+jaherian_arsenal = {
+	start = 365
+	date = 1900.01.01
+	build_cost = 0
+	can_be_moved = no
+	move_days_per_unit_distance = 10
+	starting_tier = 0
+	type = monument
+	build_trigger = {
+		owner = {
+			mission_completed = AB2_the_arsenal
+		}
+	}
+	on_built = {
+	}
+	on_destroyed = {
+	}
+	can_use_modifiers_trigger = {
+	}
+	can_upgrade_trigger = {
+	}
+	keep_trigger = {
+	}
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+		cost_to_upgrade = {
+			factor = 0
+		}
+		province_modifiers = {
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+		}
+		on_upgraded = {
+		}
+	}
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+		cost_to_upgrade = {
+			factor = 1000
+		}
+		province_modifiers = {
+			ship_recruit_speed = -0.1
+			global_ship_trade_power = 0.1
+		}
+		area_modifier = {
+			
+		}
+		country_modifiers = {
+
+		}
+		on_upgraded = {
+		}
+	}
+	tier_2 = {
+		upgrade_time = {
+			months = 240
+		}
+		cost_to_upgrade = {
+			factor = 2500
+		}
+		province_modifiers = {
+			ship_recruit_speed = -0.5
+			global_ship_trade_power = 0.25
+			light_ship_power = 0.15
+		}
+		area_modifier = {
+			
+		}
+		region_modifier = { 
+			
+		}
+		country_modifiers = {
+		}	
+		on_upgraded = {
+		}
+	}
+	tier_3 = {
+		upgrade_time = {
+			months = 480
+		}
+		cost_to_upgrade = {
+			factor = 5000
+		}
+		province_modifiers = {
+			ship_recruit_speed = -0.5
+			global_ship_trade_power = 0.25
+			light_ship_power = 0.33
+
+		}
+		area_modifier = {
+			local_has_voc_indiamen = yes
+		}
+		country_modifiers = {
+			allowed_voc_indiamen_fraction = 0.25
+			has_voc_indiamen = yes
+		}
+		on_upgraded = { }
+	}
+}
+
+king_labyrinth = {
+	start = 419
+
+	date = 1900.01.01
+
+	build_cost = 0
+
+	can_be_moved = no
+
+	starting_tier = 0
+
+	#project type
+	type = monument
+
+	build_trigger = {
+		owner = { has_country_flag = king_labyrinth_flag }
+	}
+	keep_trigger = {
+		
+	}
+	can_upgrade_trigger = {
+		
+	}
+	can_use_modifiers_trigger = {
+		
+	}
+	
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+		cost_to_upgrade = {
+			factor = 0
+		}
+		province_modifiers = {
+		}
+		area_modifier = {
+		}
+		region_modifier = { 
+			
+		}
+		country_modifiers = {
+		}
+		on_upgraded = {
+		}
+	}
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+		cost_to_upgrade = {
+			factor = 1000
+		}
+		province_modifiers = {
+			defensiveness = 0.1
+			garrison_size = 0.1
+		}
+		area_modifier = {
+			
+		}
+		region_modifier = { 
+			
+		}
+		country_modifiers = {
+			prestige = 0.1
+			expand_administration_cost = -0.1
+			governing_capacity = 100
+		}
+		on_upgraded = {
+			change_variable = {
+				which = B94_xamarzu_favour_variable
+				value = 1
+			}
+		}
+	}
+	tier_2 = {
+		upgrade_time = {
+			months = 240
+		}
+		cost_to_upgrade = {
+			factor = 2500
+		}
+		province_modifiers = {
+			defensiveness = 0.25
+			garrison_size = 0.25
+		}
+		area_modifier = {
+			
+		}
+		region_modifier = { 
+			local_governing_cost = -0.1
+		}
+		country_modifiers = {
+			prestige = 0.2
+			expand_administration_cost = -0.2
+			governing_capacity = 200
+		}	
+		on_upgraded = {
+			change_variable = {
+				which = B94_xamarzu_favour_variable
+				value = 2
+			}
+		}
+	}
+	tier_3 = {
+		upgrade_time = {
+			months = 480
+		}
+		cost_to_upgrade = {
+			factor = 5000
+		}
+		province_modifiers = {
+			defensiveness = 0.5
+			garrison_size = 0.5
+
+		}
+		area_modifier = {
+		}
+		region_modifier = { 
+			local_governing_cost = -0.25
+		}
+		country_modifiers = {
+			prestige = 0.3
+			expand_administration_cost = -0.3
+			governing_capacity = 300
+		}
+		on_upgraded = {
+			change_variable = {
+				which = B94_xamarzu_favour_variable
+				value = 3
+			}
+		}
+	}
+}
+
+iron_labyrinth = {
+	start = 306
+
+	date = 1900.01.01
+
+	build_cost = 0
+
+	can_be_moved = no
+
+	starting_tier = 0
+
+	#project type
+	type = monument
+
+	build_trigger = {
+		owner = { has_country_flag = iron_labyrinth_flag }
+	}
+	keep_trigger = {
+		
+	}
+	can_upgrade_trigger = {
+		
+	}
+	can_use_modifiers_trigger = {
+		
+	}
+	
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+		cost_to_upgrade = {
+			factor = 0
+		}
+		province_modifiers = {
+		}
+		area_modifier = {
+		}
+		region_modifier = {
+			
+		}
+		country_modifiers = {
+		}
+		on_upgraded = {
+		}
+	}
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+		cost_to_upgrade = {
+			factor = 1000
+		}
+		province_modifiers = {
+			local_manpower_modifier = 1
+		}
+		area_modifier = {
+			local_manpower_modifier = 0.5
+		}
+		region_modifier = {
+			
+		}
+		country_modifiers = {
+			land_forcelimit_modifier = 0.05
+			land_maintenance_modifier = -0.05
+		}
+		on_upgraded = {
+		}
+	}
+	tier_2 = {
+		upgrade_time = {
+			months = 240
+		}
+		cost_to_upgrade = {
+			factor = 2500
+		}
+		province_modifiers = {
+			local_manpower_modifier = 2
+		}
+		area_modifier = {
+			local_manpower_modifier = 1
+		}
+		region_modifier = { 
+			
+		}
+		country_modifiers = {
+			land_forcelimit_modifier = 0.10
+			land_maintenance_modifier = -0.10
+		}	
+		on_upgraded = {
+		}
+	}
+	tier_3 = {
+		upgrade_time = {
+			months = 480
+		}
+		cost_to_upgrade = {
+			factor = 5000
+		}
+		province_modifiers = {
+			local_manpower_modifier = 3
+
+		}
+		area_modifier = {
+			local_manpower_modifier = 2
+			local_regiment_cost = -0.25
+		}
+		region_modifier = { 
+			local_manpower_modifier = 0.25
+		}
+		country_modifiers = {
+			land_forcelimit_modifier = 0.15
+			land_maintenance_modifier = -0.15
+		}
+		on_upgraded = { }
+	}
+}
+
+culture_labyrinth = {
+	start = 919
+
+	date = 1900.01.01
+
+	time = {
+		months = 120
+	}
+
+	build_cost = 0
+
+	can_be_moved = no
+
+	starting_tier = 0
+
+	#project type
+	type = monument
+
+	build_trigger = {
+		owner = { has_country_flag = culture_labyrinth_flag }
+	}
+	keep_trigger = {
+		
+	}
+	can_upgrade_trigger = {
+		
+	}
+	can_use_modifiers_trigger = {
+		
+	}
+	
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+		cost_to_upgrade = {
+			factor = 0
+		}
+		province_modifiers = {
+		}
+		area_modifier = {
+		}
+		region_modifier = {
+			
+		}
+		country_modifiers = {
+		}
+		on_upgraded = {
+		}
+	}
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+		cost_to_upgrade = {
+			factor = 1000
+		}
+		province_modifiers = {
+			trade_goods_size = 1
+			institution_growth = 0.25
+			local_institution_spread = 0.05
+		}
+		area_modifier = {
+			production_efficiency = 0.05
+		}
+		region_modifier = {
+			
+		}
+		country_modifiers = {
+			culture_conversion_cost = -0.05
+		}
+		on_upgraded = {
+		}
+	}
+	tier_2 = {
+		upgrade_time = {
+			months = 240
+		}
+		cost_to_upgrade = {
+			factor = 2500
+		}
+		province_modifiers = {
+			trade_goods_size = 2
+			institution_growth = 0.5
+			local_institution_spread = 0.1
+		}
+		area_modifier = {
+			production_efficiency = 0.1
+		}
+		region_modifier = { 
+			
+		}
+		country_modifiers = {
+			culture_conversion_cost = -0.1
+		}	
+		on_upgraded = {
+		}
+	}
+	tier_3 = {
+		upgrade_time = {
+			months = 480
+		}
+		cost_to_upgrade = {
+			factor = 5000
+		}
+		province_modifiers = {
+			trade_goods_size = 3
+			institution_growth = 1
+			local_institution_spread = 0.25
+		}
+		area_modifier = {
+			production_efficiency = 0.15
+		}
+		region_modifier = { 
+			production_efficiency = 0.1
+		}
+		country_modifiers = {
+			culture_conversion_cost = -0.15
+		}
+		on_upgraded = { }
+	}
+}
+
+ACE_kuradaznai_necropolis = {
+	start = 332		#Corseton
+
+	date = 1900.01.01
+
+	time = {
+		months = 120
+	}
+
+	build_cost = 1000
+
+	can_be_moved = no
+
+	starting_tier = 1
+
+	#project type
+	type = monument
+
+	build_trigger = {
+		owner = { has_country_flag = ACE_kuradaznai_necropolis_flag }
+	}
+
+	on_built = {
+	}
+
+	on_destroyed = {
+	}
+
+	can_use_modifiers_trigger = {
+		owner = { religion = kuradaznai }
+		has_owner_religion = yes
+	}
+
+	can_upgrade_trigger = {
+		owner = { religion = kuradaznai }
+		has_owner_religion = yes
+	}
+
+	keep_trigger = {
+	}
+
+	#tier data
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+
+		cost_to_upgrade = {
+			factor = 0
+		}
+
+		province_modifiers = {
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+
+		}
+
+		on_upgraded = {
+		}
+	}
+
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 1000
+		}
+
+		province_modifiers = {
+		}
+
+		area_modifier = {
+			local_autonomy = -0.025
+			local_tax_modifier = 0.05
+		}
+
+		country_modifiers = {
+			global_missionary_strength = 0.01
+			monthly_church_power = 0.01
+		}
+
+		on_upgraded = {
+			owner = {
+				add_estate_loyalty = {
+					estate = estate_church
+					loyalty = 10
+				}
+			}
+		}
+	}
+
+	tier_2 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		
+		cost_to_upgrade = {
+			factor = 2500
+		}
+
+		
+		province_modifiers = {
+			
+		}
+
+		
+		area_modifier = {
+			local_tax_modifier = 0.10
+		}
+
+		
+		country_modifiers = {
+			missionaries = 1
+			global_missionary_strength = 0.02
+			monthly_church_power = 0.02
+			global_autonomy = -0.025
+		}
+		
+		on_upgraded = {
+			owner = {
+				add_estate_loyalty = {
+					estate = estate_church
+					loyalty = 15
+				}
+			}
+		}
+	}
+
+	tier_3 = {
+		
+		upgrade_time = {
+			months = 120
+		}
+
+		
+		cost_to_upgrade = {
+			factor = 5000
+		}
+
+		
+		province_modifiers = {
+			
+		}
+
+		
+		area_modifier = {
+			local_tax_modifier = 0.15
+		}
+
+		
+		country_modifiers = {
+			missionaries = 1
+			global_missionary_strength = 0.03
+			monthly_church_power = 0.03
+			church_loyalty_modifier = 0.1
+		}
+
+		region_modifier = {
+			
+		}
+		
+		on_upgraded = {
+			custom_tooltip = B94_center_of_reformation_corseton_tt
+			332 = {
+				add_reform_center = kuradaznai
+			}
+			owner = {
+				add_estate_loyalty = {
+					estate = estate_church
+					loyalty = 20
+				}
+			}
+		}
+	}
+}
+
+ACE_religion_labyrinth = {
+	start = 332		#Corseton
+
+	date = 1900.01.01
+
+	time = {
+		months = 120
+	}
+
+	build_cost = 0
+
+	can_be_moved = no
+
+	starting_tier = 0
+
+	#project type
+	type = monument
+
+	build_trigger = {
+		owner = { has_country_flag = ACE_religion_labyrinth_flag }
+	}
+
+	keep_trigger = {
+		
+	}
+	can_upgrade_trigger = {
+		
+	}
+	can_use_modifiers_trigger = {
+		
+	}
+	
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+		cost_to_upgrade = {
+			factor = 0
+		}
+		province_modifiers = {
+		}
+		area_modifier = {
+		}
+		region_modifier = {
+			
+		}
+		country_modifiers = {
+		}
+		on_upgraded = {
+		}
+	}
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+		cost_to_upgrade = {
+			factor = 1000
+		}
+		province_modifiers = {
+			
+		}
+		area_modifier = {
+			
+		}
+		region_modifier = {
+			
+		}
+		country_modifiers = {
+			church_power_modifier = 0.05
+		}
+		on_upgraded = {
+		}
+	}
+	tier_2 = {
+		upgrade_time = {
+			months = 240
+		}
+		cost_to_upgrade = {
+			factor = 2500
+		}
+		province_modifiers = {
+			
+		}
+		area_modifier = {
+			
+		}
+		region_modifier = { 
+			
+		}
+		country_modifiers = {
+			church_power_modifier = 0.1
+			church_privilege_slots = 1
+		}	
+		on_upgraded = {
+		}
+	}
+	tier_3 = {
+		upgrade_time = {
+			months = 480
+		}
+		cost_to_upgrade = {
+			factor = 5000
+		}
+		province_modifiers = {
+
+		}
+		area_modifier = {
+		}
+		region_modifier = {
+			
+		}
+		country_modifiers = {
+			church_power_modifier = 0.2
+			church_privilege_slots = 1
+			missionaries = 1
+		}
+		on_upgraded = { }
+	}
+}

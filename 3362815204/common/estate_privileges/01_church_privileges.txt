@@ -43,6 +43,14 @@ estate_church_land_rights = {
 			regiment_recruit_speed = -0.1
 		}
 	}
+	on_revoked = {
+		if = {
+			limit = {
+				has_estate_privilege = estate_curtailing_neratic_clergy
+			}
+			take_estate_land_share_massive = { estate = estate_church }
+		}
+	}
 	#conditional_modifier = {
 	#	trigger = { has_government_mechanic = ottoman_decadence_mechanic }
 	#	modifier = { monthly_ottoman_decadence = 0.02 }
@@ -259,6 +267,14 @@ estate_church_religious_state = {
 	conditional_modifier = {
 		trigger = { has_country_flag = farranean_mana_privileges }
 		modifier = { church_loyalty_modifier = 0.1 }
+	}
+	on_revoked = {
+		if = {
+			limit = {
+				has_estate_privilege = estate_curtailing_neratic_clergy
+			}
+			take_estate_land_share_gigantic = { estate = estate_church }
+		}
 	}
 	#conditional_modifier = {
 	#	trigger = { has_government_mechanic = ottoman_decadence_mechanic }
@@ -985,6 +1001,14 @@ estate_church_administrative_privileges = {
 	benefits = {
 		war_exhaustion = -0.02
 	}
+	on_revoked = {
+		if = {
+			limit = {
+				has_estate_privilege = estate_curtailing_neratic_clergy
+			}
+			take_estate_land_share_massive = { estate = estate_church }
+		}
+	}
 	mechanics = {
 		exempt_from_seize_land
 	}
@@ -1603,7 +1627,13 @@ estate_church_for_the_faith = {
 	#	modifier = { monthly_ottoman_decadence = 0.02 }
 	#}
 	ai_will_do = {
+		factor = 10
+		modifier = {
 		factor = 0
+			NOT = {
+				has_country_modifier = ace_unnatural_luck
+			}
+		}
 	}
 }
 
@@ -2110,6 +2140,12 @@ estate_church_one_faith_one_culture = {
 	on_revoked = {
 		custom_tooltip = estate_church_one_faith_one_culture_rta
 		custom_tooltip = estate_church_one_faith_one_culture_rtb
+		if = {
+			limit = {
+				has_estate_privilege = estate_curtailing_neratic_clergy
+			}
+			take_estate_land_share_massive = { estate = estate_church }
+		}
 	}
 	on_revoked_province = {
 		if = {
@@ -3324,6 +3360,13 @@ estate_church_donation_right = {
 			factor = 0.1
 			is_absolutism_active = yes
 		}
+		modifier = {
+			factor = 1000
+			NOT = {
+				religious_unity = 0.9
+			}
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 }
 
@@ -3804,7 +3847,10 @@ estate_church_U10_charms_of_protection = {
 		has_country_flag = U10_purification_privileges_enabled
 	}
 	can_select = {
-		is_abjuration_2 = yes
+		OR = {
+			is_abjuration_2 = yes
+  			is_abjuration_3 = yes
+		}
 		calc_true_if = {
 			trading_bonus = {
 				trade_goods = spices

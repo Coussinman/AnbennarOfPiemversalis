@@ -1,0 +1,237 @@
+recalculate_wyvern_merc = {
+	recalculate_wyvern_merc_loop = { number = 1 }
+	recalculate_wyvern_merc_loop = { number = 2 }
+	recalculate_wyvern_merc_loop = { number = 3 }
+	recalculate_wyvern_merc_loop = { number = 4 }
+	recalculate_wyvern_merc_loop = { number = 5 }
+	recalculate_wyvern_merc_loop = { number = 6 }
+	recalculate_wyvern_merc_loop = { number = 7 }
+	recalculate_wyvern_merc_loop = { number = 8 }
+	recalculate_wyvern_merc_loop = { number = 9 }
+	recalculate_wyvern_merc_loop = { number = 10 }
+}
+recalculate_wyvern_merc_loop = {
+	if = {
+		limit = {
+			num_of_owned_provinces_with = {
+				value = $number$
+				has_province_modifier = A33_better_sanctuary_2
+			}
+		}
+		unlock_merc_company = {
+			merc_company = merc_drake_army_$number$
+		}
+	}
+}
+
+#disaster
+A33_chose_old_money = {
+	set_country_flag = A33_choose_old
+	for = {
+		amount = 10
+		effect = "
+			random_province = {
+				limit = {
+					country_or_non_sovereign_subject_holds = root
+					OR = {
+						continent = north_america
+						continent = south_america
+					}
+					NOT = {
+						has_province_modifier  = new_money_hideout
+					}
+				}
+				A33_chose_old_money_prov = yes
+			}
+		"
+	}
+	random_province = {
+		limit = {
+			country_or_non_sovereign_subject_holds = root
+			OR = {
+				continent = north_america
+				continent = south_america
+			}
+			NOT = {
+				has_province_modifier  = new_money_hideout
+			}
+			any_neighbor_province = {
+				has_province_modifier  = new_money_hideout
+			}
+		}
+		A33_chose_old_money_prov = yes
+	}
+	random_province = {
+		limit = {
+			country_or_non_sovereign_subject_holds = root
+			OR = {
+				continent = north_america
+				continent = south_america
+			}
+			NOT = {
+				has_province_modifier  = new_money_hideout
+			}
+			any_neighbor_province = {
+				has_province_modifier  = new_money_hideout
+			}
+		}
+		A33_chose_old_money_prov = yes
+	}
+	random_owned_province = {
+		limit = {
+			continent = europe
+			NOT = {
+				has_province_modifier  = new_money_hideout
+			}
+			is_capital = no
+		}
+		A33_chose_old_money_prov = yes
+	}
+	random_owned_province = {
+		limit = {
+			continent = europe
+			NOT = {
+				has_province_modifier  = new_money_hideout
+			}
+			is_capital = no
+		}
+		A33_chose_old_money_prov = yes
+	}
+}
+
+A33_chose_old_money_prov = {
+	add_province_modifier = {
+		name = new_money_hideout
+		duration = -1
+	}
+	if = {
+		limit = { NOT = { fort_level = 1 } }
+		add_fort_up_to_16th = yes
+	}
+	spawn_rebels = {
+		type = noble_rebels
+		size = 1
+		win = yes
+	}
+}
+
+A33_chose_new_money = {
+	set_country_flag = A33_choose_new
+	for = {
+		amount = 7
+		effect = "
+			random_owned_province = {
+				limit = {
+					continent = europe
+					NOT = {
+						has_province_modifier  = old_money_hideout
+					}
+					is_capital = no
+				}
+				A33_chose_new_money_prov = yes
+			}
+		"
+	}
+	for = {
+		amount = 7
+		effect = "
+			random_owned_province = {
+				limit = {
+					continent = europe
+					NOT = {
+						has_province_modifier  = old_money_hideout
+					}
+					is_capital = no
+				}
+				A33_chose_new_money_prov = yes
+			}
+		"
+	}
+	random_province = {
+		limit = {
+			country_or_non_sovereign_subject_holds = ROOT
+			OR = {
+				continent = north_america
+				continent = south_america
+			}
+			NOT = {
+				has_province_modifier  = old_money_hideout
+			}
+			is_capital = yes
+		}
+		A33_chose_new_money_prov = yes
+	}
+	random_province = {
+		limit = {
+			country_or_non_sovereign_subject_holds = ROOT
+			OR = {
+				continent = north_america
+				continent = south_america
+			}
+			NOT = {
+				has_province_modifier  = old_money_hideout
+			}
+			is_capital = yes
+		}
+		A33_chose_new_money_prov = yes
+	}
+	random_province = {
+		limit = {
+			country_or_non_sovereign_subject_holds = ROOT
+			OR = {
+				continent = north_america
+				continent = south_america
+			}
+			NOT = {
+				has_province_modifier  = old_money_hideout
+			}
+		}
+		A33_chose_new_money_prov = yes
+	}
+	random_province = {
+		limit = {
+			country_or_non_sovereign_subject_holds = ROOT
+			OR = {
+				continent = north_america
+				continent = south_america
+			}
+			NOT = {
+				has_province_modifier  = old_money_hideout
+			}
+		}
+		A33_chose_new_money_prov = yes
+	}
+	random_province = {
+		limit = {
+			country_or_non_sovereign_subject_holds = ROOT
+			OR = {
+				continent = north_america
+				continent = south_america
+			}
+			NOT = {
+				has_province_modifier  = old_money_hideout
+			}
+		}
+		A33_chose_new_money_prov = yes
+	}
+}
+
+A33_chose_new_money_prov = {
+	add_province_modifier = {
+		name = old_money_hideout
+		duration = -1
+	}
+	if = {
+		limit = {
+			NOT = {
+				fort_level = 1
+			}
+		}
+		add_fort_up_to_16th = yes
+	}
+	spawn_rebels = {
+		type = noble_rebels
+		size = 2
+		win = yes
+	}
+}

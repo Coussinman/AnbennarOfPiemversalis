@@ -1,0 +1,2431 @@
+A34_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = A34 }
+
+	A34_bribe_electors = {
+		icon = personal_diplomacy
+		position = 2
+		required_missions = { A34_damerian_ties }
+		provinces_to_highlight = {
+			is_capital = yes
+			owner = {
+				is_elector = yes
+				has_country_flag = lilac_wars_rose_party
+			}
+		}
+
+		trigger = {
+			treasury = 100
+			calc_true_if = {
+				amount = 2
+				all_country = {
+					is_elector = yes
+					has_country_flag = lilac_wars_rose_party
+					has_50_opinion_improved_relation = {
+						target = ROOT
+					}
+				}
+			}
+		}
+
+		effect = {
+			country_event = {
+				id = flavor_bisan.1
+			}
+		}
+	}
+
+	A34_emperor_maker = {
+		icon = mission_crown_of_wenceslas
+		position = 4
+		required_missions = {
+			A34_bribe_electors
+			A34_avenge_the_emp
+		}
+		provinces_to_highlight = {  }
+
+		trigger = {
+			OR = {
+				is_emperor = yes
+				A45 = {
+					is_emperor = yes
+					alliance_with = ROOT
+				}
+			}
+		}
+
+		effect = {
+			set_country_flag = bisan_sword_moon
+			custom_tooltip = A34_emperor_maker_tt
+			add_country_modifier = {
+				name = sword_of_moon
+				duration = -1
+			}
+			if = {
+				limit = {
+					is_emperor = no
+				}
+				emperor = {
+					add_trust = {
+						who = ROOT
+						value = 10
+						mutual = yes
+					}
+				}
+			}
+		}
+	}
+
+	A34_request_elector = {
+		icon = mission_have_two_subjects
+		position = 5
+		required_missions = { A34_emperor_maker }
+		provinces_to_highlight = {
+			is_capital = yes
+			owner = {
+				is_emperor = yes
+			}
+		}
+
+		trigger = {
+			OR = {
+				is_emperor = yes
+				emperor = {
+					has_opinion = {
+						who = ROOT
+						value = 190
+					}
+				}
+			}
+			OR = {
+				any_elector = {
+					has_country_flag = lilac_wars_rose_party
+					humiliated_by = ROOT
+
+				}
+				treasury = 500
+			}
+		}
+
+		effect = {
+			elector = yes
+
+			random_country = {
+				limit = {
+					humiliated_by = ROOT
+					is_elector = yes
+					has_country_flag = lilac_wars_rose_party
+				}
+				elector = no
+			}
+			if = {
+				limit = {
+					NOT = {
+						any_country = {
+							humiliated_by = ROOT
+							is_elector = yes
+							has_country_flag = lilac_wars_rose_party
+						}
+					}
+				}
+				add_treasury = -500
+			}
+		}
+	}
+
+	A34_dev_wexhills = {
+		icon = bal_hyl_mission
+		position = 7
+		required_missions = { A32_conquest_wexhills }
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					is_capital_of = A73
+					NOT = {
+						owner = {
+							has_100_opinion_improved_relation = {
+								target = ROOT
+							}
+						}
+					}
+				}
+				AND = {
+					area = wexhills_area
+					NOT = {
+						AND = {
+							development = 10
+							has_production_building_trigger = yes
+						}
+					}
+				}
+				AND = {
+					province_id = 306
+					NOT = {
+						AND = {
+							has_manufactory_trigger = yes
+							has_great_project = {
+								type = bal_hyl
+								tier = 1
+							}
+						}
+					}
+				}
+			}
+		}
+
+		trigger = {
+			A73 = {
+				has_100_opinion_improved_relation = {
+					target = ROOT
+				}
+			}
+			wexhills_area = {
+				type = all
+				development = 10
+				has_production_building_trigger = yes
+			}
+			306 = {
+				has_manufactory_trigger = yes
+				has_great_project = {
+					type = bal_hyl
+					tier = 1
+				}
+			}
+		}
+
+		effect = {
+			303 = {
+				add_dwarven_minority_size_effect = yes
+				add_province_modifier = {
+					name = silverforge_help
+					duration = -1
+				}
+			}
+			304 = {
+				change_trade_goods = cloth
+			}
+			305 = {
+				change_trade_goods = wine
+				add_elven_minority_size_effect = yes
+				add_dwarven_minority_size_effect = yes
+			}
+			306 = {
+				change_trade_goods = glass
+				hidden_effect = {
+					remove_building = weapons
+					add_building =  mills
+				}
+				add_elven_minority_size_effect = yes
+				add_half_elven_minority_size_effect = yes
+			}
+			custom_tooltip = A34_dev_wexhills_tt
+			hidden_effect = {
+				306 = {
+					add_great_project = {
+						type = bisan_bal_hyl
+						instant = yes
+					}
+					if = {
+						limit = {
+							has_great_project = {
+								type = bal_hyl
+								tier = 1
+							}
+						}
+						add_great_project_tier = {
+							type = bisan_bal_hyl
+							tier = 1
+						}
+					}
+					else_if = {
+						limit = {
+							has_great_project = {
+								type = bal_hyl
+								tier = 2
+							}
+						}
+						add_great_project_tier = {
+							type = bisan_bal_hyl
+							tier = 2
+						}
+					}
+					else_if = {
+						limit = {
+							has_great_project = {
+								type = bal_hyl
+								tier = 3
+							}
+						}
+						add_great_project_tier = {
+							type = bisan_bal_hyl
+							tier = 3
+						}
+					}
+					destroy_great_project = {
+						type = bal_hyl
+					}
+				}
+			}
+		}
+	}
+
+	A34_bisanese_prosperity = {
+		icon = prosper_in_piedmont
+		position = 8
+		required_missions = { A34_identity }
+		provinces_to_highlight = {
+			OR = {
+				culture = bisanese
+				culture = wexonard_new
+			}
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 20
+				OR = {
+					culture = bisanese
+					culture = wexonard_new
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = bisanese_prosperity
+				duration = -1
+			}
+		}
+	}
+
+	A43_east_dameria = {
+		icon = renaissance_city
+		position = 9
+		required_missions = {
+			A34_bisanese_prosperity
+			A34_damerian_traditions
+		}
+		provinces_to_highlight = {
+			is_capital_of = ROOT
+		}
+
+		trigger = {
+			capital_scope = {
+				development = 40
+				OR = {
+					culture = bisanese
+					culture = wexonard_new
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = A43_east_dameria_tt
+
+			set_dynasty = "síl Bisan"
+			custom_tooltip = " "
+			add_government_reform = bisanese_parliament
+
+			custom_tooltip = " "
+			capital_scope = {
+				if = {
+					limit = {
+						province_has_center_of_trade_of_level = 1
+					}
+					add_center_of_trade_level = 1
+				}
+				else = {
+					center_of_trade = 1
+				}
+			}
+
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = east_dameria
+				first_limit = "
+					high_tolerance_elven_race_trigger = yes
+				"
+				first_effect = "
+					country_event = {
+						id = flavor_bisan.2
+					}
+				"
+
+			}
+		}
+	}
+
+	A34_resolution_violence = {
+		icon = mission_rb_control_state_religion
+		position = 10
+		provinces_to_highlight = {  }
+
+		trigger = {
+			is_religion_enabled = corinite
+		}
+
+		effect = {
+			country_event = {
+				id = flavor_bisan.1008
+			}
+			custom_tooltip = A34_unlock_CB
+			set_country_flag = bisan_spread_faith_flag
+		}
+	}
+
+	A34_righteous_sword = {
+		icon = mission_crusade_for_varna
+		position = 11
+		required_missions = { A34_resolution_violence }
+		provinces_to_highlight = {  }
+
+		trigger = {
+			OR = {
+				num_of_forced_converted_countries = {
+					amount = 10
+				}
+				check_variable = {
+					value = 5
+					which = A34rebelswon
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = A34_winning_batles
+			set_country_flag = bisan_spread_global
+			clr_country_flag = bisan_spread_faith_flag
+
+			add_country_modifier = {
+				name = righteous_sword
+				duration = -1
+			}
+		}
+	}
+
+	A34_righteous_lion = {
+		icon = mission_norwegian_royal_army
+		position = 13
+		required_missions = { A34_righteous_sword }
+		provinces_to_highlight = {  }
+
+		trigger = {
+			calc_true_if = {
+				amount = 5
+				all_country = {
+					force_converted_by = ROOT
+					custom_trigger_tooltip = {
+						tooltip = A34_righteous_lion_tooltip
+						NOT = {
+							culture_group = anbennarian
+							culture_group = lencori
+							culture_group = alenic
+							culture_group = escanni
+							culture_group = businori
+							culture = moon_elf
+							culture = silver_dwarf
+						}
+					}
+				}
+			}
+		}
+
+		effect = {
+			remove_country_modifier = righteous_sword
+			add_country_modifier = {
+				name = sword_of_the_righteous
+				duration = -1
+			}
+
+		}
+	}
+}
+A34_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = A34 }
+
+	A34_damerian_ties = {
+		icon = mission_alliances
+		position = 1
+		provinces_to_highlight = {
+			is_capital = yes
+			owner = {
+				OR = {
+					primary_culture = east_damerian
+					accepted_culture = east_damerian
+				}
+			}
+		}
+
+		trigger = {
+			any_country = {
+				OR = {
+					primary_culture = east_damerian
+					accepted_culture = east_damerian
+				}
+				has_100_opinion_improved_relation = {
+					target = ROOT
+				}
+			}
+		}
+
+		effect = {
+			if = {
+				limit = {
+					has_consort = no
+				}
+				define_consort = {
+					culture = east_damerian
+					religion = ROOT
+				}
+			}
+			random_ally = {
+				limit = {
+					has_100_opinion_improved_relation = {
+						target = ROOT
+					}
+					OR = {
+						primary_culture = east_damerian
+						accepted_culture = east_damerian
+					}
+				}
+				add_trust = {
+					who = ROOT
+					value = 10
+					mutual = yes
+				}
+			}
+
+			add_country_modifier = {
+				name = damerian_ties
+				duration = 7300
+			}
+
+			complex_dynamic_effect = {
+				first_custom_tooltip = A34_damerian_ties_tt
+				first_limit = "
+					alliance_with = A45
+				"
+				first_effect = "
+					create_general = {
+						tradition = 50
+						culture = east_damerian
+					}
+				"
+			}
+		}
+	}
+
+	A34_conspire_wex = {
+		icon = mission_lothane_legacy
+		position = 2
+		required_missions = { A34_damerian_ties }
+		provinces_to_highlight = {
+			is_capital = yes
+			owner = {
+				NOT = {
+					alliance_with = ROOT
+				}
+				has_country_flag = lilac_wars_moon_party
+			}
+		}
+
+		trigger = {
+			has_spy_network_in = {
+				who = A30
+				value = 30
+			}
+			calc_true_if = {
+				amount = 3
+				all_country = {
+					alliance_with = ROOT
+					has_country_flag = lilac_wars_moon_party
+				}
+			}
+		}
+
+		effect = {
+			add_casus_belli = {
+				type = cb_seize_wex
+				target = A30
+				months = 300
+			}
+		
+			for = {
+				amount = 3
+				custom_tooltip = A34_conspire_wex_tt
+				effect = "
+					random_country = {
+						limit = {
+							alliance_with = ROOT
+							has_country_flag = lilac_wars_moon_party
+							NOT = {
+								trust = { who = ROOT value = 60 }
+							}
+						}
+						add_trust = {
+							who = ROOT
+							value = 10
+							mutual = yes
+						}
+						add_favors = {
+							who = ROOT
+							amount = 10
+						}
+					}
+				"
+			}
+
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = A34_conspire_wex_tt2
+				first_limit = "
+					A30 = {
+						has_ruler_flag = lothane_sil_wex
+					}
+				"
+				first_effect = "
+					add_country_modifier = {
+						name = anti_lothane_tactics
+						duration = 3650
+					}
+				"
+			}
+		}
+	}
+
+	A34_avenge_the_emp = {
+		icon = mission_moon_throne
+		position = 3
+		required_missions = { A34_conspire_wex }
+		provinces_to_highlight = {
+			area = wexhills_area
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+
+		trigger = {
+			OR = {
+				custom_trigger_tooltip = {
+					tooltip = A34_avenge_the_emp_tt3
+					A30 = {
+						has_country_flag = lost_eoa_war
+					}
+				}
+				wexhills_area = {
+					type = all
+					owned_by = ROOT
+				}
+			}
+		}
+
+		effect = {
+			country_event = {
+				id = flavor_bisan.3
+			}
+
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = A34_avenge_the_emp_tt
+				first_limit = "
+					A30 = {
+						NOT = {
+							has_country_flag = lost_eoa_war
+						}
+					}
+					wexhills_area = {
+						type = all
+						owned_by = ROOT
+					}
+				"
+				first_effect = "
+					custom_tooltip = A34_avenge_the_emp_tt2
+					hidden_effect = {
+						wex_collapse = yes
+					}
+				"
+			}
+		}
+	}
+
+
+
+	A32_conquest_wexhills = {
+		icon = mission_unite_home_region
+		position = 6
+		required_missions = {
+			A34_freecities
+			A34_avenge_the_emp
+		}
+		provinces_to_highlight = {
+			area = wexhills_area
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+
+		trigger = {
+			wexhills_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			country_event = {
+				id = flavor_bisan.4
+			}
+
+			custom_tooltip = A32_conquest_wexhills_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						Z04 = {
+							NOT = {
+								liberty_desire = 1
+							}
+						}
+					}
+					inherit = Z04
+				}
+				if = {
+					limit = {
+						Z02 = {
+							NOT = {
+								liberty_desire = 1
+							}
+						}
+					}
+					inherit = Z02
+				}
+			}
+
+			custom_tooltip = A34_our_river_tt3
+			add_casus_belli = {
+				type = cb_insult
+				target = A85
+			}
+
+
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = A32_conquest_wexhills_tt2
+				first_limit = "
+					A30 = {
+						exists = no
+					}
+				"
+				first_effect = "
+					custom_tooltip = A32_conquest_wexhills_tt3
+					hidden_effect = {
+						A30 = {
+							every_core_province = {
+								remove_core = A30
+							}
+						}
+					}
+				"
+			}
+		}
+	}
+
+	A34_identity = {
+		icon = mission_thinking_king
+		position = 7
+		required_missions = {
+			A32_conquest_wexhills
+			A34_wexonard_anbenncost
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = east_bisan_area
+				area = west_bisan_area
+			}
+			OR = {
+				NOT = {
+					is_prosperous = yes
+				}
+				unrest = 1
+			}
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = A34_identity_tt
+				employed_advisor = {
+					skill = 3
+					category = ADM
+				}
+			}
+			east_bisan_area = {
+				type = all
+				is_prosperous = yes
+				NOT = {
+					unrest = 1
+				}
+			}
+			west_bisan_area = {
+				type = all
+				is_prosperous = yes
+				NOT = {
+					unrest = 1
+				}
+			}
+		}
+
+		effect = {
+			country_event = {
+				id = flavor_bisan.5
+			}
+		}
+	}
+
+	A34_damerian_traditions = {
+		icon = mission_naval_dominance
+		position = 8
+		required_missions = { 
+			A34_vernmen
+			A34_identity
+		}
+		provinces_to_highlight = {
+			is_capital = yes
+			owner = {
+				OR = {
+					primary_culture = east_damerian
+					accepted_culture = east_damerian
+				}
+				NOT = {	
+					has_100_opinion_improved_relation = {
+						target = ROOT
+					}
+				}
+			}
+		}
+
+		trigger = {
+			diplomatic_reputation = 5
+			any_country = {
+				OR = {
+					primary_culture = east_damerian
+					accepted_culture = east_damerian
+				}
+				has_100_opinion_improved_relation = {
+					target = ROOT
+				}
+			}
+
+		}
+
+		effect = {
+			define_advisor = {
+				type = naval_reformer
+				skill = 2
+				discount = yes
+				culture = east_damerian
+			}
+
+			add_country_modifier = {
+				name = naval_build_up
+				duration = 7300
+			}
+			random_owned_province = {
+				limit = {
+					has_port = yes
+				}
+				add_unit_construction = {
+					type = heavy_ship
+					amount = 1
+					speed = 0
+					cost = 0
+				}
+			}
+		}
+	}
+
+	A34_adopt_gods = {
+		icon = mission_moon_moon
+		position = 9
+		required_missions = { A34_damerian_traditions }
+		provinces_to_highlight = {
+			OR = {
+				province_id = 52
+				province_id = 4
+			}
+			NOT = {
+				owner = {
+					has_100_opinion_improved_relation = {
+						target = ROOT
+					}
+				}
+			}
+		}
+
+		trigger = {
+			treasury = 200
+			estate_loyalty = {
+				estate = estate_church
+				loyalty = 60
+			}
+			52 = {
+				owner = {
+					has_100_opinion_improved_relation = {
+						target = ROOT
+					}
+				}
+			}
+			4 = {
+				owner = {
+					has_100_opinion_improved_relation = {
+						target = ROOT
+					}
+				}
+			}
+			capital_scope = {
+				has_tax_building_trigger = yes
+			}
+		}
+
+		effect = {
+			country_event = {
+				id = flavor_bisan.7
+			}
+		}
+	}
+
+	A34_damerian_academy = {
+		icon = mission_marines
+		position = 10
+		required_missions = { A34_captains }
+		provinces_to_highlight = {
+			province_id = 288
+			NOT = {
+				OR = {
+					development = 25
+					has_building = impressment_offices
+				}
+			}
+		}
+
+		trigger = {
+			army_professionalism = 0.2
+			288 = {
+				owned_by = ROOT
+				has_building = impressment_offices
+				development = 25
+			}
+			any_ally = {
+				OR = {
+					primary_culture = east_damerian
+					accepted_culture = east_damerian
+				}
+				any_province = {
+					has_port = yes
+				}
+			}
+		}
+
+		effect = {
+			create_admiral = {
+				tradition = 70
+			}
+			add_country_modifier = {
+				name = damerian_marines
+				duration = -1
+			}
+			add_country_modifier = {
+				name = damerian_discipline
+				duration = -1
+			}
+
+			288 = {
+				add_unit_construction = {
+					type = galley
+					cost = 0
+					speed = 0
+					amount = 5
+				}
+			}
+
+			add_navy_tradition = 10
+			random_ally = {
+				limit = {
+					OR = {
+						primary_culture = east_damerian
+						accepted_culture = east_damerian
+					}
+					any_province = {
+						has_port = yes
+					}
+				}
+				add_navy_tradition = 10
+			}
+		}
+	}
+
+
+}
+A34_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = A34 }
+
+	A34_glassweavers = {
+		icon = bohemian_crystal
+		position = 2
+		required_missions = { A34_cities }
+		provinces_to_highlight = {
+			province_id = 923
+		}
+
+		trigger = {
+			923 = {
+				has_building = mage_tower
+				base_production = 10
+			}
+		}
+
+		effect = {
+			923 = {
+				add_elven_minority_size_effect = yes
+				add_province_modifier = {
+					name = bisanese_weavers
+					duration = -1
+				}
+			}
+
+			300 = {
+				change_trade_goods = glass
+				add_half_elven_minority_size_effect = yes
+			}
+
+			custom_tooltip = A34_glassweavers_tt
+
+		}
+	}
+
+	A34_necropolis = {
+		icon = mission_pray_light
+		position = 3
+		required_missions = { A34_glassweavers }
+		provinces_to_highlight = {
+			province_id = 332
+		}
+
+		trigger = {
+			332 = {
+				has_tax_building_trigger = yes
+			}
+			estate_loyalty = {
+				estate = estate_church
+				loyalty = 60
+			}
+			num_of_estate_agendas_completed = {
+				estate = estate_church
+				value = 3
+			}
+		}
+
+		effect = {
+			custom_tooltip = A34_necropolis_tt
+			country_event = {
+				id = flavor_bisan.9
+			}
+
+			332 = {
+				add_or_upgrade_tax_building = yes
+				add_province_modifier = {
+					name = stewards_necropolis
+					duration = 3650
+				}
+			}
+
+			custom_tooltip = A34_necropolis_tt2
+			add_country_modifier = {
+				name = nirat_cult
+				duration = -1
+			}
+			custom_tooltip = A34_necropolis_tt3
+			set_country_flag = upgraded_nerat
+		}
+	}
+
+	A34_wexonard_lion = {
+		icon = mission_subdue_rajputana
+		position = 4
+		provinces_to_highlight = {  }
+
+		trigger = {
+			army_size_percentage = 1
+			manpower_percentage = 0.5
+		}
+
+		effect = {
+			gnollsgate_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	A34_freecities = {
+		icon = mission_imperial_cities
+		position = 5
+		required_missions = { A34_wexonard_lion }
+		provinces_to_highlight = {
+			OR = {
+				is_capital_of = Z04
+				is_capital_of = Z02
+			}
+		}
+
+		trigger = {
+			dip_power = 100
+			treasury = 100
+			Z04 = {
+				OR = {
+					is_rival = ROOT
+					root = {
+						is_rival = Z04
+					}
+					has_100_opinion_improved_relation = {
+						target = ROOT
+					}
+				}
+			}
+			Z02 = {
+				OR = {
+					is_rival = ROOT
+					root = {
+						is_rival = Z02
+					}
+					has_100_opinion_improved_relation = {
+						target = ROOT
+					}
+				}
+			}
+		}
+
+		effect = {
+			ottocam_area = {
+				add_permanent_claim = ROOT
+			}
+			wexhills_area = {
+				add_permanent_claim = ROOT
+			}
+			freecities_A34 = yes
+		}
+	}
+
+	A34_wexonard_anbenncost = {
+		icon = mission_eastern_european_city
+		position = 6
+		required_missions = { A34_freecities }
+		provinces_to_highlight = {
+			province_id = 294
+		}
+
+		trigger = {
+			294 = {
+				country_or_non_sovereign_subject_holds = root
+			}
+		}
+
+		effect = {
+			custom_tooltip = A34_wexonard_anbenncost_tt
+
+
+			verne_area = {
+				add_permanent_claim = ROOT
+			}
+			wyvernmark_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	A34_vernmen = {
+		icon = mission_rb_mediterranean_authority
+		position = 7
+		required_missions = { A34_wexonard_anbenncost }
+		provinces_to_highlight = {
+			OR = {
+				area = verne_area
+				area = wyvernmark_area
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+
+		trigger = {
+			verne_area = {
+				type = all
+				owned_by = ROOT
+			}
+			wyvernmark_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			add_mercantilism = 5
+
+			add_country_modifier = {
+				name = under_lions_protection
+				duration = 5475
+			}
+
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = A34_vernmen_tt2
+				first_limit = "
+					accepted_culture = vernman
+				"
+				first_effect = "
+					custom_tooltip = A34_vernmen_tt
+					hidden_effect = {
+						every_known_country = {
+							limit = {
+								is_part_of_hre = yes
+							}
+							add_aggressive_expansion = {
+								who = ROOT
+								value = -15
+							}
+						}
+					}
+				"
+			}
+		}
+	}
+
+	A34_tail = {
+		icon = mission_hill_gnoll_auxilaries
+		position = 8
+		required_missions = { A34_vernmen }
+		provinces_to_highlight = {
+			area = khenak_area
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+
+		trigger = {
+			khenak_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			country_event = {
+				id = flavor_bisan.12
+			}
+		}
+	}
+
+	A34_captains = {
+		icon = venture_captains
+		position = 9
+		required_missions = { A34_damerian_traditions }
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_port = yes
+			NOT = {
+				has_trade_building_trigger = yes
+			}
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				has_port = yes
+				has_trade_building_trigger = yes
+			}
+			380 = {
+				trade_share = {
+					country = ROOT
+					share = 20
+				}
+			}
+		}
+
+		effect = {
+			288 = {
+				add_or_upgrade_trade_building = yes
+			}
+			random_owned_province = {
+				limit = {
+					has_port = yes
+				}
+				add_unit_construction = {
+					type = light_ship
+					cost = 0
+					speed = 0
+					amount = 3
+				}
+			}
+
+			for = {
+				amount = 5
+				custom_tooltip = A34_captains_tt
+				effect = "
+					random_owned_province = {
+						limit = {
+							has_port = yes
+							has_trade_building_trigger = yes
+						}
+						add_half_elven_minority_size_effect = yes
+					}
+				"
+			}
+		}
+	}
+
+	A34_infrastructure = {
+		icon = mission_galleys_in_port
+		position = 10
+		required_missions = { A34_captains }
+		provinces_to_highlight = {
+			owned_by = ROOT
+			OR = {
+				AND = {
+					has_port = yes
+					NOT = {
+						has_dock_building_trigger = yes
+					}
+				}
+				AND = {
+					province_id = 376
+					NOT = {
+						AND = {
+							development = 20
+							has_coast_defense_building_trigger = yes
+							has_dock_building_trigger = yes
+							has_shipyard_building_trigger = yes
+						}
+					}
+				}
+			}
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				has_port = yes
+				has_dock_building_trigger = yes
+			}
+			376 = {
+				development = 20
+				has_coast_defense_building_trigger = yes
+				has_dock_building_trigger = yes
+				has_shipyard_building_trigger = yes
+			}
+		}
+
+		effect = {
+			376 = {
+				change_trade_goods = naval_supplies
+				add_or_upgrade_shipyard_building = yes
+				add_center_of_trade_level = 1
+			}
+
+			for = {
+				amount = 4
+				custom_tooltip = A34_infrastructure_tt
+				effect = "
+					random_owned_province = {
+						limit = {
+							has_port = yes
+							NOT = {
+								province_id = 376
+							}
+							OR = {
+								trade_goods = fish
+								trade_goods = wool
+								trade_goods = grain
+							}
+						}
+						change_trade_goods = naval_supplies
+					}
+				"
+			}
+		}
+	}
+
+	A34_sealion = {
+		icon = mission_establish_high_seas_navy
+		position = 11
+		required_missions = {
+			A34_damerian_academy
+			A34_infrastructure
+		}
+		provinces_to_highlight = {  }
+
+		trigger = {
+			navy_size_percentage = 1
+			navy_tradition = 25
+			num_of_owned_provinces_with = {
+				value = 3
+				has_building = wharf
+			}
+		}
+
+		effect = {
+			288 = {
+				create_flagship = {
+					type = heavy_ship
+					name = "The Sea Lion"
+				}
+			}
+			add_country_modifier = {
+				name = sealion
+				duration = -1
+			}
+		}
+	}
+}
+A34_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = A34 }
+
+	A34_cities = {
+		icon = mission_early_game_buildings
+		position = 1
+		provinces_to_highlight = {
+			OR = {
+				province_id = 300
+				province_id = 332
+				province_id = 923
+			}
+			NOT = {
+				development = 15
+			}
+		}
+
+		trigger = {
+			300 = {
+				development = 15
+			}
+			332 = {
+				development = 15
+			}
+			923 = {
+				development = 15
+			}
+		}
+
+		effect = {
+			# country_event = {
+			# 	id = flavor_bisan.8
+			# }
+
+			add_country_modifier = {
+				name = bisanese_revitalization
+				duration = 7300
+			}
+		}
+	}
+
+	A34_corset = {
+		icon = ned_cloth_trading
+		position = 2
+		required_missions = { A34_cities }
+		provinces_to_highlight = {
+			OR = {
+				province_id = 332
+				province_id = 294
+			}
+			NOT = {
+				AND = {
+					owned_by = ROOT
+					base_production = 10
+					has_production_building_trigger = yes
+				}
+			}
+		}
+
+		trigger = {
+			332 = {
+				owned_by = ROOT
+				base_production = 10
+				has_production_building_trigger = yes
+			}
+			294 = {
+				owned_by = ROOT
+				base_production = 10
+				has_production_building_trigger = yes
+			}
+
+		}
+
+		effect = {
+			add_prestige = 10
+			medium_increase_of_halfling_tolerance_effect = yes
+
+			332 = {
+				add_province_modifier = {
+					name = halfling_corsets
+					duration = -1
+				}
+			}
+			294 = {
+				add_province_modifier = {
+					name = halfling_corsets
+					duration = -1
+				}
+			}
+
+			complex_dynamic_effect = {
+				first_custom_tooltip = A34_corset_tt
+				first_limit = "
+					capital = 294
+				"
+				first_effect = "
+					294 = {
+						change_trade_goods = silk
+					}
+				"
+			}
+
+		}
+	}
+
+	A34_bisans_legion = {
+		icon = give_him_back_his_legions
+		position = 3
+		required_missions = { A34_lionsword }
+		provinces_to_highlight = {  }
+
+		trigger = {
+			army_size = 30
+			check_variable = {
+				value = 30
+				which = A34warswon
+			}
+			custom_trigger_tooltip = {
+				tooltip = A34_bisans_legion_tt
+				employed_advisor = {
+					skill = 3
+					category = MIL
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = bisanese_legions
+				duration = -1
+			}
+
+			define_general = {
+				name = "Otto The Lion"
+				shock = 4
+				fire = 3
+				manuever = 3
+				siege = 2
+				trait = us_heit_personality
+			}
+		}
+	}
+
+	A34_traitors = {
+		icon = mission_impaled_soldies
+		position = 5
+		required_missions = { A34_wexonard_lion }
+		provinces_to_highlight = {
+			OR = {
+				province_id = 315
+				area = gnollsgate_area
+			}
+			not = {
+				owned_by = ROOT
+			}
+		}
+
+		trigger = {
+			315 = {
+				owned_by = ROOT
+			}
+			gnollsgate_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = broken_shield
+				duration = 5475
+			}
+
+			316 = {
+				add_great_project_tier = {
+					type = escandar
+					tier = 1
+				}
+			}
+
+
+			custom_tooltip = A34_traitors_tt
+			hidden_effect = {
+				A48 = {
+					every_core_province = {
+						add_permanent_claim = ROOT
+					}
+				}
+			}
+
+			complex_dynamic_effect = {
+				first_custom_tooltip = A34_traitors_tt2
+				first_limit = "
+					is_rival = A48
+				"
+				first_effect = "
+					add_prestige = 20
+				"
+		
+			}
+		}
+	}
+
+
+
+	A34_tighten_noose = {
+		icon = mission_destroyed_city
+		position = 6
+		required_missions = { A34_traitors }
+		provinces_to_highlight = {
+			province_group = sugamber_core
+		}
+
+		trigger = {
+			A48 = {
+				exists = no
+			}
+			sugamber_core = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			add_treasury = 150
+			custom_tooltip = A34_tighten_noose_tt2
+			hidden_effect = {
+				A48 = {
+					every_core_province = {
+						add_devastation = 20
+						remove_core = A48
+					}
+				}
+			}
+			custom_tooltip = " "
+			add_casus_belli = {
+				type = cb_insult
+				target = A57
+				months = 240
+			}
+			custom_tooltip = " "
+			add_casus_belli = {
+				type = cb_insult
+				target = A75
+				months = 240
+			}
+
+			hapiande_area = {
+				add_permanent_claim = root
+			}
+
+			mountainway_area = {
+				add_permanent_claim = root
+			}
+
+			lorbet_area = {
+				add_permanent_claim = root
+			}
+
+
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = A34_tighten_noose_tt3
+				first_limit = "
+					A56 = {
+						all_core_province = {
+							owned_by = A56
+						}
+					}
+				"
+				first_effect = "
+					add_adm_power = 100
+					add_prestige = 10
+				"
+			}
+
+		}
+	}
+
+	A34_our_river = {
+		icon = renaissance_city
+		position = 7
+		required_missions = { A34_tighten_noose }
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					province_group = sugamber_core
+					OR = {
+						NOT = {
+							development = 10
+						}
+						devastation = 1
+					}
+				}
+				AND = {
+					province_id = 919
+					NOT = {
+						AND = {
+							development = 20
+							num_of_buildings_in_province = 5
+						}
+					}
+				}
+				AND = {
+					is_capital_of = A38
+					NOT = {
+						owner = {
+							has_100_opinion_improved_relation = {
+								target = ROOT
+							}
+						}
+					}
+				}
+			}
+		}
+
+		trigger = {
+			A38 = {
+				has_100_opinion_improved_relation = {
+					target = ROOT
+				}
+			}
+			919 = {
+				development = 20
+				num_of_buildings_in_province = 5
+			}
+			sugamber_core = {
+				type = all
+				NOT = {
+					devastation = 1
+				}
+				development = 10
+			}
+		}
+
+		effect = {
+			for = {
+				amount = 3
+				custom_tooltip = A34_our_river_tt2
+				effect = "
+					random_owned_province = {
+						limit = {
+							province_group = sugamber_core
+							NOT = {
+								has_half_elven_minority_trigger = yes
+								province_id = 919
+							}
+						}
+						add_half_elven_minority_size_effect = yes
+					}
+				"
+			}
+
+			919 = {
+				change_province_name = "East Bisan"
+				change_trade_goods = cloth
+				add_province_modifier = {
+					name = east_bisan
+					duration = -1
+				}
+
+				add_dwarven_minority_size_effect = yes
+				add_elven_minority_size_effect = yes
+				add_half_elven_minority_size_effect = yes
+			}
+			custom_tooltip = " "
+			sugamber_core = {
+				add_local_autonomy = -25
+				add_province_modifier = {
+					name = sugamber_integration
+					duration = 7300
+				}
+			}
+		}
+	}
+
+	A34_push_west = {
+		icon = mission_early_game_buildings
+		position = 8
+		required_missions = { A34_vernmen }
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					OR = {
+						province_id = 286
+						province_id = 283
+						area = eastneck_area
+					}
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+				AND = {
+					province_id = 50
+					NOT = {
+						AND = {
+							owned_by = ROOT
+							has_trade_building_trigger = yes
+							has_shipyard_building_trigger = yes
+							has_dock_building_trigger = yes
+							development = 20
+						}
+					}
+				}
+			}
+		}
+
+		trigger = {
+			treasury = 250
+			286 = {
+				owned_by = ROOT
+			}
+			283 = {
+				owned_by = ROOT
+			}
+			eastneck_area = {
+				type = all
+				owned_by = ROOT
+			}
+			50 = {
+				owned_by = ROOT
+				has_trade_building_trigger = yes
+				has_shipyard_building_trigger = yes
+				has_dock_building_trigger = yes
+				development = 20
+			}
+		}
+
+		effect = {
+			add_treasury = -250
+			50 = {
+				change_province_name = "Port Bisan"
+				change_trade_goods = glass
+				add_province_modifier = {
+					name = port_bisan
+					duration = -1
+				}
+			}
+		}
+	}
+
+	A34_bisanese_lion = {
+		icon = mission_lion_of_the_north
+		position = 9
+		required_missions = {
+			A34_tail
+			A34_stone_lion
+		}
+		provinces_to_highlight = {  }
+
+		trigger = {
+			total_development = 500
+			stability = 2
+			legitimacy = 90
+			OR = {
+				is_emperor = yes
+				is_great_power = yes
+			}
+		}
+
+		effect = {
+			custom_tooltip = A34_bisanese_lion_tt
+			add_permanent_power_projection = {
+				type = 25_permanent_power_projection
+				amount = 25
+			}
+
+			add_country_modifier = {
+				name = lion_of_the_south
+				duration = -1
+			}
+
+			random_list = {
+				33 = {
+					change_adm = 1
+				}
+				33 = {
+					change_dip = 1
+				}
+				33 = {
+					change_mil = 1
+				}
+			}
+
+			isle_of_tef_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	A34_seadrake = {
+		icon = mission_invade_island
+		position = 10
+		required_missions = { A34_bisanese_lion }
+		provinces_to_highlight = {
+			area = isle_of_tef_area
+			not = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		trigger = {
+			isle_of_tef_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_mercantilism = 5
+			custom_tooltip = " "
+			380 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = -1
+					power = 20
+					key = control_divenhal
+				}
+			}
+
+			custom_tooltip = " "
+			create_explorer = {
+				tradition = 30
+			}
+			add_country_modifier = {
+				name = looking_beyond
+				duration = 18250
+			}
+
+			akasik_region = {
+				add_permanent_claim = ROOT
+			}
+
+
+		}
+	}
+
+	A34_deshak = {
+		icon = mission_mal_west_african_great_power
+		position = 12
+		required_missions = {
+			A34_sealion
+			A34_seadrake
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = deshak_area
+				area = oris_area
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+
+
+
+		trigger = {
+			deshak_area = {
+				type = all
+				owned_by = ROOT
+			}
+			oris_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = deshak_landing
+				duration = 10950
+			}
+
+			country_event = {
+				id = flavor_bisan.10
+			}
+		}
+	}
+
+	A34_akasik = {
+		icon = mission_elf_smiling
+		position = 13
+		required_missions = { A34_deshak }
+		provinces_to_highlight = {
+			region = akasik_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		trigger = {
+			akasik_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			country_event = {
+				id = flavor_bisan.11
+			}
+
+			complex_dynamic_effect = {
+				first_custom_tooltip = akasik_tt
+				first_limit = "
+					has_country_modifier = looking_beyond
+				"
+				first_effect = "
+					hidden_effect = {
+						remove_country_modifier = looking_beyond
+					}
+					add_country_modifier = {
+						name = looking_beyond
+						duration = -1
+					}
+				"
+			}
+		}
+	}
+}
+A34_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = A34 }
+
+	A34_lionsword = {
+		icon = per_sword_of_our_faith
+		position = 2
+		provinces_to_highlight = {  }
+
+		trigger = {
+			check_variable = {
+				value = 10
+				which = A34warswon
+			}
+			army_tradition = 30
+		}
+
+		effect = {
+			custom_tooltip = A34_lionsword_tt
+
+			change_mil = 1
+
+
+			add_ruler_modifier = {
+				name = lionsword
+				duration = -1
+			}
+			custom_tooltip = A34_lionsword_tt2
+		}
+	}
+
+	A34_lionsword_academy = {
+		icon = mission_son_military_expertise
+		position = 4
+		required_missions = { A34_lionsword }
+		provinces_to_highlight = {
+			province_id = 300
+			NOT = {
+				base_manpower = 10
+			}
+		}
+
+		trigger = {
+			army_professionalism = 0.4
+			num_of_owned_provinces_with = {
+				value = 10
+				has_manpower_building_trigger = yes
+			}
+			300 = {
+				base_manpower = 10
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = lionswords_academy
+				duration = -1
+			}
+			300 = {
+				add_building = soldier_households
+			}
+
+			custom_tooltip = A34_lionsword_academy_tt
+			set_country_flag = A34_dip_modifiers
+		}
+	}
+
+	A34_lions_toll = {
+		icon = mission_the_sound_toll
+		position = 6
+		required_missions = { A34_traitors }
+		provinces_to_highlight = {
+			province_id = 316
+			NOT = {
+				AND = {
+					has_trade_building_trigger = yes
+					base_production = 10
+				}
+			}
+		}
+
+		trigger = {
+			mercantilism = 20
+			316 = {
+				has_trade_building_trigger = yes
+				base_production = 10
+			}
+			904 = {
+				trade_share = {
+					country = root
+					share = 35
+				}
+			}
+		}
+
+		effect = {
+			316 = {
+				center_of_trade = 1
+				upgrade_trade_building = yes
+				custom_tooltip = " "
+				add_province_modifier = {
+					name = bisanese_corridor
+					duration = -1
+				}
+				add_province_modifier = {
+					name = sugamber_repairing_escandar
+					duration = 7300
+				}
+			}
+			custom_tooltip = A34_escandar_upgrade_tooltip
+		}
+	}
+
+	A34_gate = {
+		icon = cross_the_pindus
+		position = 7
+		required_missions = { A34_tighten_noose }
+		provinces_to_highlight = {
+			OR = {
+				area = mountainway_area
+				area = lorbet_area
+				area = hapiande_area
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+
+		trigger = {
+			mountainway_area = {
+				type = all
+				owned_by = ROOT
+			}
+			lorbet_area = {
+				type = all
+				owned_by = ROOT
+			}
+			hapiande_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			371 = {
+				change_province_name = "Old Bisan"
+				add_base_production = 2
+				center_of_trade = 1
+
+				add_province_modifier = {
+					name = copper_hill
+					duration = -1
+				}
+			}
+		}
+	}
+
+	A34_stone_lion = {
+		icon = mission_assert_control_over_delhi
+		position = 8
+		required_missions = { A34_gate }
+		provinces_to_highlight = {
+			OR = {
+				area = busilar_area
+				area = busilari_straits_area
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+
+		trigger = {
+
+			busilar_area = {
+				type = all
+				owned_by = ROOT
+			}
+			busilari_straits_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			custom_tooltip = A34_stone_lion_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						region = businor_region
+					}
+					add_province_modifier = {
+						name = return_to_ancestral
+						duration = 7300
+					}
+				}
+			}
+			tooltip = {
+				add_province_modifier = {
+					name = return_to_ancestral
+					duration = 7300
+				}
+			}
+			custom_tooltip = " "
+			change_adm = 1
+		}
+	}
+
+	A34_ancestral_land = {
+		icon = mission_fortifying_the_plain
+		position = 9
+		required_missions = { A34_stone_lion }
+		provinces_to_highlight = {
+			OR = {
+				area = mountainway_area
+				area = lorbet_area
+				area = busilar_area
+				area = hapiande_area
+				area = busilari_straits_area
+			}
+			OR = {
+				NOT = {
+					is_core = ROOT
+					owned_by = ROOT
+				}
+				devastation = 1
+				unrest = 1
+			}
+		}
+
+		trigger = {
+			mountainway_area = {
+				type = all
+				is_core = ROOT
+				owned_by = ROOT
+				NOT = { devastation = 1 }
+				NOT = { unrest = 1 }
+			}
+			lorbet_area = {
+				type = all
+				is_core = ROOT
+				owned_by = ROOT
+				NOT = { devastation = 1 }
+				NOT = { unrest = 1 }
+			}
+			busilar_area = {
+				type = all
+				is_core = ROOT
+				owned_by = ROOT
+				NOT = { devastation = 1 }
+				NOT = { unrest = 1 }
+			}
+			hapiande_area = {
+				type = all
+				is_core = ROOT
+				owned_by = ROOT
+				NOT = { devastation = 1 }
+				NOT = { unrest = 1 }
+			}
+			busilari_straits_area = {
+				type = all
+				is_core = ROOT
+				owned_by = ROOT
+				NOT = { devastation = 1 }
+				NOT = { unrest = 1 }
+			}
+		}
+
+		effect = {
+			country_event = {
+				id = flavor_bisan.14
+			}
+		}
+	}
+
+	A34_copper_works = {
+		icon = mission_iron_and_copper
+		position = 10
+		required_missions = { A34_ancestral_land }
+		provinces_to_highlight = {
+			owned_by = ROOT
+			trade_goods = copper
+			NOT = {
+				AND = {
+					has_production_building_trigger = yes
+					base_production = 10
+				}
+			}
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				trade_goods = copper
+				has_production_building_trigger = yes
+				base_production = 10
+			}
+			371 = {
+				has_building = weapons
+			}
+			292 = {
+				has_building = weapons
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = copper_industry
+				duration = -1
+			}
+
+			371 = {
+				add_province_modifier = {
+					name = copper_works
+					duration = -1
+				}
+			}
+			292 = {
+				add_province_modifier = {
+					name = copper_works
+					duration = -1
+				}
+			}
+		}
+	}
+
+	A34_tef = {
+		icon = military_self_reliance
+		position = 11
+		required_missions = { A34_seadrake }
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					area = isle_of_tef_area
+					OR = {
+						NOT = {
+							owned_by = ROOT
+							is_core = ROOT
+						}
+						unrest = 1
+						devastation = 1
+					}
+				}
+				AND = {
+					province_id = 35
+					NOT = {
+						base_production = 10
+					}
+				}
+				AND = {
+					province_id = 380
+					NOT = {
+						AND = {
+							has_tax_building_trigger = yes
+							base_tax = 10
+						}
+					}
+				}
+			}
+		}
+
+		trigger = {
+			isle_of_tef_area = {
+				type = all
+				owned_by = ROOT
+				is_core = ROOT
+				NOT = { unrest = 1 }
+				NOT = { devastation = 1 }
+			}
+			35 = {
+				base_production = 10
+			}
+			380 = {
+				has_tax_building_trigger = yes
+				base_tax = 10
+			}
+		}
+
+		effect = {
+			country_event = {
+				id = flavor_bisan.15
+			}
+
+			35 = {
+				add_province_modifier = {
+					name = toref_mines
+					duration = -1
+				}
+			}
+
+			380 = {
+				upgrade_tax_building = yes
+			}
+
+			custom_tooltip = A34_tef_tt
+			hidden_effect = {
+				every_country = {
+					limit = {
+						is_part_of_hre = yes
+					}
+					add_country_modifier = {
+						name = unified_dame_temples
+						duration = -1
+					}
+				}
+			}
+			tooltip = {
+				add_country_modifier = {
+					name = unified_dame_temples
+					duration = -1
+				}
+			}
+		}
+	}
+}

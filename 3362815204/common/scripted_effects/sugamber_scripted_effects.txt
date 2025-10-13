@@ -1,0 +1,371 @@
+ryala_sugamber_effect = {
+	if = {
+		limit = {
+			has_country_flag = lessons_of_ryala
+		}
+		custom_tooltip = A48_careful_tooltip
+		hidden_effect = {
+			country_event = {
+				id = flavor_sugamber.207
+			}
+		}
+		add_country_modifier = {
+			name = love_moderated
+			duration = 7300
+		}
+		clr_country_flag = lessons_of_ryala
+	}
+}
+
+ace_mother_akasik_effect = {
+	custom_tooltip = A48_mother_akasik_development_tooltip
+	tooltip = {
+		6150 = {
+			add_province_modifier = {
+				name = sugamber_akasik_patronage
+				duration = 3650
+			}
+		}
+	}
+	hidden_effect = {
+		every_owned_province = {
+			limit = {
+				region = akasik_region
+			}
+			add_province_modifier = {
+				name = sugamber_akasik_patronage
+				duration = 3650
+			}
+		}
+	}
+}
+
+sugamber_gnoll_on_build = {
+	if = {
+		limit = {
+			owner = {
+				tag = A48
+				has_country_flag = sugamber_gnollish_garrison
+			}
+			NOT = {
+				has_province_flag = sug_gnoll_$building$
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_province_modifier = gnollish_minority_oppressed_small
+					has_province_modifier = gnollish_minority_oppressed_large
+					has_province_modifier = gnollish_majority_oppressed
+					has_province_modifier = gnollish_minority_coexisting_small
+					has_province_modifier = gnollish_minority_coexisting_large
+					has_province_modifier = gnollish_majority_coexisting
+					has_province_modifier = gnollish_minority_integrated_small
+					has_province_modifier = gnollish_minority_integrated_large
+					has_province_modifier = gnollish_majority_integrated
+					has_province_modifier = gnollish_majority_primary
+				}
+			}
+			random_list = {
+				1 = {
+					add_gnollish_minority_size_effect = yes
+				}
+				4 = {} 
+			}
+		}
+		else_if = {
+			limit = {
+				OR = {
+					has_province_modifier = gnollish_minority_oppressed_small
+					has_province_modifier = gnollish_minority_coexisting_small
+					has_province_modifier = gnollish_minority_integrated_small
+				}
+			}
+			random_list = {
+				1 = {
+					add_gnollish_minority_size_effect = yes
+				}
+				9 = {} 
+			}
+		}
+		set_province_flag = sug_gnoll_$building$
+	}
+}
+
+sugamber_lisolette_ascension_effect = {
+	if = {
+		limit = {
+			has_ruler_flag = entrepreneur_mission
+		}
+		add_ruler_personality = entrepreneur_personality
+	}
+	if = {
+		limit = {
+			has_country_flag = sugamber_wex_consort
+		}
+		add_country_modifier = {
+			name = wex_consort
+			duration = 7300
+		}
+		if = {
+			limit = {
+				has_country_flag = sugamber_caylen
+			}
+			define_consort = {
+				name = "Caylen"
+				dynasty = "s�l Wex"
+				birth_date = 1430.9.2
+				adm = 3
+				dip = 3
+				mil = 2
+			}
+			set_consort_flag = caylen_sil_wex
+		}
+		else = {
+			define_consort = {
+				culture = wexonard
+				country_of_origin = A30
+				dynasty = "s�l Wex"
+				male = yes
+			}
+		}
+		create_marriage = A30
+		add_trust = {
+			who = A30
+			value = 10
+			mutual = yes
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_flag = sugamber_verne_consort
+		}
+		add_country_modifier = {
+			name = verne_consort
+			duration = 7300
+		}
+		define_consort = {
+			culture = vernman
+			country_of_origin = A33
+			dynasty = "s�l Verne"
+			male = yes
+		}
+		create_marriage = A33
+		add_trust = {
+			who = A33
+			value = 10
+			mutual = yes
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_flag = sugamber_arbaran_consort
+		}
+		add_country_modifier = {
+			name = arbaran_consort
+			duration = 7300
+		}
+		define_consort = {
+			culture = arbarani
+			country_of_origin = A46
+			dynasty = "Silcalas"
+			male = yes
+		}
+		create_marriage = A46
+		add_trust = {
+			who = A46
+			value = 10
+			mutual = yes
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_flag = sugamber_estallen_consort
+		}
+		add_country_modifier = {
+			name = estallen_consort
+			duration = 7300
+		}
+		define_consort = {
+			culture = esmari
+			country_of_origin = A93
+			dynasty = "s�l Estallen"
+			male = yes
+		}
+		add_queen_personality = mage_personality
+		create_marriage = A93
+		add_trust = {
+			who = A93
+			value = 10
+			mutual = yes
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_flag = sugamber_cestirande_consort
+		}
+		add_country_modifier = {
+			name = cestirande_consort
+			duration = 7300
+		}
+		define_consort = {
+			culture = east_damerian
+			country_of_origin = A98
+			dynasty = "s�l Cestir"
+			male = yes
+		}
+		create_marriage = A98
+		add_trust = {
+			who = A98
+			value = 10
+			mutual = yes
+		}
+	}
+}
+
+sugamber_nirakhet_vow_check = {
+	owner = {
+		if = {
+			limit = {
+				tag = A48
+				has_country_flag = sugamber_nirakhet_vow
+			}
+			if = {
+				limit = {
+					all_province = {
+						OR = {
+							NOT = {
+								region = kheterata_region
+							}
+							AND = {
+								country_or_non_sovereign_subject_holds = A48
+								OR = {
+									AND = {
+										has_terrain = desert
+										development = 6
+										num_of_buildings_in_province = 1
+									}
+									AND = {
+										has_port = yes
+										NOT = {
+											province_group = mothers_sorrow_group
+										}
+										development = 9
+										num_of_buildings_in_province = 2
+									}
+									AND = {
+										province_group = mothers_sorrow_group
+										development = 18
+										num_of_buildings_in_province = 4
+									}
+								}
+							}
+						}
+					}
+					num_of_provinces_owned_or_owned_by_subjects_with = {
+						value = 20
+						region = kheterata_region
+						has_manufactory_trigger = yes
+					}
+				}
+				country_event = {
+					id = flavor_sugamber.145
+				}
+				clr_country_flag = sugamber_nirakhet_vow
+			}
+		}
+	}
+}
+
+sugamber_consolidate_kartakhet = {
+	if = {
+		limit = {
+			is_emperor_of_china = yes
+		}
+		add_mandate = 10
+	}
+	else = {
+		custom_tooltip = A48_imperial_mandate_10_tooltip
+	}
+	custom_tooltip = A48_kartakhet_subject_tooltip
+	hidden_effect = {
+		every_province = {
+			limit = {
+				OR = {
+					tag = L29
+					region = horashesh_region
+				}
+				owner = {
+					OR = {
+						is_subject_of_type = tributary_state
+						is_subject_of_type = medasi_subject
+					}
+					is_subject_of = ROOT
+				}
+			}
+			cede_province = ROOT
+			add_core = L29
+		}
+		create_subject = {
+			subject_type = medasi_subject
+			subject = L29
+		}
+		L29 = {
+			change_primary_culture = horakheti
+			change_religion = ROOT
+		}
+	}
+}
+
+spawn_milcorissia_army = {
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	infantry = PREV
+	artillery = PREV
+	artillery = PREV
+	artillery = PREV
+	artillery = PREV
+	artillery = PREV
+	artillery = PREV
+	artillery = PREV
+	artillery = PREV
+	artillery = PREV
+	artillery = PREV
+}

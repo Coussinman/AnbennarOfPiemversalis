@@ -6,7 +6,39 @@ shared_riches_of_khenak_effect = {
 			limit = {
 				has_estate_privilege = estate_steelblood_barons
 			}
-			steelblood_copper_expansion_update = yes
+			every_owned_province = {
+				limit = {
+					OR = {
+						has_terrain = mountain
+						has_terrain = dwarven_road
+					}
+					trade_goods = copper
+				}
+				add_province_modifier = {
+					name = estate_burghers_mountain_expansion_mountains
+					duration = -1
+				}
+			}
+			every_owned_province = {
+				limit = {
+					has_terrain = highlands
+					trade_goods = copper
+				}
+				add_province_modifier = {
+					name = estate_burghers_mountain_expansion_highlands
+					duration = -1
+				}
+			}
+			every_owned_province = {
+				limit = {
+					has_terrain = hills
+					trade_goods = copper
+				}
+				add_province_modifier = {
+					name = estate_burghers_mountain_expansion_hills
+					duration = -1
+				}
+			}
 		}
 	}
 	367 = {
@@ -47,11 +79,11 @@ shared_mine_coal_effect = {
 		add_treasury = -2000
 		add_manpower = -20
 		303 = {
-			add_base_production = 3
+			add_base_production = 5
 		}
 		add_country_modifier = {
 			name = wex_coal
-			duration = 7300
+			duration = 3650
 		}
 	}
 }
@@ -62,6 +94,7 @@ marry_lisolette_effect = {
 	set_country_flag = A30_lisolette_will_marry
 	add_prestige = -10
 	add_legitimacy = -10
+	create_marriage = A48
 	A48 = {
 		set_country_flag = A30_lisolette_will_marry
 	}
@@ -77,7 +110,8 @@ marry_lisolette_effect = {
 		}
 		create_union = A48
 		define_consort = {
-			name = "Lisolette síl Rhinmond"
+			name = "Lisolette"
+			dynasty = "síl Rhinmond"
 			country_of_origin = A48
 			religion = A48
 			culture = A48

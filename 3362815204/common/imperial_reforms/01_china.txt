@@ -43,6 +43,7 @@ lessons_aakhet_reform = {
 		OR = {
 		    religion_group = khetist
 			religion = dalcabba
+			has_country_flag = sugamber_elikhet_god
 		}	
 		if = {
 			limit = { ai = yes }
@@ -258,6 +259,7 @@ medasi_trade_reform = {
 #Konolkhatep unique
 medasi_enlightening_halann_reform = {
 	empire = celestial_empire
+	potential = { tag = F66 }
 	trigger = {
 		mission_completed = konolkhatep_expand_medasi
 	}
@@ -272,16 +274,16 @@ medasi_enlightening_halann_reform = {
 					is_subject_of_type = medasi_subject
 				}
 				add_country_modifier = { 
-					name = medasi_accept_kheteratan_cultures_modifier
+					name = medasi_enlightening_halann_reform_modifier
 					duration = -1 
-					hidden = yes 
+					hidden = yes
 				}
-				add_accepted_culture = hapremiti
-				add_accepted_culture = irsmahapan
-				add_accepted_culture = shasouran
-				add_accepted_culture = korosheshi
-				add_accepted_culture = tijarikheti
-				add_accepted_culture = horakheti
+				anb_add_accepted_culture_or_dip_power = { culture = hapremiti free = yes }
+				anb_add_accepted_culture_or_dip_power = { culture = irsmahapan free = yes }
+				anb_add_accepted_culture_or_dip_power = { culture = shasouran free = yes }
+				anb_add_accepted_culture_or_dip_power = { culture = korosheshi free = yes }
+				anb_add_accepted_culture_or_dip_power = { culture = tijarikheti free = yes }
+				anb_add_accepted_culture_or_dip_power = { culture = horakheti free = yes }
 			}
 		}
 	}
@@ -290,6 +292,7 @@ medasi_enlightening_halann_reform = {
 #Konolkhatep unique
 medasi_peak_civilization_reform = {
 	empire = celestial_empire
+	potential = { tag = F66 }
 	trigger = {
 		mission_completed = konolkhatep_expand_medasi
 		if = {
@@ -324,6 +327,7 @@ medasi_peak_civilization_reform = {
 #Konolkhatep unique
 medasi_disciples_horutep_reform = {
 	empire = celestial_empire
+	potential = { tag = F66 }
 	trigger = {
 		mission_completed = konolkhatep_expand_medasi
 		if = {
@@ -619,6 +623,7 @@ empower_priesthood_reform = {
 		OR = {
 		    religion_group = khetist
 			religion = dalcabba
+			has_country_flag = sugamber_elikhet_god
 		}
 		if = {
 			limit = { ai = yes }
@@ -891,6 +896,10 @@ build_pyramid_reform = {
 		OR = {
 		    religion_group = khetist
 			religion = dalcabba
+			AND = {
+				tag = A48
+				has_country_flag = sugamber_elikhet_knowledge
+			}
 		}
 		475 = {
 			owned_by = ROOT

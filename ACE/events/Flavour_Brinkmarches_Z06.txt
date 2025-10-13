@@ -1,0 +1,1177 @@
+namespace = flavor_brinkmarches
+country_event = {
+	id = flavor_brinkmarches.1
+	title = flavor_brinkmarches.1.t
+	desc = flavor_brinkmarches.1.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_brinkmarches.1.a
+		add_stability = 1
+		add_estate_loyalty = {
+			estate = estate_church
+			loyalty = 10
+		}
+		define_heir = {
+			age = 9
+			adm = 5
+			dip = 2
+			mil = 2
+		}
+	}
+	option = {
+		name = flavor_brinkmarches.1.b
+		add_years_of_income = 1.5
+		add_estate_loyalty = {
+			estate = estate_burghers
+			loyalty = 10
+		}
+		define_heir = {
+			age = 9
+			adm = 2
+			dip = 5
+			mil = 2
+		}
+	}
+	option = {
+		name = flavor_brinkmarches.1.c
+		create_general = {
+			tradition = 40
+		}
+		add_estate_loyalty = {
+			estate = estate_nobles
+			loyalty = 10
+		}
+		define_heir = {
+			age = 9
+			adm = 2
+			dip = 2
+			mil = 5
+		}
+	}
+	option = {
+		name = flavor_brinkmarches.1.e
+		add_prestige = 15
+		add_country_modifier = {
+			name = renewed_vitality
+			duration = 5475
+		}
+	}
+}
+
+country_event = {
+	id = flavor_brinkmarches.2
+	title = flavor_brinkmarches.2.t
+	desc = flavor_brinkmarches.2.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_brinkmarches.2.a
+		overlord = {
+			country_event = {
+				id = flavor_brinkmarches.3
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_brinkmarches.3
+	title = flavor_brinkmarches.3.t
+	desc = flavor_brinkmarches.3.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_brinkmarches.3.a
+		ai_chance = {
+			factor = 75
+		}
+		Z06 = {
+			country_event = {
+				id = flavor_brinkmarches.4
+			}
+		}
+	}
+	option = {
+		ai_chance = {
+			factor = 25
+		}
+		Z06 = {
+			country_event = {
+				id = flavor_brinkmarches.5
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_brinkmarches.4
+	title = flavor_brinkmarches.4.t
+	desc = flavor_brinkmarches.4.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_brinkmarches.4.a
+		A72 = {
+			create_subject = {
+				subject_type = autonomous_vassal
+				subject = ROOT
+			}
+		}
+		421 = {
+			cede_province = Z06
+		}
+		every_province = {
+			limit = {
+				owned_by = A72
+				region = daravans_folly_region
+			}
+			cede_province = Z06
+		}
+		Z06 = {
+			add_country_modifier = {
+				name = corvuria_recolonizing
+				duration = 27375
+			}
+			add_country_modifier = {
+				name = reclamation_funding
+				duration = 27375
+			}
+		}
+		A72 = {
+			add_country_modifier = {
+				name = funding_the_reclamation
+				duration = 27375
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_brinkmarches.5
+	title = flavor_brinkmarches.5.t
+	desc = flavor_brinkmarches.5.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_brinkmarches.5.a
+		custom_tooltip = arannen_death_tt
+		add_treasury = 50
+		add_country_modifier = {
+			name = discipline_arannen
+			duration = 3650
+		}
+		set_country_flag = arannen_death
+	}
+}
+
+country_event = {
+	id = flavor_brinkmarches.6
+	title = flavor_brinkmarches.6.t
+	desc = flavor_brinkmarches.6.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_brinkmarches.6.a
+		A72 = {
+			create_subject = {
+				subject_type = autonomous_vassal
+				subject = ROOT
+			}
+		}
+		add_country_modifier = {
+			name = corvuria_recolonizing
+			duration = 27375
+		}
+		add_country_modifier = {
+			name = reclamation_funding
+			duration = 27375
+		}
+		A72 = {
+			add_country_modifier = {
+				name = funding_the_reclamation
+				duration = 27375
+			}
+		}
+		421 = {
+			cede_province = Z06
+			add_core = Z06
+		}
+		every_province = {
+			limit = {
+				owned_by = A72
+				region = daravans_folly_region
+			}
+			cede_province = Z06
+			add_core = Z06
+		}
+		remove_country_modifier = discipline_arannen
+		add_historical_friend = A72
+		A72 = {
+			add_historical_friend = Z06
+		}
+	}
+}
+
+country_event = {
+	id = flavor_brinkmarches.7
+	title = flavor_brinkmarches.7.t
+	desc = flavor_brinkmarches.7.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_brinkmarches.7.a
+		medium_increase_of_gnollish_tolerance_effect = yes
+		add_manpower = 2
+	}
+}
+
+country_event = {
+	id = flavor_brinkmarches.8
+	title = flavor_brinkmarches.8.t
+	desc = flavor_brinkmarches.8.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_brinkmarches.8.a
+		small_increase_of_gnollish_tolerance_effect = yes
+		change_heir_adm = 1
+		change_heir_dip = 1
+		change_heir_mil = 1
+		set_heir_flag = Z06_tutored_heir
+		set_country_flag = Z06_tutored_heir
+		hidden_effect = {
+			country_event = {
+				days = 3650
+				id = flavor_brinkmarches.9
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_brinkmarches.9
+	title = flavor_brinkmarches.9.t
+	desc = flavor_brinkmarches.9.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_brinkmarches.9.a
+		medium_decrease_of_gnollish_tolerance_effect = yes
+		kill_leader = {
+			type = "Pouk Wisp-Claw"
+		}
+		if = {
+			limit = {
+				has_heir_flag = Z06_tutored_heir
+			}
+			exile_heir_as = z06_exiled_heir
+		}
+		if = {
+			limit = {
+				has_ruler_flag = Z06_tutored_heir
+			}
+			exile_ruler_as = {
+				name = z06_exiled_ruler_heir
+			}
+			set_country_flag = z06_exiled_ruler_heir
+		}
+		hidden_effect = {
+			country_event = {
+				days = 365
+				id = flavor_brinkmarches.10
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_brinkmarches.10
+	title = flavor_brinkmarches.10.t
+	desc = {
+		trigger = {
+			has_country_flag = Z06_tutored_heir
+		}
+		desc = flavor_brinkmarches.10.d1
+	}
+	desc = {
+		trigger = {
+			has_country_flag = z06_exiled_ruler_heir
+		}
+		desc = flavor_brinkmarches.10.d2
+	}
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_brinkmarches.10.a
+		define_advisor = {
+			culture = arannese
+			type = court_mage
+			name = "Pock Muth"
+			skill = 1
+			discount = yes
+		}
+		add_stability = 1
+		if = {
+			limit = {
+				has_country_flag = Z06_tutored_heir
+			}
+			set_heir = z06_exiled_heir
+		}
+		if = {
+			limit = {
+				has_country_flag = z06_exiled_ruler_heir
+			}
+			set_ruler = z06_exiled_ruler_heir
+		}
+		hidden_effect = {
+			country_event = {
+				days = 1825
+				id = flavor_brinkmarches.11
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_brinkmarches.11
+	title = flavor_brinkmarches.11.t
+	desc = flavor_brinkmarches.11.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_brinkmarches.11.a
+		add_prestige = 5
+		random_list = {
+			33 = {
+				change_adm = 1
+			}
+			33 = {
+				change_dip = 1
+			}
+			33 = {
+				change_mil = 1
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				days = 1825
+				id = flavor_brinkmarches.12
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_brinkmarches.12
+	title = flavor_brinkmarches.12.t
+	desc = flavor_brinkmarches.12.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_brinkmarches.12.a
+		add_prestige = -15
+		change_adm = -6
+		change_dip = -6
+		change_mil = -6
+		kill_advisor = court_mage
+		hidden_effect = {
+			country_event = {
+				days = 365
+				id = flavor_brinkmarches.13
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_brinkmarches.13
+	title = flavor_brinkmarches.13.t
+	desc = flavor_brinkmarches.13.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_brinkmarches.13.a
+		add_stability = 1
+		change_adm = 6
+		change_dip = 6
+		change_mil = 6
+	}
+}
+
+country_event = {
+	id = flavor_brinkmarches.14
+	title = flavor_brinkmarches.14.t
+	desc = flavor_brinkmarches.14.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_brinkmarches.14.a
+		set_dynasty = "The Ever-Changing"
+		custom_tooltip = brinkmarches.14.tt
+		set_country_flag = everchanging_court
+		set_country_flag = puck_brinkmarches_flag
+		swap_non_generic_missions = yes
+		add_government_reform = everchanging_court
+		anb_add_accepted_culture_or_dip_power = {
+			culture = wispsworn_gnoll
+			free = yes
+		}
+		daravans_folly_region = {
+			change_culture = wispsworn_gnoll
+		}
+		custom_tooltip = ""
+		add_estate_influence_modifier = {
+			estate = estate_burghers
+			influence = -20
+			duration = 9125
+		}
+		add_estate_influence_modifier = {
+			estate = estate_church
+			influence = -20
+			duration = 9125
+		}
+		add_estate_influence_modifier = {
+			estate = estate_nobles
+			influence = -20
+			duration = 9125
+		}
+	}
+}
+
+country_event = {
+	id = flavor_brinkmarches.15
+	title = flavor_brinkmarches.15.t
+	desc = flavor_brinkmarches.15d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_brinkmarches.15.a
+		add_stability = 1
+		set_heir = z06_exiled_heir
+	}
+}
+
+country_event = {
+	id = flavor_brinkmarches.16
+	title = flavor_brinkmarches.16.t
+	desc = flavor_brinkmarches.16d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_brinkmarches.16.a
+		A59 = {
+			add_opinion = {
+				who = A72
+				modifier = insulted
+			}
+			break_alliance = A72
+			break_marriage = A72
+		}
+		A72 = {
+			add_prestige = -10
+		}
+	}
+}
+
+country_event = {
+	id = flavor_brinkmarches.17
+	title = flavor_brinkmarches.17.t
+	desc = flavor_brinkmarches.17.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_brinkmarches.17.a
+		change_tag = AD9
+		add_country_modifier = {
+			name = centralization_modifier
+			duration = 7300
+		}
+		if = {
+			limit = {
+				has_custom_ideas = no
+			}
+			country_event = {
+				id = ideagroups.1
+			}
+		}
+		custom_tooltip = brinkmarches.17.tt
+		for = {
+			amount = 3
+			effect = "random_owned_province = {
+					spawn_rebels = {
+						type = pretender_rebels
+						size = 2
+					}
+				}
+			"
+		}
+		emperor = {
+			add_imperial_influence = -10
+			add_opinion = {
+				who = ROOT
+				modifier = scornfully_insulted
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_brinkmarches.18
+	title = flavor_brinkmarches.18.t
+	desc = flavor_brinkmarches.18.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			332 = {
+				owner = {
+					ROOT = {
+						white_peace = PREV
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = flavor_brinkmarches.18.a
+		add_treasury = 500
+		custom_tooltip = brinkmarches.18.tt2
+		332 = {
+			add_devastation = 100
+			remove_province_modifier = necropolis_minor
+			destroy_great_project = {
+				type = the_necropolis
+			}
+		}
+		custom_tooltip = brinkmarches.18.tt
+		hidden_effect = {
+			every_known_country = {
+				limit = {
+					is_part_of_hre = yes
+				}
+				add_opinion = {
+					who = ROOT
+					modifier = brinkmarch_burned_necropolis
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_brinkmarches.19
+	title = flavor_brinkmarches.19.t
+	desc = flavor_brinkmarches.19.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_brinkmarches.19.a
+		custom_tooltip = cult_tt
+		change_primary_culture = puckari
+		set_ruler_culture = puckari
+		capital_scope = {
+			change_culture = puckari
+		}
+		anb_add_accepted_culture_or_dip_power = {
+			culture = arannese
+			free = yes
+		}
+		set_country_flag = Z06_servants_flag
+	}
+}
+
+country_event = {
+	id = flavor_brinkmarches.20
+	title = flavor_brinkmarches.20.t
+	desc = flavor_brinkmarches.20.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_brinkmarches.20.a
+		change_religion = veil_puck
+		capital_scope = {
+			change_religion = veil_puck
+		}
+		custom_tooltip = brinkmarches.20.tt
+		hidden_effect = {
+			every_known_country = {
+				ROOT = {
+					reverse_add_casus_belli = {
+						type = cb_spread_the_true_faith
+						target = PREV
+					}
+				}
+			}
+		}
+		add_country_modifier = {
+			name = fight_for_puck
+			duration = 3650
+		}
+	}
+}
+
+country_event = {
+	id = flavor_brinkmarches.21
+	title = flavor_brinkmarches.21.t
+	desc = flavor_brinkmarches.21.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_brinkmarches.21.a
+		exile_ruler_as = {
+			name = exiled_puck
+		}
+		define_ruler = {
+			name = "No Ruler"
+			culture = puckari
+			religion = veil_puck
+			age = 15
+			adm = 0
+			dip = 0
+			mil = 0
+		}
+		hidden_effect = {
+			kill_heir = {
+			}
+			kill_consort = yes
+			add_country_modifier = {
+				name = puckborn_exile
+				duration = -1
+				hidden = yes
+			}
+		}
+		country_event = {
+			id = flavor_brinkmarches.22
+			days = 365
+		}
+	}
+}
+
+country_event = {
+	id = flavor_brinkmarches.22
+	title = flavor_brinkmarches.22.t
+	desc = flavor_brinkmarches.22.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_brinkmarches.22.a
+		for = {
+			amount = 10
+			custom_tooltip = brinkmarches.22.tt
+			effect = "random_owned_province = {
+					limit = {
+						NOT = {
+							has_rebel_faction = pretender_rebels
+						}
+					}
+					spawn_rebels = {
+						type = pretender_rebels
+						size = 2
+					}
+				}
+			"
+		}
+		add_country_modifier = {
+			name = anarchy
+			duration = -1
+		}
+		hidden_effect = {
+			country_event = {
+				id = flavor_brinkmarches.23
+				days = 1460
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_brinkmarches.23
+	title = flavor_brinkmarches.23.t
+	desc = flavor_brinkmarches.23.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_brinkmarches.23.a
+		define_ruler = {
+			name = "Puck"
+			dynasty = "The Ever-Changing"
+			culture = puckari
+			religion = veil_puck
+			age = 15
+			adm = 6
+			dip = 6
+			mil = 6
+		}
+		set_country_flag = puck_back
+		add_stability = 1
+		custom_tooltip = brinkmarches.23.tt
+		hidden_effect = {
+			every_owned_province = {
+				clear_rebels = yes
+			}
+		}
+		swap_non_generic_missions = yes
+		remove_country_modifier = anarchy
+		custom_tooltip = portal_colonize_tt
+		hidden_effect = {
+			domandrod_region = {
+				cede_province = ROOT
+				add_core = ROOT
+			}
+			remove_country_modifier = puckborn_exile
+			add_ruler_personality = mage_personality
+			set_ruler_flag = evocation_1
+			set_ruler_flag = evocation_2
+			set_ruler_flag = evocation_3
+			set_ruler_flag = transmutation_1
+			set_ruler_flag = transmutation_2
+			set_ruler_flag = transmutation_3
+			set_ruler_flag = abjuration_1
+			set_ruler_flag = abjuration_2
+			set_ruler_flag = abjuration_3
+			set_ruler_flag = divination_1
+			set_ruler_flag = divination_2
+			set_ruler_flag = divination_3
+			set_ruler_flag = enchantment_1
+			set_ruler_flag = enchantment_2
+			set_ruler_flag = enchantment_3
+			set_ruler_flag = illusion_1
+			set_ruler_flag = illusion_2
+			set_ruler_flag = illusion_3
+			set_ruler_flag = necromancy_1
+			set_ruler_flag = necromancy_2
+			set_ruler_flag = necromancy_3
+			set_ruler_flag = conjuration_1
+			set_ruler_flag = conjuration_2
+			set_ruler_flag = conjuration_3
+		}
+	}
+	option = {
+		name = flavor_brinkmarches.23.b
+		hidden_effect = {
+			define_ruler = {
+				name = "Puck"
+				dynasty = "The Ever-Changing"
+				culture = puckari
+				religion = veil_puck
+				age = 15
+				adm = 6
+				dip = 6
+				mil = 6
+			}
+			set_country_flag = puck_back
+			add_stability = 1
+			custom_tooltip = brinkmarches.23.tt
+			hidden_effect = {
+				every_owned_province = {
+					clear_rebels = yes
+				}
+			}
+			swap_non_generic_missions = yes
+			remove_country_modifier = anarchy
+			custom_tooltip = portal_colonize_tt
+			hidden_effect = {
+				domandrod_region = {
+					cede_province = ROOT
+					add_core = ROOT
+				}
+				remove_country_modifier = puckborn_exile
+				add_ruler_personality = mage_personality
+				set_ruler_flag = evocation_1
+				set_ruler_flag = evocation_2
+				set_ruler_flag = evocation_3
+				set_ruler_flag = transmutation_1
+				set_ruler_flag = transmutation_2
+				set_ruler_flag = transmutation_3
+				set_ruler_flag = abjuration_1
+				set_ruler_flag = abjuration_2
+				set_ruler_flag = abjuration_3
+				set_ruler_flag = divination_1
+				set_ruler_flag = divination_2
+				set_ruler_flag = divination_3
+				set_ruler_flag = enchantment_1
+				set_ruler_flag = enchantment_2
+				set_ruler_flag = enchantment_3
+				set_ruler_flag = illusion_1
+				set_ruler_flag = illusion_2
+				set_ruler_flag = illusion_3
+				set_ruler_flag = necromancy_1
+				set_ruler_flag = necromancy_2
+				set_ruler_flag = necromancy_3
+				set_ruler_flag = conjuration_1
+				set_ruler_flag = conjuration_2
+				set_ruler_flag = conjuration_3
+			}
+		}
+		custom_tooltip = brinkmarches.23.tt2
+		clear_racial_military = yes
+		hidden_effect = {
+			add_country_modifier = {
+				name = spirit_military
+				duration = -1
+				hidden = yes
+			}
+		}
+		tooltip = {
+			add_country_modifier = {
+				name = spirit_military
+				duration = -1
+			}
+		}
+		add_country_modifier = {
+			name = restructuring_military
+			duration = 3650
+		}
+	}
+}
+
+country_event = {
+	id = flavor_brinkmarches.24
+	title = flavor_brinkmarches.24.t
+	desc = flavor_brinkmarches.24.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_brinkmarches.24.a
+		clear_racial_military = yes
+		hidden_effect = {
+			add_country_modifier = {
+				name = gnollish_military
+				duration = -1
+				hidden = yes
+			}
+		}
+		tooltip = {
+			add_country_modifier = {
+				name = gnollish_military
+				duration = -1
+			}
+		}
+		add_country_modifier = {
+			name = restructuring_military
+			duration = 3650
+		}
+	}
+	option = {
+		name = flavor_brinkmarches.24.b
+		add_country_modifier = {
+			name = gnollish_auxiliaries
+			duration = -1
+		}
+	}
+	option = {
+		name = flavor_brinkmarches.24.c
+		add_country_modifier = {
+			name = gnollish_workers
+			duration = -1
+		}
+	}
+}
+
+country_event = {
+	id = flavor_brinkmarches.25
+	title = flavor_brinkmarches.25.t
+	desc = flavor_brinkmarches.25.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_brinkmarches.25.a
+		ai_chance = {
+			factor = 100
+		}
+		custom_tooltip = brinkmarches.25.tt
+		define_conquistador = {
+			shock = 1
+			fire = 1
+			manuever = 4
+			siege = 0
+			name = "Darius Puckchosen"
+		}
+		hidden_effect = {
+			# discover relevant provinces
+			1782 = {
+				discover_country = ROOT
+			}
+			6258 = {
+				discover_country = ROOT
+			}
+			6558 = {
+				discover_country = ROOT
+			}
+			1261 = {
+				discover_country = ROOT
+			}
+			# flag country to do portal stuff
+			6241 = {
+				set_province_flag = domandrod_fey_portal_open
+			}
+			6258 = {
+				set_province_flag = deepwoods_fey_portal_open
+			}
+			# give portals if unclaimed or give core if portals are claimed
+			if = {
+				limit = {
+					6241 = {
+						is_city = no
+					}
+				}
+				6241 = {
+					cede_province = ROOT
+					add_core = ROOT
+					change_culture = ROOT
+					change_religion = ROOT
+				}
+			}
+			else = {
+				6241 = {
+					add_core = ROOT
+				}
+			}
+			if = {
+				limit = {
+					6258 = {
+						is_city = no
+					}
+				}
+				6258 = {
+					cede_province = ROOT
+					add_core = ROOT
+					change_culture = ROOT
+					change_religion = ROOT
+				}
+			}
+			else = {
+				6258 = {
+					add_core = ROOT
+				}
+			}
+			# construct the portal monuments
+			6258 = {
+				add_great_project = {
+					type = deepwoods_fey_portal
+					instant = yes
+				}
+			}
+			6241 = {
+				add_great_project = {
+					type = domandrod_fey_portal
+					instant = yes
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_brinkmarches.26
+	title = flavor_brinkmarches.26.t
+	desc = flavor_brinkmarches.26.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_brinkmarches.26.a
+		east_deepwoods_region = {
+			add_permanent_claim = root
+		}
+	}
+}
+
+country_event = {
+	id = flavor_brinkmarches.27
+	title = flavor_brinkmarches.27.t
+	desc = flavor_brinkmarches.27.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_brinkmarches.27.a
+		custom_tooltip = brinkmarches.27.tt
+		large_decrease_of_orcish_tolerance_effect = yes
+		anb_add_accepted_culture_or_dip_power = {
+			culture = wood_elf
+			free = yes
+		}
+		custom_tooltip = brinkmarches.27.tt2
+		anb_add_accepted_culture_or_dip_power = {
+			culture = pactseeker_goblin
+			free = yes
+		}
+		set_country_flag = puck_tolerance_flag
+	}
+	option = {
+		set_country_flag = puck_puckborn_deepwoods_flag
+		name = flavor_brinkmarches.27.b
+		custom_tooltip = brinkmarches.27.tt3
+		large_decrease_of_elven_tolerance_effect = yes
+		large_decrease_of_goblin_tolerance_effect = yes
+		large_decrease_of_orcish_tolerance_effect = yes
+		for = {
+			amount = 5
+			custom_tooltip = brinkmarches.27.tt4
+			effect = "random_owned_province = {
+					limit = {
+						superregion = deepwoods_superregion
+						NOT = {
+							culture = puckari
+						}
+						OR = {
+							culture = wood_elf
+							culture = forest_goblin
+							culture = green_orc
+						}
+					}
+					change_culture = puckari
+				}
+			"
+		}
+	}
+}
+
+#MISC SHIT
+country_event = {
+	id = flavor_brinkmarches.1000
+	title = flavor_brinkmarches.1000.t
+	desc = flavor_brinkmarches.1000d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	mean_time_to_happen = {
+		days = 1
+	}
+	trigger = {
+		has_country_flag = puck_puckborn_deepwoods_flag
+		any_owned_province = {
+			superregion = deepwoods_superregion
+			OR = {
+				culture = wood_elf
+				culture = forest_goblin
+				culture = green_orc
+			}
+		}
+	}
+	hidden = yes
+	option = {
+		name = flavor_brinkmarches.1000.a
+		random_owned_province = {
+			limit = {
+				OR = {
+					culture = wood_elf
+					culture = forest_goblin
+					culture = green_orc
+				}
+			}
+			change_culture = puckari
+		}
+	}
+}
+
+country_event = {
+	id = flavor_brinkmarches.1001
+	title = flavor_brinkmarches.1001.t
+	desc = flavor_brinkmarches.1001d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	mean_time_to_happen = {
+		days = 1
+	}
+	trigger = {
+		has_country_flag = puck_tolerance_flag
+		any_owned_province = {
+			superregion = deepwoods_superregion
+			OR = {
+				culture = forest_goblin
+				culture = green_orc
+			}
+		}
+	}
+	hidden = yes
+	option = {
+		name = flavor_brinkmarches.1001.a
+		random_owned_province = {
+			if = {
+				limit = {
+					culture = forest_goblin
+				}
+				change_culture = pactseeker_goblin
+			}
+			if = {
+				limit = {
+					culture = green_orc
+				}
+				change_culture = wood_elf
+			}
+			if = {
+				limit = {
+					culture = green_orc
+					any_neighbor_province = {
+						culture = pactseeker_goblin
+					}
+				}
+				change_culture = pactseeker_goblin
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_brinkmarches.1002
+	title = flavor_brinkmarches.1002.t
+	desc = flavor_brinkmarches.1002d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	mean_time_to_happen = {
+		days = 1
+	}
+	trigger = {
+		has_country_flag = Z06_servants_flag
+		any_owned_province = {
+			culture_is_human = yes
+			NOT = {
+				culture = puckari
+			}
+		}
+	}
+	hidden = yes
+	option = {
+		name = flavor_brinkmarches.1002.a
+		random_owned_province = {
+			limit = {
+				culture_is_human = yes
+				NOT = {
+					culture = puckari
+				}
+			}
+			change_culture = puckari
+		}
+	}
+}
+
+country_event = {
+	id = flavor_brinkmarches.1003
+	title = flavor_brinkmarches.1003.t
+	desc = flavor_brinkmarches.1003d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	mean_time_to_happen = {
+		days = 1
+	}
+	trigger = {
+		tag = AD9
+		NOT = {
+			has_country_flag = Z06_servants_flag
+		}
+	}
+	option = {
+		name = flavor_brinkmarches.1003.a
+		custom_tooltip = brinkmarches.17.tt
+		for = {
+			amount = 3
+			effect = "random_owned_province = {
+					spawn_rebels = {
+						type = pretender_rebels
+						size = 2
+					}
+				}
+			"
+		}
+	}
+}

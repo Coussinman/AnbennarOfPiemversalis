@@ -1,0 +1,1222 @@
+namespace = flavor_bisan
+
+country_event = {
+	id = flavor_bisan.1
+	title = flavor_bisan.1.t
+	desc = flavor_bisan.1.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_bisan.1.a
+		add_treasury = -100
+
+		add_country_modifier = {
+			name = bribed_electors
+			duration = 18250
+		}
+	}
+
+	option = {
+		name = flavor_bisan.1.b
+		add_treasury = -100
+		A45 = {
+			add_country_modifier = {
+				name = bribed_electors
+				duration = 18250
+			}
+		}
+		if = {
+			limit = {
+				A45 = {
+					is_rival = ROOT
+				}
+			}
+			A45 = {
+				remove_rival = ROOT
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_bisan.2
+	title = flavor_bisan.2.t
+	desc = flavor_bisan.2.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_bisan.2.a
+
+		define_consort = {
+			culture = moon_elf
+			religion = ROOT
+			name = "Liandiel"
+			dynasty = "Silverhair"
+			adm = 6
+			dip = 3
+			mil = 1
+		}
+		
+		kill_heir = {
+		}
+	}
+
+	option = {
+		name = flavor_bisan.2.b
+		change_heir_adm = 1
+		change_heir_dip = 1
+		change_heir_mil = 1
+	}
+
+}
+
+country_event = {
+	id = flavor_bisan.3
+	title = flavor_bisan.3.t
+	desc = flavor_bisan.3.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_bisan.3.a
+		custom_tooltip = flavor_bisan.3.a.tt
+		hidden_effect = {
+			every_country = {
+				limit = {
+					has_country_flag = lilac_wars_moon_party
+				}
+				add_prestige = 20
+				add_stability = 1
+			}
+		}
+	}
+
+}
+
+country_event = {
+    id = flavor_bisan.4
+    title = flavor_bisan.4.t
+    desc = flavor_bisan.4.d
+    picture = COUNTRY_COLLAPSE_eventPicture
+    fire_only_once = yes
+    is_triggered_only = yes
+
+    option = {
+        name = flavor_bisan.4.a
+		custom_tooltip = flavor_bisan.4.a.tt
+        wexhills_area = {
+            add_base_manpower = -1
+        }
+        add_treasury = 100
+    }
+
+    option = {
+        name = flavor_bisan.4.b
+		custom_tooltip = flavor_bisan.4.a.tt
+        wexhills_area = {
+            add_base_manpower = -2
+        }
+        add_treasury = 200
+        change_estate_land_share = {
+            estate = estate_nobles
+            share = -5
+        }
+    }
+
+    option = {
+        name = flavor_bisan.4.c
+		custom_tooltip = flavor_bisan.4.a.tt
+        wexhills_area = {
+            add_base_manpower = -3
+        }
+        add_treasury = 300
+        change_estate_land_share = {
+            estate = estate_nobles
+            share = -10
+        }
+    }
+}
+
+country_event = {
+	id = flavor_bisan.5
+	title = flavor_bisan.5.t
+	desc = flavor_bisan.5.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_bisan.5.a
+		change_primary_culture = bisanese
+		set_ruler_culture = bisanese
+		set_heir_culture = bisanese
+		set_country_flag = new_culture_bisan
+
+		capital_scope = {
+			change_culture = bisanese
+		}
+
+		add_country_modifier = {
+			name = bisanese_fencing
+			duration = -1
+		}
+
+		custom_tooltip = flavor_bisan.5.a.tt
+	}
+
+	option = {
+		name = flavor_bisan.5.b
+
+		override_country_name = GREENWEX
+		
+		custom_tooltip = flavor_bisan.5.b.tt2
+		change_primary_culture = wexonard_new
+		set_ruler_culture = wexonard_new
+		set_heir_culture = wexonard_new
+		set_country_flag = new_culture_bisan
+
+		capital_scope = {
+			change_culture = wexonard_new
+		}
+
+		add_country_modifier = {
+			name = wexonard_fencing
+			duration = -1
+		}
+
+		custom_tooltip = flavor_bisan.5.a.tt
+	}
+}
+
+country_event = {
+	id = flavor_bisan.6
+	title = flavor_bisan.6.t
+	desc = flavor_bisan.6.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+
+	hidden = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	trigger = {
+		has_country_flag = new_culture_bisan
+		any_owned_province = {
+			culture = wexonard
+		}
+	}
+
+	option = {
+		name = flavor_bisan.6.a
+		random_owned_province = {
+			limit = {
+				culture = wexonard
+			}
+			change_culture = ROOT
+		}
+	}
+
+}
+
+country_event = {
+	id = flavor_bisan.7
+	title = flavor_bisan.7.t
+	desc = flavor_bisan.7.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = flavor_bisan.7.a
+		capital_scope = {
+			add_province_modifier = {
+				name = minor_temple_munas
+				duration = -1
+			}
+		}
+
+		custom_tooltip = flavor_bisan.7.a.tt
+		set_country_flag = upgraded_munas
+	}
+
+	option = {
+		name = flavor_bisan.7.b
+		capital_scope = {
+			add_province_modifier = {
+				name = minor_temple_dame
+				duration = -1
+			}
+		}
+
+		custom_tooltip = flavor_bisan.7.b.tt
+		set_country_flag = upgraded_dame
+	}
+
+}
+
+country_event = {
+	id = flavor_bisan.8
+	title = flavor_bisan.8.t
+	desc = flavor_bisan.8.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = flavor_bisan.8.a
+		change_trade_goods = cloth
+	}
+
+	option = {
+		name = flavor_bisan.8.b
+		set_capital = 332
+	}
+
+	option = {
+		name = flavor_bisan.8.c
+		set_capital = 923
+	}
+
+}
+
+country_event = {
+	id = flavor_bisan.9
+	title = flavor_bisan.9.t
+	desc = flavor_bisan.9.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	
+	trigger = {
+		has_country_flag = dead_festival
+		NOT = {
+			has_country_modifier = hosted_dead_festival
+		}
+	}
+
+	option = {
+		name = flavor_bisan.9.a
+		add_prestige = 10
+
+
+		random = {
+			chance = 10
+			add_stability = 1
+		}
+
+		add_country_modifier = {
+			name = hosted_dead_festival
+			duration = 3650
+			hidden = yes
+		}
+	}
+}
+
+country_event = {
+	id = flavor_bisan.10
+	title = flavor_bisan.10.t
+	desc = flavor_bisan.10.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = flavor_bisan.10.a
+		highlight = yes
+		trigger = {
+			has_country_flag = A37_gnoll_tolerance
+			B67 = {
+				exists = no
+			}
+		}
+		custom_tooltip = flavor_bisan.10.a.tt
+		hidden_effect = {
+			every_province = {
+				limit = {
+					continent = europe
+				}
+				remove_core = B67
+			}
+			deshak_area = {
+				add_core = B67
+				remove_core = ROOT
+			}
+			oris_area = {
+				add_core = B67
+				remove_core = ROOT
+			}
+
+			release_with_religion_and_culture = {
+				tag = B68
+				religion = ROOT
+				culture = dovesworn_gnoll
+			}
+			vassalize = B68
+			B68 = {
+				set_in_empire = yes
+			}
+		}
+		
+	}
+
+	option = {
+		name = flavor_bisan.10.b
+		add_accepted_culture_or_dip_power = {
+			culture = desha
+		}
+
+		for = {
+			custom_tooltip = flavor_bisan.10.b.tt
+			amount = 5
+			effect = "
+				random_owned_province = {
+					limit = {
+						culture = desha
+					}
+					add_base_production = 1
+					add_half_elven_minority_size_effect = yes
+				}
+			"
+		}
+
+		382 = {
+			change_culture = ROOT
+			add_half_elven_minority_size_effect = yes
+		}
+		404 = {
+			change_culture = ROOT
+			add_half_elven_minority_size_effect = yes
+		}
+
+	}
+
+	option = {
+		name = flavor_bisan.10.c
+		trigger = {
+			U06 = {
+				exists = no
+			}
+		}
+		custom_tooltip = flavor_bisan.10.c.tt
+		hidden_effect = {
+			every_province = {
+				limit = {
+					continent = europe
+				}
+				remove_core = U06
+			}
+			deshak_area = {
+				add_core = U06
+				remove_core = ROOT
+			}
+			oris_area = {
+				add_core = U06
+				remove_core = ROOT
+			}
+
+			release_with_religion_and_culture = {
+				tag = U06
+				religion = ROOT
+				culture = desha
+			}
+			vassalize = U06
+			U06 = {
+				set_in_empire = yes
+			}
+			382 = {
+				change_culture = ROOT
+				add_half_elven_minority_size_effect = yes
+			}
+			404 = {
+				change_culture = ROOT
+				add_half_elven_minority_size_effect = yes
+			}
+		}
+	}
+
+	option = {
+		name = flavor_bisan.10.f
+		deshak_area = {
+			change_culture = ROOT
+			add_devastation = 35
+		}
+		oris_area = {
+			change_culture = ROOT
+			add_devastation = 35
+		}
+
+		382 = {
+			add_half_elven_minority_size_effect = yes
+		}
+		404 = {
+			add_half_elven_minority_size_effect = yes
+		}
+
+		hidden_effect = {
+			for = {
+				custom_tooltip = flavor_bisan.10.b.tt
+				amount = 5
+				effect = "
+					random_owned_province = {
+						limit = {
+							OR = {
+								area = deshak_area
+								area = oris_area
+							}
+							NOT = {
+								has_half_elven_minority_trigger = yes
+							}
+						}
+						add_half_elven_minority_size_effect = yes
+					}
+				"
+			}
+		}
+	}
+
+}
+
+country_event = {
+	id = flavor_bisan.11
+	title = flavor_bisan.11.t
+	desc = flavor_bisan.11.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = flavor_bisan.11.a
+		add_country_modifier = {
+			name = imperial_akasik
+			duration = -1
+		}
+
+		custom_tooltip = flavor_bisan.11.a.tt
+		hidden_effect = {
+			every_province = {
+				limit = {
+					country_or_non_sovereign_subject_holds = ROOT
+					OR = {
+						area = middle_akasik_area
+						area = akasik_mountains_area
+					}
+				}
+				remove_core = ROOT
+				add_core = F57
+			}
+			release_with_religion_and_culture = {
+				tag = F57
+				religion = ROOT
+				culture = khasani
+			}
+			vassalize = F57
+			F57 = {
+				set_in_empire = yes
+				add_accepted_culture_or_dip_power = {
+					culture = moon_elf
+				}
+			}
+
+			every_province = {
+				limit = {
+					country_or_non_sovereign_subject_holds = ROOT
+					OR = {
+						area = ekha_area
+						area = akarat_area
+					}
+				}
+				remove_core = ROOT
+				add_core = U08
+			}
+			release_with_religion_and_culture = {
+				tag = U08
+				religion = ROOT
+				culture = ekaski
+			}
+			vassalize = U08
+			U08 = {
+				set_in_empire = yes
+				add_accepted_culture_or_dip_power = {
+					culture = moon_elf
+				}
+			}
+			402 = {
+				change_culture = moon_elf
+			}
+			400 = {
+				change_culture = moon_elf
+			}
+			393 = {
+				change_culture = silver_dwarf
+			}
+		}
+
+		for = {
+			amount = 10
+			custom_tooltip = flavor_bisan.11.b.tt2
+			effect = "
+				random_owned_province = {
+					limit = {
+						has_port = yes
+						OR = {
+							area = middle_akasik_area
+							area = akasik_mountains_area
+							area = ekha_area
+							area = akarat_area
+						}
+					}
+					add_half_elven_minority_size_effect = yes
+				}
+			"
+		}
+	}
+
+	option = {
+		name = flavor_bisan.11.b
+		custom_tooltip = flavor_bisan.11.b.tt
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						area = middle_akasik_area
+						area = akasik_mountains_area
+						area = ekha_area
+						area = akarat_area
+					}
+				}
+				add_province_modifier = {
+					name = anbernnarize_akasik
+					duration = -1
+				}
+			}
+			402 = {
+				change_culture = moon_elf
+			}
+			400 = {
+				change_culture = anbenncoster
+			}
+			393 = {
+				change_culture = silver_dwarf
+			}
+		}
+		tooltip = {
+			add_province_modifier = {
+				name = anbernnarize_akasik
+				duration = -1
+			}
+		}
+
+		for = {
+			amount = 10
+			custom_tooltip = flavor_bisan.11.b.tt2
+			effect = "
+				random_owned_province = {
+					limit = {
+						has_port = yes
+						OR = {
+							area = middle_akasik_area
+							area = akasik_mountains_area
+							area = ekha_area
+							area = akarat_area
+						}
+					}
+					add_half_elven_minority_size_effect = yes
+				}
+			"
+		}
+	}
+
+}
+
+country_event = {
+	id = flavor_bisan.12
+	title = flavor_bisan.12.t
+	desc = flavor_bisan.12.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = flavor_bisan.12.a
+		set_country_flag = A34_gnoll_purge
+		913 = {
+			change_culture = ROOT
+		}
+		custom_tooltip = flavor_bisan.12.a.tt
+
+		unlock_merc_company = {
+			merc_company = merc_gnollcutters
+			free_merc = yes
+		}
+
+		add_country_modifier = {
+			name = gnollcutter_corps
+			duration = -1
+		}
+
+		
+	}
+
+	option = {
+		name = flavor_bisan.12.b
+		set_country_flag = A34_gnoll_tolerance
+		913 = {
+			change_culture = dovesworn_gnoll
+		}
+		custom_tooltip = flavor_bisan.12.b.tt
+
+		unlock_merc_company = {
+			merc_company = merc_hill_gnoll
+			free_merc = yes
+		}
+
+		add_country_modifier = {
+			name = gnoll_mercs
+			duration = -1
+		}
+	}
+
+}
+
+country_event = {
+	id = flavor_bisan.13
+	title = flavor_bisan.13.t
+	desc = flavor_bisan.13.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	hidden = yes
+	is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	trigger = {
+		tag = A34
+		has_country_flag = A34_gnoll_tolerance
+		any_owned_province = {
+			OR = {
+				culture = hill_gnoll
+				culture = flamemarked_gnoll
+				culture = seascourge_gnoll
+			}
+		}
+	}
+
+	option = {
+		name = flavor_bisan.13.a
+		random_owned_province = {
+			limit = {
+				OR = {
+					culture = hill_gnoll
+					culture = flamemarked_gnoll
+					culture = seascourge_gnoll
+				}
+			}
+			change_culture = dovesworn_gnoll
+		}
+	}
+}
+
+country_event = {
+	id = flavor_bisan.14
+	title = flavor_bisan.14.t
+	desc = flavor_bisan.14.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = flavor_bisan.14.a
+		anb_add_accepted_culture_or_dip_power = {
+			culture = busilari
+			free = yes
+		}
+
+		365 = {
+			change_culture = moon_elf
+		}
+
+		for = {
+			amount = 7
+			custom_tooltip = flavor_bisan.14.a.tt2
+			effect = "
+				random_owned_province = {
+					limit = {
+						region = businor_region
+					}
+					add_half_elven_minority_size_effect = yes
+					add_base_production = 1
+				}
+			"
+		}
+	}
+
+	option = {
+		name = flavor_bisan.14.b
+		custom_tooltip = flavor_bisan.14.b.tt
+		set_country_flag = busilari_conversion
+
+		365 = {
+			change_culture = moon_elf
+			change_province_name = "Port Magda"
+		}
+
+		for = {
+			amount = 7
+			custom_tooltip = flavor_bisan.14.a.tt3
+			effect = "
+				random_owned_province = {
+					limit = {
+						region = businor_region
+					}
+					add_half_elven_minority_size_effect = yes
+				}
+			"
+		}
+	}
+
+}
+
+country_event = {
+	id = flavor_bisan.15
+	title = flavor_bisan.15.t
+	desc = flavor_bisan.15.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = flavor_bisan.15.a
+		anb_add_accepted_culture_or_dip_power = {
+			culture = tefori_new
+			free = yes
+		}
+
+		set_country_flag = tefori_anbennar_group
+		custom_tooltip = A34_tefori_group
+		hidden_effect = {
+			update_entire_culture_foreign = {
+				culture = tefori
+			}
+		}
+	}
+
+	option = {
+		name = flavor_bisan.15.b
+		isle_of_tef_area = {
+			add_province_modifier = {
+				name = tefori_integration
+				duration = -1
+			}
+		}
+		380 = {
+			change_province_name = "Bisanthil"
+			change_culture = ROOT
+		}
+
+	}
+}
+
+country_event = {
+	id = flavor_bisan.16
+	title = flavor_bisan.16.t
+	desc = flavor_bisan.16.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = flavor_bisan.16.a
+
+		add_adm_power = 100
+		add_mil_power = 100
+		add_dip_power = 100
+
+		add_historical_friend = A85
+		A85 = {
+			add_historical_friend = ROOT
+			define_ruler = {
+				culture = east_damerian
+				name = "Tristian"
+				dynasty = "Silgarion"
+				age = 36
+				claim = 100
+			}
+			define_heir = {
+				culture = east_damerian
+				dynasty = "Silgarion"
+				age = 16
+			}
+		}
+	}
+
+}
+
+
+country_event = {
+	id = flavor_bisan.17
+	title = flavor_bisan.17.t
+	desc = flavor_bisan.17.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	hidden = yes
+	is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	trigger = {
+		has_country_flag = busilari_conversion
+		any_owned_province = {
+			culture = busilari
+			NOT = {
+				culture = moon_elf
+				culture = ROOT
+			}
+		}
+	}
+
+	option = {
+		name = flavor_bisan.17.a
+		random_owned_province = {
+			limit = {
+				culture = busilari
+				NOT = {
+					culture = moon_elf
+					culture = ROOT
+				}
+			}
+			change_culture = ROOT
+		}
+	}
+}
+
+
+# Bisanese Religious Disaster
+
+country_event = {
+	id = flavor_bisan.1000
+	title = flavor_bisan.1000.t
+	desc = flavor_bisan.1000.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		add_stability = -6
+		add_legitimacy = -50
+		if = {
+			limit = {
+				religion = regent_court
+			}
+			random_owned_province = {
+				spawn_rebels = {
+					size = 2
+					type = corinite_rebels
+				}
+			}
+		}
+		else_if = {
+			limit = { religion = corinite }
+			random_owned_province = {
+				spawn_rebels = {
+					size = 2
+					type = regent_court_rebels
+				}
+			}
+		}
+	}
+
+	option = {
+		name = flavor_bisan.1000.a
+		
+	}
+
+}
+
+country_event = {
+	id = flavor_bisan.1001
+	title = flavor_bisan.1001.t
+	desc = flavor_bisan.1001.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		set_country_flag = bisanese_disaster_done
+		add_stability = 1
+		add_legitimacy = 30
+	}
+
+	option = {
+		name = flavor_bisan.1001.a
+
+		add_adm_power = 50
+		add_dip_power = 50
+		add_mil_power = 50
+		random_list = {
+			33 = {
+				change_mil = 1
+			}
+			33 = {
+				change_dip = 1
+			}
+			33 = {
+				change_adm = 1
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_bisan.1002
+	title = flavor_bisan.1002.t
+	desc = flavor_bisan.1002.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+
+	trigger = {
+		has_heir = yes
+	}
+
+	immediate = {
+		kill_ruler = yes
+	}
+
+	option = {
+		name = flavor_bisan.1002.a
+		add_country_modifier = {
+			name = stamp_out_heretics
+			duration = 3650
+		}
+	}
+}
+
+country_event = { #corinites want conversion
+	id = flavor_bisan.1003
+	title = flavor_bisan.1003.t
+	desc = flavor_bisan.1003.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+
+	trigger = {
+		or = {
+			religion = regent_court
+			ruler_religion = regent_court
+		}
+	}
+
+	option = {
+		name = flavor_bisan.1003.a
+		add_stability = -1
+		set_ruler_religion = corinite
+	}
+
+	option = {
+		name = flavor_bisan.1003.b
+		add_stability = 1
+		random_province = {
+			spawn_rebels = {
+				size = 1
+				type = corinite_rebels
+			}
+		}
+	}
+
+}
+
+country_event = { #regent court wants conversion
+	id = flavor_bisan.1004
+	title = flavor_bisan.1004.t
+	desc = flavor_bisan.1004.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+
+	trigger = {
+		or = {
+			religion = corinite
+			ruler_religion = corinite
+		}
+	}
+
+	option = {
+		name = flavor_bisan.1004.a
+		add_stability = -1
+		set_ruler_religion = regent_court
+	}
+
+	option = {
+		name = flavor_bisan.1004.b
+		add_stability = 1
+		random_province = {
+			spawn_rebels = {
+				size = 1
+				type = regent_court_rebels
+			}
+		}
+	}
+
+}
+
+country_event = { #corinites want conversion
+	id = flavor_bisan.1005
+	title = flavor_bisan.1005.t
+	desc = flavor_bisan.1005.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_bisan.1005.a
+		add_stability = 1
+		random_owned_province = {
+			limit = {
+				NOT = { has_matching_religion = ROOT }
+			}
+			change_religion = ROOT
+		}
+		if = {
+			limit = {
+				religion = corinite
+			}
+			spawn_rebels = {
+				size = 1
+				type = regent_court_rebels
+			}
+		}
+		else_if = {
+			limit = { religion = regent_court }
+			spawn_rebels = {
+				size = 1
+				type = corinite_rebels
+			}
+		}
+	}
+
+	option = {
+		name = flavor_bisan.1005.b
+		add_or_extend_country_modifier = {
+			name = slow_conversions
+			duration = 3650
+		}
+	}
+}
+
+country_event = {
+	id = flavor_bisan.1006
+	title = flavor_bisan.1006.t
+	desc = flavor_bisan.1006.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_bisan.1006.a
+		add_stability = 1
+		random_owned_province = {
+			if = {
+				limit = { religion = regent_court }
+				spawn_rebels = {
+					size = 1
+					type = corinite_rebels
+				}
+			}
+			else_if = {
+				limit = { religion = corinite }
+				spawn_rebels = {
+					size = 1
+					type = regent_court_rebels
+				}
+			}
+			spawn_rebels = {
+				size = 1
+				type = particularist_rebels
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_bisan.1007
+	title = flavor_bisan.1007.t
+	desc = flavor_bisan.1007.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_bisan.1007.a
+		add_or_extend_country_modifier = {
+			name = stamp_out_heretics
+			duration = 3650
+		}
+		random_owned_area = {
+			add_devastation = 20
+			if = {
+				limit = { religion = regent_court }
+				spawn_rebels = {
+					size = 1
+					type = corinite_rebels
+				}
+			}
+			else_if = {
+				limit = { religion = corinite }
+				spawn_rebels = {
+					size = 1
+					type = regent_court_rebels
+				}
+			}
+		}
+
+		random = {
+			chance = 25
+			add_stability = 1
+		}
+	}
+
+}
+
+country_event = {
+	id = flavor_bisan.1008
+	title = flavor_bisan.1008.t
+	desc = flavor_bisan.1008.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_bisan.1008.a
+		add_stability = -1
+		for = {
+			amount = 3
+			custom_tooltip = flavor_bisan.1008.a.tt
+			effect = "
+				random_owned_province = {
+					spawn_rebels = {
+						size = 2
+						type = corinite_rebels
+					}
+				}
+			"
+		}
+		
+	}
+	option = {
+		name = flavor_bisan.1008.b
+		add_stability = 1
+		change_religion = corinite
+		for = {
+			amount = 3
+			custom_tooltip = flavor_bisan.1008.a.tt
+			effect = "
+				random_owned_province = {
+					spawn_rebels = {
+						size = 2
+						type = regent_court_rebels
+					}
+				}
+			"
+		}
+	}
+}

@@ -1,0 +1,188 @@
+country_decisions = {
+	summon_forth_einher = { #clear random worst monster infestation - at cost
+		color = { 19 4 152 }
+		major = yes
+		potential = {
+			religion = skaldhyrric_faith
+			any_owned_province = {
+				has_infestation_3 = yes
+			}
+		}
+		allow = {
+			hidden_trigger = { religion = skaldhyrric_faith }
+			any_owned_province = {
+				has_infestation_3 = yes
+			}
+			treasury = 200
+			NOT = { has_country_modifier = summoned_einher }
+		}
+		effect = {
+			add_treasury = -200
+			custom_tooltip = skald_einher_tooltip
+			add_country_modifier = {
+				name = summoned_einher
+				duration = 5475
+			}
+			hidden_effect = {
+				random_owned_province = {
+					limit = { has_infestation_3 = yes }
+					save_event_target_as = skald_einher
+					province_event = {
+						id = skaldhyrric.6
+						days = 30
+					}
+				}
+			}
+		}
+	}
+
+	unite_skalds_decision = {
+		color = { 19 4 152 }
+		major = yes
+		potential = {
+			religion = skaldhyrric_faith
+			NOT = { has_country_flag = skald_council_established }
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 700
+				province_id = 740
+				province_id = 985
+				province_id = 956
+				province_id = 970
+				province_id = 959
+				province_id = 984
+			}
+		}
+		allow = {
+			hidden_trigger = {
+				religion = skaldhyrric_faith
+				NOT = { has_country_flag = skald_council_established }
+			}
+			OR = {
+				num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+					value = 4
+					OR = {
+						province_id = 700
+						province_id = 740
+						province_id = 985
+						province_id = 956
+						province_id = 970
+						province_id = 959
+						province_id = 984
+					}
+				}
+				num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+					value = 30
+					religion = skaldhyrric_faith
+				}
+			}
+			estate_loyalty = {
+				estate = estate_church
+				loyalty = 60
+			}
+			adm_power = 100
+			dip_power = 100
+			mil_power = 100
+			976 = {
+				country_or_non_sovereign_subject_holds = ROOT
+				has_tax_building_trigger = yes
+			}
+		}
+		effect = {
+			hidden_effect = {
+				set_country_flag = skald_council_established
+			}
+			add_adm_power = -100
+			add_dip_power = -100
+			add_mil_power = -100
+			custom_tooltip = ACE_skaldhyrric_aspects_tt
+			custom_tooltip = ACE_one_armed_skald_temple_tt
+			add_stability_or_adm_power = yes
+			hidden_effect = {
+				976 = {
+					add_or_upgrade_tax_building = yes
+					remove_province_triggered_modifier = one_armed_skald_temple
+					add_province_triggered_modifier = one_armed_skald_temple_upgraded
+				}
+			}
+			custom_tooltip = ACE_skaldhyrric_church_power_gain_tt
+		}
+	}
+
+	call_the_skalds_decision = {
+		color = { 19 4 152 }
+		major = yes
+		potential = {
+			ai = no
+			religion = skaldhyrric_faith
+			has_country_flag = skald_council_established
+			NOT = { has_country_flag = skaldhyrric_menu_flag }
+		}
+		allow = {
+			custom_trigger_tooltip = {
+				tooltip = call_the_skalds_decision_tt
+				has_country_flag = skald_council_established
+			}
+		}
+		effect = {
+				country_event = { id = skaldhyrric.100 }
+				set_country_flag = skaldhyrric_menu_flag
+		}
+	}
+
+	call_great_hunt = { #chance for glory for ruler, or gives buffs to heir
+		potential = {
+			religion = skaldhyrric_faith
+			OR = {
+				has_country_modifier = skald_good_hunting
+				NOT = { has_ruler_modifier = skald_great_hunt }
+			}
+		}
+		allow = {
+			if = {
+				limit = { 
+					NOT = { has_country_modifier = skald_good_hunting }
+				}
+				adm_power = 40
+				dip_power = 40
+				mil_power = 40
+			}
+			else_if = {
+				limit = { has_country_modifier = skald_good_hunting }
+				adm_power = 20
+				dip_power = 20
+				mil_power = 20
+			}
+		}
+		effect = {
+			if = {
+				limit = { NOT = { has_country_modifier = skald_good_hunting } }
+				add_adm_power = -40
+				add_dip_power = -40
+				add_mil_power = -40
+				add_ruler_modifier = {
+					name = skald_great_hunt
+					duration = -1
+				}
+			}
+			else_if = {
+				limit = { has_country_modifier = skald_good_hunting }
+				add_adm_power = -20
+				add_dip_power = -20
+				add_mil_power = -20
+				add_ruler_modifier = {
+					name = skald_great_hunt
+					duration = -1
+				}
+				hidden_effect = {
+					remove_country_modifier = skald_good_hunting
+				}
+			}
+			country_event = {
+				id = skaldhyrric.20
+				days = 7
+			}
+		}
+	}
+}

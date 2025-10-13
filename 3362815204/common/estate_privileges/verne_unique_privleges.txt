@@ -1,0 +1,360 @@
+verne_merchant_escort = {  #adventurers
+	icon = privilege_comission_merchant_ships_for_war
+	max_absolutism = 0
+	loyalty = 0.1
+	influence = 0.05
+	is_valid = {
+		has_country_flag = A33_merchant_gaurd
+	}
+	can_select = {
+
+	}
+	on_granted = {
+		
+	}
+	on_revoked = {
+		
+	}
+	penalties = {
+		
+	}
+	benefits = {
+		placed_merchant_power = 5
+		trade_range_modifier = 0.25
+	}
+	ai_will_do = {
+		factor = 10
+	}
+}
+verne_red_brass_mono = {  #burghers
+	icon = privilege_limited_war_support
+	max_absolutism = 0
+	loyalty = 0.1
+	influence = 0.05
+	is_valid = {
+		has_country_flag = A33_copper_mono
+	}
+	can_select = {
+
+	}
+	on_granted = {
+		custom_tooltip = A33_red_brass_gt_tt
+		hidden_effect = {
+			if = {
+				limit = { has_country_flag = A33_upgrade_copper }
+				every_owned_province = {
+					limit = {
+						trade_goods = iron
+					}
+					add_province_modifier = {
+						name = A33_red_brass_province
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+	on_granted_province = {
+		if = {
+			limit = { trade_goods = copper }
+			add_province_modifier = {
+				name = A33_red_brass_province
+				duration = -1
+			}
+		}
+	}
+	on_revoked = {
+		custom_tooltip = A33_red_brass_rt_tt
+	}
+	on_revoked_province = {
+		if = {
+			limit = { has_province_modifier = A33_red_brass_province }
+			remove_province_modifier = A33_red_brass_province
+		}
+	}
+	penalties = {
+		
+	}
+	benefits = {
+		global_regiment_cost = -0.1
+		artillery_cost = -0.15
+	}
+	conditional_modifier = {
+		trigger = { has_country_flag = A33_upgrade_copper }
+		modifier = { 
+			artillery_power = 0.075
+		}
+	}
+	ai_will_do = {
+		factor = 10
+	}
+}
+verne_land_grants = {  #adventurers
+	icon = privilege_limited_war_support
+	max_absolutism = 0
+	loyalty = 0.1
+	influence = 0.05
+	is_valid = {
+		has_country_flag = A33_land_grant
+	}
+	can_select = {
+
+	}
+	on_granted = {
+		custom_tooltip = A33_land_grants_rt_tt
+	}
+	on_granted_province = {
+		if = {
+			limit = { NOT = { development = 8 } }
+			add_province_modifier = {
+				name = A33_veteran_colony
+				duration = -1
+			}
+		}
+	}
+	on_revoked = {
+		custom_tooltip = A33_red_brass_rt_tt
+	}
+	on_revoked_province = {
+		if = {
+			limit = { has_province_modifier = A33_veteran_colony }
+			remove_province_modifier = A33_veteran_colony
+		}
+	}
+	penalties = {
+		
+	}
+	benefits = {
+		army_tradition_decay = -0.0025
+	}
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+verne_korvid_offer = {   #nobles
+	icon = privilege_limited_war_support
+	max_absolutism = 10
+	loyalty = 0.1
+	influence = 0.15
+	is_valid = {
+		has_unlocked_estate_privilege = { estate_privilege = verne_korvid_offer }
+	}
+	
+	on_revoked = {
+		
+	}
+	penalties = {
+		
+	}
+	benefits = {
+		estate_interaction_cooldown_modifier = -0.2
+		all_estate_loyalty_equilibrium = 0.05
+		spy_offence = 0.33
+	}
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+A33_pioneer_initiative = {   #adventurers
+	icon = privilege_grant_new_world_charter
+	max_absolutism = 5
+	loyalty = -0.05
+	influence = 0.05
+	is_valid = {
+		has_unlocked_estate_privilege = { estate_privilege = A33_pioneer_initiative }
+	}
+	
+	on_revoked = {
+		
+	}
+	penalties = {
+		
+	}
+	benefits = {
+		global_colonial_growth = 10
+		colonist_placement_chance = 0.05
+		global_tariffs = 0.10
+	}
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+verne_high_priest_governor = {   #nobles
+	icon = privilege_recruit_rajput_general
+	max_absolutism = 0
+	loyalty = 0.1
+	influence = 0.05
+	is_valid = {
+		has_country_flag = A33_land_grant
+	}
+	can_select = {
+
+	}
+	on_granted = {
+		custom_tooltip = verne_high_priest_governor_tt
+	}
+	on_granted_province = {
+		if = {
+			limit = { province_group = mothers_sorrow_group }
+			add_province_modifier = {
+				name = A33_local_sorrow_mod
+				duration = -1
+			}
+		}
+	}
+	on_revoked = {
+		custom_tooltip = verne_high_priest_governor_rt
+	}
+	on_revoked_province = {
+		if = {
+			limit = { province_group = mothers_sorrow_group }
+			remove_province_modifier = A33_local_sorrow_mod
+
+		}
+	}
+	penalties = {
+		legitimacy = -0.2
+	}
+	benefits = {
+		tolerance_heathen = 2
+	}
+	ai_will_do = {
+		factor = 10
+	}
+}
+verne_nobles_swing = {   #nobles
+	icon = privilege_basqaqs
+	max_absolutism = 0
+	loyalty = 0.1
+	influence = 0.05
+	is_valid = {
+		has_reform = A33_nobles_adventurers_gov
+	}
+	can_select = {
+
+	}
+	on_granted = {
+		add_government_power = {
+			mechanic_type = A33_adven_vs_nobl_mechanic
+			power_type = A33_gov_power
+			value = 20
+		}
+		add_government_power = {
+			mechanic_type = A33_adven_vs_nobl_mechanic_1
+			power_type = A33_gov_power
+			value = 20
+		}
+	}
+	on_revoked = {
+		custom_tooltip = verne_high_priest_governor_rt
+		add_government_power = {
+			mechanic_type = A33_adven_vs_nobl_mechanic
+			power_type = A33_gov_power
+			value = -20
+		}
+		add_government_power = {
+			mechanic_type = A33_adven_vs_nobl_mechanic_1
+			power_type = A33_gov_power
+			value = -20
+		}
+	}
+	penalties = {
+		adventurers_loyalty_modifier = -0.05
+	}
+	benefits = {
+		monthly_A33_gov_power = 0.1
+	}
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+verne_adventurers_swing = {   #adventurers
+	icon = privilege_army_tradition
+	max_absolutism = 0
+	loyalty = 0.1
+	influence = 0.05
+	is_valid = {
+		has_reform = A33_nobles_adventurers_gov
+	}
+	can_select = {
+
+	}
+	on_granted = {
+		add_government_power = {
+			mechanic_type = A33_adven_vs_nobl_mechanic
+			power_type = A33_gov_power
+			value = -20
+		}
+		add_government_power = {
+			mechanic_type = A33_adven_vs_nobl_mechanic_1
+			power_type = A33_gov_power
+			value = -20
+		}
+	}
+	on_revoked = {
+		custom_tooltip = verne_high_priest_governor_rt
+		add_government_power = {
+			mechanic_type = A33_adven_vs_nobl_mechanic
+			power_type = A33_gov_power
+			value = 20
+		}
+		add_government_power = {
+			mechanic_type = A33_adven_vs_nobl_mechanic_1
+			power_type = A33_gov_power
+			value = 20
+		}
+	}
+	penalties = {
+		nobles_loyalty_modifier = -0.05
+	}
+	benefits = {
+		monthly_A33_gov_power = -0.1
+	}
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+estate_A33_adventurers_heroes_in_the_army = {
+	icon = privilege_recruit_minister
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } }
+	influence = 0
+	loyalty = 0.1
+	is_valid = {
+		tag = A33
+	}
+	can_select = {
+		army_tradition = 15
+	}
+	on_granted = {
+		add_army_tradition = -15
+	}
+	penalties = {
+		yearly_army_professionalism = -0.0033
+	}
+	benefits = {
+		leader_land_manuever = 1
+		land_morale = 0.075
+		general_cost = 0.15
+	}
+	ai_will_do = {
+		factor = 5
+		modifier = {
+			factor = 0
+			NOT = { crown_land_share = 25 }
+			estate_influence = {
+				estate = estate_adventurers
+				influence = 60
+			}
+		}
+		modifier = {
+			factor = 0.8
+			is_absolutism_active = yes
+		}
+	}
+}

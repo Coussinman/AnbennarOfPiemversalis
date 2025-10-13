@@ -1,0 +1,354 @@
+namespace = flavor_Arbaran
+
+country_event = {
+	id = flavor_Arbaran.1
+	title = flavor_Arbaran.1.t
+	desc = flavor_Arbaran.1.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	fire_only_once = yes
+
+	trigger = {
+		tag = A46
+		has_country_flag = A46_arbarani_expanse
+		alenic_expanse_area = {
+			type = all
+			owned_by = ROOT
+		}
+	}
+
+	option = {
+		name = flavor_Arbaran.1.a
+		alenic_expanse_area = {
+			change_culture = arbarani
+			add_unrest = 10
+		}
+	}
+}
+
+country_event = {
+	id = flavor_Arbaran.2
+	title = flavor_Arbaran.2.t
+	desc = flavor_Arbaran.2.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+
+	mean_time_to_happen = {
+		months = 60
+	}
+
+	hidden = yes
+
+	trigger = {
+		tag = A46
+		has_country_flag = A46_imperial_halflings
+	}
+
+	option = {
+		name = flavor_Arbaran.2.a
+		random_province = {
+			limit = {
+				region = small_country_region
+				NOT = {
+					culture = imperial_halfling
+				}
+			}
+			change_culture = imperial_halfling
+		}
+	}
+}
+
+country_event = {
+	id = flavor_Arbaran.3
+	title = flavor_Arbaran.3.t
+	desc = flavor_Arbaran.3.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			set_country_flag = A46_farrani_elves
+		}
+	}
+
+	option = {
+		name = flavor_Arbaran.3.a
+		custom_tooltip = flavor_Arbaran.3.a.tt
+		tooltip = {
+			B60 = {
+				add_country_modifier = {
+					name = elven_march
+					duration = -1
+				}
+			}
+		}
+
+		custom_tooltip = flavor_Arbaran.3.a.tt2
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					region = forlorn_vale_region 
+					NOT = {
+						culture = moon_elf
+					}
+				}
+				add_core = B60
+				remove_core = ROOT
+			}
+
+			release_with_religion_and_culture = {
+				tag = B60
+				religion = ROOT
+				culture = farrani_half_elf
+			}
+
+			create_subject = {
+				subject_type = march
+				subject = B60
+			}
+		}
+	}
+
+	option = {
+		name = flavor_Arbaran.3.b
+		custom_tooltip = flavor_Arbaran.3.a.tt2
+
+		780 = {
+			add_province_modifier = {
+				name = valefort
+				duration = -1
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_Arbaran.4
+	title = flavor_Arbaran.4.t
+	desc = flavor_Arbaran.4.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+
+	trigger = {
+		tag = A46
+		has_country_flag = A46_farrani_elves
+	}
+
+	hidden = yes
+
+	option = {
+		name = flavor_Arbaran.4.a
+		random_province = {
+			limit = {
+				region = forlorn_vale_region
+				NOT = {
+					OR = {
+						culture = moon_elf
+						culture = farrani_half_elf
+					}
+				}
+			}
+			change_culture = farrani_half_elf
+		}
+	}
+}
+
+country_event = {
+	id = flavor_Arbaran.5
+	title = flavor_Arbaran.5.t
+	desc = flavor_Arbaran.5.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = flavor_Arbaran.5.a
+		clear_racial_military = yes
+		hidden_effect = {
+			add_country_modifier = {
+				name = half_elven_military
+				duration = -1
+				hidden = yes
+			}
+		}
+		tooltip = {
+			add_country_modifier = {
+				name = half_elven_military
+				duration = -1
+			}
+		}
+		add_country_modifier = { name = restructuring_military duration = 3650 }
+	}
+
+	option = {
+		name = flavor_Arbaran.5.b
+		custom_tooltip = flavor_Arbaran.5.b.tt
+	}
+}
+
+
+
+
+####################
+
+###########################################
+# Events for Hispanic Monarchy
+###########################################
+
+#Royal Council Meeting
+country_event = {
+	id = flavor_Arbaran.1000
+	title = flavor_Arbaran.1000.t
+	desc = flavor_Arbaran.1000.desc
+	picture = HISPANIC_MONARCHY_eventPICTURE
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_Arbaran.1000.a
+		add_country_modifier = {
+			name = council_of_the_chamber_mod
+			duration = 3650
+		}
+		ai_chance = {
+			factor = 1
+		}
+	}
+
+	option = {
+		name = flavor_Arbaran.1000.b
+		add_country_modifier = {
+			name = council_of_finance_mod
+			duration = 3650
+		}
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 0
+				NOT = { num_of_loans = 3 }
+				NOT = { inflation = 1 }
+			}
+		}
+	}
+
+	option = {
+		name = flavor_Arbaran.1000.c
+		add_country_modifier = {
+			name = council_of_the_inquisition_mod
+			duration = 3650
+		}
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 0
+				religious_unity = 0.8
+			}
+		}
+	}
+}
+
+#State Council Meeting
+country_event = {
+	id = flavor_Arbaran.1001
+	title = flavor_Arbaran.1001.t
+	desc = flavor_Arbaran.1001.desc
+	picture = HISPANIC_MONARCHY_eventPICTURE
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_Arbaran.1001.a
+		add_country_modifier = {
+			name = council_of_europe_mod
+			duration = 3650
+		}
+		ai_chance = {
+			factor = 1
+		}
+	}
+
+	option = {
+		name = flavor_Arbaran.1001.b
+		add_country_modifier = {
+			name = council_of_mediterranean_mod
+			duration = 3650
+		}
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				is_at_war = no
+			}
+			modifier = {
+				factor = 0
+				NOT = { galley_fraction = 0.3 }
+			}
+			modifier = {
+				factor = 0
+				NOT = { num_of_ports = 1 }
+			}
+		}
+	}
+
+	option = {
+		name = flavor_Arbaran.1001.c
+		add_country_modifier = {
+			name = council_of_integration
+			duration = 3650
+		}
+	}
+}
+
+#War Council Meeting
+country_event = {
+	id = flavor_Arbaran.1002
+	title = flavor_Arbaran.1002.t
+	desc = flavor_Arbaran.1002.desc
+	picture = HISPANIC_MONARCHY_eventPICTURE
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_Arbaran.1002.a
+		add_country_modifier = {
+			name = council_of_the_crusade_mod
+			duration = 3650
+		}
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				manpower_percentage = 0.8
+			}
+		}
+	}
+
+	option = {
+		name = flavor_Arbaran.1002.b
+		add_country_modifier = {
+			name = council_of_military_orders_mod
+			duration = 3650
+		}
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				NOT = { manpower_percentage = 0.8 }
+			}
+		}
+	}
+
+	option = {
+		name = flavor_Arbaran.1002.c
+		add_country_modifier = {
+			name = council_of_the_armada_mod
+			duration = 3650
+		}
+		ai_chance = {
+			factor = 0
+			modifier = {
+				factor = 0
+				NOT = { num_of_ports = 1 }
+			}
+			modifier = {
+				factor = 0
+				navy_tradition = 75
+			}
+		}
+	}
+}

@@ -1,0 +1,6197 @@
+sugamber_column_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = A48
+			was_tag = A48
+		}
+	}
+	A48_uncertain_succession = {
+		icon = mission_candide_letter
+		position = 2
+		required_missions = {
+			A48_wexonard_charge
+		}
+		provinces_to_highlight = {
+			OR = {
+				is_capital_of = A30
+				is_capital_of = A33
+				is_capital_of = A46
+				is_capital_of = A93
+				is_capital_of = A98
+			}
+			NOT = {
+				A30 = {
+					high_relations_marriage_alliance_trigger = yes
+				}
+				A33 = {
+					high_relations_marriage_alliance_trigger = yes
+				}
+				A46 = {
+					high_relations_marriage_alliance_trigger = yes
+				}
+				A93 = {
+					high_relations_marriage_alliance_trigger = yes
+				}
+				A98 = {
+					high_relations_marriage_alliance_trigger = yes
+				}
+			}
+		}
+		trigger = {
+			OR = {
+				AND = {
+					has_ruler_modifier = sugamber_ewald_gamble
+					heir_claim = 40
+					custom_trigger_tooltip = {
+						tooltip = A48_marriage_alliance_tooltip
+						OR = {
+							A30 = {
+								high_relations_marriage_alliance_trigger = yes
+							}
+							A33 = {
+								high_relations_marriage_alliance_trigger = yes
+							}
+							A46 = {
+								high_relations_marriage_alliance_trigger = yes
+							}
+							A93 = {
+								high_relations_marriage_alliance_trigger = yes
+							}
+							A98 = {
+								high_relations_marriage_alliance_trigger = yes
+							}
+						}
+					}
+				}
+				has_country_flag = had_sugamber_succession_war
+			}
+		}
+		effect = {
+			set_country_flag = weakened_pretenders_sugamber
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = had_sugamber_succession_war
+					}
+				}
+				add_heir_claim = 10
+				add_estate_loyalty = {
+					estate = estate_nobles
+					loyalty = -10
+				}
+				custom_tooltip = A48_weakened_succession_war_tooltip
+				complex_dynamic_effect_ace = {
+					first_custom_tooltip = A48_marry_wex_tooltip
+					first_limit = "
+						A30 = {
+							high_relations_marriage_alliance_trigger = yes
+						}
+					"
+					first_effect = "
+						if = {
+							limit = { A30 = { has_heir_flag = caylen_sil_wex } }
+							add_legitimacy = -20
+							add_estate_loyalty = { estate = estate_nobles loyalty = -10 }
+							custom_tooltip = A48_caylen_tooltip
+							set_country_flag = sugamber_caylen
+							A30 = { set_country_flag = sugamber_caylen }
+						} else = { custom_tooltip = A48_wex_claim }
+						tooltip = { add_country_modifier = { name = wex_consort duration = 7300 } }
+						set_country_flag = sugamber_wex_consort
+					"
+					second_custom_tooltip = A48_marry_verne_tooltip
+					second_limit = "
+						A33 = {
+							high_relations_marriage_alliance_trigger = yes
+						}
+					"
+					second_effect = "
+						tooltip = {
+							add_country_modifier = {
+								name = verne_consort
+								duration = 7300
+							}
+						}
+						set_country_flag = sugamber_verne_consort
+					"
+					third_custom_tooltip = A48_marry_arbaran_tooltip
+					third_limit = "
+						A46 = {
+							high_relations_marriage_alliance_trigger = yes
+						}
+					"
+					third_effect = "
+						tooltip = {
+							add_country_modifier = {
+								name = arbaran_consort
+								duration = 7300
+							}
+						}
+						set_country_flag = sugamber_arbaran_consort
+					"
+					fourth_custom_tooltip = A48_marry_estallen_tooltip
+					fourth_limit = "
+						A93 = {
+							high_relations_marriage_alliance_trigger = yes
+						}
+					"
+					fourth_effect = "
+						tooltip = {
+							add_country_modifier = {
+								name = estallen_consort
+								duration = 7300
+							}
+						}
+						set_country_flag = sugamber_estallen_consort
+					"
+					fifth_custom_tooltip = A48_marry_cestirande_tooltip
+					fifth_limit = "
+						A98 = {
+							high_relations_marriage_alliance_trigger = yes
+						}
+					"
+					fifth_effect = "
+						tooltip = {
+							add_country_modifier = {
+								name = cestirande_consort
+								duration = 7300
+							}
+						}
+						set_country_flag = sugamber_cestirande_consort
+					"
+				}
+			}
+			else = {
+				add_legitimacy = 10
+			}
+		}
+	}
+	A48_heritage_old_kingdom = {
+		icon = mission_book_of_royal_degrees
+		position = 3
+		required_missions = {
+			A48_uncertain_succession
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 8
+				province_id = 306
+				province_id = 419
+				province_id = 516
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+				owner = {
+					has_spy_network_from = {
+						who = ROOT
+						value = 20
+					}
+				}
+			}
+		}
+		trigger = {
+			OR = {
+				has_country_flag = had_sugamber_succession_war
+				AND = {
+					is_year = 1480
+					has_any_disaster = no
+					NOT = {
+						has_ruler_modifier = sugamber_ewald_gamble
+						has_ruler_flag = lisolette_sil_rhinmond
+					}
+				}
+			}
+			legitimacy = 80
+			8 = {
+				OR = {
+					owner = {
+						has_spy_network_from = {
+							who = ROOT
+							value = 20
+						}
+					}
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+			}
+			516 = {
+				OR = {
+					owner = {
+						has_spy_network_from = {
+							who = ROOT
+							value = 20
+						}
+					}
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+			}
+			306 = {
+				OR = {
+					owner = {
+						has_spy_network_from = {
+							who = ROOT
+							value = 20
+						}
+					}
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+			}
+			419 = {
+				OR = {
+					owner = {
+						has_spy_network_from = {
+							who = ROOT
+							value = 20
+						}
+					}
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+			}
+		}
+		effect = {
+			add_prestige = 10
+			custom_tooltip = A48_wexonard_history_tooltip
+			country_event = {
+				id = flavor_sugamber.106
+				days = 30
+			}
+		}
+	}
+	A48_resplendent_capital = {
+		icon = the_great_city_of_buda
+		position = 4
+		provinces_to_highlight = {
+			province_id = 919
+		}
+		trigger = {
+			prestige = 50
+			has_institution = renaissance
+			employed_advisor = {
+				category = ADM
+			}
+			employed_advisor = {
+				category = DIP
+			}
+			employed_advisor = {
+				category = MIL
+			}
+			919 = {
+				development = 20
+				has_production_building_trigger = yes
+				has_trade_building_trigger_short = yes
+			}
+		}
+		effect = {
+			add_prestige = 10
+			if = {
+				limit = { has_ruler_modifier = sugamber_ewald_gamble }
+				add_heir_claim = 5
+			} else = {
+				add_legitimacy = 10
+			}
+			custom_tooltip = " "
+			919 = {
+				center_of_trade = 1
+				change_trade_goods = cloth
+				custom_tooltip = " "
+				add_prosperity = 25
+				custom_tooltip = " "
+				add_permanent_province_modifier = {
+					name = sugamber_jewel_borders
+					duration = -1
+				}
+			}
+		}
+	}
+	A48_sugambrian_funfairs = {
+		icon = bavarian_cultural_dominance
+		position = 5
+		required_missions = {
+			A48_resplendent_capital
+		}
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					province_id = 415
+					AND = {
+						NOT = {
+							development = 15
+							has_tax_building_trigger = yes
+							has_production_building_trigger = yes
+							has_trade_building_trigger_short = yes
+						}
+					}
+				}
+				AND = {
+					is_capital = yes
+					continent = europe
+					OR = {
+						NOT = {
+							owner = {
+								has_opinion = {
+									who = ROOT
+									value = 100
+								}
+							}
+							calc_true_if = {
+								amount = 10
+								all_country = {
+									capital_scope = {
+										continent = europe
+									}
+									has_opinion = {
+										who = ROOT
+										value = 100
+									}
+								}
+							}
+						}
+						ai_attitude = {
+							who = ROOT
+							attitude = attitude_outraged
+						}
+						coalition_target = ROOT
+					}
+				}
+			}
+		}
+		trigger = {
+			treasury = 1000
+			415 = {
+				development = 15
+				has_tax_building_trigger = yes
+				has_production_building_trigger = yes
+				has_trade_building_trigger_short = yes
+			}
+			calc_true_if = {
+				amount = 10
+				all_country = {
+					capital_scope = {
+						continent = europe
+					}
+					has_opinion = {
+						who = ROOT
+						value = 100
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = A48_no_cannorian_coalition_tooltip
+				NOT = {
+					any_country = {
+						capital_scope = {
+							continent = europe
+						}
+						OR = {
+							ai_attitude = {
+								who = ROOT
+								attitude = attitude_outraged
+							}
+							coalition_target = ROOT
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			add_treasury = -1000
+			custom_tooltip = " "
+			415 = {
+				change_trade_goods = gems
+				add_permanent_province_modifier = {
+					name = sugamber_fair_markets
+					duration = -1
+				}
+			}
+			add_country_modifier = {
+				name = sugamber_fair_host
+				duration = -1
+			}
+			country_event_with_option_insight = {
+				id = flavor_sugamber.119
+				option_1 = "
+					custom_tooltip = A48_upgrade_tax_building_tooltip
+				"
+				option_2 = "
+					custom_tooltip = A48_upgrade_production_building_tooltip
+				"
+				option_3 = "
+					custom_tooltip = A48_upgrade_trade_building_tooltip
+				"
+			}
+		}
+	}
+	A48_amber_court = {
+		icon = mission_approach_throne
+		position = 6
+		required_missions = {
+			A48_return_ryonards
+		}
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					province_id = 919
+					NOT = {
+						AND = {
+							development = 30
+							num_of_buildings_in_province = 6
+						}
+					}
+				}
+				AND = {
+					owned_by = ROOT
+					NOT = {
+						is_prosperous = yes
+						ROOT = {
+							num_of_owned_provinces_with = {
+								value = 40
+								is_prosperous = yes
+							}
+						}
+					}
+				}
+				AND = {
+					owned_by = ROOT
+					NOT = {
+						AND = {
+							culture = wexonard
+							has_courthouse_building_trigger = yes
+						}
+						ROOT = {
+							num_of_owned_provinces_with = {
+								value = 20
+								culture = wexonard
+								has_courthouse_building_trigger = yes
+							}
+						}
+					}
+				}
+			}
+		}
+		trigger = {
+			reform_level = 3
+			custom_trigger_tooltip = {
+				tooltip = A30_wexonard_renaissance_trigger_tooltip
+				employed_advisor = {
+					category = ADM
+					skill = 3
+				}
+				employed_advisor = {
+					category = DIP
+					skill = 3
+				}
+				employed_advisor = {
+					category = MIL
+					skill = 3
+				}
+			}
+			every_estate_loyalty = {
+				loyalty = 60
+			}
+			919 = {
+				development = 30
+				num_of_buildings_in_province = 6
+			}
+			num_of_owned_provinces_with = {
+				value = 40
+				is_prosperous = yes
+			}
+			num_of_owned_provinces_with = {
+				value = 20
+				culture = wexonard
+				has_courthouse_building_trigger = yes
+			}
+		}
+		effect = {
+			add_legitimacy = 10
+			add_splendor = 200
+			custom_tooltip = " "
+			919 = {
+				custom_tooltip = A48_upgrade_jewel_borders_tooltip
+				hidden_effect = {
+					remove_province_modifier = sugamber_jewel_borders
+				}
+				add_permanent_province_modifier = {
+					name = sugamber_beacon_borders
+					duration = -1
+				}
+			}
+			add_government_reform = sugamber_amber_court_reform
+		}
+	}
+	A48_liberators_akasik = {
+		icon = mission_into_africa
+		position = 8
+		required_missions = {
+			A48_across_gates
+		}
+		provinces_to_highlight = {
+			region = akasik_region
+			OR = {
+				unrest = 1
+				NOT = {
+					owned_by = ROOT
+					is_core = ROOT
+				}
+			}
+		}
+		trigger = {
+			akasik_region = {
+				type = all
+				owned_by = ROOT
+				is_core = ROOT
+				NOT = {
+					unrest = 1
+				}
+			}
+		}
+		effect = {
+			set_country_flag = sugamber_crodamization_akasik
+			custom_tooltip = A48_akasik_liberation_tooltip
+			akasik_region = {
+				add_nationalism = -5
+			}
+			custom_tooltip = " "
+			add_accepted_culture_or_dip_power = {
+				culture = desha
+				free = yes
+			}
+			custom_tooltip = A48_akasik_crodamization_tooltip
+			tooltip = {
+				6150 = {
+					add_province_modifier = {
+						name = sugamber_crodamization
+						duration = 14600
+					}
+				}
+			}
+			custom_tooltip = A48_button_unlocked_akasik_tooltip
+			hidden_effect = {
+				akasik_region = {
+					limit = {
+						trade_goods = slaves
+					}
+					change_trade_goods = unknown
+				}
+				akasik_region = {
+					limit = {
+						NOT = {
+							religion_group = cannorian
+							religion = mother_akasik
+						}
+						culture_group = akasi
+					}
+					change_religion = mother_akasik
+				}
+				akasik_region = {
+					limit = {
+						NOT = {
+							culture = desha
+							culture = wexonard
+						}
+					}
+					add_province_modifier = {
+						name = sugamber_crodamization
+						duration = 14600
+					}
+				}
+			}
+		}
+	}
+	A48_prosperous_akasik = {
+		icon = mission_el_badi_palace
+		position = 9
+		required_missions = {
+			A48_liberators_akasik
+		}
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					region = akasik_region
+					NOT = {
+						AND = {
+							no_devastation_separatism_unrest = yes
+							num_of_buildings_in_province = 1
+							OR = {
+								culture = desha
+								culture = wexonard
+							}
+							OR = {
+								religion = ROOT
+								tolerance_to_this = 1
+							}
+						}
+					}
+				}
+				AND = {
+					province_id = 383
+					NOT = {
+						has_tax_building_trigger = yes
+						has_fort_building_trigger = yes
+					}
+				}
+			}
+		}
+		trigger = {
+			treasury = 1000
+			akasik_region = {
+				type = all
+				no_devastation_separatism_unrest = yes
+				num_of_buildings_in_province = 1
+				OR = {
+					culture = desha
+					culture = wexonard
+				}
+				OR = {
+					religion = ROOT
+					tolerance_to_this = 1
+				}
+			}
+			development_in_provinces = {
+				value = 300
+				region = akasik_region
+			}
+			383 = {
+				has_tax_building_trigger = yes
+				has_fort_building_trigger = yes
+			}
+		}
+		effect = {
+			add_treasury = -1000
+			custom_tooltip = " "
+			set_country_flag = sugamber_akasik_monument
+			383 = {
+				upgrade_tax_building = yes
+				add_province_modifier = {
+					name = sugamber_akasik_temple
+					duration = -1
+				}
+			}
+			custom_tooltip = A48_monument_planetouched_tooltip
+		}
+	}
+	A48_explore_labyrinths = {
+		icon = mission_dark_ritual
+		position = 10
+		required_missions = {
+			A48_unravel_nirat_archives
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 306
+				province_id = 332
+				province_id = 419
+				province_id = 919
+			}
+			NOT = {
+				owned_by = ROOT
+				num_of_units_in_province = {
+					amount = 20
+					who = ROOT
+				}
+			}
+		}
+		trigger = {
+			treasury = 1000
+			manpower = 10
+			has_country_flag = sugamber_labyrinth_maps
+			OR = {
+				estate_loyalty = {
+					estate = estate_ahati
+					loyalty = 70
+				}
+				AND = {
+					estate_loyalty = {
+						estate = estate_adventurers
+						loyalty = 70
+					}
+					has_estate_privilege = estate_adventurers_sponsor_beast_slayers
+					has_estate_privilege = estate_adventurers_sponsor_holy_paladins
+				}
+			}
+			is_at_war = no
+			custom_trigger_tooltip = {
+				tooltip = crimson_deluge_over_tooltip
+				has_global_flag = crimson_deluge_is_over
+			}
+			306 = {
+				owned_by = ROOT
+				num_of_units_in_province = {
+					amount = 20
+					who = ROOT
+				}
+			}
+			332 = {
+				owned_by = ROOT
+				num_of_units_in_province = {
+					amount = 20
+					who = ROOT
+				}
+			}
+			419 = {
+				owned_by = ROOT
+				num_of_units_in_province = {
+					amount = 20
+					who = ROOT
+				}
+			}
+			919 = {
+				owned_by = ROOT
+				num_of_units_in_province = {
+					amount = 20
+					who = ROOT
+				}
+			}
+		}
+		effect = {
+			add_treasury = -1000
+			add_manpower = -10
+			custom_tooltip = A48_explore_labyrinths_tooltip
+			country_event = {
+				id = flavor_sugamber.157
+				days = 90
+			}
+		}
+	}
+	A48_slay_xamarzu = {
+		icon = mission_three_death
+		position = 11
+		required_missions = {
+			A48_explore_labyrinths
+			A48_elikhet_court
+		}
+		provinces_to_highlight = {
+			AND = {
+				OR = {
+					province_id = 3
+					province_id = 423
+				}
+				NOT = {
+					owner = {
+						OR = {
+							has_opinion = {
+								who = ROOT
+								value = 150
+							}
+							has_spy_network_from = {
+								who = ROOT
+								value = 50
+							}
+						}
+					}
+					owned_by = ROOT
+				}
+			}
+		}
+		trigger = {
+			has_country_flag = sugamber_path_xamarzu
+			OR = {
+				religion = dalcabba
+				has_personal_deity = ace_elikhet
+			}
+			is_at_war = no
+			custom_trigger_tooltip = {
+				tooltip = A48_magisterium_mages_tooltip
+				3 = {
+					owner = {
+						OR = {
+							has_opinion = {
+								who = ROOT
+								value = 150
+							}
+							has_spy_network_from = {
+								who = ROOT
+								value = 50
+							}
+							tag = ROOT
+						}
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = A48_orda_knights_tooltip
+				423 = {
+					owner = {
+						OR = {
+							has_opinion = {
+								who = ROOT
+								value = 150
+							}
+							has_spy_network_from = {
+								who = ROOT
+								value = 50
+							}
+							tag = ROOT
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			add_prestige = 10
+			custom_tooltip = A48_slay_xamarzu_tooltip
+			country_event = {
+				id = flavor_sugamber.166
+				days = 30
+			}
+		}
+	}
+	A48_end_long_war = {
+		icon = austria_prospers
+		position = 12
+		required_missions = {
+			A48_slay_xamarzu
+		}
+		provinces_to_highlight = {
+			region = the_borders_region
+			NOT = {
+				AND = {
+					culture = wexonard
+					no_devastation_separatism_unrest = yes
+				}
+			}
+		}
+		trigger = {
+			has_global_flag = sugamber_milcorissia_final_death
+			stability = 3
+			NOT = {
+				war_exhaustion = 1
+				num_of_loans = 1
+				corruption = 1
+			}
+			every_estate_loyalty = {
+				loyalty = 60
+			}
+			estate_loyalty = {
+				estate = estate_adventurers
+				loyalty = 60
+			}
+			estate_loyalty = {
+				estate = estate_mages
+				loyalty = 60
+			}
+			manpower_percentage = 0.8
+			the_borders_region = {
+				type = all
+				culture = wexonard
+				no_devastation_separatism_unrest = yes
+			}
+		}
+		effect = {
+			set_country_flag = sugamber_borders_decree
+			add_country_modifier = {
+				name = sugamber_savior_borders
+				duration = -1
+			}
+			306 = {
+				add_province_modifier = {
+					name = sugamber_wexkeep_labyrinth
+					duration = -1
+				}
+			}
+			332 = {
+				add_province_modifier = {
+					name = sugamber_corseton_labyrinth
+					duration = -1
+				}
+			}
+			419 = {
+				add_province_modifier = {
+					name = sugamber_varlosen_labyrinth
+					duration = -1
+				}
+			}
+			919 = {
+				add_province_modifier = {
+					name = sugamber_rhinmond_labyrinth
+					duration = -1
+				}
+			}
+			custom_tooltip = A48_arannen_collapse_tooltip
+			hidden_effect = {
+				the_borders_region = {
+					remove_core = A56
+					remove_claim = A56
+					remove_core = A57
+					remove_claim = A57
+					remove_core = A60
+					remove_claim = A60
+					remove_core = A72
+					remove_claim = A72
+					remove_core = A75
+					remove_claim = A75
+					remove_core = A86
+					remove_claim = A86
+					remove_core = B85
+					remove_claim = B85
+					remove_core = B94
+					remove_claim = B94
+					remove_core = Z06
+					remove_claim = Z06
+				}
+				A56 = {
+					change_primary_culture = busilari
+				}
+				A57 = {
+					change_primary_culture = roilsardi
+				}
+				A60 = {
+					change_primary_culture = esmari
+				}
+				western_cannor_superregion = {
+					limit = {
+						culture = arannese
+					}
+					change_culture = esmari
+				}
+				A72 = {
+					change_primary_culture = wexonard
+				}
+				A75 = {
+					change_primary_culture = wexonard
+				}
+				A86 = {
+					change_primary_culture = wexonard
+				}
+				B85 = {
+					change_primary_culture = busilari
+				}
+				Z06 = {
+					change_primary_culture = corvurian
+				}
+				escann_superregion = {
+					limit = {
+						culture = arannese
+					}
+					change_culture = corvurian
+				}
+			}
+		}
+	}
+}
+
+sugamber_column_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = A48
+			was_tag = A48
+		}
+	}
+	A48_wexonard_charge = {
+		icon = mission_the_renaissance_king
+		position = 1
+		provinces_to_highlight = {
+			is_capital_of = A30
+		}
+		trigger = {
+			army_size_percentage = 0.9
+			OR = {
+				employed_advisor = {
+					category = ADM
+				}
+				employed_advisor = {
+					category = DIP
+				}
+				employed_advisor = {
+					category = MIL
+				}
+			}
+			A30 = {
+				OR = {
+					has_opinion = {
+						who = ROOT
+						value = 150
+					}
+					AND = {
+						has_50_opinion_improved_relation = {
+							target = ROOT
+						}
+						is_rival = ROOT
+					}
+					exists = no
+				}
+			}
+		}
+		effect = {
+			remove_rival = A30
+			A30 = {
+				remove_rival = A48
+			}
+			custom_tooltip = " "
+			add_country_modifier = {
+				name = sugamber_wexonard_primacy
+				duration = 10950
+			}
+			custom_tooltip = A48_no_unlawful_demand_tooltip
+			complex_dynamic_effect = {
+				first_custom_tooltip = A48_peace_funfair_tooltip
+				first_limit = "
+					treasury = 50
+					calc_true_if = {
+						amount = 2
+						all_country = {
+							NOT = {
+								has_country_flag = lilac_wars_rose_party
+							}
+							has_opinion = {
+								who = ROOT
+								value = 100
+							}
+						}
+					}
+				"
+				first_effect = "
+					add_treasury = -50
+					add_stability_or_adm_power = yes
+					if = {
+						limit = { has_ruler_modifier = sugamber_ewald_gamble }
+						add_heir_claim = 5
+					}
+					custom_tooltip = A48_remove_devastation_funfair_tooltip
+					hidden_effect = {
+						every_owned_province = {
+							add_devastation = -10
+						}
+					}
+				"
+			}
+			hidden_effect = {
+				west_bisan_area = {
+					add_permanent_claim = ROOT
+				}
+				300 = {
+					add_permanent_claim = ROOT
+				}
+				579 = {
+					add_permanent_claim = ROOT
+				}
+				903 = {
+					add_permanent_claim = ROOT
+				}
+			}
+		}
+	}
+	A48_lions_west = {
+		icon = mission_temple_patronage
+		position = 3
+		required_missions = {
+			A48_wexonard_charge
+		}
+		provinces_to_highlight = {
+			OR = {
+				is_capital_of = A34
+				AND = {
+					province_id = 332
+					NOT = {
+						AND = {
+							owned_by = ROOT
+							is_core = ROOT
+							has_tax_building_trigger = yes
+							num_of_units_in_province = {
+								amount = 10
+								who = ROOT
+							}
+						}
+					}
+				}
+			}
+		}
+		trigger = {
+			owns_core_province = 332
+			332 = {
+				has_tax_building_trigger = yes
+				has_state_edict = edict_religious_unity
+				num_of_units_in_province = {
+					amount = 10
+					who = ROOT
+				}
+			}
+			NOT = {
+				exists = A34
+			}
+		}
+		effect = {
+			set_country_flag = curtailing_neratic_clergy
+			custom_tooltip = A48_seizing_necropolis_tooltip
+			remove_country_modifier = sugamber_neratic_clergy_opposition
+			custom_tooltip = " "
+			set_estate_privilege = estate_curtailing_neratic_clergy
+			hidden_effect = {
+				332 = {
+					spawn_rebels = {
+						type = heretic_rebels
+						size = 2
+					}
+				}
+			}
+		}
+	}
+	A48_rightful_heirs = {
+		icon = fra_burg_succession
+		position = 4
+		required_missions = {
+			A48_heritage_old_kingdom
+			A48_lions_west
+		}
+		provinces_to_highlight = {
+			OR = {
+				is_capital_of = A30
+				AND = {
+					is_capital = yes
+					owner = {
+						has_country_flag = lilac_wars_moon_party
+							is_part_of_hre = yes
+						NOT = {
+							alliance_with = ROOT
+						}
+					}
+					A30 = {
+						is_emperor = yes
+					}
+					NOT = {
+						A48 = {
+							is_subject = yes
+						}
+					}
+				}
+			}
+		}
+		trigger = {
+			is_at_war = no
+			has_country_flag = wexonard_history_recounted
+			legitimacy = 90
+			army_size = 25
+			OR = {
+				NOT = {
+					exists = A30
+				}
+				custom_trigger_tooltip = {
+					tooltip = " "
+					always = no
+				}
+				custom_trigger_tooltip = {
+					tooltip = A48_wex_vassal_tooltip
+					is_subject_of = A30
+					has_country_flag = sugamber_caylen
+					has_ruler_flag = lisolette_sil_rhinmond
+					A30 = {
+						OR = {
+							has_ruler_flag = lothane_sil_wex
+							has_ruler_flag = caylen_sil_wex
+						}
+					}
+				}
+				custom_trigger_tooltip = {
+					tooltip = " "
+					always = no
+				}
+				AND = {
+					is_subject = no
+					OR = {
+						NOT = {
+							A30 = {
+								is_emperor = yes
+							}
+						}
+						calc_true_if = {
+							amount = 2
+							all_known_country = {
+								is_part_of_hre = yes
+								alliance_with = ROOT
+								NOT = {
+									alliance_with = A30
+								}
+								OR = {
+									has_country_flag = lilac_wars_moon_party
+									is_rival = A30
+									historical_rival_with = A30
+									core_claim = A30
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			custom_tooltip = A48_wex_claim_tooltip
+			complex_dynamic_effect = {
+				first_custom_tooltip = A48_normal_wex_requirement_tooltip
+				first_limit = "
+					is_subject = no
+					OR = {
+						A30 = {
+							NOT = {
+								is_emperor = yes
+							}
+						}
+						calc_true_if = {
+							amount = 2
+							all_known_country = {
+								is_part_of_hre = yes
+								alliance_with = ROOT
+								NOT = {
+									alliance_with = A30
+								}
+								OR = {
+									has_country_flag = lilac_wars_moon_party
+									is_rival = A30
+									historical_rival_with = A30
+									core_claim = A30
+								}
+							}
+						}
+					}
+				"
+				first_effect = "
+					custom_tooltip = A48_normal_wex_war_tooltip
+					country_event = {
+						id = flavor_sugamber.114
+					}
+				"
+			}
+			complex_dynamic_effect = {
+				first_custom_tooltip = A48_caylen_wex_requirement_tooltip
+				first_limit = "
+					is_subject_of = A30
+					has_country_flag = sugamber_caylen
+					A30 = {
+						has_ruler_flag = lothane_sil_wex
+					}
+				"
+				first_effect = "
+					custom_tooltip = A48_caylen_wex_war_tooltip
+					country_event = {
+						id = flavor_sugamber.115
+					}
+				"
+			}
+			complex_dynamic_effect = {
+				first_custom_tooltip = A48_civil_war_wex_requirement_tooltip
+				first_limit = "
+					is_subject_of = A30
+					has_country_flag = sugamber_caylen
+					A30 = {
+						has_ruler_flag = caylen_sil_wex
+					}
+				"
+				first_effect = "
+					custom_tooltip = A48_civil_war_wex_war_tooltip
+					country_event = {
+						id = flavor_sugamber.116
+					}
+				"
+			}
+			hidden_effect = {
+				wexhills_area = {
+					add_permanent_claim = ROOT
+				}
+				299 = {
+					add_permanent_claim = ROOT
+				}
+				307 = {
+					add_permanent_claim = ROOT
+				}
+				318 = {
+					add_permanent_claim = ROOT
+				}
+				907 = {
+					add_permanent_claim = ROOT
+				}
+			}
+		}
+	}
+	A48_return_ryonards = {
+		icon = mission_monarch_in_throne_room
+		position = 5
+		required_missions = {
+			A48_resplendent_capital
+			A48_rightful_heirs
+		}
+		provinces_to_highlight = {
+			is_capital_of = A30
+			owner = {
+				OR = {
+					NOT = {
+						is_subject_of = ROOT
+					}
+					liberty_desire = 10
+				}
+			}
+		}
+		trigger = {
+			is_at_war = no
+			legitimacy = 100
+			stability = 1
+			estate_loyalty = {
+				estate = estate_nobles
+				loyalty = 60
+			}
+			A30 = {
+				OR = {
+					AND = {
+						is_subject_of = ROOT
+						NOT = {
+							liberty_desire = 20
+						}
+					}
+					AND = {
+						exists = no
+						wexhills_area = {
+							type = all
+							owned_by = ROOT
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			increase_ruler_adm_effect = yes
+			custom_tooltip = " "
+			add_country_modifier = {
+				name = sugamber_administrative_unification
+				duration = 10950
+			}
+			add_country_modifier = {
+				name = sugamber_ryonard_return
+				duration = -1
+			}
+			country_event_with_option_insight = {
+				id = flavor_sugamber.120
+				option_1 = "
+					custom_tooltip = A48_sugamber_name_tooltip
+				"
+				option_2 = "
+					custom_tooltip = A48_wex_name_tooltip
+				"
+			}
+		}
+	}
+	A48_king_in_wex = {
+		icon = dreams_of_grandeur
+		position = 6
+		required_missions = {
+			A48_return_ryonards
+		}
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					is_capital = yes
+					ROOT = {
+						is_part_of_hre = yes
+						is_emperor = no
+					}
+					owner = {
+						is_part_of_hre = yes
+						is_elector = yes
+						NOT = {
+							has_opinion = {
+								who = ROOT
+								value = 100
+							}
+						}
+					}
+				}
+				AND = {
+					is_capital_of = A30
+					owner = {
+						OR = {
+							liberty_desire = 1
+							NOT = {
+								AND = {
+									is_subject_of = ROOT
+									years_in_vassalage_under = {
+										who = ROOT
+										years = 10
+									}
+								}
+							}
+						}
+					}
+				}
+				AND = {
+					area = wexhills_area
+					NOT = {
+						AND = {
+							exists = A30
+							owned_by = ROOT
+						}
+					}
+				}
+			}
+		}
+		trigger = {
+			is_at_war = no
+			prestige = 80
+			diplomatic_reputation = 5
+			total_development = 500
+			OR = {
+				AND = {
+					NOT = {
+						is_part_of_hre = yes
+					}
+					is_emperor = no
+				}
+				AND = {
+					is_part_of_hre = yes
+					calc_true_if = {
+						amount = 4
+						all_known_country = {
+							is_elector = yes
+							has_opinion = {
+								who = ROOT
+								value = 100
+							}
+						}
+					}
+					OR = {
+						AND = {
+							is_emperor = no
+							NOT = {
+								active_imperial_incident = any
+							}
+						}
+						AND = {
+							is_emperor = yes
+							imperial_influence = 10
+						}
+					}
+				}
+			}
+			A30 = {
+				OR = {
+					AND = {
+						is_subject_of = ROOT
+						NOT = {
+							liberty_desire = 1
+						}
+						years_in_vassalage_under = {
+							who = ROOT
+							years = 10
+						}
+					}
+					AND = {
+						exists = no
+						wexhills_area = {
+							type = all
+							owned_by = ROOT
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			custom_tooltip = A48_wexonard_cores_tooltip
+			complex_dynamic_effect = {
+				first_custom_tooltip = A48_inherit_wex_tooltip
+				first_limit = "
+					A30 = {
+						exists = yes
+						NOT = {
+							num_of_cities = 12
+						}
+					}
+				"
+				first_effect = "
+					inherit = A30
+				"
+			}
+			complex_dynamic_effect = {
+				first_custom_tooltip = A48_not_eoa_tooltip
+				first_limit = "
+					is_part_of_hre = no
+					is_emperor = no
+				"
+				first_effect = "
+					set_country_flag = sugamber_amber_crown
+					add_government_reform = sugamber_wexonard_crown_free
+				"
+			}
+			complex_dynamic_effect = {
+				first_custom_tooltip = A48_eoa_member_tooltip
+				first_limit = "
+					is_part_of_hre = yes
+					is_emperor = no
+				"
+				first_effect = "
+					set_imperial_incident = incident_king_in_wex
+					custom_tooltip = A48_king_wex_incident_tooltip
+					custom_tooltip = A48_king_wex_reform_tooltip
+				"
+			}
+			complex_dynamic_effect = {
+				first_custom_tooltip = A48_eoa_emperor_tooltip
+				first_limit = "
+					is_part_of_hre = yes
+					is_emperor = yes
+				"
+				first_effect = "
+					add_imperial_influence = -10
+					custom_tooltip = A48_king_wex_reform_tooltip
+					set_country_flag = sugamber_amber_crown
+					hidden_effect = {
+						add_government_reform = sugamber_wexonard_crown_kingdom
+					}
+				"
+			}
+			hidden_effect = {
+				europe = {
+					limit = {
+						culture = wexonard
+					}
+					add_core = ROOT
+				}
+			}
+		}
+	}
+	A48_ceremonial_capital = {
+		icon = bal_hyl_mission
+		position = 7
+		required_missions = {
+			A48_king_in_wex
+		}
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					area = wexhills_area
+					NOT = {
+						AND = {
+							owned_by = ROOT
+							is_prosperous = yes
+							num_of_buildings_in_province = 3
+						}
+					}
+				}
+				AND = {
+					province_id = 306
+					NOT = {
+						AND = {
+							has_fort_building_trigger = yes
+							has_great_project = {
+								type = bal_hyl
+								tier = 1
+							}
+						}
+					}
+				}
+				AND = {
+					province_id = 907
+					NOT = {
+						AND = {
+							development = 15
+							num_of_buildings_in_province = 4
+						}
+					}
+				}
+			}
+		}
+		trigger = {
+			treasury = 500
+			government_rank = 2
+			wexhills_area = {
+				type = all
+				owned_by = ROOT
+				is_prosperous = yes
+				num_of_buildings_in_province = 3
+			}
+			306 = {
+				has_fort_building_trigger = yes
+				has_great_project = {
+					type = bal_hyl
+					tier = 1
+				}
+			}
+			907 = {
+				development = 15
+				num_of_buildings_in_province = 4
+			}
+		}
+		effect = {
+			add_treasury = -500
+			custom_tooltip = " "
+			306 = {
+				add_permanent_province_modifier = {
+					name = sugamber_ceremonial_capital
+					duration = -1
+				}
+				add_province_modifier = {
+					name = bal_hyl_restoration_efforts
+					duration = 18250
+				}
+			}
+			305 = {
+				change_trade_goods = wine
+				add_permanent_province_modifier = {
+					name = barry_breweries
+					duration = -1
+				}
+			}
+			907 = {
+				change_trade_goods = glass
+			}
+			custom_tooltip = A48_upgrade_ryonard_dynasty_tooltip
+			hidden_effect = {
+				remove_country_modifier = sugamber_ryonard_return
+			}
+			add_country_modifier = {
+				name = sugamber_ryonard_return_upgraded
+				duration = -1
+			}
+		}
+	}
+	A48_unravel_nirat_archives = {
+		icon = mission_writing_book
+		position = 9
+		required_missions = {
+			A48_invading_delta
+		}
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					province_id = 473
+					NOT = {
+						AND = {
+							owned_by = ROOT
+							is_core = ROOT
+							has_fort_building_trigger = yes
+							has_tax_building_trigger = yes
+							has_any_ongoing_construction = no
+							num_of_units_in_province = {
+								amount = 20
+								who = ROOT
+							}
+						}
+					}
+				}
+				AND = {
+					OR = {
+						province_id = 919
+						province_id = 413
+					}
+					NOT = {
+						has_tax_building_trigger = yes
+						has_any_ongoing_construction = no
+					}	
+				}
+				AND = {
+					province_id = 275
+					NOT = {
+						owner = {
+							OR = {
+								has_opinion = {
+									who = ROOT
+									value = 150
+								}
+								has_spy_network_from = {
+									who = ROOT
+									value = 50
+								}
+							}
+						}
+						owned_by = ROOT
+					}
+				}
+			}
+		}
+		trigger = {
+			treasury = 1000
+			current_age = age_of_reformation
+			OR = {
+				religion = regent_court
+				religion = dalcabba
+			}
+			has_estate_privilege = estate_church_expand_the_theology
+			owns_core_province = 473
+			473 = {
+				has_fort_building_trigger = yes
+				has_tax_building_trigger = yes
+				has_any_ongoing_construction = no
+				num_of_units_in_province = {
+					amount = 20
+					who = ROOT
+				}
+			}
+			919 = {
+				has_tax_building_trigger = yes
+				has_any_ongoing_construction = no
+			}
+			413 = {
+				has_tax_building_trigger = yes
+				has_any_ongoing_construction = no
+			}
+			custom_trigger_tooltip = {
+				tooltip = A48_konwell_researchers_tooltip
+				275 = {
+					owner = {
+						OR = {
+							has_opinion = {
+								who = ROOT
+								value = 150
+							}
+							has_spy_network_from = {
+								who = ROOT
+								value = 50
+							}
+							tag = ROOT
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			add_treasury = -1000
+			custom_tooltip = " "
+			473 = {
+				add_gnomish_minority_size_effect = yes
+				add_building_construction = {
+					building = university
+					cost = 0
+					speed = 2
+				}
+			}
+			custom_tooltip = " "
+			919 = {
+				add_building_construction = {
+					building = university
+					cost = 0
+					speed = 2
+				}
+			}
+			custom_tooltip = " "
+			413 = {
+				add_building_construction = {
+					building = university
+					cost = 0
+					speed = 2
+				}
+			}
+			custom_tooltip = " "
+			country_event = {
+				id = flavor_sugamber.136
+				days = 1095
+			}
+		}
+	}
+	A48_elikhet_court = {
+		icon = ace_pyramid
+		position = 10
+		required_missions = {
+			A48_unravel_nirat_archives
+			A48_meeting_khetarch
+		}
+		provinces_to_highlight = {
+			province_group = mothers_sorrow_group
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			empire_of_china_reform_passed = build_pyramid_reform
+			estate_loyalty = {
+				estate = estate_church
+				loyalty = 70
+			}
+			NOT = {
+				estate_territory = {
+					estate = estate_church
+					territory = 5
+				}
+			}
+			num_of_owned_provinces_with = {
+				value = 15
+				region = the_borders_region
+				has_tax_building_trigger = yes
+			}
+			num_of_owned_provinces_with = {
+				value = 15
+				region = kheterata_region
+				has_tax_building_trigger = yes
+			}
+			mothers_sorrow_group = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			set_country_flag = khetist_neratic_clergy
+			if = {
+				limit = {
+					is_emperor_of_china = yes
+				}
+				add_mandate = 5
+			}
+			else = {
+				custom_tooltip = A48_imperial_mandate_5_tooltip
+			}
+			custom_tooltip = A48_revoke_curtailing_tooltip
+			hidden_effect = {
+				remove_estate_privilege = estate_curtailing_neratic_clergy
+			}
+			set_estate_privilege = estate_neratic_khetist_clergy
+			country_event_with_option_insight = {
+				id = flavor_sugamber.139
+				option_1 = "
+					custom_tooltip = A48_unlock_elikhet_tooltip
+				"
+				option_2 = "
+					change_religion = dalcabba
+					custom_tooltip = A48_dalcabba_conversion_tooltip
+					custom_tooltip = A48_dalcabba_zeal_tooltip
+				"
+			}
+			complex_dynamic_effect = {
+				first_custom_tooltip = A48_dalcabba_reformation_center_tooltip
+				first_limit = "
+					332 = {
+						has_great_project = {
+							type = the_necropolis
+							tier = 3
+						}
+					}
+				"
+				first_effect = "
+					custom_tooltip = A48_dalcabba_corseton_center_tooltip
+				"
+			}
+		}
+	}
+	A48_hammer_faith = {
+		icon = take_constantinople
+		position = 11
+		required_missions = {
+			A48_elikhet_court
+		}
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					ROOT = {
+						NOT = {
+							religious_unity = 0.9
+						}
+					}
+					NOT = {
+						religion = ROOT
+						has_province_modifier = religious_zeal_at_conv
+						tolerance_to_this = 0
+					}
+				}
+				AND = {
+					region = the_borders_region
+					NOT = {
+						religion = ROOT
+						has_province_modifier = religious_zeal_at_conv
+					}
+				}
+			}
+		}
+		trigger = {
+			religious_unity = 0.9
+			has_estate_privilege = estate_church_for_the_faith
+			OR = {
+				inquisitor = 3
+				theologian = 3
+			}
+			custom_trigger_tooltip = {
+				tooltip = crimson_deluge_over_tooltip
+				has_global_flag = crimson_deluge_is_over
+			}
+			OR = {
+				hre_leagues_enabled = yes
+				AND = {
+					OR = {
+						hre_religion = regent_court
+						hre_religion = dalcabba
+					}
+					hre_religion_locked = yes
+				}
+				NOT = {
+					hre_size = 1
+				}
+			}
+			the_borders_region = {
+				type = all
+				owned_by = ROOT
+				OR = {
+					religion = ROOT
+					has_province_modifier = religious_zeal_at_conv
+				}
+			}
+		}
+		effect = {
+			set_country_flag = sugamber_hammer_faith
+			if = {
+				limit = {
+					is_emperor_of_china = yes
+				}
+				add_mandate = 5
+			}
+			else = {
+				custom_tooltip = A48_imperial_mandate_5_tooltip
+				custom_tooltip = " "
+			}
+			add_country_modifier = {
+				name = sugamber_bane_heretics
+				duration = -1
+			}
+			custom_tooltip = A48_medasi_privilegia_tooltip
+			complex_dynamic_effect = {
+				first_custom_tooltip = A48_takeover_league_tooltip
+				first_limit = "
+					army_size = 200
+					religion = dalcabba
+					hre_leagues_enabled = yes
+					NOT = {
+						hre_religion = dalcabba
+						any_known_country = {
+							is_in_league_war = yes
+						}
+					}
+				"
+				first_effect = "
+					custom_tooltip = A48_replace_league_tooltip
+					hidden_effect = {
+						country_event = {
+							id = flavor_sugamber.154
+						}
+					}
+				"
+			}
+			complex_dynamic_effect = {
+				first_custom_tooltip = A48_three_way_war_tooltip
+				first_limit = "
+					army_size = 200
+					religion = dalcabba
+					hre_leagues_enabled = yes
+					NOT = {
+						hre_religion = dalcabba
+					}
+					any_known_country = {
+						is_in_league_war = yes
+					}
+				"
+				first_effect = "
+					custom_tooltip = A48_three_leagues_tooltip
+					hidden_effect = {
+						country_event = {
+							id = flavor_sugamber.155
+						}
+					}
+				"
+			}
+			complex_dynamic_effect = {
+				first_custom_tooltip = A48_new_league_tooltip
+				first_limit = "
+					army_size = 200
+					religion = dalcabba
+					hre_religion = regent_court
+					hre_religion_locked = yes
+					NOT = {
+						hre_leagues_enabled = yes
+					}
+				"
+				first_effect = "
+					custom_tooltip = A48_second_league_war_tooltip
+					hidden_effect = {
+						country_event = {
+							id = flavor_sugamber.156
+						}
+					}
+				"
+			}
+		}
+	}
+}
+
+sugamber_column_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = A48
+			was_tag = A48
+		}
+	}
+	A48_repair_shield = {
+		icon = alpine_fortifications
+		position = 1
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					province_id = 316
+					NOT = {
+						has_state_edict = edict_defensive_edict
+					}
+				}
+				AND = {
+					OR = {
+						is_capital_of = A40
+						is_capital_of = A46
+					}
+					NOT = {
+						A40 = {
+							has_opinion = {
+								who = ROOT
+								value = 150
+							}
+						}
+						A46 = {
+							has_opinion = {
+								who = ROOT
+								value = 150
+							}
+						}
+					}
+				}
+			}
+		}
+		trigger = {
+			316 = {
+				has_state_edict = edict_defensive_edict
+			}
+			OR = {
+				estate_loyalty = {
+					estate = estate_adventurers
+					loyalty = 50
+				}
+				has_estate_privilege = estate_nobles_development_of_castles
+			}
+			OR = {
+				A40 = {
+					has_opinion = {
+						who = ROOT
+						value = 150
+					}
+				}
+				A46 = {
+					has_opinion = {
+						who = ROOT
+						value = 150
+					}
+				}
+				AND = {
+					NOT = {
+						exists = A40
+					}
+					NOT = {
+						exists = A46
+					}
+				}
+			}
+		}
+		effect = {
+			add_prestige = 10
+			if = {
+				limit = {
+					has_ruler_modifier = sugamber_ewald_gamble
+				}
+				add_heir_claim = 5
+			}
+			custom_tooltip = A48_celliande_claims_tooltip
+			if = {
+				limit = {
+					316 = {
+						NOT = {
+							has_great_project = {
+								type = escandar
+								tier = 1
+							}
+						}
+					}
+				}
+				316 = {
+					add_province_modifier = {
+						name = sugamber_repairing_escandar
+						duration = -1
+					}
+				}
+				custom_tooltip = A48_upgrading_escandar_tooltip
+			}
+			complex_dynamic_effect = {
+				first_custom_tooltip = A48_ally_silcalas_tooltip
+				first_limit = "
+					OR = {
+						A40 = {
+							alliance_with = ROOT
+							marriage_with = ROOT
+							trust = {
+								who = ROOT
+								value = 60
+							}
+						}
+						A46 = {
+							alliance_with = ROOT
+							marriage_with = ROOT
+							trust = {
+								who = ROOT
+								value = 60
+							}
+						}
+					}
+				"
+				first_effect = "
+					316 = {
+						add_province_modifier = {
+							name = sugamber_silcalas_restoration
+							duration = 36500
+						}
+					}
+					custom_tooltip = A48_silcalas_escandar_autonomy_tooltip
+				"
+			}
+			hidden_effect = {
+				412 = {
+					add_permanent_claim = ROOT
+				}
+				413 = {
+					add_permanent_claim = ROOT
+				}
+				414 = {
+					add_permanent_claim = ROOT
+				}
+				416 = {
+					add_permanent_claim = ROOT
+				}
+			}
+		}
+	}
+	A48_hammer_empire = {
+		icon = the_russian_campaign
+		position = 2
+		required_missions = {
+			A48_repair_shield
+		}
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					province_id = 316
+					NOT = {
+						AND = {
+							has_great_project = {
+								type = escandar
+								tier = 1
+							}
+							num_of_units_in_province = {
+								amount = 10
+								who = ROOT
+							}
+						}
+					}
+				}
+				AND = {
+					OR = {
+						is_capital_of = A29
+						is_capital_of = A49
+					}
+					NOT = {
+						owner = {
+							scornfully_insulted_check = yes
+						}
+					}
+				}
+			}
+		}
+		trigger = {
+			316 = {
+				has_great_project = {
+					type = escandar
+					tier = 1
+				}
+				num_of_units_in_province = {
+					amount = 10
+					who = ROOT
+				}
+			}
+			A29 = {
+				OR = {
+					scornfully_insulted_check = yes
+					exists = no
+				}
+			}
+			A49 = {
+				OR = {
+					scornfully_insulted_check = yes
+					exists = no
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					has_ruler_modifier = sugamber_ewald_gamble
+				}
+				add_heir_claim = 5
+				custom_tooltip = " "
+			}
+			add_country_modifier = {
+				name = sugamber_imperial_mercenaries
+				duration = 7300
+			}
+			custom_tooltip = A48_busilar_claims_tooltip
+			hidden_effect = {
+				mountainway_area = {
+					add_permanent_claim = ROOT
+				}
+				hapiande_area = {
+					add_permanent_claim = ROOT
+				}
+				lorbet_area = {
+					add_permanent_claim = ROOT
+				}
+				busilar_area = {
+					add_permanent_claim = ROOT
+				}
+				khenak_area = {
+					limit = {
+						NOT = {
+							province_id = 376
+						}
+					}
+					add_permanent_claim = ROOT
+				}
+				busilari_straits_area = {
+					add_permanent_claim = ROOT
+				}
+			}
+		}
+	}
+	A48_lions_south = {
+		icon = claim_the_borderlands
+		position = 3
+		required_missions = {
+			A48_hammer_empire
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 362
+				province_id = 363
+				area = hapiande_area
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		trigger = {
+			362 = {
+				owned_by = ROOT
+			}
+			363 = {
+				owned_by = ROOT
+			}
+			hapiande_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					has_country_modifier = sugamber_imperial_mercenaries
+				}
+				extend_country_modifier = {
+					name = sugamber_imperial_mercenaries
+					duration = 7300
+				}
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						mission_completed = A48_hammer_empire
+					}
+				}
+				custom_tooltip = A48_extend_merc_modifier_tooltip
+			}
+			country_event_with_option_insight = {
+				id = flavor_sugamber.111
+				option_1 = "
+					add_treasury = -100
+					363 = {
+						remove_fortifications = yes
+						add_building = farm_estate
+					}
+				"
+				option_2 = "
+					add_treasury = 200
+					give_estate_land_share_medium = {
+						estate = estate_nobles
+					}
+					add_estate_loyalty = {
+						estate = estate_nobles
+						loyalty = 10
+					}
+					363 = {
+						remove_fortifications = yes
+					}
+					custom_tooltip = A48_hortosare_hate_tooltip
+				"
+				option_3 = "
+					363 = {
+						add_local_autonomy = 10
+					}
+					custom_tooltip = A48_hortosare_respect_tooltip
+					363 = {
+						add_province_modifier = {
+							name = sugamber_hortosare_maintenance
+							duration = -1
+						}
+					}
+				"
+			}
+		}
+	}
+	A48_lionsbane = {
+		icon = mission_lion_of_the_north
+		position = 4
+		required_missions = {
+			A48_lions_west
+			A48_lions_south
+			A48_lions_east
+		}
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					OR = {
+						area = lorbet_area
+						area = busilar_area
+						area = busilari_straits_area
+					}
+					NOT = {
+						country_or_non_sovereign_subject_holds = ROOT
+					}
+				}
+				AND = {
+					owned_by = ROOT
+					OR = {
+						is_core = A29
+						is_core = A34
+						is_core = A72
+					}
+					unrest = 1
+				}
+			}
+		}
+		trigger = {
+			lorbet_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			busilar_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			busilari_straits_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			custom_trigger_tooltip = {
+				tooltip = A48_no_unrest_lions_land_tooltip
+				NOT = {
+					any_owned_province = {
+						OR = {
+							is_core = A29
+							is_core = A34
+							is_core = A72
+						}
+						unrest = 1
+					}
+				}
+			}
+		}
+		effect = {
+			add_legitimacy = 10
+			custom_tooltip = " "
+			365 = {
+				change_province_name = "Rhincóst"
+				rename_capital = "Rhincóst"
+			}
+			custom_tooltip = " "
+			increase_ruler_mil_effect = yes
+			custom_tooltip = " "
+			add_country_modifier = {
+				name = sugamber_hunting_lions
+				duration = 7300
+			}
+			complex_dynamic_effect = {
+				first_custom_tooltip = A48_lionsbane_success_tooltip
+				first_limit = "
+					NOT = {
+						is_year = 1485
+					}
+				"
+				first_effect = "
+					add_permanent_power_projection = {
+						type = 10_permanent_power_projection
+						amount = 10
+					}
+				"
+			}
+		}
+	}
+	A48_nature_nerat = {
+		icon = mission_priest_church
+		position = 5
+		required_missions = {
+			A48_lionsbane
+		}
+		provinces_to_highlight = {
+			province_id = 332
+			NOT = {
+				AND = {
+					has_fort_building_trigger = yes
+					has_great_project = {
+						type = the_necropolis
+						tier = 1
+					}
+				}
+			}
+		}
+		trigger = {
+			if = {
+				limit = {
+					religion = dalcabba
+				}
+				religion = dalcabba
+			}
+			else = {
+				religion = regent_court
+			}
+			treasury = 200
+			332 = {
+				has_tax_building_trigger = yes
+				has_fort_building_trigger = yes
+				has_great_project = {
+					type = the_necropolis
+					tier = 1
+				}
+			}
+			estate_loyalty = {
+				estate = estate_church
+				loyalty = 50
+			}
+			NOT = {
+				estate_territory = {
+					estate = estate_church
+					territory = 10
+				}
+			}
+			has_estate_privilege = estate_church_protected_burials
+		}
+		effect = {
+			add_treasury = -200
+			custom_tooltip = " "
+			332 = {
+				upgrade_tax_building = yes
+				add_province_modifier = {
+					name = sugamber_necropolis_guards
+					duration = -1
+				}
+				add_province_modifier = {
+					name = sugamber_necropolis_expansion
+					duration = 18250
+				}
+			}
+			custom_tooltip = A48_weaker_curtailing_tooltip
+			country_event = {
+				id = flavor_sugamber.121
+				days = 14
+			}
+			custom_tooltip = " "
+			complex_dynamic_effect = {
+				first_custom_tooltip = A30_yes_nerat_tooltip
+				first_limit = "
+					has_personal_deity = nerat
+				"
+				first_effect = "
+					custom_tooltip = A48_neratic_patronage_tooltip
+					hidden_effect = {
+						every_owned_province = {
+							limit = {
+								culture = arannese
+							}
+							add_nationalism = -5
+						}
+					}
+				"
+			}
+		}
+	}
+	A48_fallen_crodamics = {
+		icon = mission_sunset_alternative
+		position = 6
+		required_missions = {
+			A48_return_ryonards
+			A48_nature_nerat
+		}
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					province_id = 39
+					NOT = {
+						num_of_units_in_province = {
+							amount = 20
+							who = ROOT
+						}
+					}
+				}
+				AND = {
+					province_id = 1305
+					NOT = {
+						AND = {
+							heavy_ships_in_province = 5
+							heavy_ships_in_province = ROOT
+						}
+						AND = {
+							galleys_in_province = 15
+							galleys_in_province = ROOT
+						}
+					}
+				}
+				AND = {
+					province_id = 380
+					NOT = {
+						owner = {
+							has_spy_network_from = {
+								who = ROOT
+								value = 30
+							}
+						}
+						owned_by = ROOT
+					}
+				}
+				AND = {
+					province_id = 463
+					NOT = {
+						owner = {
+							has_spy_network_from = {
+								who = ROOT
+								value = 30
+							}
+						}
+						owned_by = ROOT
+					}
+				}
+			}
+		}
+		trigger = {
+			is_at_war = no
+			army_size = 40
+			navy_size = 30
+			has_flagship = yes
+			380 = {
+				owner = {
+					OR = {
+						has_spy_network_from = {
+							who = ROOT
+							value = 30
+						}
+						tag = ROOT
+					}
+				}
+			}
+			463 = {
+				owner = {
+					OR = {
+						has_spy_network_from = {
+							who = ROOT
+							value = 30
+						}
+						tag = ROOT
+					}
+				}
+			}
+			39 = {
+				num_of_units_in_province = {
+					amount = 20
+					who = ROOT
+				}
+			}
+			1305 = {
+				OR = {
+					AND = {
+						heavy_ships_in_province = 5
+						heavy_ships_in_province = ROOT
+					}
+					AND = {
+						galleys_in_province = 15
+						galleys_in_province = ROOT
+					}
+				}
+			}
+		}
+		effect = {
+			set_country_flag = can_claim_mandate
+			if = {
+				limit = {
+					U01 = {
+						owns = 475
+						total_development = 200
+					}
+				}
+				country_event = {
+					id = flavor_sugamber.131
+				}
+				custom_tooltip = " "
+			}
+			add_country_modifier = {
+				name = sugamber_kheteratan_proclamation
+				duration = 10950
+			}
+			custom_tooltip = A48_steward_war_tooltip
+			isle_of_tef_area = {
+				add_permanent_claim = ROOT
+			}
+			deshak_area = {
+				add_permanent_claim = ROOT
+			}
+			oris_area = {
+				add_permanent_claim = ROOT
+			}
+			ohitsopot_area = {
+				add_permanent_claim = ROOT
+			}
+			coast_of_tears_area = {
+				add_permanent_claim = ROOT
+			}
+			mothers_delta_area = {
+				add_permanent_claim = ROOT
+			}
+			hitputtiushesh_area = {
+				add_permanent_claim = ROOT
+			}
+			lower_sorrow_area = {
+				add_permanent_claim = ROOT
+			}
+			complex_dynamic_effect = {
+				first_custom_tooltip = A48_eborthil_vassalization_tooltip
+				first_limit = "
+					A47 = {
+						NOT = {
+							any_owned_province = {
+								OR = {
+									superregion = escann_superregion
+									superregion = bulwar_superregion
+								}
+							}
+						}
+					}
+					U06 = {
+						is_subject_of = A47
+					}
+				"
+				first_effect = "
+					set_country_flag = sugamber_silebor_vassals
+					add_casus_belli = {
+						type = cb_vassalize_mission
+						months = 360
+						target = A47
+					}
+					custom_tooltip = A48_deshak_vassal_tooltip
+				"
+			}
+			complex_dynamic_effect = {
+				first_custom_tooltip = A48_divenhal_naval_hegemon_tooltip
+				first_limit = "
+					NOT = { any_country = { capital_scope = { OR = {
+						region = lencenor_region
+						region = west_dameshead_region
+						region = east_dameshead_region
+						region = the_borders_region
+						region = businor_region
+						superregion = north_salahad_superregion
+						region = bulwar_proper_region
+						region = harpy_hills_region
+						region = bahar_region
+						region = ourdia_region
+						region = daravans_folly_region
+					} } navy_size = ROOT } }
+				"
+				first_effect = "
+					add_navy_tradition = 10
+					create_leader_scaling_with_tradition = {
+						leader = admiral
+						type = navy
+					}
+					define_advisor = {
+						type = naval_reformer
+						skill = 3
+						cost_multiplier = 0.5
+						name = \"Munarion Kalazandurzuir\"
+						culture = moon_elf
+						religion = ROOT
+					}
+				"
+			}
+		}
+	}
+	A48_across_gates = {
+		icon = mission_invade_island
+		position = 7
+		required_missions = {
+			A48_fallen_crodamics
+		}
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					area = isle_of_tef_area
+					NOT = {
+						owned_by = ROOT
+						AND = {
+							owned_by = A47
+							A47 = {
+								is_subject_of = A48
+							}
+						}
+					}
+				}
+				AND = {
+					OR = {
+						area = deshak_area
+						area = oris_area
+						area = ohitsopot_area
+					}
+					NOT = {
+						country_or_non_sovereign_subject_holds = ROOT
+						ROOT = {
+							num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+								value = 6
+								OR = {
+									area = deshak_area
+									area = oris_area
+									area = ohitsopot_area
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		trigger = {
+			OR = {
+				isle_of_tef_area = {
+					type = all
+					owned_by = ROOT
+				}
+				AND = {
+					isle_of_tef_area = {
+						type = all
+						owned_by = A47
+					}
+					A47 = {
+						is_subject_of = ROOT
+					}
+				}
+			}
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 6
+				OR = {
+					area = deshak_area
+					area = oris_area
+					area = ohitsopot_area
+				}
+			}
+		}
+		effect = {
+			add_navy_tradition = 10
+			custom_tooltip = " "
+			akasik_region = {
+				add_permanent_claim = ROOT
+			}
+			custom_tooltip = A48_tefori_vassal_tooltip
+			tooltip = {
+				country_event_with_option_insight = {
+					id = flavor_sugamber.132
+					option_1 = "
+						custom_tooltip = A48_gold_exploitation_tooltip
+						35 = {
+							add_province_modifier = {
+								name = sugamber_gold_exploitation
+								duration = -1
+							}
+						}
+					"
+					option_2 = "
+						add_estate_loyalty = {
+							estate = estate_burghers
+							loyalty = -10
+						}
+						isle_of_tef_area = { 
+							add_nationalism = -5
+							add_province_modifier = {
+								name = sugamber_tefori_autonomy
+								duration = -1
+							}
+						}
+						add_country_modifier = {
+							name = sugamber_tefori_merchants
+							duration = -1
+						}
+					"
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						isle_of_tef_area = {
+							type = all
+							owned_by = ROOT
+						}
+					}
+					country_event = {
+						id = flavor_sugamber.132
+					}
+				}
+				else = {
+					set_country_flag = sugamber_tefori_vassal_deal
+				}
+			}
+		}
+	}
+	A48_invading_delta = {
+		icon = mission_seize_the_bengal_coast
+		position = 8
+		required_missions = {
+			A48_across_gates
+		}
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					area = coast_of_tears_area
+					NOT = {
+						country_or_non_sovereign_subject_holds = ROOT
+					}
+				}
+				AND = {
+					region = kheterata_region
+					NOT = {
+						country_or_non_sovereign_subject_holds = ROOT
+						ROOT = {
+							num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+								value = 12
+								region = kheterata_region
+							}
+						}
+					}
+				}
+			}
+		}
+		trigger = {
+			treasury = 500
+			coast_of_tears_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 12
+				region = kheterata_region
+			}
+		}
+		effect = {
+			add_treasury = -500
+			custom_tooltip = " "
+			medium_increase_of_gnomish_tolerance_effect = yes
+			custom_tooltip = " "
+			kheterata_region = {
+				add_permanent_claim = ROOT
+			}
+			custom_tooltip = " "
+			country_event_with_option_insight = {
+				id = flavor_sugamber.133
+				option_1 = "
+					custom_tooltip = A48_gnomish_governors_tooltip
+					add_country_modifier = {
+						name = sugamber_multilingual_governance
+						duration = 7300
+					}
+				"
+				option_2 = "
+					name = flavor_sugamber.133.b
+					add_ruler_personality = scholar_personality
+					custom_tooltip = A48_gnomish_translators_tooltip
+					add_country_modifier = {
+						name = sugamber_gnomish_translators
+						duration = 10950
+					}
+				"
+				option_3 = "
+					add_treasury = -500
+					add_dip_power = -50
+					custom_tooltip = A48_gnomish_everything_tooltip
+					anb_add_accepted_culture_or_dip_power = {
+						culture = delta_gnome
+						free = yes
+					}
+					add_country_modifier = {
+						name = sugamber_multilingual_frenzy
+						duration = 14600
+					}
+				"
+
+			}
+		}
+	}
+	A48_meeting_khetarch = {
+		icon = mam_baghdad
+		position = 9
+		required_missions = {
+			A48_invading_delta
+		}
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					province_id = 475
+					NOT = {
+						AND = {
+							owned_by = ROOT
+							num_of_units_in_province = {
+								amount = 30
+								who = ROOT
+							}
+							OR = {
+								ROOT = {
+									is_emperor_of_china = yes
+								}
+								is_core = ROOT
+							}
+						}
+					}
+				}
+				AND = {
+					region = kheterata_region
+					NOT = {
+						country_or_non_sovereign_subject_holds = ROOT
+						ROOT = {
+							num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+								value = 30
+								region = kheterata_region
+							}
+						}
+					}
+				}
+			}
+		}
+		trigger = {
+			OR = {
+				religion = regent_court
+				religion = dalcabba
+			}
+			OR = {
+				is_emperor_of_china = yes
+				AND = {
+					custom_trigger_tooltip = {
+						tooltip = A48_no_steward_tooltip
+						NOT = {
+							any_country = {
+								is_emperor_of_china = yes
+							}
+						}
+					}
+					owns_core_province = 475
+				}
+			}
+			475 = {
+				owned_by = ROOT
+				num_of_units_in_province = {
+					amount = 30
+					who = ROOT
+				}
+			}
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 30
+				region = kheterata_region
+			}
+		}
+		effect = {
+			increase_ruler_adm_effect = yes
+			increase_ruler_dip_effect = yes
+			increase_ruler_mil_effect = yes
+			custom_tooltip = " "
+			add_accepted_culture_or_dip_power = {
+				culture = hapremiti
+				free = yes
+			}
+			custom_tooltip = A48_steward_gain_tooltip
+			custom_tooltip = A48_discover_kheteratan_land
+			country_event_with_option_insight = {
+				id = flavor_sugamber.134
+				option_1 = "
+					add_prestige = -20
+				"
+				option_2 = "
+					custom_tooltip = A48_ahati_promise_tooltip
+					bulwar_proper_region = {
+						add_claim = ROOT
+					}
+					add_country_modifier = {
+						name = sugamber_ahati_support
+						duration = 7300
+					}
+				"
+				option_3 = "
+					custom_tooltip = A48_nirakhet_promise_tooltip
+				"
+				option_4 = "
+					custom_tooltip = A48_dual_promise_tooltip
+					bulwar_proper_region = {
+						add_claim = ROOT
+					}
+				"
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = {
+							any_country = {
+								is_emperor_of_china = yes
+							}
+						}
+					}
+					set_emperor_of_china = ROOT
+				}
+				south_salahad_superregion = {
+					discover_country = ROOT
+				}
+				khetapera_region = {
+					discover_country = ROOT
+				}
+				far_bulwar_region = {
+					discover_country = ROOT
+				}
+				zallirkor_area = {
+					discover_country = ROOT
+				}
+				1649 = {
+					discover_country = ROOT
+				}
+				1794 = {
+					discover_country = ROOT
+				}
+				1795 = {
+					discover_country = ROOT
+				}
+				1908 = {
+					discover_country = ROOT
+				}
+				1909 = {
+					discover_country = ROOT
+				}
+				1922 = {
+					discover_country = ROOT
+				}
+				6105 = {
+					discover_country = ROOT
+				}
+				6106 = {
+					discover_country = ROOT
+				}
+				6112 = {
+					discover_country = ROOT
+				}
+				6113 = {
+					discover_country = ROOT
+				}
+				6114 = {
+					discover_country = ROOT
+				}
+				6115 = {
+					discover_country = ROOT
+				}
+			}
+		}
+	}
+	A48_proper_stewards = {
+		icon = mission_conquer_algiers
+		position = 11
+		required_missions = {
+			A48_elikhet_court
+			A48_unite_dynasties
+		}
+		provinces_to_highlight = {
+			province_group = mothers_sorrow_group
+			NOT = {
+				AND = {
+					country_or_non_sovereign_subject_holds = ROOT
+					no_devastation_separatism_unrest = yes
+					OR = {
+						religion = ROOT
+						tolerance_to_this = 2
+					}
+					ROOT = {
+						development_in_provinces = {
+							value = 500
+							province_group = mothers_sorrow_group
+						}
+					}
+				}
+			}
+		}
+		trigger = {
+			empire_of_china_num_reforms_passed = 4
+			mothers_sorrow_group = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				no_devastation_separatism_unrest = yes
+				OR = {
+					religion = ROOT
+					tolerance_to_this = 2
+				}
+			}
+			development_in_provinces = {
+				value = 500
+				province_group = mothers_sorrow_group
+			}
+			custom_trigger_tooltip = {
+				tooltip = A48_ahati_requirements_tooltip
+				OR = {
+					has_global_flag = aakheta_crushed
+					has_country_flag = sugamber_ahati_vow_success
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = A48_nirakhet_requirements_tooltip
+				OR = {
+					AND = {
+						has_global_flag = aakheta_crushed
+						has_country_flag = sugamber_ahati_hostility
+						has_country_flag = sugamber_nirakhet_hostility
+					}
+					has_country_flag = sugamber_nirakhet_uprising_crushed
+					has_country_flag = sugamber_nirakhet_vow_success
+				}
+			}
+		}
+		effect = {
+			set_country_flag = sugamber_double_humane
+			custom_tooltip = A48_humane_personality_tooltip
+			add_country_modifier = {
+				name = sugamber_worthy_stewards
+				duration = -1
+			}
+			custom_tooltip = A48_national_focus_heir_tooltip
+			mothers_sorrow_group = {
+				add_permanent_province_modifier = {
+					name = sugamber_urbanizing_sorrow
+					duration = -1
+				}
+			}
+		}
+	}
+	A48_last_stewards = {
+		icon = mission_new_dawn
+		position = 12
+		required_missions = {
+			A48_proper_stewards
+			A48_humble_barbarians
+		}
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					OR = {
+						region = kheterata_region
+						region = gol_region
+						region = khetapera_region
+					}
+					NOT = {
+						AND = {
+							owned_by = ROOT
+							no_devastation_separatism_unrest = yes
+							OR = {
+								culture = hapremiti
+								culture = wexonard
+								culture_is_human = no
+							}
+						}
+						AND = {
+							region = kheterata_region
+							owned_by = L28
+							L28 = {
+								is_subject_of = ROOT
+							}
+						}
+						area = argazeen_area
+						area = siniwix_area
+						area = garpix_rakkaz_area
+						area = grixzakr_area
+					}
+				}
+				AND = {
+					superregion = bulwar_superregion
+					NOT = {
+						country_or_subject_holds = ROOT
+						ROOT = {
+							num_of_provinces_owned_or_owned_by_subjects_with = {
+								value = 70
+								superregion = bulwar_superregion
+							}
+						}
+					}
+				}
+				AND = {
+					superregion = fangaula_superregion
+					NOT = {
+						country_or_subject_holds = ROOT
+						ROOT = {
+							num_of_provinces_owned_or_owned_by_subjects_with = {
+								value = 80
+								superregion = fangaula_superregion
+							}
+						}
+					}
+				}
+				AND = {
+					region = horashesh_region
+					NOT = {
+						country_or_subject_holds = ROOT
+						ROOT = {
+							num_of_provinces_owned_or_owned_by_subjects_with = {
+								value = 50
+								region = horashesh_region
+							}
+						}
+					}
+				}
+				AND = {
+					region = fahvanosy_region
+					NOT = {
+						country_or_subject_holds = ROOT
+						ROOT = {
+							num_of_provinces_owned_or_owned_by_subjects_with = {
+								value = 50
+								region = fahvanosy_region
+							}
+						}
+					}
+				}
+				AND = {
+					superregion = taneyas_superregion
+					NOT = {
+						country_or_subject_holds = ROOT
+						ROOT = {
+							num_of_provinces_owned_or_owned_by_subjects_with = {
+								value = 80
+								superregion = taneyas_superregion
+							}
+						}
+					}
+				}
+			}
+		}
+		trigger = {
+			empire_of_china_num_reforms_passed = 8
+			custom_trigger_tooltip = {
+				tooltip = A48_crodamize_kheterata_tooltip
+				kheterata_region = {
+					type = all
+					OR = {
+						AND = {
+							owned_by = ROOT
+							no_devastation_separatism_unrest = yes
+							OR = {
+								culture = hapremiti
+								culture = wexonard
+								culture_is_human = no
+							}
+						}
+						AND = {
+							owned_by = L28
+							L28 = {
+								is_subject_of = ROOT
+							}
+						}
+					}
+				}
+				gol_region = {
+					type = all
+					OR = {
+						AND = {
+							owned_by = ROOT
+							no_devastation_separatism_unrest = yes
+							OR = {
+								culture = hapremiti
+								culture = wexonard
+								culture_is_human = no
+							}
+						}
+						area = argazeen_area
+						area = siniwix_area
+						area = garpix_rakkaz_area
+						area = grixzakr_area
+					}
+				}
+				khetapera_region = {
+					type = all
+					owned_by = ROOT
+					no_devastation_separatism_unrest = yes
+					OR = {
+						culture = hapremiti
+						culture = wexonard
+						culture_is_human = no
+					}
+				}
+			}
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 70
+				superregion = bulwar_superregion
+			}
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 80
+				superregion = fangaula_superregion
+			}
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 50
+				region = horashesh_region
+			}
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 50
+				region = fahvanosy_region
+			}
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 80
+				superregion = taneyas_superregion
+			}
+		}
+		effect = {
+			set_country_flag = sugamber_global_empire
+			custom_tooltip = A48_upgrade_worthy_stewards_tooltip
+			hidden_effect = {
+				remove_country_modifier = sugamber_worthy_stewards
+			}
+			add_country_modifier = {
+				name = sugamber_restorer_kheterata
+				duration = -1
+			}
+			custom_tooltip = A48_national_focus_ruler_tooltip
+		}
+	}
+}
+
+sugamber_column_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = A48
+			was_tag = A48
+		}
+	}
+	A48_expand_shoe_production = {
+		icon = shoe_mission
+		position = 1
+		provinces_to_highlight = {
+			OR = {
+				province_id = 319
+				province_id = 409
+			}
+			NOT = {
+				AND = {
+					owned_by = ROOT
+					base_production = 5
+					has_any_ongoing_construction = no
+				}
+			}
+		}
+		trigger = {
+			treasury = 100
+			estate_loyalty = {
+				estate = estate_burghers
+				loyalty = 50
+			}
+			319 = {
+				owned_by = ROOT
+				base_production = 5
+				has_any_ongoing_construction = no
+			}
+			409 = {
+				owned_by = ROOT
+				base_production = 5
+				has_any_ongoing_construction = no
+			}
+		}
+		effect = {
+			add_treasury = -100
+			custom_tooltip = " "
+			319 = {
+				change_trade_goods = livestock
+				add_building_construction = {
+					building = workshop
+					cost = 0
+					speed = 1
+				}
+				add_permanent_province_modifier = {
+					name = sugamber_leather_shoes
+					duration = -1
+				}
+			}
+			409 = {
+				change_trade_goods = livestock
+				add_building_construction = {
+					building = workshop
+					cost = 0
+					speed = 1
+				}
+				add_permanent_province_modifier = {
+					name = sugamber_leather_shoes_2
+					duration = -1
+				}
+			}
+			complex_dynamic_effect = {
+				first_custom_tooltip = A48_lisolette_shoe_personality_tooltip
+				first_limit = "
+					OR = {
+						has_ruler_flag = lisolette_sil_rhinmond
+						has_heir_flag = lisolette_sil_rhinmond
+					}
+					319 = {
+						base_production = 7
+					}
+					409 = {
+						base_production = 7
+					}
+				"
+				first_effect = "
+					if = {
+						limit = {
+							has_ruler_flag = lisolette_sil_rhinmond
+
+						}
+						add_ruler_personality = entrepreneur_personality
+					}
+					else = {
+						add_heir_personality = entrepreneur_personality
+						set_heir_flag = entrepreneur_mission
+						custom_tooltip = A48_lisolette_entrepreneur_tooltip
+						add_heir_claim = 5
+					}
+				"
+			}
+		}
+	}
+	A48_bane_milcori = {
+		icon = mission_destroyed_city
+		position = 2
+		required_missions = {
+			A48_repair_shield
+		}
+		provinces_to_highlight = {
+			OR = {
+				is_capital_of = A56
+				AND = {
+					OR = {
+						province_id = 412
+						province_id = 414
+						province_id = 416
+					}
+					NOT = {
+						AND = {
+							owned_by = ROOT
+							is_core = ROOT
+						}
+					}
+				}
+				AND = {
+					province_id = 413
+					NOT = {
+						AND = {
+							owned_by = ROOT
+							is_core = ROOT
+							num_of_units_in_province = {
+								amount = 10
+								who = ROOT
+							}
+						}
+					}
+				}
+			}
+		}
+		trigger = {
+			is_at_war = no
+			NOT = {
+				exists = A56
+			}
+			owns_core_province = 413
+			owns_core_province = 412
+			owns_core_province = 414
+			owns_core_province = 416
+			413 = {
+				num_of_units_in_province = {
+					amount = 10
+					who = ROOT
+				}
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = sugamber_continuing_long_war
+				duration = 7300
+			}
+			arannen_area = {
+				add_permanent_claim = ROOT
+			}
+			eastborders_area = {
+				add_permanent_claim = ROOT
+			}
+			custom_tooltip = " "
+			country_event_with_option_insight = {
+				id = flavor_sugamber.104
+				option_1 = "
+					custom_tooltip = A48_lenient_treatment_tooltip
+					tooltip = {
+						add_treasury = 50
+					}
+					custom_tooltip = A48_lenient_dev_loss_tooltip
+					custom_tooltip = A48_double_development_5_times_tooltip
+				"
+				option_2 = "
+					custom_tooltip = A48_heavy_treatment_tooltip
+					tooltip = {
+						add_treasury = 100
+					}
+					custom_tooltip = A48_heavy_dev_loss_tooltip
+					custom_tooltip = A48_double_development_15_times_tooltip
+				"
+			}
+		}
+	}
+	A48_lions_east = {
+		icon = mission_misty_forest
+		position = 3
+		required_missions = {
+			A48_bane_milcori
+		}
+		provinces_to_highlight = {
+			area = arannen_area
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		trigger = {
+			arannen_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		effect = {
+			gisden_area = {
+				add_permanent_claim = ROOT
+			}
+			custom_tooltip = A48_arannese_claim_tooltip
+			add_casus_belli = {
+				type = cb_gnollish_dissolution
+				months = 1200
+				target = AC7
+			}
+			custom_tooltip = A48_kryzzar_dissolution_tooltip
+			set_country_flag = kryzzar_dissolution
+			country_event_with_option_insight = {
+				id = flavor_sugamber.112
+				option_1 = "
+					add_mercantilism = 3
+					add_estate_loyalty = {
+						estate = estate_burghers
+						loyalty = 10
+					}
+				"
+				option_2 = "
+					add_prestige = 10
+					add_treasury = 100
+					custom_tooltip = A48_salt_diplomacy_tooltip
+					6150 = {
+						add_province_modifier = {
+							name = sugamber_selling_off_salt
+							duration = 10950
+						}
+					}
+				"
+			}
+			hidden_effect = {
+				417 = {
+					add_permanent_claim = ROOT
+				}
+				420 = {
+					add_permanent_claim = ROOT
+				}
+				921 = {
+					add_permanent_claim = ROOT
+				}
+				922 = {
+					add_permanent_claim = ROOT
+				}
+			}
+		}
+	}
+	A48_wexonard_cloth_industry = {
+		icon = ned_cloth_trading
+		position = 4
+		required_missions = {
+			A48_lions_east
+		}
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					OR = {
+						area = highcliff_area
+						area = antir_drop_area
+					}
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+				AND = {
+					province_id = 413
+					NOT = {
+						AND = {
+							development = 15
+							culture = wexonard
+							province_has_center_of_trade_of_level = 2
+							has_trade_building_trigger_short = yes
+							has_shipyard_building_trigger = yes
+						}
+					}
+				}
+				AND = {
+					OR = {
+						province_id = 411
+						province_id = 412
+						province_id = 921
+						province_id = 922
+					}
+					NOT = {
+						AND = {
+							development = 15
+							culture = wexonard
+							province_has_center_of_trade_of_level = 2
+							has_trade_building_trigger_short = yes
+							has_production_building_trigger = yes
+							has_shipyard_building_trigger = yes
+						}
+					}
+				}
+				AND = {
+					OR = {
+						province_id = 1305
+						province_id = 1309
+						province_id = 1312
+					}
+					NOT = {
+						trade_share = {
+							country = ROOT
+							share = 10
+						}
+					}
+				}
+			}
+		}
+		trigger = {
+			highcliff_area = {
+				type = all
+				owned_by = ROOT
+			}
+			antir_drop_area = {
+				type = all
+				owned_by = ROOT
+			}
+			413 = {
+				development = 15
+				culture = wexonard
+				province_has_center_of_trade_of_level = 2
+				has_trade_building_trigger_short = yes
+				has_shipyard_building_trigger = yes
+			}
+			custom_trigger_tooltip = {
+				tooltip = A48_coastal_development_tooltip
+				411 = {
+					development = 10
+					culture = wexonard
+					has_production_building_trigger = yes
+				}
+				412 = {
+					development = 10
+					culture = wexonard
+					has_production_building_trigger = yes
+				}
+				921 = {
+					development = 10
+					culture = wexonard
+					has_production_building_trigger = yes
+				}
+				922 = {
+					development = 10
+					culture = wexonard
+					has_production_building_trigger = yes
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = A48_bahar_trade_tooltip
+				OR = {
+					1312 = {
+						trade_share = {
+							country = ROOT
+							share = 10
+						}
+					}
+					AND = {
+						1312 = {
+							trade_share = {
+								country = ROOT
+								share = 5
+							}
+						}
+						any_known_country = {
+							capital_scope = {
+								superregion = bulwar_superregion
+							}
+							any_owned_province = {
+								trade_goods = wool
+							}
+							has_opinion = {
+								who = ROOT
+								value = 150
+							}
+						}
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = A48_brasan_trade_tooltip
+				OR = {
+					1309 = {
+						trade_share = {
+							country = ROOT
+							share = 10
+						}
+					}
+					AND = {
+						1309 = {
+							trade_share = {
+								country = ROOT
+								share = 5
+							}
+						}
+						any_known_country = {
+							any_owned_province = {
+								trade_goods = silk
+							}
+							has_opinion = {
+								who = ROOT
+								value = 150
+							}
+						}
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = A48_sorrow_trade_tooltip
+				OR = {
+					1305 = {
+						trade_share = {
+							country = ROOT
+							share = 10
+						}
+					}
+					AND = {
+						1305 = {
+							trade_share = {
+								country = ROOT
+								share = 5
+							}
+						}
+						any_known_country = {
+							any_owned_province = {
+								trade_goods = cotton
+							}
+							has_opinion = {
+								who = ROOT
+								value = 150
+							}
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			413 = {
+				change_trade_goods = paper
+				add_province_modifier = {
+					name = sugamber_great_harbor
+					duration = -1
+				}
+				add_province_triggered_modifier = sugamber_textile_entrepot
+			}
+			custom_tooltip = A48_wexonard_cloth_tooltip
+			tooltip = {
+				6150 = {
+					change_trade_goods = cloth
+					add_permanent_province_modifier = {
+						name = sugamber_coastal_textile
+						duration = -1
+					}
+				}
+			}
+			412 = {
+				change_trade_goods = silk
+				add_permanent_province_modifier = {
+					name = sugamber_coastal_textile
+					duration = -1
+				}
+			}
+			custom_tooltip = A48_fabric_trade_tooltip
+			hidden_effect = {
+				411 = {
+					change_trade_goods = cloth
+					add_permanent_province_modifier = {
+						name = sugamber_coastal_textile
+						duration = -1
+					}
+				}
+				921 = {
+					change_trade_goods = cloth
+					add_permanent_province_modifier = {
+						name = sugamber_coastal_textile
+						duration = -1
+					}
+				}
+				922 = {
+					change_trade_goods = cloth
+					add_permanent_province_modifier = {
+						name = sugamber_coastal_textile
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+	A48_dominate_gnolls = {
+		icon = mission_hill_gnoll_auxilaries
+		position = 5
+		required_missions = {
+			A48_lionsbane
+		}
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					OR = {
+						AND = {
+							area = khenak_area
+							NOT = {
+								province_id = 376
+							}
+						}
+						province_id = 364
+					}
+					OR = {
+						unrest = 1
+						NOT = {
+							AND = {
+								owned_by = ROOT
+								is_core = ROOT
+							}
+						}
+					}
+				}
+				AND = {
+					area = eastborders_area
+					owned_by = ROOT
+				}
+				owned_by = A49
+				owned_by = B67
+				AND = {
+					is_capital_of = AC7
+					owner = {
+						NOT = {
+							exists = no
+							has_country_flag = sugamber_dissolution
+						}
+					}
+				}
+				AND = {
+					is_capital_of = U07
+					NOT = {
+						ROOT = {
+							navy_size = U07
+						}
+					}
+				}
+			}
+		}
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = A48_conquer_hill_gnolls_tooltip
+				364 = {
+					owned_by = ROOT
+					is_core = ROOT
+					NOT = {
+						unrest = 1
+					}
+				}
+				khenak_area = {
+					type = all
+					OR = {
+						AND = {
+							owned_by = ROOT
+							is_core = ROOT
+							NOT = {
+								unrest = 1
+							}
+						}
+						province_id = 376
+					}
+				}
+			}
+			eastborders_area = {
+				type = all
+				owned_by = ROOT
+			}
+			NOT = {
+				exists = A49
+				exists = B67
+			}
+			AC7 = {
+				OR = {
+					exists = no
+					has_country_flag = sugamber_dissolution
+				}
+			}
+			navy_size = U07
+		}
+		effect = {
+			add_casus_belli = {
+				type = cb_gnollish_dissolution
+				months = 1200
+				target = U07
+			}
+			custom_tooltip = " "
+			add_casus_belli = {
+				type = cb_gnollish_dissolution
+				months = 1200
+				target = U10
+			}
+			custom_tooltip = " "
+			country_event_with_option_insight = {
+				id = flavor_sugamber.123
+				option_1 = "
+					custom_tooltip = A48_wexonard_khenak_tooltip
+				"
+				option_2 = "
+					custom_tooltip = A48_busilari_khenak_tooltip
+				"
+			}
+			custom_tooltip = " "
+			custom_tooltip = " "
+			country_event = {
+				id = flavor_sugamber.124
+				days = 30
+			}
+			custom_tooltip = A48_gnollish_choice_fake_insight_tooltip
+		}
+	}
+	A48_jailers_nerat = {
+		icon = mission_merchant_trip
+		position = 8
+		required_missions = {
+			A48_across_gates
+			A48_dominate_gnolls
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 332
+				AND = {
+					is_capital_of = U07
+					owner = {
+						NOT = {
+							has_country_flag = sugamber_dissolution
+						}
+					}
+				}
+			}
+		}
+		trigger = {
+			if = {
+				limit = {
+					religion = dalcabba
+				}
+				religion = dalcabba
+			}
+			else = {
+				religion = regent_court
+				has_personal_deity = nerat
+			}
+			estate_loyalty = {
+				estate = estate_church
+				loyalty = 60
+			}
+			332 = {
+				has_great_project = {
+					type = the_necropolis
+					tier = 2
+				}
+			}
+			has_country_modifier = racial_focus_gnollish
+			is_not_purging_or_expelling_race_trigger = { race = gnollish }
+			U07 = {
+				OR = {
+					exists = no
+					has_country_flag = sugamber_dissolution
+				}
+			}
+		}
+		effect = {
+			set_country_flag = sugamber_gnollish_garrison
+			set_country_flag = cannot_expel_purge_gnollish
+			add_legitimacy = -10
+			add_prestige = -20
+			custom_tooltip = " "
+			add_country_modifier = {
+				name = sugamber_hounds_nerat
+				duration = -1
+			}
+			332 = {
+				add_gnollish_minority_size_effect = yes
+			}
+			custom_tooltip = A48_gnollish_coexistence_tooltip
+			west_salahad_region = {
+				limit = {
+					NOT = {
+						area = salahad_islands_area
+					}
+				}
+				add_permanent_claim = ROOT
+			}
+			custom_tooltip = A48_global_dissolution_tooltip
+			hidden_effect = {
+				west_salahad_region = {
+					discover_country = ROOT
+				}
+				if = {
+					limit = {
+						has_country_flag = unlocked_merc_gnoll_sugamber_1
+					}
+					unlock_merc_company = {
+						merc_company = merc_gnoll_sugamber_1_upgraded
+						free_merc = yes
+					}
+					clr_country_flag = unlocked_merc_gnoll_sugamber_1
+				}
+				else_if = {
+					limit = {
+						has_country_flag = unlocked_merc_gnoll_sugamber_2
+					}
+					unlock_merc_company = {
+						merc_company = merc_gnoll_sugamber_2_upgraded
+						free_merc = yes
+					}
+					clr_country_flag = unlocked_merc_gnoll_sugamber_2
+				}
+				set_variable = {
+					which = gnollish_race_tolerance
+					value = 50
+				}
+				country_event = {
+					id = racial_pop_events_gnollish.99
+				}
+				every_owned_province = {
+					limit = {
+						has_building = fort_15th
+					}
+					sugamber_gnoll_on_build = { building = fort_15th }
+				}
+				every_owned_province = {
+					limit = {
+						has_building = fort_16th
+					}
+					sugamber_gnoll_on_build = { building = fort_15th }
+					sugamber_gnoll_on_build = { building = fort_16th }
+				}
+				every_owned_province = {
+					limit = {
+						has_building = fort_17th
+					}
+					sugamber_gnoll_on_build = { building = fort_15th }
+					sugamber_gnoll_on_build = { building = fort_16th }
+					sugamber_gnoll_on_build = { building = fort_17th }
+				}
+				every_owned_province = {
+					limit = {
+						has_building = fort_18th
+					}
+					sugamber_gnoll_on_build = { building = fort_15th }
+					sugamber_gnoll_on_build = { building = fort_16th }
+					sugamber_gnoll_on_build = { building = fort_17th }
+					sugamber_gnoll_on_build = { building = fort_18th }
+				}
+				every_owned_province = {
+					limit = {
+						has_building = barracks
+					}
+					sugamber_gnoll_on_build = { building = barracks }
+				}
+				every_owned_province = {
+					limit = {
+						has_building = training_fields
+					}
+					sugamber_gnoll_on_build = { building = barracks }
+					sugamber_gnoll_on_build = { building = training_fields }
+				}
+				every_owned_province = {
+					limit = {
+						has_building = regimental_camp
+					}
+					sugamber_gnoll_on_build = { building = regimental_camp }
+				}
+				every_owned_province = {
+					limit = {
+						has_building = conscription_center
+					}
+					sugamber_gnoll_on_build = { building = regimental_camp }
+					sugamber_gnoll_on_build = { building = conscription_center }
+				}
+				every_owned_province = {
+					limit = {
+						has_building = ramparts
+					}
+					sugamber_gnoll_on_build = { building = ramparts }
+				}
+				every_owned_province = {
+					limit = {
+						has_building = soldier_households
+					}
+					sugamber_gnoll_on_build = { building = soldier_households }
+				}
+			}
+		}
+	}
+	A48_breadbasket_divenhal = {
+		icon = mission_pol_breadbasket_europe
+		position = 9
+		required_missions = {
+			A48_invading_delta
+		}
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					has_province_modifier = granary_of_the_divenhal
+					NOT = {
+						AND = {
+							base_production = 8
+							has_production_building_trigger = yes
+							has_production_manufactory_or_gold_trigger = yes
+						}
+					}
+				}
+				AND = {
+					area = coast_of_tears_area
+					NOT = {
+						AND = {
+							owned_by = ROOT
+							has_production_building_trigger = yes
+							OR = {
+								has_production_manufactory_or_gold_trigger = yes
+								province_id = 463
+							}
+						}
+						AND = {
+							owned_by = L28
+							owned_by_subject_of = ROOT
+							NOT = {
+								num_free_building_slots = 1
+							}
+						}
+					}
+				}
+				AND = {
+					province_id = 365
+					NOT = {
+						AND = {
+							owned_by = ROOT
+							ace_province_is_or_accepts_culture = yes
+							province_has_center_of_trade_of_level = 3
+							has_trade_building_trigger_short = yes
+
+						}
+					}
+				}
+				AND = {
+					province_id = 408
+					NOT = {
+						AND = {
+							owned_by = ROOT
+							ace_province_is_or_accepts_culture = yes
+							province_has_center_of_trade_of_level = 2
+							has_trade_building_trigger_short = yes
+
+						}
+					}
+				}
+			}
+		}
+		trigger = {
+			treasury = 2000
+			innovativeness = 60
+			num_of_owned_provinces_with = {
+				value = 4
+				has_province_modifier = granary_of_the_divenhal
+				base_production = 8
+				has_production_building_trigger = yes
+				has_production_manufactory_or_gold_trigger = yes
+			}
+			OR = {
+				coast_of_tears_area = {
+					type = all
+					owned_by = ROOT
+					has_production_building_trigger = yes
+					OR = {
+						has_production_manufactory_or_gold_trigger = yes
+						province_id = 463
+					}
+				}
+				coast_of_tears_area = {
+					type = all
+					owned_by = L28
+					owned_by_subject_of = ROOT
+					NOT = {
+						num_free_building_slots = 1
+					}
+				}
+			}
+			365 = {
+				owned_by = ROOT
+				ace_province_is_or_accepts_culture = yes
+				province_has_center_of_trade_of_level = 3
+				has_trade_building_trigger_short = yes
+			}
+			408 = {
+				owned_by = ROOT
+				ace_province_is_or_accepts_culture = yes
+				province_has_center_of_trade_of_level = 2
+				has_trade_building_trigger_short = yes
+			}
+		}
+		effect = {
+			add_treasury = -2000
+			custom_tooltip = A48_swamp_reclamation_tooltip
+			tooltip = {
+				6150 = {
+					add_permanent_province_modifier = {
+						name = sugamber_marsh_reclamation
+						duration = -1
+					}
+				}
+			}
+			408 = {
+				upgrade_trade_building = yes
+			}
+			custom_tooltip = " "
+			365 = {
+				upgrade_trade_building = yes
+				custom_tooltip = " "
+				add_province_triggered_modifier = sugamber_plentiful_food
+			}
+			custom_tooltip = A48_plentiful_food_tooltip
+			hidden_effect = {
+				462 = {
+					add_permanent_province_modifier = {
+						name = sugamber_marsh_reclamation
+						duration = -1
+					}
+				}
+				463 = {
+					add_permanent_province_modifier = {
+						name = sugamber_marsh_reclamation
+						duration = -1
+					}
+				}
+				546 = {
+					add_permanent_province_modifier = {
+						name = sugamber_marsh_reclamation
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+	A48_unite_dynasties = {
+		icon = mission_marriage
+		position = 10
+		required_missions = {
+			A48_meeting_khetarch
+		}
+		provinces_to_highlight = {
+			region = kheterata_region
+			NOT = {
+				AND = {
+					country_or_non_sovereign_subject_holds = ROOT
+					no_devastation_or_unrest = yes
+				}
+			}
+		}
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = A48_king_in_wexerata_tooltip
+				OR = {
+					has_reform = sugamber_wexonard_crown_free
+					has_reform = sugamber_wexonard_crown_kingdom
+				}
+			}
+			stability = 2
+			prestige = 90
+			imperial_mandate = 80
+			meritocracy = 80
+			kheterata_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				NOT = {
+					unrest = 1
+				}
+			}
+		}
+		effect = {
+			set_country_flag = sugamber_ryonard_crodamos
+			add_government_reform = sugamber_wexonard_kheteratan_empire
+			custom_tooltip = " "
+			country_event = {
+				id = flavor_sugamber.152
+			}
+			custom_tooltip = " "
+			add_ruler_personality = humane_personality
+			custom_tooltip = " "
+			kheterata_region = {
+				add_nationalism = -5
+			}
+			custom_tooltip = A48_kheterata_crodamization_tooltip
+			tooltip = {
+				6150 = {
+					add_province_modifier = {
+						name = sugamber_crodamization
+						duration = 14600
+					}
+				}
+			}
+			custom_tooltip = A48_button_unlocked_kheterata_tooltip
+			hidden_effect = {
+				kheterata_region = {
+					limit = {
+						NOT = {
+							religion_group = cannorian
+							religion_group = khetist
+						}
+						culture_group = kheteratan
+					}
+					change_religion = elikhetist
+				}
+				gol_region = {
+					limit = {
+						NOT = {
+							area = argazeen_area
+							area = siniwix_area
+							area = garpix_rakkaz_area
+							area = grixzakr_area
+						}
+					}
+					add_permanent_claim = ROOT
+				}
+				khetapera_region = {
+					add_permanent_claim = ROOT
+				}
+				eastern_krahway_area = {
+					add_permanent_claim = ROOT
+				}
+				every_owned_province = {
+					limit = {
+						OR = {
+							region = kheterata_region
+							region = gol_region
+							region = khetapera_region
+						}
+						NOT = {
+							culture = hapremiti
+							culture = wexonard
+						}
+					}
+					add_province_modifier = {
+						name = sugamber_crodamization
+						duration = 14600
+					}
+				}
+			}
+		}
+	}
+	A48_humble_barbarians = {
+		icon = mission_desert_pilgrim
+		position = 11
+		required_missions = {
+			A48_unite_dynasties
+		}
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					OR = {
+						region = gol_region
+						region = khetapera_region
+					}
+					NOT = {
+						owned_by = ROOT
+						area = argazeen_area
+						area = siniwix_area
+						area = garpix_rakkaz_area
+						area = grixzakr_area
+					}
+				}
+				AND = {
+					province_id = 5483
+					NOT = {
+						AND = {
+							has_fort_building_trigger = yes
+							has_building = mage_tower
+						}
+					}
+				}
+			}
+		}
+		trigger = {
+			gol_region = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					area = argazeen_area
+					area = siniwix_area
+					area = garpix_rakkaz_area
+					area = grixzakr_area
+				}
+			}
+			khetapera_region = {
+				type = all
+				owned_by = ROOT
+			}
+			5483 = {
+				has_fort_building_trigger = yes
+				has_building = mage_tower
+			}
+			estate_loyalty = {
+				estate = estate_mages
+				loyalty = 60
+			}
+			tributary_state = 5
+		}
+		effect = {
+			set_country_flag = sugamber_muhaqaar_damestear
+			set_country_flag = ace_upgraded_battlemages
+			if = {
+				limit = {
+					is_emperor_of_china = yes
+				}
+				add_mandate = 20
+			}
+			else = {
+				custom_tooltip = A48_imperial_mandate_20_tooltip
+				custom_tooltip = " "
+			}
+			gol_region = {
+				limit = {
+					owned_by = ROOT
+				}
+				add_nationalism = -5
+			}
+			khetapera_region = {
+				add_nationalism = -5
+			}
+			custom_tooltip = " "
+			5483 = {
+				add_permanent_province_modifier = {
+					name = sugamber_cannorian_muhaqaar
+					duration = -1
+				}
+			}
+			custom_tooltip = A48_magisterium_absolutism_tooltip
+			custom_tooltip = A30_battlemage_academies_upgrade_tooltip
+			create_war_wizard_effect = yes
+			custom_tooltip = A48_vyzemby_tributary_tooltip
+			complex_dynamic_effect = {
+				first_custom_tooltip = A48_horashesh_satrapy_tooltip
+				first_limit = "
+					L29 = {
+						OR = {
+							exists = no
+							is_subject_of = ROOT
+						}
+					}
+					horashesh_region = {
+						type = all
+						OR = {
+							owner = {
+								OR = {
+									is_subject_of_type = tributary_state
+									is_subject_of_type = medasi_subject
+								}
+								is_subject_of = ROOT
+							}
+							owned_by = ROOT
+							area = bivirir_area
+							area = porhonozy_area
+						}
+					}
+				"
+				first_effect = "
+					sugamber_consolidate_kartakhet = yes
+				"
+			}
+			hidden_effect = {
+				every_country = {
+					limit = {
+						any_owned_province = {
+							region = fahvanosy_region
+						}
+					}
+					reverse_add_casus_belli = {
+						target = ROOT
+						type = cb_force_tributary_anb
+						months = 600
+					}
+				}
+			}
+		}
+	}
+}
+
+sugamber_column_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = A48
+			was_tag = A48
+		}
+	}
+	A48_perfect_horseshoe = {
+		icon = mission_smith
+		position = 1
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					OR = {
+						province_id = 316
+						province_id = 317
+					}
+					NOT = {
+						AND = {
+							owned_by = ROOT
+							base_production = 7
+						}
+					}
+				}
+				AND = {
+					has_terrain = hills
+					NOT = {
+						any_province = {
+							has_terrain = hills
+							num_of_units_in_province = {
+								amount = 1
+								type = cavalry
+								who = ROOT
+							}
+						}
+					}
+				}
+				AND = {
+					has_winter = severe_winter
+					NOT = {
+						any_province = {
+							has_winter = severe_winter
+							num_of_units_in_province = {
+								amount = 1
+								type = cavalry
+								who = ROOT
+							}
+						}
+					}
+				}
+				AND = {
+					has_terrain = marsh
+					NOT = {
+						any_province = {
+							has_terrain = marsh
+							num_of_units_in_province = {
+								amount = 1
+								type = cavalry
+								who = ROOT
+							}
+						}
+					}
+				}
+				AND = {
+					has_terrain = woods
+					NOT = {
+						any_province = {
+							has_terrain = woods
+							num_of_units_in_province = {
+								amount = 1
+								type = cavalry
+								who = ROOT
+							}
+						}
+					}
+				}
+				AND = {
+					has_terrain = grasslands
+					NOT = {
+						any_province = {
+							has_terrain = grasslands
+							num_of_units_in_province = {
+								amount = 1
+								type = cavalry
+								who = ROOT
+							}
+						}
+					}
+				}
+			}
+		}
+		trigger = {
+			OR = {
+				army_professionalism = 0.1
+				innovativeness = 10
+			}
+			316 = {
+				owned_by = ROOT
+				base_production = 7
+			}
+			317 = {
+				owned_by = ROOT
+				base_production = 7
+			}
+			any_province = {
+				has_terrain = hills
+				num_of_units_in_province = {
+					amount = 1
+					type = cavalry
+					who = ROOT
+				}
+			}
+			any_province = {
+				has_winter = severe_winter
+				num_of_units_in_province = {
+					amount = 1
+					type = cavalry
+					who = ROOT
+				}
+			}
+			any_province = {
+				has_terrain = marsh
+				num_of_units_in_province = {
+					amount = 1
+					type = cavalry
+					who = ROOT
+				}
+			}
+			any_province = {
+				has_terrain = woods
+				num_of_units_in_province = {
+					amount = 1
+					type = cavalry
+					who = ROOT
+				}
+			}
+			any_province = {
+				has_terrain = grasslands
+				num_of_units_in_province = {
+					amount = 1
+					type = cavalry
+					who = ROOT
+				}
+			}
+		}
+		effect = {
+			316 = {
+				add_permanent_province_modifier = {
+					name = sugamber_horseshoe_production
+					duration = -1
+				}
+			}
+			317 = {
+				add_permanent_province_modifier = {
+					name = sugamber_horseshoe_production
+					duration = -1
+				}
+			}
+			add_country_modifier = {
+				name = sugamber_cheap_cavalry
+				duration = 10950
+			}
+		}
+	}
+	A48_employ_roadwardens = {
+		icon = mission_royal_roads
+		position = 2
+		required_missions = {
+			A48_expand_shoe_production
+			A48_perfect_horseshoe
+		}
+		provinces_to_highlight = {
+			owned_by = ROOT
+			OR = {
+				has_supply_depot = ROOT
+				has_trade_building_trigger_short = yes
+			}
+			NOT = {
+				AND = {
+					has_supply_depot = ROOT
+					has_trade_building_trigger_short = yes
+				}
+			}
+		}
+		trigger = {
+			trade_goods_produced_amount = {
+				trade_goods = livestock
+				amount = 20
+			}
+			trade_goods_produced_amount = {
+				trade_goods = iron
+				amount = 10
+			}
+			estate_loyalty = {
+				estate = estate_adventurers
+				loyalty = 60
+			}
+			num_of_owned_provinces_with = {
+				value = 6
+				has_supply_depot = ROOT
+				has_trade_building_trigger_short = yes
+			}
+		}
+		effect = {
+			add_army_tradition = 10
+			set_country_flag = established_roadwardens
+			custom_tooltip = A48_unlock_roadwarden_privilege_tooltip
+		}
+	}
+	A48_morbani_heritage = {
+		icon = sav_union_with_naples
+		position = 3
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					is_capital_of = A36
+					NOT = {
+						owner = {
+							has_opinion = {
+								who = ROOT
+								value = 150
+							}
+						}
+					}
+				}
+				AND = {
+					province_id = 253
+					NOT = {
+						exists = A36
+					}
+					NOT = {
+						owner = {
+							has_spy_network_from = {
+								who = ROOT
+								value = 30
+							}
+						}
+					}
+				}
+				AND = {
+					province_id = 338
+					NOT = {
+						owner = {
+							has_spy_network_from = {
+								who = ROOT
+								value = 30
+							}
+						}
+					}
+				}
+				AND = {
+					province_id = 410
+					NOT = {
+						AND = {
+							base_manpower = 7
+							has_manpower_building_trigger = yes
+							has_production_building_trigger = yes
+							num_of_units_in_province = {
+								amount = 5
+								type = cavalry
+								who = ROOT
+							}
+						}
+					}
+				}
+			}
+		}
+		trigger = {
+			treasury = 300
+			OR = {
+				A36 = {
+					has_opinion = {
+						who = ROOT
+						value = 150
+					}
+				}
+				AND = {
+					NOT = {
+						exists = A36
+					}
+					253 = {
+						owner = {
+							has_spy_network_from = {
+								who = ROOT
+								value = 30
+							}
+						}
+					}
+				}
+			}
+			338 = {
+				owner = {
+					has_spy_network_from = {
+						who = ROOT
+						value = 30
+					}
+				}
+			}
+			410 = {
+				base_manpower = 7
+				has_manpower_building_trigger = yes
+				has_production_building_trigger = yes
+				num_of_units_in_province = {
+					amount = 5
+					type = cavalry
+					who = ROOT
+				}
+			}
+		}
+		effect = {
+			add_treasury = -300
+			custom_tooltip = " "
+			410 = {
+				kill_units = {
+					amount = 5
+					type = cavalry
+					who = ROOT
+				}
+				custom_tooltip = " "
+				change_trade_goods = livestock
+				change_culture = wexonard
+				custom_tooltip = " "
+				add_permanent_province_modifier = {
+					name = sugamber_royal_stable_1
+					duration = -1
+				}
+			}
+			add_country_modifier = {
+				name = sugamber_morbani_heritage
+				duration = -1
+			}
+		}
+	}
+	A48_coldblood_stable = {
+		icon = mam_refine_the_furusiyya
+		position = 4
+		required_missions = {
+			A48_lions_east
+			A48_morbani_heritage
+		}
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					area = gisden_area
+					NOT = {
+						country_or_non_sovereign_subject_holds = ROOT
+					}
+				}
+				AND = {
+					province_id = 312
+					NOT = {
+						AND = {
+							base_production = 10
+							has_production_manufactory_or_gold_trigger = yes
+							has_production_building_trigger = yes
+						}
+					}
+				}
+				AND = {
+					province_id = 410
+					NOT = {
+						AND = {
+							base_production = 10
+							has_production_manufactory_or_gold_trigger = yes
+						}
+					}
+				}
+				AND = {
+					OR = {
+						province_id = 75
+						province_id = 955
+					}
+					NOT = {
+						owner = {
+							OR = {
+								has_opinion = {
+									who = ROOT
+									value = 150
+								}
+								has_spy_network_from = {
+									who = ROOT
+									value = 50
+								}
+							}
+						}
+						owned_by = ROOT
+					}
+				}
+			}
+		}
+		trigger = {
+			treasury = 500
+			gisden_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			312 = {
+				owned_by = ROOT
+				base_production = 10
+				has_production_manufactory_or_gold_trigger = yes
+				has_production_building_trigger = yes
+			}
+			410 = {
+				base_production = 10
+				has_production_manufactory_or_gold_trigger = yes
+			}
+			custom_trigger_tooltip = {
+				tooltip = A48_ording_horse_tooltip
+				75 = {
+					owner = {
+						OR = {
+							has_opinion = {
+								who = ROOT
+								value = 150
+							}
+							has_spy_network_from = {
+								who = ROOT
+								value = 50
+							}
+							tag = ROOT
+						}
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = A48_gerudia_horse_tooltip
+				955 = {
+					owner = {
+						OR = {
+							has_opinion = {
+								who = ROOT
+								value = 150
+							}
+							has_spy_network_from = {
+								who = ROOT
+								value = 50
+							}
+							tag = ROOT
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			add_treasury = -500
+			custom_tooltip = " "
+			312 = {
+				upgrade_production_building = yes
+				custom_tooltip = " "
+				if = {
+					limit = {
+						NOT = {
+							trade_goods = livestock
+						}
+					}
+					change_trade_goods = livestock
+					custom_tooltip = " "
+				}
+				change_culture = wexonard
+				custom_tooltip = " "
+				add_permanent_province_modifier = {
+					name = sugamber_coldblood_stable
+					duration = -1
+				}
+			}
+			410 = {
+				upgrade_production_building = yes
+				custom_tooltip = " "
+				custom_tooltip = A48_upgrade_royal_stable_tooltip
+				hidden_effect = {
+					remove_province_modifier = sugamber_royal_stable_1
+				}
+				add_permanent_province_modifier = {
+					name = sugamber_royal_stable_2
+					duration = -1
+				}
+			}
+			add_country_modifier = {
+				name = sugamber_workhorses
+				duration = -1
+			}
+		}
+	}
+	A48_hotblood_stable = {
+		icon = mission_desert_rider
+		position = 5
+		required_missions = {
+			A48_lionsbane
+			A48_coldblood_stable
+		}
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					province_id = 372
+					NOT = {
+						AND = {
+							owned_by = ROOT
+							base_manpower = 10
+							has_manpower_building_trigger = yes
+							has_forcelimit_building_trigger = yes
+							has_any_ongoing_construction = no
+						}
+					}
+				}
+				AND = {
+					province_id = 410
+					NOT = {
+						AND = {
+							base_manpower = 13
+							has_forcelimit_building_trigger = yes
+						}
+					}
+				}
+				AND = {
+					OR = {
+						province_id = 477
+						province_id = 629
+					}
+					NOT = {
+						owner = {
+							OR = {
+								has_opinion = {
+									who = ROOT
+									value = 150
+								}
+								has_spy_network_from = {
+									who = ROOT
+									value = 50
+								}
+							}
+						}
+						owned_by = ROOT
+					}
+				}
+			}
+		}
+		trigger = {
+			treasury = 1000
+			372 = {
+				owned_by = ROOT
+				base_manpower = 10
+				has_manpower_building_trigger = yes
+				has_any_ongoing_construction = no
+			}
+			410 = {
+				base_manpower = 10
+				has_manpower_building_trigger = yes
+			}
+			custom_trigger_tooltip = {
+				tooltip = A48_kheterata_horse_tooltip
+				477 = {
+					owner = {
+						OR = {
+							has_opinion = {
+								who = ROOT
+								value = 150
+							}
+							has_spy_network_from = {
+								who = ROOT
+								value = 50
+							}
+							tag = ROOT
+						}
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = A48_bulwar_horse_tooltip
+				629 = {
+					owner = {
+						OR = {
+							has_opinion = {
+								who = ROOT
+								value = 150
+							}
+							has_spy_network_from = {
+								who = ROOT
+								value = 50
+							}
+							tag = ROOT
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			add_treasury = -1000
+			custom_tooltip = " "
+			372 = {
+				upgrade_manpower_building = yes
+				if = {
+					limit = {
+						NOT = {
+							trade_goods = livestock
+						}
+					}
+					change_trade_goods = livestock
+					custom_tooltip = " "
+				}
+				custom_tooltip = " "
+				add_building_construction = {
+					building = soldier_households
+					cost = 0
+					speed = 1
+				}
+				custom_tooltip = " "
+				add_permanent_province_modifier = {
+					name = sugamber_hotblood_stable
+					duration = -1
+				}
+			}
+			410 = {
+				upgrade_manpower_building = yes
+				custom_tooltip = " "
+				custom_tooltip = A48_upgrade_royal_stable_tooltip
+				hidden_effect = {
+					remove_province_modifier = sugamber_royal_stable_2
+				}
+				add_permanent_province_modifier = {
+					name = sugamber_royal_stable_3
+					duration = -1
+				}
+			}
+			add_country_modifier = {
+				name = sugamber_couriers
+				duration = -1
+			}
+		}
+	}
+	A48_mixed_horse_cavalry = {
+		icon = mission_the_hakkapeliitta
+		position = 6
+		required_missions = {
+			A48_hotblood_stable
+		}
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					province_id = 312
+					NOT = {
+						AND = {
+							development = 25
+							has_forcelimit_building_trigger = yes
+						}
+					}
+				}
+				AND = {
+					province_id = 372
+					NOT = {
+						AND = {
+							development = 25
+							has_forcelimit_building_trigger = yes
+						}
+					}
+				}
+				AND = {
+					province_id = 410
+					NOT = {
+						AND = {
+							development = 35
+							has_forcelimit_building_trigger = yes
+						}
+					}
+				}
+				AND = {
+					OR = {
+						province_id = 327
+						province_id = 769
+					}
+					NOT = {
+						owner = {
+							OR = {
+								has_opinion = {
+									who = ROOT
+									value = 150
+								}
+								has_spy_network_from = {
+									who = ROOT
+									value = 50
+								}
+							}
+						}
+						owned_by = ROOT
+					}
+				}
+			}
+		}
+		trigger = {
+			treasury = 2000
+			army_professionalism = 0.4
+			innovativeness = 20
+			num_of_cavalry = 30
+			312 = {
+				development = 25
+				has_forcelimit_building_trigger = yes
+			}
+			372 = {
+				development = 25
+				has_forcelimit_building_trigger = yes
+			}
+			410 = {
+				development = 30
+				has_forcelimit_building_trigger = yes
+			}
+			custom_trigger_tooltip = {
+				tooltip = A48_cestirande_horse_tooltip
+				327 = {
+					owner = {
+						OR = {
+							has_opinion = {
+								who = ROOT
+								value = 150
+							}
+							has_spy_network_from = {
+								who = ROOT
+								value = 50
+							}
+							tag = ROOT
+						}
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = A48_adenica_horse_tooltip
+				769 = {
+					owner = {
+						OR = {
+							has_opinion = {
+								who = ROOT
+								value = 150
+							}
+							has_spy_network_from = {
+								who = ROOT
+								value = 50
+							}
+							tag = ROOT
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			add_treasury = -2000
+			custom_tooltip = A48_forcelimit_upgrade_tooltip
+			tooltip = {
+				6150 = {
+					upgrade_forcelimit_building = yes
+				}
+			}
+			custom_tooltip = " "
+			410 = {
+				custom_tooltip = A48_upgrade_royal_stable_tooltip
+				hidden_effect = {
+					remove_province_modifier = sugamber_royal_stable_3
+				}
+				add_permanent_province_modifier = {
+					name = sugamber_royal_stable_4
+					duration = -1
+				}
+			}
+			custom_tooltip = A48_upgrade_morbani_heritage_tooltip
+			add_country_modifier = {
+				name = sugamber_horseback_army
+				duration = -1
+			}
+			custom_tooltip = A48_combine_horse_modifiers_tooltip
+			add_country_modifier = {
+				name = sugamber_specialized_horse_breeds
+				duration = -1
+			}
+			hidden_effect = {
+				312 = {
+					upgrade_forcelimit_building = yes
+				}
+				372 = {
+					upgrade_forcelimit_building = yes
+				}
+				410 = {
+					upgrade_forcelimit_building = yes
+				}
+				remove_country_modifier = sugamber_morbani_heritage
+				remove_country_modifier = sugamber_workhorses
+				remove_country_modifier = sugamber_couriers
+			}
+		}
+	}
+	A48_form_outrider_corps = {
+		icon = polish_subjects
+		position = 7
+		required_missions = {
+			A48_mixed_horse_cavalry
+		}
+		trigger = {
+			mil_power = 200
+			army_professionalism = 0.8
+			army_tradition = 80
+			num_of_regiments_at_full_drill = 30
+			OR = {
+				innovativeness = 50
+				AND = {
+					innovativeness = 40
+					OR = {
+						national_focus = MIL
+						is_ahead_of_time_in_technology = { tech = mil }
+					}
+				}
+				AND = {
+					innovativeness = 30
+					national_focus = MIL
+					is_ahead_of_time_in_technology = { tech = mil }
+				}
+			}
+		}
+		effect = {
+			add_mil_power = -200
+			custom_tooltip = A48_upgrade_horseback_army_tooltip
+			hidden_effect = {
+				remove_country_modifier = sugamber_horseback_army
+			}
+			if = {
+				limit = {
+					NOT = {
+						mil_tech = 11
+					}
+				}
+				add_country_modifier = {
+					name = sugamber_outrider_corps_1
+					duration = -1
+				}
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						mil_tech = 17
+					}
+				}
+				add_country_modifier = {
+					name = sugamber_outrider_corps_2
+					duration = -1
+				}
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						mil_tech = 22
+					}
+				}
+				add_country_modifier = {
+					name = sugamber_outrider_corps_3
+					duration = -1
+				}
+			}
+			else = {
+				add_country_modifier = {
+					name = sugamber_outrider_corps_4
+					duration = -1
+				}
+			}
+			custom_tooltip = A48_cavalry_fire_tech_tooltip
+		}
+	}
+	A48_pacify_west_salahad = {
+		icon = mission_traverse_the_sahara
+		position = 9
+		required_missions = {
+			A48_jailers_nerat
+		}
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					OR = {
+						region = west_salahad_region
+						area = ohitsopot_area
+						province_id = 453
+						province_id = 458
+					}
+					NOT = {
+						area = salahad_islands_area
+						AND = {
+							owned_by = ROOT
+							no_devastation_or_unrest = yes
+						}
+					}
+				}
+				AND = {
+					OR = {
+						province_id = 460
+						province_id = 6093
+						province_id = 6096
+					}
+					NOT = {
+						has_fort_building_trigger = yes
+						has_supply_depot = ROOT
+					}
+				}
+				AND = {
+					OR = {
+						is_capital_of = U10
+						is_capital_of = F65
+						is_capital_of = F69
+					}
+					NOT = {
+						owner = {
+							has_country_flag = sugamber_dissolution
+						}
+					}
+				}
+			}
+		}
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = A48_west_gnolls_areas_tooltip
+				west_salahad_region = {
+					type = all
+					OR = {
+						AND = {
+							owned_by = ROOT
+							NOT = {
+								devastation = 1
+								unrest = 1
+							}
+						}
+						area = salahad_islands_area
+					}
+				}
+				ohitsopot_area = {
+					type = all
+					owned_by = ROOT
+					NOT = {
+						devastation = 1
+						unrest = 1
+					}
+				}
+				453 = {
+					owned_by = ROOT
+					NOT = {
+						devastation = 1
+						unrest = 1
+					}
+				}
+				458 = {
+					owned_by = ROOT
+					NOT = {
+						devastation = 1
+						unrest = 1
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = A48_west_salahad_forts_tooltip
+				460 = {
+					has_fort_building_trigger = yes
+					has_supply_depot = ROOT
+				}
+				6093 = {
+					has_fort_building_trigger = yes
+					has_supply_depot = ROOT
+				}
+				6096 = {
+					has_fort_building_trigger = yes
+					has_supply_depot = ROOT
+				}
+			}
+			U10 = {
+				OR = {
+					exists = no
+					has_country_flag = sugamber_dissolution
+				}
+			}
+			F65 = {
+				OR = {
+					exists = no
+					has_country_flag = sugamber_dissolution
+				}
+			}
+			F69 = {
+				OR = {
+					exists = no
+					has_country_flag = sugamber_dissolution
+				}
+			}
+		}
+		effect = {
+			custom_tooltip = A48_west_salahad_outpost_tooltip
+			tooltip = {
+				6150 = {
+					add_permanent_province_modifier = {
+						name = sugamber_gnollish_outpost
+						duration = -1
+					}
+				}
+			}
+			west_salahad_region = {
+				limit = {
+					NOT = {
+						area = salahad_islands_area
+					}
+				}
+				add_human_minority_size_effect = yes
+				add_permanent_province_modifier = {
+					name = sugamber_salahad_routes
+					duration = -1
+				}
+			}
+			custom_tooltip = A48_akasik_kheterata_road_tooltip
+			tooltip = {
+				6150 = {
+					add_gnollish_minority_size_effect = yes
+					add_permanent_province_modifier = {
+						name = sugamber_salahad_routes
+						duration = -1
+					}
+				}
+			}
+			if = {
+				limit = {
+					457 = {
+						culture = korosheshi
+					}
+				}
+				457 = {
+					change_culture = hapremiti
+				}
+				custom_tooltip = " "
+			}
+			random_hired_mercenary_company = {
+				limit = {
+					OR = {
+						template = merc_gnoll_sugamber_1_upgraded
+						template = merc_gnoll_sugamber_2_upgraded
+					}
+				}
+				disband_mercenary_company = THIS
+				custom_tooltip = " "
+			}
+			country_event_with_option_insight = {
+				id = flavor_sugamber.135
+				option_1 = "
+					custom_tooltip = unlock_merc_gnoll_sugamber_1_1_tt
+				"
+				option_2 = "
+					custom_tooltip = unlock_merc_gnoll_sugamber_1_2_tt
+				"
+			}
+			hidden_effect = {
+				460 = {
+					add_permanent_province_modifier = {
+						name = sugamber_gnollish_outpost
+						duration = -1
+					}
+				}
+				6093 = {
+					add_permanent_province_modifier = {
+						name = sugamber_gnollish_outpost
+						duration = -1
+					}
+				}
+				6096 = {
+					add_permanent_province_modifier = {
+						name = sugamber_gnollish_outpost
+						duration = -1
+					}
+				}
+				ohitsopot_area = {
+					add_gnollish_minority_size_effect = yes
+					add_permanent_province_modifier = {
+						name = sugamber_salahad_routes
+						duration = -1
+					}
+				}
+				453 = {
+					add_gnollish_minority_size_effect = yes
+					add_permanent_province_modifier = {
+						name = sugamber_salahad_routes
+						duration = -1
+					}
+				}
+				458 = {
+					add_gnollish_minority_size_effect = yes
+					add_permanent_province_modifier = {
+						name = sugamber_salahad_routes
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+	A48_destroy_eastern_gnolls = {
+		icon = mission_bedouins
+		position = 11
+		required_missions = {
+			A48_unite_dynasties
+			A48_pacify_west_salahad
+		}
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					OR = {
+						area = eastern_krahway_area
+						area = ibtat_axast_area
+						area = masusopot_area
+						province_id = 465
+						province_id = 490
+					}
+					OR = {
+						unrest = 1
+						devastation = 1
+						NOT = {
+							owned_by = ROOT
+						}
+					}
+				}
+				AND = {
+					OR = {
+						province_id = 489
+						province_id = 495
+						province_id = 6101
+					}
+					NOT = {
+						AND = {
+							owned_by = ROOT
+							has_fort_building_trigger = yes
+							has_supply_depot = ROOT
+						}
+					}
+				}
+				AND = {
+					OR = {
+						is_capital_of = U09
+						is_capital_of = F28
+						is_capital_of = F29
+					}
+					NOT = {
+						owner = {
+							has_country_flag = sugamber_dissolution
+						}
+					}
+				}
+			}
+		}
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = A48_eastern_gnolls_regions_tooltip
+				eastern_krahway_area = {
+					type = all
+					owned_by = ROOT
+					NOT = {
+						unrest = 1
+						devastation = 1
+					}
+				}
+				ibtat_axast_area = {
+					type = all
+					owned_by = ROOT
+					NOT = {
+						unrest = 1
+						devastation = 1
+					}
+				}
+				masusopot_area = {
+					type = all
+					owned_by = ROOT
+					NOT = {
+						unrest = 1
+						devastation = 1
+					}
+				}
+				465 = {
+					owned_by = ROOT
+					NOT = {
+						unrest = 1
+						devastation = 1
+					}
+				}
+				490 = {
+					owned_by = ROOT
+					NOT = {
+						unrest = 1
+						devastation = 1
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = A48_eastern_gnolls_forts_tooltip
+				489 = {
+					owned_by = ROOT
+					has_fort_building_trigger = yes
+					has_supply_depot = ROOT
+				}
+				495 = {
+					owned_by = ROOT
+					has_fort_building_trigger = yes
+					has_supply_depot = ROOT
+				}
+				6101 = {
+					owned_by = ROOT
+					has_fort_building_trigger = yes
+					has_supply_depot = ROOT
+				}
+			}
+			U09 = {
+				OR = {
+					exists = no
+					has_country_flag = sugamber_dissolution
+				}
+			}
+			F28 = {
+				OR = {
+					exists = no
+					has_country_flag = sugamber_dissolution
+				}
+			}
+			F29 = {
+				OR = {
+					exists = no
+					has_country_flag = sugamber_dissolution
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					is_emperor_of_china = yes
+				}
+				add_mandate = 5
+			}
+			else = {
+				custom_tooltip = A48_imperial_mandate_5_tooltip
+			}
+			custom_tooltip = A48_east_salahad_outpost_tooltip
+			tooltip = {
+				6150 = {
+					add_permanent_province_modifier = {
+						name = sugamber_gnollish_outpost
+						duration = -1
+					}
+				}
+			}
+			custom_tooltip = A48_gol_bulwar_road_tooltip
+			tooltip = {
+				6150 = {
+					add_human_minority_size_effect = yes
+					add_permanent_province_modifier = {
+						name = sugamber_salahad_routes
+						duration = -1
+					}
+				}
+			}
+			custom_tooltip = A48_kheterata_bulwar_road_tooltip
+			tooltip = {
+				6150 = {
+					add_gnollish_minority_size_effect = yes
+					add_permanent_province_modifier = {
+						name = sugamber_salahad_routes
+						duration = -1
+					}
+				}
+			}
+			random_hired_mercenary_company = {
+				limit = {
+					OR = {
+						template = merc_gnoll_sugamber_1_1
+						template = merc_gnoll_sugamber_1_2
+						template = merc_gnoll_sugamber_2_1
+						template = merc_gnoll_sugamber_2_2
+					}
+				}
+				disband_mercenary_company = THIS
+				custom_tooltip = " "
+			}
+			country_event_with_option_insight = {
+				id = flavor_sugamber.140
+				option_1 = "
+					custom_tooltip = unlock_merc_gnoll_sugamber_1_1_1_tt
+				"
+				option_2 = "
+					custom_tooltip = unlock_merc_gnoll_sugamber_1_1_2_tt
+				"
+			}
+			hidden_effect = {
+				495 = {
+					add_permanent_province_modifier = {
+						name = sugamber_gnollish_outpost
+						duration = -1
+					}
+				}
+				489 = {
+					add_permanent_province_modifier = {
+						name = sugamber_gnollish_outpost
+						duration = -1
+					}
+				}
+				6101 = {
+					add_permanent_province_modifier = {
+						name = sugamber_gnollish_outpost
+						duration = -1
+					}
+				}
+				eastern_krahway_area = {
+					add_human_minority_size_effect = yes
+					add_permanent_province_modifier = {
+						name = sugamber_salahad_routes
+						duration = -1
+					}
+				}
+				489 = {
+					add_human_minority_size_effect = yes
+					add_permanent_province_modifier = {
+						name = sugamber_salahad_routes
+						duration = -1
+					}
+				}
+				ibtat_axast_area = {
+					add_gnollish_minority_size_effect = yes
+					add_permanent_province_modifier = {
+						name = sugamber_salahad_routes
+						duration = -1
+					}
+				}
+				masusopot_area = {
+					add_gnollish_minority_size_effect = yes
+					add_permanent_province_modifier = {
+						name = sugamber_salahad_routes
+						duration = -1
+					}
+				}
+				465 = {
+					add_gnollish_minority_size_effect = yes
+					add_permanent_province_modifier = {
+						name = sugamber_salahad_routes
+						duration = -1
+					}
+				}
+				490 = {
+					add_gnollish_minority_size_effect = yes
+					add_permanent_province_modifier = {
+						name = sugamber_salahad_routes
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+	A48_emperor_gnollkind = {
+		icon = mission_beheading
+		position = 12
+		required_missions = {
+			A48_destroy_eastern_gnolls
+		}
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					is_capital = yes
+					NOT = {
+						continent = north_america
+						continent = south_america
+						continent = oceania
+					}
+					owner = {
+						culture_group = gnollish
+						NOT = {
+							has_country_flag = sugamber_dissolution
+						}
+					}
+				}
+				AND = {
+					is_capital = yes
+					OR = {
+						has_ruler_flag = undergoing_xhazob_ritual 
+						ruler_has_personality = xhazobs_chosen_personality
+					}
+				}
+				AND = {
+					owned_by = ROOT
+					culture_group = gnollish
+					OR = {
+						unrest = 1
+						devastation = 1
+					}
+				}
+				AND = {
+					owned_by = ROOT
+					NOT = {
+						has_any_gnollish_pop_trigger = yes
+						owner = {
+							num_of_owned_provinces_with = {
+								value = 100
+								has_any_gnollish_pop_trigger = yes
+							}
+						}
+					}
+				}
+			}
+		}
+		trigger = {
+			monthly_mil = 12
+			custom_trigger_tooltip = {
+				tooltip = A48_halcanni_dissolution_tooltip
+				NOT = {
+					any_country = {
+						culture_group = gnollish
+						OR = {
+							NOT = {
+								has_country_flag = sugamber_dissolution
+							}
+							capital_scope = {
+								OR = {
+									continent = north_america
+									continent = south_america
+									continent = oceania
+								}
+							}
+						}
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = A48_no_xhazobine_tooltip
+				NOT = {
+					any_country = {
+						OR = {
+							has_ruler_flag = undergoing_xhazob_ritual 
+							ruler_has_personality = xhazobs_chosen_personality
+						}
+					}
+				}
+			}
+			NOT = {
+				any_owned_province = {
+					culture_group = gnollish
+					OR = {
+						unrest = 1
+						devastation = 1
+					}
+				}
+			}
+			num_of_owned_provinces_with = {
+				value = 100
+				has_any_gnollish_pop_trigger = yes
+			}
+		}
+		effect = {
+			set_country_flag = sugamber_gnollish_loyalty
+			set_global_flag = sugamber_emperor_gnollkind
+			custom_tooltip = A48_upgrade_hounds_nerat_tooltip
+			add_country_modifier = {
+				name = sugamber_emperor_gnollkind
+				duration = -1
+			}
+			custom_tooltip = A48_gnollish_unification_tooltip
+			random_hired_mercenary_company = {
+				limit = {
+					OR = {
+						template = merc_gnoll_sugamber_1_1_1
+						template = merc_gnoll_sugamber_1_2_1
+						template = merc_gnoll_sugamber_2_1_1
+						template = merc_gnoll_sugamber_2_2_1
+						template = merc_gnoll_sugamber_1_1_2
+						template = merc_gnoll_sugamber_1_2_2
+						template = merc_gnoll_sugamber_2_1_2
+						template = merc_gnoll_sugamber_2_2_2
+					}
+				}
+				disband_mercenary_company = THIS
+				custom_tooltip = " "
+			}
+			country_event_with_option_insight = {
+				id = flavor_sugamber.141
+				option_1 = "
+					add_army_tradition = 20
+					custom_tooltip = A48_permanent_gnollish_coexistence_tooltip
+				"
+				option_2 = "
+					custom_tooltip = A48_integrated_gnolls_tooltip
+					anb_add_accepted_culture_or_dip_power = {
+						culture = sorrowmane_gnoll
+						free = yes
+					}
+				"
+			}
+			hidden_effect = {
+				remove_country_modifier = sugamber_hounds_nerat
+				every_owned_province = {
+					limit = {
+						culture_group = gnollish
+					}
+					add_nationalism = -50
+				}
+				every_province = {
+					limit = {
+						culture_group = gnollish
+					}
+					change_culture = sorrowmane_gnoll
+				}
+				every_country = {
+					limit = {
+						culture_group = gnollish
+					}
+					change_primary_culture = kvangahga
+				}
+				every_country = {
+					limit = {
+						OR = {
+							accepted_culture = pyreclaw_gnoll
+							accepted_culture = sandfang_gnoll
+							accepted_culture = seascourge_gnoll
+							accepted_culture = hill_gnoll
+							accepted_culture = flamemarked_gnoll
+							accepted_culture = fieldstalker_gnoll
+							accepted_culture = windhowler_gnoll
+							accepted_culture = ruinscourge_gnoll
+							accepted_culture = dovesworn_gnoll
+							accepted_culture = suncrown_gnoll
+						}
+					}
+					remove_accepted_culture = pyreclaw_gnoll
+					remove_accepted_culture = sandfang_gnoll
+					remove_accepted_culture = seascourge_gnoll
+					remove_accepted_culture = hill_gnoll
+					remove_accepted_culture = flamemarked_gnoll
+					remove_accepted_culture = fieldstalker_gnoll
+					remove_accepted_culture = windhowler_gnoll
+					remove_accepted_culture = ruinscourge_gnoll
+					remove_accepted_culture = dovesworn_gnoll
+					remove_accepted_culture = suncrown_gnoll
+					add_accepted_culture = sorrowmane_gnoll
+				}
+				every_province = {
+					limit = {
+						religion = xhazobkult
+					}
+					change_religion = kvangahga
+				}
+				every_country = {
+					limit = {
+						religion = xhazobkult
+					}
+					change_religion = kvangahga
+				}
+				if = {
+					limit = {
+						G93 = {
+							is_subject = no
+						}
+					}
+					vassalize = G93
+				}
+				if = {
+					limit = {
+						has_country_flag = unlocked_merc_gnoll_sugamber_1_1_1
+					}
+					unlock_merc_company = {
+						merc_company = merc_gnoll_sugamber_1_1_1_upgraded
+						free_merc = yes
+					}
+					clr_country_flag = unlocked_merc_gnoll_sugamber_1_1_1
+				}
+				else_if = {
+					limit = {
+						has_country_flag = unlocked_merc_gnoll_sugamber_1_2_1
+					}
+					unlock_merc_company = {
+						merc_company = merc_gnoll_sugamber_1_2_1_upgraded
+						free_merc = yes
+					}
+					clr_country_flag = unlocked_merc_gnoll_sugamber_1_2_1
+				}
+				else_if = {
+					limit = {
+						has_country_flag = unlocked_merc_gnoll_sugamber_2_1_1
+					}
+					unlock_merc_company = {
+						merc_company = merc_gnoll_sugamber_2_1_1_upgraded
+						free_merc = yes
+					}
+					clr_country_flag = unlocked_merc_gnoll_sugamber_2_1_1
+				}
+				else_if = {
+					limit = {
+						has_country_flag = unlocked_merc_gnoll_sugamber_2_2_1
+					}
+					unlock_merc_company = {
+						merc_company = merc_gnoll_sugamber_2_2_1_upgraded
+						free_merc = yes
+					}
+					clr_country_flag = unlocked_merc_gnoll_sugamber_2_2_1
+				}
+				else_if = {
+					limit = {
+						has_country_flag = unlocked_merc_gnoll_sugamber_1_1_2
+					}
+					unlock_merc_company = {
+						merc_company = merc_gnoll_sugamber_1_1_2_upgraded
+						free_merc = yes
+					}
+					clr_country_flag = unlocked_merc_gnoll_sugamber_1_1_2
+				}
+				else_if = {
+					limit = {
+						has_country_flag = unlocked_merc_gnoll_sugamber_1_2_2
+					}
+					unlock_merc_company = {
+						merc_company = merc_gnoll_sugamber_1_2_2_upgraded
+						free_merc = yes
+					}
+					clr_country_flag = unlocked_merc_gnoll_sugamber_1_2_2
+				}
+				else_if = {
+					limit = {
+						has_country_flag = unlocked_merc_gnoll_sugamber_2_1_2
+					}
+					unlock_merc_company = {
+						merc_company = merc_gnoll_sugamber_2_1_2_upgraded
+						free_merc = yes
+					}
+					clr_country_flag = unlocked_merc_gnoll_sugamber_2_1_2
+				}
+				else_if = {
+					limit = {
+						has_country_flag = unlocked_merc_gnoll_sugamber_2_2_2
+					}
+					unlock_merc_company = {
+						merc_company = merc_gnoll_sugamber_2_2_2_upgraded
+						free_merc = yes
+					}
+					clr_country_flag = unlocked_merc_gnoll_sugamber_2_2_2
+				}
+			}
+		}
+	}
+}

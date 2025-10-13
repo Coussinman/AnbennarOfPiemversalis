@@ -1,0 +1,45 @@
+fey_religion = {
+	veil_puck = {
+		color = { 10 186 255 }
+		icon = 143
+		country = {
+			land_morale = 0.1
+			hostile_attrition  = 1
+		}
+		country_as_secondary = {
+			hostile_attrition = 1
+		}
+
+		on_convert = {
+			change_religion = veil_puck
+			add_prestige = -100
+
+			add_country_modifier = {
+				name = "conversion_zeal"
+				duration = 3650
+			}
+		}
+		allowed_center_conversion = {
+			regent_court
+			corinite
+			ravelian
+			fey_court
+			pactseeker
+		}
+
+		will_get_center = {
+			any_owned_province = { 
+				has_province_flag = veil_puck_center
+				is_reformation_center = no 
+			}
+		}
+		province = {
+			local_missionary_strength = -0.02	#its harder to convert them
+		}
+		fervor = yes
+		
+		aspects_name = FEYCOURTRITUALS
+
+		heretic = { CHAOS_WORSHIPPERS }
+	}
+}

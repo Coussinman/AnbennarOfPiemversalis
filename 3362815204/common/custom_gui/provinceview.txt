@@ -33,6 +33,7 @@ custom_button = {
 						OR = {
 							dwarovar_goblin_culture_primary = yes
 							primary_culture = darkscale_kobold
+							primary_culture = magmascale_kobold
 						}
 					}
 					adm_tech = 5
@@ -657,7 +658,7 @@ custom_button = { #Merfolk Settlements
 			}
 			else_if = {
 				limit = { region = bamaliwuni_region }
-				NOT = { 6678 = { check_variable = { which = bamaliwuniMerfolkCap value = 1 } } }
+				NOT = { 6678 = { check_variable = { which = bamaliwuniMerfolkCap value = 3 } } }
 			}
 			else_if = {
 				limit = { region = throden_gokad_region }
@@ -728,6 +729,12 @@ custom_button = { #Diggy with ui closed
 					has_province_modifier = partially_ruined_hold
 					has_province_modifier = damaged_hold
 					has_province_modifier = infested_hold
+					AND = {
+						province_id = 4039
+						owner = {
+							mission_completed = AC5_exploit_fissures
+						}
+					}
 				}
 			}
 			custom_trigger_tooltip = {
@@ -1501,4 +1508,272 @@ custom_button = {	#celmaldor trade league investment
 			}
 		}
 	}
+}
+###################################################################################################ACE
+custom_button = {
+	name = province_button_sugamber
+	potential = {
+		owner = {
+			tag = A48
+		}
+	}
+	trigger = {
+		tolerance_to_this = 1
+		NOT = {
+			has_any_ongoing_construction = yes
+			nationalism = 1
+			has_owner_religion = yes
+		}
+		OR = {
+			AND = {
+				region = akasik_region
+				religion = mother_akasik
+				NOT = {
+					culture = desha
+				}
+				owner = {
+					has_country_flag = sugamber_crodamization_akasik
+				}
+			}
+			AND = {
+				OR = {
+					region = kheterata_region
+					region = gol_region
+					region = khetapera_region
+				}
+				religion_group = khetist
+				NOT = {
+					culture = hapremiti
+				}
+				owner = {
+					has_country_flag = sugamber_ryonard_crodamos
+				}
+			}
+		}
+	}
+	effect = {
+		custom_tooltip = A48_crodam_culture_conversion_tooltip
+		set_province_flag = sugamber_crodamizing
+		add_culture_construction = {
+			speed = 1
+			cost = 0
+		}
+	}
+	tooltip = A48_button_tooltip
+}
+
+custom_button = {
+	name = province_button_jotunnheim
+	potential = {
+		owner = {
+			tag = AD7
+			has_country_flag = AD7_birth_of_the_halfkynn_flag
+			has_estate_privilege = estate_church_AD5_gudafridr_proclamation
+		}
+	}
+	trigger = {
+		owner = { dip_power = 50 }
+		NOT = {
+			has_any_ongoing_construction = yes
+			nationalism = 1
+			culture = halfkynn_half_elf
+		}
+		OR = {
+			AND = {
+				culture_group = taychendi_ruinborn_elf
+				OR = {
+					has_human_minority_trigger = yes
+					has_half_elven_minority_trigger = yes
+				}
+			}
+			culture = hallfreder
+		}
+	}
+	effect = {
+		change_culture = halfkynn_half_elf
+		owner = {
+			add_dip_power = -50
+		}
+	}
+	tooltip = AD5_button_tooltip
+}
+
+custom_button = {
+	name = province_button_magmascale
+	potential = {
+		owner = {
+			tag = AC5
+		}
+	}
+	trigger = {
+		owner = {
+			OR = {
+				has_country_flag = AC5_can_place_lavarivers
+				has_country_flag = AC5_can_place_lavacities
+				has_country_flag = AC5_lavaforges_unlocked
+			}
+		}
+		hidden_trigger = {
+			owner = {
+				NOT = {
+					has_country_flag = AC5_magmascales_opened_lava_menu
+				}
+			}
+		}
+	}
+	effect = {
+		province_event = {
+			id = flavor_magmascale.110
+		}
+	}
+}
+custom_button = {
+	name = province_button_dasmatus
+	potential = {
+		owner = {
+			tag = F56
+		}
+	}
+	trigger = {
+		owner = {
+			has_country_flag = F56_dasmazar_building_allowed
+		}
+		OR = {
+			has_terrain = desert
+			has_terrain = coastal_desert
+		}
+		NOT = {
+			has_province_modifier = F56_irrigating_desert
+			has_province_modifier = F56_irrigating_coastal_desert
+			has_province_modifier = F56_desert_farm
+			has_province_modifier = F56_coastal_desert_farm
+		}
+		has_tax_building_trigger = yes
+		has_production_building_trigger = yes
+		has_state_edict = edict_encourage_development
+		any_neighbor_province = {
+			OR = {
+				has_province_modifier = F56_desert_farm
+				has_province_modifier = F56_irrigation_source
+			}
+		}
+	}
+	effect = {
+		if = {
+			limit = {
+				has_terrain = desert
+			}
+			add_treasury = -100
+			add_permanent_province_modifier = {
+				name = F56_irrigating_desert
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = {
+				has_terrain = coastal_desert
+			}
+			add_treasury = -100
+			add_permanent_province_modifier = {
+				name = F56_irrigating_coastal_desert
+				duration = -1
+			}
+		}
+	}
+	tooltip = F56_button_tooltip
+}
+
+custom_button = {
+	name = province_button_verne
+	potential = {
+		owner = {
+			tag = A33
+		}
+	}
+	trigger = {
+		OR = {
+			AND = {
+				owner = {
+					treasury = 500
+				}
+				development = 15
+				has_building = mage_tower
+				hidden_trigger = {
+					NOT = {
+						has_province_modifier = A33_starter_sanctuary
+					}
+				}
+			}
+			AND = {
+				owner = {
+					treasury = 1000
+					OR = {
+						has_country_flag = verne_better_regiments
+						has_country_flag = verne_wyvern_army
+					}
+				}
+				has_province_modifier = A33_starter_sanctuary
+				development = 25
+			}
+		}
+		hidden_trigger = {
+			NOT = {
+				has_province_modifier = A33_better_sanctuary
+				has_province_modifier = A33_better_sanctuary_2
+			}
+		}
+	}
+	effect = {
+		if = {
+			limit = {
+				NOT = {
+					has_province_modifier = A33_starter_sanctuary
+				}
+			}
+			owner = {
+				add_adm_power = -25
+				add_treasury = -500
+			}
+			add_province_modifier = {
+				name = A33_starter_sanctuary
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = {
+				owner = {
+					has_country_flag = verne_better_regiments
+				}
+			}
+			owner = {
+				add_treasury = -1000
+			}
+			remove_province_modifier = A33_starter_sanctuary
+			add_province_modifier = {
+				name = A33_better_sanctuary_2
+				duration = -1
+			}
+			hidden_effect = {
+				owner = {
+					recalculate_wyvern_merc = yes
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				owner = {
+					has_country_flag = verne_wyvern_army
+				}
+			}
+			owner = {
+				add_treasury = -1000
+			}
+			remove_province_modifier = A33_starter_sanctuary
+			add_province_modifier = {
+				name = A33_better_sanctuary
+				duration = -1
+			}
+		}
+	}
+	tooltip = A33_button_tooltip
 }

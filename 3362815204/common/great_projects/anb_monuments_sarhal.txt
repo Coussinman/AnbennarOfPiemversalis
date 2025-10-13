@@ -25,6 +25,7 @@ elikhet_pyramid = {
 			OR = {
 				religion_group = khetist
 				religion = dalcabba
+				has_country_flag = sugamber_elikhet_knowledge
 			}
 		}
 	}
@@ -34,6 +35,7 @@ elikhet_pyramid = {
 			OR = {
 				religion_group = khetist
 				religion = dalcabba
+				has_country_flag = sugamber_elikhet_knowledge
 			}
 		}
 	}
@@ -1258,19 +1260,83 @@ tower_of_muhaqaar = {
 	on_destroyed = {}
 
 	build_trigger = {
-		owner = { religion_group = khetist }
-		religion_group = khetist
+		owner = {
+			OR = {
+				religion_group = khetist
+				religion = dalcabba
+				AND = {
+					has_country_flag = sugamber_elikhet_god
+					religion = regent_court
+				}
+			}
+		}
+		OR = {
+			religion_group = khetist
+			religion = dalcabba
+			AND = {
+				has_country_flag = sugamber_elikhet_god
+				OR = {
+					religion = regent_court
+					AND = {
+						religion_group = khetist
+						tolerance_to_this = 1
+					}
+				}
+			}
+		}
 	}
-
 	can_use_modifiers_trigger = {
-		owner = { religion_group = khetist }
-		religion_group = khetist
+		owner = {
+			OR = {
+				religion_group = khetist
+				religion = dalcabba
+				AND = {
+					has_country_flag = sugamber_elikhet_god
+					religion = regent_court
+				}
+			}
+		}
+		OR = {
+			religion_group = khetist
+			religion = dalcabba
+			AND = {
+				has_country_flag = sugamber_elikhet_god
+				OR = {
+					religion = regent_court
+					AND = {
+						religion_group = khetist
+						tolerance_to_this = 1
+					}
+				}
+			}
+		}
 	}
 	can_upgrade_trigger = {
-		owner = { religion_group = khetist }
-		religion_group = khetist
+		owner = {
+			OR = {
+				religion_group = khetist
+				religion = dalcabba
+				AND = {
+					has_country_flag = sugamber_elikhet_god
+					religion = regent_court
+				}
+			}
+		}
+		OR = {
+			religion_group = khetist
+			religion = dalcabba
+			AND = {
+				has_country_flag = sugamber_elikhet_god
+				OR = {
+					religion = regent_court
+					AND = {
+						religion_group = khetist
+						tolerance_to_this = 1
+					}
+				}
+			}
+		}
 	}
-
 
 	keep_trigger = { always = yes }
 
@@ -1876,13 +1942,30 @@ aur_kes_akasik = {
     # Conditions to build the project
     build_trigger = {
 		OR = {
-			religion = mother_akasik
-			religion = fangaulan_pantheon
-		}
-		has_owner_religion = yes
+			AND = {
+				has_owner_religion = yes
+				ace_province_is_or_accepts_culture = yes
+				culture_group = akasi
+				OR = {
+					religion = mother_akasik
+					religion = fangaulan_pantheon
+				}
+			}
 		AND = {
-			culture_group = akasi
-			province_is_or_accepts_culture = yes
+				owner = {
+					mission_completed = A48_prosperous_akasik
+				}
+				OR = {
+					religion = mother_akasik
+					religion = regent_court
+					religion = dalcabba
+				}
+				OR = {
+					has_owner_religion = yes
+					tolerance_to_this = 1
+				}
+				province_is_or_accepts_culture = yes
+			}
 		}
 	}
     on_built = {
@@ -1892,49 +1975,61 @@ aur_kes_akasik = {
     }
 
     can_use_modifiers_trigger = {
-		if = {
-			limit = {
-				country_or_subject_holds = A33
-			}
-			owner = {
+		OR = {
+			AND = {
+				has_owner_religion = yes
+				ace_province_is_or_accepts_culture = yes
+				culture_group = akasi
 				OR = {
-					mission_completed = A33_a_crimson_sea
-					overlord = { mission_completed = A33_a_crimson_sea }
+					religion = mother_akasik
+					religion = fangaulan_pantheon
 				}
 			}
-		}
-		else = {
+			AND = {
+				owner = {
+					mission_completed = A48_prosperous_akasik
+				}
 			OR = {
-				religion = mother_akasik
-				religion = fangaulan_pantheon
+					religion = mother_akasik
+					religion = regent_court
+					religion = dalcabba
+			}
+				OR = {
+					has_owner_religion = yes
+					tolerance_to_this = 1
+				}
+				ace_province_is_or_accepts_culture = yes
 			}
 		}
-		has_owner_religion = yes
-		culture_group = akasi
-		province_is_or_accepts_culture = yes
 	}
 
     can_upgrade_trigger = {
-		if = {
-			limit = {
-				country_or_subject_holds = A33
-			}
-			owner = {
+		OR = {
+			AND = {
+				has_owner_religion = yes
+				ace_province_is_or_accepts_culture = yes
+				culture_group = akasi
 				OR = {
-					mission_completed = A33_a_crimson_sea
-					overlord = { mission_completed = A33_a_crimson_sea }
+					religion = mother_akasik
+					religion = fangaulan_pantheon
 				}
 			}
-		}
-		else = {
-			OR = {
-				religion = mother_akasik
-				religion = fangaulan_pantheon
+			AND = {
+				owner = {
+					mission_completed = A48_prosperous_akasik
+				}
+				OR = {
+					religion = mother_akasik
+						religion = regent_court
+						religion = dalcabba
+				}
+				OR = {
+					has_owner_religion = yes
+					tolerance_to_this = 1
+				}
+				ace_province_is_or_accepts_culture = yes
 			}
 		}
-		has_owner_religion = yes
-		culture_group = akasi
-		province_is_or_accepts_culture = yes
 	}
 
     keep_trigger = {
@@ -1985,8 +2080,20 @@ aur_kes_akasik = {
 		religious_unity = 0.15
         }
 
+		conditional_modifier = {
+			trigger = {
+				owner = {
+					mission_completed = A48_prosperous_akasik
+				}
+			}
+			modifier = {
+				tolerance_own = -0.5
+				tolerance_heathen = 1
+			}
+		}
+
         region_modifier = {
-			local_governing_cost = -0.05
+			local_governing_cost = -0.1
         }
 
         on_upgraded = {
@@ -2012,8 +2119,20 @@ aur_kes_akasik = {
 		religious_unity = 0.15
         }
 
+		conditional_modifier = {
+			trigger = {
+				owner = {
+					mission_completed = A48_prosperous_akasik
+				}
+			}
+			modifier = {
+				tolerance_own = -1
+				tolerance_heathen = 2
+			}
+		}
+
         region_modifier = {
-			local_governing_cost = -0.1
+			local_governing_cost = -0.15
         }
 
         on_upgraded = {
@@ -2040,8 +2159,20 @@ aur_kes_akasik = {
 		religious_unity = 0.2
         }
 
+		conditional_modifier = {
+			trigger = {
+				owner = {
+					mission_completed = A48_prosperous_akasik
+				}
+			}
+			modifier = {
+				tolerance_own = -1
+				tolerance_heathen = 2
+			}
+		}
+
         region_modifier = {
-			local_governing_cost = -0.15
+			local_governing_cost = -0.2
         }
 
         on_upgraded = {
@@ -2858,6 +2989,7 @@ tree_of_tales = {
 	type = monument
 
 	build_trigger = {
+		has_country_flag = A11_tree #ACE
 		religion_group = tanibic_religion
 		has_owner_religion = yes
 	}
@@ -2869,11 +3001,13 @@ tree_of_tales = {
 	}
 
 	can_use_modifiers_trigger = {
+		has_country_flag = A11_tree #ACE
 		religion_group = tanibic_religion
 		has_owner_religion = yes
 	}
 
 	can_upgrade_trigger = {
+		has_country_flag = A11_tree #ACE
 		religion_group = tanibic_religion
 		has_owner_religion = yes
 	}

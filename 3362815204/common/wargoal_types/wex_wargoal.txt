@@ -77,7 +77,44 @@ curtail_wex = {
 	}
 
 	war_name = CURTAIL_WEX_WAR
+}
 
+seize_wex = {
+	type = take_capital
+	attacker = {
+		badboy_factor = 0.1
+		prestige_factor = 0
+		peace_cost_factor = 0.2
+		allowed_provinces_are_eligible = yes
+		allowed_provinces = {
+			is_core = ROOT
+		}
+		peace_options = {
+			po_seize_wex
+		}
+		prov_desc = ALL_CORES
+	}
+	defender = {
+		badboy_factor = 0
+		prestige_factor = 0
+		peace_cost_factor = 0.2
+		allowed_provinces_are_eligible = yes
+		allowed_provinces = {
+			always = yes
+		}
+		peace_options = {
+			po_release_vassals
+			po_release_annexed
+			po_return_cores
+			po_demand_provinces
+			po_revoke_cores
+			po_become_vassal
+			po_gold
+			po_concede_defeat
+		}
+		prov_desc = ALL_CORES
+	}
+	war_name = SEIZE_WEX_WAR
 }
 
 transfer_electorship = {
@@ -117,8 +154,8 @@ ace_force_join_anbennar = {
 	type = take_capital
 
 	attacker = {
-		badboy_factor = 0.8
-		prestige_factor = 0.8
+		badboy_factor = 0.5
+		prestige_factor = 1
 		allowed_provinces_are_eligible = yes
 
 		allowed_provinces = {

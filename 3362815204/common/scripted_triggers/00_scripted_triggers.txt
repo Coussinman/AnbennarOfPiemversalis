@@ -121,6 +121,7 @@ has_adm_advisor_of_level = {
 		master_of_mint = $level$
 		inquisitor = $level$
 		natural_scientist = $level$
+		court_mage = $level$
 	}
 }
 
@@ -513,6 +514,7 @@ can_have_center_of_reformation_trigger = { #Province Scope
 		#religion = catholic
 		#religion = reformed
 		religion = regent_court
+		religion = dalcabba
 		religion = corinite
 		religion = ravelian
 		religion = infernal_court
@@ -604,6 +606,9 @@ was_never_end_game_tag_trigger = {	#Country Scope
 			#NOT = { was_tag = B64 } #Passionate Moredhal
 			#NOT = { was_tag = B65 } #Devotee Moredhal
 			NOT = { was_tag = Z97 }	#Ravelian State
+			
+			#ACE
+			NOT = { was_tag = AD6 } #Vivin
 			
 			NOT = { tag = Z01 }	#Anbennar
 			NOT = { tag = A79 }	#Gnomish Hierarchy
@@ -2805,6 +2810,39 @@ is_not_free_merc_company = {
 		NOT = { mercenary_company = merc_konol_venom_legion }
 		NOT = { mercenary_company = merc_konol_scourge_legion }
 		NOT = { mercenary_company = merc_adeen_hardliners }
+
+		#ACE mercenaries
+		NOT = { mercenary_company = merc_bald_heads }
+		NOT = { mercenary_company = merc_morbanite_chargers }
+		NOT = { mercenary_company = merc_sons_of_the_sea }
+		NOT = { mercenary_company = merc_hill_gnoll }
+		NOT = { mercenary_company = merc_maritime_guard_nathalaire }
+		NOT = { mercenary_company = merc_crusaders }
+		NOT = { mercenary_company = merc_tretun_foreign_legion }
+		NOT = { mercenary_company = merc_bladeborn }
+		NOT = { mercenary_company = merc_green_thorn_crusaders }
+		NOT = { mercenary_company = merc_red_thorn_crusaders }
+		NOT = { mercenary_company = merc_black_thorn_crusaders }
+		NOT = { mercenary_company = merc_knights_magnificent }
+		NOT = { mercenary_company = merc_drake_army_1 }
+		NOT = { mercenary_company = merc_drake_army_2 }
+		NOT = { mercenary_company = merc_drake_army_3 }
+		NOT = { mercenary_company = merc_drake_army_4 }
+		NOT = { mercenary_company = merc_drake_army_5 }
+		NOT = { mercenary_company = merc_drake_army_6 }
+		NOT = { mercenary_company = merc_drake_army_7 }
+		NOT = { mercenary_company = merc_drake_army_8 }
+		NOT = { mercenary_company = merc_drake_army_9 }
+		NOT = { mercenary_company = merc_drake_army_10 }
+		NOT = { mercenary_company = merc_A33_pizzaro_band }
+		NOT = { mercenary_company = merc_A33_cortes_band }
+		NOT = { mercenary_company = merc_A33_pizzaro_band_1 }
+		NOT = { mercenary_company = merc_A33_cortes_band_2 }
+		NOT = { mercenary_company = merc_A33_yinnic_mariners }
+		NOT = { mercenary_company = merc_A33_yinnic_rangers }
+		NOT = { mercenary_company = merc_A33_eord_rangers }
+		NOT = { mercenary_company = merc_gnollcutters }
+		NOT = { mercenary_company = merc_rootburners }
 	}
 }
 
@@ -5275,6 +5313,7 @@ can_have_incorporated_vassals = {
     OR = {
         has_government_attribute = GER_unlock_integrated_vassal
         has_country_flag = hab_integrated_vassals_flag
+		has_couuntry_flag = ARB_integrated_vassals_flag
     }
 }
 has_new_aztec_inca_maya_mission_trigger = {

@@ -22,18 +22,29 @@ shared_expand_iron_mines_trigger = {
 					has_building = weapons
 				}
 			}
+			303 = {
+				NOT = {
+					has_building = weapons
+				}
+			}
 			306 = {
 				NOT = {
 					has_building = weapons
 				}
 			}
 		}
-		treasury = 1000
+		treasury = 900
 	}
 	else_if = {
 		limit = {
-			OR = {
+			calc_true_if = {
+				amount = 2
 				299 = {
+					NOT = {
+						has_building = weapons
+					}
+				}
+				303 = {
 					NOT = {
 						has_building = weapons
 					}
@@ -45,21 +56,47 @@ shared_expand_iron_mines_trigger = {
 				}
 			}
 		}
-		treasury = 500
+		treasury = 600
+	}
+	else_if = {
+		limit = {
+			calc_true_if = {
+				amount = 1
+				299 = {
+					NOT = {
+						has_building = weapons
+					}
+				}
+				303 = {
+					NOT = {
+						has_building = weapons
+					}
+				}
+				306 = {
+					NOT = {
+						has_building = weapons
+					}
+				}
+			}
+		}
+		treasury = 300
 	}
 	299 = {
-		base_production = 6
+		base_production = 7
 		has_production_building_trigger = yes
 		NOT = {
 			has_any_ongoing_construction = yes
 		}
 	}
 	303 = {
-		base_production = 6
+		base_production = 7
 		has_production_building_trigger = yes
+		NOT = {
+			has_any_ongoing_construction = yes
+		}
 	}
 	306 = {
-		base_production = 6
+		base_production = 7
 		has_production_building_trigger = yes
 		NOT = {
 			has_any_ongoing_construction = yes
@@ -210,7 +247,13 @@ marry_lisolette_trigger = {
 		}
 	}
 	A48 = {
-		has_female_heir = yes
+		ai = yes
+		NOT = {
+			has_country_flag = had_sugamber_succession_war
+			has_country_flag = sugamber_ethelbert_rebellion
+			has_country_flag = sugamber_baldwin_rebellion
+		}
+		has_heir_flag = lisolette_sil_rhinmond
 		has_opinion = {
 			who = ROOT
 			value = 180
@@ -293,6 +336,23 @@ has_200_opinion_improved_relation = {
 			modifier = improved_relation
 			value = 200
 		}
+	}
+}
+
+valid_wexorenti_halfling_vassal = {
+	num_of_owned_provinces_with = {
+		value = 5
+		culture_is_halfling = yes
+		superregion = western_cannor_superregion
+	}
+	OR = {
+		culture = visfoot_halfling
+		culture = redfoot_halfling
+		culture = bluefoot_halfling
+		culture = imperial_halfling
+	}
+	NOT = {
+		liberty_desire = 10
 	}
 }
 

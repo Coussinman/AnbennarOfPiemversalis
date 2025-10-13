@@ -5,59 +5,109 @@
 sugamber_succession_war = {
 	potential = {
 		tag = A48
-		NOT = { has_country_flag = had_sugamber_succession_war }
+		NOT = {
+			has_country_flag = had_sugamber_succession_war
+		}
 		government = monarchy
+		OR = {
 		is_free_or_tributary_trigger = yes
+			junior_union_with = A30
+			AND = {
+				is_subject_of = A30
+				has_country_flag = sugamber_caylen
+			}
+		}
 	}
-
-
 	can_start = {
 		has_any_disaster = no
 		current_age = age_of_discovery
 		is_at_war = no
+		OR = {
 		is_lesser_in_union = no
+			junior_union_with = A30
+		}
 		OR = {
 			AND = {
-				has_ruler = "Ewald II"
+				has_ruler_modifier = sugamber_ewald_gamble
 				has_heir = no
 			}
-			has_ruler = "Lisolette"
+			has_ruler_flag = lisolette_sil_rhinmond
+		AND = {
+				junior_union_with = A30
+				A30 = {
+					has_country_flag = A30_lisolette_disaster
+				}
+			}
 		}
 	}
 
 
 	can_stop = {
-		OR = {
-			AND = {
-				has_ruler = "Ewald II"
-				has_heir = yes
-				heir_claim = 80
-			}
-			has_any_disaster = yes
-			AND = {
-				legitimacy = 100
-				stability = 3
-			}
-			is_lesser_in_union = yes
-		}
+		always = no
 	}
-
-
 	progress = {
 		modifier = {
-			factor = 2
+			factor = 50
+			junior_union_with = A30
+		}
+		modifier = {
+			factor = 5
+			always = yes
+		}
+		modifier = {
+			factor = 5
+			NOT = { legitimacy = 100 }
+		}
+		modifier = {
+			factor = 5
 			NOT = { legitimacy = 90 }
 		}
 		modifier = {
-			factor = 1
+			factor = 5
+			NOT = { legitimacy = 80 }
+		}
+		modifier = {
+			factor = 5
+			NOT = { legitimacy = 70 }
+		}
+		modifier = {
+			factor = 5
+			NOT = { legitimacy = 60 }
+		}
+		modifier = {
+			factor = 5
+			NOT = { legitimacy = 50 }
+		}
+		modifier = {
+			factor = 5
+			NOT = { stability = 3 }
+		}
+		modifier = {
+			factor = 5
+			NOT = { stability = 2 }
+		}
+		modifier = {
+			factor = 5
 			NOT = { stability = 1 }
 		}
 		modifier = {
-			factor = 1
+			factor = 5
+			NOT = { stability = 0 }
+		}
+		modifier = {
+			factor = 5
+			NOT = { stability = -1 }
+		}
+		modifier = {
+			factor = 5
+			NOT = { stability = -2 }
+		}
+		modifier = {
+			factor = 5
 			overextension_percentage = 0.20
 		}
 		modifier = {
-			factor = 2
+			factor = 5
 			revolt_percentage = 0.10
 		}
 	}
@@ -72,20 +122,17 @@ sugamber_succession_war = {
 
 
 	modifier = {
-		stability_cost_modifier = 0.50
+		stability_cost_modifier = 0.25
 		global_unrest = 5
-		war_exhaustion = 0.05
+		war_exhaustion = 0.1
+		global_autonomy = 0.1
 	}
-
-
-	on_start = flavor_sugamber.1000
+	on_start = flavor_sugamber.25
 	on_end = flavor_sugamber.14
 
 
 	on_monthly = {
-		events = {
-
-		}
+		events = {}
 		random_events = {
 			100 = 0
 			5 = flavor_sugamber.6 #Civil war hurts agriculture

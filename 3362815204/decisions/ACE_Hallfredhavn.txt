@@ -1,0 +1,286 @@
+country_decisions = {
+	AD5_read_runestones = {
+		color = { 0  0  0 }
+		potential = {
+			ai = no
+			owns_or_non_sovereign_subject_of = 2304
+		}
+		allow = {
+			ai = no
+			owns_or_non_sovereign_subject_of = 2304
+			hidden_trigger = {
+				NOT = { has_country_flag = AD5_runestone_interface_open_flag }
+			}
+		}
+		effect = {
+			hidden_effect = { set_country_flag = AD5_runestone_interface_open_flag }
+			country_event = {
+				id = hallfredhavn.15
+			}
+		}
+	}
+
+	AD5_landsnamsverk_decision = {
+		color = { 0  0  0 }
+		potential = {
+			OR = {
+				tag = AD5
+				was_tag = AD5
+			}
+			has_country_modifier = AD5_desperate_expansionism
+			hidden_trigger = {
+				NOT = { mission_completed = AD5_end_the_sidrvetr }
+			}
+		}
+		allow = {
+			has_country_modifier = AD5_desperate_expansionism
+			any_owned_province = {
+				is_colony = yes
+			}
+			custom_trigger_tooltip = {
+				tooltip = AD5_namsverk2_tt
+				OR = {
+					NOT = { has_country_modifier = AD5_landsnamsverk_sailors_modifier }
+					NOT = { has_country_modifier = AD5_landsnamsverk_manpower_modifier }
+					NOT = { has_country_modifier = AD5_landsnamsverk_forced_emigration_modifier }
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = AD5_namsverk3_tt
+				NOT = { has_country_flag = AD5_landsnamsverk_interface_open_flag }
+			}
+		}
+		effect = {
+			hidden_effect = { set_country_flag = AD5_landsnamsverk_interface_open_flag }
+			country_event = {
+				id = hallfredhavn.39
+			}
+		}
+	}
+
+	jotunnheim_empire_decision = { #form Jotunnheim empire
+		color = { 0  0  0 }
+		major = yes
+		potential = {
+			tag = AD5
+			mission_completed = AD5_conquest_of_jotunnborg
+		}
+
+		provinces_to_highlight = {
+		}
+
+		allow = {
+			custom_trigger_tooltip = {
+				tooltip = AD5_finished_any_missions_on_this_row_tt
+				has_country_flag = AD5_empire_ready
+			}
+			mission_completed = AD5_consolidation_of_kalavend
+			owns_core_province = 2495
+			owns_core_province = 2496
+			owns_core_province = 2497
+			stability = 1
+			is_at_war = no
+		}
+
+		effect = {
+			change_tag = AD7
+			override_country_name = AD7
+			if = {
+				limit = {
+					NOT = { government_rank = 3 }
+				}
+				set_government_rank = 3
+			}
+			taychend_superregion = {
+				type = all
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = taychend_formed_colonist
+				duration = 18250 #50 years
+			}
+			add_prestige_or_monarch_power = {
+				amount = 50
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			set_capital = 2495
+			2495 = {
+				add_human_minority_size_effect = yes
+			}
+			hidden_effect = {
+				country_event = {
+					id = hallfredhavn.146
+					days = 365
+				}
+			}
+			custom_tooltip = keep_taychend_missions_tt
+			set_country_flag = formed_jotunnheim_empire_flag
+			swap_non_generic_missions = yes
+			custom_tooltip = ACE_new_tale_tt
+			set_country_flag = unlocked_song_ace_jotunnheim
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			custom_tooltip = AD5_new_runestone_tt
+			country_event = { 
+				id = hallfredhavn.127 
+				days = 10
+			}
+			custom_tooltip = AD5_upon_forming_jotunnheim2_tt
+			if = {
+				limit = {
+					NOT = {
+						OR = {
+							mission_completed = AD5_di3
+							mission_completed = AD5_pe3
+							mission_completed = AD5_sv3
+							mission_completed = AD5_sk3
+							mission_completed = AD5_vi3
+						}
+					}
+				}
+				custom_tooltip = AD5_upon_forming_jotunnheim3_tt
+			}
+			if = {
+				limit = {
+					mission_completed = AD5_di3
+				}
+				AD5_di3se = yes
+			}
+			if = {
+				limit = {
+					mission_completed = AD5_pe3
+				}
+				AD5_pe3se = yes
+			}
+			if = {
+				limit = {
+					mission_completed = AD5_sv3
+				}
+				AD5_sv3se = yes
+			}
+			if = {
+				limit = {
+					mission_completed = AD5_sk3
+				}
+				AD5_sk3se = yes
+			}
+			if = {
+				limit = {
+					mission_completed = AD5_vi3
+				}
+				AD5_vi3se = yes
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+
+	AD5_reforge_regalia = {
+		color = { 0  0  0 }
+		potential = {
+			has_country_flag = AD5_is_or_was_hallfredhavn_flag
+			ai = no
+			mission_completed = AD5_forge_regalia
+			government = monarchy
+			NOT = {
+				has_country_modifier = AD5_regalia_modifier_9
+			}
+		}
+		allow = {
+			NOT = {
+				has_country_modifier = AD5_regalia_modifier_9
+			}
+		}
+		effect = {
+			custom_tooltip = AD5_old_regalia_removed_tt
+			hidden_effect = {
+				remove_country_modifier = AD5_regalia_modifier_0
+				remove_country_modifier = AD5_regalia_modifier_1
+				remove_country_modifier = AD5_regalia_modifier_2
+				remove_country_modifier = AD5_regalia_modifier_3
+				remove_country_modifier = AD5_regalia_modifier_4
+				remove_country_modifier = AD5_regalia_modifier_5
+				remove_country_modifier = AD5_regalia_modifier_6
+				remove_country_modifier = AD5_regalia_modifier_7
+				remove_country_modifier = AD5_regalia_modifier_8
+			}
+			AD5_forge_regalia_scripted_effect = yes
+		}
+	}
+
+	AD5_embrace_cannorian_pantheon = {
+		color = { 0  0  0 }
+		potential = {
+			has_country_flag = AD5_is_or_was_hallfredhavn_flag
+			NOT = {
+				religion = cannorian_pantheon
+			}
+			ruler_religion = cannorian_pantheon
+			NOT = {
+				mission_completed = AD5_sv3
+			}
+		}
+		allow = {
+			adm_power = 100
+			estate_loyalty = {
+				estate = estate_church
+				loyalty = 50
+			}
+		}
+		effect = {
+			add_adm_power = -100
+			change_religion = cannorian_pantheon
+			if = {
+				limit = {
+					NOT = {
+						has_estate_privilege = estate_church_AD5_gudafridr_proclamation
+					}
+				}
+				add_country_modifier = {
+					name = "conversion_zeal"
+					duration = 3650
+				}
+			}
+		}
+	}
+
+	AD5_embrace_skaldhyrric_faith = {
+		color = { 0  0  0 }
+		potential = {
+			has_country_flag = AD5_is_or_was_hallfredhavn_flag
+			NOT = {
+				religion = skaldhyrric_faith
+			}
+			ruler_religion = skaldhyrric_faith
+		}
+		allow = {
+			adm_power = 100
+			estate_loyalty = {
+				estate = estate_church
+				loyalty = 50
+			}
+		}
+		effect = {
+			add_adm_power = -100
+			change_religion = skaldhyrric_faith
+			if = {
+				limit = {
+					NOT = {
+						has_estate_privilege = estate_church_AD5_gudafridr_proclamation
+					}
+				}
+				add_country_modifier = {
+					name = "conversion_zeal"
+					duration = 3650
+				}
+			}
+		}
+	}
+}

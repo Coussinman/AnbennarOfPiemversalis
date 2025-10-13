@@ -1,0 +1,87 @@
+country_decisions = {
+    A57_colonize_folly = {
+		major = yes
+		potential = {
+			has_country_flag = A57_folly_frontiers_enabled
+			daravans_folly_region = {
+				NOT = { is_city = yes }
+			}
+		}
+		allow = {
+            manpower = 3
+            custom_trigger_tooltip = {
+				tooltip = A57_folly_req_tt
+                any_owned_province = {
+                    is_colony = no
+                    any_empty_neighbor_province = { 
+                        region = daravans_folly_region
+                    }
+                }
+            }
+		}
+		effect = {
+            add_manpower = -3
+            custom_tooltip = A57_colonize_folly_tt
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        is_colony = no
+                    }
+                    every_empty_neighbor_province = {
+                        add_siberian_construction = 300
+                    }
+                }
+            }
+        }
+    }
+    ace_toarnen_host_chess_contest = {
+        major = yes	
+		potential = {
+			has_country_flag = ace_toarnen_unlock_chess_tournament
+            hidden_trigger = {
+                NOT = { has_country_modifier = A57_toarnen_chess_tournament_cooldown }
+            }
+		}
+		
+		allow = {
+			dip_power = 50
+			treasury = 200
+			hidden_trigger = {
+                NOT = { has_country_modifier = A57_toarnen_chess_tournament_cooldown }
+            }
+			is_at_war = no
+			has_regency = no
+		}
+	
+		effect = {
+			add_dip_power = -50
+			add_treasury = -200
+			
+			country_event = {
+				id = flavor_toarnen.19
+			}
+
+			add_country_modifier = {
+				name = A57_toarnen_chess_tournament_cooldown 
+                hidden = yes
+				duration = 3650
+			}
+		}
+		
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				NOT = { stability = 2 }
+			}
+			modifier = {
+				factor = 0
+				NOT = { treasury = 500 }
+			}
+			modifier = {
+				factor = 0
+				prestige = 50
+			}
+		}
+	}
+}

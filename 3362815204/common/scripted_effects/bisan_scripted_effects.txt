@@ -1,0 +1,129 @@
+wex_collapse = {
+	A30 = {
+		release = A34
+		release = A56
+		release = A72
+		A48 = {
+			if = {
+				limit = {
+					is_subject_of = A30
+				}
+				release = A34
+				release = A56
+				release = A72
+			}
+		}
+		release = A60
+		release = A85
+		release = A45
+		release = A37
+		release_all_subjects = yes
+		release_all_possible_countries = yes
+		if = {
+			limit = {
+				owns = 299
+			}
+			if = {
+				limit = {
+					A85 = {
+						exists = yes
+					}
+				}
+				299 = {
+					cede_province = A85
+				}
+			}
+		}
+		if = {
+			limit = {
+				owns = 902
+			}
+			if = {
+				limit = {
+					A60 = {
+						exists = yes
+					}
+				}
+				902 = {
+					cede_province = A60
+				}
+			}
+		}
+		if = {
+			limit = {
+				owns = 920
+			}
+			if = {
+				limit = {
+					A72 = {
+						exists = yes
+					}
+				}
+				920 = {
+					cede_province = A72
+				}
+			}
+		}
+	}
+}
+
+freecities_A34 = {
+	complex_dynamic_effect = {
+		first_custom_tooltip = A34_freecities_tt
+		first_limit = "
+			Z04 = {
+				has_100_opinion_improved_relation = {
+					target = ROOT
+				}
+			}
+		"
+		first_effect = "
+			add_treasury = -100
+			add_dip_power = -100
+			vassalize = Z04
+			
+		"
+		second_custom_tooltip = A34_freecities_tt2
+		second_limit = "
+			OR = {
+				Z04 = {
+					is_rival = root
+				}
+				is_rival = Z04
+			}
+		"
+		second_effect = "
+			add_core = 903
+		"
+	}
+
+	complex_dynamic_effect = {
+		first_custom_tooltip = A34_freecities_tt3
+		first_limit = "
+			Z02 = {
+				has_100_opinion_improved_relation = {
+					target = ROOT
+				}
+			}
+		"
+		first_effect = "
+			add_treasury = -100
+			add_dip_power = -100
+			vassalize = Z02
+			
+		"
+
+		second_custom_tooltip = A34_freecities_tt4
+		second_limit = "
+			OR = {
+				Z02 = {
+					is_rival = root
+				}
+				is_rival = Z02
+			}
+		"
+		second_effect = "
+			add_core = 294
+		"
+	}
+}

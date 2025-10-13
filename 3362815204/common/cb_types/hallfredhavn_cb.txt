@@ -1,0 +1,66 @@
+# Establish Trade Protectorate
+cb_establish_trade_protectorate = {
+	valid_for_subject = no
+
+	prerequisites_self = {
+		has_reform = ACE_forceful_integration_reform
+	}
+
+	prerequisites = {
+		FROM = {
+		#	OR = {
+		#		
+		#	}
+			is_subject = no
+		}
+	}
+
+	war_goal = ACE_blockade_ports_to_protectorate
+}
+
+cb_ACE_great_power_dismantlement = {
+	valid_for_subject = no
+	ai_peace_desire = -100
+	
+	prerequisites_self = {
+		mission_completed = AD7_a_great_power
+	}
+
+	prerequisites = {
+		FROM = {
+		#	OR = {
+		#		
+		#	}
+			is_great_power = yes
+			capital_scope = {
+				OR = {
+					continent = north_america
+					continent = south_america
+				}
+			}
+		}
+	}
+	
+	war_goal = ACE_great_power_dismantling
+}
+
+cb_war_of_the_jotunn = {
+	valid_for_subject = no
+
+	prerequisites_self = {
+		mission_completed = AD5_giant_gate
+	}
+
+	prerequisites = {
+		FROM = {
+			OR = {
+				tag = G52
+				tag = G64
+				tag = J84
+				tag = U39
+			}
+		}
+	}
+
+	war_goal = ACE_war_of_the_jotunn_war_goal
+}

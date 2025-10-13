@@ -1,0 +1,120 @@
+po_flamemarked_raid = {
+	category = 6
+	power_projection = humiliated_rival
+	power_cost_base = 0
+	prestige_base = 0.2
+	ae_base = 0.1
+	warscore_cost = {
+		all_provinces = 0
+		no_provinces = 1000
+		owner_keeps = 0
+		conquered = 1
+		returned_core = 0
+		released_nation = 0
+		cancelled_subject = 0
+		concede_colonial_region = 0
+	}
+	warscore_cap = 50
+	requires_demand_independence = yes
+	is_make_subject = no
+	requires_is_allowed = no
+	is_visible = {
+		has_country_flag = flamemarked_awakening
+	}
+	is_allowed = {
+		always = yes
+	}
+	effect = {
+		FROM = {
+			every_ally = {
+				limit = {
+					num_of_colonists = 1
+					NOT = {
+						capital_scope = {
+							region = daravans_folly_region
+						}
+					}
+				}
+				every_owned_province = {
+					limit = {
+						region = daravans_folly_region
+						NOT = {
+							capital_scope = {
+								region = daravans_folly_region
+							}
+						}
+					}
+					decolonize = yes
+					change_tribal_land = ROOT
+				}
+				add_country_modifier = {
+					name = AC7_enemy_no_colony
+					duration = 5475
+				}
+			}
+			for = {
+				amount = 3
+				effect = "
+					random_owned_province = {
+						add_base_manpower = -1
+						add_base_production = -1
+						add_base_tax = -1
+					}
+				"
+			}
+			every_owned_province = {
+				limit = {
+					NOT = {
+						is_capital = yes
+					}
+					region = daravans_folly_region
+				}
+				decolonize = yes
+				change_tribal_land = ROOT
+				change_culture = ROOT
+				change_religion = ROOT
+			}
+			add_country_modifier = {
+				name = AC7_enemy_no_colony
+				duration = 5475
+			}
+		}
+		ROOT = {
+			add_manpower = 5
+			for = {
+				amount = 3
+				effect = "
+					random_province = {
+						limit = {
+							region = daravans_folly_region
+							OR = {
+								tribal_land_of = ROOT
+								owned_by = ROOT
+							}
+						}
+						add_base_manpower = 1
+						add_base_production = 1
+						add_base_tax = 1
+					}
+				"
+			}
+			kryzzar_reform = yes
+			change_variable = {
+				which = flamemark_won_wars
+				value = 1
+			}
+		}
+	}
+	ai_weight = {
+		export_to_variable = {
+			variable_name = ai_value
+			value = trigger_value:always
+		}
+		set_variable = {
+			ai_value = 2000
+		}
+		limit = {
+			always = yes
+		}
+	}
+}

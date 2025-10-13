@@ -2262,6 +2262,19 @@ the_necropolis = {
 			global_autonomy = -0.025
 		}
 
+		conditional_modifier = {
+			trigger = {
+				owner = { 
+					OR = {
+						mission_completed = MAGD_5_4
+					}
+				}
+			}
+			modifier = {
+				relation_with_same_religion = 10
+			}
+		}
+
 		
 		on_upgraded = {
 			owner = {
@@ -2494,21 +2507,39 @@ ciranmyna_the_shimmering_city = {
 	}
 
 	can_upgrade_trigger = {
+		OR = {
+			hidden_trigger = {
+				owner = {
+					has_country_flag = Z06_puck_ciranmyna_flag
+				}
+			}
+			AND = {
 		culture = wood_elf
 		owner = {
 			OR = {
 				primary_culture = wood_elf
 				accepted_culture = wood_elf
+					}
+				}
 			}
 		}
 	}
 
 	can_use_modifiers_trigger = {
-		culture = wood_elf
-		owner = {
-			OR = {
-				primary_culture = wood_elf
-				accepted_culture = wood_elf
+		OR = {
+			hidden_trigger = {
+				owner = {
+					has_country_flag = Z06_puck_ciranmyna_flag
+				}
+			}
+			AND = {
+				culture = wood_elf
+				owner = {
+					OR = {
+						primary_culture = wood_elf
+						accepted_culture = wood_elf
+					}
+				}
 			}
 		}
 	}
@@ -2651,6 +2682,12 @@ mines_of_yfelorr = {
 	}
 
 	can_upgrade_trigger = {
+		OR = {
+			hidden_trigger = {
+				owner = {
+					has_country_flag = Z06_puck_yfelorr_flag
+				}
+			}
 		if = {
 			limit = {
 				owner = {
@@ -2689,6 +2726,12 @@ mines_of_yfelorr = {
 	}
 
 	can_use_modifiers_trigger = {
+		OR = {
+			hidden_trigger = {
+				owner = {
+					has_country_flag = Z06_puck_yfelorr_flag
+				}
+			}
 		if = {
 			limit = {
 				owner = {
@@ -3880,7 +3923,22 @@ rainbow_hall_north_monument = {
 			}
 		}
 		else = {
+			OR = {
 			culture = visfoot_halfling
+				AND = {
+					culture = redfoot_halfling
+					owner = {
+						tag = AC0
+						mission_completed = A30_small_duchy
+					}
+				}
+				AND = {
+					culture = imperial_halfling
+					owner = {
+						mission_completed = A30_unite_halflings_eco
+					}
+				}
+			}
 		}
 		has_owner_accepted_culture = yes
 	}
@@ -3914,7 +3972,22 @@ rainbow_hall_north_monument = {
 			}
 		}
 		else = {
+			OR = {
 			culture = visfoot_halfling
+				AND = {
+					culture = redfoot_halfling
+					owner = {
+						tag = AC0
+						mission_completed = A30_small_duchy
+					}
+				}
+				AND = {
+					culture = imperial_halfling
+					owner = {
+						mission_completed = A30_unite_halflings_eco
+					}
+				}
+			}
 		}
 		has_owner_accepted_culture = yes
 	}
@@ -4101,7 +4174,22 @@ rainbow_hall_south_monument = {
 		}
 
 		else = {
+			OR = {
 			culture = visfoot_halfling
+				AND = {
+					culture = redfoot_halfling
+					owner = {
+						tag = AC0
+						mission_completed = A30_small_duchy
+					}
+				}
+				AND = {
+					culture = imperial_halfling
+					owner = {
+						mission_completed = A30_unite_halflings_eco
+					}
+				}
+			}
 		}
 		has_owner_accepted_culture = yes
 	}
@@ -4135,7 +4223,22 @@ rainbow_hall_south_monument = {
 			}
 		}
 		else = {
+			OR = {
 			culture = visfoot_halfling
+				AND = {
+					culture = redfoot_halfling
+					owner = {
+						tag = AC0
+						mission_completed = A30_small_duchy
+					}
+				}
+				AND = {
+					culture = imperial_halfling
+					owner = {
+						mission_completed = A30_unite_halflings_eco
+					}
+				}
+			}
 		}
 		has_owner_accepted_culture = yes
 	}
@@ -4655,6 +4758,10 @@ derilde_s_gateway = {
 				culture_group = gerudian
 				tag = A19 #Portnamm
 				tag = A80 #Iochand
+				AND = {
+					tag = AC0
+					mission_completed = A30_conquer_western_lencenor
+				}
 				capital_scope = { region = lencenor_region }
 				capital_scope = { region = small_country_region }
 			}
@@ -4670,6 +4777,10 @@ derilde_s_gateway = {
 				culture_group = gerudian
 				tag = A19 #Portnamm
 				tag = A80 #Iochand
+				AND = {
+					tag = AC0
+					mission_completed = A30_conquer_western_lencenor
+				}
 				capital_scope = { region = lencenor_region }
 				capital_scope = { region = small_country_region }
 			}
@@ -4842,14 +4953,18 @@ lorenans_rest = {
 				culture_group = lencori
 				tag = A19 #Portnamm
 				tag = A80 #Iochand
+				AND = {
+					tag = AC0
+					mission_completed = A30_integrate_lorentish
+				}
 				custom_trigger_tooltip = {
 					tooltip = is_heir_of_lorenan_tt
 					OR = {
 						dynasty = "Siloriel"
 						dynasty = "Silmuna"
-						dynasty = "síl Rubenaire"
-						dynasty = "síl Eilísin"
-						dynasty = "síl Kyliande"
+						dynasty = "s�l Rubenaire"
+						dynasty = "s�l Eil�sin"
+						dynasty = "s�l Kyliande"
 					}
 				}
 			}
@@ -4863,14 +4978,18 @@ lorenans_rest = {
 				culture_group = lencori
 				tag = A19 #Portnamm
 				tag = A80 #Iochand
+				AND = {
+					tag = AC0
+					mission_completed = A30_integrate_lorentish
+				}
 				custom_trigger_tooltip = {
 					tooltip = is_heir_of_lorenan_tt
 					OR = {
 						dynasty = "Siloriel"
 						dynasty = "Silmuna"
-						dynasty = "síl Rubenaire"
-						dynasty = "síl Eilísin"
-						dynasty = "síl Kyliande"
+						dynasty = "s�l Rubenaire"
+						dynasty = "s�l Eil�sin"
+						dynasty = "s�l Kyliande"
 					}
 				}
 			}
@@ -4926,6 +5045,7 @@ lorenans_rest = {
 		country_modifiers = {
 			legitimacy = 0.25
 			cav_to_inf_ratio = 0.05
+			lorentish_elite_loyalty_modifier = 0.025
 		}
 
 		on_upgraded = {
@@ -4954,6 +5074,7 @@ lorenans_rest = {
 			legitimacy = 0.50
 			cav_to_inf_ratio = 0.15
 			cavalry_power = 0.05
+			lorentish_elite_loyalty_modifier = 0.05
 		}
 
 		on_upgraded = {
@@ -4984,6 +5105,7 @@ lorenans_rest = {
 			cav_to_inf_ratio = 0.25
 			cavalry_power = 0.10
 			accept_vassalization_reasons = 10
+			lorentish_elite_loyalty_modifier = 0.1
 		}
 
 		on_upgraded = {
@@ -5208,11 +5330,15 @@ imperial_palace_anbenncost = {
 		owner = {
 			OR = {
 				is_part_of_hre = yes
-				tag = Z01
+				OR = {
+					tag = Z01
+					tag = AD6
+				}
 				custom_trigger_tooltip = {
 					tooltip = has_dismantled_the_hre_tt
 					has_country_flag = has_dismantled_the_hre
 				}
+				mission_completed = A30_secure_damesear
 			}
 		}
 	}
@@ -5221,11 +5347,15 @@ imperial_palace_anbenncost = {
 		owner = {
 			OR = {
 				is_part_of_hre = yes
-				tag = Z01
+				OR = {
+					tag = Z01
+					tag = AD6
+				}
 				custom_trigger_tooltip = {
 					tooltip = has_dismantled_the_hre_tt
 					has_country_flag = has_dismantled_the_hre
 				}
+				mission_completed = A30_secure_damesear
 			}
 		}
 	}

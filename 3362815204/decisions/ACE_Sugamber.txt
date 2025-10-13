@@ -1,0 +1,106 @@
+country_decisions = {
+	sugamber_nirakhetist_vow_decision = {
+		major = yes
+		potential = {
+			tag = A48
+			has_country_flag = sugamber_nirakhet_vow
+		}
+		provinces_to_highlight = {
+			region = kheterata_region
+			NOT = {
+				AND = {
+					has_terrain = desert
+					development = 6
+					num_of_buildings_in_province = 1
+				}
+				AND = {
+					has_port = yes
+					NOT = {
+						province_group = mothers_sorrow_group
+					}
+					development = 9
+					num_of_buildings_in_province = 2
+				}
+				AND = {
+					province_group = mothers_sorrow_group
+					development = 18
+					num_of_buildings_in_province = 4
+				}
+			}
+		}
+		allow = {
+			kheterata_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = A48
+				OR = {
+					AND = {
+						has_terrain = desert
+						development = 6
+						num_of_buildings_in_province = 1
+					}
+					AND = {
+						OR = {
+							has_terrain = coastal_desert
+							area = elizna_area
+						}
+						development = 9
+						num_of_buildings_in_province = 2
+					}
+					AND = {
+						province_group = mothers_sorrow_group
+						development = 18
+						num_of_buildings_in_province = 4
+					}
+				}
+			}
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 20
+				region = kheterata_region
+				has_manufactory_trigger = yes
+			}
+			NOT = {
+				had_country_flag = {
+					flag = sugamber_nirakhet_vow
+					days = 7300
+				}
+			}
+		}
+		effect = {
+			country_event = {
+				id = flavor_sugamber.145
+			}
+			clr_country_flag = sugamber_nirakhet_vow
+		}
+	}
+	sugamber_ahati_vow_decision = {
+		major = yes
+		potential = {
+			tag = A48
+			has_country_flag = sugamber_ahati_vow
+		}
+		provinces_to_highlight = {
+			region = bulwar_proper_region
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		allow = {
+			num_of_owned_provinces_with = {
+				value = 50
+				region = bulwar_proper_region
+			}
+			NOT = {
+				had_country_flag = {
+					flag = sugamber_ahati_vow
+					days = 7300
+				}
+			}
+		}
+		effect = {
+			country_event = {
+				id = flavor_sugamber.142
+			}
+			clr_country_flag = sugamber_ahati_vow
+		}
+	}
+}

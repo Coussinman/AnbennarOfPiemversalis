@@ -1,0 +1,645 @@
+namespace = flavor_leslinpar
+#disaster related
+country_event = {
+	id = flavor_leslinpar.1
+	title = flavor_leslinpar.1.t
+	desc = flavor_leslinpar.1.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		add_republican_tradition = -100
+	}
+	option = {
+		name = flavor_leslinpar.1.a
+		custom_tooltip = flavor_leslinpar.1.a.tt
+		hidden_effect = {
+			every_ally = {
+				add_trust = {
+					who = root
+					value = -10
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_leslinpar.2
+	title = flavor_leslinpar.2.t
+	desc = flavor_leslinpar.2.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		set_country_flag = leslinpar_disaster_done
+		clr_country_flag = leslinpar_disaster
+		add_republican_tradition = 20
+		add_prestige = 20
+	}
+	option = {
+		name = flavor_leslinpar.2.a
+		add_government_reform = sabalian_stratocracy_reform1
+	}
+}
+
+country_event = {
+	id = flavor_leslinpar.3
+	title = flavor_leslinpar.3.t
+	desc = flavor_leslinpar.3.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	fire_only_once = yes
+	hidden = yes
+	trigger = {
+		tag = A92
+		has_disaster = leslinpar_succession_crisis
+	}
+	option = {
+		name = flavor_leslinpar.3.a
+		emperor = {
+			add_casus_belli = {
+				target = A92
+				type = cb_restore_personal_union
+				months = 240
+			}
+		}
+		A93 = {
+			add_casus_belli = {
+				target = A92
+				type = cb_restore_personal_union
+				months = 240
+			}
+		}
+		random_known_country = {
+			limit = {
+				is_part_of_hre = yes
+				government = monarchy
+				NOT = {
+					tag = A93
+					is_emperor = yes
+					is_subject = yes
+				}
+				capital_scope = {
+					region = esmaria_region
+					region = east_dameshead_region
+					region = the_borders_region
+				}
+			}
+			add_casus_belli = {
+				target = A92
+				type = cb_restore_personal_union
+				months = 240
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_leslinpar.4
+	title = flavor_leslinpar.4.t
+	desc = flavor_leslinpar.4.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = flavor_leslinpar.4.a
+		random_country = {
+			limit = {
+				has_casus_belli = {
+					target = A92
+					type = cb_restore_personal_union
+				}
+				is_at_war = no
+			}
+			declare_war_with_cb = {
+				who = A92
+				casus_belli = cb_restore_personal_union
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_leslinpar.5
+	title = flavor_leslinpar.5.t
+	desc = flavor_leslinpar.5.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_leslinpar.5.a
+		add_republican_tradition = -10
+		add_stability_or_adm_power = yes
+		random_owned_province = {
+			add_unrest = 10
+		}
+		random = {
+			chance = 20
+			random_owned_province = {
+				spawn_rebels = {
+					size = 1
+				}
+			}
+		}
+	}
+	option = {
+		name = flavor_leslinpar.5.b
+		add_republican_tradition = 10
+		add_stability = -1
+		random_owned_province = {
+			add_unrest = 10
+		}
+		random = {
+			chance = 20
+			random_owned_province = {
+				spawn_rebels = {
+					size = 1
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_leslinpar.6
+	title = flavor_leslinpar.6.t
+	desc = flavor_leslinpar.6.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_leslinpar.6.a
+		add_republican_tradition = -10
+		every_ally = {
+			add_trust = {
+				who = root
+				value = 5
+			}
+		}
+		random_owned_province = {
+			add_unrest = 10
+		}
+		random = {
+			chance = 20
+			random_owned_province = {
+				spawn_rebels = {
+					size = 1
+				}
+			}
+		}
+	}
+	option = {
+		name = flavor_leslinpar.6.b
+		add_republican_tradition = 10
+		every_ally = {
+			add_trust = {
+				who = root
+				value = -5
+			}
+		}
+		random_owned_province = {
+			add_unrest = 10
+		}
+		random = {
+			chance = 20
+			random_owned_province = {
+				spawn_rebels = {
+					size = 1
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_leslinpar.7
+	title = flavor_leslinpar.7.t
+	desc = flavor_leslinpar.7.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_leslinpar.7.a
+		add_republican_tradition = -10
+		add_manpower = 2
+		random_owned_province = {
+			add_unrest = 10
+		}
+		random = {
+			chance = 20
+			random_owned_province = {
+				spawn_rebels = {
+					size = 1
+				}
+			}
+		}
+	}
+	option = {
+		name = flavor_leslinpar.7.b
+		add_republican_tradition = 10
+		add_manpower = -2
+		random_owned_province = {
+			add_unrest = 10
+		}
+		random = {
+			chance = 20
+			random_owned_province = {
+				spawn_rebels = {
+					size = 1
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_leslinpar.11
+	title = flavor_leslinpar.11.t
+	desc = flavor_leslinpar.11.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = A92
+		is_date = 1445.4.4
+		NOT = {
+			has_country_flag = sabal_ruler
+		}
+	}
+	immediate = {
+		set_country_flag = leslinpar_disaster
+	}
+	option = {
+		name = flavor_leslinpar.11.a
+		kill_ruler = yes
+		kill_heir = {
+		}
+		kill_consort = yes
+		change_government = republic
+		add_government_reform = leslinpar_dictator_reform
+		define_ruler = {
+			name = "Varian"
+			dynasty = "Sabal"
+			adm = 5
+			dip = 3
+			mil = 6
+			age = 64
+			claim = 95
+			culture = half_elf
+		}
+		set_ruler_flag = sabal_ruler
+		add_ruler_personality = conqueror_personality
+		add_ruler_personality = cruel_personality
+		add_ruler_personality = strict_personality
+	}
+}
+
+country_event = {
+	id = flavor_leslinpar.500
+	title = flavor_leslinpar.500.t
+	desc = flavor_leslinpar.500.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = flavor_leslinpar.500.a
+		ai_chance = {
+			factor = 5
+			modifier = {
+				factor = 3
+				capital_scope = {
+					region = esmaria_region
+				}
+			}
+			modifier = {
+				factor = 10
+				OR = {
+					ai_attitude = {
+						who = emperor
+						attitude = attitude_friendly
+					}
+					ai_attitude = {
+						who = emperor
+						attitude = attitude_loyal
+					}
+					ai_attitude = {
+						who = emperor
+						attitude = attitude_allied
+					}
+				}
+			}
+		}
+		add_imperial_influence = 10
+		emperor = {
+			declare_war_with_cb = {
+				casus_belli = cb_change_government
+				who = A92
+			}
+		}
+		reverse_add_opinion = {
+			who = A92
+			modifier = against_our_existence
+		}
+	}
+	option = {
+		name = flavor_leslinpar.500.b
+		ai_chance = {
+			factor = 5
+			modifier = {
+				factor = 5
+				NOT = {
+					capital_scope = {
+						region = esmaria_region
+					}
+				}
+			}
+			modifier = {
+				factor = 5
+				OR = {
+					ai_attitude = {
+						who = A92
+						attitude = attitude_friendly
+					}
+					ai_attitude = {
+						who = A92
+						attitude = attitude_loyal
+					}
+					ai_attitude = {
+						who = A92
+						attitude = attitude_allied
+					}
+				}
+			}
+			modifier = {
+				factor = 2
+				is_emperor = yes
+				alliance_with = A92
+			}
+		}
+		every_country = {
+			limit = {
+				is_part_of_hre = yes
+				government = monarchy
+			}
+			add_casus_belli = {
+				type = cb_change_government
+				target = A92
+			}
+		}
+	}
+}
+
+#######
+country_event = {
+	id = flavor_leslinpar.13
+	title = flavor_leslinpar.13.t
+	desc = flavor_leslinpar.13.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = flavor_leslinpar.13.a
+		set_capital = 266
+		266 = {
+			add_province_modifier = {
+				name = A92_new_capital
+				duration = 9125
+			}
+		}
+	}
+	option = {
+		name = flavor_leslinpar.13.b
+		set_capital = 267
+		267 = {
+			add_province_modifier = {
+				name = A92_new_capital
+				duration = 9125
+			}
+		}
+	}
+	option = {
+		name = flavor_leslinpar.13.c
+		capital_scope = {
+			add_base_tax = 1
+			add_base_production = 1
+			add_base_manpower = 1
+		}
+	}
+}
+
+country_event = {
+	id = flavor_leslinpar.16
+	title = flavor_leslinpar.16.t
+	desc = flavor_leslinpar.16.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = flavor_leslinpar.16.a
+		change_tag = AD1
+		update_sprite_pack = yes
+		set_country_flag = has_overriden_color_flag
+		add_country_modifier = {
+			name = A92_parian_campaign
+			duration = -1
+		}
+		set_in_empire = no
+
+		if = {
+			limit = {
+				has_custom_ideas = no
+			}
+			country_event = {
+				id = ideagroups.1
+			}
+			#Swap Ideas
+		}
+	}
+
+	option = {
+		name = flavor_leslinpar.16.b
+		change_tag = AD1
+		override_country_name = SABALIA
+		set_country_flag = has_overriden_color_flag
+		add_country_modifier = {
+			name = A92_parian_campaign
+			duration = -1
+		}
+		set_in_empire = no
+
+		if = {
+			limit = {
+				has_custom_ideas = no
+			}
+			country_event = {
+				id = ideagroups.1
+			}
+			#Swap Ideas
+		}
+	}
+
+	option = {
+		name = flavor_leslinpar.16.c
+		change_tag = AD1
+		override_country_name = PARIANDE
+		set_country_flag = has_overriden_color_flag
+		add_country_modifier = {
+			name = A92_parian_campaign
+			duration = -1
+		}
+		set_in_empire = no
+		if = {
+			limit = {
+				has_custom_ideas = no
+			}
+			country_event = {
+				id = ideagroups.1
+			}
+			#Swap Ideas
+		}
+	}
+
+	option = {
+		name = flavor_leslinpar.16.f
+		change_tag = AD1
+		override_country_name = PARIANOR
+		set_country_flag = has_overriden_color_flag
+		add_country_modifier = {
+			name = A92_parian_campaign
+			duration = -1
+		}
+		set_in_empire = no
+		if = {
+			limit = {
+				has_custom_ideas = no
+			}
+			country_event = {
+				id = ideagroups.1
+			}
+			#Swap Ideas
+		}
+	}
+}
+
+country_event = {
+	id = flavor_leslinpar.18
+	title = flavor_leslinpar.18.t
+	desc = flavor_leslinpar.18.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = flavor_leslinpar.18.a
+		set_country_flag = leslinpar_castanor_flag
+		custom_tooltip = flavor_leslinpar.18.a.tt2
+		south_castanor_region = {
+			add_permanent_claim = ROOT
+		}
+		west_castanor_region = {
+			add_permanent_claim = ROOT
+		}
+		inner_castanor_region = {
+			add_permanent_claim = ROOT
+		}
+
+		custom_tooltip = flavor_leslinpar.18.a.tt3
+		hidden_effect = {
+			swap_non_generic_missions = yes
+		}
+	}
+	option = {
+		name = flavor_leslinpar.18.b
+		custom_tooltip = flavor_leslinpar.18.b.tt
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					region = forlorn_vale_region
+				}
+				add_local_autonomy = -50
+				add_province_modifier = {
+					name = A92_secure_east
+					duration = 18250
+				}
+			}
+		}
+		tooltip = {
+			add_local_autonomy = -50
+			add_province_modifier = {
+				name = A92_secure_east
+				duration = 18250
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_leslinpar.19
+	title = flavor_leslinpar.19.t
+	desc = flavor_leslinpar.19.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = flavor_leslinpar.19.a
+		alenic_frontier_region = {
+			add_permanent_claim = ROOT
+		}
+
+		add_country_modifier = {
+			name = A92_war_against_north
+			duration = 10950
+		}
+	}
+
+	option = {
+		name = flavor_leslinpar.19.b
+		custom_tooltip = flavor_leslinpar.19.b.tt
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					has_fort_building_trigger = yes
+					OR = {
+						region = alenic_frontier_region
+						area = derwing_area
+					}
+				}
+				add_province_modifier = {
+					name = A92_northern_bulwark
+					duration = -1
+				}
+			}
+		}
+		tooltip = {
+			add_province_modifier = {
+				name = A92_northern_bulwark
+				duration = -1
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_leslinpar.20
+	title = flavor_leslinpar.20.t
+	desc = flavor_leslinpar.20.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+
+	hidden = yes
+
+	trigger = {
+		mission_completed = A92_parian_identity
+		tag = A92
+	}
+	mean_time_to_happen = {
+		months = 60
+	}
+	option = {
+		name = flavor_leslinpar.20.a
+		random_owned_province = {
+			limit = {
+				region = esmaria_region
+				NOT = {
+					culture = parian
+				}
+			}
+			change_culture = parian
+			add_unrest = -2
+		}
+	}
+}

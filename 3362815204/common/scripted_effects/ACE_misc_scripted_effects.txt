@@ -1,62 +1,489 @@
-reform = {
-	add_country_modifier = {
-		name = AC7_institution
-		duration = 18250
-	}
+ace_development_effect = {
+	sugamber_nirakhet_vow_check = yes
 	if = {
 		limit = {
-			has_country_modifier = AC7_institution
+			owner = { 
+				NOT = { has_dlc = "Leviathan" } 
+				has_country_flag = WL_magdalaire_expanding_infrastructure
+			}
+			development = 15
+			NOT = { development = 16 }
 		}
-		remove_country_modifier = AC7_institution
-		add_country_modifier = {
-			name = AC7_institution2
-			duration = 18250
-		}
-	}
-	if = {
-		limit = {
-			has_country_modifier = AC7_institution2
-		}
-		remove_country_modifier = AC7_institution2
-		add_country_modifier = {
-			name = AC7_institution3
-			duration = 18250
+		random_list = {
+			50 = {
+				add_elven_minority_size_effect = yes
+			}
+			50 = {
+				add_half_elven_minority_size_effect = yes
+			}
 		}
 	}
 	if = {
 		limit = {
-			has_country_modifier = AC7_institution3
+			owner = { 
+				NOT = { has_dlc = "Leviathan" } 
+				has_country_flag = WL_indlebury_expanding_infrastructure
+			}
+			development = 15
+			NOT = { development = 16 }
 		}
-		remove_country_modifier = AC7_institution3
-		add_country_modifier = {
-			name = AC7_institution4
-			duration = 18250
+		random_list = {
+			50 = {
+				add_elven_minority_size_effect = yes
+			}
+			50 = {
+				add_half_elven_minority_size_effect = yes
+			}
 		}
 	}
 	if = {
 		limit = {
-			has_country_modifier = AC7_institution4
+			province_id = 319
+			development = 25
+			owner = {
+				has_country_flag = butchersfield_restoration
+			}
 		}
-		remove_country_modifier = AC7_institution4
-		add_country_modifier = {
-			name = AC7_institution5
-			duration = 18250
+		owner = {
+			country_event = {
+				id = flavor_sugamber.202
+			}
+			clr_country_flag = butchersfield_restoration
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				tag = A48
+				has_estate_privilege = estate_curtailing_neratic_clergy
+			}
+		}
+		owner = {
+			change_estate_land_share = {
+				estate = estate_church
+				share = -0.05
+			}
 		}
 	}
 }
 
-A92_cloth = {
-	for = {
-		amount = 5
-		custom_tooltip = A92_cloth_tt
-		effect = "
-			random_owned_province = {
-				limit = {
-					region = esmaria_region
-					trade_goods = cloth
+ace_building_effect = {
+	sugamber_nirakhet_vow_check = yes
+}
+
+religious_supremacy_on_victory = {
+	if = {
+		limit = {
+			is_part_of_hre = yes
+		}
+		country_event = {
+			id = religious_leagues.100
+		}
+	}
+	every_known_country = {
+		limit = {
+			is_part_of_hre = yes
+		}
+		country_event = {
+			id = religious_leagues.100
+		}
+	}
+	if = {
+		limit = {
+			is_part_of_hre = no
+		}
+		country_event = {
+			id = religious_leagues.11
+		}
+	}
+	every_known_country = {
+		limit = {
+			is_part_of_hre = no
+		}
+		country_event = {
+			id = religious_leagues.11
+		}
+	}
+}
+
+religious_supremacy_update_country_modifier = {
+	if = {
+		limit = {
+			religion = regent_court
+			hre_religion = regent_court
+			hre_religion_treaty = no
+		}
+		add_country_modifier = {
+			name = hre_dominant_regent_court
+			duration = -1
+		}
+	}
+	else_if = {
+		limit = {
+			religion = corinite
+			hre_religion = corinite
+			hre_religion_treaty = no
+		}
+		add_country_modifier = {
+			name = hre_dominant_corinite
+			duration = -1
+		}
+	}
+	else_if = {
+		limit = {
+			religion = ravelian
+			hre_religion = ravelian
+			hre_religion_treaty = no
+		}
+		add_country_modifier = {
+			name = hre_dominant_ravelian
+			duration = -1
+		}
+	}
+	else_if = {
+		limit = {
+			religion = dalcabba
+			hre_religion = dalcabba
+			hre_religion_treaty = no
+		}
+		add_country_modifier = {
+			name = hre_dominant_dalcabba
+			duration = -1
+		}
+	}
+	else_if = {
+		limit = {
+			religion = the_jadd
+			hre_religion = the_jadd
+			hre_religion_treaty = no
+		}
+		add_country_modifier = {
+			name = hre_dominant_the_jadd
+			duration = -1
+		}
+	}
+}
+
+religious_supremacy_tooltip_effect = {
+	set_hre_religion = $religion$
+	set_hre_religion_locked = yes
+	if = {
+		limit = {
+			religion = $religion$
+		}
+		add_country_modifier = {
+			name = hre_dominant_$religion$
+			duration = -1
+		}
+	}
+}
+
+religious_supremacy_provincial_modifier = {
+	custom_tooltip = ACE_remove_religious_zeal_tooltip
+	hidden_effect = {
+		every_province = {
+			limit = {
+				owner = {
+					is_part_of_hre = yes
 				}
-				change_trade_goods = silk
+				is_part_of_hre = yes
+				religion = $religion$
 			}
-		"
+			add_province_modifier = {
+				name = religious_zeal_at_conv
+				duration = 10950
+			}
+		}
+		every_province = {
+			limit = {
+				owner = {
+					religion = $religion$
+					is_part_of_hre = yes
+				}
+				is_part_of_hre = yes
+				NOT {
+					religion = $religion$
+				}
+			}
+			remove_province_modifier = religious_zeal_at_conv
+		}
+	}
+	custom_tooltip = ace_remove_centers_tooltip
+	add_country_modifier = {
+		name = ace_removed_centers
+		duration = 10950
+	}
+	europe = {
+		limit = {
+			is_part_of_hre = yes
+		}
+		[[regent_court]
+			remove_reform_center = corinite
+			remove_reform_center = ravelian
+			remove_reform_center = dalcabba
+		]
+		[[corinite]
+			remove_reform_center = regent_court
+			remove_reform_center = ravelian
+			remove_reform_center = dalcabba
+		]
+		[[ravelian]
+			remove_reform_center = regent_court
+			remove_reform_center = corinite
+			remove_reform_center = dalcabba
+		]
+		[[dalcabba]
+			remove_reform_center = regent_court
+			remove_reform_center = corinite
+			remove_reform_center = ravelian
+		]
+	}
+}
+
+revert_color_to_start_tag = {
+	set_country_flag = has_reverted_to_starting_tag_color_flag
+	if = { 
+		limit = { was_tag = A56 }
+		change_country_color = { 
+			color = { 68 122 13 }
+		}
+		set_country_flag = has_overriden_color_flag
+	}
+	if = { 
+		limit = { was_tag = A75 }
+		change_country_color = { 
+			color = { 27 170 120 }
+		}
+		set_country_flag = has_overriden_color_flag
+	}
+	if = { 
+		limit = { was_tag = B85 }
+		change_country_color = { 
+			color = { 100 50 50 }
+		}
+		set_country_flag = has_overriden_color_flag
+	}
+}
+
+#only difference from the original is one less space above "Alternatively"
+complex_dynamic_effect_ace = {
+	custom_tooltip = $first_custom_tooltip$
+	if = {
+		limit = {
+			$first_limit$
+		}
+		custom_tooltip = BONUS_REWARD_YES
+	}
+	else = { custom_tooltip = BONUS_REWARD_NO }
+	tooltip = {
+		$first_effect$
+	}
+
+	[[second_custom_tooltip]
+	custom_tooltip = $second_custom_tooltip$
+	if = {
+		limit = {
+			$second_limit$
+		}
+		custom_tooltip = BONUS_REWARD_YES
+	}
+	else = { custom_tooltip = BONUS_REWARD_NO }
+	tooltip = {
+		$second_effect$
+	}
+	]
+
+	[[third_custom_tooltip]
+	custom_tooltip = $third_custom_tooltip$
+	if = {
+		limit = {
+			$third_limit$
+		}
+		custom_tooltip = BONUS_REWARD_YES
+	}
+	else = { custom_tooltip = BONUS_REWARD_NO }
+	tooltip = {
+		$third_effect$
+	}
+	]
+
+	[[fourth_custom_tooltip]
+	custom_tooltip = $fourth_custom_tooltip$
+	if = {
+		limit = {
+			$fourth_limit$
+		}
+		custom_tooltip = BONUS_REWARD_YES
+	}
+	else = { custom_tooltip = BONUS_REWARD_NO }
+	tooltip = {
+		$fourth_effect$
+	}
+	]
+
+	[[fifth_custom_tooltip]
+	custom_tooltip = $fifth_custom_tooltip$
+	if = {
+		limit = {
+			$fifth_limit$
+		}
+		custom_tooltip = BONUS_REWARD_YES
+	}
+	else = { custom_tooltip = BONUS_REWARD_NO }
+	tooltip = {
+		$fifth_effect$
+	}
+	]
+
+	[[sixth_custom_tooltip]
+	custom_tooltip = $sixth_custom_tooltip$
+	if = {
+		limit = {
+			$sixth_limit$
+		}
+		custom_tooltip = BONUS_REWARD_YES
+	}
+	else = { custom_tooltip = BONUS_REWARD_NO }
+	tooltip = {
+		$sixth_effect$
+	}
+	]
+
+	[[seventh_custom_tooltip]
+	custom_tooltip = $seventh_custom_tooltip$
+	if = {
+		limit = {
+			$seventh_limit$
+		}
+		custom_tooltip = BONUS_REWARD_YES
+	}
+	else = { custom_tooltip = BONUS_REWARD_NO }
+	tooltip = {
+		$seventh_effect$
+	}
+	]
+
+	[[eighth_custom_tooltip]
+	custom_tooltip = $eighth_custom_tooltip$
+	if = {
+		limit = {
+			$eighth_limit$
+		}
+		custom_tooltip = BONUS_REWARD_YES
+	}
+	else = { custom_tooltip = BONUS_REWARD_NO }
+	tooltip = {
+		$eighth_effect$
+	}
+	]
+
+	[[nineth_custom_tooltip]
+	custom_tooltip = $nineth_custom_tooltip$
+	if = {
+		limit = {
+			$nineth_limit$
+		}
+		custom_tooltip = BONUS_REWARD_YES
+	}
+	else = { custom_tooltip = BONUS_REWARD_NO }
+	tooltip = {
+		$nineth_effect$
+	}
+	]
+
+	[[tenth_custom_tooltip]
+	custom_tooltip = $tenth_custom_tooltip$
+	if = {
+		limit = {
+			$tenth_limit$
+		}
+		custom_tooltip = BONUS_REWARD_YES
+	}
+	else = { custom_tooltip = BONUS_REWARD_NO }
+	tooltip = {
+		$tenth_effect$
+	}
+	]
+
+	hidden_effect = {
+		if = {
+			limit = { $first_limit$ }
+			$first_effect$
+		}
+		[[second_custom_tooltip]
+		else_if = {
+			limit = { $second_limit$ }
+			$second_effect$
+		}
+		]
+		[[third_custom_tooltip]
+		else_if = {
+			limit = { $third_limit$ }
+			$third_effect$
+		}
+		]
+		[[fourth_custom_tooltip]
+		else_if = {
+			limit = { $fourth_limit$ }
+			$fourth_effect$
+		}
+		]
+		[[fifth_custom_tooltip]
+		else_if = {
+			limit = { $fifth_limit$ }
+			$fifth_effect$
+		}
+		]
+		[[sixth_custom_tooltip]
+		else_if = {
+			limit = { $sixth_limit$ }
+			$sixth_effect$
+		}
+		]
+		[[seventh_custom_tooltip]
+		else_if = {
+			limit = { $seventh_limit$ }
+			$seventh_effect$
+		}
+		]
+		[[eigth_custom_tooltip]
+		else_if = {
+			limit = { $eigth_limit$ }
+			$eigth_effect$
+		}
+		]
+		[[nineth_custom_tooltip]
+		else_if = {
+			limit = { $nineth_limit$ }
+			$nineth_effect$
+		}
+		]
+		[[tenth_custom_tooltip]
+		else_if = {
+			limit = { $tenth_limit$ }
+			$tenth_effect$
+		}
+		]
+	}
+}
+
+
+#################BUILDINGS
+anbennar_building_effect = { #replacement for anbennar
+	owner = {
+		if = {
+			limit = { religion = corinite }
+			hidden_effect = { add_karma = 0.3 }
+		}
+	}
+	if = {
+		limit = {
+			province_id = 682
+			NOT = { has_province_modifier = sareyand_bulwark_of_the_sun }
+			owner = {
+				has_country_flag = sareyand_the_bulwark_of_the_sun
+			}
+		}
+		province_event = { id = flavour_sareyand.1 }
 	}
 }

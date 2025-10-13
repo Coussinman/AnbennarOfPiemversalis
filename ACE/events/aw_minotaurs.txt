@@ -1,0 +1,681 @@
+namespace = aw_minotaurs
+
+#The Adventurers Wanted uses a strict ID system to make the system easier to author content for
+#The IDs below 100 are core utility systems that are usually straight copies or modifications of how the AW system works, such as monsters being able to migrate and be defeated by adventurers.
+#The IDs above 100 are more unique situations for the specific encounter, but they should correlate with the numbers from above: if ID 10s deal with migration, then ID 110s should be the unique events to do with migration - for example bribing a Thieves Guild to GTFO your country
+#Crazy and more uniques ones that dont conform to the utilities should be ID 200
+
+#USE THE anb_aw_minotaurs TO SEE A SIMPLE COPY-PASTABLE FORMAT IN ADDITION TO STUFF LIKE MIGRATION STYLES ETC
+#Search for CHANGEABLE for the criteria you should change in that file and this one
+
+#################################################################
+# Welcome to the master file for the Adventurers Wanted System. In the comments below you'll see copy-pastable events for you to choose, different migration styles as well as prebuilt events to handle stuff like spawning rebellions
+#################################################################
+
+#0 - spawn in province
+province_event = {
+    id = aw_minotaurs.0
+    title = aw_minotaurs.0.t
+    desc = aw_minotaurs.0.d
+    picture = COMET_SIGHTED_eventPicture
+    goto = ROOT
+    
+    is_triggered_only = yes
+    #hidden = yes
+    
+    #yup thats happening
+    option = {
+        name = aw_basic.0.a
+        ai_chance = { 
+            factor = 1 
+        }
+        add_permanent_province_modifier  = {
+            name = aw_minotaurs_1
+            duration = -1  
+        }
+
+        custom_tooltip = aw_how_to_get_more_adventurer_removal_chance_tooltip
+    }
+}
+
+
+#1 - event manager, called by on_actions. This happens ONCE per pulse. If you have 7 of these, it still only fires the manager once
+country_event = {
+    id = aw_minotaurs.1
+    title = aw_minotaurs.1.t
+    desc = aw_minotaurs.1.d
+    picture = COMET_SIGHTED_eventPicture
+    
+    hidden = yes
+    is_triggered_only = yes
+    
+    trigger = {
+        any_owned_province = {
+            OR = { 
+                has_province_modifier = aw_minotaurs_1
+                has_province_modifier = aw_minotaurs_2
+                has_province_modifier = aw_minotaurs_3
+            }
+        }
+    }
+
+    mean_time_to_happen = {
+        days = 1
+        modifier = {
+            factor = 2
+            num_of_owned_provinces_with = {
+                value = 3
+                OR = { 
+                    has_province_modifier = aw_minotaurs_1
+                    has_province_modifier = aw_minotaurs_2
+                    has_province_modifier = aw_minotaurs_3
+                }
+            }
+        }
+    }
+
+    immediate = {
+        random_owned_province = {
+            limit = {
+                OR = { 
+                    has_province_modifier = aw_minotaurs_1
+                    has_province_modifier = aw_minotaurs_2
+                    has_province_modifier = aw_minotaurs_3
+                }
+            }
+            save_event_target_as = aw_minotaurs_target
+        }
+    }
+    
+	
+	option = {
+        event_target:aw_minotaurs_target = {
+            random_list = {
+
+
+                #20 - natural removal
+                7 = {
+                    province_event = { id = aw_minotaurs.20 }    #Natural removal
+                }
+
+                #21 - adventurer removal
+                15 = {
+                    #Base modifiers
+
+                    #more likely if generous quest rewards/adverturer nation
+                    modifier = {
+                        factor = 2
+                        OR = {
+                            owner = { has_estate_privilege = estate_adventurers_generous_quest_rewards }
+                            owner = { has_adventurer_reform = yes }
+                            owner = { has_estate_privilege = estate_ahati_support_south }
+							owner = { has_estate_privilege = estate_ahati_support_brotherhoods }
+                        }
+                    }
+
+                    #more likely if loyal
+                    modifier = {
+                        factor = 2
+                        owner = {
+                            estate_loyalty = {
+                                estate = estate_adventurers
+                                loyalty = 60
+                            }
+                        }
+                    }
+
+                    #more likely if high influence
+                    modifier = {
+                        factor = 2
+                        owner = {
+                            estate_influence = {
+                                estate = estate_adventurers
+                                influence = 60
+                            }
+                        }
+                    }
+                    #small influence boost at 30
+                    modifier = {
+                        factor = 1.5
+                        owner = {
+                            estate_influence = {
+                                estate = estate_adventurers
+                                influence = 30
+                            }
+                        }
+                    }
+                    #adventurer type sponsorships
+                    modifier = {
+                        factor = 2
+                        owner = {
+                            has_estate_privilege = estate_adventurers_sponsor_beast_slayers
+                        }
+                    }
+                    province_event = { id = aw_minotaurs.21 }
+                }
+
+
+
+                #24 - monstrous nation removal
+                50 = {
+                    modifier = {
+                        #only want this to ever be part of the equation if you are monstrous
+                        factor = 0
+                        NOT = { owner = { has_country_modifier = monstrous_nation } }
+                    }
+                    #Base modifiers
+                    province_event = { id = aw_minotaurs.24 }
+                }
+
+                #120 - Adventurer Peaceful Resolution
+                10 = {
+                    #more likely if generous quest rewards/adverturer nation
+                    modifier = {
+                        factor = 2
+                        OR = {
+                            owner = { has_estate_privilege = estate_adventurers_generous_quest_rewards }
+                            owner = { has_adventurer_reform = yes }
+                            owner = { has_estate_privilege = estate_ahati_support_south }
+							owner = { has_estate_privilege = estate_ahati_support_brotherhoods }
+                        }
+                    }
+
+                    #more likely if loyal
+                    modifier = {
+                        factor = 2
+                        owner = {
+                            estate_loyalty = {
+                                estate = estate_adventurers
+                                loyalty = 60
+                            }
+                        }
+                    }
+
+                    #more likely if high influence
+                    modifier = {
+                        factor = 2
+                        owner = {
+                            estate_influence = {
+                                estate = estate_adventurers
+                                influence = 60
+                            }
+                        }
+                    }
+                    #small influence boost at 30
+                    modifier = {
+                        factor = 1.5
+                        owner = {
+                            estate_influence = {
+                                estate = estate_adventurers
+                                influence = 30
+                            }
+                        }
+                    }
+                    #adventurer type sponsorships
+                    modifier = {
+                        factor = 3
+                        owner = {
+                            has_estate_privilege = estate_adventurers_sponsor_do_gooders
+                        }
+                    }
+                    province_event = { id = aw_minotaurs.120 }
+                }
+
+                #121 - Minotaur inner conflict causes devastation
+                10 = {
+                    province_event = { id = aw_minotaurs.121 }
+                }
+
+                #122 - Minotaurs occupy ruins
+                10 = {
+                    province_event = { id = aw_minotaurs.122 }
+                }
+
+                #200 - Indecent Acts with livestock
+                10 = {
+                    province_event = { id = aw_minotaurs.200 }
+                }
+            }
+        }
+	}
+    
+}
+
+
+#2 - notification of advanturers wanted spawning
+
+############## 10s - Migration and Propagation ###################
+
+#10 - Base migration
+
+
+#11 - migration target notification if it goes to other country
+
+
+#13 - Base propagation
+
+
+#14 - propagation target notification
+
+
+#15 - Migrate to non monstrous if monstrous nation is owner (if its applicable to monsters, like wyverns etc, then this is fine to remove, else keep)
+
+
+############## 20s - Removal/Tier Down ###################
+
+#20 - natural removal
+province_event = {
+    id = aw_minotaurs.20
+    title = aw_minotaurs.20.t
+    desc = aw_minotaurs.20.d
+    picture = COMET_SIGHTED_eventPicture
+    goto = ROOT
+    
+    is_triggered_only = yes
+    
+    trigger = {
+        OR = {
+            has_province_modifier = aw_minotaurs_1
+            has_province_modifier = aw_minotaurs_2
+            has_province_modifier = aw_minotaurs_3
+        }
+    }
+    
+    option = {
+ 
+        name = aw_minotaurs.20.a
+        ai_chance = { factor = 100 }
+
+        remove_province_modifier = aw_minotaurs_1
+        remove_province_modifier = aw_minotaurs_2
+        remove_province_modifier = aw_minotaurs_3
+
+    }
+}
+
+#21 - adventurer removal
+province_event = {
+    id = aw_minotaurs.21
+    title = aw_minotaurs.21.t
+    desc = aw_minotaurs.21.d
+    picture = COMET_SIGHTED_eventPicture
+    goto = ROOT
+    
+    is_triggered_only = yes
+    
+    trigger = {
+        owner = { OR = { has_estate = estate_adventurers has_adventurer_reform = yes  } }
+        OR = {
+            has_province_modifier = aw_minotaurs_1
+            has_province_modifier = aw_minotaurs_2
+            has_province_modifier = aw_minotaurs_3
+        }
+    }
+    
+    option = {
+        # oh, thank goodness
+        name = aw_minotaurs.21.a
+        ai_chance = { factor = 100 }
+
+        remove_province_modifier = aw_minotaurs_1
+        remove_province_modifier = aw_minotaurs_2
+        remove_province_modifier = aw_minotaurs_3
+
+        owner = {
+            if = {
+                limit = { has_estate = estate_adventurers }
+                add_estate_influence_modifier = {
+                    estate = estate_adventurers
+                    desc = EST_VAL_AW_RESOLVED_ADVENTURERS_WANTED_ENCOUNTER
+                    duration = 3650
+                    influence = 5
+                }
+            }
+        }
+
+        owner = { add_prestige_excess_to_splendour_effect = { VAL=3} }
+
+    }
+}
+
+#22 - natural tier down
+
+
+#23 - adventurer tier down
+
+
+#24 - monstrous nation removal
+province_event = {
+    id = aw_minotaurs.24
+    title = aw_minotaurs.24.t
+    desc = aw_minotaurs.24.d
+    picture = COMET_SIGHTED_eventPicture
+    goto = ROOT
+    
+    is_triggered_only = yes
+    
+    trigger = {
+        owner = { has_country_modifier = monstrous_nation }
+
+        OR = {
+            has_province_modifier = aw_minotaurs_1
+            has_province_modifier = aw_minotaurs_2
+            has_province_modifier = aw_minotaurs_3
+        }
+    }
+    
+    option = {
+ 
+        name = aw_minotaurs.24.a
+        ai_chance = { factor = 100 }
+
+        remove_province_modifier = aw_minotaurs_1
+        remove_province_modifier = aw_minotaurs_2
+        remove_province_modifier = aw_minotaurs_3
+
+        owner = { add_prestige_excess_to_splendour_effect = { VAL=3} }
+
+    }
+}
+
+#25 - monstrous natural tier down. keep if you want, or just rely on removal
+
+
+############## 30s - Tier Up ###################
+
+#30 - natural tier up
+
+
+############## 40s - Other Utility ###################
+
+#40 - convert to pop if tolerating
+
+#41 - convert to pop, monstrous subjugation
+
+
+############## 110s - Special Migration & Propagation ###################
+
+
+
+############## 120s - Special Removal/Tier Down ###################
+
+#120 - Adventurer Peaceful Resolution
+province_event = {
+    id = aw_minotaurs.120
+    title = aw_minotaurs.120.t
+    desc = aw_minotaurs.120.d
+    picture = FEAST_eventPicture
+    goto = ROOT
+    
+    is_triggered_only = yes
+    
+    trigger = {
+        owner = { OR = { has_estate = estate_adventurers has_adventurer_reform = yes  } }
+        OR = {
+            has_province_modifier = aw_minotaurs_1
+            has_province_modifier = aw_minotaurs_2
+            has_province_modifier = aw_minotaurs_3
+        }
+    }
+    
+    option = {
+        # oh, thank goodness
+        name = aw_minotaurs.120.a
+        ai_chance = { factor = 100 }
+
+        remove_province_modifier = aw_minotaurs_1
+        remove_province_modifier = aw_minotaurs_2
+        remove_province_modifier = aw_minotaurs_3
+
+        owner = { 
+            if = {
+                limit = { has_estate = estate_adventurers }
+                add_estate_influence_modifier = {
+                    estate = estate_adventurers
+                    desc = EST_VAL_AW_RESOLVED_ADVENTURERS_WANTED_ENCOUNTER
+                    duration = 3650
+                    influence = 5
+                }
+            }
+            add_prestige_excess_to_splendour_effect = { VAL=5 } 
+            add_country_modifier = {
+                name = aw_minotaur_shock_troops_modifier
+                duration = 3650
+            }
+        }
+    }
+}
+
+#121 - Minotaur inner conflict causes devastation
+province_event = {
+    id = aw_minotaurs.121
+    title = aw_minotaurs.121.t
+    desc = aw_minotaurs.121.d
+    picture = FEAST_eventPicture
+    goto = ROOT
+    
+    is_triggered_only = yes
+    
+    trigger = {
+        OR = {
+            has_province_modifier = aw_minotaurs_1
+            has_province_modifier = aw_minotaurs_2
+            has_province_modifier = aw_minotaurs_3
+        }
+    }
+    
+    option = {
+        name = aw_minotaurs.121.a
+        ai_chance = { factor = 100 }
+
+        add_devastation = 10
+        random_list = {
+            33 = {
+                add_base_tax = -1
+            }
+            33 = {
+                add_base_production = -1
+            }
+            33 = {
+                add_base_manpower = -1
+            }
+        }
+
+    }
+
+    option = {
+        name = aw_minotaurs.121.b
+        ai_chance = { factor = 100 }
+
+
+
+        owner = { add_manpower = -0.05 }
+        add_devastation = 5
+    }
+
+    option = {
+        name = aw_minotaurs.121.c
+        ai_chance = { factor = 100 }
+        highlight = yes
+        trigger = {
+           owner = { has_country_modifier = ACE_minotaur_tamers }
+        }
+
+        remove_province_modifier = aw_minotaurs_1
+        remove_province_modifier = aw_minotaurs_2
+        remove_province_modifier = aw_minotaurs_3
+
+        add_province_modifier = {
+            name = aw_tamed_minotaur_herd
+            duration = 3650
+        }
+
+
+        owner = { add_manpower = -0.05 }
+
+    }
+}
+
+#122 - Minotaurs occupy ruins
+province_event = {
+    id = aw_minotaurs.122
+    title = aw_minotaurs.122.t
+    desc = aw_minotaurs.122.d
+    picture = ANGRY_MOB_eventPicture
+    goto = ROOT
+    
+    is_triggered_only = yes
+    
+    trigger = {
+        OR = {
+            has_province_modifier = aw_minotaurs_1
+            has_province_modifier = aw_minotaurs_2
+        }
+
+    }
+    
+    option = {
+        name = aw_minotaurs.122.a
+        ai_chance = { factor = 100 }
+
+        if = {
+            limit = {
+                has_province_modifier = aw_minotaurs_1
+            }
+            remove_province_modifier = aw_minotaurs_1
+            add_province_modifier = {
+                name = aw_minotaurs_2
+                duration = -1
+            }
+        }
+        if = {
+            limit = {
+                has_province_modifier = aw_minotaurs_2
+            }
+            remove_province_modifier = aw_minotaurs_2
+            add_province_modifier = {
+                name = aw_minotaurs_3
+                duration = -1
+            }
+        }
+    }
+
+    option = {
+        name = aw_minotaurs.122.b
+        ai_chance = { factor = 100 }
+        owner = { add_manpower = -0.05 }
+        random_list = {
+            50 = {
+                custom_tooltip = ACE_minotaurs_the_attack_succeeds_tt
+                owner = { add_army_tradition_or_mil_power = yes }
+            }
+            50 = {
+                custom_tooltip = ACE_minotaurs_the_attack_fails_tt
+                if = {
+                    limit = {
+                        has_province_modifier = aw_minotaurs_1
+                    }
+                    remove_province_modifier = aw_minotaurs_1
+                    add_province_modifier = {
+                        name = aw_minotaurs_2
+                        duration = -1
+                    }
+                }
+                else_if = {
+                    limit = {
+                        has_province_modifier = aw_minotaurs_2
+                    }
+                    remove_province_modifier = aw_minotaurs_2
+                    add_province_modifier = {
+                        name = aw_minotaurs_3
+                        duration = -1
+                    }
+                }
+            }
+        }
+    }
+
+    option = {
+        name = aw_minotaurs.122.c
+        ai_chance = { factor = 100 }
+        highlight = yes
+        trigger = {
+            owner = {
+                has_country_modifier = ACE_minotaur_tamers
+            }
+        }
+        remove_province_modifier = aw_minotaurs_1
+        remove_province_modifier = aw_minotaurs_2
+        remove_province_modifier = aw_minotaurs_3
+
+        add_province_modifier = {
+            name = aw_tamed_minotaur_herd
+            duration = 3650
+        }
+    }
+}
+
+
+
+############## 130s - Special Tier Up ###################
+
+
+############## 140s - Other Special Utility ###################
+
+
+############## 200s - Special Flavour ###################
+
+#200 - Indecent Acts with livestock
+province_event = {
+    id = aw_minotaurs.200
+    title = aw_minotaurs.200.t
+    desc = aw_minotaurs.200.d
+    picture = PAINTER_ARTIST_eventPicture
+    goto = ROOT
+    
+    is_triggered_only = yes
+    
+    trigger = {
+        OR = {
+            has_province_modifier = aw_minotaurs_1
+            has_province_modifier = aw_minotaurs_2
+            has_province_modifier = aw_minotaurs_3
+        }
+        NOT = {
+            has_terrain = city_terrain
+        }
+        NOT = {
+            has_underground_terrain = yes
+        }
+    }
+    
+    option = {
+        name = aw_minotaurs.200.a
+        ai_chance = { factor = 100 }
+
+        add_unrest = 5
+        owner = {
+            add_prestige = -1
+        }
+    }
+
+    option = {
+        name = aw_minotaurs.200.b
+        ai_chance = { factor = 100 }
+        highlight = yes
+        trigger = {
+            owner = {
+                has_country_modifier = ACE_minotaur_tamers
+            }
+        }
+        
+        remove_province_modifier = aw_minotaurs_1
+        remove_province_modifier = aw_minotaurs_2
+        remove_province_modifier = aw_minotaurs_3
+
+        add_province_modifier = {
+            name = aw_tamed_minotaur_herd
+            duration = 3650
+        }
+    }
+}

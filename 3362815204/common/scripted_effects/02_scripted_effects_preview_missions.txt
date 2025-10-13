@@ -199,7 +199,41 @@ select_current_missions_REV = {
 		}
 	}
 }
+select_current_missions_VER = {
+	hidden_effect = {
+		if = {
+			limit = { can_preview_mission_of_key_and_batch = { key = VER batch = 1 } }
+			clr_country_flag = can_choose_VER_1_branching_missions
+			clr_country_flag = can_choose_VER_2_branching_missions
+			clr_country_flag = can_choose_VER_3_branching_missions
+			clr_country_flag = has_batch_1_active
+			clr_preview_loc_branch = { key = VER batch = 1 }
+		}
+		if = {
+			limit = { can_preview_mission_of_key_and_batch = { key = VER batch = 2 } }
+			clr_country_flag = can_choose_VER_1_branching_missions
+			clr_country_flag = can_choose_VER_2_branching_missions
+			clr_country_flag = can_choose_VER_3_branching_missions
+			clr_country_flag = has_batch_2_active
+			clr_preview_loc_branch = { key = VER batch = 2 }
+		}
+		if = {
+			limit = { can_preview_mission_of_key_and_batch = { key = VER batch = 3 } }
+			clr_country_flag = can_choose_VER_1_branching_missions
+			clr_country_flag = can_choose_VER_2_branching_missions
+			clr_country_flag = can_choose_VER_3_branching_missions
+			clr_country_flag = has_batch_3_active
+			clr_preview_loc_branch = { key = VER batch = 3 }
+		}
+		change_variable = {
+			which = can_preview_missions_var
+			value = -1
+		}
+	}
+}
 
+select_current_missions_TEL = {
+}
 
 select_current_branch_batch_1 = {
 	custom_tooltip = BYZ_end_preview
@@ -207,6 +241,8 @@ select_current_branch_batch_1 = {
 	if = { limit = { can_preview_mission_of_key_and_batch = { key = LOR batch = 1 } } select_current_missions_LOR = yes }
 	if = { limit = { can_preview_mission_of_key_and_batch = { key = WEX batch = 1 } } select_current_missions_WEX = yes }
 	if = { limit = { can_preview_mission_of_key_and_batch = { key = REV batch = 1 } } select_current_missions_REV = yes }
+	if = { limit = { can_preview_mission_of_key_and_batch = { key = VER batch = 1 } } select_current_missions_VER = yes }
+	if = { limit = { can_preview_mission_of_key_and_batch = { key = TEL batch = 1 } } select_current_missions_TEL = yes }
 }
 select_current_branch_batch_2 = {
 	custom_tooltip = BYZ_end_preview
@@ -214,6 +250,7 @@ select_current_branch_batch_2 = {
 	if = { limit = { can_preview_mission_of_key_and_batch = { key = LOR batch = 2 } } select_current_missions_LOR = yes }
 	if = { limit = { can_preview_mission_of_key_and_batch = { key = WEX batch = 2 } } select_current_missions_WEX = yes }
 	if = { limit = { can_preview_mission_of_key_and_batch = { key = REV batch = 2 } } select_current_missions_REV = yes }
+	if = { limit = { can_preview_mission_of_key_and_batch = { key = VER batch = 2 } } select_current_missions_VER = yes }
 }
 select_current_branch_batch_3 = {
 	custom_tooltip = BYZ_end_preview
@@ -221,6 +258,7 @@ select_current_branch_batch_3 = {
 	if = { limit = { can_preview_mission_of_key_and_batch = { key = LOR batch = 3 } } select_current_missions_LOR = yes }
 	if = { limit = { can_preview_mission_of_key_and_batch = { key = WEX batch = 3 } } select_current_missions_WEX = yes }
 	if = { limit = { can_preview_mission_of_key_and_batch = { key = REV batch = 3 } } select_current_missions_REV = yes }
+	if = { limit = { can_preview_mission_of_key_and_batch = { key = VER batch = 3 } } select_current_missions_VER = yes }
 }
 
 #####
@@ -237,6 +275,14 @@ clear_all_branching_flags_batch_1 = {
 		limit = { can_preview_mission_of_key_and_batch = { key = REV batch = 1 } }
 		clr_preview_loc_branch = { key = REV batch = 1 }
 	}
+	if = {
+		limit = { can_preview_mission_of_key_and_batch = { key = VER batch = 1 } }
+		clr_preview_loc_branch = { key = VER batch = 1 }
+	}
+	if = {
+		limit = { can_preview_mission_of_key_and_batch = { key = TEL batch = 1 } }
+		clr_preview_loc_branch = { key = TEL batch = 1 }
+	}
 }
 clear_all_branching_flags_batch_2 = {
 	if = {
@@ -251,6 +297,14 @@ clear_all_branching_flags_batch_2 = {
 		limit = { can_preview_mission_of_key_and_batch = { key = REV batch = 2 } }
 		clr_preview_loc_branch = { key = REV batch = 2 }
 	}
+	if = {
+		limit = { can_preview_mission_of_key_and_batch = { key = VER batch = 2 } }
+		clr_preview_loc_branch = { key = VER batch = 2 }
+	}
+	if = {
+		limit = { can_preview_mission_of_key_and_batch = { key = TEL batch = 3 } }
+		clr_preview_loc_branch = { key = TEL batch = 3 }
+	}
 }
 clear_all_branching_flags_batch_3 = {
 	if = {
@@ -264,6 +318,14 @@ clear_all_branching_flags_batch_3 = {
 	if = {
 		limit = { can_preview_mission_of_key_and_batch = { key = REV batch = 3 } }
 		clr_preview_loc_branch = { key = REV batch = 3 }
+	}
+	if = {
+		limit = { can_preview_mission_of_key_and_batch = { key = VER batch = 3 } }
+		clr_preview_loc_branch = { key = VER batch = 3 }
+	}
+	if = {
+		limit = { can_preview_mission_of_key_and_batch = { key = TEL batch = 3 } }
+		clr_preview_loc_branch = { key = TEL batch = 3 }
 	}
 }
 clear_all_branching_flags_batch_4 = {
@@ -328,6 +390,22 @@ preview_mission_branch_1_batch_1 = {
 		clr_country_flag = ACE_A05_Branching_path
 		custom_tooltip = A05_preview_cannorian
 	}
+	if = {
+		limit = { can_preview_mission_of_key_and_batch = { key = VER batch = 1 } }
+		set_preview_loc_branch = { key = VER batch = 1 branch = 1 }
+		set_country_flag = verne_adventurer_republic_path
+		clr_country_flag = verne_adventurer_monarchy_path
+		custom_tooltip = A33_preview_adven_republic
+	}
+	if = {
+		limit = { can_preview_mission_of_key_and_batch = { key = TEL batch = 1 } }
+		set_preview_loc_branch = { key = TEL batch = 1 branch = 1 }
+		set_country_flag = TELLUM_bell_1
+		clr_country_flag = TELLUM_bell_2
+		clr_country_flag = TELLUM_bell_3
+		clr_country_flag = TELLUM_bell_4
+		clr_country_flag = TELLUM_bell_5
+	}
 }
 preview_mission_branch_1_batch_2 = {
 	if = {
@@ -353,8 +431,22 @@ preview_mission_branch_1_batch_2 = {
 		clr_country_flag = ACE_A05_Branching_path
 		custom_tooltip = A05_preview_cannorian
 	}
+	if = {
+		limit = { can_preview_mission_of_key_and_batch = { key = VER batch = 2 } }
+		set_preview_loc_branch = { key = VER batch = 2 branch = 1 }
+		set_country_flag = verne_adventurer_republic_path
+		clr_country_flag = verne_adventurer_monarchy_path
+		custom_tooltip = A33_preview_adven_republic
+	}
 }
 preview_mission_branch_1_batch_3 = {
+	if = {
+		limit = { can_preview_mission_of_key_and_batch = { key = VER batch = 3 } }
+		set_preview_loc_branch = { key = VER batch = 3 branch = 1 }
+		set_country_flag = verne_adventurer_republic_path
+		clr_country_flag = verne_adventurer_monarchy_path
+		custom_tooltip = A33_preview_adven_republic
+	}
 }
 preview_mission_branch_1_batch_4 = {
 }
@@ -384,6 +476,22 @@ preview_mission_branch_2_batch_1 = {
 		clr_country_flag = ACE_A05_Branching_path
 		custom_tooltip = A05_preview_gerudian
 	}
+	if = {
+		limit = { can_preview_mission_of_key_and_batch = { key = VER batch = 1 } }
+		set_preview_loc_branch = { key = VER batch = 1 branch = 2 }
+		set_country_flag = verne_adventurer_monarchy_path
+		clr_country_flag = verne_adventurer_republic_path
+		custom_tooltip = A33_preview_adven_monarchy
+	}
+	if = {
+		limit = { can_preview_mission_of_key_and_batch = { key = TEL batch = 1 } }
+		set_preview_loc_branch = { key = TEL batch = 1 branch = 2 }
+		clr_country_flag = TELLUM_bell_1
+		set_country_flag = TELLUM_bell_2
+		clr_country_flag = TELLUM_bell_3
+		clr_country_flag = TELLUM_bell_4
+		clr_country_flag = TELLUM_bell_5
+	}
 }
 preview_mission_branch_2_batch_2 = {
 	if = {
@@ -409,8 +517,22 @@ preview_mission_branch_2_batch_2 = {
 		clr_country_flag = ACE_A05_Branching_path
 		custom_tooltip = A05_preview_gerudian
 	}
+	if = {
+		limit = { can_preview_mission_of_key_and_batch = { key = VER batch = 2 } }
+		set_preview_loc_branch = { key = VER batch = 2 branch = 2 }
+		set_country_flag = verne_adventurer_monarchy_path
+		clr_country_flag = verne_adventurer_republic_path
+		custom_tooltip = A33_preview_adven_republic
+	}
 }
 preview_mission_branch_2_batch_3 = {
+	if = {
+		limit = { can_preview_mission_of_key_and_batch = { key = VER batch = 3 } }
+		set_preview_loc_branch = { key = VER batch = 3 branch = 2 }
+		set_country_flag = verne_adventurer_monarchy_path
+		clr_country_flag = verne_adventurer_republic_path
+		custom_tooltip = A33_preview_adven_republic
+	}
 }
 preview_mission_branch_2_batch_4 = {
 }
@@ -425,6 +547,15 @@ preview_mission_branch_3_batch_1 = {
 		clr_country_flag = A05_gerudian_path
 		clr_country_flag = ACE_A05_Branching_path
 		custom_tooltip = A05_preview_gnomish
+	}
+	if = {
+		limit = { can_preview_mission_of_key_and_batch = { key = TEL batch = 1 } }
+		set_preview_loc_branch = { key = TEL batch = 1 branch = 3 }
+		clr_country_flag = TELLUM_bell_1
+		clr_country_flag = TELLUM_bell_2
+		set_country_flag = TELLUM_bell_3
+		clr_country_flag = TELLUM_bell_4
+		clr_country_flag = TELLUM_bell_5
 	}
 }
 preview_mission_branch_3_batch_2 = {
@@ -445,6 +576,15 @@ preview_mission_branch_3_batch_4 = {
 preview_mission_branch_3_batch_5 = {
 }
 preview_mission_branch_4_batch_1 = {
+	if = {
+		limit = { can_preview_mission_of_key_and_batch = { key = TEL batch = 1 } }
+		set_preview_loc_branch = { key = TEL batch = 1 branch = 4 }
+		clr_country_flag = TELLUM_bell_1
+		clr_country_flag = TELLUM_bell_2
+		clr_country_flag = TELLUM_bell_3
+		set_country_flag = TELLUM_bell_4
+		clr_country_flag = TELLUM_bell_5
+	}
 }
 preview_mission_branch_4_batch_2 = {
 }
@@ -455,6 +595,15 @@ preview_mission_branch_4_batch_4 = {
 preview_mission_branch_4_batch_5 = {
 }
 preview_mission_branch_5_batch_1 = {
+	if = {
+		limit = { can_preview_mission_of_key_and_batch = { key = TEL batch = 1 } }
+		set_preview_loc_branch = { key = TEL batch = 1 branch = 5 }
+		clr_country_flag = TELLUM_bell_1
+		clr_country_flag = TELLUM_bell_2
+		clr_country_flag = TELLUM_bell_3
+		clr_country_flag = TELLUM_bell_4
+		set_country_flag = TELLUM_bell_5
+	}
 }
 preview_mission_branch_5_batch_2 = {
 }

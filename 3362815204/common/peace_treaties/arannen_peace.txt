@@ -1,0 +1,48 @@
+po_dismantle_empire = {
+	category = 6
+	power_projection = humiliated_rival
+	power_cost_base = 0
+	prestige_base = 0.2
+	ae_base = 1
+	warscore_cost = {
+		all_provinces = 0
+		no_provinces = 1000
+		owner_keeps = 0
+		conquered = 1
+		returned_core = 0
+		released_nation = 0
+		cancelled_subject = 0
+		concede_colonial_region = 0
+	}
+	warscore_cap = 100
+	requires_demand_independence = yes
+	is_make_subject = no
+	requires_is_allowed = no
+	is_visible = {
+		has_country_flag = A72_dismantle_empire_flag
+		FROM = {
+			is_emperor = yes
+		}
+	}
+	is_allowed = {
+		FROM = {
+			is_emperor = yes
+		}
+	}
+	effect = {
+		dismantle_hre = yes
+		clr_country_flag = A72_dismantle_empire_flag
+	}
+	ai_weight = {
+		export_to_variable = {
+			variable_name = ai_value
+			value = trigger_value:always
+		}
+		set_variable = {
+			ai_value = 2000
+		}
+		limit = {
+			always = yes
+		}
+	}
+}

@@ -58,9 +58,9 @@ cb_restore_personal_union = {
 			FROM = {
 				OR = {
 					government = monarchy
-					# has_reform = ambrosian_republic
+					has_reform = ambrosian_republic
 					# has_reform = military_dictatorship_reform
-					# has_country_flag = neapolitan_republic
+					has_country_flag = neapolitan_republic
 					has_country_flag = verne_union_target #Verne PU coup's two republics so I need this to keep the CB
 				}
 				is_subject = no
@@ -1071,6 +1071,7 @@ cb_heretic = {
 		NOT = {	has_matching_religion = FROM }
 		OR = {
 			cb_on_religious_enemies = yes
+			has_country_flag = sugamber_hammer_faith
 			FROM = { has_ruler_flag = hussite_heretic }
 		}
 		OR = {
@@ -1766,7 +1767,12 @@ cb_take_mandate = {
 
 	prerequisites = {
 		is_neighbor_of = FROM
-		FROM = { is_emperor_of_china = yes }
+		FROM = {
+			is_emperor_of_china = yes
+			NOT = {
+				has_country_flag = sugamber_global_empire
+			}
+		}
 		NOT = { truce_with = FROM }		
 		is_revolutionary = no 
 	}
@@ -1799,6 +1805,7 @@ cb_force_satrapy = {
 		OR = {
 			is_neighbor_of = FROM
 			any_subject_country = { is_neighbor_of = FROM } #Anbennar
+			has_country_flag = sugamber_global_empire
 		}
 	}
 	war_goal = take_capital_force_tributary
@@ -1876,6 +1883,15 @@ cb_force_tributary_anb = {
 					}
 				}
 				has_country_modifier = miremaw_exerting_our_influence_reward
+			}
+			AND = { #Reavergeld reform
+				has_reform = ACE_reavergeld_reform
+				FROM = {
+					has_opinion_modifier = {
+						who = ROOT
+						modifier = slaves_raided
+					}
+				}
 			}
 		}
 	}

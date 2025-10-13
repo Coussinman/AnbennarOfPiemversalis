@@ -1,0 +1,388 @@
+is_not_free_merc_company_ace = {
+	ROOT = {
+		NOT = {
+			mercenary_company = merc_bald_heads
+			mercenary_company = merc_morbanite_chargers
+			mercenary_company = merc_sons_of_the_sea
+			mercenary_company = merc_hill_gnoll
+			mercenary_company = merc_maritime_guard_nathalaire
+			mercenary_company = merc_crusaders
+			mercenary_company = merc_tretun_foreign_legion
+			mercenary_company = merc_bladeborn
+			mercenary_company = merc_green_thorn_crusaders
+			mercenary_company = merc_red_thorn_crusaders
+			mercenary_company = merc_black_thorn_crusaders
+			mercenary_company = merc_knights_magnificent
+			mercenary_company = merc_gnollcutters
+			
+
+			mercenary_company = merc_gnoll_sugamber_1
+			mercenary_company = merc_gnoll_sugamber_2
+
+			mercenary_company = merc_gnoll_sugamber_1_upgraded
+			mercenary_company = merc_gnoll_sugamber_2_upgraded
+
+			mercenary_company = merc_gnoll_sugamber_1_1
+			mercenary_company = merc_gnoll_sugamber_2_1
+			mercenary_company = merc_gnoll_sugamber_1_2
+			mercenary_company = merc_gnoll_sugamber_2_2
+
+			mercenary_company = merc_gnoll_sugamber_1_1_1
+			mercenary_company = merc_gnoll_sugamber_2_1_1
+			mercenary_company = merc_gnoll_sugamber_1_2_1
+			mercenary_company = merc_gnoll_sugamber_2_2_1
+			mercenary_company = merc_gnoll_sugamber_1_1_2
+			mercenary_company = merc_gnoll_sugamber_2_1_2
+			mercenary_company = merc_gnoll_sugamber_1_2_2
+			mercenary_company = merc_gnoll_sugamber_2_2_2
+
+			mercenary_company = merc_gnoll_sugamber_1_1_1_upgraded
+			mercenary_company = merc_gnoll_sugamber_2_1_1_upgraded
+			mercenary_company = merc_gnoll_sugamber_1_2_1_upgraded
+			mercenary_company = merc_gnoll_sugamber_2_2_1_upgraded
+			mercenary_company = merc_gnoll_sugamber_1_1_2_upgraded
+			mercenary_company = merc_gnoll_sugamber_2_1_2_upgraded
+			mercenary_company = merc_gnoll_sugamber_1_2_2_upgraded
+			mercenary_company = merc_gnoll_sugamber_2_2_2_upgraded
+
+			mercenary_company = merc_drake_army_1
+			mercenary_company = merc_drake_army_2
+			mercenary_company = merc_drake_army_3
+			mercenary_company = merc_drake_army_4
+			mercenary_company = merc_drake_army_5
+			mercenary_company = merc_drake_army_6
+			mercenary_company = merc_drake_army_7
+			mercenary_company = merc_drake_army_8
+			mercenary_company = merc_drake_army_9
+			mercenary_company = merc_drake_army_10
+			mercenary_company = merc_A33_pizzaro_band
+			mercenary_company = merc_A33_cortes_band
+			mercenary_company = merc_A33_pizzaro_band_1
+			mercenary_company = merc_A33_cortes_band_2
+			mercenary_company = merc_A33_yinnic_mariners
+			mercenary_company = merc_A33_yinnic_rangers
+			mercenary_company = merc_A33_eord_rangers
+		}
+	}
+	FROM = {
+		NOT = {
+			has_country_modifier = sugamber_imperial_mercenaries
+		}
+	}
+}
+
+ace_province_is_or_accepts_culture = {
+	custom_trigger_tooltip = {
+		tooltip = ace_province_is_or_accepts_culture_tooltip
+		OR = {
+			has_owner_culture = yes
+			has_owner_accepted_culture = yes
+		}
+	}
+}
+
+high_relations_marriage_alliance_trigger = {
+	alliance_with = ROOT
+	marriage_with = ROOT
+	has_100_opinion_improved_relation = {
+		target = ROOT
+	}
+}
+
+scornfully_insulted_check = {
+	if = {
+		limit = {
+			ROOT = {
+				ai = no
+			}
+		}
+		if = {
+			limit = {
+				has_dlc = "Dharma"
+			}
+			has_opinion_modifier = {
+				who = ROOT
+				modifier = scornfully_insulted
+			}
+		}
+		else = {
+			has_opinion_modifier = {
+				who = ROOT
+				modifier = insulted
+			}
+		}
+	}
+}
+
+no_devastation_or_unrest = {
+	custom_trigger_tooltip = {
+		tooltip = no_devastation_or_unrest_trigger_tooltip
+		NOT = {
+			devastation = 1
+			unrest = 1
+		}
+	}
+}
+
+no_devastation_separatism_unrest = {
+	custom_trigger_tooltip = {
+		tooltip = no_devastation_separatism_unrest_trigger_tooltip
+		NOT = {
+			nationalism = 1
+			devastation = 1
+			unrest = 1
+		}
+	}
+}
+
+has_trade_building_trigger_short = {
+	custom_trigger_tooltip = {
+		tooltip = has_trade_building_trigger_short_tt
+		OR = {
+			has_building = marketplace
+			has_building = trade_depot
+			has_building = stock_exchange
+		}
+	}
+}
+
+religious_supremacy_cooldown = {
+	OR = {
+		NOT = {
+			has_country_flag = hre_religion_changed
+		}
+		had_country_flag = {
+			flag = hre_religion_changed
+			days = 30
+		}
+	}
+}
+
+warless_victory_trigger = {
+	has_dlc = "Art of War"
+	is_emperor = yes
+	is_at_war = no
+	NOT = {
+		any_known_country = {
+			is_in_league_war = yes
+		}
+	}
+	has_regency = no
+	hre_religion_locked = no
+	religion = $religion$
+	OR = {
+		AND = {
+			hre_leagues_enabled = yes
+			had_global_flag = {
+				flag = evangelical_union_happened
+				days = 10950
+			}
+			NOT = {
+				any_known_country = {
+					is_elector = yes
+					OR = {
+						[[regent_court]
+							religion = corinite
+							religion = ravelian
+							religion = dalcabba
+						]
+						[[corinite]
+							religion = regent_court
+							religion = ravelian
+							religion = dalcabba
+						]
+						[[ravelian]
+							religion = regent_court
+							religion = corinite
+							religion = dalcabba
+						]
+						[[dalcabba]
+							religion = regent_court
+							religion = corinite
+							religion = ravelian
+						]
+					}
+					is_league_enemy = ROOT
+					truce_with = ROOT
+				}
+			}
+		}
+		AND = {
+			NOT = {
+				has_global_flag = evangelical_union_happened
+			}
+			is_year = 1610
+		}
+	}
+}
+
+vaengheim_num_of_units_check = {
+	any_owned_province = {
+		area = northern_greatwoods_area
+		num_of_units_in_province = {
+			who = ROOT
+			amount = 5
+		}
+	}
+	any_owned_province = {
+		area = coast_of_vics_area
+		num_of_units_in_province = {
+			who = ROOT
+			amount = 5
+		}
+	}
+	any_owned_province = {
+		area = west_chillsbay_area
+		num_of_units_in_province = {
+			who = ROOT
+			amount = 5
+		}
+	}
+}
+
+AD5_has_slave_population = {
+	OR = {
+		has_province_modifier = AD5_small_langeyru_slavery
+		has_province_modifier = AD5_significant_langeyru_slavery
+		has_province_modifier = AD5_huge_langeyru_slavery
+	}
+}
+
+WL_indlebury_two_spies = {
+	OR = {
+		AND = {
+			has_spy_network_in = {
+				who = A30
+				value = 10
+			}
+			has_spy_network_in = {
+				who = A49
+				value = 10
+			}
+		}
+		AND = {
+			has_spy_network_in = {
+				who = A30
+				value = 10
+			}
+			has_spy_network_in = {
+				who = A85
+				value = 10
+			}
+		}
+		AND = {
+			has_spy_network_in = {
+				who = A30
+				value = 10
+			}
+			has_spy_network_in = {
+				who = A93
+				value = 10
+			}
+		}
+		AND = {
+			has_spy_network_in = {
+				who = A49
+				value = 10
+			}
+			has_spy_network_in = {
+				who = A85
+				value = 10
+			}
+		}
+		AND = {
+			has_spy_network_in = {
+				who = A49
+				value = 10
+			}
+			has_spy_network_in = {
+				who = A93
+				value = 10
+			}
+		}
+		AND = {
+			has_spy_network_in = {
+				who = A85
+				value = 10
+			}
+			has_spy_network_in = {
+				who = A93
+				value = 10
+			}
+		}
+		AND = {
+			has_spy_network_in = {
+				who = A30
+				value = 10
+			}
+			has_spy_network_in = {
+				who = A49
+				value = 10
+			}
+			has_spy_network_in = {
+				who = A85
+				value = 10
+			}
+		}
+		AND = {
+			has_spy_network_in = {
+				who = A30
+				value = 10
+			}
+			has_spy_network_in = {
+				who = A49
+				value = 10
+			}
+			has_spy_network_in = {
+				who = A93
+				value = 10
+			}
+		}
+		AND = {
+			has_spy_network_in = {
+				who = A30
+				value = 10
+			}
+			has_spy_network_in = {
+				who = A85
+				value = 10
+			}
+			has_spy_network_in = {
+				who = A93
+				value = 10
+			}
+		}
+		AND = {
+			has_spy_network_in = {
+				who = A49
+				value = 10
+			}
+			has_spy_network_in = {
+				who = A85
+				value = 10
+			}
+			has_spy_network_in = {
+				who = A93
+				value = 10
+			}
+		}
+		AND = {
+			has_spy_network_in = {
+				who = A30
+				value = 10
+			}
+			has_spy_network_in = {
+				who = A49
+				value = 10
+			}
+			has_spy_network_in = {
+				who = A85
+				value = 10
+			}
+			has_spy_network_in = {
+				who = A93
+				value = 10
+			}
+		}
+	}
+}

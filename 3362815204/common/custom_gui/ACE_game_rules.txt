@@ -1,0 +1,1239 @@
+custom_window = {
+	name = ACE_game_rules_gui_window
+	potential = {
+		ai = no
+	}
+}
+custom_window = {
+	name = ACE_game_rules_menu_window
+	potential = {
+		NOT = {
+			has_global_flag = ACE_game_rule_set
+		}
+	}
+}
+custom_button = {
+    name = ACE_game_rules_close_button
+    effect = {
+		set_global_flag = ACE_game_rule_set
+    }
+    tooltip = ACE_game_rules_close_menu
+}
+custom_button = {
+    name = ACE_game_rules_confirm_button
+    trigger = {
+		NOT = {
+			is_year = 1445
+		}
+		ACE_game_rules_confirm_trigger = yes
+    }
+    effect = {
+		if = {
+			limit = {
+				NOT = {
+					is_variable_equal = {
+						which = ACE_game_rules_page_var
+						value = 10
+					}
+				}
+			}
+			custom_tooltip = ACE_game_rules_confirm_menu
+			ACE_game_rules_confirm_effect = yes
+			hidden_effect = {
+				set_global_flag = ACE_game_rule_set
+
+				if = {
+					limit = {
+						is_variable_equal = {
+							which = ACE_game_rules_achievement_var
+							value = 2
+						}
+					}
+					set_global_flag = achievements_disabled
+				}
+
+				if = {
+					limit = {
+						NOT = {
+							is_variable_equal = {
+								which = ACE_game_rules_great_conquerors_var
+								value = 1
+							}
+						}
+					}
+					if = {
+						limit = {
+							is_variable_equal = {
+								which = ACE_game_rules_great_conquerors_var
+								value = 2
+							}
+						}
+						set_global_flag = great_conqueror
+					}
+					else_if = {
+						limit = {
+							is_variable_equal = {
+								which = ACE_game_rules_great_conquerors_var
+								value = 3
+							}
+						}
+						set_global_flag = mythical_conqueror
+					}
+					if = {
+						limit = {
+							is_variable_equal = {
+								which = ACE_game_rules_variant_conquerors_var
+								value = 2
+							}
+						}
+						set_global_flag = variant_conqueror
+					}
+					if = {
+						limit = {
+							is_variable_equal = {
+								which = ACE_game_rules_delayed_conquerors_var
+								value = 1
+							}
+						}
+						set_global_flag = delayed_conquerors
+					}
+				}
+
+
+
+				if = {
+					limit = {
+						is_variable_equal = {
+							which = ACE_game_rules_burning_desert_var
+							value = 2
+						}
+					}
+					set_global_flag = ace_jaddari_victory_rule
+					country_event = {
+						id = ace_game_rules.0
+					}
+				}
+				else_if = {
+					limit = {
+						is_variable_equal = {
+							which = ACE_game_rules_burning_desert_var
+							value = 3
+						}
+					}
+					set_global_flag = ace_zokka_victory_rule
+					country_event = {
+						id = ace_game_rules.0
+					}
+				}
+				else_if = {
+					limit = {
+						is_variable_equal = {
+							which = ACE_game_rules_burning_desert_var
+							value = 4
+						}
+					}
+					set_global_flag = ace_harpy_victory_rule
+					country_event = {
+						id = ace_game_rules.0
+					}
+				}
+
+				if = {
+					limit = {
+						is_variable_equal = {
+							which = ACE_game_rules_decades_devastation_var
+							value = 2
+						}
+					}
+					set_global_flag = ace_bulwari_victory_rule
+					country_event = {
+						id = ace_game_rules.100
+					}
+				}
+				else_if = {
+					limit = {
+						is_variable_equal = {
+							which = ACE_game_rules_decades_devastation_var
+							value = 3
+						}
+					}
+					set_global_flag = ace_sun_elf_victory_rule
+					country_event = {
+						id = ace_game_rules.100
+					}
+				}
+				else_if = {
+					limit = {
+						is_variable_equal = {
+							which = ACE_game_rules_decades_devastation_var
+							value = 4
+						}
+					}
+					set_global_flag = ace_bulwar_opportunity_rule
+					country_event = {
+						id = ace_game_rules.100
+					}
+				}
+
+				if = {
+					limit = {
+						is_variable_equal = {
+							which = ACE_game_rules_wex_var
+							value = 2
+						}
+					}
+					set_global_flag = ace_wex_domination_rule
+					country_event = {
+						id = ace_game_rules.200
+					}
+				}
+				else_if = {
+					limit = {
+						is_variable_equal = {
+							which = ACE_game_rules_wex_var
+							value = 3
+						}
+					}
+					set_global_flag = ace_wex_imperial_rule
+					country_event = {
+						id = ace_game_rules.200
+					}
+				}
+
+				if = {
+					limit = {
+						is_variable_equal = {
+							which = ACE_game_rules_lencenor_var
+							value = 2
+						}
+					}
+					set_global_flag = ace_lorent_victory_rule
+					country_event = {
+						id = ace_game_rules.300
+					}
+				}
+				else_if = {
+					limit = {
+						is_variable_equal = {
+							which = ACE_game_rules_lencenor_var
+							value = 3
+						}
+					}
+					set_global_flag = ace_winelords_victory_rule
+					country_event = {
+						id = ace_game_rules.300
+					}
+				}
+				else_if = {
+					limit = {
+						is_variable_equal = {
+							which = ACE_game_rules_lencenor_var
+							value = 4
+						}
+					}
+					set_global_flag = ace_lencenor_halfling
+					country_event = {
+						id = ace_game_rules.300
+					}
+				}
+
+				#Delete Regions
+				if = { limit = { is_variable_equal = { which = ACE_game_rules_north_aelantir_var value = 2 } }
+					set_global_flag = delete_north_aelantir_region
+					north_america = { ace_destroy_province = yes }
+				}
+				else_if = { limit = { is_variable_equal = { which = ACE_game_rules_north_aelantir_var value = 3 } }
+					set_global_flag = delete_north_aelantir_region
+					north_america = { destroy_province_permanently = yes }
+				}
+
+				if = { limit = { is_variable_equal = { which = ACE_game_rules_south_aelantir_var value = 2 } }
+					set_global_flag = delete_south_aelantir_region
+					south_america = { ace_destroy_province = yes }
+				}
+				else_if = { limit = { is_variable_equal = { which = ACE_game_rules_south_aelantir_var value = 3 } }
+					set_global_flag = delete_south_aelantir_region
+					south_america = { destroy_province_permanently = yes }
+				}
+
+				if = { limit = { is_variable_equal = { which = ACE_game_rules_cannor_var value = 2 } }
+					set_global_flag = delete_cannor_region
+					western_cannor_superregion = { ace_destroy_province = yes }
+					escann_superregion = { ace_destroy_province = yes }
+					gerudia_superregion = { ace_destroy_province = yes }
+				}
+				else_if = { limit = { is_variable_equal = { which = ACE_game_rules_cannor_var value = 3 } }
+					set_global_flag = delete_cannor_region
+					western_cannor_superregion = { destroy_province_permanently = yes }
+					escann_superregion = { destroy_province_permanently = yes }
+					gerudia_superregion = { destroy_province_permanently = yes }
+				}
+
+				if = { limit = { is_variable_equal = { which = ACE_game_rules_deepwoods_var value = 2 } }
+					set_global_flag = delete_deepwoods_region
+					deepwoods_superregion = { ace_destroy_province = yes }
+				}
+				else_if = { limit = { is_variable_equal = { which = ACE_game_rules_deepwoods_var value = 3 } }
+					set_global_flag = delete_deepwoods_region
+					deepwoods_superregion = { destroy_province_permanently = yes }
+				}
+
+				if = { limit = { is_variable_equal = { which = ACE_game_rules_western_spine_var value = 2 } }
+					set_global_flag = delete_west_serpentspine_region
+					west_serpentspine_superregion = { ace_destroy_province = yes }
+				}
+				else_if = { limit = { is_variable_equal = { which = ACE_game_rules_western_spine_var value = 3 } }
+					set_global_flag = delete_west_serpentspine_region
+					west_serpentspine_superregion = { destroy_province_permanently = yes }
+				}
+
+				if = { limit = { is_variable_equal = { which = ACE_game_rules_forbidden_plains_var value = 2 } }
+					set_global_flag = delete_forbidden_plains_region
+					forbidden_lands_superregion = { ace_destroy_province = yes }
+				}
+				else_if = { limit = { is_variable_equal = { which = ACE_game_rules_forbidden_plains_var value = 3 } }
+					set_global_flag = delete_forbidden_plains_region
+					forbidden_lands_superregion = { destroy_province_permanently = yes }
+				}
+
+				if = { limit = { is_variable_equal = { which = ACE_game_rules_gozengun_var value = 2 } }
+					set_global_flag = delete_gozenguun_region
+					gozengun_superregion = { ace_destroy_province = yes }
+				}
+				else_if = { limit = { is_variable_equal = { which = ACE_game_rules_gozengun_var value = 3 } }
+					set_global_flag = delete_gozenguun_region
+					gozengun_superregion = { destroy_province_permanently = yes }
+				}
+
+				if = { limit = { is_variable_equal = { which = ACE_game_rules_bulwar_var value = 2 } }
+					set_global_flag = delete_bulwar_region
+					bulwar_superregion = { ace_destroy_province = yes }
+				}
+				else_if = { limit = { is_variable_equal = { which = ACE_game_rules_bulwar_var value = 3 } }
+					set_global_flag = delete_bulwar_region
+					bulwar_superregion = { destroy_province_permanently = yes }
+				}
+
+				if = { limit = { is_variable_equal = { which = ACE_game_rules_rahen_var value = 2 } }
+					set_global_flag = delete_rahen_region
+					rahen_superregion = { ace_destroy_province = yes }
+				}
+				else_if = { limit = { is_variable_equal = { which = ACE_game_rules_rahen_var value = 3 } }
+					set_global_flag = delete_rahen_region
+					rahen_superregion = { destroy_province_permanently = yes }
+				}
+
+				if = { limit = { is_variable_equal = { which = ACE_game_rules_east_haless_var value = 2 } }
+					set_global_flag = delete_haless_region
+					yanshen_superregion = { ace_destroy_province = yes }
+					vimdatrong_superregion = { ace_destroy_province = yes }
+				}
+				else_if = { limit = { is_variable_equal = { which = ACE_game_rules_east_haless_var value = 3 } }
+					set_global_flag = delete_haless_region
+					yanshen_superregion = { destroy_province_permanently = yes }
+					vimdatrong_superregion = { destroy_province_permanently = yes }
+				}
+
+				if = { limit = { is_variable_equal = { which = ACE_game_rules_eastern_spine_var value = 2 } }
+					set_global_flag = delete_east_serpentspine_region
+					east_serpentspine_superregion = { ace_destroy_province = yes }
+				}
+				else_if = { limit = { is_variable_equal = { which = ACE_game_rules_eastern_spine_var value = 3 } }
+					set_global_flag = delete_east_serpentspine_region
+					east_serpentspine_superregion = { destroy_province_permanently = yes }
+				}
+
+				if = { limit = { is_variable_equal = { which = ACE_game_rules_north_salahad_var value = 2 } }
+					set_global_flag = delete_north_sarhal_region
+					gol_region = { ace_destroy_province = yes }
+					khetapera_region = { ace_destroy_province = yes }
+					north_salahad_superregion = { ace_destroy_province = yes }
+				}
+				else_if = { limit = { is_variable_equal = { which = ACE_game_rules_north_salahad_var value = 3 } }
+					set_global_flag = delete_north_sarhal_region
+					gol_region = { destroy_province_permanently = yes }
+					khetapera_region = { destroy_province_permanently = yes }
+					north_salahad_superregion = { destroy_province_permanently = yes }
+				}
+
+				if = { limit = { is_variable_equal = { which = ACE_game_rules_west_sarhal_var value = 2 } }
+					set_global_flag = delete_south_sarhal_region
+					fangaula_superregion = { ace_destroy_province = yes }
+					horashesh_region = { ace_destroy_province = yes }
+					fahvanosy_region = { ace_destroy_province = yes }
+					katala_raz_region = { ace_destroy_province = yes }
+					throden_gokad_region = { ace_destroy_province = yes }
+					odu_kherass_region = { ace_destroy_province = yes }
+				}
+				else_if = { limit = { is_variable_equal = { which = ACE_game_rules_west_sarhal_var value = 3 } }
+					set_global_flag = delete_south_sarhal_region
+					fangaula_superregion = { destroy_province_permanently = yes }
+					horashesh_region = { destroy_province_permanently = yes }
+					fahvanosy_region = { destroy_province_permanently = yes }
+					katala_raz_region = { destroy_province_permanently = yes }
+					throden_gokad_region = { destroy_province_permanently = yes }
+					odu_kherass_region = { destroy_province_permanently = yes }
+				}
+
+				if = { limit = { is_variable_equal = { which = ACE_game_rules_east_sarhal_var value = 2 } }
+					set_global_flag = delete_east_sarhal_region
+					east_sarhal_superregion = { ace_destroy_province = yes }
+					jasiir_jadid_region = { ace_destroy_province = yes }
+					ardimya_region = { ace_destroy_province = yes }
+					gazraak_region = { ace_destroy_province = yes }
+				}
+				else_if = { limit = { is_variable_equal = { which = ACE_game_rules_east_sarhal_var value = 3 } }
+					set_global_flag = delete_east_sarhal_region
+					east_sarhal_superregion = { destroy_province_permanently = yes }
+					jasiir_jadid_region = { destroy_province_permanently = yes }
+					ardimya_region = { destroy_province_permanently = yes }
+					gazraak_region = { destroy_province_permanently = yes }
+				}
+			}
+		}
+		else = {
+			hidden_effect = {
+				set_variable = {
+					which = ACE_game_rules_page_var
+					value = 1
+				}
+			}
+		}
+    }
+}
+
+
+custom_button = {
+    name = ACE_game_rules_page_back_button
+	potential = {
+		NOT = {
+			is_variable_equal = {
+				which = ACE_game_rules_page_var
+				value = 10
+			}
+		}
+	}
+    effect = {
+		ACE_game_rules_back_page_effect = yes
+	}
+    tooltip = ACE_game_rules_previous_page
+}
+custom_button = {
+    name = ACE_game_rules_page_next_button
+	potential = {
+		NOT = {
+			is_variable_equal = {
+				which = ACE_game_rules_page_var
+				value = 10
+			}
+		}
+	}
+    effect = {
+		ACE_game_rules_next_page_effect = yes
+	}
+    tooltip = ACE_game_rules_previous_page
+}
+custom_text_box = {
+    name = ACE_game_rules_page_banner_text
+}
+custom_window = {
+	name = ACE_game_rules_page_1_window
+	potential = {
+		is_variable_equal = {
+			which = ACE_game_rules_page_var
+			value = 1
+		}
+	}
+}
+custom_window = {
+	name = ACE_game_rules_page_2_window
+	potential = {
+		is_variable_equal = {
+			which = ACE_game_rules_page_var
+			value = 2
+		}
+	}
+}
+custom_window = {
+	name = ACE_game_rules_page_3_window
+	potential = {
+		is_variable_equal = {
+			which = ACE_game_rules_page_var
+			value = 3
+		}
+	}
+}
+custom_window = {
+	name = ACE_game_rules_page_delete_regions_window
+	potential = {
+		is_variable_equal = {
+			which = ACE_game_rules_page_var
+			value = 10
+		}
+	}
+}
+
+
+
+custom_button = {
+    name = ACE_game_rules_toggle_north_aelantir_button
+    effect = {
+		ACE_game_rules_toggle_region_effect = {
+			var = ACE_game_rules_north_aelantir_var
+		}
+    }
+	frame_variable = "ACE_game_rules_north_aelantir_var"
+	tooltip = ACE_game_rules_text_north_aelantir
+}
+custom_text_box = {
+    name = ACE_game_rules_toggle_north_aelantir_text
+}
+custom_icon = {
+    name = ACE_game_rules_north_aelantir_image
+	potential = {
+		is_variable_equal = {
+			which = ACE_game_rules_north_aelantir_var
+			value = 1
+		}
+	}
+}
+
+
+
+custom_button = {
+    name = ACE_game_rules_toggle_south_aelantir_button
+    effect = {
+		ACE_game_rules_toggle_region_effect = {
+			var = ACE_game_rules_south_aelantir_var
+		}
+    }
+	frame_variable = "ACE_game_rules_south_aelantir_var"
+	tooltip = ACE_game_rules_text_south_aelantir
+}
+custom_text_box = {
+    name = ACE_game_rules_toggle_south_aelantir_text
+}
+custom_icon = {
+    name = ACE_game_rules_south_aelantir_image
+	potential = {
+		is_variable_equal = {
+			which = ACE_game_rules_south_aelantir_var
+			value = 1
+		}
+	}
+}
+
+
+
+custom_button = {
+    name = ACE_game_rules_toggle_cannor_button
+    effect = {
+		ACE_game_rules_toggle_region_effect = {
+			var = ACE_game_rules_cannor_var
+		}
+    }
+	frame_variable = "ACE_game_rules_cannor_var"
+	tooltip = ACE_game_rules_text_cannor
+}
+custom_text_box = {
+    name = ACE_game_rules_toggle_cannor_text
+}
+custom_icon = {
+    name = ACE_game_rules_cannor_image
+	potential = {
+		is_variable_equal = {
+			which = ACE_game_rules_cannor_var
+			value = 1
+		}
+	}
+}
+
+
+
+custom_button = {
+    name = ACE_game_rules_toggle_deepwoods_button
+    effect = {
+		ACE_game_rules_toggle_region_effect = {
+			var = ACE_game_rules_deepwoods_var
+		}
+    }
+	frame_variable = "ACE_game_rules_deepwoods_var"
+	tooltip = ACE_game_rules_text_deepwoods
+}
+custom_text_box = {
+    name = ACE_game_rules_toggle_deepwoods_text
+}
+custom_icon = {
+    name = ACE_game_rules_deepwoods_image
+	potential = {
+		is_variable_equal = {
+			which = ACE_game_rules_deepwoods_var
+			value = 1
+		}
+	}
+}
+
+
+
+custom_button = {
+    name = ACE_game_rules_toggle_western_spine_button
+    effect = {
+		ACE_game_rules_toggle_region_effect = {
+			var = ACE_game_rules_western_spine_var
+		}
+    }
+	frame_variable = "ACE_game_rules_western_spine_var"
+	tooltip = ACE_game_rules_text_western_spine
+}
+custom_text_box = {
+    name = ACE_game_rules_toggle_western_spine_text
+}
+custom_icon = {
+    name = ACE_game_rules_western_spine_image
+	potential = {
+		is_variable_equal = {
+			which = ACE_game_rules_western_spine_var
+			value = 1
+		}
+	}
+}
+
+
+
+custom_button = {
+    name = ACE_game_rules_toggle_forbidden_plains_button
+    effect = {
+		ACE_game_rules_toggle_region_effect = {
+			var = ACE_game_rules_forbidden_plains_var
+		}
+    }
+	frame_variable = "ACE_game_rules_forbidden_plains_var"
+	tooltip = ACE_game_rules_text_forbidden_plains
+}
+custom_text_box = {
+    name = ACE_game_rules_toggle_forbidden_plains_text
+}
+custom_icon = {
+    name = ACE_game_rules_forbidden_plains_image
+	potential = {
+		is_variable_equal = {
+			which = ACE_game_rules_forbidden_plains_var
+			value = 1
+		}
+	}
+}
+
+
+
+custom_button = {
+    name = ACE_game_rules_toggle_gozengun_button
+    effect = {
+		ACE_game_rules_toggle_region_effect = {
+			var = ACE_game_rules_gozengun_var
+		}
+    }
+	frame_variable = "ACE_game_rules_gozengun_var"
+	tooltip = ACE_game_rules_text_gozengun
+}
+custom_text_box = {
+    name = ACE_game_rules_toggle_gozengun_text
+}
+custom_icon = {
+    name = ACE_game_rules_gozengun_image
+	potential = {
+		is_variable_equal = {
+			which = ACE_game_rules_gozengun_var
+			value = 1
+		}
+	}
+}
+
+
+
+custom_button = {
+    name = ACE_game_rules_toggle_bulwar_button
+    effect = {
+		ACE_game_rules_toggle_region_effect = {
+			var = ACE_game_rules_bulwar_var
+		}
+    }
+	frame_variable = "ACE_game_rules_bulwar_var"
+	tooltip = ACE_game_rules_text_bulwar
+}
+custom_text_box = {
+    name = ACE_game_rules_toggle_bulwar_text
+}
+custom_icon = {
+    name = ACE_game_rules_bulwar_image
+	potential = {
+		is_variable_equal = {
+			which = ACE_game_rules_bulwar_var
+			value = 1
+		}
+	}
+}
+
+
+
+custom_button = {
+    name = ACE_game_rules_toggle_rahen_button
+    effect = {
+		ACE_game_rules_toggle_region_effect = {
+			var = ACE_game_rules_rahen_var
+		}
+    }
+	frame_variable = "ACE_game_rules_rahen_var"
+	tooltip = ACE_game_rules_text_rahen
+}
+custom_text_box = {
+    name = ACE_game_rules_toggle_rahen_text
+}
+custom_icon = {
+    name = ACE_game_rules_rahen_image
+	potential = {
+		is_variable_equal = {
+			which = ACE_game_rules_rahen_var
+			value = 1
+		}
+	}
+}
+
+
+
+custom_button = {
+    name = ACE_game_rules_toggle_east_haless_button
+    effect = {
+		ACE_game_rules_toggle_region_effect = {
+			var = ACE_game_rules_east_haless_var
+		}
+    }
+	frame_variable = "ACE_game_rules_east_haless_var"
+	tooltip = ACE_game_rules_text_east_haless
+}
+custom_text_box = {
+    name = ACE_game_rules_toggle_east_haless_text
+}
+custom_icon = {
+    name = ACE_game_rules_east_haless_image
+	potential = {
+		is_variable_equal = {
+			which = ACE_game_rules_east_haless_var
+			value = 1
+		}
+	}
+}
+
+
+
+custom_button = {
+    name = ACE_game_rules_toggle_eastern_spine_button
+    effect = {
+		ACE_game_rules_toggle_region_effect = {
+			var = ACE_game_rules_eastern_spine_var
+		}
+    }
+	frame_variable = "ACE_game_rules_eastern_spine_var"
+	tooltip = ACE_game_rules_text_eastern_spine
+}
+custom_text_box = {
+    name = ACE_game_rules_toggle_eastern_spine_text
+}
+custom_icon = {
+    name = ACE_game_rules_eastern_spine_image
+	potential = {
+		is_variable_equal = {
+			which = ACE_game_rules_eastern_spine_var
+			value = 1
+		}
+	}
+}
+
+
+
+custom_button = {
+    name = ACE_game_rules_toggle_north_salahad_button
+    effect = {
+		ACE_game_rules_toggle_region_effect = {
+			var = ACE_game_rules_north_salahad_var
+		}
+    }
+	frame_variable = "ACE_game_rules_north_salahad_var"
+	tooltip = ACE_game_rules_text_north_salahad
+}
+custom_text_box = {
+    name = ACE_game_rules_toggle_north_salahad_text
+}
+custom_icon = {
+    name = ACE_game_rules_north_salahad_image
+	potential = {
+		is_variable_equal = {
+			which = ACE_game_rules_north_salahad_var
+			value = 1
+		}
+	}
+}
+
+
+
+custom_button = {
+    name = ACE_game_rules_toggle_west_sarhal_button
+    effect = {
+		ACE_game_rules_toggle_region_effect = {
+			var = ACE_game_rules_west_sarhal_var
+		}
+    }
+	frame_variable = "ACE_game_rules_west_sarhal_var"
+	tooltip = ACE_game_rules_text_west_sarhal
+}
+custom_text_box = {
+    name = ACE_game_rules_toggle_west_sarhal_text
+}
+custom_icon = {
+    name = ACE_game_rules_west_sarhal_image
+	potential = {
+		is_variable_equal = {
+			which = ACE_game_rules_west_sarhal_var
+			value = 1
+		}
+	}
+}
+
+
+
+custom_button = {
+    name = ACE_game_rules_toggle_east_sarhal_button
+    effect = {
+		ACE_game_rules_toggle_region_effect = {
+			var = ACE_game_rules_east_sarhal_var
+		}
+    }
+	frame_variable = "ACE_game_rules_east_sarhal_var"
+	tooltip = ACE_game_rules_text_east_sarhal
+}
+custom_text_box = {
+    name = ACE_game_rules_toggle_east_sarhal_text
+}
+custom_icon = {
+    name = ACE_game_rules_east_sarhal_image
+	potential = {
+		is_variable_equal = {
+			which = ACE_game_rules_east_sarhal_var
+			value = 1
+		}
+	}
+}
+
+
+
+custom_button = {
+    name = ACE_game_rules_open_delete_region_button
+    effect = {
+		hidden_effect = {
+			set_variable = {
+				which = ACE_game_rules_page_var
+				value = 10
+			}
+		}
+	}
+    tooltip = ACE_game_rules_open_delete_region_page
+}
+custom_icon = {
+    name = ACE_game_rules_delete_region_image
+	frame_variable = "ACE_game_rules_delete_region_var"
+    tooltip = ACE_game_rules_tooltip_delete_region
+}
+
+
+
+custom_button = {
+    name = ACE_game_rules_achievement_back_button
+    effect = {
+		ACE_game_rules_back_option_effect = {
+			var = ACE_game_rules_achievement_var
+			num = 2
+		}
+	}
+    tooltip = ACE_game_rules_previous_page
+}
+custom_button = {
+    name = ACE_game_rules_achievement_next_button
+    effect = {
+		ACE_game_rules_next_option_effect = {
+			var = ACE_game_rules_achievement_var
+			num = 2
+		}
+    }
+    tooltip = ACE_game_rules_next_page
+}
+custom_icon = {
+    name = ACE_game_rules_achievement_image
+	frame_variable = "ACE_game_rules_achievement_var"
+    tooltip = ACE_game_rules_tooltip_achievement
+}
+custom_text_box = {
+    name = ACE_game_rules_title_achievement
+}
+
+
+
+custom_window = {
+	name = ACE_game_rules_todo_3_rule_window
+	potential = {
+		tag = A30
+		tag = A01
+		tag = Z01
+	}
+}
+custom_button = {
+    name = ACE_game_rules_todo_3_back_button
+    effect = {
+		ACE_game_rules_back_option_effect = {
+			var = ACE_game_rules_todo_3_var
+			num = 2
+		}
+    }
+    tooltip = ACE_game_rules_previous_page
+}
+custom_button = {
+    name = ACE_game_rules_todo_3_next_button
+    effect = {
+		ACE_game_rules_next_option_effect = {
+			var = ACE_game_rules_todo_3_var
+			num = 2
+		}
+    }
+    tooltip = ACE_game_rules_next_page
+}
+custom_icon = {
+    name = ACE_game_rules_todo_3_image
+	frame_variable = "ACE_game_rules_todo_3_var"
+    tooltip = ACE_game_rules_tooltip_todo_3
+}
+custom_text_box = {
+    name = ACE_game_rules_title_todo_3
+}
+
+
+
+custom_button = {
+    name = ACE_game_rules_title_yes_great_conquerors_back_button
+    effect = {
+		ACE_game_rules_back_option_effect = {
+			var = ACE_game_rules_great_conquerors_var
+			num = 3
+		}
+	}
+    tooltip = ACE_game_rules_previous_page
+}
+custom_button = {
+    name = ACE_game_rules_title_yes_great_conquerors_next_button
+    effect = {
+		ACE_game_rules_next_option_effect = {
+			var = ACE_game_rules_great_conquerors_var
+			num = 3
+		}
+    }
+    tooltip = ACE_game_rules_next_page
+}
+custom_icon = {
+    name = ACE_game_rules_title_yes_great_conquerors_image
+	frame_variable = "ACE_game_rules_great_conquerors_var"
+    tooltip = ACE_game_rules_tooltip_great_conquerors
+}
+custom_text_box = {
+    name = ACE_game_rules_title_great_conquerors
+}
+
+
+
+custom_window = {
+	name = ACE_game_rules_variant_conquerors_window
+	potential = {
+		NOT = {
+			is_variable_equal = {
+				which = ACE_game_rules_great_conquerors_var
+				value = 1
+			}
+		}
+	}
+}
+custom_window = {
+	name = ACE_game_rules_variant_conquerors_disabled_window
+	potential = {
+		is_variable_equal = {
+			which = ACE_game_rules_great_conquerors_var
+			value = 1
+		}
+	}
+}
+custom_button = {
+    name = ACE_game_rules_variant_conquerors_back_button
+    effect = {
+		ACE_game_rules_back_option_effect = {
+			var = ACE_game_rules_variant_conquerors_var
+			num = 2
+		}
+	}
+    tooltip = ACE_game_rules_previous_page
+}
+custom_button = {
+    name = ACE_game_rules_variant_conquerors_next_button
+    effect = {
+		ACE_game_rules_next_option_effect = {
+			var = ACE_game_rules_variant_conquerors_var
+			num = 2
+		}
+    }
+    tooltip = ACE_game_rules_next_page
+}
+custom_icon = {
+    name = ACE_game_rules_variant_conquerors_image
+	frame_variable = "ACE_game_rules_variant_conquerors_var"
+    tooltip = ACE_game_rules_tooltip_variant_conquerors
+}
+custom_icon = {
+    name = ACE_game_rules_variant_conquerors_disabled_image
+}
+custom_text_box = {
+    name = ACE_game_rules_title_variant_conquerors
+}
+
+
+
+custom_window = {
+	name = ACE_game_rules_delayed_conquerors_window
+	potential = {
+		NOT = {
+			is_variable_equal = {
+				which = ACE_game_rules_great_conquerors_var
+				value = 1
+			}
+		}
+	}
+}
+custom_window = {
+	name = ACE_game_rules_delayed_conquerors_disabled_window
+	potential = {
+		is_variable_equal = {
+			which = ACE_game_rules_great_conquerors_var
+			value = 1
+		}
+	}
+}
+custom_button = {
+    name = ACE_game_rules_delayed_conquerors_back_button
+    effect = {
+		ACE_game_rules_back_option_effect = {
+			var = ACE_game_rules_delayed_conquerors_var
+			num = 2
+		}
+	}
+    tooltip = ACE_game_rules_previous_page
+}
+custom_button = {
+    name = ACE_game_rules_delayed_conquerors_next_button
+    effect = {
+		ACE_game_rules_next_option_effect = {
+			var = ACE_game_rules_delayed_conquerors_var
+			num = 2
+		}
+    }
+    tooltip = ACE_game_rules_next_page
+}
+custom_icon = {
+    name = ACE_game_rules_delayed_conquerors_image
+	frame_variable = "ACE_game_rules_delayed_conquerors_var"
+    tooltip = ACE_game_rules_tooltip_delayed_conquerors
+}
+custom_icon = {
+    name = ACE_game_rules_delayed_conquerors_disabled_image
+}
+custom_text_box = {
+    name = ACE_game_rules_title_delayed_conquerors
+}
+
+
+
+custom_button = {
+    name = ACE_game_rules_unraveling_back_button
+    effect = {
+		ACE_game_rules_back_option_effect = {
+			var = ACE_game_rules_unraveling_var
+			num = 4
+		}
+	}
+    tooltip = ACE_game_rules_previous_page
+}
+custom_button = {
+    name = ACE_game_rules_unraveling_next_button
+    effect = {
+		ACE_game_rules_next_option_effect = {
+			var = ACE_game_rules_unraveling_var
+			num = 4
+		}
+    }
+    tooltip = ACE_game_rules_next_page
+}
+custom_icon = {
+    name = ACE_game_rules_unraveling_image
+	frame_variable = "ACE_game_rules_unraveling_var"
+    tooltip = ACE_game_rules_tooltip_unraveling
+}
+custom_text_box = {
+    name = ACE_game_rules_title_unraveling
+}
+
+
+
+custom_button = {
+    name = ACE_game_rules_wex_back_button
+    effect = {
+		ACE_game_rules_back_option_effect = {
+			var = ACE_game_rules_wex_var
+			num = 3
+		}
+	}
+    tooltip = ACE_game_rules_previous_page
+}
+custom_button = {
+    name = ACE_game_rules_wex_next_button
+    effect = {
+		ACE_game_rules_next_option_effect = {
+			var = ACE_game_rules_wex_var
+			num = 3
+		}
+    }
+    tooltip = ACE_game_rules_next_page
+}
+custom_icon = {
+    name = ACE_game_rules_wex_image
+	frame_variable = "ACE_game_rules_wex_var"
+    tooltip = ACE_game_rules_tooltip_wex
+}
+custom_text_box = {
+    name = ACE_game_rules_title_wex
+}
+
+
+
+custom_button = {
+    name = ACE_game_rules_lencenor_back_button
+    effect = {
+		ACE_game_rules_back_option_effect = {
+			var = ACE_game_rules_lencenor_var
+			num = 4
+		}
+	}
+    tooltip = ACE_game_rules_previous_page
+}
+custom_button = {
+    name = ACE_game_rules_lencenor_next_button
+    effect = {
+		ACE_game_rules_next_option_effect = {
+			var = ACE_game_rules_lencenor_var
+			num = 4
+		}
+    }
+    tooltip = ACE_game_rules_next_page
+}
+custom_icon = {
+    name = ACE_game_rules_lencenor_image
+	frame_variable = "ACE_game_rules_lencenor_var"
+    tooltip = ACE_game_rules_tooltip_lencenor
+}
+custom_text_box = {
+    name = ACE_game_rules_title_lencenor
+}
+
+
+
+custom_button = {
+    name = ACE_game_rules_gawed_back_button
+    effect = {
+		ACE_game_rules_back_option_effect = {
+			var = ACE_game_rules_gawed_var
+			num = 3
+		}
+	}
+    tooltip = ACE_game_rules_previous_page
+}
+custom_button = {
+    name = ACE_game_rules_gawed_next_button
+    effect = {
+		ACE_game_rules_next_option_effect = {
+			var = ACE_game_rules_gawed_var
+			num = 3
+		}
+    }
+    tooltip = ACE_game_rules_next_page
+}
+custom_icon = {
+    name = ACE_game_rules_gawed_image
+	frame_variable = "ACE_game_rules_gawed_var"
+    tooltip = ACE_game_rules_tooltip_gawed
+}
+custom_text_box = {
+    name = ACE_game_rules_title_gawed
+}
+
+
+
+custom_button = {
+    name = ACE_game_rules_burning_desert_back_button
+    effect = {
+		ACE_game_rules_back_option_effect = {
+			var = ACE_game_rules_burning_desert_var
+			num = 4
+		}
+	}
+    tooltip = ACE_game_rules_previous_page
+}
+custom_button = {
+    name = ACE_game_rules_burning_desert_next_button
+    effect = {
+		ACE_game_rules_next_option_effect = {
+			var = ACE_game_rules_burning_desert_var
+			num = 4
+		}
+    }
+    tooltip = ACE_game_rules_next_page
+}
+custom_icon = {
+    name = ACE_game_rules_burning_desert_image
+	frame_variable = "ACE_game_rules_burning_desert_var"
+    tooltip = ACE_game_rules_tooltip_burning_desert
+}
+custom_text_box = {
+    name = ACE_game_rules_title_burning_desert
+}
+
+
+
+custom_button = {
+    name = ACE_game_rules_decades_devastation_back_button
+    effect = {
+		ACE_game_rules_back_option_effect = {
+			var = ACE_game_rules_decades_devastation_var
+			num = 4
+		}
+	}
+    tooltip = ACE_game_rules_previous_page
+}
+custom_button = {
+    name = ACE_game_rules_decades_devastation_next_button
+    effect = {
+		ACE_game_rules_next_option_effect = {
+			var = ACE_game_rules_decades_devastation_var
+			num = 4
+		}
+    }
+    tooltip = ACE_game_rules_next_page
+}
+custom_icon = {
+    name = ACE_game_rules_decades_devastation_image
+	frame_variable = "ACE_game_rules_decades_devastation_var"
+    tooltip = ACE_game_rules_tooltip_decades_devastation
+}
+custom_text_box = {
+    name = ACE_game_rules_title_decades_devastation
+}

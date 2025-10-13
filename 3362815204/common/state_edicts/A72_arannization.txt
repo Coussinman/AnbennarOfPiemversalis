@@ -1,0 +1,35 @@
+A72_enforce_arannization = {
+	potential = {
+		OR = {
+			tag = A72	
+			was_tag = A72
+		}	#we support "potential" if modders want to have lots and just show some.
+	}
+
+	allow = {
+		mission_completed = A72_arannese_identity
+	}
+
+	modifier = {
+		local_culture_conversion_cost = -0.20
+		local_culture_conversion_time = -0.20
+	}
+
+	color = {  113 11 43 }
+
+
+	ai_will_do = {
+		factor = 10
+	}
+	on_state_edict_enacted = {
+		custom_tooltip = A72_arannization.1.tt
+		hidden_effect = {
+			random_area_province = {
+				spawn_rebels = {
+					size = 1
+					type = nationalist_rebels
+				}
+			}
+		}	
+	}
+}

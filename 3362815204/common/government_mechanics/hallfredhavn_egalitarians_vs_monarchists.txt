@@ -1,0 +1,64 @@
+anb_ace_egalitarians_vs_monarchists_mechanic = {
+	available = {
+		has_dlc = "Domination"
+	}
+
+	powers = {
+		governmental_power = {
+			gui = parliament_vs_monarchy_gov_mech
+			max = 100	#Monarchy direction
+			min = -100	#Egalitarian direction
+			base_monthly_growth = 0
+			scaled_modifier = {
+				trigger = {
+					has_government_power = { 
+						mechanic_type = anb_ace_egalitarians_vs_monarchists_mechanic
+						power_type = governmental_power
+						value = 0
+					}
+				}
+				modifier = {
+					improve_relation_modifier = 0.2
+					republican_tradition = -0.5
+					max_absolutism = 20
+					nobles_loyalty_modifier = 0.15
+					administrative_efficiency = 0.1
+				}
+			}
+			reverse_scaled_modifier = {
+				trigger = {
+					NOT = {
+						has_government_power = { 
+							mechanic_type = anb_ace_egalitarians_vs_monarchists_mechanic
+							power_type = governmental_power
+							value = 0
+						}
+					}
+				}
+				modifier = {
+					global_tax_modifier = 0.2
+					republican_tradition = 0.5
+					yearly_absolutism = -2
+					burghers_loyalty_modifier = 0.15
+					years_of_nationalism = -10
+				}
+			}
+			on_max_reached = {
+				custom_tooltip = ACE_AD5_monarchy_will_be_declared_tt
+				hidden_effect = {
+					country_event = {
+						id = hallfredhavn.42
+					}
+				}
+			}
+			on_min_reached = {
+				custom_tooltip = ACE_AD5_thing_will_be_reformed_tt
+				hidden_effect = {
+					country_event = {
+						id = hallfredhavn.43
+					}
+				}
+			}
+		}
+	}
+}

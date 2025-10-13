@@ -1,0 +1,203 @@
+armringraction_relic = { #relic
+	category = influence
+
+	require_acceptance = no
+
+	ai_will_do = {
+		always = no
+	}
+
+
+	is_visible = {
+		ai = no
+		has_reform = ACE_armringrskipan_reform
+		FROM = {
+			is_subject_of = ROOT
+			is_vassal = yes
+		}
+	}
+	is_allowed = {
+		always = yes
+	}
+	on_accept = {
+		create_subject = {
+			subject_type = relic_armringr_vassal
+			subject = FROM
+		}
+	}
+}
+
+armringraction_gold = { #gold
+	category = influence
+
+	require_acceptance = no
+
+	ai_will_do = {
+		always = yes
+	}
+
+	is_visible = {
+		ai = no
+		has_reform = ACE_armringrskipan_reform
+		FROM = {
+			is_subject_of = ROOT
+			is_vassal = yes
+		}
+	}
+	is_allowed = {
+		FROM = { NOT = { liberty_desire = 75 } }
+	}
+	on_accept = {
+		create_subject = {
+			subject_type = gold_armringr_vassal
+			subject = FROM
+		}
+	}
+}
+
+armringraction = { #silver
+	category = influence
+
+	require_acceptance = no
+
+	ai_will_do = {
+		always = no
+	}
+
+	is_visible = {
+		ai = no
+		has_reform = ACE_armringrskipan_reform
+		FROM = {
+			is_subject_of = ROOT
+			is_vassal = yes
+		}
+	}
+	is_allowed = {
+		FROM = { NOT = { liberty_desire = 50 } }
+	}
+	on_accept = {
+		create_subject = {
+			subject_type = silver_armringr_vassal
+			subject = FROM
+		}
+	}
+}
+
+armringraction_bronze = { #silver
+	category = influence
+
+	require_acceptance = no
+
+	ai_will_do = {
+		always = yes
+	}
+
+	is_visible = {
+		ai = no
+		has_reform = ACE_armringrskipan_reform
+		FROM = {
+			is_subject_of = ROOT
+			is_vassal = yes
+		}
+	}
+	is_allowed = {
+		FROM = { NOT = { liberty_desire = 1 } }
+	}
+	on_accept = {
+		create_subject = {
+			subject_type = bronze_armringr_vassal
+			subject = FROM
+		}
+		FROM = {
+			add_country_modifier = {
+				name = ACE_bronze_armringr_disloyalty_modifier
+				duration = -1
+			}
+		}
+	}
+}
+
+right_of_armringr_inheritance_action = {
+	category = influence
+
+	require_acceptance = no
+
+	ai_will_do = {
+		always = yes
+	}
+
+	is_visible = {
+		ai = no
+		has_reform = ACE_armringrskipan_reform
+		FROM = {
+			is_subject_of = ROOT
+			OR = {
+				is_subject_of_type = relic_armringr_vassal
+				is_subject_of_type = gold_armringr_vassal
+				is_subject_of_type = silver_armringr_vassal
+			}
+			NOT = {
+				has_country_modifier = ACE_right_of_inheritance_modifier
+			}
+		}
+	}
+	is_allowed = {
+		FROM = { 
+			NOT = { 
+				has_country_modifier = ACE_recently_changed_right_of_inheritance_modifier 
+			} 
+		}
+	}
+	on_accept = {
+		FROM = {
+			add_country_modifier = {
+				name = ACE_right_of_inheritance_modifier
+				duration = -1
+			}
+			add_country_modifier = {
+				name = ACE_recently_changed_right_of_inheritance_modifier
+				duration = 3650
+			}
+		}
+	}
+}
+
+revoke_right_of_armringr_inheritance_action = {
+	category = influence
+
+	require_acceptance = no
+
+	ai_will_do = {
+		always = no
+	}
+
+	is_visible = {
+		ai = no
+		has_reform = ACE_armringrskipan_reform
+		FROM = {
+			is_subject_of = ROOT
+			OR = {
+				is_subject_of_type = relic_armringr_vassal
+				is_subject_of_type = gold_armringr_vassal
+				is_subject_of_type = silver_armringr_vassal
+			}
+			has_country_modifier = ACE_right_of_inheritance_modifier
+		}
+	}
+	is_allowed = {
+		FROM = { 
+			NOT = { 
+				has_country_modifier = ACE_recently_changed_right_of_inheritance_modifier 
+			} 
+		}
+	}
+	on_accept = {
+		FROM = {
+			remove_country_modifier = ACE_right_of_inheritance_modifier
+			add_country_modifier = {
+				name = ACE_recently_changed_right_of_inheritance_modifier
+				duration = 3650
+			}
+		}
+	}
+}

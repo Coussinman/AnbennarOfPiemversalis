@@ -1,0 +1,5472 @@
+
+
+reveria_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	potential = {
+		tag = A05
+	}
+	has_country_shield = yes
+
+	A05_prepare_first_kobold_incursion = {
+		icon = mission_rb_unite_the_clans
+		position = 2
+		required_missions = {
+			A05_reconquer_the_gnomish_pass
+		}
+		provinces_to_highlight = {
+			province_id = 167
+		}
+		trigger = {
+			if = {
+				limit = {
+					ai = no
+				}
+				employed_advisor = {
+					category = MIL
+				}
+				army_size_percentage = 0.6
+				num_of_generals = 1
+				owns_core_province = 167
+				167 = {
+					fort_level = 1
+				}
+				OR = {
+					has_country_modifier = racial_pop_kobold_expulsion
+					has_country_modifier = racial_pop_kobold_purge
+					170 = {
+						owner = {
+							has_spy_network_from = {
+								who = root
+								value = 30
+							}
+						}
+					}
+					any_owned_province = {
+						has_kobold_majority_trigger = yes
+					}
+				}
+			}
+			else = {
+				num_of_generals = 1
+				owns_core_province = 167
+			}
+		}
+		effect = {
+			dragondowns_area = {
+				add_permanent_claim = ROOT
+			}
+			170 = {
+				add_permanent_claim = ROOT
+			}
+			173 = {
+				add_permanent_claim = ROOT
+			}
+			174 = {
+				add_permanent_claim = ROOT
+			}
+			dragonpoint_area = {
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name= "ACE_reveria_ready_to_fight"
+				duration = 3650
+			}
+			custom_tooltip = reveria_kobold_explainer_tt
+			if = {
+				limit = {
+					ai = yes
+				}
+				hidden_effect = {
+					set_country_flag = flag_reveria_anti_kobold
+					generic_end_purge = {
+						race = kobold
+					}
+					generic_end_expulsion = {
+						race = kobold
+					}
+					generic_start_purge = {
+						race = kobold
+					}
+					increase_free_state_action = {
+						action = genocide
+					}
+				}
+			}
+			else = {
+				if = {
+					limit = {
+						OR = {
+							has_country_modifier = racial_pop_kobold_expulsion
+							has_country_modifier = racial_pop_kobold_purge
+						}
+					}
+					custom_tooltip = reveria_kobold_purge_tt
+					hidden_effect = {
+						set_country_flag = flag_reveria_anti_kobold
+					}
+				}
+				else = {
+					custom_tooltip = reveria_kobold_tolerance_tt
+					hidden_effect = {
+						set_country_flag = flag_reveria_pro_kobold
+					}
+				}
+			}
+		}
+	}
+
+	A05_Reclaim_Drekiriki = {
+		icon = mission_rb_conquer_the_highlands
+		position = 3
+		required_missions = {
+			A05_prepare_first_kobold_incursion
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = dragondowns_area
+				province_id = 177
+				province_id = 170
+				province_id = 178
+				province_id = 176
+			}
+			NOT = {
+				owned_by = ROOT
+				is_core = ROOT
+			}
+		}
+		trigger = {
+			dragondowns_area = {
+				type = all
+				owned_by = ROOT
+				is_core = ROOT
+			}
+			owns_core_province = 177
+			owns_core_province = 178
+			owns_core_province = 176
+			owns_core_province = 170
+		}
+		effect = {
+			dragonspine_area = {
+				add_permanent_claim = ROOT
+			}
+			183 = {
+				add_permanent_claim = ROOT
+			}
+			3362 = {
+				add_permanent_claim = ROOT
+			}
+			177 = {
+				change_province_name = "Drekirï¿½ki"
+				rename_capital = "Drekirï¿½ki"
+			}
+			custom_tooltip = ACE_unlock_tale_drekiriki_tt
+			set_country_flag = unlocked_song_ace_fall_of_drekiriki
+			country_event_with_effect_insight = {
+				id = reveria.12
+				effect = "
+					177 = {
+						add_province_modifier = {
+							name = reveria_preparing_new_capital
+							duration = 3650
+						}
+					}
+					add_adm_power = -20
+				"
+			}
+			custom_tooltip = ACE_reveria_drekiriki_migrants_tt
+			hidden_effect = {
+				country_event = {
+					id = reveria.53
+					days = 730
+				}
+			}
+			if = {
+				limit = {
+					ai = yes
+				}
+				hidden_effect = {
+					177 = {
+						change_culture = ROOT
+						change_religion = ROOT
+						add_base_production = 3
+						add_base_tax = 3
+						add_base_manpower = 3
+					}
+					largest_decrease_of_kobold_tolerance_effect = yes
+					remove_country_modifier = racial_pop_kobold_purge
+					remove_country_modifier = racial_pop_kobold_expulsion
+					add_country_modifier = {
+						name = racial_pop_kobold_purge
+						duration = -1
+					}
+				}
+			}
+			if = {
+				limit = {
+					mission_completed = A05_acquire_nimscodd
+				}
+				hidden_effect = {
+					country_event = {
+						id = reveria.81
+						days = 1825
+						random = 10000
+					}
+					country_event = {
+						id = reveria.82
+						days = 1825
+						random = 10000
+					}
+					country_event = {
+						id = reveria.83
+						days = 1825
+						random = 10000
+					}
+					country_event = {
+						id = reveria.84
+						days = 1825
+						random = 10000
+					}
+					country_event = {
+						id = reveria.85
+						days = 1825
+						random = 10000
+					}
+				}
+			}
+		}
+	}
+
+	A05_A_New_Capital = {
+		icon = mission_great_trading_houses
+		position = 4
+		required_missions = {
+			A05_Reclaim_Drekiriki
+		}
+		provinces_to_highlight = {
+			province_id = 177
+		}
+		trigger = {
+			is_at_war = no
+			treasury = 100
+			adm_power = 100
+			if = {
+				limit = {
+					ai = no
+				}
+				177 = {
+					owned_by = ROOT
+					is_core = ROOT
+					development = 15
+					OR = {
+						has_owner_culture = yes
+						culture_group = gnomish
+					}
+				}
+			}
+			else = {
+				177 = {
+					owned_by = ROOT
+					is_core = ROOT
+				}
+			}
+		}
+		effect = {
+			country_event_with_effect_insight = {
+				id = reveria.13
+				effect = "
+					set_capital = 177
+					if = {
+						limit = { ai = yes }
+						177 = {
+							change_culture = reverian
+							add_base_production = 5
+						}
+					}
+					custom_tooltip = reveria_new_capital_tt
+				"
+			}
+			custom_tooltip = " "
+			country_event_with_option_insight = {
+				id = reveria.72
+				days = 7
+				option_1 = "
+					custom_tooltip = ACE_keep_name_tt
+				"
+
+				option_2 = "
+					override_country_name = DREKIRIKI
+				"
+
+				option_3 = "
+					override_country_name = VESTRRIKI
+				"
+
+				option_4 = "
+					override_country_name = TVENNRRIKJA
+				"
+			}
+		}
+	}
+
+	A05_sustainable_economy_for_drekiriki = {
+		icon = mission_city_prosperity
+		position = 5
+		required_missions = {
+			A05_A_New_Capital
+		}
+		provinces_to_highlight = {
+			province_id = 177
+		}
+		trigger = {
+			177 = {
+				is_capital_of = ROOT
+				has_tax_building_trigger = yes
+				has_production_building_trigger = yes
+				has_trade_building_trigger = yes
+				development = 27
+			}
+		}
+		effect = {
+			177 = {
+				add_center_of_trade_level = 1
+				add_base_tax = 1
+				add_base_production = 1
+				add_base_manpower = 1
+			}
+			176 = {
+				add_province_modifier = {
+					name = reveria_developing_countryside
+					duration = 3650
+				}
+			}
+			178 = {
+				add_province_modifier = {
+					name = reveria_developing_countryside
+					duration = 3650
+				}
+			}
+			175 = {
+				add_province_modifier = {
+					name = reveria_developing_countryside
+					duration = 3650
+				}
+			}
+		}
+	}
+
+	A05_develop_the_dragonpoint_countryside = {
+		icon = mission_colonial
+		position = 6
+		required_missions = {
+			A05_sustainable_economy_for_drekiriki
+		}
+		provinces_to_highlight = {
+			area = dragonpoint_area
+		}
+		trigger = {
+			dragonpoint_area = {
+				type = all
+				owned_by = ROOT
+				is_core = ROOT
+				custom_trigger_tooltip = {
+					tooltip = ACE_reveria_revitalized_dragonpoint_tt
+					has_province_flag = dragon_coast_revitalized
+				}
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = reveria_developed_countryside
+				duration = 7300
+			}
+			if = {
+				limit = {
+					NOT = {
+						any_province = {
+							continent = europe
+							higher_development_than = 177
+						}
+					}
+				}
+				custom_tooltip = ACE_reveria_most_developed_yes
+				tooltip = {
+					if = {
+						limit = {
+							has_dlc = "Mandate of Heaven"
+						}
+						add_splendor = 200
+					}
+					else = {
+						change_government_reform_progress = 100
+					}
+				}
+			}
+			else = {
+				custom_tooltip = ACE_reveria_most_developed_no
+				tooltip = {
+					if = {
+						limit = {
+							has_dlc = "Mandate of Heaven"
+						}
+						add_splendor = 200
+					}
+					else = {
+						change_government_reform_progress = 100
+					}
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = {
+							any_province = {
+								continent = europe
+								higher_development_than = 177
+							}
+						}
+					}
+					if = {
+						limit = {
+							has_dlc = "Mandate of Heaven"
+						}
+						add_splendor = 200
+					}
+					else = {
+						change_government_reform_progress = 100
+					}
+				}
+			}
+		}
+	}
+
+	A05_defending_the_capital = {
+		icon = mission_conquer_mewar
+		position = 7
+		required_missions = {
+			A05_develop_the_dragonpoint_countryside
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 167
+				province_id = 184
+			}
+			NOT = {
+				AND = {
+					owned_by = ROOT
+					is_core = ROOT
+					fort_level = 2
+				}
+			}
+		}
+		trigger = {
+			167 = {
+				owned_by = ROOT
+				is_core = ROOT
+				fort_level = 2
+			}
+			184 = {
+				owned_by = ROOT
+				is_core = ROOT
+				fort_level = 2
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = reveria_defended_the_dragon_coast
+				duration = 36500
+			}
+			184 = {
+				change_culture = ROOT
+				change_religion = ROOT
+				add_gnomish_minority_size_effect = yes
+			}
+		}
+	}
+
+	A05_attract_gnomish_industry = {
+		icon = mission_smith
+		position = 8
+		required_missions = {
+			A05_defending_the_capital
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 169
+				province_id = 177
+			}
+			NOT = {
+				owned_by = root
+				is_core = ROOT
+			}
+		}
+		trigger = {
+			high_tolerance_gnomish_race_trigger = yes
+			owns_core_province = 177
+			owns_core_province = 169
+			adm_power = 100
+			has_estate = estate_artificers
+		}
+		effect = {
+			dragonpoint_area = {
+				add_prosperity = 50
+			}
+			177 = {
+				add_center_of_trade_level = 1
+				add_gnomish_minority_size_effect = yes
+			}
+			add_innovativeness_or_monarch_power_anb = { amount = 1 }
+			mission_reward_artifice_points_1 = yes
+			add_adm_power = -100
+			add_estate_loyalty = {
+				estate = estate_artificers
+				loyalty = 10
+			}
+		}
+	}
+
+	A05_grant_artificers_privileges = {
+		icon = invade_poland
+		position = 9
+		required_missions = {
+			A05_attract_gnomish_industry
+		}
+		trigger = {
+			estate_loyalty = {
+				estate = estate_artificers
+				loyalty = 45
+			}
+			estate_influence = {
+				estate = estate_artificers
+				influence = 35
+			}
+		}
+		effect = {
+			add_innovativeness_or_monarch_power_anb = { amount = 1 }
+			country_event_with_effect_insight = {
+				id = reveria.15
+				effect = "
+					A05_dvtrig = yes
+				"
+			}
+		}
+	}
+
+	A05_gnome_mines_secured = {
+		icon = mission_mechanical_mining
+		position = 10
+		required_missions = {
+			A05_grant_artificers_privileges
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = dragonmaw_area
+				area = dragonheart_area
+				area = dragondepth_area
+			}
+			NOT = {
+				AND = {
+					owned_by = ROOT
+					is_core = ROOT
+					has_province_flag = dragon_coast_revitalized
+				}
+			}
+		}
+		trigger = {
+			adm_power = 100
+			dragonmaw_area = {
+				type = all
+				owned_by = ROOT
+				is_core = ROOT
+				custom_trigger_tooltip = {
+					tooltip = ACE_reveria_revitalized_dragonpoint_tt
+					has_province_flag = dragon_coast_revitalized
+				}
+			}
+			dragonheart_area = {
+				type = all
+				owned_by = ROOT
+				is_core = ROOT
+				custom_trigger_tooltip = {
+					tooltip = ACE_reveria_revitalized_dragonpoint_tt
+					has_province_flag = dragon_coast_revitalized
+				}
+			}
+			dragondepth_area = {
+				type = all
+				owned_by = ROOT
+				is_core = ROOT
+				custom_trigger_tooltip = {
+					tooltip = ACE_reveria_revitalized_dragonpoint_tt
+					has_province_flag = dragon_coast_revitalized
+				}
+			}
+		}
+		effect = {
+			add_adm_power = -100
+			mission_reward_artifice_points_4 = yes
+			add_estate_loyalty = {
+				estate = estate_artificers
+				loyalty = 10
+			}
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = ACE_reveria_anti_kobold_mines_tt
+				first_limit = "
+					has_country_flag = flag_reveria_anti_kobold
+				"
+				first_effect = "
+					dragonmaw_area = {
+						change_culture = cliff_gnome
+						change_religion = the_thought
+					}
+					dragonheart_area = {
+						change_culture = cliff_gnome
+						change_religion = the_thought
+					}
+					dragondepth_area = {
+						change_culture = cliff_gnome
+						change_religion = the_thought
+					}
+				"
+			}
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = ACE_reveria_dwarf_friends_tt
+				first_limit = "
+					any_country = {
+						culture_group = dwarven
+						has_opinion = {
+							who = ROOT
+							value = 100
+						}
+					}
+				"
+				first_effect = "
+					A05_dveff = yes
+				"
+			}
+		}
+	}
+
+	A05_westward_winds = {
+		icon = mission_rb_scottish_north_sea_trade
+		position = 13
+		required_missions = {
+			A05_the_reaver_fleet
+		}
+		trigger = {
+			has_idea_group = exploration_ideas
+			exploration_ideas = 1
+			has_discovered = 1001
+			dip_power = 50
+		}
+		effect = {
+			1001 = {
+				add_permanent_claim = ROOT
+			}
+			add_dip_power = -50
+			add_country_modifier = {
+				name = reveria_westward_winds
+				duration = 7300
+			}
+			define_explorer = {
+				name = "Harald of Vestrund"
+				fire = 0
+				shock = 2
+				manuever = 4
+				siege = 2
+			}
+			define_advisor = {
+				type = navigator
+				skill = 2
+				culture = ROOT
+				religion = ROOT
+				discount = yes
+			}
+		}
+	}
+
+	A05_land_spotted = {
+		icon = mission_rb_conquer_the_isles
+		position = 14
+		required_missions = {
+			A05_westward_winds
+		}
+		trigger = {
+			OR = {
+				has_discovered = 1204
+				has_discovered = 1205
+				has_discovered = 951
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = reveria_discover_aelantir_modifier
+				duration = 7300
+			}
+		}
+	}
+
+	A05_ruined_sea_raiding = {
+		icon = mission_fleet_arrival
+		position = 15
+		required_missions = {
+			A05_land_spotted
+		}
+		provinces_to_highlight = {
+			colonial_region = colonial_isles
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+				is_city = yes
+			}
+			has_discovered = ROOT
+		}
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 20
+				colonial_region = colonial_isles
+				is_city = yes
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name= reveria_ruined1
+				duration = -1
+			}
+		}
+	}
+
+	A05_island_hopping = {
+		icon = mission_heart_of_the_hansa
+		position = 16
+		required_missions = {
+			A05_ruined_sea_raiding
+		}
+		provinces_to_highlight = {
+			colonial_region = colonial_isles
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+				is_city = yes
+			}
+			has_discovered = ROOT
+		}
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 40
+				colonial_region = colonial_isles
+				is_city = yes
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name= reveria_ruined2
+				duration = -1
+			}
+			add_estate_loyalty = {
+				estate = estate_burghers
+				loyalty = 5
+			}
+			hidden_effect = {
+				remove_country_modifier = reveria_ruined1
+			}
+		}
+	}
+
+	A05_damned_dam = {
+		icon = mission_defeat_jaunpur
+		position = 18
+		required_missions = {
+			A05_vareynn_secured
+		}
+		provinces_to_highlight = {
+			province_id = 1165
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			has_discovered = ROOT
+		}
+		trigger = {
+			1165 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			mil_power = 50
+			treasury = 50
+			manpower = 5
+		}
+		effect = {
+			add_mil_power = -50
+			add_treasury = -50
+			sarda_region = {
+				discover_country = A05
+			}
+			2781 = {
+				discover_country = A05
+			}
+			add_estate_loyalty = {
+				estate = estate_burghers
+				loyalty = 5
+			}
+			country_event = {
+				id = reveria.18
+			}
+		}
+	}
+
+	A05_vels_bacar_dam = {
+		icon = mission_viking
+		position = 19
+		required_missions = {
+			A05_damned_dam
+		}
+		provinces_to_highlight = {
+			province_id = 1138
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			has_discovered = ROOT
+		}
+		trigger = {
+			1138 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			mil_power = 80
+			treasury = 100
+			manpower = 8
+		}
+		effect = {
+			add_mil_power = -80
+			add_treasury = -100
+			add_estate_loyalty = {
+				estate = estate_burghers
+				loyalty = 5
+			}
+			country_event = {
+				id = reveria.19
+			}
+		}
+	}
+
+	A05_the_fate_of_the_dome = {
+		icon = take_the_bishoprics
+		position = 20
+		required_missions = {
+			A05_vels_bacar_dam
+		}
+		provinces_to_highlight = {
+			province_id = 1142
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			has_discovered = ROOT
+		}
+		trigger = {
+			OR = {
+				any_owned_province = {
+					has_great_project = {
+						type = ynnic_precursor_dome_stanyrhrada
+					}
+				}
+				any_subject_country = {
+					any_owned_province = {
+						has_great_project = {
+							type = ynnic_precursor_dome_stanyrhrada
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			country_event = {
+				id = reveria.23
+			}
+		}
+	}
+
+	A05_subjugation_of_the_ynn = {
+		icon = mission_burning_castle
+		position = 21
+		required_missions = {
+			A05_the_fate_of_the_dome
+			A05_the_last_dragon_of_aelantir
+		}
+		trigger = {
+			prestige = 50
+		}
+		effect = {
+			sarda_region = {
+				add_permanent_claim = ROOT
+			}
+			dolindha_region = {
+				add_permanent_claim = ROOT
+			}
+			rzenta_region = {
+				add_permanent_claim = ROOT
+			}
+			pomvasonn_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+}
+
+reveria_2A = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential = {
+		tag = A05
+	}
+	has_country_shield = yes
+
+	A05_gnomes_in_the_army = {
+		icon = mission_mithril_cannons
+		position = 5
+		required_missions = {
+			A05_integration_into_the_administration
+		}
+		trigger = {
+			NOT = {
+				has_country_modifier = gnomish_military
+			}
+			calc_true_if = {
+				amount = 3
+					custom_trigger_tooltip = {
+						tooltip = ACE_reveria_unlocked_artifice_invention_portable_turrets_tt
+						has_country_flag = unlocked_artifice_invention_portable_turrets
+					}
+					custom_trigger_tooltip = {
+						tooltip = ACE_reveria_unlocked_artifice_invention_sparkdrive_rifles_tt
+						has_country_flag = unlocked_artifice_invention_sparkdrive_rifles
+					}
+					custom_trigger_tooltip = {
+						tooltip = ACE_reveria_unlocked_artifice_invention_vorpal_bullets_tt
+						has_country_flag = unlocked_artifice_invention_vorpal_bullets
+					}
+					custom_trigger_tooltip = {
+						tooltip = ACE_reveria_unlocked_artifice_invention_magic_missile_deployer_tt
+						has_country_flag = unlocked_artifice_invention_magic_missile_deployer
+					}
+					custom_trigger_tooltip = {
+						tooltip = ACE_reveria_unlocked_artifice_invention_artificer_exo_arms_tt
+						has_country_flag = unlocked_artifice_invention_artificer_exo_arms
+					}
+			}
+			artillery_fraction = 0.1
+			mil_power = 200
+			num_of_owned_provinces_with = {
+				value = 3
+				culture_group = gnomish
+				has_forcelimit_building_trigger = yes
+			}
+			num_of_owned_provinces_with = {
+				value = 3
+				culture_group = gnomish
+				has_manpower_building_trigger = yes
+			}
+		}
+		effect = {
+			add_mil_power = -200
+			add_country_modifier = {
+				name= "reveria_gnomish_army2"
+				duration = -1
+			}
+			define_advisor = {
+				type = army_reformer
+				skill = 2
+				culture = cliff_gnome
+				religion = the_thought
+				discount = yes
+			}
+			custom_tooltip = " "
+			unlock_merc_company = {
+				merc_company = merc_nomsgaetir
+				free_merc = yes # Only include this line if "elite" merc that costs no professionalism
+			}
+			set_country_flag = unlocked_artifice_invention_coddorran_powered_exosuit
+			country_event = {
+				id = artifice_inventions.307
+			}
+		}
+	}
+}
+
+reveria_2_thought = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential = {
+		tag = A05
+		has_country_flag = A05_gnomish_path
+	}
+	has_country_shield = yes
+
+	A05_Thought_2_1 = { #strengthening the artificery
+		icon = mission_industrial_forging
+		position = 8
+		required_missions = {
+			A05_Thought_4_2
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			religion = the_thought
+			years_of_income = 1
+			estate_influence = {
+				estate = estate_artificers
+				influence = 60
+			}
+			num_artifice_inventions_discovered = { VAL = 10 }
+		}
+		effect = {
+			add_years_of_income = -1
+			add_estate_artificers_loyalty_effect = yes
+			add_innovativeness_or_monarch_power_anb = { amount = 2 }
+			add_country_modifier = {
+				name= ACE_reveria_stimulus_checks
+				duration = 3650
+			}
+			custom_tooltip = ACE_reverian_ingenuity_tt
+			tooltip = {
+				capital_scope = {
+					add_province_modifier = {
+						name = ACE_reverian_ingenuity
+						duration = -1
+					}
+				}
+			}
+			hidden_effect = {
+				every_province = {
+					limit = {
+						culture = reverian
+					}
+					add_province_modifier = {
+						name = ACE_reverian_ingenuity
+						duration = -1
+					}
+					country_event = {
+						id = reveria.83
+						days = 365
+					}
+				}
+			}
+		}
+	}
+
+	A05_Thought_2_2 = { #Birthing a technocracy
+		icon = mission_gnome_tinkering
+		position = 9
+		required_missions = {
+			A05_Thought_2_1
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			religion = the_thought
+			num_artifice_inventions_discovered = { VAL = 20 }
+			NOT = {
+				estate_influence = {
+					estate = estate_nobles
+					influence = 40
+				}
+				estate_influence = {
+					estate = estate_mages
+					influence = 40
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					NOT = { government = republic }
+				}
+				hidden_effect = {
+					change_government = republic
+				}
+			}
+			add_government_reform = technocracy_republic_reform
+			custom_tooltip = ACE_reveria_republic_cb_tt
+		}
+	}
+}
+
+reveria_2_cannorian = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential = {
+		tag = A05
+		has_country_flag = A05_cannorian_path
+	}
+	has_country_shield = yes
+
+	A05_Cannorian_2_1 = { #strengthen the temple
+		icon = mission_religious
+		position = 8
+		required_missions = {
+			A05_Cannorian_4_2
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			OR = {
+				AND = {
+					religion = regent_court
+					976 = {
+						owned_by = ROOT
+						has_tax_building_trigger = yes
+					}
+				}
+				AND = {
+					religion = corinite
+					OR = {
+						AND = {
+							NOT = { karma = -33 }
+							num_of_forced_converted_countries = { amount = 5 }
+						}
+						AND = {
+							karma = 33
+							stability = 2
+						}
+					}
+				}
+				AND = {
+					religion = ravelian
+					is_papal_controller = yes
+					papal_influence = 50
+				}
+				AND = {
+					religion = infernal_court
+					OR = {
+						num_of_forced_converted_countries = { amount = 5 }
+						num_of_converted_provinces = { amount = 30 }
+					}
+				}
+			}
+		}
+		effect = {
+			complex_dynamic_effect = {
+				first_custom_tooltip = ACE_reveria_2_1_regent_court_tt
+				first_limit = "
+					religion = regent_court
+				"
+				first_effect = "
+					A05_R_1E = yes
+				"
+				second_custom_tooltip = ACE_reveria_2_1_corinite_tt
+				second_limit = "
+					religion = corinite
+				"
+				second_effect = "
+					A05_R_2E = yes
+				"
+				third_custom_tooltip = ACE_reveria_2_1_ravelian_tt
+				third_limit = "
+					religion = ravelian
+				"
+				third_effect = "
+					A05_R_3E = yes
+				"
+				fourth_custom_tooltip = ACE_reveria_2_1_infernal_tt
+				fourth_limit = "
+					religion = infernal_court
+				"
+				fourth_effect = "
+					A05_R_4E = yes
+				"
+			}
+		}
+	}
+
+	A05_Cannorian_2_2 = { #Birthing a technocracy
+		icon = mission_women_prayer
+		position = 9
+		required_missions = {
+			A05_Cannorian_2_1
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			OR = {
+				is_defender_of_faith_of_tier = 5
+				num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+					value = 500
+					religion = ROOT
+				}
+			}
+		}
+		effect = {
+			custom_tooltip = ACE_reveria_every_tier_tt
+			if = {
+				limit = {
+					is_defender_of_faith_of_tier = 5
+				}
+				add_splendor = 500
+			}
+			else_if = {
+				limit = {
+					is_defender_of_faith_of_tier = 4
+				}
+				add_splendor = 400
+			}
+			else_if = {
+				limit = {
+					is_defender_of_faith_of_tier = 3
+				}
+				add_splendor = 300
+			}
+			else_if = {
+				limit = {
+					is_defender_of_faith_of_tier = 2
+				}
+				add_splendor = 200
+			}
+			else_if = {
+				limit = {
+					is_defender_of_faith_of_tier = 1
+				}
+				add_splendor = 100
+			}
+			custom_tooltip = ACE_reveria_every_100_tt
+			if = {
+				limit = {
+					num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+						value = 500
+						religion = ROOT
+					}
+				}
+				add_splendor = 500
+			}
+			else_if = {
+				limit = {
+					num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+						value = 400
+						religion = ROOT
+					}
+				}
+				add_splendor = 400
+			}
+			else_if = {
+				limit = {
+					num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+						value = 300
+						religion = ROOT
+					}
+				}
+				add_splendor = 300
+			}
+			else_if = {
+				limit = {
+					num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+						value = 200
+						religion = ROOT
+					}
+				}
+				add_splendor = 200
+			}
+			else_if = {
+				limit = {
+					num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+						value = 100
+						religion = ROOT
+					}
+				}
+				add_splendor = 100
+			}
+			add_country_modifier = {
+				name = ACE_reveria_religious_hegemon
+				duration = -1
+			}
+		}
+	}
+}
+
+reveria_2_skaldhyrric = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential = {
+		tag = A05
+		has_country_flag = A05_gerudian_path
+	}
+	has_country_shield = yes
+
+	A05_Skaldhyrric_2_1 = { #Reaver Tales
+		icon = mission_priest_church
+		position = 8
+		required_missions = {
+			A05_Skaldhyrric_4_2
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			treasury = 150
+			check_variable = {
+				which = AceSkaldSongs
+				value = 5
+			}
+			custom_trigger_tooltip = {
+				tooltip = ACE_reveria_skald_council_established_tt
+				has_country_flag = skald_council_established
+			}
+			976 = {
+				owned_by = ROOT
+				has_tax_building_trigger = yes
+			}
+		}
+		effect = {
+			976 = {
+				add_building_construction = {
+					building = cathedral
+					speed = 0.5
+					cost = 0.5
+				}
+				hidden_effect = {
+					remove_province_triggered_modifier = one_armed_skald_temple
+				}
+				add_province_triggered_modifier = one_armed_skald_temple_upgraded
+			}
+		}
+	}
+
+	A05_Skaldhyrric_2_2 = { #Reaver Tales2
+		icon = mission_fire_judgement
+		position = 9
+		required_missions = {
+			A05_Skaldhyrric_2_1
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			check_variable = {
+				which = AceSkaldSongs
+				value = 10
+			}
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 500
+				religion = skaldhyrric_faith
+			}
+		}
+		effect = {
+			add_splendor = 500
+			add_country_modifier = {
+				name = ACE_reveria_religious_hegemon
+				duration = -1
+			}
+		}
+	}
+}
+
+reveria_2_branching = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential = {
+		tag = A05
+		has_country_flag = ACE_A05_Branching_path
+	}
+	has_country_shield = yes
+
+	A05_Branching_2_1 = { #strengthening the artificery
+		icon = mission_unknown_mission
+		position = 8
+		required_missions = {
+			A05_Branching_4_2
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+		}
+		effect = {
+		}
+	}
+
+	A05_Branching_2_2 = { #Birthing a technocracy
+		icon = mission_unknown_mission
+		position = 9
+		required_missions = {
+			A05_Branching_2_1
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+		}
+		effect = {
+		}
+	}
+}
+
+reveria_2B = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential = {
+		tag = A05
+	}
+	has_country_shield = yes
+
+	A05_damestear_demands = {
+		icon = mission_rb_inland_india
+		position = 10
+		required_missions = {
+			A05_grant_artificers_privileges
+		}
+		provinces_to_highlight = {
+			province_id = 146
+		}
+		trigger = {
+			production_leader = {
+				trade_goods = damestear
+			}
+			owns_core_province = 146
+			146 = {
+				has_manufactory_trigger = yes
+				has_production_building_trigger = yes
+			}
+			estate_influence = {
+				estate = estate_artificers
+				influence = 50
+			}
+		}
+		effect = {
+			mission_reward_artifice_points_1 = yes
+			add_estate_loyalty = {
+				estate = estate_artificers
+				loyalty = 10
+			}
+			add_estate_loyalty = {
+				estate = estate_mages
+				loyalty = 10
+			}
+			define_advisor = {
+				type = natural_scientist
+				skill = 2
+				culture = creek_gnome
+				religion = regent_court
+				discount = yes
+			}
+		}
+	}
+
+	A05_a_gnomish_gift = {
+		icon = mission_missive
+		position = 11
+		required_missions = {
+			A05_gnome_mines_secured
+			A05_damestear_demands
+			A05_coal_furnaces
+		}
+		trigger = {
+			has_regency = no
+			production_leader = {
+				trade_goods = damestear
+			}
+			estate_loyalty = {
+				estate = estate_artificers
+				loyalty = 50
+			}
+			OR = {
+				employed_advisor = {
+					culture = cliff_gnome
+				}
+				employed_advisor = {
+					culture = creek_gnome
+				}
+			}
+		}
+		effect = {
+			country_event_with_effect_insight = {
+				id = reveria.16
+				effect = "
+					increase_ruler_adm_effect = yes
+					add_country_modifier = {
+						name= reveria_gnomish_administrator_tools
+						duration = -1
+					}
+				"
+			}
+		}
+	}
+
+	A05_nostalgic_cold = {
+		icon = mission_rb_colonise_canada
+		position = 15
+		required_missions = {
+			A05_land_spotted
+		}
+		provinces_to_highlight = {
+			colonial_region = colonial_dalaire
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+				is_city = yes
+			}
+			has_discovered = ROOT
+		}
+		trigger = {
+			any_subject_country = {
+				is_colonial_nation_of = ROOT
+				capital_scope = {
+					colonial_region = colonial_dalaire
+				}
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = reveria_colonial_venture
+				duration = 3650
+			}
+		}
+	}
+
+	A05_a_promising_river = {
+		icon = mission_advance_to_the_dnieper
+		position = 16
+		required_missions = {
+			A05_nostalgic_cold
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 1746
+				province_id = 1749
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			has_discovered = ROOT
+		}
+		trigger = {
+			treasury = 200
+			mil_power = 50
+			has_discovered = 2838
+			has_discovered = 2488
+			1746 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			1749 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			add_treasury = -200
+			add_mil_power = -50
+			define_conquistador = {
+				name = "Ivar of Knarhatt"
+				fire = 3
+				shock = 5
+				manuever = 4
+				siege = 0
+			}
+			dolindha_region = {
+				discover_country = A05
+			}
+			brelar_area = {
+				add_permanent_claim = ROOT
+			}
+			1171 = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	A05_vareynn_secured = {
+		icon = boh_humiliate_austria
+		position = 17
+		required_missions = {
+			A05_a_promising_river
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = brelar_area
+				province_id = 1171
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			has_discovered = ROOT
+		}
+		trigger = {
+			brelar_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			1171 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			mil_power = 20
+			treasury = 20
+			manpower = 1
+		}
+		effect = {
+			add_estate_loyalty = {
+				estate = estate_burghers
+				loyalty = 10
+			}
+			add_mil_power = -20
+			add_treasury = -20
+			country_event = {
+				id = reveria.17
+			}
+		}
+	}
+
+	A05_mocbarja_dam = {
+		icon = mission_defeat_jaunpur
+		position = 18
+		required_missions = {
+			A05_vareynn_secured
+		}
+		provinces_to_highlight = {
+			province_id = 1186
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			has_discovered = ROOT
+		}
+		trigger = {
+			1186 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			mil_power = 40
+			treasury = 30
+			manpower = 3
+		}
+		effect = {
+			add_mil_power = -40
+			add_treasury = -30
+			add_estate_loyalty = {
+				estate = estate_burghers
+				loyalty = 5
+			}
+			country_event = {
+				id = reveria.20
+			}
+			rzenta_region = {
+				discover_country = A05
+			}
+			pomvasonn_area = {
+				discover_country = A05
+			}
+		}
+	}
+
+	A05_the_last_dragon_of_aelantir = {
+		icon = mission_alone_in_the_wood
+		position = 20
+		required_missions = {
+			A05_mocbarja_dam
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 1815
+				province_id = 1191
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			has_discovered = ROOT
+		}
+		trigger = {
+			1815 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			1191 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			country_event = {
+				id = reveria.22
+			}
+		}
+	}
+
+	A05_lizard_port = {
+		icon = mission_city_prosperity
+		position = 23
+		required_missions = {
+			A05_sarhali_foothold
+		}
+		provinces_to_highlight = {
+			province_id = 6632
+		}
+		trigger = {
+			owns_core_province = 6632
+			custom_trigger_tooltip = {
+				tooltip = ACE_reveria_trade_company_tt
+				OR = {
+					trade_company_ironwood_coast = {
+						trade_company_size = 5
+					}
+					trade_company_sea_of_lel = {
+						trade_company_size = 5
+					}
+					trade_company_clovesight = {
+						trade_company_size = 5
+					}
+					trade_company_adzalaz_gulf = {
+						trade_company_size = 5
+					}
+				}
+			}
+		}
+		effect = {
+			custom_tooltip = ACE_reveria_lizardport_tt
+			hidden_effect = {
+				6632 = {
+					add_province_modifier = {
+						name = ACE_A05_large_reaver_port
+						duration = -1
+					}
+				}
+				africa = {
+					type = all
+					limit = {
+						trade_goods = cloves
+					}
+					add_permanent_claim = ROOT
+				}
+				set_country_flag = lizardfolk_port_enabled
+			}
+		}
+	}
+
+	A05_clove_monopoly = {
+		icon = mission_mnd_maj_cloves
+		position = 24
+		required_missions = {
+			A05_lizard_port
+		}
+		provinces_to_highlight = {
+			trade_goods = cloves
+		}
+		trigger = {
+			production_leader = {
+				trade_goods = cloves
+			}
+		}
+		effect = {
+			change_price = {
+				trade_goods = cloves
+				key = ACE_reveria_clove_monopoly_key
+				value = 0.25
+				duration = -1
+			}
+			add_country_modifier = {
+				name = ACE_reveria_clove_master
+				duration = -1
+			}
+			add_mercantilism = 5
+			if = {
+				limit = {
+					religion = the_thought
+				}
+				country_event = {
+					id = mages_estate_events.24
+				}
+			}
+		}
+	}
+}
+
+reveria_3A = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = {
+		tag = A05
+	}
+	has_country_shield = yes
+
+	A05_reconquer_the_gnomish_pass = {
+		icon = mission_unite_home_region
+		position = 1
+		provinces_to_highlight = {
+			OR = {
+				province_id = 145
+				province_id = 167
+				province_id = 148
+			}
+		}
+		trigger = {
+			owns_core_province = 145
+			owns_core_province = 167
+			owns_core_province = 148
+		}
+		effect = {
+			146 = {
+				add_permanent_claim = ROOT
+			}
+			169 = {
+				add_permanent_claim = ROOT
+			}
+			126 = {
+				add_permanent_claim = ROOT
+			}
+			storm_isles_area = {
+				add_permanent_claim = ROOT
+			}
+			add_prestige_excess_to_splendour_effect = { VAL = 10 }
+			add_legitimacy = 10
+			add_manpower = 1.5
+			country_event_with_option_insight = {
+				id = reveria.61
+				option_1 = "
+					custom_tooltip = ace_reveria_appeased_stormers_tt
+					reveria_return_stormer_lands = yes
+				"
+				option_2 = "
+					custom_tooltip = ace_reveria_angered_stormers_tt
+				"
+			}
+		}
+	}
+
+	A05_portnamm_secured = {
+		icon = mission_hanseatic_city
+		position = 2
+		provinces_to_highlight = {
+			area = iochand_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			iochand_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			add_innovativeness_or_monarch_power_anb = { amount = 1 }
+			anb_add_accepted_culture_or_dip_power = {
+				culture = creek_gnome
+				free = yes
+			}
+			add_country_modifier = {
+				name = reveria_protected_trade
+				duration = 7300
+			}
+			small_increase_of_gnomish_tolerance_effect = yes
+			129 = {
+				add_gnomish_minority_size_effect = yes
+			}
+			138 = {
+				add_gnomish_minority_size_effect = yes
+			}
+		}
+	}
+
+	A05_grant_guild_rights_and_citzenship_to_gnomes = {
+		icon = the_ostend_company
+		position = 3
+		required_missions = {
+			A05_portnamm_secured
+			A05_acquire_nimscodd
+		}
+		trigger = {
+			accepted_culture = creek_gnome
+			accepted_culture = cliff_gnome
+			high_tolerance_gnomish_race_trigger = yes
+			adm_power = 100
+		}
+		effect = {
+			add_country_modifier = {
+				name = ace_reveria_custodian_of_the_gnomes
+				duration = -1
+			}
+			anb_add_accepted_culture_or_dip_power = {
+				culture = cliff_gnome
+				free = yes
+			}
+			add_adm_power = -100
+			add_estate_loyalty = {
+				estate = estate_burghers
+				loyalty = -10
+			}
+			define_advisor = {
+				type = trader
+				skill = 2
+				culture = cliff_gnome
+				religion = the_thought
+				discount = yes
+			}
+			add_country_modifier = {
+				name = reveria_gnomish_enterprises
+				duration = 3650
+			}
+		}
+	}
+
+	A05_integration_into_the_administration = {
+		icon = mission_artificier_experience
+		position = 4
+		required_missions = {
+			A05_grant_guild_rights_and_citzenship_to_gnomes
+		}
+		trigger = {
+			high_tolerance_gnomish_race_trigger = yes
+			adm_tech = 6
+			has_institution = renaissance
+			adm_power = 200
+			OR = {
+				employed_advisor = {
+					culture = cliff_gnome
+				}
+				employed_advisor = {
+					culture = creek_gnome
+				}
+				employed_advisor = {
+					culture = imperial_gnome
+				}
+			}
+		}
+		effect = {
+			add_adm_power = -200
+			country_event_with_effect_insight = {
+				id = reveria.11
+				effect = "
+					A05_iita = yes
+					if = {
+						limit = {
+							government = monarchy
+						}
+						country_event_with_option_insight = {
+							id = reveria.37
+							days = 35
+							option_1 = \"
+								A05_gcr = yes
+							\"
+							option_2 = \"
+								add_prestige_excess_to_splendour_effect = { VAL = 10 }
+							\"
+						}
+					}
+				"
+			}
+		}
+	}
+
+	A05_the_gommo_of_portnamm = {
+		icon = leiden_university
+		position = 5
+		required_missions = {
+			A05_integration_into_the_administration
+		}
+		provinces_to_highlight = {
+			province_id = 126
+			NOT = {
+				AND = {
+					owned_by = ROOT
+					is_core = ROOT
+					culture = creek_gnome
+					development = 30
+				}
+			}
+		}
+		trigger = {
+			treasury = 300
+			owns_core_province = 126
+			126 = {
+				culture = creek_gnome
+				development = 30
+			}
+			accepted_culture = creek_gnome
+			has_estate = estate_artificers
+		}
+		effect = {
+			set_country_flag = A05_gommo_haver
+			126 = {
+				add_building_construction = {
+					building = university
+					speed = 0.5
+					cost = 1.0
+				}
+				add_permanent_province_modifier = {
+					name = reveria_gommo_of_portnamm2
+					duration = -1
+				}
+			}
+			129 = {
+				change_culture = creek_gnome
+				if = {
+					limit = {
+						trade_goods = fish
+					}
+					change_trade_goods = paper
+				}
+			}
+			142 = {
+				change_culture = creek_gnome
+				if = {
+					limit = {
+						trade_goods = grain
+					}
+					change_trade_goods = paper
+				}
+			}
+			mission_reward_artifice_points_2 = yes
+		}
+	}
+
+	A05_the_gommo_of_drekiriki = {
+		icon = bibliotheca_corviana
+		position = 6
+		required_missions = {
+			A05_gnomes_in_the_navy
+			A05_the_gommo_of_portnamm
+			A05_gnomes_in_the_army
+		}
+		provinces_to_highlight = {
+			province_id = 177
+		}
+		trigger = {
+			owns_core_province = 177
+			177 = { is_capital = yes }
+			treasury = 270
+		}
+		effect = {
+			177 = {
+				add_building_construction = {
+					building = university
+					speed = 0.5
+					cost = 1.0
+				}
+				add_permanent_province_modifier = {
+					name = reveria_gommo_of_drekiriki2
+					duration = -1
+				}
+				add_gnomish_minority_size_effect = yes
+			}
+			mission_reward_artifice_points_3 = yes
+		}
+	}
+}
+
+reveria_3_thought = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = {
+		tag = A05
+		has_country_flag = A05_gnomish_path
+	}
+	has_country_shield = yes
+
+	A05_Thought_3_1 = { #Harmonic Colonies
+		icon = per_the_persian_influence
+		position = 8
+		required_missions = {
+			A05_Thought_4_2
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			religion = the_thought
+			colony = 4
+			NOT = {
+				any_subject_country = {
+					is_colonial_nation_of = ROOT
+					liberty_desire = 50
+				}
+			}
+			all_subject_country = {
+				OR = {
+					NOT = {
+						is_colonial_nation_of = ROOT
+					}
+					capital_scope = {
+						has_tax_building_trigger = yes
+					}
+				}
+			}
+		}
+		effect = {
+			custom_tooltip = reveria_pan_harmonize_subjects_tt
+			medium_increase_of_ruinborn_tolerance_effect = yes
+			capital_scope = {
+				add_ruinborn_minority_size_effect = yes
+			}
+			hidden_effect = {
+				every_subject_country = {
+					limit = {
+						is_colonial_nation_of = ROOT
+						NOT = {
+							religion = the_thought
+						}
+					}
+					change_religion = the_thought
+				}
+			}
+			set_country_flag = ACE_reveria_harmonic_subjects_flag
+			hidden_effect = {
+				every_subject_country = {
+					limit = { religion = the_thought }
+					reveria_pan_harmonize = yes
+				}
+			}
+		}
+	}
+
+	A05_Thought_3_2 = {
+		icon = per_language_of_poetry
+		position = 9
+		required_missions = {
+			A05_Thought_3_1
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			religion = the_thought
+			colony = 10
+			NOT = {
+				any_subject_country = {
+					is_colonial_nation_of = ROOT
+					liberty_desire = 50
+				}
+			}
+		}
+		effect = {
+			custom_tooltip = reveria_pan_advanced_harmonize_subjects_tt
+			set_country_flag = ACE_reveria_advanced_harmonic_subjects_flag
+			medium_increase_of_ruinborn_tolerance_effect = yes
+			capital_scope = {
+				add_ruinborn_minority_size_effect = yes
+			}
+			custom_tooltip = ACE_reveria_5_ruinborn_tt
+			for = {
+				amount = 5
+				effect = "
+					random_province = {
+						limit = {
+							has_terrain = city_terrain
+							owned_by = ROOT
+							NOT = {
+								has_province_flag = ACE_reveria_ruinborn_minority_flag
+							}
+						}
+						add_ruinborn_minority_size_effect = yes
+						add_base_tax = 1
+						set_province_flag = ACE_reveria_ruinborn_minority_flag
+					}
+				"
+			}
+			hidden_effect = {
+				country_event = {
+					id = reveria.96
+					days = 365
+				}
+				if = {
+					limit = {
+						has_country_modifier = ACE_reveria_harmonious_habitat
+					}
+					every_subject_country = {
+						limit = {
+							religion = the_thought
+						}
+						add_country_modifier = {
+							name = ACE_reveria_harmonious_habitat
+							duration = -1
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_country_modifier = ACE_reveria_harmonious_humans
+					}
+					every_subject_country = {
+						limit = {
+							religion = the_thought
+						}
+						remove_country_modifier = ACE_reveria_harmonious_habitat
+						add_country_modifier = {
+							name = ACE_reveria_harmonious_humans
+							duration = -1
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_country_modifier = ACE_reveria_harmonious_hegemon
+					}
+					every_subject_country = {
+						limit = {
+							religion = the_thought
+						}
+						remove_country_modifier = ACE_reveria_harmonious_humans
+						add_country_modifier = {
+							name = ACE_reveria_harmonious_hegemon
+							duration = -1
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+reveria_3_cannorian = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = {
+		tag = A05
+		has_country_flag = A05_cannorian_path
+	}
+	has_country_shield = yes
+
+	A05_Cannorian_3_1 = {
+		icon = mission_the_varangians
+		position = 8
+		required_missions = {
+			A05_Cannorian_4_2
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			is_in_league_war = yes
+			estate_loyalty = {
+				estate = estate_nobles
+				loyalty = 30
+			}
+			dip_power = 100
+			mil_power = 100
+		}
+		effect = {
+			add_dip_power = -100
+			add_mil_power = -100
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = ACE_reveria_league_leader_tt
+				first_limit = "
+					is_league_leader = yes
+				"
+				first_effect = "
+					custom_tooltip = ACE_reveria_league_leader_effect_tt
+					hidden_effect = {
+						every_country = {
+							limit = {
+								is_league_friend = ROOT
+								NOT = {
+									tag = ROOT
+								}
+							}
+							country_event = {
+								id = reveria.95
+							}
+						}
+					}
+				"
+			}
+			complex_dynamic_effect = {
+				first_custom_tooltip = ACE_reveria_league_rever_tt
+				first_limit = "
+					dynasty = \"síl Rever\"
+				"
+				first_effect = "
+					add_ruler_modifier = {
+ 						name = ACE_reveria_league_rever
+ 						duration = -1
+					}
+				"
+				second_custom_tooltip = ACE_reveria_league_carver_tt
+				second_limit = "
+					dynasty = \"síl Rever-Carver\"
+				"
+				second_effect = "
+					add_ruler_modifier = {
+ 						name = ACE_reveria_league_carver
+ 						duration = -1
+					}
+					define_general = {
+						trait = siege_specialist_personality
+						name = \"Ragnak síl Rever-Carver\"
+						shock = 2
+						fire = 1
+						manuever = 0
+						siege = 4
+					}
+				"
+				third_custom_tooltip = ACE_reveria_league_stormer_tt
+				third_limit = "
+					dynasty = \"síl Rever-Stormer\"
+				"
+				third_effect = "
+					add_ruler_modifier = {
+ 						name = ACE_reveria_league_stormer
+ 						duration = -1
+					}
+				"
+			}
+		}
+	}
+
+	A05_Cannorian_3_2 = {
+		icon = a.e.i.o.u.
+		position = 9
+		required_missions = {
+			A05_Cannorian_3_1
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			is_emperor = yes
+			hre_leagues_enabled = no
+			is_at_war = no
+		}
+		effect = {
+			add_imperial_influence = 50
+			add_country_modifier = {
+				name = ACE_reveria_religious_victory_modifier
+				duration = -1
+			}
+			add_ruler_modifier = {
+				name = ACE_reveria_religious_victory_modifier_ruler
+				duration = -1
+			}
+		}
+	}
+}
+
+reveria_3_skaldhyrric = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = {
+		tag = A05
+		has_country_flag = A05_gerudian_path
+	}
+	has_country_shield = yes
+
+	A05_Skaldhyrric_3_1 = { #Ebonsteel Resurgence
+		icon = mission_the_varangians
+		position = 8
+		required_missions = {
+			A05_Skaldhyrric_4_2
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 984
+				province_id = 976
+			}
+		}
+		trigger = {
+			owns_core_province = 984
+			owns_core_province = 976
+		}
+		effect = {
+			custom_tooltip = ACE_reveria_ebonsteel_resurgence_tt
+			add_innovativeness_or_monarch_power_anb = { amount = 5 }
+		}
+	}
+
+	A05_Skaldhyrric_3_2 = {
+		icon = mission_the_varangians
+		position = 9
+		required_missions = {
+			A05_Skaldhyrric_3_1
+		}
+		provinces_to_highlight = {
+			has_province_modifier = mage_tower_ebonforge
+		}
+		trigger = {
+			treasury = 1000
+			mission_completed = A05_coal_furnaces
+			num_of_owned_provinces_with = {
+				value = 5
+				has_province_modifier = ironwood_trees
+				has_production_building_trigger = yes
+			}
+			num_of_owned_provinces_with = {
+				value = 3
+				has_province_modifier = mage_tower_ebonforge
+				has_building = mage_tower
+			}
+			num_of_carolean = 10
+		}
+		effect = {
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = ACE_reveria_iron_trading_tt
+				first_limit = "
+					trading_bonus = {
+						trade_goods = iron
+						value = yes
+					}
+				"
+				first_effect = "
+					add_country_modifier = {
+						name = ACE_reveria_ebonsteel_supplies
+						duration = -1
+					}
+				"
+			}
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = ACE_reveria_coal_trading_tt
+				first_limit = "
+					trading_bonus = {
+						trade_goods = coal
+						value = yes
+					}
+				"
+				first_effect = "
+					add_country_modifier = {
+						name = ACE_reveria_ebonsteel_streamlining
+						duration = -1
+					}
+				"
+			}
+			add_treasury = -1000
+			custom_tooltip = ACE_reveria_ebonsteel_professionalism_tt
+			187 = {
+				add_permanent_province_modifier = {
+					name = medium_ebonsteel_forge
+					duration = -1
+				}
+			}
+			189 = {
+				add_permanent_province_modifier = {
+					name = medium_ebonsteel_forge
+					duration = -1
+				}
+			}
+		}
+	}
+}
+
+reveria_3_branching = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = {
+		tag = A05
+		has_country_flag = ACE_A05_Branching_path
+	}
+	has_country_shield = yes
+
+	A05_Branching_3_1 = {
+		icon = mission_unknown_mission
+		position = 8
+		required_missions = {
+			A05_Branching_4_2
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+		}
+		effect = {
+		}
+	}
+
+	A05_Branching_3_2 = {
+		icon = mission_unknown_mission
+		position = 9
+		required_missions = {
+			A05_Branching_3_1
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+		}
+		effect = {
+		}
+	}
+}
+
+reveria_3B = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = {
+		tag = A05
+	}
+	has_country_shield = yes
+
+	A05_coal_furnaces = {
+		icon = mission_rb_build_furnaces
+		position = 10
+		required_missions = {
+			A05_grant_artificers_privileges
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 187
+				province_id = 189
+			}
+			NOT = {
+				owned_by = ROOT
+				has_building = furnace
+				base_production = 15
+			}
+		}
+		trigger = {
+			187 = {
+				owned_by = ROOT
+				trade_goods = coal
+				has_building = furnace
+				base_production = 15
+			}
+			189 = {
+				owned_by = ROOT
+				trade_goods = coal
+				has_building = furnace
+				base_production = 15
+			}
+		}
+		effect = {
+			mission_reward_artifice_points_2 = yes
+			add_estate_loyalty = {
+				estate = estate_artificers
+				loyalty = 10
+			}
+			187 = {
+				add_province_modifier = {
+					name = reveria_dragon_furnace
+					duration = -1
+				}
+			}
+			189 = {
+				add_province_modifier = {
+					name = reveria_dragon_furnace
+					duration = -1
+				}
+			}
+		}
+	}
+
+	A05_the_reaver_fleet = {
+		icon = mission_sea_battles
+		position = 12
+		trigger = {
+			num_of_heavy_ship = 3
+			num_of_galley = 5
+			navy_size_percentage = 0.8
+			OR = {
+				num_of_admirals = 1
+				num_of_explorers = 1
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = reveria_naval_enthusiasm
+				duration = 7300
+			}
+			define_explorer = {
+				name = "Flokï¿½ Boatsmith"
+				fire = 2
+				shock = 3
+				manuever = 0
+				siege = 1
+			}
+			country_event_with_option_insight = {
+				id = reveria.86
+				option_1 = "
+					add_country_modifier = {
+						name = ACE_reveria_first_reaver_year
+						duration = 365
+					}
+					add_country_modifier = {
+						name = ACE_reveria_reaver_year_cooldown
+						duration = 3650
+					}
+					change_variable = {
+						which = ACE_reveria_reaver_years_variable
+						value = 1
+					}
+					custom_tooltip = ACE_reveria_reaver_year_unlock_tt
+				"
+				option_2 = "
+					custom_tooltip = ACE_reveria_reaver_year_unlock_tt
+				"
+			}
+		}
+	}
+
+	A05_southward_winds = {
+		icon = mission_viking
+		position = 13
+		required_missions = {
+			A05_the_reaver_fleet
+		}
+		provinces_to_highlight = {
+			province_id = 93
+		}
+		trigger = {
+			OR = {
+				A05_ideas = 7
+				check_variable = {
+					which = ACE_reveria_reaver_years_variable
+					value = 3
+				}
+			}
+			OR = {
+				93 = {
+					owner = {
+						if = {
+							limit = {
+								is_subject = yes
+							}
+							overlord = {
+								has_spy_network_from = {
+									who = ROOT
+									value = 30
+								}
+							}
+						}
+						else = {
+							has_spy_network_from = {
+								who = ROOT
+								value = 30
+							}
+						}
+					}
+				}
+				owns_core_province = 93
+			}
+		}
+		effect = {
+			93 = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	A05_sarhali_exploitation_committee = {
+		icon = the_ostend_company
+		position = 21
+		required_missions = {
+			A05_southward_winds
+		}
+		trigger = {
+			estate_loyalty = {
+				estate = estate_burghers
+				loyalty = 50
+			}
+			OR = {
+				estate_influence = {
+					estate = estate_burghers
+					influence = 75
+				}
+				has_estate_privilege = estate_burghers_commercial_board_of_advice
+			}
+			adm_power = 25
+			dip_power = 25
+		}
+		effect = {
+			add_adm_power = -25
+			add_dip_power = -25
+			custom_tooltip = ACE_reveria_sarhali_exploitation_committee_formation_tt
+#			set_estate_privilege = estate_burghers_new_world_charter
+		}
+	}
+
+	A05_sarhali_foothold = {
+		icon = balance_of_power
+		position = 22
+		required_missions = {
+			A05_sarhali_exploitation_committee
+		}
+		trigger = {
+			5813 = {
+				OR = {
+					owned_by = ROOT
+					has_province_modifier = slaves_raided
+				}
+			}
+			5710 = {
+				OR = {
+					owned_by = ROOT
+					has_province_modifier = slaves_raided
+				}
+			}
+			6599 = {
+				OR = {
+					owned_by = ROOT
+					has_province_modifier = slaves_raided
+				}
+			}
+			5898 = {
+				OR = {
+					owned_by = ROOT
+					has_province_modifier = slaves_raided
+				}
+			}
+			5941 = {
+				OR = {
+					owned_by = ROOT
+					has_province_modifier = slaves_raided
+				}
+			}
+		}
+		provinces_to_highlight = {
+			has_terrain = city_terrain
+			has_port = yes
+			OR = {
+				superregion = fangaula_superregion
+				superregion = tanib_dajek_superregion
+				superregion = taneyas_superregion
+			}
+			NOT = {
+				owned_by = ROOT
+				has_province_modifier = slaves_raided
+			}
+		}
+		effect = {
+			custom_tooltip = ACE_reveria_claims_south_sarhal_tt
+			hidden_effect = {
+				africa = {
+					type = all
+					limit = {
+						has_port = yes
+						OR = {
+							superregion = fangaula_superregion
+							superregion = tanib_dajek_superregion
+							superregion = taneyas_superregion
+							superregion = djinnakah_superregion
+						}
+						OR = {
+							has_terrain = city_terrain
+							province_has_center_of_trade_of_level = 1
+							has_province_modifier = important_natural_harbor
+							has_river_estuary_trigger = yes
+							OR = {
+								has_province_modifier = ananoma_dilapidated
+								has_province_modifier = ananoma_standart
+								has_province_modifier = ananoma_improved
+							}
+							OR = {
+								province_id = 6612
+								province_id = 6632
+								province_id = 6000
+							}
+						}
+					}
+					add_permanent_claim = ROOT
+				}
+			}
+			hidden_effect = {
+				africa = {
+					type = all
+					limit = {
+						OR = {
+							superregion = fangaula_superregion
+							superregion = tanib_dajek_superregion
+							superregion = taneyas_superregion
+							superregion = djinnakah_superregion
+						}
+						OR = {
+							trade_goods = gold
+							trade_goods = damestear
+						}
+					}
+					add_permanent_claim = ROOT
+				}
+			}
+		}
+	}
+
+	A05_the_great_canal = { #Gate to Haless
+		icon = mam_highway_empire
+		position = 23
+		required_missions = { A05_sarhali_foothold }
+		provinces_to_highlight = {
+			province_id = 6000
+		}
+
+		trigger = {
+			owns = 6000
+			OR = {
+				6000 = {
+					has_great_project = {
+						type = great_merfolk_canal
+						tier = 1
+					}
+				}
+				OR = {
+					AND = {
+						has_estate_privilege = artifice_invention_subterrenes
+						has_estate_privilege = artifice_invention_coddorran_powered_exosuit
+						treasury = 5000
+					}
+					AND = {
+						has_estate_privilege = artifice_invention_subterrenes
+						treasury = 10000
+					}
+					AND = {
+						has_estate_privilege = artifice_invention_coddorran_powered_exosuit
+						treasury = 15000
+					}
+					AND = { #shoutout to Ovdal Tungr for this masterpiece
+						treasury = 20000
+						custom_trigger_tooltip = {
+							tooltip = F23_the_path_to_haless_trigger_tt
+							OR = {
+								if = {
+									limit = { full_idea_group = infrastructure_ideas }
+									OR = {
+										adm_tech = 20
+										AND = { adm_tech = 19 innovativeness = 20 }
+										AND = { adm_tech = 18 innovativeness = 40 }
+										AND = { adm_tech = 17 innovativeness = 60 }
+										AND = { adm_tech = 16 innovativeness = 80 }
+										AND = { adm_tech = 15 innovativeness = 100 }
+									}
+								}
+								else = {
+									OR = {
+										adm_tech = 22
+										AND = { adm_tech = 21 innovativeness = 20 }
+										AND = { adm_tech = 20 innovativeness = 40 }
+										AND = { adm_tech = 19 innovativeness = 60 }
+										AND = { adm_tech = 18 innovativeness = 80 }
+										AND = { adm_tech = 17 innovativeness = 100 }
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = ACE_reveria_claims_east_sarhal_tt
+			hidden_effect = {
+				every_province = {
+					limit = {
+						superregion = east_sarhal_superregion
+						OR = {
+							AND = {
+								has_port = yes
+								province_has_center_of_trade_of_level = 1
+							}
+							trade_goods = gold
+							trade_goods = damestear
+						}
+					}
+					add_permanent_claim = ROOT
+				}
+			}
+#I kept trying to shrink this one because it was causing crashes, eventually I realised add_canal crashes inside of cmplex_dynamic_effect
+			complex_dynamic_effect = {
+				first_custom_tooltip = ACE_reveria_canal1_tt
+				first_limit = "
+					A05_cl1 = yes
+				"
+				first_effect = "
+					A05_c1 = yes
+				"
+				second_custom_tooltip = ACE_reveria_canal2_tt
+				second_limit = "
+					A05_cl2 = yes
+				"
+				second_effect = "
+					A05_c2 = yes
+				"
+				third_custom_tooltip = ACE_reveria_canal3_tt
+				third_limit = "
+					A05_cl3 = yes
+				"
+				third_effect = "
+					A05_c3 = yes
+				"
+				fourth_custom_tooltip = ACE_reveria_canal4_tt
+				fourth_limit = "
+					A05_cl4 = yes
+				"
+				fourth_effect = "
+					A05_c4 = yes
+				"
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = {
+							6000 = { has_great_project = { type = great_merfolk_canal } }
+						}
+					}
+					6000 = { add_canal = great_merfolk_canal }
+				}
+			}
+		}
+	}
+
+	A05_exploit_east_sarhal = { #Gate to Haless
+		icon = mam_highway_empire
+		position = 24
+		required_missions = { A05_the_great_canal }
+		provinces_to_highlight = {
+			superregion = east_sarhal_superregion
+			OR = {
+				AND = {
+					province_has_center_of_trade_of_level = 1
+					has_port = yes
+				}
+				trade_goods = gold
+				trade_goods = damestear
+			}
+		}
+
+		trigger = {
+			calc_true_if = {
+				all_owned_province = {
+					superregion = east_sarhal_superregion
+					owned_by = root
+					has_port = yes
+#					OR = {
+						province_has_center_of_trade_of_level = 1
+#						province_has_center_of_trade_of_level = 2
+#						province_has_center_of_trade_of_level = 3
+#					}
+				}
+				amount = 4
+			}
+			any_owned_province = {
+				superregion = east_sarhal_superregion
+				OR = {
+					trade_goods = gold
+					trade_goods = damestear
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = ACE_A05_dominating_east_sarhali_maritime_trade
+				duration = -1
+			}
+			1339 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = -1
+					power = 20
+				}
+			}
+			1343 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = -1
+					power = 20
+				}
+			}
+			custom_tooltip = ACE_reveria_sole_raiders_of_rahen_tt
+			hidden_effect = {
+				every_province = {
+					limit = {
+						has_port = yes
+						OR = {
+							owned_by = Y64
+							owned_by = Y53
+							owned_by = L55
+						}
+					}
+					add_permanent_claim = ROOT
+				}
+			}
+		}
+	}
+
+	A05_sole_raiders_of_the_gulf_of_rahen = { #
+		icon = mission_fleet_arrival
+		position = 25
+		required_missions = { A05_exploit_east_sarhal }
+		provinces_to_highlight = {
+			OR = {
+				owned_by = Y64
+				owned_by = Y53
+				owned_by = L55
+			}
+			has_port = yes
+		}
+
+		trigger = {
+			NOT = {
+				Y64 = {
+					any_owned_province = {
+						has_port = yes
+					}
+				}
+				Y53 = {
+					any_owned_province = {
+						has_port = yes
+					}
+				}
+				L55 = {
+					any_owned_province = {
+						has_port = yes
+					}
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = ACE_A05_dominating_raheni_maritime_trade
+				duration = -1
+			}
+			add_splendor = 100
+			custom_tooltip = ACE_reveria_raheni_ports_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						province_group = raheni_islands_province_group
+						NOT = { province_has_center_of_trade_of_level = 1 }
+					}
+					add_province_modifier = {
+						name = ACE_A05_reaver_port
+						duration = -1
+					}
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						province_group = raheni_islands_province_group
+						province_has_center_of_trade_of_level = 1
+					}
+					add_province_modifier = {
+						name = ACE_A05_large_reaver_port
+						duration = -1
+					}
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						province_group = ringlet_sea_islands_province_group
+						NOT = { province_has_center_of_trade_of_level = 1 }
+					}
+					add_province_modifier = {
+						name = ACE_A05_reaver_port
+						duration = -1
+					}
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						province_group = ringlet_sea_islands_province_group
+						province_has_center_of_trade_of_level = 1
+					}
+					add_province_modifier = {
+						name = ACE_A05_large_reaver_port
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+
+	A05_halessi_temples = { #
+		icon = mission_haless_map
+		position = 26
+		required_missions = { A05_sole_raiders_of_the_gulf_of_rahen }
+		provinces_to_highlight = {
+
+		}
+
+		trigger = {
+			has_institution = global_trade
+			has_estate_privilege = artifice_invention_korashi_drills
+		}
+
+		effect = {
+			every_province = {
+				limit = {
+					continent = asia
+					has_port = yes
+					has_temple_complex = yes
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+}
+
+reveria_4A = {
+	slot = 4
+	generic = no
+	ai = yes
+	potential = {
+		tag = A05
+	}
+	has_country_shield = yes
+
+	A05_gnomes_in_the_navy = {
+		icon = mission_gnomish_ship
+		position = 5
+		required_missions = {
+			A05_integration_into_the_administration
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 169
+				is_capital_of = ROOT
+			}
+			NOT = {
+				culture_group = gnomish
+				has_shipyard_building_trigger = yes
+			}
+		}
+		trigger = {
+			NOT = {
+				has_country_modifier = gnomish_military
+			}
+			OR = {
+				custom_trigger_tooltip = {
+					tooltip = ACE_reveria_unlocked_artifice_invention_commercial_sky_galleons_tt
+					has_country_flag = unlocked_artifice_invention_commercial_sky_galleons
+				}
+				innovativeness = 20
+			}
+			dip_power = 200
+			OR = {
+				169 = {
+					owned_by = ROOT
+					culture_group = gnomish
+					has_shipyard_building_trigger = yes
+				}
+				capital_scope = {
+					culture_group = gnomish
+					has_shipyard_building_trigger = yes
+				}
+			}
+		}
+		effect = {
+			add_dip_power = -200
+			add_country_modifier = {
+				name= "reveria_gnomish_navy"
+				duration = -1
+			}
+			define_advisor = {
+				type = naval_reformer
+				skill = 2
+				culture = cliff_gnome
+				religion = the_thought
+				discount = yes
+			}
+			set_country_flag = unlocked_artifice_invention_gu_boats
+			country_event = {
+				id = artifice_inventions.902
+			}
+		}
+	}
+}
+
+reveria_4_thought = {
+	slot = 4
+	generic = no
+	ai = yes
+	potential = {
+		tag = A05
+		has_country_flag = A05_gnomish_path
+	}
+	has_country_shield = yes
+
+	A05_Thought_4_1 = { #The Thought
+		icon = mission_quran
+		position = 6
+		required_missions = {
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = ACE_reveria_chosen_religious_path_tt
+				not_in_mission_preview_mode = {
+					key = REV
+				}
+			}
+			religion = the_thought
+			harmony = 60
+		}
+		effect = {
+			add_country_modifier = {
+				name = ACE_reveria_the_thought
+				duration = -1
+			}
+			complex_dynamic_effect = {
+				first_custom_tooltip = ACE_reveria_harmonized_cannor_tt
+				first_limit = "
+					has_harmonized_with = cannorian
+				"
+				first_effect = "
+					add_harmony = 25
+				"
+				second_custom_tooltip = not_harmonized_cannor_tt
+				second_limit = "
+					NOT = { has_harmonized_with = cannorian }
+				"
+				second_effect = "
+					add_harmonized_religion = regent_court
+					add_harmony = -25
+					if = {
+						limit = {
+							has_country_flag = ACE_reveria_harmonic_subjects_flag
+						}
+						hidden_effect = {
+							every_subject_country = {
+								limit = { religion = the_thought }
+								reveria_pan_harmonize = yes
+							}
+						}
+					}
+				"
+			}
+		}
+	}
+
+	A05_Thought_4_2 = { #Harmonious Habitat
+		icon = mng_expand_yongle_dadian
+		position = 7
+		required_missions = {
+			A05_Thought_4_1
+		}
+		provinces_to_highlight = {
+			region = dragon_coast_region
+			NOT = {
+				area = dragonhills_area
+				AND = {
+					owned_by = ROOT
+					OR = {
+						tolerance_to_this = 4
+						province_id = 140
+					}
+				}
+			}
+		}
+		trigger = {
+			religion = the_thought
+			dragon_coast_region = {
+				type = all
+				OR = {
+					area = dragonhills_area
+					AND = {
+						owned_by = ROOT
+						OR = {
+							tolerance_to_this = 4
+							province_id = 140
+						}
+					}
+				}
+			}
+			num_of_owned_provinces_with = {
+				value = 5
+				has_tax_building_trigger = yes
+			}
+		}
+		effect = {
+			remove_country_modifier = ACE_reveria_the_thought
+			add_country_modifier = {
+				name = ACE_reveria_harmonious_habitat
+				duration = -1
+			}
+		}
+	}
+
+	A05_Thought_4_3 = { #Harmonious Humans
+		icon = mission_the_sudebnik
+		position = 8
+		required_missions = {
+			A05_Thought_4_2
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			religion = the_thought
+			num_of_harmonized = 5
+		}
+		effect = {
+			remove_country_modifier = ACE_reveria_harmonious_habitat
+			add_country_modifier = {
+				name = ACE_reveria_harmonious_humans
+				duration = -1
+			}
+			complex_dynamic_effect = {
+				first_custom_tooltip = ACE_reveria_harmonizing_tt
+				first_limit = "
+						harmonization_progress = 1
+				"
+				first_effect = "
+					add_harmonization_progress = 25
+				"
+				second_custom_tooltip = ACE_reveria_not_harmonizing_tt
+				second_limit = "
+					NOT = { harmonization_progress = 1 }
+				"
+				second_effect = "
+					add_harmony = 25
+				"
+			}
+		}
+	}
+
+	A05_Thought_4_4 = { #Harmonious Hegemon
+		icon = mission_table_of_ranks
+		position = 9
+		required_missions = {
+			A05_Thought_4_3
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			religion = the_thought
+			num_of_harmonized = 10
+		}
+		effect = {
+			remove_country_modifier = ACE_reveria_harmonious_humans
+			add_country_modifier = {
+				name = ACE_reveria_harmonious_hegemon
+				duration = -1
+			}
+			complex_dynamic_effect = {
+				first_custom_tooltip = ACE_reveria_harmonizing_tt
+				first_limit = "
+						harmonization_progress = 1
+				"
+				first_effect = "
+					add_harmonization_progress = 50
+				"
+				second_custom_tooltip = ACE_reveria_not_harmonizing_tt
+				second_limit = "
+					NOT = { harmonization_progress = 1 }
+				"
+				second_effect = "
+					add_harmony = 50
+				"
+			}
+		}
+	}
+}
+
+reveria_4_cannorian = {
+	slot = 4
+	generic = no
+	ai = yes
+	potential = {
+		tag = A05
+		has_country_flag = A05_cannorian_path
+	}
+	has_country_shield = yes
+
+	A05_Cannorian_4_1 = { #Cannorian Reveria
+		icon = mission_priest_church
+		position = 6
+		required_missions = {
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = ACE_reveria_chosen_religious_path_tt
+				not_in_mission_preview_mode = {
+					key = REV
+				}
+			}
+			treasury = 200
+			religion_group = cannorian
+			owns_core_province = 126
+			num_of_owned_provinces_with = {
+				value = 5
+				has_tax_building_trigger = yes
+			}
+			if = {
+				limit = {
+					has_estate = estate_church
+				}
+				OR = {
+					num_of_estate_privileges = { estate = estate_church value = 5 }
+					estate_loyalty = { estate = estate_church loyalty = 65 }
+					num_of_estate_agendas_completed = { estate = estate_church value = 2 }
+				}
+			}
+		}
+		effect = {
+			add_treasury = -200
+			if = {
+				limit = {
+					capital_scope = {
+						has_building = cathedral
+					}
+				}
+				add_splendor = 50
+			}
+			else = {
+				capital_scope = {
+					add_building_construction = {
+						building = cathedral
+						speed = 0.5
+						cost = 0
+					}
+				}
+			}
+			define_advisor = {
+				type = inquisitor
+				name = "Adraenth the Holy"
+				skill = 3
+				culture = reverian
+				religion = ROOT
+				cost_multiplier = 0.25
+			}
+			custom_tooltip = ACE_reveria_creek_missionaries_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						culture = creek_gnome
+						NOT = {
+							religion = ROOT
+						}
+					}
+					add_province_modifier = {
+						name = ACE_reveria_creek_missionaries
+						duration = 3650
+					}
+				}
+			}
+		}
+	}
+
+	A05_Cannorian_4_2 = { #Harmonious Habitat
+		icon = mission_catholic_heddal_church
+		position = 7
+		required_missions = {
+			A05_Cannorian_4_1
+		}
+		provinces_to_highlight = {
+			region = dragon_coast_region
+			NOT = {
+				area = dragonhills_area
+				AND = {
+					owned_by = ROOT
+					OR = {
+						religion = ROOT
+						province_id = 140
+					}
+				}
+			}
+		}
+		trigger = {
+			religion_group = cannorian
+			dragon_coast_region = {
+				type = all
+				OR = {
+					area = dragonhills_area
+					AND = {
+						owned_by = ROOT
+						OR = {
+							religion = ROOT
+							province_id = 140
+						}
+					}
+				}
+			}
+			num_of_owned_provinces_with = {
+				value = 5
+				has_tax_building_trigger = yes
+			}
+		}
+		effect = {
+			add_stability_or_adm_power = yes
+			add_country_modifier = {
+				name = ACE_reveria_devout_populace
+				duration = -1
+			}
+		}
+	}
+
+	A05_Cannorian_4_3 = { #Harmonious Humans
+		icon = mission_crown_of_denmark
+		position = 8
+		required_missions = {
+			A05_Cannorian_4_2
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			is_emperor = yes
+			A11 = {
+				is_subject_of = ROOT
+				is_elector = yes
+			}
+			dip_power = 100
+			imperial_influence = 5
+		}
+		effect = {
+			add_dip_power = -100
+			add_imperial_influence = -5
+			custom_tooltip = legitimate_subject_elector_tt
+			hidden_effect = {
+				A11 = {
+					add_country_modifier = {
+						hidden = yes
+						name = legitimate_subject_elector_modifer
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+
+	A05_Cannorian_4_4 = { #Harmonious Hegemon
+		icon = mission_crown_of_wenceslas
+		position = 9
+		required_missions = {
+			A05_Cannorian_4_3
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			is_emperor = yes
+			imperial_influence = 10
+			8 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			hre_reform_passed = anbennar_permanent_parliament
+		}
+		effect = {
+			add_imperial_influence = -10
+			add_country_modifier = {
+				name = ACE_reveria_imperial_cities
+				duration = -1
+			}
+			custom_tooltip = ACE_dip_for_reform_votes_tt
+			hidden_effect = {
+				every_country = {
+					limit = {
+						is_part_of_hre = yes
+					}
+					ROOT = {
+						add_dip_power = 1
+					}
+				}
+			}
+			custom_tooltip = boh_empower_diplo_advisors_tt
+			hidden_effect = {
+				set_country_flag = boh_empower_diplo_advisors
+			}
+		}
+	}
+}
+
+reveria_4_skaldhyrric = {
+	slot = 4
+	generic = no
+	ai = yes
+	potential = {
+		tag = A05
+		has_country_flag = A05_gerudian_path
+	}
+	has_country_shield = yes
+
+	A05_Skaldhyrric_4_1 = { #Religious Investments
+		icon = mission_science
+		position = 6
+		required_missions = {
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = ACE_reveria_chosen_religious_path_tt
+				not_in_mission_preview_mode = {
+					key = REV
+				}
+			}
+			religion = skaldhyrric_faith
+			OR = {
+				custom_trigger_tooltip = {
+					tooltip = ACE_reveria_skaldhyrric_gerudian_province_tax_tt
+					any_owned_province = {
+						religion = skaldhyrric_faith
+						superregion = gerudia_superregion
+						has_tax_building_trigger = yes
+					}
+				}
+				custom_trigger_tooltip = {
+					tooltip = ACE_reveria_skaldhyrric_ally_200_tt
+					any_country = {
+						religion = skaldhyrric_faith
+						alliance_with = ROOT
+						has_opinion = {
+							who = ROOT
+							value = 200
+						}
+					}
+				}
+			}
+			treasury = 100
+		}
+		effect = {
+			add_treasury = -100
+			add_country_modifier = {
+				name = ACE_reveria_gerudian_skalds
+				duration = 18250
+			}
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = ACE_reveria_stormers_effect_tt
+				first_limit = "
+					ruler_religion = skaldhyrric_faith
+					dynasty = \"síl Rever-Stormer\"
+				"
+				first_effect = "
+					every_owned_province = {
+						limit = {
+							culture = reverian
+							NOT = {
+							province_id = 143
+							}
+							NOT = {
+							religion = skaldhyrric_faith
+							}
+						}
+						random = {
+							chance = 50
+
+							change_religion = skaldhyrric_faith
+						}
+					}
+				"
+			}
+		}
+	}
+
+	A05_Skaldhyrric_4_2 = { #Harmonious Habitat
+		icon = mission_green_village
+		position = 7
+		required_missions = {
+			A05_Skaldhyrric_4_1
+		}
+		provinces_to_highlight = {
+			region = dragon_coast_region
+			NOT = {
+				area = dragonhills_area
+				AND = {
+					owned_by = ROOT
+					OR = {
+						religion = skaldhyrric_faith
+						province_id = 140
+					}
+				}
+			}
+		}
+		trigger = {
+			religion = skaldhyrric_faith
+			dragon_coast_region = {
+				type = all
+				OR = {
+					area = dragonhills_area
+					AND = {
+						owned_by = ROOT
+						OR = {
+							religion = skaldhyrric_faith
+							province_id = 140
+						}
+					}
+				}
+			}
+			num_of_owned_provinces_with = {
+				value = 5
+				has_tax_building_trigger = yes
+			}
+		}
+		effect = {
+			custom_tooltip = ACE_reveria_ebonsteel_unlock_tt
+			set_country_flag = ACE_reveria_ebonsteel_flag
+			add_stability_or_adm_power = yes
+			add_country_modifier = {
+				name = ACE_reveria_devout_populace
+				duration = -1
+			}
+			custom_tooltip = ACE_reveria_skaldhyrric_reverts_tt
+			hidden_effect = {
+				every_province = {
+					limit = {
+						religion = skaldhyrric_faith
+						has_port = yes
+					}
+					add_permanent_claim = ROOT
+				}
+			}
+		}
+	}
+
+	A05_Skaldhyrric_4_3 = { #Harmonious Hemisphere
+		icon = mission_empire
+		position = 8
+		required_missions = {
+			A05_Skaldhyrric_4_2
+		}
+		provinces_to_highlight = {
+			OR = {
+				culture = west_dalr
+				culture = east_dalr
+				culture = olavish
+			}
+			religion = skaldhyrric_faith
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 15
+				OR = {
+					culture = west_dalr
+					culture = east_dalr
+					culture = olavish
+				}
+				religion = skaldhyrric_faith
+			}
+		}
+		effect = {
+			custom_tooltip = ACE_reveria_skaldhyrric_conquest_tt
+			hidden_effect = {
+				every_province = {
+					limit = {
+						religion = skaldhyrric_faith
+					}
+					add_permanent_claim = ROOT
+				}
+			}
+		}
+	}
+
+	A05_Skaldhyrric_4_4 = { #Gerudian Hegemon
+		icon = mission_naval_kingdom
+		position = 9
+		required_missions = {
+			A05_Skaldhyrric_4_3
+		}
+		provinces_to_highlight = {
+			religion = skaldhyrric_faith
+			NOT = {
+				owned_by_subject_of = ROOT
+				owned_by = ROOT
+			}
+		}
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = ACE_reveria_skald_council_established_tt
+				has_country_flag = skald_council_established
+			}
+			NOT = {
+				any_province = {
+					religion = skaldhyrric_faith
+					NOT = {
+						OR = {
+							owned_by_subject_of = ROOT
+							owned_by = ROOT
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			set_government_rank = 3
+			add_country_modifier = {
+				name = ACE_reveria_skaldhyrric_hegemon
+				duration = -1
+			}
+			custom_tooltip = ACE_reveria_skaldhyrric_hegemon_tt
+			tooltip = {
+				capital_scope = {
+					add_province_modifier = {
+						name = ACE_reveria_skalds_serving_the_realm
+						duration = -1
+					}
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						religion = skaldhyrric_faith
+						culture_group = gerudian
+					}
+					add_province_modifier = {
+						name = ACE_reveria_skalds_serving_the_realm
+						duration = -1
+					}
+				}
+				country_event = {
+					id = reveria.94
+					days = 365
+				}
+			}
+		}
+	}
+}
+
+reveria_4_branching = {
+	slot = 4
+	generic = no
+	ai = yes
+	potential = {
+		tag = A05
+		has_country_flag = ACE_A05_Branching_path
+	}
+	has_country_shield = yes
+
+	A05_Branching_4_1 = { #Unity
+		icon = mission_unknown_mission
+		position = 6
+		required_missions = {
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = ACE_reveria_chosen_religious_path_tt
+				not_in_mission_preview_mode = {
+					key = REV
+				}
+			}
+		}
+		effect = {
+		}
+	}
+
+	A05_Branching_4_2 = { #Harmonious Habitat
+		icon = mission_unknown_mission
+		position = 7
+		required_missions = {
+			A05_Branching_4_1
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+		}
+		effect = {
+		}
+	}
+
+	A05_Branching_4_3 = { #Harmonious Humans
+		icon = mission_unknown_mission
+		position = 8
+		required_missions = {
+			A05_Branching_4_2
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+		}
+		effect = {
+		}
+	}
+
+	A05_Branching_4_4 = { #Harmonious Hegemon
+		icon = mission_unknown_mission
+		position = 9
+		required_missions = {
+			A05_Branching_4_3
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+		}
+		effect = {
+		}
+	}
+}
+
+reveria_4B = {
+	slot = 4
+	generic = no
+	ai = yes
+	potential = {
+		tag = A05
+	}
+	has_country_shield = yes
+
+	A05_derhildes_bloodline = {
+		icon = mission_female_throne
+		position = 10
+		required_missions = {
+			A05_propaganda_department
+		}
+		provinces_to_highlight = {
+			province_id = 113
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			treasury = 100
+			prestige = 50
+			OR = {
+				113 = {
+					owner = {
+						if = {
+							limit = {
+								is_subject = yes
+							}
+							overlord = {
+								has_spy_network_from = {
+									who = ROOT
+									value = 50
+								}
+							}
+						}
+						else = {
+							has_spy_network_from = {
+								who = ROOT
+								value = 50
+							}
+						}
+					}
+				}
+				113 = {
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+			}
+		}
+		effect = {
+			add_treasury = -100
+			if = {
+				limit = {
+					exists = A02
+				}
+				custom_tooltip = ACE_reveria_deranne_exists_tt_yes
+				tooltip = {
+					add_casus_belli = {
+						type = cb_restore_personal_union
+						months = 2400
+						target = A02
+					}
+				}
+			}
+			else = {
+				custom_tooltip = ACE_reveria_deranne_exists_tt_no
+				tooltip = {
+					add_casus_belli = {
+						type = cb_restore_personal_union
+						months = 2400
+						target = A02
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						exists = A02
+					}
+				}
+				custom_tooltip = ACE_reveria_deranne_doesnt_exist_tt_yes
+				tooltip = {
+					every_province = {
+						limit = {
+							is_core = A02
+						}
+						add_core = ROOT
+					}
+				}
+			}
+			else = {
+				custom_tooltip = ACE_reveria_deranne_doesnt_exist_tt_no
+				tooltip = {
+					every_province = {
+						limit = {
+							is_core = A02
+						}
+						add_core = ROOT
+					}
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						exists = A02
+					}
+					add_casus_belli = {
+						type = cb_restore_personal_union
+						months = 2400
+						target = A02
+					}
+				}
+				else = {
+					every_province = {
+						limit = {
+							is_core = A02
+						}
+						add_core = ROOT
+					}
+				}
+			}
+		}
+	}
+
+	A05_land_of_the_reaverqueen = {
+		icon = mission_green_village
+		position = 11
+		required_missions = {
+			A05_derhildes_bloodline
+		}
+		provinces_to_highlight = {
+			area = deranne_area
+			NOT = {
+				owned_by = ROOT
+				is_core = ROOT
+			}
+		}
+		trigger = {
+			OR = {
+				deranne_area = {
+					owned_by = ROOT
+					is_core = ROOT
+					type = all
+				}
+				senior_union_with = A02
+			}
+		}
+		effect = {
+			add_prestige_excess_to_splendour_effect = { VAL = 10 }
+			if = {
+				limit = {
+					has_country_modifier = reveria_crown1
+				}
+				remove_country_modifier = reveria_crown1
+				add_country_modifier = {
+					name = reveria_crown2
+					duration = -1
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_modifier = reveria_crown2
+				}
+				remove_country_modifier = reveria_crown2
+				add_country_modifier = {
+					name = reveria_crown3
+					duration = -1
+				}
+			}
+		}
+	}
+
+	A05_reaver_empire = {
+		icon = mission_empire
+		position = 12
+		required_missions = {
+			A05_land_of_the_reaverqueen
+			A05_divenscourge_pearls
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			has_regency = no
+			OR = {
+				have_cast_magnificent_feast = yes
+				years_of_income = 1.0
+			}
+			if = {
+				limit = { has_dlc = "Mandate of Heaven" }
+				OR = {
+					in_golden_age = yes
+					has_had_golden_age = yes
+				}
+			}
+			else = { stability = 3 }
+			has_any_disaster = no
+		}
+		effect = {
+			country_event = {
+				id = reveria.88
+			}
+			set_government_rank = 3
+			add_country_modifier = {
+				name = reveria_empire
+				duration = -1
+			}
+			custom_tooltip = ACE_reveria_revive_dead_cultures_tt
+			if = {
+				limit = { has_dlc = "Mandate of Heaven" }
+				custom_tooltip = pol_if_used_ge_rest_else_30_years_extension_tt
+				if = {
+					limit = { has_had_golden_age = yes }
+					reset_golden_age = yes
+				}
+				else_if = {
+					limit = { in_golden_age = yes }
+					extend_golden_age = 600
+				}
+			}
+			else = {
+				change_ruler_stat = {
+					type = adm
+					amount = 2
+				}
+				add_prestige_or_monarch_power = { amount = 25 }
+			}
+			if = {
+				limit = {
+					have_cast_magnificent_feast = yes
+				}
+				custom_tooltip = ACE_reveria_feast_held_tt_yes
+				tooltip = {
+					add_splendor = 100
+				}
+			}
+			else = {
+				custom_tooltip = ACE_reveria_feast_held_tt_yes_tt_no
+				tooltip = {
+					add_splendor = 100
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						have_cast_magnificent_feast = yes
+					}
+				}
+				custom_tooltip = ACE_reveria_feast_not_held_tt_yes
+				tooltip = {
+					add_years_of_income = -1.0
+					add_splendor = 100
+				}
+			}
+			else = {
+				custom_tooltip = ACE_reveria_feast_not_held_exist_tt_no
+				tooltip = {
+					add_years_of_income = -1.0
+					add_splendor = 100
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						have_cast_magnificent_feast = yes
+					}
+					add_splendor = 100
+				}
+				else = {
+					add_years_of_income = -1.0
+					add_splendor = 100
+				}
+			}
+		}
+	}
+
+	A05_moonisle_raiding_outpost= {
+		icon = secure_the_republic
+		position = 14
+		required_missions = {
+			A05_southward_winds
+		}
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					province_id = 93
+					NOT = {
+						owned_by = ROOT
+						is_core = ROOT
+						has_dock_building_trigger = yes
+						has_shipyard_building_trigger = yes
+					}
+				}
+				AND = {
+					province_id = 9
+					NOT = {
+						owned_by = ROOT
+						is_core = ROOT
+					}
+				}
+			}
+		}
+		trigger = {
+			owns_core_province = 93
+			93 = {
+				has_dock_building_trigger = yes
+				has_shipyard_building_trigger = yes
+			}
+			OR = {
+				9 = {
+					owner = {
+						if = {
+							limit = {
+								is_subject = yes
+							}
+							overlord = {
+								has_spy_network_from = {
+									who = ROOT
+									value = 30
+								}
+							}
+						}
+						else = {
+							has_spy_network_from = {
+								who = ROOT
+								value = 30
+							}
+						}
+					}
+				}
+				owns = 9
+			}
+		}
+		effect = {
+			93 = {
+				add_province_modifier = {
+					name = ACE_A05_large_reaver_port
+					duration = -1
+				}
+			}
+			9 = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	A05_adrail_raiding_outpost = {
+		icon = fortify_malta
+		position = 15
+		required_missions = {
+			A05_moonisle_raiding_outpost
+		}
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					province_id = 9
+					NOT = {
+						owned_by = ROOT
+						is_core = ROOT
+						has_dock_building_trigger = yes
+						has_shipyard_building_trigger = yes
+					}
+				}
+				AND = {
+					province_id = 524
+					NOT = {
+						owned_by = ROOT
+						is_core = ROOT
+					}
+				}
+			}
+		}
+		trigger = {
+			owns_core_province = 9
+			9 = {
+				has_dock_building_trigger = yes
+				has_shipyard_building_trigger = yes
+			}
+			OR = {
+				524 = {
+					owner = {
+						if = {
+							limit = {
+								is_subject = yes
+							}
+							overlord = {
+								has_spy_network_from = {
+									who = ROOT
+									value = 30
+								}
+							}
+						}
+						else = {
+							has_spy_network_from = {
+								who = ROOT
+								value = 30
+							}
+						}
+					}
+				}
+				owns_core_province = 524
+			}
+		}
+		effect = {
+			524 = {
+				add_permanent_claim = ROOT
+			}
+			9 = {
+				add_province_modifier = {
+					name = ACE_A05_large_reaver_port
+					duration = -1
+				}
+			}
+		}
+	}
+
+	A05_reavers_of_the_dameshead_sea = {
+		icon = mission_seize_north_sea_trade
+		position = 16
+		required_missions = {
+			A05_adrail_raiding_outpost
+		}
+		provinces_to_highlight = {
+			province_group = dameshead_sea_ports_province_group
+			NOT = {
+				has_province_modifier = slaves_raided
+				country_or_subject_holds = ROOT
+				is_empty = yes
+				owner = { truce_with = ROOT }
+				owner = { alliance_with = ROOT }
+			}
+		}
+		trigger = {
+			dameshead_sea_ports_province_group = {
+				type = all
+				OR = {
+					country_or_subject_holds = ROOT
+					has_province_modifier = slaves_raided
+					is_empty = yes
+					owner = { truce_with = ROOT }
+					owner = { alliance_with = ROOT }
+				}
+			}
+			owns_core_province = 9
+			owns_core_province = 524
+		}
+		effect = {
+			add_country_modifier = {
+				name = reveria_reavers_of_the_Dameshead_sea
+				duration = -1
+			}
+			524 = {
+				add_province_modifier = {
+					name = ACE_A05_large_reaver_port
+					duration = -1
+				}
+			}
+		}
+	}
+
+	A05_second_age_of_reavers_m = {
+		icon = mission_destroyed_city
+		position = 17
+		required_missions = {
+			A05_reavers_of_the_dameshead_sea
+			A05_reavers_of_the_divenhal_sea
+		}
+		trigger = {
+			all_known_country = {
+				NOT = {
+					navy_size = ROOT
+				}
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = reveria_second_age_of_reavers2
+				duration = -1
+			}
+		}
+	}
+
+	A05_pillage_mihipha_college = {
+		icon = mission_burning_castle
+		position = 23
+		required_missions = {
+			A05_sarhali_foothold
+		}
+		provinces_to_highlight = {
+			province_id = 6612
+		}
+		trigger = {
+			controls = 6612
+			mil_power = 50
+		}
+		effect = {
+			add_mil_power = -50
+			custom_tooltip = ACE_pillage_mihipha_college_tt
+			if = {
+				limit = {
+					6612 = {
+						has_great_project = {
+							type = first_mihipha_college
+							tier = 0
+						}
+					}
+				}
+				6612 = {
+					destroy_great_project = {
+						type = first_mihipha_college
+					}
+					slave_raid_pillage_capital_effect = yes
+					custom_tooltip = " "
+					add_devastation = 100
+					add_base_tax = -1
+					add_base_production = -1
+					add_base_manpower = -1
+				}
+				mission_reward_artifice_points_1 = yes
+				add_innovativeness_or_monarch_power_anb = { amount = 2 }
+				every_country = {
+					limit = {
+						OR = {
+							primary_culture = zohebidi
+							primary_culture = amezatany
+							primary_culture = mboala
+							primary_culture = mazava
+							primary_culture = vyoronsi
+							primary_culture = zohebidi
+						}
+						NOT = { tag = A05 }
+					}
+					add_aggressive_expansion = {
+						who = ROOT
+						value = 25
+					}
+				}
+
+			}
+			if = {
+				limit = {
+					6612 = {
+						has_great_project = {
+							type = first_mihipha_college
+							tier = 1
+						}
+					}
+				}
+				6612 = {
+					destroy_great_project = {
+						type = first_mihipha_college
+					}
+					slave_raid_pillage_capital_effect = yes
+					add_devastation = 100
+					add_base_tax = -2
+					add_base_production = -2
+					add_base_manpower = -2
+				}
+				mission_reward_artifice_points_2 = yes
+				add_innovativeness_or_monarch_power_anb = { amount = 4 }
+				every_country = {
+					limit = {
+						OR = {
+							primary_culture = zohebidi
+							primary_culture = amezatany
+							primary_culture = mboala
+							primary_culture = mazava
+							primary_culture = vyoronsi
+							primary_culture = zohebidi
+						}
+						NOT = { tag = A05 }
+					}
+					add_aggressive_expansion = {
+						who = ROOT
+						value = 50
+					}
+				}
+			}
+			if = {
+				limit = {
+					6612 = {
+						has_great_project = {
+							type = first_mihipha_college
+							tier = 2
+						}
+					}
+				}
+				6612 = {
+					destroy_great_project = {
+						type = first_mihipha_college
+					}
+					slave_raid_pillage_capital_effect = yes
+					add_devastation = 100
+					add_base_tax = -3
+					add_base_production = -3
+					add_base_manpower = -3
+				}
+				mission_reward_artifice_points_3 = yes
+				add_innovativeness_or_monarch_power_anb = { amount = 6 }
+				every_country = {
+					limit = {
+						OR = {
+							primary_culture = zohebidi
+							primary_culture = amezatany
+							primary_culture = mboala
+							primary_culture = mazava
+							primary_culture = vyoronsi
+							primary_culture = zohebidi
+						}
+						NOT = { tag = A05 }
+					}
+					add_aggressive_expansion = {
+						who = ROOT
+						value = 60
+					}
+				}
+			}
+			if = {
+				limit = {
+					6612 = {
+						has_great_project = {
+							type = first_mihipha_college
+							tier = 3
+						}
+					}
+				}
+				6612 = {
+					destroy_great_project = {
+						type = first_mihipha_college
+					}
+					slave_raid_pillage_capital_effect = yes
+					add_devastation = 100
+					add_base_tax = -4
+					add_base_production = -4
+					add_base_manpower = -4
+				}
+				mission_reward_artifice_points_4 = yes
+				add_innovativeness_or_monarch_power_anb = { amount = 8 }
+				every_country = {
+					limit = {
+						OR = {
+							primary_culture = zohebidi
+							primary_culture = amezatany
+							primary_culture = mboala
+							primary_culture = mazava
+							primary_culture = vyoronsi
+							primary_culture = zohebidi
+						}
+						NOT = { tag = A05 }
+					}
+					add_aggressive_expansion = {
+						who = ROOT
+						value = 70
+					}
+				}
+			}
+		}
+	}
+
+	A05_treasure_fleet_dominance = { #
+		icon = mission_haless_map
+		position = 26
+		required_missions = { A05_sole_raiders_of_the_gulf_of_rahen }
+		provinces_to_highlight = {
+
+		}
+
+		trigger = {
+			calc_true_if = {
+				all_owned_province = {
+					has_province_modifier = JY_LF_port
+				}
+				amount = 5
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = ACE_A05_dominating_halessi_maritime_trade
+				duration = -1
+			}
+			1366 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = -1
+					power = 20
+				}
+			}
+			1369 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = -1
+					power = 20
+				}
+			}
+			1371 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = -1
+					power = 20
+				}
+			}
+			1372 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = -1
+					power = 20
+				}
+			}
+		}
+	}
+}
+
+reveria_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	potential = {
+		tag = A05
+	}
+	has_country_shield = yes
+
+	A05_acquire_nimscodd = {
+		icon = fortify_malta
+		position = 2
+		required_missions = {
+			A05_reconquer_the_gnomish_pass
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 146
+				province_id = 169
+				area = storm_isles_area
+			}
+			NOT = {
+				owned_by = ROOT
+				is_core = ROOT
+			}
+		}
+		trigger = {
+			owns_core_province = 146
+			owns_core_province = 169
+		}
+		effect = {
+			add_innovativeness_or_monarch_power_anb = { amount = 2 }
+			small_increase_of_gnomish_tolerance_effect = yes
+			add_country_modifier = {
+				name = reveria_gnomish_innovations
+				duration = 36500
+			}
+			if = {
+				limit = {
+					mission_completed = A05_Reclaim_Drekiriki
+				}
+				hidden_effect = {
+					country_event = {
+						id = reveria.81
+						days = 1825
+						random = 10000
+					}
+					country_event = {
+						id = reveria.82
+						days = 1825
+						random = 10000
+					}
+					country_event = {
+						id = reveria.83
+						days = 1825
+						random = 10000
+					}
+					country_event = {
+						id = reveria.84
+						days = 1825
+						random = 10000
+					}
+					country_event = {
+						id = reveria.85
+						days = 1825
+						random = 10000
+					}
+				}
+			}
+		}
+	}
+
+	A05_reaver_reunion = {
+		icon = mission_warrior_gold
+		position = 3
+		required_missions = {
+			A05_acquire_nimscodd
+		}
+		provinces_to_highlight = {
+			is_capital_of = Z08
+		}
+		trigger = {
+			storm_isles_area = {
+				type = all
+				owned_by = ROOT
+				is_core = ROOT
+			}
+			OR = {
+				Z08 = {
+					has_opinion = {
+						who = ROOT
+						value = 50
+					}
+				}
+				diplomat = 1
+			}
+			Z08 = {
+				has_regency = no
+			}
+			has_regency = no
+		}
+		effect = {
+			Z08 = {
+				country_event_with_effect_insight = {
+					id = reveria.25
+					effect = "
+						add_prestige_excess_to_splendour_effect = { VAL = 10 }
+						add_treasury = -30
+						A05 = {
+							country_event = {
+								id = reveria.1
+								days = 20
+							}
+						}
+					"
+				}
+			}
+			hidden_effect = {
+				Z08 = {
+					add_country_modifier = {
+						name = reveria_recently_hosted_feast
+						duration = 3650
+					}
+				}
+			}
+		}
+	}
+
+	A05_reavers_and_the_mother_bear = {
+		icon = mission_duel_snow
+		position = 4
+		required_missions = {
+			A05_reaver_reunion
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 985
+				area = revrland_area
+			}
+			NOT = {
+				owned_by = ROOT
+				is_core = ROOT
+			}
+		}
+		trigger = {
+			OR = {
+				alliance_with = Z08
+				owns_core_province = 985
+				revrland_area = {
+					type = all
+					owned_by = ROOT
+					is_core = ROOT
+				}
+			}
+			OR = {
+				Z08 = {
+					NOT = {
+						has_country_modifier = reveria_recently_hosted_feast
+					}
+				}
+				NOT = {
+					exists = Z08
+				}
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = reveria_gerudian_tolerance
+				duration = -1
+			}
+			add_estate_loyalty = {
+				estate = estate_church
+				loyalty = -10
+			}
+			add_estate_influence_modifier = {
+				estate = estate_church
+				desc = est_reveria_church_gerudian_tolerance
+				influence = -10
+				duration = 7300
+			}
+		}
+	}
+
+	A05_time_to_host = {
+		icon = mission_monarch_diplomacy
+		position = 5
+		required_missions = {
+			A05_reavers_and_the_mother_bear
+		}
+		trigger = {
+			is_at_war = no
+			has_regency = no
+			treasury = 100
+			dip_power = 100
+		}
+		effect = {
+			add_treasury = -100
+			add_dip_power = -100
+			add_estate_loyalty = {
+				estate = estate_church
+				loyalty = -5
+			}
+			country_event_with_effect_insight = {
+				id = reveria.6
+				effect = "
+					increase_ruler_dip_effect = yes
+					add_prestige_excess_to_splendour_effect = { VAL = 20 }
+				"
+			}
+		}
+	}
+
+	A05_research_reaver_bloodlines = {
+		icon = mission_diplomacy_missive
+		position = 6
+		required_missions = {
+			A05_time_to_host
+		}
+		provinces_to_highlight = {
+			province_id = 959
+		}
+		trigger = {
+			OR = {
+				Z08 = {
+					has_opinion = {
+						who = ROOT
+						value = 80
+					}
+				}
+				Z10 = {
+					has_opinion = {
+						who = ROOT
+						value = 80
+					}
+				}
+				Z09 = {
+					has_opinion = {
+						who = ROOT
+						value = 80
+					}
+				}
+				NOT = {
+					exists = Z10
+					exists = Z09
+				}
+				owns_core_province = 959
+			}
+			treasury = 100
+		}
+		effect = {
+			add_treasury = -100
+			country_event_with_effect_insight = {
+				id = reveria.8
+				effect = "
+					add_legitimacy_or_monarch_power = { VAL = 10 }
+				"
+			}
+			tooltip = {
+				country_event_with_option_insight = {
+					id = reveria.38
+					days = 31
+					option_1 = "
+						add_prestige_excess_to_splendour_effect = { VAL = 10 }
+					"
+					option_2 = "
+						A05_skhf = yes
+					"
+					option_3 = "
+						custom_tooltip = ACE_reveria_if_we_are_thought_tt
+					"
+				}
+			}
+		}
+	}
+
+	A05_reverian_crown = {
+		icon = mission_intervene_in_castile
+		position = 8
+		required_missions = {
+			A05_research_reaver_bloodlines
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 62
+				province_id = 8
+				province_id = 912
+			}
+			NOT = {
+				owned_by = ROOT
+				is_core = ROOT
+			}
+		}
+		trigger = {
+			treasury = 200
+			OR = {
+				A20 = {
+					has_opinion = {
+						who = ROOT
+						value = 80
+					}
+				}
+				A73 = {
+					has_opinion = {
+						who = ROOT
+						value = 80
+					}
+				}
+				A38 = {
+					has_opinion = {
+						who = ROOT
+						value = 80
+					}
+				}
+				owns_core_province = 62
+				owns_core_province = 8
+				owns_core_province = 912
+			}
+			has_regency = no
+		}
+		effect = {
+			country_event_with_effect_insight = {
+				id = reveria.9
+				effect = "
+					add_treasury = -200
+					add_country_modifier = {
+						name= reveria_crown1
+						duration = -1
+					}
+					increase_ruler_dip_effect = yes
+				"
+			}
+		}
+	}
+
+	A05_propaganda_department = {
+		icon = mission_gnome_tinkering
+		position = 9
+		required_missions = {
+			A05_reverian_crown
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			OR = {
+				any_owned_province = {
+					printing_press = 100
+				}
+				innovativeness = 20
+				artifice_has_points_10 = yes
+			}
+			treasury = 200
+			adm_power = 100
+			dip_power = 100
+		}
+		effect = {
+			add_treasury = -200
+			add_adm_power = -100
+			add_dip_power = -100
+			add_prestige_excess_to_splendour_effect = { VAL = 10 }
+			add_legitimacy = 40
+			if = {
+				limit = { exists = A02 }
+				reverse_add_opinion = {
+					who = A02
+					modifier = reveria_researched_bloodlines
+				}
+				A02 = {
+					add_legitimacy = 10
+					add_prestige_excess_to_splendour_effect = { VAL = 5 }
+				}
+			}
+			if = {
+				limit = { exists = A11 }
+				reverse_add_opinion = {
+					who = A11
+					modifier = reveria_researched_bloodlines
+				}
+				A11 = {
+					add_legitimacy = 10
+					add_prestige_excess_to_splendour_effect = { VAL = 5 }
+				}
+			}
+			custom_tooltip = " "
+			complex_dynamic_effect = {
+				first_custom_tooltip = ACE_reveria_propaganda_pp_tt
+				first_limit = "
+					any_owned_province = {
+						printing_press = 100
+					}
+				"
+				first_effect = "
+					capital_scope = {
+						add_institution_embracement = {
+							which = printing_press
+							value = 100
+						}
+					}
+				"
+				second_custom_tooltip = ACE_reveria_propaganda_inno_tt
+				second_limit = "
+					innovativeness = 20
+					NOT = {
+						any_owned_province = {
+							printing_press = 100
+						}
+					}
+				"
+				second_effect = "
+					change_innovativeness = -20
+					custom_tooltip = ACE_reveria_20_inno_on_embrace_tt
+					set_country_flag = ACE_reveria_20_inno_on_embrace
+				"
+				third_custom_tooltip = ACE_reveria_propaganda_ac_tt
+				third_limit = "
+					artifice_has_points_10 = yes
+					NOT = {
+						any_owned_province = {
+							printing_press = 100
+						}
+						innovativeness = 20
+					}
+				"
+				third_effect = "
+					reveria_artifice_granted_10 = yes
+					custom_tooltip = ACE_reveria_10_capacity_on_embrace_tt
+					set_country_flag = ACE_reveria_10_capacity_on_embrace
+				"
+			}
+		}
+	}
+
+	A05_henriks_bloodline = {
+		icon = mission_confrontation
+		position = 10
+		required_missions = {
+			A05_propaganda_department
+		}
+		provinces_to_highlight = {
+			province_id = 43
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			treasury = 100
+			prestige = 50
+			43 = {
+				OR = {
+					owner = {
+						if = {
+							limit = {
+								is_subject = yes
+							}
+							overlord = {
+								has_spy_network_from = {
+									who = ROOT
+									value = 50
+								}
+							}
+						}
+						else = {
+							has_spy_network_from = {
+								who = ROOT
+								value = 50
+							}
+						}
+					}
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+			}
+		}
+		effect = {
+			add_treasury = -100
+			if = {
+				limit = {
+					exists = A11
+				}
+				custom_tooltip = ACE_reveria_pearlsedge_exists_tt_yes
+				tooltip = {
+					add_casus_belli = {
+						type = cb_restore_personal_union
+						months = 2400
+						target = A11
+					}
+				}
+			}
+			else = {
+				custom_tooltip = ACE_reveria_pearlsedge_exists_tt_no
+				tooltip = {
+					add_casus_belli = {
+						type = cb_restore_personal_union
+						months = 2400
+						target = A11
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						exists = A11
+					}
+				}
+				custom_tooltip = ACE_reveria_pearlsedge_doesnt_exist_tt_yes
+				tooltip = {
+					every_province = {
+						limit = {
+							is_core = A11
+						}
+						add_core = ROOT
+					}
+				}
+			}
+			else = {
+				custom_tooltip = ACE_reveria_pearlsedge_doesnt_exist_tt_no
+				tooltip = {
+					every_province = {
+						limit = {
+							is_core = A11
+						}
+						add_core = ROOT
+					}
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						exists = A11
+					}
+					add_casus_belli = {
+						type = cb_restore_personal_union
+						months = 2400
+						target = A11
+					}
+				}
+				else = {
+					every_province = {
+						limit = {
+							is_core = A11
+						}
+						add_core = ROOT
+					}
+				}
+			}
+		}
+	}
+
+	A05_divenscourge_pearls = {
+		icon = mission_monarch_in_throne_room
+		position = 11
+		required_missions = {
+			A05_henriks_bloodline
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = damespearl_area
+				area = pearlywine_area
+			}
+			NOT = {
+				owned_by = ROOT
+				is_core = ROOT
+			}
+		}
+		trigger = {
+			damespearl_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			pearlywine_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			A11 = {
+				OR = {
+					NOT = {
+						is_subject_of = ROOT
+					}
+					NOT = {
+						liberty_desire = 25
+					}
+				}
+			}
+		}
+		effect = {
+			add_prestige_excess_to_splendour_effect = { VAL = 10 }
+			if = {
+				limit = {
+					has_country_modifier = reveria_crown1
+				}
+				remove_country_modifier = reveria_crown1
+				add_country_modifier = {
+					name = reveria_crown2
+					duration = -1
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_modifier = reveria_crown2
+				}
+				remove_country_modifier = reveria_crown2
+				add_country_modifier = {
+					name = reveria_crown3
+					duration = -1
+				}
+			}
+			tretunica_area = {
+				add_permanent_claim = ROOT
+			}
+			if = {
+				limit = {
+					A11 = {
+						is_subject_of = ROOT
+					}
+				}
+				tretunica_area = {
+					add_permanent_claim = A11
+				}
+			}
+		}
+	}
+
+	A05_eastward_winds = {
+		icon = mission_establish_high_seas_navy
+		position = 13
+		required_missions = {
+			A05_the_reaver_fleet
+			A05_divenscourge_pearls
+		}
+		provinces_to_highlight = {
+
+		}
+		trigger = {
+			OR = {
+				A05_ideas = 7
+				check_variable = {
+					which = ACE_reveria_reaver_years_variable
+					value = 5
+				}
+			}
+		}
+		effect = {
+			376 = {
+				add_permanent_claim = ROOT
+			}
+			406 = {
+				add_permanent_claim = ROOT
+			}
+			86 = {
+				add_permanent_claim = ROOT
+			}
+			33 = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	A05_reaver_tef = {
+		icon = mission_establish_high_seas_navy
+		position = 14
+		required_missions = {
+			A05_eastward_winds
+			A05_southward_winds
+		}
+		provinces_to_highlight = {
+			area = isle_of_tef_area
+		}
+
+		trigger = {
+			OR = {
+				A47 = {
+					if = {
+						limit = {
+							is_subject = yes
+						}
+						overlord = {
+							has_spy_network_from = {
+								who = ROOT
+								value = 30
+							}
+						}
+					}
+					else = {
+						has_spy_network_from = {
+							who = ROOT
+							value = 30
+						}
+					}
+				}
+				380 = {
+					owner = {
+						if = {
+							limit = {
+								is_subject = yes
+							}
+							overlord = {
+								has_spy_network_from = {
+									who = ROOT
+									value = 30
+								}
+							}
+						}
+						else = {
+							has_spy_network_from = {
+								who = ROOT
+								value = 30
+							}
+						}
+					}
+				}
+				isle_of_tef_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+			}
+		}
+		effect = {
+			add_casus_belli = {
+				type = cb_restore_personal_union
+				months = 1200
+				target = A47
+			}
+			isle_of_tef_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	A05_pirail_raiding_outpost = { #beyond the pass
+		icon = secure_dejima
+		position = 15
+		required_missions = {
+			A05_reaver_tef
+		}
+		provinces_to_highlight = {
+			area = isle_of_tef_area
+		}
+		trigger = {
+			isle_of_tef_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			A47 = {
+				OR = {
+					NOT = {
+						is_subject_of = ROOT
+					}
+					NOT = {
+						liberty_desire = 25
+					}
+				}
+			}
+		}
+		effect = {
+			add_prestige = 20
+			custom_tooltip = ACE_reveria_new_tefkora_tt
+			if = {
+				limit = {
+					36 = {
+						owned_by_subject_of = ROOT
+					}
+				}
+				36 = {
+					cede_province = ROOT
+					add_core = ROOT
+				}
+			}
+			36 = {
+				add_province_modifier = {
+					name = ACE_reveria_nirhaunes_estate
+					duration = -1
+				}
+				add_province_modifier = {
+					name = ACE_A05_large_reaver_port
+					duration = -1
+				}
+			}
+			if = {
+				limit = {
+					has_country_modifier = reveria_crown1
+				}
+				remove_country_modifier = reveria_crown1
+				add_country_modifier = {
+					name = reveria_crown2
+					duration = -1
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_modifier = reveria_crown2
+				}
+				remove_country_modifier = reveria_crown2
+				add_country_modifier = {
+					name = reveria_crown3
+					duration = -1
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_modifier = reveria_crown3
+				}
+				remove_country_modifier = reveria_crown3
+				add_country_modifier = {
+					name = reveria_crown4
+					duration = -1
+				}
+			}
+			533 = {
+				add_permanent_claim = ROOT
+			}
+			451 = {
+				add_permanent_claim = ROOT
+			}
+			6762 = {
+				add_permanent_claim = ROOT
+			}
+			582 = {
+				add_permanent_claim = ROOT
+			}
+			580 = {
+				add_permanent_claim = ROOT
+			}
+			577 = {
+				add_permanent_claim = ROOT
+			}
+			496 = {
+				add_permanent_claim = ROOT
+			}
+			494 = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	A05_reavers_of_the_divenhal_sea = {
+		icon = imperial_navy
+		position = 16
+		required_missions = {
+			A05_pirail_raiding_outpost
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 533
+				province_id = 451
+				province_id = 6762
+				province_id = 582
+				province_id = 580
+				province_id = 577
+				province_id = 496
+				province_id = 494
+			}
+		}
+		trigger = {
+			NOT = {
+				exists = A74
+				exists = F32
+			}
+			calc_true_if = {
+				all_owned_province = {
+					OR = {
+						province_id = 533
+						province_id = 451
+						province_id = 6762
+						province_id = 582
+						province_id = 580
+						province_id = 577
+						province_id = 496
+						province_id = 494
+					}
+				}
+				amount = 4
+			}
+		}
+		effect = {
+			custom_tooltip = ACE_reveria_revive_divenori_tt
+			add_country_modifier = {
+				name = reveria_reavers_of_the_Divenhal_sea
+				duration = -1
+			}
+			custom_tooltip = ACE_reveria_divenhal_ports_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						province_group = divenhal_islands_province_group
+					}
+					add_province_modifier = {
+						name = ACE_A05_reaver_port
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+}

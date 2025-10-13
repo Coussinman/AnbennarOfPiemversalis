@@ -508,6 +508,16 @@ artist = {
 	}
 
 	skill_scaled_modifier = {
+		trigger = { owner = { mission_completed = R11_four_season } }
+		modifier = { build_cost = -0.01 }
+	}
+
+	skill_scaled_modifier = {
+		trigger = { owner = { has_country_flag = pashaine_artist_idea_cost } }
+		modifier = { idea_cost = -0.025 }
+	}
+
+	skill_scaled_modifier = {
 		trigger = { 
 			owner = {  
 				has_reform = wexonard_grand_court_reform
@@ -517,15 +527,6 @@ artist = {
 			legitimacy = 0.1
 			monthly_splendor = 0.5
 		}
-	}
-	skill_scaled_modifier = {
-		trigger = { owner = { mission_completed = R11_four_season } }
-		modifier = { build_cost = -0.01 }
-	}
-
-	skill_scaled_modifier = {
-		trigger = { owner = { has_country_flag = pashaine_artist_idea_cost } }
-		modifier = { idea_cost = -0.025 }
 	}
 
 	chance = {
@@ -738,17 +739,17 @@ theologian = {
 	# 	}
 	# 	modifier = { meritocracy = 0.25 }
 	# }
-	#ACE
-	skill_scaled_modifier = {
-		trigger = { 
-			owner = {
-				has_country_flag = Z05_faithful
-			}
-		}
-		modifier = {
-			development_cost = -0.02
-		}
-	}
+	# skill_scaled_modifier = {
+	# 	trigger = { 
+	# 		owner = { 
+	# 			has_country_flag = mng_dev_per_adm_advisor_level_flag 
+	# 		}
+	# 	}
+	# 	modifier = {
+	# 		development_cost = -0.02
+	# 	}
+	# }
+	
 	# skill_scaled_modifier = {
 	# 	trigger = {
 	# 		owner = { has_country_modifier = eng_foreign_religious_control }
@@ -787,6 +788,17 @@ theologian = {
 		modifier = { innovativeness_gain = 0.1 }
 	}
 
+	#ACE
+	skill_scaled_modifier = {
+		trigger = { 
+			owner = {
+				has_country_flag = Z05_faithful
+			}
+		}
+		modifier = {
+			development_cost = -0.02
+		}
+	}
 	skill_scaled_modifier = {
 		trigger = { 
 			owner = {  
@@ -1076,7 +1088,10 @@ inquisitor = {
 	skill_scaled_modifier = {
 		trigger = { 
 			owner = {  
+				OR = {
 				has_reform = wexonard_grand_court_reform
+					has_country_flag = AB2_inquisitors_flag 
+				}
 			}
 		}
 		modifier = { tolerance_own = 0.4 }
@@ -1229,6 +1244,18 @@ statesman = {
 		}
 	}
 
+	#BISAN
+	skill_scaled_modifier = {
+		trigger = {
+			owner = { 
+				has_country_flag = A34_dip_modifiers
+			}
+		}
+		modifier = {
+			mercenary_cost = -0.03
+		}
+	}
+
 	chance = {
 		factor = 1
 	}
@@ -1353,17 +1380,6 @@ naval_reformer = {
 	}
 
 	skill_scaled_modifier = {
-		trigger = { 
-			owner = {  
-				has_reform = wexonard_grand_court_reform
-			}
-		}
-		modifier = {
-			global_ship_recruit_speed = -0.04
-			global_ship_repair = 0.04
-		}
-	}
-	skill_scaled_modifier = {
 		trigger = {
 			owner = { 
 				has_government_attribute = republican_tradition_from_advisors 
@@ -1386,6 +1402,30 @@ naval_reformer = {
 		modifier = {
 			movement_speed = 0.025
 			movement_speed_in_fleet_modifier = 0.2
+		}
+	}
+
+	skill_scaled_modifier = {
+		trigger = { 
+			owner = {  
+				has_reform = wexonard_grand_court_reform
+			}
+		}
+		modifier = {
+			global_ship_recruit_speed = -0.04
+			global_ship_repair = 0.04
+		}
+	}
+
+	#BISAN
+	skill_scaled_modifier = {
+		trigger = {
+			owner = { 
+				has_country_flag = A34_dip_modifiers
+			}
+		}
+		modifier = {
+			naval_maintenance_modifier = -0.03
 		}
 	}
 
@@ -1525,6 +1565,18 @@ trader = {
 		modifier = { trade_steering = 0.04 }
 	}
 
+	#BISAN
+	skill_scaled_modifier = {
+		trigger = {
+			owner = { 
+				has_country_flag = A34_dip_modifiers
+			}
+		}
+		modifier = {
+			galley_power = 0.03
+		}
+	}
+
 	chance = {
 		factor = 1
 	}
@@ -1596,17 +1648,6 @@ spymaster = {
 	# 	}
 	# 	modifier = { meritocracy = 0.25 }
 	# }
-	#Cestirmark - Eldritch investigators
-	skill_scaled_modifier = {
-		trigger = { 
-			owner = { 
-				has_estate_privilege = estate_adventurers_organization_scp_bureau
-			}
-		}
-		modifier = {
-			idea_cost = -0.02
-		}
-	}
 	# skill_scaled_modifier = {
 	# 	trigger = { 
 	# 		owner = { has_country_flag = mng_trade_eff_per_dip_advisor_level_flag }
@@ -1649,14 +1690,6 @@ spymaster = {
 		}
 	}
 
-	skill_scaled_modifier = {
-		trigger = { 
-			owner = {  
-				has_reform = wexonard_grand_court_reform
-			}
-		}
-		modifier = { spy_action_cost_modifier = -0.04 }
-	}
 		#Cestirmark - Eldritch investigators
 	skill_scaled_modifier = {
 		trigger = { 
@@ -1666,6 +1699,27 @@ spymaster = {
 		}
 		modifier = {
 			idea_cost = -0.02
+		}
+	}
+
+	skill_scaled_modifier = {
+		trigger = { 
+			owner = {  
+				has_reform = wexonard_grand_court_reform
+			}
+		}
+		modifier = { spy_action_cost_modifier = -0.04 }
+	}
+
+	#BISAN
+	skill_scaled_modifier = {
+		trigger = { 
+			owner = { 
+				has_country_flag = A34_dip_modifiers
+			}
+		}
+		modifier = {
+			siege_ability = 0.03
 		}
 	}
 
@@ -1785,6 +1839,18 @@ colonial_governor = {
 			}
 		}
 		modifier = { reduced_liberty_desire_on_other_continent = 6 }
+	}
+
+	#BISAN
+	skill_scaled_modifier = {
+		trigger = {
+			owner = { 
+				has_country_flag = A34_dip_modifiers
+			}
+		}
+		modifier = {
+			land_attrition = -0.03
+		}
 	}
 	
 	chance = {
@@ -1920,6 +1986,18 @@ diplomat = {
 			envoy_travel_time = -0.04
 		}
 	}
+
+	#BISAN
+	skill_scaled_modifier = {
+		trigger = {
+			owner = { 
+				has_country_flag = A34_dip_modifiers
+			}
+		}
+		modifier = {
+			war_exhaustion = -0.01
+		}
+	}
 	
 	chance = {
 		factor = 1
@@ -2039,6 +2117,18 @@ navigator = {
 		modifier = {
 			naval_attrition = -0.04
 			transport_attrition = -0.04
+		}
+	}
+
+	#BISAN
+	skill_scaled_modifier = {
+		trigger = {
+			owner = { 
+				has_country_flag = A34_dip_modifiers
+			}
+		}
+		modifier = {
+			disengagement_chance = 0.03
 		}
 	}
 	
@@ -2175,21 +2265,22 @@ army_reformer = {
 	skill_scaled_modifier = {
 		trigger = { 
 			owner = {  
-				has_reform = wexonard_grand_court_reform
-			}
-		}
-		modifier = {
-			army_tradition_from_battle = 0.2
-		}
-	}
-	skill_scaled_modifier = {
-		trigger = {
-			owner = {
 				has_government_attribute = grombari_council_advisor_modifier
 			}
 		}
 		modifier = {
 			global_autonomy = -0.02
+		}
+	}
+
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_reform = wexonard_grand_court_reform
+			}
+		}
+		modifier = {
+			army_tradition_from_battle = 0.2
 		}
 	}
 
@@ -2297,21 +2388,22 @@ army_organiser = {
 	skill_scaled_modifier = {
 		trigger = { 
 			owner = {
-				has_reform = wexonard_grand_court_reform
-			}
-		}
-		modifier = {
-			global_supply_limit_modifier = 0.1
-		}
-	}
-	skill_scaled_modifier = {
-		trigger = { 
-			owner = { 
 				has_country_flag = bladeskeep_monument_nationalism_upgrade 
 			}
 		}
 		modifier = {
 			years_of_nationalism = -1
+		}
+	}
+
+	skill_scaled_modifier = {
+		trigger = { 
+			owner = { 
+				has_reform = wexonard_grand_court_reform
+			}
+		}
+		modifier = {
+			global_supply_limit_modifier = 0.1
 		}
 	}
 
@@ -2393,7 +2485,22 @@ commandant = {
 			drill_gain_modifier = 0.04
 		}
 	}
-
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_country_flag = U10_military_path_1
+			}
+		}
+		modifier = { assault_fort_ability = 0.25 artillery_barrage_cost = -0.25 }
+	}
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_country_flag = U10_military_path_2
+			}
+		}
+		modifier = { attrition = -0.2 attrition = 1 }
+	}
 	skill_scaled_modifier = {
 		trigger = { 
 			owner = {  
@@ -2420,6 +2527,16 @@ commandant = {
 		}
 		modifier = { attrition = -0.2 attrition = 1 }
 	}
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = grombari_council_advisor_modifier
+			}
+		}
+		modifier = {
+			global_autonomy = -0.02
+		}
+	}
 
 	skill_scaled_modifier = {
 		trigger = {
@@ -2432,8 +2549,35 @@ commandant = {
 		}
 	}
 
+	#ACE
+	skill_scaled_modifier = {
+		trigger = { 
+			owner = {  
+				has_reform = wexonard_grand_court_reform
+			}
+		}
+		modifier = {
+			drill_decay_modifier = -0.02
+		}
+	}
+
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				mission_completed = A72_guns
+			}
+		}
+		modifier = {
+			artillery_power = 0.03
+		}
+	}
+
 	chance = {
 		factor = 1
+		modifier = {
+			factor = 3
+			has_country_flag = Z06_elite_defenders
+		}
 	}
 	
 	ai_will_do = {
@@ -2867,6 +3011,17 @@ grand_captain = {
 			}
 		}
 		modifier = { land_attrition = -0.04 }
+	}
+
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_country_flag = A72_barrage_flag
+			}
+		}
+		modifier = { 
+			siege_ability = 0.05
+		}
 	}
 
 	chance = {

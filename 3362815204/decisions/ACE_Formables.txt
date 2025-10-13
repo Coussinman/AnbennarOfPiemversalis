@@ -13,7 +13,7 @@ country_decisions = {
 			A01 = {
 				is_subject_of = ROOT
 				NOT = {
-					liberty_desire = 25 #is this too hard?
+					liberty_desire = 25					#is this too hard?
 					development = 1000
 				}
 				has_opinion = {
@@ -26,7 +26,7 @@ country_decisions = {
 				}
 			}
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-				value = 25 #about 102 provinces in all of Lencenor and West Dameshead, 66 without Rubyhold and 62 without Venail
+				value = 25				#about 102 provinces in all of Lencenor and West Dameshead, 66 without Rubyhold and 62 without Venail
 				OR = {
 					region = lencenor_region
 					region = west_dameshead_region
@@ -58,10 +58,11 @@ country_decisions = {
 							culture = low_lorentish
 						}
 					}
-					add_nationalism -10
+					add_nationalism
+					-10
 				}
 			}
-			change_tag = B87
+			change_tag = AC0
 			hidden_effect = {
 				restore_country_name = yes
 			}
@@ -120,7 +121,6 @@ country_decisions = {
 			}
 		}
 	}
-
 	# form_Damaeril = {
 	# 	major = yes
 	# 	potential = {
@@ -182,7 +182,6 @@ country_decisions = {
 	# 				owns_core_province = 2		# Eargate
 	# 				owns_core_province = 8		# Anbenncost
 	# 				owns_core_province = 11		# Damesteeth
-
 	# 				dip = 5
 	# 			}
 	# 			#owns de jure Damerian lands
@@ -192,15 +191,12 @@ country_decisions = {
 	# 				owns_core_province = 5		# Varivar
 	# 				owns_core_province = 2		# Eargate
 	# 				owns_core_province = 8		# Anbenncost
-
 	# 				owns_core_province = 276	# Damescross
 	# 				owns_core_province = 330	# Acromton
 	# 				owns_core_province = 910	# Taxwick
 	# 				owns_core_province = 281	# Plumwall
-
 	# 				owns_core_province = 13		# Toothsend
 	# 				owns_core_province = 10		# Wesdam
-
 	# 				owns_core_province = 11		# Damesteeth
 	# 			}
 	# 		}
@@ -230,7 +226,6 @@ country_decisions = {
 	# 		A31 = { add_historical_friend = ROOT }
 	# 		A01 = { add_historical_rival = ROOT }
 	# 		A13 = { add_historical_rival = ROOT }
-
 	# 		add_country_modifier = {
 	# 			name = "centralization_modifier"
 	# 			duration = 7300
@@ -288,7 +283,6 @@ country_decisions = {
 	# 		factor = 1
 	# 	}
 	# }
-
 	form_winebay = {
 		major = yes
 		provinces_to_highlight = {
@@ -297,7 +291,6 @@ country_decisions = {
 				area = upper_winebay_area
 				area = lower_bloodwine_area
 				area = eastern_winebay_area
-
 			}
 			NOT = {
 				AND = {
@@ -308,7 +301,9 @@ country_decisions = {
 		}
 		potential = {
 			was_never_end_game_tag_trigger = yes
-			NOT = { has_country_flag = formed_winebay }
+			NOT = {
+				has_country_flag = formed_winebay
+			}
 			OR = {
 				government = republic
 				has_reform = plutocratic_reform
@@ -358,7 +353,6 @@ country_decisions = {
 			set_country_flag = formed_winebay
 		}
 	}
-
 	# form_anb_germany = {
 	# 	major = yes
 	# 	potential = {
@@ -368,7 +362,6 @@ country_decisions = {
 	# 		NOT = { tag = A04 }
 	# 		is_colonial_nation = no
 	# 	}
-
 	# 	allow = {
 	# 		adm_tech = 15
 	# 		is_free_or_tributary_trigger = yes
@@ -398,12 +391,9 @@ country_decisions = {
 	# 			owns_core_province = 271
 	# 		}
 	# 	}
-
 	# 	effect = {
-
 	# 	}
 	# }
-
 	form_rohibonia = {
 		major = yes
 		potential = {
@@ -452,10 +442,14 @@ country_decisions = {
 			set_global_flag = formed_rohibonia
 			change_tag = AD2
 			change_government = monarchy
-			set_in_empire = no #TODO disaster
+			add_government_reform = rohibonic_horse_lords
+			set_in_empire = no			#TODO disaster
 			add_country_modifier = {
-				name = "centralization_modifier"
+				name = centralization_modifier
 				duration = 7300
+			}
+			old_rohibonia = {
+				add_permanent_claim = ROOT
 			}
 			if = {
 				limit = {
@@ -468,7 +462,168 @@ country_decisions = {
 			country_event = {
 				id = ace_misc.1
 			}
-			add_government_reform = rohibonic_horse_lords
+		}
+	}
+	form_vivin_empire = {
+		major = yes
+		potential = {
+			NOT = {
+				has_country_flag = formed_vivin_empire
+			}
+			was_never_end_game_tag_trigger = yes
+			mission_completed = A72_crusader_dynasty
+			is_colonial_nation = no
+		}
+		allow = {
+			total_development = 750
+			OR = {
+				A59 = {
+					exists = no
+				}
+				A59 = {
+					is_subject_of = ROOT
+					NOT = {
+						liberty_desire = 25
+					}
+				}
+			}
+			OR = {
+				A60 = {
+					exists = no
+				}
+				A60 = {
+					is_subject_of = ROOT
+					NOT = {
+						liberty_desire = 25
+					}
+				}
+			}
+		}
+		effect = {
+			set_country_flag = formed_vivin_empire
+			change_tag = AD6
+			custom_tooltip = vivin_empire_tt
+			hidden_effect = {
+				AD6 = {
+					set_in_empire = no
+				}
+				if = {
+					limit = {
+						is_emperor = yes
+					}
+					set_emperor = no
+				}
+			}
+			swap_non_generic_missions = yes
+			set_government_rank = 3
+			add_government_reform = multicultural_empire_reform
+			add_country_modifier = {
+				name = centralization_modifier
+				duration = 7300
+			}
+			hidden_effect = {
+				every_owned_province = {
+					set_in_empire = no
+				}
+			}
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+				country_event = {
+					id = ideagroups.1
+				}
+			}
+			if = {
+				limit = {
+					A60 = {
+						is_subject_of = ROOT
+					}
+				}
+				create_subject = {
+					subject_type = integrated_personal_union
+					subject = A60
+				}
+				hidden_effect = {
+					A60 = {
+						change_country_color = {
+							country = ROOT
+						}
+						set_in_empire = no
+						every_owned_province = {
+							set_in_empire = no
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					A59 = {
+						is_subject_of = ROOT
+					}
+				}
+				create_subject = {
+					subject_type = integrated_personal_union
+					subject = A59
+				}
+				hidden_effect = {
+					A59 = {
+						change_country_color = {
+							country = ROOT
+						}
+						set_in_empire = no
+						every_owned_province = {
+							set_in_empire = no
+						}
+					}
+				}
+			}
+		}
+	}
+	form_milcorissia = {
+		major = yes
+		potential = {
+			NOT = {
+				has_country_flag = formed_milcorissia
+			}
+			was_never_end_game_tag_trigger = yes
+			has_country_flag = A56_milcorissia_flag
+		}
+		provinces_to_highlight = {
+			region = the_borders_region
+		}
+		allow = {
+			is_at_war = no
+			is_subject = no
+			the_borders_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			set_country_flag = formed_milcorissia
+			change_tag = B94
+			change_primary_culture = milcori
+			anb_add_accepted_culture_or_dip_power = {
+				culture = arannese
+				free = yes
+			}
+			add_country_modifier = {
+				name = centralization_modifier
+				duration = 7300
+			}
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+				country_event = {
+					id = ideagroups.1
+				}
+			}
+			swap_non_generic_missions = yes
+			country_event = {
+				id = flavor_milcorissia.2
+			}
 		}
 	}
 }

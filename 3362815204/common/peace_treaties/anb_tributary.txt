@@ -73,7 +73,17 @@ po_anb_tributary = {
 		}
 	}
 	is_allowed = { # Defaults to equivalent of "always = yes"
-		always = yes
+		NOT = {
+			AND = {
+				tag = F29
+				has_country_modifier = ace_unnatural_luck
+				FROM = {
+					any_owned_province = {
+						region = far_salahad_region
+					}
+				}
+			}
+		}
 	}
 	effect = { # Defaults to empty effect (which makes error log entry but is safe)
 		create_subject = {

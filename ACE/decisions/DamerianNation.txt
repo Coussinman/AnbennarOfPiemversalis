@@ -1,0 +1,245 @@
+
+country_decisions = {
+	damerian_nation = {
+		major = yes
+		potential = {
+			OR = {
+				primary_culture = east_damerian
+				primary_culture = west_damerian
+				primary_culture = rogieran
+				primary_culture = half_elf
+				AND = {
+					tag = A34
+					mission_completed = A43_east_dameria
+				}
+			}
+			NOT = {
+				has_country_flag = formed_dameria_flag
+				has_country_flag = formed_pashaine_flag
+			}
+			is_colonial_nation = no
+			OR = {
+				ai = no
+				AND = {
+					is_playing_custom_nation = no
+					is_former_colonial_nation = no
+					NOT = {
+						exists = A58
+					}
+				}
+			}
+			government = monarchy
+			normal_or_historical_nations = yes
+			was_never_end_game_tag_trigger = yes
+			was_never_anbennarian_regional_tag_trigger =yes
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 168	# Auraire
+				province_id = 6		# Damesear
+				province_id = 5		# Varivar
+				province_id = 2		# Eargate
+				province_id = 8		# Anbenncost
+				province_id = 11	# Damesteeth
+
+				AND = {
+					ROOT = {
+						OR = {
+							NOT = {
+								dip = 5
+								dynasty = "Silmuna"
+							}
+							AND = {
+								tag = B34
+								mission_completed = A43_east_dameria
+							}
+						}
+					}
+					OR = {
+						province_id = 276	# Damescross
+						province_id = 330	# Acromton
+						province_id = 910	# Taxwick
+						province_id = 281	# Plumwall
+						province_id = 13	# Toothsend
+						province_id = 10	# Wesdam
+					}
+				}
+			}
+			OR = {
+				NOT = {
+					AND = {
+						owned_by = ROOT
+						is_core = ROOT
+					}
+					AND = {
+						owner = {
+							tag = B34
+							mission_completed = A43_east_dameria
+						}
+					}
+				}
+				NOT = {
+					AND = {
+						country_or_non_sovereign_subject_holds = ROOT
+						owner = {
+							tag = B34
+							mission_completed = A43_east_dameria
+						}
+					}
+				}
+			}
+		}
+		allow = {
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			NOT = {
+				exists = A58
+			}
+			OR = {
+				AND = {
+					owns_core_province = 168	# Auraire
+					owns_core_province = 6		# Damesear
+					owns_core_province = 5		# Varivar
+					owns_core_province = 2		# Eargate
+					owns_core_province = 8		# Anbenncost
+					owns_core_province = 11		# Damesteeth
+					OR = {
+						dip = 5
+						dynasty = "Silmuna"
+						AND = {
+							owns_core_province = 276	# Damescross
+							owns_core_province = 330	# Acromton
+							owns_core_province = 910	# Taxwick
+							owns_core_province = 281	# Plumwall
+							owns_core_province = 13		# Toothsend
+							owns_core_province = 10		# Wesdam
+						}
+					}
+				}
+				AND = {
+					tag = A34
+					mission_completed = A43_east_dameria
+					custom_trigger_tooltip = {
+						tooltip = A34_vassalage_damerian_formable_tt
+						168 = { country_or_non_sovereign_subject_holds = ROOT }
+						6 = { country_or_non_sovereign_subject_holds = ROOT }
+						5 = { country_or_non_sovereign_subject_holds = ROOT }
+						2 = { country_or_non_sovereign_subject_holds = ROOT }
+						8 = { country_or_non_sovereign_subject_holds = ROOT }
+						11 = { country_or_non_sovereign_subject_holds = ROOT }
+						
+						276 = { country_or_non_sovereign_subject_holds = ROOT }
+						330 = { country_or_non_sovereign_subject_holds = ROOT }
+						910 = { country_or_non_sovereign_subject_holds = ROOT }
+						281 = { country_or_non_sovereign_subject_holds = ROOT }
+						13 = { country_or_non_sovereign_subject_holds = ROOT }
+						10 = { country_or_non_sovereign_subject_holds = ROOT }
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					8 = {
+						owned_by = ROOT
+					}
+				}
+				8 = {
+					move_capital_effect = yes
+				}
+			}
+			if = {
+				limit = {
+					tag = A34
+				}
+				anb_add_accepted_culture_or_dip_power = {
+					culture = east_damerian
+					free = yes
+				}
+			}
+			change_tag = A58
+			hidden_effect = {
+				restore_country_name = yes
+			}
+			swap_non_generic_missions = yes
+			if = {
+				limit = {
+					NOT = {
+						has_reform = damerian_monarchy
+						has_reform = bisanese_parliament
+					}
+				}
+				add_government_reform = damerian_monarchy
+			}
+			add_historical_friend = A45 #Istralore
+			add_historical_friend = A41 #Damish Temple
+			add_historical_friend = A31 #Moonhaven
+			add_historical_rival = A01 #Lorent
+			add_historical_rival = A13 #Gawed
+			A45 = { add_historical_friend = ROOT }
+			A41 = { add_historical_friend = ROOT }
+			A31 = { add_historical_friend = ROOT }
+			A01 = { add_historical_rival = ROOT }
+			A13 = { add_historical_rival = ROOT }
+			country_event = {
+				id = anb_half_elves.1
+			}
+			add_country_modifier = {
+				name = centralization_modifier
+				duration = 7300
+			}
+			add_prestige = 50
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+				country_event = {
+					id = ideagroups.1
+				} 
+			}
+			if = {
+				limit = {
+					is_part_of_hre = no
+				}
+				if = {
+					limit = {
+						NOT = {
+							government_rank = 2
+						}
+					}
+					set_government_rank = 2
+				}
+				set_country_flag = is_a_grand_duchy
+				west_damesear_area = {
+					add_permanent_claim = A58
+				}
+				east_damesear_area = {
+					add_permanent_claim = A58
+				}
+				west_dameshead_region = {
+					add_permanent_claim = A58
+				}
+				damerian_dales_area = {
+					add_permanent_claim = A58
+				}
+				the_commons_area = {
+					add_permanent_claim = A58
+				}
+				heartlands_area = {
+					add_permanent_claim = A58
+				}
+			}
+			else_if = {
+				limit = {
+					is_part_of_hre = yes
+				}
+				custom_tooltip = grand_duchy_formation_tt
+			}
+			set_country_flag = formed_dameria_flag
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}

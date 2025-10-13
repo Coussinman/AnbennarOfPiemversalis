@@ -1,0 +1,122 @@
+ACE_blockade_ports_to_protectorate = {
+	type = blockade_ports
+
+	attacker = {
+		badboy_factor = 1
+		prestige_factor = 1
+		peace_cost_factor = 1
+
+		allowed_provinces = {
+			always = no
+		}
+
+		peace_options = {
+			po_ACE_trade_protectorate
+		}
+
+		prov_desc = ALL_PROVS
+	}
+
+	defender = {
+		badboy_factor = 0
+		prestige_factor = 0
+		peace_cost_factor = 0.2
+
+		allowed_provinces = {
+			always = yes
+		}
+
+		peace_options = {
+			po_looming_harpy
+		}
+
+		prov_desc = ALL_PROVS
+	}
+
+	war_name = ACE_PROTECTORATE_WAR
+
+}
+
+ACE_great_power_dismantling = {
+	type = take_capital
+	
+	attacker = {
+		badboy_factor = 2
+		prestige_factor = 5
+		peace_cost_factor = 5
+
+		required_treaty_to_take_provinces = {
+			po_ACE_dismantling
+		}
+		
+		peace_options = {
+			po_ACE_dismantling
+			po_release_vassals
+			po_release_annexed
+			po_return_cores
+		}
+		
+		deny_annex = yes
+		allowed_provinces_are_eligible = yes
+	}
+	
+	defender = {
+		badboy_factor = 0
+		prestige_factor = 2
+		peace_cost_factor = 0
+		
+		peace_options = {
+			po_release_vassals
+			po_release_annexed
+			po_return_cores
+		}
+		
+		deny_annex = yes
+		allowed_provinces_are_eligible = yes
+	}
+
+	war_name = ACE_great_power_dismantling_WAR_NAME
+}
+
+ACE_war_of_the_jotunn_war_goal = {
+	type = superiority
+
+	attacker = {
+		badboy_factor = 0.5
+		prestige_factor = 1
+		peace_cost_factor = 0.75
+
+		allowed_provinces = {
+			always = yes
+		}
+
+		peace_options = {
+			po_release_vassals
+			po_demand_provinces
+			po_return_cores
+		}
+
+		prov_desc = ALL_PROVS
+	}
+
+	defender = {
+		badboy_factor = 0.5
+		prestige_factor = 1
+		peace_cost_factor = 0.75
+
+		allowed_provinces = {
+			always = yes
+		}
+
+		peace_options = {
+			po_release_vassals
+			po_demand_provinces
+			po_return_cores
+		}
+
+		prov_desc = ALL_PROVS
+	}
+
+	war_name = ACE_WAR_OF_THE_JOTUNN_WAR_NAME
+
+}

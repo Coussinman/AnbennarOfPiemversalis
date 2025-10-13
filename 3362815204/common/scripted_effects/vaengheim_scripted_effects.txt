@@ -1,3 +1,376 @@
+vaengheim_ebonfrost_dwarves_effect = {
+	custom_tooltip = vaengheim_ebonfrost_dwarves_effect_tt
+	hidden_effect = {
+		973 = {
+			change_culture = silver_dwarf
+			add_base_production = 2
+		}
+		6271 = {
+			add_dwarven_minority_size_effect = yes
+		}
+		2830 = {
+			add_dwarven_minority_size_effect = yes
+		}
+		6276 = {
+			add_dwarven_minority_size_effect = yes
+		}
+		984 = {
+			add_dwarven_minority_size_effect = yes
+		}
+	}
+}
+
+vaengheim_skaldol_ebonforge_tower_effect = {
+	custom_tooltip = vaengheim_smidafjall_ebonforge_tower_effect_tt 
+	hidden_effect = {
+		6270 = {
+			add_province_triggered_modifier = mage_tower_ebonforge
+			add_base_production = 2
+			add_base_manpower = 2
+		}
+	}
+}
+
+vaengheim_blue_reach_good_effect = {
+	custom_tooltip = vaengheim_blue_reach_tolerance_effect_tt
+	hidden_effect = {
+		serpentshead_area = {
+			type = all
+			add_nationalism = -5
+			add_province_modifier = {
+				name = vaengheim_blue_reach_tolerance
+				duration = -1
+			}
+		}
+		northern_greatwoods_area = {
+			type = all
+			add_nationalism = -5
+			add_province_modifier = {
+				name = vaengheim_blue_reach_tolerance
+				duration = -1
+			}
+		}
+		coast_of_vics_area = { 
+			type = all
+			add_nationalism = -5
+			add_province_modifier = {
+				name = vaengheim_blue_reach_tolerance
+				duration = -1
+			}
+		}
+		west_chillsbay_area = {
+			type = all
+			add_nationalism = -5
+			add_province_modifier = {
+				name = vaengheim_blue_reach_tolerance
+				duration = -1
+			}
+		}
+	}
+	add_government_power = {
+		mechanic_type = ace_vaengheim_court_power_share
+		power_type = vaengheim_power_share
+		value = 10
+	}
+}
+
+vaengheim_blue_reach_bad_effect = {
+	custom_tooltip = vaengheim_blue_reach_conversions_effect_tt
+	hidden_effect = {
+		random_owned_province = {
+			limit = {
+				area = serpentshead_area
+			}
+			change_religion = skaldhyrric_faith
+		}
+		serpentshead_area = {
+			type = all
+			add_province_modifier = {
+				name = vaengheim_blue_reach_conversions
+				duration = 3650
+			}
+		}
+		random_owned_province = {
+			limit = {
+				area = northern_greatwoods_area
+			}
+			change_religion = skaldhyrric_faith
+		}
+		northern_greatwoods_area = {
+			type = all
+			add_province_modifier = {
+				name = vaengheim_blue_reach_conversions
+				duration = 3650
+			}
+		}
+		random_owned_province = {
+			limit = {
+				area = coast_of_vics_area
+			}
+			change_religion = skaldhyrric_faith
+		}
+		coast_of_vics_area = {
+			type = all
+			add_province_modifier = {
+				name = vaengheim_blue_reach_conversions
+				duration = 3650
+			}
+		}
+		random_owned_province = {
+			limit = {
+				area = west_chillsbay_area
+			}
+			change_religion = skaldhyrric_faith
+		}
+		west_chillsbay_area = {
+			type = all
+			add_province_modifier = {
+				name = vaengheim_blue_reach_conversions
+				duration = 3650
+			}
+		}
+	}
+	add_government_power = {
+		mechanic_type = ace_vaengheim_court_power_share
+		power_type = vaengheim_power_share
+		value = -10
+	}
+}
+
+vaengheim_troll_vestrtaka_area = {
+	vestrtaka_area = {
+		limit = { 
+			NOT = { 
+				OR = { 
+					culture = ROOT 
+					culture_group = gerudian 
+				}
+			}
+		}
+			add_devastation = 30
+			change_culture = west_dalr 
+			change_religion = ROOT
+			kill_units = { who = ROOT amount = 1 }
+			add_harpy_minority_size_effect = yes
+	}
+}
+
+vaengheim_troll_dalrfjall_area = {
+	dalrfjall_area = {
+		limit = { 
+			NOT = { 
+				OR = { 
+					culture = ROOT 
+					culture_group = gerudian 
+				}
+			}
+		}
+			add_devastation = 30
+			change_culture = west_dalr 
+			change_religion = ROOT
+			kill_units = { who = ROOT amount = 1 }
+			add_harpy_minority_size_effect = yes
+	}
+}
+
+vaengheim_gnomes_effect = {
+	custom_tooltip = vaengheim_gnomes_effect_tt
+	custom_tooltip = " "
+	define_advisor = {
+		type = spymaster
+		skill = 2
+		culture = cliff_gnome
+		religion = the_thought
+		cost_multiplier = 0.25
+	}
+	custom_tooltip = " "
+	medium_increase_of_gnomish_tolerance_effect = yes
+	custom_tooltip = " "
+	add_government_power = {
+		mechanic_type = ace_vaengheim_court_power_share
+		power_type = vaengheim_power_share
+		value = 5
+	}
+	custom_tooltip = " "
+	for = {
+		amount = 5
+		effect = "
+		random_owned_province = {
+			limit = { harpy_roost_st_has_any_roost = yes }
+			add_gnomish_minority_size_effect = yes
+		}
+		"
+	}
+}
+
+vaengheim_kobolds_effect = {
+	custom_tooltip = vaengheim_kobolds_effect_tt
+	custom_tooltip = " "
+	define_advisor = {
+		type = fortification_expert
+		skill = 2
+		culture = greenscale_kobold
+		religion = kobold_dragon_cult
+		cost_multiplier = 0.25
+	}
+	custom_tooltip = " "
+	medium_increase_of_kobold_tolerance_effect = yes
+	custom_tooltip = " "
+	add_government_power = {
+		mechanic_type = ace_vaengheim_court_power_share
+		power_type = vaengheim_power_share
+		value = 5
+	}
+	for = {
+		amount = 5
+		effect = "
+		random_owned_province = {
+			limit = { harpy_roost_st_has_any_roost = yes }
+			add_kobold_minority_size_effect = yes
+		}
+		"
+	}
+}
+
+vaengheim_govreward_1_effect = {
+	if = {
+		limit = {
+			has_country_modifier = vaengheim_olavlund_modifier_1
+		}
+		remove_country_modifier = vaengheim_olavlund_modifier_1
+		add_country_modifier = {
+			name = vaengheim_gov_reward_1
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			has_country_modifier = vaengheim_olavlund_modifier_2
+		}
+		remove_country_modifier = vaengheim_olavlund_modifier_2
+		add_country_modifier = {
+			name = vaengheim_gov_reward_3
+			duration = -1
+		}
+	}
+}
+
+vaengheim_govreward_2_effect = {
+	if = {
+		limit = {
+			has_country_modifier = vaengheim_olavlund_modifier_1
+		}
+		remove_country_modifier = vaengheim_olavlund_modifier_1
+		add_country_modifier = {
+			name = vaengheim_gov_reward_3
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			has_country_modifier = vaengheim_olavlund_modifier_2
+		}
+		remove_country_modifier = vaengheim_olavlund_modifier_2
+		add_country_modifier = {
+			name = vaengheim_gov_reward_2
+			duration = -1
+		}
+	}
+}
+
+vaengheim_color_effect_1 = {
+	change_country_color = { color = { 67  109  192 }}
+	every_subject_country = {
+		limit = { is_colonial_nation_of = ROOT }
+		change_country_color = { color = { 67  109  192 }}
+	}
+}
+
+vaengheim_color_effect_2 = {
+	change_country_color = { color = { 32 3 90 }}
+	every_subject_country = {
+		limit = { is_colonial_nation_of = ROOT }
+		change_country_color = { color = { 32 3 90 }}
+	}
+}
+
+vaengheim_terrain_dev_modifier_check = {
+	if = {
+		limit = {
+			has_terrain = forest
+			owner = {
+				has_country_flag = vaengheim_forest_expansion
+			}
+		}
+		add_province_modifier = {
+			name = estate_burghers_forest_expansion_forest
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			has_terrain = woods
+			owner = {
+				has_country_flag = vaengheim_forest_expansion
+			}
+		}
+		add_province_modifier = {
+			name = estate_burghers_forest_expansion_woods
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			has_terrain = mountain
+			owner = {
+				has_country_flag = vaengheim_mountain_expansion
+			}
+		}
+		add_province_modifier = {
+			name = estate_burghers_mountain_expansion_mountains
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			has_terrain = highlands
+			owner = {
+				has_country_flag = vaengheim_mountain_expansion
+			}
+		}
+		add_province_modifier = {
+			name = estate_burghers_mountain_expansion_highlands
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			has_terrain = hills
+			owner = {
+				has_country_flag = vaengheim_mountain_expansion
+			}
+		}
+		add_province_modifier = {
+			name = estate_burghers_mountain_expansion_hills
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			has_climate = arctic
+			owner = {
+				has_country_flag = vaengheim_arctic_expansion
+			}
+		}
+		owner = { set_country_flag = vaengheim_incense_2_flag }
+		add_province_modifier = {
+			name = estate_burghers_vaengheim_expansion_arctic
+			duration = -1
+		}
+	}
+}
+
+#New Anbennar MT
 Z88_hunt_success_increase = {
 	custom_tooltip = hunt_success_increase_tt
 	hidden_effect = {

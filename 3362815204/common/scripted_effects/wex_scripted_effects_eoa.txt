@@ -477,20 +477,36 @@ form_carneter_effect = {
 		}
 	}
 }
-partition_conquered_busilar = {
-	country_event_with_option_insight = {
-		id = flavor_wex.517
-		option_1 = "custom_tooltip = A30_direct_control_busilar_option_1_tooltip"
-		option_2 = "custom_tooltip = A30_direct_control_busilar_option_2_tooltip"
-	}
-}
 
-partition_vassalized_busilar = {
-	country_event_with_option_insight = {
-		id = flavor_wex.517
-		option_1 = "custom_tooltip = A30_vassal_busilar_option_1_tooltip"
-		option_2 = "custom_tooltip = A30_vassal_busilar_option_2_tooltip"
-		option_3 = "custom_tooltip = A30_vassal_busilar_option_3_tooltip"
+wex_corvuria_integration_effect = {
+	A59 = {
+		wex_set_in_empire = yes
+		add_liberty_desire = -100
+		custom_tooltip = A30_annex_western_corvuria_tooltip
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						area = corvurian_plains_area
+						province_id = 429
+						province_id = 430
+					}
+				}
+				add_permanent_claim = A60
+				cede_province = A60
+			}
+		}
+	}
+	579 = {
+		change_trade_goods = gems
+	}
+	change_ruler_stat = {
+		type = dip
+		amount = 1
+	}
+	add_country_modifier = {
+		name = wex_corvurian_integration
+		duration = 7300
 	}
 }
 
@@ -528,7 +544,8 @@ wex_folly_offer = {
 random_dev_grain = {
 	for = {
 		amount = 5
-		effect = "random_province = {
+		effect = "
+			random_province = {
 				limit = {
 					owned_by = ROOT
 					trade_goods = grain

@@ -1,0 +1,4309 @@
+A33_recovering_wyverns = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = A33 }
+
+	A33_lilac_war_aftermath = {
+		icon = mission_teutonic_knights
+		position = 1
+
+		trigger = {
+			army_size_percentage = 0.8
+		}
+
+		effect = {
+			define_general = {
+				name = "Gelman the Unyielding"
+				fire = 2
+				shock = 4
+				manuever = 2
+				siege = 2
+			}
+			khenak_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	A33_conquer_hill_gnolls = {
+		icon = mission_arabian_fort
+		position = 2
+		required_missions = { A33_lilac_war_aftermath }
+		provinces_to_highlight = {
+			area = khenak_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			khenak_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_prestige_or_monarch_power = { amount = 20 }
+			364 = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	A33_gnollish_question = {
+		icon = mission_kowtow
+		position = 3
+		required_missions = { A33_conquer_hill_gnolls }
+		provinces_to_highlight = {
+			area = khenak_area
+			nationalism = 10
+		}
+
+		trigger = {
+			khenak_area = {
+				type = all
+				NOT = { nationalism = 10 }
+			}
+		}
+
+		effect = {
+			country_event = {
+				id = verne_flavor_ace.2
+			}
+			add_treasury = 100
+		}
+	}
+
+	A33_egg_hunt = {
+		icon = mission_invade_island
+		position = 4
+		required_missions = { A33_gnollish_question }
+		provinces_to_highlight = {
+			area = khenak_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			treasury = 400
+			khenak_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				NOT = { unrest = 5 }
+			}
+		}
+
+		effect = {
+			country_event = { id = verne.4 }
+			random_owned_province = {
+				limit = {
+					area = khenak_area
+					NOT = { has_province_modifier = aw_wyvern_1 }
+					NOT = { has_province_modifier = aw_wyvern_2 }
+				}
+				add_permanent_province_modifier = {
+					name = aw_wyvern_2
+					duration = -1
+				}
+			}
+		}
+	}
+
+	A33_drake_sanctuary = {
+		icon = mission_conquer_50_development
+		position = 1
+		required_missions = { A33_egg_hunt }
+		provinces_to_highlight = {
+			province_id = 331
+			NOT = {
+				owned_by = ROOT
+				is_core = ROOT
+			}
+		}
+
+		trigger = {
+			has_country_modifier = verne_found_eggs
+			OR = {
+				AND = {
+					treasury = 600
+					331 = {
+						owner = {
+							has_opinion = {
+								who = ROOT
+								value = 100
+							}
+						}
+					}
+				}
+				AND = {
+					owns_core_province = 331
+					treasury = 150
+				}
+			}
+		}
+
+		effect = {
+			country_event_with_option_insight = {
+				id = verne_flavor_ace.3
+				option_1 = "
+					add_treasury = -400
+					custom_tooltip = A33_verne_flavor_ace_4_1_tt
+				"
+				option_2 = "
+					add_treasury = -600
+					add_dip_power = -50
+					custom_tooltip = A33_verne_flavor_ace_4_2_tt
+				"
+			}
+		}
+	}
+
+	A33_wyverns_back = {
+		icon = mission_italian_condottiere
+		position = 1
+		required_missions = { A33_drake_sanctuary }
+		trigger = {
+			any_owned_province = {
+				has_province_modifier = A33_starter_sanctuary
+			}
+			OR = {
+				ruler_has_mage_personality = yes
+				advisor = court_mage
+			}
+		}
+
+		effect = {
+			if = {
+				limit = { has_dlc = "Lions of the North"}
+				hidden_effect = { add_country_modifier = { name = mythical_cavalry_enabler duration = -1 hidden = yes } }
+				#enable_mythical_cavalry = { mount = wyvern }
+				add_country_modifier = {
+					name = revived_drakes_dlc
+					duration = -1
+				}
+				custom_tooltip = mythical_cavalry_enabled_tooltip
+			}
+			else = {
+				add_country_modifier = {
+					name = revived_drakes
+					duration = -1
+				}
+			}
+			set_country_flag = lvl1_wyvren_aces
+			custom_tooltip = verne_wyvern_aces_tt
+			country_event = { id = verne.2 }
+		}
+	}
+
+	A33_wyverns_rider = {
+		icon = mission_bozi_bojovnici
+		position = 1
+		required_missions = { A33_wyverns_back }
+		trigger = {
+			OR = {
+				army_professionalism = 0.4
+				army_tradition = 60
+			}
+			OR = {
+				num_of_hussars = 20
+				num_of_cavalry = 250
+			}
+			num_of_generals_with_traits = 3
+		}
+
+		effect = {
+			clr_country_flag = lvl1_wyvren_aces
+			set_country_flag = lvl2_wyvren_aces
+			hidden_effect = {
+				set_country_flag = A33_unlocked_battle_score
+				swap_non_generic_missions = yes
+			}
+			custom_tooltip = A33_upgraded_generals_tt
+			random_list = {
+				50 = {
+					define_conquistador = {
+						fire = 6
+						shock = 11
+						manuever = 6
+						siege = 6
+						trait = wyvern_rider_personality
+					}
+				}
+				50 = {
+					define_conquistador = {
+						fire = 6
+						shock = 11
+						manuever = 6
+						siege = 6
+						trait = wyvern_rider_personality
+						female = yes
+					}
+				}
+			}
+		}
+	}
+}
+A33_branch_battle_counter_shenan_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = A33
+		NOT = { has_country_flag = A33_unlocked_battle_score }
+	}
+	A33_wyverns_general_locked = {
+		icon = mission_locked_mission
+		position = 1
+		required_missions = { A33_wyverns_rider }
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = verne_battle_to_soon_tt
+				always = no
+			}
+		}
+
+		effect = {
+			add_prestige = 1
+		}
+	}
+}
+A33_branch_1_adven_rep = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = A33
+		has_country_flag = verne_adventurer_republic_path
+	}
+	A33_yin_expo = {
+		icon = mission_advance_to_the_dnieper
+		position = 9
+		provinces_to_highlight = {
+			area = ynnsmouth_area
+		}
+		required_missions = { A33_colonial_reform }
+		trigger = {
+			has_discovered = colonial_lower_ynn
+			num_of_conquistadors = 1
+			ynnsmouth_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			country_event = {
+				id = verne_flavor_ace.41
+			}
+		}
+	}
+	A33_yin_truimph = {
+		icon = mission_defeat_jaunpur
+		position = 1
+		provinces_to_highlight = {
+			OR = {
+				colonial_region = colonial_lower_ynn
+				colonial_region = colonial_upper_ynn
+				colonial_region = colonial_expanse
+			}
+		}
+		required_missions = { A33_yin_expo }
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				OR = {
+					colonial_region = colonial_lower_ynn
+					colonial_region = colonial_upper_ynn
+					colonial_region = colonial_expanse
+				}
+				value = 25
+			}
+		}
+
+		effect = {
+			country_event_with_insight = {
+				id = verne_flavor_ace.44
+				insight_tooltip = A33_ynn_adven_tt
+			}
+		}
+	}
+
+}
+A33_branch_battle_counter_shenan_2 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = A33
+		has_country_flag = A33_unlocked_battle_score
+	}
+
+	A33_wyverns_general = {
+		icon = gory_to_the_black_army
+		position = 1
+		required_missions = { A33_wyverns_rider }
+
+		trigger = {
+			OR = {
+				army_professionalism = 1
+				army_tradition = 100
+			}
+			num_of_battles = {amount = 200 }
+			grand_captain = 5
+			num_of_generals_with_traits = 4
+		}
+
+		effect = {
+			custom_tooltip = A33_enable_generals_decision
+			set_country_flag = A33_wyvern_decision
+		}
+	}
+}
+
+A33_branch_2_shared_dummy = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = A33 }
+}
+A33_branch_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = A33
+		has_country_flag = verne_adventurer_republic_path
+	}
+
+	A33_verne_kingdom = {
+		icon = mission_hanseatic_city
+		position = 3
+		required_missions = { A33_branching_start }
+		provinces_to_highlight = {
+			OR = {
+				area = menibor_loop_area
+				area = eastneck_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			not_in_mission_preview_mode = {
+				key = VER
+			}
+			num_of_owned_provinces_with = {
+				OR = {
+					area = menibor_loop_area
+					area = eastneck_area
+				}
+				value = 6
+			}
+		}
+
+		effect = {
+			14 = {
+				add_permanent_claim = ROOT
+			}
+			custom_tooltip = A33_ae_reduce
+			hidden_effect = {
+				every_country = {
+					limit = {
+						is_part_of_hre = yes
+					}
+					add_aggressive_expansion = {
+						who = ROOT
+						value = -15
+						apply_calc = no
+					}
+				}
+			}
+
+		}
+
+	}
+
+	A33_pearls_ambition = {
+		icon = mission_kazakh_tribes
+		position = 1
+		required_missions = { A33_verne_kingdom }
+		provinces_to_highlight = {
+			province_id = 14
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			14 ={
+				is_core = ROOT
+			}
+			army_strength = {
+				who = A11
+				value = 1.75
+			}
+			navy_size = A11
+		}
+
+		effect = {
+			if = {
+				limit = {
+					exists = A11
+				}
+				add_casus_belli = {
+					target = A11
+					type = cb_vassalize_mission
+					months = 240
+				}
+			}
+			else = {
+				damespearl_area = {
+					add_permanent_claim = ROOT
+				}
+				pearlywine_area = {
+					add_permanent_claim = ROOT
+				}
+			}
+		}
+	}
+
+	A33_surpass_pears = {
+		icon = mission_unite_home_region
+		position = 5
+		required_missions = { A33_pearls_ambition }
+		provinces_to_highlight = {
+			is_capital_of = A11
+		}
+
+		trigger = {
+			pearlywine_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			damespearl_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			OR = {
+				NOT = { exists = A11 }
+				A11 = {
+					is_subject_of = ROOT
+					NOT = { liberty_desire = 40 }
+				}
+			}
+		}
+
+		effect = {
+			add_prestige = 50
+			remove_historical_rival = A11
+			A11 = { remove_historical_rival = ROOT }
+			add_power_projection = {
+				type = 10_permanent_power_projection
+				amount = 10
+			}
+		}
+	}
+
+	A33_fate_empire = {
+		icon = mission_moon_throne
+		position = 6
+		required_missions = { A33_surpass_pears }
+		provinces_to_highlight = {
+			owner = {
+				army_size = A33
+			}
+			is_capital = yes
+		}
+
+		trigger = {
+			all_known_country = {
+				capital_scope = { continent = europe }
+				NOT = { army_size = ROOT }
+			}
+		}
+
+		effect = {
+			custom_tooltip = A33_adven_emp_fin
+			hidden_effect = {
+				every_neighbor_province = {
+					limit = {
+						is_part_of_hre = yes
+					}
+					add_permanent_claim = ROOT
+				}
+			}
+			add_ruler_personality = iron_crowned_personality
+			if = {
+				limit = { current_age = age_of_discovery }
+				add_country_modifier_for_age = {
+					name = A33_empire_broke
+					age = age_of_discovery
+				}
+			}
+			else_if = {
+				limit = { current_age = age_of_reformation }
+				add_country_modifier_for_age = {
+					name = A33_empire_broke
+					age = age_of_reformation
+				}
+			}
+			else_if = {
+				limit = { current_age = age_of_absolutism }
+				add_country_modifier_for_age = {
+					name = A33_empire_broke
+					age = age_of_absolutism
+				}
+			}
+			else = {
+				add_country_modifier_for_age = {
+					name = A33_empire_broke
+					age = age_of_revolutions
+				}
+			}
+		}
+	}
+}
+
+A33_branch_2_branching = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = A33
+		has_country_flag = verne_adventurer_monarchy_path
+	}
+
+	A33_influence_vernman = {
+		icon = bavarian_netherlands
+		position = 3
+		required_missions = { A33_branching_start }
+		provinces_to_highlight = {
+			is_capital = yes
+			owner = {
+				culture = vernman
+				is_part_of_hre = yes
+				OR = {
+					NOT = {
+						has_opinion = {
+							who = ROOT
+							value = 180
+						}
+					}
+					NOT = {
+						trust = {
+							who = ROOT
+							value = 60
+						}
+					}
+				}
+			}
+			NOT = { owned_by = ROOT }
+		}
+
+		trigger = {
+			not_in_mission_preview_mode = {
+				key = VER
+			}
+			OR = {
+				custom_trigger_tooltip = {
+					tooltip = A33_sphere_trig_tt
+					all_country = {
+						if = {
+					 		limit = {
+						 		culture = vernman
+								is_part_of_hre = yes
+								NOT = { tag = ROOT }
+							}
+							has_opinion = {
+						 		who = ROOT
+								value = 180
+							}
+							trust = {
+								who = ROOT
+								value = 60
+							}
+						}
+					}
+				}
+
+				and = {
+					50 = {
+						country_or_non_sovereign_subject_holds = ROOT
+					}
+					569 = {
+						country_or_non_sovereign_subject_holds = ROOT
+					}
+					284 = {
+						country_or_non_sovereign_subject_holds = ROOT
+					}
+					287 = {
+						country_or_non_sovereign_subject_holds = ROOT
+					}
+					295 = {
+						country_or_non_sovereign_subject_holds = ROOT
+					}
+				}
+			}
+		}
+
+		effect = {
+			country_event_with_option_insight = {
+				id = verne_flavor_ace.46
+				option_1 = "
+				tooltip = {
+					add_country_modifier = {
+						name = A33_verne_staletes_1
+						duration = 5475
+					}
+				}
+				custom_tooltip = A33_sphere_ver_1
+				"
+				option_2 = "
+				tooltip = {
+					add_country_modifier = {
+						name = A33_verne_staletes_2
+						duration = 5475
+					}
+				}
+				custom_tooltip = A33_sphere_ver_2
+				"
+				option_3 = "
+				tooltip = {
+					add_country_modifier = {
+						name = A33_verne_staletes_3
+						duration = 5475
+					}
+				}
+				custom_tooltip = A33_sphere_ver_3
+				"
+			}
+		}
+	}
+
+	A33_vernman_granduchy = {
+		icon = control_swabia
+		position = 1
+		required_missions = { A33_influence_vernman }
+		provinces_to_highlight = {
+			culture = vernman
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+			is_part_of_hre = yes
+			NOT = { province_id = 331 }
+			NOT = { province_id = 285 }
+		}
+
+		trigger = {
+			eastneck_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			galeinn_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			prestige = 100
+		}
+
+		effect = {
+			custom_tooltip = A33_integrate_verne_sats
+			hidden_effect = {
+				random_country = {
+					limit = {
+						primary_culture = vernman
+						owns = 45
+					}
+					every_owned_province = {
+						add_core = prev
+					}
+				}
+				inherit = prev
+			}
+			country_event = {
+				id = verne_flavor_ace.47
+			}
+			custom_tooltip = A33_steal_elector_tt
+			set_country_flag = A33_steal_elector
+			override_country_name = AA3
+		}
+	}
+
+	A33_meritcratical_empire = {
+		icon = influence_the_princes
+		position = 1
+		required_missions = { A33_vernman_granduchy }
+		provinces_to_highlight = {
+			is_capital = yes
+			owner = {
+				NOT = { is_rival = ROOT }
+				is_part_of_hre = yes
+				NOT = {
+					has_opinion = {
+						who = ROOT
+						value = 50
+					}
+				}
+			}
+		}
+
+		trigger = {
+			is_emperor = yes
+			custom_trigger_tooltip = {
+				tooltip = A33_merit_emp_tt
+				all_country = {
+					if = {
+						 limit = {
+							is_part_of_hre = yes
+							NOT = { is_rival = ROOT }
+							NOT = { tag = ROOT }
+						}
+						has_opinion = {
+							who = ROOT
+							value = 50
+						}
+					}
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = A33_avenge_lilac
+				duration = 3650
+			}
+			add_casus_belli = {
+				type = verne_cb_imperial_ban
+				target = A30
+				months = 120
+			}
+			add_casus_belli = {
+				type = verne_cb_imperial_ban
+				target = A48
+				months = 120
+			}
+		}
+	}
+
+	A33_expanding_sphere = {
+		icon = mission_moon_throne
+		position = 1
+		required_missions = { A33_meritcratical_empire }
+		provinces_to_highlight = {
+			OR = {
+				area = west_damesear_area
+				area = east_damesear_area
+				area = damerian_dales_area
+				area = the_commons_area
+			}
+		}
+
+		trigger = {
+			imperial_influence = 20
+			exists = Z42
+			exists = Z41
+			exists = Z40
+			custom_trigger_tooltip = {
+				tooltip = A33_re_dameria_tt
+				all_country = {
+					if = {
+						 limit = {
+							capital_scope = {
+								OR = {
+									area = west_damesear_area
+									area = east_damesear_area
+									area = damerian_dales_area
+									area = the_commons_area
+								}
+							}
+							NOT = { tag = ROOT }
+						}
+						NOT = { num_of_cities = 6 }
+						has_opinion = {
+							who = ROOT
+							value = 180
+						}
+						trust = {
+							who = ROOT
+							value = 60
+						}
+					}
+				}
+			}
+		}
+
+		effect = {
+			add_imperial_influence = -20
+			country_event_with_option_insight = {
+				id = verne_flavor_ace.50
+				option_1 = "custom_tooltip = A33_inherit_dam_1"
+				option_2 = "custom_tooltip = A33_inherit_dam_2"
+				option_3 = "custom_tooltip = A33_inherit_dam_3"
+				option_4 = "custom_tooltip = A33_inherit_dam_5"
+			}
+			custom_tooltip = A33_expanding_sphere_tt
+		}
+	}
+}
+A33_branch_2_shared = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = A33 }
+
+	A33_wyverns_tactics = {
+		icon = swiss_mercenaries
+		position = 7
+		required_missions = { A33_wyverns_back }
+
+		trigger = {
+			if = {
+				limit = { has_dlc = "Lions of the North"}
+				num_of_hussars = 20
+			}
+			else = {
+				num_of_cavalry = 150
+				cavalry_fraction = 0.5
+			}
+			splendor = 800
+		}
+
+		effect = {
+			if = {
+				limit = { has_dlc = "Lions of the North"}
+				remove_country_modifier = revived_drakes_dlc
+				add_country_modifier = {
+					name = revived_drakes_dlc_2
+					duration = -1
+				}
+				custom_tooltip = A33_build_sanctuaries
+				set_country_flag = A33_can_build_sanct
+			}
+			else = {
+				remove_country_modifier = revived_drakes
+				add_country_modifier = {
+					name = revived_drakes_2
+					duration = -1
+				}
+			}
+		}
+	}
+
+	A33_wyverns_question = {
+		icon = expand_the_arsenal
+		position = 1
+		required_missions = { A33_wyverns_tactics }
+
+		trigger = {
+			if = {
+				limit = { has_dlc = "Lions of the North"}
+				num_of_hussars = 50
+			}
+			else = {
+				num_of_cavalry = 200
+				cavalry_fraction = 0.5
+			}
+			has_global_modifier_value = {
+				which = discipline
+				value = 0.20
+			}
+		}
+
+		effect = {
+			set_country_flag = A33_upgrade_sanc
+			country_event_with_option_insight = {
+				id = verne_flavor_ace.16
+
+				option_1 = "
+					custom_tooltip = verne_wyvern_army
+				"
+				option_2 = "
+					custom_tooltip = A33_units_wyvrens
+				"
+			}
+		}
+	}
+
+}
+A33_branch_2_adven_rep = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = A33
+		has_country_flag = verne_adventurer_republic_path
+	}
+	A33_eordland_expo = {
+		icon = mission_a_great_mandala
+		position = 9
+		provinces_to_highlight = {
+			province_id = 2042
+		}
+		required_missions = { A33_colonial_reform }
+		trigger = {
+			eorwestislands_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			has_discovered = colonial_eordand
+			num_of_conquistadors = 1
+			has_discovered = 2042
+		}
+
+		effect = {
+			country_event = {
+				id = verne_flavor_ace.42
+			}
+			hidden_effect = {
+				every_country = {
+					limit = { culture_group = eordan_ruinborn_elf }
+					country_event = { id = cyranvar.14 days = 1825 }
+				}
+			}
+		}
+	}
+	A33_eordland_truimph = {
+		icon = mission_che_the_cave_country
+		position = 1
+		provinces_to_highlight = {
+			area = domandrod_central_glade_area
+		}
+		required_missions = { A33_eordland_expo }
+		trigger = {
+			domandrod_central_glade_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			if = {
+				limit = { 6241 = { is_city = no } }
+				6241 = {
+					cede_province = ROOT
+					add_core = ROOT
+				}
+			}
+			else = {
+				6241 = { add_core = ROOT }
+			}
+			6241 = {
+				add_great_project = {
+					type = domandrod_fey_portal
+					instant = no
+				}
+			}
+			if = {
+				limit = { 6258 = { is_city = no } }
+				6258 = {
+					cede_province = ROOT
+					add_core = ROOT
+				}
+			}
+			else = {
+				6258 = { add_core = ROOT }
+			}
+			6258 = {
+				add_great_project = {
+					type = deepwoods_fey_portal
+					instant = no
+				}
+			}
+		}
+	}
+
+}
+A33_branching_shenan_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = A33 }
+	A33_branching_start = {
+		icon = mission_verne_flag
+		position = 2
+
+		trigger = {
+			estate_loyalty = {
+				estate = estate_nobles
+				loyalty = 60
+			}
+			estate_loyalty = {
+				estate = estate_adventurers
+				loyalty = 60
+			}
+			government_reform_progress = 50
+		}
+
+		effect = {
+			country_event = {
+				id = verne_flavor_ace.1
+			}
+		}
+	}
+
+}
+A33_branch_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = A33
+		has_country_flag = verne_adventurer_republic_path
+	}
+
+	A33_noble_wanneing = {
+		icon = mission_restore_faith_in_the_throne
+		position = 3
+		required_missions = { A33_branching_start }
+
+		trigger = {
+			not_in_mission_preview_mode = {
+				key = VER
+			}
+			OR = {
+				NOT = {
+					estate_influence = {
+						estate = estate_nobles
+						influence = 30
+					}
+				}
+				NOT = {
+					estate_loyalty = {
+						estate = estate_nobles
+						loyalty = 20
+					}
+				}
+			}
+			estate_loyalty = {
+				estate = estate_adventurers
+				loyalty = 60
+			}
+		}
+
+		effect = {
+			hidden_effect = {
+				unlock_government_reform = {
+					government_reform = A33_adventury_republic_reform
+				}
+			}
+			change_government_to_republic = yes
+			add_government_reform = A33_adventury_republic_reform
+		}
+	}
+
+	A33_verne_republic = {
+		icon = mission_the_sudebnik
+		position = 1
+		required_missions = { A33_noble_wanneing }
+
+		trigger = {
+			republican_tradition = 95
+			reform_level = 3
+		}
+
+		effect = {
+			change_government_reform_progress = 250
+			add_stability_or_adm_power = yes
+		}
+	}
+
+	A33_khenois_contact = {
+		icon = ven_scales_of_power
+		position = 1
+		required_missions = {
+			A33_verne_republic
+			A33_first_colony
+		}
+		provinces_to_highlight = {
+			colonial_region = colonial_kheionai
+			has_port = yes
+		}
+
+		trigger = {
+			has_discovered = colonial_kheionai
+			num_of_conquistadors = 1
+		}
+
+		effect = {
+			kill_leader = {
+				type = conquistador
+			}
+			country_event_with_insight = {
+				id = verne_flavor_ace.28
+				insight_tooltip = A33_khen_expo
+			}
+			add_country_modifier = {
+				name = A33_start_expo
+				duration = -1
+			}
+		}
+	}
+
+	A33_khenois_contender = {
+		icon = mission_colonize_california
+		position = 1
+		required_missions = { A33_khenois_contact }
+		provinces_to_highlight = {
+			colonial_region = colonial_kheionai
+			has_port = yes
+		}
+
+		trigger = {
+			any_subject_country = {
+				custom_trigger_tooltip = {
+					tooltip = any_type_colony_tt
+					OR = {
+						is_subject_of_type = colony
+						is_subject_of_type = crown_colony
+						is_subject_of_type = private_enterprise
+						is_subject_of_type = self_governing_colony
+					}
+				}
+				capital_scope = {
+					colonial_region = colonial_kheionai
+				}
+			}
+		}
+
+		effect = {
+			elokos_area = {
+				add_permanent_claim = ROOT
+			}
+			empkeios_area = {
+				add_permanent_claim = ROOT
+			}
+			keyolion_area = {
+				add_permanent_claim = ROOT
+			}
+			random_subject_country = {
+				limit = {
+					capital_scope = {
+						colonial_region = colonial_kheionai
+					}
+				}
+				elokos_area = {
+					add_permanent_claim = ROOT
+				}
+				empkeios_area = {
+					add_permanent_claim = ROOT
+				}
+				keyolion_area = {
+					add_permanent_claim = ROOT
+				}
+			}
+		}
+	}
+
+	A33_khenois_conquests = {
+		icon = mission_conquer_lanka
+		position = 1
+		required_missions = {
+			A33_khenois_contender
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = elokos_area
+				area = empkeios_area
+				area = keyolion_area
+			}
+		}
+
+		trigger = {
+			elokos_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			empkeios_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			keyolion_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			if = {
+				limit = {
+					any_subject_country = {
+						capital_scope = {
+							colonial_region = colonial_kheionai
+						}
+					}
+				}
+				random_subject_country = {
+					limit = {
+						capital_scope = {
+							colonial_region = colonial_kheionai
+						}
+					}
+					add_country_modifier = {
+						name = A33_expo_stab
+						duration = 3650
+					}
+					vothelisi_area = {
+						add_permanent_claim = ROOT
+					}
+					degakheion_area = {
+						add_permanent_claim = ROOT
+					}
+				}
+			}
+			vothelisi_area = {
+				add_permanent_claim = ROOT
+			}
+			degakheion_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	A33_khenois_hegemony = {
+		icon = mission_invade_island
+		position = 1
+		required_missions = { A33_khenois_conquests }
+		provinces_to_highlight = {
+			OR = {
+				area = vothelisi_area
+				area = degakheion_area
+			}
+		}
+
+		trigger = {
+			vothelisi_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			degakheion_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			if = {
+				limit = {
+					any_subject_country = {
+						capital_scope = {
+							colonial_region = colonial_kheionai
+						}
+					}
+				}
+				random_subject_country = {
+					limit = {
+						capital_scope = {
+							colonial_region = colonial_kheionai
+						}
+					}
+					add_country_modifier = {
+						name = A33_expo_stab
+						duration = 3650
+					}
+					alecand_region = {
+						add_permanent_claim = ROOT
+					}
+				}
+			}
+		}
+	}
+
+	A33_khenois_new_age = {
+		icon = secure_the_republic
+		position = 1
+		required_missions = { A33_khenois_hegemony }
+		provinces_to_highlight = {
+			owner = {
+				NOT = { tag = ROOT }
+				NOT = { is_subject_of = ROOT }
+				num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+					value = 4
+					region = alecand_region
+				}
+			}
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = A33_khenoi_dism
+				any_country = {
+					NOT = { tag = ROOT }
+					NOT = { is_subject_of = ROOT }
+					capital_scope = {
+						region = alecand_region
+					}
+					num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+						value = 4
+						region = alecand_region
+					}
+				}
+			}
+
+		}
+
+		effect = {
+			add_yearly_manpower = 1
+			add_splendor = 800
+			add_prestige_or_monarch_power = { amount = 33 }
+			if = {
+				limit = {
+					any_subject_country = {
+						capital_scope = {
+							colonial_region = colonial_kheionai
+						}
+					}
+				}
+				random_subject_country = {
+					limit = {
+						capital_scope = {
+							colonial_region = colonial_kheionai
+						}
+					}
+					add_country_modifier = {
+						name = A33_expo_stab2
+						duration = 3650
+					}
+					kheionai_superregion = {
+						add_permanent_claim = ROOT
+					}
+
+				}
+			}
+		}
+	}
+
+	A33_eordland_expidition = {
+		icon = mission_stormy_seas
+		position = 1
+		required_missions = { A33_khenois_new_age }
+		provinces_to_highlight = {
+			province_id = 2736
+		}
+
+		trigger = {
+			2736 = {
+				development = 35
+				province_has_current_tech_fort_trigger = yes
+				num_of_buildings_in_province = 4
+			}
+		}
+
+		effect = {
+			custom_tooltip = A33_regatta_starter_1
+			set_country_flag = A33_regatta_starter_flg_6
+		}
+	}
+}
+A33_branch_mon_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = A33
+		has_country_flag = verne_adventurer_monarchy_path
+	}
+
+	A33_novus_homen = {
+		icon = spa_infantes_aragon
+		position = 1
+		required_missions = { A33_branching_start }
+
+		trigger = {
+			not_in_mission_preview_mode = {
+				key = VER
+			}
+			estate_loyalty = {
+				estate = estate_nobles
+				loyalty = 60
+			}
+			estate_loyalty = {
+				estate = estate_adventurers
+				loyalty = 60
+			}
+			dip_power = 100
+		}
+
+		effect = {
+			add_dip_power = -100
+			unlock_government_reform = {
+				government_reform = A33_nobles_adventurers_gov
+			}
+			add_government_reform = A33_nobles_adventurers_gov
+		}
+	}
+
+	A33_imperial_bid = {
+		icon = mission_moon_throne
+		position = 1
+		required_missions = { A33_novus_homen }
+		provinces_to_highlight = {
+			owner = {
+				is_elector = yes
+			}
+			is_capital = yes
+		}
+
+		trigger = {
+			if = {
+				limit = {
+					hre_size = 1
+				}
+				calc_true_if = {
+					desc = A33_imp_bid_tt
+					all_elector = {
+						preferred_emperor = ROOT
+						has_opinion = { who = ROOT value = 75 }
+					}
+					amount = 3
+				}
+			}
+			else = {
+				num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+					value = 20
+					OR = {
+						region = east_dameshead_region
+						region = west_dameshead_region
+						region = the_borders_region
+					}
+				}
+			}
+		}
+
+		effect = {
+			if = {
+				limit = {
+					has_country_modifier = lilac_wars_moon_party_member_Elect
+				}
+				remove_country_modifier = lilac_wars_moon_party_member_Elect
+			}
+			add_country_modifier = {
+				name = A33_strong_bid
+				duration = 5475
+			}
+		}
+	}
+
+	A33_border_mark = {
+		icon = fortify_the_passes
+		position = 1
+		required_missions = { A33_imperial_bid }
+		provinces_to_highlight = {
+			OR = {
+				owned_by = A23
+				owned_by = A46
+				owned_by = A72
+				owned_by = A04
+			}
+			is_capital = yes
+		}
+
+		trigger = {
+			A23 = {
+				has_20_opinion_sent_gift = { target = ROOT }
+			}
+			A46 = {
+				has_20_opinion_sent_gift = { target = ROOT }
+			}
+			A72 = {
+				has_20_opinion_sent_gift = { target = ROOT }
+			}
+			A04 = {
+				has_20_opinion_sent_gift = { target = ROOT }
+			}
+			manpower = 50
+		}
+
+		effect = {
+			add_manpower = -25
+			add_imperial_influence = 10
+			A23 = {
+				add_manpower = 10
+			}
+			A46 = {
+				add_manpower = 10
+			}
+			A72 = {
+				add_manpower = 10
+			}
+			A04 = {
+				add_manpower = 10
+			}
+			custom_tooltip = A33_reinforce_bord_tt
+			hidden_effect = {
+				every_country = {
+					limit = { is_part_of_hre = yes }
+					add_trust = {
+						who = ROOT
+						value = 10
+					}
+				}
+			}
+		}
+	}
+
+	A33_reorganize_wex = {
+		icon = balance_of_power
+		position = 1
+		required_missions = {
+			A33_border_mark
+			A33_meritcratical_empire
+		}
+		provinces_to_highlight = {
+			OR = {
+				owned_by = A30
+				owned_by = A48
+			}
+		}
+
+		trigger = {
+			A30 = {
+				NOT = { num_of_cities = 10 }
+			}
+			A48 = {
+				NOT = { num_of_cities = 8 }
+			}
+			A34 = {
+				has_opinion = {
+					who = ROOT
+					value = 100
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = A33_reorganize_wex_3
+			country_event_with_option_insight = {
+				id = verne_flavor_ace.51
+				option_1 = "
+					A30 = {
+						inherit = A48
+						inherit = A34
+						inherit = Z04
+						inherit = Z02
+					}
+					create_subject = {
+						subject_type = A33_grand_duchy
+						subject = A30
+					}
+				"
+				option_2 = "
+					A48 = {
+						inherit = A30
+						inherit = A34
+						inherit = Z04
+						inherit = Z02
+					}
+					create_subject = {
+						subject_type = A33_grand_duchy
+						subject = A48
+					}
+				"
+				option_3 = "
+					A34 = {
+						inherit = A30
+						inherit = A48
+						inherit = Z04
+						inherit = Z02
+					}
+					create_subject = {
+						subject_type = A33_grand_duchy
+						subject = A34
+					}
+				"
+			}
+		}
+	}
+
+	A33_imperial_diet = {
+		icon = imperial_ascendancy
+		position = 1
+		required_missions = { A33_reorganize_wex }
+
+		trigger = {
+			hre_reform_passed = anbennar_permanent_parliament
+			imperial_influence = 5
+			government_reform_progress = 100
+		}
+
+		effect = {
+			add_imperial_influence = -5
+			change_government_reform_progress = -100
+			set_country_flag = A33_parliament_hre_flag
+			add_government_reform = A33_parliament_hre
+		}
+	}
+
+	A33_empire_prosperity = {
+		icon = give_him_back_his_legions
+		position = 1
+		required_missions = { A33_imperial_diet }
+		provinces_to_highlight = {
+			is_capital = yes
+			owner = {
+				NOT = { is_rival = ROOT }
+				is_part_of_hre = yes
+				NOT = {
+					has_opinion = {
+						who = ROOT
+						value = 65
+					}
+				}
+				NOT = { tag = ROOT }
+			}
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = A33_prosp_emp_tt
+				all_country = {
+					if = {
+						limit = {
+							is_part_of_hre = yes
+							NOT = { is_rival = ROOT }
+							NOT = { tag = ROOT }
+						}
+						has_opinion = {
+							who = ROOT
+							value = 65
+						}
+					}
+				}
+			}
+		}
+
+		effect = {
+			add_imperial_influence = 10
+			custom_tooltip = A33_reinforce_bord_tt
+			hidden_effect = {
+				every_country = {
+					limit = { is_part_of_hre = yes }
+					add_trust = {
+						who = ROOT
+						value = 10
+					}
+				}
+			}
+		}
+	}
+
+	A33_empire_the_borders = {
+		icon = expand_the_terraferma
+		position = 1
+		required_missions = { A33_empire_prosperity }
+		provinces_to_highlight = {
+			is_capital = yes
+			owner = {
+				NOT = { is_rival = ROOT }
+				capital_scope = {
+					OR = {
+						region = the_borders_region
+						area = ashfields_area
+					}
+				}
+				NOT = {
+					has_opinion = {
+						who = ROOT
+						value = 120
+					}
+				}
+				NOT = {
+					trust = {
+						who = ROOT
+						value = 65
+					}
+				}
+			}
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = A33_empire_the_borders_tt
+				all_country = {
+					if = {
+						limit = {
+							capital_scope = {
+								OR = {
+									region = the_borders_region
+									area = ashfields_area
+								}
+							}
+							NOT = { tag = ROOT }
+						}
+						has_opinion = {
+							who = ROOT
+							value = 120
+						}
+						trust = {
+							who = ROOT
+							value = 60
+						}
+					}
+				}
+			}
+		}
+
+		effect = {
+			every_country = {
+				limit = {
+					capital_scope = {
+						OR = {
+							region = dostanor_region
+							region = daravans_folly_region
+							region = ourdia_region
+						}
+					}
+					religion_group = cannorian
+				}
+				reverse_add_casus_belli = {
+					target = ROOT
+					type = cb_expand_empire_ace
+					months = 180
+				}
+			}
+			country_event_with_option_insight = {
+				id = verne_flavor_ace.52
+				option_1 = "
+					add_country_modifier = {
+						name = A33_border_arannen
+						duration = 5475
+					}
+					custom_tooltip = A33_arran_bord
+				"
+				option_2 = "
+					add_country_modifier = {
+						name = A33_arannen
+						duration = 5475
+					}
+					custom_tooltip = A33_ashfield_bord
+				"
+				option_3 = "
+					add_country_modifier = {
+						name = A33_coastal_border
+						duration = 5475
+					}
+					custom_tooltip = A33_coast_bord
+				"
+				option_4 = "
+					add_country_modifier = {
+						name = A33_tellum_border
+						duration = 5475
+					}
+					custom_tooltip = A33_tellum_bord
+				"
+			}
+		}
+	}
+
+	A33_empire_dostanort = {
+		icon = westphalian_conquest
+		position = 1
+		required_missions = { A33_empire_the_borders }
+		provinces_to_highlight = {
+			is_capital = yes
+			owner = {
+				NOT = { is_rival = ROOT }
+				capital_scope = {
+					OR = {
+						region = dostanor_region
+						region = daravans_folly_region
+						region = ourdia_region
+					}
+				}
+				religion_group = cannorian
+				NOT = {
+					has_opinion = {
+						who = ROOT
+						value = 120
+					}
+				}
+				NOT = {
+					trust = {
+						who = ROOT
+						value = 60
+					}
+				}
+			}
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = A33_dostanor_tt
+				all_country = {
+					if = {
+						 limit = {
+							capital_scope = {
+								OR = {
+									region = dostanor_region
+									region = daravans_folly_region
+									region = ourdia_region
+								}
+							}
+							religion_group = cannorian
+						}
+						has_opinion = {
+							who = ROOT
+							value = 120
+						}
+						trust = {
+							who = ROOT
+							value = 60
+						}
+					}
+				}
+			}
+			441 = {
+				is_part_of_hre = yes
+			}
+			447 = {
+				is_part_of_hre = yes
+			}
+			510 = {
+				is_part_of_hre = yes
+			}
+		}
+
+		effect = {
+			add_splendor = 400
+			add_adm_power = 100
+			add_dip_power = 100
+			add_mil_power = 100
+			country_event_with_option_insight = {
+				id = verne_flavor_ace.53
+				option_1 = "
+					unlock_estate_privilege = {
+						estate_privilege = verne_korvid_offer
+					}
+					set_estate_privilege = verne_korvid_offer
+					custom_tooltip = A33_empire_dostanor_tt1
+				"
+				option_2 = "
+					510 = {
+						if = {
+							limit = {
+								NOT = {
+									has_great_project = {
+										type = bal_ouord
+										tier = 3
+									}
+								}
+							}
+							add_great_project_tier = {
+								type = bal_ouord
+								tier = 1
+							}
+						}
+						else = {
+							add_base_manpower = 4
+							add_base_production = 4
+							add_base_tax = 4
+						}
+					}
+					custom_tooltip = A33_empire_dostanor_tt2
+				"
+				option_3 = "
+					add_country_modifier = {
+						name = A33_nathalarie
+						duration = 18250
+					}
+					custom_tooltip = A33_empire_dostanor_tt3
+				"
+			}
+		}
+	}
+
+	A33_empire_dece_util = {
+		icon = mission_rb_trinity_college_dublin
+		position = 1
+		required_missions = {
+			A33_empire_rose_pluc
+			A33_empire_small_country
+			A33_empire_dostanort
+			A33_empire_anbennar_alenic
+			A33_empire_elfrealm_2
+		}
+
+		trigger = {
+			hre_reform_passed = anbennar_imperial_war
+			imperial_influence = 100
+			custom_trigger_tooltip = {
+				tooltip = A33_A33_empire_dece_util_trig_tt
+				has_country_flag = A33_passed_federalis
+			}
+		}
+
+		effect = {
+			custom_tooltip = A33_empire_dece_util_tt
+			set_country_flag = A33_empire_dece_flag
+		}
+	}
+}
+A33_branch_4_shared = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = A33 }
+
+	A33_explorations = {
+		icon = mission_conquer_5_states
+		position = 2
+		required_missions = { A33_riding_waves }
+
+		trigger = {
+			OR = {
+				exploration_ideas = 2
+				expansion_ideas = 2
+			}
+		}
+
+		effect = {
+			create_explorer = {
+				tradition = 60
+			}
+			add_country_modifier = {
+				name = verne_new_adventures
+				duration = 3650
+			}
+		}
+	}
+
+	A33_land_ho = {
+		icon = mission_invade_island
+		position = 1
+		required_missions = { A33_explorations }
+		provinces_to_highlight = {
+			OR = {
+				continent = north_america
+				continent = south_america
+			}
+			NOT = { has_discovered = ROOT }
+		}
+
+		trigger = {
+			any_province = {
+				OR = {
+					continent = north_america
+					continent = south_america
+				}
+				has_discovered = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = A33_colonial_enthusiasm
+				duration = 7300
+			}
+			create_conquistador = {
+				tradition = 70
+			}
+			add_splendor = 400
+		}
+	}
+
+	A33_first_colony = {
+		icon = mission_claim_the_canaries
+		position = 1
+		required_missions = { A33_land_ho }
+		provinces_to_highlight = {
+			OR = {
+				continent = north_america
+				continent = south_america
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+			has_discovered = yes
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				OR = {
+					continent = north_america
+					continent = south_america
+				}
+				value = 7
+			}
+		}
+
+		effect = {
+			every_country = {
+				limit = {
+					is_colonial_nation_of = ROOT
+				}
+				add_country_modifier = {
+					name = colonial_enthusiasm
+					duration = 5475
+				}
+			}
+			add_country_modifier = {
+				name = colonial_enthusiasm
+				duration = 5475
+			}
+
+		}
+	}
+
+}
+A33_branch_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = A33
+		has_country_flag = verne_adventurer_republic_path
+	}
+
+	A33_taychend_contact = {
+		icon = mission_potosi_silver
+		position = 1
+		required_missions = {
+			A33_first_colony
+			A33_verne_republic
+		}
+		provinces_to_highlight = {
+			colonial_region = colonial_taychend
+			has_port = yes
+		}
+
+		trigger = {
+			not_in_mission_preview_mode = {
+				key = VER
+			}
+			has_discovered = colonial_taychend
+			num_of_conquistadors = 1
+		}
+
+		effect = {
+			kill_leader = {
+				type = conquistador
+			}
+			country_event_with_insight = {
+				id = verne_flavor_ace.33
+				insight_tooltip = A33_tay_expo
+			}
+			add_country_modifier = {
+				name = A33_start_expo
+				duration = -1
+			}
+		}
+	}
+
+	A33_taychend_contender = {
+		icon = mission_spanish_netherlands
+		position = 1
+		required_missions = { A33_taychend_contact }
+		provinces_to_highlight = {
+			colonial_region = colonial_taychend
+			has_port = yes
+		}
+
+		trigger = {
+			any_subject_country = {
+				custom_trigger_tooltip = {
+					tooltip = any_type_colony_tt
+					OR = {
+						is_subject_of_type = colony
+						is_subject_of_type = crown_colony
+						is_subject_of_type = private_enterprise
+						is_subject_of_type = self_governing_colony
+					}
+				}
+				capital_scope = {
+					colonial_region = colonial_kheionai
+				}
+			}
+		}
+
+		effect = {
+			royakottar_area = {
+				add_permanent_claim = ROOT
+			}
+			uesrennu_area = {
+				add_permanent_claim = ROOT
+			}
+			varamraya_area = {
+				add_permanent_claim = ROOT
+			}
+			random_subject_country = {
+				limit = {
+					capital_scope = {
+						colonial_region = colonial_taychend
+					}
+				}
+				royakottar_area = {
+					add_permanent_claim = ROOT
+				}
+				uesrennu_area = {
+					add_permanent_claim = ROOT
+				}
+				varamraya_area = {
+					add_permanent_claim = ROOT
+				}
+			}
+		}
+	}
+
+	A33_colonial_method = {
+		icon = mission_italian_condottiere
+		position = 1
+		required_missions = { A33_taychend_contender A33_taychend_contender }
+
+		trigger = {
+			num_of_subjects = 4
+			government_reform_progress = -50
+			dip_power = 100
+			calc_true_if = {
+				all_subject_country = {
+					OR = {
+						is_subject_of_type = colony
+						is_subject_of_type = crown_colony
+						is_subject_of_type = private_enterprise
+						is_subject_of_type = self_governing_colony
+					}
+				}
+				amount = 4
+			}
+		}
+
+		effect = {
+			custom_tooltip = A33_adven_colon_1
+			add_dip_power = -100
+			change_government_reform_progress = 50
+			hidden_effect = {
+				random_subject_country = {
+					limit = {
+						capital_scope = {
+							colonial_region = colonial_kheionai
+						}
+						is_colonial_nation = yes
+					}
+					ROOT = {
+						create_subject = {
+							subject_type = A33_adventurer_colony
+							subject = PREV
+						}
+					}
+				}
+				random_subject_country = {
+					limit = {
+						capital_scope = {
+							colonial_region = colonial_taychend
+						}
+						is_colonial_nation = yes
+					}
+					ROOT = {
+						create_subject = {
+							subject_type = A33_adventurer_colony
+							subject = PREV
+						}
+					}
+				}
+				random_subject_country = {
+					limit = {
+						is_colonial_nation = yes
+					}
+					ROOT = {
+						create_subject = {
+							subject_type = A33_adventurer_colony
+							subject = PREV
+						}
+					}
+				}
+			}
+
+		}
+	}
+
+	A33_colonial_reform = {
+		icon = spa_dominate_sevilla
+		position = 1
+		required_missions = { A33_colonial_method }
+		provinces_to_highlight = {
+			owner = {
+				is_subject_of = ROOT
+				NOT = {
+					has_opinion = {
+						who = ROOT
+						value = 150
+					}
+				}
+				liberty_desire = 5
+			}
+
+		}
+
+		trigger = {
+			all_subject_country = {
+				has_opinion = {
+					who = ROOT
+					value = 150
+				}
+				NOT = { liberty_desire = 5 }
+			}
+		}
+
+		effect = {
+			country_event_with_option_insight = {
+				id = verne_flavor_ace.38
+				option_1 = "custom_tooltip = A33_upgrade_col_1tt"
+				option_2 = "custom_tooltip = A33_upgrade_col_2tt"
+				option_3 = "custom_tooltip = A33_upgrade_col_3tt"
+			}
+			custom_tooltip = A33_colonial_reform_tt
+			set_country_flag = A33_colonial_reform_fl
+		}
+	}
+
+	A33_legacy_of_conquistadors = {
+		icon = mission_iberian_conquistador
+		position = 1
+		required_missions = {
+			A33_colonial_reform
+			A33_taychendi_hegemonys
+			A33_khenois_hegemony
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 2510
+				province_id = 2682
+			}
+		}
+
+		trigger = {
+			any_hired_mercenary_company = {
+				template = merc_A33_cortes_band
+				location = { province_id = 2510 }
+			}
+			any_hired_mercenary_company = {
+				template = merc_A33_pizzaro_band
+				location = { province_id = 2682 }
+			}
+			2510 = {
+				has_manpower_building_trigger = yes
+				has_forcelimit_building_trigger = yes
+				has_building = soldier_households
+			}
+			2682 = {
+				has_manpower_building_trigger = yes
+				has_forcelimit_building_trigger = yes
+				has_building = soldier_households
+			}
+		}
+
+		effect = {
+			random_hired_mercenary_company = {
+				limit = {
+					template = merc_A33_cortes_band
+				}
+				disband_mercenary_company = THIS
+			}
+			random_hired_mercenary_company = {
+				limit = {
+					template = merc_A33_pizzaro_band
+				}
+				disband_mercenary_company = THIS
+			}
+			country_event = {
+				id = verne_flavor_ace.39
+			}
+		}
+	}
+}
+A33_branch_42 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = A33
+		has_country_flag = verne_adventurer_monarchy_path
+	}
+
+	A33_profitable_colonies = {
+		icon = mission_rb_the_thirteen_colonies
+		position = 1
+		required_missions = { A33_first_colony }
+		provinces_to_highlight = {
+			OR = {
+				region = trollsbay_region
+				region = reapers_coast_region
+				region = bloodgroves_region
+			}
+			has_port = yes
+			province_has_center_of_trade_of_level = 1
+		}
+
+		trigger = {
+			not_in_mission_preview_mode = {
+				key = VER
+			}
+			reapers_coast_region = {
+				has_discovered = root
+			}
+			trollsbay_region = {
+				has_discovered = root
+			}
+			bloodgroves_region = {
+				has_discovered = root
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = A33_colonial_enthusiasm
+				duration = 7300
+			}
+		}
+	}
+
+	A33_exile_troublesome = {
+		icon = mission_settlers_north_america
+		position = 1
+		required_missions = { A33_profitable_colonies }
+
+		trigger = {
+			has_estate_privilege = estate_adventurers_pioneer_initiatives
+			NOT = {
+				has_government_power = {
+					mechanic_type = A33_adven_vs_nobl_mechanic
+					power_type = A33_gov_power
+					value = 33
+				}
+			}
+
+		}
+
+		effect = {
+			remove_estate_privilege = estate_adventurers_pioneer_initiatives
+			hidden_effect = {
+				unlock_estate_privilege = {
+					estate_privilege = A33_pioneer_initiative
+				}
+			}
+			set_estate_privilege = A33_pioneer_initiative
+		}
+	}
+
+	A33_aelentir_domination = {
+		icon = mission_dominate_home_trade_node
+		position = 1
+		required_missions = { A33_exile_troublesome }
+
+		trigger = {
+			calc_true_if = {
+				any_subject_country = {
+					is_colonial_nation = yes
+					num_of_cities = 10
+				}
+				amount = 4
+			}
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				trade_goods = precursor_relics
+				value = 2
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = A33_aelantir_domination
+				duration = 14600
+			}
+		}
+	}
+
+	A33_reign_in_col = {
+		icon = spa_tercios_system
+		position = 1
+		required_missions = { A33_aelentir_domination }
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = A33_reign_in_col_tt
+				has_country_flag = A33_finished_disaster
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = A33_colonial_respect
+				duration = -1
+			}
+			regenerate_government_mechanics = yes
+			custom_tooltip = A33_upgrade_gov
+		}
+	}
+}
+A33_branch_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = A33 }
+
+	A33_riding_waves = {
+		icon = mission_junk_boat
+		position = 1
+
+		trigger = {
+			num_of_transport = 8
+			OR = {
+				num_of_light_ship = 10
+				num_of_heavy_ship = 4
+			}
+		}
+
+		effect = {
+			define_admiral = {
+				name = "Adrian of Stingport"
+				fire = 4
+				shock = 6
+				manuever = 6
+				siege = 4
+			}
+			add_navy_tradition = 10
+		}
+	}
+
+	A33_new_friends = {
+		icon = mission_monarch_in_throne_room
+		position = 2
+		required_missions = { A33_riding_waves }
+		provinces_to_highlight = { owned_by = A47 }
+
+		trigger = {
+			A47 = {
+				alliance_with = ROOT
+				has_opinion = {
+					who = ROOT
+					value = 170
+				}
+				trust = {
+					who = ROOT
+					value = 55
+				}
+			}
+		}
+
+		effect = {
+			add_trust = {
+				who = A47
+				value = 15
+			}
+			increase_legitimacy_huge_effect = yes
+			country_event_with_option_insight = {
+				id = verne_flavor_ace.7
+				option_1 = "
+					add_mil_power = 50
+				"
+				option_2 = "
+					add_dip_power = 50
+				"
+			}
+		}
+	}
+
+	A33_busilari_ambition = {
+		icon = mission_lion_of_the_north
+		position = 3
+		required_missions = { A33_new_friends }
+		provinces_to_highlight = {
+			is_capital_of = A29
+		}
+
+		trigger = {
+			has_spy_network_in = {
+				who = A29
+				value = 30
+			}
+			prestige = 50
+		}
+
+		effect = {
+			hapiande_area = {
+				add_permanent_claim = ROOT
+			}
+			lorbet_area = {
+				add_permanent_claim = ROOT
+			}
+			mountainway_area = {
+				add_permanent_claim = ROOT
+			}
+			busilar_area = {
+				add_permanent_claim = ROOT
+			}
+			A47 = {
+				busilari_straits_area = {
+					add_permanent_claim = A47
+				}
+			}
+		}
+	}
+
+	A33_conquer_businor = {
+		icon = dreams_of_grandeur
+		position = 4
+		required_missions = { A33_busilari_ambition }
+		provinces_to_highlight = {
+			OR = {
+				area = hapiande_area
+				area = lorbet_area
+				area = mountainway_area
+				area = busilar_area
+				area = busilari_straits_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			NOT = { exists = A29 }
+			hapiande_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			lorbet_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			mountainway_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			busilar_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			if = {
+				limit = { exists = A47 }
+				custom_tooltip = A33_eborthil_event_chain
+				country_event = {
+					id = verne_flavor_ace.8
+				}
+			}
+			else = {
+				busilari_straits_area = {
+					add_permanent_claim = ROOT
+				}
+				isle_of_tef_area = {
+					add_territorial_core = ROOT
+				}
+			}
+		}
+	}
+
+	A33_fighting_pirates = {
+		icon = sources_of_trade
+		position = 5
+		required_missions = { A33_conquer_businor }
+		provinces_to_highlight = {
+			is_capital_of = U07
+		}
+
+		trigger = {
+			navy_size = U07
+			army_size = U07
+			1259 = {
+				trade_share = {
+					country = ROOT
+					share = 50
+				}
+			}
+		}
+
+		effect = {
+			ekha_area = {
+				add_permanent_claim = ROOT
+			}
+			middle_akasik_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	A33_ending_pirates = {
+		icon = mission_dominate_the_mediterranean
+		position = 6
+		required_missions = { A33_fighting_pirates }
+		provinces_to_highlight = {
+			or= {
+				area = middle_akasik_area
+				area = ekha_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			ekha_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			middle_akasik_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			custom_tooltip = A33_gnoll_slave
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						region = akasik_region
+						trade_goods = slaves
+					}
+					change_trade_goods = unknown
+				}
+			}
+			custom_tooltip = A33_port_culture_convert
+			hidden_effect = {
+				for = {
+					amount = 2
+					effect = "
+						random_owned_province = {
+							limit = {
+								region = akasik_region
+								province_has_center_of_trade_of_level = 1
+								NOT = { culture = vernman }
+							}
+							change_culture = vernman
+						}
+					"
+				}
+			}
+		}
+	}
+
+}
+
+A33_branch_5_adventurer_path = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = A33
+		has_country_flag = verne_adventurer_republic_path
+	}
+	A33_taychend_conquestss = {
+		icon = mission_royal_roads
+		position = 7
+		required_missions = { A33_taychend_contender }
+		provinces_to_highlight = {
+			OR = {
+				area = royakottar_area
+				area = uesrennu_area
+				area = varamraya_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			royakottar_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			uesrennu_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			varamraya_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			kalavend_region ={
+				add_permanent_claim = ROOT
+			}
+			sibisimra_area = {
+				add_permanent_claim = ROOT
+			}
+			kattisangamar_area = {
+				add_permanent_claim = ROOT
+			}
+			hidden_effect = {
+				random_subject_country = {
+					limit = {
+						capital_scope = {
+							colonial_region = colonial_taychend
+						}
+					}
+					kalavend_region = {
+						add_permanent_claim = ROOT
+					}
+					sibisimra_area = {
+						add_permanent_claim = ROOT
+					}
+					kattisangamar_area = {
+						add_permanent_claim = ROOT
+					}
+				}
+			}
+			if = {
+				limit = {
+					any_subject_country = {
+						capital_scope = {
+							colonial_region = colonial_taychend
+						}
+					}
+				}
+				random_subject_country = {
+					limit = {
+						capital_scope = {
+							colonial_region = colonial_taychend
+						}
+					}
+					add_country_modifier = {
+						name = A33_expo_stab
+						duration = 3650
+					}
+				}
+			}
+		}
+	}
+
+	A33_taychendi_hegemonys = {
+		icon = mission_sw_against_the_desert
+		position = 1
+		required_missions = { A33_taychend_conquestss }
+		provinces_to_highlight = {
+			OR = {
+				region = kalavend_region
+				area = sibisimra_area
+				area = kattisangamar_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			kalavend_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			sibisimra_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			kattisangamar_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			yodhanchend_region = {
+				add_permanent_claim = ROOT
+			}
+			larankarha_highlands_region = {
+				add_permanent_claim = ROOT
+			}
+			hidden_effect = {
+				random_subject_country = {
+					limit = {
+						capital_scope = {
+							colonial_region = colonial_taychend
+						}
+					}
+					yodhanchend_region = {
+						add_permanent_claim = ROOT
+					}
+					larankarha_highlands_region = {
+						add_permanent_claim = ROOT
+					}
+				}
+			}
+			if = {
+				limit = {
+					any_subject_country = {
+						capital_scope = {
+							colonial_region = colonial_taychend
+						}
+					}
+				}
+				random_subject_country = {
+					limit = {
+						capital_scope = {
+							colonial_region = colonial_taychend
+						}
+					}
+					add_country_modifier = {
+						name = A33_expo_stab
+						duration = 3650
+					}
+				}
+			}
+		}
+	}
+
+	A33_taychend_consolidation = {
+		icon = cross_the_pindus
+		position = 1
+		required_missions = { A33_taychendi_hegemonys }
+		provinces_to_highlight = {
+			owner = {
+				NOT = {
+					tag = ROOT
+					is_subject_of = ROOT
+				}
+				num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+					value = 4
+					superregion = taychend_superregion
+				}
+			}
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = A33_taychend_dism
+				any_country = {
+					NOT = {
+						tag = ROOT
+						is_subject_of = ROOT
+					}
+					capital_scope = {
+						colonial_region = colonial_taychend
+					}
+					num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+						value = 4
+						colonial_region = colonial_taychend
+					}
+				}
+			}
+		}
+
+		effect = {
+			add_yearly_manpower = 1
+			add_splendor = 800
+			add_prestige_or_monarch_power = { amount = 33 }
+			if = {
+				limit = {
+					any_subject_country = {
+						capital_scope = {
+							colonial_region = colonial_taychend
+						}
+					}
+				}
+				random_subject_country = {
+					limit = {
+						capital_scope = {
+							colonial_region = colonial_taychend
+						}
+					}
+					add_country_modifier = {
+						name = A33_expo_stab2
+						duration = 3650
+					}
+					taychend_superregion = {
+						add_permanent_claim = ROOT
+					}
+
+				}
+			}
+		}
+	}
+
+	A33_taychend_wealth = {
+		icon = mission_war_chest
+		position = 1
+		required_missions = { A33_taychend_consolidation }
+		provinces_to_highlight = {
+			country_or_non_sovereign_subject_holds = ROOT
+			trade_goods = precursor_relics
+			superregion = taychend_superregion
+			NOT = { base_production = 8 }
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 5
+				trade_goods = precursor_relics
+				superregion = taychend_superregion
+				base_production = 8
+			}
+			manpower = 10
+		}
+
+		effect = {
+			add_manpower = -10
+			country_event = {
+				id = verne_flavor_ace.40
+				days = 450
+				random = 60
+			}
+		}
+	}
+}
+A33_branch_5_monarch_path = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = A33
+		has_country_flag = verne_adventurer_monarchy_path
+	}
+	A33_khet_fight = {
+		icon = mission_city_prosperity
+		position = 1
+		required_missions = { A33_ending_pirates }
+
+		trigger = {
+			not_in_mission_preview_mode = {
+				key = VER
+			}
+			is_neighbor_of = U01
+			U01 = {
+				scornfully_insulted_check = yes
+			}
+		}
+
+		effect = {
+			ohitsopot_area = {
+				add_permanent_claim = ROOT
+			}
+			coast_of_tears_area = {
+				add_permanent_claim = ROOT
+			}
+			mothers_delta_area = {
+				add_permanent_claim = ROOT
+			}
+			hitputtiushesh_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	A33_steward_mandate = {
+		icon = mission_non-western_soldiers
+		position = 1
+		required_missions = { A33_khet_fight }
+		provinces_to_highlight = {
+			OR = {
+				area = hitputtiushesh_area
+				area = mothers_delta_area
+				area = coast_of_tears_area
+				area = ohitsopot_area
+				owned_by = U01
+			}
+		}
+
+		trigger = {
+			hitputtiushesh_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			mothers_delta_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			coast_of_tears_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			ohitsopot_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			NOT = { exists = U01 }
+			custom_trigger_tooltip = {
+				tooltip = A33_steward_mandate_tt
+				has_country_flag = empire_of_china_dismantled
+			}
+		}
+
+		effect = {
+			country_event_with_option_insight = {
+				id = verne_flavor_ace.66
+				option_1 = "custom_tooltip = verne_flavor_ace661_tt "
+				option_2 = "custom_tooltip = verne_flavor_ace662_tt "
+			}
+		}
+	}
+}
+A33_imperial_branching_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = A33
+		has_country_flag = verne_adventurer_monarchy_path
+	}
+
+	A33_empire_damescrown = {
+		icon = helvetic_conquest
+		position = 9
+		required_missions = { A33_empire_prosperity }
+		provinces_to_highlight = {
+			is_capital = yes
+			owner = {
+				NOT = { is_rival = ROOT }
+				is_part_of_hre = yes
+				OR = {
+					tag = A23
+					tag = A36
+					culture = crownsman
+					capital_scope = {
+						region = esmaria_region
+						NOT = { area = ashfields_area }
+					}
+				}
+				NOT = {
+					AND = {
+						has_opinion = {
+							who = ROOT
+							value = 120
+						}
+						trust = {
+							who = ROOT
+							value = 75
+						}
+					}
+				}
+			}
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = A33_A33_empire_damescrown_tt
+				all_country = {
+					if = {
+						limit = {
+							is_part_of_hre = yes
+							OR = {
+								tag = A23
+								tag = A36
+								culture = crownsman
+								capital_scope = {
+									region = esmaria_region
+									NOT = { area = ashfields_area }
+								}
+							}
+						}
+						has_opinion = {
+							who = ROOT
+							value = 120
+						}
+						trust = {
+							who = ROOT
+							value = 60
+						}
+					}
+				}
+			}
+		}
+
+		effect = {
+			country_event_with_insight = {
+				id = verne_flavor_ace.54
+				insight_tooltip = A33_A33_empire_damescrown_tt_1
+			}
+		}
+	}
+
+	A33_empire_small_country = {
+		icon = avoid_fragmentation
+		position = 1
+		required_missions = { A33_empire_damescrown }
+		provinces_to_highlight = {
+			and = {
+				is_capital = yes
+				owner = {
+					culture_group = halfling
+					NOT = {
+						has_opinion = {
+							who = ROOT
+							value = 150
+						}
+					}
+					NOT = {
+						trust = {
+							who = ROOT
+							value = 75
+						}
+					}
+				}
+			}
+			culture_group = halfling
+		}
+
+		trigger = {
+			calc_true_if = {
+				any_country = {
+					culture_group = halfling
+					is_part_of_hre = yes
+					has_opinion = {
+						who = ROOT
+						value = 150
+					}
+					trust = {
+						who = ROOT
+						value = 70
+					}
+				}
+				amount = 4
+			}
+		}
+
+		effect = {
+			country_event_with_insight = {
+				id = verne_flavor_ace.58
+				insight_tooltip = A33_empire_small_country_tt
+			}
+		}
+	}
+}
+imperial_branching_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = A33
+		has_country_flag = verne_adventurer_monarchy_path
+	}
+
+	A33_empire_elfrealm = {
+		icon = mch_proclaim_later_jin
+		position = 9
+		required_missions = { A33_empire_prosperity }
+		provinces_to_highlight = {
+			is_capital = yes
+			owned_by = A32
+		}
+
+		trigger = {
+			OR = {
+				and = {
+					OR = {
+						is_rival = A32
+						A32 = {
+							NOT = { num_of_cities = 10 }
+						}
+					}
+				}
+				A32 = {
+					has_opinion = {
+						who = ROOT
+						value = 150
+					}
+					trust = {
+						who = ROOT
+						value = 75
+					}
+				}
+				352 = {
+					is_part_of_hre = yes
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = A33_empire_elfrealm_1tt
+			hidden_effect = {
+				if = {
+					limit = {
+						A32 = {
+							has_opinion = {
+								who = ROOT
+								value = 150
+							}
+							trust = {
+								who = ROOT
+								value = 75
+							}
+						}
+					}
+					A32 = {
+						set_in_empire = yes
+					}
+				}
+				else = {
+					add_casus_belli = {
+						type = cb_expand_empire_ace
+						target = A12
+						months = 120
+					}
+				}
+			}
+			A83 = {
+				set_in_empire = yes
+			}
+		}
+	}
+
+	A33_empire_elfrealm_2 = {
+		icon = mission_three_elve
+		position = 1
+		required_missions = { A33_empire_elfrealm }
+		provinces_to_highlight = {
+			is_capital = yes
+			OR = {
+				owned_by = A32
+				owned_by = A83
+				owned_by = A46
+			}
+		}
+
+		trigger = {
+			A32 = {
+				exists = yes
+				has_opinion = {
+					who = ROOT
+					value = 150
+				}
+				trust = {
+					who = ROOT
+					value = 75
+				}
+			}
+			OR = {
+				A83 = {
+					exists = yes
+					has_opinion = {
+						who = ROOT
+						value = 150
+					}
+					trust = {
+						who = ROOT
+						value = 75
+					}
+				}
+				A83 = {
+					exists = no
+				}
+			}
+			A46 = {
+				exists = yes
+				has_opinion = {
+					who = ROOT
+					value = 150
+				}
+				trust = {
+					who = ROOT
+					value = 75
+				}
+			}
+		}
+
+		effect = {
+			country_event_with_insight = {
+				id = verne_flavor_ace.59
+				insight_tooltip = A33_empire_elfrealm_2_tt
+			}
+		}
+	}
+}
+A33_imperial_branching_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = A33
+		has_country_flag = verne_adventurer_monarchy_path
+	}
+
+	A33_empire_west_dameshead = {
+		icon = mission_conquer_andhra_vij
+		position = 9
+		required_missions = { A33_empire_prosperity }
+		provinces_to_highlight = {
+			is_part_of_hre = yes
+			OR = {
+				region = west_dameshead_region
+				region = lencenor_region
+			}
+			owner = {
+				OR = {
+					is_part_of_hre = no
+					overlord = {
+						is_part_of_hre = no
+					}
+				}
+			}
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = A33_empire_west_dameshead_tt
+				NOT = {
+					any_province = {
+						is_part_of_hre = yes
+						OR = {
+							region = west_dameshead_region
+							region = lencenor_region
+						}
+						owner = {
+							OR = {
+								is_part_of_hre = no
+								overlord = {
+									is_part_of_hre = no
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		effect = {
+			add_casus_belli = {
+				type = verne_cb_imperial_ban
+				target = A01
+				months = 120
+			}
+			country_event_with_option_insight = {
+				id = verne_flavor_ace.61
+				option_1 = " custom_tooltip = A33_empire_west_dameshead_1_tt "
+				option_2 = " custom_tooltip = A33_empire_west_dameshead_2_tt "
+				option_3 = " custom_tooltip = A33_empire_west_dameshead_3_tt "
+			}
+		}
+	}
+
+	A33_empire_rose_pluc = {
+		icon = mission_rb_war_of_the_roses
+		position = 1
+		required_missions = { A33_empire_west_dameshead }
+		provinces_to_highlight = {
+			owned_by = A01
+		}
+
+		trigger = {
+			A01 = {
+				NOT = { num_of_cities = 7 }
+			}
+			calc_true_if = {
+				all_country = {
+					is_part_of_hre = yes
+					capital_scope = {
+						region = lencenor_region
+					}
+					has_opinion = {
+						who = ROOT
+						value = 150
+					}
+				}
+				amount = 5
+			}
+		}
+
+		effect = {
+			country_event_with_insight = {
+				id = verne_flavor_ace.62
+				insight_tooltip = A33_empire_rose_pluc_1_tt
+			}
+		}
+	}
+}
+A33_imperial_branching_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = A33
+		has_country_flag = verne_adventurer_monarchy_path
+	}
+
+	A33_empire_alenic = {
+		icon = mission_conquer_alexandria
+		position = 9
+		required_missions = { A33_empire_prosperity }
+		provinces_to_highlight = {
+			owned_by = A13
+			is_part_of_hre = yes
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = A33_empire_alenic_tt
+				A13 = {
+					NOT = {
+						any_owned_province = {
+							is_part_of_hre = yes
+						}
+					}
+				}
+			}
+			208 = {
+				owner = {
+					is_part_of_hre = yes
+				}
+			}
+			219 = {
+				owner = {
+					is_part_of_hre = yes
+				}
+			}
+			235 = {
+				owner = {
+					is_part_of_hre = yes
+				}
+			}
+		}
+
+		effect = {
+			add_casus_belli = {
+				type = verne_cb_imperial_ban
+				target = A13
+				months = 120
+			}
+		}
+	}
+
+	A33_empire_anbennar_alenic = {
+		icon = sweep_the_po
+		position = 1
+		required_missions = { A33_empire_alenic }
+		provinces_to_highlight = {
+			owned_by = A13
+		}
+
+		trigger = {
+			A13 = {
+				NOT = { num_of_cities = 15 }
+			}
+			calc_true_if = {
+				any_country = {
+					is_part_of_hre = yes
+					capital_scope = {
+						region = alenic_reach_region
+					}
+					has_opinion = {
+						who = ROOT
+						value = 150
+					}
+				}
+				amount = 3
+			}
+		}
+
+		effect = {
+			country_event_with_insight = {
+				id = verne_flavor_ace.63
+				insight_tooltip = A33_empire_anbennar_alenic_tt
+			}
+		}
+	}
+}
+A33_grain_mini = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = A33 }
+
+	A33_grain_yield = {
+		icon = mission_pol_breadbasket_europe
+		position = 12
+		provinces_to_highlight = {
+			owned_by = ROOT
+			OR = {
+				trade_goods = wine
+				trade_goods = livestock
+				trade_goods = grain
+			}
+			NOT = { base_production = 9 }
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				OR = {
+					trade_goods = wine
+					trade_goods = livestock
+					trade_goods = grain
+				}
+				base_production = 9
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = A33_bred_basket
+				duration = 3650
+			}
+			distribute_development = {
+				amount = 7
+				type = manpower
+				limit = "culture = vernman"
+				tooltip = A33_only_in_verne_tt
+			}
+			distribute_development = {
+				amount = 7
+				type = production
+				limit = "culture = vernman"
+				tooltip = A33_only_in_verne_tt
+			}
+			distribute_development = {
+				amount = 7
+				type = tax
+				limit = "culture = vernman"
+				tooltip = A33_only_in_verne_tt
+			}
+		}
+	}
+
+	A33_stable_agriculture = {
+		icon = mission_landsknecht_soldier
+		position = 1
+		required_missions = { A33_grain_yield }
+
+		trigger = {
+			army_size = 200
+			num_of_owned_provinces_with = {
+				value = 15
+				OR = {
+					has_building = barracks
+					has_building = training_fields
+				}
+			}
+			num_of_owned_provinces_with = {
+				value = 15
+				OR = {
+					has_building = regimental_camp
+					has_building = conscription_center
+				}
+			}
+			num_of_owned_provinces_with = {
+				value = 5
+				has_building = soldier_households
+			}
+		}
+
+		effect = {
+			set_country_flag = A33_land_grant
+			custom_tooltip = A33_land_grants_tt
+		}
+	}
+
+	A33_grand_rigotta = {
+		icon = mission_sail_to_the_east_indies
+		position = 15
+		required_missions = { A33_rounding_east }
+
+		trigger = {
+			OR = {
+				custom_trigger_tooltip = {
+					tooltip = achievement_magellans_voyage_tooltip
+					has_country_flag = circumnavigation_first
+				}
+				custom_trigger_tooltip = {
+					tooltip = second_circumnavigation_tt
+					has_country_flag = circumnavigation_done
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = A33_regatta_starter_1
+			set_country_flag = A33_regatta_starter_flg_5
+			if = {
+				limit = { has_country_flag = circumnavigation_first }
+				add_adm_power = 100
+				add_dip_power = 100
+				add_mil_power = 100
+			}
+			else = {
+				add_adm_power = 50
+				add_dip_power = 50
+				add_mil_power = 50
+			}
+		}
+	}
+}
+A33_copper_real = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = A33 }
+
+	A33_khenak_copper = {
+		icon = mission_kon_anzikus_copper
+		position = 12
+		provinces_to_highlight = {
+			owned_by = ROOT
+			trade_goods = copper
+		}
+
+		trigger = {
+			trade_goods_produced_amount = {
+				trade_goods = copper
+				amount = 7
+			}
+		}
+
+		effect = {
+			set_country_flag = A33_copper_mono
+			custom_tooltip = A33_copper_mono_tt
+		}
+	}
+
+	A33_metallurgy_tradition = {
+		icon = mission_iron_and_copper
+		position = 1
+		required_missions = { A33_khenak_copper }
+		provinces_to_highlight = {
+			OR = {
+				trade_goods = copper
+				trade_goods = iron
+			}
+		}
+
+		trigger = {
+			trade_goods_produced_amount = {
+				trade_goods = iron
+				amount = 10
+			}
+			trading_part = {
+				trade_goods = copper
+				value = 0.10
+			}
+		}
+
+		effect = {
+			custom_tooltip = A33_upgrade_copper_tt
+			set_country_flag = A33_upgrade_copper
+			hidden_effect = {
+				if = {
+					limit = { has_estate_privilege = verne_red_brass_mono }
+					every_owned_province = {
+						limit = {
+							trade_goods = iron
+						}
+						add_province_modifier = {
+							name = A33_red_brass_province
+							duration = -1
+						}
+					}
+				}
+			}
+		}
+	}
+}
+A33_eco_branch = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = A33 }
+
+	A33_develop_commerce = {
+		icon = reform_the_state
+		position = 11
+		provinces_to_highlight = {
+			OR = {
+				province_id = 1296
+				province_id = 1305
+				province_id = 1312
+				province_id = 1309
+			}
+			NOT = {
+				trade_share = {
+					country = ROOT
+					share = 60
+				}
+			}
+		}
+
+		trigger = {
+			1296 = {
+				is_strongest_trade_power = ROOT
+				trade_share = {
+					country = ROOT
+					share = 40
+				}
+			}
+			1305 = {
+				has_merchant = ROOT
+			}
+			1312 = {
+				has_merchant = ROOT
+			}
+			1309 = {
+				has_merchant = ROOT
+			}
+		}
+
+		effect = {
+			add_mercantilism_or_monarch_power = {
+				amount = 3
+			}
+			add_estate_burghers_loyalty_effect = yes
+			add_country_modifier = {
+				name = A33_divenhal_trade
+				duration = 7300
+			}
+		}
+	}
+
+	A33_commerce_hubs = {
+		icon = renovate_berlin
+		position = 1
+		required_missions = { A33_develop_commerce }
+		provinces_to_highlight = {
+			culture = vernman
+			OR = {
+				development = 25
+				province_has_center_of_trade_of_level = 2
+				has_manufactory_trigger = yes
+			}
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				culture = vernman
+				OR = {
+					development = 25
+					province_has_center_of_trade_of_level = 2
+				}
+			}
+		}
+
+		effect = {
+			292 = {
+				add_center_of_trade_level = 1
+			}
+			for = {
+				custom_tooltip = A33_verne_cities_tt
+				effect = "
+					random_owned_province = {
+						limit = {
+							NOT = { has_province_flag = rus_manu }
+							has_manufactory_trigger = yes
+							development = 20
+						}
+						set_province_flag = rus_manu
+					}
+				"
+				amount = 10
+			}
+			tooltip = {
+				add_province_modifier = {
+					name = A33_vernman_cities
+					duration = -1
+				}
+				add_base_tax = 1
+				add_base_production = 1
+				add_base_manpower = 1
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						has_province_flag = rus_manu
+					}
+					add_province_modifier = {
+						name = A33_vernman_cities
+						duration = -1
+					}
+					add_base_tax = 1
+					add_base_production = 1
+					add_base_manpower = 1
+					clr_province_flag = rus_manu
+				}
+			}
+		}
+	}
+
+	A33_adventurer_trade = {
+		icon = renaissance_city
+		position = 1
+		required_missions = { A33_commerce_hubs }
+		provinces_to_highlight = {
+			OR = {
+				province_id = 1366
+				province_id = 1364
+				province_id = 1361
+				province_id = 1369
+			}
+			NOT = {
+				has_merchant = ROOT
+			}
+		}
+
+		trigger = {
+			calc_true_if = {
+				1366 = {
+					has_merchant = ROOT
+				}
+				1364 = {
+					has_merchant = ROOT
+				}
+				1361 = {
+					has_merchant = ROOT
+				}
+				1369 = {
+					has_merchant = ROOT
+				}
+				amount = 2
+			}
+		}
+
+		effect = {
+			add_mercantilism_or_monarch_power = { amount = 3 }
+			set_country_flag = A33_merchant_gaurd
+			custom_tooltip = A33_merchant_gaurd_tt
+			add_prestige_or_monarch_power = { amount = 10 }
+		}
+	}
+
+	A33_balance = {
+		icon = friends_in_high_places
+		position = 1
+		required_missions = {
+			A33_adventurer_trade
+			A33_stable_agriculture
+			A33_metallurgy_tradition
+		}
+		provinces_to_highlight = {
+			culture = vernman
+			NOT = { development = 15 }
+		}
+
+		trigger = {
+			any_owned_province = {
+				culture = vernman
+				development = 15
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = A33_balanced_demographics
+				duration = -1
+			}
+		}
+	}
+}
+A33_sarhal_colonization = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = A33 }
+
+	A33_sarhali_knowledge = {
+		icon = mission_establish_high_seas_navy
+		position = 12
+		provinces_to_highlight = {
+			OR = {
+				province_id = 6094
+				AND = {
+					province_id = 376
+					NOT = { has_building = dock }
+				}
+			}
+		}
+
+		trigger = {
+			376 = {
+				has_building = dock
+			}
+			6094 = {
+				has_discovered = ROOT
+			}
+		}
+
+		effect = {
+			custom_tooltip = A33_regatta_starter
+			set_country_flag = A33_regatta_starter_flg
+			add_navy_tradition = 20
+			add_country_modifier = {
+				name = A33_regatta_1
+				duration = 3650
+			}
+		}
+	}
+
+	A33_clove_hunting = {
+		icon = mission_portuguese_malacca
+		position = 1
+		required_missions = { A33_sarhali_knowledge }
+		provinces_to_highlight = {
+			region = fahvanosy_region
+		}
+
+		trigger = {
+			fahvanosy_region = {
+				has_discovered = ROOT
+			}
+		}
+
+		effect = {
+			custom_tooltip = A33_regatta_starter_1
+			set_country_flag = A33_regatta_starter_flg_1
+			custom_tooltip = A33_fahvanosy_tt
+			hidden_effect = {
+				fahvanosy_region = {
+					limit = {
+						trade_goods = cloves
+						NOT = { is_core = ROOT }
+						NOT = { is_permanent_claim = ROOT }
+					}
+					add_permanent_claim = ROOT
+				}
+			}
+		}
+	}
+
+	A33_moving_coast = {
+		icon = mission_trade_with_japan
+		position = 1
+		required_missions = { A33_clove_hunting }
+		provinces_to_highlight = {
+			OR = {
+				province_id = 3084
+				province_id = 3082
+			}
+			NOT = {
+				trade_share = {
+					country = ROOT
+					share = 30
+				}
+			}
+		}
+
+		trigger = {
+			3084 = {
+				trade_share = {
+					country = ROOT
+					share = 30
+				}
+			}
+			3082 = {
+				trade_share = {
+					country = ROOT
+					share = 30
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = A33_west_sarhal_sup
+			hidden_effect = {
+				tanib_dajek_superregion = {
+					if = {
+						limit = {
+							OR = {
+								province_has_center_of_trade_of_level = 1
+								province_id = 5858
+								province_id = 5716
+							}
+						}
+					}
+					add_permanent_claim = ROOT
+				}
+			}
+
+		}
+	}
+
+	A33_moving_inland = {
+		icon = dutch_formosa
+		position = 1
+		required_missions = { A33_moving_coast }
+		provinces_to_highlight = {
+			OR = {
+				and = {
+					province_has_center_of_trade_of_level = 1
+					region = horashesh_region
+				}
+			}
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 2
+				region = horashesh_region
+				province_has_center_of_trade_of_level = 1
+			}
+			num_of_owned_provinces_with = {
+				value = 5
+				region = horashesh_region
+			}
+		}
+
+		effect = {
+			create_conquistador = {
+				tradition = 100
+			}
+			horashesh_region = {
+				discover_country = ROOT
+			}
+			custom_tooltip = A33_sarhal_colo_tt
+			hidden_effect = {
+				every_neighbor_province = {
+					limit = {
+						region = horashesh_region
+						NOT = { is_core = ROOT }
+						NOT = { is_permanent_claim = ROOT }
+					}
+					add_permanent_claim = ROOT
+				}
+			}
+
+		}
+	}
+
+	A33_sarhally_base = {
+		icon = indonesian_trade
+		position = 1
+		required_missions = { A33_moving_inland }
+		provinces_to_highlight = {
+			OR = {
+				superregion = fangaula_superregion
+				superregion = tanib_dajek_superregion
+			}
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				OR = {
+					superregion = fangaula_superregion
+					superregion = tanib_dajek_superregion
+				}
+				value = 30
+			}
+		}
+
+		effect = {
+			for = {
+				custom_tooltip = A33_sarhali_port
+				effect = "random_owned_province = {
+					limit = {
+						OR = {
+							superregion = fangaula_superregion
+							superregion = tanib_dajek_superregion
+						}
+						NOT = { has_province_modifier = A33_sarhal_port }
+						province_has_center_of_trade_of_level = 1
+					}
+					add_province_modifier = {
+						name = A33_sarhal_port
+						duration = -1
+					}
+				}"
+				amount = 3
+			}
+			tooltip = {
+				add_province_modifier = {
+					name = A33_sarhal_port
+					duration = -1
+				}
+			}
+			376 = {
+				add_province_modifier = {
+					name = A33_sarhal_port
+					duration = -1
+				}
+			}
+		}
+	}
+}
+
+A33_towards_rahen = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = A33 }
+
+	A33_rounding_sarhal = {
+		icon = mission_conquer_gujarat_dlh
+		position = 13
+		required_missions = { A33_sarhali_knowledge }
+		provinces_to_highlight = {
+			region = dao_nako_region
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 3
+				region = dao_nako_region
+			}
+		}
+
+		effect = {
+			custom_tooltip = A33_regatta_starter_1
+			set_country_flag = A33_regatta_starter_flg_2
+			add_adm_power = 50
+			add_dip_power = 50
+			add_mil_power = 50
+		}
+	}
+
+	A33_rounding_east = {
+		icon = colonize_the_cape
+		position = 1
+		required_missions = { A33_rounding_sarhal }
+		provinces_to_highlight = {
+			OR = {
+				area = merfolk_tip_area
+				area = fobunaicha_area
+			}
+		}
+
+		trigger = {
+			merfolk_tip_area = {
+				has_discovered = ROOT
+			}
+			fobunaicha_area = {
+				has_discovered = ROOT
+			}
+		}
+
+		effect = {
+			custom_tooltip = A33_regatta_starter_1
+			set_country_flag = A33_regatta_starter_flg_3
+			6052 = {
+				add_permanent_claim = ROOT
+			}
+			6677 = {
+				add_permanent_claim = ROOT
+			}
+			6086 = {
+				add_permanent_claim = ROOT
+			}
+			6087 = {
+				add_permanent_claim = ROOT
+			}
+			visage_isles_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	A33_halessi_bases = {
+		icon = consolidate_switzerland
+		position = 1
+		required_missions = { A33_rounding_east }
+		provinces_to_highlight = {
+			continent = asia
+			has_port = yes
+		}
+
+		trigger = {
+			any_owned_province = {
+				continent = asia
+			}
+		}
+
+		effect = {
+			add_prestige_or_monarch_power = { amount = 20 }
+			add_country_modifier = {
+				name = A33_halessi_trade
+				duration = 7300
+			}
+		}
+	}
+
+	A33_halessi_influence = {
+		icon = form_the_swiss_guard
+		position = 1
+		required_missions = { A33_halessi_bases }
+		provinces_to_highlight = {
+			OR = {
+				has_province_modifier = temple_complex
+				has_province_modifier = damaged_temple_complex
+				has_province_modifier = derelict_temple_complex
+			}
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = krakazol_digging_sideways_tooltip
+				has_global_flag = korashi_drill_invented_flag
+			}
+			OR = {
+				any_owned_province = {
+					OR = {
+						has_province_modifier = temple_complex
+						has_province_modifier = damaged_temple_complex
+						has_province_modifier = derelict_temple_complex
+					}
+				}
+				any_ally = {
+					trust = {
+						who = ROOT
+						value = 70
+					}
+					OR = {
+						has_province_modifier = temple_complex
+						has_province_modifier = damaged_temple_complex
+						has_province_modifier = derelict_temple_complex
+					}
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = A33_regatta_starter_1
+			set_country_flag = A33_regatta_starter_flg_4
+			country_event = {
+				id = verne_flavor_ace.17
+			}
+		}
+	}
+}
+
+A33_disable_vanilla = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		always = no
+	}
+
+	A33_corins_devout_protectors = {
+		icon = form_the_swiss_guard
+		position = 1
+		required_missions = {}
+		provinces_to_highlight = {}
+		trigger = {
+			always = no
+		}
+		effect = {}
+	}
+	A33_the_vernman_era = {
+		icon = form_the_swiss_guard
+		position = 2
+		required_missions = {}
+		provinces_to_highlight = {}
+		trigger = {
+			always = no
+		}
+		effect = {}
+	}
+	A33_in_search_of_adventure = {
+		icon = form_the_swiss_guard
+		position = 2
+		required_missions = {}
+		provinces_to_highlight = {}
+		trigger = {
+			always = no
+		}
+		effect = {}
+	}
+	A33_united_under_crimson_wings = {
+		icon = form_the_swiss_guard
+		position = 3
+		required_missions = {}
+		provinces_to_highlight = {}
+		trigger = {
+			always = no
+		}
+		effect = {}
+	}
+}

@@ -1,0 +1,84 @@
+po_wl_dismantle_sug = {
+    category = 6
+	power_projection = humiliated_rival
+	power_cost_base = 0.0
+	prestige_base = 1.0
+	ae_base = 0.5
+	warscore_cost = {
+		all_provinces = 0.0
+		no_provinces = 100.0
+		owner_keeps = 0.0
+		conquered = 1.0
+		returned_core = 0.0
+		released_nation = 0.0
+		cancelled_subject = 0.0
+		concede_colonial_region = 0.0
+	}
+	warscore_cap = 80
+	requires_demand_independence = yes
+	is_make_subject = no
+	requires_is_allowed = yes
+	is_visible = {
+		is_in_war = {
+			attacker_leader = THIS
+			casus_belli = cb_wexonard_league_sug
+		}
+	}
+	is_allowed = {
+		always = yes
+	}
+	effect = {
+        every_province = {
+            limit = {
+                OR = {
+                    AND = {
+                        culture = wexonard
+                        is_core = A48
+                        owned_by = A48
+                    }
+                    province_id = 913
+                }
+            }
+            cede_province = ROOT
+        }
+        if = {
+            limit = { NOT = { has_country_flag = WL_screw_celliande } }
+            410 = {
+                cede_province = A56
+            }
+            411 = {
+                cede_province = A56
+            }
+        }
+        else = {
+            410 = { cede_province = ROOT }
+            411 = { cede_province = ROOT }
+            every_known_country = {
+                add_aggressive_expansion = {
+                    who = ROOT
+                    value = 10
+                    apply_calc = yes
+                }
+		    }
+        }
+        A48 = {
+            every_owned_province = {
+                cede_province = previous_owner
+            }
+			release_all_subjects = yes
+			release_all_possible_countries = yes
+		}
+	}
+	ai_weight = {
+		export_to_variable = {
+			variable_name = ai_value
+			value = trigger_value:always
+		}
+		set_variable = {
+			ai_value = 2000
+		}
+		limit = {
+			always = yes
+		}
+	}
+}

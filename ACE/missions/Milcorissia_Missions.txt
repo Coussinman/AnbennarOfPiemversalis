@@ -1,0 +1,684 @@
+B94_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = B94
+	}
+	B94_dark_allies = {
+		icon = mission_shady_encounter
+		position = 10
+		provinces_to_highlight = {
+		}
+		trigger = {
+			OR = {
+				any_country = {
+					alliance_with = ROOT
+					OR = {
+						tag = A15
+						tag = B34
+						tag = B54
+					}
+				}
+				AND = {
+					A15 = {
+						exists = no
+					}
+					B34 = {
+						exists = no
+					}
+					B54 = {
+						exists = no
+					}
+				}
+			}
+		}
+		effect = {
+			custom_tooltip = dark_allies_tooltip4
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = dark_allies_tooltip
+				first_limit = "A15 = { alliance_with = ROOT }
+				"
+				first_effect = "add_country_modifier = {
+						name = elisin_alliance
+						duration = 7300
+					}
+					create_general = {
+						tradition = 50
+					}
+				"
+				second_custom_tooltip = dark_allies_tooltip2
+				second_limit = "B54 = { alliance_with = ROOT }
+				"
+				second_effect = "add_country_modifier = {
+						name = esthil_alliance
+						duration = 7300
+					}
+					add_estate_influence_modifier = {
+						estate = estate_mages
+						influence = 20
+						duration = 7300
+					}
+				"
+				third_custom_tooltip = dark_allies_tooltip3
+				third_limit = "B34 = { alliance_with = ROOT }
+				"
+				third_effect = "add_army_tradition = 10
+					define_advisor = {
+						culture = luciander
+						type = spymaster
+						skill = 2
+						discount = yes
+					}
+				"
+			}
+		}
+	}
+}
+
+B94_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = B94
+	}
+	B94_capital_of_religion = {
+		icon = mission_pray_light
+		position = 10
+		required_missions = {
+			B94_capital_of_kings
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			adm_power = 100
+			treasury = 250
+			332 = {
+				owned_by = ROOT
+				development = 30
+				has_tax_building_trigger = yes
+				custom_trigger_tooltip = {
+					tooltip = diggy_no_building #This includes armies and such
+					NOT = { has_construction = any }
+				}
+			}
+		}
+		effect = {
+			add_adm_power = -100
+			add_treasury = -250
+			add_or_upgrade_tax_building = yes
+			set_country_flag = ACE_kuradaznai_necropolis_flag
+			set_country_flag = ACE_religion_labyrinth_flag
+			332 = {
+				change_culture = milcori
+				change_religion = kuradaznai
+				change_province_name = "Ardate Morata"
+				add_great_project = {
+					type = ACE_religion_labyrinth
+				}
+				custom_tooltip = B94_kuradaznai_necropolis_tt
+			}
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = capital_of_religion_tooltip2
+				first_limit = "capital = 332
+				"
+				first_effect = "332 = {
+						change_trade_goods = incense
+					}
+					add_province_modifier = {
+						name = B94_incense_of_death_modifier
+						duration = -1
+					}
+				"
+			}
+		}
+	}
+	B94_necromancers = {
+		icon = mission_three_death
+		position = 11
+		required_missions = {
+			B94_capital_of_religion
+			B94_dark_allies
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			has_estate_privilege = estate_mages_battlemage_academies
+			num_of_owned_provinces_with = {
+				value = 4
+				has_building = mage_tower
+			}
+		}
+		effect = {
+			set_country_flag = ace_upgraded_battlemages
+			custom_tooltip = A30_battlemage_academies_upgrade_tooltip
+			create_war_wizard_effect = yes
+		}
+	}
+	B94_rediscover_nerat = {
+		icon = mission_burning_parthenon
+		position = 12
+		required_missions = {
+			B94_necromancers
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			have_cast_magnificent_feast = yes
+			419 = {
+				owned_by = ROOT
+				has_fort_building_trigger = yes
+				has_great_project = {
+					type = king_labyrinth
+					tier = 1
+				}
+			}
+		}
+		effect = {
+			custom_tooltip = B94_nerat_rediscovered_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						culture = arannese
+					}
+					random = {
+						chance = 50
+						change_religion = kuradaznai
+					}
+				}
+			}
+			add_country_modifier = {
+				name = B94_mask_is_slipping_modifier
+				duration = 3650
+			}
+		}
+	}
+}
+
+B94_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = B94
+	}
+	B94_capital_of_kings = {
+		icon = spa_new_capital
+		position = 9
+		provinces_to_highlight = {
+		}
+		trigger = {
+			adm_power = 100
+			419 = {
+				development = 30
+				num_free_building_slots = 0
+				NOT = {
+					local_autonomy = 25
+				}
+				custom_trigger_tooltip = {
+					tooltip = diggy_no_building #This includes armies and such
+					NOT = { has_construction = any }
+				}
+			}
+		}
+		effect = {
+			country_event = {
+				id = flavor_milcorissia.1
+			}
+			custom_tooltip = ""
+			set_country_flag = king_labyrinth_flag
+			419 = {
+				add_great_project = {
+					type = king_labyrinth
+				}
+			}
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = capital_of_kings_tooltip
+				first_limit = "was_tag = B85
+				"
+				first_effect = "419 = {
+						add_base_tax = 2
+						add_base_production = 2
+						add_base_manpower = 2
+					}
+				"
+				second_custom_tooltip = capital_of_kings_tooltip2
+				second_limit = "capital = 419
+				"
+				second_effect = "419 = {
+						change_trade_goods = paper
+					}
+				"
+			}
+		}
+	}
+	B94_capital_of_war = {
+		icon = mission_conquer_mewar
+		position = 10
+		required_missions = {
+			B94_capital_of_kings
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			mil_power = 100
+			army_professionalism = 0.25
+			306 = {
+				development = 30
+				has_manpower_building_trigger = yes
+				has_forcelimit_building_trigger = yes
+				custom_trigger_tooltip = {
+					tooltip = diggy_no_building #This includes armies and such
+					NOT = { has_construction = any }
+				}
+			}
+		}
+		effect = {
+			set_country_flag = iron_labyrinth_flag
+			306 = {
+				add_great_project = {
+					type = iron_labyrinth
+				}
+			}
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = capital_of_war_tooltip
+				first_limit = "was_tag = A75"
+				first_effect = "
+					306 = {
+						add_base_tax = 2
+						add_base_production = 2
+						add_base_manpower = 2
+					}
+				"
+				second_custom_tooltip = capital_of_war_tooltip2
+				second_limit = "capital = 306"
+				second_effect = "
+					add_province_modifier = {
+						name = iron_labyrinth
+						duration = -1
+					}
+				"
+			}
+		}
+	}
+	B94_retame_minotaurs = {
+		icon = mission_machine_of_war
+		position = 11
+		required_missions = { B94_capital_of_war } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			mil_power = 100
+			manpower = 4
+			army_reformer = 3
+			419 = {
+				owned_by = ROOT
+				infantry_in_province = 5
+				has_great_project = {
+					type = king_labyrinth
+				}
+			}
+			306 = {
+				owned_by = ROOT
+				infantry_in_province = 5
+				has_great_project = {
+					type = iron_labyrinth
+				}
+			}
+			332 = {
+				owned_by = ROOT
+				infantry_in_province = 5
+				has_great_project = {
+					type = ACE_religion_labyrinth
+				}
+			}
+			919 = {
+				owned_by = ROOT
+				infantry_in_province = 5
+				has_great_project = {
+					type = culture_labyrinth
+				}
+			}
+		}
+
+		effect = {
+			add_mil_power = -100
+			add_manpower = -4
+			add_country_modifier = {
+				name = ACE_minotaur_tamers
+				duration = -1
+			}
+			custom_tooltip = enable_minotaur_cav_tooltip
+			hidden_effect = { add_country_modifier = { name = mythical_cavalry_enabler duration = -1 hidden = yes } }
+			enable_mythical_cavalry = { mount = minotaur_mount }
+		} 
+	}
+	B94_minotaur_armory = {
+		icon = mission_industrial_forging
+		position = 12
+		required_missions = {
+			B94_retame_minotaurs
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+		}
+		effect = {
+		}
+	}
+	B94_mask = {
+		icon = mission_the_ascension
+		position = 13
+		required_missions = {
+			B94_minotaur_armory
+			B94_rediscover_nerat
+			B94_milcori_architecture
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+		}
+		effect = {
+			remove_country_modifier = B94_mask_is_slipping_modifier
+		}
+	}
+}
+
+B94_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = B94
+	}
+	B94_capital_of_culture = {
+		icon = mission_city_prosperity
+		position = 10
+		required_missions = {
+			B94_capital_of_kings
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			dip_power = 100
+			919 = {
+				development = 30
+				is_prosperous = yes
+				has_courthouse_building_trigger = yes
+				custom_trigger_tooltip = {
+					tooltip = diggy_no_building #This includes armies and such
+					NOT = { has_construction = any }
+				}
+			}
+		}
+		effect = {
+			set_country_flag = culture_labyrinth_flag
+			919 = {
+				change_culture = milcori
+				if = {
+					limit = {
+						NOT = {
+							was_tag = A56
+						}
+					}
+					change_province_name = "Xarmazun"
+				}
+				add_great_project = {
+					type = culture_labyrinth
+				}
+			}
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = capital_of_culture_tooltip
+				first_limit = "was_tag = A56
+				"
+				first_effect = "919 = {
+						add_base_tax = 2
+						add_base_production = 2
+						add_base_manpower = 2
+					}
+				"
+				second_custom_tooltip = capital_of_culture_tooltip2
+				second_limit = "capital = 919
+				"
+				second_effect = "919 = {
+						change_trade_goods = silk
+					}
+				"
+			}
+		}
+	}
+	B94_rediscover_roots = {
+		icon = mission_monarch_diplomacy
+		position = 11
+		required_missions = {
+			B94_capital_of_culture
+			B94_prosperity
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				culture = milcori
+			}
+		}
+		effect = {
+			custom_tooltip = dev_points_culture_tt
+			set_country_flag = rediscover_roots_flag
+			change_primary_culture = milcori
+			anb_add_accepted_culture_or_dip_power = {
+				culture = arannese
+				free = yes
+			}
+			add_country_modifier = {
+				name = milcori_rebirth
+				duration = -1
+			}
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = rediscover_roots_tooltip
+				first_limit = "OR = {
+						was_tag = A56
+						was_tag = B85
+					}
+				"
+				first_effect = "custom_tooltip = rediscover_roots_tooltip2
+					tooltip = {
+						add_province_modifier = {
+							name = rediscover_roots
+							duration = -1
+						}
+					}
+					hidden_effect = {
+						every_owned_province = {
+							limit = {
+								culture = arannese
+							}
+							add_province_modifier = {
+								name = rediscover_roots
+								duration = -1
+							}
+						}
+					}
+				"
+				second_custom_tooltip = rediscover_roots_tooltip3
+				second_limit = "was_tag = A75
+				"
+				second_effect = "custom_tooltip = rediscover_roots_tooltip4
+					tooltip = {
+						add_province_modifier = {
+							name = rediscover_roots
+							duration = -1
+						}
+					}
+					hidden_effect = {
+						every_owned_province = {
+							limit = {
+								culture = wexonard
+							}
+							add_province_modifier = {
+								name = rediscover_roots
+								duration = -1
+							}
+						}
+					}
+				"
+			}
+		}
+	}
+	B94_milcori_architecture = {
+		icon = mission_malwi_architecture
+		position = 12
+		required_missions = {
+			B94_rediscover_roots
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			919 = {
+				has_great_project = {
+					type = culture_labyrinth
+					tier = 2
+				}
+			}
+			development_in_provinces = {
+				value = 250
+				culture = milcori
+			}
+			num_of_owned_provinces_with = {
+				value = 15
+				culture = milcori
+				NOT = {
+					num_of_buildings_in_province = 1
+				}
+			}
+		}
+		effect = {
+			hidden_effect = {
+				remove_country_modifier = milcori_rebirth
+			}
+			add_prestige = 20
+			add_country_modifier = {
+				name = milcori_revival
+				duration = -1
+			}
+		}
+	}
+}
+
+B94_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = B94
+	}
+	B94_prosperity = {
+		icon = austria_prospers
+		position = 10
+		provinces_to_highlight = {
+		}
+		trigger = {
+			employed_advisor = {
+				category = adm
+			}
+			all_owned_province = {
+				NOT = {
+					devastation = 1
+				}
+				development = 10
+			}
+		}
+		effect = {
+			add_stability = 1
+			add_country_modifier = {
+				name = prosperous_land
+				duration = 7300
+			}
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = prosperity_tooltip
+				first_limit = "capital_scope = {
+						is_prosperous = yes
+					}
+				"
+				first_effect = "capital_scope = {
+						add_base_tax = 1
+						add_base_production = 1
+						add_base_manpower = 1
+					}
+				"
+			}
+		}
+	}
+	B94_underground_slave = {
+		icon = prosperity_for_all
+		position = 12
+		required_missions = {
+			B94_rediscover_roots
+			B94_prosperity
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			crown_land_share = 50
+			num_of_owned_provinces_with = {
+				value = 5
+				OR = {
+					trade_goods = grain
+					trade_goods = livestock
+				}
+				has_building = farm_estate
+			}
+		}
+		effect = {
+			custom_tooltip = underground_slave_tooltip
+			hidden_effect = {
+				for = {
+					amount = 3
+					effect = "random_owned_province = {
+							limit = {
+								has_building = farm_estate
+								OR = {
+									trade_goods = grain
+									trade_goods = livestock
+								}
+							}
+							remove_building = farm_estate
+							change_trade_goods = slaves
+							add_building = tradecompany
+						}
+					"
+				}
+			}
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = underground_slave_tooltip2
+				first_limit = "any_owned_province = {
+						trade_goods = slaves
+					}
+				"
+				first_effect = "change_price = {
+						trade_goods = slaves
+						key = underground_slavery
+						value = 0.2
+						duration = 7300
+					}
+				"
+				second_custom_tooltip = capital_of_culture_tooltip
+				second_limit = "was_tag = A56
+				"
+				second_effect = "custom_tooltip = underground_slave_tooltip3
+					hidden_effect = {
+						remove_estate_privilege = estate_celliander_serfdom
+					}
+					set_country_flag = A56_serfdom_flag2
+					set_estate_privilege = estate_celliander_serfdom2
+				"
+			}
+		}
+	}
+}

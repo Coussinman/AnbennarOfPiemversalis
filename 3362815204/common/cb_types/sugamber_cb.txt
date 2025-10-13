@@ -1,0 +1,83 @@
+cb_gnollish_dissolution = {
+	valid_for_subject = no
+	is_triggered_only = yes
+	war_goal = dissolve_pack
+}
+
+cb_gnollish_dissolution_global = {
+	valid_for_subject = no
+	prerequisites_self = {
+		tag = A48
+		has_country_flag = sugamber_gnollish_garrison
+	}
+	prerequisites = {
+		FROM = {
+			culture_group = gnollish
+			NOT = {
+				has_country_flag = sugamber_dissolution
+			}
+		}
+	}
+	war_goal = dissolve_pack
+}
+
+cb_aakhet_war_ace = {
+	ai_peace_desire = -100
+	valid_for_subject = no
+	is_triggered_only = yes
+	attacker_disabled_po = {
+		po_revoke_cores
+		po_release_vassals
+		po_release_annexed
+		po_return_cores
+		po_anb_tributary
+	}
+	war_goal = annex_country_aakhet
+}
+
+cb_nirakhetist_uprising = { 
+	ai_peace_desire = -50
+	valid_for_subject = no
+	is_triggered_only = yes
+	attacker_disabled_po = {
+		po_demand_provinces
+		po_revoke_cores
+		po_release_vassals
+		po_release_annexed
+		po_return_cores
+		po_become_vassal
+		po_subjugate_vassal
+		po_anb_tributary
+		po_form_personal_union
+		po_transfer_vassals
+	}
+	war_goal = war_for_kheterata_ace
+}
+
+cb_sigma_league = {
+	ai_peace_desire = -25
+	valid_for_subject = no
+	is_triggered_only = yes
+
+	war_goal = superiority_sigma_league
+}
+
+
+cb_milcorissia_last_war = {
+	ai_peace_desire = -100
+	valid_for_subject = no
+	is_triggered_only = yes
+	attacker_disabled_po = {
+		po_demand_provinces
+		po_revoke_cores
+		po_release_vassals
+		po_release_annexed
+		po_return_cores
+		po_become_vassal
+		po_subjugate_vassal
+		po_anb_tributary
+		po_form_personal_union
+		po_transfer_vassals
+	}
+	war_goal = end_milcorissia
+}

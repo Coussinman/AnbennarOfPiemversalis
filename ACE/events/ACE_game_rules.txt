@@ -1,0 +1,1188 @@
+
+namespace = ace_game_rules
+
+#Salahad game rule
+country_event = {
+	id = ace_game_rules.0
+	title = ace_game_rules.0.t
+	desc = ace_game_rules.0.desc
+	picture = DIPLOMAT_INTERROGATION_eventPicture
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = ace_game_rules.0.a
+		trigger = {
+			has_global_flag = ace_jaddari_victory_rule
+		}
+		F46 = {
+			add_country_modifier = {
+				name = zokka_jaddari_game_rules_buff
+				duration = 1460
+			}
+			add_country_modifier = {
+				name = ace_unnatural_luck
+				duration = -1
+			}
+			set_ai_personality = {
+				personality = ai_militarist
+			}
+			add_treasury = -10
+			hire_advisor = {
+				type = commandant
+			}
+			change_national_focus = ADM
+			remove_ruler_personality = conqueror_personality
+			add_ruler_personality = ace_conqueror_personality
+			set_estate_privilege = estate_church_for_the_faith
+			set_estate_privilege = estate_mages_patronage_of_the_magical_arts
+			change_estate_land_share = {
+				estate = estate_mages
+				share = 5
+			}
+			set_estate_privilege = estate_church_religious_state
+			change_estate_land_share = {
+				estate = estate_church
+				share = 10
+			}
+			set_estate_privilege = estate_nobles_nobility_primacy
+			change_estate_land_share = {
+				estate = estate_nobles
+				share = 10
+			}
+			set_estate_privilege = estate_burghers_patronage_of_the_arts
+		}
+		R51 = {
+			add_country_modifier = {
+				name = ace_unnatural_misfortune
+				duration = -1
+			}
+		}
+	}
+	option = {
+		name = ace_game_rules.0.a
+		trigger = {
+			has_global_flag = ace_zokka_victory_rule
+		}
+		F29 = {
+			add_country_modifier = {
+				name = zokka_jaddari_game_rules_buff
+				duration = 1460
+			}
+			add_country_modifier = {
+				name = ace_unnatural_luck
+				duration = -1
+			}
+			set_ai_personality = {
+				personality = ai_militarist
+			}
+			add_treasury = -10
+			hire_advisor = {
+				type = commandant
+			}
+			add_ruler_personality = ace_conqueror_personality
+		}
+		R51 = {
+			add_country_modifier = {
+				name = ace_unnatural_misfortune
+				duration = -1
+			}
+		}
+	}
+	option = {
+		name = ace_game_rules.0.a
+		trigger = {
+			has_global_flag = ace_harpy_victory_rule
+		}
+		random_list = {
+			99 = {
+				F48 = {
+					set_estate_privilege = estate_mages_patronage_of_the_magical_arts
+					change_estate_land_share = {
+						estate = estate_mages
+						share = 5
+					}
+					add_country_modifier = {
+						name = ace_unnatural_luck
+						duration = -1
+					}
+					set_ai_personality = {
+						personality = ai_militarist
+					}
+					add_country_modifier = { #Siadan is too weak otherwise
+						name = siadan_clutch
+						duration = 365
+					}
+					change_national_focus = MIL
+					add_treasury = -10
+					hire_advisor = {
+						type = commandant
+						discount = yes
+					}
+					add_ruler_personality = ace_conqueror_personality
+				}
+			}
+			1 = {
+				F50 = {
+					set_estate_privilege = estate_mages_patronage_of_the_magical_arts
+					change_estate_land_share = {
+						estate = estate_mages
+						share = 5
+					}
+					add_country_modifier = {
+						name = ace_unnatural_luck
+						duration = -1
+					}
+					set_ai_personality = {
+						personality = ai_militarist
+					}
+					change_national_focus = MIL
+					add_treasury = -10
+					hire_advisor = {
+						type = commandant
+						discount = yes
+					}
+					add_ruler_personality = ace_conqueror_personality
+				}
+			}
+		}
+		F25 = { #Temporary Sareyand buff so they annoy Jaddari
+			add_country_modifier = {
+				name = ace_unnatural_luck
+				duration = 3650
+			}
+			change_national_focus = MIL
+			add_treasury = -10
+			hire_advisor = {
+				type = commandant
+				discount = yes
+			}
+			set_estate_privilege = estate_church_for_the_faith
+		}
+		F29 = {
+			add_country_modifier = {
+				name = ace_unnatural_misfortune
+				duration = -1
+			}
+		}
+		F46 = {
+			add_country_modifier = {
+				name = ace_unnatural_misfortune
+				duration = -1
+			}
+		}
+		R51 = {
+			add_country_modifier = {
+				name = ace_unnatural_misfortune
+				duration = -1
+			}
+		}
+	}
+}
+
+#Siadan vs Mulen fight
+country_event = {
+	id = ace_game_rules.1
+	title = ace_game_rules.1.t
+	desc = ace_game_rules.1.desc
+	picture = DIPLOMAT_INTERROGATION_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	trigger = {
+		tag = F48
+		has_global_flag = ace_harpy_victory_rule
+		ai = yes
+		exists = F50
+	}
+	option = {
+		name = ace_game_rules.1.a
+		while = {
+			limit = {
+				NOT = {
+					army_size_percentage = 0.99
+				}
+			}
+			capital_scope = {
+				infantry = ROOT
+			}
+		}
+		declare_war_with_cb = {
+			who = F50
+			casus_belli = cb_monster_vs_civ_ai
+		}
+	}
+}
+
+#Vassalize Verkal Gulan TODO expand for Jaddari
+country_event = {
+	id = ace_game_rules.2
+	title = ace_game_rules.2.t
+	desc = ace_game_rules.2.desc
+	picture = DIPLOMAT_INTERROGATION_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		OR = {
+			tag = F48
+			tag = F50
+		}
+		has_global_flag = ace_harpy_victory_rule
+		ai = yes
+		is_at_war = no
+		is_subject = no
+		is_year = 1446
+		NOT = {
+			is_year = 1500
+			overextension_percentage = 0.5
+			war_exhaustion = 5
+		}
+		stability = 0
+		exists = F47
+		F47 = {
+			is_subject = no
+			is_neighbor_of = ROOT
+			NOT = {
+				army_strength = {
+					who = ROOT
+					value = 1.5
+				}
+			}
+		}
+	}
+	option = {
+		name = ace_game_rules.2.a
+		while = {
+			limit = {
+				NOT = {
+					army_size_percentage = 0.99
+				}
+			}
+			add_treasury = -10
+			capital_scope = {
+				infantry = ROOT
+			}
+		}
+		declare_war_with_cb = {
+			who = F47
+			casus_belli = cb_vassalize_mission_ai
+		}
+	}
+}
+
+#Vassalize Goblin for Mulen
+country_event = {
+	id = ace_game_rules.3
+	title = ace_game_rules.3.t
+	desc = ace_game_rules.3.desc
+	picture = DIPLOMAT_INTERROGATION_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		tag = F50
+		has_global_flag = ace_harpy_victory_rule
+		ai = yes
+		is_at_war = no
+		is_subject = no
+		is_year = 1450
+		NOT = {
+			is_year = 1500
+			overextension_percentage = 0.5
+			war_exhaustion = 5
+		}
+		stability = 0
+		OR = {
+			AND = {
+				exists = H88
+				H88 = {
+					is_subject = no
+					is_neighbor_of = ROOT
+				}
+			}
+			AND = {
+				exists = H92
+				H92 = {
+					is_subject = no
+					is_neighbor_of = ROOT
+				}
+			}
+			AND = {
+				exists = H93
+				H93 = {
+					is_subject = no
+					is_neighbor_of = ROOT
+				}
+			}
+		}
+	}
+	option = {
+		name = ace_game_rules.3.a
+		while = {
+			limit = {
+				NOT = {
+					army_size_percentage = 0.99
+				}
+			}
+			add_treasury = -10
+			capital_scope = {
+				infantry = ROOT
+			}
+		}
+		random_known_country = {
+			limit = {
+				OR = {
+					tag = H88
+					tag = H92
+					tag = H93
+				}
+			}
+			ROOT = {
+				declare_war_with_cb = {
+					who = PREV
+					casus_belli = cb_vassalize_mission_ai
+				}
+			}
+		}
+	}
+}
+
+#Invade Elayenna for Harpies
+country_event = {
+	id = ace_game_rules.4
+	title = ace_game_rules.4.t
+	desc = ace_game_rules.4.desc
+	picture = DIPLOMAT_INTERROGATION_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		OR = {
+			tag = F48
+			tag = F50
+		}
+		has_global_flag = ace_harpy_victory_rule
+		ai = yes
+		is_at_war = no
+		is_subject = no
+		is_year = 1450
+		NOT = {
+			is_year = 1500
+			overextension_percentage = 0.5
+			war_exhaustion = 5
+		}
+		stability = 0
+		F49 = {
+			NOT = {
+				is_in_war = {
+					participants = F29
+				}
+			}
+			OR = {
+				is_subject = no
+				is_subject_of = F46
+			}
+			is_neighbor_of = ROOT
+		}
+		OR = {
+			F49 = {
+				NOT = {
+					alliance_with = F46
+					is_subject_of = F46
+				}
+			}
+			F46 = {
+				NOT = {
+					army_strength = {
+						who = ROOT
+						value = 1.5
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = ace_game_rules.4.a
+		while = {
+			limit = {
+				NOT = {
+					army_size_percentage = 0.99
+				}
+			}
+			capital_scope = {
+				infantry = ROOT
+			}
+		}
+		declare_war_with_cb = {
+			who = F49
+			casus_belli = cb_monster_vs_civ_ai
+		}
+	}
+}
+
+#Break Siadan-Zokka alliance
+country_event = {
+	id = ace_game_rules.5
+	title = ace_game_rules.5.t
+	desc = ace_game_rules.5.desc
+	picture = DIPLOMAT_INTERROGATION_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		tag = F48
+		has_global_flag = ace_harpy_victory_rule
+		F50 = {
+			exists = no
+		}
+		ai = yes
+		is_year = 1448
+		F29 = {
+			alliance_with = ROOT
+		}
+	}
+	option = {
+		name = ace_game_rules.5.a
+		break_alliance = F29
+		add_trust = {
+			who = F29
+			value = -100
+			mutual = yes
+		}
+		break_alliance = F49
+		add_trust = {
+			who = F49
+			value = -100
+			mutual = yes
+		}
+	}
+}
+
+#Break all non Jadd alliances in Bulwar and Rahen for Jaddari
+country_event = {
+	id = ace_game_rules.10
+	title = ace_game_rules.10.t
+	desc = ace_game_rules.10.desc
+	picture = DIPLOMAT_INTERROGATION_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		tag = F46
+		has_global_flag = ace_jaddari_victory_rule
+		ai = yes
+		OR = {
+			any_ally = {
+				capital_scope = {
+					OR = {
+						superregion = bulwar_superregion
+						superregion = rahen_superregion
+					}
+				}
+				NOT = {
+					religion = the_jadd
+					primary_culture = ghankedhen
+					ai = no
+					tag = R38
+				}
+			}
+			any_subject_country = {
+				is_subject_of_type = tributary_state_anb
+			}
+		}
+	}
+	option = {
+		name = ace_game_rules.10.a
+		every_ally = {
+			limit = {
+				capital_scope = {
+					OR = {
+						superregion = bulwar_superregion
+						superregion = rahen_superregion
+					}
+				}
+				NOT = {
+					religion = the_jadd
+					primary_culture = ghankedhen
+					ai = no
+					tag = R38
+				}
+
+			}
+			break_alliance = ROOT
+			break_marriage = ROOT
+			ROOT = {
+				remove_guarantee = PREV
+				add_opinion = {
+					who = PREV
+					modifier = renounced_as_heretics
+					multiplier = 3
+				}
+			}
+			add_opinion = {
+				who = ROOT
+				modifier = renounced_as_heretics
+				multiplier = 3
+			}
+			add_trust = {
+				who = ROOT
+				value = -100
+				mutual = yes
+			}
+		}
+		every_subject_country = {
+			limit = {
+				is_subject_of_type = tributary_state_anb
+			}
+			ROOT = {
+				free_vassal = PREV
+			}
+			grant_independence = yes
+		}
+	}
+}
+
+#Break all non Jadd alliances in Bulwar and Rahen for Jaddari
+country_event = {
+	id = ace_game_rules.11
+	title = ace_game_rules.11.t
+	desc = ace_game_rules.11.desc
+	picture = DIPLOMAT_INTERROGATION_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		tag = F46
+		has_global_flag = ace_jaddari_victory_rule
+		ai = yes
+		total_development = 200
+		is_at_war = no
+		NOT = {
+			overextension_percentage = 0.2
+			war_exhaustion = 1
+		}
+		any_neighbor_country = {
+			is_subject = no
+			any_owned_province = {
+				is_permanent_claim = ROOT
+				OR = {
+					superregion = bulwar_superregion
+					area = avhavubhiya_area
+				}
+				NOT = {
+					province_id = 2915
+					province_id = 4400
+					province_id = 5668
+				}
+			}
+			NOT = {
+				is_great_power = yes
+				total_development = 200
+				num_of_allies = 3
+				any_ally = {
+					OR = {
+						is_great_power = yes
+						total_development = 200
+					}
+				}
+				truce_with = ROOT
+				alliance_with = ROOT
+				guaranteed_by = ROOT
+				any_country = {
+					has_guaranteed = PREV
+					OR = {
+						is_great_power = yes
+						total_development = 200
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = ace_game_rules.11.a
+		random_neighbor_country = {
+			limit = {
+				is_subject = no
+				any_owned_province = {
+					is_permanent_claim = ROOT
+					OR = {
+						superregion = bulwar_superregion
+						area = avhavubhiya_area
+					}
+					NOT = {
+						province_id = 2915
+						province_id = 4400
+						province_id = 5668
+					}
+				}
+				NOT = {
+					is_great_power = yes
+					total_development = 200
+					num_of_allies = 3
+					any_ally = {
+						OR = {
+							is_great_power = yes
+							total_development = 200
+						}
+					}
+					truce_with = ROOT
+					alliance_with = ROOT
+					guaranteed_by = ROOT
+					any_country = {
+						has_guaranteed = PREV
+						OR = {
+							is_great_power = yes
+							total_development = 200
+						}
+					}
+				}
+			}
+			ROOT = {
+				declare_war_with_cb = {
+					who = PREV
+					casus_belli = cb_annex
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+#Western Bulwar game rule
+country_event = {
+	id = ace_game_rules.100
+	title = ace_game_rules.100.t
+	desc = ace_game_rules.100.desc
+	picture = DIPLOMAT_INTERROGATION_eventPicture
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = ace_game_rules.100.a
+		trigger = {
+			has_global_flag = ace_bulwari_victory_rule
+		}
+		every_country = {
+			limit = {
+				culture_group = bulwari
+				NOT = {
+					tag = F35
+				}
+			}
+			add_country_modifier = {
+				name = ace_unnatural_luck
+				duration = -1
+			}
+			set_ai_personality = {
+				personality = ai_militarist
+			}
+			change_national_focus = MIL
+			set_estate_privilege = estate_burghers_patronage_of_the_arts
+			set_estate_privilege = estate_nobles_nobility_primacy
+			change_estate_land_share = {
+				estate = estate_nobles
+				share = 10
+			}
+			if = {
+				limit = {
+					is_subject = yes
+				}
+				set_estate_privilege = estate_burghers_land_of_commerce
+				change_estate_land_share = {
+					estate = estate_burghers
+					share = 10
+				}
+			}
+			else_if = {
+				limit = {
+					has_estate = estate_mages
+				}
+				set_estate_privilege = estate_mages_patronage_of_the_magical_arts
+				change_estate_land_share = {
+					estate = estate_mages
+					share = 5
+				}
+				hire_advisor = {
+					type = commandant
+				}
+			}
+		}
+		every_country = {
+			limit = {
+				OR = {
+					primary_culture = sun_elf
+					culture = exodus_goblin
+					culture = firanyan_harpy
+					culture = sandfang_gnoll
+				}
+				NOT = {
+					tag = F29
+				}
+			}
+			add_country_modifier = {
+				name = ace_unnatural_misfortune
+				duration = -1
+			}
+		}
+		U13 = { #Prevents Greysheep from allying with Marblehead, which is fairly common when savescumming
+			break_alliance = U15
+			add_trust = {
+				who = U15
+				value = -20
+				mutual = yes
+			}
+		}
+		F27 = {
+			add_truce_with = U13 #Small delay so Dartax can fully annex Greysheep with no problem
+		}
+		F22 = {
+			set_country_flag = ace_god_mage_heir
+			add_mil_power = -40
+			add_army_professionalism = 0.01
+			define_general = {
+				fire = 3
+				shock = 3
+				manuever = 0
+				siege = 3
+				trait = strict_drillmaster_personality
+			}
+			add_truce_with = F27 #prevents them from declaring a stupid early war on the Harpies
+			country_event = {
+				id = ace_game_rules.101
+				days = 31
+			}
+		}
+	}
+	option = {
+		name = ace_game_rules.0.a
+		trigger = {
+			has_global_flag = ace_sun_elf_victory_rule
+		}
+		every_country = {
+			limit = {
+				primary_culture = sun_elf
+				NOT = {
+					tag = U05
+				}
+			}
+			add_country_modifier = {
+				name = ace_unnatural_luck
+				duration = -1
+			}
+			set_ai_personality = {
+				personality = ai_militarist
+			}
+		}
+	}
+	option = {
+		name = ace_game_rules.0.a
+		trigger = {
+			has_global_flag = ace_bulwar_opportunity_rule
+		}
+		every_country = {
+			limit = {
+				OR = {
+					culture = exodus_goblin
+					culture = firanyan_harpy
+					culture = sandfang_gnoll
+					tag = F22
+					tag = U05
+				}
+				NOT = {
+					tag = F29
+				}
+			}
+			add_country_modifier = {
+				name = ace_unnatural_luck
+				duration = -1
+			}
+			set_ai_personality = {
+				personality = ai_militarist
+			}
+			change_national_focus = MIL
+			if = {
+				limit = {
+					culture_group = bulwari
+				}
+				set_estate_privilege = estate_nobles_nobility_primacy
+				change_estate_land_share = {
+					estate = estate_nobles
+					share = 10
+				}
+			}
+		}
+		every_country = {
+			limit = {
+				primary_culture = sun_elf
+			}
+			add_country_modifier = {
+				name = ace_unnatural_misfortune
+				duration = -1
+			}
+		}
+	}
+}
+
+#Dartax vs Greysheep war
+country_event = {
+	id = ace_game_rules.101
+	title = ace_game_rules.101.t
+	desc = ace_game_rules.101.desc
+	picture = DIPLOMAT_INTERROGATION_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = ace_game_rules.101.a
+		while = {
+			limit = {
+				NOT = {
+					army_size_percentage = 0.99
+				}
+			}
+			add_treasury = -8
+			651 = {
+				infantry = ROOT
+			}
+		}
+		U13 = {
+			break_alliance = U15
+		}
+		declare_war_with_cb = {
+			who = U13
+			casus_belli = cb_core
+			war_goal_province = 654
+		}
+	}
+}
+
+#Dartax decides to fight Birz or Marblehead at tech 4
+country_event = {
+	id = ace_game_rules.102
+	title = ace_game_rules.102.t
+	desc = ace_game_rules.102.desc
+	picture = DIPLOMAT_INTERROGATION_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		tag = F22
+		ai = yes
+		has_global_flag = ace_bulwari_victory_rule
+		is_at_war = no
+		army_size = 10
+		army_size_percentage = 0.6
+		mil_tech = 4
+		NOT = {
+			mil_tech = 6
+		}
+		any_neighbor_country = {
+			OR = {
+				tag = F34
+				tag = F21
+				tag = U15
+			}
+			NOT = {
+				is_subject = yes
+				truce_with = ROOT
+				alliance_with = ROOT
+				AND = {
+					num_of_allies = 1
+					is_ahead_of_time_in_technology = { tech = mil }
+					is_at_war = no
+				}
+				AND = {
+					num_of_allies = 2
+					OR = {
+						is_ahead_of_time_in_technology = { tech = mil }
+						is_at_war = no
+					}
+				}
+				num_of_allies = 3
+			}
+		}
+	}
+	option = {
+		name = ace_game_rules.102.a
+		while = {
+			limit = {
+				NOT = {
+					army_size_percentage = 0.99
+				}
+			}
+			add_treasury = -5
+			651 = {
+				infantry = ROOT
+			}
+		}
+		hire_advisor = {
+			type = commandant
+		}
+		set_estate_privilege = estate_church_for_the_faith
+		if = {
+			limit = {
+				F34 = {
+					is_neighbor_of = ROOT
+					NOT = {
+						is_subject = yes
+						truce_with = ROOT
+						alliance_with = ROOT
+						AND = {
+							num_of_allies = 1
+							is_ahead_of_time_in_technology = { tech = mil }
+							is_at_war = no
+						}
+						AND = {
+							num_of_allies = 2
+							OR = {
+								is_ahead_of_time_in_technology = { tech = mil }
+								is_at_war = no
+							}
+						}
+						num_of_allies = 3
+					}
+				}
+			}
+			declare_war_with_cb = {
+				who = F34
+				casus_belli = cb_annex
+			}
+		} else_if = {
+			limit = {
+				F21 = {
+					is_neighbor_of = ROOT
+					NOT = {
+						is_subject = yes
+						truce_with = ROOT
+						alliance_with = ROOT
+						AND = {
+							num_of_allies = 1
+							is_ahead_of_time_in_technology = { tech = mil }
+							is_at_war = no
+						}
+						AND = {
+							num_of_allies = 2
+							OR = {
+								is_ahead_of_time_in_technology = { tech = mil }
+								is_at_war = no
+							}
+						}
+						num_of_allies = 3
+					}
+				}
+			}
+			declare_war_with_cb = {
+				who = F21
+				casus_belli = cb_annex
+			}
+		} else = {
+			declare_war_with_cb = {
+				who = U15
+				casus_belli = cb_monster_vs_civ
+			}
+		}
+	}
+}
+
+
+
+#Wex game rule
+country_event = {
+	id = ace_game_rules.200
+	title = ace_game_rules.200.t
+	desc = ace_game_rules.200.desc
+	picture = DIPLOMAT_INTERROGATION_eventPicture
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = ace_game_rules.200.a
+		trigger = {
+			has_global_flag = ace_wex_domination_rule
+		}
+		A30 = {
+			add_country_modifier = {
+				name = ace_unnatural_luck
+				duration = -1
+			}
+			set_ai_personality = {
+				personality = ai_militarist
+			}
+			change_national_focus = ADM
+			remove_ruler_personality = conqueror_personality
+			add_ruler_personality = ace_conqueror_personality
+			set_estate_privilege = estate_burghers_patronage_of_the_arts
+			set_estate_privilege = estate_nobles_nobility_primacy
+			change_estate_land_share = {
+				estate = estate_nobles
+				share = 10
+			}
+			set_estate_privilege = estate_church_religious_state
+			change_estate_land_share = {
+				estate = estate_church
+				share = 10
+			}
+			set_estate_privilege = estate_mages_patronage_of_the_magical_arts
+			change_estate_land_share = {
+				estate = estate_mages
+				share = 5
+			}
+			hire_advisor = {
+				type = commandant
+			}
+		}
+	}
+	option = {
+		name = ace_game_rules.0.a
+		trigger = {
+			has_global_flag = ace_wex_imperial_rule
+		}
+	}
+}
+
+
+
+#Lencenor game rule
+country_event = {
+	id = ace_game_rules.300
+	title = ace_game_rules.300.t
+	desc = ace_game_rules.300.desc
+	picture = DIPLOMAT_INTERROGATION_eventPicture
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = ace_game_rules.300.a
+		trigger = {
+			has_global_flag = ace_lorent_victory_rule
+		}
+		A01 = {
+			add_country_modifier = {
+				name = ace_unnatural_luck
+				duration = -1
+			}
+			set_ai_personality = {
+				personality = ai_militarist
+			}
+			change_national_focus = ADM
+			hire_advisor = {
+				type = statesman
+			}
+		}
+	}
+	option = {
+		name = ace_game_rules.0.a
+		trigger = {
+			has_global_flag = ace_winelords_victory_rule
+		}
+		A01 = {
+			add_country_modifier = {
+				name = ace_unnatural_misfortune
+				duration = -1
+			}
+		}
+		every_country = {
+			limit = {
+				OR = {
+					culture_group = lencori
+				}
+				capital_scope = {
+					region = lencenor_region
+				}
+				NOT = {
+					tag = A01
+				}
+			}
+			add_country_modifier = {
+				name = ace_unnatural_luck
+				duration = -1
+			}
+			change_national_focus = MIL
+			change_personal_deity = ryala
+			set_estate_privilege = estate_burghers_patronage_of_the_arts
+			set_estate_privilege = estate_nobles_nobility_primacy
+			change_estate_land_share = {
+				estate = estate_nobles
+				share = 10
+			}
+			set_estate_privilege = estate_church_religious_state
+			change_estate_land_share = {
+				estate = estate_church
+				share = 10
+			}
+			set_estate_privilege = estate_mages_patronage_of_the_magical_arts
+			change_estate_land_share = {
+				estate = estate_mages
+				share = 5
+			}
+			hire_advisor = {
+				type = commandant
+			}
+		}
+	}
+}
+
+#Force declare war on Lorent
+country_event = {
+	id = ace_game_rules.301
+	title = ace_game_rules.301.t
+	desc = ace_game_rules.301.desc
+	picture = DIPLOMAT_INTERROGATION_eventPicture
+	is_triggered_only = yes
+	hidden = yes
+	trigger = {
+		always = no
+		has_global_flag = ace_winelords_victory_rule
+		ai = yes
+		is_subject_of = A01
+		liberty_desire = 50
+		NOT = {
+			is_year = 1500
+			truce_with = A01
+		}
+		OR = {
+			A01 = {
+				war_with = A13
+			}
+			AND = {
+				A01 = {
+					is_at_war = yes
+				}
+				A13 = {
+					is_supporting_independence_of = ROOT
+				}
+			}
+		}
+	}
+	option = {
+		name = ace_game_rules.301.a
+		declare_war_with_cb = {
+			who = A01
+			casus_belli = cb_independence_war
+		}
+	}
+}
+
+
+
+#Build troops for Harpies, probably removed in the future
+country_event = {
+	id = ace_game_rules.777
+	title = ace_game_rules.777.t
+	desc = ace_game_rules.777.desc
+	picture = DIPLOMAT_INTERROGATION_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		has_global_flag = ace_harpy_victory_rule
+		OR = {
+			tag = F48
+			tag = F50
+		}
+		ai = yes
+		is_at_war = no
+		is_subject = no
+		army_size_percentage = 0.5
+		NOT = {
+			war_exhaustion = 5
+			army_size_percentage = 0.99
+		}
+	}
+	option = {
+		name = ace_game_rules.777.a
+		while = {
+			limit = {
+				NOT = {
+					army_size_percentage = 0.99
+				}
+			}
+			capital_scope = {
+				infantry = ROOT
+			}
+		}
+	}
+}
+
+

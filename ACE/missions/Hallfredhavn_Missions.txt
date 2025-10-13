@@ -1,0 +1,3720 @@
+hallfredhavn_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = AD5
+			tag = AD7
+		}
+	} 
+
+	AD5_forgotten_feudalism = {
+		icon = mission_subjugate_the_merchants
+		position = 3
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			if = {
+				limit = {
+					ai = no
+				}
+				has_institution = feudalism 
+			}
+			else = {
+				is_year = 1445
+			}
+		} 
+
+		effect = {
+			add_adm_tech = 1
+			add_mil_tech = 1
+			remove_country_modifier = AD5_forgotten_feudalism_modifier
+			if = {
+				limit = {
+					ai = yes
+				}
+				capital_scope = {
+					add_institution_embracement = {
+						which = feudalism
+						value = 100
+					}
+				}
+			}
+		}
+	}
+}
+hallfredhavn_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = AD5
+			tag = AD7
+		}
+	} 
+
+	AD5_recover_from_ofarar = {
+		icon = mission_fish_markets
+		position = 2
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			is_year = 1450
+			development_in_provinces = {
+				value = 15
+				trade_goods = grain
+			}
+			development_in_provinces = {
+				value = 25
+				trade_goods = fish
+			}
+			any_owned_province = {
+				trade_goods = livestock
+			}
+		}
+
+		effect = {
+			add_stability_or_adm_power = yes
+			add_dip_power = 100
+			add_country_modifier = {
+				name = AD5_hope_modifier
+				duration = 3650
+			}
+		}
+	}
+
+	AD5_diversify_food_production = {
+		icon = mission_iroquois_food_surplus
+		position = 3
+		required_missions = { AD5_recover_from_ofarar } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			NOT = { has_country_modifier = AD5_rampant_starvation } 
+			NOT = { has_country_modifier = AD5_food_shortages }
+		}
+
+		effect = {
+			add_stability_or_adm_power = yes
+			add_dip_power = 100
+			if = {
+				limit = {
+					has_country_modifier = AD5_hope_modifier
+				}
+				extend_country_modifier = { 
+					name = AD5_hope_modifier
+					duration = 3650
+				}
+			}
+			else = {
+				add_country_modifier = {
+					name = AD5_hope_modifier
+					duration = 3650
+				}
+			}
+		} 
+	}
+}
+hallfredhavn_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = AD5
+			tag = AD7
+		}
+	} 
+
+	AD5_awaken_government = {
+		icon = mission_the_polish_throne
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			if = {
+				limit = {
+					ai = no
+				}
+				monthly_adm = 10
+				stability = 0
+				NOT = { average_unrest = 5 }
+				OR = {
+			#		AND = {
+			#			government = republic
+			#			has_country_modifier = separation_of_powers
+			#		}
+			#		AND = {
+			#			government = monarchy
+			#			legitimacy = 80
+			#		}
+					AND = {
+						faction_in_power = ad5_faction_divenscourges
+						faction_influence = {
+							faction = ad5_faction_divenscourges
+							influence = 30
+						}
+					}
+					AND = {
+						faction_in_power = ad5_faction_pearlsguarders
+						faction_influence = {
+							faction = ad5_faction_pearlsguarders
+							influence = 30
+						}
+					}
+					AND = {
+						faction_in_power = ad5_faction_svartskeggs
+						faction_influence = {
+							faction = ad5_faction_svartskeggs
+							influence = 30
+						}
+					}
+					AND = {
+						faction_in_power = ad5_faction_skalir
+						faction_influence = {
+							faction = ad5_faction_skalir
+							influence = 30
+						}
+					}
+					AND = {
+						faction_in_power = ad5_faction_vidarfotar
+						faction_influence = {
+							faction = ad5_faction_vidarfotar
+							influence = 30
+						}
+					}
+				}
+			}
+			else = {
+				is_year =1445
+			}
+		}
+
+		effect = {
+			remove_country_modifier = AD5_inert_government
+			add_stability = -1
+			add_adm_power = 200
+			add_dip_power = 200
+			add_mil_power = 200
+		}
+	}
+
+	AD5_desperate_expansionist_policies = {
+		icon = mission_colonial
+		position = 2
+		required_missions = { AD5_awaken_government } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			if = {
+				limit = {
+					ai = no
+				}
+				treasury = 100
+				adm_power = 250
+			}
+		}
+
+		effect = {
+			add_treasury = -100
+			add_adm_power = -250
+			add_country_modifier = {
+				name = "AD5_desperate_expansionism"
+				duration = 36500
+			}
+			custom_tooltip = AD5_Landnamsverk_tt
+#			change_variable = {
+#				which = ACE_hallfredhavn_wood_variable
+#				value = -10
+#			}
+		}
+	}
+
+	AD5_revive_metallurgy = {
+		icon = mission_iron_and_copper
+		position = 3
+		required_missions = { AD5_desperate_expansionist_policies } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 2309
+				province_id = 2300
+			}
+		}
+
+		trigger = {
+			2302 = {
+				base_production = 10
+			}
+			any_owned_province = {
+				is_colony = no
+				OR = {
+					trade_goods = copper
+					trade_goods = iron
+				}
+			}
+		}
+
+		effect = {
+			remove_country_modifier = AD5_metal_shortage
+		#	custom_tooltip = AD5_lengthen_landnamsverk_tt
+		#	hidden_effect = {
+		#		extend_country_modifier = {
+		#			name = "AD5_desperate_expansionism"
+		#			duration = 3650
+		#		}
+		#	}
+		}
+	}
+
+	AD5_end_the_sidrvetr = {
+		icon = prosperity_for_all
+		position = 4
+		required_missions = {
+			AD5_revive_metallurgy
+			AD5_taychendi_goods
+			AD5_forgotten_feudalism
+			AD5_diversify_food_production
+			AD5_fate_of_the_oonoi
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			check_variable = {
+				which = variable_AD5_hallfredhavn_food
+				value = 100
+			}
+			stability = 1
+			NOT = { average_unrest = 0 } 
+		#	OR = {
+		#		legitimacy = 80
+		#		republican_tradition = 80
+		#	}
+			NOT = {
+				num_of_rebel_armies = 1
+			}
+		}
+
+		effect = {
+			custom_tooltip = AD5_matured_landsnamsverk_tt
+			hidden_effect = {
+				remove_country_modifier = AD5_desperate_expansionism
+			}
+			add_country_modifier = {
+				name = AD5_desperate_expansionism2
+				duration = -1
+			}
+			remove_country_modifier = AD5_rampant_starvation
+			remove_country_modifier = AD5_food_shortages
+			remove_country_modifier = AD5_rationing
+			add_stability_or_adm_power = yes
+			add_country_modifier = {
+				name = AD5_survivors_of_the_sidrvetr_modifier
+				duration = -1
+			}
+			custom_tooltip = AD5_new_runestone_tt
+			country_event_with_effect_insight = {
+				id = hallfredhavn.124
+				effect = "
+					custom_tooltip = AD5_create_stadfastr_tt
+				"
+			}
+			if = {
+				limit = {
+					has_country_flag = AD5_dynamically_revealing_missions_flag
+				}
+				set_country_flag = AD5_unlock_chapter_2_flag
+				swap_non_generic_missions = yes
+			}
+		}
+	}
+}
+hallfredhavn_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = AD5
+			tag = AD7
+		}
+	} 
+
+	AD5_secure_lumber_and_wool = {
+		icon = mission_modernize_production
+		position = 1
+		provinces_to_highlight = {
+			OR = {
+				province_id = 2305
+				province_id = 2306
+				province_id = 2303
+			}
+		} 
+
+		trigger = {
+#			check_variable = {
+#				which = ACE_hallfredhavn_wood_variable
+#				value = 10
+#			}
+			any_owned_province = {
+				is_city = yes
+				trade_goods = wool
+			} 
+			treasury = 50
+		}
+
+		effect = {
+#			change_variable = {
+#				which = ACE_hallfredhavn_wood_variable
+#				value = -10
+#			}
+			remove_country_modifier = AD5_wool_shortage
+			add_treasury = -50
+			random_owned_province = {
+				limit = { trade_goods = wool } 
+				add_building = workshop
+			}
+		}
+	}
+
+	AD5_rebuild_the_navy = {
+		icon = mission_shipyards_of_gujarat
+		position = 2
+		required_missions = { AD5_secure_lumber_and_wool AD5_awaken_government } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+#			check_variable = {
+#				which = ACE_hallfredhavn_wood_variable
+#				value = 10
+#			}
+	#		navy_size = 2
+			dip_power = 100
+			manpower = 1
+			treasury = 50
+		}
+
+		effect = { 
+			add_dip_power = -100
+			add_manpower = -1
+			add_treasury = -50
+			2302 = { 
+				add_building = shipyard
+				add_base_production = 1
+				add_unit_construction = {
+					type = galley
+					amount = 2
+					speed = 0.5
+					cost = 0.5
+				}
+			}
+			add_country_modifier = {
+				name = AD5_burnwood_fleet
+				duration = 36500
+			}
+			complex_dynamic_effect = {
+				first_custom_tooltip = AD5_dip_tech_no_tt
+				first_limit = "
+					NOT = { dip_tech = 3 }
+				"
+				first_effect = "
+							add_dip_tech = 1
+				"
+				second_custom_tooltip = AD5_dip_tech_yes_tt
+				second_limit = "
+					dip_tech = 3
+				"
+				second_effect = "
+					add_dip_power = 400
+				"
+			}
+		}
+	}
+
+	AD5_taychendi_goods = {
+		icon = mission_dominate_home_trade_node
+		position = 3
+		required_missions = { AD5_rebuild_the_navy } 
+		provinces_to_highlight = {
+			province_id = 6559
+		} 
+
+		trigger = {
+			OR = {
+				check_variable = {
+					which = variable_AD5_hallfredhavn_trades
+					value = 30
+				}
+				num_of_light_ship = 3
+				6559 = {
+					OR = {
+						owned_by = ROOT
+						has_province_modifier = slaves_raided
+					}
+				}
+			}
+		} 
+
+		effect = {
+			capital_scope = { add_prosperity = 50 }
+			2301 = {
+				remove_province_modifier = AD5_mediocre_seeds
+			}
+			remove_country_modifier = AD5_defunct_magnates
+		} 
+	}
+}
+hallfredhavn_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = AD5
+			tag = AD7
+		}
+	} 
+
+	AD5_restore_gudafridr = {
+		icon = mission_norse_faith
+		position = 2
+		required_missions = { AD5_awaken_government } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			stability = 0
+#			NOT = { average_unrest = 2 } 
+			estate_loyalty = {
+				estate = estate_church
+				loyalty = 60
+			}
+			OR = {
+				advisor = inquisitor
+				advisor = theologian
+			}
+		}
+
+		effect = {
+			country_event_with_option_insight = {
+				id = hallfredhavn.7
+				days = 7
+				option_1 = "
+					remove_estate_privilege = estate_church_AD5_broken_gudafridr
+					set_estate_privilege = estate_church_AD5_gudafridr_proclamation
+					add_treasury = -50
+					add_stability = 1
+					custom_tooltip = \" \"
+				"
+
+				option_2 = "
+					remove_estate_privilege = estate_church_AD5_broken_gudafridr
+					add_country_modifier = {
+						name = AD5_religious_consolidation
+						duration = 3650
+					}
+					every_owned_province = {
+						limit = {
+							NOT = {
+								religion = skaldhyrric_faith
+							}
+						}
+						add_unrest = 10
+					}
+				"
+			}
+		} 
+	}
+
+	AD5_fate_of_the_oonoi = {
+		icon = trade_with_the_natives
+		position = 3
+		required_missions = { AD5_restore_gudafridr } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			accepted_culture = oonoi
+		#	OR = {
+		#		AND = {
+		#			has_reform = egalitarian_thing_reform
+		#			NOT = {
+		#				has_estate_privilege = estate_nobles_langeyru_slavery
+		#			}
+		#		}
+		#		has_estate_privilege = estate_nobles_langeyru_slavery
+		#	}
+		}
+
+		effect = { 
+			custom_tooltip = AD5_oonoi_settlers_tt
+			complex_dynamic_effect = {
+				first_custom_tooltip = AD5_ruinborn_tolerance_tt
+				first_limit = "
+					NOT = { has_estate_privilege = estate_nobles_langeyru_slavery }
+				"
+				first_effect = "
+					medium_increase_of_ruinborn_tolerance_effect = yes
+					add_country_modifier = {
+						name = AD5_langeyru_acceptance
+						duration = 18250
+					}
+					custom_tooltip = AD5_more_oonoi_tt
+				"
+				second_custom_tooltip = AD5_ruinborn_subjugation_tt
+				second_limit = "
+					has_estate_privilege = estate_nobles_langeyru_slavery
+				"
+				second_effect = "
+					medium_decrease_of_ruinborn_tolerance_effect = yes
+					custom_tooltip = AD5_ruinborn_subjugation2_tt
+					hidden_effect = {
+						every_owned_province = {
+							hallfredhavn_expand_slavery = yes
+							add_ruinborn_minority_size_effect = yes
+						}
+					}
+				"
+				
+			}
+		}
+	}
+}
+hallfredhavn_1_2 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = AD5
+			tag = AD7
+		}
+		OR = {
+			has_country_flag = AD5__revealing_all_missions_flag
+			has_country_flag = AD5_unlock_chapter_2_flag
+		}
+	}
+
+	AD5_raid_the_skegglands = {
+		icon = mission_raid_on_genoa
+		position = 5
+		required_missions = { AD5_end_the_sidrvetr } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			check_variable = {
+				which = num_of_raided_coasts
+				value = 10
+			}
+		}
+
+		effect = {
+			custom_tooltip = AD5_raided_taychend_claims_tt
+			hidden_effect = {
+				taychend_superregion = {
+					type = all
+					limit = {
+						has_port = yes
+						has_province_modifier = slaves_raided
+					}
+					add_claim = ROOT
+				}
+			}
+		} 
+	}
+}
+hallfredhavn_2_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = AD5
+			tag = AD7
+		}
+		OR = {
+			has_country_flag = AD5__revealing_all_missions_flag
+			has_country_flag = AD5_unlock_chapter_2_flag
+		}
+	}
+
+	AD5_build_the_fleet = {
+		icon = mission_danish_navy
+		position = 5
+		required_missions = { AD5_end_the_sidrvetr } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			navy_size_percentage = 0.50
+			OR = {
+				num_of_explorers = 1
+				num_of_admirals = 1
+			}
+		} 
+
+		effect = {
+			add_navy_tradition = 10
+			add_country_modifier = {
+				name = AD5_fleet_battles
+				duration = 7300
+			}
+		} 
+	}
+
+	AD5_skeggland_outpost = {
+		icon = mission_steer_trade_to_bengal
+		position = 6
+		required_missions = {
+			AD5_raid_the_skegglands
+			AD5_build_the_fleet
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			any_owned_province = {
+				superregion = taychend_superregion
+				has_port = yes
+			}
+		}
+
+		effect = {
+			custom_tooltip = AD5_east_skeggland_claims_tt
+			hidden_effect = {
+				every_province = {
+					limit = {
+						OR = {
+							area = katelperai_area
+							area = orenkoraim_area
+							area = sibisimra_area
+							area = vuls_tenvach_area
+							province_id = 2518
+							province_id = 2329
+						}
+					}
+					add_permanent_claim = ROOT
+				}
+			}
+		} 
+	}
+}
+
+hallfredhavn_3_2 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = AD5
+			tag = AD7
+		}
+		OR = {
+			has_country_flag = AD5__revealing_all_missions_flag
+			has_country_flag = AD5_unlock_chapter_2_flag
+		}
+	}
+
+	AD5_brendrotaland_domination = {
+		icon = mission_sw_against_the_desert
+		position = 5
+		required_missions = { AD5_end_the_sidrvetr } 
+		provinces_to_highlight = {
+			region = dry_coast_region
+		} 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 15
+				region = dry_coast_region
+			}
+		} 
+
+		effect = {
+			dry_coast_region = { add_permanent_claim = AD5 }
+			add_country_modifier = {
+				name = AD5_brendrotaland_domination_modifier
+				duration = 36500
+			}
+			country_event = {
+				id = hallfredhavn.123
+			}
+			custom_tooltip = AD5_brendrotaland_rename_tt
+			1798 = {
+				change_province_name = "Réttsvígsfjall"
+			}
+			1807 = {
+				change_province_name = "Skógavaktfjall"
+			}
+			1812 = {
+				change_province_name = "Austurströnd"
+			}
+			1814 = {
+				change_province_name = "Vestrströnd"
+			}
+			1607 = {
+				change_province_name = "Hallfredsaer"
+			}
+		} 
+	}
+}
+
+hallfredhavn_monarchy_path = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = AD5
+			tag = AD7
+		} 
+		has_country_flag = AD5_monarchy_flag
+		OR = {
+			has_country_flag = AD5__revealing_all_missions_flag
+			has_country_flag = AD5_unlock_chapter_2_flag
+		}
+	}
+
+	AD5_forge_regalia = {
+		icon = mission_crown_of_denmark
+		position = 6
+		required_missions = { AD5_brendrotaland_domination } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			adm_power = 100
+		} 
+
+		effect = {
+			add_adm_power = -100
+			AD5_forge_regalia_scripted_effect = yes
+			custom_tooltip = AD5_reforge_regalia_later_tt
+		}
+	}
+}
+
+hallfredhavn_republic_path = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = AD5
+			tag = AD7
+		} 
+		has_country_flag = AD5_republic_flag
+		OR = {
+			has_country_flag = AD5__revealing_all_missions_flag
+			has_country_flag = AD5_unlock_chapter_2_flag
+		}
+	}
+
+	AD5_build_the_thingholl = {
+		icon = mission_heunthume
+		position = 6
+		required_missions = { AD5_brendrotaland_domination } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			adm_power = 100
+			treasury = 300
+		}
+
+		effect = {
+			add_adm_power = -100
+			add_treasury = -300
+			2302 = {
+				add_province_modifier = {
+					name = AD5_thingoll_modifier
+					duration = -1
+				}
+			}
+		}
+	}
+}
+
+hallfredhavn_3_2_2 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = AD5
+			tag = AD7
+		}
+		OR = {
+			has_country_flag = AD5__revealing_all_missions_flag
+			has_country_flag = AD5_unlock_chapter_2_flag
+		}
+	}
+
+	AD5_hallfredrik = {
+		icon = unite_the_realm
+		position = 7
+		required_missions = {
+			AD5_skeggland_outpost
+			AD5_mature_economy
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			total_development = 150
+			OR = {
+				total_development = 200
+				num_of_subjects = 2
+			}
+			OR = {
+				AND = {
+					mission_completed = AD5_forge_regalia
+					government = monarchy
+				}
+				AND = {
+					mission_completed = AD5_build_the_thingholl
+					government = republic
+				}
+			}
+		}
+
+		effect = {
+			set_government_rank = 2
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = AD5_brendrotaland_flag
+					}
+				}
+				override_country_name = HALLFREDRIK
+			}
+			add_splendor = 200
+			set_country_flag = AD5_unlock_chapter_3_flag
+			if = {
+				limit = {
+					has_country_flag = AD5_dynamically_revealing_missions_flag
+				}
+				swap_non_generic_missions = yes
+			}
+		}
+	}
+}
+
+hallfredhavn_4_2 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = AD5
+			tag = AD7
+		}
+		OR = {
+			has_country_flag = AD5__revealing_all_missions_flag
+			has_country_flag = AD5_unlock_chapter_2_flag
+		}
+	}
+
+	AD5_develop_hallfredhavn = {
+		icon = mission_city_prosperity
+		position = 5
+		required_missions = { AD5_end_the_sidrvetr } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 2301
+				province_id = 2302
+			}
+		} 
+
+		trigger = {
+			2301 = {
+				development = 25
+			}
+			2302 = {
+				num_of_buildings_in_province = 2
+				development = 30
+			}
+		}
+
+		effect = {
+			2301 = {
+				add_permanent_province_modifier = {
+					name = AD5_irrigation_system
+					duration = -1
+				}
+			}
+			2302 = {
+				add_permanent_province_modifier = {
+					name = AD5_irrigation_system
+					duration = -1
+				}
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+				add_permanent_province_modifier = {
+					name = arvar_estuary
+					duration = -1
+				}
+			}
+		} 
+	}
+
+	AD5_mature_economy = {
+		icon = dominant_economy
+		position = 6
+		required_missions = {
+			AD5_develop_hallfredhavn
+			AD5_sail_to_distant_shores
+			AD5_brendrotaland_domination
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			total_development = 150
+			any_owned_province = {
+				OR = {
+					trade_goods = copper
+					trade_goods = iron
+					trade_goods = gold
+				}
+			}
+			adm_power = 300
+		} 
+
+		effect = {
+			add_adm_power = -300
+			remove_country_modifier = AD5_immature_economy
+			custom_tooltip = " "
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = AD5_gold_mint_tt
+				first_limit = "
+					any_owned_province = {
+						trade_goods = gold
+					}
+				"
+				first_effect = "
+					add_inflation = -5
+				"
+			}
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = AD5_iron_mint_tt
+				first_limit = "
+					any_owned_province = {
+						trade_goods = iron
+					}
+				"
+				first_effect = "
+					add_inflation = -3
+				"
+			}
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = AD5_copper_mint_tt
+				first_limit = "
+					any_owned_province = {
+						trade_goods = copper
+					}
+				"
+				first_effect = "
+					add_inflation = -2
+				"
+			}
+		} 
+	}
+}
+
+hallfredhavn_5_2 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = AD5
+			tag = AD7
+		}
+		OR = {
+			has_country_flag = AD5__revealing_all_missions_flag
+			has_country_flag = AD5_unlock_chapter_2_flag
+		}
+	}
+
+	AD5_sail_to_distant_shores = {
+		icon = mission_invade_island
+		position = 5
+		required_missions = { AD5_end_the_sidrvetr } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 6503
+				province_id = 2324
+			}
+		}
+
+		trigger = {
+			owns_core_province = 6503
+			owns_core_province = 2324
+		} 
+
+		effect = {
+			create_explorer = { tradition = 50 }
+			define_advisor = {
+				type = navigator
+				skill = 3
+				discount = yes
+			}
+			country_event_with_option_insight = {
+				id = hallfredhavn.41
+				days = 7
+				option_1 = "
+					6503 = {
+						add_province_modifier = {
+							name = AD5_aquatic_industry_focus
+							duration = 18250
+						}
+						add_base_production = 2
+						change_trade_goods = fish
+					}
+					custom_tooltip = AD5_fish_provinces_only_tt
+					tooltip = {
+						add_province_modifier = {
+							name = AD5_aquatic_industry_focus
+							duration = 18250
+						}
+						add_base_production = 2
+					}
+				"
+
+				option_2 = "
+					6503 = {
+						add_province_modifier = {
+							name = AD5_aquatic_industry_focus
+							duration = 18250
+						}
+						add_base_production = 5
+						change_trade_goods = gems
+					}
+				"
+
+				option_3 = "
+					6503 = {
+						add_province_modifier = {
+							name = AD5_aquatic_industry_focus
+							duration = 18250
+						}
+						add_base_production = 5
+						change_trade_goods = naval_supplies
+					}
+				"
+			}
+		}
+	}
+}
+
+hallfredhavn_1_3 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = AD5
+			tag = AD7
+		}
+		OR = {
+			has_country_flag = AD5__revealing_all_missions_flag
+			has_country_flag = AD5_unlock_chapter_3_flag
+		}
+	}
+
+	AD5_flatey_settlements = {
+		icon = mission_retake_ceuta
+		position = 8
+		required_missions = { AD5_hallfredrik } 
+		provinces_to_highlight = {
+			region = severed_coast_region
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				region = severed_coast_region
+			}
+		}
+
+		effect = {
+			severed_coast_region = {
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = AD5_flatey_rush
+				duration = 3650
+			}
+		}
+	}
+
+	AD5_sunnarhofn = {
+		icon = toulon_dockyards
+		position = 8
+		required_missions = { AD5_flatey_settlements } 
+		provinces_to_highlight = {
+			province_id = 2322
+		}
+
+		trigger = {
+			2322 = {
+				owned_by = ROOT
+				is_colony = no
+				has_dock_building_trigger = yes
+				has_shipyard_building_trigger = yes
+				development = 25
+			}
+		}
+
+		effect = {
+			2322 = {
+				change_trade_goods = precursor_relics
+				upgrade_dock_building = yes
+				upgrade_shipyard_building = yes
+				add_permanent_province_modifier = {
+					name = AD5_sunnarhofn_modifier
+					duration = -1
+				}
+				change_province_name = "Jötunnhavn"
+				rename_capital = "Jötunnhavn"
+
+			}
+		}
+	}
+
+	AD5_flatey_domination = {
+		icon = mission_colonize_the_west
+		position = 8
+		required_missions = { AD5_sunnarhofn } 
+		provinces_to_highlight = {
+			region = severed_coast_region
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+
+		trigger = {
+			fishtail_woods_area = {
+				type = all
+				owned_by = ROOT
+				is_core = ROOT
+			}
+			timberneck_area = {
+				type = all
+				owned_by = ROOT
+				is_core = ROOT
+			}
+			greencrest_area = {
+				type = all
+				owned_by = ROOT
+				is_core = ROOT
+			}
+			owns_core_province = 2312
+			owns_core_province = 2314
+		}
+
+		effect = {
+			custom_tooltip = AD5_flatey_growth_tt
+			tooltip = {
+				add_province_modifier = {
+					name = AD5_flatey_growth
+					duration = 36500
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						region = severed_coast_region
+					}
+					add_province_modifier = {
+						name = AD5_flatey_growth
+						duration = 36500
+					}
+				}
+			}
+		}
+	}
+
+	AD5_flatey_prosperity = {
+		icon = mission_green_village
+		position = 8
+		required_missions = { AD5_flatey_domination } 
+		provinces_to_highlight = {
+			OR = {
+				area = fishtail_woods_area
+				area = timberneck_area
+				area = greencrest_area
+				province_id = 2312
+				province_id = 2314
+			}
+			is_prosperous = no
+		}
+
+		trigger = {
+			dip_power = 200
+			has_discovered = 43
+			fishtail_woods_area = {
+				type = all
+				is_prosperous = yes
+			}
+			timberneck_area = {
+				type = all
+				is_prosperous = yes
+			}
+			greencrest_area = {
+				type = all
+				is_prosperous = yes
+			}
+			2312 = {
+				is_prosperous = yes
+			}
+			2314 = {
+				is_prosperous = yes
+			}
+		}
+
+		effect = {
+			if = {
+				limit = {
+					has_country_flag = ACE_munas_forbidden_flag
+				}
+				custom_tooltip = ACE_new_deities_tt
+				hidden_effect = {
+					clr_country_flag = ACE_munas_forbidden_flag
+					clr_country_flag = ACE_nathalyne_forbidden_flag
+					clr_country_flag = ACE_begga_forbidden_flag
+					clr_country_flag = ACE_corin_forbidden_flag
+				}
+			}
+			add_dip_power = -200
+			custom_tooltip = AD5_flatey_immigration_tt
+			tooltip = {
+				add_province_modifier = {
+					name = AD5_virgin_lands
+					duration = 36500
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						region = severed_coast_region
+					}
+					add_base_tax = 1
+					add_base_production = 1
+					add_base_manpower = 1
+					add_province_modifier = {
+						name = AD5_virgin_lands
+						duration = 36500
+					}
+					random_list = {
+						10 = {
+							change_culture = perlatter
+							change_religion = cannorian_pantheon
+						}
+
+						10 = {
+							change_culture = reverian
+							change_religion = cannorian_pantheon
+						}
+
+						10 = {
+							change_culture = talderannic
+							change_religion = cannorian_pantheon
+						}
+
+						10 = {
+							change_culture = west_dalr
+							change_religion = skaldhyrric_faith
+						}
+
+						10 = {
+							change_culture = east_dalr
+							change_religion = skaldhyrric_faith
+						}
+
+						10 = {
+							change_culture = olavish
+							change_religion = skaldhyrric_faith
+						}
+
+						40 = {
+
+						}
+					}
+				}
+			}
+		}
+	}
+
+}
+
+hallfredhavn_2_3 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = AD5
+			tag = AD7
+		}
+		OR = {
+			has_country_flag = AD5__revealing_all_missions_flag
+			has_country_flag = AD5_unlock_chapter_3_flag
+		}
+	}
+
+	AD5_brendrotaland_rivers = {
+		icon = mission_coromandel_trade
+		position = 8
+		required_missions = { AD5_hallfredrik } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 2333
+				province_id = 2296
+				province_id = 2336
+			}
+		}
+
+		trigger = {
+			treasury = 200
+			adm_power = 100
+			2333 = {
+				if = {
+					limit = {
+						has_dlc = "Leviathan"
+					}
+					num_of_times_expanded_infrastructure = 1
+				}
+				else = {
+					development = 16
+				}
+			}
+			2296 = {
+				if = {
+					limit = {
+						has_dlc = "Leviathan"
+					}
+					num_of_times_expanded_infrastructure = 1
+				}
+				else = {
+					development = 16
+				}
+			}
+			2336 = {
+				if = {
+					limit = {
+						has_dlc = "Leviathan"
+					}
+					num_of_times_expanded_infrastructure = 1
+				}
+				else = {
+					development = 16
+				}
+			}
+		}
+
+		effect = {
+			add_treasury = -200
+			add_adm_power = -100
+			2333 = {
+				add_permanent_province_modifier = {
+					name = vestra_estuary
+					duration = -1
+				}
+			}
+			2296 = {
+				add_permanent_province_modifier = {
+					name = austra_estuary
+					duration = -1
+				}
+			}
+			2336 = {
+				add_base_tax = 2
+				add_base_production = 1
+				add_base_manpower = 1
+				add_province_modifier = {
+				name = birth_of_a_new_city_adm
+				duration = -1
+			}
+			}
+		}
+	}
+
+	AD5_brendrotaland_defense = {
+		icon = alpine_fortifications
+		position = 8
+		required_missions = { AD5_brendrotaland_rivers } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 2299
+				province_id = 2338
+				province_id = 2512
+				province_id = 2507
+			}
+			has_fort_building_trigger = no
+		}
+
+		trigger = {
+			2299 = { has_fort_building_trigger = yes }
+			2338 = { has_fort_building_trigger = yes }
+			2512 = { has_fort_building_trigger = yes }
+			2507 = { has_fort_building_trigger = yes }
+		}
+
+		effect = {
+			2299 = { 
+				add_province_modifier = {
+					name = AD5_brendrotaland_defense_modifier
+					duration = -1
+				}
+			}
+			2338 = { 
+				add_province_modifier = {
+					name = AD5_brendrotaland_defense_modifier
+					duration = -1
+				}
+			}
+			2512 = { 
+				add_province_modifier = {
+					name = AD5_brendrotaland_defense_modifier
+					duration = -1
+				}
+			}
+			2507 = { 
+				add_province_modifier = {
+					name = AD5_brendrotaland_defense_modifier
+					duration = -1
+				}
+			}
+			custom_tooltip = AD5_brendrotaland_prosperity_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						region = dry_coast_region
+					}
+					add_prosperity = 100
+					random = {
+						chance = 25
+						if = {
+							limit = {
+								has_building = workshop
+							}
+							remove_building = workshop
+							add_building = counting_house
+						}
+						else_if = {
+							limit = {
+								has_building = counting_house
+							}
+							add_base_production = 3
+						}
+						else = {
+							add_building = workshop
+						}
+					}
+				}
+			}
+		} 
+	}
+
+}
+
+hallfredhavn_3_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = AD5
+			tag = AD7
+		}
+		OR = {
+			has_country_flag = AD5__revealing_all_missions_flag
+			has_country_flag = AD5_unlock_chapter_3_flag
+		}
+	}
+
+	AD5_giant_gate = {
+		icon = mission_rhine
+		position = 8
+		required_missions = { AD5_hallfredrik } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 6559
+			}
+		}
+
+		trigger = {
+			owns_core_province = 6559
+			6559 = {
+				NOT = { local_autonomy = 50 }
+			}
+			6559 = {
+				NOT = { devastation = 33 }
+			}
+			6559 = {
+				NOT = { unrest = 5 }
+			}
+		}
+
+		effect = {
+			custom_tooltip = AD5_war_of_the_jotunn_cb_tt
+			custom_tooltip = ACE_can_use_gathyanavaida_tt2
+			set_country_flag = ACE_can_use_gathyanavaida_flag
+			custom_tooltip = AD5_reveal_kalavend_tt
+			hidden_effect = {
+				kalavend_region = {
+					discover_country = ROOT
+				}
+			}
+			every_province = {
+				limit = {
+					OR = {
+						area = orenkoraim_area
+						area = royakottar_area
+						area = varamraya_area
+					}
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	AD5_at_the_gates_of_jotunnborg = {
+		icon = mission_taychend_nanru_nakar_city_entrance
+		position = 9
+		required_missions = { AD5_giant_gate } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 2509
+				province_id = 2508
+				province_id = 2500
+				province_id = 2499
+				province_id = 2498
+			}
+		}
+
+		trigger = {
+			OR = {
+				owns_or_non_sovereign_subject_of = 2509
+				controls = 2509
+				2509 = {
+					owner = { 
+						gives_military_access_to = ROOT
+					}
+				}
+				2509 = {
+					owner = { 
+						truce_with = ROOT
+					}
+				}
+			}
+			OR = {
+				owns_or_non_sovereign_subject_of = 2508
+				controls = 2508
+				2508 = {
+					owner = { 
+						gives_military_access_to = ROOT
+					}
+				}
+			}
+			OR = {
+				owns_or_non_sovereign_subject_of = 2500
+				controls = 2500
+				2500 = {
+					owner = { 
+						gives_military_access_to = ROOT
+					}
+				}
+				2500 = {
+					owner = { 
+						truce_with = ROOT
+					}
+				}
+			}
+			OR = {
+				owns_or_non_sovereign_subject_of = 2499
+				controls = 2499
+				2499 = {
+					owner = { 
+						gives_military_access_to = ROOT
+					}
+				}
+				2499 = {
+					owner = { 
+						truce_with = ROOT
+					}
+				}
+			}
+			OR = {
+				owns_or_non_sovereign_subject_of = 2498
+				controls = 2498
+				2498 = {
+					owner = { 
+						gives_military_access_to = ROOT
+					}
+				}
+				2498 = {
+					owner = { 
+						truce_with = ROOT
+					}
+				}
+			}
+		}
+
+		effect = {
+			every_province = {
+				limit = {
+					area = nanru_nakar_area
+					owned_by_subject_of = ROOT
+				}
+				add_core = ROOT
+			}
+			every_province = {
+				limit = {
+					area = nanru_nakar_area
+					NOT = {
+						OR = {
+							owned_by = ROOT
+							owned_by_subject_of = ROOT
+							controlled_by = ROOT
+						}
+					}
+				}
+				add_province_modifier = {
+					name = ad5_enemy_at_the_gates
+					duration = 3650
+				}
+			}
+			every_province = {
+				limit = {
+					area = nanru_nakar_area
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	AD5_conquest_of_jotunnborg = {
+		icon = mission_taychend_nanru_nakar_city
+		position = 9
+		required_missions = { AD5_at_the_gates_of_jotunnborg } 
+		provinces_to_highlight = {
+			area = nanru_nakar_area
+		}
+
+		trigger = {
+			owns_core_province = 2495
+			owns_core_province = 2496
+			owns_core_province = 2497
+		}
+
+		effect = {
+			custom_tooltip = AD5_new_runestone_tt
+			custom_tooltip = AD5_jotunnheim_decision_unlock_tt
+			kalavend_region = {
+				add_permanent_claim = ROOT
+			}
+			country_event_with_option_insight = {
+				id = hallfredhavn.63
+				days = 7
+				option_1 = "
+					2495 = {
+						add_permanent_province_modifier = {
+							name = AD5_small_skali_trading_outpost_modifier
+							duration = -1
+						}
+						add_unrest = 10
+					}
+					add_faction_influence = {
+						faction = ad5_faction_skalir
+						influence = 5
+					}
+				"
+
+				option_2 = "
+					add_faction_influence = {
+						faction = ad5_faction_skalir
+						influence = -5
+					}
+					random = {
+						chance = 25
+						add_stability = -1
+					}
+				"
+			}
+			custom_tooltip = " "
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = AD5_has_slavery_tt
+				first_limit = "
+					has_estate_privilege = estate_nobles_langeyru_slavery
+				"
+				first_effect = "
+					country_event = { id = hallfredhavn.62 }
+					custom_tooltip = AD5_event_62_tt
+				"
+			}
+		}
+	}
+
+	AD5_consolidation_of_kalavend = {
+		icon = develop_the_po_valley
+		position = 9
+		required_missions = { AD5_conquest_of_jotunnborg } 
+		provinces_to_highlight = {
+			region = kalavend_region
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+
+		trigger = {
+			owns_all_provinces = {
+				region = kalavend_region
+			}
+			accepted_culture = kalavendhi
+			custom_trigger_tooltip = {
+				tooltip = AD5_autonomy_jotunnborg_tt
+				NOT = {
+					2495 = {
+						local_autonomy = 33
+					}
+					2496 = {
+						local_autonomy = 33
+					}
+					2497 = {
+						local_autonomy = 33
+					}
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = AD5_new_runestone_tt
+			country_event_with_effect_insight = {
+				id = hallfredhavn.82
+				effect = "
+					custom_tooltip = AD5_jotundalr_settlements_tt
+					tooltip = {
+						add_province_modifier = {
+							name = AD5_jotundalr_settlements
+							duration = -1
+						}
+					}
+				"
+			}
+			hidden_effect = {
+				country_event = {
+					id = hallfredhavn.117
+					days = 18250
+				}
+			}
+		}
+	}
+}
+
+hallfredhavn_3_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = AD5
+			tag = AD7
+		}
+		OR = {
+			has_country_flag = AD5__revealing_all_missions_flag
+			has_country_flag = AD5_unlock_chapter_3_flag
+		}
+	}
+
+	AD5_welcome_to_the_jungle = {
+		icon = mission_jungle
+		position = 8
+		required_missions = { AD5_hallfredrik } 
+		provinces_to_highlight = {
+			province_id = 2273
+		}
+
+		trigger = {
+			owns_core_province = 2273
+		}
+
+		effect = { 
+			country_event_with_option_insight = {
+				id = hallfredhavn.64
+				days = 7
+				option_1 = "
+					custom_tooltip = AD5_orwaiiification_tt
+					add_country_modifier = {
+						name = AD5_orwaiiification_modifier
+						duration = 5840
+					}
+				"
+
+				option_2 = "
+					custom_tooltip = AD5_jungle_settling_tt
+					add_country_modifier = {
+						name = AD5_jungle_settling_modifier
+						duration = 5840
+					}
+				"
+
+				option_3 = "
+					custom_tooltip = AD5_nothing_tt
+				"
+			}
+		} 
+	}
+
+	AD5_the_blooming = {
+		icon = mission_jungle
+		position = 9
+		required_missions = { AD5_welcome_to_the_jungle } 
+		provinces_to_highlight = {
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = AD5_blooming_tt
+				has_global_flag = effelai_blooming_happening
+			}
+		}
+
+		effect = {
+			country_event_with_option_insight = {
+				id = hallfredhavn.91
+				days = 7
+				option_1 = "
+					if = {
+						limit = {
+							NOT = {
+								national_focus = MIL
+							}
+						}
+						change_national_focus = MIL
+					}
+					unlock_merc_company = {
+						merc_company = merc_rootburners
+						free_merc = yes
+					}
+					custom_tooltip = AD5_does_not_contr_fl_tt
+					add_army_professionalism = 0.1
+					add_army_tradition = 10
+					add_country_modifier = {
+						name = AD5_total_war
+						duration = -1
+					}
+				"
+
+				option_2 = "
+					unlock_merc_company = {
+						merc_company = merc_rootburners
+						free_merc = yes
+					}
+					custom_tooltip = AD5_does_not_contr_fl_tt
+					add_army_professionalism = 0.05
+					add_army_tradition = 5
+					add_country_modifier = {
+						name = AD5_partial_militarisation
+						duration = -1
+					}
+				"
+
+				option_3 = "
+					unlock_merc_company = {
+						merc_company = merc_rootburners
+						free_merc = yes
+					}
+					custom_tooltip = AD5_does_not_contr_fl_tt
+				"
+			}
+		}
+	}
+
+	AD5_the_burning = {
+		icon = mission_jungle
+		position = 10
+		required_missions = { AD5_the_blooming } 
+		provinces_to_highlight = {
+		}
+
+		trigger = {
+			2378 = {
+				owned_by = ROOT
+			}
+			1804 = {
+				check_variable = {
+					which = effelai_total_hubs_burned
+					value = 10
+				}
+			}
+		}
+
+		effect = {
+			add_stability = 1
+			custom_tooltip = AD5_end_militarisation_tt
+			remove_country_modifier = AD5_total_war
+			remove_country_modifier = AD5_partial_militarisation
+			add_country_modifier = {
+				name = AD5_effelai_veterancy
+				duration = -1
+			}
+			custom_tooltip = ACE_upgraded_tale_kykrskogr_tt
+			set_country_flag = unlocked_song_ace_upgraded_burning_of_kykrskogr
+			custom_tooltip = AD5_new_runestone_tt
+		}
+	}
+}
+
+hallfredhavn_3_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = AD5
+			tag = AD7
+		}
+		OR = {
+			has_country_flag = AD5__revealing_all_missions_flag
+			has_country_flag = AD5_unlock_chapter_3_flag
+		}
+	}
+
+	AD5_gauldursstrandir = {
+		icon = mission_invade_island
+		position = 8
+		required_missions = { AD5_hallfredrik } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 2244
+				province_id = 2243
+				province_id = 2245
+				province_id = 2246
+				province_id = 2247
+				province_id = 2248
+				province_id = 2249
+			}
+		}
+
+		trigger = {
+			any_owned_province = {
+				OR = {
+					province_id = 2244
+					province_id = 2243
+					province_id = 2245
+					province_id = 2246
+					province_id = 2247
+					province_id = 2248
+					province_id = 2249
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = AD5_claim_strandir_tt
+			hidden_effect = {
+				every_province = {
+					limit = {
+						region = east_effelai_region
+						has_terrain = grasslands
+						NOT = {
+							province_id = 2239
+						}
+					}
+					add_permanent_claim = ROOT
+				}
+			}
+			country_event_with_option_insight = {
+				id = hallfredhavn.133
+				days = 7
+				option_1 = "
+					random_owned_province = {
+						limit = {
+							region = east_effelai_region
+							has_terrain = grasslands
+						}
+						hallfredhavn_expand_slavery = yes
+					}
+					add_faction_influence = {
+						faction = ad5_faction_vidarfotar
+						influence = 5
+					}
+				"
+
+				option_2 = "
+					random_owned_province = {
+						limit = {
+							region = east_effelai_region
+							has_terrain = grasslands
+						}
+						add_colonysize = 100
+					}
+				"
+			}
+		}
+	}
+
+	AD5_gauldursval = {
+		icon = mission_northumberland_coast
+		position = 8
+		required_missions = { AD5_gauldursstrandir } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 2244
+				province_id = 2243
+				province_id = 2245
+				province_id = 2246
+				province_id = 2247
+				province_id = 2248
+				province_id = 2249
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = AD5_own_the_gauldursstrandir_tt
+				owns = 2244
+				owns = 2243
+				owns = 2245
+				owns = 2246
+				owns = 2247
+				owns = 2248
+				owns = 2249
+			}
+			owns_core_province = 2244
+			2244 = {
+				is_colony = no
+				development = 10
+			}
+		}
+
+		effect = {
+			custom_tooltip = AD5_vidarfotar_migration_tt
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = AD5_has_slavery_tt
+				first_limit = "
+						has_estate_privilege = estate_nobles_langeyru_slavery
+				"
+				first_effect = "
+					custom_tooltip = AD5_has_slaves_effect_tt
+				"
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						OR = {
+							province_id = 2244
+							province_id = 2243
+							province_id = 2245
+							province_id = 2246
+							province_id = 2247
+							province_id = 2248
+							province_id = 2249
+						}
+					}
+					add_random_development = 2
+					add_random_development = 1
+					random = {
+						chance = 33
+						if = {
+							limit = {
+								NOT = {
+									has_building = dock
+								}
+							}
+							add_building = dock
+						}
+						else = {
+							add_base_production = 1
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_estate_privilege = estate_nobles_langeyru_slavery
+					}
+					every_owned_province = {
+						limit = {
+							OR = {
+								province_id = 2244
+								province_id = 2243
+								province_id = 2245
+								province_id = 2246
+								province_id = 2247
+								province_id = 2248
+								province_id = 2249
+							}
+						}
+						hallfredhavn_expand_slavery = yes
+						change_trade_goods = slaves
+					}
+				}
+				2268 = {  }
+				2270 = {  }
+				2293 = {  }
+				2806 = {  }
+				2805 = {  }
+				2804 = {  }
+				1589 = {  }
+				1510 = {  }
+				1591 = {  }
+				1590 = {  }
+				1598 = {  }
+				1505 = {  }
+				1596 = {  }
+				1586 = {  }
+
+				1067 = {  add_permanent_claim = ROOT }
+				1068 = {  add_permanent_claim = ROOT }
+				1069 = {  add_permanent_claim = ROOT }
+				1070 = {  add_permanent_claim = ROOT }
+				947 = {  add_permanent_claim = ROOT }
+				5128 = {  add_permanent_claim = ROOT }
+				1538 = {
+					change_province_name = "Vestrgauldursaer"
+				}
+				1539 = {
+					change_province_name = "Gauldursaer"
+				}
+				1540 = {
+					change_province_name = "Austergauldursaer"
+				}
+				1591 = {
+					change_province_name = "Nordrgauldursaer"
+				}
+			}
+		}
+	}
+}
+
+hallfredhavn_faction_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = AD5
+			tag = AD7
+		}
+		OR = {
+			has_country_flag = AD5__revealing_all_missions_flag
+			has_country_flag = AD5_unlock_chapter_3_flag
+		}
+	}
+
+	AD5_divenscourge_goals = {
+		icon = mission_norwegian_ship
+		position = 13
+		required_missions = { } 
+		provinces_to_highlight = {
+
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = AD5_unlock_chapter_3_tt
+				has_country_flag = AD5_unlock_chapter_3_flag
+			}
+			num_of_explorers = 1
+			adm_power = 100
+			sailors = 1000
+			manpower = 1
+			treasury = 100
+		}
+
+		effect = {
+			country_event_with_effect_insight = {
+				id = hallfredhavn.67
+				effect = "
+					custom_tooltip = AD5_expedition_direction_tt
+				"
+			}
+			add_adm_power = -100
+			add_sailors = -1000
+			add_manpower = -1
+			add_treasury = -100
+		} 
+	}
+
+	AD5_divenscourge_goals2 = {
+		icon = mal_trade_with_europeans
+		position = 14
+		required_missions = { AD5_divenscourge_goals } 
+		provinces_to_highlight = {
+
+		}
+
+		trigger = {
+			OR = {
+				has_discovered = 43
+				has_discovered = 112
+				has_discovered = 138
+				has_discovered = 956
+				has_discovered = 380
+			}
+			num_of_explorers = 1
+			adm_power = 100
+			sailors = 1000
+			manpower = 1
+			treasury = 100
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = AD5_cannorian_adventurers
+				duration = 36500
+			}
+			country_event_with_effect_insight = {
+				id = hallfredhavn.67
+				effect = "
+					custom_tooltip = AD5_expedition_direction_tt
+				"
+			}
+			add_adm_power = -100
+			add_sailors = -1000
+			add_manpower = -1
+			add_treasury = -100
+		}
+	}
+
+	AD5_di3 = {
+		icon = the_italian_league
+		position = 14
+		required_missions = { AD5_divenscourge_goals2 } 
+		provinces_to_highlight = {
+
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = AD5_not_finished_any_missions_on_this_row_tt
+				NOT = { has_country_flag = AD5_empire_ready }
+			}	
+			num_of_estate_privileges = {
+				estate = estate_adventurers
+				value = 8
+			}
+			num_of_continents = 3
+			num_of_explorers = 1
+			adm_power = 100
+			sailors = 1000
+			manpower = 1
+			treasury = 100
+		}
+
+		effect = { 
+			country_event_with_effect_insight = {
+				id = hallfredhavn.67
+				effect = "
+					custom_tooltip = AD5_expedition_direction_tt
+				"
+			}
+			add_adm_power = -100
+			add_sailors = -1000
+			add_manpower = -1
+			add_treasury = -100
+			custom_tooltip = " "
+			custom_tooltip = " "
+			custom_tooltip = ACE_upgraded_heroes_in_the_army_tt
+			hidden_effect = {
+				set_country_flag = ACE_upgraded_heroes_in_the_army_flag
+			}
+			custom_tooltip = AD5_upon_forming_jotunnheim_tt
+			tooltip = {
+				AD5_di3se = yes
+			}
+			set_country_flag = AD5_empire_ready
+		} 
+	}
+}
+
+
+hallfredhavn_faction_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = AD5
+			tag = AD7
+		}
+		OR = {
+			has_country_flag = AD5__revealing_all_missions_flag
+			has_country_flag = AD5_unlock_chapter_3_flag
+		}
+	}
+
+	AD5_pearlsguard_goals = {
+		icon = per_expand_our_influence
+		position = 13
+		required_missions = { } 
+		provinces_to_highlight = {
+
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = AD5_unlock_chapter_3_tt
+				has_country_flag = AD5_unlock_chapter_3_flag
+			}
+			has_estate_privilege = estate_church_AD5_gudafridr_proclamation
+			OR = {
+				NOT = {
+					has_estate_privilege = estate_nobles_langeyru_slavery
+				}
+				num_accepted_cultures = 3
+			}
+		}
+
+		effect = { 
+			add_country_modifier = {
+				name = AD5_pluralism_modifier1
+				duration = -1
+			}
+			add_faction_influence = {
+				faction = ad5_faction_pearlsguarders
+				influence = 5
+			}
+		} 
+	}
+
+	AD5_pearlsguard_goals2 = {
+		icon = mission_pol_imperial_commonwealth
+		position = 14
+		required_missions = { AD5_pearlsguard_goals } 
+		provinces_to_highlight = {
+
+		}
+
+		trigger = {
+			has_estate_privilege = estate_church_AD5_gudafridr_proclamation
+			religion = cannorian_pantheon
+			has_reform = egalitarian_thing_reform
+			NOT = {
+				has_estate_privilege = estate_nobles_langeyru_slavery
+			}
+		}
+
+		effect = { 
+			remove_country_modifier = AD5_pluralism_modifier1
+			add_country_modifier = {
+				name = AD5_pluralism_modifier2
+				duration = -1
+			}
+			add_faction_influence = {
+				faction = ad5_faction_pearlsguarders
+				influence = 10
+			}
+		} 
+	}
+
+	AD5_pe3 = {
+		icon = mission_noble_council
+		position = 14
+		required_missions = { AD5_pearlsguard_goals2 } 
+		provinces_to_highlight = {
+
+		}
+
+		trigger = {
+			has_estate_privilege = estate_church_AD5_gudafridr_proclamation
+			religion = cannorian_pantheon
+			NOT = {
+				has_estate_privilege = estate_nobles_langeyru_slavery
+			}
+			num_accepted_cultures = 5
+		}
+
+		effect = { 
+			custom_tooltip = AD5_upon_forming_jotunnheim_tt
+			tooltip = {
+				AD5_pe3se = yes
+			}
+		} 
+	}
+}
+
+hallfredhavn_faction_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = AD5
+			tag = AD7
+		}
+		OR = {
+			has_country_flag = AD5__revealing_all_missions_flag
+			has_country_flag = AD5_unlock_chapter_3_flag
+		}
+	}
+
+	AD5_svartskegg_goals = {
+		icon = mission_white_tower
+		position = 13
+		required_missions = { }
+		provinces_to_highlight = {
+
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = AD5_unlock_chapter_3_tt
+				has_country_flag = AD5_unlock_chapter_3_flag
+			}
+			any_owned_province = {
+				has_building = mage_tower
+			}
+			has_estate_privilege = estate_mages_svartskeggs_magic_licenses
+			num_of_estate_privileges = {
+				estate = estate_mages
+				value = 3
+			}
+		}
+
+		effect = { 
+			add_estate_loyalty = {
+				estate = estate_mages
+				loyalty = 10
+			}
+			add_estate_influence_modifier = {
+				estate = estate_mages
+				desc = AD5_first_tower
+				influence = 10
+				duration = 7300
+			}
+		}
+	}
+
+	AD5_svartskegg_goals2 = {
+		icon = mission_magic_tower
+		position = 14
+		required_missions = { AD5_svartskegg_goals } 
+		provinces_to_highlight = {
+			has_building = mage_tower
+		}
+
+		trigger = {
+			religion = skaldhyrric_faith
+	#		NOT = {
+	#			has_estate_privilege = estate_church_AD5_gudafridr_proclamation
+	#		}
+			has_estate_privilege = estate_mages_battlemage_academies
+			estate_loyalty = {
+				estate = estate_mages
+				loyalty = 60
+			}
+			estate_influence = {
+				estate = estate_mages
+				influence = 40
+			}
+			OR = {
+				advisor = inquisitor
+				advisor = theologian
+			}
+			any_owned_province = {
+				has_building = mage_tower
+				has_manpower_building_trigger = yes
+				has_tax_building_trigger = yes
+				development = 20
+			}
+		}
+
+		effect = {
+			custom_tooltip = A05_reveria_skald_upgrade_tt
+			hidden_effect = {
+				set_global_flag = one_armed_skald_upgraded_flag
+			}
+			custom_tooltip = " "
+			set_country_flag = ace_upgraded_battlemages
+			custom_tooltip = A30_battlemage_academies_upgrade_tooltip
+			create_war_wizard_effect = yes
+			custom_tooltip = SEPERATOR_TOOLTIP
+			custom_tooltip = AD5_skaldschool2_tt
+			tooltip = {
+#				capital_scope = {
+					add_province_modifier = {
+						name = AD5_skald_academy
+						duration = -1
+					}
+#				}
+			}
+			custom_tooltip = SEPERATOR_TOOLTIP
+			custom_tooltip = AD5_skaldschool1_tt
+			if = {
+				limit = {
+					any_owned_province = {
+						has_building = mage_tower
+						has_manpower_building_trigger = yes
+						has_tax_building_trigger = yes
+						development = 20
+						OR = {
+							trade_goods = damestear
+							trade_goods = precursor_relics
+						}
+					}
+				}
+				random_owned_province = {
+					limit = {
+						has_building = mage_tower
+						has_manpower_building_trigger = yes
+						has_tax_building_trigger = yes
+						development = 20
+						OR = {
+							trade_goods = damestear
+							trade_goods = precursor_relics
+						}
+					}
+					add_province_modifier = {
+						name = AD5_skald_academy
+						duration = -1
+					}
+					add_base_production = 3
+				}
+				change_innovativeness = 5
+			}
+			else = {
+				random_owned_province = {
+					limit = {
+						has_building = mage_tower
+						has_manpower_building_trigger = yes
+						has_tax_building_trigger = yes
+						development = 20
+					}
+					add_province_modifier = {
+						name = AD5_skald_academy
+						duration = -1
+					}
+				}
+			}
+		} 
+	}
+
+	AD5_sv3 = {
+		icon = mission_norse_faith
+		position = 14
+		required_missions = { AD5_svartskegg_goals2 } 
+		provinces_to_highlight = {
+
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = AD5_not_finished_any_missions_on_this_row_tt
+				NOT = { has_country_flag = AD5_empire_ready }
+			}
+			religion = skaldhyrric_faith
+			num_of_owned_provinces_with = {
+				value = 50
+				religion = skaldhyrric_faith
+			}
+			NOT = {
+				has_estate_privilege = estate_church_AD5_gudafridr_proclamation
+			}
+		}
+
+		effect = {
+			set_country_flag = AD5_empire_ready
+			hidden_effect = {
+				set_country_flag = skald_council_established
+			}
+			custom_tooltip = ACE_skaldhyrric_aspects_tt
+			custom_tooltip = AD5_upon_forming_jotunnheim_tt
+			tooltip = {
+				AD5_sv3se = yes
+			}
+		}
+	}
+}
+
+hallfredhavn_faction_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = AD5
+			tag = AD7
+		}
+		OR = {
+			has_country_flag = AD5__revealing_all_missions_flag
+			has_country_flag = AD5_unlock_chapter_3_flag
+		}
+	}
+
+	AD5_skalir_goals = {
+		icon = mission_arabian_sea_trade
+		position = 13
+		required_missions = { } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 1607
+				province_id = 1544
+				province_id = 1539
+				province_id = 1545
+				province_id = 1731
+				province_id = 2556
+				province_id = 2484
+			}
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = AD5_unlock_chapter_3_tt
+				has_country_flag = AD5_unlock_chapter_3_flag
+			}
+			calc_true_if = {
+				amount = 3
+				1607 = { is_strongest_trade_power = ROOT }
+				1544 = { is_strongest_trade_power = ROOT }
+				1539 = { is_strongest_trade_power = ROOT }
+				1545 = { is_strongest_trade_power = ROOT }
+				1731 = { is_strongest_trade_power = ROOT }
+				2556 = { is_strongest_trade_power = ROOT }
+				2484 = { is_strongest_trade_power = ROOT }
+			}
+			num_of_estate_privileges = {
+				estate = estate_burghers
+				value = 4
+			}
+			has_estate_privilege = estate_burghers_AD5_first_bid
+			OR = {
+				mercantilism = 20
+				custom_trigger_tooltip = {
+					tooltip = AD5_free_trade_tt
+					has_idea = free_trade
+				}
+				num_of_centers_of_trade = 6
+			}
+		}
+
+		effect = { 
+			add_faction_influence = {
+				faction = ad5_faction_skalir
+				influence = 5
+			}
+			add_estate_loyalty = {
+				estate = estate_burghers
+				loyalty = 10
+			}
+			add_country_modifier = {
+				name = AD5_skalir_trade_ships_modifier
+				duration = -1
+			}
+		} 
+	}
+
+	AD5_skalir_goals2 = {
+		icon = mam_harness_spice_trade
+		position = 14
+		required_missions = { AD5_skalir_goals } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 1607
+				province_id = 1544
+				province_id = 1539
+				province_id = 1545
+				province_id = 1731
+				province_id = 2556
+				province_id = 2484
+			}
+		}
+
+		trigger = {
+			calc_true_if = {
+				amount = 4
+				1607 = { is_strongest_trade_power = ROOT }
+				1544 = { is_strongest_trade_power = ROOT }
+				1539 = { is_strongest_trade_power = ROOT }
+				1545 = { is_strongest_trade_power = ROOT }
+				1731 = { is_strongest_trade_power = ROOT }
+				2556 = { is_strongest_trade_power = ROOT }
+				2484 = { is_strongest_trade_power = ROOT }
+			}
+			num_of_estate_privileges = {
+				estate = estate_burghers
+				value = 6
+			}
+			has_estate_privilege = estate_burghers_AD5_first_bid
+			OR = {
+				mercantilism = 40
+				custom_trigger_tooltip = {
+					tooltip = AD5_overseas_merchants_tt
+					has_idea = overseas_merchants
+				}
+				num_of_centers_of_trade = 8
+			}
+		}
+
+		effect = { 
+			add_faction_influence = {
+				faction = ad5_faction_skalir
+				influence = 10
+			}
+			add_estate_loyalty = {
+				estate = estate_burghers
+				loyalty = 15
+			}
+			remove_country_modifier = AD5_skalir_trade_ships_modifier
+			add_country_modifier = {
+				name = AD5_skalir_trade_fleet_modifier
+				duration = -1
+			}
+			custom_tooltip = AD5_merchant_settlers_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						OR = {
+							province_has_center_of_trade_of_level = 1
+							has_river_estuary_trigger = yes
+						}
+					}
+					add_human_minority_size_effect = yes
+				}
+			}
+		} 
+	}
+
+	AD5_sk3 = {
+		icon = mission_the_triangle_trade
+		position = 14
+		required_missions = { AD5_skalir_goals2 } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 1607
+				province_id = 1544
+				province_id = 1539
+				province_id = 1545
+				province_id = 1731
+				province_id = 2556
+				province_id = 2484
+			}
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = AD5_not_finished_any_missions_on_this_row_tt
+				NOT = { has_country_flag = AD5_empire_ready }
+			}
+			calc_true_if = {
+				amount = 5
+				1607 = { is_strongest_trade_power = ROOT }
+				1544 = { is_strongest_trade_power = ROOT }
+				1539 = { is_strongest_trade_power = ROOT }
+				1545 = { is_strongest_trade_power = ROOT }
+				1731 = { is_strongest_trade_power = ROOT }
+				2556 = { is_strongest_trade_power = ROOT }
+				2484 = { is_strongest_trade_power = ROOT }
+			}
+			num_of_estate_privileges = {
+				estate = estate_burghers
+				value = 8
+			}
+			has_estate_privilege = estate_burghers_AD5_first_bid
+			OR = {
+				mercantilism = 60
+				custom_trigger_tooltip = {
+					tooltip = AD5_fast_negotiations_tt
+					has_idea = fast_negotiations
+				}
+				num_of_centers_of_trade = 10
+			}
+		}
+
+		effect = { 
+			add_faction_influence = {
+				faction = ad5_faction_skalir
+				influence = 15
+			}
+			add_estate_loyalty = {
+				estate = estate_burghers
+				loyalty = 20
+			}
+	#		remove_country_modifier = AD5_skalir_trade_fleet_modifier
+	#		add_country_modifier = {
+	#			name = AD5_trade_empire_modifier
+	#			duration = -1
+	#		}
+			custom_tooltip = AD5_upon_forming_jotunnheim_tt
+			tooltip = {
+				AD5_sk3se = yes
+			}
+			set_country_flag = AD5_empire_ready
+		}
+	}
+}
+
+hallfredhavn_faction_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = AD5
+			tag = AD7
+		}
+		OR = {
+			has_country_flag = AD5__revealing_all_missions_flag
+			has_country_flag = AD5_unlock_chapter_3_flag
+		}
+	}
+
+	AD5_vidarfotr_goals = {
+		icon = mission_rb_scottish_the_darien_scheme
+		position = 13
+		required_missions = { } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 2509
+				has_province_modifier  = AD5_small_langeyru_slavery
+				has_province_modifier  = AD5_significant_langeyru_slavery
+				has_province_modifier  = AD5_huge_langeyru_slavery
+			}
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = AD5_unlock_chapter_3_tt
+				has_country_flag = AD5_unlock_chapter_3_flag
+			}
+			has_estate_privilege = estate_nobles_langeyru_slavery
+			2509 = {
+				owned_by = ROOT
+				base_production = 10
+				has_trade_building_trigger = yes
+				province_has_center_of_trade_of_level = 2
+			}
+			num_of_owned_provinces_with = {
+				value = 5
+				OR = {
+					has_province_modifier  = AD5_small_langeyru_slavery
+					has_province_modifier  = AD5_significant_langeyru_slavery
+					has_province_modifier  = AD5_huge_langeyru_slavery
+				}
+				base_production = 10
+			}
+		}
+
+		effect = { 
+			custom_tooltip = AD5_10_dev_grow_slaves_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						development = 10
+					}
+					hallfredhavn_expand_slavery = yes
+				}
+				every_owned_province = {
+					limit = {
+						trade_goods = slaves
+					}
+					add_province_modifier = {
+						name = AD5_vidarfotar_slave_markets
+						duration = -1
+					}
+				}
+			}
+		} 
+	}
+
+	AD5_vidarfotr_goals2 = {
+		icon = mission_raid_on_venice
+		position = 14
+		required_missions = { AD5_vidarfotr_goals } 
+		provinces_to_highlight = {
+
+		}
+
+		trigger = {
+			has_estate_privilege = estate_nobles_langeyru_slavery
+			check_variable = {
+				which = num_of_raided_coasts
+				value = 50
+			}
+		}
+
+		effect = { 
+			custom_tooltip = ACE_1_year_of_income_tt
+			add_years_of_income = 1
+			custom_tooltip = ACE_raiding_gives_claims_tt
+			hidden_effect = {
+				set_country_flag = ACE_raiding_gives_claims_flag
+			}
+		} 
+	}
+
+	AD5_vi3 = {
+		icon = mission_viking
+		position = 14
+		required_missions = { AD5_vidarfotr_goals2 } 
+		provinces_to_highlight = {
+
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = AD5_not_finished_any_missions_on_this_row_tt
+				NOT = { has_country_flag = AD5_empire_ready }
+			}
+			has_estate_privilege = estate_nobles_langeyru_slavery
+			check_variable = {
+				which = num_of_raided_coasts
+				value = 60
+			}
+		}
+
+		effect = { 
+			custom_tooltip = AD5_coastal_plantations_tt
+			hidden_effect = {
+				every_owned_province = {
+					hallfredhavn_expand_slavery = yes
+				}
+				every_owned_province = {
+					limit = {
+						province_has_center_of_trade_of_level = 1
+					}
+					hallfredhavn_expand_slavery = yes
+				}
+			}
+			custom_tooltip = AD5_upon_forming_jotunnheim_tt
+			tooltip = {
+				AD5_vi3se = yes
+			}
+			set_country_flag = AD5_empire_ready
+		} 
+	}
+}
+
+jotunnheim_slot1_block1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = AD5
+			tag = AD7
+		}
+		OR = {
+			has_country_flag = AD5__revealing_all_missions_flag
+			has_country_flag = formed_jotunnheim_empire_flag
+		}
+	}
+
+	AD7_blamennland_foray = {
+		icon = mission_kheionai_laskaris
+		position = 18
+		required_missions = { AD7_armringrskipan } 
+		provinces_to_highlight = {
+
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = AD5_formed_jotunnheim_tt
+				has_country_flag = formed_jotunnheim_empire_flag
+			}
+			reform_level = 7
+			navy_size = G52
+			navy_size = G56
+			navy_size = G62
+		}
+
+		effect = {
+			country_event_with_option_insight = {
+				id = hallfredhavn.92
+				option_1 = "
+					add_government_reform = ACE_reavergeld_reform
+				"
+				option_2 = "
+					custom_tooltip = AD5_claim_andic_reach_tt
+				"
+				option_3 = "
+					add_government_reform = ACE_forceful_integration_reform
+				"
+			}
+		}
+	}
+
+	AD7_blamennland_wars = {
+		icon = mission_kheionai_laskaris
+		position = 18
+		required_missions = { AD7_blamennland_foray } 
+		provinces_to_highlight = {
+
+		}
+
+		trigger = {
+			OR = {
+				custom_trigger_tooltip = {
+					tooltip = AD5_conquered_andic_reach_coast_tt
+					num_of_owned_provinces_with = {
+						value = 12
+						region = andic_reach_region
+					}
+				}
+				2620 = { #Ameion
+					trade_share = {
+						country = ROOT
+						share = 75
+					}
+				}
+				custom_trigger_tooltip = {
+					tooltip = AD5_tributarised_andic_reach_coast_tt
+					AND = {
+						G52 = {
+							OR = {
+								exists = no
+								is_subject_of = ROOT
+							}
+						}
+						G56 = {
+							OR = {
+								exists = no
+								is_subject_of = ROOT
+							}
+						}
+						G62 = {
+							OR = {
+								exists = no
+								is_subject_of = ROOT
+							}
+						}
+						G57 = {
+							OR = {
+								exists = no
+								is_subject_of = ROOT
+							}
+						}
+					}
+				}
+			}
+		}
+
+		effect = { 
+			cleaved_sea_islands = {
+				type = all
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = AD5_expanded_raiding
+				duration = -1
+			}
+		}
+	}
+}
+
+jotunnheim_slot2_block1 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = AD5
+			tag = AD7
+		}
+		OR = {
+			has_country_flag = AD5__revealing_all_missions_flag
+			has_country_flag = formed_jotunnheim_empire_flag
+		}
+	}
+
+	AD7_armringrskipan = {
+		icon = mission_have_two_subjects
+		position = 17
+		required_missions = { } 
+		provinces_to_highlight = {
+
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = AD5_formed_jotunnheim_tt
+				has_country_flag = formed_jotunnheim_empire_flag
+			}
+			num_of_subjects = 4
+			OR = {
+				AND = {
+						government = monarchy
+						reform_level = 2
+				}
+				AND = {
+						government = republic
+						reform_level = 6
+				}
+			}
+		}
+
+		effect = { 
+			if = {
+				limit = { government = monarchy }
+				add_government_reform = ACE_armringrskipan_reform
+			}
+			else = {
+				add_government_reform = ACE_armringrskipan_republican_reform
+			}
+		}
+	}
+
+	AD7_consolidate_the_skegglands = {
+		icon = mission_unite_home_region
+		position = 17
+		required_missions = { AD7_armringrskipan } 
+		provinces_to_highlight = {
+			superregion = taychend_superregion
+			NOT = {
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+
+		trigger = {
+			taychend_superregion = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+
+		effect = { 
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						superregion = taychend_superregion
+					}
+					add_nationalism = -10
+					add_unrest = -2
+					add_devastation = -10
+				}
+			}
+			custom_tooltip = AD5_nationalism_tt
+			tooltip = {
+				add_nationalism = -10
+				add_unrest = -2
+				add_devastation = -10
+			}
+		}
+	}
+
+	AD7_skegglander_submission = {
+		icon = balance_of_power
+		position = 17
+		required_missions = { AD7_consolidate_the_skegglands } 
+		provinces_to_highlight = {
+			superregion = taychend_superregion
+			OR = {
+				NOT = {
+					owned_by = ROOT
+					is_core = ROOT
+				}
+				unrest = 1
+				NOT = {
+					OR = {
+						has_owner_accepted_culture = yes
+						has_owner_culture = yes
+						has_influencing_fort = yes
+						any_neighbor_province = {
+                            has_influencing_fort = yes
+                        }
+					}
+				}
+			}	
+		}
+
+		trigger = {
+			taychend_superregion = {
+				type = all
+				owned_by = ROOT
+				NOT = {
+					unrest = 1
+				}
+				is_core = ROOT
+				OR = {
+					has_owner_accepted_culture = yes
+					has_owner_culture = yes
+					has_influencing_fort = yes
+					any_neighbor_province = {
+						has_influencing_fort = yes
+					}
+				}
+			}
+		}
+
+		effect = { 
+			add_country_modifier = {
+				name = AD5_skeggland_submission_modifier
+				duration = -1
+			}
+		}
+	}
+}
+
+jotunnheim_slot3_block1 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = AD5
+			tag = AD7
+		}
+		OR = {
+			has_country_flag = AD5__revealing_all_missions_flag
+			has_country_flag = formed_jotunnheim_empire_flag
+		}
+	}
+
+	AD7_a_great_power = {
+		icon = geo_a_house_divided
+		position = 17
+		required_missions = { } 
+		provinces_to_highlight = {
+
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = AD5_formed_jotunnheim_tt
+				has_country_flag = formed_jotunnheim_empire_flag
+			}
+			is_great_power = yes
+		}
+
+		effect = {
+			custom_tooltip = ACE_dismantle_gp_cb_tt
+			every_country = {
+				limit = {
+					NOT = {
+						tag = AD7
+						tag = AD5
+					}
+					capital_scope = {
+						OR = {
+							continent = north_america
+							continent = south_america
+						}
+					}
+					is_great_power = yes
+				}
+				reverse_add_casus_belli = {
+					target = ROOT
+					type = cb_ACE_great_power_dismantlement
+					months = 2400
+				}
+			}
+		}
+	}
+
+	AD7_the_great_power = {
+		icon = helvetic_conquest
+		position = 18
+		required_missions = { AD7_a_great_power } 
+		provinces_to_highlight = {
+
+		}
+
+		trigger = {
+			is_great_power = yes
+			custom_trigger_tooltip = {
+				tooltip = AD5_only_gp_in_aelantir_tt
+				NOT = {
+					any_country = {
+						NOT = {
+							tag = AD7
+						}
+						capital_scope = {
+							OR = {
+								continent = north_america
+								continent = south_america
+							}
+						}
+						is_great_power = yes
+					}
+				}
+			}
+		}
+
+		effect = {
+			add_splendor = 400
+			custom_tooltip = ACE_upgraded_tale_tt
+			set_country_flag = unlocked_song_ace_upgraded_jotunnheim
+			if = {
+				limit = {
+					religion = skaldhyrric_faith
+				}
+				add_church_power = 100
+			}
+			custom_tooltip = AD7_integrate_cultures_tt
+		}
+	}
+
+	AD7_the_hallfred_doctrine = {
+		icon = mission_aelantir
+		position = 19
+		required_missions = { AD7_the_great_power } 
+		provinces_to_highlight = {
+
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = AD5_nr_1_gp_tt
+				is_great_power = yes
+				NOT = {
+					great_power_rank = 2
+				}
+			}
+		}
+
+		effect = {
+			complex_dynamic_effect = {
+				first_custom_tooltip = AD5_d9_tt
+				first_limit = "
+					faction_in_power = ad5_faction_divenscourges
+				"
+				first_effect = "
+					AD5_d9 = yes
+				"
+				second_custom_tooltip = AD5_p9_tt
+				second_limit = "
+					faction_in_power = ad5_faction_pearlsguarders
+				"
+				second_effect = "
+					AD5_p9 = yes
+				"
+				third_custom_tooltip = AD5_s9_tt
+				third_limit = "
+					faction_in_power = ad5_faction_svartskeggs
+				"
+				third_effect = "
+					AD5_s9 = yes
+				"
+				fourth_custom_tooltip = AD5_sk9_tt
+				fourth_limit = "
+					faction_in_power = ad5_faction_skalir
+				"
+				fourth_effect = "
+					AD5_sk9 = yes
+				"
+				fifth_custom_tooltip = AD5_v9_tt
+				fifth_limit = "
+					faction_in_power = ad5_faction_vidarfotar
+				"
+				fifth_effect = "
+					AD5_v9 = yes
+				"
+			}
+		}
+	}
+
+	AD7_capstone = {
+		icon = mission_eric_the_pirate
+		position = 20
+		required_missions = {
+			AD7_blamennland_wars
+			AD7_skegglander_submission
+			AD7_the_hallfred_doctrine 
+			AD7_halfkynn_cultural_traits
+			AD7_back_to_the_motherland
+		}
+		provinces_to_highlight = {
+
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = AD5_nr_1_gp_tt
+				is_great_power = yes
+				NOT = {
+					great_power_rank = 2
+				}
+			}
+			if = {
+				limit = { has_dlc = "Mandate of Heaven" }
+				OR = {
+					in_golden_age = yes
+					has_had_golden_age = yes
+				}
+			}
+			mission_completed = AD5_the_burning
+		}
+
+		effect = {
+			custom_tooltip = AD5_new_runestone_tt
+			if = {
+				limit = { has_dlc = "Mandate of Heaven" }
+				custom_tooltip = pol_if_used_ge_rest_else_30_years_extension_tt
+				if = {
+					limit = { has_had_golden_age = yes }
+					reset_golden_age = yes
+				}
+				else_if = {
+					limit = { in_golden_age = yes }
+					extend_golden_age = 600
+				}
+			}
+			else = {
+				change_ruler_stat = {
+					type = adm
+					amount = 2
+				}
+				add_prestige_or_monarch_power = { amount = 25 }
+			}
+			add_country_modifier = {
+				name = AD7_nation_of_wanderers_modifier
+				duration = -1
+			}
+			custom_tooltip = AD7_nation_of_wanderers_province_modifier_tt
+			tooltip = {
+				add_province_modifier = {
+					name = AD7_nation_of_wanderers_province_modifier
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				every_province = {
+					limit = {
+						culture = hallfreder
+						NOT = {
+							has_province_modifier = AD7_nation_of_wanderers_province_modifier
+						}
+					}
+					add_province_modifier = {
+						name = AD7_nation_of_wanderers_province_modifier
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+}
+
+jotunnheim_slot4_block1 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = AD5
+			tag = AD7
+		}
+		OR = {
+			has_country_flag = AD5__revealing_all_missions_flag
+			has_country_flag = formed_jotunnheim_empire_flag
+		}
+	}
+
+	AD7_integrate_the_kynn = {
+		icon = mission_elf_smiling
+		position = 18
+		required_missions = { } 
+		provinces_to_highlight = {
+
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = AD5_formed_jotunnheim_tt
+				has_country_flag = formed_jotunnheim_empire_flag
+			}
+			accepted_culture = halfkynn_half_elf
+			num_of_owned_provinces_with = {
+				value = 10
+				culture = halfkynn_half_elf
+			}
+		}
+
+		effect = { 
+			custom_tooltip = AD7_halfkynn_spread_tt
+		}
+	}
+
+	AD7_halfkynn_cultural_traits = {
+		icon = mission_elf_smiling
+		position = 19
+		required_missions = { AD7_integrate_the_kynn } 
+		provinces_to_highlight = {
+
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 20
+				culture = halfkynn_half_elf
+			}
+		}
+
+		effect = { 
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = AD5_kyn_ruler_tt
+				first_limit = "
+						ruler_culture = halfkynn_half_elf
+				"
+				first_effect = "
+					change_primary_culture = halfkynn_half_elf
+					set_country_flag = pearlsedge_gerudia
+				"
+			}
+			custom_tooltip = " "
+			custom_tooltip = " "
+			country_event_with_option_insight = {
+				id = hallfredhavn.118
+				option_1 = "
+					custom_tooltip = AD5_halfkynn_trade_tt
+					tooltip = {
+						add_province_modifier = {
+							name = AD5_halfkynn_war_modifier
+							duration = -1
+						}
+					}
+				"
+				option_2 = "
+					custom_tooltip = AD5_halfkynn_trade_tt
+					tooltip = {
+						add_province_modifier = {
+							name = AD5_halfkynn_trade_modifier
+							duration = -1
+						}
+					}
+				"
+			}
+		}
+	}
+}
+
+jotunnheim_slot5_block1 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = AD5
+			tag = AD7
+		}
+		OR = {
+			has_country_flag = AD5__revealing_all_missions_flag
+			has_country_flag = formed_jotunnheim_empire_flag
+		}
+	}
+
+	AD7_back_to_the_motherland = {
+		icon = mal_trade_with_europeans
+		position = 19
+		required_missions = { } 
+		provinces_to_highlight = {
+
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = AD5_formed_jotunnheim_tt
+				has_country_flag = formed_jotunnheim_empire_flag
+			}
+			dip_power = 200
+			OR = {
+				full_idea_group = diplomatic_ideas
+				full_idea_group = exploration_ideas
+				dip_tech = 20
+			}
+		}
+
+		effect = {
+			add_dip_power = -200
+			if = {
+				limit = {
+					exists = A11
+				}
+				country_event = {
+					id = hallfredhavn.97 
+					days = 100
+					random = 995
+				}
+			}
+			if = {
+				limit = {
+					exists = A47
+				}
+				country_event = {
+					id = hallfredhavn.98 
+					days = 100
+					random = 995
+				}
+			}
+			if = {
+				limit = {
+					exists = A05
+				}
+				country_event = {
+					id = hallfredhavn.99
+					days = 100
+					random = 995
+				}
+			}
+			if = {
+				limit = {
+					exists = Z15
+				}
+				country_event = {
+					id = hallfredhavn.100
+					days = 100
+					random = 995
+				}
+			}
+			if = {
+				limit = {
+					exists = Z10
+				}
+				country_event = {
+					id = hallfredhavn.101
+					days = 100
+					random = 995
+				}
+			}
+			else_if = {
+				limit = {
+					exists = Z08
+				}
+				country_event = {
+					id = hallfredhavn.102
+					days = 100
+					random = 995
+				}
+			}
+			custom_tooltip = AD7_PU_tt
+		}
+	}
+}

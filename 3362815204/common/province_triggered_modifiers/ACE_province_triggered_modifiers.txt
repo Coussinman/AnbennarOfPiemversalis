@@ -26,6 +26,90 @@ bandit_king_duel = {
 	}
 }
 
+sugamber_textile_entrepot = {
+	potential = {
+		always = yes
+	}
+	trigger = {
+		owner = {
+			tag = A48
+			1312 = {
+				trade_share = {
+					country = PREV
+					share = 20
+				}
+			}
+			1309 = {
+				trade_share = {
+					country = PREV
+					share = 20
+				}
+			}
+		}
+	}
+	monthly_splendor = 1
+	local_prosperity_growth = 0.5
+	on_activation = {
+		every_owned_province = {
+			limit = {
+				OR = {
+					province_id = 411
+					province_id = 412
+					province_id = 921
+					province_id = 922
+				}
+			}
+			remove_province_modifier = sugamber_coastal_textile
+			add_permanent_province_modifier = {
+				name = sugamber_coastal_textile_upgraded
+				duration = -1
+			}
+		}
+	}
+	on_deactivation = {
+		every_owned_province = {
+			limit = {
+				OR = {
+					province_id = 411
+					province_id = 412
+					province_id = 921
+					province_id = 922
+				}
+			}
+			remove_province_modifier = sugamber_coastal_textile_upgraded
+			add_permanent_province_modifier = {
+				name = sugamber_coastal_textile
+				duration = -1
+			}
+		}
+	}
+}
+
+sugamber_plentiful_food = {
+	potential = {
+		always = yes
+	}
+	trigger = {
+		owner = {
+			tag = A48
+			production_leader = {
+				trade_goods = grain
+			}
+			trading_bonus = {
+				trade_goods = grain
+				value = yes
+			}
+		}
+	}
+	province_trade_power_value = 10
+	production_efficiency = 0.05
+	development_cost = -0.05
+	on_activation = {
+	}
+	on_deactivation = {
+	}
+}
+
 one_armed_skald_temple = {
 	potential = {
 		always = yes
@@ -149,4 +233,208 @@ AC5_exploited_hold = {
 			}
 		}
 	}
+}
+
+AD5_eborthil_embassy_in_jotunnheim = {
+	potential = {
+		always = yes
+	}
+
+	trigger = {
+		owner = {
+			tag = AD7
+		}
+		owner = {
+			alliance_with = A47
+		}
+	}
+
+	diplomatic_upkeep = 1
+}
+
+AD5_jotunnheim_embassy_in_eborthil = {
+	potential = {
+		always = yes
+	}
+
+	trigger = {
+		owner = {
+			tag = A47
+		}
+		owner = {
+			alliance_with = AD7
+		}
+	}
+	
+	diplomatic_upkeep = 1
+}
+
+AD5_pearlsedge_embassy_in_jotunnheim = {
+	potential = {
+		always = yes
+	}
+
+	trigger = {
+		owner = {
+			tag = AD7
+		}
+		owner = {
+			alliance_with = A11
+		}
+	}
+	
+	diplomatic_upkeep = 1
+}
+
+AD5_jotunnheim_embassy_in_pearlsedge = {
+	potential = {
+		always = yes
+	}
+
+	trigger = {
+		owner = {
+			tag = A11
+		}
+		owner = {
+			alliance_with = AD7
+		}
+	}
+	
+	diplomatic_upkeep = 1
+}
+
+AD5_reveria_embassy_in_jotunnheim = {
+	potential = {
+		always = yes
+	}
+
+	trigger = {
+		owner = {
+			tag = AD7
+		}
+		owner = {
+			alliance_with = A05
+		}
+	}
+	
+	diplomatic_upkeep = 1
+}
+
+AD5_jotunnheim_embassy_in_reveria = {
+	potential = {
+		always = yes
+	}
+
+	trigger = {
+		owner = {
+			tag = A05
+		}
+		owner = {
+			alliance_with = AD7
+		}
+	}
+	
+	diplomatic_upkeep = 1
+}
+
+AD5_revrhavn_embassy_in_jotunnheim = {
+	potential = {
+		always = yes
+	}
+
+	trigger = {
+		owner = {
+			tag = AD7
+		}
+		owner = {
+			alliance_with = Z10
+		}
+	}
+	
+	diplomatic_upkeep = 1
+}
+
+AD5_jotunnheim_embassy_in_revrhavn = {
+	potential = {
+		always = yes
+	}
+
+	trigger = {
+		owner = {
+			tag = Z10
+		}
+		owner = {
+			alliance_with = AD7
+		}
+	}
+	
+	diplomatic_upkeep = 1
+}
+
+AD5_bjarnrik_embassy_in_jotunnheim = {
+	potential = {
+		always = yes
+	}
+
+	trigger = {
+		owner = {
+			tag = AD7
+		}
+		owner = {
+			alliance_with = Z08
+		}
+	}
+	
+	diplomatic_upkeep = 1
+}
+
+AD5_jotunnheim_embassy_in_bjarnrik = {
+	potential = {
+		always = yes
+	}
+
+	trigger = {
+		owner = {
+			tag = Z08
+		}
+		owner = {
+			alliance_with = AD7
+		}
+	}
+	
+	diplomatic_upkeep = 1
+}
+
+AD5_urviksten_embassy_in_jotunnheim = {
+	potential = {
+		always = yes
+	}
+
+	trigger = {
+		owner = {
+			tag = AD7
+		}
+		owner = {
+			alliance_with = Z15
+		}
+	}
+	
+	diplomatic_upkeep = 1
+}
+
+AD5_jotunnheim_embassy_in_urviksten = {
+	potential = {
+		always = yes
+	}
+
+	trigger = {
+		owner = {
+			tag = Z15
+		}
+		owner = {
+			alliance_with = AD7
+		}
+	}
+	
+	diplomatic_upkeep = 1
 }

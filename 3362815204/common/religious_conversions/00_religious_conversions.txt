@@ -135,6 +135,202 @@ propagate_religion_policy = {
 }
 
 
+
+
+#Anbennar
+
+adeanic_center_of_reformation = {
+
+	religion = regent_court
+
+	map_icon = GFX_religious_conversion_center_reformed
+
+	max_distance = 150.0
+	base_conversion_speed = 5
+
+	target_province_weights = {
+		factor = 2
+
+		modifier = {
+			factor = 0
+			is_empty = yes
+		}
+		modifier = {
+			factor = 0
+			has_missionary = yes
+		}
+		modifier = {
+			factor = 0
+			has_province_modifier = religious_center
+		}
+		modifier = {
+			factor = 0
+			has_province_modifier = religious_zeal_at_conv
+		}
+		modifier = { # Khugdihr MT
+			factor = 0
+			has_province_modifier = khug_ancestral_holy_site
+		}
+		modifier = {
+			factor = 0
+			religion = ravelian
+		}
+		modifier = {
+			factor = 0
+			religion = dalcabba
+		}
+		modifier = {
+			factor = 0
+			NOT = { religion_group = cannorian }
+		}
+		modifier = {
+			factor = 0
+			NOT = { continent = FROM }
+		}
+
+		modifier = {
+			factor = 2
+			owner = {
+				religion = regent_court
+			}
+		}
+		modifier = {
+			factor = 1.5
+			owner = {
+				OR = {
+					has_personal_deity = adean
+					has_personal_deity = ara
+				}
+			}
+		}
+		modifier = {
+			factor = 1.5
+			culture_group = FROM
+		}
+		modifier = {
+			factor = 0.5
+			has_state_edict = edict_religion_enforced
+		}
+		modifier = {
+			factor = 0.75
+			culture = corintari
+		}
+		modifier = {
+			factor = 0.75
+			owner = {
+				tag = B02
+			}
+		}
+		modifier = {
+			factor = 1.25
+			culture = adenner
+		}
+		modifier = {
+			factor = 1.25
+			owner = {
+				tag = B58
+			}
+		}
+		modifier = {
+			factor = 0
+			current_age = age_of_absolutism
+		}
+	}
+}
+
+dalcabba_center_of_reformation = {
+
+	religion = dalcabba
+
+	map_icon = GFX_religious_conversion_center_reformed
+
+	max_distance = 150.0
+	base_conversion_speed = 5
+
+	target_province_weights = {
+		factor = 2
+
+		modifier = {
+			factor = 0
+			is_empty = yes
+		}
+		modifier = {
+			factor = 0
+			has_missionary = yes
+		}
+		modifier = {
+			factor = 0
+			has_province_modifier = religious_center
+		}
+		modifier = {
+			factor = 0
+			has_province_modifier = religious_zeal_at_conv
+		}
+		modifier = { # Khugdihr MT
+			factor = 0
+			has_province_modifier = khug_ancestral_holy_site
+		}
+		modifier = {
+			factor = 0
+			NOT = { religion_group = cannorian }
+		}
+		modifier = {
+			factor = 0
+			NOT = { continent = FROM }
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				religion = dalcabba
+			}
+		}
+		modifier = {
+			factor = 1.25
+			owner = {
+				OR = {
+					has_personal_deity = adean
+					has_personal_deity = ara
+				}
+			}
+		}
+		modifier = {
+			factor = 0.5
+			has_state_edict = edict_religion_enforced
+		}
+		modifier = {
+			factor = 0.75
+			OR = {
+				culture = corintari
+				culture = adenner
+			}
+		}
+		modifier = {
+			factor = 0.75
+			owner = {
+				OR = {
+					tag = B02
+					tag = B58
+				}
+			}
+		}
+		modifier = {
+			factor = 1.25
+			OR = {
+				culture = elikhander
+				culture_group = kheteratan
+			}
+		}
+		modifier = {
+			factor = 0.25
+			current_age = age_of_absolutism
+		}
+		modifier = {
+			factor = 0
+			current_age = age_of_revolutions
+		}
+	}
+}
+
 # Centers of Reformation
 # From Scope is center of Reformation Province
 # Will only target provinces on same continent
@@ -1200,6 +1396,231 @@ nayiru_center_of_reformation = {
 		modifier = {
 			factor = 0.5
 			religion = bulwari_sun_cult
+		}
+	}
+}
+
+veil_puck_center_of_reformation = {
+
+	religion = veil_puck
+
+	map_icon = GFX_religious_conversion_center_reformed
+
+	max_distance = 150.0
+	base_conversion_speed = 5
+
+	target_province_weights = {
+		factor = 2
+
+		modifier = {
+			factor = 0
+			is_empty = yes
+		}
+		modifier = {
+			factor = 0
+			has_missionary = yes
+		}
+		modifier = {
+			factor = 0
+			has_province_modifier = religious_center
+		}
+		modifier = {
+			factor = 0
+			has_province_modifier = religious_zeal_at_conv
+		}
+		modifier = {
+			factor = 0
+			religion = ravelian
+		}
+		modifier = {
+			factor = 0
+			religion = dalcabba
+		}
+	
+		modifier = {
+			factor = 0
+			NOT = { religion_group = cannorian }
+		}
+		modifier = {
+			factor = 0
+			NOT = { continent = FROM }
+		}
+
+		modifier = {
+			factor = 2
+			owner = {
+				religion = veil_puck
+			}
+		}
+		modifier = {
+			factor = 1.5
+			culture_group = anbennarian
+		}
+		modifier = {
+			factor = 1.5
+			religion_group = cannorian
+		}
+		modifier = {
+			factor = 0.5
+			has_state_edict = edict_religion_enforced
+		}
+		modifier = {
+			factor = 0.75
+			owner = {
+				has_personal_deity = nerat
+			}
+		}
+		modifier = {
+			factor = 1.25
+			culture = arannese
+		}
+		modifier = {
+			factor = 1.25
+			culture = puckari
+		}
+		modifier = {
+			factor = 0
+			current_age = age_of_absolutism
+		}
+	}
+}
+
+bulwari_sun_cult_center_of_reformation = {
+	religion = bulwari_sun_cult
+
+	map_icon = GFX_religious_conversion_center_reformed
+
+	max_distance = 150.0
+	base_conversion_speed = 5
+
+	target_province_weights = {
+		factor = 2
+
+		modifier = {
+			factor = 0
+			is_empty = yes
+		}
+		modifier = {
+			factor = 0
+			has_missionary = yes
+		}
+		modifier = {
+			factor = 0
+			has_province_modifier = religious_center
+		}
+		modifier = {
+			factor = 0
+			has_province_modifier = religious_zeal_at_conv
+		}
+		modifier = {
+			factor = 0
+			religion = ravelian
+		}
+		modifier = {
+			factor = 0
+			religion = dalcabba
+		}
+	
+		modifier = {
+			factor = 0
+			NOT = { religion_group = cannorian }
+		}
+		modifier = {
+			factor = 0
+			NOT = { continent = FROM }
+		}
+
+		modifier = {
+			factor = 2
+			owner = {
+				religion = bulwari_sun_cult
+			}
+		}
+		modifier = {
+			factor = 1.5
+			culture_group = anbennarian
+		}
+		modifier = {
+			factor = 1.5
+			religion_group = cannorian
+		}
+		modifier = {
+			factor = 0.5
+			has_state_edict = edict_religion_enforced
+		}
+		modifier = {
+			factor = 0
+			current_age = age_of_absolutism
+		}
+	}
+}
+
+the_jadd_center_of_reformation = {
+	religion = the_jadd
+
+	map_icon = GFX_religious_conversion_center_reformed
+
+	max_distance = 150.0
+	base_conversion_speed = 5
+
+	target_province_weights = {
+		factor = 2
+
+		modifier = {
+			factor = 0
+			is_empty = yes
+		}
+		modifier = {
+			factor = 0
+			has_missionary = yes
+		}
+		modifier = {
+			factor = 0
+			has_province_modifier = religious_center
+		}
+		modifier = {
+			factor = 0
+			has_province_modifier = religious_zeal_at_conv
+		}
+		modifier = {
+			factor = 0
+			religion = ravelian
+		}
+		modifier = {
+			factor = 0
+			religion = dalcabba
+		}
+	
+		modifier = {
+			factor = 0
+			NOT = { religion_group = cannorian }
+		}
+		modifier = {
+			factor = 0
+			NOT = { continent = FROM }
+		}
+
+		modifier = {
+			factor = 2
+			owner = {
+				religion = bulwari_sun_cult
+			}
+		}
+		modifier = {
+			factor = 1.5
+			culture_group = anbennarian
+		}
+		modifier = {
+			factor = 1.5
+			religion_group = cannorian
+		}
+		modifier = {
+			factor = 0.5
+			has_state_edict = edict_religion_enforced
+		}
+		modifier = {
+			factor = 0
+			current_age = age_of_absolutism
 		}
 	}
 }

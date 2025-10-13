@@ -1,0 +1,1697 @@
+dasmatus_1_z = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = F56
+		has_country_flag = dasmatus_zokka_despair_event_has_fired
+	}
+	F56_hope_dies = {
+		icon = mission_burning_man
+		position = 1
+		trigger = {
+			NOT = {
+				war_exhaustion = 2
+			}
+		}
+		effect = {
+			country_event = {
+				id = flavor_dasmatus.2
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_ruler = "Dasma II"
+					}
+				}
+				country_event = {
+					id = flavor_dasmatus.3
+					days = 30
+					random = 30
+				}
+			}
+		}
+	}
+	F56_desperation = {
+	icon = mission_heated_battle
+	position = 2
+		required_missions = {
+			F56_hope_dies
+		}
+		trigger = {
+			army_size_percentage = 1.1
+			navy_size = F29
+		}
+		effect = {
+			add_country_modifier = {
+				name = F56_strength_of_the_condemned_modifier
+				duration = 3650
+			}
+			add_country_modifier = {
+				name = F56_nothing_to_lose_modifier 
+				duration = 1095
+			}
+			country_event = {
+				id = flavor_dasmatus.6
+			}
+			custom_tooltip = F56_special_war_conditions_tooltip
+			complex_dynamic_effect = {
+				first_custom_tooltip = F56_dual_invasion_tooltip
+				first_limit = "
+					4400 = { 
+						num_of_units_in_province = {
+							who = ROOT
+							amount = 5
+						}
+					}
+					5668 = {
+						num_of_units_in_province = {
+							who = ROOT
+							amount = 5
+						}
+					}
+				"
+				first_effect = "
+					add_country_modifier = {
+						name = F56_coordinated_assault_modifier 
+						duration = 1095
+					}
+				"
+			}
+		}
+	}	 #this will actually be done in an event
+	F56_shockwaves = {
+	icon = mission_horse_siege
+	position = 3
+	required_missions = {
+		F56_desperation
+		}
+	trigger = {
+		NOT = {
+			F29 = {
+				exists = yes
+				}
+			}
+		}
+	effect = {
+		country_event = {
+			id = flavor_dasmatus.5
+			days = 365
+			}
+			add_power_projection = { 
+				type = 25_permanent_power_projection
+				amount = 25 
+			}
+		}
+	}
+
+	F56_daylight_returns = {
+		icon = mission_new_dawn
+		position = 4
+		required_missions = {
+			F56_shockwaves
+			}
+		trigger = {
+			all_owned_province = {
+				is_core = ROOT
+				NOT = {
+				culture_group = gnollish
+				}
+				}
+			has_country_flag = power_ascendant_event_completed
+			}
+		effect = {
+			every_owned_province = {
+				add_nationalism = -10
+			}
+			remove_country_modifier = F56_nothing_to_lose_modifier
+			remove_country_modifier = F56_desperation_demands_consequences
+			remove_country_modifier = F56_necessary_coup_modifier
+			add_country_modifier = {
+				name = F56_hope_resplendent_modifier 
+				duration = 18250
+			}
+			set_country_flag = zokkadari_dealt_with
+		}
+	} 
+}
+
+dasmatus_1_lower = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = F56
+	}
+	F56_the_desert_legions = {
+		icon = mission_desert_rider
+		position = 5
+		trigger = {
+			has_country_flag = zokkadari_dealt_with
+			far_salahad_region = {
+				type = all
+				OR = {
+					culture_group = dwarven
+					culture_group = harpy
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+			}
+			if = {
+				limit = {
+					F46 = { is_subject_of = F56 }
+				}
+				F46 = {
+					has_opinion = {
+						who = ROOT
+						value = 200
+					} 
+				}
+			}
+		}
+		effect = {
+			every_province = {
+				limit = {	
+					AND = {
+						OR = {
+						culture = desert_elf
+						culture = siadunan_harpy
+						}
+						religion = the_jadd
+						region = far_salahad_region
+					}
+				}
+				add_province_modifier = {
+					name = F56_jaddari_religious_autonomy_modifier 
+					duration = -1
+					}
+			}
+			country_event = {
+				id = flavor_dasmatus.16
+			}
+			add_country_modifier = {
+				name = F56_jadd_cooldown
+				duration = 7300
+			}
+		}
+	}
+	F56_reclaim_sad_sur = {
+		icon = mission_city_prosperity
+		position = 7
+		required_missions = {
+			F56_the_desert_legions
+			F56_dasmazar_reborn
+		}
+		trigger = {
+			NOT = {
+				exists = F28 
+			}
+			bulwar_proper_region = {
+				type = all
+				NOT = { religion = xhazobkult }
+					}
+			bulwar_proper_region = {
+				type = all
+				OR = {
+					NOT = { culture_group = gnollish }
+					owned_by = ROOT
+				}
+			}
+			688 = { 
+				num_of_units_in_province = {
+					who = ROOT
+					type = infantry
+					amount = 5
+				}
+			}
+		}
+		effect = {
+			custom_tooltip = F56_sadnatu_tt
+			hidden_effect = {
+				set_country_flag = F56_sadnatu_allowed
+			}
+			688 = {
+				change_culture = maqeti
+				change_religion = ROOT
+				kill_units = {
+					who = ROOT
+					type = infantry
+					amount = 5
+				}
+			}
+		}
+	}
+	F56_eastern_harpies = {
+		icon = mission_city_prosperity
+		position = 8
+		required_missions = {
+			F56_reclaim_sad_sur
+		}
+		trigger = {
+			far_salahad_region = {
+				type = all
+				owned_by = F56
+			}
+			OR = {
+				num_of_owned_provinces_with = {
+					culture_group = harpy
+					religion = old_bulwari_sun_cult
+					value = 6
+				}
+				NOT = {
+					num_of_owned_provinces_with = {
+						culture_group = harpy
+						value = 6
+					}
+				}
+			}
+		}			
+		effect = {
+			country_event = {
+				id = flavor_dasmatus.18
+			}
+		}
+	}
+	F56_the_pilgrimage = {
+		icon = mission_city_prosperity
+		position = 9
+		required_missions = {
+			F56_eastern_harpies
+		}
+		trigger = {
+			owns_core_province = 6101 
+			6101 = {
+				NOT = { unrest = 1 }
+				num_of_units_in_province = {
+					who = ROOT
+					type = infantry
+					amount = 20
+				}
+			}
+		}
+		effect = {
+			country_event = {
+				id = flavor_dasmatus.19
+			}
+		}
+	}
+	
+	F56_homecoming = {
+		icon = mission_city_prosperity
+		position = 10
+		required_missions = {
+			F56_the_pilgrimage
+		}
+		trigger = {
+			maqet_kingdom = {
+				type = all
+				owned_by = ROOT
+				is_core = ROOT
+				NOT = { unrest = 1 }
+				religion = old_bulwari_sun_cult
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = F56_the_return
+				duration = 7300
+			}
+		}
+	}	
+	F56_temples = {
+		icon = mission_city_prosperity
+		position = 11
+		required_missions = {
+			F56_homecoming
+		}
+		trigger = {
+			F30_major_osc_temples = {
+				type = all
+				OR = {
+					AND = { 
+						owned_by = ROOT
+						religion = old_bulwari_sun_cult
+					}
+					province_id = 522
+				}
+			}
+		}
+		effect = {
+			set_country_flag = F56_dasmati_centralization 
+			add_prestige = 5
+		}
+	}
+	F56_truimphant_return = {
+		icon = mission_city_prosperity
+		position = 12
+		required_missions = {
+			F56_temples
+		}
+		trigger = {
+			bulwar_proper_region = {
+				type = all
+				owned_by = ROOT
+			}
+			OR = {
+				bulwari_cities = {
+					type = all
+					religion = old_bulwari_sun_cult
+				}
+				has_global_modifier_value = { 
+					which = tolerance_heretic 
+					value =  2.0
+				}
+			}
+			stability = 1
+			legitimacy = 100
+			prestige = 75
+		}
+		effect = {
+			add_prestige = 5
+			set_country_flag = dasmatus_upgraded_blessings
+			custom_tooltip = F56_blessings_tt
+		}
+	}
+}
+dasmatus_2_placeholder = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = F56
+	}
+}
+dasmatus_2_j = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = F56
+		has_global_flag = jaddar_defeated_zokka
+	}
+	F56_kogs_and_chains = {
+		icon = mission_pray_light
+		position = 1
+		trigger = {
+			NOT = {
+				exists = F55 # Kogzalla
+				exists = F54 # Kograffa
+			}
+			dasmatus_area = { 
+				type = all
+				owned_by = ROOT
+			 }
+			zallirkor_area = { 
+				type = all
+				owned_by = ROOT
+			 }
+				}
+		effect = {
+			every_owned_province = { 
+				limit = {
+					area = dasmatus_area
+				}
+				add_province_modifier = {
+					name = F56_mainland_reintegration
+					duration = 7300
+				}
+			}
+				change_estate_land_share = {
+					estate = estate_church
+					share = 2
+				}
+				change_estate_land_share = {
+					estate = estate_nobles
+					share = -5
+				}
+				change_estate_land_share = {
+					estate = estate_burghers
+					share = -2
+				}
+				add_prestige = 15
+		}
+	}
+	F56_treat_with_jaddar = {
+		icon = mission_monarch_diplomacy
+		position = 2
+		required_missions = {
+			F56_kogs_and_chains
+		}
+		trigger = {
+			OR = {
+				AND = {
+					F46 = {
+						OR = {
+						alliance_with = ROOT
+						has_75_opinion_improved_relation = { target = ROOT}
+						}
+					  } 
+				treasury = 150
+				}
+				AND = {
+					arrtukerr_area = { owned_by = ROOT }
+					2923 = { owned_by = ROOT }
+				}
+			}
+		}
+		effect = {
+			ROOT = {
+				create_alliance = F46
+			}
+			add_treasury = -150
+			F46 = {
+				add_treasury = 150
+			}
+			arrtukerr_area = {
+				cede_province = ROOT
+				change_culture = masnsih
+				change_religion = the_jadd
+			}
+			2923 = {
+				cede_province = ROOT
+			}
+		}
+	}
+	F56_tensions_rise = {
+		icon = mission_discussion_arch
+		position = 3
+		required_missions = {
+			F56_treat_with_jaddar
+		}
+		trigger = {
+			OR = {	
+				AND = {
+					NOT = {
+						alliance_with = F46
+					}
+					OR = {
+						is_rival = F46
+						F46 = {
+							scornfully_insulted_check = yes
+						}
+					}
+				}
+				AND = {
+					F46 = {
+						AND = {
+							is_at_war = yes
+							trust = {
+								who = ROOT
+								value = 80
+							}
+							has_spy_network_from = {
+								who = ROOT
+								value = 50
+							}
+						}
+					}
+					ROOT = {is_scrying = yes}
+				}
+				F46 = {
+					trust = {
+						who = ROOT
+						value = 100
+					}
+					has_opinion_modifier = {
+						modifier = sent_gift 
+						who = ROOT
+						value = 25
+					}
+					has_opinion_modifier = {
+						modifier = honored_alliance
+						who = ROOT
+					}
+					owes_favors = {
+						who = ROOT
+						value = 50
+					}	
+					has_opinion = {
+						who = ROOT
+						value = 200
+					}	
+				}
+			}
+		}
+		effect = {
+			set_country_flag = zokkadari_dealt_with
+			complex_dynamic_effect = {
+				first_custom_tooltip = F56_jaddar_rival_tt 
+				first_limit = "
+					AND = {
+						NOT = {
+							alliance_with = F46
+						}
+						OR = {
+							is_rival = F46
+							F46 = {
+								scornfully_insulted_check = yes
+							}
+						}
+					}
+				"
+				first_effect = "
+					custom_tooltip = F56_jaddar_rival_tooltip
+					F46 = {
+						every_owned_province = {
+							add_permanent_claim = F56
+						}
+					}
+				"		
+				second_custom_tooltip = F56_jaddar_betrayal_tt 
+				second_limit = "
+					AND = {
+						F46 = {
+							AND = {
+								is_at_war = yes
+								trust = {
+									who = ROOT
+									value = 80
+								}
+								has_spy_network_from = {
+									who = ROOT
+									value = 50
+								}
+							}
+						}
+						ROOT = {is_scrying = yes}
+					}
+				"
+				second_effect = "
+					custom_tooltip = F56_jaddar_betrayal_tooltip
+					F46 = {
+						kill_ruler = yes
+						add_trust = {
+							who = F56 
+							value = -70
+							mutual = yes
+						}
+					}
+					create_subject = {
+						subject_type = march
+						subject = F46
+					}
+				"		
+				third_custom_tooltip = F56_jaddar_friend_tt 
+				third_limit = "
+					F46 = {
+						trust = {
+							who = ROOT
+							value = 100
+						}
+						has_opinion_modifier = {
+							modifier = sent_gift 
+							who = ROOT
+							value = 25
+						}
+						has_opinion_modifier = {
+							modifier = honored_alliance
+							who = ROOT
+						}
+						owes_favors = {
+							who = ROOT
+							value = 50
+						}	
+						has_opinion = {
+							who = ROOT
+							value = 200
+						}	
+					}
+				"
+				third_effect = "
+					custom_tooltip = F56_jaddar_friend_tooltip
+					F46 = {
+						every_owned_province = {
+							add_province_modifier = {
+								name = F56_jaddari_autonomy_modifier 
+								duration = 18250
+							}
+						}
+					}
+					inherit = F46
+				"	
+			}
+		}
+	}	
+}
+
+dasmatus_2_z = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = F56
+		has_country_flag = dasmatus_zokka_despair_event_has_fired
+	}
+	F56_children_of_war = {
+		icon = mission_homeless_children
+		position = 4
+		required_missions = {
+			F56_shockwaves
+		}
+		trigger = {
+			OR = {
+				AND = {
+					num_of_regiments_at_full_drill = 10
+				}
+				AND = {
+					5668 = {
+						development = 10
+						NOT = {
+							devastation = 1
+						}
+					}
+					manpower = 5
+					
+					#has_country_flag = children_scarred_flag
+				}
+			}
+		}
+		effect = {
+			complex_dynamic_effect = {
+				first_custom_tooltip = F56_veterans_tt 
+				first_limit = "
+					AND = {
+						#has_country_flag = veterans_of_the_fight
+						num_of_regiments_at_full_drill = 10
+					}
+				"
+				first_effect = "
+					custom_tooltip = F56_veterans_of_the_fight_tooltip
+					add_country_modifier = {
+						name = F56_veterans_of_the_fight
+						duration = 18250
+					}
+					5668 = {
+						add_province_modifier = {
+							name = F56_dasmatus_desolate
+							duration = 7300
+						}
+					}
+				"
+				second_custom_tooltip = F56_veterans_2_tt
+				second_limit = "
+					AND = {
+						5668 = {
+							development = 10
+						}
+						manpower = 5
+						#has_country_flag = children_scarred_flag
+					}
+				"
+				second_effect = "
+					custom_tooltip = F56_children_scarred_tooltip
+					add_country_modifier = {
+						name = F56_children_scarred
+						duration = 7300
+					}
+					add_country_modifier = {
+						name = F56_healing_scars
+						duration = 18250
+					}
+					5668 = {
+						add_province_modifier = {
+							name = F56_dasmatus_damaged
+							duration = 7300
+						}
+					}
+					add_manpower = -5
+				"
+			}
+		}
+	}
+}
+
+dasmatus_2_lower = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = F56
+	}
+	F56_the_jadd = {
+		icon = mission_city_prosperity
+		position = 6
+		required_missions = {
+			F56_the_desert_legions
+	}
+		trigger = {
+			NOT = {
+				AND = {
+					exists = F46
+					has_country_modifier = F56_jadd_cooldown
+				}
+			} 
+			development_in_provinces = {
+				value = 150
+				religion = the_jadd
+			}
+		}
+		effect = {
+			country_event = {
+				id = flavor_dasmatus.7
+			}
+		}
+	}	
+	F56_an_old_foe = {
+		icon = mission_city_prosperity
+		position = 7
+		required_missions = {
+			F56_dasmazar_reborn
+		}
+		trigger = {
+			NOT = {
+				exists = F72
+			}	
+			5442 = {
+				base_production = 5
+			}
+			F72 = {
+				all_core_province = {
+					owned_by = ROOT
+				}
+			}	
+		}
+		effect = {
+			country_event = {
+				id = flavor_dasmatus.20
+			}
+		}
+	}
+	F56_the_revenge = {
+		icon = mission_city_prosperity
+		position = 8
+		required_missions = {
+			F56_an_old_foe
+			F56_reclaim_sad_sur
+		}
+		trigger = {
+			5477 = {
+				owned_by = ROOT
+				num_of_units_in_province = {
+					who = ROOT
+					type = infantry
+					amount = 20
+				}
+				has_province_modifier = scorched_earth
+			}
+			NOT = {
+				exists = F71
+			}
+			F71 = {
+				all_core_province = {
+					owned_by = ROOT
+				}
+			}	
+			all_owned_province = {
+				OR = {
+					num_of_units_in_province = {
+						who = ROOT
+						type = infantry
+						amount = 1
+					}
+					NOT = { culture_group = gnollish }
+				}	
+			}
+			OR = {
+				has_country_modifier = racial_pop_gnollish_expulsion
+				has_country_modifier = racial_pop_gnollish_purge
+			}
+		}
+		effect = {
+			every_owned_province = {
+				limit = {
+					culture_group = gnollish
+				}
+				add_devastation = 75
+				change_culture = maqeti
+				change_religion = ROOT
+				add_base_tax = -2
+				add_base_production = -2
+				add_base_manpower = -2
+				kill_units = {
+					who = ROOT
+					type = infantry
+					amount = 1	
+				}
+			}
+			country_event = {
+				id = flavor_dasmatus.21
+			}
+		}
+	}
+	F56_slay_empress = {
+		icon = mission_city_prosperity
+		position = 9
+		required_missions = {
+			F56_the_revenge
+		}
+		trigger = {
+			NOT = {
+					exists = U09
+			}
+			OR = {
+				AND = {
+					accepted_culture = irsmahapan
+					all_owned_province = {
+								OR = {
+									NOT = {culture = pyreclaw_gnoll}
+									num_of_units_in_province = {
+										who = ROOT
+										type = infantry
+										amount = 3
+									}
+							}
+						}
+					}
+				OR = {
+					medium_tolerance_gnollish_race_trigger = yes
+					high_tolerance_gnollish_race_trigger = yes
+				}
+			}
+		}
+		effect = {
+			country_event = {
+				id = flavor_dasmatus.22
+			}
+		}
+	}
+}	
+			
+dasmatus_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = F56
+	}
+
+	F56_reinforce_the_army = {
+		icon = mission_smith
+		position = 2
+		required_missions = {
+			F56_adenisigu
+		}
+		trigger = {
+			army_size_percentage = 0.9
+			OR = {
+				advisor = commandant
+				advisor = army_reformer
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = F56_dead_mens_bravery
+				duration = 3650
+			}
+		}
+	}
+
+	F56_rally_the_free = {
+		icon = mission_captured
+		position = 3
+		required_missions = {
+			F56_reinforce_the_army
+			F56_the_chainbreakers
+		}
+		trigger = {
+			F54 = {
+                OR = {
+                    overlord = {
+                        has_spy_network_from = {
+                            who = ROOT
+                            value = 10
+                        }
+                    }
+                    has_spy_network_from = {
+                        who = ROOT
+                        value = 10
+                    }
+                    exists = no
+                }
+            }
+			5434 = {
+				num_of_units_in_province = {
+					who = ROOT
+					amount = 5
+				}
+			}
+		}
+		effect = {
+            if = {
+                limit = { 
+                    F54 = { is_subject = yes }
+                }
+                    F54 = {
+                        overlord = {
+                            add_spy_network_from = {
+                                who = ROOT
+                                value = -10
+                            }
+                        }
+                    }
+                }
+            else = {
+                add_spy_network_in = {
+                    who = F54
+                    value = -10
+                }
+            }
+			country_event = {
+				id = flavor_dasmatus.12
+			}
+		}
+	}
+	F56_destroying_the_fallen = {
+		icon = mission_burning_castle
+		position = 4
+		required_missions = {
+			F56_rally_the_free
+		}
+		trigger = {
+			dasmatus_area = {
+				type = all
+				OR = {
+					province_id = 5668
+					num_of_units_in_province = {
+						who = ROOT
+						type = infantry
+						amount = 2
+					}
+				}
+            }
+		}
+
+		effect = {
+			dasmatus_area = {
+				limit = {
+					NOT = {
+						province_id = 5668
+					}
+				}
+				remove_gnollish_minority_size_effect = yes
+				remove_gnollish_minority_size_effect = yes
+				add_devastation = 25
+				add_base_tax = -1
+				add_base_production = -1
+				add_base_manpower = -1
+				add_province_modifier = {
+					name = F56_clearing_the_gnolls
+					duration = 1825
+				}
+			}
+		}
+	}
+	F56_repairing_the_broken = {
+		icon = mission_cope_with_refugees
+		position = 5
+		required_missions = {
+			F56_destroying_the_fallen
+		}
+		trigger = {
+			stability = 1
+			OR = {
+				advisor = artist
+				advisor = philosopher
+				advisor = theologian
+			}
+			all_owned_province = {
+				NOT = {
+					unrest = 1
+				}
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = F56_reforging_chains
+				duration = 9125
+			}
+		}
+	}
+	F56_dasmazar_reborn = {
+		icon = mission_sunset_alternative
+		position = 6
+		required_missions = {
+			F56_repairing_the_broken
+		}
+		trigger = {
+			is_at_war = no
+			Dasmazar = {
+				type = all
+				owned_by = ROOT
+				is_core = ROOT
+				no_devastation_or_unrest = yes
+			}
+			development_in_provinces = {
+				value = 60
+				area = dasmatus_area
+			}
+			dasmatus_area = {
+				type = all
+				is_prosperous = yes
+			}
+		}
+		effect = {
+			country_event = {
+				id = flavor_dasmatus.13
+			}
+			add_government_reform = blood_of_maqet
+		}
+	}
+	F56_bloody_hands = {
+		icon = mission_city_prosperity
+		position = 9
+		required_missions = {
+			F56_the_revenge
+			F56_new_development
+		}
+		trigger = {
+			has_country_flag = F56_bones
+		}
+		effect = {
+			country_event = {
+			id = flavor_dasmatus.23
+			}
+		}
+	}
+	F56_reality = {
+		icon = mission_city_prosperity
+		position = 10
+		required_missions = {
+			F56_bloody_hands
+		}
+		trigger = {
+			OR = {
+				has_country_flag = F56_retribution
+				has_country_flag = F56_redemption
+			}
+			stability = 3
+			every_estate_loyalty = {
+				loyalty = 50
+			}
+		}
+		effect = {
+			add_prestige = 1
+			add_government_reform = F56_zeal_tolerance_t2
+			hidden_effect = {
+				trigger_switch = {
+					on_trigger = has_country_flag
+					F56_retribution = {
+						set_government_power = {
+							mechanic_type = F56_tolerance_zeal_mechanic
+							power_type = dasmati_zeal
+							value = 33
+						}
+					}
+					F56_redemption = {
+						set_government_power = {
+							mechanic_type = F56_tolerance_zeal_mechanic
+							power_type = dasmati_zeal
+							value = -33
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+dasmatus_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = F56
+	}
+	F56_adenisigu = {
+		icon = mission_destroyed_city
+		position = 1
+		trigger = {
+			OR = {
+				national_focus = ADM
+				national_focus = DIP
+				national_focus = MIL
+			}
+		}
+		effect = {
+			country_event = {
+				id = flavor_dasmatus.1
+			}
+			complex_dynamic_effect = {
+				first_custom_tooltip = F56_focus_adm_tt
+				first_limit = "
+					national_focus = ADM
+				"
+				first_effect = "
+					add_country_modifier = {
+						name = F56_sympathetic_bankers
+						duration = 7300
+					}
+				"
+				second_custom_tooltip = F56_focus_dip_tt
+				second_limit = "
+					national_focus = DIP
+				"
+				second_effect = "
+					add_country_modifier = {
+						name = F56_freedom_raids
+						duration = 1825
+					}
+				"
+				third_custom_tooltip = F56_focus_mil_tt
+				third_limit = "
+					national_focus = MIL
+				"
+				third_effect = "
+					add_country_modifier = {
+						name = F56_ready_to_fight
+						duration = 1825
+					}
+				"
+				}
+			}
+		}
+
+	F56_the_chainbreakers = {
+		icon = mission_fleet_arrival
+		position = 2
+		required_missions = {
+			F56_adenisigu
+		}
+		trigger = {
+			treasury = 30
+			OR = {
+				advisor = naval_reformer
+				advisor = fortification_expert
+			}
+			AND = {
+				5505 = { has_province_modifier = slaves_raided }
+				5504 = { has_province_modifier = slaves_raided }
+				5446 = { has_province_modifier = slaves_raided }
+			}
+		}
+		effect = {
+			random_owned_province = {
+				limit = {
+					has_port = yes
+				}
+				add_unit_construction = {
+					type = galley
+					amount = 3
+					speed = 0.1
+					cost = 0.5
+				}
+				add_unit_construction = {
+					type = transport
+					amount = 2
+					speed = 0.1
+					cost = 0.5
+				}
+			}
+		}
+	}
+	F56_liberation_on_the_waves = {
+		icon = mission_burning_castle
+		position = 3
+		required_missions = {
+			F56_the_chainbreakers
+		}
+		trigger = {
+			OR = {
+				navy_tradition = 30
+				AND = {
+					sailors = 10000
+					navy_tradition = 15
+				}
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = F56_chainbreaker_marines
+				duration = -1
+			}
+			add_country_modifier = {
+				name = F56_chainbreaker_marines_national
+				duration = -1
+			}
+		}
+	}
+	F56_chainbreaker_corps = {
+		icon = mission_face_off
+		position = 4
+		required_missions = {
+			F56_liberation_on_the_waves
+		}
+		trigger = {
+			num_of_marines = 25
+			army_professionalism = 0.2
+			sailors = 25000
+			OR = {
+				maritime_ideas = 1
+				naval_ideas = 1
+				navy_tradition = 45
+			}
+		}
+		effect = {
+			remove_country_modifier = F56_chainbreaker_marines
+			remove_country_modifier = F56_chainbreaker_marines_national
+			add_country_modifier = {
+				name = F56_chainbreaker_corps_modifier
+				duration = -1
+			}
+			add_country_modifier = {
+				name = F56_chainbreaker_corps_national
+				duration = -1
+			}
+		}
+	}
+	F56_building_anew = {
+		icon = mission_city_prosperity
+		position = 5
+		required_missions = {
+			F56_destroying_the_fallen
+		}
+		trigger = {
+			Dasmazar = {
+				type = all
+				NOT = {
+					devastation = 1
+				}
+			}
+			dasmatus_area = {
+				type = all
+				num_of_buildings_in_province = 1
+			}
+		}
+		effect = {
+			dasmatus_area = {
+				type = all
+				add_province_modifier = {
+					name = F56_healing_dasmatus
+					duration = 1825
+				}
+			}
+			Dasmazar = {
+				add_province_modifier = {
+					name = F56_healing_dasmazar
+					duration = 7300
+				}
+			}
+		}
+	}
+	F56_freedmen_housing = {
+		icon = mission_city_prosperity
+		position = 7
+		required_missions = {
+			F56_dasmazar_reborn
+			F56_building_anew
+		}
+		trigger = {
+			check_variable = {
+				which = F56_slave_sites
+				value = 1
+			}
+			has_country_flag = homeless_freedmen
+			Dasmazar = {
+				calc_true_if = {
+					all_owned_province = { has_manpower_building_trigger = yes }
+					amount = 5
+				}
+			}
+		}
+		effect = {
+			country_event = {
+				id = flavor_dasmatus.25
+			}
+		}
+	}
+	F56_new_development = {
+		icon = mission_city_prosperity
+		position = 8
+		required_missions = {
+			F56_freedmen_housing
+		}
+		trigger = {
+			treasury = 500
+			5667 = { has_fort_building_trigger = yes }
+			5668 = {
+				has_building = temple
+				has_building = marketplace
+				has_building = workshop
+			}
+			5434 = {
+				has_building = temple
+				has_building = marketplace
+				has_building = workshop
+			}
+		}
+		effect = {
+			set_country_flag = F56_dasmazar_building_allowed
+			add_prestige = 5
+		}
+	}
+	F56_volunteers = {
+		icon = mission_city_prosperity
+		position = 9
+		required_missions = {
+			F56_new_development
+		}
+		trigger = {
+			calc_true_if = {
+				all_owned_province = {
+					has_province_modifier = F56_freed_slave_site
+					has_manpower_building_trigger = yes
+				}
+				amount = 5
+			}
+			num_of_marines = 10
+			army_professionalism = 0.2
+		}
+		effect = {
+			add_country_modifier = {
+				name = F56_volunteer_regiments
+				duration = -1
+			}
+		}
+	}	
+}
+
+dasmatus_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = F56
+	}
+	F56_allies_no_more = {
+		icon = mission_eliminate_pretenders
+		position = 2
+		required_missions = {
+			F56_adenisigu
+		}
+		trigger = {
+			treasury = 50
+			has_advisor = yes
+			# OR = {
+			# 	advisor = statesman
+			# 	advisor = spymaster
+			# }
+			has_spy_network_in = {
+				who = R02
+				value = 25
+			}
+		}
+		effect = {
+			country_event = {
+				id = flavor_dasmatus.4
+			}
+		}
+	}
+
+	F56_improvised_defenses = {
+		icon = mission_tear_down_spanish_strongholds
+		position = 3
+		required_missions = {
+			F56_allies_no_more
+		}
+		trigger = {
+			treasury = 100
+			4400 = {
+				owned_by = ROOT
+				is_core = ROOT
+				num_of_units_in_province = {
+					who = ROOT
+					type = infantry
+					amount = 2
+				}
+				has_any_ongoing_construction = no
+			}
+		}
+		effect = {
+			4400 = {
+				add_building_construction = {
+					building = fort_15th
+					speed = 0.2
+					cost = 0.5
+				}
+				kill_units = {
+					who = ROOT
+					type = infantry
+					amount = 2
+				}
+			}
+		}
+	}
+
+	F56_subkaliss_naval_academy = {
+		icon = mission_table_of_ranks
+		position = 4
+		required_missions = {
+			F56_improvised_defenses
+			F56_liberation_on_the_waves
+		}
+		trigger = {
+			4400 = {
+				development = 30
+				has_building = shipyard
+				has_building = dock
+				has_building = impressment_offices
+				has_building = coastal_defence
+			}
+			navy_tradition = 60
+			OR = {
+				has_leader_with = {
+					admiral = yes
+					total_pips  = 10
+				}
+				dip_power = 200
+			}
+		}
+		effect = {
+			4400 = {
+				add_province_modifier = {
+					name = F56_subkaliss_naval_academy
+					duration = -1
+				}
+			}
+		}
+	}
+	
+	F56_elite_chainbreakers = {
+		icon = mission_omani_marines
+		position = 5
+		required_missions = {
+			F56_subkaliss_naval_academy
+			F56_chainbreaker_corps
+		}
+		trigger = {
+			num_of_marines = 50
+			army_professionalism = 0.4
+			navy_tradition = 75
+			num_of_owned_provinces_with = {
+				value = 10
+				has_building = impressment_offices
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = F56_elite_chainbreakers
+				duration = -1
+			}
+			add_country_modifier = {
+				name = F56_elite_chainbreakers_national
+				duration = -1
+			}
+			
+			remove_country_modifier = F56_chainbreaker_corps_modifier
+			remove_country_modifier = F56_chainbreaker_corps_national
+		}
+	}
+
+	F56_rule_the_coast = {
+		icon = mission_combat_barbary_piracy
+		position = 6
+		required_missions = {
+			F56_elite_chainbreakers
+		}
+		trigger = {
+			OR = {
+				full_idea_group = naval_ideas
+				full_idea_group = maritime_ideas
+				AND = {
+					navy_tradition = 90
+					navy_size = 100
+				}
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = F56_coastal_power
+				duration = -1
+			}
+		}
+	}
+	F56_free_gnidi = {
+		icon = mission_city_prosperity
+		position = 7
+		required_missions = {
+			F56_dasmazar_reborn
+		}
+		trigger = {
+			beri_gnidi_area = {	
+				type = all
+				owned_by = ROOT
+			}
+			R01 = {
+				all_owned_province = {
+					NOT = {
+						continent = africa
+					}
+				}
+			}
+		}
+		effect = {
+			dakmender_area = {
+				add_permanent_claim = ROOT
+			}
+			biribitid_area = {
+				add_permanent_claim = ROOT
+			}
+			medifat_area = {
+				add_permanent_claim = ROOT
+			}
+			beri_gnidi_area = {
+				add_nationalism = -10
+				add_province_modifier = {
+					name = F56_integrating_gnidi
+					duration = 3650
+				}
+			}
+		}
+	}
+	
+	F56_aggressive_negotiations = {
+		icon = mission_city_prosperity
+		position = 8
+		required_missions = {
+			F56_free_gnidi
+		}
+		trigger = {
+			Y53 = {
+				all_owned_province = {
+					OR = {
+						NOT = {
+							continent = africa
+						}
+						   controlled_by = ROOT
+					}
+				}
+				NOT = { 
+					OR = {
+						num_of_heavy_ship = ROOT 
+						navy_size = ROOT
+					}
+				}
+			}
+			treasury = 5
+		}
+		Effect = {
+			Y53 = {
+				every_owned_province = {
+					limit = { continent = africa }
+					cede_province = ROOT
+				}
+				add_treasury = 5
+			}
+			add_treasury = -5
+			white_peace = Y53
+		}
+	}
+	F56_erstwhile_allies = {
+		icon = mission_city_prosperity
+		position = 9
+		required_missions = {
+			F56_aggressive_negotiations
+		}
+		trigger = {
+			medifat_area = {	
+				type = all
+				owned_by = ROOT
+			}
+			dakmender_area = {
+				type = all
+				owned_by = ROOT
+			}
+			R02 = {
+				OR = { 
+					AND = {
+						all_owned_province = {
+							NOT = {
+								continent = africa
+							}
+						}
+						scornfully_insulted_check = yes
+					}
+					NOT = {exists = yes}
+				}
+			}	
+		}
+		effect = {
+			country_event = {
+				id = flavor_dasmatus.26
+			}
+		}
+	}
+	F56_break_the_cycle = {
+		icon = mission_combat_barbary_piracy
+		position = 10
+		required_missions = { F56_erstwhile_allies }
+		trigger = {
+			avhavubhiya_area = {
+				type = all
+				owned_by = ROOT
+			}
+			sarkhashabid_area = {
+				type = all
+				owned_by = ROOT
+			}
+			keruhar_area = {
+				type = all
+				owned_by = ROOT
+			}
+			R04 = {
+				scornfully_insulted_check = yes
+			}
+	
+		}
+		effect = {
+			country_event = {
+				id = flavor_dasmatus.27
+			}
+		}
+	}
+	F56_destroy_the_guild = {
+		icon = mission_cannons_firing
+		position = 11
+		required_missions = { F56_break_the_cycle }
+		trigger = {
+			ascension_cape_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		effect = {
+			country_event = {
+				id = flavor_dasmatus.28
+			}
+		}
+	}
+}
+

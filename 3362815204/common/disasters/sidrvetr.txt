@@ -1,0 +1,36 @@
+
+#Sidrvetr is the Hallfredhavn stagnation disaster
+sidrvetr = {
+	ended_by_country_breaking_to_rebels = no
+	potential = {
+		tag = AD5
+		NOT = {
+			has_country_flag = sidrvetr_survivor_flag
+		}
+	}
+	can_start = {
+#		has_any_disaster = no
+	}
+	can_stop = {
+		always = no
+	}
+	progress = {
+		modifier = {
+			factor = 100
+		}
+	}
+	can_end = {
+		mission_completed = AD5_end_the_sidrvetr
+	}
+	modifier = {
+		stability_cost_modifier = 0.50
+		global_tax_modifier = -0.5
+		global_manpower_modifier = -0.5
+		global_unrest = 2
+		legitimacy = -2
+	}
+	on_start = hallfredhavn.2
+	on_end = hallfredhavn.3
+	on_monthly = {
+	}
+}

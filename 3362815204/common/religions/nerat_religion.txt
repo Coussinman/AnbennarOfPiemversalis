@@ -1,0 +1,78 @@
+cannorian = {
+	kuradaznai = {
+		color = { 125 50 0 }
+		icon = 144
+		#date = 1.1.1
+		date = 1822.1.1
+		allowed_conversion = {
+		}
+		allowed_center_conversion = {
+			corinite
+			ravelian
+			regent_court
+			cannorian_pantheon
+		}
+		country = {
+			tolerance_own = 2
+			extra_manpower_at_religious_war = yes
+		}
+		country_as_secondary = {
+			tolerance_own = 1
+			extra_manpower_at_religious_war = yes
+		}
+
+		on_convert = {
+			change_religion = kuradaznai
+			if = {
+				limit = {
+					NOT = { has_country_flag = emperor_religion_change }
+					NOT = { has_country_flag = updating_isolationism_window }
+				}
+				add_prestige = -100
+
+				add_country_modifier = {
+					name = "conversion_zeal"
+					duration = 3650
+				}
+				if = {
+					limit = {
+						NOT = {
+							tag = B94
+						}
+					}
+					B94 = {
+						change_variable = {
+							which = B94_xamarzu_favour_variable
+							value = -1
+						}
+					}
+				}
+			}
+		}
+		will_get_center = { #Refered to even for initial CoR Spawn
+			any_owned_province = {
+				can_have_center_of_reformation_trigger = {
+					RELIGION = kuradaznai
+				}
+			}
+		}
+		allow_female_defenders_of_the_faith = yes
+		uses_church_power = yes				# Uses church power/aspect mechanics
+		aspects = {
+			kuradaznai_aspect_morgurax
+			kuradaznai_aspect_morakzom
+			kuradaznai_aspect_morvezta
+			kuradaznai_aspect_morlazar
+			kuradaznai_aspect_xamarzu
+			kuradaznai_aspect_canrec
+			kuradaznai_aspect_rewan
+			kuradaznai_aspect_dak
+			kuradaznai_aspect_malazmur
+			kuradaznai_aspect_kaino
+			kuradaznai_aspect_vaysora
+		}
+		aspects_name = KURADAZNAI_CHURCH_ASPECTS
+
+		heretic = { ACE_LIFERS }
+	}
+}

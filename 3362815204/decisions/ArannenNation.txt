@@ -7,7 +7,9 @@ country_decisions = {
 			primary_culture = arannese
 			OR = {
 				ai = no
-				NOT = { exists = A72 }
+				NOT = {
+					exists = A72
+				}
 			}
 			
 			NOT = { has_country_flag = formed_arannen_flag }
@@ -15,10 +17,15 @@ country_decisions = {
 				ai = no
 				is_playing_custom_nation = no
 			}
-			NOT = { tag = Z01 }	#Anbennar
-			NOT = { tag = A72 }	#Arannen
-			NOT = { tag = A75 } #Gisden
-			NOT = { tag = B94 } #Milcorissia
+			NOT = {
+				has_country_flag = formed_arannen_flag
+				has_country_flag = puck_brinkmarches_flag
+				has_country_flag = formed_vivin_empire
+				tag = Z01 #Anbennar
+				tag = A72 #Arannen
+				tag = A75 #Gisden
+				tag = B94 #Milcorissia
+			}
 			is_colonial_nation = no
 			OR = {
 				is_former_colonial_nation = no
@@ -31,36 +38,37 @@ country_decisions = {
 			was_never_end_game_tag_trigger = yes
 		}
 		provinces_to_highlight = {
-			OR = {
-				province_id = 904 # Arannen
-				province_id = 313 # Endersby
-				province_id = 418 # Marllin
-				province_id = 325 # Cronesford
-				province_id = 419 # Varlosen
-			}
-			OR = {
-				NOT = { owned_by = ROOT }
-				NOT = { is_core = ROOT }
+			area = arannen_area
+			NOT = {
+				owned_by = ROOT
+				is_core = ROOT
 			}
 		}
 		allow = {
-			owns_core_province = 904 # Arannen
-			owns_core_province = 313 # Endersby
-			owns_core_province = 418 # Marllin
-			owns_core_province = 325 # Cronesford
-			owns_core_province = 419 # Varlosen
+			arannen_area = {
+				type = all
+				owned_by = ROOT
+				is_core = ROOT
+			}
 			is_at_war = no
 			is_free_or_tributary_trigger = yes			
-			NOT = { exists = A72 }
-			
+			NOT = {
+				exists = A72
+			}
 		}
 		effect = {
-			904 = { # Arannen
+			set_country_flag = formed_arannen_flag
+			904 = {
 				move_capital_effect = yes
 			}
 			change_tag = A72
-			hidden_effect = { restore_country_name = yes }
+			hidden_effect = {
+				restore_country_name = yes
+			}
 			swap_non_generic_missions = yes
+			gisden_area = {
+				add_permanent_claim = A72
+			}
 			eastborders_area = {
 				limit = {
 					NOT = { owned_by = ROOT }
@@ -70,9 +78,19 @@ country_decisions = {
 			hidden_effect = {
 				if = {
 					limit = {
-						421 = { is_city = yes }
+						421 = {
+							is_city = yes
+						}
 					}
-					complete_mission = A72_colonize_the_wisphollow
+					complete_mission = A72_wisphollow
+				}
+				if = {
+					limit = {
+						Z06 = {
+							is_subject = no
+						}
+					}
+					complete_mission = A72_wispking
 				}
 			}
 			add_country_modifier = {
@@ -84,7 +102,9 @@ country_decisions = {
 				limit = {
 					has_custom_ideas = no
 				}
-				country_event = { id = ideagroups.1 } #Swap Ideas
+				country_event = {
+					id = ideagroups.1
+				}
 			}
 			set_country_flag = formed_arannen_flag
 		}

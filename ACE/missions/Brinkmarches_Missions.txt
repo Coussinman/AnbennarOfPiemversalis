@@ -1,0 +1,1675 @@
+Z06_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = Z06
+			was_tag = Z06
+		}
+	}
+	z06_elite_defenders = {
+		icon = protect_against_the_turks
+		position = 5
+		required_missions = {
+			z06_born_fight
+		}
+		provinces_to_highlight = {
+			is_capital_of = ROOT
+			NOT = {
+				base_manpower = 10
+			}
+		}
+		trigger = {
+			capital_scope = {
+				base_manpower = 10
+			}
+			army_tradition = 40
+			has_global_modifier_value = {
+				which = discipline
+				value = 0.1
+			}
+			army_professionalism = 0.25
+		}
+		effect = {
+			add_country_modifier = {
+				name = elite_defenders
+				duration = -1
+			}
+			define_advisor = {
+				type = commandant
+				skill = 2
+				discount = yes
+			}
+			custom_tooltip = elite_defenders_tt
+			set_country_flag = Z06_elite_defenders
+			complex_dynamic_effect = {
+				first_custom_tooltip = elite_defenders_tt2
+				first_limit = "defensive_ideas = 3
+				"
+				first_effect = "add_country_modifier = {
+						name = defend_then_attack
+						duration = -1
+					}
+				"
+			}
+		}
+	}
+}
+
+Z06_1_2 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = Z06
+			was_tag = Z06
+		}
+		has_country_flag = puck_brinkmarches_flag
+	}
+	z06_secure_north = {
+		icon = mission_mountain_castle
+		position = 9
+		required_missions = {
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = corvurian_plains_area
+				area = central_corvuria_area
+			}
+			NOT = {
+				owned_by = root
+			}
+		}
+		trigger = {
+			corvurian_plains_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = root
+			}
+			central_corvuria_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = root
+			}
+		}
+		effect = {
+			433 = {
+				add_center_of_trade_level = 1
+			}
+			add_country_modifier = {
+				name = secured_trade_routes
+				duration = 7300
+			}
+		}
+	}
+	z06_breadbasket = {
+		icon = mission_green_village
+		position = 10
+		required_missions = {
+			z06_secure_north
+			z06_survival
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = gisden_area
+				area = ashfields_area
+			}
+			NOT = {
+				owned_by = root
+			}
+		}
+		trigger = {
+			gisden_area = {
+				type = all
+				owned_by = root
+			}
+			ashfields_area = {
+				type = all
+				owned_by = root
+			}
+		}
+		effect = {
+			for = {
+				custom_tooltip = breadbasket_tt
+				amount = 5
+				effect = "random_owned_province = {
+						limit = {
+							trade_goods = grain
+						}
+						add_base_manpower = 1
+					}
+				"
+			}
+			custom_tooltip = breadbasket_tt2
+			hidden_effect = {
+				311 = {
+					remove_province_modifier = ace_cannor_ashfields_fertile
+				}
+				324 = {
+					add_permanent_province_modifier = {
+						name = ace_cannor_ashfields_fertile
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+	z06_servants = {
+		icon = mission_three_death
+		position = 12
+		required_missions = {
+			z06_realm
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			NOT = {
+				num_of_rebel_armies = 1
+			}
+			NOT = {
+				average_autonomy = 25
+			}
+			num_of_owned_provinces_with = {
+				value = 3
+				culture_is_human = yes
+				has_building = mage_tower
+			}
+		}
+		effect = {
+			country_event = {
+				id = flavor_brinkmarches.19
+			}
+		}
+	}
+	z06_loyalty = {
+		icon = mission_hanged_tree
+		position = 13
+		required_missions = {
+			z06_servants
+		}
+		provinces_to_highlight = {
+			AND = {
+				owned_by = root
+				culture = puckari
+			}
+			NOT = {
+				development = 10
+			}
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 15
+				culture = puckari
+				development = 10
+			}
+			NOT = {
+				average_unrest = 1
+			}
+			stability = 1
+		}
+		effect = {
+			enable_tributary_state_use = yes
+			set_country_flag = puck_mage_tower
+			set_country_flag = Z06_loyalty_flag
+			set_country_flag = can_create_tributaries_flag
+			set_country_flag = can_use_tributary_cb_flag
+			custom_tooltip = loyalty_tt
+		}
+	}
+}
+
+Z06_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = Z06
+			was_tag = Z06
+		}
+	}
+	z06_shield = {
+		icon = fortress_of_belgrade
+		position = 2
+		required_missions = {
+			z06_reclamation
+		}
+		provinces_to_highlight = {
+			OR = {
+				is_capital_of = emperor
+				is_capital_of = A72
+			}
+		}
+		trigger = {
+			mil_power = 100
+			treasury = 50
+			emperor = {
+				has_50_opinion_improved_relation = {
+					target = root
+				}
+			}
+			overlord = {
+				has_50_opinion_improved_relation = {
+					target = root
+				}
+			}
+		}
+		effect = {
+			add_mil_power = -100
+			add_treasury = -50
+			add_prestige = 10
+			323 = {
+				add_building_construction = {
+					building = ramparts
+					cost = 0
+					speed = 1
+				}
+			}
+		}
+	}
+	z06_born_fight = {
+		icon = mission_cannons_firing
+		position = 4
+		required_missions = {
+			z06_shield
+		}
+		provinces_to_highlight = {
+			
+		}
+		trigger = {
+			employed_advisor = {
+				category = MIL
+			}
+			num_of_generals = 3
+		}
+		effect = {
+			eastborders_area = {
+				add_base_manpower = 1
+			}
+			add_country_modifier = {
+				name = born_to_fight
+				duration = -1
+			}
+		}
+	}
+	z06_swamp_citadels = {
+		icon = mch_bypass_great_wall
+		position = 6
+		required_missions = {
+			z06_born_fight
+			z06_imperial_swamp
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 442
+				province_id = 3716
+			}
+			NOT = {
+				owned_by = root
+			}
+		}
+		trigger = {
+			treasury = 250
+			3716 = {
+				owned_by = ROOT
+			}
+			442 = {
+				owned_by = ROOT
+			}
+		}
+		effect = {
+			add_treasury = -250
+			3716 = {
+				add_province_modifier = {
+					name = swamp_citadel
+					duration = -1
+				}
+				add_building_construction = {
+					building = fort_15th
+					cost = 0
+					speed = 2
+				}
+			}
+			442 = {
+				add_province_modifier = {
+					name = swamp_citadel
+					duration = -1
+				}
+				add_building_construction = {
+					building = fort_15th
+					cost = 0
+					speed = 2
+				}
+			}
+		}
+	}
+}
+
+Z06_2_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = Z06
+			was_tag = Z06
+		}
+		has_country_flag = puck_brinkmarches_flag
+	}
+	z06_survival = {
+		icon = mission_whisper
+		position = 9
+		required_missions = {
+			z06_turn_tables
+		}
+		provinces_to_highlight = {
+			owner = {
+				is_elector = yes
+			}
+			is_capital = yes
+		}
+		trigger = {
+			calc_true_if = {
+				amount = 3
+				all_elector = {
+					has_spy_network_from = {
+						who = ROOT
+						value = 30
+					}
+				}
+			}
+			A72 = {
+				OR = {
+					exists = no
+					is_subject_of = ROOT
+				}
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = reclamation_wars
+				duration = 7300
+			}
+			the_borders_region = {
+				add_permanent_claim = root
+			}
+		}
+	}
+	z06_realm = {
+		icon = mission_empowerment
+		position = 11
+		required_missions = {
+			z06_survival
+		}
+		provinces_to_highlight = {
+			region = the_borders_region
+			NOT = {
+				owned_by = root
+			}
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 15
+				region = the_borders_region
+			}
+			total_development = 300
+			legitimacy = 100
+			has_spy_network_in = {
+				who = emperor
+				value = 70
+			}
+		}
+		effect = {
+			country_event = {
+				id = flavor_brinkmarches.17
+			}
+			custom_tooltip = " "
+			332 = {
+				owner = {
+					ROOT = {
+						add_casus_belli = {
+							type = cb_insult
+							target = PREV
+							months = -1
+						}
+					}
+				}
+			}
+		}
+	}
+	z06_coast = {
+		icon = mission_market
+		position = 12
+		required_missions = {
+			z06_realm
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = highcliff_area
+				area = antir_drop_area
+			}
+			NOT = {
+				owned_by = root
+			}
+		}
+		trigger = {
+			highcliff_area = {
+				type = all
+				owned_by = root
+			}
+			antir_drop_area = {
+				type = all
+				owned_by = root
+			}
+			413 = {
+				development = 20
+				has_trade_building_trigger = yes
+				has_production_building_trigger = yes
+			}
+		}
+		effect = {
+			413 = {
+				change_province_name = "Pucktarra"
+				change_trade_goods = incense
+				add_province_modifier = {
+					name = major_port
+					duration = -1
+				}
+				add_unit_construction = {
+					amount = 5
+					type = light_ship
+					cost = 0
+					speed = 0.5
+				}
+			}
+			1303 = {
+				change_province_name = "Puck's Coast"
+			}
+		}
+	}
+	z06_revenge = {
+		icon = mission_destroyed_city
+		position = 13
+		required_missions = {
+			z06_coast
+		}
+		provinces_to_highlight = {
+			province_id = 332
+		}
+		trigger = {
+			332 = {
+				controlled_by = root
+			}
+			332 = {
+				owner = {
+					root = {
+						war_score_against = {
+							who = PREV
+							value = 80
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			country_event = {
+				id = flavor_brinkmarches.18
+			}
+			complex_dynamic_effect = {
+				first_custom_tooltip = revenge_tt
+				first_limit = "religion = veil_puck
+				"
+				first_effect = "332 = {
+						change_religion = veil_puck
+						set_province_flag = veil_puck_center
+						custom_tooltip = veil_puck_tt
+						hidden_effect = {
+							add_reform_center = veil_puck
+						}
+
+						add_province_modifier = {
+							name = religious_zeal_at_conv
+							duration = 7300
+						}
+					}
+				"
+			}
+		}
+	}
+}
+
+Z06_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = Z06
+			was_tag = Z06
+		}
+	}
+	z06_reclamation = {
+		icon = mission_have_two_subjects
+		position = 1
+		provinces_to_highlight = {
+		}
+		trigger = {
+			treasury = 50
+			overlord = {
+				has_opinion = {
+					who = ROOT
+					value = 180
+				}
+			}
+			421 = {
+				owned_by = A72
+			}
+		}
+		effect = {
+			country_event = {
+				id = flavor_brinkmarches.2
+			}
+		}
+	}
+	z06_protect = {
+		icon = mission_hundred_years_war
+		position = 3
+		required_missions = {
+			z06_reclamation
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			army_size_percentage = 1
+			any_neighbor_country = {
+				NOT = {
+					is_part_of_hre = yes
+				}
+				any_owned_province = {
+					region = daravans_folly_region
+				}
+			}
+			OR = {
+				A72 = {
+					has_100_opinion_improved_relation = {
+						target = ROOT
+					}
+				}
+				custom_trigger_tooltip = {
+					tooltip = protect_tt
+					has_country_flag = won_vs_arannen
+				}
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = mobilization
+				duration = 7300
+			}
+			daravans_folly_region = {
+				add_permanent_claim = root
+			}
+			custom_tooltip = protect_tt2
+			set_country_flag = Z06_protect_flag
+			complex_dynamic_effect = {
+				first_custom_tooltip = protect_tt3
+				first_limit = "A72 = {
+						alliance_with = A59
+					}
+				"
+				first_effect = "country_event = {
+						id = flavor_brinkmarches.16
+					}
+				"
+			}
+		}
+	}
+	z06_imperial_swamp = {
+		icon = mission_portuguese_malabar
+		position = 5
+		required_missions = {
+			z06_protect
+			z06_doing_part
+		}
+		provinces_to_highlight = {
+			region = daravans_folly_region
+			NOT = {
+				owned_by = root
+			}
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				region = daravans_folly_region
+			}
+			
+		}
+		effect = {
+			add_army_tradition = 10
+			add_mil_power = 50
+			add_country_modifier = {
+				name = focused_reclamation
+				duration = 7300
+			}
+
+			complex_dynamic_effect = {
+				first_custom_tooltip = imperial_swamp_tt
+				first_limit = "
+					A59 = {
+						NOT = {
+							any_owned_province = {
+								region = daravans_folly_region
+							}
+						}
+					}
+				"
+				first_effect = "
+					add_country_modifier = {
+						name = uncontested_reclamation
+						duration = 7300
+					}
+				"
+			}
+		}
+	}
+	z06_wispcircle = {
+		icon = mission_a_great_mandala
+		position = 7
+		required_missions = {
+			z06_swamp_citadels
+			z06_settle_folly
+		}
+		provinces_to_highlight = {
+			province_id = 421 
+			NOT = {
+				has_tax_building_trigger = yes
+			}
+		}
+		trigger = {
+			has_regency = no
+			treasury = 200
+			estate_loyalty = {
+				estate = estate_burghers
+				loyalty = 50
+			}
+			estate_loyalty = {
+				estate = estate_church
+				loyalty = 50
+			}
+			estate_loyalty = {
+				estate = estate_nobles
+				loyalty = 50
+			}
+			421 = {
+				has_tax_building_trigger = yes
+
+			}
+		}
+		effect = {
+			custom_tooltip = AB2_sunset_league.tt1
+			country_event = {
+				id = flavor_brinkmarches.14
+			}
+			add_treasury = -250
+			421 = {
+				add_building_construction = {
+					building = mage_tower
+					cost = 0.5
+					speed = 0
+				}
+			}
+		}
+	}
+	
+}
+
+Z06_3_1 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = Z06
+			was_tag = Z06
+		}
+		has_country_flag = puck_brinkmarches_flag
+	}
+	z06_turn_tables = {
+		icon = mission_swear_fealty_knight
+		position = 8
+		required_missions = {
+			z06_wispcircle
+		}
+		provinces_to_highlight = {
+			is_capital_of = A72
+		}
+		trigger = {
+			OR = {
+				AND = {
+					has_spy_network_in = {
+						who = A72
+						value = 50
+					}
+					army_size = A72
+				}
+				is_subject = no
+				A72 = {
+					exists = no
+				}
+			}
+		}
+		effect = {
+			add_army_tradition = 10
+			A72 = {
+				free_vassal = ROOT
+			}
+			declare_war_with_cb = {
+				casus_belli = cb_vassalize_mission
+				who = A72
+			}
+			dostanor_region = {
+				add_permanent_claim = root
+			}
+		}
+	}
+	z06_capital = {
+		icon = mission_big_house
+		position = 9
+		required_missions = {
+			z06_turn_tables
+		}
+		provinces_to_highlight = {
+			province_id = 421
+			NOT = {
+				AND = {
+					development = 25
+					has_trade_building_trigger = yes
+					has_tax_building_trigger = yes
+					has_production_building_trigger = yes
+				}
+			}
+		}
+		trigger = {
+			is_at_war = no
+			421 = {
+				development = 25
+				has_trade_building_trigger = yes
+				has_tax_building_trigger = yes
+				has_production_building_trigger = yes
+			}
+		}
+		effect = {
+			set_capital = 421
+			set_country_flag = z06_wispcircle_flag
+			421 = {
+				remove_province_modifier = wispsworn_settlement
+				add_province_modifier = {
+					name = pucks_capital
+					duration = -1
+				}
+				change_trade_goods = incense
+				center_of_trade = 1
+				add_great_project = {
+					type = the_wispcircle
+				}
+			}
+		}
+	}
+	z06_cult = {
+		icon = mission_women_prayer
+		position = 12
+		required_missions = {
+			z06_capital
+			z06_realm
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			legitimacy = 100
+			monthly_adm = 10
+			estate_loyalty = {
+				estate = estate_church
+				loyalty = 60
+			}
+			num_of_estate_agendas_completed = {
+				estate = estate_church
+				value = 3
+			}
+			capital_scope = {
+				is_prosperous = yes
+			}
+		}
+		effect = {
+			country_event_with_effect_insight = {
+				id = flavor_brinkmarches.20
+				effect = "
+					change_religion = veil_puck
+					capital_scope = {
+						change_religion = veil_puck
+					}
+					custom_tooltip = brinkmarches.20.tt
+				"
+			} 
+		}
+	}
+	z06_beyond = {
+		icon = mission_transmutation
+		position = 14
+		required_missions = {
+			z06_loyalty
+			z06_open_portal
+			z06_cult
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			6258 = {
+				has_ruler_leader_from = ROOT
+			}
+			fervor = 100
+			stability = 3
+		}
+		effect = {
+			country_event = {
+				id = flavor_brinkmarches.21
+			}
+		}
+	}
+}
+
+Z06_3_2 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = Z06
+			was_tag = Z06
+		}
+		has_country_flag = puck_back
+	}
+	z06_king = {
+		icon = mission_thinking_king
+		position = 15
+		required_missions = {
+			z06_beyond
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			has_ruler = "Puck"
+			stability = 3
+		}
+		effect = {
+			country_event = {
+				id = witch_king.0
+			}
+			custom_tooltip = A92_a_duchy_reborn_tooltip2
+			hidden_effect = {
+				every_elector = {
+					capital_scope = {
+						add_permanent_claim = ROOT
+					}
+				}
+				emperor = {
+					capital_scope = {
+						add_permanent_claim = ROOT
+					}
+				}
+			}
+			eordand_superregion = {
+				add_permanent_claim = root
+			}
+
+			custom_tooltip = z06_king_tt
+			set_country_flag = puck_hre_dismantle_flag
+			hidden_effect = {
+				every_country = {
+					limit = {
+						is_part_of_hre = yes
+					}
+					set_country_flag = puck_hre_member_flag
+				}
+			}
+
+			add_country_modifier = {
+				name = return_of_puck
+				duration = -1
+			}
+		}
+	}
+}
+
+Z06_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = Z06
+			was_tag = Z06
+		}
+	}
+	z06_recruit = {
+		icon = per_recruit_the_qizilbash
+		position = 3
+		required_missions = {
+			z06_wisphollow
+		}
+		provinces_to_highlight = {
+			province_id = 421 
+			NOT = {
+				development = 10
+			}
+		}
+		trigger = {
+			421 = {
+				development = 10
+			}
+			manpower = 5
+		}
+		effect = {
+			add_manpower = -5
+			unlock_merc_company = {
+				merc_company = merc_wispsworn
+			}
+			medium_increase_of_gnollish_tolerance_effect = yes
+			capital_scope = {
+				add_gnollish_minority_size_effect = yes
+			}
+			define_general = {
+				name = "Pouk Wisp-Claw"
+				shock = 4
+				fire = 1
+				manuever = 2
+				siege = 1
+			}
+		}
+	}
+	z06_doing_part = {
+		icon = revenge_for_nicopolis
+		position = 4
+		required_missions = {
+			z06_recruit
+			z06_protect
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			any_hired_mercenary_company = {
+				template = merc_wispsworn
+			}
+			check_variable = {
+				which = Z06warswon
+				value = 5
+			}
+		}
+		effect = {
+			add_army_professionalism = 0.05
+			421 = {
+				add_province_modifier = {
+					name = wispsworn_settlement
+					duration = -1
+				}
+			}
+			unlock_merc_company = {
+				merc_company = merc_wispsworn2
+			}
+			random_hired_mercenary_company = {
+				limit = {
+					template = merc_wispsworn1
+				}
+				disband_mercenary_company = THIS
+			}
+			random_owned_area = {
+				limit = {
+					area = eastborders_area
+				}
+				add_gnollish_minority_size_effect = yes
+			}
+		}
+	}
+	z06_settle_folly = {
+		icon = mission_settlers_north_america
+		position = 6
+		required_missions = {
+			z06_imperial_swamp
+			z06_doing_part
+		}
+		provinces_to_highlight = {
+			region = daravans_folly_region
+			NOT = {
+				AND = {
+					has_trade_building_trigger = yes
+					has_tax_building_trigger = yes
+				}
+			}
+			owned_by = root
+		}
+		trigger = {
+			OR = {
+				medium_tolerance_gnollish_race_trigger = yes
+				high_tolerance_gnollish_race_trigger = yes
+			}
+			daravans_folly_region = {
+				type = all
+				owned_by = root
+			}
+			num_of_owned_provinces_with = {
+				value = 5
+				region = daravans_folly_region
+				has_tax_building_trigger = yes
+				has_trade_building_trigger = yes
+			}
+			451 = {
+				development = 30
+				owned_by = root
+				province_has_center_of_trade_of_level = 2
+			}
+		}
+		effect = {
+			large_increase_of_gnollish_tolerance_effect = yes
+			custom_tooltip = settle_folly_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						region = daravans_folly_region
+						NOT = {
+							province_id = 451
+						}
+					}
+					add_province_modifier = {
+						name = gnollish_settlements
+						duration = 7300
+					}
+				}
+			}
+			tooltip = {
+				add_province_modifier = {
+					name = gnollish_settlements
+					duration = 7300
+				}
+			}
+			451 = {
+				change_province_name = "Tizpaxet"
+				change_culture = flamemarked_gnoll
+				add_or_upgrade_trade_building = yes
+				add_gnollish_minority_size_effect = yes
+			}
+		}
+	}
+	
+}
+
+Z06_4_2 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = Z06
+			was_tag = Z06
+		}
+		has_country_flag = puck_brinkmarches_flag
+	}
+	z06_wispsworn = {
+		icon = mission_alone_in_the_wood
+		position = 10
+		required_missions = {
+			z06_capital
+		}
+		provinces_to_highlight = {
+			culture = wispsworn_gnoll
+			NOT = {
+				AND = {
+					has_manpower_building_trigger = yes
+					development = 10
+					is_prosperous = yes
+				}
+			}
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				has_manpower_building_trigger = yes
+				development = 10
+				culture = wispsworn_gnoll
+			}
+			num_of_owned_provinces_with = {
+				value = 2
+				culture = wispsworn_gnoll
+				is_prosperous = yes
+			}
+		}
+		effect = {
+			country_event_with_option_insight = {
+				id = flavor_brinkmarches.24
+				option_1 = "
+					add_country_modifier = {
+						name = gnollish_military
+						duration = -1
+					}
+				"
+				option_2 = "
+					add_country_modifier = {
+						name = gnollish_auxiliaries
+						duration = -1
+					}
+				"
+				option_3 = "
+					add_country_modifier = {
+						name = gnollish_workers
+						duration = -1
+					}
+				"
+			} 
+		}
+	}
+	z06_north_woods = {
+		icon = mission_secret_of_the_veil
+		position = 12
+		required_missions = {
+			z06_investigate
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = fealmyraeth_area
+				area = coryllann_area
+				area = scothaear_area
+				area = scothalar_area
+			}
+			NOT = {
+				owned_by = root
+			}
+		}
+		trigger = {
+			fealmyraeth_area = {
+				type = all
+				owned_by = root
+			}
+			coryllann_area = {
+				type = all
+				owned_by = root
+			}
+			scothaear_area = {
+				type = all
+				owned_by = root
+			}
+			scothalar_area = {
+				type = all
+				owned_by = root
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = strong_wood
+				duration = 7300
+			}
+
+			3030 = {
+				change_trade_goods = tropical_wood
+			}
+			323 = {
+				change_trade_goods = dyes
+			}
+		}
+	}
+	z06_open_portal = {
+		icon = mission_well_of_majesty
+		position = 13
+		required_missions = {
+			z06_north_woods
+			z06_east_woods
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 7007
+				province_id = 3024
+				province_id = 7014
+			}
+		}
+		trigger = {
+			dip_power = 200
+			7007 = {
+				has_building = mage_tower
+			}
+			3024 = {
+				has_building = mage_tower
+			}
+			7014 = {
+				has_building = mage_tower
+			}
+		}
+		effect = {
+			add_dip_power = -200
+			country_event_with_option_insight = {
+				id = flavor_brinkmarches.25
+				option_1 = "
+					custom_tooltip = brinkmarches.25.tt
+				"
+			}
+		}
+	}
+}
+
+Z06_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = Z06
+			was_tag = Z06
+		}
+	}
+	z06_wisphollow = {
+		icon = mission_mnd_maj_end_disaster
+		position = 2
+		required_missions = {
+			z06_reclamation
+		}
+		provinces_to_highlight = {
+			province_id = 421
+		}
+		trigger = {
+			421 = {
+				num_of_units_in_province = {
+					amount = 5
+					who = ROOT
+					type = infantry
+				}
+			}
+		}
+		effect = {
+			country_event = {
+				id = flavor_brinkmarches.7
+			}
+		}
+	}
+	z06_sucession = {
+		icon = mission_crown_of_wenceslas
+		position = 2
+		provinces_to_highlight = {
+		}
+		trigger = {
+			OR = {
+				AND = {
+					has_ruler = "Walter V"
+					has_heir = no
+					estate_loyalty = {
+						estate = estate_burghers
+						loyalty = 55
+					}
+					estate_loyalty = {
+						estate = estate_church
+						loyalty = 55
+					}
+					estate_loyalty = {
+						estate = estate_nobles
+						loyalty = 55
+					}
+				}
+				has_heir = yes
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					has_heir = no
+				}
+				country_event = {
+					id = flavor_brinkmarches.1
+				}
+			}
+			else = {
+				add_stability = 1
+			}
+		}
+	}
+	z06_restored_house = {
+		icon = mission_restore_kiev
+		position = 3
+		required_missions = {
+			z06_sucession
+			z06_recruit
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			heir_age = 12
+		}
+		effect = {
+			country_event = {
+				id = flavor_brinkmarches.8
+			}
+		}
+	}
+	
+}
+
+Z06_5_2 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = Z06
+			was_tag = Z06
+		}
+		has_country_flag = puck_brinkmarches_flag
+	}
+	z06_south_passage = {
+		icon = mission_alone_in_the_forest
+		position = 9
+		required_missions = {
+			z06_turn_tables
+		}
+		provinces_to_highlight = {
+			province_id = 509
+		}
+		trigger = {
+			509 = {
+				owned_by = root
+			}
+		}
+		effect = {
+			west_deepwoods_region = {
+				add_permanent_claim = root
+			}
+
+			custom_tooltip = south_passage_tt3
+			hidden_effect = {
+				every_known_country = {
+					limit = {
+						capital_scope = {
+							OR = {
+								region = west_deepwoods_region
+								region = east_deepwoods_region
+							}
+						}
+						NOT = {
+							total_development = 150
+						}
+					}
+					ROOT = {
+						add_casus_belli = {
+							type = cb_vassalize_mission
+							target = PREV
+						}
+					}
+				}
+			}
+
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = south_passage_tt
+				first_limit = "
+					1782 = {
+						is_city = no
+					}
+				"
+				first_effect = "
+					7029 = {
+						create_colony = 1000
+					}
+				"
+				second_custom_tooltip = south_passage_tt2
+				second_limit = "
+					510 = {
+						owned_by = root
+					}
+				"
+				second_effect = "
+					ourdia_region = {
+						add_permanent_claim = root
+					}
+				"
+				
+			}
+		}
+	}
+	z06_return = {
+		icon = mission_forest_pilgrim
+		position = 10
+		required_missions = {
+			z06_south_passage
+		}
+		provinces_to_highlight = {
+			region = west_deepwoods_region
+			not = {
+				owned_by = root
+			}
+		}
+		trigger = {
+			west_deepwoods_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = root
+			}
+		}
+		effect = {
+			custom_tooltip = return_tt
+			set_country_flag = Z06_puck_ciranmyna_flag
+			3020 = {
+				add_great_project_tier = {
+					type = ciranmyna_the_shimmering_city
+					tier = 1
+				}
+			}
+			custom_tooltip = " "
+			west_deepwoods_region = {
+				add_province_modifier = {
+					name = return_home
+					duration = 7300
+				}
+			}
+
+			east_deepwoods_region = {
+				add_permanent_claim = root
+			}
+		}
+	}
+	z06_investigate = {
+		icon = mission_verdant_secret
+		position = 11
+		required_missions = {
+			z06_return
+		}
+		provinces_to_highlight = {
+			owned_by = root
+			OR = {
+				area = faedayr_area
+				AND = {
+					region = west_deepwoods_region
+					NOT = {
+						num_of_times_improved_by_owner = 3
+					}
+				}
+			}
+		}
+		trigger = {
+			faedayr_area = {
+				type = all
+				num_of_units_in_province = {
+					amount = 5
+				}
+			}
+			num_of_owned_provinces_with = {
+				value = 10
+				region = west_deepwoods_region
+				num_of_times_improved_by_owner = 3
+			}
+		}
+		effect = {
+			country_event_with_effect_insight = {
+				id = flavor_brinkmarches.26
+				effect = "
+					east_deepwoods_region = {
+						add_permanent_claim = root
+					}
+				"
+			}
+		}
+	}
+	z06_east_woods = {
+		icon = mission_jungle_pilgrim
+		position = 12
+		required_missions = {
+			z06_investigate
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = gozyest_area
+				area = ayeth_area
+				area = lonfarch_area
+				area = krazho_area
+				area = criodharka_area
+				area = yfelorr_area
+				area = dywyael_area
+				area = arsydpydru_area
+				area = ghul_area
+			}
+			NOT = {
+				owned_by = root
+			}
+		}
+		trigger = {
+			gozyest_area = {
+				type = all
+				owned_by = root
+			}
+			ayeth_area = {
+				type = all
+				owned_by = root
+			}
+			lonfarch_area = {
+				type = all
+				owned_by = root
+			}
+			krazho_area = {
+				type = all
+				owned_by = root
+			}
+			criodharka_area = {
+				type = all
+				owned_by = root
+			}
+			yfelorr_area = {
+				type = all
+				owned_by = root
+			}
+			dywyael_area = {
+				type = all
+				owned_by = root
+			}
+			arsydpydru_area = {
+				type = all
+				owned_by = root
+			}
+			ghul_area = {
+				type = all
+				owned_by = root
+			}
+		}
+		effect = {
+			custom_tooltip = east_woods_tt
+			set_country_flag = Z06_puck_yfelorr_flag
+			3042 = {
+				add_great_project_tier = {
+					type = mines_of_yfelorr
+					tier = 1
+				}
+			}
+
+			add_country_modifier = {
+				name = riches_of_the_woods
+				duration = -1
+			}
+		}
+	}
+	z06_fate = {
+		icon = mission_fire_judgement
+		position = 13
+		required_missions = {
+			z06_east_woods
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 3020
+				province_id = 7016
+				province_id = 3042
+			}
+			NOT = {
+				has_building = mage_tower
+			}
+		}
+		trigger = {
+			3020 = {
+				development = 15
+			}
+			7016 = {
+				development = 15
+			}
+			3042 = {
+				development = 15
+			}
+			west_deepwoods_region = {
+				type = all
+				NOT = {
+					average_autonomy = 25
+				}
+			}
+			east_deepwoods_region = {
+				type = all
+				NOT = {
+					average_autonomy = 25
+				}
+			}
+		}
+		effect = {
+			3020 = {
+				center_of_trade = 1
+			}
+			7016 = {
+				center_of_trade = 1
+			}
+			3042 = {
+				center_of_trade = 1
+			}
+			custom_tooltip = " "
+			country_event_with_option_insight = {
+				id = flavor_brinkmarches.27
+				option_1 = "
+					custom_tooltip = brinkmarches.27.tt
+					large_decrease_of_orcish_tolerance_effect = yes
+					anb_add_accepted_culture_or_dip_power = {
+						culture = wood_elf
+						free = yes
+					}
+					custom_tooltip = brinkmarches.27.tt2
+					anb_add_accepted_culture_or_dip_power = {
+						culture = pactseeker_goblin
+						free = yes
+					}
+				"
+				option_2 = "
+					custom_tooltip = brinkmarches.27.tt3
+					large_decrease_of_elven_tolerance_effect = yes
+					large_decrease_of_goblin_tolerance_effect = yes
+					large_decrease_of_orcish_tolerance_effect = yes
+					custom_tooltip = brinkmarches.27.tt4
+				"
+			}
+			
+		}
+	}
+}

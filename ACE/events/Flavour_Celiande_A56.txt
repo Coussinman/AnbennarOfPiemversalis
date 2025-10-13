@@ -1,0 +1,736 @@
+namespace = flavor_celliande
+country_event = {
+	id = flavor_celliande.1
+	title = flavor_celliande.1.t
+	desc = flavor_celliande.1.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = flavor_celliande.1.a
+		add_country_modifier = {
+			name = serondor_order
+			duration = -1
+		}
+	}
+	option = {
+		name = flavor_celliande.1.b
+		451 = {
+			add_core = AB4
+		}
+		if = {
+			limit = {
+				A74 = {
+					is_subject_of = ROOT
+				}
+			}
+			A74 = {
+				change_tag = AB4
+			}
+		}
+		else = {
+			release_with_religion_and_culture = {
+				tag = AB4
+				religion = ROOT
+				culture = ROOT
+			}
+		}
+		create_subject = {
+			subject_type = autonomous_vassal
+			subject = AB4
+		}
+		hidden_effect = {
+			AB4 = {
+				change_government = theocracy
+				add_government_reform = monastic_order_reform
+				hidden_effect = {
+					add_treasury = 50
+					add_manpower = 10
+					add_sailors = 1000
+					add_next_institution_embracement = 100
+					capital_scope = {
+						spawn_units_for = {
+							type = infantry
+							who = AB4
+							amount = 4
+						}
+						spawn_units_for = {
+							type = galley
+							who = AB4
+							amount = 4
+						}
+					}
+					change_estate_land_share = {
+						estate = estate_church
+						share = 20
+					}
+					change_estate_land_share = {
+						estate = estate_burghers
+						share = 20
+					}
+					change_estate_land_share = {
+						estate = estate_nobles
+						share = 20
+					}
+					change_estate_land_share = {
+						estate = estate_mages
+						share = 5
+					}
+					change_estate_land_share = {
+						estate = estate_adventurers
+						share = 5
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = flavor_celliande.1.c
+		highlight = yes
+		451 = {
+			add_core = AB4
+		}
+		if = {
+			limit = {
+				A74 = {
+					is_subject_of = ROOT
+				}
+			}
+			A74 = {
+				change_tag = AB4
+			}
+		}
+		else = {
+			release_with_religion_and_culture = {
+				tag = AB4
+				religion = ROOT
+				culture = ROOT
+			}
+		}
+		create_subject = {
+			subject_type = autonomous_vassal
+			subject = AB4
+		}
+		hidden_effect = {
+			AB4 = {
+				change_government = theocracy
+				add_government_reform = monastic_order_reform
+				hidden_effect = {
+					add_treasury = 50
+					add_manpower = 10
+					add_sailors = 1000
+					add_next_institution_embracement = 100
+					capital_scope = {
+						spawn_units_for = {
+							type = infantry
+							who = AB4
+							amount = 4
+						}
+						spawn_units_for = {
+							type = galley
+							who = AB4
+							amount = 4
+						}
+					}
+					change_estate_land_share = {
+						estate = estate_church
+						share = 20
+					}
+					change_estate_land_share = {
+						estate = estate_burghers
+						share = 20
+					}
+					change_estate_land_share = {
+						estate = estate_nobles
+						share = 20
+					}
+					change_estate_land_share = {
+						estate = estate_mages
+						share = 5
+					}
+					change_estate_land_share = {
+						estate = estate_adventurers
+						share = 5
+					}
+				}
+			}
+		}
+		switch_tag = AB4
+	}
+}
+
+country_event = {
+	id = flavor_celliande.2
+	title = flavor_celliande.2.t
+	desc = flavor_celliande.2.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = flavor_celliande.2.a
+		custom_tooltip = flavor_celliande.2.a.tt
+		set_country_flag = partition_sugamber_flag
+		add_trust = {
+			who = A34
+			value = 10
+			mutual = yes
+		}
+		add_casus_belli = {
+			type = cb_partition_sugamber
+			target = A48
+		}
+		A48 = {
+			add_country_modifier = {
+				name = fort_sabotage
+				duration = 3650
+			}
+		}
+		add_country_modifier = {
+			name = reconquest_spirit
+			duration = 3650
+		}
+	}
+	option = {
+		name = flavor_celliande.2.b
+		add_trust = {
+			who = A34
+			value = -10
+			mutual = yes
+		}
+		create_general = {
+			tradition = 50
+		}
+		add_prestige = 10
+		A48 = {
+			add_country_modifier = {
+				name = fort_sabotage
+				duration = 3650
+			}
+		}
+		add_country_modifier = {
+			name = reconquest_spirit
+			duration = 3650
+		}
+	}
+}
+
+country_event = {
+	id = flavor_celliande.3
+	title = flavor_celliande.3.t
+	desc = flavor_celliande.3.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = flavor_celliande.3.a
+		A48 = {
+			kill_ruler = yes
+		}
+	}
+}
+
+country_event = {
+	id = flavor_celliande.4
+	title = flavor_celliande.4.t
+	desc = flavor_celliande.4.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = flavor_celliande.4.a
+		922 = {
+			change_trade_goods = slaves
+			add_province_modifier = {
+				name = underground_slavery
+				duration = -1
+			}
+		}
+	}
+	option = {
+		name = flavor_celliande.4.b
+		for = {
+			amount = 3
+			custom_tooltip = flavor_celliande.4.b.tt
+			effect = "random_owned_province = {
+					limit = {
+						OR = {
+							has_terrain = farmlands
+							has_terrain = grasslands
+						}
+					}
+					add_base_production = 1
+				}
+			"
+		}
+		add_country_modifier = {
+			name = freed_slaves
+			duration = 7300
+		}
+	}
+}
+
+country_event = {
+	id = flavor_celliande.5
+	title = flavor_celliande.5.t
+	desc = flavor_celliande.5.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = A56
+	}
+	mean_time_to_happen = {
+		months = 60
+	}
+	option = {
+		name = flavor_celliande.5.a
+		451 = {
+			add_permanent_claim = root
+		}
+		add_sailors = 1000
+		define_admiral = {
+			name = "Serondor síl Sorncell"
+			shock = 2
+			fire = 3
+			manuever = 4
+			siege = 1
+		}
+	}
+}
+
+country_event = {
+	id = flavor_celliande.6
+	title = flavor_celliande.6.t
+	desc = flavor_celliande.6.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = flavor_celliande.6.a
+		custom_tooltip = flavor_celliande.6.a.tt
+		hidden_effect = {
+			set_global_flag = ace_varlosen_uprising
+			416 = {
+				add_core = B85
+			}
+			419 = {
+				add_core = B85
+			}
+			420 = {
+				add_core = B85
+			}
+			hidden_effect = {
+				A72 = {
+					release = B85
+				}
+				B85 = {
+					add_treasury = 500
+					add_manpower = 20
+					define_ruler_to_general = {
+						fire = 3
+						shock = 11
+						manuever = 4
+						siege = 7
+						trait = war_wizard_personality
+					}
+					capital_scope = {
+						spawn_units_for = {
+							type = infantry
+							who = B85
+							amount = 10
+						}
+						add_latest_building = {
+							builder = B85
+							fort = yes
+						}
+					}
+				}
+				arannen_area = {
+					add_permanent_claim = B85
+				}
+				B85 = {
+					declare_war_with_cb = {
+						casus_belli = cb_conquest
+						who = A72
+						war_goal_province = 904
+					}
+				}
+			}
+			if = {
+				limit = {
+					alliance_with = A72
+				}
+				break_alliance = A72
+			}
+			join_all_offensive_wars_of = B85
+			set_country_flag = celliande_varlosen_uprising_flag
+		}
+	}
+}
+
+country_event = {
+	id = flavor_celliande.7
+	title = flavor_celliande.7.t
+	desc = flavor_celliande.7.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = A56
+		has_global_flag = ace_varlosen_uprising
+		B85 = {
+			exists = yes
+		}
+		NOT = {
+			has_country_flag = celliande_varlosen_uprising_flag
+		}
+	}
+
+	option = {
+		name = flavor_celliande.7.a
+		join_all_offensive_wars_of = B85
+	}
+
+}
+
+country_event = {
+	id = flavor_celliande.8
+	title = flavor_celliande.8.t
+	desc = flavor_celliande.8.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_celliande.8.a
+		custom_tooltip = A75_lodge_nameless_tt
+		set_country_flag = lodge_of_the_nameless
+		create_subject = {
+			subject_type = vassal
+			subject = B85
+		}
+		if = {
+			limit = {
+				Z06 = {
+					is_subject_of = B85
+				}
+			}
+			create_subject = {
+				subject_type = vassal
+				subject = Z06
+			}
+		}
+		custom_tooltip = flavor_celliande.8.a.tt
+		hidden_effect = {
+			every_country = {
+				limit = {
+					is_part_of_hre = yes
+					not = {
+						is_subject_of = ROOT
+					}	
+				}
+				add_aggressive_expansion = {
+					who = ROOT
+					value = 30
+					apply_calc = no
+				}
+			}
+		}
+		419 = {
+			cede_province = root
+		}
+		332 = {
+			add_permanent_claim = ROOT
+		}
+		306 = {
+			add_permanent_claim = ROOT
+		}
+	}
+}
+
+country_event = {
+	id = flavor_celliande.9
+	title = flavor_celliande.9.t
+	desc = flavor_celliande.9.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_celliande.9.a
+		every_core_province = {
+			limit = {
+				is_core = A57
+			}
+			add_random_development = -1
+		}
+		take_estate_land_share_massive = { estate = all }
+	}
+	option = {
+		name = flavor_celliande.9.b
+		every_core_province = {
+			limit = {
+				is_core = A57
+			}
+			add_local_autonomy = -25
+		}
+		add_years_of_income = 1
+	}
+}
+
+country_event = {
+	id = flavor_celliande.10
+	title = flavor_celliande.10.t
+	desc = flavor_celliande.10.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_celliande.10.a
+		define_advisor = {
+			type = court_mage
+			skill = 2
+			discount = yes
+		}
+		random_list = {
+			33 = {
+				change_adm = 1
+			}
+			33 = {
+				change_dip = 1
+			}
+			33 = {
+				change_mil = 1
+			}
+		}
+		add_country_modifier = {
+			name = lodge_infiltrators
+			duration = 5475
+		}
+	}
+}
+
+country_event = {
+	id = flavor_celliande.11
+	title = flavor_celliande.11.t
+	desc = flavor_celliande.11.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_celliande.11.a
+		country_event = {
+			id = flavor_celliande.12
+			days = 365
+		}
+	}
+	
+}
+
+country_event = {
+	id = flavor_celliande.12
+	title = flavor_celliande.12.t
+	desc = flavor_celliande.12.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_celliande.12.a
+		332 = {
+			owner = {
+				add_trust = {
+					who = ROOT
+					value = -10
+					mutual = yes
+				}
+			}
+		}
+		country_event = {
+			id = flavor_celliande.13
+			days = 365
+		}
+	}
+}
+
+country_event = {
+	id = flavor_celliande.13
+	title = flavor_celliande.13.t
+	desc = flavor_celliande.13.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_celliande.13.a
+		custom_tooltip = A75_lodge_nameless_tt
+		hidden_effect = {
+			332 = {
+				add_core = ROOT
+				cede_province = ROOT
+				add_province_modifier = {
+					name = capital_city
+					duration = 1825
+				}
+			}
+		}
+		declare_war_with_cb = {
+			casus_belli = cb_vassalize_mission
+			who = A34
+		}
+		set_country_flag = A56_bisan_war_flag
+	}
+}
+
+country_event = {
+	id = flavor_celliande.14
+	title = flavor_celliande.14.t
+	desc = flavor_celliande.14.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_celliande.14.a
+		add_country_modifier = {
+			name = support_of_neratic_clergy
+			duration = 7300
+		}
+	}
+	
+}
+
+country_event = {
+	id = flavor_celliande.15
+	title = flavor_celliande.15.t
+	desc = flavor_celliande.15.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = A56
+		has_country_flag = A56_bisan_war_flag
+		is_at_war = no
+		A34 = {
+			is_subject_of = ROOT
+		}
+	}
+
+	option = {
+		name = flavor_celliande.15.a
+		A34 = {
+			override_country_name = NERATTEMPLE
+			change_country_color = {
+				color = { 69  69  69 }
+			}
+			hidden_effect = {
+				add_liberty_desire = -25
+				change_government = theocracy
+				add_government_reform = leading_clergy_reform
+				set_government_rank = 1
+			}
+		}
+		332 = {
+			add_province_modifier = {
+				name = stewards_necropolis
+				duration = 7300
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_celliande.16
+	title = flavor_celliande.16.t
+	desc = flavor_celliande.16.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_celliande.16.a
+		add_prestige = 10
+		919 = {
+			change_province_name = "Harxarzul"
+			add_base_tax = -1
+			add_base_production = -2
+			add_base_manpower = -1
+		}
+		capital_scope = {
+			hidden_effect = {
+				remove_province_modifier = gateway_to_the_borders
+			}
+			custom_tooltip = flavor_celliande.16.a.tt
+			add_province_modifier = {
+				name = jewel_of_the_borders
+				duration = -1
+			}
+			change_trade_goods = cloth
+			add_base_tax = 1
+			add_base_production = 2
+			add_base_manpower = 1
+		}
+	}
+}
+
+country_event = {
+	id = flavor_celliande.17
+	title = flavor_celliande.17.t
+	desc = flavor_celliande.17.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_celliande.17.a
+		306 = {
+			add_province_modifier = {
+				name = renovation_efforts
+				duration = -1
+			}
+		}
+	}
+	
+}
+
+country_event = {
+	id = flavor_celliande.18
+	title = flavor_celliande.18.t
+	desc = flavor_celliande.18.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_celliande.18.a
+		
+	}
+	
+}
+
+country_event = {
+	id = flavor_celliande.19
+	title = flavor_celliande.19.t
+	desc = flavor_celliande.19.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = A11
+		has_heir = no
+		has_country_flag = A56_elecotral_ties_flag
+	}
+
+	mean_time_to_happen = {
+		months = 50
+	}
+
+	option = {
+		name = flavor_celliande.19.a
+		define_heir = {
+			dynasty = A56
+		}
+	}
+}
+
+
+
+

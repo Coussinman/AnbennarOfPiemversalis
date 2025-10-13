@@ -1,0 +1,65 @@
+po_abolish_slavery = {
+	category = 6
+	power_projection = humiliated_rival
+	power_cost_base = 0
+	prestige_base = 0.2
+	ae_base = 0.1
+	warscore_cost = {
+		all_provinces = 0
+		no_provinces = 1000
+		owner_keeps = 0
+		conquered = 1
+		returned_core = 0
+		released_nation = 0
+		cancelled_subject = 0
+		concede_colonial_region = 0
+	}
+	warscore_cap = 20
+	requires_demand_independence = yes
+	is_make_subject = no
+	requires_is_allowed = yes
+	is_visible = {
+		is_in_war = {
+		}
+		FROM = {
+			has_country_modifier = orcish_slaves_in_colonies
+		}
+	}
+	is_allowed = {
+		always = yes
+	}
+	effect = {
+		add_adm_power = 50
+		add_dip_power = 50
+		add_mil_power = 50
+		medium_increase_of_orcish_tolerance_effect = yes
+		random_owned_province = {
+			add_orcish_minority_size_effect = yes
+		}
+		change_variable = {
+			which = AB2_abolished_num
+			value = 1
+		}
+		FROM = {
+			every_owned_province = {
+				limit = { trade_goods = slaves }
+				change_trade_goods = unknown
+			}
+			remove_country_modifier = orcish_slaves_in_colonies
+			every_subject_country = {
+				every_owned_province = {
+					limit = { trade_goods = slaves }
+					change_trade_goods = unknown
+				}
+				limit = { is_colonial_nation = yes }
+				remove_country_modifier = orcish_slaves_in_colonies
+			}
+			custom_tooltip = po_abolish_slavery_tt
+			add_country_modifier = {
+				name = orcish_slaves_in_colonies_cooldown
+				duration = -1
+				hidden = yes
+			}
+		}
+	}
+}

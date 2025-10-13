@@ -1,0 +1,203 @@
+A33_imperial_conscription = {
+	category = 1
+
+	allow = { 
+		has_reform = A33_parliament_hre 
+	}
+	
+	#on_issue_taken = { hidden_effect = { country_event = { id =  } } }
+
+	effect = {
+		every_elector = {
+			add_manpower = -10
+			root = {
+				add_manpower = 10
+			}
+		}
+	}
+	
+	modifier = {
+		improve_relation_modifier = -0.2
+		manpower_recovery_speed = 0.2
+	}
+	
+	chance = {
+		factor = 3
+		modifier = {
+			factor = 2
+			NOT = { manpower_percentage = 0.5 }
+		}
+	}
+	effect_duration = 5
+	ai_will_do = { factor = 100 }
+}
+A33_imperial_mercs = {
+	category = 1
+
+	allow = { 
+		has_reform = A33_parliament_hre 
+	}
+	
+	#on_issue_taken = { hidden_effect = { country_event = { id =  } } }
+
+	effect = {
+		add_imperial_influence = -5
+	}
+	
+	modifier = {
+		global_regiment_cost = -0.15
+		discipline = 0.05
+	}
+	
+	chance = {
+		factor = 3
+		modifier = {
+			factor = 2
+			NOT = { manpower_percentage = 0.5 }
+		}
+	}
+	ai_will_do = { factor = 100 }
+}
+A33_imperial_dipo = {
+	category = 2
+
+	allow = { 
+		has_reform = A33_parliament_hre 
+	}
+	
+	#on_issue_taken = { hidden_effect = { country_event = { id =  } } }
+
+	effect = {
+		every_country = {
+			limit = {
+				is_part_of_hre = yes
+			}
+			add_opinion = {
+				who = root
+				modifier = opinion_introduced_reforms
+			}
+		}
+	}
+	
+	modifier = {
+		improve_relation_modifier = 0.2
+		yearly_corruption = 0.2
+	}
+	
+	chance = {
+		factor = 4
+	}
+
+	ai_will_do = { factor = 100 }
+}
+A33_imperial_center = {
+	category = 2
+
+	allow = { 
+		has_reform = A33_parliament_hre 
+	}
+	
+	#on_issue_taken = { hidden_effect = { country_event = { id =  } } }
+
+	effect = {
+		every_country = {
+			limit = {
+				is_part_of_hre = yes
+			}
+			add_manpower = 15
+		}
+		add_imperial_influence = 5
+	}
+	
+	modifier = {
+		manpower_recovery_speed = -0.15
+	}
+	
+	chance = {
+		factor = 4
+	}
+
+	ai_will_do = { factor = 100 }
+}
+A33_imperial_integration = {
+	category = 3
+
+	allow = { 
+		has_reform = A33_parliament_hre 
+	}
+	
+	#on_issue_taken = { hidden_effect = { country_event = { id =  } } }
+
+	effect = {
+		every_country = {
+			limit = {
+				is_part_of_hre = yes
+			}
+			add_country_modifier = {
+				name = A33_imperial_parl_1
+				duration = 3650
+			}
+		}
+	}
+	
+	modifier = {
+		improve_relation_modifier = 0.2
+	}
+	
+	chance = {
+		factor = 4
+	}
+
+	ai_will_do = { factor = 100 }
+}
+A33_imperial_centralization = {
+	category = 3
+
+	allow = { 
+		has_reform = A33_parliament_hre 
+	}
+	
+	#on_issue_taken = { hidden_effect = { country_event = { id =  } } }
+
+	effect = {
+		add_imperial_influence = 10
+	}
+	
+	modifier = {
+		imperial_authority_value = 0.05
+	}
+	
+	chance = {
+		factor = 4
+	}
+	effect_duration = 5
+	ai_will_do = { factor = 100 }
+}
+
+A33_imperial_federalism = {
+	category = 3
+
+	allow = { 
+		has_reform = A33_parliament_hre
+		hre_reform_passed = anbennar_empower_imperial_diet
+		not = { has_country_flag = A33_passed_federalis }
+	}
+	
+	#on_issue_taken = { hidden_effect = { country_event = { id =  } } }
+
+	effect = {
+		add_adm_power = 100
+		add_dip_power = 100
+		add_mil_power = 100
+		set_country_flag = A33_passed_federalis
+	}
+	
+	modifier = {
+		imperial_authority_value = 0.1
+	}
+	backing_percentage = 0
+	chance = {
+		factor = 10
+	}
+	ai_will_do = { factor = 100 }
+}

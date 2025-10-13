@@ -560,6 +560,8 @@ magic_ruler_initialize_schools = {
 			OR = {
 				has_reform = magocracy_reform
 				has_reform = magisterium_reform
+				#ACE
+				has_reform = wispkings_realm
 			}
 		}
 		magic_ruler_give_random_spell_school = yes
@@ -756,6 +758,33 @@ magic_ruler_initialize_schools = {
 		effelai_parura_mage_heir_divination_scripted_effect = yes
 	}
 
+	#Caylen powerful mage
+	if = {
+		limit = {
+			has_ruler_flag = caylen_sil_wex
+			has_ruler_flag = caylen_schools
+		}
+		magic_ruler_give_random_spell_school = yes
+		magic_ruler_give_random_spell_school = yes
+	}
+
+	#Wex Magisterium Reform
+	if = {
+		limit = {
+			has_reform = wex_magisterium_reform
+		}
+		magic_ruler_give_random_spell_school = yes
+		magic_ruler_give_random_spell_school = yes
+	}
+	#Tretun
+	if = {
+		limit = {
+			has_country_flag = tretun_mages
+		}
+
+		magic_study_level_up_evocation = yes
+		magic_study_level_up_divination = yes
+	}
 
 	set_ruler_flag = initialized_magic_flags
 }

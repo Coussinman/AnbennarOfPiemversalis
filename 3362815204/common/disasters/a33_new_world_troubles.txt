@@ -1,0 +1,87 @@
+
+#Vernman civil war
+A33_trouble_in_colonies = {
+	potential = {
+		tag = A33
+		NOT = { has_country_flag = A33_had_disaster }
+		has_country_flag = A33_can_proc_dis
+	}
+	can_start = {
+		has_any_disaster = no
+		is_at_war = no
+		current_age = age_of_absolutism
+	}
+	can_stop = {
+		has_any_disaster = yes
+	}
+	progress = {
+		modifier = {
+			factor = 2
+			NOT = { legitimacy = 90 }
+		}
+		modifier = {
+			factor = 1
+			NOT = { stability = 1 }
+		}
+
+		modifier = {
+			factor = -1
+			stability = 1
+		}
+		modifier = {
+			factor = -1
+			stability = 2
+		}
+		modifier = {
+			factor = 4
+			not = {
+				has_government_power = {
+					mechanic_type = A33_adven_vs_nobl_mechanic
+					power_type = A33_gov_power
+					value = -50
+				}
+			}
+		}
+
+	}
+	can_end = {
+		or = {
+			custom_trigger_tooltip = {
+				tooltip = A33_disaster_sided_old
+				has_country_flag = A33_sided_old_money_won
+			}
+			custom_trigger_tooltip = {
+				tooltip = A33_disaster_sided_new
+				has_country_flag = A33_sided_new_money_won
+			}
+			
+			custom_trigger_tooltip = {
+				tooltip = A33_disaster_sided_fail
+				had_country_flag = { flag = A33_disaster_start days = 4380 }
+			}
+		}
+	}
+	modifier = {
+		stability_cost_modifier = 0.50
+		global_unrest = 2
+		war_exhaustion = 0.05
+		reduced_liberty_desire_on_other_continent = -25
+		liberty_desire_from_subject_development = 0.15
+		reinforce_speed = -0.15
+	}
+	on_start = verne_flavor_ace.68
+	on_end = verne_flavor_ace.69
+	on_monthly = {
+		events = {		}
+		random_events = {
+			1000 = 0
+			150 = verne_flavor_ace.70 #
+			150 = verne_flavor_ace.71 #
+			50 = verne_flavor_ace.72 #
+			50 = verne_flavor_ace.73 #
+			50 = verne_flavor_ace.74 #
+			50 = verne_flavor_ace.75 #
+			50 = verne_flavor_ace.76 #
+		}
+	}
+}

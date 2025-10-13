@@ -34,6 +34,11 @@ has_branching_missions = {
 		# has_mission = TIM_mushasha
 		# has_mission = ven_army_republic
 		# has_mission = tatars_religious_question
+		#ACE
+		tag = A05
+		tag = A30
+		tag = A33
+		tag = A86
 	}
 }
 
@@ -99,6 +104,12 @@ can_preview_missions = {
 			can_preview_mission_of_key = { key = TIM }
 			can_preview_mission_of_key = { key = VEN }
 			can_preview_mission_of_key = { key = HORDES }
+			#ACE
+			can_preview_mission_of_key = { key = WEX }
+			can_preview_mission_of_key = { key = LOR }
+			can_preview_mission_of_key = { key = REV }
+			can_preview_mission_of_key = { key = VER }
+			can_preview_mission_of_key = { key = TEL }
 		}
 	}
 }
@@ -371,6 +382,46 @@ has_selected_a_branch = {
 				}
 				can_preview_mission_of_key_and_batch = { key = HORDES batch = $batch$ }
 			}
+			#ACE
+			AND = {
+				OR = {
+					has_country_flag = A30_domination_path
+					has_country_flag = A30_imperial_path
+				}
+				can_preview_mission_of_key_and_batch = { key = WEX batch = $batch$ }
+			}
+			AND = {
+				OR = {
+					has_country_flag = A30_classic_domination_missions
+					has_country_flag = A30_lorent_missions
+				}
+				can_preview_mission_of_key_and_batch = { key = LOR batch = $batch$ }
+			}
+			AND = {
+				OR = {
+					has_country_flag = A05_cannorian_path
+					has_country_flag = A05_gerudian_path
+					has_country_flag = A05_gnomish_path
+				}
+				can_preview_mission_of_key_and_batch = { key = REV batch = $batch$ }
+			}
+			AND = {
+				OR = {
+					has_country_flag = verne_adventurer_monarchy_path
+					has_country_flag = verne_adventurer_republic_path
+				}
+				can_preview_mission_of_key_and_batch = { key = VER batch = $batch$ }
+			}
+			AND = {
+				OR = {
+					has_country_flag = TELLUM_bell_1
+					has_country_flag = TELLUM_bell_2
+					has_country_flag = TELLUM_bell_3
+					has_country_flag = TELLUM_bell_4
+					has_country_flag = TELLUM_bell_5
+				}
+				can_preview_mission_of_key_and_batch = { key = TEL batch = $batch$ }
+			}
 		}
 	}
 }
@@ -391,6 +442,9 @@ num_of_mission_branches_3 = {
 		#Winds of Change
 		can_preview_mission_of_key_and_batch = { key = VEN batch = $batch$ }
 		can_preview_mission_of_key_and_batch = { key = HORDES batch = $batch$ }
+		#ACE
+		can_preview_mission_of_key_and_batch = { key = TEL batch = $batch$ }
+		can_preview_mission_of_key_and_batch = { key = REV batch = $batch$ }
 	}
 }
 
@@ -408,12 +462,13 @@ num_of_mission_branches_4 = {
 		# none
 		#Winds of Change
 		# none
+		#ACE
+		can_preview_mission_of_key_and_batch = { key = TEL batch = $batch$ }
 	}
 }
 
 num_of_mission_branches_5 = {
-	always = no
-	has_country_flag = has_$batch$_batch	#Dummy
+	can_preview_mission_of_key_and_batch = { key = TEL batch = $batch$ }
 }
 num_of_mission_branches = {
 	num_of_mission_branches_$value$ = { batch = $batch$ }
@@ -571,6 +626,27 @@ currently_selected_branch_1 = {
 			can_preview_mission_of_key_and_batch = { key = HORDES batch = $batch$ }
 			has_country_flag = hordes_tolerance_branch_flag
 		}
+		#ACE
+		AND = {
+			can_preview_mission_of_key_and_batch = { key = WEX batch = $batch$ }
+			has_country_flag = A30_domination_path
+		}
+		AND = {
+			can_preview_mission_of_key_and_batch = { key = LOR batch = $batch$ }
+			has_country_flag = A30_classic_domination_missions
+		}
+		AND = {
+			can_preview_mission_of_key_and_batch = { key = REV batch = $batch$ }
+			has_country_flag = A05_cannorian_path
+		}
+		AND = {
+			can_preview_mission_of_key_and_batch = { key = VER batch = $batch$ }
+			has_country_flag = verne_adventurer_republic_path
+		}
+		AND = {
+			can_preview_mission_of_key_and_batch = { key = TEL batch = $batch$ }
+			has_country_flag = TELLUM_bell_1
+		}
 	}
 }
 currently_selected_branch_2 = {
@@ -725,6 +801,27 @@ currently_selected_branch_2 = {
 			can_preview_mission_of_key_and_batch = { key = HORDES batch = $batch$ }
 			has_country_flag = hordes_devout_branch_flag
 		}
+		#ACE
+		AND = {
+			can_preview_mission_of_key_and_batch = { key = WEX batch = $batch$ }
+			has_country_flag = A30_imperial_path
+		}
+		AND = {
+			can_preview_mission_of_key_and_batch = { key = LOR batch = $batch$ }
+			has_country_flag = A30_lorent_missions
+		}
+		AND = {
+			can_preview_mission_of_key_and_batch = { key = REV batch = $batch$ }
+			has_country_flag = A05_gerudian_path
+		}
+		AND = {
+			can_preview_mission_of_key_and_batch = { key = VER batch = $batch$ }
+			has_country_flag = verne_adventurer_monarchy_path
+		}
+		AND = {
+			can_preview_mission_of_key_and_batch = { key = TEL batch = $batch$ }
+			has_country_flag = TELLUM_bell_2
+		}
 	}
 }
 currently_selected_branch_3 = {
@@ -779,6 +876,15 @@ currently_selected_branch_3 = {
 			can_preview_mission_of_key_and_batch = { key = HORDES batch = $batch$ }
 			has_country_flag = hordes_confucian_branch_flag
 		}
+		#ACE
+		AND = {
+			can_preview_mission_of_key_and_batch = { key = REV batch = $batch$ }
+			has_country_flag = A05_gnomish_path
+		}
+		AND = {
+			can_preview_mission_of_key_and_batch = { key = TEL batch = $batch$ }
+			has_country_flag = TELLUM_bell_3
+		}
 	}
 }
 currently_selected_branch_4 = {
@@ -807,11 +913,19 @@ currently_selected_branch_4 = {
 		# none
 		#Winds of Change
 		# none
+		#ACE
+		AND = {
+			can_preview_mission_of_key_and_batch = { key = TEL batch = $batch$ }
+			has_country_flag = TELLUM_bell_4
+		}
 	}
 }
 currently_selected_branch_5 = {
-	always = no
-	has_country_flag = has_$batch$_batch	#dummy
+	#ACE
+	AND = {
+		can_preview_mission_of_key_and_batch = { key = TEL batch = $batch$ }
+		has_country_flag = TELLUM_bell_5
+	}
 }
 currently_selected_branch = {
 	currently_selected_branch_$value$ = { batch = $batch$ }
@@ -839,6 +953,8 @@ can_select_branch_1 = {
 		hre_size = 1
 	}
 	else = { hidden_trigger = { or = { always = yes } } }
+	#ACE
+	hidden_trigger = { or = { always = yes has_country_flag = has_$batch$_batch } }
 }
 can_select_branch_2 = {
 	# if = {
@@ -867,6 +983,8 @@ can_select_branch_2 = {
 		is_emperor = no
 	}
 	else = { hidden_trigger = { or = { always = yes } } }
+  #ACE
+	hidden_trigger = { or = { always = yes has_country_flag = has_$batch$_batch } }
 }
 can_select_branch_3 = {
 	# if = {
@@ -894,6 +1012,8 @@ can_select_branch_3 = {
 	# 	}
 	# }
 	# else = { hidden_trigger = { or = { always = yes } } }
+  #ACE
+	hidden_trigger = { or = { always = yes has_country_flag = has_$batch$_batch } }
 }
 can_select_branch_4 = {
 	# if = {
@@ -907,8 +1027,11 @@ can_select_branch_4 = {
 	# 	religion = norse_pagan_reformed
 	# }
 	# else = { hidden_trigger = { or = { always = yes } } }
+  #ACE
+	hidden_trigger = { or = { always = yes has_country_flag = has_$batch$_batch } }
 }
 can_select_branch_5 = {
+  #ACE
 	hidden_trigger = { or = { always = yes has_country_flag = has_$batch$_batch } }
 }
 can_select_branch = {
@@ -938,6 +1061,36 @@ can_select_current_branch = {
 			tooltip = boh_unlock_branching_mission
 			always = no
 		}
+	}
+	else = { hidden_trigger = { always = yes } }
+	#ACE
+	if = {
+		limit = { can_preview_mission_of_key_and_batch = { key = WEX batch = $batch$ } }
+		hidden_trigger = { always = yes }
+	}
+	if = {
+		limit = { can_preview_mission_of_key_and_batch = { key = LOR batch = $batch$ } }
+		OR = {
+			custom_trigger_tooltip = {
+				tooltip = A30_wex_killed_empire_trigger_tooltip
+				has_global_flag = eoa_wex_collapse
+			}
+			AND = {
+				custom_trigger_tooltip = {
+					tooltip = A30_wex_lost_to_empire_trigger_tooltip
+					has_country_flag = lost_eoa_war
+				}
+				total_development = 600
+			}
+		}
+	}
+	if = {
+		limit = { can_preview_mission_of_key_and_batch = { key = REV batch = $batch$ } }
+		hidden_trigger = { always = yes }
+	}
+	if = {
+		limit = { can_preview_mission_of_key_and_batch = { key = TEL batch = $batch$ } }
+		hidden_trigger = { always = no }
 	}
 	else = { hidden_trigger = { always = yes } }
 }

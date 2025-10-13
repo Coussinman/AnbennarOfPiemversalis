@@ -254,6 +254,7 @@ interaction = { # Sale of Titles
 		}
 		if = {
 			limit = {
+				NOT = { has_estate_privilege = estate_lorentish_elite_harmonize_feudal_laws }
 				NOT = { has_government_attribute = can_sell_crownland_to_single_estates }
 				NOT = { has_country_flag = can_sell_crownland_to_estates_targeted_flag }
 			}
@@ -283,6 +284,22 @@ interaction = { # Sale of Titles
 			clr_country_flag = recent_land_distribution
 		}
 		set_country_flag = recent_land_distribution
+		if = {   #verne gov mechanic
+			limit = { has_government_mechanic = A33_adven_vs_nobl_mechanic  }
+			add_government_power = {
+				mechanic_type = A33_adven_vs_nobl_mechanic
+				power_type = A33_gov_power
+				value = -10
+			}
+		}
+		if = {
+			limit = { has_government_mechanic = A33_adven_vs_nobl_mechanic_1 }
+			add_government_power = {
+				mechanic_type = A33_adven_vs_nobl_mechanic_1
+				power_type = A33_gov_power
+				value = -10
+			}
+		}
     }
 	ai_will_do = {
 		factor = 25
@@ -499,6 +516,30 @@ interaction = { # Summon Diet
 
 		#Pashaine
 		pashaine_add_clue = yes
+		if = {
+			limit = { has_government_mechanic = A33_adven_vs_nobl_mechanic_1 }
+			add_government_power = {
+				mechanic_type = A33_adven_vs_nobl_mechanic_1
+				power_type = A33_gov_power
+				value = 10
+			}
+		}
+		if = {
+			limit = {
+				has_reform = sugamber_amber_court_reform
+			}
+			country_event = {
+				id = flavor_sugamber.125
+			}
+		}
+		if = { ###verne gov mechanics
+			limit = { has_government_mechanic = A33_adven_vs_nobl_mechanic  }
+			add_government_power = {
+				mechanic_type = A33_adven_vs_nobl_mechanic
+				power_type = A33_gov_power
+				value = 10
+			}
+		}
     }
 	ai_will_do = {
 		# Only use if it will bring loyalty above 50 for all estates
@@ -615,6 +656,7 @@ interaction = { # Seize Land
 		set_country_flag = recent_land_seizure
 		if = {
 			limit = {
+				NOT = { has_estate_privilege = estate_lorentish_elite_harmonize_feudal_laws }
 				NOT = { has_government_attribute = can_seize_crownland_of_single_estates }
 				NOT = { has_country_flag = can_seize_crownland_to_estates_targeted_flag }
 			}
@@ -709,6 +751,7 @@ interaction = { # Seize Land
 			}
 			change_estate_land_share = { estate = estate_adventurers share = 1 }
 		}
+		on_seize_land_effect = yes
 	}
 	ai_will_do = {
 		factor = 50

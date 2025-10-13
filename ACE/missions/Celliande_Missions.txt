@@ -1,0 +1,993 @@
+A56_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { TAG = AB4 }
+		OR = {
+			tag = A56
+			was_tag = A56
+		}
+	}
+	A56_sorncell = {
+		icon = renaissance_city
+		position = 1
+		provinces_to_highlight = {
+			province_id = 413
+			NOT = {
+				AND = {
+					has_trade_building_trigger = yes
+					development = 25
+				}
+			}
+		}
+		trigger = {
+			413 = {
+				has_trade_building_trigger = yes
+				development = 25
+				current_institution = 50
+			}
+			380 = {
+				trade_share = {
+					country = ROOT
+					share = 10
+				}
+			}
+		}
+		effect = {
+			413 = {
+				add_or_upgrade_trade_building = yes
+				add_province_modifier = {
+					name = gateway_to_the_borders
+					duration = -1
+				}
+				add_institution_embracement = {
+					which = renaissance
+					value = 50
+				}
+			}
+		}
+	}
+
+	A56_elecotral_ties = {
+		icon = mission_dual_diplomacy
+		position = 3
+		provinces_to_highlight = {
+			
+		}
+		required_missions = {
+			A56_sorncell
+		}
+		trigger = {
+			A11 = {
+				trust = { who = ROOT value = 70 }
+				has_opinion = {
+					who = ROOT
+					value = 180
+				}
+			}
+			OR = {
+				advisor = statesman
+				advisor = diplomat
+			}
+		}
+		effect = {
+			custom_tooltip = A56_elecotral_ties_tt
+			set_country_flag = A56_elecotral_ties_flag
+			add_country_modifier = {
+				name = imperial_ties
+				duration = 7300
+			}
+		}
+	}
+
+
+	A56_rhinmond = {
+		icon = the_great_city_of_buda
+		position = 5
+		required_missions = {
+			A56_lodge
+		}
+		provinces_to_highlight = {
+			province_id = 919
+			NOT = {
+				AND = {
+					num_of_units_in_province = {
+						amount = 5
+						who = ROOT
+						type = infantry
+					}
+				}
+			}
+		}
+		trigger = {
+			919 = {
+				owned_by = root
+				num_of_units_in_province = {
+					amount = 5
+					who = ROOT
+					type = infantry
+				}
+			}
+		}
+		effect = {
+			country_event = {
+				id = flavor_celliande.16
+			}
+		}
+	}
+	A56_sabotage_wexhills = {
+		icon = mission_assassination
+		position = 6
+		required_missions = {
+			A56_rhinmond
+		}
+		provinces_to_highlight = {
+			province_id = 306
+		}
+		trigger = {
+			mil_power = 100
+			306 = {
+				owner = {
+					has_spy_network_from = {
+						who = ROOT
+						value = 50
+					}
+				}
+			}
+		}
+		effect = {
+			add_mil_power = -100
+			306 = {
+				add_province_modifier = {
+					name = excavated_tunnels
+					duration = 3650
+				}
+			}
+		}
+	}
+	A56_seize_wexhills = {
+		icon = bal_hyl_mission
+		position = 7
+		required_missions = {
+			A56_sabotage_wexhills
+		}
+		provinces_to_highlight = {
+			province_id = 306
+			NOT = {
+				num_of_units_in_province = {
+					amount = 5
+					who = ROOT
+					type = infantry
+				}
+			}
+		}
+		trigger = {
+			306 = {
+				owned_by = root
+				num_of_units_in_province = {
+					amount = 5
+					who = ROOT
+					type = infantry
+				}
+			}
+		}
+		effect = {
+			country_event = {
+				id = flavor_celliande.17
+			}
+		}
+	}
+}
+
+A56_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { TAG = AB4 }
+		OR = {
+			tag = A56
+			was_tag = A56
+		}
+	}
+	A56_revenge = {
+		icon = mission_whisper
+		position = 1
+		provinces_to_highlight = {
+			OR = {
+				is_capital_of = A48
+				is_capital_of = A34
+			}
+		}
+		trigger = {
+			A48 = {
+				OR = {
+					has_spy_network_from = {
+						who = ROOT
+						value = 30
+					}
+					has_any_disaster = yes
+				}
+			}
+			A34 = {
+				has_50_opinion_improved_relation = {
+					target = root
+				}
+			}
+		}
+		effect = {
+			country_event = {
+				id = flavor_celliande.2
+			}
+			sugamber_core = {
+				add_permanent_claim = root
+			}
+			complex_dynamic_effect = {
+				first_custom_tooltip = A56_revenge_tt
+				first_limit = "A48 = {
+						has_ruler = \"Ewald II\"
+					}
+				"
+				first_effect = "country_event = {
+						id = flavor_celliande.3
+						days = 30
+					}
+				"
+			}
+		}
+	}
+	A56_rebuild_cloth = {
+		icon = ned_cloth_trading
+		position = 2
+		required_missions = {
+			A56_sorncell
+			A56_revenge
+		}
+		provinces_to_highlight = {
+			province_id = 412
+			NOT = {
+				AND = {
+					has_production_building_trigger = yes
+					base_production = 6
+				}
+			}
+		}
+		trigger = {
+			412 = {
+				base_production = 6
+				has_production_building_trigger = yes
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = upstart_cloth_industry
+				duration = 7300
+			}
+			414 = {
+				change_trade_goods = cloth
+			}
+			complex_dynamic_effect = {
+				first_custom_tooltip = A56_rebuild_cloth_tt
+				first_limit = "412 = {
+						higher_development_than = 904
+					}
+				"
+				first_effect = "412 = {
+						add_base_production = 3
+					}
+					414 = {
+						add_base_production = 3
+					}
+				"
+			}
+		}
+	}
+	A56_piracy = {
+		icon = mission_pirate_flag
+		position = 3
+		required_missions = {
+			A56_eagle
+		}
+		provinces_to_highlight = {
+			province_id = 451
+		}
+		trigger = {
+			OR = {
+				451 = {
+					is_core = root
+				}
+				A74 = {
+					is_subject_of = root
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					A72 = {
+						is_subject_of = root
+					}
+				}
+				add_stability = 1
+			}
+			else = {
+				451 = {
+					add_culture_construction = {
+						cost = 0
+						speed = 1
+					}
+				}
+			}
+			country_event_with_option_insight = {
+				id = flavor_celliande.4
+				option_1 = "922 = {
+					change_trade_goods = slaves
+					add_province_modifier = {
+						name = underground_slavery
+						duration = -1
+					}
+				}
+				"
+				option_2 = "custom_tooltip = flavor_celliande.4.b.tt
+					add_country_modifier = {
+						name = freed_slaves
+						duration = 7300
+					}
+				}
+				"
+			}
+		}
+	}
+	A56_serondar_order = {
+		icon = support_the_orders
+		position = 4
+		required_missions = {
+			A56_piracy
+		}
+		provinces_to_highlight = {
+			province_id = 451
+			NOT = {
+				AND = {
+					has_dock_building_trigger = yes
+					has_coast_defense_building_trigger = yes
+				}
+			}
+		}
+		trigger = {
+			num_of_galley = 10
+			451 = {
+				has_dock_building_trigger = yes
+				has_coast_defense_building_trigger = yes
+			}
+		}
+		effect = {
+			country_event = {
+				id = flavor_celliande.1
+			}
+		}
+	}
+	A56_infiltrate_aldresia = {
+		icon = mission_shady_encounter
+		position = 5
+		required_missions = {
+			A56_lodge
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			treasury = 100
+			423 = {
+				owner = {
+					has_spy_network_from = {
+						who = ROOT
+						value = 50
+					}
+				}
+			}
+			emperor = {
+				has_50_opinion_improved_relation = {
+					target = root
+				}
+			}
+		}
+		effect = {
+			add_casus_belli = {
+				type = cb_insult
+				target = A77
+				months = 250
+			}
+			A77 = {
+				add_manpower = -2
+				add_country_modifier = {
+					name = celliander_infiltrators
+					duration = 3650
+				}
+			}
+		}
+	}
+	A56_secrets_of_old = {
+		icon = mission_solaris
+		position = 7
+		required_missions = {
+			A56_infiltrate_aldresia
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			423 = {
+				OR = {
+					controlled_by = root
+					owned_by = root
+				}
+			}
+			estate_loyalty = {
+				estate = estate_mages
+				loyalty = 50
+			}
+			adm_power = 100
+		}
+		effect = {
+			country_event = {
+				id = flavor_celliande.18
+			}
+		}
+	}
+}
+
+A56_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { TAG = AB4 }
+		OR = {
+			tag = A56
+			was_tag = A56
+		}
+	}
+	A56_eagle = {
+		icon = lead_the_empire
+		position = 2
+		required_missions = {
+			A56_revenge
+			A56_squatters
+		}
+		provinces_to_highlight = {
+			is_core = root
+			not = {
+				owned_by = root
+			}
+		}
+		trigger = {
+			all_core_province = {
+				owned_by = root
+			}
+			army_size_percentage = 1
+		}
+		effect = {
+			add_country_modifier = {
+				name = resurgent_eagle
+				duration = 7300
+			}
+			arannen_area = {
+				add_permanent_claim = root
+			}
+			eastborders_area = {
+				add_permanent_claim = root
+			}
+		}
+	}
+	A56_the_tower = {
+		icon = mission_magic_tower
+		position = 3
+		required_missions = {
+			A56_eagle
+			A56_court_mages
+		}
+		provinces_to_highlight = {
+			is_capital_of = A72
+		}
+		trigger = {
+			OR = {
+				has_spy_network_in = {
+					who = A72
+					value = 30
+				}
+				custom_trigger_tooltip = {
+					tooltip = A56_the_tower_tt
+					has_global_flag = ace_varlosen_uprising
+					is_at_war = no
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					has_global_flag = ace_varlosen_uprising
+					is_at_war = no
+				}
+				add_adm_power = 100
+				add_stability = 1
+			}
+			else = {
+				custom_tooltip = A56_the_tower_tt2
+				country_event = {
+					id = flavor_celliande.6
+					days = 30
+				}
+			}
+		}
+	}
+	A56_lodge = {
+		icon = mission_necromancy
+		position = 4
+		required_missions = {
+			A56_the_tower
+		}
+		provinces_to_highlight = {
+			province_id = 419
+		}
+		trigger = {
+			OR = {
+				419 = {
+					country_or_non_sovereign_subject_holds = root
+				}
+				AND = {
+					is_at_war = no
+					B85 = {
+						exists = yes
+						guaranteed_by = ROOT
+					}
+				}
+			}
+		}
+		effect = {
+			country_event = {
+				id = flavor_celliande.8
+			}
+		}
+	}
+	A56_demand_corseton = {
+		icon = mission_dual_diplomacy
+		position = 5
+		required_missions = {
+			A56_lodge
+		}
+		provinces_to_highlight = {
+			is_capital_of = A34
+		}
+		trigger = {
+			dip_power = 200
+			332 = {
+				owner = {
+					has_spy_network_from = {
+						who = ROOT
+						value = 50
+					}
+				}
+			}
+			estate_loyalty = {
+				estate = estate_church
+				loyalty = 60
+			}
+		}
+		effect = {
+			custom_tooltip = A56_demand_corseton_tt
+			add_dip_power = -200
+			country_event = {
+				id = flavor_celliande.11
+			}
+		}
+	}
+	A56_necropolis = {
+		icon = mission_mountain_castle
+		position = 7
+		required_missions = {
+			A56_demand_corseton
+		}
+		provinces_to_highlight = {
+			province_id = 332
+			NOT = {
+				AND = {
+					development = 20
+					num_of_units_in_province = {
+						amount = 5
+						who = ROOT
+						type = infantry
+					}
+				}
+			}
+		}
+		trigger = {
+			is_at_war = no
+			332 = {
+				owned_by = root
+				num_of_units_in_province = {
+					amount = 5
+					who = ROOT
+					type = infantry
+				}
+				development = 20
+			}
+		}
+		effect = {
+			country_event = {
+				id = flavor_celliande.14
+			}
+		}
+	}
+	A56_triumphant = {
+		icon = a_roman_empire
+		position = 8
+		required_missions = {
+			A56_necropolis
+			A56_seize_wexhills
+			A56_secrets_of_old
+		}
+		provinces_to_highlight = {
+			region = the_borders_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = root
+			}
+		}
+		trigger = {
+			the_borders_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = root
+			}
+		}
+		effect = {
+			add_prestige = 25
+			custom_tooltip = A56_triumphant_tt
+			set_country_flag = A56_milcorissia_flag
+			add_country_modifier = {
+				name = A75_true_heirs_of_milcorissia
+				duration = -1
+			}
+			custom_tooltip = A75_true_heirs_of_milcorissia_magic_study_tt
+			hidden_effect = {
+				update_magic_study_experience_modifier = {
+					value = 25
+				}
+			}
+			hidden_effect = {
+				remove_ruler_personality = mage_personality
+			}
+			hidden_effect = {
+				country_event = {
+					id = gisden.22
+					days = 1
+				}
+			}
+		}
+	}
+}
+
+A56_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { TAG = AB4 }
+		OR = {
+			tag = A56
+			was_tag = A56
+		}
+	}
+	A56_squatters = {
+		icon = mng_end_sengoku_jidai
+		position = 1
+		provinces_to_highlight = {
+			is_core = A57
+		}
+		trigger = {
+			A57 = {
+				exists = no
+				all_core_province = {
+					owned_by = root
+				}
+			}
+		}
+		effect = {
+			add_prestige = 15
+			country_event_with_option_insight = {
+				id = flavor_celliande.9
+				option_1 = "every_core_province = {
+						limit = {
+							is_core = A57
+						}
+						add_random_development = -2
+					}
+					take_estate_land_share_massive = { estate = all }
+				"
+				option_2 = "every_core_province = {
+						limit = {
+							is_core = A57
+						}
+						add_local_autonomy = -25
+					}
+					add_years_of_income = 1
+				"
+			}
+		}
+	}
+	A56_court_mages = {
+		icon = mission_empowerment
+		position = 2
+		provinces_to_highlight = {
+		}
+		trigger = {
+			stability = 1
+			num_of_estate_privileges = {
+				estate = estate_mages
+				value = 2
+			}
+			has_estate_privilege = estate_mages_cast_spells
+		}
+		effect = {
+			country_event_with_effect_insight = {
+				id = flavor_celliande.10
+				effect = "define_advisor = {
+						type = court_mage
+						skill = 2
+						discount = yes
+					}
+					random_list = {
+						33 = {
+							change_adm = 1
+						}
+						33 = {
+							change_dip = 1
+						}
+						33 = {
+							change_mil = 1
+						}
+					}
+					add_country_modifier = {
+						name = lodge_infiltrators
+						duration = 5475
+					}
+				"
+			}
+		}
+	}
+	A56_magisterial_interference = {
+		icon = mission_three_death
+		position = 5
+		required_missions = {
+			A56_court_mages
+			A56_lodge
+		}
+		provinces_to_highlight = {
+			is_capital_of = A85
+		}
+		trigger = {
+			adm_power = 200
+			treasury = 200
+			has_spy_network_in = {
+				who = A85
+				value = 50
+			}
+			estate_influence = {
+				estate = estate_mages
+				influence = 35
+			}
+		}
+		effect = {
+			hidden_effect = {
+				clear_mages_organization_effect = yes
+			}
+			set_estate_privilege = estate_mages_organization_state
+			add_treasury = -200
+			add_adm_power = 200
+			419 = {
+				add_building_construction = {
+					building = mage_tower
+					cost = 0
+					speed = 0.5
+				}
+			}
+			set_country_flag = remove_dip_from_regulations
+			custom_tooltip = A56_magisterial_interference_tt
+		}
+	}
+	A56_serfdom = {
+		icon = mission_serfdom
+		position = 6
+		required_missions = {
+			A56_magisterial_interference
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			average_autonomy = 25
+			NOT = {
+				estate_influence = {
+					estate = estate_adventurers
+					influence = 30
+				}
+			}
+			NOT = {
+				average_unrest = 3
+			}
+		}
+		effect = {
+			set_country_flag = A56_serfdom_flag
+			set_estate_privilege = estate_celliander_serfdom
+		}
+	}
+	A56_absolute_rulers = {
+		icon = mission_english_absolutism
+		position = 7
+		required_missions = {
+			A56_serfdom
+			A56_nobility
+		}
+		provinces_to_highlight = {
+			owned_by = root
+			NOT = {
+				has_courthouse_building_trigger = yes
+			}
+		}
+		trigger = {
+			crown_land_share = 40
+			NOT = {
+				estate_influence = {
+					estate = estate_church
+					influence = 50
+				}
+				estate_influence = {
+					estate = estate_burghers
+					influence = 50
+				}
+				estate_influence = {
+					estate = estate_adventurers
+					influence = 50
+				}
+			}
+			num_of_owned_provinces_with = {
+				value = 15
+				has_courthouse_building_trigger = yes
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = celliander_absolute_rule
+				duration = -1
+			}
+			custom_tooltip = A56_absolute_rulers_tt
+			hidden_effect = {
+				every_owned_province = {
+					add_local_autonomy = -25
+				}
+			}
+		}
+	}
+}
+
+A56_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { TAG = AB4 }
+		OR = {
+			tag = A56
+			was_tag = A56
+		}
+	}
+	A56_tutorship = {
+		icon = mission_writing_book
+		position = 3
+		required_missions = {
+			A56_court_mages
+		}
+		provinces_to_highlight = {
+			is_capital_of = ROOT
+			NOT = {
+				has_tax_building_trigger = yes
+			}
+		}
+		trigger = {
+			has_heir = yes
+			heir_age = 12
+			estate_loyalty = {
+				estate = estate_mages
+				loyalty = 50
+			}
+			capital_scope = {
+				has_tax_building_trigger = yes
+			}
+		}
+		effect = {
+			random_list = {
+				70 = {
+					custom_tooltip = A56_tutorship_tt
+					hidden_effect = {
+						random_list = {
+							10 = {
+								add_heir_personality = just_personality
+							}
+							10 = {
+								add_heir_personality = righteous_personality
+							}
+							10 = {
+								add_heir_personality = free_thinker_personality
+							}
+							10 = {
+								add_heir_personality = careful_personality
+							}
+							10 = {
+								add_heir_personality = lawgiver_personality
+							}
+							10 = {
+								add_heir_personality = well_connected_personality
+							}
+							10 = {
+								add_heir_personality = scholar_personality
+							}
+							10 = {
+								add_heir_personality = conqueror_personality
+							}
+							10 = {
+								add_heir_personality = industrious_personality
+							}
+							10 = {
+								add_heir_personality = silver_tongue_personality
+							}
+						}
+					}
+				}
+				20 = {
+					change_heir_adm = 1
+					change_heir_dip = 1
+					change_heir_mil = 1
+				}
+				10 = {
+					add_heir_personality = mage_personality
+				}
+			}
+		}
+	}
+	A56_nobility = {
+		icon = mission_noble_council
+		position = 6
+		required_missions = {
+			A56_magisterial_interference
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			estate_influence = {
+				estate = estate_nobles
+				influence = 50
+			}
+			estate_loyalty = {
+				estate = estate_nobles
+				loyalty = 60
+			}
+			crown_land_share = 20
+		}
+		effect = {
+			take_estate_land_share_large = {
+				estate = estate_church
+			}
+			take_estate_land_share_large = {
+				estate = estate_burghers
+			}
+			highcliff_area = {
+				add_base_tax = 1
+			}
+			custom_tooltip = A56_nobility_tt
+			set_country_flag = A56_nobility_flag
+			set_country_flag = estate_burghers_land_rights_disabled
+			custom_tooltip = A56_nobility_tt2
+		}
+	}
+}

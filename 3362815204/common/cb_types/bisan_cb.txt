@@ -1,0 +1,52 @@
+cb_spread_the_true_faith = {
+	valid_for_subject = no
+	holy_war = yes
+	prerequisites_self = {
+		OR = {
+			has_country_flag = bisan_spread_faith_flag
+			has_country_flag = vivin_ravelation_flag
+			has_country_flag = bisan_spread_global
+			has_country_flag = puck_flag
+		}
+	}
+
+	prerequisites = {
+		if = {
+			limit = {
+				ROOT = {
+					has_country_flag = vivin_ravelation_flag
+					has_country_flag = bisan_spread_global
+					NOT = {
+						has_country_flag = bisan_spread_faith_flag
+					}
+				}
+			}
+			FROM = {
+				NOT = {
+					religion = ROOT
+				}
+			}
+		}
+		if = {
+			limit = {
+				ROOT = {
+					has_country_flag = bisan_spread_faith_flag
+					NOT = {
+						has_country_flag = bisan_spread_global
+						has_country_flag = vivin_ravelation_flag
+					}
+				}
+			}
+			FROM = {
+				NOT = {
+					religion = ROOT
+				}
+				capital_scope = {
+					continent = europe
+				}
+			}
+		}
+	}
+
+	war_goal = superiority_spread_the_true_faith
+}

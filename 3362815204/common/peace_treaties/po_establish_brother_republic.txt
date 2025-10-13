@@ -1,0 +1,40 @@
+po_establish_brother_Republic = {
+	category = 6
+	power_projection = humiliated_rival
+	power_cost_base = 0
+	prestige_base = 0.2
+	ae_base = 0.5
+	warscore_cost = {
+		all_provinces = 0
+		no_provinces = 1000
+		owner_keeps = 0
+		conquered = 1
+		returned_core = 0
+		released_nation = 0
+		cancelled_subject = 0
+		concede_colonial_region = 0
+	}
+	warscore_cap = 50
+	requires_demand_independence = yes
+	is_make_subject = no
+	requires_is_allowed = yes
+	is_visible = {
+		is_in_war = {
+			casus_belli = cb_establish_brother_republic_cb
+		}
+	}
+	is_allowed = {
+		always = yes
+	}
+	effect = {
+		create_subject = {
+			subject_type = brother_republic
+			subject = FROM
+		}
+		FROM = {
+			change_religion = root
+			set_country_flag = AB2_vassal_republic_flag
+			add_government_reform = AB2_brother_republic
+		}
+	}
+}

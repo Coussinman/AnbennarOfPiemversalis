@@ -1,0 +1,1320 @@
+
+hallfredhavn_expand_slavery = {
+	custom_tooltip = AD5_expand_slavery_tt
+	hidden_effect = {
+		if = {
+			limit = {
+				has_province_modifier = AD5_huge_langeyru_slavery
+			}
+			add_base_production = 1
+		}
+		else_if = {
+			limit = {
+				has_province_modifier = AD5_significant_langeyru_slavery
+			}
+			remove_province_modifier = AD5_significant_langeyru_slavery
+			add_province_modifier = {
+				name = AD5_huge_langeyru_slavery
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = {
+				has_province_modifier = AD5_small_langeyru_slavery
+			}
+			remove_province_modifier = AD5_small_langeyru_slavery
+			add_province_modifier = {
+				name = AD5_significant_langeyru_slavery
+				duration = -1
+			}
+		}
+		else = {
+			add_province_modifier = {
+				name = AD5_small_langeyru_slavery
+				duration = -1
+			}
+		}
+	}
+}
+
+hallfredhavn_shrink_slavery = {
+	custom_tooltip = AD5_expand_slavery_tt
+	hidden_effect = {
+		if = {
+			limit = {
+				has_province_modifier = AD5_huge_langeyru_slavery
+			}
+			remove_province_modifier = AD5_huge_langeyru_slavery
+			add_province_modifier = {
+				name = AD5_significant_langeyru_slavery
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = {
+				has_province_modifier = AD5_significant_langeyru_slavery
+			}
+			remove_province_modifier = AD5_significant_langeyru_slavery
+			add_province_modifier = {
+				name = AD5_small_langeyru_slavery
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = {
+				has_province_modifier = AD5_small_langeyru_slavery
+			}
+			remove_province_modifier = AD5_small_langeyru_slavery
+		}
+	}
+}
+
+hallfredhavn_check_ruler_dynasty_and_apply_faction_influence_bonus = {
+	if = {
+		limit = {
+			dynasty = "Divenscourge"
+		}
+		add_ruler_modifier = {
+			name = ACE_hallfredhavn_ruler_divenscourge
+			duration = -1 
+		}
+	}
+	if = {
+		limit = {
+			dynasty = "Pearlsguard"
+		}
+		add_ruler_modifier = {
+			name = ACE_hallfredhavn_ruler_pearlsguard
+			duration = -1 
+		}
+	}
+	if = {
+		limit = {
+			dynasty = "Svartrskegg"
+		}
+		add_ruler_modifier = {
+			name = ACE_hallfredhavn_ruler_svartrskegg
+			duration = -1 
+		}
+	}
+	if = {
+		limit = {
+			dynasty = "Skali"
+		}
+		add_ruler_modifier = {
+			name = ACE_hallfredhavn_ruler_skali
+			duration = -1 
+		}
+	}
+	if = {
+		limit = {
+			dynasty = "Vidarfótr"
+		}
+		add_ruler_modifier = {
+			name = ACE_hallfredhavn_ruler_vidarfotr
+			duration = -1 
+		}
+	}
+}
+
+hallfredhavn_fishing_effect = {
+	random_list = {
+		10 = { #whale catch
+			change_variable = {
+				which = variable_AD5_hallfredhavn_food
+				value = 15
+			}
+		}
+		80 = { #great catch
+			change_variable = {
+				which = variable_AD5_hallfredhavn_food
+				value = 5
+			}
+		}
+		10 = { #meagre catch
+			change_variable = {
+				which = variable_AD5_hallfredhavn_food
+				value = 1
+			}
+			custom_tooltip = AD5_damaged_ship_tt
+			add_treasury = -5
+		}
+	}
+}
+
+hallfredhavn_food_purchase_effect = {
+	if = {
+		limit = {
+			has_country_flag = AD5_outpost_food_flag
+		}
+		random_list = {
+			50 = { #meagre food trading
+				change_variable = {
+					which = variable_AD5_hallfredhavn_food
+					value = 10
+				}
+				add_treasury = -100
+			}
+			25 = { #meagre food trading
+				change_variable = {
+					which = variable_AD5_hallfredhavn_food
+					value = 5
+				}
+				add_treasury = -80
+			}
+			25 = { #meagre food trading
+				change_variable = {
+					which = variable_AD5_hallfredhavn_food
+					value = 3
+				}
+				add_treasury = -50
+			}
+		}
+	}
+	else = {
+		random_list = {
+			33 = { #great food haul
+				change_variable = {
+					which = variable_AD5_hallfredhavn_food
+					value = 10
+				}
+				add_treasury = -100
+			}
+			33 = { #decent food haul
+				change_variable = {
+					which = variable_AD5_hallfredhavn_food
+					value = 5
+				}
+				add_treasury = -80
+			}
+			33 = { #meagre food haul
+				change_variable = {
+					which = variable_AD5_hallfredhavn_food
+					value = 3
+				}
+				add_treasury = -50
+			}
+		}
+	}
+}
+
+hallfredhavn_raid_effect = {
+	if = {
+		limit = {
+			has_estate_privilege = estate_nobles_langeyru_slavery
+		}
+		custom_tooltip = ad5_random_province_grows_slavery_tt
+		hidden_effect = {
+			random_owned_province = {
+				hallfredhavn_expand_slavery = yes
+			}
+		}
+		random_list = {
+			25 = { #great raid
+				add_treasury = 75
+			}
+			25 = { #decent raid
+				add_treasury = 50
+			}
+			25 = { #meagre raid
+				add_treasury = 25
+			}
+			25 = { #raid failed
+				add_treasury = 25
+				add_manpower = -0.1
+			}
+		}
+	}
+	else = {
+		random_list = {
+			25 = { #great raid
+				add_treasury = 100
+			}
+			25 = { #decent raid
+				add_treasury = 75
+			}
+			25 = { #meagre raid
+				add_treasury = 50
+			}
+			25 = { #raid failed
+				add_treasury = 25
+				add_manpower = -0.1
+			}
+		}
+	}
+}
+
+hallfredhavn_trade_effect = {
+	if = {
+		limit = {
+			has_country_flag = AD5_outpost_food_flag
+		}
+		random_list = {
+			50 = { #great trade
+				add_treasury = 50
+				add_dip_power = 50
+				change_variable = {
+					which = variable_AD5_hallfredhavn_trades
+					value = 1
+				}
+			}
+			25 = { #decent trade
+				add_treasury = 35
+				add_dip_power = 35
+				change_variable = {
+					which = variable_AD5_hallfredhavn_trades
+					value = 1
+				}
+			}
+			25 = { #meagre trade
+				add_treasury = 25
+				add_dip_power = 25
+			}
+		}
+	}
+	else = {
+		random_list = {
+			33 = { #great trade
+				add_treasury = 50
+				add_dip_power = 50
+				change_variable = {
+					which = variable_AD5_hallfredhavn_trades
+					value = 1
+				}
+			}
+			33 = { #decent trade
+				add_treasury = 35
+				add_dip_power = 35
+				change_variable = {
+					which = variable_AD5_hallfredhavn_trades
+					value = 1
+				}
+			}
+			33 = { #meagre trade
+				add_treasury = 25
+				add_dip_power = 25
+			}
+		}
+	}
+}
+
+AD5_di3se = {
+	add_country_modifier = {
+		name = AD5_adventurous_empire_modifier
+		duration = -1
+	}
+	custom_tooltip = ACE_year_of_manpower_tt
+	add_yearly_manpower = 1
+}
+
+AD5_pe3se = {
+	remove_country_modifier = AD5_pluralism_modifier2
+	add_country_modifier = {
+		name = AD5_tolerant_empire_modifier
+		duration = -1
+	}
+	custom_tooltip = AD5_pearlsguard_churches_tt
+}
+
+AD5_sv3se = {
+	add_country_modifier = {
+		name = AD5_skald_empire_modifier
+		duration = -1
+	}
+}
+
+AD5_sk3se = {
+	remove_country_modifier = AD5_skalir_trade_fleet_modifier
+	add_country_modifier = {
+		name = AD5_trade_empire_modifier
+		duration = -1
+	}
+	custom_tooltip = ACE_interloper_no_more_tt
+	set_country_flag = ACE_taychendi_interloper_no_more_flag
+	2509 = {
+		set_center_level_2_center_of_trade = yes
+	}
+	2495 = {
+		set_center_level_3_center_of_trade = yes
+	}
+}
+
+AD5_vi3se = {
+	add_country_modifier = {
+		name = AD5_slaver_empire_modifier
+		duration = -1
+	}
+}
+
+AD5_generate_hadvar = {
+	add_country_modifier = {
+		name = AD5_just_elected_a_ruler
+		duration = 2
+		hidden = yes
+	}
+	if = {
+		limit = {
+			is_year = 1444
+			NOT = {
+				is_year = 1454
+			}
+		}
+		define_ruler = {
+			name = "Hadvar Rangvaldsson"
+			dynasty = "Divenscourge"
+			adm = 5
+			dip = 5
+			mil = 5
+			claim = 80
+			age = 50
+		}
+		add_ruler_personality = reaver_personality
+		add_ruler_personality = reformist_personality
+		add_ruler_personality = intricate_web_weaver_personality
+	}
+	else_if = {
+		limit = {
+			is_year = 1454
+			NOT = {
+				is_year = 1464
+			}
+		}
+		define_ruler = {
+			name = "Hadvar Rangvaldsson"
+			dynasty = "Divenscourge"
+			adm = 5
+			dip = 5
+			mil = 5
+			claim = 80
+			age = 60
+		}
+		add_ruler_personality = reaver_personality
+		add_ruler_personality = reformist_personality
+		add_ruler_personality = intricate_web_weaver_personality
+	}
+	else_if = {
+		limit = {
+			is_year = 1464
+			NOT = {
+				is_year = 1474
+			}
+		}
+		define_ruler = {
+			name = "Hadvar Rangvaldsson"
+			dynasty = "Divenscourge"
+			adm = 6
+			dip = 5
+			mil = 5
+			claim = 80
+			age = 70
+		}
+		add_ruler_personality = reaver_personality
+		add_ruler_personality = reformist_personality
+		add_ruler_personality = intricate_web_weaver_personality
+	}
+	else_if = {
+		limit = {
+			is_year = 1474
+			NOT = {
+				is_year = 1484
+			}
+		}
+		define_ruler = {
+			name = "Hadvar Rangvaldsson"
+			dynasty = "Divenscourge"
+			adm = 6
+			dip = 5
+			mil = 5
+			claim = 80
+			age = 80
+		}
+		add_ruler_personality = reaver_personality
+		add_ruler_personality = reformist_personality
+		add_ruler_personality = intricate_web_weaver_personality
+	}
+	else_if = {
+		limit = {
+			is_year = 1484
+			NOT = {
+				is_year = 1494
+			}
+		}
+		define_ruler = {
+			name = "Ingram Hadvarsson"
+			dynasty = "Divenscourge"
+			adm = 3
+			dip = 3
+			mil = 6
+			claim = 75
+			age = 46
+		}
+		add_ruler_personality = reaver_personality
+		add_ruler_personality = inspiring_leader_personality
+	}
+	else_if = {
+		limit = {
+			is_year = 1494
+			NOT = {
+				is_year = 1500
+			}
+		}
+		define_ruler = {
+			name = "Ingram Hadvarsson"
+			dynasty = "Divenscourge"
+			adm = 3
+			dip = 4
+			mil = 6
+			claim = 75
+			age = 50
+		}
+		add_ruler_personality = reaver_personality
+		add_ruler_personality = inspiring_leader_personality
+	}
+	else_if = {
+		limit = {
+			is_year = 1500
+			NOT = {
+				is_year = 1510
+			}
+		}
+		define_ruler = {
+			name = "Ingram Hadvarsson"
+			dynasty = "Divenscourge"
+			adm = 4
+			dip = 4
+			mil = 6
+			claim = 75
+			age = 50
+		}
+		add_ruler_personality = reaver_personality
+		add_ruler_personality = inspiring_leader_personality
+		add_ruler_personality = strict_personality
+	}
+	else_if = {
+		limit = {
+			is_year = 1510
+			NOT = {
+				is_year = 1520
+			}
+		}
+		define_ruler = {
+			name = "Sigvard Ingramsson"
+			dynasty = "Divenscourge"
+			adm = 4
+			dip = 4
+			mil = 4
+			claim = 75
+			age = 20
+		}
+		add_ruler_personality = reformist_personality
+	}
+	else_if = {
+		limit = {
+			is_year = 1520
+			NOT = {
+				is_year = 1530
+			}
+		}
+		define_ruler = {
+			name = "Sigvard Ingramsson"
+			dynasty = "Divenscourge"
+			adm = 4
+			dip = 4
+			mil = 4
+			claim = 75
+			age = 30
+		}
+		add_ruler_personality = reformist_personality
+	}
+	else_if = {
+		limit = {
+			is_year = 1530
+			NOT = {
+				is_year = 1540
+			}
+		}
+		define_ruler = {
+			name = "Sigvard Ingramsson"
+			dynasty = "Divenscourge"
+			adm = 5
+			dip = 4
+			mil = 4
+			claim = 75
+			age = 40
+		}
+		add_ruler_personality = reformist_personality
+	}
+	else_if = {
+		limit = {
+			is_year = 1540
+			NOT = {
+				is_year = 1550
+			}
+		}
+		define_ruler = {
+			name = "Sigvard Ingramsson"
+			dynasty = "Divenscourge"
+			adm = 5
+			dip = 5
+			mil = 4
+			claim = 75
+			age = 50
+		}
+		add_ruler_personality = reformist_personality
+	}
+	else = {
+		define_ruler = {
+			dynasty = "Divenscourge"
+			claim = 65
+		}
+	}
+	add_ruler_modifier = {
+		name = ACE_hallfredhavn_ruler_divenscourge
+		duration = -1
+	}
+
+	if = { #heir generation if has heir slot
+		limit = {
+			OR = {
+				has_reform = ACE_autocratic_jarl_reform
+				has_reform = thing_jarldom_reform
+			}
+		}
+		if = {
+			limit = {
+				is_year = 1444
+				NOT = {
+					is_year = 1454
+				}
+			}
+			define_heir = {
+				name = "Gorm Hadvarsson"
+				dynasty = "Divenscourge"
+				adm = 3
+				dip = 4
+				mil = 3
+				claim = 80
+				age = 25
+			}
+			add_heir_personality = reformist_personality
+		}
+		else_if = {
+			limit = {
+				is_year = 1454
+				NOT = {
+					is_year = 1464
+				}
+			}
+			define_heir = {
+				name = "Gorm Hadvarsson"
+				dynasty = "Divenscourge"
+				adm = 4
+				dip = 4
+				mil = 3
+				claim = 80
+				age = 35
+			}
+			add_heir_personality = reformist_personality
+		}
+		else_if = {
+			limit = {
+				is_year = 1464
+				NOT = {
+					is_year = 1474
+				}
+			}
+			define_heir = {
+				name = "Gorm Hadvarsson"
+				dynasty = "Divenscourge"
+				adm = 4
+				dip = 5
+				mil = 3
+				claim = 80
+				age = 45
+			}
+			add_heir_personality = reformist_personality
+		}
+		else_if = {
+			limit = {
+				is_year = 1474
+				NOT = {
+					is_year = 1484
+				}
+			}
+			define_heir = {
+				name = "Gorm Hadvarsson"
+				dynasty = "Divenscourge"
+				adm = 4
+				dip = 5
+				mil = 3
+				claim = 80
+				age = 55
+			}
+			add_heir_personality = reformist_personality
+			add_heir_personality = silver_tongue_personality
+		}
+		else_if = {
+			limit = {
+				is_year = 1484
+				NOT = {
+					is_year = 1494
+				}
+			}
+			define_heir = {
+				name = "Olof Ingramsson"
+				dynasty = "Divenscourge"
+				adm = 5
+				dip = 3
+				mil = 2
+				claim = 80
+				age = 12
+			}
+			add_heir_personality = reformist_personality
+		}
+		else_if = {
+			limit = {
+				is_year = 1494
+				NOT = {
+					is_year = 1500
+				}
+			}
+			define_heir = {
+				name = "Olof Ingramsson"
+				dynasty = "Divenscourge"
+				adm = 5
+				dip = 3
+				mil = 2
+				claim = 80
+				age = 20
+			}
+			add_heir_personality = reformist_personality
+		}
+		else_if = {
+			limit = {
+				is_year = 1500
+				NOT = {
+					is_year = 1510
+				}
+			}
+			define_heir = {
+				name = "Olof Ingramsson"
+				dynasty = "Divenscourge"
+				adm = 5
+				dip = 3
+				mil = 3
+				claim = 80
+				age = 30
+			}
+			add_heir_personality = reformist_personality
+		}
+		else_if = {
+			limit = {
+				is_year = 1510
+				NOT = {
+					is_year = 1520
+				}
+			}
+			define_heir = {
+				name = "Gorm Sigvaldsson"
+				dynasty = "Divenscourge"
+				adm = 3
+				dip = 3
+				mil = 5
+				claim = 80
+				age = 2
+			}
+		}
+		else_if = {
+			limit = {
+				is_year = 1520
+				NOT = {
+					is_year = 1530
+				}
+			}
+			define_heir = {
+				name = "Gorm Sigvaldsson"
+				dynasty = "Divenscourge"
+				adm = 3
+				dip = 3
+				mil = 5
+				claim = 80
+				age = 12
+			}
+		}
+		else_if = {
+			limit = {
+				is_year = 1530
+				NOT = {
+					is_year = 1540
+				}
+			}
+			define_heir = {
+				name = "Gorm Sigvaldsson"
+				dynasty = "Divenscourge"
+				adm = 3
+				dip = 3
+				mil = 5
+				claim = 80
+				age = 22
+			}
+		}
+		else_if = {
+			limit = {
+				is_year = 1530
+				NOT = {
+					is_year = 1540
+				}
+			}
+			define_heir = {
+				name = "Gorm Sigvaldsson"
+				dynasty = "Divenscourge"
+				adm = 3
+				dip = 3
+				mil = 5
+				claim = 80
+				age = 32
+			}
+		}
+	}
+}
+
+AD5_piss_off_svartrskeggs = {
+	if = {
+		limit = {
+			has_country_flag = ad5_monarchist_block_flag
+		}
+		custom_tooltip = AD5_betrayal_of_the_skalds_tt
+		add_stability = -1
+		add_estate_loyalty = {
+			estate = estate_mages
+			loyalty = -50
+		}
+		if = {
+			limit = {
+				religion = skaldhyrric_faith
+			}
+			add_estate_loyalty = {
+				estate = estate_church
+				loyalty = -30
+			}
+		}
+	}
+}
+
+AD5_d9 = {
+	custom_tooltip = AD5_d9_effects_tt
+	hidden_effect = {
+		set_country_flag = AD5_permanent_claim_conversion_flag
+		every_province = {
+			limit = {
+				is_claim = ROOT
+				NOT = {
+					is_permanent_claim = ROOT
+				}
+			}
+			add_permanent_claim = ROOT
+		}
+	}
+}
+
+AD5_p9 = {#"We will gain §YPermanent Claims§! on all §YCannorian Religious Group Provinces§! in §YAelantir§!!"
+	custom_tooltip = AD5_p9_effects_tt
+	hidden_effect = {
+		every_province = {
+			limit = {
+				OR = {
+					continent = north_america
+					continent = south_america
+				}
+				religion_group = cannorian
+			}
+			add_permanent_claim = ROOT
+		}
+	}
+}
+
+AD5_s9 = {#"We will gain §YPermanent Claims§! on all §YPrecursor Relics§! and §YDamestear Provinces§! in §YAelantir§!!"
+	custom_tooltip = AD5_s9_effects_tt
+	hidden_effect = {
+		every_province = {
+			limit = {
+				OR = {
+					continent = north_america
+					continent = south_america
+				}
+				OR = {
+					trade_goods = damestear
+					trade_goods = precursor_relics
+				}
+			}
+			add_permanent_claim = ROOT
+		}
+	}
+}
+
+AD5_sk9 = {#"We will gain §YPermanent Claims§! on all §YCenters of Trade§! and §YEstuaries§! in §YAelantir§!!"
+	custom_tooltip = AD5_sk9_effects_tt
+	hidden_effect = {
+		every_province = {
+			limit = {
+				OR = {
+					continent = north_america
+					continent = south_america
+				}
+				OR = {
+					province_has_center_of_trade_of_level = 1
+					has_river_estuary_trigger = yes
+				}
+			}
+			add_permanent_claim = ROOT
+		}
+	}
+}
+
+AD5_v9 = {#"We will gain §YPermanent Claims§! on all islands in §YAelantir§!!"
+	custom_tooltip = AD5_v9_effects_tt
+	hidden_effect = {
+		every_province = {
+			limit = {
+				OR = {
+					continent = north_america
+					continent = south_america
+				}
+				is_island = yes
+			}
+			add_permanent_claim = ROOT
+		}
+	}
+}
+
+AD5_forge_regalia_scripted_effect = {
+	hidden_effect = {
+		set_variable = {
+			which = AD5_regalia
+			which = 0
+		}
+	}
+	custom_tooltip = AD5_regalia_tt
+	if = {
+		limit = {
+			OR = {
+				any_owned_province = {
+					trade_goods = gems
+				}
+				any_ally = {
+					any_owned_province = {
+						trade_goods = gems
+					}
+				}
+				any_subject_country = {
+					any_owned_province = {
+						trade_goods = gems
+					}						
+				}
+				has_country_flag = AD5_raided_gems
+			}
+		}
+		custom_tooltip = AD5_gems_yes_tt
+		hidden_effect = {
+			change_variable = {
+				which = AD5_regalia
+				which = 1
+			}
+		#	add_treasury = -25
+		}
+	}
+	else = {
+		custom_tooltip = AD5_gems_no_tt
+	}
+	if = {
+		limit = {
+			OR = {
+				any_owned_province = {
+					trade_goods = gold
+				}
+				any_ally = {
+					any_owned_province = {
+						trade_goods = gold
+					}
+				}
+				any_subject_country = {
+					any_owned_province = {
+						trade_goods = gold
+					}						
+				}
+				has_country_flag = AD5_raided_gold
+			}
+		}
+		custom_tooltip = AD5_gold_yes_tt
+		hidden_effect = {
+			change_variable = {
+				which = AD5_regalia
+				which = 1
+			}
+		#	add_treasury = -25
+		}
+	}
+	else = {
+		custom_tooltip = AD5_gold_no_tt
+	}
+	if = {
+		limit = {
+			OR = {
+				any_owned_province = {
+					trade_goods = precursor_relics
+				}
+				any_ally = {
+					any_owned_province = {
+						trade_goods = precursor_relics
+					}
+				}
+				any_subject_country = {
+					any_owned_province = {
+						trade_goods = precursor_relics
+					}						
+				}
+				has_country_flag = AD5_raided_precursor_relics
+			}
+		}
+		custom_tooltip = AD5_precursor_relics_yes_tt
+		hidden_effect = {
+			change_variable = {
+				which = AD5_regalia
+				which = 1
+			}
+		#	add_treasury = -25
+		}
+	}
+	else = {
+		custom_tooltip = AD5_precursor_relics_no_tt
+	}
+	if = {
+		limit = {
+			OR = {
+				any_owned_province = {
+					trade_goods = ivory
+				}
+				any_ally = {
+					any_owned_province = {
+						trade_goods = ivory
+					}
+				}
+				any_subject_country = {
+					any_owned_province = {
+						trade_goods = ivory
+					}						
+				}
+				has_country_flag = AD5_raided_ivory
+			}
+		}
+		custom_tooltip = AD5_ivory_yes_tt
+		hidden_effect = {
+			change_variable = {
+				which = AD5_regalia
+				which = 1
+			}
+		#	add_treasury = -25
+		}
+	}
+	else = {
+		custom_tooltip = AD5_ivory_no_tt
+	}
+	if = {
+		limit = {
+			OR = {
+				any_owned_province = {
+					trade_goods = silk
+				}
+				any_ally = {
+					any_owned_province = {
+						trade_goods = silk
+					}
+				}
+				any_subject_country = {
+					any_owned_province = {
+						trade_goods = silk
+					}						
+				}
+				has_country_flag = AD5_raided_silk
+			}
+		}
+		custom_tooltip = AD5_silk_yes_tt
+		hidden_effect = {
+			change_variable = {
+				which = AD5_regalia
+				which = 1
+			}
+		#	add_treasury = -25
+		}
+	}
+	else = {
+		custom_tooltip = AD5_silk_no_tt
+	}
+	if = {
+		limit = {
+			OR = {
+				any_owned_province = {
+					trade_goods = cloth
+				}
+				any_ally = {
+					any_owned_province = {
+						trade_goods = cloth
+					}
+				}
+				any_subject_country = {
+					any_owned_province = {
+						trade_goods = cloth
+					}						
+				}
+				has_country_flag = AD5_raided_cloth
+			}
+		}
+		custom_tooltip = AD5_cloth_yes_tt
+		hidden_effect = {
+			change_variable = {
+				which = AD5_regalia
+				which = 1
+			}
+		#	add_treasury = -25
+		}
+	}
+	else = {
+		custom_tooltip = AD5_cloth_no_tt
+	}
+	if = {
+		limit = {
+			OR = {
+				any_owned_province = {
+					trade_goods = dyes
+				}
+				any_ally = {
+					any_owned_province = {
+						trade_goods = dyes
+					}
+				}
+				any_subject_country = {
+					any_owned_province = {
+						trade_goods = dyes
+					}						
+				}
+				has_country_flag = AD5_raided_dyes
+			}
+		}
+		custom_tooltip = AD5_dyes_yes_tt
+		hidden_effect = {
+			change_variable = {
+				which = AD5_regalia
+				which = 1
+			}
+		#	add_treasury = -25
+		}
+	}
+	else = {
+		custom_tooltip = AD5_dyes_no_tt
+	}
+	if = {
+		limit = {
+			OR = {
+				any_owned_province = {
+					trade_goods = glass
+				}
+				any_ally = {
+					any_owned_province = {
+						trade_goods = glass
+					}
+				}
+				any_subject_country = {
+					any_owned_province = {
+						trade_goods = glass
+					}						
+				}
+				has_country_flag = AD5_raided_glass
+			}
+		}
+		custom_tooltip = AD5_glass_yes_tt
+		hidden_effect = {
+			change_variable = {
+				which = AD5_regalia
+				which = 1
+			}
+		#	add_treasury = -25
+		}
+	}
+	else = {
+		custom_tooltip = AD5_glass_no_tt
+	}
+	if = {
+		limit = {
+			OR = {
+				any_owned_province = {
+					trade_goods = damestear
+				}
+				any_ally = {
+					any_owned_province = {
+						trade_goods = damestear
+					}
+				}
+				any_subject_country = {
+					any_owned_province = {
+						trade_goods = damestear
+					}						
+				}
+				has_country_flag = AD5_raided_damestear
+			}
+		}
+		custom_tooltip = AD5_damestear_yes_tt
+		hidden_effect = {
+			change_variable = {
+				which = AD5_regalia
+				which = 1
+			}
+		#	add_treasury = -25
+		}
+	}
+	else = {
+		custom_tooltip = AD5_damestear_no_tt
+	}
+	if = {
+		limit = {
+			calc_true_if = {
+				amount = 9
+				hallfredhavn_trade_goods_amount_trigger = yes
+			}
+		}
+		add_treasury = -225
+		add_country_modifier = {
+			name = AD5_regalia_modifier_9
+			duration = -1
+		}
+	}
+	else_if = {
+		limit = {
+			calc_true_if = {
+				amount = 8
+				hallfredhavn_trade_goods_amount_trigger = yes
+			}
+		}
+		add_treasury = -200
+		add_country_modifier = {
+			name = AD5_regalia_modifier_8
+			duration = -1
+		}
+	}
+	else_if = {
+		limit = {
+			calc_true_if = {
+				amount = 7
+				hallfredhavn_trade_goods_amount_trigger = yes
+			}
+		}
+		add_treasury = -175
+		add_country_modifier = {
+			name = AD5_regalia_modifier_7
+			duration = -1
+		}
+	}
+	else_if = {
+		limit = {
+			calc_true_if = {
+				amount = 6
+				hallfredhavn_trade_goods_amount_trigger = yes
+			}
+		}
+		add_treasury = -150
+		add_country_modifier = {
+			name = AD5_regalia_modifier_6
+			duration = -1
+		}
+	}
+	else_if = {
+		limit = {
+			calc_true_if = {
+				amount = 5
+				hallfredhavn_trade_goods_amount_trigger = yes
+			}
+		}
+		add_treasury = -125
+		add_country_modifier = {
+			name = AD5_regalia_modifier_5
+			duration = -1
+		}
+	}
+	else_if = {
+		limit = {
+			calc_true_if = {
+				amount = 4
+				hallfredhavn_trade_goods_amount_trigger = yes
+			}
+		}
+		add_treasury = -100
+		add_country_modifier = {
+			name = AD5_regalia_modifier_4
+			duration = -1
+		}
+	}
+	else_if = {
+		limit = {
+			calc_true_if = {
+				amount = 3
+				hallfredhavn_trade_goods_amount_trigger = yes
+			}
+		}
+		add_treasury = -75
+		add_country_modifier = {
+			name = AD5_regalia_modifier_3
+			duration = -1
+		}
+	}
+	else_if = {
+		limit = {
+			calc_true_if = {
+				amount = 2
+				hallfredhavn_trade_goods_amount_trigger = yes
+			}
+		}
+		add_treasury = -50
+		add_country_modifier = {
+			name = AD5_regalia_modifier_2
+			duration = -1
+		}
+	}
+	else_if = {
+		limit = {
+			calc_true_if = {
+				amount = 1
+				hallfredhavn_trade_goods_amount_trigger = yes
+			}
+		}
+		add_treasury = -25
+		add_country_modifier = {
+			name = AD5_regalia_modifier_1
+			duration = -1
+		}
+	}
+	else = {
+		add_country_modifier = {
+			name = AD5_regalia_modifier_0
+			duration = -1
+		}
+	}
+	hidden_effect = {
+		set_variable = {
+			which = AD5_regalia
+			which = 0
+		}
+	}
+}
+
+hallfredavn_raided_trade_good = {
+	if = {
+		limit = {
+			FROM = {
+				any_neighbor_province = {
+					has_province_modifier = slaves_raided
+					trade_goods = $trade_goods$
+				}
+			}
+		}
+		set_country_flag = AD5_raided_$trade_goods$
+	}
+}

@@ -1,0 +1,44 @@
+elven = {
+
+	# can_form_personal_unions = no
+	flags_with_emblem_percentage = 33  #default == 0
+	flag_emblem_index_range = { 1 57 }
+
+		dusksavior_worship = {
+			color = { 100 94 119 }
+			icon = 142
+			country = {
+			mages_loyalty_modifier = 0.2
+			mages_influence_modifier = 0.4
+			}
+			country_as_secondary = {
+			local_autonomy = -0.1
+			}
+
+			uses_church_power = yes
+
+				aspects = {
+					abjuration_guild_cos
+					conjuration_guild_cos
+					illusion_guild_cos
+					enchantment_guild_cos
+					divination_guild_cos
+					evocation_guild_cos
+					transmutation_guild_cos
+					blood_guild_cos
+					rune_guild_cos
+				}
+
+				aspects_name = DUSKSAVIOR_ASPECTS
+	
+				on_convert = {
+					change_religion = dusksavior_worship
+					add_prestige = -100
+				}
+	
+			heretic = { DEIST }
+	
+			harmonized_modifier = harmonized_faithless
+
+		}
+}

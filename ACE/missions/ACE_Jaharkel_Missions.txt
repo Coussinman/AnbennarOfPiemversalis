@@ -1,0 +1,2965 @@
+AB2_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = AB2
+	}
+	AB2_expand_marines = {
+		icon = mission_marines
+		position = 3
+		required_missions = {
+			AB2_militia
+		}
+		provinces_to_highlight = {
+			is_capital_of = root
+			NOT = {
+				has_manpower_building_trigger = yes
+			}
+		}
+		trigger = {
+			if = {
+				limit = {
+					ai = yes
+				}
+				num_of_marines = 5
+				navy_tradition = 20
+				army_tradition = 20
+			}
+			else = {
+				navy_tradition = 30
+				army_tradition = 30
+				num_of_marines = 5
+				capital_scope = {
+					has_manpower_building_trigger = yes
+				}
+			}
+		}
+		effect = {
+			custom_tooltip = AB2_expand_marines.tt
+			hidden_effect = {
+				remove_country_modifier = republican_miltia
+				remove_country_modifier = newly_formed_marines
+			}
+			add_country_modifier = {
+				name = jaharkel_marines
+				duration = -1
+			}
+			add_country_modifier = {
+				name = disciplined_marines
+				duration = -1
+			}
+		}
+	}
+	AB2_heartlands = {
+		icon = mission_unite_home_region
+		position = 6
+		required_missions = {
+			AB2_coast
+		}
+		provinces_to_highlight = {
+			culture = busilari
+			NOT = {
+				country_or_non_sovereign_subject_holds = root
+			}
+		}
+		trigger = {
+			all_province = {
+				OR = {
+					NOT = {
+						culture = busilari
+					}
+					NOT = {
+						region = businor_region
+					}
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+			}
+		}
+		effect = {
+			add_adm_power = 50
+			add_dip_power = 50
+			add_mil_power = 50
+			363 = {
+				add_permanent_province_modifier = {
+					name = the_sun_shield
+				}
+			}
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = AB2_heartlands.tt
+				first_limit = "B81 = {
+						is_subject_of = root
+						OR = {
+							government = republic
+							government = dictatorship
+						}
+					}
+				"
+				first_effect = "create_subject = {
+							subject_type = brother_republic
+							subject = B81
+						}
+						B81 = {
+						set_country_flag = AB2_vassal_republic_flag
+						add_government_reform = AB2_brother_republic
+						hidden_effect = {
+							change_country_color = {
+								country = root
+							}
+						}
+					}
+				"
+				second_custom_tooltip = AB2_heartlands.tt2
+				second_limit = "B81 = {
+						is_subject_of = root
+						government = monarchy
+					}
+				"
+				second_effect = "B81 = {
+						add_country_modifier = {
+							name = AB2_our_shield
+							duration = -1
+						}
+					}
+				"
+			}
+		}
+	}
+}
+
+AB2_1_2 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = AB2
+	}
+	AB2_urbanization = {
+		icon = mission_early_game_buildings
+		position = 9
+		required_missions = {
+			AB2_sunset_league
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 408
+				province_id = 368
+				province_id = 372
+				province_id = 373
+			}
+			NOT = {
+				AND = {
+					has_trade_building_trigger = yes
+					has_production_building_trigger = yes
+					has_tax_building_trigger = yes
+					development = 25
+				}
+			}
+		}
+		trigger = {
+			408 = {
+				development = 25
+				has_trade_building_trigger = yes
+				has_production_building_trigger = yes
+				has_tax_building_trigger = yes
+			}
+			368 = {
+				development = 25
+				has_trade_building_trigger = yes
+				has_shipyard_building_trigger = yes
+				has_dock_building_trigger = yes
+			}
+			372 = {
+				development = 25
+				has_trade_building_trigger = yes
+				has_production_building_trigger = yes
+				has_tax_building_trigger = yes
+			}
+			373 = {
+				development = 25
+				has_trade_building_trigger = yes
+				has_shipyard_building_trigger = yes
+				has_dock_building_trigger = yes
+			}
+		}
+		effect = {
+			408 = {
+				change_trade_goods = coffee
+				add_building = plantations
+				add_province_modifier = {
+					name = AB2_cannorian_coffee_plantation
+					duration = -1
+				}
+				add_prosperity = 100
+			}
+			custom_tooltip = SEPERATOR_TOOLTIP
+			368 = {
+				change_trade_goods = naval_supplies
+				upgrade_shipyard_building = yes
+				add_prosperity = 100
+			}
+			custom_tooltip = SEPERATOR_TOOLTIP
+			373 = {
+				change_trade_goods = naval_supplies
+				upgrade_shipyard_building = yes
+				add_prosperity = 100
+			}
+			custom_tooltip = SEPERATOR_TOOLTIP
+			372 = {
+				change_province_name = "Garmaz"
+				change_trade_goods = cloth
+				upgrade_production_building = yes
+			}
+		}
+	}
+	AB2_the_arsenal = {
+		icon = expand_the_arsenal
+		position = 11
+		required_missions = {
+			AB2_urbanization
+		}
+		provinces_to_highlight = {
+			is_capital_of = root
+			NOT = {
+				AND = {
+					has_dock_building_trigger = yes
+					has_shipyard_building_trigger = yes
+				}
+			}
+		}
+		trigger = {
+			OR = {
+				num_of_heavy_ship = 5
+				num_of_galley = 20
+			}
+			navy_size_percentage = 1
+			navy_tradition = 35
+			capital_scope = {
+				has_dock_building_trigger = yes
+				has_shipyard_building_trigger = yes
+			}
+		}
+		effect = {
+			capital_scope = {
+				add_great_project = {
+					type = jaherian_arsenal
+				}
+			}
+		}
+	}
+	AB2_west_colony = {
+		icon = mission_rb_grow_the_channel
+		position = 13
+		required_missions = {
+			AB2_the_grand_republic
+		}
+		provinces_to_highlight = {
+			colonial_region = colonial_endralliande
+		}
+		trigger = {
+			colonial_endralliande = {
+				has_discovered = root
+			}
+		}
+		effect = {
+			add_dip_power = 50
+			add_country_modifier = {
+				name = AB2_old_world_charters
+				duration = 7300
+			}
+		}
+	}
+	AB2_coffee_plantations = {
+		icon = mission_zanzibari_trade
+		position = 14
+		required_missions = {
+			AB2_west_colony
+		}
+		provinces_to_highlight = {
+			colonial_region = colonial_endralliande
+		}
+		trigger = {
+			any_subject_country = {
+				is_colonial_nation_of = ROOT
+				capital_scope = {
+					colonial_region = colonial_endralliande
+				}
+				num_of_owned_provinces_with = {
+					value = 5
+					has_port = yes
+				}
+			}
+		}
+		effect = {
+			custom_tooltip = AB2_coffee_plantations.tt2
+			set_country_flag = AB2_coffee_plantations_flag
+			custom_tooltip = AB2_coffee_plantations.tt
+			random_subject_country = {
+				limit = {
+					is_colonial_nation_of = ROOT
+					capital_scope = {
+						colonial_region = colonial_endralliande
+					}
+				}
+				capital_scope = {
+					change_trade_goods = coffee
+				}
+				set_country_flag = AB2_coffee_plantations_flag
+				for = {
+					amount = 3
+					effect = "random_owned_province = {
+							limit = {
+								has_port = yes
+								OR = {
+									has_terrain = grasslands
+									has_terrain = farmlands
+								}
+								NOT = {
+									trade_goods = coffee
+								}
+							}
+							change_trade_goods = coffee
+						}
+					"
+				}
+			}
+			add_country_modifier = {
+				name = AB2_growing_entreprise
+				duration = 7300
+			}
+		}
+	}
+}
+
+AB2_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = AB2
+	}
+	AB2_militia = {
+		icon = mission_italian_condottiere
+		position = 2
+		required_missions = {
+			AB2_reach_out
+		}
+		provinces_to_highlight = {
+			is_capital_of = root
+			not = {
+				base_manpower = 6
+			}
+		}
+		trigger = {
+			if = {
+				limit = {
+					ai = yes
+				}
+				army_size_percentage = 0.7
+			}
+			else = {
+				army_size_percentage = 0.8
+				365 = {
+					base_manpower = 6
+				}
+			}
+		}
+		effect = {
+			create_general = {
+				tradition = 50
+			}
+			add_country_modifier = {
+				name = republican_miltia
+				duration = -1
+			}
+			add_country_modifier = {
+				name = newly_formed_marines
+				duration = -1
+			}
+		}
+	}
+	AB2_inevitable = {
+		icon = mission_alliances
+		position = 4
+		required_missions = {
+			AB2_militia
+		}
+		provinces_to_highlight = {
+			is_capital_of = A29
+		}
+		trigger = {
+			if = {
+				limit = {
+					ai = yes
+				}
+				army_size_percentage = 1
+			}
+			else = {
+				army_size_percentage = 1
+				has_spy_network_in = {
+					who = A29
+					value = 50
+				}
+			}
+		}
+		effect = {
+			country_event_with_effect_insight = {
+				id = flavor_jaherkost.7
+				effect = "custom_tooltip = jaherkost.7.a.tt
+				"
+			}
+			busilar_area = {
+				add_permanent_claim = root
+			}
+			lorbet_area = {
+				add_permanent_claim = root
+			}
+			busilari_straits_area = {
+				add_permanent_claim = root
+			}
+		}
+	}
+	AB2_coast = {
+		icon = mission_northumberland_coast
+		position = 5
+		required_missions = {
+			AB2_inevitable
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = busilar_area
+				area = busilari_straits_area
+				area = lorbet_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = root
+			}
+		}
+		trigger = {
+			busilar_area = {
+				type = all
+				owned_by = root
+			}
+			busilari_straits_area = {
+				type = all
+				owned_by = root
+			}
+			lorbet_area = {
+				type = all
+				owned_by = root
+			}
+		}
+		effect = {
+			add_prestige = 10
+			custom_tooltip = AB2_coast.tt
+			hidden_effect = {
+				for = {
+					amount = 3
+					effect = "random_owned_province = {
+							limit = {
+								has_port = yes
+								has_building = marketplace
+							}
+							upgrade_building = {trade = yes}
+						}
+					"
+				}
+			}
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = AB2_coast.tt2
+				first_limit = "emperor = {
+						or = {
+							alliance_with = root
+							has_100_opinion_improved_relation = {
+								target = root
+							}
+						}
+					}
+				"
+				first_effect = "custom_tooltip = AB2_coast.tt3
+					hidden_effect = {
+						every_country = {
+							limit = {
+								is_part_of_hre = yes
+							}
+							add_aggressive_expansion = {
+								who = root
+								value = -20
+							}
+						}
+					}
+				"
+			}
+		}
+	}
+	AB2_ports = {
+		icon = mission_secure_hajj_ports
+		position = 7
+		required_missions = {
+			AB2_coast
+		}
+		provinces_to_highlight = {
+			owned_by = root
+			NOT = {
+				AND = {
+					has_shipyard_building_trigger = yes
+					has_dock_building_trigger = yes
+				}
+			}
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 3
+				has_shipyard_building_trigger = yes
+				has_dock_building_trigger = yes
+			}
+		}
+		effect = {
+			capital_scope = {
+				add_or_upgrade_shipyard_building = yes
+			}
+			custom_tooltip = ""
+			add_country_modifier = {
+				name = grand_ports
+				duration = -1
+			}
+		}
+	}
+}
+
+AB2_2_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = AB2
+	}
+	AB2_bronze_navy = {
+		icon = mission_iron_and_copper
+		position = 10
+		required_missions = {
+			AB2_urbanization
+		}
+		provinces_to_highlight = {
+			country_or_non_sovereign_subject_holds = root
+			trade_goods = copper
+			NOT = {
+				AND = {
+					base_production = 8
+					has_production_building_trigger = yes
+				}
+			}
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 3
+				trade_goods = copper
+				base_production = 8
+				has_production_building_trigger = yes
+			}
+		}
+		effect = {
+			add_years_of_owned_provinces_production_income = {
+				years = 1
+			}
+			country_event_with_option_insight = {
+				id = flavor_jaherkost.11
+				option_1 = "add_country_modifier = {
+						name = AB2_bronze_cannons
+						duration = -1
+					}
+				"
+				option_2 = "add_country_modifier = {
+						name = AB2_bronze_navy
+						duration = -1
+					}
+				"
+			}
+		}
+	}
+	AB2_divenhal_trade = {
+		icon = mississippi_company
+		position = 11
+		required_missions = {
+			AB2_stone_toll
+		}
+		provinces_to_highlight = {
+			province_id = 36
+			NOT = {
+				AND = {
+					has_trade_building_trigger = yes
+					development = 15
+				}
+			}
+		}
+		trigger = {
+			mercantilism = 25
+			36 = {
+				has_trade_building_trigger = yes
+				development = 15
+			}
+			custom_trigger_tooltip = {
+				tooltip = AB2_divenhal_trade.tt
+				employed_advisor = {
+					skill = 3
+					category = DIP
+				}
+			}
+		}
+		effect = {
+			set_country_flag = AB2_divenhal_trade_flag
+			36 = {
+				change_trade_goods = paper
+				center_of_trade = 1
+			}
+			custom_tooltip = ""
+			add_country_modifier = {
+				name = divenhal_trade_company
+				duration = -1
+			}
+			custom_tooltip = AB2_divenhal_trade.tt2
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = AB2_divenhal_trade.tt3
+				first_limit = "is_trade_league_leader = yes
+				"
+				first_effect = "add_mercantilism = 5
+				"
+			}
+		}
+	}
+	AB2_the_grand_republic = {
+		icon = republican_yearnings
+		position = 12
+		required_missions = {
+			AB2_akasik
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = akarat_area
+				area = ekha_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = root
+			}
+		}
+		trigger = {
+			ekha_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = root
+			}
+			akarat_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = root
+			}
+		}
+		effect = {
+			add_dip_power = 100
+			create_explorer = {
+				tradition = 50
+			}
+			add_country_modifier = {
+				name = western_winds
+				duration = 18250
+			}
+		}
+	}
+	AB2_south_winds = {
+		icon = mission_south_indian_trade
+		position = 14
+		required_missions = {
+			AB2_the_grand_republic
+		}
+		provinces_to_highlight = {
+			region = dao_nako_region
+		}
+		trigger = {
+			any_province = {
+				region = dao_nako_region
+				owned_by = root
+			}
+		}
+		effect = {
+			add_mercantilism = 3
+			add_country_modifier = {
+				name = sarhali_riches
+				duration = 7300
+			}
+			bavabetsaro_area = {
+				add_permanent_claim = root
+			}
+			sombimofo_area = {
+				add_permanent_claim = root
+			}
+			pikakely_area = { #TODO CHECK
+				add_permanent_claim = root
+			}
+		}
+	}
+	AB2_cloves_and_spice = {
+		icon = mission_rb_colonise_spice_islands
+		position = 15
+		required_missions = {
+			AB2_south_winds
+		}
+		provinces_to_highlight = {
+			region = fahvanosy_region
+		}
+		trigger = {
+			calc_true_if = {
+				amount = 3
+				all_province = {
+					OR = {
+						trade_goods = cloves
+						trade_goods = spices
+					}
+					country_or_non_sovereign_subject_holds = root
+				}
+			}
+		}
+		effect = {
+			add_mercantilism = 3
+			380 = {
+				change_trade_goods = spices
+				add_province_modifier = {
+					name = spice_markets
+					duration = -1
+				}
+			}
+		}
+	}
+	AB2_dominate_clove_trade = {
+		icon = mam_harness_spice_trade
+		position = 16
+		required_missions = {
+			AB2_cloves_and_spice
+			AB2_fahvanosy
+		}
+		provinces_to_highlight = {
+			AND = {
+				OR = {
+					province_id = 3082
+				}
+				NOT = {
+					trade_share = {
+						country = ROOT
+						share = 35
+					}
+				}
+			}
+		}
+		trigger = {
+			6632 = {
+				trade_share = {
+					country = ROOT
+					share = 35
+				}
+			}
+		}
+		effect = {
+			add_mercantilism = 3
+			random_province = {
+				limit = {
+					OR = {
+						trade_goods = cloves
+					}
+					country_or_non_sovereign_subject_holds = root
+				}
+				add_province_modifier = {
+					name = major_clove_source
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				add_country_modifier = {
+					name = sarhal_trade_domination
+					duration = -1
+				}
+			}
+			tooltip = {
+				add_country_modifier = {
+					name = sarhal_trade_domination
+					duration = -1
+				}
+			}
+		}
+	}
+}
+
+AB2_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = AB2
+	}
+	AB2_reach_out = {
+		icon = mission_indian_stateman
+		position = 1
+		provinces_to_highlight = {
+			is_capital = yes
+			owner = {
+				primary_culture = sun_elf
+				NOT = {
+					tag = AB2
+				}
+			}
+		}
+		trigger = {
+			if = {
+				limit = {
+					ai = yes
+				}
+				any_country = {
+					has_100_opinion_improved_relation = {
+						target = root
+					}
+				}
+			}
+			else = {
+				OR = {
+					any_ally = {
+						culture = sun_elf
+					}
+					calc_true_if = {
+						amount = 2
+						all_country = {
+							culture = sun_elf
+							has_100_opinion_improved_relation = {
+								target = root
+							}
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			365 = {
+				change_culture = sun_elf
+				add_province_modifier = {
+					name = sun_elf_migrants
+					duration = 3650
+				}
+				large_increase_of_elven_tolerance_effect = yes
+			}
+			define_advisor = {
+				type = diplomat
+				culture = sun_elf
+				religion = bulwari_sun_cult
+				skill = 2
+				discount = yes
+			}
+			if = {
+				limit = {
+					ai = yes
+				}
+				every_country = {
+					limit = {
+						has_100_opinion_improved_relation = {
+							target = root
+						}
+					}
+					add_trust = {
+						who = PREV
+						value = 10
+						mutual = yes
+					}
+				}
+			}
+			else = {
+				every_country = {
+					limit = {
+						OR = {
+							AND = {
+								alliance_with = root
+								culture = sun_elf
+							}
+							AND = {
+								has_100_opinion_improved_relation = {
+									target = root
+								}
+								culture = sun_elf
+							}
+						}
+					}
+					add_trust = {
+						who = PREV
+						value = 10
+						mutual = yes
+					}
+				}
+			}
+		}
+	}
+	AB2_merchant_navy = {
+		icon = imperial_navy
+		position = 2
+		required_missions = {
+			AB2_reach_out
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			if = {
+				limit = {
+					ai = yes
+				}
+				treasury = 50
+			}
+			else = {
+				num_of_light_ship = 7
+				num_of_admirals = 1
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					ai = yes
+				}
+				capital_scope = {
+					spawn_units_for = {
+						type = light_ship
+						who = AB2
+						amount = 5
+					}
+				}
+				add_navy_tradition = 10
+				add_sailors = 1000
+				add_country_modifier = {
+					name = newly_formed_navy_AI
+					duration = 9125
+				}
+				define_advisor = {
+					type = naval_reformer
+					culture = sun_elf
+					religion = bulwari_sun_cult
+					skill = 1
+					discount = yes
+				}
+			}
+			else = {
+				add_navy_tradition = 10
+				add_sailors = 1000
+				add_country_modifier = {
+					name = newly_formed_navy
+					duration = 9125
+				}
+				define_advisor = {
+					type = naval_reformer
+					culture = sun_elf
+					religion = bulwari_sun_cult
+					skill = 1
+					discount = yes
+				}
+			}
+		}
+	}
+	AB2_secure_trade = {
+		icon = mission_dominate_home_trade_node
+		position = 3
+		required_missions = {
+			AB2_merchant_navy
+			AB2_port_jaher
+		}
+		provinces_to_highlight = {
+			AND = {
+				province_id = 1296
+				NOT = {
+					trade_share = {
+						country = ROOT
+						share = 10
+					}
+				}
+			}
+		}
+		trigger = {
+			if = {
+				limit = {
+					ai = yes
+				}
+				380 = {
+					trade_share = {
+						country = ROOT
+						share = 10
+					}
+				}
+				navy_size_percentage = 0.7
+			}
+			else = {
+				380 = {
+					trade_share = {
+						country = ROOT
+						share = 15
+					}
+				}
+				navy_size_percentage = 1
+			}
+		}
+		effect = {
+			add_mercantilism = 3
+			custom_tooltip = AB2_secure_trade.tt
+			custom_tooltip = ""
+			capital_scope = {
+				add_trade_node_income = 5
+			}
+			custom_tooltip = ""
+			hidden_effect = {
+				every_province = {
+					limit = {
+						same_trade_node_as = 380
+						province_has_center_of_trade_of_level = 1
+					}
+					add_permanent_claim = root
+				}
+			}
+			452 = {
+				add_permanent_claim = root
+			}
+		}
+	}
+	AB2_gemisle = {
+		icon = mission_rb_conquer_the_isles
+		position = 5
+		required_missions = {
+			AB2_secure_trade
+		}
+		provinces_to_highlight = {
+			province_id = 452
+			NOT = {
+				AND = {
+					owned_by = root
+					has_coast_defense_building_trigger = yes
+				}
+			}
+		}
+		trigger = {
+			if = {
+				limit = {
+					ai = yes
+				}
+				452 = {
+					owned_by = root
+				}
+			}
+			else = {
+				452 = {
+					owned_by = root
+					has_coast_defense_building_trigger = yes
+				}
+			}
+		}
+		effect = {
+			add_mercantilism = 3
+			452 = {
+				add_province_modifier = {
+					name = fort_gemisle
+					duration = -1
+				}
+			}
+			crathanor_area = {
+				add_permanent_claim = root
+			}
+			reuyel_area = {
+				add_permanent_claim = root
+			}
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = AB2_gemisle.tt
+				first_limit = "U17 = {
+						exists = yes
+					}
+				"
+				first_effect = "add_casus_belli = {
+						type = cb_vassalize_mission
+						target = U17
+						months = 300
+					}
+				"
+				second_custom_tooltip = AB2_gemisle.tt2
+				second_limit = "U18 = {
+						exists = yes
+					}
+				"
+				second_effect = "add_casus_belli = {
+						type = cb_vassalize_mission
+						target = U18
+						months = 300
+					}
+				"
+				third_custom_tooltip = AB2_gemisle.tt3
+				third_limit = "F23 = {
+						exists = yes
+					}
+				"
+				third_effect = "add_casus_belli = {
+						type = cb_vassalize_mission
+						target = F23
+						months = 300
+					}
+				"
+			}
+		}
+	}
+	AB2_bahari_republics = {
+		icon = republican_yearnings
+		position = 6
+		required_missions = {
+			AB2_gemisle
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = crathanor_area
+				area = reuyel_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = root
+			}
+		}
+		trigger = {
+			crathanor_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = root
+			}
+			reuyel_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = root
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = republic_of_the_west
+				duration = -1
+			}
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = AB2_bahari_republics.tt
+				first_limit = "U17 = {
+						is_subject_of = root
+					}
+				"
+				first_effect = "U17 = {
+						custom_tooltip = AB2_bahari_republics.tt2
+						hidden_effect = {
+							set_country_flag = AB2_vassal_republic_flag
+							root = {
+								create_subject = {
+									subject_type = brother_republic
+									subject = U17
+								}
+							}
+							add_government_reform = AB2_brother_republic
+						}
+					}
+				"
+				second_custom_tooltip = AB2_bahari_republics.tt3
+				second_limit = "U18 = {
+						is_subject_of = root
+					}
+				"
+				second_effect = "U18 = {
+						custom_tooltip = AB2_bahari_republics.tt4
+						hidden_effect = {
+							set_country_flag = AB2_vassal_republic_flag
+							root = {
+								create_subject = {
+									subject_type = brother_republic
+									subject = U18
+								}
+							}
+							add_government_reform = AB2_brother_republic
+						}
+					}
+				"
+				third_custom_tooltip = AB2_bahari_republics.tt6
+				third_limit = "F23 = {
+						is_subject_of = root
+					}
+				"
+				third_effect = "F23 = {
+						custom_tooltip = AB2_bahari_republics.tt4
+						hidden_effect = {
+							set_country_flag = AB2_vassal_republic_flag
+							root = {
+								create_subject = {
+									subject_type = brother_republic
+									subject = F23
+								}
+							}
+							add_government_reform = AB2_brother_republic
+						}
+					}
+				"
+			}
+		}
+	}
+	AB2_expand_league = {
+		icon = mission_heart_of_the_hansa
+		position = 7
+		required_missions = {
+			AB2_bahari_republics
+		}
+		provinces_to_highlight = {
+			province_id = 365
+			NOT = {
+				AND = {
+					province_has_center_of_trade_of_level = 3
+					num_of_buildings_in_province = 5
+					development = 30
+				}
+			}
+		}
+		trigger = {
+			if = {
+				limit = {
+					ai = yes
+				}
+				365 = {
+					development = 30
+				}
+			}
+			else = {
+				365 = {
+					province_has_center_of_trade_of_level = 3
+					development = 30
+					num_of_buildings_in_province = 5
+				}
+			}
+		}
+		effect = {
+			365 = {
+				remove_province_modifier = port_jaher
+				add_province_modifier = {
+					name = gem_of_the_divenhal
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						region = businor_region
+						not = {
+							province_id = 365
+						}
+					}
+					add_province_modifier = {
+						name = founding_the_league
+						duration = 7300
+					}
+				}
+			}
+			custom_tooltip = AB2_expand_league.tt2
+			tooltip = {
+				add_province_modifier = {
+					name = founding_the_league
+					duration = 7300
+				}
+			}
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = AB2_expand_league.tt
+				first_limit = "capital_scope = {
+						is_prosperous = yes
+					}
+				"
+				first_effect = "365 = {
+						add_base_manpower = 1
+						add_base_production = 1
+						add_base_production = 1
+					}
+				"
+			}
+		}
+	}
+	AB2_sunset_league = {
+		icon = unite_the_league
+		position = 8
+		required_missions = {
+			AB2_expand_league
+			AB2_ports
+			AB2_burning_shadows
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 516
+				province_id = 521
+				province_id = 451
+			}
+			NOT = {
+				AND = {
+					has_trade_building_trigger = yes
+					has_shipyard_building_trigger = yes
+					has_production_building_trigger = yes
+					development = 25
+				}
+			}
+		}
+		trigger = {
+			if = {
+				limit = {
+					ai = yes
+				}
+				380 = {
+					trade_share = {
+						country = ROOT
+						share = 30
+					}
+				}
+				516 = {
+					development = 25
+				}
+				521 = {
+					development = 25
+				}
+				451 = {
+					development = 30
+				}
+				OR = {
+					U17 = {
+						exists = no
+					}
+					U17 = {
+						is_subject_of = root
+					}
+				}
+				OR = {
+					U18 = {
+						exists = no
+					}
+					U18 = {
+						is_subject_of = root
+					}
+				}
+			}
+			else = {
+				380 = {
+					trade_share = {
+						country = ROOT
+						share = 45
+					}
+				}
+				516 = {
+					development = 25
+					has_trade_building_trigger = yes
+					has_shipyard_building_trigger = yes
+					has_production_building_trigger = yes
+				}
+				521 = {
+					development = 25
+					has_trade_building_trigger = yes
+					has_shipyard_building_trigger = yes
+					has_production_building_trigger = yes
+				}
+				451 = {
+					development = 30
+					has_trade_building_trigger = yes
+					has_shipyard_building_trigger = yes
+					has_production_building_trigger = yes
+				}
+				OR = {
+					U17 = {
+						exists = no
+					}
+					U17 = {
+						is_subject_of = root
+					}
+				}
+				OR = {
+					U18 = {
+						exists = no
+					}
+					U18 = {
+						is_subject_of = root
+					}
+				}
+			}
+		}
+		effect = {
+			override_country_name = SUNSETREPUBLIC
+			set_country_flag = AB2_sunset_republic_flag
+			add_government_reform = AB2_sunset_republic
+			516 = {
+				add_permanent_province_modifier = {
+					name = founding_league_city
+				}
+			}
+			521 = {
+				add_permanent_province_modifier = {
+					name = founding_league_city
+				}
+			}
+			451 = {
+				add_permanent_province_modifier = {
+					name = founding_league_city
+				}
+			}
+			1254 = {
+				change_province_name = "Golden Coast"
+			}
+		}
+	}
+}
+
+AB2_3_2 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = AB2
+	}
+	AB2_overshadow_eborthil = {
+		icon = mission_invade_england_ITA
+		position = 9
+		required_missions = {
+			AB2_sunset_league
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			380 = {
+				is_strongest_trade_power = ROOT
+			}
+			navy_size = A47
+		}
+		effect = {
+			isle_of_tef_area = {
+				add_permanent_claim = root
+			}
+			add_country_modifier = {
+				name = war_for_domination
+				duration = 5475
+			}
+		}
+	}
+	AB2_stone_toll = {
+		icon = mission_the_sound_toll
+		position = 10
+		required_missions = {
+			AB2_overshadow_eborthil
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 39
+				province_id = 379
+			}
+			NOT = {
+				AND = {
+					has_trade_building_trigger = yes
+					has_production_building_trigger = yes
+				}
+			}
+		}
+		trigger = {
+			isle_of_tef_area = {
+				type = all
+				owned_by = root
+			}
+			39 = {
+				has_trade_building_trigger = yes
+				has_production_building_trigger = yes
+			}
+			379 = {
+				has_trade_building_trigger = yes
+				has_production_building_trigger = yes
+				owned_by = root
+			}
+		}
+		effect = {
+			add_mercantilism = 3
+			middle_akasik_area = {
+				add_permanent_claim = root
+			}
+			ekha_area = {
+				add_permanent_claim = root
+			}
+			country_event_with_option_insight = {
+				id = flavor_jaherkost.12
+				option_1 = "custom_tooltip = jaherkost.12.a.tt
+					39 = {
+						add_base_tax = 1
+						upgrade_trade_building = yes
+					}
+					379 = {
+						add_base_tax = 1
+						upgrade_trade_building = yes
+					}
+				"
+				option_2 = "custom_tooltip = jaherkost.12.b.tt
+					39 = {
+						remove_province_modifier = lion_toll
+						add_base_production = 1
+						upgrade_production_building = yes
+					}
+					379 = {
+						remove_province_modifier = stonegaze_toll
+						change_trade_goods = copper
+						add_base_production = 1
+						upgrade_production_building = yes
+					}
+				"
+			}
+		}
+	}
+	AB2_akasik = {
+		icon = mission_impaled_soldies
+		position = 11
+		required_missions = {
+			AB2_stone_toll
+			AB2_dominate_seas
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 400
+				province_id = 386
+				province_id = 406
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = root
+			}
+		}
+		trigger = {
+			400 = {
+				country_or_non_sovereign_subject_holds = root
+			}
+			386 = {
+				country_or_non_sovereign_subject_holds = root
+			}
+			406 = {
+				country_or_non_sovereign_subject_holds = root
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = converting_akasik
+				duration = 7300
+			}
+			every_owned_province = {
+				limit = {
+					region = akasik_region
+					trade_goods = slaves
+				}
+				change_trade_goods = unknown
+			}
+			custom_tooltip = AB2_the_grand_republic.tt
+			hidden_effect = {
+				every_known_country = {
+					limit = {
+						has_country_modifier = orcish_slaves_in_colonies
+					}
+					ROOT = {
+						add_casus_belli = {
+							type = cb_abolish_slavery
+							target = PREV
+						}
+					}
+				}
+			}
+		}
+	}
+	AB2_abolition = {
+		icon = french_revolution
+		position = 12
+		required_missions = {
+			AB2_akasik
+		}
+		provinces_to_highlight = {
+			is_capital = yes
+			owner = {
+				has_country_modifier = orcish_slaves_in_colonies
+			}
+		}
+		trigger = {
+			check_variable = {
+				which = AB2_abolished_num
+				value = 5
+			}
+			8 = {
+				trade_share = {
+					country = root
+					share = 15
+				}
+			}
+		}
+		effect = {
+			add_stability = 1
+			add_prestige_or_monarch_power = {
+				amount = 50
+			}
+			8 = {
+				add_trade_modifier = {
+					who = root
+					duration = 7300
+					power = 20
+					key = abolished_slavery
+				}
+			}
+			custom_tooltip = AB2_abolition.tt
+			hidden_effect = {
+				every_country = {
+					limit = {
+						has_country_modifier = orcish_slaves_in_colonies
+					}
+					add_prestige = 5
+					add_country_modifier = {
+						name = innovative_modifier
+						duration = 3650
+					}
+					add_country_modifier = {
+						name = "the_abolish_slavery_act"
+						duration = -1
+					}
+					remove_country_modifier = orcish_slaves_in_colonies
+					custom_tooltip = abolished_slavery_act_tooltip
+					hidden_effect = {
+						every_owned_province = {
+							limit = {
+								trade_goods = slaves
+								country_or_non_sovereign_subject_holds = root
+							}
+							change_trade_goods = unknown
+							remove_building = tradecompany
+							if = {
+								limit = {
+									has_province_modifier = slave_entrepot
+								}
+								remove_province_modifier = slave_entrepot
+							}
+						}
+					}
+				}
+			}
+			custom_tooltip = AB2_abolition.tt2
+			hidden_effect = {
+				every_country = {
+					limit = {
+						capital_scope = {
+							continent = europe
+						}
+						any_owned_province = {
+							trade_goods = slaves
+						}
+					}
+					ROOT = {
+						add_casus_belli = {
+							type = cb_abolish_slavery
+							target = PREV
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+AB2_3_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = AB2
+		NOT = {
+			has_country_flag = AB2_jadd_flag
+		}
+	}
+	AB2_branch_3 = {
+		icon = mission_unknown_mission
+		position = 8
+		required_missions = {
+			AB2_abolition
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+		}
+	}
+}
+
+AB2_3_4 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = AB2
+		has_country_flag = AB2_jadd_flag
+	}
+	AB2_sun_empire = {
+		icon = mission_rule_of_the_sun
+		position = 13
+		required_missions = {
+			AB2_abolition
+		}
+		provinces_to_highlight = {
+			is_capital = yes
+			owner = {
+				NOT = {
+					religion = the_jadd
+				}
+			}
+		}
+		trigger = {
+			army_size_percentage = 0.85
+			any_elector = {
+				religion = the_jadd
+			}
+			calc_true_if = {
+				amount = 5
+				all_country = {
+					capital_scope = {
+						continent = europe
+					}
+					religion = the_jadd
+				}
+			}
+		}
+		effect = {
+			set_country_flag = AB2_republic_emperor
+			custom_tooltip = AB2_sun_empire.tt
+			hidden_effect = {
+				set_hre_religion_locked = yes
+				set_hre_religion_treaty = yes
+				set_hre_religion = emperor
+			}
+			hidden_effect = {
+				set_hre_heretic_religion = the_jadd
+			}
+			hidden_effect = {
+				enable_hre_leagues = yes
+			}
+			custom_tooltip = ""
+			custom_tooltip = AB2_sun_empire.tt2
+			hidden_effect = {
+				every_known_country = {
+					limit = {
+						is_part_of_hre = yes
+						government = republic
+						any_owned_province = {
+							has_port = yes
+						}
+					}
+					root = {
+						add_casus_belli = {
+							type = cb_establish_brother_republic_cb
+							target = PREV
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+AB2_3_5 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = AB2
+	}
+	AB2_fahvanosy = {
+		icon = mission_trade_company_region_abroad
+		position = 15
+		required_missions = {
+			AB2_south_winds
+		}
+		provinces_to_highlight = {
+			area = bavabetsaro_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = root
+			}
+		}
+		trigger = {
+			bavabetsaro_area = {
+				type = all
+				owned_by = root
+			}
+		}
+		effect = {
+			3239 = {
+				add_center_of_trade_level = 1
+				change_trade_goods = spices
+			}
+			custom_tooltip = AB2_fahvanosy.tt
+			set_country_flag = AB2_fahvanosy_company
+			fahvanosy_region = {
+				add_permanent_claim = root
+			}
+		}
+	}
+	AB2_riches_of_sarhal = {
+		icon = mission_african_gold
+		position = 17
+		required_missions = {
+			AB2_dominate_clove_trade
+			AB2_expand_the_company
+		}
+		provinces_to_highlight = {
+			OR = {
+				superregion = fangaula_superregion
+				superregion = tanib_dajek_superregion
+				superregion = taneyas_superregion
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = root
+			}
+		}
+		trigger = {
+			6599 = {
+				trade_share = {
+					country = ROOT
+					share = 50
+				}
+			}
+			calc_true_if = {
+				amount = 3
+				any_province = {
+					continent = africa
+					province_has_center_of_trade_of_level = 3
+					country_or_non_sovereign_subject_holds = root
+				}
+			}
+			calc_true_if = {
+				amount = 50
+				all_province = {
+					OR = {
+						superregion = fangaula_superregion
+						superregion = tanib_dajek_superregion
+						superregion = taneyas_superregion
+					}
+					country_or_non_sovereign_subject_holds = root
+				}
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = hold_on_sarhal
+				duration = -1
+			}
+			custom_tooltip = AB2_riches_of_sarhal.tt
+			hidden_effect = {
+				every_province = {
+					limit = {
+						continent = africa
+						province_has_center_of_trade_of_level = 1
+					}
+					add_permanent_claim = root
+				}
+			}
+		}
+	}
+}
+
+AB2_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = AB2
+	}
+	AB2_port_jaher = {
+		icon = mission_hanseatic_city
+		position = 2
+		required_missions = {
+			AB2_reach_out
+		}
+		provinces_to_highlight = {
+			province_id = 365
+			NOT = {
+				AND = {
+					has_trade_building_trigger = yes
+					development = 20
+				}
+			}
+		}
+		trigger = {
+			if = {
+				limit = {
+					ai = yes
+				}
+				365 = {
+					development = 20
+				}
+			}
+			else = {
+				365 = {
+					has_trade_building_trigger = yes
+					development = 20
+				}
+			}
+		}
+		effect = {
+			custom_tooltip = AB2_port_jaher.tt
+			365 = {
+				set_province_flag = AB2_port_jaher
+				add_province_modifier = {
+					name = port_jaher
+					duration = -1
+				}
+				add_prosperity = 50
+			}
+		}
+	}
+	AB2_coffee = {
+		icon = yem_coffee
+		position = 3
+		required_missions = {
+			AB2_port_jaher
+		}
+		provinces_to_highlight = {
+			is_capital = yes
+			owner = {
+				any_owned_province = {
+					trade_goods = coffee
+				}
+			}
+		}
+		trigger = {
+			if = {
+				limit = {
+					ai = yes
+				}
+				treasury = 100
+				capital_scope = {
+					has_production_building_trigger = yes
+				}
+			}
+			else = {
+				treasury = 100
+				capital_scope = {
+					has_production_building_trigger = yes
+				}
+				any_country = {
+					any_owned_province = {
+						trade_goods = coffee
+					}
+					has_100_opinion_improved_relation = {
+						target = root
+					}
+				}
+			}
+		}
+		effect = {
+			add_treasury = -100
+			capital_scope = {
+				change_trade_goods = coffee
+			}
+			add_country_modifier = {
+				name = cannorian_coffee_plantation
+				duration = 7300
+			}
+		}
+	}
+	AB2_the_borders = {
+		icon = mission_landsknecht_soldier
+		position = 4
+		required_missions = {
+			AB2_secure_trade
+		}
+		provinces_to_highlight = {
+			province_id = 413
+		}
+		trigger = {
+			if = {
+				limit = {
+					ai = yes
+				}
+				treasury = 150
+			}
+			else = {
+				treasury = 150
+				413 = {
+					owner = {
+						has_spy_network_from = {
+							who = root
+							value = 30
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			country_event = {
+				id = flavor_jaherkost.4
+			}
+		}
+	}
+	AB2_nathalaire = {
+		icon = mission_mountain_castle
+		position = 6
+		required_missions = {
+			AB2_gemisle
+			AB2_the_borders
+		}
+		provinces_to_highlight = {
+			province_id = 451
+		}
+		trigger = {
+			navy_size = A74
+			OR = {
+				AND = {
+					treasury = 100
+					A74 = {
+						is_part_of_hre = yes
+					}
+					emperor = {
+						has_100_opinion_improved_relation = {
+							target = root
+						}
+					}
+				}
+				AND = {
+					A74 = {
+						NOT = {
+							is_part_of_hre = yes
+						}
+					}
+				}
+				451 = {
+					country_or_non_sovereign_subject_holds = root
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					451 = {
+						country_or_non_sovereign_subject_holds = root
+					}
+				}
+				add_dip_power = 100
+				add_prestige = 10
+			}
+			else = {
+				451 = {
+					add_permanent_claim = root
+				}
+				add_country_modifier = {
+					name = approaching_nathalaire
+					duration = 3650
+				}
+				complex_dynamic_effect_without_alternative = {
+					first_custom_tooltip = AB2_nathalaire.tt
+					first_limit = "A74 = {
+							is_part_of_hre = yes
+						}
+					"
+					first_effect = "country_event = {
+							id = flavor_jaherkost.9
+						}
+					"
+				}
+			}
+		}
+	}
+	AB2_burning_shadows = {
+		icon = mission_fire_judgement
+		position = 7
+		required_missions = {
+			AB2_nathalaire
+		}
+		provinces_to_highlight = {
+			province_id = 451
+			NOT = {
+				AND = {
+					is_core = root
+					religion = root
+				}
+			}
+		}
+		trigger = {
+			451 = {
+				is_core = ROOT
+				religion = ROOT
+			}
+		}
+		effect = {
+			add_mil_power = 50
+			add_years_of_trade_income = {
+				years = 1
+				custom_tooltip = BYZ_add_1_years_of_trade_income
+			}
+			complex_dynamic_effect_without_alternative = {
+				first_custom_tooltip = AB2_burning_shadows.tt
+				first_limit = "451 = {
+						trade_goods = slaves
+					}
+				"
+				first_effect = "country_event = {
+						id = flavor_jaherkost.10
+					}
+				"
+				second_custom_tooltip = AB2_burning_shadows.tt2
+				second_limit = "OR = {
+						has_country_flag = AB2_jadd_flag
+					}
+				"
+				second_effect = "
+					if = {
+						limit = {
+							religion = the_jadd
+						}
+						451 = {
+							set_province_flag = jadd_center_flag
+							custom_tooltip = AB2_burning_shadows.tt3
+							add_reform_center = the_jadd
+						}
+					}
+				"
+			}
+		}
+	}
+}
+
+AB2_4_2 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = AB2
+	}
+	AB2_dominate_seas = {
+		icon = mission_sea_battles
+		position = 10
+		required_missions = {
+			AB2_overshadow_eborthil
+			AB2_claim_islands
+		}
+		provinces_to_highlight = {
+			is_capital = yes
+			owner = {
+				any_owned_province = {
+					sea_zone = {
+						OR = {
+							region = divenhal_sea_region
+						}
+					}
+				}
+			}
+		}
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = AB2_dominate_seas_tt
+				NOT = {
+					any_country = {
+						any_owned_province = {
+							sea_zone = {
+								OR = {
+									region = divenhal_sea_region
+								}
+							}
+						}
+						navy_size = ROOT
+					}
+				}
+			}
+			OR = {
+				num_of_heavy_ship = 20
+				num_of_light_ship = 50
+				num_of_voc_indiamen = 25
+				num_of_galley = 50
+			}
+		}
+		effect = {
+			create_admiral = {
+				tradition = 100
+			}
+			add_navy_tradition = 20
+			add_sailors = 5000
+			define_advisor = {
+				type = naval_reformer
+				culture = sun_elf
+				religion = the_jadd
+				skill = 3
+				discount = yes
+			}
+		}
+	}
+	AB2_elven_settlements = {
+		icon = mission_elf_smiling
+		position = 11
+		required_missions = {
+			AB2_dominate_seas
+		}
+		provinces_to_highlight = {
+			owned_by = root
+			has_province_modifier = trade_post_modifier
+			NOT = {
+				has_trade_building_trigger = yes
+			}
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				has_province_modifier = trade_post_modifier
+				has_trade_building_trigger = yes
+			}
+		}
+		effect = {
+			set_country_flag = AB2_elven_settlements_flag
+			custom_tooltip = AB2_elven_settlements.tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						has_province_modifier = trade_post_modifier
+					}
+					add_province_modifier = {
+						name = elf_settlement
+						duration = -1
+					}
+					change_trade_goods = coffee
+					change_culture = sun_elf
+				}
+			}
+		}
+	}
+	AB2_zalerian_marines = {
+		icon = mission_omani_marines
+		position = 12
+		required_missions = {
+			AB2_elizna
+		}
+		provinces_to_highlight = {
+			province_id = 496
+			NOT = {
+				is_core = ROOT
+				has_shipyard_building_trigger = yes
+				has_manpower_building_trigger = yes
+			}
+		}
+		trigger = {
+			army_professionalism = 0.55
+			496 = {
+				is_core = ROOT
+				has_shipyard_building_trigger = yes
+				has_manpower_building_trigger = yes
+			}
+		}
+		effect = {
+			custom_tooltip = AB2_zalerian_marines.tt
+			hidden_effect = {
+				remove_country_modifier = jaharkel_marines
+				remove_country_modifier = disciplined_marines
+			}
+			add_country_modifier = {
+				name = zalerian_marine_integration
+				duration = -1
+			}
+			add_country_modifier = {
+				name = coastal_stormers
+				duration = -1
+			}
+		}
+	}
+	AB2_expand_the_company = {
+		icon = mission_indian_trade_company
+		position = 16
+		required_missions = {
+			AB2_fahvanosy
+		}
+		provinces_to_highlight = {
+			OR = {
+				region = fahvanosy_region
+				region = dao_nako_region
+				region = horashesh_region
+			}
+			country_or_non_sovereign_subject_holds = root
+		}
+		trigger = {
+			calc_true_if = {
+				amount = 20
+				all_province = {
+					OR = {
+						region = fahvanosy_region
+						region = dao_nako_region
+						region = horashesh_region
+					}
+					country_or_non_sovereign_subject_holds = root
+				}
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = expanding_the_company
+				duration = -1
+			}
+			for = {
+				amount = 3
+				custom_tooltip = AB2_expand_the_company.tt
+				effect = "random_province = {
+						limit = {
+							OR = {
+								region = fahvanosy_region
+								region = dao_nako_region
+								region = horashesh_region
+							}
+							province_has_center_of_trade_of_level = 1	
+							country_or_non_sovereign_subject_holds = root
+						}
+					add_center_of_trade_level = 1
+					}
+				"
+			}
+		}
+	}
+}
+
+AB2_5_1 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = AB2
+	}
+	AB2_the_western_sun = {
+		icon = mission_sunset
+		position = 3
+		required_missions = {
+			AB2_port_jaher
+		}
+		provinces_to_highlight = {
+			is_capital_of = ROOT
+			NOT = {
+				AND = {
+					has_tax_building_trigger = yes
+					religion = the_jadd
+				}
+			}
+		}
+		trigger = {
+			capital_scope = {
+				has_tax_building_trigger = yes
+			}
+			religion = the_jadd
+		}
+		effect = {
+			add_stability = 1
+			add_republican_tradition = 10
+			add_estate_loyalty = {
+				estate = estate_church
+				loyalty = 10
+			}
+			set_country_flag = AB2_jadd_flag
+			swap_non_generic_missions = yes
+		}
+	}
+}
+
+AB2_5_branch = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = AB2
+		NOT = {
+			has_country_flag = AB2_conversion_stance_flag
+			has_country_flag = AB2_tolerance_stance_flag
+			has_country_flag = AB2_jadd_flag
+		}
+	}
+	AB2_5_branching1 = {
+		icon = mission_unknown_mission
+		position = 5
+		required_missions = {
+			AB2_the_western_sun
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+		}
+		effect = {
+		}
+	}
+	AB2_5_branching2 = {
+		icon = mission_unknown_mission
+		position = 7
+		required_missions = {
+			AB2_5_branching1
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+		}
+		effect = {
+		}
+	}
+}
+
+AB2_5_tolerance = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = AB2
+		has_country_flag = AB2_tolerance_stance_flag
+	}
+	AB2_freedom_of_thought = {
+		icon = mission_hands_praying
+		position = 3
+		required_missions = {
+			AB2_the_western_sun
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			has_estate_privilege = estate_burghers_enforced_interfaith_dialogue
+			any_owned_province = {
+				NOT = {
+					religion = root
+				}
+			}
+			num_accepted_cultures = 2
+		}
+		effect = {
+			add_country_modifier = {
+				name = AB2_tolerant_society
+				duration = -1
+			}
+			custom_tooltip = AB2_freedom_of_thought.tt
+		}
+	}
+	AB2_diverse_nation = {
+		icon = mission_elf_smiling
+		position = 4
+		required_missions = {
+			AB2_freedom_of_thought
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			num_accepted_cultures = 4
+			calc_true_if = {
+				high_tolerance_dwarven_race_trigger = yes
+				high_tolerance_elven_race_trigger = yes
+				high_tolerance_halfling_race_trigger = yes
+				high_tolerance_gnomish_race_trigger = yes
+				high_tolerance_half_orcish_race_trigger = yes
+				high_tolerance_kobold_race_trigger = yes
+				high_tolerance_orcish_race_trigger = yes
+				high_tolerance_human_race_trigger = yes
+				high_tolerance_gnollish_race_trigger = yes
+				high_tolerance_ruinborn_race_trigger = yes
+				high_tolerance_goblin_race_trigger = yes
+				high_tolerance_harpy_race_trigger = yes
+				high_tolerance_troll_race_trigger = yes
+				high_tolerance_half_elven_race_trigger = yes
+				high_tolerance_ogre_race_trigger = yes
+				high_tolerance_harimari_race_trigger = yes
+				high_tolerance_centaur_race_trigger = yes
+				high_tolerance_hobgoblin_race_trigger = yes
+				high_tolerance_lizardfolk_race_trigger = yes
+				high_tolerance_mechanim_race_trigger = yes
+				amount = 4
+			}
+		}
+		effect = {
+			remove_country_modifier = AB2_tolerant_society
+			add_country_modifier = {
+				name = AB2_diverse_nation
+				duration = -1
+			}
+			capital_scope = {
+				add_dwarven_minority_size_effect = yes
+				add_human_minority_size_effect = yes
+				add_half_elven_minority_size_effect = yes
+				random_list = {
+					33 = {
+						add_goblin_minority_size_effect = yes
+					}
+					33 = {
+						add_halfling_minority_size_effect = yes
+					}
+					33 = {
+						add_gnomish_minority_size_effect = yes
+					}
+				}
+			}
+			custom_tooltip = ""
+			increase_all_existing_tolerances = {
+				size = medium
+			}
+			custom_tooltip = AB2_diverse_nation.tt
+		}
+	}
+}
+
+AB2_5_conversion = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = AB2
+		has_country_flag = AB2_conversion_stance_flag
+	}
+	AB2_places_of_worship = {
+		icon = mission_sun_temple
+		position = 3
+		required_missions = {
+			AB2_the_western_sun
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				has_tax_building_trigger = yes
+			}
+			OR = {
+				advisor = theologian
+				advisor = inquisitor
+			}
+		}
+		effect = {
+			custom_tooltip = Z05_faithful_tt
+			set_country_flag = Z05_faithful
+			custom_tooltip = AB2_places_of_worship.tt2
+			set_country_flag = AB2_inquisitors_flag
+			for = {
+				amount = 5
+				custom_tooltip = AB2_places_of_worship.tt
+				effect = "random_owned_province = {
+						limit = {
+							has_tax_building_trigger = yes
+						}
+						add_base_tax = 1
+					}
+				"
+			}
+		}
+	}
+	AB2_western_bastion_of_faith = {
+		icon = mission_sunset_alternative
+		position = 4
+		required_missions = {
+			AB2_places_of_worship
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+			religious_unity = 1
+			estate_loyalty = {
+				estate = estate_church
+				loyalty = 60
+			}
+			num_of_estate_agendas_completed = {
+				estate = estate_church
+				value = 3
+			}
+			num_of_owned_states_with = {
+				value = 3
+				has_holy_order_trigger = yes
+			}
+		}
+		effect = {
+			365 = {
+				upgrade_building = {
+					tax = yes
+				}
+				set_province_flag = nsc_center_flag
+				custom_tooltip = AB2_western_bastion_of_faith.tt
+				add_reform_center = bulwari_sun_cult
+			}
+			add_country_modifier = {
+				name = AB2_western_bulwark
+				duration = -1
+			}
+		}
+	}
+}
+
+AB2_5_jadd = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = AB2
+		has_country_flag = AB2_jadd_flag
+	}
+	AB2_spread_truth = {
+		icon = mission_desert_pilgrim
+		position = 5
+		required_missions = {
+			AB2_the_western_sun
+		}
+		provinces_to_highlight = {
+			
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				continent = europe
+				religion = the_jadd
+			}
+			has_global_modifier_value = {
+				which = global_missionary_strength
+				value = 0.05
+			}
+			num_of_light_ship = 10
+		}
+		effect = {
+			enable_propogate_religion_effect = yes
+			set_country_flag = 25_trade_power_for_propogate_religion
+			custom_tooltip = AB2_spread_truth.tt
+			add_country_modifier = {
+				name = AB2_prilgrimages
+				duration = 7300
+			}
+		}
+	}
+	AB2_a_zealous_republic = {
+		icon = mission_arise_ashes
+		position = 7
+		required_missions = {
+			AB2_spread_truth
+		}
+		provinces_to_highlight = {
+			owned_by = root
+			NOT = {
+				has_tax_building_trigger = yes
+			}
+		}
+		trigger = {
+			calc_true_if = {
+				amount = 50
+				all_province = {
+					religion = the_jadd
+					continent = europe
+				}
+			}
+			num_of_owned_provinces_with = {
+				value = 10
+				has_tax_building_trigger = yes
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = AB2_zealous_republic
+				duration = -1
+			}
+			custom_tooltip = AB2_a_zealous_republic.tt
+			set_country_flag = enabled_great_holy_war_cb
+		}
+	}
+}
+
+AB2_5_2 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = AB2
+	}
+}
+
+AB2_5_3 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = AB2
+	}
+	AB2_claim_islands = {
+		icon = mission_invade_island
+		position = 9
+		required_missions = {
+			AB2_sunset_league
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 6760
+				province_id = 533
+				province_id = 6761
+				province_id = 582
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = root
+			}
+		}
+		trigger = {
+			6760 = {
+				owned_by = root
+			}
+			533 = {
+				owned_by = root
+			}
+			6761 = {
+				owned_by = root
+			}
+			582 = {
+				owned_by = root
+			}
+		}
+		effect = {
+			6761 = {
+				change_culture = ROOT
+				change_religion = ROOT
+				add_center_of_trade_level = 1
+				add_country_modifier = {
+					name = bulwari_settlement
+					duration = -1
+				}
+			}
+		}
+	}
+	AB2_elizna = {
+		icon = mission_rb_control_electors
+		position = 11
+		required_missions = {
+			AB2_claim_islands
+		}
+		provinces_to_highlight = {
+			is_capital_of = U05
+		}
+		trigger = {
+			OR = {
+				U05 = {
+					exists = no
+				}
+				AND = {
+					U05 = {
+						has_50_opinion_improved_relation = {
+							target = root
+						}
+						has_spy_network_from = {
+							who = ROOT
+							value = 30
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			complex_dynamic_effect = {
+				first_custom_tooltip = AB2_elizna.tt
+				first_limit = "U05 = {
+						exists = yes
+					}
+				"
+				first_effect = "country_event ={
+						id = flavor_jaherkost.16
+					}
+				"
+				second_custom_tooltip = AB2_elizna.tt2
+				second_limit = "OR = {
+						U05 = {
+							exists = no
+						}
+						AND = {
+							466 = {
+							owned_by = U05
+							}
+							473 = {
+							owned_by = U05
+							}
+							475 = {
+							owned_by = U05
+							}
+						}
+					}
+				"
+				second_effect = "elizna_area = {
+						add_permanent_claim = root
+					}
+					add_country_modifier = {
+						name = war_for_elizna
+						duration = 3650
+					}
+				"
+			}
+		}
+	}
+	AB2_bulwari_ports = {
+		icon = mission_secure_hajj_ports
+		position = 12
+		required_missions = {
+			AB2_elizna
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 565
+				province_id = 560
+				province_id = 543
+				province_id = 536
+			}
+		}
+		trigger = {
+			565 = {
+				owned_by = root
+				trade_share = {
+					country = ROOT
+					share = 25
+				}
+			}
+			560 = {
+				owned_by = root
+			}
+			543 = {
+				owned_by = root
+			}
+			536 = {
+				owned_by = root
+				trade_share = {
+					country = ROOT
+					share = 25
+				}
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = divenhal_supremacy
+				duration = -1
+			}
+			custom_tooltip = AB2_bulwari_ports.tt
+			hidden_effect = {
+				every_province = {
+					limit = {
+						superregion = bulwar_superregion
+						province_has_center_of_trade_of_level = 1
+						NOT = {
+							country_or_non_sovereign_subject_holds = root
+						}
+					}
+					add_permanent_claim = root
+				}
+			}
+			536 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = -1
+					power = 25
+					key = divenhal_domination
+				}
+			}
+			565 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = -1
+					power = 25
+					key = divenhal_domination
+				}
+			}
+		}
+	}
+}
+
+AB2_5_4 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = AB2
+		NOT = {
+			has_country_flag = AB2_jadd_flag
+		}
+	}
+	AB2_branch_2 = {
+		icon = mission_unknown_mission
+		position = 13
+		required_missions = {
+			AB2_bulwari_ports
+		}
+		provinces_to_highlight = {
+		}
+		trigger = {
+		}
+		effect = {
+		}
+	}
+}
+
+AB2_5_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = AB2
+		has_country_flag = AB2_jadd_flag
+	}
+	AB2_victory_over_bulwar = {
+		icon = mission_sunset_alternative
+		position = 13
+		required_missions = {
+			AB2_bulwari_ports
+		}
+		provinces_to_highlight = {
+			superregion = bulwar_superregion
+			NOT = {
+				religion = the_jadd
+			}
+		}
+		trigger = {
+			601 = {
+				religion = the_jadd
+			}
+			calc_true_if = {
+				amount = 50
+				all_province = {
+					superregion = bulwar_superregion
+					religion = the_jadd
+				}
+			}
+		}
+		effect = {
+			add_adm_power = 100
+			add_dip_power = 100
+			add_mil_power = 100
+			601 = {
+				set_province_flag = jadd_center_flag
+				custom_tooltip = AB2_victory_over_bulwar.tt
+				add_reform_center = the_jadd
+			}
+			custom_tooltip = AB2_victory_over_bulwar_tt
+			hidden_effect = {
+				every_country = {
+					limit = {
+						religion = bulwari_sun_cult
+					}
+					country_event = {
+						id = jaddari_missions.1
+						random = 365
+					}
+				}
+				every_province = {
+					limit = {
+						religion = bulwari_sun_cult
+					}
+					if = {
+						limit = {
+							culture = sun_elf
+						}
+						random_list = {
+							80 = {
+							}
+							20 = {
+								change_religion = the_jadd
+							}
+						}
+					}
+					else = {
+						random_list = {
+							40 = {
+							}
+							60 = {
+								change_religion = the_jadd
+							}
+						}
+					}
+				}
+				set_global_flag = reformed_the_sun_cult
+			}
+		}
+	}
+}
