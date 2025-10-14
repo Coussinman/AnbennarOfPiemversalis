@@ -190,3 +190,113 @@ country_event = {
         }
     }
 }
+
+namespace = custom_celmador_nimscodd_issue
+
+country_event = {
+    id = custom_celmador_nimscodd_issue.1
+    title = custom_celmador_nimscodd_issue.1.t
+    desc = custom_celmador_nimscodd_issue.1.d
+    picture = GFX_evt_debate
+
+    is_triggered_only = yes
+
+    option = {
+        name = custom_celmador_nimscodd_issue.1.a
+        #céde oddcodd(198) à celmador contre du dev capital et des tunes
+        # Transfert de la province
+        198 = {
+            # Si elle n'est pas déjà à Celmador, on transfère
+            if = { 
+                limit = { owner = { NOT = { tag = Z22 } } }        
+                change_owner = Z22                                
+            }
+            cede_province = Z22
+            add_core = Z22                                         
+            remove_core = A06                                     
+            clr_city = no                                          
+        }
+
+        # Compensation : développement dans la capitale de Nimscodd
+        capital_scope = {
+            add_base_tax = 2
+            add_base_production = 2
+            add_base_manpower = 1
+        }
+
+        # Compensation : transfert d'or (Celmador paie, Nimscodd reçoit)
+        add_treasury = 200
+        Z22 = { add_treasury = -200 }
+
+        # Petite détente diplomatique & trêve
+        add_truce_with = Z22
+        Z22 = {
+            add_opinion = { who = A06 modifier = positive_event_opinion } # nécessite un opinion modifier; sinon commente cette ligne
+        }
+        
+        Z22 = { country_event = { id = custom_celmador_nimscodd_issue.2 } }
+    }
+
+    option = {
+        name = custom_celmador_nimscodd_issue.1.b
+        # Part en guerre contre Celmador pour l'île de Oddcodd
+
+        Z22 = { country_event = { id = custom_celmador_nimscodd_issue.3 } }
+    }
+}
+
+country_event = {
+    id = custom_celmador_nimscodd_issue.2
+    title = custom_celmador_nimscodd_issue.2.t
+    desc = custom_celmador_nimscodd_issue.2.d
+    picture = GFX_evt_trade_ports
+
+    is_triggered_only = yes
+    trigger = { tag = Z22 }   # Remplace par z22 si ton tag est en minuscules
+
+    option = {
+        name = custom_celmador_nimscodd_issue.2.a
+
+        198 = {
+            add_base_production = 2
+            add_elven_minority_size_effect = yes
+            add_province_modifier = {
+                name = z22_storm_isles_trade
+                duration = -1
+            }
+        }
+
+        storm_isles_area = {
+            add_nationalism = -5
+        }
+
+        696 = {
+            add_gnomish_minority_size_effect = yes
+        }
+    }
+}
+
+country_event = {
+    id = custom_celmador_nimscodd_issue.3
+    title = custom_celmador_nimscodd_issue.3.t
+    desc = custom_celmador_nimscodd_issue.3.d
+    picture = GFX_evt_trade_ports
+
+    is_triggered_only = yes
+    trigger = { tag = Z22 }   # Remplace par z22 si ton tag est en minuscules
+
+    option = {
+        name = custom_celmador_nimscodd_issue.3.a
+
+        198 = {
+            add_permanent_claim = Z22
+        }
+
+        declare_war_with_cb = {
+            who = A06
+            casus_belli = cb_conquest
+            war_goal_province = 198
+        }
+        
+    }
+}
