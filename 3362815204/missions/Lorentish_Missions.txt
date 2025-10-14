@@ -496,10 +496,10 @@ lorent_internal = {
 			}	
 			OR = {
 				dynasty = "Siloriel"
-				dynasty = "síl Rubenaire"
-				dynasty = "síl Eilísin"
-				dynasty = "síl Madelaire"
-				dynasty = "síl Kyliande"
+				dynasty = "sï¿½l Rubenaire"
+				dynasty = "sï¿½l Eilï¿½sin"
+				dynasty = "sï¿½l Madelaire"
+				dynasty = "sï¿½l Kyliande"
 			}
 		}
 		
@@ -1674,7 +1674,13 @@ lorent_conflict_with_gawed_and_anbennar = {
 		trigger = {
 			if = {
 				limit = { exists = A13 }
-				war_with = A13
+				OR = {
+					is_rival = A13
+					has_opinion_modifier = {
+						who = A13
+						modifier = insulted
+					}
+				}
 			}
 		}
 		

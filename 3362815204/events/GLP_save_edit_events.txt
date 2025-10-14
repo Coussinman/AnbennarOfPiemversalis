@@ -3829,125 +3829,6 @@ country_event = {
 	}
 }
 
-#The last reflection
-country_event = {
-	id = glp_save_edit_events_NUKE.1
-	title = glp_save_edit_events_NUKE.EVTNAME1
-	desc = glp_save_edit_events_NUKE.EVTDESC1
-	picture = BIG_STAR_IN_SKY_eventPicture
-
-	is_triggered_only = yes
-
-	trigger = {
-	}
-
-	mean_time_to_happen = {
-	}
-
-	option = {
-		name = glp_save_edit_events_NUKE.EVTOPTZZ1
-		hidden_effect = {
-			clear_global_event_target = MJ_nuke
-		}
-	}
-	option = {
-		name = glp_save_edit_events_NUKE.EVTOPTA01
-		event_target:MJ_nuke = { owner = { country_event = { id = glp_save_edit_events_NUKE.2 } } }
-	}
-	option = {
-		name = glp_save_edit_events_NUKE.EVTOPTA02
-		event_target:MJ_nuke = { owner = { country_event = { id = glp_save_edit_events_NUKE.3 } } }
-	}
-}
-
-#Saved from the MJ wrath
-country_event = {
-	id = glp_save_edit_events_NUKE.2
-	title = glp_save_edit_events_NUKEWARNING.EVTNAME1
-	desc = glp_save_edit_events_NUKEWARNING.EVTDESC1
-	picture = BANKRUPTCY_eventPicture
-
-	is_triggered_only = yes
-
-	trigger = {
-	}
-
-	mean_time_to_happen = {
-	}
-
-	option = {
-		name = glp_save_edit_events_NUKEWARNING.EVTOPTA01
-	}
-	option = {
-		name = glp_save_edit_events_NUKEWARNING.EVTOPTA02
-	}
-	option = {
-		name = glp_save_edit_events_NUKEWARNING.EVTOPTA03
-	}
-	after = {
-		hidden_effect = {
-			clear_global_event_target = MJ_nuke
-		}
-	}
-}
-
-#It exploded...
-country_event = {
-	id = glp_save_edit_events_NUKE.3
-	title = glp_save_edit_events_NUKEEXPLODED.EVTNAME1
-	desc = glp_save_edit_events_NUKEEXPLODED.EVTDESC1
-	picture = BIG_STAR_IN_SKY_eventPicture
-
-	is_triggered_only = yes
-
-	trigger = {
-	}
-
-	mean_time_to_happen = {
-	}
-
-	immediate = {
-		hidden_effect = {
-			event_target:MJ_nuke = {
-				add_devastation = 100
-				if = {
-					limit = { base_tax = 2 }
-					set_base_tax = 1
-				}
-				if = {
-					limit = { base_production = 2 }
-					set_base_production = 1
-				}
-				if = {
-					limit = { base_manpower = 2 }
-					set_base_manpower = 1
-				}
-				kill_units = {
-					who = enemy
-				}
-				kill_units = {
-					who = owner
-				} 
-				kill_units = {
-					who = controller
-				}
-				remove_all_buildings = yes
-			}
-		}
-	}
-
-	option = {
-		name = glp_save_edit_events_NUKEEXPLODED.EVTOPTA01
-	}
-
-	after = {
-		hidden_effect = {
-			clear_global_event_target = MJ_nuke
-		}
-	}
-}
-
-
 # Change Province Religion Event
 
 country_event = {
@@ -8133,6 +8014,10 @@ country_event = {
 		country_event = { id = glp_save_edit_events_estate.6 }
 	}
 }
+
+
+namespace = glp_save_edit_events_estate
+
 country_event = {
 	id = glp_save_edit_events_estate.1
 	title = "glp_save_edit_events_estate.EVTNAME1"
@@ -11769,5 +11654,127 @@ country_event = {
 	}
 	after = {
 		clear_global_event_target = estate_modification_target
+	}
+}
+
+
+namespace = glp_save_edit_events_NUKE
+
+
+#The last reflection
+country_event = {
+	id = glp_save_edit_events_NUKE.1
+	title = glp_save_edit_events_NUKE.EVTNAME1
+	desc = glp_save_edit_events_NUKE.EVTDESC1
+	picture = BIG_STAR_IN_SKY_eventPicture
+
+	is_triggered_only = yes
+
+	trigger = {
+	}
+
+	mean_time_to_happen = {
+	}
+
+	option = {
+		name = glp_save_edit_events_NUKE.EVTOPTZZ1
+		hidden_effect = {
+			clear_global_event_target = MJ_nuke
+		}
+	}
+	option = {
+		name = glp_save_edit_events_NUKE.EVTOPTA01
+		event_target:MJ_nuke = { owner = { country_event = { id = glp_save_edit_events_NUKE.2 } } }
+	}
+	option = {
+		name = glp_save_edit_events_NUKE.EVTOPTA02
+		event_target:MJ_nuke = { owner = { country_event = { id = glp_save_edit_events_NUKE.3 } } }
+	}
+}
+
+#Saved from the MJ wrath
+country_event = {
+	id = glp_save_edit_events_NUKE.2
+	title = glp_save_edit_events_NUKEWARNING.EVTNAME1
+	desc = glp_save_edit_events_NUKEWARNING.EVTDESC1
+	picture = BANKRUPTCY_eventPicture
+
+	is_triggered_only = yes
+
+	trigger = {
+	}
+
+	mean_time_to_happen = {
+	}
+
+	option = {
+		name = glp_save_edit_events_NUKEWARNING.EVTOPTA01
+	}
+	option = {
+		name = glp_save_edit_events_NUKEWARNING.EVTOPTA02
+	}
+	option = {
+		name = glp_save_edit_events_NUKEWARNING.EVTOPTA03
+	}
+	after = {
+		hidden_effect = {
+			clear_global_event_target = MJ_nuke
+		}
+	}
+}
+
+#It exploded...
+country_event = {
+	id = glp_save_edit_events_NUKE.3
+	title = glp_save_edit_events_NUKEEXPLODED.EVTNAME1
+	desc = glp_save_edit_events_NUKEEXPLODED.EVTDESC1
+	picture = BIG_STAR_IN_SKY_eventPicture
+
+	is_triggered_only = yes
+
+	trigger = {
+	}
+
+	mean_time_to_happen = {
+	}
+
+	immediate = {
+		hidden_effect = {
+			event_target:MJ_nuke = {
+				add_devastation = 100
+				if = {
+					limit = { base_tax = 2 }
+					set_base_tax = 1
+				}
+				if = {
+					limit = { base_production = 2 }
+					set_base_production = 1
+				}
+				if = {
+					limit = { base_manpower = 2 }
+					set_base_manpower = 1
+				}
+				kill_units = {
+					who = enemy
+				}
+				kill_units = {
+					who = owner
+				} 
+				kill_units = {
+					who = controller
+				}
+				remove_all_buildings = yes
+			}
+		}
+	}
+
+	option = {
+		name = glp_save_edit_events_NUKEEXPLODED.EVTOPTA01
+	}
+
+	after = {
+		hidden_effect = {
+			clear_global_event_target = MJ_nuke
+		}
 	}
 }
