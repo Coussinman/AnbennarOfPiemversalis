@@ -937,6 +937,11 @@ country_event = {
 	mean_time_to_happen = {
 		years = 30
 		modifier = {
+			factor = 0.01
+			tag = A48
+			has_country_flag = sugamber_ahati_hostility
+		}
+		modifier = {
 			factor = 1.25
 			tag = F66
 		}
@@ -986,6 +991,8 @@ country_event = {
 
 	trigger = {
 		is_emperor_of_china = yes
+		OR = {
+			AND = {
 		has_estate = estate_ahati
 		NOT = { has_country_modifier = ahati_disaster_timer }
 		is_year = 1500 #at least
@@ -994,6 +1001,21 @@ country_event = {
 			estate_influence = { estate = estate_ahati influence = 40 }
 			has_country_modifier = duwarkani_disgruntled_ahati #duwarkani MT 
 		}
+			}
+			AND = {
+				tag = A48
+				had_country_flag = {
+					flag = sugamber_ahati_hostility
+					days = 7300
+				}
+			}
+		}
+		NOT = {
+			has_country_flag = sugamber_ahati_vow_success
+		}
+		NOT = { has_country_modifier = ahati_disaster_timer }
+		is_year = 1500 #at least
+		total_development = 400
 	}
 
 	immediate = {
@@ -1036,7 +1058,13 @@ country_event = {
 
 	trigger = {
 		is_emperor_of_china = yes
+		OR = {
 		has_estate = estate_ahati
+			AND = {
+				tag = A48
+				has_country_flag = sugamber_ahati_hostility
+			}
+		}
 	}
 	
 	immediate = {
@@ -1128,7 +1156,13 @@ country_event = {
 
 	trigger = {
 		is_emperor_of_china = yes
+		OR = {
 		has_estate = estate_ahati
+			AND = {
+				tag = A48
+				has_country_flag = sugamber_ahati_hostility
+			}
+		}
 		has_country_flag = current_aakhet_host
 	}
 
@@ -2208,12 +2242,33 @@ country_event = {
 
 	trigger = {
 		is_emperor_of_china = yes
+		OR = {
 		has_estate = estate_ahati
+			AND = {
+				tag = A48
+				has_country_flag = sugamber_ahati_hostility
+			}
+		}
 	}
 
 	immediate = {
 		hidden_effect = {
 			set_global_flag = aakheta_released
+			if = {
+				limit = {
+					tag = A48
+					has_country_flag = sugamber_ahati_vow_failure
+				}
+				masusopot_area = {
+					add_core = U04
+				}
+				awaashesh_area = {
+					add_core = U04
+				}
+				ibtat_axast_area = {
+					add_core = U04
+				}
+			}
 			U04 = { every_core_province = { change_religion = aakhetist } }
 			release_with_religion_and_culture = { tag = U04 religion = aakhetist culture = hapremiti }
 			U04 = {
@@ -2427,7 +2482,114 @@ country_event = {
 					clr_province_flag = ahati_barracks
 				}
 			}
-			country_event = { id = ahati_events.175 days = 1 }
+			
+			if = {
+				limit = {
+					tag = A48
+					has_country_flag = sugamber_nirakhetist_hostility
+				}
+				every_owned_province = {
+					limit = {
+						OR = {
+							area = lower_sorrow_area
+							area = hitputtiushesh_area
+							province_id = 468
+							province_id = 469
+							province_id = 474
+							province_id = 502
+							
+						}
+					}
+					add_core = U02
+					cede_province = U02
+				}
+				if = {
+					limit = {
+						tag = A48
+						has_country_flag = sugamber_nirakhetist_vow_failure
+					}
+					every_owned_province = {
+						limit = {
+							OR = {
+								area = upper_sorrow_area
+								province_id = 592
+								province_id = 6089
+								
+							}
+						}
+						add_core = U02
+						cede_province = U02
+					}
+				}
+				U02 = {
+					change_religion = nirakhetist
+					change_primary_culture = hapremiti
+					change_government = theocracy
+					add_government_reform = monastic_order_reform
+					set_capital = 473
+					add_manpower = 20
+					add_treasury = 1000
+					add_country_modifier = {
+						name = aakheta_uprising_modifier
+						duration = -1
+					}
+					add_country_modifier = {
+						name = aakheta_recovery
+						duration = 90
+					}
+					define_ruler = {
+						adm = 3
+						dip = 4
+						mil = 5
+						age = 64
+						claim = 100
+						male = yes
+						culture = hapremiti
+						religion = nirakhetist
+					}
+					add_ruler_personality = inspiring_leader_personality
+					add_ruler_personality = strict_personality
+					add_ruler_personality = industrious_personality
+					define_general = {
+						fire = 3
+						shock = 11
+						manuever = 4
+						siege = 7
+						trait = war_wizard_personality
+					}
+					capital_scope = {
+						spawn_aakheta_army_ai = yes
+						spawn_aakheta_army_ai = yes
+					}
+					random_owned_province = {
+						spawn_aakheta_army_ai = yes
+					}
+					for = {
+						custom_tooltip = " "
+						amount = 10
+						effect = "
+							random_owned_province = {
+								limit = {
+									NOT = {
+										has_fort_building_trigger = yes
+										any_neighbor_province = {
+											has_fort_building_trigger = yes
+										}
+									}
+								}
+								add_latest_building = {
+									builder = ROOT
+									fort = yes
+								}
+							}
+						"
+					}
+				}
+			}
+			country_event = {
+				id = ahati_events.175
+				days = 1
+			}
 		}
 	}
 
@@ -2451,6 +2613,11 @@ country_event = {
 	#Play as them
 	option = {
         name = ahati_events.170.b
+		trigger = {
+			NOT = {
+				tag = A48
+			}
+		}
         ai_chance = { factor = 0 }
 		custom_tooltip = ahati_events.170.tooltip2
 		switch_tag = U04
@@ -2484,6 +2651,18 @@ country_event = {
 		custom_tooltip = ahati_events.171.tooltip
 		hidden_effect = { U04 = { disband_all_units = yes } }
 		inherit = U04
+		if = {
+			limit = {
+				tag = A48
+				has_country_flag = sugamber_nirakhetist_hostility
+			}
+			hidden_effect = {
+				U02 = {
+					disband_all_units = yes
+				}
+			}
+			inherit = U02
+		}
 		add_estate_loyalty = { estate = estate_ahati loyalty = 30 }
         add_estate_influence_modifier = { estate = estate_ahati influence = -75 duration = 3650 desc = ahati_defeated }
 		add_mandate = 20
@@ -2706,8 +2885,15 @@ country_event = {
 			}
 			declare_war_with_cb = { who = ROOT casus_belli = cb_aakheta_uprising } 
 		}
-
-		ai_chance = { factor = 100 }
+		if = {
+			limit = {
+				tag = A48
+				has_country_flag = sugamber_nirakhetist_hostility
+			}
+			U02 = {
+				join_all_offensive_wars_of = U04
+			}
+		}
 	}
 }
 

@@ -1,6 +1,67 @@
 
 namespace = flavor_gawed
 
+#Gawed Setup
+country_event = {
+	id = flavor_gawed.0
+	title = flavor_gawed.0.t
+	desc = flavor_gawed.0.d
+	picture = BORDER_TENSION_eventPicture
+
+	is_triggered_only = yes
+
+	trigger = {
+		tag = A13
+	}
+
+	immediate = {
+		add_government_power = {
+			mechanic_type = ace_gawed_great_houses
+			power_type = brasslance_loyalty
+			value = 6
+		}
+		add_government_power = {
+			mechanic_type = ace_gawed_great_houses
+			power_type = eaglecrest_loyalty
+			value = 4
+		}
+		add_government_power = {
+			mechanic_type = ace_gawed_great_houses
+			power_type = ginnfield_loyalty
+			value = 4
+		}
+		add_government_power = {
+			mechanic_type = ace_gawed_great_houses
+			power_type = ramsgate_loyalty
+			value = 4
+		}
+		add_government_power = {
+			mechanic_type = ace_gawed_great_houses
+			power_type = bawne_loyalty
+			value = 4
+		}
+		add_government_power = {
+			mechanic_type = ace_gawed_great_houses
+			power_type = oudescker_loyalty
+			value = 2
+		}
+		add_government_power = {
+			mechanic_type = ace_gawed_great_houses
+			power_type = dire_loyalty
+			value = 2
+		}
+		add_government_power = {
+			mechanic_type = ace_gawed_great_houses
+			power_type = balgard_loyalty
+			value = 2
+		}
+	}
+
+	option = {
+		name = flavor_gawed.0.a
+	}
+}
+
 #Burning of the Redglades
 country_event = {
 	id = flavor_gawed.1
@@ -30,18 +91,24 @@ country_event = {
 		hidden_effect = {
 			every_country = {
 				limit = {
-					OR = {
-						capital_scope = { continent = europe }
-						capital_scope = { superregion = bulwar_superregion }
-						capital_scope = { superregion = north_salahad_superregion }
+					capital_scope = {
+						OR = {
+							continent = europe
+							superregion = bulwar_superregion
+							superregion = north_salahad_superregion
+						}
 					}
-					NOT = { tag = ROOT }
+					NOT = {
+						tag = ROOT
 				}
-				country_event = { id = flavor_gawed.2 days = 7 }
+			}
+				country_event = {
+					id = flavor_gawed.2
+					days = 7
+				}
 			}
 		}
 	}
-
 }
 
 #Gawed burns the Redglades
@@ -146,8 +213,9 @@ country_event = {
 		tag = A13
 		is_religion_enabled = corinite
 		current_age = age_of_reformation
-		
-		NOT = { religion = corinite }
+		NOT = {
+			religion = corinite
+		}
 	}
 	
 	mean_time_to_happen = {
@@ -986,9 +1054,11 @@ country_event = {
 	
 	trigger = {
 		has_reform = northern_league_magnates
-		NOT = { republican_tradition = 50 }
+		NOT = {
+			republican_tradition = 50
+			has_ruler_modifier = republic_rule_for_life
+		}
 		faction_in_power = nl_old_guard
-		NOT = { has_ruler_modifier = republic_rule_for_life }
 	}
 	
 	mean_time_to_happen = {
@@ -1040,7 +1110,9 @@ country_event = {
 	trigger = {
 		has_reform = northern_league_magnates
 		republican_tradition = 75
-		NOT = { faction_in_power = nl_old_guard }
+		NOT = {
+			faction_in_power = nl_old_guard
+		}
 		has_ruler_modifier = republic_rule_for_life
 	}
 	
@@ -1645,7 +1717,9 @@ country_event = {
 			factor = 10
 			modifier = {
 				factor = 0
-				NOT = { mil_power = 100 }
+				NOT = {
+					mil_power = 100
+				}
 			}
 		}
 		name = flavor_gawed.23.a

@@ -305,6 +305,15 @@ province_event = { #individual province migration
 							has_country_modifier = monstrous_nation
 									has_country_modifier = racial_pop_human_purge
 							has_country_modifier = racial_pop_human_expulsion
+							AND = {
+								has_country_flag = sugamber_cardesti_hostility
+								NOT = {
+									had_country_flag = {
+										flag = sugamber_cardesti_hostility
+										days = 18250
+									}
+								}
+							}
 						}
 					}
 				}
@@ -362,6 +371,45 @@ country_event = { #migration into lands event
 	option = {
 		name = cardesti_events.6.b
 		set_country_flag = cardesti_no_notice
+	}
+
+	option = {
+		name = cardesti_events.6.c
+		trigger = {
+			has_country_flag = sugamber_cardest
+		}
+		highlight = yes
+		add_treasury = 100
+		add_country_modifier = {
+			name = sugamber_cardesti_artifacts
+			duration = 3650
+		}
+		set_country_flag = sugamber_cardesti_hostility
+		clr_country_flag = sugamber_cardest
+		custom_tooltip = cardesti_migrate_your_lands_tt
+		hidden_effect = {
+			owner = {
+				set_country_flag = cardesti_migrating_out
+				every_owned_province = {
+					limit = { has_province_modifier = cardesti_minority_modifier }
+					owner = { country_event = { id = cardesti_events.2 } }
+					remove_province_modifier = cardesti_minority_modifier
+					cardesti_remove_event_modifiers_scripted_effect = yes
+				}
+				clr_country_flag = cardesti_migrating_out
+			}
+		}
+		custom_tooltip = A48_no_cardesti_tooltip
+	}
+
+	option = {
+		name = cardesti_events.6.e
+		trigger = {
+			has_country_flag = sugamber_cardest
+		}
+		highlight = yes
+		add_prestige = 20
+		clr_country_flag = sugamber_cardest
 	}
 }
 

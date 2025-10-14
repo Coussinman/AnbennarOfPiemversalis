@@ -154,6 +154,8 @@ country_event = {
 		}
 	}
 	option = {
+		save_global_event_target_as = old_tag_target
+		set_country_flag = has_overriden_color_flag
 		name = "EVTOPTA9075"
 		change_tag = Z01	#Empire of Anbennar
 		hidden_effect = { restore_country_name = yes }
@@ -790,6 +792,26 @@ country_event = {
 				remove_country_modifier = imperial_palace_prince_modifier_tier_1
 				remove_country_modifier = imperial_palace_prince_modifier_tier_2
 				remove_country_modifier = imperial_palace_prince_modifier_tier_3
+			}
+			if = {
+				limit = {
+					has_country_flag = puck_hre_dismantle_flag
+				}
+				every_country = {
+					limit = {
+						has_country_flag = puck_hre_member_flag
+						NOT = {
+							tag = AD9
+							tag = Z06
+						}
+					}
+					ROOT = {
+						create_subject = {
+							subject_type = tributary_state_anb
+							subject = PREV
+						}
+					}
+				}
 			}
 		}
 		ai_chance = {

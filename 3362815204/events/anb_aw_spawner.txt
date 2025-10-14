@@ -191,6 +191,30 @@ country_event = {
 					province_event = { id = aw_trolls.0 }
 				}
 
+				#ACE Minotaurs
+				1 = {
+					trigger = {
+						NOT = {
+							has_infestation_of_type = {
+								TYPE = minotaurs
+							}
+							
+							has_terrain = city_terrain
+						}
+						OR = {
+							continent = europe
+							has_underground_terrain = yes
+						}
+					}
+					#Factors
+					modifier = {
+						factor = 5
+						region = the_borders_region  #Labyrinths are breeding grounds
+					}
+					
+					province_event = { id = aw_minotaurs.0 }
+				}
+
 				#Haunted House
 				1 = {
 					trigger = {

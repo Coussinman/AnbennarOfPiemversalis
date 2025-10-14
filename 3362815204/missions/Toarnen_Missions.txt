@@ -1,1844 +1,2667 @@
-
-toarnen_column_1 = {
+#Yours Truly, V
+new_branch = {
 	slot = 1
 	generic = no
 	ai = yes
-	potential = {
-		tag = A57
-	}
 	has_country_shield = yes
-	
-	A57_bordercliff_our_shield = {
-		icon = mission_monarch_in_throne_room
-		required_missions = { 	 
-		}
+	potential = { tag = A57 }
+
+	A57_renew_lilac_alliances = {
+		icon = fra_burg_succession
 		position = 1
-		
+		provinces_to_highlight = {
+			is_capital = yes
+			owner = { has_country_flag = lilac_wars_rose_party }
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = A57_rose_allies_tt
+				calc_true_if = {
+					amount = 2
+					all_known_country = {
+						alliance_with = ROOT
+						has_country_flag = lilac_wars_rose_party
+					}
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "A57_alliances_renewed"
+				duration = 5475
+			}
+			every_known_country = {
+				limit = {
+					alliance_with = ROOT
+					has_country_flag = lilac_wars_rose_party
+				}
+				ROOT = {
+					add_favors = {
+						who = PREV
+						amount = 10
+					}
+				}
+			}
+		}
+	}
+
+	A57_promote_chess = {
+		icon = mission_diplomatic_relation
+		position = 2
+		required_missions = { A57_renew_lilac_alliances }
+		provinces_to_highlight = {  }
+
+		trigger = {
+			diplomatic_reputation = 5
+			prestige = 50
+		}
+
+		effect = { country_event = { id = flavor_toarnen.2 }  }
+	}
+
+	A57_expanding_chess_theory = {
+		icon = mission_university_of_copenhagen
+		position = 3
+		required_missions = { A57_promote_chess }
+		provinces_to_highlight = {
+			is_capital = yes
+			owner = {
+				capital_scope = { continent = europe }
+				NOT = { has_75_opinion_improved_relation = { target = ROOT } }
+			}
+		}
+
+		trigger = {
+			employed_advisor = { category = DIP }
+			employed_advisor = { category = MIL }
+			A92 = { has_75_opinion_improved_relation = { target = ROOT }  }
+			custom_trigger_tooltip = {
+				tooltip = A57_relations_chess_tt
+				calc_true_if = {
+					amount = 2
+					all_known_country = {
+						NOT = { monstrous_culture = yes }
+						capital_scope = { continent = europe }
+						has_75_opinion_improved_relation = { target = ROOT }
+					}
+				}
+			}
+		}
+
+		effect = {
+			add_historical_friend = A92
+			A92 = {
+				add_historical_friend = ROOT
+			}
+			add_country_modifier = {
+				name = A57_expanding_chess_theory_mod
+				duration = -1
+			}
+			custom_tooltip = A57_allies_chess_tt
+			hidden_effect = {
+				A92 = { country_event = { id = flavor_toarnen.4 }  }
+				every_country = {
+					limit = { has_75_opinion_improved_relation = { target = ROOT } }
+					country_event = { id = flavor_toarnen.4 }
+				}
+			}
+		}
+	}
+
+	A57_toarnen_cones = {
+		icon = deal_with_the_illuminati
+		position = 5
+		required_missions = { A57_expanding_chess_theory }
+		provinces_to_highlight = {  }
+
+		trigger = {
+			diplomat = 2
+			commandant = 2
+			custom_trigger_tooltip = {
+				tooltip = A57_any_military_idea_completed_tt
+				OR = {
+					full_idea_group = aristocracy_ideas
+					full_idea_group = plutocracy_ideas
+					full_idea_group = horde_gov_ideas
+					full_idea_group = theocracy_gov_ideas
+					full_idea_group = indigenous_ideas
+					full_idea_group = offensive_ideas
+					full_idea_group = defensive_ideas
+					full_idea_group = quality_ideas
+					full_idea_group = quantity_ideas
+					full_idea_group = mercenary_ideas
+					full_idea_group = naval_ideas
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = A57_unlock_chess_tournament_tooltip
+			hidden_effect = { set_country_flag = ace_toarnen_unlock_chess_tournament }
+			custom_tooltip = A57_chess_grandmaster_unlocked_tt
+			set_global_flag = A57_chess_grandmaster_unlocked
+		}
+	}
+
+	A57_new_settlements = {
+		icon = settle_north_america
+		position = 8
+		required_missions = { A57_new_center }
+		provinces_to_highlight = {
+			OR = {
+				has_province_modifier = A57_small_roilsardi_settlement
+				has_province_modifier = A57_big_roilsardi_settlement
+				has_province_modifier = A57_roilsardi_home
+			}
+			NOT = {
+				has_tax_building_trigger = yes
+				has_manpower_building_trigger = yes
+				has_production_building_trigger = yes
+			}
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				OR = {
+					has_province_modifier = A57_small_roilsardi_settlement
+					has_province_modifier = A57_big_roilsardi_settlement
+					has_province_modifier = A57_roilsardi_home
+				}
+				has_tax_building_trigger = yes
+				has_manpower_building_trigger = yes
+				has_production_building_trigger = yes
+				value = 10
+			}
+			every_estate_loyalty = { loyalty = 50 }
+		}
+
+		effect = {
+			custom_tooltip = A57_improved_settlers_tt
+			set_country_flag = A57_improved_settlers
+			hidden_effect = { country_event = { id = flavor_toarnen.100 }  }
+		}
+	}
+
+	A57_east_roilsard = {
+		icon = eastern_catholicization
+		position = 10
+		required_missions = { A57_new_settlements }
+		provinces_to_highlight = {
+			owned_by = ROOT
+			culture = roilsardi
+			has_tax_building_trigger = yes
+			has_manpower_building_trigger = yes
+			has_production_building_trigger = yes
+		}
+
+		trigger = {
+			922 = {
+				has_any_ongoing_construction = no
+			}
+			development_in_provinces = {
+				value = 200
+				culture = roilsardi
+				has_tax_building_trigger = yes
+				has_manpower_building_trigger = yes
+				has_production_building_trigger = yes
+			}
+			highcliff_area = {
+				type = all
+				if = {
+					limit = { has_dlc = "Mandate of Heaven" }
+					is_prosperous = yes
+				}
+				NOT = { devastation = 1 }
+			}
+		}
+
+		effect = {
+			922 = {
+				add_building_construction = {
+					building = university
+					cost = 0
+					speed = 1
+				}
+			}
+			custom_tooltip = A57_edict_tt
+			set_country_flag = A57_edict_unlocked
+			tooltip = {
+				add_province_modifier = {
+					name = A57_roilsardi_home
+					duration = -1
+				}
+			}
+		}
+	}
+
+	A57_homecoming = {
+		icon = mission_dominate_home_trade_node
+		position = 12
+		required_missions = {
+			A57_gone_for_good
+			A57_east_roilsard
+		}
+		provinces_to_highlight = {
+			province_id = 59
+		}
+
+		trigger = {
+			development_in_provinces = {
+				value = 400
+				culture = roilsardi
+			}
+			army_size = 50
+			num_of_heavy_ship = 50
+			OR = {
+				59 = { country_or_non_sovereign_subject_holds = ROOT }
+				if = {
+					limit = {
+						59 = {
+							owner = {
+								NOT = { is_subject = yes }
+								primary_culture = roilsardi
+								OR = {
+									alliance_with = ROOT
+									has_100_opinion_improved_relation = { target = ROOT }
+								}
+							}
+						}
+					}
+					59 = {
+						owner = {
+							OR = {
+								alliance_with = ROOT
+								has_100_opinion_improved_relation = { target = ROOT }
+							}
+						}
+					}
+				}
+				else_if = {
+					limit = {
+						59 = {
+							owner = {
+								primary_culture = roilsardi
+								is_subject = yes
+							}
+						}
+					}
+					59 = {
+						owner = {
+							overlord = { scornfully_insulted_check = yes }
+						}
+					}
+				}
+				else_if = {
+					limit =  {
+						59 = {
+							owner = {
+								NOT = { primary_culture = roilsardi }
+							}
+						}
+					}
+					59 = {
+						owner = {
+							scornfully_insulted_check = yes
+							NOT = { total_development = ROOT }						
+						}
+					}
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = A57_retvrn
+				duration = 3650
+			}
+			if = {
+				limit = {
+					59 = {
+						owner = {
+							ai = yes
+							NOT = { is_subject = yes }
+							primary_culture = roilsardi
+							OR = {
+								alliance_with = ROOT
+								has_100_opinion_improved_relation = { target = ROOT }
+							}
+						}
+					}
+				}
+				59 = {
+					owner = {
+						ROOT = {
+							create_subject = {
+								subject_type = personal_union
+								subject = PREV
+							}
+						}
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					59 = {
+						owner = {
+							ai = no
+							NOT = {
+								is_or_was_tag = { tag = A57 }
+								is_subject = yes
+							}
+							primary_culture = roilsardi
+							OR = {
+								alliance_with = ROOT
+								has_100_opinion_improved_relation = { target = ROOT }
+							}
+						}
+					}
+				}
+				add_country_modifier = {
+					name = A57_coop_roilsard_modifier
+					duration = -1
+				}
+				set_country_flag = A57_roilsard_is_not_ai
+				59 = {
+					owner = {
+						add_country_modifier = {
+							name = A57_coop_roilsard_modifier
+							duration = -1
+						}
+						add_trust = {
+							who = ROOT
+							value = 25
+							mutual = yes
+						}
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					59 = {
+						owner = {
+							primary_culture = roilsardi
+							is_subject = yes
+							overlord = { scornfully_insulted_check = yes }
+						}
+					}
+				}
+				59 = {
+					owner = {
+						eastern_winebay_area = { add_permanent_claim = PREV }
+						grant_independence = yes
+						ROOT = {
+							create_subject = {
+								subject_type = personal_union
+								subject = PREV
+							}
+						}
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					59 = {
+						owner = {
+							NOT = { primary_culture = roilsardi }
+							scornfully_insulted_check = yes
+						}
+					}
+				}
+				eastern_winebay_area = { add_permanent_claim = ROOT }
+			}
+			else_if = {
+				limit = { 59 = { owned_by = ROOT }  }
+				add_prestige_or_monarch_power = { amount = 50 }
+				eastern_winebay_area = { add_permanent_claim = ROOT }
+			}
+			custom_tooltip = " "
+			complex_dynamic_effect = {
+				first_custom_tooltip = A57_won_wars_against_lorent_tt
+				first_limit = "
+					has_won_war_against = {
+						who = A01
+						max_years_since = 20
+					}
+				"
+				first_effect = "
+					add_country_modifier = {
+						name = A57_zeal
+						duration = 3650
+					}
+				"
+			}
+		}
+	}
+
+	A57_reunion_at_last = {
+		icon = counter_reformation
+		position = 13
+		required_missions = { A57_homecoming }
+		provinces_to_highlight = {
+			area = eastern_winebay_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			OR = {
+				eastern_winebay_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				AND = {
+					hidden_trigger = { has_country_flag = A57_roilsard_is_not_ai }
+					eastern_winebay_area = {
+						type = all
+						owner = { primary_culture = roilsardi }
+					}
+				}
+			}
+		}
+
+		effect = {
+			eastern_winebay_area = {
+				add_permanent_province_modifier = {
+					name = roilsard_5
+					duration = -1
+				}
+			}
+			if = {
+				limit = {
+					59 = {
+						owner = {
+							is_subject_of = ROOT
+							primary_culture = roilsardi
+							OR = {
+								is_subject = no
+								ROOT = { has_country_flag = A57_roilsard_is_not_ai }
+							}
+						}
+					}
+				}
+				59 = {
+					owner = {
+						change_tag = A78
+						lencenor_region = { add_permanent_claim = PREV }
+						add_country_modifier = {
+							name = A57_expanding_chess_theory_mod
+							duration = -1
+						}
+						add_country_modifier = {
+							name = A57_roilsardi_larp4
+							duration = -1
+						}
+					}
+				}
+			}
+			else_if = {
+				limit = { eastern_winebay_area = { owned_by = ROOT }  }
+				eastern_winebay_area = {
+					cede_province = A78
+					add_permanent_claim = A78
+				}
+				A78 = {
+					add_country_modifier = {
+						name = A57_expanding_chess_theory_mod
+						duration = -1
+					}
+					add_country_modifier = {
+						name = A57_roilsardi_larp4
+						duration = -1
+					}
+				}
+				ROOT = {
+					create_subject = {
+						subject_type = personal_union
+						subject = A78
+					}
+				}
+			}
+		}
+	}
+
+	A57_crown_of_thorns = {
+		icon = versailles_palace
+		position = 15
+		required_missions = { A57_reunion_at_last }
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					area = eastern_winebay_area
+					NOT = {
+						AND = {
+							development = 35
+							culture = roilsardi
+						}
+					}
+				}
+				AND = {
+					province_id = 67
+					NOT = {
+						AND = {
+							OR = {
+								controlled_by = ROOT
+								country_or_non_sovereign_subject_holds = ROOT
+							}
+							has_ruler_leader_from = ROOT
+							num_of_units_in_province = {
+								amount = 40
+								who = ROOT
+							}
+						}
+					}
+				}
+			}
+		}
+
+		trigger = {
+			eastern_winebay_area = {
+				type = all
+				culture = roilsardi
+				development = 35
+			}
+			67 = {
+				OR = {
+					controlled_by = ROOT
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				has_ruler_leader_from = ROOT
+				num_of_units_in_province = {
+					amount = 40
+					who = ROOT
+				}
+			}
+		}
+
+		effect = { country_event = { id = flavor_toarnen.12 }  }
+	}
+}
+new_branch2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = A57 }
+
+	A57_renegotiating_the_charters = {
+		icon = mission_subjugate_the_merchants
+		position = 3
+		provinces_to_highlight = {  }
+
+		trigger = {
+			crown_land_share = 10
+			estate_loyalty = {
+				estate = estate_burghers
+				loyalty = 50
+			}
+			prestige = 30
+			OR = {
+				statesman = 2
+				diplomat = 2
+			}
+		}
+
+		effect = { country_event = { id = flavor_toarnen.7 }  }
+	}
+
+	A57_charters_undone = {
+		icon = hispanic_monarchy
+		position = 5
+		required_missions = {
+			A57_roilsardi_first
+			A57_renegotiating_the_charters
+		}
+		provinces_to_highlight = {
+			owned_by = ROOT
+			unrest = 1
+		}
+
+		trigger = {
+			total_development = 75
+			check_variable = {
+				which = NumOfRoilsardiProvinces
+				value = 10
+			}
+			all_owned_province = { NOT = { unrest = 1 }  }
+			estate_loyalty = {
+				estate = estate_nobles
+				loyalty = 60
+			}
+		}
+
+		effect = {
+			add_estate_loyalty = {
+				estate = estate_burghers
+				loyalty = -20
+			}
+			if = {
+				limit = { has_estate_privilege = estate_burghers_toarnese_charters }
+				remove_estate_privilege = estate_burghers_toarnese_charters
+			}
+			else_if = {
+				limit = { has_estate_privilege = estate_burghers_toarnese_charters_2 }
+				remove_estate_privilege = estate_burghers_toarnese_charters_2
+			}
+			custom_tooltip = A57_start_roilsardi_migrations_capital_tt
+			set_country_flag = A57_roilsardi_migrations_capital
+			custom_tooltip = " "
+			custom_tooltip = A57_mil_developing_tt
+			set_country_flag = A57_mil_developing_active
+			for = {
+				amount = 2
+				effect = "
+					random_owned_province = {
+						limit = {
+							region = the_borders_region
+						}
+						spawn_rebels = {
+							type = particularist_rebels
+							size = 2
+						}
+					}
+				"
+			}
+		}
+	}
+
+	A57_new_center = {
+		icon = prosper_in_piedmont
+		position = 7
+		required_missions = {
+			A57_charters_undone
+			A57_red_thorn
+		}
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					area = highcliff_area
+					NOT = {
+						AND = {
+							culture = roilsardi
+							development = 12
+						}
+					}
+				}
+				AND = {
+					province_id = 922
+					NOT = {
+						AND = {
+							development = 25
+							num_of_buildings_in_province = 5
+						}
+					}
+				}
+			}
+		}
+
+		trigger = {
+			highcliff_area = {
+				type = all
+				culture = roilsardi
+				development = 12
+			}
+			922 = {
+				development = 25
+				num_of_buildings_in_province = 5
+			}
+		}
+
+		effect = {
+			highcliff_area = {
+				limit = { NOT = { has_province_modifier = A57_east_roilsard }  }
+				add_permanent_province_modifier = {
+					name = A57_east_roilsard
+					duration = -1
+				}
+			}
+			922 = {
+				center_of_trade = 1
+				change_trade_goods = cloth
+				hidden_effect = { remove_province_modifier = A57_east_roilsard }
+				add_permanent_province_modifier = {
+					name = A57_east_roilsard2
+					duration = -1
+				}
+			}
+			921 = { change_province_name = "Nï¿½r Saloren" }
+			413 = { change_province_name = "Sornfork" }
+			420 = { change_province_name = "Thorncastle" }
+		}
+	}
+
+	A57_black_and_white_plaid_mission = {
+		icon = ned_cloth_trading
+		position = 10
+		required_missions = {
+			A57_salt_lion
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 904
+				province_id = 922
+			}
+			devastation = 1
+			NOT = {
+				province_has_center_of_trade_of_level = 2
+			}
+		}
+
+		trigger = {
+			904 = {
+				has_production_manufactory_or_gold_trigger = yes
+				province_has_center_of_trade_of_level = 2
+				NOT = { devastation = 1 }
+			}
+			922 = {
+				has_production_manufactory_or_gold_trigger = yes
+				province_has_center_of_trade_of_level = 2
+				NOT = { devastation = 1 }
+			}
+		}
+
+		effect = {
+			904 = {
+				change_trade_goods = silk
+				add_permanent_province_modifier = {
+					name = A57_black_and_white_plaid_modifier
+					duration = -1
+				}
+			}
+			922 = {
+				change_trade_goods = silk
+				add_permanent_province_modifier = {
+					name = A57_black_and_white_plaid_modifier
+					duration = -1
+				}
+			}
+		}
+	}
+
+	A57_vainglory_incarnate = {
+		icon = mission_thinking_king
+		position = 12
+		required_missions = { A57_gone_for_good }
+		provinces_to_highlight = {
+			province_id = 417
+		}
+
+		trigger = {
+			calc_true_if = {
+				amount = 10
+				all_known_country = { scornfully_insulted_check = yes }
+			}
+			power_projection = 60
+			all_rival_country = { NOT = { army_size = ROOT }  }
+			417 = {
+				NOT = { unrest = 1 }
+				culture = roilsardi
+				has_courthouse_building_trigger = yes
+			}
+		}
+
+		effect = {
+			custom_tooltip = A57_insult_explaining_tt
+			set_country_flag = A57_upgraded_insult
+		}
+	}
+
+	A57_roilsardi_sword_art = {
+		icon = mission_smith
+		position = 14
+		required_missions = { A57_reunion_at_last }
+		provinces_to_highlight = {  }
+
+		trigger = {
+			has_commanding_three_star = yes
+			if = {
+				limit = {
+					has_dlc = "Cradle of Civilization"
+				}
+				army_professionalism = 0.4
+			}
+			custom_trigger_tooltip = {
+				tooltip = A57_millions_must_die_tt
+				has_country_flag = just_a_statistic
+			}
+		}
+
+		effect = {
+			change_mil = 1
+			922 = {
+				add_province_modifier = {
+					name = A57_roilsardi_sword_arts
+					duration = -1
+				}
+			}
+			59 = {
+				add_province_modifier = {
+					name = A57_roilsardi_sword_arts
+					duration = -1
+				}
+			}
+		}
+	}
+}
+new_branch3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = A57 }
+
+	A57_last_party = {
+		icon = mission_noble_council
+		position = 1
+		provinces_to_highlight = {  }
+
+		trigger = {
+			treasury = 25
+			army_size_percentage = 0.9
+			estate_loyalty = {
+				estate = estate_nobles
+				loyalty = 50
+			}
+		}
+
+		effect = {
+			add_treasury = -25
+			country_event = { id = flavor_toarnen.5 }
+		}
+	}
+
+	A57_spit_on_celliande = {
+		icon = mission_hundred_years_war
+		position = 2
+		required_missions = {
+			A57_last_party
+			A57_renew_lilac_alliances
+		}
+		provinces_to_highlight = { is_capital_of = A56 }
+
+		trigger = { A56 = { scornfully_insulted_check = yes }  }
+
+		effect = {
+			custom_tooltip = A57_celliande_claims_tt
+			hidden_effect = { A56 = { every_owned_province = { add_permanent_claim = ROOT }  }  }
+			custom_tooltip = " "
+			complex_dynamic_effect = {
+				first_custom_tooltip = A57_celliande_spy_network_tt
+				first_limit = "
+					A56 = {
+						ai = yes
+						has_spy_network_from = {
+							who = ROOT
+							value = 10
+						}
+					}
+				"
+				first_effect = "
+					A56 = {
+						add_country_modifier = {
+							name = A57_cowering_in_fear
+							duration = 3650
+						}
+					}
+				"
+			}
+		}
+	}
+
+	A57_woe_to_vanquished = {
+		icon = mission_burning_man
+		position = 3
+		required_missions = { A57_spit_on_celliande }
+		provinces_to_highlight = { owned_by = A56 }
+
+		trigger = {
+			A56 = { exists = no }
+			highcliff_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			414 = { country_or_non_sovereign_subject_holds = ROOT }
+			416 = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		effect = { country_event = { id = flavor_toarnen.8 }  }
+	}
+
+	A57_roilsardi_first = {
+		icon = fra_napoleonic_navy
+		position = 4
+		required_missions = {
+			A57_woe_to_vanquished
+			A57_new_homes
+		}
+		provinces_to_highlight = {
+			is_capital_of = ROOT
+			NOT = {
+				development = 15
+				has_tax_building_trigger = yes
+			}
+		}
+
+		trigger = {
+			dip_power = 150
+			capital_scope = {
+				development = 15
+				has_tax_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_dip_power = -150
+			custom_tooltip = " "
+			change_primary_culture = roilsardi
+			hidden_effect = {
+				set_ruler_culture = roilsardi
+				set_heir_culture = roilsardi
+			}
+			custom_tooltip = " "
+			add_country_modifier = {
+				name = "A57_cultural_revival"
+				duration = 10950
+			}
+			set_country_flag = A57_roilsardi_larp_onaction
+			custom_tooltip = A57_roilsardi_larp_explanation_tt
+			add_country_modifier = {
+				name = "A57_roilsardi_larp"
+				duration = -1
+			}
+			custom_tooltip = A57_start_roilsardi_migrations_tt
+			set_country_flag = A57_roilsardi_migrations
+			custom_tooltip = " "
+			capital_scope = {
+				change_province_name = "Toarnaiste"
+				change_culture = roilsardi
+				add_permanent_province_modifier = {
+					name = "A57_east_roilsard"
+					duration = -1
+				}
+			}
+		}
+	}
+
+	A57_red_thorn = {
+		icon = mission_hundred_years_war
+		position = 6
+		required_missions = { A57_roilsardi_first }
+		provinces_to_highlight = {
+			region = the_borders_region
+			culture = roilsardi
+			NOT = {
+				AND = {
+					has_forcelimit_building_trigger = yes
+					has_fort_building_trigger = yes
+					if = {
+						limit = { has_dlc = "Cradle of Civilization" }
+						has_supply_depot = ROOT
+					}
+					else = {
+						development = 10
+						has_building = barracks
+					}
+				}
+			}
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				culture = roilsardi
+				region = the_borders_region
+				has_manpower_building_trigger = yes
+				value = 3
+			}
+			any_owned_province = {
+				region = the_borders_region
+				culture = roilsardi
+				has_forcelimit_building_trigger = yes
+				has_fort_building_trigger = yes
+				if = {
+					limit = { has_dlc = "Cradle of Civilization" }
+					has_supply_depot = ROOT
+				}
+				else = {
+					development = 10
+					has_building = barracks
+				}
+			}
+		}
+
+		effect = {
+			add_manpower = 1
+			define_general = {
+				fire = 4
+				shock = 4
+				manuever = 3
+				siege = 2
+				name = "Alisanne sï¿½l Toarnaiste"
+				female = yes
+				trait = glory_seeker_personality
+			}
+			unlock_merc_company = {
+				merc_company = merc_red_thorn_crusaders
+				free_merc = yes
+			}
+			random_owned_province = {
+				limit = {
+					region = the_borders_region
+					culture = roilsardi
+					has_forcelimit_building_trigger = yes
+					has_fort_building_trigger = yes
+					if = {
+						limit = { has_dlc = "Cradle of Civilization" }
+						has_supply_depot = ROOT
+					}
+					else = {
+						development = 10
+						has_building = barracks
+					}
+				}
+				add_permanent_province_modifier = {
+					name = A57_red_thorn_base
+					duration = -1
+				}
+			}
+		}
+	}
+
+	A57_great_arannese_crusade = {
+		icon = crush_heretic_strongholds
+		position = 7
+		required_missions = { A57_red_thorn }
+		provinces_to_highlight = {
+			is_capital = yes
+			owner = {
+				primary_culture = arannese
+			}
+			NOT = { scornfully_insulted_check = yes }
+		 }
+
+		trigger = {
+			army_size = 20
+			custom_trigger_tooltip = {
+				tooltip = A57_insult_arannese_tt
+				OR = {
+					calc_true_if = {
+						amount = 2
+						all_known_country = {
+							OR = {
+								NOT = {
+									primary_culture = arannese
+									NOT = { scornfully_insulted_check = yes }
+								}
+								scornfully_insulted_check = yes
+								has_spy_network_from = {
+									who = ROOT
+									value = 35
+								}
+							}
+						}
+					}
+					all_known_country = {
+						OR = {
+							NOT = { capital_scope = { continent = europe } }
+							AND = {
+								capital_scope = { continent = europe }
+								NOT = { primary_culture = arannese }
+							}
+						}
+					}
+					
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = A57_great_arannese_crusade_begins_tt
+			hidden_effect = {
+				every_province = {
+					limit = { culture = arannese }
+					add_permanent_claim = ROOT
+				}
+				every_known_country = {
+					limit = { culture = arannese }
+					add_opinion = {
+						who = ROOT
+						modifier = A57_sus_intentions
+					}
+				}
+			}
+			custom_tooltip = " "
+			complex_dynamic_effect = {
+				first_custom_tooltip = A57_emperor_relations_tt
+				first_limit = "
+					emperor = {
+						has_100_opinion_improved_relation = {
+							target = ROOT
+						}
+					}
+				"
+				first_effect = "
+					add_country_modifier = {
+						name = A57_emperor_support
+						duration = 9125
+					}
+				"
+			}
+		}
+	}
+
+	A57_salt_lion = {
+		icon = assert_our_sovereignty
+		position = 9
+		required_missions = { A57_great_arannese_crusade }
+		provinces_to_highlight = {
+			area = arannen_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			arannen_area = { type = all country_or_non_sovereign_subject_holds = ROOT }
+			904 = {
+				num_of_units_in_province = {
+					amount = 20
+					who = ROOT
+				}
+				if = {
+					limit = { has_dlc = "Cradle of Civilization" }
+					has_supply_depot = ROOT
+				}
+				else = {
+					development = 10
+					has_building = barracks
+				}
+			}
+		}
+
+		effect = {
+			904 = {
+				add_base_tax = -2
+				add_base_production = -2
+				add_base_manpower = -2
+				add_devastation = 50
+				change_culture = roilsardi
+				change_province_name = "Nï¿½r Deranne"
+				add_province_modifier = {
+					name = A57_small_roilsardi_settlement
+					duration = -1
+				}
+			}
+			custom_tooltip = A57_arannen_dev_distribution_tt
+			for = {
+				amount = 5
+				effect = "
+					capital_scope = {
+						random_area_province = {
+							random_list = {
+								33 = { add_base_tax = 1 }
+								33 = { add_base_production = 1 }
+								33 = { add_base_manpower = 1 }
+							}
+						}
+					}
+				"
+			}
+		}
+	}
+
+	A57_gone_for_good = {
+		icon = mission_burning_castle
+		position = 11
+		required_missions = { A57_salt_lion }
+		provinces_to_highlight = {
+			is_capital = yes
+			owner = { primary_culture = arannese }
+		}
+
+		trigger = {
+			all_known_country = {
+				OR = {
+					NOT = { capital_scope = { continent = europe } }
+					AND = {
+						capital_scope = { continent = europe }
+						NOT = { primary_culture = arannese }
+					}
+				}
+			}
+		}
+
+		effect = {
+			set_country_flag = is_a_marquisate
+			add_power_projection = {
+				type = 25_permanent_power_projection
+				amount = 25
+			}
+			add_stability_or_adm_power = yes
+			override_country_name = Toarnaiste
+			change_country_color = {
+				color = { 10 92 10 }
+			}
+			add_government_reform = A57_eastern_marquisate_reform
+			custom_tooltip = " "
+			custom_tooltip = A57_lose_ae_tt
+			hidden_effect = {
+				every_known_country = {
+					limit = { NOT = { primary_culture = arannese }  }
+					add_aggressive_expansion = {
+						who = ROOT
+						value = -20
+						apply_calc = no
+					}
+				}
+			}
+			custom_tooltip = " "
+			complex_dynamic_effect = {
+				first_custom_tooltip = A57_extend_imperial_modifier_tt
+				first_limit = "
+					has_country_modifier = A57_emperor_support
+				"
+				first_effect = "
+					add_or_extend_country_modifier = {
+						name = A57_emperor_support
+						duration = -1
+					}
+				"
+			}
+		}
+	}
+
+	A57_new_era_of_borders = {
+		icon = bavarian_cultural_dominance
+		position = 14
+		required_missions = { A57_gone_for_good  }
+		provinces_to_highlight = {
+			continent = europe
+			culture = arannese
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = A57_no_arannese_tt
+				europe = { NOT = { any_province = { culture = arannese }  }  }
+			}
+			custom_trigger_tooltip = {
+				tooltip = A57_roilsardi_borders_tt
+				all_owned_province = {
+					OR = {
+						NOT = { region = the_borders_region }
+						AND = {
+							culture = roilsardi
+							development = 15
+							if = {
+								limit = { has_dlc = "Mandate of Heaven" }
+								is_prosperous = yes
+							}
+						}
+					}
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = A57_halve_hegemony_reqs_tt
+			set_country_flag = halve_hegemony_requirements
+			custom_tooltip = A57_golden_age_tt
+			hidden_effect = {
+				if = {
+					limit = { has_dlc = "Mandate of Heaven" }
+					if = {
+						limit = { in_golden_age = yes }
+						extend_golden_age = 600
+					}
+					else_if = {
+						limit = { has_had_golden_age = yes }
+						reset_golden_age = yes
+					}
+					else_if = {
+						limit = {
+							NOT = {
+								OR = {
+									in_golden_age = yes
+									has_had_golden_age = yes
+								}
+							}
+						}
+						add_splendor = 800
+					}
+				}
+			}
+		}
+	}
+}
+new_branch4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = A57 }
+
+	A57_home_connections = {
+		icon = fra_crown_seat_capital
+		position = 1
+		provinces_to_highlight = {
+			province_id = 32
+			NOT = { owner = { has_50_opinion_improved_relation = { target = ROOT } } }
+		}
+
+		trigger = {
+			dip_power = 40
+			OR = {
+				A87 = { has_50_opinion_improved_relation = { target = ROOT }  }
+				32 = { owner = { has_50_opinion_improved_relation = { target = ROOT }  }  }
+			}
+		}
+
+		effect = {
+			A87 = {
+				add_historical_friend = ROOT
+			}
+			add_historical_friend = A87
+			add_dip_power = -40
+			country_event = { id = flavor_toarnen.6 }
+		}
+	}
+
+	A57_new_homes = {
+		icon = settle_north_america
+		position = 3
+		required_missions = { A57_home_connections }
+		provinces_to_highlight = {
+			owned_by = ROOT
+			devastation = 1
+		}
+
+		trigger = {
+			OR = {
+				all_owned_province = { NOT = { devastation = 1 }  }
+				stability = 2
+			}
+		}
+		effect = { 922 = { province_event = { id = flavor_toarnen.101 }  }  }
+	}
+
+	A57_toarnen_black_mission = {
+		icon = mission_wine_monopolies
+		position = 5
+		required_missions = { A57_roilsardi_first }
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					province_id = 921
+					NOT = {
+						has_production_building_trigger = yes
+						base_production = 6
+					}
+				}
+				AND = {
+					NOT = { owned_by = ROOT }
+					trade_goods = wine
+					owner = {
+						NOT = {
+							OR = {
+								alliance_with = ROOT
+								has_50_opinion_improved_relation = { target = ROOT }
+							}
+						}
+					}
+				}
+			}
+		}
+
 		trigger = {
 			estate_loyalty = {
 				estate = estate_nobles
-				loyalty = 55
+				loyalty = 60
 			}
-			estate_loyalty = {
-				estate = estate_burghers
-				loyalty = 55
+			921 = {
+				has_production_building_trigger = yes
+				base_production = 6
 			}
-			mil_power = 40
+			calc_true_if = {
+				amount = 2
+				all_known_country = {
+					any_owned_province = { trade_goods = wine }
+					OR = {
+						alliance_with = ROOT
+						has_50_opinion_improved_relation = { target = ROOT }
+					}
+				}
+			}
 		}
-		
+
 		effect = {
-			add_mil_power = -40
-			921 = { # bordercliff
+			921 = {
+				change_trade_goods = wine
+				add_permanent_province_modifier = {
+					name = A57_toarnen_black_modifier
+					duration = -1
+				}
+			}
+		}
+	}
+
+	A57_exporting_toarnen_black = {
+		icon = mission_che_botanical_exports
+		position = 6
+		required_missions = { A57_toarnen_black_mission }
+		provinces_to_highlight = {
+			province_id = 921
+			NOT = {
+				base_production = 12
+				has_production_manufactory_or_gold_trigger = yes
+			}
+		}
+
+		trigger = {
+			921 = {
+				base_production = 12
+				has_production_manufactory_or_gold_trigger = yes
+			}
+			num_of_owned_provinces_with = {
+				AND = {
+					has_trade_building_trigger = yes
+					has_production_building_trigger = yes
+					province_has_center_of_trade_of_level = 2
+				}
+				value = 5
+			}
+		}
+
+		effect = {
+			custom_tooltip = A57_exporting_black_tt
+			hidden_effect = {
+				every_known_country = {
+					limit = { alliance_with = ROOT }
+					country_event = { id = flavor_toarnen.9 }
+				}
+			}
+			custom_tooltip = " "
+			custom_tooltip = A57_upgrade_national_idea_tt
+			set_country_flag = A57_toarnen_black_idea_upgraded
+			hidden_effect = { swap_free_idea_group = yes }
+			custom_tooltip = " "
+			complex_dynamic_effect = {
+				first_custom_tooltip = A57_seven_allies_tt
+				first_limit = "
+					num_of_allies = 7
+				"
+				first_effect = "
+					add_country_modifier = {
+						name = A57_wine_borders
+						duration = -1
+					}
+				"
+			}
+		}
+	}
+
+	A57_true_roilsard_land = {
+		icon = austria_prospers
+		position = 7
+		required_missions = { A57_exporting_toarnen_black }
+		provinces_to_highlight = {
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = A57_true_roilsard_land_tt
+				OR = {
+					trading_part = {
+						trade_goods = wine
+						value = 0.2
+					}
+					AND = {
+						trading_part = {
+							trade_goods = wine
+							value = 0.15
+						}
+						NOT = {
+							trading_part = {
+								trade_goods = wine
+								value = 0.2
+							}
+						}
+						calc_true_if = {
+							amount = 1
+							all_known_country = {
+								any_owned_province = { trade_goods = wine }
+								OR = {
+									alliance_with = ROOT
+									has_spy_network_from = {
+										who = ROOT
+										value = 50
+									}
+								}
+							}
+						}
+					}
+					AND = {
+						trading_part = {
+							trade_goods = wine
+							value = 0.1
+						}
+						NOT = {
+							trading_part = {
+								trade_goods = wine
+								value = 0.15
+							}
+						}
+						calc_true_if = {
+							amount = 2
+							all_known_country = {
+								any_owned_province = { trade_goods = wine }
+								OR = {
+									alliance_with = ROOT
+									has_spy_network_from = {
+										who = ROOT
+										value = 50
+									}
+								}
+							}
+						}						
+					}
+					AND = {
+						trading_part = {
+							trade_goods = wine
+							value = 0.05
+						}
+						NOT = {
+							trading_part = {
+								trade_goods = wine
+								value = 0.1
+							}
+						}
+						calc_true_if = {
+							amount = 3
+							all_known_country = {
+								any_owned_province = { trade_goods = wine }
+								OR = {
+									alliance_with = ROOT
+									has_spy_network_from = {
+										who = ROOT
+										value = 50
+									}
+								}
+							}
+						}
+					}
+					AND = {
+						NOT = {
+							trading_part = {
+								trade_goods = wine
+								value = 0.05
+							}
+						}
+						calc_true_if = {
+							amount = 4
+							all_known_country = {
+								any_owned_province = { trade_goods = wine }
+								OR = {
+									alliance_with = ROOT
+									has_spy_network_from = {
+										who = ROOT
+										value = 50
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = A57_wine_production_tt
+			set_country_flag = A57_wine_production
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						base_production = 12
+						has_production_manufactory_or_gold_trigger = yes
+						OR = {
+							trade_goods = grain
+							trade_goods = fish
+							trade_goods = livestock
+							trade_goods = wool
+							trade_goods = naval_supplies
+						}
+					}
+					change_trade_goods = wine
+					add_province_modifier = {
+						name = A57_toarnen_black_modifier
+						duration = -1
+					}
+					hidden_effect = {
+						province_event = {
+							id = flavor_toarnen.104
+						}
+					}
+				}
+				every_owned_province = {
+					limit = {
+						base_production = 12
+						has_production_manufactory_or_gold_trigger = yes
+						trade_goods = wine
+					}
+					add_province_modifier = {
+						name = A57_toarnen_black_modifier
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+
+	A57_black_raven_slain = {
+		icon = mission_conquer_romania
+		position = 8
+		required_missions = { A57_great_corvurian_crusade }
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					region = dostanor_region
+					NOT = {
+						OR = {
+							country_or_non_sovereign_subject_holds = ROOT
+							AND = {
+								if = {
+									limit = { has_dlc = "Cradle of Civilization" }
+									has_supply_depot = ROOT
+								}
+								else = {
+									development = 10
+									has_building = barracks
+								}
+								num_of_units_in_province = {
+									amount = 10
+									who = ROOT
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		trigger = {
+			dostanor_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			calc_true_if = {
+				amount = 2
+				all_owned_province = {
+					region = dostanor_region
+					if = {
+						limit = { has_dlc = "Cradle of Civilization" }
+						has_supply_depot = ROOT
+					}
+					else = {
+						development = 10
+						has_building = barracks
+					}
+					num_of_units_in_province = {
+						amount = 10
+						who = ROOT
+					}
+				}
+			}
+		}
+
+		effect = {
+			emperor = { add_imperial_influence = 15 }
+			hidden_effect = {
+				every_owned_province = {
+					limit = { region = dostanor_region }
+					random_list = {
+						40 = {
+							spawn_rebels = {
+								type = particularist_rebels
+								size = 1
+							}
+						}
+						10 = {
+							spawn_rebels = {
+								type = vampires_thralls
+								size = 1
+							}
+						}
+						50 = {}
+					}
+				}
+			}
+			set_country_flag = A57_corvurian_rebels_event
+			custom_tooltip = A57_corvurian_rebellion_tt
+		}
+	}
+
+	A57_black_thorn_arrays = {
+		icon = gory_to_the_black_army
+		position = 9
+		required_missions = { A57_black_raven_slain }
+		provinces_to_highlight = {
+			owned_by = ROOT
+			OR = {
+				AND = {
+					province_id = 441
+					NOT = {
+						culture = roilsardi
+						has_fort_building_trigger = yes
+						has_forcelimit_building_trigger = yes
+						if = {
+							limit = { has_dlc = "Cradle of Civilization" }
+							has_supply_depot = ROOT
+						}
+						else = {
+							development = 10
+							has_building = barracks
+						}
+					}
+				}
+				AND = {
+					region = dostanor_region
+					culture = roilsardi
+					NOT = {
+						has_manpower_building_trigger = yes
+					}
+				}
+			}
+		}
+
+		trigger = {
+			441 = {
+				culture = roilsardi
+				has_fort_building_trigger = yes
+				has_forcelimit_building_trigger = yes
+				if = {
+					limit = { has_dlc = "Cradle of Civilization" }
+					has_supply_depot = ROOT
+				}
+				else = {
+					development = 10
+					has_building = barracks
+				}
+			}
+			num_of_owned_provinces_with = {
+				AND = {
+					culture = roilsardi
+					region = dostanor_region
+					has_manpower_building_trigger = yes
+				}
+				value = 3
+			}
+		}
+
+		effect = {
+			add_manpower = 1
+			define_general = {
+				fire = 3
+				shock = 5
+				manuever = 3
+				siege = 5
+				name = "Adrian sï¿½l Vivin"
+				trait = siege_specialist_personality
+			}
+			441 = {
+				change_province_name = "Arca Tretun"
+				add_permanent_province_modifier = {
+					name = A57_black_thorn_base
+					duration = -1
+				}
+			}
+			unlock_merc_company = {
+				merc_company = merc_black_thorn_crusaders
+				free_merc = yes
+			}
+			custom_tooltip = A57_VAMPIRES_BOOOO_tt
+			hidden_effect = {
+				441 = {
+					province_event = {
+						id = aw_vampires.140
+						days = 730
+					}
+				}
+			}
+			south_castanor_region = { discover_country = ROOT }
+			west_castanor_region = { discover_country = ROOT }
+			custom_tooltip = " "
+			complex_dynamic_effect = {
+				first_custom_tooltip = A57_extend_corvurian_modifier_tt
+				first_limit = "
+					has_country_modifier = A57_corvurian_crusade
+				"
+				first_effect = "
+					add_or_extend_country_modifier = {
+						name = A57_corvurian_crusade
+						duration = -1
+					}
+				"
+			}
+		}
+	}
+
+	A57_ourdia = {
+		icon = fortress_of_belgrade
+		position = 11
+		required_missions = { A57_great_bahari_crusade }
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					region = ourdia_region
+					NOT = { country_or_non_sovereign_subject_holds = ROOT }
+				}
+				AND = {
+					province_id = 510
+					NOT = {
+						has_fort_building_trigger = yes
+						has_forcelimit_building_trigger = yes
+						if = {
+							limit = { has_dlc = "Cradle of Civilization" }
+							has_supply_depot = ROOT
+						}
+						else = {
+							development = 10
+							has_building = barracks
+						}
+					}
+				}
+				AND = {
+					region = ourdia_region
+					culture = roilsardi
+					NOT = {
+						has_manpower_building_trigger = yes
+					}
+				}
+			}
+		}
+
+		trigger = {
+			ourdia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			510 = {
+				culture = roilsardi
+				has_fort_building_trigger = yes
+				has_forcelimit_building_trigger = yes
+				if = {
+					limit = { has_dlc = "Cradle of Civilization" }
+					has_supply_depot = ROOT
+				}
+				else = {
+					development = 10
+					has_building = barracks
+				}
+			}
+			num_of_owned_provinces_with = {
+				AND = {
+					culture = roilsardi
+					region = ourdia_region
+					has_manpower_building_trigger = yes
+				}
+				value = 3
+			}
+		}
+
+		effect = {
+			510 = { change_province_name = "Castanfort" }
+			add_country_modifier = {
+				name = A57_drill_crusaders
+				duration = -1
+			}
+			random_owned_province = {
+				limit = { has_province_modifier = A57_green_thorn_base }
+				remove_province_modifier = A57_green_thorn_base
+			}
+			510 = {
+				add_permanent_province_modifier = {
+					name = "A57_green_thorn_base"
+					duration = -1
+				}
+			}
+			custom_tooltip = A57_ourdia_settlers_tt
+			hidden_effect = {
+				random_owned_province = {
+					limit = { region = ourdia_region }
+					province_event = { id = flavor_toarnen.103 }
+				}
+				random_owned_province = {
+					limit = { region = ourdia_region }
+					province_event = { id = flavor_toarnen.103 days = 2 }
+				}
+			}
+		}
+	}
+
+	A57_crusader_supremacy = {
+		icon = mission_united_knight_order
+		position = 12
+		required_missions = { A57_ourdia }
+		provinces_to_highlight = {
+			OR = {
+				has_province_modifier = A57_red_thorn_base
+				has_province_modifier = A57_green_thorn_base
+				has_province_modifier = A57_black_thorn_base
+			}
+			NOT = {
+				development = 30
+				has_building = state_house
+			}
+		}
+
+		trigger = {
+			treasury = 1500
+			manpower = 20
+			num_of_regiments_at_full_drill = 30
+			any_owned_province = {
+				has_province_modifier = A57_red_thorn_base
+				development = 30
+				has_building = state_house
+			}
+			any_owned_province = {
+				has_province_modifier = A57_green_thorn_base
+				development = 30
+				has_building = state_house
+			}
+			any_owned_province = {
+				has_province_modifier = A57_black_thorn_base
+				development = 30
+				has_building = state_house
+			}
+		}
+
+		effect = {
+			add_treasury = -1500
+			add_manpower = -20
+			custom_tooltip = A57_lose_nat_tt
+			hidden_effect = { every_owned_province = { add_nationalism = -5 }  }
+			custom_tooltip = " "
+			custom_tooltip = A57_upgrade_strongholds_tt
+			tooltip = {
+				add_permanent_province_modifier = {
+					name = A57_green_thorn_base_upgrade
+					duration = -1
+				}
+			}
+			tooltip = {
+				add_permanent_province_modifier = {
+					name = A57_red_thorn_base_upgrade
+					duration = -1
+				}
+			}
+			tooltip = {
+				add_permanent_province_modifier = {
+					name = A57_black_thorn_base_upgrade
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				random_owned_province = {
+					limit = { has_province_modifier = A57_green_thorn_base }
+					remove_province_modifier = A57_green_thorn_base
+					add_permanent_province_modifier = {
+						name = A57_green_thorn_base_upgrade
+						duration = -1
+					}
+				}
+				random_owned_province = {
+					limit = { has_province_modifier = A57_red_thorn_base }
+					remove_province_modifier = A57_red_thorn_base
+					add_permanent_province_modifier = {
+						name = A57_red_thorn_base_upgrade
+						duration = -1
+					}
+				}
+				random_owned_province = {
+					limit = { has_province_modifier = A57_black_thorn_base }
+					remove_province_modifier = A57_black_thorn_base
+					add_permanent_province_modifier = {
+						name = A57_black_thorn_base_upgrade
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+
+	A57_roilsardizing_bahar = {
+		icon = mission_riches_of_golconda
+		position = 14
+		required_missions = { A57_cradle_of_our_greatness }
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					region = bahar_region
+					OR = {
+						trade_goods = wine
+						trade_goods = dyes
+						trade_goods = cloth
+						trade_goods = glass
+					}
+					NOT = {
+						base_production = 10
+						has_production_manufactory_or_gold_trigger = yes
+						NOT = { devastation = 1 }
+					}
+				}
+				AND = {
+					OR = {
+						province_id = 521
+						province_id = 516
+					}
+					NOT = {
+						culture = roilsardi
+						province_has_center_of_trade_of_level = 2
+					}
+				}
+			}
+		}
+
+		trigger = {
+			521 = {
+				culture = roilsardi
+				province_has_center_of_trade_of_level = 2
+			}
+			516 = {
+				culture = roilsardi
+				province_has_center_of_trade_of_level = 2
+			}
+			custom_trigger_tooltip = {
+				tooltip = A57_roilsardizing_bahar_tt
+				all_owned_province = {
+					OR = {
+						NOT = { region = bahar_region }
+						NOT = {
+							OR = {
+								trade_goods = wine
+								trade_goods = dyes
+								trade_goods = cloth
+								trade_goods = glass
+							}
+						}
+						AND = {
+							culture = roilsardi
+							base_production = 10
+							has_production_manufactory_or_gold_trigger = yes
+							NOT = { devastation = 1 }
+						}
+					}
+				}
+			}
+		}
+
+		effect = {
+			add_years_of_income = 1
+			add_country_modifier = {
+				name = A57_bahar_riches
+				duration = -1
+			}
+			521 = {
+				change_province_name = "Crathainï¿½"
+				change_trade_goods = silk
+				add_permanent_province_modifier = {
+					name = A57_black_and_white_plaid_modifier
+					duration = -1
+				}
+			}
+			516 = {
+				change_province_name = "Nï¿½r Vivinmar"
+				change_trade_goods = silk
+				add_permanent_province_modifier = {
+					name = A57_black_and_white_plaid_modifier
+					duration = -1
+				}
+			}
+			536 = { change_province_name = "Aisport" }
+			6760 = { change_province_name = "Vispoint" }
+		}
+	}
+}
+new_branch5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = A57 }
+
+	A57_on_the_edge = {
+		icon = mission_rb_unite_the_clans
+		position = 2
+		provinces_to_highlight = {
+			province_id = 420
+			NOT = {
+				num_of_units_in_province = {
+					amount = 12
+					who = ROOT
+				}
+			}
+		}
+
+		trigger = {
+			420 = {
+				has_any_ongoing_construction = no
+				num_of_units_in_province = {
+					amount = 12
+					who = ROOT
+				}
+			}
+		}
+
+		effect = {
+			420 = {
+				add_base_manpower = 2
 				add_building_construction = {
 					building = fort_15th
 					speed = 2
 					cost = 0
 				}
+				add_province_modifier = {
+					name = A57_gates_to_folly
+					duration = -1
+				}
 			}
+			daravans_folly_region = { add_permanent_claim = ROOT }
+			custom_tooltip = A57_decision_enabled
+			set_country_flag = A57_folly_frontiers_enabled
 		}
 	}
-	
-	A57_muster_the_arrayers = {
-		icon = mission_assemble_an_army
-		required_missions = { 
-			A57_bordercliff_our_shield
-		}
-		position = 2
-		
-		provinces_to_highlight = {
-			province_id = 921
-			NOT = { base_manpower = 4 }
-		}
-		
-		trigger = {
-			estate_loyalty = {
-				estate = estate_nobles
-				loyalty = 65
-			}
-			921 = { # Bordercliff
-				base_manpower = 4
-			}
-		}
-		
-		effect = {
-			add_country_modifier = {
-				name = A57_building_up_the_army
-				duration = 3650
-			}
-		}
-	}
-	
-	A57_guard_the_folly_border = {
-		icon = mission_colonial
-		required_missions = { 
-			A57_celliande_will_pay_in_blood
-		}
+
+	A57_pirate_menace = {
+		icon = mission_pirate_fleet
 		position = 4
-		
+		required_missions = { A57_on_the_edge }
 		provinces_to_highlight = {
-			province_id = 420 # Mugalleán
-			OR = {
-				NOT = { owned_by = ROOT }
-				NOT = { has_manpower_building_trigger = yes }
-			}
-		}
-		
-		trigger = {
-			420 = { # Mugalleán
+			province_id = 451
+			NOT = {
 				owned_by = ROOT
-				has_manpower_building_trigger = yes
+				num_of_units_in_province = {
+					amount = 12
+					who = ROOT
+				}
 			}
 		}
-		
+
+		trigger = {
+			navy_size_percentage = 0.9
+			451 = {
+				NOT = { unrest = 1 }
+				country_or_non_sovereign_subject_holds = ROOT
+				num_of_units_in_province = {
+					amount = 12
+					who = ROOT
+				}
+			}
+		}
+
 		effect = {
-			flooded_coast_area = {
+			451 = {
+				add_permanent_province_modifier = {
+					name = A57_pirate_haven_reigned_in
+					duration = -1
+				}
+			}
+			1303 = {
+				change_province_name = "Coast of Roses"
+			}
+			custom_tooltip = " "
+			complex_dynamic_effect = {
+				first_custom_tooltip = A57_eborthil_node_share_tt
+				first_limit = "
+					1296 = { #Eborthil node
+						trade_share = {
+							country = ROOT
+							share = 10
+						}
+					}
+				"
+				first_effect = "
+					custom_tooltip = A57_can_use_improve_inland_routes_tt
+					set_country_flag = can_always_use_improve_inland_routes
+				"
+			}
+		}
+	}
+
+	A57_green_thorn = {
+		icon = mission_modern_knight_army
+		position = 5
+		required_missions = {
+			A57_roilsardi_first
+			A57_pirate_menace
+		}
+		provinces_to_highlight = {
+			region = daravans_folly_region
+			culture = roilsardi
+			NOT = { has_manpower_building_trigger = yes }
+		 }
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				AND = {
+					culture = roilsardi
+					region = daravans_folly_region
+					has_manpower_building_trigger = yes
+				}
+				value = 3
+			}
+		}
+
+		effect = {
+			add_manpower = 1
+			define_general = {
+				fire = 3
+				shock = 2
+				manuever = 6
+				siege = 3
+				name = "Alain Magnan"
+				trait = hardy_warrior_personality
+			}
+			every_owned_province = {
+				remove_province_modifier = escanni_refugee_settlement_small
+				remove_province_modifier = escanni_refugee_settlement_large
+			}
+			unlock_merc_company = {
+				merc_company = merc_green_thorn_crusaders
+				free_merc = yes
+			}
+		}
+	}
+
+	A57_great_corvurian_crusade = {
+		icon = mission_assemble_an_army
+		position = 7
+		required_missions = { A57_green_thorn }
+		provinces_to_highlight = {
+			region = daravans_folly_region
+			culture = roilsardi
+			NOT = {
+				OR = {
+					has_fort_building_trigger = yes
+					has_forcelimit_building_trigger = yes
+					if = {
+						limit = { has_dlc = "Cradle of Civilization" }
+						has_supply_depot = ROOT
+					}
+					else = { base_manpower = 3 }
+				}
+			}
+		}
+
+		trigger = {
+			AC7 = { exists = no }
+			any_owned_province = {
+				region = daravans_folly_region
+				culture = roilsardi
+				has_fort_building_trigger = yes
+				has_forcelimit_building_trigger = yes
+				if = {
+					limit = { has_dlc = "Cradle of Civilization" }
+					has_supply_depot = ROOT
+				}
+				else = { base_manpower = 3 }
+			}
+		}
+
+		effect = {
+			random_owned_province = {
+				limit = {
+					region = daravans_folly_region
+					culture = roilsardi
+					has_fort_building_trigger = yes
+					has_forcelimit_building_trigger = yes
+					if = {
+						limit = { has_dlc = "Cradle of Civilization" }
+						has_supply_depot = ROOT
+					}
+					else = { base_manpower = 3 }
+				}
+				add_permanent_province_modifier = {
+					name = A57_green_thorn_base
+					duration = -1
+				}
+			}
+			dostanor_region = { add_permanent_claim = ROOT }
+			custom_tooltip = " "
+			complex_dynamic_effect = {
+				first_custom_tooltip = A57_corvuria_spy_network_tt
+				first_limit = "
+					A59 = {
+						has_spy_network_from = {
+							who = ROOT
+							value = 50
+						}
+					}
+				"
+				first_effect = "
+					add_country_modifier = {
+						name = A57_corvurian_crusade
+						duration = 9125
+					}
+				"
+			}
+		}
+	}
+
+	A57_great_bahari_crusade = {
+		icon = mission_dharma_mission_arabian_trade
+		position = 10
+		required_missions = { A57_great_corvurian_crusade }
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					region = daravans_folly_region
+					NOT = { country_or_non_sovereign_subject_holds = ROOT }
+				}
+				AND = {
+					province_id = 1303
+					NOT = { 1303 = { is_strongest_trade_power = ROOT } }
+				}
+			}
+		}
+
+		trigger = {
+			daravans_folly_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			1303 = { is_strongest_trade_power = ROOT }
+		}
+
+		effect = {
+			447 = { change_province_name = "Nï¿½r Wineport" }
+			ourdia_region = { add_permanent_claim = ROOT }
+			bahar_region = { add_permanent_claim = ROOT }
+			custom_tooltip = " "
+			complex_dynamic_effect = {
+				first_custom_tooltip = A57_to_surpass_bulwar_tt
+				first_limit = "
+					all_known_country = {
+						OR = {
+							NOT = {
+								OR = {
+									culture = sun_elf
+									culture_group = bulwari
+								}
+							}
+							AND = {
+								OR = {
+									culture = sun_elf
+									culture_group = bulwari
+								}
+								NOT = { army_size = ROOT }
+							}
+						}
+					}
+				"
+				first_effect = "
+					add_country_modifier = {
+						name = A57_bahari_crusade_mod
+						duration = 9125
+					}
+				"
+			}
+		}
+	}
+
+	A57_bahar = {
+		icon = mission_sunset_alternative
+		position = 11
+		required_missions = { A57_great_bahari_crusade }
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					region = bahar_region
+					NOT = { country_or_non_sovereign_subject_holds = ROOT }
+				}
+				AND = {
+					province_id = 536
+					unrest = 1
+					NOT = {
+						num_of_units_in_province = {
+							amount = 20
+							who = ROOT
+						}
+						province_has_center_of_trade_of_level = 2
+					}
+				}
+			}
+		}
+
+		trigger = {
+			bahar_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			536 = {
+				num_of_units_in_province = {
+					amount = 20
+					who = ROOT
+				}
+				province_has_center_of_trade_of_level = 2
+				NOT = { unrest = 1 }
+			}
+		}
+
+		effect = {
+			custom_tooltip = A57_bahar_settlers_tt
+			hidden_effect = {
+				536 = { province_event = { id = flavor_toarnen.103 }  }
+				random_owned_province = {
+					limit = { region = bahar_region }
+					province_event = { id = flavor_toarnen.103 days = 2 }
+				}
+			}
+		}
+	}
+
+	A57_cradle_of_our_greatness = {
+		icon = mam_city_thousand_minarets
+		position = 13
+		required_missions = { A57_bahar }
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					is_capital = yes
+					owner = {
+						primary_culture = sun_elf
+						NOT = {
+							scornfully_insulted_check = yes
+						}
+					}
+				}
+				AND = {
+					province_id = 1309
+					NOT = {
+						AND = {
+							heavy_ships_in_province = ROOT
+							heavy_ships_in_province = 25
+						}
+					}
+				}
+			}
+		}
+
+		trigger = {
+			all_known_country = {
+				OR = {
+					NOT = { primary_culture = sun_elf }
+					scornfully_insulted_check = yes
+				}
+			}
+			1309 = {
+				heavy_ships_in_province = ROOT
+				heavy_ships_in_province = 25
+			}
+		}
+
+		effect = {
+			set_country_flag = A57_scorching_elves
+			custom_tooltip = A57_loot_bulwari_provinces_tt
+			496 = {
+				set_province_flag = A57_loot_this_flag
+				add_permanent_claim = ROOT
+			}
+			565 = {
+				set_province_flag = A57_loot_this_flag
+				add_permanent_claim = ROOT
+			}
+			591 = {
+				set_province_flag = A57_loot_this_flag
+				add_permanent_claim = ROOT
+			}
+			601 = {
+				set_province_flag = A57_loot_this_flag
+				add_permanent_claim = ROOT
+			}
+			609 = {
+				set_province_flag = A57_loot_this_flag
+				add_permanent_claim = ROOT
+			}
+			613 = {
+				set_province_flag = A57_loot_this_flag
+				add_permanent_claim = ROOT
+			}
+			616 = {
+				set_province_flag = A57_loot_this_flag
+				add_permanent_claim = ROOT
+			}
+			625 = {
+				set_province_flag = A57_loot_this_flag
+				add_permanent_claim = ROOT
+			}
+			631 = {
+				set_province_flag = A57_loot_this_flag
+				add_permanent_claim = ROOT
+			}
+			643 = {
+				set_province_flag = A57_loot_this_flag
 				add_permanent_claim = ROOT
 			}
 		}
 	}
-	
-	A57_a_coast_of_roses = {
-		icon = balance_of_power
-		required_missions = { 
-			A57_guard_the_folly_border
-		}
-		position = 5
 
-		provinces_to_highlight = {
-			province_id = 451 # Nathalaire
-			NOT = { owned_by = ROOT }
-		}
-
-		trigger = {
-			451 = { # Nathalaire
-				owned_by = ROOT
-			}
-		}
-		
-		effect = {
-			451 = { # Nathalaire
-				add_nationalism = -5
-			}
-			U17 = { # Crathanor
-				add_opinion = {
-					who = ROOT
-					modifier = toarnen_crathanor_friend
-				}
-			}
-		}
-	}
-
-	A57_reorganize_celliande = {
-		icon = prosper_in_piedmont
-		required_missions = { 
-			A57_pacify_celliande 
-		}
-		position = 6
-
+	A57_bahar_capstone = {
+		icon = mission_whisper
+		position = 15
+		required_missions = { A57_cradle_of_our_greatness }
 		provinces_to_highlight = {
 			OR = {
-				province_id = 412 # Doveswall
-				province_id = 414 # Idlorn
-				province_id = 416 # Antirhalan
-			}
-		}
-
-		trigger = {
-			412 = { # Doveswall
-				NOT = { local_autonomy = 20 }
-			}
-			414 = { # Idlorn
-				NOT = { local_autonomy = 20 }
-			}
-			416 = { # Antirhalan
-				NOT = { local_autonomy = 20 }
-			}
-			adm_power = 50
-		}
-
-		effect = {
-			add_adm_power = -50
-			412 = { # Doveswall
-				add_base_production = 1
-			}
-			414 = { # Idlorn
-				add_base_production = 1
-			}
-			416 = { # Antirhalan
-				add_base_production = 1
-			}
-		}
-			
-	}
-
-	A57_curtail_the_charters = {
-		icon = mission_conquer_50_development
-		required_missions = { 
-			A57_the_defender_of_the_east 
-		}
-		position = 8
-
-		provinces_to_highlight = {
-			OR = {
-				province_id = 921 # Bordercliff
-				province_id = 413 # Sorncell
-				province_id = 922 # Aiscestir
-			}
-			NOT = { owned_by = ROOT }
-		}
-		
-		trigger = {
-			army_size = 17
-			921 = { # Bordercliff
-				owned_by = ROOT
-			}
-			413 = { # Sorncell
-				owned_by = ROOT
-			}
-			OR = {
-				AND = {
-					921 = { # Bordercliff
-						NOT = { development = 10 }
-					}
-					413 = { # Sorncell
-						NOT = { development = 15 }
-					}
-					922 = { # Aiscestir
-						development = 15
-					}
-				}
-				922 = { # Aiscestir
-					development = 30
-				}
-			}
-		}
-
-		effect = {
-			reduce_stability_or_adm_power = yes
-			921 = { # Bordercliff
-				remove_province_modifier = A57_charters_of_bordercliff
-				spawn_rebels = {
-					type = noble_rebels
-					size = 2
-				}
-				add_province_modifier = {
-					name = A57_declaration_of_autonomous_government
-					duration = 7300
-				}
-			}
-			413 = { # Sorncell
-				remove_province_modifier = A57_sorncell_charter
-				spawn_rebels = {
-					type = pretender_rebels
-					size = 2
-				}
-				add_province_modifier = {
-					name = A57_declaration_of_autonomous_government
-					duration = 7300
-				}
-			}
-			change_estate_land_share = {
-				estate = estate_burghers
-				share = -5
-			}
-		}
-	}
-	
-	A57_divide_to_pacify = {
-		icon = mission_destroyed_city
-		required_missions = { 
-			A57_curtail_the_charters
-		}
-		position = 9
-		
-		provinces_to_highlight = {
-			OR = {
-				province_id = 921 # Bordercliff
-				province_id = 413 # Sorncell
-			}
-			OR = {
-				NOT = { owned_by = ROOT }
-				local_autonomy = 10
-			}
-		}
-		
-		trigger = {
-			921 = { # Bordercliff
-				owned_by = ROOT
-				NOT = { local_autonomy = 10 }
-			}
-			413 = { # Sorncell
-				owned_by = ROOT
-				NOT = { local_autonomy = 10 }
-			}
-			stability = 1
-			adm_power = 100
-		}
-		
-		effect = {
-			add_adm_power = -100
-			921 = { # Bordercliff
-				remove_province_modifier = A57_declaration_of_autonomous_government
-				add_base_production = -3
-				add_base_tax = -2
-			}
-			413 = { # Sorncell
-				remove_province_modifier = A57_declaration_of_autonomous_government
-				add_base_production = -3
-				add_base_tax = -1
-			}
-			922 = { # Aiscestir
-				add_base_production = 2
-				add_base_tax = 3
-			}
-			420 = { # Mugalleán
-				add_base_production = 2
-			}
-			414 = { # Idlorn
-				add_base_production = 1
-			}
-			416 = { # Antirhalan
-				add_base_tax = 1
-			}
-		}
-	}
-	
-	A57_barbaric_alenics = {
-		icon = mission_impaled_soldies
-		required_missions = { 
-			A57_northern_aranneses 
-		}
-		position = 13
-		
-		provinces_to_highlight = {
-			OR = {
-				province_id = 920 # Andurolm
-				province_id = 902 # Embergarden
-			}
-			NOT = { owned_by = ROOT }
-		}
-		
-		trigger = {
-			920 = { # Andurolm
-				owned_by = ROOT
-			}
-			902 = { # Embergarden
-				owned_by = ROOT
-			}
-		}
-		
-		effect = {
-			add_prestige = 10
-			920 = { # Andurolm
-				add_nationalism = -10
-				add_province_modifier = {
-					name = A57_northern_roilsardization
-					duration = 3650
-				}
-			}
-			902 = { # Embergarden
-				add_nationalism = -10
-				add_province_modifier = {
-					name = A57_northern_roilsardization
-					duration = 3650
-				}
-			}
-		}
-	}
-	
-	A57_a_forbidden_dialect = {
-		icon = mission_settlers_north_america
-		required_missions = { 
-			A57_barbaric_alenics
-		}
-		position = 14
-		
-		provinces_to_highlight = {
-			OR = {
-				province_id = 920 # Andurolm
-				province_id = 902 # Embergarden
-			}
-			OR = {
-				NOT = { owned_by = ROOT }
-				NOT = { is_core = ROOT }
-				NOT = { culture = roilsardi }
-			}
-		}
-		
-		trigger = {
-			920 = { # Andurolm
-				owned_by = ROOT
-				is_core = ROOT
-				culture = roilsardi
-			}
-			902 = { # Embergarden
-				owned_by = ROOT
-				is_core = ROOT
-				culture = roilsardi
-			}
-			adm_power = 50
-		}
-		
-		effect = {
-			add_adm_power = -50
-			920 = { # Andurolm
-				add_base_production = 1
-				add_base_manpower = 1
-			}
-			902 = { # Embergarden
-				add_base_production = 1
-				add_base_manpower = 2
-			}
-		}
-	}
-}
-
-toarnen_column_two = {
-	slot = 2
-	generic = no
-	ai = yes
-	potential = {
-		tag = A57
-	}
-	has_country_shield = yes
-	
-	A57_spit_on_celliande = {
-		icon = mission_captured
-		required_missions = { }
-		position = 1
-		
-		provinces_to_highlight = {
-			is_capital = yes
-			owned_by = A56 # Celliande
-		}
-		
-		trigger = {
-			if = {
-				limit = {
-					exists = A56 # Celliande
-				}
-				is_rival = A56 # Celliande
-				A56 = { # Celliande
-					if = {
-						limit = {
-							has_dlc = "Dharma"
-						}
-						has_opinion_modifier = {
-							who = ROOT
-							modifier = scornfully_insulted
-						}
-					}
-					else = {
-						has_opinion_modifier = {
-							who = ROOT
-							modifier = insulted
-						}
-					}
-					NOT = {
-						has_opinion = {
-							who = ROOT
-							value = -199
-						}
-					}
-				}
-			}
-			else = {
-				NOT = {
-					exists = A56 # Celliande
-				}
-			}
-		}
-		
-		effect = {
-			if = {
-				limit = {
-					exists = A56 # Celliande
-				}
-				add_dip_power = 25
-				add_power_projection = {
-					type = mission_rewards_power_projection
-					amount = 10
-				}
-			}
-		}
-	}
-	
-	A57_an_incident_in_sorncell = {
-		icon = mission_burning_castle
-		required_missions = { 
-			A57_spit_on_celliande
-			A57_bordercliff_our_shield
-		}
-		position = 2
-		
-		provinces_to_highlight = {
-			is_capital = yes
-			owned_by = A56
-		}
-		
-		trigger = {
-			if = {
-				limit = {
-					exists = A56 # Celliande
-				}
-				has_spy_network_in = {
-					who = A56
-					value = 50
-				}
-				dip_power = 50
-			}
-			else = {
-				NOT = {
-					exists = A56 # Celliande
-				}
-			}
-		}
-		
-		effect = {
-			if = {
-				limit = {
-					exists = A56 # Celliande
-				}
-				add_dip_power = -50
-				A56 = { # Celliande
-					add_country_modifier = {
-						name = A57_infiltrated_army
-						duration = 1825
-					}
-					hidden_effect = {
-						country_event = { id = flavor_toarnen.39 }
-					}
-				}
-			}
-		}
-	}
-	
-	A57_celliande_will_pay_in_blood = {
-		icon = mission_colonial
-		required_missions = { 
-			A57_an_incident_in_sorncell
-			A57_muster_the_arrayers
-		}
-		position = 3
-		
-		provinces_to_highlight = {
-			province_id = 413 # Sorncell
-			NOT = { owned_by = ROOT }
-		}
-		
-		trigger = {
-			OR = {
-				AND = {
-					413 = { # Sorncell
-						owned_by = A56
-						is_claim = ROOT
-					}
-					is_at_war = no
-				}
-				413 = {
-					owned_by = ROOT
-				}
-			}
-		}
-		
-		effect = {
-			if = {
-				limit = {
-					413 = { # Sorncell
-						owned_by = A56
-					}
-				}
-				A56 = {
-					country_event = {
-						id = flavor_toarnen.13
-					}
-				}
-			}
-			else = {
-				add_prestige = 10
-			}
-		}
-	}
-	
-	A57_a_chart_for_sorncell = {
-		icon = balance_of_power
-		required_missions = { 
-			A57_celliande_will_pay_in_blood
-		}
-		position = 4
-		
-		provinces_to_highlight = {
-			province_id = 413 # Sorncell
-			NOT = { owned_by = ROOT }
-		}
-		
-		trigger = {
-			413 = { # Sorncell
-				owned_by = ROOT
-			}
-		}
-		
-		effect = {
-			413 = { # Sorncell
-				add_core = ROOT
-				add_nationalism = -5
-				add_province_modifier = {
-					name = A57_sorncell_charter
-					duration = -1
-				}
-			}
-			A56 = {
-				every_owned_province = {
-					add_claim = ROOT
-				}
-			}
-		}
-	}
-	
-	A57_pacify_celliande = {
-		icon = prosper_in_piedmont
-		required_missions = { 
-			A57_a_chart_for_sorncell
-		}
-		position = 5
-		
-		provinces_to_highlight = {
-			OR = {
-				province_id = 412 # doveswall
-				province_id = 414 # Idlorn
-				province_id = 416 # Antirhalan
-			}
-			NOT = { owned_by = ROOT }
-		}
-		
-		trigger = {
-			412 = { # doveswall
-				owned_by = ROOT
-			}
-			414 = { # Idlorn
-				owned_by = ROOT
-			}
-			416 = { # Antirhalan
-				owned_by = ROOT
-			}
-		}
-		
-		effect = {
-			412 = { # doveswall
-				add_nationalism = -10
-				add_local_autonomy = 20
-			}
-			414 = { # Idlorn
-				add_nationalism = -10
-				add_local_autonomy = 20
-			}
-			416 = { # Antirhalan
-				add_nationalism = -10
-				add_local_autonomy = 20
-			}
-		}
-	}
-	
-	A57_renew_lilac_war_alliances = {
-		icon = mission_conquer_50_development
-		required_missions = { 
-			A57_pacify_celliande
-		}
-		position = 6
-		
-		provinces_to_highlight = {
-			is_capital = yes
-			OR = {
-				owned_by = A48
-				owned_by = A29
-			}
-		}
-		
-		trigger = {
-			OR = {
+				has_province_flag = A57_loot_this_flag
 				AND = {
 					OR = {
-						A48 = { # sugamber
-							has_opinion = {
-								who = ROOT
-								value = 75
-							}
-						}
-						A29 = { # busilar
-							has_opinion = {
-								who = ROOT
-								value = 75
-							}
-						}
-					}
-					total_development = 50
-				}
-				
-				NOT = {
-					OR = {
-						exists = A48 # sugamber
-						exists = A29 # busilar
-					}
-				}
-			}
-		}
-		
-		effect = {
-			if = {
-				limit = { 
-					OR = {
-						exists = A48 # sugamber
-						exists = A29 # busilar
-					}
-				}
-				419 = {
-					add_permanent_claim = ROOT
-				}
-				325 = {
-					add_permanent_claim = ROOT
-				}
-				418 = {
-					add_permanent_claim = ROOT
-				}
-			}
-		}
-	}
-	
-	A57_the_defender_of_the_east = {
-		icon = mission_approach_throne
-		required_missions = { 
-			A57_renew_lilac_war_alliances
-			A57_reorganize_celliande
-		}
-		position = 7
-		
-		provinces_to_highlight = {
-			OR = {
-				province_id = 419 # Varlosen
-				province_id = 325 # Losfadel
-				province_id = 418 # Marllin
-			}
-			NOT = { owned_by = ROOT }
-		}
-		
-		trigger = {
-			419 = { # Varlosen
-				owned_by = ROOT
-			}
-			325 = { # Losfadel
-				owned_by = ROOT
-			}
-			418 = { # Marllin
-				owned_by = ROOT
-			}
-		}
-		
-		effect = {
-			add_country_modifier = {
-				name = A57_the_true_march_of_the_east
-				duration = 3650
-			}
-		}
-	}
-	
-	A57_the_green_thorn_fortress = {
-		icon = mission_sinister_castle
-		required_missions = {
-			A57_the_defender_of_the_east
-		}
-		position = 8
-		
-		provinces_to_highlight = {
-			province_id = 418 # Marllin
-			OR = {
-				NOT = { owned_by = ROOT }
-				NOT = { has_forcelimit_building_trigger = yes }
-				NOT = { has_manpower_building_trigger = yes }
-				local_autonomy = 25
-			}
-		}
-		
-		trigger = {
-			418 = { # Marllin
-				owned_by = ROOT
-				has_forcelimit_building_trigger = yes
-				has_manpower_building_trigger = yes
-				NOT = { local_autonomy = 25 }
-			}
-			treasury = 150
-			mil_power = 100
-		}
-		
-		effect = {
-			add_mil_power = -100
-			add_treasury = -50
-			418 = { # Marllin
-				add_base_manpower = 3
-				add_building_construction = {
-					building = fort_15th
-					speed = 0.5
-					cost = 0.5
-				}
-				change_province_name = "Fort Saloren"
-				add_permanent_province_modifier = {
-					name = A57_green_thorn_forteress
-					duration = -1
-				}
-			}
-		}
-	}
-	
-	A57_expand_the_arraying = {
-		icon = mission_assemble_an_army
-		required_missions = { A57_the_green_thorn_fortress }
-		position = 9
-		
-		trigger = {
-			army_size = 15
-			mil_tech = 9
-			if = {
-				limit = { has_dlc = "Cradle of Civilization" }
-				army_professionalism = 0.2
-			}
-			else = {
-				army_tradition = 50
-			}
-		}
-		
-		effect = {
-			add_country_modifier = {
-				name = A57_expended_arraying
-				duration = -1
-			}
-		}
-	}
-	
-	A57_borrow_teinmas = {
-		icon = mission_rb_scottish_the_darien_scheme
-		required_missions = { A57_northern_aranneses }
-		position = 13
-		
-		provinces_to_highlight = {
-			OR = {
-				AND = {
-					OR = {
-						province_id = 320 # livergrave
-						province_id = 311 # ashfield
-					}
-					NOT = { owned_by = ROOT }
-				}
-				AND = {
-					province_id = 314
-					NOT = { owned_by = A32 }
-				}
-			}
-		}
-		
-		trigger = {
-			320 = { # livergrave
-				owned_by = ROOT
-			}
-			311 = { # ashfield
-				owned_by = ROOT
-			}
-			total_development = A32 # Ibevar
-			treasury = 500
-			314 = { # Téinmas
-				owned_by = A32 # Ibevar
-			}
-			A32 = { # Ibevar
-				has_opinion = {
-					who = ROOT
-					value = 175
-				}
-			}
-		}
-		
-		effect = {
-			add_treasury = -500
-			A32 = { # Ibevar
-				country_event = {
-					id = flavor_toarnen.16
-					days = 1
-				}
-			}
-		}
-	}
-}
-
-toarnen_column_three = {
-	slot = 3
-	generic = no
-	ai = yes
-	potential = {
-		tag = A57
-	}
-	has_country_shield = yes
-	
-	A57_adelaide_parties = {
-		icon = mission_feast
-		required_missions = { }
-		position = 1
-		
-		trigger = {
-			treasury = 25
-		}
-		
-		effect = {
-			add_treasury = -25
-			country_event = { id = flavor_toarnen.2 }
-		}
-	}
-	
-	A57_a_roilsardi_heir = {
-		icon = mission_candide_letter
-		required_missions = { 
-			A57_adelaide_parties 
-			A57_coming_back_to_the_thorn
-		}
-		position = 2
-		
-		trigger = {
-			OR = {
-				AND = {
-					prestige = 20
-					dip_power = 40
-				}
-				NOT = {
-					exists = A87 # Saloren
-				}
-			}
-		}
-		
-		effect = {
-			if = {
-				limit = {
-					exists = A87 # Saloren
-				}
-				add_dip_power = -40
-				country_event = { id = flavor_toarnen.3 }
-			}
-		}
-	}
-	
-	A57_the_green_thorn_order = {
-		icon = mission_pf_soldier
-		required_missions = { A57_a_roilsardi_heir }
-		position = 3
-		
-		trigger = {
-			if = {
-				limit = { has_dlc = "Cradle of Civilization" }
-				army_professionalism = 0.15
-			}
-			mil_tech = 5
-			mil_power = 35
-		}
-		
-		effect = {
-			add_mil_power = -35
-			add_country_modifier = {
-				name = A57_green_thorn_crusaders
-				duration = -1
-			}
-		}
-	}
-	
-	A57_roilsardi_immigration = {
-		icon = mission_settlers_north_america
-		required_missions = { A57_the_green_thorn_order }
-		position = 4
-		
-		provinces_to_highlight = {
-			culture = roilsardi
-			NOT = { owner = { culture = roilsardi } }
-		}
-		
-		trigger = {
-			dip_tech = 6
-			treasury = 100
-			dip_power = 100
-			any_known_country = {
-				NOT = { culture = roilsardi }
-				any_owned_province = { culture = roilsardi }
-			}
-		}
-		
-		effect = {
-			country_event = {
-				id = flavor_toarnen.7
-			}
-		}
-	}
-	
-	A57_roilsardis_first = {
-		icon = mission_discussion_arch
-		required_missions = { 
-			A57_roilsardi_immigration 
-		}
-		position = 5
-		
-		trigger = {
-			OR = {
-				ruler_culture = roilsardi
-				any_core_province = {
-					culture = roilsardi
-				}
-			}
-			dip_power = 100
-		}
-		
-		effect = {
-			add_dip_power = -100
-			add_prestige = 15
-			primary_and_ruler_culture_change = { race = human new_culture = roilsardi }
-			add_country_modifier = {
-				name = A57_promote_roilsardi_schooling
-				duration = 3650
-			}
-		}
-	}
-	
-	A57_rekindle_our_culture = {
-		icon = mission_priest_church
-		required_missions = { 
-			A57_roilsardis_first
-		}
-		position = 6
-		
-		provinces_to_highlight = {
-			culture = roilsardi
-			NOT = { owned_by = ROOT }
-		}
-		
-		trigger = {
-			num_of_owned_provinces_with = {
-				value = 4
-				culture = roilsardi
-			}
-			treasury = 150
-			dip_power = 75
-		}
-		
-		effect = {
-			add_treasury = -150
-			add_dip_power = -75
-			add_country_modifier = {
-				name = A57_new_roilsardi_literrature
-				duration = 7300
-			}
-		}
-	}
-	
-	A57_we_are_the_true_roilsardis = {
-		icon = mission_thinking_king
-		required_missions = { 
-			A57_rekindle_our_culture 
-			A57_build_the_settlements
-		}
-		position = 7
-		
-		provinces_to_highlight = {
-			owned_by = ROOT
-			NOT = {
-				culture = roilsardi
-			}
-		}
-		
-		trigger = {
-			num_of_owned_provinces_with = {
-				value = 6
-				culture = roilsardi
-			}
-		}
-		
-		effect = {
-			922 = { # Aiscestir
-				change_culture = roilsardi
-				change_province_name = "New Toarnaire"
-			}
-			custom_tooltip = toaren_prestige_per_culture_custom_tooltip
-			hidden_effect = {
-				country_event = {
-					id = flavor_toarnen.12
-					days = 3650
-				}
-			}
-		}
-	}
-	
-	A57_finish_arannen = {
-		icon = mission_unite_home_region
-		required_missions = { 
-			A57_we_are_the_true_roilsardis
-		}
-		position = 9
-		
-		provinces_to_highlight = {
-			OR = {
-				province_id = 413 # Sorncell
-				province_id = 921 # Bordercliff
-				province_id = 418 # marllin
-			}
-			OR = {
-				NOT = { owned_by = ROOT }
-				AND = {
-					OR = {
-						province_id = 413
-						province_id = 921
-					}
-					local_autonomy = 10
-				}
-				AND = {
-					OR = {
-						province_id = 921
-						province_id = 418
+						region = ourdia_region
+						region = bahar_region
 					}
 					NOT = { culture = roilsardi }
 				}
 				AND = {
-					province_id = 418
-					NOT = { has_forcelimit_building_trigger = yes }
+					province_id = 1309
+					NOT = { 1309 = { is_strongest_trade_power = ROOT } }
 				}
 			}
 		}
-		
+
 		trigger = {
-			413 = { # Sorncell
-				owned_by = ROOT
-				NOT = {
-					local_autonomy = 10
-				}
+			check_variable = {
+				which = A57_looted_bulwar_cities
+				value = 3
 			}
-			921 = { # Bordercliff
-				owned_by = ROOT
-				NOT = {
-					local_autonomy = 10
-				}
-				culture = roilsardi
-			}
-			418 = { #Marllin
-				owned_by = ROOT
-				has_forcelimit_building_trigger = yes
-				culture = roilsardi
-			}
-		}
-		
-		effect = {
-			arannen_area = {
-				add_permanent_claim = ROOT
-			}
-			eastborders_area = {
-				add_permanent_claim = ROOT
-			}
-			417 = { # TELLUM
-				add_permanent_claim = ROOT
-			}
-			
-			every_country = {
-				limit = { primary_culture = arannese }
-				add_opinion = {
-					who = ROOT
-					modifier = toarnen_arannen_crusade
-				}
-			}
-		}
-	}
-	
-	A57_a_nameless_culture = {
-		icon = mission_rb_unite_the_clans
-		required_missions = { 
-			A57_finish_arannen 
-			A57_expand_the_arraying
-		}
-		position = 10
-		
-		provinces_to_highlight = {
-			OR = {
-				AND = {
-					province_id = 904 # Arannen
-					NOT = { owned_by = ROOT }
-				}
-				owned_by = A72
-			}
-		}
-		
-		trigger = {
-			904 = { # Arannen
-				owned_by = ROOT
-			}
-			NOT = {
-				exists = A72 # Arannen
-			}
-			dip_power = 50
-		}
-		
-		effect = {
-			if = {
-				limit = { 
-					904 = { # Arannen
-						culture = arannese
-					}
-				}
-				add_dip_power = -50
-				904 = { # Arannen
-					change_culture = roilsardi
-					add_base_tax = -2
-					add_base_production = -2
-					add_base_manpower = -2
-					add_local_autonomy = -20
-					change_province_name = "New Loopuis"
-				}
-				418 = { # Marllin
-					add_base_production = 1
-					add_base_tax = 1
-					add_base_manpower = 1
-				}
-				325 = { # Losfadel
-					add_base_production = 1
-					add_base_tax = 1
-					add_base_manpower = 1
-				}
-			}
-		}
-	}
-	
-	A57_defend_folly_borders = {
-		icon = mission_break_sicily
-		required_missions = { 
-			A57_a_nameless_culture
-		}
-		position = 11
-		
-		provinces_to_highlight = {
-			OR = {
-				province_id = 322 # Brinkwick
-				province_id = 323 # Surcham
-				province_id = 324 # Eastborders
-			}
-			OR = {
-				NOT = { owned_by = ROOT }
-				AND = {
-					province_id = 322
-					NOT = { fort_level = 2 }
-				}
-			}
-		}
-		
-		trigger = {
-			322 = { # Brinkwick
-				owned_by = ROOT
-				fort_level = 2
-			}
-			323 = { # Surcham
-				owned_by = ROOT
-			}
-			324 = { # Eastborders
-				owned_by = ROOT
-			}
-			treasury = 50
-			mil_power = 75
-		}
-		
-		effect = {
-			add_treasury = -50
-			add_mil_power = -75
-			322 = { # Brinkwick
-				add_base_manpower = 2
-				change_province_name = "Thornmarch"
-				add_permanent_province_modifier = {
-					name = A57_green_thorn_forteress
-					duration = -1
-				}
-			}
-		}
-	}
-	
-	A57_northern_aranneses = {
-		icon = mission_heated_battle
-		required_missions = { 
-			A57_defend_folly_borders
-		}
-		position = 12
-		
-		trigger = {
-			army_size = 27
-		}
-		
-		effect = {
-			gisden_area = {
-				add_permanent_claim = ROOT
-			}
-			ashfields_area = {
-				add_permanent_claim = ROOT
-			}
-		}
-	}
-	
-	A57_northern_arrays = {
-		icon = mission_assemble_an_army
-		required_missions = { 
-			A57_northern_aranneses
-		}
-		position = 13
-		
-		provinces_to_highlight = {
-			OR = {
-				province_id = 326 # Gisden
-				province_id = 311 # Ashfield
-			}
-			OR = {
-				NOT = { owned_by = ROOT }
-				NOT = { culture = roilsardi }
-			}
-		}
-		
-		trigger = {
-			326 = { # Gisden
-				owned_by = ROOT
-				culture = roilsardi
-			}
-			311 = { # Ashfield
-				owned_by = ROOT
-				culture = roilsardi
-			}
-			gisden_area = {
-				has_forcelimit_building_trigger = yes
-			}
-			ashfields_area = {
-				has_forcelimit_building_trigger = yes
-			}
-			eastborders_area = {
-				has_forcelimit_building_trigger = yes
-			}
-			arannen_area = {
-				has_forcelimit_building_trigger = yes
-			}
-		}
-		
-		effect = {
-			gisden_area = {
-				add_province_modifier = {
-					name = A57_arrays_of_the_north
-					duration = -1
-				}
-			}
-			ashfields_area = {
-				add_province_modifier = {
-					name = A57_arrays_of_the_north
-					duration = -1
-				}
-			}
-			eastborders_area = {
-				add_province_modifier = {
-					name = A57_arrays_of_the_north
-					duration = -1
-				}
-			}
-			arannen_area = {
-				add_province_modifier = {
-					name = A57_arrays_of_the_north
-					duration = -1
-				}
-			}
-		}
-	}
-	
-	A57_the_crusade = {
-		icon = mission_burning_witch
-		required_missions = { 
-			A57_northern_arrays
-		}
-		position = 14
-		
-		provinces_to_highlight = {
-			culture = roilsardi
-			NOT = { owned_by = ROOT }
-		}
-		
-		trigger = {
-			num_of_owned_provinces_with = {
-				value = 20
-				culture = roilsardi
-			}
-			total_development = 120
-			manpower_percentage = 0.9
-		}
-		
-		effect = {
-			dostanor_region = {
-				add_permanent_claim = ROOT
-			}
-			add_country_modifier = {
-				name = A57_the_crusade_against_vampires
-				duration = 5475
-			}
-		}
-	}
-	
-	A57_a_pure_corvuria = {
-		icon = mission_burning_man
-		required_missions = { 
-			A57_the_crusade
-		}
-		position = 15
-		
-		provinces_to_highlight = {
-			OR = {
-				owned_by = A59 # Corvuria
-				owned_by = A60 # Asheniande
-				owned_by = Z07 # Dostanor
-				AND = {
-					region = dostanor_region
-					NOT = { owned_by = ROOT }
-				}
-			}
-		}
-		
-		trigger = {
-			NOT = {
-				exists = A59 # Corvuria
-			}
-			NOT = {
-				exists = A60 # Asheniande
-			}
-			NOT = {
-				exists = Z07 # Dostanor
-			}
-			dostanor_region = {
+			ourdia_region = {
 				type = all
-				owned_by = ROOT
-			}
-		}
-		
-		effect = {
-			emperor = {
-				add_opinion = {
-					who = ROOT
-					modifier = toarnen_secure_empire
-				}
-			}
-			dostanor_region = {
-				add_province_modifier = {
-					name = arbaran_assimilation
-					duration = 18250 #50 years to outlast separatism and be useful. Using this is optional as the player can always just accept the cultures and leave them.
-				}
-			}
-		}
-	}
-	
-	A57_margraves_of_toarnaiste = {
-		icon = mission_empire
-		required_missions = { 
-			A57_a_pure_corvuria 
-		}
-		position = 16
-		
-		provinces_to_highlight = {
-			culture = roilsardi
-			NOT = { owned_by = ROOT }
-		}
-
-		trigger = {
-			num_of_owned_provinces_with = {
-				value = 30
 				culture = roilsardi
 			}
-			stability = 2
-			prestige = 60
-			dostanor_region = {
+			bahar_region = {
 				type = all
-				is_part_of_hre = yes
+				OR ={
+					culture = roilsardi
+					province_id = 526
+				}
+			}
+			1309 = {
+				is_strongest_trade_power = ROOT
 			}
 		}
 
 		effect = {
-			country_event = { id = flavor_toarnen.10 }
-		}
-	}
-}
-
-toarnen_column_four = {
-	slot = 4
-	generic = no
-	ai = yes
-	potential = {
-		tag = A57
-	}
-	has_country_shield = yes
-	
-	A57_coming_back_to_the_thorn = {
-		icon = mission_princess_writing
-		required_missions = { }
-		position = 1
-		
-		trigger = {
-			OR = {
-				marriage_with = A87 # Saloren
-				A87 = {
-					has_opinion = {
-						who = ROOT
-						value = 125
-					}
-				}
-				NOT = {
-					exists = A87 # Saloren
-				}
-				hidden_trigger = {
-					ai = yes
-				}
-			}
-		}
-		
-		effect = {
+			clr_country_flag = A57_scorching_elves
+			custom_tooltip = A57_looting_cities_reward_tt
 			if = {
 				limit = {
-					exists = A87 # Saloren
-				}
-				add_prestige = 10
-				A87 = {
-					add_opinion = {
-						who = ROOT
-						modifier = toarnen_saloren_friend
+					check_variable = {
+						which = A57_looted_bulwar_cities
+						value = 0
 					}
-				}
-			}
-		}
-	}
-	
-	A57_promote_the_toarnen_black = {
-		icon = mission_wine_monopolies
-		required_missions = { 
-			A57_coming_back_to_the_thorn
-		}
-		position = 2
-		
-		trigger = {
-			estate_loyalty = {
-				estate = estate_nobles
-				loyalty = 65
-			}
-			estate_influence = {
-				estate = estate_nobles
-				influence = 60
-			}
-			adm_power = 50
-		}
-		
-		effect = {
-			add_adm_power = -50
-			922 = { # Aiscestir
-				add_permanent_province_modifier = {
-					name = A57_toarnen_black_in_taverns
-					duration = -1
-				}
-			}
-		}
-	}
-	
-	A57_export_our_wine = {
-		icon = mission_dominate_home_trade_node
-		required_missions = { 
-			A57_promote_the_toarnen_black
-		}
-		position = 3
-		
-		trigger = {
-			num_of_owned_provinces_with = {
-				value = 4
-				has_trade_building_trigger = yes
-			}
-		}
-		
-		effect = {
-			add_mercantilism = 5
-		}
-	}
-	
-	A57_find_a_plaids_importer = {
-		icon = mission_merchant_trip 
-		required_missions = { 
-			A57_export_our_wine
-		}
-		position = 4
-		
-		trigger = {
-			any_known_country = {
-				capital_scope = { region = bahar_region }
-				has_opinion = {
-					who = ROOT
-					value = 100
-				}
-			}
-			any_known_country = {
-				capital_scope = { superregion = escann_superregion }
-				has_opinion = {
-					who = ROOT
-					value = 100
-				}
-			}
-			dip_power = 50
-		}
-		
-		effect = {
-			add_dip_power = -50
-			add_country_modifier = { 
-				name = A57_plaids_exporter
-				duration = 10950
-			}
-		}
-	}
-	
-	A57_black_and_white_fashion = {
-		icon = mission_guarded_market
-		required_missions = { 
-			A57_find_a_plaids_importer
-			A57_roilsardi_immigration
-		}
-		position = 5
-		
-		provinces_to_highlight = {
-			province_id = 922 # Aiscestir
-			OR = {
-				NOT = { base_production = 7 }
-				NOT = { has_production_building_trigger = yes }
-			}
-		}
-		
-		trigger = {
-			922 = { # Aiscestir
-				base_production = 7
-				has_production_building_trigger = yes
-			}
-		}
-		
-		effect = {
-			922 = { # Aiscestir
-				change_trade_goods = cloth
-			}
-		}
-	}
-	
-	A57_build_the_settlements = {
-		icon = mission_guarded_market
-		required_missions = { 
-			A57_black_and_white_fashion
-		}
-		position = 6
-		
-		provinces_to_highlight = {
-			OR = {
-				AND = {
-					province_id = 922 # Aiscestir
-					OR = {
-						NOT = { has_trade_building_trigger = yes }
-						NOT = { has_tax_building_trigger = yes }
-					}
-				}
-				AND = {
-					province_id = 420 # Mugalleán
-					NOT = { development = 10 }
-				}
-			}
-		}
-		
-		trigger = {
-			922 = { # Aiscestir
-				has_trade_building_trigger = yes
-				has_tax_building_trigger = yes
-			}
-			420 = { # Mugalleán
-				development = 10
-			}
-			dip_power = 50
-		}
-		
-		effect = {
-			add_dip_power = -50
-			922 = { # Aiscestir
-				add_base_tax = 2
-			}
-			420 = { # Mugalleán
-				add_base_tax = 1
-			}
-		}
-	}
-	
-	A57_host_a_royal_chess_contest = {
-		icon = mission_feast
-		required_missions = { 
-			A57_we_are_the_true_roilsardis 
-		}
-		position = 8
-		
-		provinces_to_highlight = {
-			province_id = 922
-			OR = {
-				NOT = { owned_by = ROOT }
-				NOT = { development = 15 }
-				unrest = 0
-			}
-		}
-		
-		trigger = {
-			prestige = 60
-			treasury = 100
-			922 = {
-				owned_by = ROOT
-				development = 15
-				NOT = { unrest = 0 }
-			}
-		}
-		
-		effect = {
-			add_treasury = -100
-			add_dip_power = 50
-			country_event = { id = flavor_toarnen.4 }
-		}
-	}
-	
-	A57_popularize_chess_variants = {
-		icon = mission_feast
-		required_missions = { 
-			A57_host_a_royal_chess_contest 
-		}
-		position = 9
-		
-		trigger = {
-			A92 = { # Leslinpar
-				has_opinion = {
-					who = ROOT
-					value = 150
-				}
-			}
-			dip_power = 50
-		}
-		
-		effect = {
-			add_dip_power = -50
-			add_prestige = 15
-			add_country_modifier = {
-				name = A57_toarnen_cones
-				duration = -1
-			}
-			every_neighbor_country = {
-				add_country_modifier = {
-					name = A57_toarnen_cones
-					duration = -1
-				}
-			}
-		}
-	}
-	
-	A57_teach_chess_to_cannor = {
-		icon = mission_feast
-		required_missions = { 
-			A57_popularize_chess_variants 
-		}
-		position = 10
-		
-		trigger = {
-			275 = { # Konwell
-				OR = {
-					owner = {
-						has_opinion = {
-							who = ROOT
-							value = 150
+					NOT = {
+						check_variable = {
+							which = A57_looted_bulwar_cities
+							value = 6
 						}
 					}
-					owned_by = ROOT
+				}
+				add_country_modifier = {
+					name = A57_bulwar_reward_low
+					duration = -1
 				}
 			}
-			treasury = 200
-			dip_power = 200
-			has_institution = printing_press
-		}
-		
-		effect = {
-			add_treasury = -200
-			add_dip_power = -200
-
-			add_country_modifier = {
-				name = A57_world_chess_center
-				duration = -1
+			else_if = {
+				limit = {
+					check_variable = {
+						which = A57_looted_bulwar_cities
+						value = 6
+					}
+					NOT = {
+						check_variable = {
+							which = A57_looted_bulwar_cities
+							value = 10
+						}
+					}
+				}
+				bulwar_superregion = {
+					add_permanent_claim = ROOT
+				}
+				add_country_modifier = {
+					name = A57_bulwar_reward_mid
+					duration = -1
+				}
 			}
-		}
-	}
-	
-	A57_the_great_chess_tournament = {
-		icon = mission_feast
-		required_missions = { 
-			A57_teach_chess_to_cannor
-			A57_chess_and_war
-		}
-		position = 11
-		
-		trigger = {
-			diplomatic_reputation = 4
-			prestige = 60
-		}
-		
-		effect = {
-			custom_tooltip = toaren_unlock_chess_tournament_tooltip
+			else_if = {
+				limit = {
+					check_variable = {
+						which = A57_looted_bulwar_cities
+						value = 10
+					}
+				}
+				add_country_modifier = {
+					name = A57_bulwar_reward_high
+					duration = -1
+				}
+			}
+			custom_tooltip = A57_golden_age_tt
 			hidden_effect = {
-				set_country_flag = toarnen_unlock_chess_tournament
-			}
-		}
-	}
-}
-
-toarnen_column_five = {
-	slot = 5
-	generic = no
-	ai = yes
-	potential = {
-		tag = A57
-	}
-	has_country_shield = yes
-	
-	A57_toarnese_grandmasters = {
-		icon = mission_feast
-		required_missions = { 
-			A57_host_a_royal_chess_contest 
-		}
-		position = 9
-		
-		trigger = {
-			dip = 4
-			treasury = 200
-		}
-		
-		effect = {
-			add_treasury = -200
-			add_country_modifier = {
-				name = A57_chess_masters
-				duration = -1
-			}
-			define_advisor = {
-				type = army_reformer
-				culture = roilsardi
-				skill = 2
-				discount = yes
-			}
-		}
-	}
-	
-	A57_chess_and_war = {
-		icon = mission_feast
-		required_missions = { 
-			A57_toarnese_grandmasters 
-		}
-		position = 9
-		
-		trigger = {
-			diplomat = 3
-			commandant = 3
-		}
-		
-		effect = {
-			custom_tooltip = toaren_unlock_chess_training_tooltip
-			hidden_effect = {
-				set_country_flag = toarnen_unlock_chess_training
+				if = {
+					limit = { has_dlc = "Mandate of Heaven" }
+					if = {
+						limit = { in_golden_age = yes }
+						extend_golden_age = 600
+					}
+					else_if = {
+						limit = { has_had_golden_age = yes }
+						reset_golden_age = yes
+					}
+					else_if = {
+						limit = {
+							NOT = {
+								OR = {
+									in_golden_age = yes
+									has_had_golden_age = yes
+								}
+							}
+						}
+						add_splendor = 800
+					}
+				}
 			}
 		}
 	}

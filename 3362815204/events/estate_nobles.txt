@@ -37,6 +37,10 @@ country_event = {
 	
 	mean_time_to_happen = {
 		days = 1
+		modifier = {
+			factor = 10000
+			has_country_modifier = ace_unnatural_misfortune
+		}
 	}
 	
 	option = {
@@ -142,6 +146,10 @@ country_event = {
 		name = nobles_estate_events.1.b #
 		ai_chance = {
 			factor = 50
+			modifier = {
+				factor = 0
+				has_country_modifier = ace_unnatural_misfortune
+			}
 			modifier = {
 				factor = 0.1
 				has_estate = estate_burghers
@@ -1253,24 +1261,24 @@ country_event = {
 				modifier = EST_VAL_MINISTER_CHURCH
 			}
 		}
-		# NOT = {
-		# 	has_estate_influence_modifier = {
-		# 		estate = estate_brahmins
-		# 		modifier = EST_VAL_MINISTER_CHURCH
-		# 	}
-		# }
+		NOT = {
+			has_estate_influence_modifier = {
+				estate = estate_brahmins
+				modifier = EST_VAL_MINISTER_CHURCH
+			}
+		}
 		NOT = {
 			has_estate_influence_modifier = {
 				estate = estate_dhimmi
 				modifier = EST_VAL_MINISTER_DHIMMI
 			}
 		}
-		# NOT = {
-		# 	has_estate_influence_modifier = {
-		# 		estate = estate_brahmins
-		# 		modifier = EST_VAL_MINISTER_DHIMMI
-		# 	}
-		# }
+		NOT = {
+			has_estate_influence_modifier = {
+				estate = estate_brahmins
+				modifier = EST_VAL_MINISTER_DHIMMI
+			}
+		}
 	}
 	
 	is_triggered_only = yes
@@ -1495,12 +1503,12 @@ country_event = {
 		name = nobles_estate_events.10.c #Clergy
 		trigger = {
 			has_estate = estate_church
-			# NOT = {
-			# 	#AND = {
-			# 	#	religion = hinduism
-			# 		has_estate = estate_brahmins
-			# 	#}
-			# }
+			NOT = {
+				#AND = {
+				#	religion = hinduism
+					has_estate = estate_brahmins
+				#}
+			}
 		}
 		ai_chance = {
 			factor = 25

@@ -1,4 +1,371 @@
 country_decisions = {
+	A33_verne_conscript_wyvern_general = {
+		potential = {
+			has_country_flag = A33_wyvern_decision
+		}
+		allow = {
+			mil_power = 75
+			Not = { has_country_modifier = A33_conscripted_wyvern_general }
+		}
+		color = { 195 160 20 }
+		effect = {
+			add_country_modifier = {
+				name = A33_conscripted_wyvern_general
+				duration = 9125
+			}
+			add_mil_power = -75
+			if = {
+				limit = {
+					army_tradition = 0.00
+					NOT = { army_tradition = 20 }
+				}
+				random_list = {
+					50 = {
+						define_conquistador = {
+							fire = 2
+							shock = 6
+							manuever = 3
+							siege = 2
+							trait = wyvern_rider_personality
+						}
+					}
+					50 = {
+						define_conquistador = {
+							fire = 2
+							shock = 6
+							manuever = 3
+							siege = 2
+							trait = wyvern_rider_personality
+							female = yes
+						}
+					}
+				}
+			}
+			
+			if = {
+				limit = {
+					army_tradition = 20
+					NOT = { army_tradition = 40 }
+				}
+				random_list = {
+					50 = {
+						define_conquistador = {
+							fire = 3
+							shock = 7
+							manuever = 4
+							siege = 3
+							trait = wyvern_rider_personality
+						}
+					}
+					50 = {
+						define_conquistador = {
+							fire = 3
+							shock = 7
+							manuever = 4
+							siege = 3
+							trait = wyvern_rider_personality
+							female = yes
+						}
+					}
+				}
+			}
+			
+			if = {
+				limit = {
+					army_tradition = 40
+					NOT = { army_tradition = 60 }
+				}
+				random_list = {
+					50 = {
+						define_conquistador = {
+							fire = 4
+							shock = 8
+							manuever = 6
+							siege = 4
+							trait = wyvern_rider_personality
+							name = root_name_male
+						}
+					}
+					50 = {
+						define_conquistador = {
+							fire = 4
+							shock = 8
+							manuever = 6
+							siege = 4
+							trait = wyvern_rider_personality
+							female = yes
+						}
+					}
+				}
+			}
+			
+			if = {
+				limit = {
+					army_tradition = 60
+					NOT = { army_tradition = 80 }
+				}
+				random_list = {
+					50 = {
+						define_conquistador = {
+							fire = 5
+							shock = 9
+							manuever = 6
+							siege = 5
+							trait = wyvern_rider_personality
+						}
+					}
+					50 = {
+						define_conquistador = {
+							fire = 5
+							shock = 9
+							manuever = 6
+							siege = 5
+							trait = wyvern_rider_personality
+							female = yes
+						}
+					}
+				}
+			}
+			
+			if = {
+				limit = {
+					army_tradition = 80
+				}
+				random_list = {
+					50 = {
+						define_conquistador = {
+							fire = 6
+							shock = 10
+							manuever = 6
+							siege = 6
+							trait = wyvern_rider_personality
+							name = root_name_male
+						}
+					}
+					50 = {
+						define_conquistador = {
+							fire = 6
+							shock = 10
+							manuever = 6
+							siege = 6
+							trait = wyvern_rider_personality
+							female = yes
+						}
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+
+
+	}
+	A33_sanctuary_menu = {
+		potential = {
+			has_country_flag = A33_can_build_sanct
+		}
+		allow = {
+		}
+		color = { 161 43 32 }
+		effect = {
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	A33_regatta_menu = {
+		potential = {
+			has_country_flag = A33_regatta_starter_flg
+		}
+		allow = {
+			Not = { has_country_flag = A33_in_regatta_menu }
+			Not = { has_country_modifier = A33_regatta_off }
+		}
+		color = { 195 160 20 }
+		effect = {
+			set_country_flag = A33_in_regatta_menu
+			
+			country_event = {
+				id = verne_flavor_ace.112
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	A33_unify_empire = {
+		potential = {
+			has_country_flag = A33_empire_dece_flag
+		}
+		provinces_to_highlight = {
+			is_capital = yes
+			owner = {
+				is_part_of_hre = yes
+				not = {
+					has_opinion = {
+						who = root
+						value = 100
+					}	
+				}
+				not = {
+					trust = {
+						who = root
+						value = 65
+					}	
+				}
+			}
+		}
+		allow = {
+			custom_trigger_tooltip = {
+				tooltip = A33_unify_empire_tt
+				all_country = {
+					if = {
+						 limit = {
+							is_part_of_hre = yes
+							not = { tag = root }
+						}
+						has_opinion = {
+							 who = root
+							  value = 120
+						}
+						trust = {
+							who = root
+							value = 60
+						}
+					  }
+				}
+			}
+			imperial_influence = 100
+		}
+		color = { 195 160 20 }
+		effect = {
+			country_event = { id = 9075 tooltip = renovatio_effect }
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	A33_debug_gov = {
+		potential = {
+			has_country_flag = A33_debug
+		}
+		
+		allow = {
+			ai = no
+		}
+		color = { 195 160 20 }
+		effect = {
+			unlock_government_reform = {   
+				government_reform = A33_nobles_adventurers_gov
+			}
+			add_government_reform = A33_nobles_adventurers_gov
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	A33_steal_pearls = {
+		potential = {
+			has_country_flag = A33_steal_elector
+		}
+		
+		allow = {
+			ai = no
+			A11 = {
+				humiliated_by = ROOT
+				is_elector = yes
+			}
+		}
+		color = { 195 160 20 }
+		effect = {
+			if = {
+				limit = {
+					A11 = {
+						is_elector = yes
+					}
+				}
+				A11 = {
+					elector = no
+					tooltip = {
+						add_opinion = {
+							who = ROOT
+							modifier = usurped_our_electorate
+						}
+					}
+					hidden_effect = {
+						country_event = {
+							id = hre_event.14
+						}
+					}
+				}
+			}
+			elector = yes
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	A33_hideouts = {
+		potential = {
+			tag = A33 
+			has_disaster = A33_trouble_in_colonies
+		}
+		
+		allow = {
+			#ai = no
+		}
+		provinces_to_highlight = {
+			or = {
+				has_province_modifier = new_money_hideout
+				has_province_modifier = old_money_hideout
+			}
+		}
+		color = { 195 160 20 }
+		effect = {
+			random_province  = {
+				limit = { 
+					country_or_non_sovereign_subject_holds = root
+					or = {
+						has_province_modifier = new_money_hideout
+						has_province_modifier = old_money_hideout
+					}
+					country_or_subject_holds = root
+				}		
+				remove_province_modifier = new_money_hideout
+				remove_province_modifier = old_money_hideout
+			}
+			if = {
+				limit = {
+					not = {
+						any_province = {
+							country_or_non_sovereign_subject_holds = root
+							has_province_modifier = old_money_hideout
+							country_or_subject_holds = root
+						}
+					}
+					has_country_flag = A33_choose_new
+				}
+				set_country_flag = A33_sided_new_money_won
+			}
+			if = {
+				limit = {
+					not = {
+						any_province = {
+							country_or_non_sovereign_subject_holds = root
+							has_province_modifier = new_money_hideout
+							country_or_subject_holds = root
+						}
+					}
+					has_country_flag = A33_choose_old
+				}
+				set_country_flag = A33_sided_old_money_won
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
 	estate_verne_recruit_wyvernrider = {
 		color = { 195 160 20 }
 		potential = {
@@ -86,7 +453,7 @@ country_decisions = {
 					ROOT = { has_country_flag = verne_taychendi_kheionai_adventures_unlocked }
 					OR = {
 						AND = {
-							province_id = 2388 #Cara Lafquén
+							province_id = 2388 #Cara Lafquï¿½n
 							ROOT = { NOT = { has_country_flag = verne_amadia_pearl_hunt_adventure_completed } }
 						}
 						AND = {
@@ -128,7 +495,7 @@ country_decisions = {
 							ROOT = { NOT = { has_country_flag = verne_gamyi_adventure_completed } }
 						}
 						AND = {
-							province_id = 6599 #Lelanàn
+							province_id = 6599 #Lelanï¿½n
 							ROOT = { NOT = { has_country_flag = verne_fahvanosy_dive_adventure_completed } }
 						}
 						AND = {
@@ -209,7 +576,7 @@ country_decisions = {
 					OR = {
 						if = {
 							limit = { NOT = { has_country_flag = verne_amadia_pearl_hunt_adventure_completed } }
-							2388 = { #Cara Lafquén
+							2388 = { #Cara Lafquï¿½n
 								verne_can_send_expedition = yes
 							}
 						}
@@ -335,7 +702,7 @@ country_decisions = {
 						}
 						if = {
 							limit = { NOT = { has_country_flag = verne_fahvanosy_dive_adventure_completed } }
-							6599 = { #Lelanàn
+							6599 = { #Lelanï¿½n
 								verne_can_send_expedition = yes
 							}
 						}
@@ -425,7 +792,7 @@ country_decisions = {
 				if = {
 					limit = {
 						NOT = { has_country_flag = verne_amadia_pearl_hunt_adventure_completed }
-						2388 = { #Cara Lafquén
+						2388 = { #Cara Lafquï¿½n
 							verne_can_send_expedition = yes
 						}
 					}
@@ -537,7 +904,7 @@ country_decisions = {
 				else_if = {
 					limit = {
 						NOT = { has_country_flag = verne_fahvanosy_dive_adventure_completed }
-						6599 = { #Lelanàn
+						6599 = { #Lelanï¿½n
 							verne_can_send_expedition = yes
 						}
 					}

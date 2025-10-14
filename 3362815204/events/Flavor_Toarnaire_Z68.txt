@@ -1,88 +1,88 @@
 namespace = flavor_Toarnaire
 
-country_event = {
-	id = flavor_Toarnaire.1000
-	title = flavor_Toarnaire.t
-	desc = flavor_Toarnaire.desc
-	picture = ELECTION_REPUBLICAN_eventPicture
-	is_triggered_only = yes
-	trigger = {
-		has_reform = toarnaire_bloodcourt_reform
-		NOT = { has_country_flag = in_toarnaire_election }
-	}
-	immediate = {
-		hidden_effect = {
-			set_country_flag = in_toarnaire_election
-		}
-	}
-	option = {
-		name = flavor_Toarnaire.b
-		define_ruler = {
-			min_age = 50
-			random_gender = yes
-			dynasty = "s�l Vivin"
-			culture = corvurian
-			random_gender = yes
-		}
-		hidden_effect = {
-			if = {
-				limit = {
-					has_country_flag = blood_magic
-				}
-				add_ruler_personality = mage_personality
-			}
-			clear_ruler_vampire_flags = yes
-			set_country_flag = new_vampire
-			ruler_become_vampire = yes
-			clr_country_flag = in_toarnaire_election
-			set_ruler_flag = vivin_ruler_flag
-		}
-	}
-	option = {
-		name = flavor_Toarnaire.c
-		define_ruler = {
-			min_age = 50
-			dynasty = "s�l Saloren"
-			culture = roilsardi
-			random_gender = yes
-		}
-		hidden_effect = {
-			if = {
-				limit = {
-					has_country_flag = blood_magic
-				}
-				add_ruler_personality = mage_personality
-			}
-			clear_ruler_vampire_flags = yes
-			set_country_flag = new_vampire
-			ruler_become_vampire = yes
-			clr_country_flag = in_toarnaire_election
-			set_ruler_flag = saloren_ruler_flag
-		}
-	}
-	option = {
-		name = flavor_Toarnaire.d
-		define_ruler = {
-			min_age = 50
-			dynasty = "na Loop"
-			culture = arannese
-			random_gender = yes
-		}
-		hidden_effect = {
-			if = {
-				limit = {
-					has_country_flag = blood_magic
-				}
-				add_ruler_personality = mage_personality
-			}
-			clear_ruler_vampire_flags = yes
-			set_country_flag = new_vampire
-			ruler_become_vampire = yes
-			clr_country_flag = in_toarnaire_election
-			set_ruler_flag = loop_ruler_flag
-		}
-	}
-}
+# country_event = {
+# 	id = flavor_Toarnaire.1000
+# 	title = flavor_Toarnaire.t
+# 	desc = flavor_Toarnaire.desc
+# 	picture = ELECTION_REPUBLICAN_eventPicture
+# 	is_triggered_only = yes
+# 	trigger = {
+# 		has_reform = toarnaire_bloodcourt_reform
+# 		NOT = { has_country_flag = in_toarnaire_election }
+# 	}
+# 	immediate = {
+# 		hidden_effect = {
+# 			set_country_flag = in_toarnaire_election
+# 		}
+# 	}
+# 	option = {
+# 		name = flavor_Toarnaire.b
+# 		define_ruler = {
+# 			min_age = 50
+# 			random_gender = yes
+# 			dynasty = "s�l Vivin"
+# 			culture = corvurian
+# 			random_gender = yes
+# 		}
+# 		hidden_effect = {
+# 			if = {
+# 				limit = {
+# 					has_country_flag = blood_magic
+# 				}
+# 				add_ruler_personality = mage_personality
+# 			}
+# 			remove_vampire_immortality = yes
+# 			set_country_flag = new_vampire
+# 			ruler_become_vampire = yes
+# 			clr_country_flag = in_toarnaire_election
+# 			set_ruler_flag = vivin_ruler_flag
+# 		}
+# 	}
+# 	option = {
+# 		name = flavor_Toarnaire.c
+# 		define_ruler = {
+# 			min_age = 50
+# 			dynasty = "s�l Saloren"
+# 			culture = roilsardi
+# 			random_gender = yes
+# 		}
+# 		hidden_effect = {
+# 			if = {
+# 				limit = {
+# 					has_country_flag = blood_magic
+# 				}
+# 				add_ruler_personality = mage_personality
+# 			}
+# 			remove_vampire_immortality = yes
+# 			set_country_flag = new_vampire
+# 			ruler_become_vampire = yes
+# 			clr_country_flag = in_toarnaire_election
+# 			set_ruler_flag = saloren_ruler_flag
+# 		}
+# 	}
+# 	option = {
+# 		name = flavor_Toarnaire.d
+# 		define_ruler = {
+# 			min_age = 50
+# 			dynasty = "na Loop"
+# 			culture = arannese
+# 			random_gender = yes
+# 		}
+# 		hidden_effect = {
+# 			if = {
+# 				limit = {
+# 					has_country_flag = blood_magic
+# 				}
+# 				add_ruler_personality = mage_personality
+# 			}
+# 			remove_vampire_immortality = yes
+# 			set_country_flag = new_vampire
+# 			ruler_become_vampire = yes
+# 			clr_country_flag = in_toarnaire_election
+# 			set_ruler_flag = loop_ruler_flag
+# 		}
+# 	}
+# }
 
 country_event = {
 	id = flavor_Toarnaire.1
@@ -166,7 +166,7 @@ country_event = {
 	fire_only_once = yes
 	trigger = {
 		tag = Z68
-		mission_completed = Z68_poke_giant
+		#mission_completed = Z68_poke_giant
 		A30 = {
 			war_with = Z68
 		}
@@ -312,8 +312,8 @@ country_event = {
 	is_triggered_only = yes
 	fire_only_once = yes
 	trigger = {
-		mission_completed = Z68_a_shadow_empire
-		hre_reform_passed = emperor_reichskrieg
+		#mission_completed = Z68_a_shadow_empire
+		hre_reform_passed = anbennar_imperial_war
 	}
 	option = {
 		name = flavor_Toarnaire.11.a

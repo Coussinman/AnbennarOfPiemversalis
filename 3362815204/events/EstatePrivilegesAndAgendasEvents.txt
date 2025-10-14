@@ -304,6 +304,7 @@ country_event = {
 		clr_country_flag = estate_kabiurgarko_present_agenda
 		clr_country_flag = estate_khelorvalshi_present_agenda
 		clr_country_flag = estate_ahati_present_agenda
+		clr_country_flag = estate_lorentish_elite_present_agenda
 		clear_estate_agenda_cache = ROOT
 	}
 
@@ -1624,6 +1625,53 @@ country_event = {
 			}
 		}
 	}
+	#Lorentish Elite
+	option = {
+		name = estate_privileges_and_agendas_events.3.ace
+		trigger = { has_country_flag = estate_lorentish_elite_present_agenda }
+		start_estate_agenda = estate_lorentish_elite
+		goto = estate_lorentish_elite
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 1.5
+				NOT = {
+					estate_loyalty = {
+						loyalty = 30
+						estate = estate_lorentish_elite
+					}
+				}
+			}
+			modifier = {
+				factor = 2
+				NOT = {
+					estate_loyalty = {
+						loyalty = 20
+						estate = estate_lorentish_elite
+					}
+				}
+			}
+			modifier = {
+				factor = 1.5
+				estate_influence = {
+					influence = 70
+					estate = estate_lorentish_elite
+				}
+			}
+			modifier = {
+				factor = 2
+				is_absolutism_active = yes
+				num_of_estate_privileges = {
+					estate = estate_lorentish_elite
+					value = 1
+				}
+				estate_loyalty = {
+					estate = estate_lorentish_elite
+					higher_than_influence = no
+				}
+			}
+		}
+	}
 }
 
 country_event = {
@@ -1719,7 +1767,10 @@ country_event = { # Sale of Titles
 	#Grant church land
 	option = {
 		name = estate_privileges_and_agendas_events.6.b
-		trigger = { has_estate = estate_church }
+		trigger = {
+			has_estate = estate_church
+			has_government_attribute = can_sell_crownland_to_single_estates
+		}
 		give_estate_land_share_gigantic = { estate = estate_church }
 		add_estate_loyalty = {
 			estate = estate_church
@@ -1734,7 +1785,10 @@ country_event = { # Sale of Titles
 	#Grant burghers land
 	option = {
 		name = estate_privileges_and_agendas_events.6.c
-		trigger = { has_estate = estate_burghers }
+		trigger = {
+			has_estate = estate_burghers
+			has_government_attribute = can_sell_crownland_to_single_estates
+		}
 		give_estate_land_share_gigantic = { estate = estate_burghers }
 		add_estate_loyalty = {
 			estate = estate_burghers
@@ -1749,7 +1803,10 @@ country_event = { # Sale of Titles
 	#Grant nobles land
 	option = {
 		name = estate_privileges_and_agendas_events.6.d
-		trigger = { has_estate = estate_nobles }
+		trigger = {
+			has_estate = estate_nobles
+			has_government_attribute = can_sell_crownland_to_single_estates
+		}
 		give_estate_land_share_gigantic = { estate = estate_nobles }
 		add_estate_loyalty = {
 			estate = estate_nobles
@@ -1779,7 +1836,10 @@ country_event = { # Sale of Titles
 	#Grant cossacks land
 	option = {
 		name = estate_privileges_and_agendas_events.6.f
-		trigger = { has_estate = estate_cossacks }
+		trigger = {
+			has_estate = estate_cossacks
+			has_government_attribute = can_sell_crownland_to_single_estates
+		}
 		give_estate_land_share_gigantic = { estate = estate_cossacks }
 		add_estate_loyalty = {
 			estate = estate_cossacks
@@ -1794,7 +1854,10 @@ country_event = { # Sale of Titles
 	#Grant tribes land
 	option = {
 		name = estate_privileges_and_agendas_events.6.g
-		trigger = { has_estate = estate_nomadic_tribes }
+		trigger = {
+			has_estate = estate_nomadic_tribes
+			has_government_attribute = can_sell_crownland_to_single_estates
+		}
 		give_estate_land_share_gigantic = { estate = estate_nomadic_tribes }
 		add_estate_loyalty = {
 			estate = estate_nomadic_tribes
@@ -2330,6 +2393,76 @@ country_event = { # Sale of Titles
 			factor = 0
 		}
 	}
+
+	#Grant Lorentish Elites land
+	option = {
+		name = estate_privileges_and_agendas_events.6.o
+		trigger = {
+			has_estate = estate_lorentish_elite
+			OR = {
+				has_estate_privilege = estate_lorentish_elite_harmonize_feudal_laws
+				has_government_attribute = can_sell_crownland_to_single_estates
+			}
+		}
+		give_estate_land_share_gigantic = { estate = estate_lorentish_elite }
+		add_estate_loyalty = {
+			estate = estate_lorentish_elite
+			loyalty = 15
+			short = yes
+		}
+		custom_tooltip = A30_granted_land_lorentish_elites_tooltip
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						region = lencenor_region
+						region = west_dameshead_region
+					}
+				}
+				add_nationalism = -3
+			}
+		}
+		random_list = {
+			60 = {
+				random_owned_province = {
+					limit = {
+						region = the_borders_region
+					}
+					add_base_production = 1
+				}
+			}
+			20 = {
+				random_owned_province = {
+					limit = {
+						region = the_borders_region
+					}
+					add_base_production = 1
+					add_half_elven_minority_size_effect = yes
+				}
+			}
+			10 = {
+				random_owned_province = {
+					limit = {
+						region = the_borders_region
+					}
+					add_base_production = 1
+					add_elven_minority_size_effect = yes
+				}
+			}
+			10 = {
+				random_owned_province = {
+					limit = {
+						region = the_borders_region
+					}
+					add_base_production = 1
+					add_dwarven_minority_size_effect = yes
+				}
+			}
+		}
+		ai_chance = {
+			factor = 0
+		}
+	}
 }
 
 #Seize crownland
@@ -2416,6 +2549,7 @@ country_event = {
 				estate = estate_church
 				territory = 5
 			}
+			has_government_attribute = can_seize_crownland_of_single_estates
 		}
 		seize_land_estate_effect = { estate = estate_church }
 		ai_chance = {
@@ -2433,6 +2567,7 @@ country_event = {
 				estate = estate_burghers
 				territory = 5
 			}
+			has_government_attribute = can_seize_crownland_of_single_estates
 		}
 		seize_land_estate_effect = { estate = estate_burghers }
 		ai_chance = {
@@ -2450,6 +2585,7 @@ country_event = {
 				estate = estate_nobles
 				territory = 5
 			}
+			has_government_attribute = can_seize_crownland_of_single_estates
 		}
 		seize_land_estate_effect = { estate = estate_nobles }
 		ai_chance = {
@@ -2484,6 +2620,7 @@ country_event = {
 				estate = estate_cossacks
 				territory = 5
 			}
+			has_government_attribute = can_seize_crownland_of_single_estates
 		}
 		seize_land_estate_effect = { estate = estate_cossacks }
 		ai_chance = {
@@ -2501,6 +2638,7 @@ country_event = {
 				estate = estate_nomadic_tribes
 				territory = 5
 			}
+			has_government_attribute = can_seize_crownland_of_single_estates
 		}
 		seize_land_estate_effect = { estate = estate_nomadic_tribes }
 		ai_chance = {
@@ -3098,6 +3236,44 @@ country_event = {
 			}
 		}
 		seize_land_estate_effect = { estate = estate_ahati }
+		ai_chance = {
+			factor = 0
+		}
+	}
+	#Seize from Lorentish Elites
+	option = {
+		name = estate_privileges_and_agendas_events.7.q
+		trigger = {
+			has_estate = estate_lorentish_elite
+			NOT = { estate_has_exempt_from_seize_land_privilege = { estate = estate_lorentish_elite } }
+			estate_territory = {
+				estate = estate_lorentish_elite
+				territory = 5
+			}
+			OR = {
+				has_estate_privilege = estate_lorentish_elite_harmonize_feudal_laws
+				has_government_attribute = can_seize_crownland_of_single_estates
+			}
+		}
+		seize_land_estate_effect = { estate = estate_lorentish_elite }
+		custom_tooltip = A30_seized_land_lorentish_elites_tooltip
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						region = lencenor_region
+						region = west_dameshead_region
+					}
+				}
+				add_local_autonomy = -10
+			}
+			if = {
+				limit = {
+					has_country_modifier = new_lorenan_epic
+				}
+				add_absolutism = 5
+			}
+		}
 		ai_chance = {
 			factor = 0
 		}

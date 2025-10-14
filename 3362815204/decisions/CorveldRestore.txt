@@ -7,6 +7,7 @@ country_decisions = {
 			OR = {
 				adm_tech = 10
 				has_country_flag = B47_slavery_ended
+				has_country_flag = A72_corveld
 			}
 			owns = 447
 			NOT = { has_country_modifier = monstrous_nation }
@@ -22,7 +23,18 @@ country_decisions = {
 		allow = {
 			owns = 447
 			if = {
-				limit = { has_country_flag = B47_slavery_ended }
+				limit = {
+					has_country_flag = A72_corveld
+				}
+				always = yes
+			}
+			else_if = {
+				limit = {
+					has_country_flag = B47_slavery_ended
+					NOT = {
+						has_country_flag = A72_corveld
+					}
+				}
 				adm_tech = 10
 			}
 			else = {
@@ -30,7 +42,18 @@ country_decisions = {
 			}
 
 			if = {
-				limit = { has_country_flag = B47_slavery_ended }
+				limit = { 
+					has_country_flag = A72_corveld
+				}
+				treasury = 350
+			}
+			else_if = {
+				limit = { 
+					has_country_flag = B47_slavery_ended
+					NOT = {
+						has_country_flag = A72_corveld
+					}
+				}
 				treasury = 750
 			}
 			else = {
@@ -54,7 +77,16 @@ country_decisions = {
 			add_adm_power = -150
 			if = {
 				limit = {
+					has_country_flag = A72_corveld
+				}
+				add_treasury = -350
+			}
+			else_if = {
+				limit = { 
 					has_country_flag = B47_slavery_ended
+					NOT = {
+						has_country_flag = A72_corveld
+					}
 				}
 				add_treasury = -750
 			}

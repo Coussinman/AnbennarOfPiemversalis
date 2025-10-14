@@ -8,6 +8,7 @@ country_decisions = {
 			NOT = { has_country_flag = no_longer_monstrous }
 			NOT = { has_ruler_flag = undergoing_xhazob_ritual }
 			NOT = { has_country_flag = cannot_demonsterise }
+			NOT = { has_country_flag = AC7_kryzzar_monstrous }
 		}
 		allow = {
 			hidden_trigger = {
@@ -30,15 +31,16 @@ country_decisions = {
 				limit = { ai = no }
 				add_stability = -1
 			}
-			start_demonsterization_effect = yes
+			hidden_effect = { set_country_flag = removing_monstrous }
+			hidden_effect = { 
 			if = {
-				limit = {
-					culture_group = lizardfolk
-					NOT = { primary_culture = ashhana_lizardfolk }
-					NOT = { tag = S34 } #Cunning River Eel
+					limit = { has_country_flag = semi_monstrous }
+					set_variable = { monstrousPoints = 50 }
 				}
-				country_event = { id = monstrous.215 days = 1 }
+				else = { set_variable = { monstrousPoints = 100 } }
 			}
+
+			custom_tooltip = start_demonsterization
 		}
 		ai_will_do = { 
 			factor = 400 

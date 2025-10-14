@@ -216,6 +216,12 @@ country_event = { #	hidden edge case event if Orda Aldresia breaks alliance for 
         emperor = {				#game crashes if this is the other way around, see flavor_orda_aldresia.3
             has_matching_religion = ROOT
             war_with = ROOT
+		NOT = {
+			AND = {
+				tag = A30
+				has_country_flag = A30_domination_path
+			}
+		}
         }
         NOT = { has_country_flag = broken_oath }
     }

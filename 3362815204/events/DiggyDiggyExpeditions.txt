@@ -24,7 +24,8 @@ country_event = {
 	
 	#total: 65
 	#new total: 56 + 12 = 68
-
+	#8 Krak 15 North-East 26 south 29 North-West 28 Center
+	#2 Krak 3 North-East 5 South 6 North East 6 Center
 	option = {
         name = diggy_expedition.0.a
         ai_chance = { factor = 100 }
@@ -32,7 +33,13 @@ country_event = {
 			amount = 22
 			effect = "
 				random_province = {
-					limit = { region = west_dwarovar_region is_city = no can_spawn_expedition = yes }
+					limit = {
+						region = west_dwarovar_region
+						is_city = no
+						NOT = {
+							has_province_modifier = expedition_target
+						}
+					}
 					spawn_expedition = yes
 				}
 			"
@@ -41,7 +48,15 @@ country_event = {
 			amount = 13
 			effect = "
 				random_province = {
-					limit = { region = serpentreach_region is_city = no can_spawn_expedition = yes }
+					limit = {
+						region = serpentreach_region
+						NOT = { area = still_caverns_area area = zarn_area area = buradforge_area area = gor_burad_area area = argrod_14_16_area area = argrod_junction_area area = shroomfissure_area province_id = 2968 province_id = 2970
+						}
+						is_city = no
+						NOT = {
+							has_province_modifier = expedition_target
+						}
+					}
 					spawn_expedition = yes
 				}
 			"
@@ -50,7 +65,62 @@ country_event = {
 			amount = 13
 			effect = "
 				random_province = {
-					limit = { region = middle_dwarovar_region is_city = no can_spawn_expedition = yes }
+					limit = {
+						OR = {
+							area = still_caverns_area
+							area = zarn_area
+							area = buradforge_area
+							area = gor_burad_area
+							area = argrod_14_16_area
+							area = argrod_junction_area
+							area = shroomfissure_area
+							province_id = 2968
+							province_id = 2970
+						}
+						is_city = no
+						NOT = {
+							has_province_modifier = expedition_target
+						}
+					}
+					spawn_expedition = yes
+				}
+			"
+		}
+		for = {
+			amount = 6
+			effect = "
+				random_province = {
+					limit = {
+						OR = {
+							area = dwarovrod_27_29_area
+							area = misty_cave_trail_area
+							area = hehos_legacy_area
+							area = dwarovrod_30_32_area
+							area = deep_ones_lair_area
+							area = diggers_road_area
+							province_id = 4027
+							province_id = 4082
+							province_id = 4216
+						}
+						is_city = no
+						NOT = {
+							has_province_modifier = expedition_target
+						}
+					}
+					spawn_expedition = yes
+				}
+			"
+		}
+		for = {
+			amount = 7
+			effect = "
+				random_province = {
+					limit = {
+						region = middle_dwarovar_region
+						NOT = { area = dwarovrod_27_29_area area = misty_cave_trail_area area = hehos_legacy_area area = dwarovrod_30_32_area area = deep_ones_lair_area area = diggers_road_area province_id = 4027 province_id = 4082 province_id = 4216 }
+						is_city = no
+						NOT = { has_province_modifier = expedition_target }
+					}
 					spawn_expedition = yes
 				}
 			"
@@ -60,7 +130,16 @@ country_event = {
 			amount = 8
 			effect = "
 				random_province = {
-					limit = { region = tree_of_stone_region is_city = no can_spawn_expedition = yes NOT = { province_id = 4266 } }
+					limit = {
+						region = tree_of_stone_region
+						is_city = no
+						NOT = {
+							has_province_modifier = expedition_target
+						}
+						NOT = {
+							province_id = 4266
+						}
+					}
 					spawn_expedition = yes
 				}
 			"
@@ -69,7 +148,9 @@ country_event = {
 		seed_dwarovkron = yes
 
 		every_country = {
-			set_variable = { ancientDwarvenKnowledge = 0 }
+			set_variable = {
+				ancientDwarvenKnowledge = 0
+			}
 		}
 	}
 }

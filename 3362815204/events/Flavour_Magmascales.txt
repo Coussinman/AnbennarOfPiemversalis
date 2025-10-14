@@ -44,7 +44,7 @@ country_event = { #Kobold lifestyle event chain
 	option = {
 		name = flavor_magmascale.2.a
 		add_country_modifier = {
-			name = AC5_healty_younglings
+			name = AC5_healthy_younglings
 			duration = 3650
 		}
 		country_event = {
@@ -61,7 +61,7 @@ country_event = { #Kobold lifestyle event chain
 		}
 		set_capital = 4041
 		add_country_modifier = {
-			name = AC5_healty_younglings
+			name = AC5_healthy_younglings
 			duration = 3650
 		}
 		country_event = {
@@ -382,7 +382,7 @@ country_event = { #Scorched Wing, harpy rebels, if you win remove roosts, reduce
 		name = flavor_magmascale.12.a
 		every_owned_province = {
 			limit = {
-				has_active_triggered_province_modifier = harpy_roost
+				harpy_roost_st_has_any_roost = yes
 			}
 			spawn_rebels = {
 				type = nationalist_rebels
@@ -439,14 +439,14 @@ country_event = { #Scorched Wing reward after defeating rebels, take from missio
 		every_owned_province = {
 			limit = {
 				OR = {
-					has_active_triggered_province_modifier = harpy_roost
+					harpy_roost_st_has_any_roost = yes
 					culture_is_harpy = yes
 				}
 			}
 			add_nationalism = -10
 			add_local_autonomy = -25
 			add_kobold_minority_size_effect = yes
-			remove_province_triggered_modifier = harpy_roost
+			harpy_roost_se_destroy_roost = yes
 		}
 	}
 }
@@ -1734,8 +1734,8 @@ country_event = { #DEBUG
 		name = flavor_magmascale.1100.b
 		override_country_name = ZUTARZIRA
 		change_government = monarchy
-		add_government_reform = ace_magmascales_stratocratic_rule
-		add_government_reform = ace_magmascale_engineer_generals_reform
+		add_government_reform = magmascales_stratocratic_rule
+		add_government_reform = magmascale_engineer_generals_reform
 		custom_tooltip = AC5_reformswap_privileges_tt
 		set_country_flag = unlocked_artifice_invention_bioartificed_fireplants
 		set_country_flag = unlocked_artifice_invention_obsidian_settlement_generation_kit

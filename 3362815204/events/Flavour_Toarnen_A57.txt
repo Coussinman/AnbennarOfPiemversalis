@@ -1,63 +1,59 @@
 
 namespace = flavor_toarnen
 
-# The Whitecliffs burghers uprising of 1356   
+#startup event
 country_event = {
 	id = flavor_toarnen.1
 	title = flavor_toarnen.1.t
 	desc = flavor_toarnen.1.d
-	picture = DIPLOMACY_eventPicture
-    
+	picture = COUNTRY_COLLAPSE_eventPicture
+	fire_only_once = yes
 	is_triggered_only = yes
-
 	trigger = {
 		tag = A57
-		NOT = {
+        NOT = {
 			has_country_flag = toarnen_had_1356_uprising
 		}
 	}
-
-
+	immediate = {
+		
+	}
 	option = {
 		name = flavor_toarnen.1.a
-		921 = {  # bordercliff
-			add_province_modifier = {
-				name = A57_charters_of_bordercliff
-				duration = -1
-			}
+		tooltip = {
+			set_estate_privilege = estate_burghers_toarnese_charters
 		}
-		hidden_effect = {
+        hidden_effect = {
 			set_country_flag = toarnen_had_1356_uprising
 		}
-	}	
+	}
 }
 
-#A very Roilsardi party 
+#The Royal Chess Contest, start event
 country_event = {
 	id = flavor_toarnen.2
 	title = flavor_toarnen.2.t
 	desc = flavor_toarnen.2.d
 	picture = DIPLOMACY_eventPicture
-    
+
 	fire_only_once = yes
-	is_triggered_only = yes  
-	
+	is_triggered_only = yes
+
     option = {
-		name = flavor_toarnen.2.a		
-		
-		add_estate_loyalty_modifier = {
-			estate = estate_nobles
-			desc = toarnen_a_very_roilsardi_party
-			duration = 1825
-			loyalty = 15
+		name = flavor_toarnen.2.a
+
+		add_prestige = 10
+
+		hidden_effect = {
+            country_event = {
+                id = flavor_toarnen.3
+                days = 30
+            }
 		}
 	}
-}
+} 
 
-
-#A visit to Saloren 
 country_event = {
-
 	id = flavor_toarnen.3
 	title = flavor_toarnen.3.t
 	desc = flavor_toarnen.3.d
@@ -66,12 +62,69 @@ country_event = {
 	fire_only_once = yes
 	is_triggered_only = yes
 
-	option = {
+    option = {
 		name = flavor_toarnen.3.a
+
+		increase_ruler_dip_effect = yes
+	}
+}
+
+country_event = {
+	id = flavor_toarnen.4
+	title = flavor_toarnen.4.t
+	desc = flavor_toarnen.4.d
+	picture = DIPLOMACY_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_toarnen.4.a
+		add_country_modifier = {
+			name = A57_expanding_chess_theory_mod
+			duration = -1
+		}
+	}
+}
+
+country_event = {
+	id = flavor_toarnen.5
+	title = flavor_toarnen.5.t
+	desc = flavor_toarnen.5.d
+	picture = FEAST_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_toarnen.5.a	
+		
+		define_advisor = {
+			type = commandant
+			skill = 1
+			discount = yes
+		}
+
+		add_estate_loyalty = {
+			estate = estate_nobles
+			loyalty = 15
+		}
+	}
+}
+
+country_event = {
+	id = flavor_toarnen.6
+	title = flavor_toarnen.6.t
+	desc = flavor_toarnen.6.d
+	picture = wihgfx_FEMALE_RULER_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = flavor_toarnen.6.a
 		trigger = {
 			is_female = no
 		}
-
+		create_marriage = A87
 		define_consort = {
 			name = "Laurens"
 			dynasty = "síl na Loop"
@@ -95,11 +148,11 @@ country_event = {
 		}
 	}
     option = {
-		name = flavor_toarnen.3.b
+		name = flavor_toarnen.6.b
 		trigger = {
 			is_female = yes
 		}
-
+		create_marriage = A87
 		define_consort = {
 			name = "Maurise"
 			dynasty = "síl na Loop"
@@ -123,483 +176,206 @@ country_event = {
 		}
 	}
     option = {
-		name = flavor_toarnen.3.c
-
+		name = flavor_toarnen.6.c
+		
 		add_prestige = 20
+		add_dip_power = 50	
 	}
 }
-
-
-
-#The Royal Chess Contest, start event
-
-country_event = {
-	id = flavor_toarnen.4
-	title = flavor_toarnen.4.t
-	desc = flavor_toarnen.4.d
-	picture = DIPLOMACY_eventPicture
-
-	fire_only_once = yes
-	is_triggered_only = yes
-
-    option = {
-		name = flavor_toarnen.4.a
-
-		add_prestige = 10
-
-		hidden_effect = {
-			if = {
-				limit = {
-					dip = 4
-				}
-				country_event = {
-					id = flavor_toarnen.6
-					days = 30
-				}
-			}
-			else = {
-				country_event = {
-					id = flavor_toarnen.5
-					days = 30
-				}
-			}
-		}
-	}
-}
-
-#The Royal Chess Contest, if ruler DIP under 4  
-
-country_event = {
-	id = flavor_toarnen.5
-	title = flavor_toarnen.5.t
-	desc = flavor_toarnen.5.d
-	picture = DIPLOMACY_eventPicture
-
-	fire_only_once = yes
-	is_triggered_only = yes
-
-    option = {
-		name = flavor_toarnen.5.a
-
-		increase_ruler_dip_effect = yes
-	}
-}
-
-
-#The Royal Chess Contest, if ruler DIP over 4  
-
-country_event = {
-	id = flavor_toarnen.6
-	title = flavor_toarnen.6.t
-	desc = flavor_toarnen.6.d
-	picture = DIPLOMACY_eventPicture
-
-	fire_only_once = yes
-	is_triggered_only = yes
-
-    option = {
-		name = flavor_toarnen.6.a
-
-		add_prestige = 20
-		add_legitimacy = 10
-		add_country_modifier = {
-			name = A57_winner_of_aiscestir_chess_contest
-			duration = 1825
-		}
-	}
-}
-
-
-#Roilsardi Migration event
 
 country_event = {
 	id = flavor_toarnen.7
 	title = flavor_toarnen.7.t
 	desc = flavor_toarnen.7.d
-	picture = DIPLOMACY_eventPicture
+	picture = BURGHER_ESTATE_UPSET_eventPicture
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	option = {
 		name = flavor_toarnen.7.a
-		add_treasury = -100
-		add_dip_power = -100
-		add_country_modifier = {
-			name = A57_ongoing_migration
-			duration = 1825
+		922 = {
+			galley = ROOT
+			galley = ROOT
+			galley = ROOT
+			galley = ROOT
+			galley = ROOT
+			galley = ROOT
 		}
-		hidden_effect = {
-			set_country_flag = A57_small_migration
-			country_event = {
-				id = flavor_toarnen.11
-				days = 1825
-			}
+		remove_estate_privilege = estate_burghers_toarnese_charters
+		set_estate_privilege = estate_burghers_toarnese_charters_2
+		add_estate_loyalty = {
+			estate = estate_burghers
+			loyalty = 10
 		}
 	}
 
 	option = {
 		name = flavor_toarnen.7.b
-		add_treasury = -200
-		add_dip_power = -200
-		add_country_modifier = {
-			name = A57_ongoing_migration
-			duration = 3650
+		change_estate_land_share = {
+			estate = estate_burghers
+			share = -5
 		}
-		hidden_effect = {
-			country_event = {
-				id = flavor_toarnen.11
-				days = 3650
-			}
+		add_estate_loyalty = {
+			estate = estate_burghers
+			loyalty = -15
 		}
 	}
 }
-
-#The End of the Vampires
 
 country_event = {
 	id = flavor_toarnen.8
 	title = flavor_toarnen.8.t
 	desc = flavor_toarnen.8.d
-	picture = DIPLOMACY_eventPicture
+	picture = SIEGE_eventPicture
 
 	fire_only_once = yes
-
-	trigger = {
-		tag = A57
-		mission_completed = A57_the_crusade
-		441 = {  # Arca Corvur
-			controlled_by = A57
-			owned_by = A59  # Corvuria
-		}
-	}
+	is_triggered_only = yes
 
 	option = {
-		name = flavor_toarnen.8.a
-
-		add_manpower = -1
-		441 = {
-			add_base_tax = -3
-			add_base_manpower = -3
-			add_base_production = -3
-		}
-		A59 = {
-			kill_heir = { allow_new_heir = no }
-			kill_vampire_ruler = yes
-		}
-		add_treasury = 450
-
-		A59 = {
-			country_event = {
-				id = flavor_toarnen.9
+		name = flavor_toarnen.8.a	
+		every_owned_province = {
+			limit = {
+				is_core = A56
 			}
-		}	
+			add_base_tax = -1
+			add_base_production = -1
+			add_base_manpower = -1
+		}
+		capital_scope = {
+			add_base_tax = 2
+			add_base_production = 2
+			add_base_manpower = 2
+		}
+		add_treasury = 100
+	}
+	option = {
+		name = flavor_toarnen.8.b
+		add_prestige = 20
+		every_owned_province = {
+			add_devastation = -10
+		}
+		every_owned_province = {
+			limit = {
+				is_core = A56
+			}
+			add_local_autonomy = 10
+			add_nationalism = -10
+		}
 	}
 }
-
-
-#The End of the Vampires - corvuria POV 
 
 country_event = {
 	id = flavor_toarnen.9
 	title = flavor_toarnen.9.t
 	desc = flavor_toarnen.9.d
 	picture = DIPLOMACY_eventPicture
-
+	
 	is_triggered_only = yes
+	hidden = yes
 
 	option = {
-		name = flavor_toarnen.9.a
-	}
-}
-
-#Margraves of Toarnaiste
-country_event = {
-	id = flavor_toarnen.10
-	title = flavor_toarnen.10.t
-	desc = flavor_toarnen.10.d
-	picture = DIPLOMACY_eventPicture
-
-	is_triggered_only = yes
-
-	option = {
-		name = flavor_toarnen.10.a
-
-		set_country_flag = is_a_marquisate
-
-		add_prestige = 40
-		add_country_modifier = {
-			name = A57_toarnaiste_the_eastern_thorn
-			duration = -1
-		}
-
-		custom_tooltip = toaren_roilsard_culture_tooltip
-		hidden_effect = {
-			capital_scope = {
-				add_province_triggered_modifier = toaren_roilsard_culture1
-				add_province_triggered_modifier = toaren_roilsard_culture2
-				add_province_triggered_modifier = toaren_roilsard_culture3
-				add_province_triggered_modifier = toaren_roilsard_culture4
-				add_province_triggered_modifier = toaren_roilsard_culture5
-			}
+		name = flavor_toarnen.9.a	
+		A57 = {
+			add_treasury = 100
 		}
 	}
 }
 
-
-#Organizing the Settlements
 country_event = {
 	id = flavor_toarnen.11
 	title = flavor_toarnen.11.t
 	desc = flavor_toarnen.11.d
-	picture = DIPLOMACY_eventPicture
-
-	is_triggered_only = yes
-
+	picture = THE_COVENANT_eventPicture
+	trigger = {
+		has_country_flag = A57_corvurian_rebels_event
+		NOT = { num_of_rebel_armies = 1 }
+	}
+	immediate = {
+		clr_country_flag = A57_corvurian_rebels_event
+	}
 	option = {
 		name = flavor_toarnen.11.a
-
-		if = {
-			limit = {
-				has_country_flag = A57_small_migration
-			}
-
-			420 = {  # Mugalleán
-				change_culture = roilsardi
-				add_base_tax = 2
-				add_base_production = 1
-				add_base_manpower = 1
+		add_stability_or_adm_power = yes
+		custom_tooltip = A57_corvurian_provinces_tt
+		tooltip = {
+			add_nationalism = -5
+			add_province_modifier = {
+				name = A57_corvurians_kneel
+				duration = -1
 			}
 		}
-		else = {
-			420 = {  # Mugalleán
-				change_culture = roilsardi
-				add_base_tax = 2
-				add_base_production = 2
-				add_base_manpower = 1
-			}
-			922 = {  # Aiscestir
-				add_base_tax = 2
-				add_base_production = 1
-			}
-			add_country_modifier = {
-				name = A57_unprepared_administration
-				duration = 3650
+		hidden_effect = {
+			every_owned_province = {
+				limit = { region = dostanor_region }
+				add_nationalism = -5
+				add_province_modifier = {
+					name = A57_corvurians_kneel
+					duration = -1
+				}
 			}
 		}
 	}
 }
 
-
-
-#We are the true roilsardis
 country_event = {
 	id = flavor_toarnen.12
 	title = flavor_toarnen.12.t
 	desc = flavor_toarnen.12.d
-	picture = DIPLOMACY_eventPicture
-
+	picture = IMPALED_SOLDIERS_eventPicture
 	is_triggered_only = yes
-
 	option = {
 		name = flavor_toarnen.12.a
-
-		every_owned_province = {
-			limit = {
-				culture = roilsardi
-			}
-			owner = {
-				add_legitimacy = 2
-				add_prestige = 3
-			}
+		67 = {
+			add_devastation = 100
+			change_culture = roilsardi
+			add_base_tax = -10
+			add_base_production = -10
+			add_base_manpower = -10
 		}
-	}
-}
-
-#Celliande threaten war Celliande POV
-country_event = {
-	id = flavor_toarnen.13
-	title = flavor_toarnen.13.t
-	desc = flavor_toarnen.13.d
-	picture = DIPLOMACY_eventPicture
-
-	is_triggered_only = yes
-
-	option = {
-		name = flavor_toarnen.13.a
-
-		ai_chance = {
-			factor = 30
-			modifier = {
-				factor = 100
-				is_at_war = yes
-			}
-		}
-
-		A57 = {
-			country_event = {
-				id = flavor_toarnen.15
-				days = 10
-			}
-		}
-	}
-
-	option = {
-		name = flavor_toarnen.13.b
-
-		ai_chance = {
-			factor = 70
-		}
-
-		A57 = {
-			country_event = {
-				id = flavor_toarnen.14
-				days = 10
-			}
-		}
-	}
-}
-
-#Celliande threaten war Celliande refused Toarren POV
-country_event = {
-	id = flavor_toarnen.14
-	title = flavor_toarnen.14.t
-	desc = flavor_toarnen.14.d
-	picture = DIPLOMACY_eventPicture
-
-	is_triggered_only = yes
-
-	option = {
-		name = flavor_toarnen.14.a
-
-		ai_chance = {
-			factor = 50
-		}
-
-		add_prestige = 20
-		declare_war_with_cb = {
-			casus_belli = cb_conquest
-			who = A56
-			war_goal_province = 413
-		}
-	}
-
-	option = {
-		name = flavor_toarnen.14.b
-
-		ai_chance = {
-			factor = 50
-		}
-
-		add_prestige = -10
-	}
-}
-
-#Celliande threaten war Celliande gave up Toarren POV
-country_event = {
-	id = flavor_toarnen.15
-	title = flavor_toarnen.15.t
-	desc = flavor_toarnen.15.d
-	picture = DIPLOMACY_eventPicture
-
-	is_triggered_only = yes
-
-	option = {
-		name = flavor_toarnen.15.a
-
-		413 = {  # Sorncell
-			cede_province = A57
-		}
-		add_truce_with = A56
-		A56 = {
-			add_truce_with = A57
-		}
-	}
-}
-
-# Borrow Teinmas Ibevar POV
-country_event = {
-	id = flavor_toarnen.16
-	title = flavor_toarnen.16.t
-	desc = flavor_toarnen.16.d
-	picture = DIPLOMACY_eventPicture
-
-	is_triggered_only = yes
-
-	option = {  # accept
-		name = flavor_toarnen.16.a
-
-		add_treasury = 500	
-		
-		A57 = { 
-			country_event = {
-				id = flavor_toarnen.17 
-				days = 1 
+		add_adm_power = 100
+		add_dip_power = 100
+		add_mil_power = 100
+		custom_tooltip = A57_golden_age_tt
+		hidden_effect = {
+			if = {
+				limit = { has_dlc = "Mandate of Heaven" } 
+				if = {
+					limit = { in_golden_age = yes } 
+					extend_golden_age = 600
+				}
+				else_if = {
+					limit = { has_had_golden_age = yes } 
+					reset_golden_age = yes
+				}
+				else_if = {
+					limit = {
+						NOT = {
+							OR = {
+								in_golden_age = yes
+								has_had_golden_age = yes
+							}
+						}
+					}
+					add_splendor = 800
 				}
 			}
-	}
-	option = {  # refuse
-		name = flavor_toarnen.16.b
-		
-		A57 = { 
-			country_event = {
-				id = flavor_toarnen.18
-				days = 1
-				}
-			}
-	}
-}
-
-
-# Borrow Teinmas Ibevar accepted Toarnen POV
-country_event = {
-	id = flavor_toarnen.17
-	title = flavor_toarnen.17.t
-	desc = flavor_toarnen.17.d
-	picture = DIPLOMACY_eventPicture
-
-	is_triggered_only = yes
-
-	option = {
-		name = flavor_toarnen.17.a
-
-		314 = {  # Téinmas
-			cede_province = ROOT
-			remove_core = A32  # Ibevar
 		}
 	}
 }
-
-# Borrow Teinmas Ibevar refused Toarnen POV
-country_event = {
-	id = flavor_toarnen.18
-	title = flavor_toarnen.18.t
-	desc = flavor_toarnen.18.d
-	picture = DIPLOMACY_eventPicture
-
-	is_triggered_only = yes
-
-	option = {
-		name = flavor_toarnen.18.a
-
-		add_treasury = 500
-		314 = { add_claim = ROOT }
-	}
-}
-
 
 # Chess contest intro - get participants
 country_event = {
 	id = flavor_toarnen.19
 	title = flavor_toarnen.19.t
 	desc = flavor_toarnen.19.d
-	picture = DIPLOMACY_eventPicture
+	picture = CULTURE_eventPicture
 
 	is_triggered_only = yes
 
 	immediate = {
 		hidden_effect = {
-			chess_tournament_get_participants = yes
+			ace_chess_tournament_get_participants = yes
 		}
 	}
 
@@ -618,7 +394,7 @@ country_event = {
 	id = flavor_toarnen.29
 	title = flavor_toarnen.29.t
 	desc = flavor_toarnen.29.d
-	picture = DIPLOMACY_eventPicture
+	picture = CULTURE_eventPicture
 
 	is_triggered_only = yes
 
@@ -662,7 +438,7 @@ country_event = {
 	id = flavor_toarnen.30
 	title = flavor_toarnen.30.t
 	desc = flavor_toarnen.30.d
-	picture = DIPLOMACY_eventPicture
+	picture = CULTURE_eventPicture
 
 	is_triggered_only = yes
 	major = yes 
@@ -696,7 +472,7 @@ country_event = {
 					}
 				}
 				set_country_flag = chess_tournament_tmp_flag
-				chess_tournament_create_pairs = yes
+				ace_chess_tournament_create_pairs = yes
 			}
 		}
 	}
@@ -802,13 +578,13 @@ country_event = {
 	id = flavor_toarnen.20
 	title = flavor_toarnen.20.t
 	desc = flavor_toarnen.20.d
-	picture = DIPLOMACY_eventPicture
+	picture = CULTURE_eventPicture
 
 	is_triggered_only = yes
 
 	immediate = {
 		hidden_effect = {
-			chess_tournament_get_your_pair = yes
+			ace_chess_tournament_get_your_pair = yes
 		}
 	}
 
@@ -890,6 +666,18 @@ country_event = {
 			}
 		}
 	}
+
+	option = {
+		name = flavor_toarnen.20.dd
+		trigger = {
+			ruler_has_personality = chess_grandmaster_personality
+		}
+		highlight = yes
+		add_adm_power = 1
+		add_dip_power = 1
+		add_mil_power = 1
+		set_country_flag = chess_tournament_grandmaster
+	}
 }
 
 
@@ -898,7 +686,7 @@ country_event = {
 	id = flavor_toarnen.21
 	title = flavor_toarnen.21.t
 	desc = flavor_toarnen.21.d
-	picture = DIPLOMACY_eventPicture
+	picture = CULTURE_eventPicture
 
 	is_triggered_only = yes
 
@@ -913,8 +701,8 @@ country_event = {
 						has_country_flag = chess_tournament_round_loser
 					}
 				}
-				chess_tournament_get_your_pair = yes
-				chess_tournament_get_winner = yes
+				ace_chess_tournament_get_your_pair = yes
+				ace_chess_tournament_get_winner = yes
 			}
 		}
 	}
@@ -947,7 +735,7 @@ country_event = {
 	id = flavor_toarnen.22
 	title = flavor_toarnen.22.t
 	desc = flavor_toarnen.22.d
-	picture = DIPLOMACY_eventPicture
+	picture = CULTURE_eventPicture
 
 	is_triggered_only = yes
 	major = yes 
@@ -960,14 +748,14 @@ country_event = {
 		hidden_effect = {
 			every_country = {
 				limit = { has_country_flag = chess_tournament_participant }
-				chess_tournament_clear_flags = yes
+				ace_chess_tournament_clear_flags = yes
 			}
 			every_country = {
 				limit = { has_country_flag = chess_tournament_round_winner }
 				clr_country_flag = chess_tournament_round_winner
 				set_country_flag = chess_tournament_participant
 			}
-			chess_tournament_create_pairs = yes
+			ace_chess_tournament_create_pairs = yes
 		}
 	}
 
@@ -1009,7 +797,7 @@ country_event = {
 	id = flavor_toarnen.23
 	title = flavor_toarnen.23.t
 	desc = flavor_toarnen.23.d
-	picture = DIPLOMACY_eventPicture
+	picture = CULTURE_eventPicture
 
 	is_triggered_only = yes
 	major = yes 
@@ -1022,14 +810,14 @@ country_event = {
 		hidden_effect = {
 			every_country = {
 				limit = { has_country_flag = chess_tournament_participant }
-				chess_tournament_clear_flags = yes
+				ace_chess_tournament_clear_flags = yes
 			}
 			every_country = {
 				limit = { has_country_flag = chess_tournament_round_winner }
 				clr_country_flag = chess_tournament_round_winner
 				set_country_flag = chess_tournament_participant
 			}
-			chess_tournament_create_pairs = yes
+			ace_chess_tournament_create_pairs = yes
 		}
 	}
 
@@ -1072,7 +860,7 @@ country_event = {
 	id = flavor_toarnen.24
 	title = flavor_toarnen.24.t
 	desc = flavor_toarnen.24.d
-	picture = DIPLOMACY_eventPicture
+	picture = CULTURE_eventPicture
 
 	is_triggered_only = yes
 	major = yes 
@@ -1085,14 +873,14 @@ country_event = {
 		hidden_effect = {
 			every_country = {
 				limit = { has_country_flag = chess_tournament_participant }
-				chess_tournament_clear_flags = yes
+				ace_chess_tournament_clear_flags = yes
 			}
 			every_country = {
 				limit = { has_country_flag = chess_tournament_round_winner }
 				clr_country_flag = chess_tournament_round_winner
 				set_country_flag = chess_tournament_participant
 			}
-			chess_tournament_create_pairs = yes
+			ace_chess_tournament_create_pairs = yes
 		}
 	}
 
@@ -1135,7 +923,7 @@ country_event = {
 	id = flavor_toarnen.25
 	title = flavor_toarnen.25.t
 	desc = flavor_toarnen.25.d
-	picture = DIPLOMACY_eventPicture
+	picture = CULTURE_eventPicture
 
 	is_triggered_only = yes
 	hidden = yes
@@ -1143,22 +931,61 @@ country_event = {
 	immediate = {
 		hidden_effect = {
 			# second place
-			random_country = {
-				limit = { 
+			if = {
+				limit = {
+					any_country = {
+						ai = yes
+						has_country_flag = chess_tournament_participant 
+						NOT = {
+							has_country_flag = chess_tournament_round_winner
+						}
+					}
+				}
+				random_country = {
+					limit = { 
+						ai = yes
+						has_country_flag = chess_tournament_participant 
+						NOT = {
+							has_country_flag = chess_tournament_round_winner
+						} 
+					}
+					set_country_flag = chess_tournament_second_place
+					country_event = { id = flavor_toarnen.26 }
+				}
+			}
+			else_if = {
+				limit = {
 					has_country_flag = chess_tournament_participant 
 					NOT = {
 						has_country_flag = chess_tournament_round_winner
 					}
 				}
-				
+				set_country_flag = chess_tournament_second_place
 				country_event = { id = flavor_toarnen.26 }
 			}
 
 			# first place
-			random_country = {
+			if = {
+				limit = {
+					any_country = {
+						ai = yes
+						has_country_flag = chess_tournament_round_winner
+					}
+				}
+				random_country = {
+					limit = { 
+						ai = yes
+						has_country_flag = chess_tournament_round_winner
+					}
+					clr_country_flag = chess_tournament_round_winner
+					set_country_flag = chess_tournament_first_place
+					country_event = { id = flavor_toarnen.27 }
+				}
+			}
+			else_if = {
 				limit = { has_country_flag = chess_tournament_round_winner }
 				clr_country_flag = chess_tournament_round_winner
-				
+				set_country_flag = chess_tournament_first_place
 				country_event = { id = flavor_toarnen.27 }
 			}
 
@@ -1168,7 +995,7 @@ country_event = {
 					id = flavor_toarnen.28
 					days = 30
 				}
-				chess_tournament_clear_flags = yes
+				ace_chess_tournament_clear_flags = yes
 			}
 			
 		}
@@ -1185,20 +1012,16 @@ country_event = {
 	id = flavor_toarnen.26
 	title = flavor_toarnen.26.t
 	desc = flavor_toarnen.26.d
-	picture = DIPLOMACY_eventPicture
+	picture = CULTURE_eventPicture
 
 	is_triggered_only = yes
 
 	option = {
 		name = flavor_toarnen.26.a
 
-		add_treasury = 150
-		add_dip_power = 100
+		add_treasury = 100
+		add_dip_power = 50
 
-		add_country_modifier = {
-			name = A57_ground_chess_tournament_second
-			duration = 3650
-		}
 	}
 }
 
@@ -1207,7 +1030,7 @@ country_event = {
 	id = flavor_toarnen.27
 	title = flavor_toarnen.27.t
 	desc = flavor_toarnen.27.d
-	picture = DIPLOMACY_eventPicture
+	picture = CULTURE_eventPicture
 
 	is_triggered_only = yes
 
@@ -1220,22 +1043,12 @@ country_event = {
 	option = {
 		name = flavor_toarnen.27.a
 
-		add_treasury = 300
-		add_dip_power = 200
+		add_treasury = 200
+		add_dip_power = 100
 
-		add_country_modifier = {
-			name = A57_ground_chess_tournament_winner
-			duration = 3650
-		}
+		force_add_ruler_personality = { personality = chess_grandmaster_personality }
 
 		hidden_effect = {
-			every_country = {
-				limit = {
-					has_country_flag = chess_tournament_original_participant
-				}
-				clr_country_flag = chess_tournament_original_participant
-				country_event = { id = flavor_toarnen.28 }
-			}
 			every_country = {
 				limit = {
 					has_country_flag = chess_tournament_got_invitation
@@ -1251,23 +1064,53 @@ country_event = {
 	id = flavor_toarnen.28
 	title = flavor_toarnen.28.t
 	desc = flavor_toarnen.28.d
-	picture = DIPLOMACY_eventPicture
+	picture = CULTURE_eventPicture
 
 	is_triggered_only = yes
 
 	immediate = {
 		hidden_effect = {
-			random_country = {
+			if = {
 				limit = {
-					has_country_modifier = A57_ground_chess_tournament_winner
+					any_country = {
+						ai = yes
+						has_country_flag = chess_tournament_first_place
+					}
 				}
-				save_event_target_as = chess_first_place
+				random_country = {
+					limit = {
+						ai = yes
+						has_country_flag = chess_tournament_first_place
+					}
+					save_event_target_as = chess_first_place_target
+				}
 			}
-			random_country = {
+			else_if = {
 				limit = {
-					has_country_modifier = A57_ground_chess_tournament_second
+					has_country_flag = chess_tournament_first_place
 				}
-				save_event_target_as = chess_second_place
+				save_event_target_as = chess_first_place_target
+			}
+			if = {
+				limit = {
+					any_country = {
+						ai = yes
+						has_country_flag = chess_tournament_second_place
+					}
+				}
+				random_country = {
+					limit = {
+						ai = yes
+						has_country_flag = chess_tournament_second_place
+					}
+					save_event_target_as = chess_second_place_target
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = chess_tournament_second_place
+				}
+				save_event_target_as = chess_second_place_target
 			}
 		}
 	}
@@ -1288,35 +1131,594 @@ country_event = {
 		trigger = {
 			tag = A57
 		}
-		add_stability_or_adm_power = yes
-		add_treasury = 150
-		add_prestige = 30
-		add_dip_power = 100
+		
+		add_prestige = 5
 	}
 
 	after = {
+		every_country = {
+			limit = {
+				has_country_flag = chess_tournament_first_place
+			}
+			clr_country_flag = chess_tournament_first_place
+		}
+		every_country = {
+			limit = {
+				has_country_flag = chess_tournament_second_place
+			}
+			clr_country_flag = chess_tournament_second_place
+		}
 		clr_country_flag = chess_tournament_original_participant
 	}
 }
 
-
-# An incident in Sroncell mission Celliande POV
+#Roilsardi settlers events
 country_event = {
-	id = flavor_toarnen.39
-	title = flavor_toarnen.39.t
-	desc = flavor_toarnen.39.d
-	picture = DIPLOMACY_eventPicture
-
+	id = flavor_toarnen.100
+	title = flavor_toarnen.100.t
+	desc = flavor_toarnen.100.d
+	picture = HARBOUR_eventPicture
+	hidden = yes
 	is_triggered_only = yes
-
+	trigger = {
+		has_country_flag = A57_roilsardi_migrations
+	}
 	option = {
-		name = flavor_toarnen.39.a
-
-		tooltip = {
-			add_country_modifier = {
-				name = A57_infiltrated_army
-				duration = 1825
+		name = flavor_toarnen.100.a
+		random_owned_province = {
+			limit = {
+				NOT = {
+					OR = {
+						culture = roilsardi
+						has_province_modifier = A57_big_roilsardi_settlement
+					}
+				}
+			}
+			province_event = {
+				id = flavor_toarnen.101
+			}
+		}
+		if = {
+			limit = { has_country_flag = A57_roilsardi_migrations_capital }
+			country_event = {
+				id = flavor_toarnen.102
+				days = 365
+			}
+ 		}
+		if = {
+			limit = { has_country_flag = A57_edict_unlocked }
+			random_owned_province = {
+				province_event = {
+					id = flavor_toarnen.103
+					days = 1095
+				}
 			}
 		}
 	}
+}
+
+province_event = {
+	id = flavor_toarnen.101
+	title = flavor_toarnen.101.t
+	desc = flavor_toarnen.101.d
+	picture = HARBOUR_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = flavor_toarnen.101.a
+		A57_upgrade_roilsardi_settlement = yes
+ 	}
+}
+
+country_event = {
+	id = flavor_toarnen.102
+	title = flavor_toarnen.101.t
+	desc = flavor_toarnen.102.d
+	picture = HARBOUR_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_toarnen.101.a
+		random_owned_province = {
+			limit = { area = highcliff_area }
+			A57_upgrade_roilsardi_settlement = yes
+			add_random_development = 1
+		}
+ 	}
+}
+
+province_event = {
+	id = flavor_toarnen.103
+	title = flavor_toarnen.101.t
+	desc = flavor_toarnen.101.d
+	picture = HARBOUR_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_toarnen.101.a
+		if = {
+			limit = {
+				culture = roilsardi
+				has_province_modifier = A57_big_roilsardi_settlement
+			}
+			remove_province_modifier = A57_big_roilsardi_settlement
+			add_province_modifier = {
+				name = A57_roilsardi_home
+				duration = -1
+			}
+		}
+		A57_upgrade_roilsardi_settlement = yes
+		random_list = {
+			25 = {
+				add_elven_minority_size_effect = yes
+				if = {
+					limit = { has_large_elven_minority_trigger = yes }
+					add_random_development = 1
+				}
+			}
+			45 = {
+				add_half_elven_minority_size_effect = yes
+				if = {
+					limit = { has_large_half_elven_minority_trigger = yes }
+					add_random_development = 1
+				}
+			}
+			30 = { }
+		}
+		random_area_province = {
+            limit = {
+                culture = roilsardi
+            }
+            add_random_development = 1
+        }
+ 	}
+}
+
+province_event = {
+	id = flavor_toarnen.104
+	title = flavor_toarnen.101.t
+	desc = flavor_toarnen.101.d
+	picture = HARBOUR_eventPicture
+	hidden = yes
+	is_triggered_only = yes
+	option = {
+		name = flavor_toarnen.101.a
+		if = {
+			limit = { NOT = { has_building = farm_estate }}
+			add_building = farm_estate
+		}
+ 	}
+}
+
+#Roilsardization
+country_event = {
+	id = flavor_toarnen.200
+	title = flavor_toarnen.200.t
+	desc = flavor_toarnen.200.d
+	picture = DIPLOMACY_eventPicture
+
+	hidden = yes
+	is_triggered_only = yes
+	trigger = {
+		NOT = {
+			has_country_flag = A57_roilsardization_end 
+		}
+	}
+
+	option = {
+		name = flavor_toarnen.200.a
+		A57_upgrade_roilsardi_larp = yes
+ 	}
+}
+
+#Looting Bulwari cities
+country_event = { #Elizna
+	id = flavor_toarnen.300
+	title = flavor_toarnen.300.t
+	desc = flavor_toarnen.300.d
+	picture = SURAKES_SUN_GARDEN_eventPicture
+	goto = 496
+	fire_only_once = yes
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			496 = {
+				clr_province_flag = A57_loot_this_flag
+			}
+			change_variable = {
+				which = A57_looted_bulwar_cities
+				value = 1
+			}
+		}
+	}
+
+	option = {
+		name = flavor_toarnen.300.a
+		U05 = {
+			add_country_modifier = {
+				name = A57_imperial_fleet_in_shambles
+				duration = -1
+			}
+		}
+		496 = {
+			add_devastation = 50
+			add_base_tax = -3
+			add_base_production = -3
+			add_base_manpower = -3
+			remove_province_modifier = eliznan_sunrise
+			remove_province_modifier = U05_eliznan_sunrise_mod
+			change_trade_goods = fish
+		}
+		add_treasury = 300
+		add_splendor = 200
+		412 = {
+			change_trade_goods = tea
+			add_permanent_province_modifier = {
+				name = A57_toarnen_sunrise
+				duration = -1
+			}
+		}
+ 	}
+}
+
+country_event = { #Brasan
+	id = flavor_toarnen.301
+	title = flavor_toarnen.300.t
+	desc = flavor_toarnen.300.d
+	picture = SURAKES_SUN_GARDEN_eventPicture
+	goto = 565
+	fire_only_once = yes
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			565 = {
+				clr_province_flag = A57_loot_this_flag
+			}
+			change_variable = {
+				which = A57_looted_bulwar_cities
+				value = 1
+			}
+		}
+	}
+
+	option = {
+		name = flavor_toarnen.300.a
+		565 = {
+			add_devastation = 50
+			add_base_tax = -3
+			add_base_production = -3
+			add_base_manpower = -3
+		}
+		add_treasury = 300
+		add_splendor = 200
+		1309 = {
+			add_trade_modifier = {
+				who = ROOT
+				duration = -1
+				power = 25
+				key = STRONG_MERCHANTS
+			}
+		}
+ 	}
+}
+
+country_event = { #Kumarkand
+	id = flavor_toarnen.302
+	title = flavor_toarnen.300.t
+	desc = flavor_toarnen.300.d
+	picture = SURAKES_SUN_GARDEN_eventPicture
+	goto = 591
+	fire_only_once = yes
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			591 = {
+				clr_province_flag = A57_loot_this_flag
+			}
+			change_variable = {
+				which = A57_looted_bulwar_cities
+				value = 1
+			}
+		}
+	}
+
+	option = {
+		name = flavor_toarnen.300.a
+		591 = {
+			add_devastation = 50
+			add_base_tax = -3
+			add_base_production = -3
+			add_base_manpower = -3
+		}
+		add_treasury = 300
+		add_splendor = 200
+		add_country_modifier = {
+			name = A57_wondrous_hemlets
+			duration = -1
+		}
+ 	}
+}
+
+country_event = { #Bulwar
+	id = flavor_toarnen.303
+	title = flavor_toarnen.300.t
+	desc = flavor_toarnen.300.d
+	picture = SURAKES_SUN_GARDEN_eventPicture
+	goto = 601
+	fire_only_once = yes
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			601 = {
+				clr_province_flag = A57_loot_this_flag
+			}
+			change_variable = {
+				which = A57_looted_bulwar_cities
+				value = 1
+			}
+		}
+	}
+
+	option = {
+		name = flavor_toarnen.300.a
+		601 = {
+			add_devastation = 50
+			add_base_tax = -3
+			add_base_production = -3
+			add_base_manpower = -3
+			remove_province_triggered_modifier = bulwar_bulwar_temple_modifier
+			remove_province_modifier = bulwar_eduz_rakadags
+		}
+		add_treasury = 300
+		add_splendor = 200
+		add_adm_power = 50
+		add_dip_power = 50
+		add_mil_power = 50
+		every_known_country = {
+			limit = { religion_group = bulwari }
+			add_stability = -1
+		}
+ 	}
+}
+
+country_event = { #Varamhar magic academy
+	id = flavor_toarnen.304
+	title = flavor_toarnen.300.t
+	desc = flavor_toarnen.300.d
+	picture = SURAKES_SUN_GARDEN_eventPicture
+	goto = 609
+	fire_only_once = yes
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			609 = {
+				clr_province_flag = A57_loot_this_flag
+			}
+			change_variable = {
+				which = A57_looted_bulwar_cities
+				value = 1
+			}
+		}
+	}
+
+	option = {
+		name = flavor_toarnen.300.a
+		609 = {
+			add_devastation = 50
+			add_base_tax = -3
+			add_base_production = -3
+			add_base_manpower = -3
+			remove_province_modifier = varamhar_the_varamhar_academy
+		}
+		add_treasury = 300
+		add_splendor = 200
+		if = {
+			limit = { has_heir = yes }
+ 			set_heir_mage_effect = yes
+		}
+		else = {
+			hidden_effect = {
+				define_consort = {
+					country_of_origin = ROOT
+					religion = ROOT
+					culture = ROOT
+				}
+			}
+			country_event = { id = 9469 }
+			set_heir_mage_effect = yes
+		}
+ 	}
+}
+
+country_event = { #Azkabar
+	id = flavor_toarnen.305
+	title = flavor_toarnen.300.t
+	desc = flavor_toarnen.300.d
+	picture = SURAKES_SUN_GARDEN_eventPicture
+	goto = 613
+	fire_only_once = yes
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			613 = {
+				clr_province_flag = A57_loot_this_flag
+			}
+			change_variable = {
+				which = A57_looted_bulwar_cities
+				value = 1
+			}
+		}
+	}
+
+	option = {
+		name = flavor_toarnen.300.a
+		613 = {
+			add_devastation = 50
+			add_base_tax = -3
+			add_base_production = -3
+			add_base_manpower = -3
+		}
+		add_treasury = 300
+		add_splendor = 200
+		every_province = {
+			limit = { NOT = { owned_by = ROOT } religion_group = bulwari }
+			add_unrest = 10
+		}
+ 	}
+}
+
+country_event = { #Arashbar
+	id = flavor_toarnen.306
+	title = flavor_toarnen.300.t
+	desc = flavor_toarnen.300.d
+	picture = SURAKES_SUN_GARDEN_eventPicture
+	goto = 616
+	fire_only_once = yes
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			616 = {
+				clr_province_flag = A57_loot_this_flag
+			}
+			change_variable = {
+				which = A57_looted_bulwar_cities
+				value = 1
+			}
+		}
+	}
+
+	option = {
+		name = flavor_toarnen.300.a
+		add_country_modifier = {
+			name = A57_crown_of_the_ancients
+			duration = -1
+		}
+		616 = {
+			add_devastation = 50
+			add_base_tax = -3
+			add_base_production = -3
+			add_base_manpower = -3
+		}
+		add_treasury = 300
+		add_splendor = 200
+ 	}
+}
+
+country_event = { #Sareyand
+	id = flavor_toarnen.307
+	title = flavor_toarnen.300.t
+	desc = flavor_toarnen.300.d
+	picture = SURAKES_SUN_GARDEN_eventPicture
+	goto = 625
+	fire_only_once = yes
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			625 = {
+				clr_province_flag = A57_loot_this_flag
+			}
+			change_variable = {
+				which = A57_looted_bulwar_cities
+				value = 1
+			}
+		}
+	}
+
+	option = {
+		name = flavor_toarnen.300.a
+		add_country_modifier = {
+			name = A57_new_ideas
+			duration = -1
+		}
+		625 = {
+			remove_province_modifier = city_of_ideas_sareyand
+			add_devastation = 50
+			add_base_tax = -3
+			add_base_production = -3
+			add_base_manpower = -3
+		}
+		add_treasury = 300
+		add_splendor = 200
+ 	}
+}
+
+country_event = { #Eduz-Vacyn
+	id = flavor_toarnen.308
+	title = flavor_toarnen.300.t
+	desc = flavor_toarnen.300.d
+	picture = SURAKES_SUN_GARDEN_eventPicture
+	goto = 631
+	fire_only_once = yes
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			631 = {
+				clr_province_flag = A57_loot_this_flag
+			}
+			change_variable = {
+				which = A57_looted_bulwar_cities
+				value = 1
+			}
+		}
+	}
+
+	option = {
+		name = flavor_toarnen.300.a
+		631 = {
+			remove_province_triggered_modifier = bulwar_vacyn_temple_modifier
+			add_devastation = 50
+			add_base_tax = -3
+			add_base_production = -3
+			add_base_manpower = -3
+		}
+		add_treasury = 300
+		add_splendor = 200
+		add_adm_power = 50
+		add_dip_power = 50
+		add_mil_power = 50
+		every_known_country = {
+			limit = { religion_group = bulwari }
+			add_stability = -1
+		}
+ 	}
+}
+
+country_event = { #Azka-Sur
+	id = flavor_toarnen.309
+	title = flavor_toarnen.300.t
+	desc = flavor_toarnen.300.d
+	picture = SURAKES_SUN_GARDEN_eventPicture
+	goto = 643
+	fire_only_once = yes
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			643 = {
+				clr_province_flag = A57_loot_this_flag
+			}
+			change_variable = {
+				which = A57_looted_bulwar_cities
+				value = 1
+			}
+		}
+	}
+
+	option = {
+		name = flavor_toarnen.300.a
+		643 = {
+			remove_province_triggered_modifier = bulwar_confluence_temple_modifier
+			add_devastation = 50
+			add_base_tax = -3
+			add_base_production = -3
+			add_base_manpower = -3
+		}
+		add_treasury = 300
+		add_splendor = 200
+		add_adm_power = 50
+		add_dip_power = 50
+		add_mil_power = 50
+		every_known_country = {
+			limit = { religion_group = bulwari }
+			add_stability = -1
+		}
+ 	}
 }

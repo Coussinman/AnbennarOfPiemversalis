@@ -1,5 +1,30 @@
 namespace = ace_misc
 
+# Setup
+country_event = {
+	id = ace_misc.0
+	title = ace_misc.0.t
+	desc = ace_misc.0.d
+	picture = CARIBBEAN_PIRATE_FORT_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+	hidden = yes
+	trigger = {
+		ai = no
+		NOT = {
+			has_global_flag = ACE_game_rules_multiplayer_flag
+		}
+	}
+	immediate = {
+		hidden_effect = {
+			ACE_game_rules_setup_effect = yes
+		}
+	}
+	option = {
+		name = ace_misc.0.a
+	}
+}
+
 country_event = {
 	id = ace_misc.1
 	title = ace_misc.1.t
@@ -11,82 +36,69 @@ country_event = {
 
 	option = {
 		name = ace_misc.1.a
-		change_primary_culture = arbarani_new
 		custom_tooltip = ace_misc.1.a.tt
 		hidden_effect = {
-			update_entire_culture_foreign = {
-				culture = crownsman
+			remove_accepted_culture	= crownsman
+			remove_accepted_culture	= arbarani
+			remove_accepted_culture	= adenner
+			every_owned_province = {
+				limit = {
+					culture = arbarani
+					OR = {
+						area = derwing_area
+						area = golden_plains_area
+						area = teagansfield_area
+						region = damescrown_region
+						region = esmaria_region
+					}
+				}
+				change_culture = crodamic
 			}
-			update_entire_culture_foreign = {
-				culture = morbani
-			}
-			update_entire_culture_foreign = {
-				culture = arbarani
-			}
-			anb_add_accepted_culture_or_dip_power = {
-				culture = crodamic
-				free = yes
-			}
-			anb_add_accepted_culture_or_dip_power = {
-				culture = morbani_new
-				free = yes
-			}
-			anb_add_accepted_culture_or_dip_power = {
-				culture = stargi
-				free = yes
-			}
-			anb_add_accepted_culture_or_dip_power = {
-				culture = crownsman_new
-				free = yes
-			}
-			anb_add_accepted_culture_or_dip_power = {
-				culture = arbarani_new
-				free = yes
-			}
-			anb_add_accepted_culture_or_dip_power = {
-				culture = adeanic
-				free = yes
+			every_owned_province = {
+				limit = {
+					culture = arbarani
+					region = alenic_frontier_region
+					NOT = {
+						area = golden_plains_area
+					}
+				}
+				change_culture = morbani
 			}
 			every_owned_province = {
 				limit = {
 					culture = crownsman
 				}
-				change_culture = crownsman_new
+				change_culture = arami
 			}
-
 			every_owned_province = {
 				limit = {
-					culture = arbarani
+					culture = adenner
 				}
-				change_culture = arbarani_new
+				change_culture = adennic
 			}
-			remove_accepted_culture	= crownsman
-			remove_accepted_culture	= arbarani
-			capital_scope = {
-				change_culture = adeanic
-			}
-			338 = {
-				change_culture = morbani_new
-			}
-			334 = {
-				change_culture = crodamic
-			}
-			782 = {
-				change_culture = stargi
-			}
-			774 = {
-				change_culture = adeanic
-			}
-
 		}
 		add_country_modifier = {
 			name = rohibonic_revival
 			duration = -1
 		}
 	}
-
 	option = {
 		name = ace_misc.1.b
-
+		anb_add_accepted_culture_or_dip_power = {
+			culture = arbarani
+			free = yes
+		}
+		anb_add_accepted_culture_or_dip_power = {
+			culture = crownsman
+			free = yes
+		}
+		anb_add_accepted_culture_or_dip_power = {
+			culture = adenner
+			free = yes
+		}
+		anb_add_accepted_culture_or_dip_power = {
+			culture = farrani_half_elf
+			free = yes
+		}
 	}
 }
