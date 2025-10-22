@@ -98,6 +98,7 @@ country_event = {
 	
 	option = {
 		name = zokka_jaddari_war.2.a  #Victorious!
+		remove_country_modifier = zokka_jaddari_game_rules_buff
 		
 		add_prestige = 10
 		add_government_power = { mechanic_type = desert_legion_mechanic power_type = jaddari_zealotry value = 10 }
@@ -284,6 +285,7 @@ country_event = {
 	
 	option = {
 		name = zokka_jaddari_war.4.a  #Victorious!
+		remove_country_modifier = zokka_jaddari_game_rules_buff
 		
 		add_prestige = 10
 		custom_tooltip = zokka_jaddari_war.4.tt
@@ -310,6 +312,12 @@ country_event = {
 			2923 = { change_culture = masnsih add_core = F79 }
 			2911 = { change_culture = masnsih add_core = F79 }
 			2912 = { change_culture = masnsih add_core = F79 }
+			F56 = { 
+				country_event = { 
+					id = flavor_dasmatus.14 
+					days = 1 
+				} 
+			}
 		}	
 		
 		1348 = { change_province_name = "Sea of Zokka" }
@@ -401,6 +409,10 @@ country_event = {
 		name = zokka_jaddari_war.6.b #Burn out the Xhazobine!
 		ai_chance = {
 			factor = 1
+			modifier = {
+				factor = 0
+				has_global_flag = ace_jaddari_victory_rule
+			}
 		}
 		add_estate_loyalty = {
 			estate = estate_church
@@ -788,6 +800,10 @@ country_event = {
 		}
 		ai_chance = {
 			factor = 1
+			modifier = {
+				factor = 0
+				has_global_flag = ace_jaddari_victory_rule
+			}
 		}
 	}
 }
@@ -966,6 +982,10 @@ country_event = { #For F54 Gnoll next to Dasmatusu
 		}
 		ai_chance = {
 			factor = 70
+			modifier = {
+				factor = 0
+				has_global_flag = ace_jaddari_victory_rule
+			}
 		}
 	}
 }
@@ -1113,6 +1133,10 @@ country_event = {
 
 		ai_chance = {
 			factor = 65
+			modifier = {
+				factor = 0
+				has_global_flag = ace_jaddari_victory_rule
+			}
 		}
 	}
 	option = {

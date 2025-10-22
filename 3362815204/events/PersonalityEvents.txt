@@ -779,6 +779,9 @@ country_event = {
 				type = natural_scientist
 			}
 		}
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 	
 	is_triggered_only = yes
@@ -890,6 +893,9 @@ country_event = {
 			NOT = { has_province_modifier = kind_hearted_healing_ravages_of_war }
 			NOT = { has_province_modifier = not_so_kind_hearted }
 		}
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 	
 	is_triggered_only = yes
@@ -996,6 +1002,9 @@ country_event = {
 		NOT = { has_ruler_modifier = inspiring_spiritual_guide }
 		NOT = { stability = 3 }
 		NOT = { has_ruler_flag = free_thinker_swap_no }
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 	
 	is_triggered_only = yes
@@ -2236,6 +2245,9 @@ country_event = {
 		has_dlc = "Rights of Man"
 		ruler_has_personality_ancestor = { key = incorruptible }
 		NOT = { has_ruler_modifier = corrupted_incorruptible_ruler }
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 	
 	is_triggered_only = yes
@@ -2339,6 +2351,9 @@ country_event = {
 			any_owned_province = {
 				has_province_modifier = economic_downturn_modifier
 			}
+		}
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
 		}
 	}
 	
@@ -2573,7 +2588,10 @@ country_event = {
 	
 	trigger = {
 		has_dlc = "Rights of Man"
+		OR = {
 		ruler_has_personality_ancestor = { key = conqueror }
+			ruler_has_personality = ace_conqueror_personality
+		}
 		is_at_war = yes
 		NOT = { has_ruler_modifier = conquerors_presence }
 		NOT = { has_ruler_modifier = the_beating_of_the_drums }
@@ -2583,10 +2601,21 @@ country_event = {
 	
 	mean_time_to_happen = {
 		days = 1
+		modifier = {
+			factor = 100
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	option = {
 		name = "personality_events.37.a"
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_country_modifier = ace_unnatural_luck
+			}
+		}
 		add_ruler_modifier = {
 			name = "conquerors_presence"
 			duration = 1825
@@ -2594,6 +2623,9 @@ country_event = {
 	}
 	option = {
 		name = "personality_events.37.b"
+		ai_chance = {
+			factor = 1
+		}
 		add_ruler_modifier = {
 			name = "the_beating_of_the_drums"
 			duration = 1825
@@ -2690,6 +2722,9 @@ country_event = {
 		ruler_has_personality_ancestor = { key = strict }
 		has_heir = yes
 		heir_age = 20
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 	
 	is_triggered_only = yes
@@ -2940,6 +2975,9 @@ country_event = {
 			NOT = { is_rival = ROOT }
 			NOT = { war_with = ROOT }	
 		}	
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 	
 	is_triggered_only = yes
@@ -3002,6 +3040,9 @@ country_event = {
 		OR = {
 			advisor = master_of_mint
 			advisor = treasurer
+		}
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
 		}
 	}
 	
@@ -3223,6 +3264,9 @@ country_event = {
 	trigger = {
 		ruler_has_personality = sinner_personality
 		has_dlc = "Rights of Man"
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	immediate = {
@@ -3361,6 +3405,9 @@ country_event = {
 			NOT = { is_rival = ROOT }
 			NOT = { is_enemy = ROOT }
 			NOT = { junior_union_with = ROOT }
+		}
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
 		}
 		
 	}
@@ -3577,6 +3624,9 @@ country_event = {
 			NOT = { reverse_has_opinion = { who = ROOT value = 0 } }
 		 	NOT = { ROOT = { has_casus_belli = { type = cb_insult target = PREV } } }
 		}
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	#Finding a country
@@ -3686,6 +3736,9 @@ country_event = {
 		has_dlc = "Rights of Man"
 		ruler_has_personality = obsessive_perfectionist_personality
 		NOT = { has_ruler_modifier = military_perfectionism }
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 	
 	is_triggered_only = yes

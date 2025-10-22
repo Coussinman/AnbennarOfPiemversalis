@@ -91,7 +91,23 @@ country_event = {
     picture = DIPLOMACY_eventPicture
 
 	trigger = {
+		OR = {
 		heir_can_be_planetouched_monarchy = yes
+			AND = {
+				tag = A48
+				has_country_flag = sugamber_akasik_monument
+				government = monarchy
+				has_heir = yes
+				NOT = {
+					heir_age = 15
+					ruler_has_planetouched_personality = yes
+					has_heir_flag = is_a_secret_homunculus
+					has_heir_flag = is_a_exposed_homunculus
+					has_country_flag = vampire_heir
+				}
+				is_lesser_in_union = no
+			}
+		}
 		heir_has_planetouched_personality = no
 	}
 
@@ -109,7 +125,13 @@ country_event = {
 		}
 		modifier = {
 			factor = 1.25
+			OR = {
 			planetouched_low_affinity = yes
+				AND = {
+					tag = A48
+					has_country_flag = sugamber_akasik_monument
+				}
+			}
 		}
 		modifier = {
 			factor = 0.8
@@ -125,6 +147,21 @@ country_event = {
 					has_country_modifier = 333_gate_of_earth_colony_country
 				}
 				5650 = { has_great_project = { type = gate_of_earth tier = 1 } }
+		}
+		modifier = {
+			factor = 0.5
+			has_personal_deity = ace_mother_akasik
+		}
+		modifier = {
+			factor = 0.8
+			has_dlc = "Leviathan"
+			owns = 383
+			383 = {
+				has_great_project = {
+					type = aur_kes_akasik
+					tier = 3
+				}
+			}
 		}
 	}
 
@@ -198,7 +235,15 @@ country_event = {
     picture = DIPLOMACY_eventPicture
 
 	trigger = {
-		capital_scope = { continent = africa }
+		OR = {
+			capital_scope = {
+				continent = africa
+			}
+			AND = {
+				tag = A48
+				has_country_flag = sugamber_akasik_monument
+			}
+		}
 	}
 
 	mean_time_to_happen = {
@@ -206,7 +251,13 @@ country_event = {
 
 		modifier = {
 			factor = 0.5
+			OR = {
 			planetouched_high_affinity = yes
+				AND = {
+					tag = A48
+					has_country_flag = sugamber_akasik_monument
+				}
+			}
 		}
 		modifier = {
 			factor = 0.75
@@ -215,6 +266,10 @@ country_event = {
 		modifier = {
 			factor = 1.25
 			planetouched_low_affinity = yes
+		}
+		modifier = {
+			factor = 0.5
+			has_personal_deity = ace_mother_akasik
 		}
 		modifier = {
 			factor = 0.9

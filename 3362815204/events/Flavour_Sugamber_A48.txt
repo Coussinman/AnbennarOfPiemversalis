@@ -1,120 +1,80 @@
-
-######################################
-#  Sugamber Succession War Disaster  #
-######################################
-
 namespace = flavor_sugamber
 
-#Legitamacy of Lisolette called into question
-country_event = {
-	id = flavor_sugamber.999
-	title = flavor_sugamber.999.t
-	desc = flavor_sugamber.999.d
-	picture = KING_SICK_IN_BED_eventPicture
-	
-	fire_only_once = yes
-	is_triggered_only = yes
-
-	trigger = {
-		tag = A48
-		NOT = { has_country_flag = had_sugamber_succession_war }
-		government = monarchy
-		is_free_or_tributary_trigger = yes
-		has_ruler = "Lisolette"
-	}
-	option = {
-		name = flavor_sugamber.999.a
-		ai_chance = { factor = 100 }
-		add_legitimacy = -20
-	}
-}
-
-#Helper events for disaster to trigger correct start
+#Setup Event
 country_event = {
 	id = flavor_sugamber.1000
 	title = flavor_sugamber.1000.t
-	desc = flavor_sugamber.1000.d
-	picture = KING_SICK_IN_BED_eventPicture
-	
-	major = yes
-	major_trigger = {
-		capital_scope = {
-			OR = {
-				superregion = western_cannor_superregion
-				AND = {
-					superregion = escann_superregion
-					owner = { technology_group = tech_cannorian }
-				}
+	desc = flavor_sugamber.1000.desc
+	picture = DIPLOMAT_INTERROGATION_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		tag = A48
+	}
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = lilac_wars.11
+				days = 20
+				random = 20
 			}
 		}
 	}
-
-	fire_only_once = yes
-	hidden = yes
-	is_triggered_only = yes
-
 	option = {
-		ai_chance = { factor = 100 }
-		hidden_effect = { country_event = { id = flavor_sugamber.1001 } }
+		name = flavor_sugamber.1000.a
+		add_prestige = 10
+		custom_tooltip = rose_party_diplo_tooltip
+		custom_tooltip = " "
+		tooltip = {
+			add_country_modifier = {
+				name = sugamber_ewald_gamble
+				duration = -1
+			}
+			add_country_modifier = {
+				name = sugamber_neratic_clergy_opposition
+				duration = 10950
+			}
+		}
 	}
 }
-
-country_event = {
-	id = flavor_sugamber.1001
-	title = flavor_sugamber.1001.t
-	desc = flavor_sugamber.1001.d
-	picture = KING_SICK_IN_BED_eventPicture
-
-	fire_only_once = yes
-	hidden = yes
-	is_triggered_only = yes
-
-	option = {
-		ai_chance = { factor = 100 }
-		trigger = {
-			has_ruler = "Lisolette"
-		}
-		country_event = { id = flavor_sugamber.0 }
-	}
-
-	option = {
-		ai_chance = { factor = 100 }
-		trigger = {
-			has_ruler = "Ewald II"
-		}
-		country_event = { id = flavor_sugamber.4 }
-	}
-}
-
 
 # Start of the Sugambrian succession crisis
 country_event = {
 	id = flavor_sugamber.0
 	title = flavor_sugamber.0.t
-	desc = flavor_sugamber.0.d
+	desc = flavor_sugamber.0.desc
 	picture = KING_SICK_IN_BED_eventPicture
-	
-	fire_only_once = yes
-
 	is_triggered_only = yes
-
-	immediate = {
-		set_country_flag = sugamber_succession_war_start
-	}
-
 	option = {
 		name = flavor_sugamber.0.a
-		country_event = { id = flavor_sugamber.1 days = 7 random = 7 }
+		country_event = {
+			id = flavor_sugamber.1
+			days = 7
+		}
 		hidden_effect = {
-			random_list = { 
-				35 = { 
-				set_country_flag = A48_stabbed
+			random_list = {
+				1 = {
+					modifier = {
+						factor = 0
+						OR = {
+							has_country_flag = A30_lisolette_will_marry
+							mission_completed = A48_uncertain_succession
+						}
+					}
+					set_country_flag = A48_stabbed
 				}
-				35 = { 
-				set_country_flag = A48_poisoned
+				1 = {
+					modifier = {
+						factor = 0
+						OR = {
+							has_country_flag = A30_lisolette_will_marry
+							mission_completed = A48_uncertain_succession
+						}
+					}
+					set_country_flag = A48_poisoned
 				}
-				30 = {
-				set_country_flag = A48_drunken_reveal
+				1 = {
+					set_country_flag = A48_drunken_reveal
 				}
 			}
 		}
@@ -122,74 +82,96 @@ country_event = {
 
 	option = {
 		name = flavor_sugamber.0.b
-		country_event = { id = flavor_sugamber.1 days = 7 random = 7 }
+		country_event = {
+			id = flavor_sugamber.1
+			days = 7
+		}
 		hidden_effect = {
-			random_list = { 
-				35 = { 
-				set_country_flag = A48_cold_feet
+			random_list = {
+				1 = {
+					set_country_flag = A48_cold_feet
 				}
-				35 = { 
-				set_country_flag = A48_generic
+				1 = {
+					set_country_flag = A48_generic
 				}
-				30 = {
-				set_country_flag = A48_crossbow
+				1 = {
+					modifier = {
+						factor = 0
+						OR = {
+							has_country_flag = A30_lisolette_will_marry
+							mission_completed = A48_uncertain_succession
+						}
+					}
+					set_country_flag = A48_crossbow
 				}
 			}
 		}
 	}
 }
 
-
 country_event = {
 	id = flavor_sugamber.1
 	title = flavor_sugamber.1.t
 	desc = {
-		trigger = { has_country_flag = A48_stabbed }
+		trigger = {
+			has_country_flag = A48_stabbed
+		}
 		desc = flavor_sugamber.1.d1
 	}
 	desc = {
-		trigger = { has_country_flag = A48_poisoned }
+		trigger = {
+			has_country_flag = A48_poisoned
+		}
 		desc = flavor_sugamber.1.d2
 	}
 	desc = {
-		trigger = { has_country_flag = A48_drunken_reveal }
+		trigger = {
+			has_country_flag = A48_drunken_reveal
+		}
 		desc = flavor_sugamber.1.d3
 	}
 	desc = {
-		trigger = { has_country_flag = A48_cold_feet }
+		trigger = {
+			has_country_flag = A48_cold_feet
+		}
 		desc = flavor_sugamber.1.d4
 	}
 	desc = {
-		trigger = { has_country_flag = A48_generic }
+		trigger = {
+			has_country_flag = A48_generic
+		}
 		desc = flavor_sugamber.1.d5
 	}
 	desc = {
-		trigger = { has_country_flag = A48_crossbow }
+		trigger = {
+			has_country_flag = A48_crossbow
+		}
 		desc = flavor_sugamber.1.d6
 	}
 	picture = ASSASSINATION_eventPicture
-	
-	fire_only_once = yes
-
 	is_triggered_only = yes
-	
+
 	option = {
 		name = flavor_sugamber.1.a
-		trigger = { 
+		trigger = {
 			OR = {
 				has_country_flag = A48_stabbed
 				has_country_flag = A48_poisoned
 				has_country_flag = A48_crossbow
 			}
 		}
-		country_event = { id = flavor_sugamber.2 days = 7 random = 7 }
+		country_event = {
+			id = flavor_sugamber.2
+			days = 7
+		}
 		define_ruler = {
 			name = "Ethelbert"
-			dynasty = "of Vaduham"
+			dynasty = "of Rupellion"
 			adm = 4
 			dip = 4
 			mil = 5
-			age = 40 
+			age = 40
+			claim = 50
 		}
 		if = {
 			limit = {
@@ -204,14 +186,17 @@ country_event = {
 
 	option = {
 		name = flavor_sugamber.1.b
-		trigger = { 
+		trigger = {
 			OR = {
 				has_country_flag = A48_drunken_reveal
 				has_country_flag = A48_cold_feet
 				has_country_flag = A48_generic
 			}
 		}
-		country_event = { id = flavor_sugamber.3 days = 7 random = 7 }
+		country_event = {
+			id = flavor_sugamber.3
+			days = 7
+		}
 		if = {
 			limit = {
 				has_country_flag = A48_generic
@@ -225,30 +210,27 @@ country_event = {
 country_event = {
 	id = flavor_sugamber.2
 	title = flavor_sugamber.2.t
-	desc = flavor_sugamber.2.d
+	desc = flavor_sugamber.2.desc
 	picture = CIVIL_WAR_eventPicture
-	
-	fire_only_once = yes
-
 	is_triggered_only = yes
-
-	immediate = {
-	}
-
 	option = {
 		name = flavor_sugamber.2.a
+		set_country_flag = sugamber_baldwin_rebellion
+		add_manpower = -5
 		if = {
 			limit = {
-				owns = 415		#Lockcastle
 				415 = {
-					NOT = { units_in_province = 1 }
+					owned_by = ROOT
+					NOT = {
+						units_in_province = 1
+					}
 				}
 			}
 			415 = {
-				set_province_flag = sugamber_local_support_for_rebels 
+				set_province_flag = sugamber_local_support_for_rebels
 				spawn_rebels = {
 					type = pretender_rebels
-					size = 1.8
+					size = 2
 					leader = "Baldwin of Lockcastle"
 					win = yes
 				}
@@ -257,14 +239,16 @@ country_event = {
 		else = {
 			random_owned_province = {
 				limit = {
-					NOT = { units_in_province = 1 }
-					NOT = { has_province_modifier = gnollish_minority_coexisting_large}
-					NOT = { culture = hill_gnoll }
+					NOT = {
+						units_in_province = 1
+						has_province_modifier = gnollish_minority_coexisting_large
+						culture = hill_gnoll
+					}
 				}
 				set_province_flag = sugamber_local_support_for_rebels
 				spawn_rebels = {
 					type = pretender_rebels
-					size = 1.8
+					size = 2
 					leader = "Baldwin of Lockcastle"
 					win = yes
 				}
@@ -272,24 +256,20 @@ country_event = {
 		}
 		random_owned_province = {
 			limit = {
-				NOT = { units_in_province = 1 }
-				NOT = { has_province_modifier = gnollish_minority_coexisting_large}
-				NOT = { culture = hill_gnoll }
+				NOT = {
+					units_in_province = 1
+					has_province_modifier = gnollish_minority_coexisting_large
+					culture = hill_gnoll
+				}
 			}
 			set_province_flag = sugamber_local_support_for_rebels
 			spawn_rebels = {
 				type = pretender_rebels
-				size = 1.2
+				size = 1
 				leader = "Baldwin of Lockcastle"
 				win = yes
 			}
 		}
-		add_yearly_manpower = -2
-		set_country_flag = sugamber_baldwin_rebellion
-	}
-
-	after = {
-		clr_country_flag = sugamber_succession_war_start
 	}
 }
 
@@ -297,28 +277,28 @@ country_event = {
 country_event = {
 	id = flavor_sugamber.3
 	title = flavor_sugamber.3.t
-	desc = flavor_sugamber.3.d
+	desc = flavor_sugamber.3.desc
 	picture = CIVIL_WAR_eventPicture
-	
-	fire_only_once = yes
-
 	is_triggered_only = yes
-
 	option = {
 		name = flavor_sugamber.3.a
+		set_country_flag = sugamber_ethelbert_rebellion
+		add_manpower = -5
 		if = {
 			limit = {
-				owns = 317		#Vaduham
 				317 = {
-					NOT = { units_in_province = 1 }
+					owned_by = ROOT
+					NOT = {
+						units_in_province = 1
+					}
 				}
 			}
 			317 = {
-				set_province_flag = sugamber_local_support_for_rebels 
+				set_province_flag = sugamber_local_support_for_rebels
 				spawn_rebels = {
 					type = pretender_rebels
-					size = 1.8
-					leader = "Ethelbert of Vaduham"
+					size = 2
+					leader = "Ethelbert of Rupellion"
 					win = yes
 				}
 			}
@@ -326,39 +306,37 @@ country_event = {
 		else = {
 			random_owned_province = {
 				limit = {
-					NOT = { units_in_province = 1 }
-					NOT = { has_province_modifier = gnollish_minority_coexisting_large}
-					NOT = { culture = hill_gnoll }
+					NOT = {
+						units_in_province = 1
+						has_province_modifier = gnollish_minority_coexisting_large
+						culture = hill_gnoll
+					}
 				}
 				set_province_flag = sugamber_local_support_for_rebels
 				spawn_rebels = {
 					type = pretender_rebels
-					size = 1.8
-					leader = "Ethelbert of Vaduham"
+					size = 2
+					leader = "Ethelbert of Rupellion"
 					win = yes
 				}
 			}
 		}
 		random_owned_province = {
 			limit = {
-				NOT = { units_in_province = 1 }
-				NOT = { has_province_modifier = gnollish_minority_coexisting_large}
-				NOT = { culture = hill_gnoll }
+				NOT = {
+					units_in_province = 1
+					has_province_modifier = gnollish_minority_coexisting_large
+					culture = hill_gnoll
+				}
 			}
 			set_province_flag = sugamber_local_support_for_rebels
 			spawn_rebels = {
 				type = pretender_rebels
-				size = 1.2
-				leader = "Ethelbert of Vaduham"
+				size = 1
+				leader = "Ethelbert of Rupellion"
 				win = yes
 			}
 		}
-		add_yearly_manpower = -2
-		set_country_flag = sugamber_ethelbert_rebellion
-	}
-
-	after = {
-		clr_country_flag = sugamber_succession_war_start
 	}
 }
 
@@ -366,30 +344,23 @@ country_event = {
 country_event = {
 	id = flavor_sugamber.4
 	title = flavor_sugamber.4.t
-	desc = flavor_sugamber.4.d
+	desc = flavor_sugamber.4.desc
 	picture = DEATH_OF_HEIR_eventPicture
-	
-	fire_only_once = yes
-
 	is_triggered_only = yes
-
 	trigger = {
-		tag = A48
-		NOT = { has_country_flag = sugamber_baldwin_rebellion }
-		NOT = { has_country_flag = sugamber_ethelbert_rebellion }
-		NOT = { has_country_flag = had_sugamber_succession_war }
+		NOT = {
+			has_country_flag = sugamber_baldwin_rebellion
+			has_country_flag = sugamber_ethelbert_rebellion
+			has_country_flag = had_sugamber_succession_war
+		}
 	}
-
-	immediate = {
-	}
-
 	option = {
 		name = flavor_sugamber.4.a
+			set_country_flag = sugamber_ethelbert_rebellion
 			reduce_stability_or_adm_power = yes
 			define_heir = {
 				name = "Baldwin"
 				dynasty = "Lockcastle"
-				#fixed = yes
 				change_adm = 4
 				change_dip = 3
 				change_mil = 4
@@ -397,37 +368,43 @@ country_event = {
 			}
 			random_owned_province = {
 				limit = {
-					NOT = { units_in_province = 1 }
-					NOT = { has_province_modifier = gnollish_minority_coexisting_large}
-					NOT = { culture = hill_gnoll }
+					NOT = {
+						units_in_province = 1
+						has_province_modifier = gnollish_minority_coexisting_large
+						culture = hill_gnoll
+					}
 				}
 				set_province_flag = sugamber_local_support_for_rebels
 				spawn_rebels = {
 					type = pretender_rebels
-					size = 1.8
-					leader = "Ethelbert of Vaduham"
+					size = 2
+					leader = "Ethelbert of Rupellion"
 					win = yes
 				}
 			}
 			random_owned_province = {
 				limit = {
-					NOT = { units_in_province = 1 }
-					NOT = { has_province_modifier = gnollish_minority_coexisting_large}
-					NOT = { culture = hill_gnoll }
+					NOT = {
+						units_in_province = 1
+						has_province_modifier = gnollish_minority_coexisting_large
+						culture = hill_gnoll
+					}
 				}
 				set_province_flag = sugamber_local_support_for_rebels
 				spawn_rebels = {
 					type = pretender_rebels
-					size = 1.2
-					leader = "Ethelbert of Vaduham"
+					size = 1
+					leader = "Ethelbert of Rupellion"
 					win = yes
 				}
 			}
-			add_yearly_manpower = -2
-			set_country_flag = sugamber_ethelbert_rebellion
+			add_manpower = -5
 	}
 	after = {
-		clr_country_flag = sugamber_succession_war_start
+		country_event = {
+			id = flavor_sugamber.5
+			days = 90
+		}
 	}
 }
 
@@ -435,93 +412,83 @@ country_event = {
 country_event = {
 	id = flavor_sugamber.5
 	title = flavor_sugamber.5.t
-	desc = flavor_sugamber.5.d
+	desc = flavor_sugamber.5.desc
 	picture = REVOLUTION_eventPicture
-	
-	fire_only_once = yes
-	mean_time_to_happen = {
-		months = 6
-	}
-	
+	is_triggered_only = yes
 	trigger = {
-		tag = A48
-		OR	= {	has_country_flag = sugamber_baldwin_rebellion
-				has_country_flag = sugamber_ethelbert_rebellion
-		}
 		owns = 913
-		controls = 913
 	}
-	
-	option = {	#Just ignore them.
+	option = {
 		name = flavor_sugamber.5.a
-		random = { 
-			chance = 50 
+		random = {
+			chance = 50
 			913 = {
-			spawn_rebels = {
-				type = nationalist_rebels
-				size = 1
-				friend = A49
+				spawn_rebels = {
+					type = nationalist_rebels
+					size = 1
+					friend = A49
 				}
 			}
 		}
 	}
-	
-	option = {	# Preempt rebellion by giving them someone else to fight.
+	option = {
 		name = flavor_sugamber.5.b
-			913 = {
-				add_unit_construction = {
-					type = infantry
-					amount = 1
-					speed = 0.25
-					cost = 1
+		913 = {
+			add_unit_construction = {
+				type = infantry
+				amount = 1
+				speed = 0.25
+				cost = 1
 			}
 		}
 		set_country_flag = gnollish_officer
 	}
-	
-	option = {	# Keep them quiet by lowering their taxes.
+	option = {
 		name = flavor_sugamber.5.c
-			913 = {
-				add_local_autonomy = 30
-		}	
+		913 = {
+			add_local_autonomy = 25
+		}
 	}
 }
 
 # The civil war hurts our agriculture.
 country_event = {
-	id =  flavor_sugamber.6
+	id = flavor_sugamber.6
 	title = flavor_sugamber.6.t
-	desc = flavor_sugamber.6.d
+	desc = flavor_sugamber.6.desc
 	picture = FAMINE_eventPicture
-	
-	trigger = {
-		tag = A48
-		OR	= {	has_country_flag = sugamber_baldwin_rebellion
-				has_country_flag = sugamber_ethelbert_rebellion
-		}
-	}
-	
 	fire_only_once = yes
 	is_triggered_only = yes
-	
-	option = {		# Why can't the peasants eat cake?
+	trigger = {
+		OR = {
+			has_country_flag = sugamber_baldwin_rebellion
+			has_country_flag = sugamber_ethelbert_rebellion
+		}
+	}
+	option = {
 		name = flavor_sugamber.6.a
-		ai_chance = { factor = 25 }
+		ai_chance = {
+			factor = 1
+		}
 		reduce_stability_or_adm_power = yes
 		reduce_legitimacy_small_effect = yes
 		add_war_exhaustion = 2
 	}
-	option = {		# Just import food from abroad.
+	option = {
 		name = flavor_sugamber.6.b
-		ai_chance = { factor = 50 }
+		ai_chance = {
+			factor = 2
+		}
 		add_country_modifier = {
 			name = importing_food
 			duration = 1825
 		}
 	}
-	option = {		# Someone must be hoarding food, we must seize it.
+	option = {
 		name = flavor_sugamber.6.c
-		ai_chance = { factor = 25 }
+		ai_chance = {
+			factor = 1
+		}
 		reduce_estate_nobles_loyalty_effect = yes
 		reduce_estate_burghers_loyalty_effect = yes
 	}
@@ -531,12 +498,10 @@ country_event = {
 province_event = {
 	id = flavor_sugamber.7
 	title = flavor_sugamber.7.t
-	desc = flavor_sugamber.7.d
+	desc = flavor_sugamber.7.desc
 	picture = LILAC_WARS_eventPicture
-	goto = root
-
+	goto = ROOT
 	fire_only_once = yes
-
 	trigger = {
 		owner = {
 			has_disaster = sugamber_succession_war
@@ -545,13 +510,13 @@ province_event = {
 		fort_level = 2
 		has_siege = yes
 		sieged_by = REB
-		NOT = { nationalism = 1 }
+		NOT = {
+			nationalism = 1
+		}
 	}
-
 	mean_time_to_happen = {
 		months = 6
 	}
-
 	option = {
 		name = flavor_sugamber.7.a
 		change_siege = 5
@@ -562,10 +527,9 @@ province_event = {
 country_event = {
 	id = flavor_sugamber.8
 	title = flavor_sugamber.8.t
-	desc = flavor_sugamber.8.d
+	desc = flavor_sugamber.8.desc
 	picture = LILAC_WARS_eventPicture
-	goto = root
-
+	goto = ROOT
 	is_triggered_only = yes
 	fire_only_once = yes
 
@@ -574,23 +538,26 @@ country_event = {
 		manpower_percentage = 0.2
 	}
 
-	#Welp
 	option = {
 		name = flavor_sugamber.8.a
-		ai_chance = { factor = 10 }
-		add_yearly_manpower = -2
-		add_prestige = -5
+		ai_chance = {
+			factor = 1
+		}
+		add_manpower = -5
+		add_prestige = -10
 	}
-	#Pay them off
 	option = {
 		name = flavor_sugamber.8.b
-		ai_chance = { factor = 10 }
-		add_years_of_income = -0.5
+		ai_chance = {
+			factor = 1
+		}
+		add_treasury = -25
 	}
-	#Scorch and burn
 	option = {
 		name = flavor_sugamber.8.c
-		ai_chance = { factor = 10 }
+		ai_chance = {
+			factor = 1
+		}
 		random_owned_province = {
 			limit = {
 				num_of_units_in_province = {
@@ -608,21 +575,18 @@ country_event = {
 country_event = {
 	id = flavor_sugamber.9
 	title = flavor_sugamber.9.t
-	desc = flavor_sugamber.9.d
+	desc = flavor_sugamber.9.desc
 	picture = LILAC_WARS_eventPicture
-
 	is_triggered_only = yes
 	fire_only_once = yes
-	
-	trigger = { 
+	trigger = {
 		has_disaster = sugamber_succession_war
-		tag = A48
 	}
-	
-	#Pardon them
 	option = {
-		name =  flavor_sugamber.9.a
-		ai_chance = { factor = 50 }
+		name = flavor_sugamber.9.a
+		ai_chance = {
+			factor = 1
+		}
 		ROOT = {
 			add_legitimacy = -10
 			add_country_modifier = {
@@ -631,12 +595,13 @@ country_event = {
 			}
 		}
 	}
-	#Execute and seize their holdings
 	option = {
-		name =  flavor_sugamber.9.b
-		ai_chance = { factor = 50 }
+		name = flavor_sugamber.9.b
+		ai_chance = {
+			factor = 1
+		}
 		ROOT = {
-			add_years_of_income = 0.5
+			add_treasury = 25
 			add_legitimacy = 10
 			add_country_modifier = {
 				name = rebel_leaders_executed
@@ -651,25 +616,38 @@ country_event = {
 	id = flavor_sugamber.10
 	title = flavor_sugamber.10.t
 	desc = {
-		trigger = { has_country_flag = sugamber_baldwin_rebellion }
+		trigger = {
+			has_country_flag = sugamber_baldwin_rebellion
+		}
 		desc = flavor_sugamber.10.d1
 	}
 	desc = {
-		trigger = { has_country_flag = sugamber_ethelbert_rebellion}
+		trigger = {
+			has_country_flag = sugamber_ethelbert_rebellion
+		}
 		desc = flavor_sugamber.10.d2
 	}
-	
 	picture = SPY_eventPicture
-	
+
 	mean_time_to_happen = {
-		months = 18
+		months = 24
 	}
 
 	trigger = {
 		is_neighbor_of = A48
-		
-		NOT = { has_country_flag = support_rebels }
-		NOT = { has_country_flag = no_support_for_rebels }
+		NOT = {
+			AND = {
+				tag = A30
+				A48 = {
+					OR = {
+						junior_union_with = A30
+						is_subject_of = A30
+					}
+				}
+			}
+			has_country_flag = support_rebels
+			has_country_flag = no_support_for_rebels
+		}
 		A48 = {
 			has_disaster = sugamber_succession_war
 			any_owned_province = {
@@ -680,72 +658,124 @@ country_event = {
 					has_port = yes
 				}
 				unit_in_siege = no
-				NOT = { has_province_flag = sugamber_local_support_for_rebels }
-				NOT = { has_province_modifier = gnollish_minority_coexisting_large}
-				NOT = { culture = hill_gnoll }
+				NOT = {
+					has_province_flag = sugamber_local_support_for_rebels
+					has_province_modifier = gnollish_minority_coexisting_large
+					culture = hill_gnoll
+				}
 			}
 		}
 	}
-		
-	option = {		# Send some unruly subjects to the rebels as 'volunteers'.
+	option = {
 		name = flavor_sugamber.10.a
-		ai_chance = { factor = 30 }
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					alliance_with = A48
+					marriage_with = A48
+				}
+			}
+		}
 		set_country_flag = support_rebels
 		add_manpower = -2
 		hidden_effect = {
 			A48 = {
-				country_event = { id = flavor_sugamber.12 days = 1 }
+				country_event = {
+					id = flavor_sugamber.12
+					days = 1
+				}
 			}
 		}
 		reverse_add_opinion = {
-				who = A48
-				modifier = A48_supported_rebels
+			who = A48
+			modifier = A48_supported_rebels
 		}
 	}
-	option = {		# Give the rebels some monetary aid.
+	option = {
 		name = flavor_sugamber.10.b
-		ai_chance = { factor = 20 }
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					alliance_with = A48
+					marriage_with = A48
+				}
+			}
+		}
 		set_country_flag = support_rebels
-		add_years_of_income = -0.4
+		add_treasury = -20
 		hidden_effect = {
 			A48 = {
-				country_event = { id = flavor_sugamber.12 days = 1 }
+				country_event = {
+					id = flavor_sugamber.12
+					days = 1
+				}
 			}
 		}
 		reverse_add_opinion = {
-				who = A48
-				modifier = A48_supported_rebels
+			who = A48
+			modifier = A48_supported_rebels
 		}
 	}
-	option = {		# We don't help rebel scum.
+	option = {
 		name = flavor_sugamber.10.c
-		ai_chance = { 
-			factor = 50
+		ai_chance = {
+			factor = 2
 			modifier = {
-				factor = 3
-				has_opinion = {
-					who = A48
-					value = 30 }
+				factor = 0
+				OR = {
+					is_rival = A48
+					historical_rival_with = A48
+					core_claim = A48
+					NOT = {
+						has_opinion = {
+							who = A48
+							value = -100
+						}
+					}
+				}
 			}
 			modifier = {
 				factor = 2
-				NOT = { tag = A56 } #Celliande
-				NOT = { tag = A34 } #Bisan
+				has_opinion = {
+					who = A48
+					value = 100
+				}
 			}
 			modifier = {
-				factor = 0.3
+				factor = 2
+				has_opinion = {
+					who = A48
+					value = 50
+				}
+			}
+			modifier = {
+				factor = 0.5
 				NOT = {
 					has_opinion = {
 						who = A48
-						value = -30 }
+						value = 0
+					}
+				}
+			}
+			modifier = {
+				factor = 0.5
+				NOT = {
+					has_opinion = {
+						who = A48
+						value = -50
+					}
 				}
 			}
 		}
 		set_country_flag = no_support_for_rebels
 		add_prestige = 5
 		reverse_add_opinion = {
-				who = A48
-				modifier = A48_didnt_support_rebels
+			who = A48
+			modifier = A48_didnt_support_rebels
 		}
 	}
 }
@@ -754,33 +784,39 @@ country_event = {
 country_event = {
 	id = flavor_sugamber.12
 	title = flavor_sugamber.12.t
-	desc = flavor_sugamber.12.d
+	desc = flavor_sugamber.12.desc
 	picture = SPY_eventPicture
-	
+
 	is_triggered_only = yes
-	
-	option = {		# We will not forget this.
+
+	option = {
 		name = flavor_sugamber.12.a
-		if = { #Celliande supports nationalist rebels
+		if = {
 			limit = {
 				FROM = {
-					tag = A56
+					culture = arannese
 				}
-				410 = {
-					owned_by = ROOT
-					unit_in_siege = no
-					NOT = { has_province_flag = sugamber_local_support_for_rebels }
-				}
-				411 = {
-					owned_by = ROOT
-					unit_in_siege = no
-					NOT = { has_province_flag = sugamber_local_support_for_rebels }
+				OR = {
+					410 = {
+						owned_by = ROOT
+						unit_in_siege = no
+						NOT = {
+							has_province_flag = sugamber_local_support_for_rebels
+						}
+					}
+					411 = {
+						owned_by = ROOT
+						unit_in_siege = no
+						NOT = {
+							has_province_flag = sugamber_local_support_for_rebels
+						}
+					}
 				}
 			}
 			410 = {
 				spawn_rebels = {
 					type = nationalist_rebels
-					size = 0.5
+					size = 1
 					friend = FROM
 				}
 				set_province_flag = sugamber_local_support_for_rebels
@@ -788,33 +824,38 @@ country_event = {
 			411 = {
 				spawn_rebels = {
 					type = nationalist_rebels
-					size = 0.5
+					size = 1
 					friend = FROM
 				}
 				set_province_flag = sugamber_local_support_for_rebels
 			}
 		}
-		else_if = { #Bisan supports nationalist rebels
+		else_if = {
 			limit = {
 				FROM = {
-					tag = A34
+					OR = {
+						culture = vernman
+						culture = east_damerian
+					}
 				}
 				315 = {
 					owned_by = ROOT
 					unit_in_siege = no
-					NOT = { has_province_flag = sugamber_local_support_for_rebels }
+					NOT = {
+						has_province_flag = sugamber_local_support_for_rebels
+					}
 				}
 			}
 			315 = {
 				spawn_rebels = {
 					type = nationalist_rebels
-					size = 0.75
+					size = 1
 					friend = FROM
 				}
 				set_province_flag = sugamber_local_support_for_rebels
 			}
 		}
-		else_if = { #Neighboring country supports rebels
+		else_if = {
 			limit = {
 				any_owned_province = {
 					any_neighbor_province = {
@@ -832,13 +873,15 @@ country_event = {
 					has_port = yes
 					}
 					unit_in_siege = no
-					NOT = { has_province_flag = sugamber_local_support_for_rebels }
-					NOT = { has_province_modifier = gnollish_minority_coexisting_large}
-					NOT = { culture = hill_gnoll }
+					NOT = {
+						has_province_flag = sugamber_local_support_for_rebels
+						has_province_modifier = gnollish_minority_coexisting_large
+						culture = hill_gnoll
+					}
 				}
 				spawn_rebels = {
 					type = pretender_rebels
-					size = 0.8
+					size = 1
 					friend = FROM
 				}
 				set_province_flag = sugamber_local_support_for_rebels
@@ -851,65 +894,69 @@ country_event = {
 country_event = {
 	id = flavor_sugamber.13
 	title = flavor_sugamber.13.t
-	desc = flavor_sugamber.13.d
+	desc = flavor_sugamber.13.desc
 	picture = LILAC_WARS_eventPicture
-	
+	hidden = yes
 	major = yes
+	fire_only_once = yes
 	major_trigger = {
 		capital_scope = {
 			OR = {
 				superregion = western_cannor_superregion
 				AND = {
 					superregion = escann_superregion
-					owner = { technology_group = tech_cannorian }
-				}
-			}
-		}
-	}
-
-	hidden = yes
-	fire_only_once = yes
-	mean_time_to_happen = {
-		days = 1
-	}
-
-	trigger = {
-		tag = A48
-		OR = {
-			#Normal trigger (all rebels are dead)
-			AND = {
-				has_disaster = sugamber_succession_war
-				NOT = { num_of_rebel_controlled_provinces = 1 }
-				NOT = { num_of_rebel_armies = 1 }
-				NOT = { has_country_flag = sugamber_succession_war_start }
-			}
-			#If ruler dies in battle or goes kaput from old age - Lisolette loyalists rebel route
-			AND = {
-				has_country_flag = sugamber_baldwin_rebellion
-				NOT = { has_ruler = "Ethelbert" }
-			}
-			#If ruler dies in battle or goes kaput from old age - Ethelbert rebels route
-			AND = {
-				has_country_flag = sugamber_ethelbert_rebellion
-				NOT = {
-					calc_true_if = {
-						has_ruler = "Ewald II"
-						has_ruler = "Lisolette"
-						has_ruler = "Baldwin"
-						amount = 1
+					owner = {
+						technology_group = tech_cannorian
 					}
 				}
 			}
 		}
 	}
-
+	mean_time_to_happen = {
+		days = 1
+	}
+	trigger = {
+		tag = A48
+		NOT = {
+			has_country_flag = had_sugamber_succession_war
+		}
+		OR = {
+			AND = {
+				has_disaster = sugamber_succession_war
+				OR = {
+					has_country_flag = sugamber_baldwin_rebellion
+					has_country_flag = sugamber_ethelbert_rebellion
+				}
+				NOT = {
+					num_of_rebel_controlled_provinces = 1
+					num_of_rebel_armies = 1
+				}
+			}
+			AND = {
+				has_country_flag = sugamber_baldwin_rebellion
+				NOT = {
+					has_ruler = "Ethelbert"
+				}
+			}
+			AND = {
+				has_country_flag = sugamber_ethelbert_rebellion
+				NOT = {
+					has_ruler_modifier = sugamber_ewald_gamble
+					has_ruler_flag = lisolette_sil_rhinmond
+					has_ruler = "Baldwin"
+					junior_union_with = A30
+				}
+			}
+		}
+	}
 	option = {
 		name = flavor_sugamber.13.a
-		ai_chance = { factor = 100 }
 		if = {
-			limit = { 
+			limit = {
 				has_country_flag = sugamber_baldwin_rebellion
-				NOT = { has_ruler = "Ethelbert" }
+				NOT = {
+					has_ruler = "Ethelbert"
+				}
 			}
 			define_ruler = {
 				name = "Baldwin"
@@ -922,24 +969,22 @@ country_event = {
 			set_country_flag = sugamber_lisolette_avenged
 		}
 		else_if = {
-			limit = { 
+			limit = {
 				has_country_flag = sugamber_ethelbert_rebellion
 				NOT = {
-					calc_true_if = {
-						has_ruler = "Ewald II"
-						has_ruler = "Lisolette"
-						has_ruler = "Baldwin"
-						amount = 1
-					}
+					has_ruler_modifier = sugamber_ewald_gamble
+					has_ruler_flag = lisolette_sil_rhinmond
+					has_ruler = "Baldwin"
+					junior_union_with = A30
 				}
 			}
 			define_ruler = {
 				name = "Ethelbert"
-				dynasty = "of Vaduham"
+				dynasty = "of Rupellion"
 				adm = 4
 				dip = 4
 				mil = 5
-				age = 40 
+				age = 40
 			}
 			set_country_flag = sugamber_ethelbert_restored
 		}
@@ -955,7 +1000,7 @@ country_event = {
 	id = flavor_sugamber.14
 	title = flavor_sugamber.14.t
 	desc = {
-		trigger = { 
+		trigger = {
 			OR = {
 				has_country_flag = sugamber_ethelbert_restored
 				has_country_flag = sugamber_lisolette_avenged
@@ -969,64 +1014,72 @@ country_event = {
 		}
 		desc = flavor_sugamber.14.d2
 	}
-	
 	picture = LILAC_WARS_eventPicture
-
 	is_triggered_only = yes
 	fire_only_once = yes
-
-    immediate = {
+	immediate = {
 		set_country_flag = had_sugamber_succession_war
 	}
-
 	option = {
-		ai_chance = { factor = 100 }
 		name = flavor_sugamber.12.a
 		add_stability_or_adm_power = yes
 		add_war_exhaustion = -3
-
-		#What happens if rebels win
 		if = {
 			limit = {
-				NOT = { has_country_flag = rebels_lost}
+				NOT = {
+					has_country_flag = rebels_lost
+				}
 			}
-			country_event = { id = flavor_sugamber.19 } #Giving nobles recompense for supporting rebellion
-			
-			#Add unrest to all provinces that didn't support rebels
+			country_event = {
+				id = flavor_sugamber.19
+			}
 			every_owned_province = {
 				limit = {
-					NOT = { has_province_flag = sugamber_local_support_for_rebels }
+					NOT = {
+						has_province_flag = sugamber_local_support_for_rebels
+					}
 				}
 				add_province_modifier = {
 					name = add_unrest_5_modifier
 					duration = 3650
 				}
 			}
-
-			#Returning territory to Bisan?
-			if = { 
-				limit = { 
-					NOT = { war_with = A34 } 
-					A34 = { has_country_flag = support_rebels }
+			if = {
+				limit = {
+					NOT = {
+						war_with = A34
+					}
+					A34 = {
+						has_country_flag = support_rebels
+					}
 				}
-				country_event = { id = flavor_sugamber.20 days = 30 }
-			}
-
-			#Returning territory to Celliande?
-			if = { 
-				limit = { 
-					NOT = { war_with = A56 } 
-					A56 = { has_country_flag = support_rebels } 
+				country_event = {
+					id = flavor_sugamber.20
+					days = 30
 				}
-				country_event = { id = flavor_sugamber.21 days = 30 }
 			}
-
-			#Deal with relations and such
+			if = {
+				limit = {
+					NOT = {
+						war_with = A56
+					}
+					A56 = {
+						has_country_flag = support_rebels
+					}
+				}
+				country_event = {
+					id = flavor_sugamber.21
+					days = 30
+				}
+			}
 			every_country = {
 				limit = {
 					has_country_flag = support_rebels
 				}
-				country_event = { id = flavor_sugamber.16 days = 1 } # Improved Relations with Sugamber
+				country_event = {
+					id = flavor_sugamber.16
+					days = 1
+				}
 			}
 			every_country = {
 				limit = {
@@ -1039,8 +1092,6 @@ country_event = {
 				clr_country_flag = no_support_for_rebels
 			}
 		}
-
-		#What happens if rebels lose
 		else = {
 			every_owned_province = {
 				limit = {
@@ -1058,7 +1109,10 @@ country_event = {
 						has_country_flag = support_rebels
 					}
 				}
-				country_event = { id = flavor_sugamber.17 days = 1 } #Relations deteriorate with Sugamber
+				country_event = {
+					id = flavor_sugamber.17
+					days = 1
+				}
 			}
 		}
 		hidden_effect = {
@@ -1073,8 +1127,14 @@ country_event = {
 			clr_country_flag = sugamber_lisolette_avenged
 			clr_country_flag = sugamber_ethelbert_restored
 			clr_country_flag = rebels_lost
-			if = { limit = { has_country_flag = gnollish_officer }
-				country_event = { id = flavor_sugamber.18 days = 60 }
+			if = {
+				limit = {
+					has_country_flag = gnollish_officer
+				}
+				country_event = {
+					id = flavor_sugamber.18
+					days = 60
+				}
 			}
 			every_owned_province = {
 				clr_province_flag = sugamber_local_support_for_rebels
@@ -1087,16 +1147,15 @@ country_event = {
 country_event = {
 	id = flavor_sugamber.16
 	title = flavor_sugamber.16.t
-	desc = flavor_sugamber.16.d
+	desc = flavor_sugamber.16.desc
 	picture = LILAC_WARS_eventPicture
-	
 	is_triggered_only = yes
-	
+
 	immediate = {
 		clr_country_flag = support_rebels
 	}
-	
-	option = {		# Hopefully he'll one day pays us back.
+
+	option = {
 		name = flavor_sugamber.16.a
 		FROM = {
 			add_opinion = {
@@ -1115,13 +1174,14 @@ country_event = {
 country_event = {
 	id = flavor_sugamber.17
 	title = flavor_sugamber.17.t
-	desc = flavor_sugamber.17.d
+	desc = flavor_sugamber.17.desc
 	picture = LILAC_WARS_eventPicture
-	
 	is_triggered_only = yes
-	
-	option = {		#Not mentioning any names? that's how you recognize anyone who's bluffing.
-		trigger = { has_country_flag = support_rebels }
+
+	option = {
+		trigger = {
+			has_country_flag = support_rebels
+		}
 		name = flavor_sugamber.17.a
 		FROM = {
 			add_opinion = {
@@ -1131,9 +1191,11 @@ country_event = {
 		}
 		clr_country_flag = support_rebels
 	}
-	
-	option = {		#Oh, good thing we didn't.
-		trigger = { has_country_flag = no_support_for_rebels }
+
+	option = {
+		trigger = {
+			has_country_flag = no_support_for_rebels
+		}
 		name = flavor_sugamber.17.b
 		FROM = {
 			add_opinion = {
@@ -1149,21 +1211,21 @@ country_event = {
 country_event = {
 	id = flavor_sugamber.18
 	title = flavor_sugamber.18.t
-	desc = flavor_sugamber.18.d
+	desc = flavor_sugamber.18.desc
 	picture = LILAC_WARS_eventPicture
-	
-	fire_only_once = yes
 	is_triggered_only = yes
-	
+
 	immediate = {
 		hidden_effect = {
 			clr_country_flag = gnollish_officer
 		}
 	}
 
-	option = {	# Give him a high function.
+	option = {
 		name = flavor_sugamber.18.a
-		ai_chance = { factor = 10 }
+		ai_chance = {
+			factor = 1
+		}
 		define_advisor = {
 			type = commandant
 			skill = 1
@@ -1185,15 +1247,19 @@ country_event = {
 		small_increase_of_gnollish_tolerance_effect = yes
 	}
 
-	option = {	# Make him an officer.
+	option = {
 		name = flavor_sugamber.18.b
-		ai_chance = { factor = 50 }
+		ai_chance = {
+			factor = 5
+		}
 		add_army_tradition = 5
 	}
 
-	option = {	# Gnolls already cause enough havoc without recieving high positions.
+	option = {
 		name = flavor_sugamber.18.c
-		ai_chance = { factor = 40 }
+		ai_chance = {
+			factor = 4
+		}
 		increase_legitimacy_small_effect = yes
 		add_prestige = 5
 		add_army_tradition = -5
@@ -1205,65 +1271,67 @@ country_event = {
 country_event = {
 	id = flavor_sugamber.19
 	title = flavor_sugamber.19.t
-	desc = flavor_sugamber.19.d
+	desc = flavor_sugamber.19.desc
 	picture = GOOD_WITH_MONARCH_eventPicture
-	
-	fire_only_once = yes
-
 	is_triggered_only = yes
-	
+
 	trigger = {
 		tag = A48
 	}
 
-	option = { # Divide the crown lands under our supporters.
+	option = {
 		name = flavor_sugamber.19.a
-		ai_chance = { factor = 20 }
-		give_estate_land_share_medium = { estate = estate_nobles }
+		ai_chance = {
+			factor = 2
+		}
+		give_estate_land_share_medium = {
+			estate = estate_nobles
+		}
 		add_estate_loyalty = {
 			estate = estate_nobles
-			loyalty = 5
+			loyalty = 10
 		}
 	}
 
-	option = { # Arrange for public offices to be given to their surplus children, even if those traditionaly went to priest or burghers.
+	option = {
 		name = flavor_sugamber.19.b
-		ai_chance = { factor = 20 }
+		ai_chance = {
+			factor = 2
+		}
 		add_estate_loyalty = {
 			estate = estate_burghers
-			loyalty = -5
+			loyalty = -20
 		}
 		add_estate_loyalty = {
 			estate = estate_church
-			loyalty = -5
+			loyalty = -20
 		}
 		add_estate_loyalty = {
 			estate = estate_nobles
-			loyalty = 5
+			loyalty = 10
 		}
-		add_corruption = 5
 	}
 
-	option = { # Give them a donation out of the treasury.
+	option = {
 		name = flavor_sugamber.19.c
 		ai_chance = {
-			factor = 30
+			factor = 3
 			modifier = {
 				factor = 0.1
 				num_of_loans = 2
 			}
 		}
-		add_years_of_income = -0.75
+		add_treasury = -50
 		add_estate_loyalty = {
 			estate = estate_nobles
-			loyalty = 5
+			loyalty = 10
 		}
 	}
 
-	option = { # They only did their duty, I don't reward basic decency.
+	option = {
 		name = flavor_sugamber.19.e
 		ai_chance = {
-			factor = 30
+			factor = 3
 			modifier = {
 				factor = 0.1
 				NOT = {
@@ -1282,25 +1350,33 @@ country_event = {
 country_event = {
 	id = flavor_sugamber.20
 	title = flavor_sugamber.20.t
-	desc = flavor_sugamber.20.d
+	desc = flavor_sugamber.20.desc
 	picture = MERCHANTS_TALKING_eventPicture
 
 	is_triggered_only = yes
 
-	option = { # They can have Gnollesgate, the gnolles only makes trouble anyway.
+	option = {
 		name = flavor_sugamber.20.a
-		trigger = { owns = 913 }
-		ai_chance = { factor = 50 }
+		trigger = {
+			owns = 913
+		}
+		ai_chance = {
+			factor = 5
+		}
 		913 = {
 			cede_province = A34
 			remove_core = A48
 		}
 	}
 
-	option = { # Give them Countsbridge.
+	option = {
 		name = flavor_sugamber.20.b
-		trigger = { owns = 315 }
-		ai_chance = { factor = 20 }
+		trigger = {
+			owns = 315
+		}
+		ai_chance = {
+			factor = 2
+		}
 		315 = {
 			cede_province = A34
 			remove_core = A48
@@ -1313,13 +1389,15 @@ country_event = {
 		}
 	}
 
-	option = { # Fullfill all their claims.
+	option = {
 		name = flavor_sugamber.20.c
-		trigger = { 
+		trigger = {
 			owns = 913
 			owns = 315
 		}
-		ai_chance = { factor = 10 }
+		ai_chance = {
+			factor = 1
+		}
 		913 = {
 			cede_province = A34
 			remove_core = A48
@@ -1337,32 +1415,41 @@ country_event = {
 		}
 	}
 
-	option = { # Pay them in cash.
+	option = {
 		name = flavor_sugamber.20.e
 		ai_chance = {
-			factor = 10
+			factor = 1
 			modifier = {
 				factor = 0.1
 				num_of_loans = 2
 			}
 			modifier = {
 				factor = 3
-				NOT = { owns = 913 }
+				NOT = {
+					owns = 913
+				}
 			}
 			modifier = {
 				factor = 3
-				NOT = { owns = 315 }
+				NOT = {
+					owns = 315
+				}
 			}
 		}
-		add_years_of_income = -1
+		add_treasury = -50
 		A34 = {
-			country_event = { id = flavor_sugamber.22 days = 1 } # We received tribute from Sugamber
+			country_event = {
+				id = flavor_sugamber.22
+				days = 1
+			}
 		}
 	}
 
-	option = { # Haha! did they really thought we'd pay them back.
+	option = {
 		name = flavor_sugamber.20.f
-		ai_chance = { factor = 20 }
+		ai_chance = {
+			factor = 2
+		}
 		A34 = {
 			add_historical_rival = A48
 			add_opinion = {
@@ -1377,25 +1464,33 @@ country_event = {
 country_event = {
 	id = flavor_sugamber.21
 	title = flavor_sugamber.21.t
-	desc = flavor_sugamber.21.d
+	desc = flavor_sugamber.21.desc
 	picture = MERCHANTS_TALKING_eventPicture
 
 	is_triggered_only = yes
 
-	option = { # They can have Hawkshot, we still have a coastline without it.
+	option = {
 		name = flavor_sugamber.21.a
-		trigger = { owns = 410 }
-		ai_chance = { factor = 50 }
+		trigger = {
+			owns = 410
+		}
+		ai_chance = {
+			factor = 3
+		}
 		410 = {
 			cede_province = A56
 			remove_core = A48
 		}
 	}
 
-	option = { # Give them Irmathmas, if we haven't got any port we can't get raided by pirates.
+	option = {
 		name = flavor_sugamber.21.b
-		trigger = { owns = 411 }
-		ai_chance = { factor = 21 }
+		trigger = {
+			owns = 411
+		}
+		ai_chance = {
+			factor = 2
+		}
 		411 = {
 			cede_province = A56
 			remove_core = A48
@@ -1408,13 +1503,15 @@ country_event = {
 		}
 	}
 
-	option = { # Fullfill all their claims.
+	option = {
 		name = flavor_sugamber.21.c
-		trigger = { 
+		trigger = {
 			owns = 410
 			owns = 411
 		}
-		ai_chance = { factor = 10 }
+		ai_chance = {
+			factor = 1
+		}
 		410 = {
 			cede_province = A56
 			remove_core = A48
@@ -1432,32 +1529,41 @@ country_event = {
 		}
 	}
 
-	option = { # Pay them in cash.
+	option = {
 		name = flavor_sugamber.21.e
 		ai_chance = {
-			factor = 10
+			factor = 1
 			modifier = {
 				factor = 0.1
 				num_of_loans = 2
 			}
 			modifier = {
 				factor = 3
-				NOT = { owns = 410 }
+				NOT = {
+					owns = 410
+				}
 			}
 			modifier = {
 				factor = 3
-				NOT = { owns = 411 }
+				NOT = {
+					owns = 411
+				}
 			}
 		}
-		add_years_of_income = -1
+		add_treasury = -50
 		A56 = {
-			country_event = { id = flavor_sugamber.22 days = 1 } # We received tribute from Sugamber
+			country_event = {
+				id = flavor_sugamber.22
+				days = 1
+			}
 		}
 	}
 
-	option = { # Haha, did they really thought we'd pay them back
+	option = {
 		name = flavor_sugamber.21.f
-		ai_chance = { factor = 21 }
+		ai_chance = {
+			factor = 2
+		}
 		A56 = {
 			add_historical_rival = A48
 			add_opinion = {
@@ -1468,607 +1574,4791 @@ country_event = {
 	}
 }
 
-# We received tribute from Sugamber
+# We recieved tribute from Sugamber
 country_event = {
 	id = flavor_sugamber.22
 	title = flavor_sugamber.22.t
-	desc = flavor_sugamber.22.d
+	desc = flavor_sugamber.22.desc
 	picture = MERCHANTS_TALKING_eventPicture
 	is_triggered_only = yes
 
-	option = { # They are lucky that it now would appear unthankful to attack them
+	option = {
 		name = flavor_sugamber.22.a
-		add_years_of_income = 1.5
+		add_treasury = 50
 	}
 }
 
-
-#################################
-#    Sugamber Mission Events    #
-#################################
-
-#Rhinmond Carnival Troupe
+#Lisolette died after marrying Wex's heir/ruler
 country_event = {
-	id = flavor_sugamber.2000
-	title = flavor_sugamber.2000.t
-	desc = flavor_sugamber.2000.d
-	picture = CULTURE_eventPicture
+	id = flavor_sugamber.23
+	title = flavor_sugamber.23.t
+	desc = flavor_sugamber.23.desc
+	picture = KING_SICK_IN_BED_eventPicture
+	fire_only_once = yes
 	is_triggered_only = yes
-	goto = sugamber_carnival_provinces
-
-	immediate = {
-		hidden_effect = {
-			random_owned_area = {
-				limit = { 
-					is_state_core = ROOT
-					area_for_scope_province = { type = all owned_by = ROOT }
-				}
-				save_event_target_as = sugamber_carnival_provinces
-			}
-		}
-	}
-
-	option = {
-		name = flavor_sugamber.2000.a
-		ai_chance = { 
-			factor = 20 
-		}
-		event_target:sugamber_carnival_provinces = {
-			area = {
-				add_province_modifier = {
-					name = sugamber_rhinmond_troupe_entertain_peasants_focus
-					duration = 1825
-				}
-			}
-		}
+	trigger = {
+		tag = A48
+		has_country_flag = A30_lisolette_will_marry
+		government = monarchy
+		is_free_or_tributary_trigger = yes
+		has_ruler_modifier = sugamber_ewald_gamble
+		has_heir_flag = lisolette_sil_rhinmond
 	}
 	option = {
-		name = flavor_sugamber.2000.b
-		ai_chance = { 
-			factor = 20 
-		}
-		event_target:sugamber_carnival_provinces = {
-			area = {
-				add_province_modifier = {
-					name = sugamber_rhinmond_troupe_culture_focus
-					duration = 1825
-				}
-			}
-		}
-	}
-	option = {
-		name = flavor_sugamber.2000.c
-		ai_chance = { 
-			factor = 20 
-		}
-		event_target:sugamber_carnival_provinces = {
-			area = {
-				add_province_modifier = {
-					name = sugamber_rhinmond_troupe_ducats_focus
-					duration = 1825
-				}
-			}
-		}
-	}
-	option = {
-		name = flavor_sugamber.2000.e
-		ai_chance = { 
-			factor = 20 
-		}
-		event_target:sugamber_carnival_provinces = {
-			area = {
-				add_province_modifier = {
-					name = sugamber_rhinmond_troupe_garrison_focus
-					duration = 1825
-				}
-			}
-		}
-	}
-	option = {
-		name = flavor_sugamber.2000.f
-		ai_chance = { 
-			factor = 20 
-		}
-		event_target:sugamber_carnival_provinces = {
-			area = {
-				add_province_modifier = {
-					name = sugamber_rhinmond_troupe_entertain_workers_focus
-					duration = 1825
-				}
-			}
-		}
-	}
-
-	after = {
-		country_event = {
-			id = flavor_sugamber.2000
-			days = 1825
-		}
-		set_country_flag = sugamber_rhinmond_troupe_fired
-	}
-}
-
-#The Bisan Partition - start
-country_event = {
-	id = flavor_sugamber.2001
-	title = flavor_sugamber.2001.t
-	desc = flavor_sugamber.2001.d
-	picture = DIPLOMACY_eventPicture
-	is_triggered_only = yes
-	hidden = yes
-
-	#Send the ultimatum!
-	option = {
-		name = flavor_sugamber.2001.a
-		A34 = {
-			country_event = {
-				id = flavor_sugamber.2002
-				days = 7
-			}
-		}
-	}
-}
-
-#Bisan gets the ultimatum
-country_event = {
-	id = flavor_sugamber.2002
-	title = flavor_sugamber.2002.t
-	desc = flavor_sugamber.2002.d
-	picture = DIPLOMACY_eventPicture
-	is_triggered_only = yes
-
-	#Get partitioned
-	option = {
-		name = flavor_sugamber.2002.a
-		ai_chance = {
-			factor = 10
-			modifier = {
-				factor = 0
-				total_development = 55
-			}
-		}
-		FROM = {
-			country_event = {
-				id = flavor_sugamber.2003
-				days = 7
-			}
-		}
-	}
-
-	#Refuse to get partitioned
-	option = {
-		name = flavor_sugamber.2002.b
-		ai_chance = {
-			factor = 90
-		}		
-		FROM = {
-			country_event = {
-				id = flavor_sugamber.2004
-				days = 7
-			}
-		}
-	}
-}
-
-#Bisan accepts - nice
-country_event = {
-	id = flavor_sugamber.2003
-	title = flavor_sugamber.2003.t
-	desc = flavor_sugamber.2003.d
-	picture = DIPLOMACY_eventPicture
-	is_triggered_only = yes
-
-	option = {
-		name = flavor_sugamber.2003.a
-		if = {
-			limit = {
-				A34 = {
-					owns = 300
-				}
-			}
-			300 = {
-				cede_province = A30
-				add_core = A30
-			}
-		}
-		if = {
-			limit = {
-				A34 = {
-					owns = 332
-				}
-			}
-			332 = {
-				cede_province = A30
-				add_core = A30
-			}
-		}
-		if = {
-			limit = {
-				A34 = {
-					owns = 903
-				}
-			}
-			903 = {
-				cede_province = A30
-				add_core = A30
-			}
-		}
-		if = {
-			limit = {
-				A34 = {
-					owns = 579
-				}
-			}
-			579 = {
-				cede_province = A48
-				add_core = A48
-			}
-		}
-		if = {
-			limit = {
-				A34 = {
-					owns = 923
-				}
-			}
-			923 = {
-				cede_province = A48
-				add_core = A48
-			}
-		}
-		if = {
-			limit = {
-				A34 = {
-					owns = 294
-				}
-			}
-			294 = {
-				cede_province = A48
-				add_core = A48
-			}
-		}
-	}
-}
-
-#Bisan refuses - to war!
-country_event = {
-	id = flavor_sugamber.2004
-	title = flavor_sugamber.2004.t
-	desc = flavor_sugamber.2004.d
-	picture = BATTLE_eventPicture
-	is_triggered_only = yes
-
-	option = {
-		name = flavor_sugamber.2004.a
-		declare_war_with_cb = {
-			casus_belli = cb_annex
-			who = A34
-		}
+		name = flavor_sugamber.23.a
+		add_legitimacy = -10
+		clr_country_flag = A30_lisolette_will_marry
 		A30 = {
-			join_all_offensive_wars_of = ROOT
-		}
-		if = {
-			limit = {
-				A34 = {
-					owns = 300
-				}
-			}
-			300 = {
-				add_claim = A30
-			}
-		}
-		if = {
-			limit = {
-				A34 = {
-					owns = 332
-				}
-			}
-			332 = {
-				add_claim = A30
-			}
-		}
-		if = {
-			limit = {
-				A34 = {
-					owns = 903
-				}
-			}
-			903 = {
-				add_claim = A30
-			}
-		}
-		if = {
-			limit = {
-				A34 = {
-					owns = 579
-				}
-			}
-			579 = {
-				add_claim = A48
-			}
-		}
-		if = {
-			limit = {
-				A34 = {
-					owns = 923
-				}
-			}
-			923 = {
-				add_claim = A48
-			}
-		}
-		if = {
-			limit = {
-				A34 = {
-					owns = 294
-				}
-			}
-			294 = {
-				add_claim = A48
+			country_event = {
+				id = flavor_sugamber.24
 			}
 		}
 	}
 }
 
-
-#Make Orda Aldresia a march?
+#Lisolette died, Wex proclaims Sugamber belongs to the sil Wex heir/ruler
 country_event = {
-	id = flavor_sugamber.2005
-	title = flavor_sugamber.2005.t
-	desc = flavor_sugamber.2005.d
-	picture = DIPLOMACY_eventPicture
+	id = flavor_sugamber.24
+	title = flavor_sugamber.24.t
+	desc = flavor_sugamber.24.desc
+	picture = KING_SICK_IN_BED_eventPicture
 	is_triggered_only = yes
-
-	#Accepts
 	option = {
-		ai_chance = {
-			factor = 1
-			modifier = {
-				factor = 0
-				FROM = {
-					is_emperor = no
-				}
-				total_development = 50
-			}
-			modifier = {
-				factor = 0
-				FROM = {
-					is_emperor = no
-					NOT = {
-						has_matching_religion = THIS
+		name = flavor_sugamber.24.a
+		break_marriage = A48
+		add_stability_or_adm_power = yes
+		clr_country_flag = A30_lisolette_will_marry
+		add_casus_belli = {
+			target = A48
+			type = cb_restore_personal_union
+			months = 240
+		}
+	}
+}
+
+#Helper events for disaster to trigger correct start
+country_event = {
+	id = flavor_sugamber.25
+	title = flavor_sugamber.25.t
+	desc = flavor_sugamber.25.desc
+	picture = KING_SICK_IN_BED_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+	major = yes
+	major_trigger = {
+		capital_scope = {
+			OR = {
+				superregion = western_cannor_superregion
+				AND = {
+					superregion = escann_superregion
+					owner = {
+						technology_group = tech_cannorian
 					}
 				}
 			}
 		}
-		name = flavor_sugamber.2005.a
-		FROM = {
+	}
+	option = {
+		hidden_effect = {
 			country_event = {
-				id = flavor_sugamber.2006
-				days = 7
+				id = flavor_sugamber.26
 			}
 		}
 	}
+}
 
-	#Declines
+country_event = {
+	id = flavor_sugamber.26
+	title = flavor_sugamber.26.t
+	desc = flavor_sugamber.26.desc
+	picture = KING_SICK_IN_BED_eventPicture
+	is_triggered_only = yes
+	hidden = yes
 	option = {
-		ai_chance = {
-			factor = 3
-			modifier = {
-				factor = 0.1
-				FROM = {
-					is_emperor = yes
+		trigger = {
+			OR = {
+				has_ruler_flag = lisolette_sil_rhinmond
+				AND = {
+					junior_union_with = A30
+					OR = {
+						has_country_flag = A30_lisolette_will_marry
+						has_country_flag = sugamber_caylen
+					}
 				}
 			}
 		}
-		name = flavor_sugamber.2005.b
-		FROM = {
+		country_event = {
+			id = flavor_sugamber.0
+		}
+	}
+	option = {
+		trigger = {
+			has_ruler_modifier = sugamber_ewald_gamble
+		}
+		country_event = {
+			id = flavor_sugamber.4
+		}
+	}
+}
+#Legitimacy of Lisolette called into question
+country_event = {
+	id = flavor_sugamber.999
+	title = flavor_sugamber.999.t
+	desc = {
+		trigger = {
+			NOT = {
+				has_country_flag = A30_lisolette_will_marry
+				has_country_flag = sugamber_caylen
+			}
+		}
+		desc = flavor_sugamber.999.desc1
+	}
+	desc = {
+		trigger = {
+			OR = {
+				has_country_flag = A30_lisolette_will_marry
+				has_country_flag = sugamber_caylen
+			}
+		}
+		desc = flavor_sugamber.999.desc2
+	}
+	picture = KING_SICK_IN_BED_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	trigger = {
+		tag = A48
+		NOT = {
+			has_country_flag = had_sugamber_succession_war
+		}
+		government = monarchy
+		is_free_or_tributary_trigger = yes
+		has_ruler_flag = lisolette_sil_rhinmond
+	}
+
+	option = {
+		name = flavor_sugamber.999.a
+		if = {
+			limit = {
+				has_country_flag = A30_lisolette_will_marry
+			}
+			A30 = {
+				create_union = A48
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_caylen
+				A30 = {
+					OR = {
+						has_ruler_flag = caylen_sil_wex
+						has_heir_flag = caylen_sil_wex
+					}
+				}
+			}
+			A30 = {
+				create_subject = {
+					subject_type = autonomous_vassal_wex
+					subject = A48
+				}
+			}
+			add_legitimacy = -10
+		}
+		else = {
+			add_legitimacy = -10
+		}
+	}
+}
+
+#################################
+#### Sugamber Mission Events ####
+#################################
+
+#Seizeing Celliander land
+country_event = {
+	id = flavor_sugamber.104
+	title = flavor_sugamber.104.t
+	desc = flavor_sugamber.104.desc
+	picture = VILLAGE_RAIDED_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.104.a
+		ai_chance = {
+			factor = 1
+		}
+		set_country_flag = A48_milcori_lenient
+		random_owned_province = {
+			limit = {
+				is_core = A56
+			}
+			spawn_rebels = {
+				type = nationalist_rebels
+				size = 1
+			}
+		}
+	}
+	option = {
+		name = flavor_sugamber.104.b
+		ai_chance = {
+			factor = 1
+		}
+		set_country_flag = A48_milcori_harsh
+		random_owned_province = {
+			limit = {
+				is_core = A56
+			}
+			spawn_rebels = {
+				type = nationalist_rebels
+				size = 1
+			}
+		}
+		random_owned_province = {
+			limit = {
+				is_core = A56
+			}
+			spawn_rebels = {
+				type = nationalist_rebels
+				size = 1
+			}
+		}
+	}
+	after = {
+		hidden_effect = {
 			country_event = {
-				id = flavor_sugamber.2007
-				days = 7
+				id = flavor_sugamber.2000
+				days = 30
 			}
 		}
 	}
 }
 
-#Orda Aldresia accepts
+#loop event
 country_event = {
-	id = flavor_sugamber.2006
-	title = flavor_sugamber.2006.t
-	desc = flavor_sugamber.2006.d
-	picture = DIPLOMACY_eventPicture
+	id = flavor_sugamber.2000
+	title = flavor_sugamber.2000.t
+	desc = flavor_sugamber.2000.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
 	is_triggered_only = yes
-
+	hidden = yes
 	option = {
-		name = flavor_sugamber.2006.a
-		add_trust = {
-			who = FROM
-			value = 20
-			mutual = yes
+		name = flavor_sugamber.2000.a
+		if = {
+			limit = {
+				NOT = {
+					num_of_rebel_armies = 1
+				}
+			}
+			country_event = {
+				id = flavor_sugamber.105
+			}
 		}
-		create_subject = {
-			subject_type = march
-			subject = A77
+		else = {
+			hidden_effect = {
+				country_event = {
+					id = flavor_sugamber.2000
+					days = 30
+				}
+			}
 		}
 	}
 }
 
-#Orda Aldresia declines
+#Seizeing Celliander land
 country_event = {
-	id = flavor_sugamber.2007
-	title = flavor_sugamber.2007.t
-	desc = flavor_sugamber.2007.d
-	picture = DIPLOMACY_eventPicture
+	id = flavor_sugamber.105
+	title = flavor_sugamber.105.t
+	desc = {
+		trigger = {
+			has_country_flag = A48_milcori_lenient
+		}
+		desc = flavor_sugamber.105_desc_1
+	}
+	desc = {
+		trigger = {
+			has_country_flag = A48_milcori_harsh
+		}
+		desc = flavor_sugamber.105_desc_2
+	}
+	picture = VILLAGE_RAIDED_eventPicture
 	is_triggered_only = yes
-
 	option = {
-		name = flavor_sugamber.2007.a
-		rotwall_area = {
+		name = flavor_sugamber.105.a
+		trigger = {
+			has_country_flag = A48_milcori_lenient
+		}
+		add_treasury = 50
+		add_legitimacy = 10
+		add_heir_claim = 5
+		custom_tooltip = " "
+		custom_tooltip = A48_lenient_dev_loss_tooltip
+		custom_tooltip = " "
+		custom_tooltip = A48_double_development_5_times_tooltip
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					is_core = A56
+				}
+				add_base_tax = -1
+				add_devastation = 5
+				add_nationalism = -5
+			}
+			set_variable = {
+				which = sugamber_milcori_loot
+				value = 5
+			}
+		}
+	}
+	option = {
+		name = flavor_sugamber.104.b
+		trigger = {
+			has_country_flag = A48_milcori_harsh
+		}
+		add_treasury = 100
+		add_legitimacy = 10
+		add_heir_claim = 5
+		custom_tooltip = " "
+		custom_tooltip = A48_heavy_dev_loss_tooltip
+		custom_tooltip = " "
+		custom_tooltip = A48_double_development_15_times_tooltip
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					is_core = A56
+				}
+				add_base_tax = -1
+				add_base_production = -1
+				add_base_manpower = -1
+				add_devastation = 10
+				add_nationalism = -10
+			}
+			set_variable = {
+				which = sugamber_milcori_loot
+				value = 15
+			}
+		}
+	}
+}
+
+#The first king, the Sugambrian kings and the Long War
+country_event = {
+	id = flavor_sugamber.106
+	title = flavor_sugamber.106.t
+	desc = flavor_sugamber.106.desc
+	picture = SIEGE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.106.a
+		add_prestige = 10
+		custom_tooltip = A48_gawedi_hate_tooltip
+		add_historical_rival = A13
+		A13 = {
+			add_historical_rival = A48
+		}
+		custom_tooltip = A48_milcorissia_hate_tooltip
+		add_historical_rival = B94
+		B94 = {
+			add_historical_rival = A48
+		}
+		custom_tooltip = A48_lichbane_tooltip
+		set_country_flag = lichbane_legacy
+		country_event = {
+			id = flavor_sugamber.107
+			days = 180
+		}
+	}
+}
+
+#The wars in Esmaria and the end of the first kingdom
+country_event = {
+	id = flavor_sugamber.107
+	title = flavor_sugamber.107.t
+	desc = flavor_sugamber.107.desc
+	picture = BATTLE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.107.a
+		custom_tooltip = A48_itrahures_hate_tooltip
+		add_historical_rival = U17
+		custom_tooltip = A48_crathanor_loot_ryala_tooltip
+		set_country_flag = lessons_of_ryala
+		set_country_flag = sugamber_crathanor_loot
+		country_event = {
+			id = flavor_sugamber.108
+			days = 180
+		}
+	}
+}
+
+#The second Kingdom and Great Cardest
+country_event = {
+	id = flavor_sugamber.108
+	title = flavor_sugamber.108.t
+	desc = flavor_sugamber.108.desc
+	picture = BORDER_TENSION_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.108.a
+		add_opinion = {
+			who = A30
+			modifier = wexhill_distrust
+		}
+		custom_tooltip = A48_cardest_hate_tooltip
+		set_country_flag = sugamber_damerian_humiliation
+		set_country_flag = sugamber_cardest
+		country_event = {
+			id = flavor_sugamber.109
+			days = 180
+		}
+	}
+}
+
+#The third Kingdom and Nichmer
+country_event = {
+	id = flavor_sugamber.109
+	title = flavor_sugamber.109.t
+	desc = flavor_sugamber.109.desc
+	picture = LOOMING_DEATH_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.109.a
+		add_legitimacy = 10
+		custom_tooltip = A48_wexonard_unity_tooltip
+		set_country_flag = gawedi_reconciliation
+		set_country_flag = butchersfield_restoration
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					culture = wexonard
+				}
+				add_nationalism = -5
+			}
+		}
+		country_event = {
+			id = flavor_sugamber.110
+			days = 180
+		}
+	}
+}
+
+#The last kingdom and the grand duchy
+country_event = {
+	id = flavor_sugamber.110
+	title = flavor_sugamber.110.t
+	desc = flavor_sugamber.110.desc
+	picture = LILAC_WARS_eventPicture
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			set_country_flag = wexonard_history_recounted
+		}
+	}
+	option = {
+		name = flavor_sugamber.110.a
+		increase_ruler_adm_effect = yes
+		add_country_modifier = {
+			name = sugamber_ambition
+			duration = 7300
+		}
+	}
+	option = {
+		name = flavor_sugamber.110.b
+		increase_ruler_dip_effect = yes
+		add_country_modifier = {
+			name = sugamber_ambition
+			duration = 7300
+		}
+	}
+	option = {
+		name = flavor_sugamber.110.c
+		increase_ruler_mil_effect = yes
+		add_country_modifier = {
+			name = sugamber_ambition
+			duration = 7300
+		}
+	}
+}
+
+#The fate of Stonehold
+country_event = {
+	id = flavor_sugamber.111
+	title = flavor_sugamber.111.t
+	desc = flavor_sugamber.111.desc
+	picture = muslimgfx_FORT_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.111.a
+		add_treasury = -100
+		363 = {
+			remove_fortifications = yes
+			if = {
+				limit = {
+					NOT = {
+						has_production_manufactory_or_gold_trigger = yes
+					}
+				}
+				add_building = farm_estate
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						has_building = counting_house
+					}
+				}
+				remove_building = workshop
+				add_building = counting_house
+			}
+			else = {
+				add_base_production = 3
+			}
+		}
+	}
+	option = {
+		name = flavor_sugamber.111.b
+		add_treasury = 200
+		give_estate_land_share_large = {
+			estate = estate_nobles
+		}
+		add_estate_loyalty = {
+			estate = estate_nobles
+			loyalty = 10
+		}
+		363 = {
+			remove_fortifications = yes
+		}
+		custom_tooltip = A48_hortosare_hate_tooltip
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					is_core = B81
+				}
+				add_unrest = 5
+			}
+		}
+	}
+	option = {
+		name = flavor_sugamber.111.c
+		set_country_flag = hortosare_respect
+		363 = {
+			add_local_autonomy = 10
+		}
+		custom_tooltip = A48_hortosare_respect_tooltip
+		363 = {
+			add_province_modifier = {
+				name = sugamber_hortosare_maintenance
+				duration = -1
+			}
+		}
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					is_core = B81
+				}
+				add_nationalism = -10
+			}
+		}
+	}
+}
+
+#The Arannese Salt Trade
+country_event = {
+	id = flavor_sugamber.112
+	title = flavor_sugamber.112.t
+	desc = flavor_sugamber.112.desc
+	picture = TRADE_GOODS_FURS_FISH_AND_SALT_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.112.a
+		add_mercantilism = 3
+		add_estate_loyalty = {
+			estate = estate_burghers
+			loyalty = 10
+		}
+	}
+	option = {
+		name = flavor_sugamber.112.b
+		add_prestige = 10
+		add_treasury = 100
+		custom_tooltip = A48_salt_diplomacy_tooltip
+		tooltip = {
+			6150 = {
+				add_province_modifier = {
+					name = sugamber_selling_off_salt
+					duration = 10950
+				}
+			}
+		}
+		hidden_effect = {
+			every_country = {
+				limit = {
+					is_part_of_hre = yes
+					NOT = {
+						any_owned_province = {
+							trade_goods = salt
+						}
+					}
+				}
+				add_aggressive_expansion = {
+					who = ROOT
+					value = -5
+					apply_calc = no
+				}
+			}
+			every_owned_province = {
+				limit = {
+					trade_goods = salt
+				}
+				add_province_modifier = {
+					name = sugamber_selling_off_salt
+					duration = 10950
+				}
+			}
+		}
+	}
+}
+
+#Sugamber floods the salt market
+country_event = {
+	id = flavor_sugamber.113
+	title = flavor_sugamber.113.t
+	desc = flavor_sugamber.113.desc
+	picture = TRADE_GOODS_FURS_FISH_AND_SALT_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.113.a
+		trigger = {
+			any_owned_province = {
+				trade_goods = salt
+			}
+		}
+		every_owned_province = {
+			limit = {
+				trade_goods = salt
+			}
+			add_permanent_province_modifier = {
+				name = sugamber_low_salt_value
+				duration = 10950
+			}
+		}
+		tooltip = {
+			add_opinion = {
+				who = A48
+				modifier = salt_hate
+			}
+		}
+	}
+	option = {
+		name = flavor_sugamber.113.b
+		trigger = {
+			NOT = {
+				any_owned_province = {
+					trade_goods = salt
+				}
+			}
+		}
+		add_country_modifier = {
+			name = sugamber_cheap_salt
+			duration = 3650
+		}
+	}
+}
+
+#Wexonard Brother Wars
+country_event = {
+	id = flavor_sugamber.114
+	title = flavor_sugamber.114.t
+	desc = flavor_sugamber.114.desc
+	picture = BATTLE_eventPicture
+	is_triggered_only = yes
+	major_trigger = {
+		capital_scope = {
+			superregion = western_cannor_superregion
+		}
+		NOT = {
+			has_country_modifier = monstrous_nation
+		}
+	}
+	option = {
+		name = flavor_sugamber.114.a
+		add_prestige = 10
+		if = {
+			limit = {
+				A30 = {
+					has_ruler_flag = lothane_sil_wex
+				}
+			}
+			custom_tooltip = A48_anti_lothane_coalition_tooltip
+			hidden_effect = {
+				every_country = {
+					limit = {
+						alliance_with = ROOT
+						has_country_flag = lilac_wars_moon_party
+					}
+					add_trust = {
+						who = ROOT
+						value = 10
+						mutual = yes
+					}
+					ROOT = {
+						add_favors = {
+							who = PREV
+							amount = 10
+						}
+					}
+				}
+			}
+		}
+		declare_war_with_cb = {
+			casus_belli = cb_seize_wex
+			who = A30
+		}
+	}
+}
+
+#Wexonard Brother Wars, Caylen version
+country_event = {
+	id = flavor_sugamber.115
+	title = flavor_sugamber.115.t
+	desc = flavor_sugamber.115.desc
+	picture = BATTLE_eventPicture
+	is_triggered_only = yes
+	major_trigger = {
+		capital_scope = {
+			superregion = western_cannor_superregion
+		}
+		NOT = {
+			has_country_modifier = monstrous_nation
+		}
+	}
+	option = {
+		name = flavor_sugamber.115.a
+		set_country_flag = sons_against_father
+		grant_independence = yes
+		A30 = {
+			exile_heir_as = caylen_sugamber_exile
+			add_treasury = -50
+			add_manpower = -5
+			break_alliance = A01
+		}
+		add_treasury = 50
+		add_manpower = 5
+		add_trust = {
+			who = A01
+			value = 10
+			mutual = yes
+		}
+		declare_war_with_cb = {
+			casus_belli = cb_seize_wex
+			who = A30
+		}
+	}
+}
+
+#Wexonard Brother Wars, Caylen version
+country_event = {
+	id = flavor_sugamber.116
+	title = flavor_sugamber.116.t
+	desc = flavor_sugamber.116.desc
+	picture = easterngfx_COURT_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.116.a
+		add_prestige = 10
+		country_event = {
+			id = flavor_sugamber.117
+			days = 15
+		}
+	}
+}
+
+#Wexonard Brother Wars, civil war version
+country_event = {
+	id = flavor_sugamber.117
+	title = flavor_sugamber.117.t
+	desc = flavor_sugamber.117.desc
+	picture = BATTLE_eventPicture
+	is_triggered_only = yes
+	major_trigger = {
+		capital_scope = {
+			superregion = western_cannor_superregion
+		}
+		NOT = {
+			has_country_modifier = monstrous_nation
+		}
+	}
+	option = {
+		name = flavor_sugamber.117.a
+		grant_independence = yes
+		A30 = {
+			exile_ruler_as = {
+				name = caylen_sugamber_exile
+			}
+			define_ruler = {
+				dynasty = "síl Wex"
+				male = yes
+				min_age = 30
+				claim = 50
+			}
+			add_prestige = -20
+			add_treasury = -100
+			add_manpower = -10
+			break_alliance = A01
+		}
+		add_treasury = 100
+		add_manpower = 10
+		add_trust = {
+			who = A01
+			value = 10
+			mutual = yes
+		}
+		declare_war_with_cb = {
+			casus_belli = cb_seize_wex
+			who = A30
+		}
+	}
+}
+
+#Vassalized Wex
+country_event = {
+	id = flavor_sugamber.118
+	title = flavor_sugamber.118.t
+	desc = {
+		trigger = {
+			NOT = {
+				AND = {
+					has_ruler_flag = lisolette_sil_rhinmond
+					has_consort_flag = caylen_sil_wex
+				}
+			}
+		}
+		desc = flavor_sugamber.118.desc1
+	}
+	desc = {
+		trigger = {
+			has_country_flag = sons_against_father
+			has_ruler_flag = lisolette_sil_rhinmond
+			has_consort_flag = caylen_sil_wex
+		}
+		desc = flavor_sugamber.118.desc2
+	}
+	desc = {
+		trigger = {
+			NOT = {
+				has_country_flag = sons_against_father
+			}
+			has_ruler_flag = lisolette_sil_rhinmond
+			has_consort_flag = caylen_sil_wex
+		}
+		desc = flavor_sugamber.118.desc3
+	}
+	picture = VIKING_KING_eventPicture
+	is_triggered_only = yes
+	major_trigger = {
+		capital_scope = {
+			superregion = western_cannor_superregion
+		}
+		NOT = {
+			has_country_modifier = monstrous_nation
+		}
+	}
+	option = {
+		name = flavor_sugamber.118.a
+		add_prestige = 20
+		add_army_tradition = 10
+		custom_tooltip = " "
+		add_power_projection = {
+			type = mission_rewards_power_projection
+			amount = 20
+		}
+		custom_tooltip = " "
+		A30 = {
+			override_country_name = WEXHILLS
+		}
+		custom_tooltip = " "
+		add_country_modifier = {
+			name = sugamber_imperial_disinterest
+			duration = 10950
+		}
+	}
+}
+
+#Preparing for the fairs
+country_event = {
+	id = flavor_sugamber.119
+	title = flavor_sugamber.119.t
+	desc = flavor_sugamber.119.desc
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.119.a
+		415 = {
+			add_base_tax = 2
+			upgrade_tax_building = yes
+		}
+	}
+	option = {
+		name = flavor_sugamber.119.b
+		415 = {
+			upgrade_production_building = yes
+		}
+	}
+	option = {
+		name = flavor_sugamber.119.c
+		415 = {
+			upgrade_trade_building = yes
+			upgrade_trade_building = yes
+		}
+	}
+}
+
+#Return of the Ryonards
+country_event = {
+	id = flavor_sugamber.120
+	title = flavor_sugamber.120.t
+	desc = flavor_sugamber.120.desc
+	picture = GERMAN_UNIFICATION_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.120.a
+		set_dynasty = "Ryonard"
+		custom_tooltip = A48_ryonard_heir_tooltip
+		set_heir_flag = ryonard_heir
+		add_prestige = 10
+	}
+	option = {
+		name = flavor_sugamber.120.b
+		set_dynasty = "Ryonard"
+		custom_tooltip = A48_ryonard_heir_tooltip
+		set_heir_flag = ryonard_heir
+		override_country_name = SUG_WEX
+		custom_tooltip = " "
+		add_prestige = 10
+	}
+}
+
+#Origins of Nerat
+country_event = {
+	id = flavor_sugamber.121
+	title = flavor_sugamber.121.t
+	desc = flavor_sugamber.121.desc
+	picture = ICONS_IN_CHURCH_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.121.a
+		add_prestige = -10
+		custom_tooltip = " "
+		add_estate_loyalty = {
+			estate = estate_church
+			loyalty = -10
+		}
+		custom_tooltip = " "
+		country_event = {
+			id = flavor_sugamber.122
+			days = 14
+		}
+	}
+}
+
+#The great debate
+country_event = {
+	id = flavor_sugamber.122
+	title = flavor_sugamber.122.t
+	desc = flavor_sugamber.122.desc
+	picture = PROTESTANT_CATHOLIC_DEBATE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.122.a
+		add_innovativeness_or_monarch_power_anb = {
+			amount = 1
+		}
+		custom_tooltip = " "
+		473 = {
 			add_claim = ROOT
 		}
-		ROOT = {
+	}
+}
+
+#Settling the Khenak
+country_event = {
+	id = flavor_sugamber.123
+	title = flavor_sugamber.123.t
+	desc = flavor_sugamber.123.desc
+	picture = southamericagfx_CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.123.a
+		every_owned_province = {
+			limit = {
+				culture = hill_gnoll
+			}
+			change_culture = wexonard
+			change_religion = ROOT
+		}
+	}
+	option = {
+		name = flavor_sugamber.123.b
+		every_owned_province = {
+			limit = {
+				culture = hill_gnoll
+				region = the_borders_region
+			}
+			change_culture = wexonard
+			change_religion = ROOT
+		}
+		every_owned_province = {
+			limit = {
+				culture = hill_gnoll
+				region = businor_region
+			}
+			change_culture = busilari
+			change_religion = ROOT
+		}
+		if = {
+			limit = {
+				has_country_flag = hortosare_respect
+			}
+			custom_tooltip = A48_busilari_respect_tooltip
+			anb_add_accepted_culture_or_dip_power = {
+				culture = busilari
+				free = yes
+			}
+		}
+	}
+}
+
+#Gnollish Mercenary Specialization
+country_event = {
+	id = flavor_sugamber.124
+	title = flavor_sugamber.124.t
+	desc = flavor_sugamber.124.desc
+	picture = SWORD_OF_OSMAN_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.124.a
+		unlock_merc_company = {
+			merc_company = merc_gnoll_sugamber_1
+			free_merc = yes
+		}
+		custom_tooltip = A48_hillthrone_specialization_tooltip
+	}
+	option = {
+		name = flavor_sugamber.124.b
+		unlock_merc_company = {
+			merc_company = merc_gnoll_sugamber_2
+			free_merc = yes
+		}
+		custom_tooltip = A48_flamemarked_specialization_tooltip
+	}
+}
+
+#Select commoner to be advisor
+country_event = {
+	id = flavor_sugamber.125
+	title = flavor_sugamber.125.t
+	desc = flavor_sugamber.125.desc
+	picture = ADVISOR_eventPicture
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			random_list = {
+				1 = {
+					set_country_flag = sugamber_philosopher
+				}
+				1 = {
+					set_country_flag = sugamber_natural_scientist
+				}
+				1 = {
+					set_country_flag = sugamber_artist
+				}
+				1 = {
+					set_country_flag = sugamber_treasurer
+				}
+				1 = {
+					set_country_flag = sugamber_theologian
+				}
+				1 = {
+					set_country_flag = sugamber_master_of_mint
+				}
+				1 = {
+					set_country_flag = sugamber_inquisitor
+				}
+				1 = {
+					trigger = {
+						has_estate = estate_mages
+					}
+					set_country_flag = sugamber_court_mage
+				}
+			}
+			random_list = {
+				1 = {
+					set_country_flag = sugamber_statesman
+				}
+				1 = {
+					set_country_flag = sugamber_naval_reformer
+				}
+				1 = {
+					set_country_flag = sugamber_trader
+				}
+				1 = {
+					set_country_flag = sugamber_spymaster
+				}
+				1 = {
+					trigger = {
+						any_subject_country = {
+							is_colonial_nation = yes
+						}
+					}
+					set_country_flag = sugamber_colonial_governor
+				}
+				1 = {
+					set_country_flag = sugamber_diplomat
+				}
+				1 = {
+					trigger = {
+						num_of_colonists = 1
+					}
+					set_country_flag = sugamber_navigator
+				}
+			}
+			random_list = {
+				1 = {
+					set_country_flag = sugamber_army_reformer
+				}
+				1 = {
+					set_country_flag = sugamber_army_organiser
+				}
+				1 = {
+					set_country_flag = sugamber_commandant
+				}
+				1 = {
+					set_country_flag = sugamber_quartermaster
+				}
+				1 = {
+					set_country_flag = sugamber_recruitmaster
+				}
+				1 = {
+					set_country_flag = sugamber_fortification_expert
+				}
+				1 = {
+					set_country_flag = sugamber_grand_captain
+				}
+			}
+			random_list = {
+				1 = {
+					trigger = {
+						NOT = {
+							innovativeness = 100
+						}
+					}
+					set_country_flag = sugamber_innovativeness_1
+				}
+				1 = {
+					set_country_flag = sugamber_reform_1
+				}
+				1 = {
+					set_country_flag = sugamber_splendor_1
+				}
+				1 = {
+					trigger = {
+						NOT = {
+							legitimacy_equivalent = 100
+						}
+					}
+					set_country_flag = sugamber_legitimacy
+				}
+				1 = {
+					trigger = {
+						NOT = {
+							prestige = 100
+						}
+					}
+					set_country_flag = sugamber_prestige
+				}
+				1 = {
+					trigger = {
+						NOT = {
+							crown_land_share = 100
+						}
+					}
+					set_country_flag = sugamber_crownland
+				}
+				1 = {
+					trigger = {
+						OR = {
+							current_age = age_of_absolutism
+							current_age = age_of_revolutions
+						}
+						NOT = {
+							absolutism = 100
+						}
+					}
+					set_country_flag = sugamber_absolutism
+				}
+				2 = {
+					trigger = {
+						has_country_flag = sugamber_court_mage
+						ruler_studying_magic = yes
+					}
+					set_country_flag = sugamber_magical_experience
+				}
+			}
+			random_list = {
+				1 = {
+					trigger = {
+						NOT = {
+							innovativeness = 100
+							has_country_flag = sugamber_innovativeness_1
+						}
+					}
+					set_country_flag = sugamber_innovativeness_2
+				}
+				1 = {
+					trigger = {
+						NOT = {
+							has_country_flag = sugamber_reform_1
+						}
+					}
+					set_country_flag = sugamber_reform_2
+				}
+				1 = {
+					trigger = {
+						NOT = {
+							has_country_flag = sugamber_splendor_1
+						}
+					}
+					set_country_flag = sugamber_splendor_2
+				}
+				1 = {
+					trigger = {
+						NOT = {
+							mercantilism = 100
+						}
+					}
+					set_country_flag = sugamber_mercantilism
+				}
+				1 = {
+					trigger = {
+						NOT = {
+							navy_tradition = 100
+						}
+					}
+					set_country_flag = sugamber_navy_tradition
+				}
+				1 = {
+					set_country_flag = sugamber_admiral
+				}
+				1 = {
+					trigger = {
+						is_emperor = yes
+						NOT = {
+							imperial_influence = 100
+						}
+					}
+					set_country_flag = sugamber_imperial_authority
+				}
+				1 = {
+					trigger = {
+						is_emperor_of_china = yes
+						NOT = {
+							imperial_mandate = 100
+						}
+					}
+					set_country_flag = sugamber_mandate
+				}
+			}
+			random_list = {
+				1 = {
+					trigger = {
+						NOT = {
+							innovativeness = 100
+							has_country_flag = sugamber_innovativeness_1
+							has_country_flag = sugamber_innovativeness_2
+						}
+					}
+					set_country_flag = sugamber_innovativeness_3
+				}
+				1 = {
+					trigger = {
+						NOT = {
+							has_country_flag = sugamber_reform_1
+							has_country_flag = sugamber_reform_2
+						}
+					}
+					set_country_flag = sugamber_reform_3
+				}
+				1 = {
+					trigger = {
+						NOT = {
+							has_country_flag = sugamber_splendor_1
+							has_country_flag = sugamber_splendor_2
+						}
+					}
+					set_country_flag = sugamber_splendor_3
+				}
+				1 = {
+					trigger = {
+						NOT = {
+							army_professionalism = 1
+						}
+					}
+					set_country_flag = sugamber_army_professionalism
+				}
+				1 = {
+					trigger = {
+						NOT = {
+							army_tradition = 100
+						}
+					}
+					set_country_flag = sugamber_army_tradition
+				}
+				1 = {
+					set_country_flag = sugamber_general
+				}
+				1 = {
+					trigger = {
+						NOT = {
+							power_projection = 100
+						}
+					}
+					set_country_flag = sugamber_power_projection
+				}
+			}
+			random_owned_province = {
+				limit = {
+					OR = {
+						has_owner_accepted_culture = yes
+						has_owner_culture = yes
+					}
+				}
+				save_event_target_as = home_province_1
+				set_province_flag = sugamber_home_province
+			}
+			random_owned_province = {
+				limit = {
+					OR = {
+						has_owner_accepted_culture = yes
+						has_owner_culture = yes
+					}
+					NOT = {
+						area_for_scope_province = {
+							has_province_flag = sugamber_home_province
+						}
+					}
+				}
+				save_event_target_as = home_province_2
+				set_province_flag = sugamber_home_province
+			}
+			random_owned_province = {
+				limit = {
+					OR = {
+						has_owner_accepted_culture = yes
+						has_owner_culture = yes
+					}
+					NOT = {
+						area_for_scope_province = {
+							has_province_flag = sugamber_home_province
+						}
+					}
+				}
+				save_event_target_as = home_province_3
+			}
+		}
+	}
+	option = {
+		name = flavor_sugamber.125.a
+		goto = home_province_1
+		if = {
+			limit = {
+				has_country_flag = sugamber_philosopher
+			}
+			define_advisor = {
+				type = philosopher
+				skill = 3
+				cost_multiplier = 0.75
+				location = event_target:home_province_1
+				culture = event_target:home_province_1
+				religion = event_target:home_province_1
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_natural_scientist
+			}
+			define_advisor = {
+				type = natural_scientist
+				skill = 3
+				cost_multiplier = 0.75
+				location = event_target:home_province_1
+				culture = event_target:home_province_1
+				religion = event_target:home_province_1
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_artist
+			}
+			define_advisor = {
+				type = artist
+				skill = 3
+				cost_multiplier = 0.75
+				location = event_target:home_province_1
+				culture = event_target:home_province_1
+				religion = event_target:home_province_1
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_treasurer
+			}
+			define_advisor = {
+				type = treasurer
+				skill = 3
+				cost_multiplier = 0.75
+				location = event_target:home_province_1
+				culture = event_target:home_province_1
+				religion = event_target:home_province_1
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_theologian
+			}
+			define_advisor = {
+				type = theologian
+				skill = 3
+				cost_multiplier = 0.75
+				location = event_target:home_province_1
+				culture = event_target:home_province_1
+				religion = event_target:home_province_1
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_master_of_mint
+			}
+			define_advisor = {
+				type = master_of_mint
+				skill = 3
+				cost_multiplier = 0.75
+				location = event_target:home_province_1
+				culture = event_target:home_province_1
+				religion = event_target:home_province_1
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_inquisitor
+			}
+			define_advisor = {
+				type = inquisitor
+				skill = 3
+				cost_multiplier = 0.75
+				location = event_target:home_province_1
+				culture = event_target:home_province_1
+				religion = event_target:home_province_1
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_court_mage
+			}
+			define_advisor = {
+				type = court_mage
+				skill = 3
+				cost_multiplier = 0.75
+				location = event_target:home_province_1
+				culture = event_target:home_province_1
+				religion = event_target:home_province_1
+			}
+		}
+		custom_tooltip = " "
+		if = {
+			limit = {
+				has_country_flag = sugamber_innovativeness_1
+			}
+			change_innovativeness = 1
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_reform_1
+			}
+			change_government_reform_progress = 10
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_splendor_1
+			}
+			add_splendor = 100
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_legitimacy
+			}
+			add_legitimacy_equivalent = {
+				amount = 10
+				republican_tradition = 5
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_prestige
+			}
+			add_prestige = 20
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_crownland
+			}
+			take_estate_land_share_medium = {
+				estate = all
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_absolutism
+			}
+			add_absolutism = 5
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_magical_experience
+			}
+			increase_study_experience = {
+				experience = 200
+			}
+		}
+		custom_tooltip = " "
+		event_target:home_province_1 = {
+			area = {
+				add_local_autonomy = -20
+				add_devastation = -10
+				add_nationalism = -5
+			}
+			add_prosperity = 20
+		}
+	}
+
+	option = {
+		name = flavor_sugamber.125.b
+		goto = home_province_2
+		if = {
+			limit = {
+				has_country_flag = sugamber_statesman
+			}
+			define_advisor = {
+				type = statesman
+				skill = 3
+				cost_multiplier = 0.75
+				location = event_target:home_province_2
+				culture = event_target:home_province_2
+				religion = event_target:home_province_2
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_naval_reformer
+			}
+			define_advisor = {
+				type = naval_reformer
+				skill = 3
+				cost_multiplier = 0.75
+				location = event_target:home_province_2
+				culture = event_target:home_province_2
+				religion = event_target:home_province_2
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_trader
+			}
+			define_advisor = {
+				type = trader
+				skill = 3
+				cost_multiplier = 0.75
+				location = event_target:home_province_2
+				culture = event_target:home_province_2
+				religion = event_target:home_province_2
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_spymaster
+			}
+			define_advisor = {
+				type = spymaster
+				skill = 3
+				cost_multiplier = 0.75
+				location = event_target:home_province_2
+				culture = event_target:home_province_2
+				religion = event_target:home_province_2
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_colonial_governor
+			}
+			define_advisor = {
+				type = colonial_governor
+				skill = 3
+				cost_multiplier = 0.75
+				location = event_target:home_province_2
+				culture = event_target:home_province_2
+				religion = event_target:home_province_2
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_diplomat
+			}
+			define_advisor = {
+				type = diplomat
+				skill = 3
+				cost_multiplier = 0.75
+				location = event_target:home_province_2
+				culture = event_target:home_province_2
+				religion = event_target:home_province_2
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_navigator
+			}
+			define_advisor = {
+				type = navigator
+				skill = 3
+				cost_multiplier = 0.75
+				location = event_target:home_province_2
+				culture = event_target:home_province_2
+				religion = event_target:home_province_2
+			}
+		}
+		custom_tooltip = " "
+		if = {
+			limit = {
+				has_country_flag = sugamber_innovativeness_2
+			}
+			change_innovativeness = 1
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_reform_2
+			}
+			change_government_reform_progress = 10
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_splendor_2
+			}
+			add_splendor = 100
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_mercantilism
+			}
+			add_mercantilism = 2
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_navy_tradition
+			}
+			add_navy_tradition = 10
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_admiral
+			}
+			create_leader_scaling_with_tradition = {
+				leader = admiral
+				type = navy
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_imperial_authority
+			}
+			add_imperial_influence = 3
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_mandate
+			}
+			add_mandate = 3
+		}
+		custom_tooltip = " "
+		event_target:home_province_2 = {
+			area = {
+				add_local_autonomy = -20
+				add_devastation = -10
+				add_nationalism = -5
+			}
+			add_prosperity = 20
+		}
+	}
+	option = {
+		name = flavor_sugamber.125.c
+		goto = home_province_3
+		if = {
+			limit = {
+				has_country_flag = sugamber_army_reformer
+			}
+			define_advisor = {
+				type = army_reformer
+				skill = 3
+				cost_multiplier = 0.75
+				location = event_target:home_province_3
+				culture = event_target:home_province_3
+				religion = event_target:home_province_3
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_army_organiser
+			}
+			define_advisor = {
+				type = army_organiser
+				skill = 3
+				cost_multiplier = 0.75
+				location = event_target:home_province_3
+				culture = event_target:home_province_3
+				religion = event_target:home_province_3
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_commandant
+			}
+			define_advisor = {
+				type = commandant
+				skill = 3
+				cost_multiplier = 0.75
+				location = event_target:home_province_3
+				culture = event_target:home_province_3
+				religion = event_target:home_province_3
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_quartermaster
+			}
+			define_advisor = {
+				type = quartermaster
+				skill = 3
+				cost_multiplier = 0.75
+				location = event_target:home_province_3
+				culture = event_target:home_province_3
+				religion = event_target:home_province_3
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_recruitmaster
+			}
+			define_advisor = {
+				type = recruitmaster
+				skill = 3
+				cost_multiplier = 0.75
+				location = event_target:home_province_3
+				culture = event_target:home_province_3
+				religion = event_target:home_province_3
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_fortification_expert
+			}
+			define_advisor = {
+				type = fortification_expert
+				skill = 3
+				cost_multiplier = 0.75
+				location = event_target:home_province_3
+				culture = event_target:home_province_3
+				religion = event_target:home_province_3
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_grand_captain
+			}
+			define_advisor = {
+				type = grand_captain
+				skill = 3
+				cost_multiplier = 0.75
+				location = event_target:home_province_3
+				culture = event_target:home_province_3
+				religion = event_target:home_province_3
+			}
+		}
+		custom_tooltip = " "
+		if = {
+			limit = {
+				has_country_flag = sugamber_innovativeness_3
+			}
+			change_innovativeness = 1
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_reform_3
+			}
+			change_government_reform_progress = 10
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_splendor_3
+			}
+			add_splendor = 100
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_army_professionalism
+			}
+			add_army_professionalism = 0.02
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_army_tradition
+			}
+			add_army_tradition = 10
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_general
+			}
+			create_leader_scaling_with_tradition = {
+				type = army
+				leader = general
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = sugamber_power_projection
+			}
+			add_power_projection = {
+				type = mission_rewards_power_projection
+				amount = 10
+			}
+		}
+		custom_tooltip = " "
+		event_target:home_province_3 = {
+			area = {
+				add_local_autonomy = -20
+				add_devastation = -10
+				add_nationalism = -5
+			}
+			add_prosperity = 20
+		}
+	}
+	after = {
+		clr_country_flag = sugamber_philosopher
+		clr_country_flag = sugamber_natural_scientist
+		clr_country_flag = sugamber_artist
+		clr_country_flag = sugamber_treasurer
+		clr_country_flag = sugamber_theologian
+		clr_country_flag = sugamber_master_of_mint
+		clr_country_flag = sugamber_inquisitor
+		clr_country_flag = sugamber_court_mage
+
+		clr_country_flag = sugamber_innovativeness_1
+		clr_country_flag = sugamber_reform_1
+		clr_country_flag = sugamber_splendor_1
+		clr_country_flag = sugamber_legitimacy
+		clr_country_flag = sugamber_prestige
+		clr_country_flag = sugamber_crownland
+		clr_country_flag = sugamber_absolutism
+		clr_country_flag = sugamber_magical_experience
+
+		clr_country_flag = sugamber_statesman
+		clr_country_flag = sugamber_naval_reformer
+		clr_country_flag = sugamber_trader
+		clr_country_flag = sugamber_spymaster
+		clr_country_flag = sugamber_colonial_governor
+		clr_country_flag = sugamber_diplomat
+		clr_country_flag = sugamber_navigator
+
+		clr_country_flag = sugamber_innovativeness_2
+		clr_country_flag = sugamber_reform_2
+		clr_country_flag = sugamber_splendor_2
+		clr_country_flag = sugamber_mercantilism
+		clr_country_flag = sugamber_navy_tradition
+		clr_country_flag = sugamber_admiral
+		clr_country_flag = sugamber_imperial_authority
+		clr_country_flag = sugamber_mandate
+
+		clr_country_flag = sugamber_army_reformer
+		clr_country_flag = sugamber_army_organiser
+		clr_country_flag = sugamber_commandant
+		clr_country_flag = sugamber_quartermaster
+		clr_country_flag = sugamber_recruitmaster
+		clr_country_flag = sugamber_fortification_expert
+		clr_country_flag = sugamber_grand_captain
+
+		clr_country_flag = sugamber_innovativeness_3
+		clr_country_flag = sugamber_reform_3
+		clr_country_flag = sugamber_splendor_3
+		clr_country_flag = sugamber_army_professionalism
+		clr_country_flag = sugamber_army_tradition
+		clr_country_flag = sugamber_general
+		clr_country_flag = sugamber_power_projection
+		event_target:home_province_1 = {
+			clr_province_flag = sugamber_home_province
+		}
+		event_target:home_province_2 = {
+			clr_province_flag = sugamber_home_province
+		}
+	}
+}
+
+#King in Wex Imperial Incident
+country_event = {
+	id = flavor_sugamber.126
+	title = flavor_sugamber.126.t
+	desc = flavor_sugamber.126.desc
+	picture = COURT_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.126.a
+		A48 = {
+			add_prestige_or_monarch_power = {
+				amount = 10
+			}
+			add_legitimacy_or_monarch_power = {
+				VAL = 10
+			}
+			custom_tooltip = " "
+			set_country_flag = sugamber_amber_crown
+			add_government_reform = sugamber_wexonard_crown_kingdom
+			custom_tooltip = " "
+			add_opinion = {
+				who = emperor
+				modifier = granted_king_title
+			}
+		}
+		custom_tooltip = " "
+		emperor = {
+			add_imperial_influence = -5
 			add_prestige = -10
 		}
 	}
+	option = {
+		name = flavor_sugamber.126.b
+		A48 = {
+			country_event = {
+				id = flavor_sugamber.127
+			}
+			custom_tooltip = A48_king_wex_compensation_decision_tooltip
+		}
+	}
+	option = {
+		name = flavor_sugamber.126.c
+		A48 = {
+			tooltip = {
+				add_legitimacy = -10
+				add_prestige = -25
+			}
+			custom_tooltip = " "
+			country_event = {
+				id = flavor_sugamber.128
+			}
+			custom_tooltip = A48_king_title_war_tooltip
+		}
+	}
 }
 
-#The Alpha Pack - start
+#Sugamber paying for King in Wex
 country_event = {
- 	id = flavor_sugamber.2008
-	title = flavor_sugamber.2008.t
-	desc = flavor_sugamber.2008.d
-	picture = BORDER_TENSION_eventPicture
+	id = flavor_sugamber.127
+	title = flavor_sugamber.127.t
+	desc = flavor_sugamber.127.desc
+	picture = DIPLOMACY_eventPicture
 	is_triggered_only = yes
-
-	#Give some... support to the Flamemarked Gnolls
 	option = {
-		name = flavor_sugamber.2008.a
-		ai_chance = {
-			factor = 50
+		name = flavor_sugamber.127.a
+		add_prestige_or_monarch_power = {
+			amount = 10
 		}
-		set_country_flag = sugamber_flamemaked_gnolls_dominant
-		add_years_of_income = -0.5
-		add_prestige = -10
-	}
-
-	#Give some... support to the Hill Gnolls
-	option = {
-		name = flavor_sugamber.2008.b
-		ai_chance = {
-			factor = 50
+		add_legitimacy_or_monarch_power = {
+			VAL = 10
 		}
-		set_country_flag = sugamber_hill_gnolls_dominant
-		add_years_of_income = -0.5
-		add_prestige = -10
-	}
-
-	#Their fights don't concern us
-	option = {
-		name = flavor_sugamber.2008.c
-		ai_chance = {
-			factor = 50
-		}
+		set_country_flag = sugamber_amber_crown
+		add_government_reform = sugamber_wexonard_crown_kingdom
+		custom_tooltip = A48_king_wex_compensation_tooltip
 		hidden_effect = {
-			random_list = {
-				50 = {
-					set_country_flag = sugamber_flamemaked_gnolls_dominant
+			every_known_country = {
+				limit = {
+					is_part_of_hre = yes
 				}
-				50 = {
-					set_country_flag = sugamber_hill_gnolls_dominant
+				if = {
+					limit = {
+						is_emperor = yes
+					}
+					add_treasury = 200
+					A48 = {
+						add_treasury = -200
+					}
+				}
+				else_if = {
+					limit = {
+						is_elector = yes
+					}
+					add_treasury = 50
+					A48 = {
+						add_treasury = -50
+					}
+				}
+				else = {
+					add_treasury = 20
+					A48 = {
+						add_treasury = -20
+					}
 				}
 			}
+		}
+	}
+	option = {
+		name = flavor_sugamber.127.b
+		set_country_flag = sugamber_king_title_war
+		custom_tooltip = A48_king_title_war_tooltip
+	}
+}
+
+#Empire refuses to let Sugamber use king title
+country_event = {
+	id = flavor_sugamber.128
+	title = flavor_sugamber.128.t
+	desc = flavor_sugamber.128.desc
+	picture = ACCUSATION_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.128.a
+		add_legitimacy = -10
+		add_prestige = -25
+		custom_tooltip = A48_king_title_war_tooltip
+		set_country_flag = sugamber_king_title_war
+	}
+}
+
+#Sugamber takes the title by force
+country_event = {
+	id = flavor_sugamber.129
+	title = flavor_sugamber.129.t
+	desc = flavor_sugamber.129.desc
+	picture = HRE_eventPicture
+	is_triggered_only = yes
+	major_trigger = {
+		capital_scope = {
+			continent = europe
+		}
+		has_discovered = A48
+	}
+	option = {
+		name = flavor_sugamber.129.a
+		add_prestige_or_monarch_power = {
+			amount = 20
+		}
+		add_legitimacy_or_monarch_power = {
+			VAL = 10
+		}
+		add_power_projection = {
+			type = mission_rewards_power_projection
+			amount = 10
+		}
+		custom_tooltip = " "
+		set_country_flag = sugamber_amber_crown
+		add_government_reform = sugamber_wexonard_crown_kingdom
+		custom_tooltip = " "
+		emperor = {
+			add_prestige = -50
+			add_legitimacy = -20
+			add_stability = -1
+			add_imperial_influence = -10
+		}
+	}
+}
+
+#Sugamber takes the title as emperor afterwards
+country_event = {
+	id = flavor_sugamber.130
+	title = flavor_sugamber.130.t
+	desc = flavor_sugamber.130.desc
+	picture = HRE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.130.a
+		add_imperial_influence = -10
+		custom_tooltip = " "
+		set_country_flag = sugamber_amber_crown
+		add_government_reform = sugamber_wexonard_crown_kingdom
+	}
+}
+
+#Inviting Crodamos Pretenders
+country_event = {
+	id = flavor_sugamber.131
+	title = flavor_sugamber.131.t
+	desc = flavor_sugamber.131.desc
+	picture = muslimgfx_DIPLOMACY_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.131.a
+		add_treasury = -200
+		add_legitimacy = -10
+		add_prestige = -25
+		define_advisor = {
+			type = army_reformer
+			cost_multiplier = 0.75
+			name = "Teganret Crodamos"
+			skill = 2
+			culture = hapremiti
+			religion = elikhetist
+		}
+		define_advisor = {
+			type = theologian
+			cost_multiplier = 0.75
+			name = "Sedora Crodamos"
+			female = yes
+			skill = 2
+			culture = hapremiti
+			religion = elikhetist
+		}
+	}
+}
+
+#Tefori Autonomy Deal?
+country_event = {
+	id = flavor_sugamber.132
+	title = flavor_sugamber.132.t
+	desc = flavor_sugamber.132.desc
+	picture = muslimgfx_MERCHANTS_TALKING_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.132.a
+		custom_tooltip = A48_gold_exploitation_tooltip
+		35 = {
+			add_province_modifier = {
+				name = sugamber_gold_exploitation
+				duration = -1
+			}
+		}
+	}
+	option = {
+		name = flavor_sugamber.132.b
+		add_estate_loyalty = {
+			estate = estate_burghers
+			loyalty = -10
+		}
+		isle_of_tef_area = {
+			add_nationalism = -5
+			add_province_modifier = {
+				name = sugamber_tefori_autonomy
+				duration = -1
+			}
+		}
+		add_country_modifier = {
+			name = sugamber_tefori_merchants
+			duration = -1
+		}
+	}
+}
+
+#Gnomish Multilingual Scribes
+country_event = {
+	id = flavor_sugamber.133
+	title = flavor_sugamber.133.t
+	desc = flavor_sugamber.133.desc
+	picture = OVEREXTENSION_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.133.a
+		custom_tooltip = A48_gnomish_governors_tooltip
+		custom_tooltip = " "
+		add_country_modifier = {
+			name = sugamber_multilingual_governance
+			duration = 7300
+		}
+		hidden_effect = {
+			919 = {
+				add_gnomish_minority_size_effect = yes
+			}
+		}
+	}
+	option = {
+		name = flavor_sugamber.133.b
+		set_country_flag = sugamber_gnomish_printers
+		add_ruler_personality = patron_of_arts_personality
+		custom_tooltip = " "
+		custom_tooltip = A48_gnomish_translators_tooltip
+		custom_tooltip = " "
+		add_country_modifier = {
+			name = sugamber_gnomish_translators
+			duration = 10950
+		}
+		hidden_effect = {
+			413 = {
+				add_gnomish_minority_size_effect = yes
+			}
+		}
+	}
+	option = {
+		name = flavor_sugamber.133.c
+		add_treasury = -1000
+		add_dip_power = -50
+		custom_tooltip = " "
+		custom_tooltip = A48_gnomish_everything_tooltip
+		custom_tooltip = " "
+		anb_add_accepted_culture_or_dip_power = {
+			culture = delta_gnome
+			free = yes
+		}
+		custom_tooltip = " "
+		add_country_modifier = {
+			name = sugamber_multilingual_frenzy
+			duration = 18250
+		}
+		hidden_effect = {
+			413 = {
+				add_gnomish_minority_size_effect = yes
+			}
+			919 = {
+				add_gnomish_minority_size_effect = yes
+			}
+		}
+	}
+}
+
+#Meeting the Khetarch and Kheteratan elites
+country_event = {
+	id = flavor_sugamber.134
+	title = flavor_sugamber.134.t
+	desc = flavor_sugamber.134.desc
+	picture = SULTAN_AND_MERCHANT_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.134.a
+		add_prestige = -20
+		set_country_flag = sugamber_ahati_hostility
+		set_country_flag = sugamber_nirakhetist_hostility
+	}
+	option = {
+		name = flavor_sugamber.134.b
+		set_country_flag = sugamber_ahati_vow
+		set_country_flag = sugamber_nirakhetist_hostility
+		custom_tooltip = A48_ahati_promise_tooltip
+		bulwar_proper_region = {
+			add_claim = ROOT
+		}
+		add_country_modifier = {
+			name = sugamber_ahati_support
+			duration = 7300
+		}
+	}
+	option = {
+		name = flavor_sugamber.134.c
+		set_country_flag = sugamber_ahati_hostility
+		set_country_flag = sugamber_nirakhet_vow
+		custom_tooltip = A48_nirakhet_promise_tooltip
+		custom_tooltip = A48_nirakhet_promise_detailed_tooltip
+	}
+	option = {
+		name = flavor_sugamber.134.d
+		set_country_flag = sugamber_ahati_vow
+		set_country_flag = sugamber_nirakhet_vow
+		custom_tooltip = A48_dual_promise_tooltip
+		bulwar_proper_region = {
+			add_claim = ROOT
+		}
+	}
+	after = {
+		hidden_effect = {
+			if = {
+				limit = {
+					has_country_flag = sugamber_ahati_vow
+				}
+				country_event = {
+					id = flavor_sugamber.144
+					days = 7300
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = sugamber_nirakhet_vow
+				}
+				country_event = {
+					id = flavor_sugamber.146
+					days = 7300
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = sugamber_nirakhetist_hostility
+				}
+				country_event = {
+					id = flavor_sugamber.147
+					days = 7635
+				}
+			}
+		}
+	}
+}
+
+#Gnollish Legion Upgrade West
+country_event = {
+	id = flavor_sugamber.135
+	title = flavor_sugamber.135.t
+	desc = flavor_sugamber.135.desc
+	picture = FORTIFIED_CITY_WITH_CARAVAN_OUTSIDE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.135.a
+		random_hired_mercenary_company = {
+			limit = {
+				OR = {
+					template = merc_gnoll_sugamber_1_upgraded
+					template = merc_gnoll_sugamber_2_upgraded
+				}
+			}
+			disband_mercenary_company = THIS
+			custom_tooltip = " "
+		}
+		if = {
+			limit = {
+				has_country_flag = unlocked_merc_gnoll_sugamber_1_upgraded
+			}
+			unlock_merc_company = {
+				merc_company = merc_gnoll_sugamber_1_1
+				free_merc = yes
+			}
+			clr_country_flag = unlocked_merc_gnoll_sugamber_1_upgraded
+		}
+		else = {
+			unlock_merc_company = {
+				merc_company = merc_gnoll_sugamber_2_1
+				free_merc = yes
+			}
+			clr_country_flag = unlocked_merc_gnoll_sugamber_2_upgraded
+		}
+		custom_tooltip = A48_seascourge_specialization_tooltip
+	}
+	option = {
+		name = flavor_sugamber.135.b
+		random_hired_mercenary_company = {
+			limit = {
+				OR = {
+					template = merc_gnoll_sugamber_1_upgraded
+					template = merc_gnoll_sugamber_2_upgraded
+				}
+			}
+			disband_mercenary_company = THIS
+			custom_tooltip = " "
+		}
+		if = {
+			limit = {
+				has_country_flag = unlocked_merc_gnoll_sugamber_1_upgraded
+			}
+			unlock_merc_company = {
+				merc_company = merc_gnoll_sugamber_1_2
+				free_merc = yes
+			}
+			clr_country_flag = unlocked_merc_gnoll_sugamber_1_upgraded
+		}
+		else = {
+			unlock_merc_company = {
+				merc_company = merc_gnoll_sugamber_2_2
+				free_merc = yes
+			}
+			clr_country_flag = unlocked_merc_gnoll_sugamber_2_upgraded
+		}
+		custom_tooltip = A48_windhowler_specialization_tooltip
+	}
+}
+
+#Studying Nirat's Texts
+country_event = {
+	id = flavor_sugamber.136
+	title = flavor_sugamber.136.t
+	desc = flavor_sugamber.136.desc
+	picture = BIG_BOOK_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.136.a
+		country_event = {
+			id = flavor_sugamber.137
+			days = 1095
+		}
+	}
+}
+
+#Studying Nirat's Texts part 2
+country_event = {
+	id = flavor_sugamber.137
+	title = flavor_sugamber.137.t
+	desc = flavor_sugamber.137.desc
+	picture = ENLIGHTENMENT_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.137.a
+		set_country_flag = sugamber_elikhet_knowledge
+		country_event = {
+			id = flavor_sugamber.138
+			days = 1095
+		}
+	}
+}
+
+#Studying Nirat's Texts part 3
+country_event = {
+	id = flavor_sugamber.138
+	title = flavor_sugamber.138.t
+	desc = flavor_sugamber.138.desc
+	picture = DARK_EXPEDITION_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.138.a
+		set_country_flag = sugamber_labyrinth_maps
+	}
+}
+
+#Elikhet and the Regent Court
+country_event = {
+	id = flavor_sugamber.139
+	title = flavor_sugamber.139.t
+	desc = flavor_sugamber.139.desc
+	picture = CASTELLOS_IS_DEAD_eventPicture
+	is_triggered_only = yes
+	major = yes
+	major_trigger = {
+		OR = {
+			religion_group = cannorian
+			religion_group = khetist
+		}
+	}
+	option = {
+		name = flavor_sugamber.139.a
+		set_country_flag = sugamber_elikhet_god
+		custom_tooltip = A48_unlock_elikhet_tooltip
+	}
+	option = {
+		name = flavor_sugamber.139.b
+		enable_religion = dalcabba
+		change_religion = dalcabba
+		custom_tooltip = " "
+		add_country_modifier = {
+			name = sugamber_dalcabba_zeal
+			duration = 7300
+		}
+		custom_tooltip = A48_dalcabba_conversion_tooltip
+		hidden_effect = {
+			remove_country_modifier = conversion_zeal
+			every_owned_province = {
+				limit = {
+					OR = {
+						province_id = 332
+						province_id = 919
+						AND = {
+							has_province_modifier = religious_zeal_at_conv
+							religion = regent_court
+						}
+					}
+				}
+				change_religion = dalcabba
+			}
+			every_owned_province = {
+				limit = {
+					religion = regent_court
+				}
+				random = {
+					chance = 20
+					change_religion = dalcabba
+				}
+			}
+			every_owned_province = {
+				limit = {
+					religion = elikhetist
+				}
+				random_list = {
+					1 = {
+						change_religion = dalcabba
+					}
+					9 = {
+						add_province_modifier = {
+							name = sugamber_dalcabba_interest
+							duration = 3650
+						}
+					}
+				}
+			}
+			332 = {
+				if = {
+					limit = {
+						owned_by = ROOT
+						has_great_project = {
+							type = the_necropolis
+							tier = 3
+						}
+					}
+					change_religion = dalcabba
+					add_reform_center = dalcabba
+				}
+			}
+		}
+		if = {
+			limit = {
+				is_year = 1499
+			}
+			country_event = {
+				id = flavor_sugamber.1391
+			}
+		}
+	}
+}
+
+#Choose Khetist Modifier
+country_event = {
+	id = flavor_sugamber.1391
+	title = flavor_sugamber.1391.t
+	desc = flavor_sugamber.1391.desc
+	picture = CASTELLOS_IS_DEAD_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = ace_tolerate_the_lost
+		add_adm_power = -50
+		add_country_modifier = {
+			name = ace_tolerate_the_lost
+			duration = -1
+		}
+	}
+	option = {
+		name = ace_grow_the_economy
+		add_dip_power = -50
+		add_country_modifier = {
+			name = ace_grow_the_economy
+			duration = -1
+		}
+	}
+	option = {
+		name = ace_defend_the_realm
+		add_mil_power = -50
+		add_country_modifier = {
+			name = ace_defend_the_realm
+			duration = -1
+		}
+	}
+	after = {
+		if = {
+			limit = {
+				is_year = 1533
+			}
+			country_event = {
+				id = flavor_sugamber.1392
+			}
+		}
+	}
+}
+
+#Choose Khetist Modifier 2
+country_event = {
+	id = flavor_sugamber.1392
+	title = flavor_sugamber.1392.t
+	desc = flavor_sugamber.1392.desc
+	picture = CASTELLOS_IS_DEAD_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = ace_embrace_the_future
+		add_adm_power = -50
+		add_country_modifier = {
+			name = ace_embrace_the_future
+			duration = -1
+		}
+	}
+	option = {
+		name = ace_sail_the_seas
+		add_dip_power = -50
+		add_country_modifier = {
+			name = ace_sail_the_seas
+			duration = -1
+		}
+	}
+	option = {
+		name = ace_control_the_satraps
+		add_mil_power = -50
+		add_country_modifier = {
+			name = ace_control_the_satraps
+			duration = -1
+		}
+	}
+	after = {
+		if = {
+			limit = {
+				is_year = 1586
+			}
+			country_event = {
+				id = flavor_sugamber.1393
+			}
+		}
+	}
+}
+
+#Choose Khetist Modifier 3
+country_event = {
+	id = flavor_sugamber.1393
+	title = flavor_sugamber.1393.t
+	desc = flavor_sugamber.1393.desc
+	picture = CASTELLOS_IS_DEAD_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = ace_integrate_the_lands
+		add_adm_power = -50
+		add_country_modifier = {
+			name = ace_integrate_the_lands
+			duration = -1
+		}
+	}
+	option = {
+		name = ace_enlighten_the_people
+		add_dip_power = -50
+		add_country_modifier = {
+			name = ace_enlighten_the_people
+			duration = -1
+		}
+	}
+	option = {
+		name = ace_supply_the_troops
+		add_mil_power = -50
+		add_country_modifier = {
+			name = ace_supply_the_troops
+			duration = -1
+		}
+	}
+	after = {
+		if = {
+			limit = {
+				is_year = 1638
+			}
+			country_event = {
+				id = flavor_sugamber.1394
+			}
+		}
+	}
+}
+
+#Choose Khetist Modifier 4
+country_event = {
+	id = flavor_sugamber.1394
+	title = flavor_sugamber.1394.t
+	desc = flavor_sugamber.1394.desc
+	picture = CASTELLOS_IS_DEAD_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = ace_limit_the_wealth
+		add_adm_power = -50
+		add_country_modifier = {
+			name = ace_limit_the_wealth
+			duration = -1
+		}
+	}
+	option = {
+		name = ace_press_the_sailors
+		add_dip_power = -50
+		add_country_modifier = {
+			name = ace_press_the_sailors
+			duration = -1
+		}
+	}
+	option = {
+		name = ace_run_the_distance
+		add_mil_power = -50
+		add_country_modifier = {
+			name = ace_run_the_distance
+			duration = -1
+		}
+	}
+	after = {
+		if = {
+			limit = {
+				is_year = 1684
+			}
+			country_event = {
+				id = flavor_sugamber.1395
+			}
+		}
+	}
+}
+
+#Choose Khetist Modifier 5
+country_event = {
+	id = flavor_sugamber.1395
+	title = flavor_sugamber.1395.t
+	desc = flavor_sugamber.1395.desc
+	picture = CASTELLOS_IS_DEAD_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = ace_promote_the_loyal
+		add_adm_power = -50
+		add_country_modifier = {
+			name = ace_promote_the_loyal
+			duration = -1
+		}
+	}
+	option = {
+		name = ace_integrate_the_barbarians
+		add_dip_power = -50
+		add_country_modifier = {
+			name = ace_integrate_the_barbarians
+			duration = -1
+		}
+	}
+	option = {
+		name = ace_marshal_the_armies
+		add_mil_power = -50
+		add_country_modifier = {
+			name = ace_marshal_the_armies
+			duration = -1
+		}
+	}
+	after = {
+		if = {
+			limit = {
+				is_year = 1753
+			}
+			country_event = {
+				id = flavor_sugamber.1396
+			}
+		}
+	}
+}
+
+#Choose Khetist Modifier 6
+country_event = {
+	id = flavor_sugamber.1396
+	title = flavor_sugamber.1396.t
+	desc = flavor_sugamber.1396.desc
+	picture = CASTELLOS_IS_DEAD_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = ace_cleanse_the_court
+		add_country_modifier = {
+			name = ace_cleanse_the_court
+			duration = -1
+		}
+	}
+	option = {
+		name = ace_crush_the_masses
+		add_dip_power = -50
+		add_country_modifier = {
+			name = ace_crush_the_masses
+			duration = -1
+		}
+	}
+	option = {
+		name = ace_break_the_walls
+		add_mil_power = -50
+		add_country_modifier = {
+			name = ace_break_the_walls
+			duration = -1
+		}
+	}
+}
+
+#Gnollish Legion Upgrade East
+country_event = {
+	id = flavor_sugamber.140
+	title = flavor_sugamber.140.t
+	desc = flavor_sugamber.140.desc
+	picture = FORTIFIED_CITY_WITH_CARAVAN_OUTSIDE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.140.a
+		random_hired_mercenary_company = {
+			limit = {
+				OR = {
+					template = merc_gnoll_sugamber_1_1
+					template = merc_gnoll_sugamber_1_2
+					template = merc_gnoll_sugamber_2_1
+					template = merc_gnoll_sugamber_2_2
+				}
+			}
+			disband_mercenary_company = THIS
+			custom_tooltip = " "
+		}
+		if = {
+			limit = {
+				has_country_flag = unlocked_merc_gnoll_sugamber_1_1
+			}
+			unlock_merc_company = {
+				merc_company = merc_gnoll_sugamber_1_1_1
+				free_merc = yes
+			}
+			clr_country_flag = unlocked_merc_gnoll_sugamber_1_1
+		}
+		else_if = {
+			limit = {
+				has_country_flag = unlocked_merc_gnoll_sugamber_1_2
+			}
+			unlock_merc_company = {
+				merc_company = merc_gnoll_sugamber_1_2_1
+				free_merc = yes
+			}
+			clr_country_flag = unlocked_merc_gnoll_sugamber_1_2
+		}
+		else_if = {
+			limit = {
+				has_country_flag = unlocked_merc_gnoll_sugamber_2_1
+			}
+			unlock_merc_company = {
+				merc_company = merc_gnoll_sugamber_2_1_1
+				free_merc = yes
+			}
+			clr_country_flag = unlocked_merc_gnoll_sugamber_2_1
+		}
+		else_if = {
+			limit = {
+				has_country_flag = unlocked_merc_gnoll_sugamber_2_2
+			}
+			unlock_merc_company = {
+				merc_company = merc_gnoll_sugamber_2_2_1
+				free_merc = yes
+			}
+			clr_country_flag = unlocked_merc_gnoll_sugamber_2_2
+		}
+		custom_tooltip = A48_pyreclaw_specialization_tooltip
+	}
+	option = {
+		name = flavor_sugamber.140.b
+		random_hired_mercenary_company = {
+			limit = {
+				OR = {
+					template = merc_gnoll_sugamber_1_1
+					template = merc_gnoll_sugamber_1_2
+					template = merc_gnoll_sugamber_2_1
+					template = merc_gnoll_sugamber_2_2
+				}
+			}
+			disband_mercenary_company = THIS
+			custom_tooltip = " "
+		}
+		if = {
+			limit = {
+				has_country_flag = unlocked_merc_gnoll_sugamber_1_1
+			}
+			unlock_merc_company = {
+				merc_company = merc_gnoll_sugamber_1_1_2
+				free_merc = yes
+			}
+			clr_country_flag = unlocked_merc_gnoll_sugamber_1_1
+		}
+		else_if = {
+			limit = {
+				has_country_flag = unlocked_merc_gnoll_sugamber_1_2
+			}
+			unlock_merc_company = {
+				merc_company = merc_gnoll_sugamber_1_2_2
+				free_merc = yes
+			}
+			clr_country_flag = unlocked_merc_gnoll_sugamber_1_2
+		}
+		else_if = {
+			limit = {
+				has_country_flag = unlocked_merc_gnoll_sugamber_2_1
+			}
+			unlock_merc_company = {
+				merc_company = merc_gnoll_sugamber_2_1_2
+				free_merc = yes
+			}
+			clr_country_flag = unlocked_merc_gnoll_sugamber_2_1
+		}
+		else_if = {
+			limit = {
+				has_country_flag = unlocked_merc_gnoll_sugamber_2_2
+			}
+			unlock_merc_company = {
+				merc_company = merc_gnoll_sugamber_2_2_2
+				free_merc = yes
+			}
+			clr_country_flag = unlocked_merc_gnoll_sugamber_2_2
+		}
+		custom_tooltip = A48_sandfang_specialization_tooltip
+	}
+}
+
+#The role of Gnolls
+country_event = {
+	id = flavor_sugamber.141
+	title = flavor_sugamber.141.t
+	desc = flavor_sugamber.141.desc
+	picture = KINGS_CHOICE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.141.a
+		add_army_tradition = 20
+		custom_tooltip = A48_permanent_gnollish_coexistence_tooltip
+	}
+	option = {
+		name = flavor_sugamber.141.b
+		set_country_flag = sugamber_integrated_gnolls
+		custom_tooltip = A48_integrated_gnolls_tooltip
+		anb_add_accepted_culture_or_dip_power = {
+			culture = sorrowmane_gnoll
+			free = yes
+		}
+	}
+}
+
+#Ahati vow fulfilled
+country_event = {
+	id = flavor_sugamber.142
+	title = flavor_sugamber.142.t
+	desc = flavor_sugamber.142.desc
+	picture = DRAGON_FLY_eventPicture
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			set_country_flag = sugamber_ahati_vow_success
+		}
+	}
+	option = {
+		name = flavor_sugamber.142.a
+		set_global_flag = ahati_rebellion_crushed
+		add_mandate = 30
+		add_meritocracy = 10
+		add_prestige_or_monarch_power = {
+			amount = 50
+		}
+		add_army_professionalism = 0.05
+		add_army_tradition = 20
+		add_war_exhaustion = -5
+		increase_ruler_mil_effect = yes
+		increase_ruler_mil_effect = yes
+		custom_tooltip = " "
+		add_treasury = -500
+		add_manpower = -20
+		remove_country_modifier = sugamber_ahati_support
+		custom_tooltip = A48_draconic_conquest_tooltip
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					region = bulwar_proper_region
+					NOT = {
+						AND = {
+							province_has_center_of_trade_of_level = 1
+							has_port = yes
+						}
+					}
+				}
+				cede_province = U04
+				add_territorial_core = U04
+				add_unrest = 30
+			}
+			U04 = {
+				change_government = theocracy
+				add_government_reform = monastic_order_reform
+				set_capital = 688
+				add_manpower = 50
+				add_treasury = 2000
+				add_country_modifier = {
+					name = sugamber_aakheta_ahati_funding
+					duration = 5475
+				}
+				add_country_modifier = {
+					name = sugamber_aakheta_invasion_bulwar
+					duration = 1825
+				}
+				add_country_modifier = {
+					name = aakheta_recovery
+					duration = 70
+				}
+				define_ruler = {
+					adm = 3
+					dip = 4
+					mil = 6
+					age = 39
+					claim = 100
+					male = yes
+					culture = hapremiti
+					religion = aakhetist
+					name = "Hazan"
+					dynasty = "'the Vengeful'"
+				}
+				add_adm_power = -100
+				add_dip_power = -100
+				add_mil_power = 200
+				add_ruler_personality = martial_educator_personality
+				add_ruler_personality = conqueror_personality
+				add_ruler_personality = well_advised_personality
+				define_ruler_to_general = {
+					fire = 5
+					shock = 7
+					manuever = 4
+					siege = 3
+					trait = ruthless_personality
+				}
+				define_general = {
+					fire = 2
+					shock = 2
+					manuever = 6
+					siege = 4
+					name = "Dagan 'the Reckless'"
+					trait = goal_oriented_personality
+				}
+				define_general = {
+					fire = 5
+					shock = 5
+					manuever = 1
+					siege = 0
+					name = "Arhab 'the Unbreaking'"
+					trait = frontline_holder_personality
+				}
+				define_general = {
+					fire = 1
+					shock = 6
+					manuever = 6
+					siege = 0
+					name = "Tozan 'the Thunderous'"
+					trait = born_to_the_saddle_personality
+				}
+				define_general = {
+					fire = 6
+					shock = 2
+					manuever = 0
+					siege = 5
+					name = "Rabon 'the Calamitous'"
+					trait = cannoneer_personality
+				}
+				capital_scope = {
+					spawn_aakheta_army_ai = yes
+					spawn_aakheta_army_ai = yes
+				}
+				random_owned_province = {
+					spawn_aakheta_army_ai = yes
+					spawn_aakheta_army_ai = yes
+				}
+				capital_scope = {
+					add_latest_building = {
+						builder = ROOT
+						fort = yes
+					}
+				}
+				for = {
+					amount = 3
+					effect = "
+						random_owned_province = {
+							limit = {
+								has_terrain = mountain
+								NOT = {
+									has_fort_building_trigger = yes
+									any_neighbor_province = {
+										has_fort_building_trigger = yes
+									}
+								}
+							}
+							add_latest_building = {
+								builder = ROOT
+								fort = yes
+							}
+						}
+					"
+				}
+				for = {
+					amount = 3
+					effect = "
+						random_owned_province = {
+							limit = {
+								OR = {
+									has_terrain = highlands
+									has_terrain = hills
+								}
+								NOT = {
+									has_fort_building_trigger = yes
+									any_neighbor_province = {
+										has_fort_building_trigger = yes
+									}
+								}
+							}
+							add_latest_building = {
+								builder = ROOT
+								fort = yes
+							}
+						}
+					"
+				}
+				for = {
+					amount = 6
+					effect = "
+						random_owned_province = {
+							limit = {
+								NOT = {
+									has_fort_building_trigger = yes
+									any_neighbor_province = {
+										has_fort_building_trigger = yes
+									}
+								}
+							}
+							add_latest_building = {
+								builder = ROOT
+								fort = yes
+							}
+						}
+					"
+				}
+				if = {
+					limit = {
+						any_owned_province = {
+							has_port = yes
+						}
+					}
+					random_owned_province = {
+						limit = {
+							has_port = yes
+						}
+						spawn_aakheta_fleet = yes
+					}
+					define_admiral = {
+						fire = 4
+						shock = 3
+						manuever = 5
+						siege = 3
+						name = "Sepeh 'the Turbulent'"
+						trait = naval_cannoneer_personality
+					}
+				}
+			}
+			bulwar_superregion = {
+				add_claim = U04
+				discover_country = U04
+			}
+			U04 = {
+				country_event = {
+					id = flavor_sugamber.143
+					days = 40
+				}
+			}
+		}
+	}
+}
+
+#Aakheta war on Bulwar
+country_event = {
+	id = flavor_sugamber.143
+	title = flavor_sugamber.143.t
+	desc = flavor_sugamber.143.desc
+	picture = DRAGON_ATTACK_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.143.a
+		every_country = {
+			limit = {
+				NOT = {
+					tag = A48
+					alliance_with = A48
+					is_subject_of = A48
+				}
+				any_owned_province = {
+					superregion = bulwar_superregion
+					NOT = {
+						area = eastern_krahway_area
+					}
+				}
+			}
+			U04 = {
+				declare_war_with_cb = {
+					casus_belli = cb_aakhet_war_ace
+					who = PREV
+				}
+			}
+		}
+	}
+}
+
+#Ahati vow failed
+country_event = {
+	id = flavor_sugamber.144
+	title = flavor_sugamber.144.t
+	desc = flavor_sugamber.144.desc
+	picture = muslimgfx_ANGRY_MOB_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		NOT = {
+			has_country_flag = sugamber_ahati_vow_success
+		}
+	}
+	immediate = {
+		hidden_effect = {
+			clr_country_flag = sugamber_ahati_vow
+			set_country_flag = sugamber_ahati_hostility
+			set_country_flag = sugamber_ahati_vow_failure
+		}
+	}
+	option = {
+		name = flavor_sugamber.144.a
+		add_stability = -2
+		add_mandate = -20
+		add_meritocracy = -20
+		add_prestige = -100
+		add_army_tradition = -20
+		add_country_modifier = {
+			name = sugamber_ahati_scorn
+			duration = 10950
+		}
+	}
+}
+
+#Nirakhet vow fulfilled
+country_event = {
+	id = flavor_sugamber.145
+	title = flavor_sugamber.145.t
+	desc = flavor_sugamber.145.desc
+	picture = muslimgfx_FEAST_eventPicture
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			set_country_flag = sugamber_nirakhet_vow_success
+		}
+	}
+	option = {
+		name = flavor_sugamber.145.a
+		add_stability_or_adm_power = yes
+		custom_tooltip = " "
+		add_mandate = 30
+		add_meritocracy = 20
+		custom_tooltip = " "
+		add_prestige_or_monarch_power = {
+			amount = 50
+		}
+		add_navy_tradition = 20
+		custom_tooltip = " "
+		increase_ruler_adm_effect = yes
+		increase_ruler_dip_effect = yes
+		custom_tooltip = " "
+		kheterata_region = {
+			add_nationalism = -20
+			add_permanent_province_modifier = {
+				name = sugamber_nirakhetist_unity
+				duration = 7300
+			}
+		}
+	}
+}
+
+#Nirakhet vow failed
+country_event = {
+	id = flavor_sugamber.146
+	title = flavor_sugamber.146.t
+	desc = flavor_sugamber.146.desc
+	picture = CHURCH_ESTATE_UPSET_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		NOT = {
+			has_country_flag = sugamber_nirakhet_vow_success
+		}
+	}
+	immediate = {
+		hidden_effect = {
+			clr_country_flag = sugamber_nirakhet_vow
+			set_country_flag = sugamber_nirakhet_hostility
+			set_country_flag = sugamber_nirakhetist_vow_failure
+		}
+	}
+	option = {
+		name = flavor_sugamber.144.a
+		add_stability = -1
+		add_mandate = -20
+		add_meritocracy = -20
+		add_prestige = -50
+	}
+	after = {
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = sugamber_ahati_hostility
+				}
+			}
+			country_event = {
+				id = flavor_sugamber.147
+				days = 365
+			}
+		}
+	}
+}
+
+#Nirakhetist revolt
+country_event = {
+	id = flavor_sugamber.147
+	title = flavor_sugamber.147.t
+	desc = flavor_sugamber.147.desc
+	picture = QIZILBASH_CAVALRY_CHARGING_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		NOT = {
+			has_country_flag = sugamber_nirakhet_hostility
+		}
+	}
+	option = {
+		name = flavor_sugamber.144.a
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						area = lower_sorrow_area
+						area = hitputtiushesh_area
+						province_id = 468
+						province_id = 469
+						province_id = 474
+						province_id = 502
+						
+					}
+				}
+				add_core = U02
+				cede_province = U02
+			}
+			if = {
+				limit = {
+					tag = A48
+					has_country_flag = sugamber_nirakhetist_vow_failure
+				}
+				every_owned_province = {
+					limit = {
+						OR = {
+							area = upper_sorrow_area
+							province_id = 592
+							province_id = 6089
+							
+						}
+					}
+					add_core = U02
+					cede_province = U02
+				}
+			}
+			U02 = {
+				change_religion = nirakhetist
+				change_primary_culture = hapremiti
+				change_government = theocracy
+				add_government_reform = monastic_order_reform
+				set_capital = 473
+				add_manpower = 50
+				add_treasury = 3000
+				add_country_modifier = {
+					name = aakheta_uprising_modifier_ai
+					duration = -1
+				}
+				add_country_modifier = {
+					name = aakheta_recovery
+					duration = 90
+				}
+				define_ruler = {
+					adm = 3
+					dip = 4
+					mil = 5
+					age = 64
+					claim = 100
+					male = yes
+					culture = hapremiti
+					religion = nirakhetist
+				}
+				add_ruler_personality = inspiring_leader_personality
+				add_ruler_personality = strict_personality
+				add_ruler_personality = industrious_personality
+				add_adm_power = 100
+				add_dip_power = 100
+				add_mil_power = 100
+				define_general = {
+					fire = 3
+					shock = 11
+					manuever = 4
+					siege = 7
+					trait = war_wizard_personality
+				}
+				capital_scope = {
+					spawn_aakheta_army_ai = yes
+					spawn_aakheta_army_ai = yes
+				}
+				random_owned_province = {
+					spawn_aakheta_army_ai = yes
+					spawn_aakheta_army_ai = yes
+				}
+				random_owned_province = {
+					spawn_aakheta_army_ai = yes
+				}
+				capital_scope = {
+					add_latest_building = {
+						builder = ROOT
+						fort = yes
+					}
+				}
+				for = {
+					amount = 10
+					effect = "
+						random_owned_province = {
+							limit = {
+								NOT = {
+									has_fort_building_trigger = yes
+									any_neighbor_province = {
+										has_fort_building_trigger = yes
+									}
+								}
+							}
+							add_latest_building = {
+								builder = ROOT
+								fort = yes
+							}
+						}
+					"
+				}
+				if = {
+					limit = {
+						any_owned_province = {
+							has_port = yes
+						}
+					}
+					random_owned_province = {
+						limit = {
+							has_port = yes
+						}
+						spawn_aakheta_fleet = yes
+					}
+					define_admiral = {
+						fire = 6
+						shock = 2
+						manuever = 6
+						siege = 2
+					}
+				}
+			}
+			country_event = {
+				id = flavor_sugamber.148
+				days = 1
+			}
+		}
+	}
+}
+
+#1 day war delay
+country_event = {
+	id = flavor_sugamber.148
+	title = flavor_sugamber.148.t
+	desc = flavor_sugamber.148.desc
+	picture = DHIMMI_ESTATE_eventPicture
+	is_triggered_only = yes
+	hidden = yes
+	trigger = {
+		is_emperor_of_china = yes
+	}
+	option = {
+		name = flavor_sugamber.148.a
+		U02 = {
+			remove_country_modifier = restructuring_military
+			remove_country_modifier = restructuring_administration
+			if = {
+				limit = {
+					NOT = {
+						religion = nirakhetist
+					}
+				}
+				change_religion = nirakhetist
+			}
+			declare_war_with_cb = {
+				who = ROOT
+				casus_belli = cb_nirakhetist_uprising
+			}
+		}
+	}
+}
+
+#Sugamber victory
+country_event = {
+	id = flavor_sugamber.149
+	title = flavor_sugamber.149.t
+	desc = flavor_sugamber.149.desc
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		is_emperor_of_china = yes
+	}
+	option = {
+		name = flavor_sugamber.149.a
+		custom_tooltip = flavor_sugamber.149.tooltip
+		hidden_effect = {
+			U02 = {
+				disband_all_units = yes
+			}
+		}
+		inherit = U02
+		add_mandate = 15
+		set_country_flag = sugamber_nirakhet_uprising_crushed
+	}
+}
+
+#Nirakhetist victory
+country_event = {
+	id = flavor_sugamber.150
+	title = flavor_sugamber.150.t
+	desc = flavor_sugamber.150.desc
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+	major = yes
+	immediate = {
+		hidden_effect = {
+			set_country_flag = sugamber_nirakhet_uprising_succeeded
+			remove_country_modifier = restructuring_military
+			remove_country_modifier = restructuring_administration
+			remove_country_modifier = aakheta_uprising_modifier
+			remove_country_modifier = aakheta_uprising_modifier_ai
+			A48 = {
+				every_owned_province = {
+					limit = {
+						region = kheterata_region
+					}
+					cede_province = U02
+					add_core = U02
+				}
+				every_owned_province = {
+					limit = {
+						superregion = north_salahad_superregion
+					}
+					cede_province = U02
+					add_territorial_core = U02
+				}
+			}
+		}
+	}
+	option = {
+		name = flavor_sugamber.150.a
+		if = {
+			limit = {
+				A48 = {
+					is_emperor_of_china = yes
+				}
+			}
+			set_emperor_of_china = ROOT
+		}
+		set_government_rank = 3
+		add_stability = 2
+		set_mandate = 100
+		set_meritocracy = 50
+		add_country_modifier = {
+			name = aakheta_victory
+			duration = 18250
+		}
+		add_country_modifier = {
+			name = aakheta_victory2
+			duration = 1825
+		}
+		disband_all_units = yes
+		capital_scope = {
+			spawn_aakheta_army = yes
+			spawn_aakheta_army = yes
+		}
+	}
+	after = {
+		every_owned_province = {
+			remove_core = A48
+			if = {
+				limit = {
+					ROOT = {
+						ai = yes
+					}
+				}
+				change_religion = nirakhetist
+			}
+		}
+		if = {
+			limit = {
+				ai = yes
+				NOT = {
+					religion = nirakhetist
+				}
+			}
+			change_religion = nirakhetist
+		}
+	}
+}
+
+#Sugamber loss
+country_event = {
+	id = flavor_sugamber.151
+	title = flavor_sugamber.151.t
+	desc = flavor_sugamber.151.desc
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.151.a
+		add_stability = -2
+		add_prestige = -100
+		set_country_flag = sugamber_nirakhet_uprising_succeeded
+	}
+}
+
+#New name for Sugamber + Kheterata
+country_event = {
+	id = flavor_sugamber.152
+	title = flavor_sugamber.152.t
+	desc = flavor_sugamber.152.desc
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.152.a
+	}
+	option = {
+		name = flavor_sugamber.152.b
+		override_country_name = SUG_KHETERATA
+	}
+	option = {
+		name = flavor_sugamber.152.c
+		override_country_name = SUG_WEX_KHETERATA
+	}
+	option = {
+		name = flavor_sugamber.152.d
+		override_country_name = SUG_GATES
+	}
+	option = {
+		name = flavor_sugamber.152.e
+		override_country_name = SUG_DIVENHAL
+	}
+	option = {
+		name = flavor_sugamber.152.f
+		override_country_name = SUG_RYONARD_CRODAMOS
+	}
+	option = {
+		name = flavor_sugamber.152.g
+		override_country_name = SUG_RYONARD
+	}
+	option = {
+		name = flavor_sugamber.152.h
+		override_country_name = SUG_CRODAMIA
+	}
+}
+
+#Sugamber revokes privilegia
+country_event = {
+	id = flavor_sugamber.153
+	title = flavor_sugamber.153.t
+	desc = flavor_sugamber.153.desc
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.153.a
+		dismantle_hre = yes
+		custom_tooltip = " "
+		add_mandate = 20
+		custom_tooltip = " "
+		increase_ruler_adm_effect = yes
+		increase_ruler_dip_effect = yes
+		increase_ruler_mil_effect = yes
+		custom_tooltip = " "
+		if = {
+			limit = {
+				A77 = {
+					is_subject_of = ROOT
+					OR = {
+						is_subject_of_type = tributary_state
+						is_subject_of_type = imperial_bodyguard
+					}
+				}
+			}
+			create_subject = {
+				subject_type = medasi_subject
+				subject = A77
+			}
+			custom_tooltip = " "
+		}
+		add_country_modifier = {
+			name = sugamber_steward_moon
+			duration = -1
+		}
+		hidden_effect = {
+			remove_country_modifier = supporting_orda_aldresia
+		}
+	}
+}
+
+#Take over League
+country_event = {
+	id = flavor_sugamber.154
+	title = flavor_sugamber.154.t
+	desc = flavor_sugamber.154.desc
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.154.a
+		hidden_effect = {
+			set_hre_religion_locked = yes
+			set_hre_religion_treaty = yes
+			set_hre_religion = emperor
+		}
+		set_hre_heretic_religion = dalcabba
+		hidden_effect = {
+			enable_hre_leagues = yes
+		}
+		custom_tooltip = " "
+		add_country_modifier = {
+			name = sugamber_dalcabba_bullying
+			duration = 3650
+		}
+	}
+}
+
+#Declare war on both Leagues
+country_event = {
+	id = flavor_sugamber.155
+	title = flavor_sugamber.155.t
+	desc = flavor_sugamber.155.desc
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.155.a
+		declare_war_with_cb = {
+			who = emperor
+			casus_belli = cb_religious_league
+		}
+		random_known_country = {
+			limit = {
+				is_in_war = {
+					attacker_leader = THIS
+					casus_belli = cb_religious_league
+				}
+			}
+			ROOT = {
+				declare_war_with_cb = {
+					who = PREV
+					casus_belli = cb_sigma_league
+				}
+			}
+		}
+	}
+}
+
+#New Dalcabba League
+country_event = {
+	id = flavor_sugamber.156
+	title = flavor_sugamber.156.t
+	desc = flavor_sugamber.156.desc
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.156.a
+		clr_country_flag = evangelical_union_happened
+		set_global_flag = evangelical_union_happened
+		hidden_effect = {
+			set_hre_religion_treaty = yes
+			set_hre_religion = regent_court
+		}
+		set_hre_heretic_religion = dalcabba
+		enable_hre_leagues = yes
+		custom_tooltip = " "
+		add_country_modifier = {
+			name = sugamber_dalcabba_bullying
+			duration = 3650
+		}
+	}
+}
+
+#First Labyrinth Event, some clues
+country_event = {
+	id = flavor_sugamber.157
+	title = flavor_sugamber.157.t
+	desc = flavor_sugamber.157.desc
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.157.a
+		add_prestige = 10
+		country_event = {
+			id = flavor_sugamber.158
+			days = 180
+		}
+	}
+}
+
+#Necromancer trap in Corseton
+country_event = {
+	id = flavor_sugamber.158
+	title = flavor_sugamber.158.t
+	desc = flavor_sugamber.158.desc
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			332 = {
+				spawn_rebels = {
+					type = aw_zombies_rebels
+					size = 3
+				}
+			}
+		}
+	}
+	option = {
+		name = flavor_sugamber.158.a
+		add_manpower = -2
+		add_war_exhaustion = 1
+		country_event = {
+			id = flavor_sugamber.159
+			days = 180
+		}
+	}
+}
+
+#Ancient Wexonard nobles's bodies found deep in Bal Hyl
+country_event = {
+	id = flavor_sugamber.159
+	title = flavor_sugamber.159.t
+	desc = flavor_sugamber.159.desc
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.159.a
+		add_estate_loyalty = {
+			estate = estate_nobles
+			loyalty = 20
+		}
+		country_event = {
+			id = flavor_sugamber.160
+			days = 180
+		}
+	}
+}
+
+#Pattern of the Rhinmond shifting labyrinth understood better
+country_event = {
+	id = flavor_sugamber.160
+	title = flavor_sugamber.160.t
+	desc = flavor_sugamber.160.desc
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.160.a
+		change_innovativeness = 2
+		country_event = {
+			id = flavor_sugamber.161
+			days = 180
+		}
+	}
+}
+
+#Explorers in Varlosen have difficulty proceeding further and are ambushed constantly
+country_event = {
+	id = flavor_sugamber.161
+	title = flavor_sugamber.161.t
+	desc = flavor_sugamber.161.desc
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			419 = {
+				spawn_rebels = {
+					type = aw_zombies_rebels
+					size = 3
+				}
+			}
+		}
+	}
+	option = {
+		name = flavor_sugamber.161.a
+		add_war_exhaustion = 1
+		add_manpower = -2
+		country_event = {
+			id = flavor_sugamber.162
+			days = 180
+		}
+	}
+}
+
+#Corseton labyrinth uncovers the ancient worship of Nerat
+country_event = {
+	id = flavor_sugamber.162
+	title = flavor_sugamber.162.t
+	desc = flavor_sugamber.162.desc
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.162.a
+		add_estate_loyalty = {
+			estate = estate_church
+			loyalty = 20
+		}
+		country_event = {
+			id = flavor_sugamber.163
+			days = 180
+		}
+	}
+}
+
+#Bal Hyl labyrinth shows evidence of earliest necromancer kings
+country_event = {
+	id = flavor_sugamber.163
+	title = flavor_sugamber.163.t
+	desc = flavor_sugamber.163.desc
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			306 = {
+				spawn_rebels = {
+					type = aw_zombies_rebels
+					size = 1
+				}
+			}
+		}
+	}
+	option = {
+		name = flavor_sugamber.163.a
+		add_treasury = -200
+		add_prestige_or_monarch_power = {
+			amount = 20
+		}
+		add_estate_loyalty = {
+			estate = estate_mages
+			loyalty = 20
+		}
+		country_event = {
+			id = flavor_sugamber.164
+			days = 180
+		}
+	}
+}
+
+#Rhinmond's end of the labyrinth found, evidence of mass slavery and hubris of ancient Milcori king like Cernarex
+country_event = {
+	id = flavor_sugamber.164
+	title = flavor_sugamber.164.t
+	desc = flavor_sugamber.164.desc
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			919 = {
+				spawn_rebels = {
+					type = aw_zombies_rebels
+					size = 3
+				}
+			}
+		}
+	}
+	option = {
+		name = flavor_sugamber.164.a
+		add_prestige = 20
+		country_event = {
+			id = flavor_sugamber.165
+			days = 360
+		}
+	}
+}
+
+#Using clues from other places progress in Varlosen resumes
+country_event = {
+	id = flavor_sugamber.165
+	title = flavor_sugamber.165.t
+	desc = flavor_sugamber.165.desc
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.165.a
+		set_country_flag = sugamber_path_xamarzu
+		add_army_tradition = 10
+		add_estate_loyalty = {
+			estate = estate_adventurers
+			loyalty = 20
+		}
+	}
+}
+
+#The final stand of the Milcori
+country_event = {
+	id = flavor_sugamber.166
+	title = flavor_sugamber.166.t
+	desc = flavor_sugamber.166.desc
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						area = antir_drop_area
+						province_id = 322
+						province_id = 324
+						province_id = 325
+						province_id = 326
+						province_id = 414
+						province_id = 417
+						province_id = 418
+						province_id = 419
+						province_id = 421
+						province_id = 904
+					}
+				}
+				add_core = B94
+				cede_province = B94
+				set_in_empire = no
+			}
+			B94 = {
+				change_religion = infernal
+				change_government = kingdom
+				set_government_rank = 3
+				add_government_reform = autocracy_reform
+				add_government_reform = magical_elite_reform
+				add_government_reform = centralize_empire_reform
+				add_government_reform = strengthen_clergy_reform
+				add_government_reform = anbennar_T5_generic_mage_shields
+				add_government_reform = royal_decree_reform
+				add_government_reform = of_noble_bearing_reform
+				add_government_reform = war_economy_reform
+				add_government_reform = machiavellianistic_rule_reform
+				add_government_reform = deified_monarchy_reform
+				add_government_reform = political_absolutism_reform
+				set_capital = 419
+				add_manpower = 100
+				add_treasury = 2000
+				add_country_modifier = {
+					name = sugamber_milcorissia_last_war
+					duration = -1
+				}
+				define_ruler = {
+					adm = 5
+					dip = 2
+					mil = 6
+					age = 200
+					claim = 100
+					male = yes
+					culture = arannese
+					religion = infernal_court
+					name = "Xamarzu"
+					dynasty = "'Scourge of Man'"
+				}
+				add_ruler_personality = mage_personality
+				add_ruler_personality = inspiring_leader_personality
+				add_ruler_personality = strict_personality
+				add_ruler_modifier = {
+					name = lich_ruler
+					duration = -1
+				}
+				set_ruler_flag = is_a_lich
+				set_ruler_flag = is_a_secret_lich
+				set_country_flag = lich_ruler
+				set_country_flag = lich_ruler_has_phylactery
+				set_country_flag = exposed_lich_ruler
+				clear_racial_military = yes
+				add_country_modifier = {
+					name = undead_military
+					duration = -1
+					hidden = yes
+				}
+				add_ruler_modifier = {
+					name = witch_king_modifier
+					duration = -1
+				}
+				set_country_flag = witch_king_flag
+				country_event = {
+					id = witch_king.0
+				}
+				set_ruler_flag = necromancy_3
+				set_ruler_flag = evocation_3
+				add_adm_power = 200
+				add_dip_power = 200
+				add_mil_power = 200
+				add_army_tradition = 50
+				add_idea_group = defensive_ideas
+				add_idea = battlefield_commisions
+				add_idea = military_drill
+				add_idea = improved_manuever
+				add_idea = regimental_system
+				add_idea = defensive_mentality
+				add_idea = supply_trains
+				add_idea = improved_foraging
+				add_idea_group = religious_ideas
+				add_idea = missionary_schools
+				add_idea = church_attendance_duty
+				add_idea = divine_supremacy
+				add_idea = devoutness
+				add_idea = inquisition
+				add_idea = religious_tradition
+				add_idea = deus_vult
+				add_idea_group = quality_ideas
+				add_idea = private_to_marshal
+				add_idea = quality_education
+				add_idea = finest_of_horses
+				add_idea = escort_ships
+				add_idea = naval_drill
+				add_idea = copper_bottoms
+				add_idea = massed_battery
+				define_ruler_to_general = {
+					fire = 3
+					shock = 11
+					manuever = 4
+					siege = 7
+					trait = war_wizard_personality
+				}
+				define_general = {
+					fire = 4
+					shock = 5
+					manuever = 3
+					siege = 6
+					name = "Moscion 'the Faithful'"
+					trait = siege_specialist_personality
+				}
+				define_general = {
+					fire = 6
+					shock = 6
+					manuever = 0
+					siege = 0
+					name = "Amolusan 'the Dutiful'"
+					trait = frontline_holder_personality
+				}
+				define_general = {
+					fire = 5
+					shock = 3
+					manuever = 6
+					siege = 2
+					name = "Mioran 'the Unfathomable'"
+					trait = goal_oriented_personality
+				}
+				capital_scope = {
+					spawn_milcorissia_army = yes
+				}
+				322 = {
+					spawn_milcorissia_army = yes
+				}
+				414 = {
+					spawn_milcorissia_army = yes
+				}
+				904 = {
+					spawn_milcorissia_army = yes
+				}
+				every_owned_province = {
+					add_province_modifier = {
+						name = sugamber_milcori_undead_bastion
+						duration = -1
+					}
+					add_latest_building = {
+						builder = ROOT
+						fort = yes
+					}
+				}
+			}
+			europe = {
+				discover_country = B94
+			}
+		}
+	}
+	option = {
+		name = flavor_sugamber.166.a
+		add_stability = -1
+		add_manpower = -10
+		country_event = {
+			id = flavor_sugamber.167
+			days = 2
+		}
+	}
+}
+
+#War declaration
+country_event = {
+	id = flavor_sugamber.167
+	title = flavor_sugamber.167.t
+	desc = flavor_sugamber.167.desc
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = flavor_sugamber.167.a
+		B94 = {
+			declare_war_with_cb = {
+				who = A48
+				casus_belli = cb_aakhet_war_ace
+			}
+		}
+	}
+}
+
+#Sugamber Victory
+country_event = {
+	id = flavor_sugamber.168
+	title = flavor_sugamber.168.t
+	desc = flavor_sugamber.168.desc
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.168.a
+		set_global_flag = sugamber_milcorissia_final_death
+		add_meritocracy = 10
+		increase_ruler_mil_effect = yes
+		add_splendor = 200
+		add_prestige_or_monarch_power = {
+			amount = 100
+		}
+		add_army_tradition = 20
+		add_stability_or_adm_power = yes
+		add_power_projection = {
+			type = 10_permanent_power_projection
+			amount = 10
+		}
+		custom_tooltip = A48_end_milcorissia_tooltip
+	}
+}
+
+#Sugamber Loss
+country_event = {
+	id = flavor_sugamber.169
+	title = flavor_sugamber.169.t
+	desc = flavor_sugamber.169.desc
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.169.a
+		tooltip = {
+			add_stability = -10
+			add_meritocracy = -100
+			add_mandate = -100
+			add_prestige = -200
+			add_war_exhaustion = 20
+			kill_ruler = yes
+		}
+	}
+}
+
+#Lichbane Legacy, fighting another Lich/undead army
+country_event = {
+	id = flavor_sugamber.200
+	title = flavor_sugamber.200.t
+	desc = flavor_sugamber.200.desc
+	picture = LOOMING_DEATH_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.200.a
+		add_prestige = 10
+		add_legitimacy = 10
+		add_country_modifier = {
+			name = sugamber_lichbane_legacy
+			duration = 3650
+		}
+	}
+}
+
+#Sack of Crathano
+country_event = {
+	id = flavor_sugamber.201
+	title = flavor_sugamber.201.t
+	desc = flavor_sugamber.201.desc
+	picture = muslimgfx_FORT_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.201.a
+		add_prestige_or_monarch_power = {
+			amount = 10
+		}
+		custom_tooltip = " "
+		add_legitimacy_or_monarch_power = {
+			VAL = 10
+		}
+		custom_tooltip = " "
+		add_power_projection = {
+			type = mission_rewards_power_projection
+			amount = 10
+		}
+		custom_tooltip = " "
+		add_treasury = 100
+		custom_tooltip = " "
+		516 = {
+			add_base_tax = -2
+			add_base_production = -2
+			add_base_manpower = -2
+			add_devastation = 100
+		}
+	}
+}
+
+#Restoration of Tulipsfield
+country_event = {
+	id = flavor_sugamber.202
+	title = flavor_sugamber.202.t
+	desc = flavor_sugamber.202.desc
+	picture = FEAST_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.202.a
+		319 = {
+			change_province_name = "Tulipsfield"
+			rename_capital = Tulipsfield
+			add_prosperity = 100
+			add_permanent_province_modifier = {
+				name = butchersfield_massacre_monument
+				duration = -1
+			}
+		}
+		add_stability_or_adm_power = yes
+		add_legitimacy_or_monarch_power = {
+			VAL = 10
+		}
+	}
+}
+
+#Sugamber is visiting Tenbury
+country_event = {
+	id = flavor_sugamber.203
+	title = flavor_sugamber.203.t
+	desc = flavor_sugamber.203.desc
+	picture = KINGS_CHOICE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.203.a
+		ai_chance = {
+			factor = 1
+		}
+		add_prestige = -5
+		remove_historical_rival = A48
+		A48 = {
+			remove_historical_rival = A13
+			country_event = {
+				id = flavor_sugamber.204
+				days = 2
+			}
+		}
+	}
+	option = {
+		name = flavor_sugamber.203.b
+		ai_chance = {
+			factor = 0
+		}
+		A48 = {
+			country_event = {
+				id = flavor_sugamber.205
+				days = 2
+			}
+		}
+	}
+}
+
+#Gawed accepts
+country_event = {
+	id = flavor_sugamber.204
+	title = flavor_sugamber.204.t
+	desc = flavor_sugamber.204.desc
+	picture = DIPLOMACY_SIGNING_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.204.a
+		ai_chance = {
+			factor = 1
 		}
 		add_prestige = 10
-	}
-
-	after = {
-		hidden_effect = {
-			country_event = {
-				id = flavor_sugamber.2009
-				days = 30
+		tooltip = {
+			remove_historical_rival = A13
+			A13 = {
+			remove_historical_rival = A48
 			}
 		}
 	}
 }
 
-#Alpha pack winner
+#Gawed rejects
 country_event = {
-	id = flavor_sugamber.2009
-	title = flavor_sugamber.2009.t
-	desc = flavor_sugamber.2009.d
-	picture = BORDER_TENSION_eventPicture
+	id = flavor_sugamber.205
+	title = flavor_sugamber.205.t
+	desc = flavor_sugamber.205.desc
+	picture = REFUGEES_ESCAPING_eventPicture
 	is_triggered_only = yes
-
 	option = {
-		name = flavor_sugamber.2009.a
-		if = {
-			limit = { has_country_flag = sugamber_flamemaked_gnolls_dominant }
-			add_country_modifier = {
-				name = sugamber_alpha_flamemarked_win
-				duration = -1
-			}
+		name = flavor_sugamber.205.a
+		ai_chance = {
+			factor = 1
 		}
-		else_if = {
-			limit = { has_country_flag = sugamber_hill_gnolls_dominant }
-			add_country_modifier = {
-				name = sugamber_alpha_pack_hill_win
-				duration = -1
+		add_prestige = -10
+	}
+}
+
+#Lichbane Legacy, victory
+country_event = {
+	id = flavor_sugamber.206
+	title = flavor_sugamber.206.t
+	desc = flavor_sugamber.206.desc
+	picture = KNIGHTS_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.206.a
+		add_prestige_or_monarch_power = {
+			amount = 20
+		}
+		add_legitimacy_or_monarch_power = {
+			VAL = 10
+		}
+		add_army_tradition = 10
+		add_power_projection = {
+			type = mission_rewards_power_projection
+			amount = 20
+		}
+	}
+}
+
+#Adding careful personality on choosing Ryala
+country_event = {
+	id = flavor_sugamber.207
+	title = flavor_sugamber.207.t
+	desc = flavor_sugamber.207.desc
+	picture = QUEEN_AT_COUNCIL_TABLE_eventPicture
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = flavor_sugamber.207.a
+		add_ruler_personality = careful_personality
+	}
+}
+
+#Event on dissolved gnollish tag
+country_event = {
+	id = flavor_sugamber.210
+	title = flavor_sugamber.210.t
+	desc = flavor_sugamber.210.desc
+	picture = VILLAGE_RAIDED_eventPicture
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			FROM = {
+				country_event = {
+					id = flavor_sugamber.211
+				}
 			}
 		}
 	}
-	after = {
-		hidden_effect = {
-			country_event = {
-				id = flavor_sugamber.2010
-				days = 30
+	option = {
+		name = flavor_sugamber.210.a
+			add_yearly_manpower = -50
+			add_stability = -6
+			add_legitimacy_equivalent = {
+				amount = -100
+				republican_tradition = -100
+			}
+			add_prestige = -200
+			add_war_exhaustion = 20
+	}
+}
+
+#Event on dissolved gnollish tag for Sugamber
+country_event = {
+	id = flavor_sugamber.211
+	title = flavor_sugamber.211.t
+	desc = {
+		trigger = {
+			NOT = {
+				has_country_flag = sugamber_gnollish_garrison
+			}
+		}
+		desc = flavor_sugamber.211.desc1
+	}
+	desc = {
+		trigger = {
+			has_country_flag = sugamber_gnollish_garrison
+		}
+		desc = flavor_sugamber.211.desc2
+	}
+	picture = VILLAGE_RAIDED_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_sugamber.211.a
+		tooltip = {
+			FROM = {
+				set_country_flag = sugamber_dissolution
+				add_yearly_manpower = -50
+				add_stability = -6
+				add_legitimacy_equivalent = {
+					amount = -100
+					republican_tradition = -100
+				}
+				add_prestige = -200
+				add_war_exhaustion = 20
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = kryzzar_dissolution
+				FROM = {
+					tag = AC7
+				}
+			}
+			custom_tooltip = A48_kryzzar_dissolved_tooltip
+			hidden_effect = {
+				every_country = {
+					limit = {
+						is_part_of_hre = yes
+						NOT = {
+							any_owned_province = {
+								trade_goods = salt
+							}
+						}
+					}
+					add_aggressive_expansion = {
+						who = ROOT
+						value = -10
+						apply_calc = no
+					}
+				}
 			}
 		}
 	}
 }
 
-#Winner causes looting and devastation
+#Automatic Conversion Gnollish Land
 country_event = {
-	id = flavor_sugamber.2010
-	title = flavor_sugamber.2010.t
-	desc = flavor_sugamber.2010.d
-	picture = VILLAGE_BURNING_eventPicture
+	id = flavor_sugamber.212
+	title = flavor_sugamber.212.t
+	desc = {
+		trigger = {
+			tag = A48
+		}
+		desc = flavor_sugamber.212.desc1
+	}
+	desc = {
+		trigger = {
+			NOT = {
+				tag = A48
+			}
+		}
+		desc = flavor_sugamber.212.desc2
+	}
+	picture = REFORM_eventPicture
 	is_triggered_only = yes
-
-	#What can ya do
-	option = {
-		name = flavor_sugamber.2010.a
-		ai_chance = {
-			factor = 50
+	trigger = {
+		A48 = {
+			has_country_flag = sugamber_gnollish_garrison
 		}
-		if = {
-			limit = { has_country_flag = sugamber_flamemaked_gnolls_dominant }
-			gnollsgate_area = {
-				add_devastation = 50
-				add_local_autonomy = 25
+		OR = {
+			tag = A48
+			AND = {
+				is_subject_of = A48
+				NOT = {
+					culture_group = gnollish
+				}
 			}
 		}
-		else_if = {
-			limit = { has_country_flag = sugamber_hill_gnolls_dominant }
-			central_dreadmire_area = {
-				add_devastation = 50
-				add_local_autonomy = 25
+		any_owned_province = {
+			culture_group = gnollish
+			OR = {
+				region = akasik_region
+				region = kheterata_region
+				AND = {
+					superregion = bulwar_superregion
+					NOT = {
+						area = jixobix_area
+						area = garpix_tluukt_area
+						area = eastern_krahway_area
+						area = xhurgrum_area
+						area = garpix_zokka_area
+						area = arrtukerr_area
+						area = zallirkor_area
+					}
+				}
+				AND = {
+					superregion = south_salahad_superregion
+					NOT = {
+						province_id = 488
+						province_id = 489
+						area = kaxatan_area
+						area = saymas_area
+						area = krahilyn_area
+						area = argazeen_area
+						area = siniwix_area
+						area = garpix_rakkaz_area
+						region = gazraak_region
+					}
+				}
+				superregion = tanib_dajek_superregion
+				AND = {
+					superregion = east_sarhal_superregion
+					NOT = {
+						area = vresywaz_area
+						area = gizan_area
+						area = yaikehaad_area
+					}
+				}
+				AND = {
+					superregion = fangaula_superregion
+					NOT = {
+						area = arrakan_ghaman_area
+						area = xoruku_xugu_area
+						area = gharr_marr_area
+						area = fanghasba_area
+						province_id = 5735
+						province_id = 5736
+						province_id = 6304
+					}
+				}
 			}
 		}
 	}
-
-	#Damn these unruly Gnolls
 	option = {
-		name = flavor_sugamber.2010.b
-		ai_chance = {
-			factor = 50
-		}
-		if = {
-			limit = { has_country_flag = sugamber_flamemaked_gnolls_dominant }
-			central_dreadmire_area = {
-				spawn_rebels = {
-					type = xhazobkult_rebels
-					size = 1
+		name = flavor_sugamber.212.a
+		random_owned_province = {
+			limit = {
+				culture_group = gnollish
+				OR = {
+					region = akasik_region
+					region = kheterata_region
+					AND = {
+						superregion = bulwar_superregion
+						NOT = {
+							area = jixobix_area
+							area = garpix_tluukt_area
+							area = eastern_krahway_area
+							area = xhurgrum_area
+							area = garpix_zokka_area
+							area = arrtukerr_area
+							area = zallirkor_area
+						}
+					}
+					AND = {
+						superregion = south_salahad_superregion
+						NOT = {
+							province_id = 488
+							province_id = 489
+							area = kaxatan_area
+							area = saymas_area
+							area = krahilyn_area
+							area = argazeen_area
+							area = siniwix_area
+							area = garpix_rakkaz_area
+							region = gazraak_region
+						}
+					}
+					superregion = tanib_dajek_superregion
+					AND = {
+						superregion = east_sarhal_superregion
+						NOT = {
+							area = vresywaz_area
+							area = gizan_area
+							area = yaikehaad_area
+						}
+					}
+					AND = {
+						superregion = fangaula_superregion
+						NOT = {
+							area = arrakan_ghaman_area
+							area = xoruku_xugu_area
+							area = gharr_marr_area
+							area = fanghasba_area
+							province_id = 5735
+							province_id = 5736
+							province_id = 6304
+						}
+					}
 				}
 			}
-			add_country_modifier = {
-				name = sugamber_gnoll_unrest
-				duration = 1850
-			}
-		}
-		else_if = {
-			limit = { has_country_flag = sugamber_hill_gnolls_dominant }
-			gnollsgate_area = {
-				spawn_rebels = {
-					type = xhazobkult_rebels
-					size = 1
+			if = {
+				limit = {
+					region = akasik_region
+				}
+				change_culture = desha
+				if = {
+					limit = {
+						NOT = {
+							religion = ROOT
+							religion = mother_akasik
+						}
+					}
+					change_religion = mother_akasik
 				}
 			}
-			add_country_modifier = {
-				name = sugamber_gnoll_unrest
-				duration = 1850
+			else_if = {
+				limit = {
+					OR = {
+						region = khetapera_region
+						region = gol_region
+						region = khetapera_region
+					}
+				}
+				change_culture = hapremiti
+				if = {
+					limit = {
+						NOT = {
+							religion = ROOT
+							religion = elikhetist
+						}
+					}
+					change_religion = elikhetist
+				}
+			}
+			else_if = {
+				limit = {
+					province_group = sur_mountains
+				}
+				change_culture = sadnatu
+			}
+			else_if = {
+				limit = {
+					region = bulwar_proper_region
+					NOT = {
+						province_group = sur_mountains
+						area = bulwar_area
+						area = kumarkand_area
+						area = traz_buranun_area
+						area = harklum_area
+						area = south_naza_area
+						area = east_naza_area
+						area = north_naza_area
+					}
+				}
+				change_culture = brasanni
+			}
+			else_if = {
+				limit = {
+					OR = {
+						area = bulwar_area
+						area = kumarkand_area
+						area = traz_buranun_area
+						area = harklum_area
+						area = south_naza_area
+						area = east_naza_area
+						area = north_naza_area
+						area = sareyand_area
+						area = avamezan_area
+					}
+				}
+				change_culture = zanite
+			}
+			else_if = {
+				limit = {
+					region = far_bulwar_region
+					NOT = {
+						area = sareyand_area
+						area = avamezan_area
+					}
+				}
+				change_culture = surani
+			}
+			else_if = {
+				limit = {
+					area = dasmatus_area
+				}
+				change_culture = maqeti
+			}
+			else_if = {
+				limit = {
+					region = far_salahad_region
+					NOT = {
+						area = dasmatus_area
+					}
+				}
+				change_culture = masnish
+			}
+			else_if = {
+				limit = {
+					OR = {
+						region = horashesh_region
+						region = fahvanosy_region
+					}
+				}
+				change_culture = horakheti
+			}
+			else_if = {
+				limit = {
+					region = janama_region
+				}
+				change_culture = binwarji
+			}
+			else_if = {
+				limit = {
+					region = kubaci_region
+				}
+				change_culture = mantimatu
+			}
+			else_if = {
+				limit = {
+					region = dao_nako_region
+				}
+				change_culture = jiromji
 			}
 		}
-	}
-	after = {
-		clr_country_flag = sugamber_hill_gnolls_dominant
-		clr_country_flag = sugamber_flamemarked_gnolls_dominant
 	}
 }

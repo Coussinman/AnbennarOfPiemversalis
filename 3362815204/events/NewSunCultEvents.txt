@@ -419,7 +419,17 @@ country_event = {
 		name = new_sun_cult.52.b
 		ai_chance = {
 			factor = 33
-			modifier = { factor = 0 tag = F25 }
+			modifier = {
+				factor = 0
+				tag = F25
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					has_global_flag = ace_bulwari_victory_rule
+					has_global_flag = ace_bulwar_opportunity_rule
+				}
+			}
 		}
 		custom_tooltip = nsc_much_chosen_role_down_tt
 		add_incident_variable_value = { incident = incident_bulwar_under_threat value = -2 }
@@ -727,6 +737,16 @@ country_event = {
 			modifier = { factor = 0.1 NOT = { manpower = 1 } }
 			modifier = { factor = 0.1 is_at_war = yes }
 			modifier = { factor = 0.75 incident_variable_value = { incident = incident_bulwar_under_threat value = 2 } }
+			modifier = {
+				factor = 0
+				NOT = {
+					tag = F25
+				}
+				OR = {
+					has_global_flag = ace_bulwari_victory_rule
+					has_global_flag = ace_bulwar_opportunity_rule
+				}
+			}
 		}
 		custom_tooltip = nsc_chosen_role_up_tt
 		add_incident_variable_value = { incident = incident_bulwar_under_threat value = 1 }
@@ -838,6 +858,16 @@ country_event = {
 			factor = 50
 			modifier = { factor = 0.1 NOT = { estate_loyalty = { estate = estate_burghers loyalty = 30 } } }
 			modifier = { factor = 0.75 incident_variable_value = { incident = incident_bulwar_under_threat value = 2 } }
+			modifier = {
+				factor = 0
+				NOT = {
+					tag = F25
+				}
+				OR = {
+					has_global_flag = ace_bulwari_victory_rule
+					has_global_flag = ace_bulwar_opportunity_rule
+				}
+			}
 		}
 		custom_tooltip = nsc_chosen_role_up_tt
 		add_incident_variable_value = { incident = incident_bulwar_under_threat value = 1 }
@@ -934,6 +964,16 @@ country_event = {
 		ai_chance = {
 			factor = 50
 			modifier = { factor = 0.75 incident_variable_value = { incident = incident_bulwar_under_threat value = 2 } }
+			modifier = {
+				factor = 0
+				NOT = {
+					tag = F25
+				}
+				OR = {
+					has_global_flag = ace_bulwari_victory_rule
+					has_global_flag = ace_bulwar_opportunity_rule
+				}
+			}
 		}
 		custom_tooltip = nsc_chosen_role_up_tt
 		add_incident_variable_value = { incident = incident_bulwar_under_threat value = 1 }
@@ -1402,7 +1442,16 @@ country_event = {
 	#Side with the old guard - defensive tactics
 	option = {
 		name = new_sun_cult.69.a
-		ai_chance = { factor = 33 }
+		ai_chance = {
+			factor = 33
+			modifier = {
+				factor = 0
+				OR = {
+					has_global_flag = ace_bulwari_victory_rule
+					has_global_flag = ace_bulwar_opportunity_rule
+				}
+			}
+		}
 		custom_tooltip = nsc_chosen_role_up_tt
 		add_incident_variable_value = { incident = incident_bulwar_under_threat value = 1 }
 		add_country_modifier = { name = nsc_defensive_tactics duration = 3650 }
@@ -1411,14 +1460,25 @@ country_event = {
 	#Side with the vanguard - mobile warfare
 	option = {
 		name = new_sun_cult.69.b
-		ai_chance = { factor = 33 }
+		ai_chance = {
+			factor = 33
+		}
 		add_country_modifier = { name = nsc_mobility_tactics duration = 3650 }
 	}
 	
 	#Side with the humans - mass assault
 	option = {
 		name = new_sun_cult.69.c
-		ai_chance = { factor = 33 }
+		ai_chance = {
+			factor = 33
+			modifier = {
+				factor = 0
+				OR = {
+					has_global_flag = ace_bulwari_victory_rule
+					has_global_flag = ace_bulwar_opportunity_rule
+				}
+			}
+		}
 		custom_tooltip = nsc_chosen_role_down_tt
 		add_incident_variable_value = { incident = incident_bulwar_under_threat value = -1 }
 		add_country_modifier = { name = nsc_assault_tactics duration = 3650 }
@@ -1450,6 +1510,16 @@ country_event = {
 			factor = 33
 			modifier = { factor = 0.75 incident_variable_value = { incident = incident_bulwar_under_threat value = 1 } }
 			modifier = { factor = 5 tag = F25 }
+			modifier = {
+				factor = 0
+				NOT = {
+					tag = F25
+				}
+				OR = {
+					has_global_flag = ace_bulwari_victory_rule
+					has_global_flag = ace_bulwar_opportunity_rule
+				}
+			}
 		}
 		custom_tooltip = nsc_chosen_role_up_tt
 		add_incident_variable_value = { incident = incident_bulwar_under_threat value = 1 }
@@ -1459,7 +1529,9 @@ country_event = {
 	#Side with the vanguard - specialised troops
 	option = {
 		name = new_sun_cult.70.b
-		ai_chance = { factor = 33 }
+		ai_chance = {
+			factor = 33
+		}
 		add_country_modifier = { name = nsc_specialised_focus duration = 3650 }
 	}
 	
@@ -1472,6 +1544,13 @@ country_event = {
 			modifier = { factor = 0.5 NOT = { incident_variable_value = { incident = incident_bulwar_under_threat value = -3 } } }
 			modifier = { factor = 0.5 NOT = { incident_variable_value = { incident = incident_bulwar_under_threat value = -4 } } }
 			modifier = { factor = 0.1 tag = F25 }
+			modifier = {
+				factor = 0
+				OR = {
+					has_global_flag = ace_bulwari_victory_rule
+					has_global_flag = ace_bulwar_opportunity_rule
+				}
+			}
 		}
 		custom_tooltip = nsc_chosen_role_down_tt
 		add_incident_variable_value = { incident = incident_bulwar_under_threat value = -1 }
@@ -1505,6 +1584,16 @@ country_event = {
 			modifier = { factor = 0.75 incident_variable_value = { incident = incident_bulwar_under_threat value = 1 } }
 			modifier = { factor = 0.75 incident_variable_value = { incident = incident_bulwar_under_threat value = 2 } }
 			modifier = { factor = 5 tag = F25 }
+			modifier = {
+				factor = 0
+				NOT = {
+					tag = F25
+				}
+				OR = {
+					has_global_flag = ace_bulwari_victory_rule
+					has_global_flag = ace_bulwar_opportunity_rule
+				}
+			}
 		}
 		custom_tooltip = nsc_chosen_role_up_tt
 		add_incident_variable_value = { incident = incident_bulwar_under_threat value = 1 }
@@ -1514,7 +1603,16 @@ country_event = {
 	#Side with the vanguard - long and rigorous for everyone
 	option = {
 		name = new_sun_cult.71.b
-		ai_chance = { factor = 33 }
+		ai_chance = {
+			factor = 33
+			modifier = {
+				factor = 0
+				OR = {
+					has_global_flag = ace_bulwari_victory_rule
+					has_global_flag = ace_bulwar_opportunity_rule
+				}
+			}
+		}
 		add_country_modifier = { name = nsc_rigorous_training duration = 3650 }
 	}
 	
@@ -1950,6 +2048,13 @@ country_event = {
 			modifier = { factor = 0.5 alliance_with = F37 }
 			modifier = { factor = 0 vassal_of = F37 }
 			modifier = { factor = 5 is_rival = F37 }
+			modifier = {
+				factor = 10
+				OR = {
+					has_global_flag = ace_bulwari_victory_rule
+					has_global_flag = ace_bulwar_opportunity_rule
+				}
+			}
 		}
 		custom_tooltip = nsc_decrease_unity_tt
 		add_years_of_income = -0.1 
@@ -2078,6 +2183,14 @@ country_event = {
 				factor = 0 #Elizna trolling
 				F37 = { has_country_flag = nsc_choice_a }
 				tag = U05 
+			}
+			modifier = {
+				factor = 10
+				primary_culture = sun_elf
+				OR = {
+					has_global_flag = ace_bulwari_victory_rule
+					has_global_flag = ace_bulwar_opportunity_rule
+				}
 			}
 		}
 		
@@ -2379,6 +2492,16 @@ country_event = {
 				F37 = { has_country_flag = nsc_choice_a }
 				tag = U05 
 			}
+			modifier = {
+				factor = 10
+				NOT = {
+					primary_culture = sun_elf
+				}
+				OR = {
+					has_global_flag = ace_bulwari_victory_rule
+					has_global_flag = ace_bulwar_opportunity_rule
+				}
+			}
 		}
 		
 		if = { limit = { F37 = { has_country_flag = nsc_choice_f } } #Increasing unity if picking the same option as Irrliam
@@ -2571,6 +2694,14 @@ country_event = {
 				}
 				is_chosen_country = no
 			}
+			modifier = {
+				factor = 10
+				primary_culture = sun_elf
+				OR = {
+					has_global_flag = ace_bulwari_victory_rule
+					has_global_flag = ace_bulwar_opportunity_rule
+				}
+			}
 		}
 			
 		if = { limit = { F37 = { has_country_flag = nsc_choice_a } } #Increasing unity if picking the same option as Irrliam
@@ -2629,6 +2760,16 @@ country_event = {
 				factor = 0 #Elizna trolling
 				F37 = { has_country_flag = nsc_choice_b }
 				tag = U05 
+			}
+			modifier = {
+				factor = 10
+				NOT = {
+					primary_culture = sun_elf
+				}
+				OR = {
+					has_global_flag = ace_bulwari_victory_rule
+					has_global_flag = ace_bulwar_opportunity_rule
+				}
 			}
 		}
 			
@@ -2746,7 +2887,7 @@ country_event = {
 	id = new_sun_cult.132
 	title = new_sun_cult.132.t
 	desc = new_sun_cult.132.d
-	picture = SUN_CULT_DEBATE_event_picture
+	picture = ANGRY_MOB_eventPicture
 	
 	is_triggered_only = yes
 	
@@ -2790,6 +2931,14 @@ country_event = {
 				factor = 0 #Elizna trolling
 				F37 = { has_country_flag = nsc_choice_a }
 				tag = U05 
+			}
+			modifier = {
+				factor = 10
+				primary_culture = sun_elf
+				OR = {
+					has_global_flag = ace_bulwari_victory_rule
+					has_global_flag = ace_bulwar_opportunity_rule
+				}
 			}
 		}
 			
@@ -2909,6 +3058,16 @@ country_event = {
 				F37 = { has_country_flag = nsc_choice_c }
 				tag = U05 
 			}
+			modifier = {
+				factor = 10
+				NOT = {
+					primary_culture = sun_elf
+				}
+				OR = {
+					has_global_flag = ace_bulwari_victory_rule
+					has_global_flag = ace_bulwar_opportunity_rule
+				}
+			}
 		}
 			
 		if = { limit = { F37 = { has_country_flag = nsc_choice_c } } #Increasing unity if picking the same option as Irrliam
@@ -2957,7 +3116,7 @@ country_event = {
 	id = new_sun_cult.133
 	title = new_sun_cult.133.t
 	desc = new_sun_cult.133.d
-	picture = SUN_CULT_DEBATE_event_picture
+	picture = REFORM_eventPicture
 	
 	is_triggered_only = yes
 	
@@ -3030,7 +3189,7 @@ country_event = {
 	id = new_sun_cult.134
 	title = new_sun_cult.134.t
 	desc = new_sun_cult.134.d
-	picture = SUN_CULT_DEBATE_event_picture
+	picture = BATTLE_eventPicture
 	
 	is_triggered_only = yes
 	
@@ -3074,6 +3233,16 @@ country_event = {
 				factor = 0 #Elizna trolling
 				F37 = { has_country_flag = nsc_choice_a }
 				tag = U05 
+			}
+			modifier = {
+				factor = 10
+				NOT = {
+					primary_culture = sun_elf
+				}
+				OR = {
+					has_global_flag = ace_bulwari_victory_rule
+					has_global_flag = ace_bulwar_opportunity_rule
+				}
 			}
 		}
 			
@@ -3133,6 +3302,14 @@ country_event = {
 				factor = 0 #Elizna trolling
 				F37 = { has_country_flag = nsc_choice_b }
 				tag = U05 
+			}
+			modifier = {
+				factor = 10
+				primary_culture = sun_elf
+				OR = {
+					has_global_flag = ace_bulwari_victory_rule
+					has_global_flag = ace_bulwar_opportunity_rule
+				}
 			}
 		}
 			
@@ -3241,7 +3418,7 @@ country_event = {
 	id = new_sun_cult.135
 	title = new_sun_cult.135.t
 	desc = new_sun_cult.135.d
-	picture = SUN_CULT_DEBATE_event_picture
+	picture = REFORM_eventPicture
 	
 	is_triggered_only = yes
 	
@@ -3314,7 +3491,7 @@ country_event = {
 	id = new_sun_cult.136
 	title = new_sun_cult.136.t
 	desc = new_sun_cult.136.d
-	picture = SUN_CULT_DEBATE_event_picture
+	picture = DIPLOMACY_eventPicture
 	
 	is_triggered_only = yes
 	
@@ -3360,6 +3537,14 @@ country_event = {
 				tag = U05 
 			}
 			modifier = { factor = 0 tag = F37 } #Irrliam wants to keep the Order
+			modifier = {
+				factor = 10
+				primary_culture = sun_elf
+				OR = {
+					has_global_flag = ace_bulwari_victory_rule
+					has_global_flag = ace_bulwar_opportunity_rule
+				}
+			}
 		}
 			
 		if = { limit = { F37 = { has_country_flag = nsc_choice_b } } #Increasing unity if picking the same option as Irrliam
@@ -3418,6 +3603,16 @@ country_event = {
 				tag = U05 
 			}
 			modifier = { factor = 0 tag = F37 } #Irrliam wants to keep the Order
+			modifier = {
+				factor = 10
+				NOT = {
+					primary_culture = sun_elf
+				}
+				OR = {
+					has_global_flag = ace_bulwari_victory_rule
+					has_global_flag = ace_bulwar_opportunity_rule
+				}
+			}
 		}
 			
 		if = { limit = { F37 = { has_country_flag = nsc_choice_c } } #Increasing unity if picking the same option as Irrliam
@@ -3523,7 +3718,7 @@ country_event = {
 	id = new_sun_cult.137
 	title = new_sun_cult.137.t
 	desc = new_sun_cult.137.d
-	picture = SUN_CULT_DEBATE_event_picture
+	picture = REFORM_eventPicture
 	
 	is_triggered_only = yes
 	
@@ -3621,7 +3816,7 @@ country_event = {
 	id = new_sun_cult.138
 	title = new_sun_cult.138.t
 	desc = new_sun_cult.138.d
-	picture = SUN_CULT_DEBATE_event_picture
+	picture = CITY_DEVELOPMENT_eventPicture
 	
 	is_triggered_only = yes
 	
@@ -3665,6 +3860,16 @@ country_event = {
 				factor = 0 #Elizna trolling
 				F37 = { has_country_flag = nsc_choice_a }
 				tag = U05 
+			}
+			modifier = {
+				factor = 10
+				NOT = {
+					primary_culture = sun_elf
+				}
+				OR = {
+					has_global_flag = ace_bulwari_victory_rule
+					has_global_flag = ace_bulwar_opportunity_rule
+				}
 			}
 		}
 			
@@ -3784,6 +3989,14 @@ country_event = {
 				F37 = { has_country_flag = nsc_choice_c }
 				tag = U05 
 			}
+			modifier = {
+				factor = 10
+				primary_culture = sun_elf
+				OR = {
+					has_global_flag = ace_bulwari_victory_rule
+					has_global_flag = ace_bulwar_opportunity_rule
+				}
+			}
 		}
 			
 		if = { limit = { F37 = { has_country_flag = nsc_choice_c } } #Increasing unity if picking the same option as Irrliam
@@ -3833,7 +4046,7 @@ country_event = {
 	id = new_sun_cult.139
 	title = new_sun_cult.139.t
 	desc = new_sun_cult.139.d
-	picture = SUN_CULT_DEBATE_event_picture
+	picture = REFORM_eventPicture
 	
 	is_triggered_only = yes
 	
@@ -3906,7 +4119,7 @@ country_event = {
 	id = new_sun_cult.140
 	title = new_sun_cult.140.t
 	desc = new_sun_cult.140.d
-	picture = SUN_CULT_DEBATE_event_picture
+	picture = COMET_SIGHTED_eventPicture
 	
 	is_triggered_only = yes
 	
@@ -3950,6 +4163,14 @@ country_event = {
 				factor = 0 #Elizna trolling
 				F37 = { has_country_flag = nsc_choice_a }
 				tag = U05 
+			}
+			modifier = {
+				factor = 10
+				primary_culture = sun_elf
+				OR = {
+					has_global_flag = ace_bulwari_victory_rule
+					has_global_flag = ace_bulwar_opportunity_rule
+				}
 			}
 		}
 			
@@ -4067,6 +4288,16 @@ country_event = {
 				F37 = { has_country_flag = nsc_choice_c }
 				tag = U05 
 			}
+			modifier = {
+				factor = 10
+				NOT = {
+					primary_culture = sun_elf
+				}
+				OR = {
+					has_global_flag = ace_bulwari_victory_rule
+					has_global_flag = ace_bulwar_opportunity_rule
+				}
+			}
 		}
 			
 		if = { limit = { F37 = { has_country_flag = nsc_choice_c } } #Increasing unity if picking the same option as Irrliam
@@ -4115,7 +4346,7 @@ country_event = {
 	id = new_sun_cult.141
 	title = new_sun_cult.141.t
 	desc = new_sun_cult.141.d
-	picture = SUN_CULT_DEBATE_event_picture
+	picture = REFORM_eventPicture
 	
 	is_triggered_only = yes
 	
@@ -4570,7 +4801,7 @@ country_event = {
 	id = new_sun_cult.149
 	title = new_sun_cult.149.t
 	desc = new_sun_cult.149.d
-	picture = ADVENTURERS_ESTATE_eventPicture
+	picture = ELECTION_REPUBLICAN_eventPicture
 	
 	is_triggered_only = yes
 	

@@ -72,9 +72,40 @@ country_event = { #aristo path uses the same AI chances, stored in flavour_eoa_r
 					}
 				}
 			}
+			modifier = {
+				factor = 0
+				NOT = {
+					has_opinion = {
+						who = emperor
+						value = 0
+					}
+				}
+			}
 		}
 		emperor = {
-			vassalize = ROOT
+			if = {
+				limit = {
+					tag = A48
+					has_country_flag = sugamber_hammer_faith
+					hre_religion_locked = yes
+					OR = {
+						AND = {
+							religion = regent_court
+							hre_religion = regent_court
+						}
+						AND = {
+							religion = dalcabba
+							hre_religion = dalcabba
+						}
+					}
+				}
+				create_subject = {
+					subject_type = tributary_state
+					subject = ROOT
+				}
+			} else = {
+				vassalize = ROOT
+			}
 		}
 	}
 	

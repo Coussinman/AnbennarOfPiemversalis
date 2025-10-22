@@ -1,40 +1,4 @@
 country_decisions = {
-	summon_forth_einher = { #clear random worst monster infestation - at cost
-		color = { 19 4 152 }
-		major = yes
-		potential = {
-			religion = skaldhyrric_faith
-			any_owned_province = {
-				has_infestation_3 = yes
-			}
-		}
-		allow = {
-			hidden_trigger = { religion = skaldhyrric_faith }
-			any_owned_province = {
-				has_infestation_3 = yes
-			}
-			treasury = 200
-			NOT = { has_country_modifier = summoned_einher }
-		}
-		effect = {
-			add_treasury = -200
-			custom_tooltip = skald_einher_tooltip
-			add_country_modifier = {
-				name = summoned_einher
-				duration = 5475
-			}
-			hidden_effect = {
-				random_owned_province = {
-					limit = { has_infestation_3 = yes }
-					save_event_target_as = skald_einher
-					province_event = {
-						id = skaldhyrric.6
-						days = 30
-					}
-				}
-			}
-		}
-	}
 	unite_skalds_decision = {
 		color = { 19 4 152 }
 		major = yes

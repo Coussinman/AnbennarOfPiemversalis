@@ -1167,7 +1167,13 @@ country_event = {
 			random_list = {
 				33 = { country_event = { id = harpy_events.104 days = 1825 } }				#neutral
 				33 = { country_event = { id = harpy_events.105 days = 1095 random = 730 } }	#rebellion
-				33 = { country_event = { id = harpy_events.106 days = 1095 random = 730 } }	#success
+				33 = { #success
+					modifier = {
+						factor = 1000
+						has_country_modifier = ace_unnatural_luck
+					}
+					country_event = { id = harpy_events.106 days = 1095 random = 730 }
+				}	
 			}
 		}
 	}
@@ -1321,6 +1327,9 @@ country_event = {
 		eligble_for_harpy_harem_events = yes
 		has_regency = no
 		num_of_cities = 25
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 	
 	immediate = {
@@ -1365,6 +1374,9 @@ country_event = {
 		has_ruler_flag = harpy_father_insight
 		NOT = { has_ruler_flag = death_of_father }
 		NOT = { ruler_age = 60 } #After this it is assumed he has died but was of less notice.
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 	
 	option = {
@@ -1457,6 +1469,9 @@ country_event = {
 		has_regency = no
 		NOT = { has_ruler_flag = heir_plotting }
 		NOT = { has_ruler_flag = heir_framed_for_plot }
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 	
 	immediate = {
@@ -1780,6 +1795,9 @@ country_event = {
 		num_of_cities = 25
 		ruler_age = 60
 		NOT = { is_long_lived_ruler = yes }
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 	 
 	immediate = {
@@ -1824,6 +1842,9 @@ country_event = {
 		OR = { 										#This is here only because Naleni deletes estates
 			has_estate = estate_nobles
 			has_estate = estate_monstrous_tribes
+		}
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
 		}
 	}
 	
@@ -1938,6 +1959,9 @@ country_event = {
 	
 	trigger = {
 		has_ruler_flag = harpy_clan_alliance
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 	
 	#Desinherit her and send a new ward
@@ -2011,6 +2035,9 @@ country_event = {
 	#accept
 	option = {
 		name = harpy_events.120.a
+		ai_chance = {
+			factor = 1
+		}
 		trigger = { heir_claim = 20 }
 		add_heir_claim = -20
 		hidden_effect = { country_event = { id = harpy_events.1200 days = 2 } }
@@ -2021,6 +2048,13 @@ country_event = {
 	#refuse meeting
 	option = {
 		name = harpy_events.120.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_country_modifier = ace_unnatural_luck
+			}
+		}
 		add_heir_claim = 5
 		set_heir_flag = harpy_father_event
 	}
@@ -2070,6 +2104,10 @@ country_event = {
 		set_heir_flag = harpy_father_skill
 		ai_chance = {
 			factor = 10
+			modifier = {
+				factor = 1000
+				has_country_modifier = ace_unnatural_luck
+			}
 		}
 	}
 

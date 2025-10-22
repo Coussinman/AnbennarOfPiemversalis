@@ -124,6 +124,9 @@ country_event = {
 		NOT = { adm = 2 }
 		NOT = { luck = yes }
 		has_regency = no
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
@@ -372,6 +375,9 @@ country_event = {
 	trigger = {
 		num_of_royal_marriages = 2
 		has_regency = no
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	immediate = {
@@ -576,6 +582,9 @@ country_event = {
 	trigger = {
 		NOT = { has_country_modifier = obscurantism }
 		NOT = { has_institution = enlightenment }
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
@@ -1668,6 +1677,9 @@ country_event = {
 
 	trigger = {
 		NOT = { adm = 5 }
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
@@ -1770,6 +1782,9 @@ country_event = {
 		}
 		#NOT = { tag = PAP }
 		NOT = { tag = Z97 }
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
@@ -1927,6 +1942,9 @@ country_event = {
 				}
 			}
 		}
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
@@ -2066,6 +2084,9 @@ country_event = {
 			is_in_capital_area = yes
 			is_capital = no
 		}
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
@@ -2177,6 +2198,9 @@ country_event = {
 				}
 			}
 		}
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
@@ -2223,6 +2247,9 @@ country_event = {
 			government = dictatorship
 		}
 		is_lesser_in_union = no
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
@@ -2315,7 +2342,11 @@ country_event = {
 
 	is_triggered_only = yes
 	
-	trigger = {}
+	trigger = {
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
+	}
 
 	mean_time_to_happen = {
 		days = 1
@@ -2493,6 +2524,9 @@ country_event = {
 			}
 		}
 		NOT = { has_country_modifier = disorder }
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
@@ -2604,6 +2638,9 @@ country_event = {
 			}
 		}
 		NOT = { has_country_modifier = trade_disaster }
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
@@ -2650,10 +2687,21 @@ country_event = {
 
 	trigger = {
 		NOT = { has_country_flag = no_more_comet_sighted_event }
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
 		days = 1
+		modifier = {
+			factor = 1000
+			has_country_modifier = ace_unnatural_misfortune
+			stability = -2
+			NOT = {
+				ruler_has_personality_ancestor = { key = scholar }
+			}
+		}
 		
 		modifier = {
 			factor = 0.1
@@ -3012,6 +3060,9 @@ country_event = {
 			NOT = { is_subject_of = root }
 			NOT = { alliance_with = root }
 		}
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
@@ -3100,6 +3151,9 @@ country_event = {
 			has_estate = estate_nobles
 			has_estate = estate_rajput
 			has_estate = estate_maratha
+		}
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
 		}
 	}
 
@@ -3349,11 +3403,23 @@ country_event = {
 
 	mean_time_to_happen = {
 		days = 1
+		modifier = {
+			factor = 100
+			has_country_modifier = ace_unnatural_luck
+			num_of_loans = 1
+		}
 	}
 
 	option = {
 		name = "EVTOPTA5070"		# Make a long-term investment
-		ai_chance = { factor = 55 }
+		ai_chance = {
+			factor = 55
+			modifier = {
+				factor = 0
+				has_country_modifier = ace_unnatural_luck
+				num_of_loans = 1
+			}
+		}
 		add_country_modifier = {
 			name = "trade_income_increase"
 			duration = 3650
@@ -3367,6 +3433,7 @@ country_event = {
 	}
 	option = {
 		name = "personality_options.5068.a"		# We must be better at hiding our tracks
+		ai_chance = { factor = 200 }
 		highlight = yes
 		trigger = {
 			ruler_has_personality = embezzler_personality
@@ -3393,6 +3460,9 @@ country_event = {
 		}
 		NOT = {
 			has_country_modifier = tax_income_loss
+		}
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
 		}
 	}
 
@@ -3717,6 +3787,9 @@ country_event = {
 				}
 			}
 		}
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
@@ -3798,6 +3871,9 @@ country_event = {
 		is_lesser_in_union = no
 		any_owned_province = {
 			development = 10
+		}
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
 		}
 	}
 
@@ -4350,6 +4426,9 @@ country_event = {
 		advisor = philosopher
 		#religion = catholic
 		religion = ravelian
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
@@ -5321,6 +5400,9 @@ country_event = {
 		government = monarchy
 		has_institution = printing_press
 		has_parliament = no
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
@@ -5679,6 +5761,9 @@ country_event = {
 			is_in_capital_area = yes
 			is_capital = no
 		}
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
@@ -5920,6 +6005,9 @@ country_event = {
 	trigger = {
 		stability = 0
 		inflation = 5
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
@@ -5987,6 +6075,9 @@ country_event = {
 				num_of_rebel_controlled_provinces = 1
 			}
 		}
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
@@ -6019,14 +6110,28 @@ country_event = {
 	trigger = {
 		NOT = { has_country_modifier = defensive_modifier }
 		NOT = { has_country_modifier = offensive_modifier }
+		NOT = {
+			has_country_modifier = ace_unnatural_misfortune
+		}
 	}
 
 	mean_time_to_happen = {
 		days = 1
+		modifier = {
+			factor = 100
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	option = {
 		name = "EVTOPTA714"
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_country_modifier = ace_unnatural_luck
+			}
+		}
 		add_country_modifier = {
 			name = defensive_modifier
 			duration = 3650
@@ -6034,6 +6139,9 @@ country_event = {
 	}
 	option = {
 		name = "EVTOPTB714"
+		ai_chance = {
+			factor = 1
+		}
 		add_country_modifier = {
 			name = offensive_modifier
 			duration = 3650
@@ -6093,6 +6201,9 @@ country_event = {
 		has_regency = no
 		is_lesser_in_union = no
 		NOT = { DIP = 4 }
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
@@ -6129,6 +6240,9 @@ country_event = {
 		has_estate = estate_nobles
 		NOT = { revolt_percentage = 0.1 }
 		NOT = { num_of_loans = 10 }
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
@@ -6184,6 +6298,9 @@ country_event = {
 		stability = 0
 		inflation = 5
 		NOT = { advisor = master_of_mint }
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
@@ -6276,6 +6393,9 @@ country_event = {
 	trigger = {
 		stability = 0
 		army_tradition = 50
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
@@ -6349,6 +6469,9 @@ country_event = {
 	trigger = {
 		stability = 0
 		navy_tradition = 50
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
@@ -6515,6 +6638,9 @@ country_event = {
 			has_estate = estate_rajput
 			has_estate = estate_maratha
 		}
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
@@ -6611,6 +6737,9 @@ country_event = {
 		religion = corinite
 		NOT = { has_country_modifier = narrowminded_modifier }
 		NOT = { has_country_modifier = innovative_modifier }
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
@@ -6697,10 +6826,17 @@ country_event = {
 			is_in_capital_area = yes
 		}
 		NOT = { is_year = 1650 }
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
 		days = 1
+		modifier = {
+			factor = 1000
+			has_country_modifier = ace_unnatural_misfortune
+		}
 	}
 
 	immediate = {
@@ -6730,6 +6866,10 @@ country_event = {
 						loyalty = 30
 					}
 				}
+			}
+			modifier = {
+				factor = 0
+				has_country_modifier = ace_unnatural_misfortune
 			}
 		}
 		goto = rural_province
@@ -6764,6 +6904,10 @@ country_event = {
 		trigger = { ruler_has_personality_ancestor = { key = calm } }
 		ai_chance = {
 			factor = 100
+			modifier = {
+				factor = 0
+				has_country_modifier = ace_unnatural_misfortune
+			}
 		}
 		goto = rural_province
 		event_target:rural_province = {
@@ -6794,6 +6938,9 @@ country_event = {
 		has_regency = no
 		is_lesser_in_union = no
 		stability = -1
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
@@ -6999,6 +7146,12 @@ country_event = {
 	
 	trigger = {
 		is_at_war = no
+		NOT = {
+			AND = {
+				total_development = 100
+				has_country_modifier = ace_unnatural_luck
+			}
+		}
 	}
 
 	mean_time_to_happen = {
@@ -7058,6 +7211,9 @@ country_event = {
 	
 	trigger = {
 		stability = 0
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
@@ -7108,6 +7264,9 @@ country_event = {
 		stability = 0
 		num_of_ports = 1
 		primitives = no
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
@@ -7156,6 +7315,9 @@ country_event = {
 	
 	trigger = {
 		stability = 0
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
@@ -7204,6 +7366,9 @@ country_event = {
 	
 	trigger = {
 		stability = 0
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
@@ -7252,16 +7417,27 @@ country_event = {
 	
 	trigger = {
 		stability = 0
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
 		days = 1
+		modifier = {
+			factor = 10
+			has_country_modifier = ace_unnatural_misfortune
+		}
 	}
 
 	option = {
 		name = "EVTOPTA734" #Accept Demands
 		ai_chance = {
 			factor = 40
+			modifier = {
+				factor = 0
+				has_country_modifier = ace_unnatural_misfortune
+			}
 		}
 		add_adm_power = -50
 	}
@@ -7269,6 +7445,10 @@ country_event = {
 		name = "EVTOPTB734" #Ignore them
 		ai_chance = {
 			factor = 60
+			modifier = {
+				factor = 100
+				has_country_modifier = ace_unnatural_misfortune
+			}
 			modifier = {
 				factor = 0.5
 				NOT = { prestige = 0 }
@@ -7330,10 +7510,17 @@ country_event = {
 		NOT = { war_exhaustion = 1 }
 		NOT = { num_of_rebel_controlled_provinces = 1 }
 		NOT = { has_country_modifier = bad_discipline }
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
 		days = 1
+		modifier = {
+			factor = 1000
+			has_country_modifier = ace_unnatural_misfortune
+		}
 	}
 
 	option = {
@@ -7341,6 +7528,10 @@ country_event = {
 		add_yearly_manpower = -1.5
 		ai_chance = {
 			factor = 1
+			modifier = {
+				factor = 0
+				has_country_modifier = ace_unnatural_misfortune
+			}
 		}
 	}
 	option = {
@@ -7448,6 +7639,11 @@ country_event = {
 
 	mean_time_to_happen = {
 		days = 1
+		modifier = {
+			factor = 1000
+			has_country_modifier = ace_unnatural_luck
+			num_of_loans = 1
+		}
 	}
 	
 	immediate = {
@@ -7509,6 +7705,11 @@ country_event = {
 		name = "EVTOPTB736"
 		ai_chance = {
 			factor = 50
+			modifier = {
+				factor = 0
+				has_country_modifier = ace_unnatural_luck
+				num_of_loans = 1
+			}
 		}
 		#add_meritocracy_effect = yes
 		trigger_switch = {
@@ -7544,6 +7745,11 @@ country_event = {
 		name = "personality_options.736.a" #I know just who should receive our patronage.
 		ai_chance = {
 			factor = 100
+			modifier = {
+				factor = 0
+				has_country_modifier = ace_unnatural_luck
+				num_of_loans = 1
+			}
 		}
 		highlight = yes
 		trigger = {
@@ -7571,6 +7777,11 @@ country_event = {
 		name = "personality_options.736.b" #I know just who should receive our patronage.
 		ai_chance = {
 			factor = 100
+			modifier = {
+				factor = 0
+				has_country_modifier = ace_unnatural_luck
+				num_of_loans = 1
+			}
 		}
 		highlight = yes
 		trigger = {
@@ -7783,6 +7994,9 @@ country_event = {
 		stability = 0
 		NOT = { has_country_modifier = smugglers_dominating }
 		NOT = { has_country_modifier = cooperation_with_merchant_class }
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	mean_time_to_happen = {
@@ -8230,6 +8444,9 @@ country_event = {
 		is_at_war = yes
 		NOT = {
 			has_country_modifier = warriors_do_not_read_books
+		}
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
 		}
 	}
 	
@@ -9061,6 +9278,10 @@ country_event = {
 		ai_chance = {
 			factor = 50
 			modifier = {
+				factor = 0
+				has_country_modifier = ace_unnatural_luck
+			}
+			modifier = {
 				factor = 1.5
 				NOT = { years_of_income = 0.3 }
 			}
@@ -9150,6 +9371,10 @@ country_event = {
 	
 	mean_time_to_happen = {
 		days = 1
+		modifier = {
+			factor = 1000
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 	
 	immediate = {
@@ -9162,10 +9387,20 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA872"
+		ai_chance = {
+			factor = 1
+		}
 		add_stability_or_adm_power = yes
 	}
 	option = {
 		name = "EVTOPTB872"
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_country_modifier = ace_unnatural_luck
+			}
+		}
 		add_prestige = 10
 		#add_meritocracy_effect = yes
 		generate_advisor_of_type_and_semi_random_religion_effect = {
@@ -9177,6 +9412,13 @@ country_event = {
 	}
 	option = {
 		name = "personality_options.872.a"
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_country_modifier = ace_unnatural_luck
+			}
+		}
 		highlight = yes
 		trigger = { ruler_has_personality_ancestor = { key = well_connected } }
 		add_prestige = 10
@@ -9480,6 +9722,9 @@ country_event = {
 		}
 		NOT = { adm_tech = 20 }
 		NOT = { has_country_flag = has_competent_doctors }
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 	
 	mean_time_to_happen = {
@@ -10046,6 +10291,9 @@ country_event = {
 			}
 		}
 		government = monarchy
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 	
 	mean_time_to_happen = {
@@ -10242,6 +10490,9 @@ country_event = {
 	trigger = {
 		war_exhaustion = 10
 		stability = -2
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	option = {
@@ -10386,7 +10637,7 @@ country_event = {
 	}
 }
 
-### Scripted by Sara Wendel-Örtqvist ###
+### Scripted by Sara Wendel-ï¿½rtqvist ###
 
 namespace = random_event
 
@@ -11330,6 +11581,9 @@ country_event = {
 	trigger = {
 		has_parliament = yes
 		is_at_war = yes
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 	
 	mean_time_to_happen = {
@@ -12202,10 +12456,17 @@ country_event = {
 		NOT = {
 			has_ruler_modifier = archery_muskets
 		}
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 	
 	mean_time_to_happen = {
 		days = 1
+		modifier = {
+			factor = 10000
+			has_country_modifier = ace_unnatural_misfortune
+		}
 	}
 	
 	option = {
@@ -13035,6 +13296,9 @@ country_event = {
 
 	trigger = {
 		wine  = 1
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	is_triggered_only = yes
@@ -13106,12 +13370,19 @@ country_event = {
 		NOT = { has_country_modifier = poor_uniforms }
 		NOT = { has_country_flag = yidablaerun_poor_uniforms_disabled }
 		NOT = { has_country_flag = no_more_poor_uniforms }
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	is_triggered_only = yes
 
 	mean_time_to_happen = {
 		days = 1
+		modifier = {
+			factor = 10000
+			has_country_modifier = ace_unnatural_misfortune
+		}
 	}
 
 	option = {
@@ -13173,6 +13444,9 @@ country_event = {
 				is_subject_of_type = self_governing_colony
 			}
 		}
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	is_triggered_only = yes
@@ -13200,13 +13474,18 @@ country_event = {
 		salt = 1
 		NOT = { has_country_modifier = salt_crisis }
 		NOT = { has_country_flag = no_more_salt_crisis } #Anbennar
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
-
-
 	is_triggered_only = yes
 
 	mean_time_to_happen = {
 		days = 1
+		modifier = {
+			factor = 100
+			has_country_modifier = ace_unnatural_misfortune
+		}
 	}
 	
 	option = {
@@ -13259,6 +13538,9 @@ country_event = {
 		mil_tech = 7
 		NOT = { has_country_modifier = poor_copper }
 		NOT = { has_country_flag = no_more_bad_copper } #Anbennar
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	is_triggered_only = yes
@@ -13285,6 +13567,9 @@ country_event = {
 
 	trigger = {
 		gold = 1
+		NOT = {
+			has_country_modifier = ace_unnatural_misfortune
+		}
 		#NOT = { religion_group = pagan }
 	}
 
@@ -13312,12 +13597,19 @@ country_event = {
 		iron = 1
 		NOT = { has_country_modifier = poor_iron }
 		NOT = { has_country_flag = no_more_bad_iron }	#Anbennar
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	is_triggered_only = yes
 
 	mean_time_to_happen = {
 		days = 1
+		modifier = {
+			factor = 100
+			has_country_modifier = ace_unnatural_misfortune
+		}
 	}
 
 	option = {
@@ -13451,6 +13743,9 @@ country_event = {
 		any_owned_province = {
 			trade_goods = spices
 			NOT = { has_province_modifier = harvest_fails }
+		}
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
 		}
 	}
 
@@ -13609,6 +13904,9 @@ country_event = {
 			is_capital = no
 			unrest = 1
 		}
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 	
 	immediate = {
@@ -13665,6 +13963,9 @@ country_event = {
 		any_owned_province = { 
 			trade_goods = grain
 			is_capital = no
+		}
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
 		}
 	}
 
@@ -13778,6 +14079,9 @@ country_event = {
 			is_city = yes
 			is_capital = no
 		}
+		NOT = {
+			has_country_modifier = ace_unnatural_luck
+		}
 	}
 
 	immediate = {
@@ -13850,12 +14154,32 @@ country_event = {
 			}
 		}
 		add_years_of_income = 0.50
+		if = {
+			limit = {
+				tag = AD5
+				has_disaster = sidrvetr
+			}
+			change_variable = {
+				which = variable_AD5_hallfredhavn_food
+				value = 10
+			}
+		}
 	}
 	option = {
 		name = "EVTOPTB6014"		# Invest the money
 		add_adm_power = 50
 		ai_chance = {
 			factor = 45
+		}
+		if = {
+			limit = {
+				tag = AD5
+				has_disaster = sidrvetr
+			}
+			change_variable = {
+				which = variable_AD5_hallfredhavn_food
+				value = 10
+			}
 		}
 	}
 }

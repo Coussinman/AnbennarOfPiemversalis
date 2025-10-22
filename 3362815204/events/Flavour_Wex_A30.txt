@@ -1,277 +1,142 @@
-
-
 namespace = flavor_wex
 
-#Sack of Anbenncost - Anbenncost
+###################################
+###Base Events + Domination Path###
+###################################
+#Sack of Anbenncost
 country_event = {
 	id = flavor_wex.1
 	title = flavor_wex.1.t
 	desc = flavor_wex.1.d
-	picture = BORDER_TENSION_eventPicture
-	
+	picture = COUNTRY_COLLAPSE_eventPicture
 	fire_only_once = yes
-	
+	is_triggered_only = yes
 	trigger = {
 		tag = A30
 	}
-	
-	mean_time_to_happen = {
-		months = 1
+	immediate = {
+		hidden_effect = {
+			add_imperial_influence = -20
+			every_province = {
+				limit = {
+					OR = {
+						province_id = 376
+						area = heartland_borders_area
+						area = beepeck_area
+						area = lorenans_reach_area
+						area = exwes_area
+						owner = {
+							tag = A02
+						}
+					}
+				}
+				add_devastation = 10
+			}
+			every_province = {
+				limit = {
+					OR = {
+						area = rotwall_area
+						region = esmaria_region
+						region = west_dameshead_region
+						region = east_dameshead_region
+						region = the_borders_region
+						region = lencenor_region
+						AND = {
+							region = businor_region
+							has_port = yes
+						}
+					}
+					NOT = {
+						province_id = 524
+					}
+					owner = {
+						NOT = {
+							tag = A02
+							tag = A20
+							tag = A21
+							tag = A47
+						}
+						OR = {
+							tag = A41
+							tag = A85
+							tag = A87
+							has_country_flag = lilac_wars_moon_party
+							has_country_flag = lilac_wars_rose_party
+							overlord = {
+								has_country_flag = lilac_wars_moon_party
+							}
+							overlord = {
+								has_country_flag = lilac_wars_rose_party
+							}
+						}
+					}
+				}
+				add_devastation = 20
+			}
+			82 = {
+				add_devastation = 30
+			}
+			83 = {
+				add_devastation = 30
+			}
+			106 = {
+				add_devastation = 30
+			}
+			8 = {
+				add_devastation = 60
+			}
+			country_event = {
+				id = lilac_wars.11
+				days = 20
+				random = 20
+			}
+		}
 	}
-	
 	option = {
 		name = flavor_wex.1.a
-		
-		8 = {
-			add_loot_from_rich_province_general_effect = {
-				LOOTER = A30
+		set_country_flag = A30_setup_event
+		add_imperial_influence = -20
+		custom_tooltip = " "
+		add_treasury = 500
+		add_splendor = 200
+		add_prestige = 10
+		custom_tooltip = " "
+		A38 = {
+			add_opinion = {
+				who = A30
+				modifier = A38_sacked_anbenncost
 			}
 		}
-		
-		A38 = { 
-			add_opinion = { who = A30 modifier = A38_sacked_anbenncost }
-			hidden_effect = { country_event = { id = flavor_anbenncost.100 } }
-		}
-		
-		add_prestige = -10
+		custom_tooltip = A30_lothane_election_tooltip
+		custom_tooltip = rose_party_diplo_tooltip
 	}
-}
-
-country_event = {
-	id = flavor_wex.2
-	title = flavor_wex.2.t
-	desc = flavor_wex.2.d
-	picture = STREET_SPEECH_eventPicture
-
-	fire_only_once = yes
-	is_triggered_only = yes
-
-	option = {
-		name = flavor_wex.2.a
-
-		ai_chance = {
-			factor = 100
-		}
-
-		every_owned_province = {
-			limit = {
-				OR = {
-					province_id = 2
-					province_id = 5
-					province_id = 276
-					province_id = 281
-					province_id = 330
-					province_id = 910
-				}
-				NOT = { is_core = A30 }
-			}
-			add_devastation = 50
-			add_core = A30
-			custom_tooltip = wex_rebellion_tt
-			hidden_effect = {
-				add_province_modifier = {
-					name = wex_rebellious_damerians
-					duration = -1
-					desc = desc_wex_rebellious_damerians
-				}
-			}
-		}
-
-		add_stability = 1
-		set_country_flag = lothane_conqueror
-
-	}
-
-	option = {
-		name = flavor_wex.2.b
-		ai_chance = {
-			factor = 0
-		}
-		country_event = { id = flavor_wex.13 days = 30 }
-		country_event = { id = flavor_wex.14 days = 60 }
-		country_event = { id = flavor_wex.12 days = 90 }
-		set_country_flag = lothane_benevolent
-	}
-}
-
-country_event = {
-	id = flavor_wex.3
-	title = flavor_wex.3.t
-	desc = flavor_wex.3.d
-	picture = ADVISOR_eventPicture
-	
-	fire_only_once = yes
-	
-	trigger = {
-		tag = A30
-	}
-	
-	mean_time_to_happen = {
-		days = 14
-	}
-	
-	option = {
-		name = flavor_wex.3.a
-		add_imperial_influence = 10	
-		A30 = {
-			define_ruler_to_general = {
-			fire = 2
-			shock = 10
-			manuever = 3
-			siege = 7
-			trait = war_wizard_personality
-			}
-		}
-		add_opinion = {
-				who = A45
-				modifier = wex_moon_party_hate
-		}
-		reverse_add_opinion = {
-			who = A45
-			modifier = wex_moon_party_hate
-		}
-
-
-	}
-
-}
-
-country_event = {
-	id = flavor_wex.4
-	title = flavor_wex.4.t
-	desc = flavor_wex.4.d
-	picture = GOOD_WITH_MONARCH_eventPicture
-	#Event Image: King Arthur by Ekaterina Belousova
-	
-	fire_only_once = yes
-	
-	is_triggered_only = yes
-	
-	trigger = {
-		always = yes
-	}
-	
-	option = {
-		name = flavor_wex.4.a
-		ai_chance = { factor = 100 }
-		A30 = { 
-			set_country_flag = wex_ibevar_elector_war
-			declare_war_with_cb = {
-			who = A31
-			casus_belli = cb_steal_electorate
-			}
-		}
-		A32 = {	
-			join_all_offensive_wars_of = A30 
-		}
-	}
-	
-	option = {
-		name = flavor.wex.4.b
-		ai_chance = { factor = 0 }
-		}
-
 }
 
 country_event = {
 	id = flavor_wex.5
 	title = flavor_wex.5.t
 	desc = flavor_wex.5.d
-	picture = GOOD_WITH_MONARCH_eventPicture
-	#Event Image: King Arthur by Ekaterina Belousova
-	
-	fire_only_once = yes
-	
+	picture = BYZ_BYZANTINE_EMPEROR_eventPicture
 	is_triggered_only = yes
-	
-	trigger = {
-		always = yes
-	}
-	
 	option = {
 		name = flavor_wex.5.a
-		trigger = { tag = A98 }
-		ai_chance = { factor = 100 }
-		A30 = {
-			set_country_flag = wex_cestirande_elector_war
-			declare_war_with_cb = {
-				who = A45
-				casus_belli = cb_steal_electorate
+		custom_tooltip = A30_domination_path_guide
+		hidden_effect = {
+			enable_branching_mission_review_without_ai = {
+				key = LOR
+			}
+			country_event = {
+				id = flavor_wex.55
+				days = 180
 			}
 		}
-		A98 = { 
-			join_all_offensive_wars_of = A30 
+	}
+	after = {
+		country_event = {
+			id = flavor_wex.54
+			days = 365
+			random = 365
 		}
-	}
-	
-	option = {
-		name = flavor_wex.5.b
-		trigger = { tag = B59 }	
-		ai_chance = { factor = 100 }
-		A30 = {
-			set_country_flag = wex_pashaine_elector_war
-			declare_war_with_cb = {
-				who = A45
-				casus_belli = cb_steal_electorate
-			}
-		}
-		B59 = { 
-			join_all_offensive_wars_of = A30 
-		}
-	}
-	
-	option = {
-		name = flavor.wex.5.c
-		ai_chance = { factor = 0 }
-	}
-}
-
-country_event = {
-	id = flavor_wex.6
-	title = flavor_wex.6.t
-	desc = flavor_wex.6.d
-	picture = HRE_eventPicture
-	goto = from
-	
-	is_triggered_only = yes
-	
-	option = {
-		name = flavor_wex.6.a
-		elector = no
-	}
-}
-
-country_event = {
-	id = flavor_wex.7
-	title = flavor_wex.7.t
-	desc = flavor_wex.7.d
-	picture = HRE_eventPicture
-	goto = from
-	
-	is_triggered_only = yes
-	
-	option = {
-		name = flavor_wex.7.a
-		trigger = { has_country_flag = wex_ibevar_elector_war }
-		A32 = { 
-			set_in_empire = yes
-			elector = yes 
-		}
-		clr_country_flag = wex_ibevar_elector_war
-	}
-	
-	option = {
-		name = flavor_wex.7.b
-		trigger = {  has_country_flag = wex_cestirande_elector_war }
-		A98 = { elector = yes }
-		clr_country_flag = wex_cestirande_elector_war
-	}
-	
-	option = {
-		name = flavor_wex.7.c
-		trigger = {  has_country_flag = wex_pashaine_elector_war }
-		B59 = { elector = yes }
-		clr_country_flag = wex_pashaine_elector_war
 	}
 }
 
@@ -279,163 +144,24 @@ country_event = {
 	id = flavor_wex.8
 	title = flavor_wex.8.t
 	desc = flavor_wex.8.d
-	picture = GOOD_WITH_MONARCH_eventPicture
-	
-	trigger = {
-		has_country_flag = wex_industrial_plans
-		NOT = {
-			has_country_modifier = wex_construction_plan
-			has_country_modifier = wex_production_plan
-			has_country_modifier = wex_militarization_plan
-			has_country_modifier = wex_shipbuilding_plan
-		}
-	}
-	
-	mean_time_to_happen = {
-		days = 7
-	}
-	
+	picture = FIREBALL_eventPicture
+	is_triggered_only = yes
 	option = {
 		name = flavor_wex.8.a
-		add_country_modifier = {
-			name = wex_construction_plan
-			duration = 7300
+		A93 = {
+			kill_heir = {
+				allow_new_heir = no
+			}
+			define_heir = {
+				dynasty = "of Tomansford"
+				age = 30
+				claim = 60
+			}
+			kill_ruler = yes
 		}
-	}
-	
-	option = {
-		name = flavor_wex.8.b
-		add_country_modifier = {
-			name = wex_production_plan
-			duration = 7300
-		}
-	}
-	
-	option = {
-		name = flavor_wex.8.c
-		add_country_modifier = {
-			name = wex_militarization_plan
-			duration = 7300
-		}
-	}
-	
-	option = {
-		name = flavor_wex.8.e
-		add_country_modifier = {
-			name = wex_shipbuilding_plan
-			duration = 7300
-		}
-	}
-}
-
-country_event = {
-	id = flavor_wex.9
-	title = flavor_wex.9.t
-	desc = flavor_wex.9.d
-	picture = TRADEGOODS_eventPicture
-	
-	is_triggered_only = yes
-	
-	trigger = {
-		always = yes
-	}
-	
-	option = {
-		name = flavor_wex.9.a
-		trigger = { has_consort = no }
-		ai_chance = { factor = 100 }
-		define_consort = {
-			name = "Cela"
-			dynasty = "síl Plumwall"
-			country_of_origin = Z41
-			culture = east_damerian
-			religion = regent_court
-			adm = 1
-			dip = 6
-			mil = 3
-			female = yes
-		}
-		add_queen_personality = drunkard_personality 
-		add_queen_personality = charismatic_negotiator_personality
-	}
-		
-	option = {
-		name = flavor_wex.9.b
-		ai_chance = { factor = 50 }
-		define_advisor = {
-			type = spymaster
-			name = "Cela síl Plumwall"
-			skill = 2
-			female = yes
-			culture = east_damerian
-			religion = regent_court
-			discount = yes
-		}
-	}
-	
-	option = {
-		name = flavor_wex.9.c
-		trigger = { has_consort = yes }
-		ai_chance = { factor = 50 }
-		remove_consort_effect = yes
-		add_legitimacy = -10
-		define_consort = {
-			name = "Cela"
-			dynasty = "síl Plumwall"
-			country_of_origin = Z41
-			culture = east_damerian
-			religion = regent_court
-			adm = 1
-			dip = 6
-			mil = 3
-			female = yes
-		}
-		add_queen_personality = drunkard_personality 
-		add_queen_personality = charismatic_negotiator_personality
-	}
-	
-	option = {
-		name = flavor_wex.9.e
-		ai_chance = { factor = 0 }
-		add_prestige = -10
-	
-	}
-}
-
-country_event = {
-	id = flavor_wex.10
-	title = flavor_wex.10.t
-	desc = flavor_wex.10.d
-	picture = TRADEGOODS_eventPicture
-	
-	is_triggered_only = yes
-	
-	trigger = {
-		always = yes
-	}
-
-	option = {
-		name = flavor_wex.10.a
-		ai_chance = { factor = 50 }
-		define_advisor = {
-			type = naval_reformer
-			name = "Ivrandil Saltsworn"
-			skill = 3
-			culture = moon_elf
-			religion = regent_court
-			discount = yes
-		}
-	}
-	
-	option = {
-		name = flavor_wex.10.b
-		ai_chance = { factor = 50 }
-		define_admiral = {
-			name = "Ivrandil Saltsworn"
-			shock = 1
-			fire = 1
-			manuever = 5
-			siege = 3
+		country_event = {
+			id = flavor_wex.11
+			days = 30
 		}
 	}
 }
@@ -444,246 +170,3586 @@ country_event = {
 	id = flavor_wex.11
 	title = flavor_wex.11.t
 	desc = flavor_wex.11.d
-	picture = TRADEGOODS_eventPicture
-	
+	picture = LAND_MILITARY_eventPicture
 	is_triggered_only = yes
-	
-	trigger = {
-		always = yes
-	}
-
 	option = {
 		name = flavor_wex.11.a
-		ai_chance = { factor = 50 }
-		define_advisor = {
-			type = commandant
-			name = "Godric síl Acromton"
-			skill = 3
-			culture = east_damerian
-			religion = regent_court
-			discount = yes
+		declare_war_with_cb = {
+			who = A93
+			casus_belli = cb_restore_personal_union
 		}
-	}
-	
-	option = {
-		name = flavor_wex.11.b
-		ai_chance = { factor = 50 }
-		define_general = {
-			name = "Godric síl Acromton"
-			shock = 3
-			fire = 1
-			manuever = 2
-			siege = 2
-			trait = master_of_arms_personality
+		A93 = {
+			add_opinion = {
+				who = ROOT
+				modifier = wex_esmari_hate
+			}
+			add_trust = {
+				who = ROOT
+				value = -10
+			}
 		}
 	}
 }
 
-#Releasing Varivar
 country_event = {
+	#Orda Aldresia duel start
 	id = flavor_wex.12
 	title = flavor_wex.12.t
 	desc = flavor_wex.12.d
-	picture = STREET_SPEECH_eventPicture
-
-	fire_only_once = yes
+	picture = DIPLOMACY_SIGNING_eventPicture
 	is_triggered_only = yes
-
 	option = {
 		name = flavor_wex.12.a
-
-		ai_chance = {
-			factor = 100
-		}
-		release_with_religion_and_culture = { tag = Z42 religion = regent_court culture = moon_elf }
-		create_subject = {
-			subject_type = vassal
-			subject = Z42
-		}
-		Z42 = {
-			remove_opinion = {
-				who = A30
-				modifier = released_vassal
+		hidden_effect = {
+			A30 = {
+				set_ruler_flag = in_magic_duel
+				set_country_flag = lothane_vs_oa
 			}
-			add_opinion = {
-				who = A30
-				modifier = wex_loyalist_rule
+			A77 = {
+				set_country_flag = duel_@ROOT
+			}
+			country_event = {
+				id = magic_duel.0
 			}
 		}
-	}
-
-	option = {
-		name = flavor_wex.12.b
-
-		ai_chance = {
-			factor = 100
-		}
-		release_with_religion_and_culture = { tag = Z42 religion = regent_court culture = moon_elf }
-		create_subject = {
-			subject_type = march
-			subject = Z42
-		}
-		Z42 = {
-			remove_opinion = {
-				who = A30
-				modifier = released_vassal
-			}
-			add_opinion = {
-				who = A30
-				modifier = wex_loyalist_rule
-			}
-		}
-	}
-
-	#Play as them
-	option = {
-		name = flavor_wex.12.c
-		trigger =  { ai = no }
-		highlight = yes
-
-		ai_chance = {
-			factor = 0
-		}
-
-		release_with_religion_and_culture = { tag = Z42 religion = regent_court culture = moon_elf }
-		create_subject = {
-			subject_type = march
-			subject = Z42
-		}
-		Z42 = {
-			remove_opinion = {
-				who = A30
-				modifier = released_vassal
-			}
-			add_opinion = {
-				who = A30
-				modifier = wex_loyalist_rule
-			}
-		}
-		switch_tag = Z42
 	}
 }
 
-#Releasing Plumwall
+#Orda Aldresia duel results
 country_event = {
 	id = flavor_wex.13
 	title = flavor_wex.13.t
 	desc = flavor_wex.13.d
-	picture = STREET_SPEECH_eventPicture
-
-	fire_only_once = yes
+	picture = WOUNDED_SOLDIERS_eventPicture
 	is_triggered_only = yes
-
 	option = {
 		name = flavor_wex.13.a
-
-		ai_chance = {
-			factor = 100
+		add_prestige = 10
+		remove_country_modifier = supporting_orda_aldresia
+		free_vassal = A77
+		A77 = {
+			kill_ruler = yes
+			add_prestige = -50
+			add_devotion = -50
 		}
-		release_with_religion_and_culture = { tag = Z41 religion = regent_court culture = east_damerian }
-		create_subject = {
-			subject_type = vassal
-			subject = Z41
-		}
-		Z41 = {
-			remove_opinion = {
-				who = A30
-				modifier = released_vassal
-			}
-			add_opinion = {
-				who = A30
-				modifier = wex_loyalist_rule
-			}
-		}
-	}
-
-	#Play as them
-	option = {
-		name = flavor_wex.13.b
-		trigger =  { ai = no }
-		highlight = yes
-
-		ai_chance = {
-			factor = 0
-		}
-
-		release_with_religion_and_culture = { tag = Z41 religion = regent_court culture = east_damerian }
-		create_subject = {
-			subject_type = vassal
-			subject = Z41
-		}
-		Z41 = {
-			remove_opinion = {
-				who = A30
-				modifier = released_vassal
-			}
-			add_opinion = {
-				who = A30
-				modifier = wex_loyalist_rule
+		custom_tooltip = A30_universal_hate_tooltip
+		hidden_effect = {
+			every_country = {
+				limit = {
+					is_part_of_hre = yes
+				}
+				add_opinion = {
+					who = ROOT
+					modifier = wex_universal_hate
+				}
+				add_trust = {
+					who = ROOT
+					value = -5
+				}
 			}
 		}
-		switch_tag = Z41
+		clr_country_flag = lothane_vs_oa
+		set_country_flag = weak_orda_aldresia
 	}
 }
 
-#Releasing Acromton
 country_event = {
+	#Asheniande partition
 	id = flavor_wex.14
 	title = flavor_wex.14.t
 	desc = flavor_wex.14.d
-	picture = STREET_SPEECH_eventPicture
-
-	fire_only_once = yes
+	picture = COURT_eventPicture
 	is_triggered_only = yes
-
 	option = {
 		name = flavor_wex.14.a
-
-		ai_chance = {
-			factor = 100
-		}
-		release_with_religion_and_culture = { tag = Z40 religion = regent_court culture = east_damerian }
-		create_subject = {
-			subject_type = vassal
-			subject = Z40
-		}
-		Z40 = {
-			remove_opinion = {
-				who = A30
-				modifier = released_vassal
+		trigger = {
+			A59 = {
+				has_75_opinion_improved_relation = {
+					target = ROOT
+				}
 			}
-			add_opinion = {
-				who = A30
-				modifier = wex_loyalist_rule
+		}
+		set_country_flag = wex_corvurian_deal
+		428 = {
+			add_permanent_claim = A59
+		}
+		431 = {
+			add_permanent_claim = A59
+		}
+	}
+	option = {
+		name = flavor_wex.14.b
+		set_country_flag = wex_no_deal
+		add_casus_belli = {
+			target = A60
+			type = cb_vassalize_mission
+			months = 120
+		}
+	}
+}
+
+country_event = {
+	#Corvuria good
+	id = flavor_wex.15
+	title = flavor_wex.15.t
+	desc = flavor_wex.15.d
+	picture = CONQUEST_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		ashfields_area = {
+			type = all
+			owned_by = ROOT
+		}
+		NOT = {
+			is_year = 1500
+		}
+	}
+	option = {
+		name = flavor_wex.15.a
+		set_country_flag = wex_corvurian_aid
+		A60 = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						province_id = 428
+						province_id = 431
+					}
+				}
+				cede_province = A59
 			}
 		}
 	}
+}
 
-	#Play as them
+country_event = {
+	#Corvuria bad
+	id = flavor_wex.16
+	title = flavor_wex.16.t
+	desc = flavor_wex.16.d
+	picture = ACCUSATION_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		A60 = {
+			is_subject_of = A30
+		}
+		NOT = {
+			is_year = 1500
+		}
+	}
 	option = {
-		name = flavor_wex.14.b
-		trigger =  { ai = no }
-		highlight = yes
+		name = flavor_wex.16.a
+		set_country_flag = wex_angered_corvurians
+		A60 = {
+			every_owned_province = {
+				limit = {
+					area = ashfields_area
+				}
+				add_permanent_claim = A30
+				cede_province = A30
+				add_unrest = 25
+			}
+			add_liberty_desire = 25
+		}
+		A59 = {
+			add_opinion = {
+				who = ROOT
+				modifier = wex_borders_hate
+			}
+			add_trust = {
+				who = ROOT
+				value = -20
+			}
+		}
+	}
+}
 
+country_event = {
+	#Magisterium kneels
+	id = flavor_wex.17
+	title = flavor_wex.17.t
+	desc = flavor_wex.17.d
+	picture = MAGES_ESTATE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.17.a
+		trigger = {
+			NOT = { has_country_flag = magisterium_caylen_mage }
+		}
+		add_prestige = 10
+	}
+	option = {
+		name = flavor_wex.17.b
+		trigger = {
+			has_country_flag = magisterium_caylen_mage
+		}
+		add_prestige = 10
+		add_treasury = -100
+		increase_heir_adm_effect = yes
+		increase_heir_dip_effect = yes
+		increase_heir_mil_effect = yes
+		if = {
+			limit = { has_ruler_flag = heir_mage_personality_mod }
+			set_heir_flag = caylen_schools
+		}
+		else = {
+			set_heir_mage_effect = yes
+		}
+	}
+}
+
+country_event = {
+	#Yet another sack of anbenncost
+	id = flavor_wex.18
+	title = flavor_wex.18.t
+	desc = flavor_wex.18.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.18.a
+		add_treasury = 500
+		custom_tooltip = " "
+		8 = {
+			destroy_great_project = {
+				type = imperial_palace_anbenncost
+			}
+			custom_tooltip = " "
+			change_province_name = "Damucen"
+			rename_capital = "Damucen"
+			add_base_tax = -5
+			add_base_production = -5
+			add_base_manpower = -5
+			add_devastation = 100
+			set_province_flag = imperial_palace_destroyed_flag
+		}
+		custom_tooltip = A30_yet_another_sack_of_anbenncost_dev_tooltip
+		for = {
+			amount = 10
+			effect = "
+				random_owned_province = {
+					limit = {
+						culture_is_wexonard = yes
+					}
+					random_list = {
+						1 = { add_base_production = 1 }
+						1 = { add_base_manpower = 1 }
+					}
+				}
+			"
+		}
+		add_country_modifier = {
+			name = wex_iron_fist
+			duration = 10950
+		}
+	}
+	option = {
+		name = flavor_wex.18.b
+		custom_tooltip = A30_unlock_imperial_palace_tooltip
+		custom_tooltip = " "
+		8 = {
+			add_province_modifier = {
+				name = wex_anbenncost
+				duration = -1
+			}
+		}
+		add_country_modifier = {
+			name = wex_velvet_glove
+			duration = 10950
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.21
+	title = flavor_wex.21.t
+	desc = flavor_wex.21.d
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.21.a
+		add_country_modifier = {
+			name = wex_east_damerian_triumph_integration
+			duration = -1
+		}
+	}
+	option = {
+		name = flavor_wex.21.b
+		add_country_modifier = {
+			name = wex_east_damerian_triumph_assimilation
+			duration = -1
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.22
+	title = flavor_wex.22.t
+	desc = flavor_wex.22.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		mission_completed = A30_east_dameshead_global_eco
+		any_owned_province = {
+			region = east_dameshead_region
+			has_terrain = city_terrain
+			culture = anbenncoster
+		}
+	}
+	option = {
+		name = flavor_wex.22.a
+		random_owned_province = {
+			limit = {
+				region = east_dameshead_region
+				has_terrain = city_terrain
+				culture = anbenncoster
+			}
+			spawn_rebels = {
+				type = nationalist_rebels
+				size = 2
+			}
+			change_culture = east_damerian
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.23
+	title = flavor_wex.23.t
+	desc = flavor_wex.23.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		mission_completed = A30_east_dameshead_global_eco
+		any_owned_province = {
+			OR = {
+				province_group = luna_river_basin
+				province_id = 52
+			}
+			culture_is_human = yes
+			culture_group = anbennarian
+			NOT = {
+				culture = pashainey
+			}
+		}
+	}
+	option = {
+		name = flavor_wex.23.a
+		random_owned_province = {
+			limit = {
+				OR = {
+					province_group = luna_river_basin
+					province_id = 52
+				}
+				culture_is_human = yes
+				culture_group = anbennarian
+				NOT = {
+					culture = pashainey
+				}
+			}
+			change_culture = pashainey
+			add_nationalism = -10
+		}
+		random_owned_province = {
+			limit = {
+				OR = {
+					province_group = luna_river_basin
+					province_id = 52
+				}
+				culture_is_human = yes
+				culture_group = anbennarian
+				NOT = {
+					culture = pashainey
+				}
+			}
+			change_culture = pashainey
+			add_nationalism = -10
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.24
+	title = flavor_wex.24.t
+	desc = flavor_wex.24.d
+	picture = NAVAL_MILITARY_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.24.a
+		custom_tooltip = A30_slavery_yes_tooltip
+		216 = {
+			if = {
+				limit = {
+					trade_goods = slaves
+				}
+				add_base_production = 4
+				add_province_modifier = {
+					name = wex_beating_heart_of_slavery
+					duration = -1
+				}
+				large_decrease_of_orcish_tolerance_effect = yes
+				hidden_effect = {
+					set_global_flag = wex_slavery_continues
+				}
+			}
+			else = {
+				change_trade_goods = slaves
+				add_province_modifier = {
+					name = wex_beating_heart_of_slavery
+					duration = -1
+				}
+				large_decrease_of_orcish_tolerance_effect = yes
+				hidden_effect = {
+					set_global_flag = wex_slavery_continues
+				}
+			}
+		}
+	}
+	option = {
+		name = flavor_wex.24.b
+		country_event = {
+			id = flavor_wex.48
+		}
+		large_increase_of_orcish_tolerance_effect = yes
+		add_mercantilism = 10
+		hidden_effect = {
+			set_global_flag = wex_slavery_abolished
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.25
+	title = flavor_wex.25.t
+	desc = flavor_wex.25.d
+	picture = REVOLT_HUNGARIAN_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.25.a
+		south_alen_area = {
+			spawn_rebels = {
+				type = nationalist_rebels
+				size = 4
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.26
+	title = flavor_wex.26.t
+	desc = flavor_wex.26.d
+	picture = HORDE_ON_HORSEBACK_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.26.a
+		random_owned_province = {
+			limit = {
+				area = alenic_expanse_area
+			}
+			spawn_rebels = {
+				type = nationalist_rebels
+				size = 4
+			}
+		}
+		random_owned_province = {
+			limit = {
+				area = alenic_expanse_area
+			}
+			spawn_rebels = {
+				type = nationalist_rebels
+				size = 4
+			}
+		}
+		random_owned_province = {
+			limit = {
+				area = alenic_expanse_area
+			}
+			spawn_rebels = {
+				type = nationalist_rebels
+				size = 4
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.27
+	title = flavor_wex.27.t
+	desc = flavor_wex.27.d
+	picture = TRADE_GOODS_FURS_FISH_AND_SALT_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.27.a
+		alenvord_area = {
+			add_province_modifier = {
+				name = wex_woodsmen_army
+				duration = -1
+			}
+		}
+		balvord_area = {
+			add_province_modifier = {
+				name = wex_woodsmen_army
+				duration = -1
+			}
+		}
+		jonsway_area = {
+			add_province_modifier = {
+				name = wex_woodsmen_army
+				duration = -1
+			}
+		}
+	}
+	option = {
+		name = flavor_wex.27.b
+		alenvord_area = {
+			add_province_modifier = {
+				name = wex_woodsmen_fur
+				duration = -1
+			}
+		}
+		balvord_area = {
+			add_province_modifier = {
+				name = wex_woodsmen_fur
+				duration = -1
+			}
+		}
+		jonsway_area = {
+			add_province_modifier = {
+				name = wex_woodsmen_fur
+				duration = -1
+			}
+		}
+	}
+	option = {
+		name = flavor_wex.27.c
+		highlight = yes
+		add_prestige = 20
+		name = flavor_wex.27.b
+		change_estate_land_share = {
+			estate = all
+			share = -5
+		}
+		alenvord_area = {
+			add_unrest = 10
+			add_local_autonomy = -50
+		}
+		balvord_area = {
+			add_unrest = 10
+			add_local_autonomy = -50
+		}
+		jonsway_area = {
+			add_unrest = 10
+			add_local_autonomy = -50
+		}
+		custom_tooltip = A30_dwarovar_brain_tooltip
+		hidden_effect = {
+			country_event = {
+				id = flavor_wex.28
+				days = 365
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.28
+	title = flavor_wex.28.t
+	desc = flavor_wex.28.d
+	picture = DARK_FOREST_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.28.a
+		random_list = {
+			20 = {
+				add_prestige = 10
+			}
+			20 = {
+				kill_ruler = yes
+			}
+			60 = {
+				custom_tooltip = A30_werewolving_tooltip
+				hidden_effect = {
+					country_event = {
+						id = flavor_wex.29
+						days = 365
+					}
+				}
+			}
+		}
+		225 = {
+			spawn_rebels = {
+				type = nationalist_rebels
+				size = 4
+				win = yes
+			}
+		}
+		228 = {
+			spawn_rebels = {
+				type = nationalist_rebels
+				size = 4
+				win = yes
+			}
+		}
+		242 = {
+			spawn_rebels = {
+				type = nationalist_rebels
+				size = 4
+				win = yes
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.29
+	title = flavor_wex.29.t
+	desc = flavor_wex.29.d
+	picture = SIEGE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.29.a
+		kill_ruler = yes
+		capital_scope = {
+			add_devastation = 20
+			add_province_modifier = {
+				name = aw_werewolves_1
+				duration = -1
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.30
+	title = flavor_wex.30.t
+	desc = flavor_wex.30.d
+	picture = DIPLOMACY_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.30.a
+		ai_chance = {
+			factor = 100
+		}
+		every_owned_province = {
+			cede_province = FROM
+		}
+	}
+	option = {
+		name = flavor_wex.30.b
+		every_owned_province = {
+			add_permanent_claim = A30
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.31
+	title = flavor_wex.31.t
+	desc = flavor_wex.31.d
+	picture = INVENTION_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.31.a
+		add_country_modifier = {
+			name = wexonard_firearms
+			duration = -1
+		}
+	}
+	option = {
+		name = flavor_wex.31.b
+		add_country_modifier = {
+			name = wexonard_greatswords
+			duration = -1
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.32
+	title = flavor_wex.32.t
+	desc = flavor_wex.32.d
+	picture = LIBERUM_VETO_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		mission_completed = A30_rediscover_roots
+		any_owned_province = {
+			OR = {
+				province_id = 219
+				province_id = 220
+				province_id = 224
+				province_id = 235
+				province_id = 237
+				province_id = 239
+				province_id = 243
+				province_id = 337
+			}
+			NOT = {
+				culture = wexonard
+			}
+		}
+	}
+	option = {
+		name = flavor_wex.32.a
+		random_owned_province = {
+			limit = {
+				OR = {
+					province_id = 219
+					province_id = 220
+					province_id = 224
+					province_id = 235
+					province_id = 237
+					province_id = 239
+					province_id = 243
+					province_id = 337
+				}
+				NOT = {
+					culture = wexonard
+				}
+			}
+			change_culture = wexonard
+			add_base_manpower = 1
+			add_base_production = 1
+			add_nationalism = -10
+			add_province_modifier = {
+				name = return_wexonards
+				duration = 10950
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.33
+	title = flavor_wex.33.t
+	desc = flavor_wex.33.d
+	picture = FARMING_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		mission_completed = A30_homeland_morbani
+		any_owned_province = {
+			OR = {
+				culture = arbarani
+				AND = {
+					OR = {
+						province_id = 338
+						province_id = 343
+					}
+					NOT = {
+						culture = morbani_alenic
+					}
+				}
+			}
+			superregion = western_cannor_superregion
+		}
+	}
+	option = {
+		name = flavor_wex.33.a
+		random_owned_province = {
+			limit = {
+				OR = {
+					culture = arbarani
+					AND = {
+						OR = {
+							province_id = 338
+							province_id = 343
+						}
+						NOT = {
+							culture = morbani_alenic
+						}
+					}
+				}
+				superregion = western_cannor_superregion
+			}
+			change_culture = morbani_alenic
+			add_base_manpower = 1
+			add_base_production = 1
+			add_nationalism = -10
+			add_province_modifier = {
+				name = morbani_resurgence
+				duration = 7300
+			}
+		}
+		random_owned_province = {
+			limit = {
+				OR = {
+					culture = arbarani
+					AND = {
+						OR = {
+							province_id = 338
+							province_id = 343
+						}
+						NOT = {
+							culture = morbani_alenic
+						}
+					}
+				}
+				superregion = western_cannor_superregion
+			}
+			change_culture = morbani_alenic
+			add_base_manpower = 1
+			add_base_production = 1
+			add_nationalism = -10
+			add_province_modifier = {
+				name = morbani_resurgence
+				duration = 7300
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.34
+	title = flavor_wex.34.t
+	desc = flavor_wex.34.d
+	picture = CITY_DEVELOPMENT_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		mission_completed = A30_rediscover_our_brothers
+		any_owned_province = {
+			NOT = {
+				culture_is_wexonard = yes
+			}
+			OR = {
+				region = the_borders_region
+				area = ashfields_area
+				area = rotwall_area
+			}
+			any_neighbor_province = {
+				culture_is_wexonard = yes
+			}
+		}
+	}
+	immediate = {
+		for = {
+			amount = 3
+			effect = "
+				random_owned_province = {
+					limit = {
+						NOT = {
+							culture_is_wexonard = yes
+						}
+						OR = {
+							region = the_borders_region
+							area = ashfields_area
+							area = rotwall_area
+						}
+						any_neighbor_province = {
+							culture_is_wexonard = yes
+						}
+						NOT = {
+							has_province_flag = wexonized_province
+						}
+					}
+					set_province_flag = wexonized_province
+				}
+			"
+		}
+	}
+	option = {
+		name = flavor_wex.34.a
+		every_owned_province = {
+			limit = {
+				has_province_flag = wexonized_province
+			}
+			change_culture_to_wexonard = yes
+			add_base_production = 1
+			clr_province_flag = wexonized_province
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.35
+	title = flavor_wex.35.t
+	desc = flavor_wex.35.d
+	picture = FIREBALL_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.35.a
+		221 = {
+			spawn_rebels = {
+				type = nationalist_rebels
+				size = 3
+			}
+		}
+		country_event = {
+			id = flavor_wex.36
+			days = 60
+		}
+	}
+	option = {
+		name = flavor_wex.35.a
+		add_treasury = 200
+		add_legitimacy = 5
+		221 = {
+			add_base_tax = -1
+			add_base_production = -1
+			add_base_manpower = -1
+			add_devastation = 20
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.36
+	title = flavor_wex.36.t
+	desc = flavor_wex.36.d
+	picture = SIEGE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.36.a
+		221 = {
+			add_base_tax = -2
+			add_base_production = -2
+			add_base_manpower = -2
+			add_devastation = 20
+		}
+		custom_tooltip = A30_distribute_mil_tooltip
+		for = {
+			amount = 6
+			effect = "
+				random_owned_province = {
+					limit = {
+						area = wexhills_area
+					}
+					add_base_manpower = 1
+				}
+			"
+		}
+		country_event = {
+			id = flavor_wex.37
+			days = 60
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.37
+	title = flavor_wex.37.t
+	desc = flavor_wex.37.d
+	picture = SIEGE_PRAGUE_CASTLE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.37.a
+		221 = {
+			if = {
+				limit = {
+					has_building = temple
+				}
+				remove_building = temple
+			}
+			if = {
+				limit = {
+					has_building = cathedral
+				}
+				remove_building = cathedral
+			}
+			else = {
+				add_devastation = 10
+			}
+			add_base_tax = -2
+			add_base_production = -2
+			add_base_manpower = -2
+			add_devastation = 20
+		}
+		custom_tooltip = A30_distribute_tax_tooltip
+		for = {
+			amount = 6
+			effect = "
+				random_owned_province = {
+					limit = {
+						area = wexhills_area
+					}
+					add_base_tax = 1
+				}
+			"
+		}
+		country_event = {
+			id = flavor_wex.38
+			days = 60
+		}
+	}
+	option = {
+		name = flavor_wex.37.b
+		add_prestige_or_monarch_power = {
+			amount = 50
+		}
+		add_country_modifier = {
+			name = wex_crypt_spared
+			duration = 9125			#50
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.38
+	title = flavor_wex.38.t
+	desc = flavor_wex.38.d
+	picture = HOUSE_OF_TRADE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.38.a
+		221 = {
+			if = {
+				limit = {
+					has_building = marketplace
+				}
+				remove_building = marketplace
+			}
+			if = {
+				limit = {
+					has_building = trade_depot
+				}
+				remove_building = trade_depot
+			}
+			if = {
+				limit = {
+					has_building = stock_exchange
+				}
+				remove_building = stock_exchange
+			}
+			else = {
+				add_devastation = 10
+			}
+			add_center_of_trade_level = -3
+			add_base_tax = -2
+			add_base_production = -2
+			add_base_manpower = -2
+			add_devastation = 20
+		}
+		custom_tooltip = A30_distribute_prod_tooltip
+		for = {
+			amount = 6
+			effect = "
+				random_owned_province = {
+					limit = {
+						culture_is_wexonard = yes
+					}
+					add_base_production = 1
+				}
+			"
+		}
+		country_event = {
+			id = flavor_wex.39
+			days = 60
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.39
+	title = flavor_wex.39.t
+	desc = flavor_wex.39.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.39.a
+		221 = {
+			change_province_name = "Aldvord"
+			add_permanent_province_modifier = {
+				name = gaweton_ruins
+				duration = -1
+			}
+			province_event = {
+				id = flavor_wex.40
+				days = 730
+			}
+		}
+		222 = {
+			center_of_trade = 1
+		}
+		A13 = {
+			release_all_possible_countries = yes
+			release_all_subjects = yes
+		}
+		set_country_flag = wex_gaweton_destroyed
+	}
+}
+
+province_event = {
+	id = flavor_wex.40
+	title = flavor_wex.40.t
+	desc = flavor_wex.40.d
+	picture = GOBLIN_AMBUSH_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.40.a
+		add_base_production = 2
+		add_goblin_minority_size_effect = yes
+		add_permanent_province_modifier = {
+			name = aw_goblins_1
+			duration = -1
+		}
+		custom_tooltip = aw_how_to_get_more_adventurer_removal_chance_tooltip
+		hidden_effect = {
+			province_event = {
+				id = flavor_wex.41
+				days = 730
+			}
+			province_event = {
+				id = flavor_wex.43
+				days = 1460
+			}
+		}
+	}
+}
+
+province_event = {
+	#Goblins show up in Gaweton
+	id = flavor_wex.41
+	title = flavor_wex.41.t
+	desc = flavor_wex.41.d
+	picture = GOBLIN_AMBUSH_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.40.a
+		add_base_production = 2
+		add_goblin_minority_size_effect = yes
+		if = {
+			limit = {
+				has_province_modifier = aw_goblins_1
+			}
+			remove_province_modifier = aw_goblins_1
+			add_permanent_province_modifier = {
+				name = aw_goblins_2
+				duration = -1
+			}
+			hidden_effect = {
+				province_event = {
+					id = flavor_wex.41
+					days = 730
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				OR = {
+					has_province_modifier = aw_goblins_2
+					has_province_modifier = aw_goblins_3
+				}
+			}
+			remove_province_modifier = aw_goblins_2
+			add_permanent_province_modifier = {
+				name = aw_goblins_3
+				duration = -1
+			}
+			hidden_effect = {
+				province_event = {
+					id = flavor_wex.42
+					days = 730
+				}
+			}
+		}
+		custom_tooltip = aw_how_to_get_more_adventurer_removal_chance_tooltip
+	}
+}
+
+province_event = {
+	#Goblins become majority
+	id = flavor_wex.42
+	title = flavor_wex.42.t
+	desc = flavor_wex.42.d
+	picture = GOBLIN_AMBUSH_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.42.a
+		change_culture = city_goblin
+		change_province_name = "Ciernbrod"
+		change_trade_goods = chinaware
+		medium_increase_of_goblin_tolerance_effect = yes
+		add_base_production = 4
+		remove_province_modifier = aw_goblins_3
+		remove_province_modifier = gaweton_ruins
+		add_permanent_province_modifier = {
+			name = gaweton_ruins_repurposed
+			duration = -1
+		}
+		owner = {
+			add_legitimacy = -10
+			add_prestige = -20
+		}
+	}
+	option = {
+		name = flavor_wex.42.b
+		add_devastation = 50
+		add_base_production = -6
+		remove_province_modifier = aw_goblins_3
+		hidden_effect = {
+			spawn_rebels = {
+				type = aw_goblins_rebels
+				size = 3
+			}
+		}
+	}
+}
+
+province_event = {
+	#Kobolds show up in Gaweton
+	id = flavor_wex.43
+	title = flavor_wex.43.t
+	desc = flavor_wex.43.d
+	picture = KOBOLD_HOARD_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.43.a
+		add_kobold_minority_size_effect = yes
+	}
+}
+
+country_event = {
+	id = flavor_wex.46
+	title = flavor_wex.46.t
+	desc = flavor_wex.46.d
+	picture = TRADE_GOODS_METALS_AND_MINING_EQUIPENT_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.46.a
+		goto = 303
+		add_prestige = 10
+		change_innovativeness = 5
+		add_country_modifier = {
+					name = wex_coal
+					duration = -1
+		}
+		303 = {
+			change_trade_goods = coal
+			add_dwarven_minority_size_effect = yes
+			add_gnomish_minority_size_effect = yes
+		}
+	}
+}
+
+province_event = {
+	id = flavor_wex.47
+	title = flavor_wex.47.t
+	desc = flavor_wex.47.d
+	picture = DEBATE_REPUBLICAN_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		owner = {
+			OR = {
+				tag = A30
+				AND = {
+					tag = A75
+					is_subject_of = A30
+				}
+			}
+		}
+	}
+	option = {
+		name = flavor_wex.47.a
+		add_prestige = 5
+		change_culture_to_wexonard = yes
+	}
+}
+
+# Orcish Slave Trade Banned in Cannor by Wex
+country_event = {
+	id = flavor_wex.48
+	title = flavor_wex.48.t
+	desc = flavor_wex.48.d
+	picture = TRADE_GOODS_PLANTATION_GOODS_IN_WAREHOUSE_eventPicture
+	major = yes
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.48.a
+		change_price = {
+			trade_goods = slaves
+			key = ORCISH_SLAVE_TRADE_BANNED_IN_CANNOR
+			value = 1
+			duration = 9125
+		}
+		custom_tooltip = tooltip_orcish_slave_trade_banned_in_cannor
+		set_global_flag = orcish_slave_trade_banned_in_cannor
+	}
+}
+
+country_event = {
+	id = flavor_wex.49
+	title = flavor_wex.49.t
+	desc = flavor_wex.49.d
+	picture = TRADE_GOODS_PLANTATION_GOODS_IN_WAREHOUSE_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		any_owned_province = {
+			has_province_modifier = wex_gnomish_glassworks
+			NOT = {
+				has_any_gnomish_pop_trigger = yes
+			}
+		}
+	}
+	immediate = {
+		hidden_effect = {
+			random_owned_province = {
+				limit = {
+					has_province_modifier = wex_gnomish_glassworks
+					NOT = {
+						has_any_gnomish_pop_trigger = yes
+					}
+				}
+				save_event_target_as = wex_event_target
+			}
+		}
+	}
+	option = {
+		name = flavor_wex.49.a
+		goto = wex_event_target
+		event_target:wex_event_target = {
+			add_gnomish_minority_size_effect = yes
+		}
+		random_list = {
+			10 = {
+				add_adm_power = 20
+				add_dip_power = 20
+				add_mil_power = 20
+			}
+			10 = {
+				add_country_modifier = {
+					name = wex_gnomes_tech
+					duration = 1825
+				}
+			}
+			10 = {
+				add_country_modifier = {
+					name = wex_gnomes_ideas
+					duration = 1825
+				}
+			}
+			10 = {
+				event_target:wex_event_target = {
+					add_base_production = 2
+				}
+			}
+			10 = {
+				add_stability_or_adm_power = yes
+			}
+			10 = {
+				add_stability = -1
+			}
+			10 = {
+				event_target:wex_event_target = {
+					add_devastation = 35
+				}
+			}
+			10 = {
+				add_country_modifier = {
+					name = wex_gnomes_seethe
+					duration = 3650
+				}
+			}
+			10 = {
+				add_country_modifier = {
+					name = wex_gnomes_wack
+					duration = 3650
+				}
+			}
+			10 = {
+				add_adm_power = -20
+				add_dip_power = -20
+				add_mil_power = -20
+			}
+		}
+	}
+}
+
+#If your ruler dies and your heir is set to marry Lisolette, he does
+country_event = {
+	id = flavor_wex.50
+	title = flavor_wex.50.t
+	desc = flavor_wex.50.d
+	picture = COURT_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		tag = A30
+		has_country_flag = A30_lisolette_will_marry
+		has_regency = no
+		is_female = no
+		NOT = {
+			has_ruler_flag = heir_mar_lis
+		}
+	}
+	option = {
+		name = flavor_wex.50.a
+		clr_country_flag = A30_lisolette_will_marry
+		define_consort = {
+			name = "Lisolette"
+			dynasty = "sÃ­l Rhinmond"
+			country_of_origin = A48
+			religion = A48
+			culture = A48
+			adm = 5
+			dip = 4
+			mil = 2
+			female = yes
+			birth_date = 1422.1.1
+		}
+		set_consort_flag = lis_consort
+		hidden_effect = {
+			country_event = {
+				id = flavor_wex.52
+				days = 1095
+			}
+		}
+	}
+	after = {
+		country_event = {
+			id = flavor_wex.52
+			days = 1095
+			random = 730
+		}
+	}
+}
+
+#Inherit Sugamber after 15 years, hidden event
+country_event = {
+	id = flavor_wex.5100
+	title = flavor_wex.5100.t
+	desc = flavor_wex.5100.d
+	picture = REFORM_eventPicture
+
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			set_variable = {
+				which = admTaken
+				value = 0
+			}
+			if = {
+				limit = {
+					A48 = {
+						NOT = {
+							development = 100
+						}
+					}
+				}
+				hidden_effect = {
+					export_to_variable = {
+						which = sugDev
+						value = total_development
+						who = A48
+					}
+					while = {
+						limit = {
+							check_variable = {
+								which = sugDev
+								value = 1
+							}
+						}
+						change_variable = {
+							which = admTaken
+							value = 4
+						}
+						change_variable = {
+							which = sugDev
+							value = -1
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					A48 = {
+						development = 100
+					}
+				}
+				export_to_variable = {
+					which = sugDev
+					value = total_development
+					who = A48
+				}
+				change_variable = {
+					which = sugDev
+					value = -100
+				}
+				change_variable = {
+					which = admTaken
+					value = 400
+				}
+				while = {
+					limit = {
+						check_variable = {
+							which = sugDev
+							value = 1
+						}
+					}
+					change_variable = {
+						which = admTaken
+						value = 6
+					}
+					change_variable = {
+						which = sugDev
+						value = -1
+					}
+				}
+			}
+			set_variable = {
+				which = admTakenDirectly
+				which = 0
+			}
+			set_variable = {
+				which = monthsDurationDebt
+				which = 0
+			}
+			while = {
+				limit = {
+					adm_power = -99
+					check_variable = {
+						which = admTaken
+						value = 1
+					}
+				}
+				add_adm_power = -1
+				change_variable = {
+					which = admTaken
+					value = -1
+				}
+				change_variable = {
+					which = admTakenDirectly
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						which = admTaken
+						value = 3
+					}
+				}
+				add_country_modifier = {
+					name = wex_sugamber_admin_debt
+					duration = 30
+				}
+				change_variable = {
+					which = monthsDurationDebt
+					value = 1
+				}
+			}
+			while = {
+				limit = {
+					check_variable = {
+						which = admTaken
+						value = 3
+					}
+				}
+				extend_country_modifier = {
+					name = wex_sugamber_admin_debt
+					duration = 30
+				}
+				change_variable = {
+					which = monthsDurationDebt
+					value = 1
+				}
+				change_variable = {
+					which = admTaken
+					value = -3
+				}
+			}
+			country_event = {
+				id = flavor_wex.51
+			}
+		}
+	}
+	option = {
+		name = flavor_wex.5100.a
+	}
+}
+
+#Inherit Sugamber after 15 years, seen event
+country_event = {
+	id = flavor_wex.51
+	title = flavor_wex.51.t
+	desc = flavor_wex.51.d
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.51.a
+		custom_tooltip = A30_admin_cost_sugamber_tooltip
+		if = {
+			limit = {
+				check_variable = {
+					which = monthsDurationDebt
+					value = 1
+				}
+			}
+			custom_tooltip = A30_admin_debt_sugamber_tooltip
+		}
+		inherit = A48
+	}
+}
+
+country_event = {
+	id = flavor_wex.52
+	title = flavor_wex.52.t
+	desc = flavor_wex.52.d
+	picture = UNIVERSITY_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		has_ruler_flag = caylen_sil_wex
+		has_consort_flag = lis_consort
+	}
+	option = {
+		name = flavor_wex.52.a
+		change_adm = 1
+	}
+}
+
+country_event = {
+	id = flavor_wex.53
+	title = flavor_wex.53.t
+	desc = flavor_wex.53.d
+	picture = TOURNAMENT_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.53.a
+		random_list = {
+			20 = {
+				add_prestige = -20
+			}
+			80 = {
+				add_prestige = 5
+				change_heir_dip = 1
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.54
+	title = flavor_wex.54.t
+	desc = flavor_wex.54.d
+	picture = VILLAGE_RAIDED_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		has_ruler_flag = lothane_sil_wex
+	}
+	option = {
+		name = flavor_wex.54.a
+		medium_increase_of_gnollish_tolerance_effect = yes
+		random_owned_province = {
+			limit = {
+				culture = wexonard
+			}
+			add_gnollish_minority_size_effect = yes
+		}
+		add_manpower = 5
+		add_prestige = -20
+		add_legitimacy = -10
+	}
+	option = {
+		name = flavor_wex.54.b
+		small_decrease_of_gnollish_tolerance_effect = yes
+		add_prestige = -5
+	}
+}
+
+country_event = {
+	id = flavor_wex.55
+	title = flavor_wex.55.t
+	desc = flavor_wex.55.d
+	picture = BATTLE_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		has_ruler_flag = lothane_sil_wex
+	}
+	option = {
+		name = flavor_wex.55.a
+		trigger = {
+			ai = no
+		}
+		goto = 318
+		318 = {
+			add_province_triggered_modifier = bandit_king_duel
+		}
+		custom_tooltip = A30_bandit_king_move_unit_tooltip
+		hidden_effect = {
+			country_event = {
+				id = flavor_wex.57
+				days = 365
+			}
+		}
+	}
+	option = {
+		name = flavor_wex.55.b
+		add_prestige = -5
+	}
+}
+
+country_event = {
+	id = flavor_wex.56
+	title = flavor_wex.56.t
+	desc = flavor_wex.56.d
+	picture = DARK_FOREST_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		has_ruler_flag = lothane_sil_wex
+	}
+	immediate = {
+		hidden_effect = {
+			318 = {
+				remove_province_triggered_modifier = bandit_king_duel
+			}
+		}
+	}
+	option = {
+		name = flavor_wex.56.a
+		custom_tooltip = A30_what_if_tooltip
+		add_prestige = -10
+		318 = {
+			remove_province_modifier = aw_bandits_3
+		}
+	}
+	option = {
+		name = flavor_wex.56.b
+		custom_tooltip = A30_what_if_tooltip
+		318 = {
+			remove_province_modifier = aw_bandits_3
+		}
+		418 = {
+			owner = {
+				country_event = {
+					id = flavor_wex.58
+					days = 30
+				}
+			}
+		}
+	}
+	option = {
+		name = flavor_wex.56.c
+		trigger = {
+			has_country_flag = 4th_path_soon_tm
+		}
+		custom_tooltip = A30_point_of_no_return_tooltip
+		318 = {
+			remove_province_modifier = aw_bandits_3
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.57
+	title = flavor_wex.57.t
+	desc = flavor_wex.57.d
+	picture = BANKRUPTCY_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		318 = {
+			has_province_modifier = bandit_king_duel
+		}
+	}
+	immediate = {
+		hidden_effect = {
+			318 = {
+				remove_province_triggered_modifier = bandit_king_duel
+			}
+		}
+	}
+	option = {
+		name = flavor_wex.57.a
+		add_prestige = -10
+		318 = {
+			add_local_autonomy = 25
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.58
+	title = flavor_wex.58.t
+	desc = flavor_wex.58.d
+	picture = BATTLE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.58.a
+		418 = {
+			add_devastation = 10
+			add_province_modifier = {
+				name = aw_bandits_3
+				duration = -1
+			}
+		}
+		add_trust = {
+			who = A30
+			value = -10
+			mutual = yes
+		}
+	}
+}
+
+###########################
+###Post-Lothane Disaster###
+###########################
+country_event = {
+	id = flavor_wex.100
+	title = flavor_wex.100.t
+	desc = flavor_wex.100.d
+	picture = DEATH_OF_HEIR_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		tag = A30
+		has_country_flag = A30_domination_path
+		NOT = {
+			has_ruler_flag = lothane_sil_wex
+			has_country_flag = lothane_death
+			is_year = 1550
+			is_subject = yes
+		}
+	}
+	immediate = {
+		hidden_effect = {
+			set_country_flag = lothane_death
+			318 = {
+				remove_province_triggered_modifier = bandit_king_duel
+			}
+			if = {
+				limit = {
+					OR = {
+						ai = no
+						total_development = 300
+					}
+				}
+				set_global_flag = lothane_death_disaster
+				country_event = {
+					id = flavor_wex.101
+					days = 30
+				}
+				emperor = {
+					country_event = {
+						id = flavor_wex.101
+						days = 30
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = flavor_wex.100.a
+		add_country_modifier = {
+			name = wex_lothane_infamy
+			duration = 18250
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.101
+	title = flavor_wex.101.t
+	desc = flavor_wex.101.d
+	picture = COURT_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.101.a
+		trigger = {
+			tag = A30
+		}
+	}
+	option = {
+		name = flavor_wex.101.c
+		trigger = {
+			is_emperor = yes
+		}
+		break_alliance = A30
+		every_known_country = {
+			limit = {
+				is_part_of_hre = yes
+			}
+			country_event = {
+				id = flavor_wex.102
+				days = 30
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.102
+	title = flavor_wex.102.t
+	desc = flavor_wex.102.d
+	picture = ACCUSATION_eventPicture
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					tag = A30
+				}
+				calculate_dove_war_allegiance = yes
+				every_known_country = {
+					limit = {
+						is_part_of_hre = yes
+						is_subject = no
+						NOT = {
+							tag = A30
+						}
+					}
+					add_trust = {
+						who = A30
+						value = -5
+						mutual = yes
+					}
+					country_event = {
+						id = flavor_wex.103
+						days = 15
+					}
+				}
+				emperor = {
+					country_event = {
+						id = flavor_wex.104
+						days = 15
+					}
+				}
+			}
+		}
+	}
+	option = {
+		#Wex option
+		name = flavor_wex.102.a
+		trigger = {
+			tag = A30
+		}
+		add_prestige = -10
+		add_legitimacy = -10
+	}
+	option = {
+		#Imperial prince option
+		name = flavor_wex.102.b
+		trigger = {
+			NOT = {
+				tag = A30
+			}
+		}
+	}
+}
+
+#AI and player determines what do with Wex(the incident decision for the AI is determined here too)
+country_event = {
+	id = flavor_wex.103
+	title = flavor_wex.103.t
+	desc = flavor_wex.103.d
+	picture = OVEREXTENSION_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.103.a
+		ai_chance = {
+			factor = 1
+		}
+		trigger = {
+			OR = {
+				has_country_flag = hostile_to_wex
+				is_emperor = yes
+			}
+		}
+		set_country_flag = wex_incident_against
+		break_alliance = A30
+		add_opinion = {
+			who = A30
+			modifier = coalition_against_wex
+		}
+		add_trust = {
+			who = A30
+			value = -10
+			mutual = yes
+		}
+	}
+	option = {
+		name = flavor_wex.103.b
+		trigger = {
+			is_emperor = no
+			NOT = {
+				has_country_flag = hostile_to_wex
+				has_country_flag = friendly_to_wex
+			}
+		}
+		ai_chance = {
+			factor = 1
+		}
+		set_country_flag = wex_incident_neutral
+		break_alliance = A30
+		break_alliance = emperor
+		add_opinion = {
+			who = A30
+			modifier = distrusting_wex
+		}
+		add_trust = {
+			who = A30
+			value = -5
+			mutual = yes
+		}
+	}
+	option = {
+		name = flavor_wex.103.c
+		trigger = {
+			is_emperor = no
+			has_country_flag = friendly_to_wex
+		}
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				NOT = {
+					has_opinion = {
+						who = A30
+						value = 0
+					}
+				}
+			}
+			modifier = {
+				factor = 0.1
+				NOT = {
+					alliance_with = A30
+				}
+			}
+			modifier = {
+				factor = 2
+				has_opinion = {
+					who = A30
+					value = 100
+				}
+			}
+			modifier = {
+				factor = 5
+				has_opinion = {
+					who = A30
+					value = 150
+				}
+			}
+			modifier = {
+				factor = 5
+				has_opinion = {
+					who = A30
+					value = 200
+				}
+			}
+			modifier = {
+				factor = 5
+				alliance_with = A30
+				trust = {
+					who = A30
+					value = 60
+				}
+			}
+			modifier = {
+				factor = 5
+				alliance_with = A30
+				trust = {
+					who = A30
+					value = 70
+				}
+			}
+		}
+		set_country_flag = wex_incident_allied
+		add_trust = {
+			who = A30
+			value = 10
+			mutual = yes
+		}
+		break_alliance = emperor
+	}
+}
+
+#Hidden looped event checking for active imperial incidents
+country_event = {
+	id = flavor_wex.104
+	title = flavor_wex.104.t
+	desc = flavor_wex.104.d
+	picture = OVEREXTENSION_eventPicture
+	is_triggered_only = yes
+	hidden = yes
+	immediate = {
+		if = {
+			limit = {
+				NOT = {
+					active_imperial_incident = any
+				}
+			}
+			A30 = {
+				country_event = {
+					id = flavor_wex.105
+				}
+			}
+			emperor = {
+				country_event = {
+					id = flavor_wex.105
+				}
+			}
+		}
+		else = {
+			emperor = {
+				country_event = {
+					id = flavor_wex.104
+					days = 360
+				}
+			}
+		}
+	}
+	option = {
+		name = flavor_wex.104.a
+	}
+}
+
+#Imperial princes are called to Anbennconst to start a conflict against Wex
+country_event = {
+	id = flavor_wex.105
+	title = flavor_wex.105.t
+	desc = flavor_wex.105.d
+	picture = HRE_eventPicture
+	is_triggered_only = yes
+	major = yes
+	option = {
+		#Wex option
+		name = flavor_wex.105.a
+		trigger = {
+			tag = A30
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_dlc = "Emperor"
+				}
+			}
+			custom_tooltip = A30_no_emperor_dlc_180_days_tooltip
+		}
+	}
+	option = {
+		#Emperor option
+		name = flavor_wex.105.b
+		trigger = {
+			is_emperor = yes
+		}
+		if = {
+			limit = {
+				has_dlc = "Emperor"
+			}
+			set_imperial_incident = incident_wexonard_crimes
+		}
+		else = {
+			country_event = {
+				id = flavor_wex.107
+				days = 180
+			}
+		}
+	}
+}
+
+#Incident hook
+country_event = {
+	id = flavor_wex.106
+	title = flavor_wex.106.t
+	desc = flavor_wex.106.d
+	picture = BYZ_BYZANTINE_EAGLE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.106.a
+		ai_chance = {
+			modifier = {
+				factor = 1000
+				has_country_flag = wex_incident_against
+			}
+		}
+		country_event = {
+			id = flavor_wex.107
+			days = 2
+		}
+	}
+	option = {
+		name = flavor_wex.106.b
+		ai_chance = {
+			modifier = {
+				factor = 1000
+				has_country_flag = wex_incident_neutral
+			}
+		}
+		country_event = {
+			id = flavor_wex.107
+			days = 2
+		}
+	}
+	option = {
+		name = flavor_wex.106.c
+		ai_chance = {
+			modifier = {
+				factor = 1000
+				has_country_flag = wex_incident_allied
+			}
+		}
+		country_event = {
+			id = flavor_wex.107
+			days = 2
+		}
+	}
+}
+
+#Imperial princes are called to Anbennconst to start a conflict against Wex
+country_event = {
+	id = flavor_wex.107
+	title = flavor_wex.107.t
+	desc = flavor_wex.107.d
+	picture = MILITARY_CAMP_eventPicture
+	is_triggered_only = yes
+	major = yes
+	immediate = {
+		hidden_effect = {
+			A30 = {
+				country_event = {
+					id = flavor_wex.108
+					days = 2
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_country_flag = wex_lorentish_support
+						}
+					}
+					A01 = {
+						break_alliance = A30
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = flavor_wex.107.a
+		A30 = {
+			declare_war_with_cb = {
+				who = emperor
+				casus_belli = cb_destroy_anbennar_wex
+			}
+		}
+		every_known_country = {
+			limit = {
+				OR = {
+					has_country_flag = wex_incident_allied
+					AND = {
+						tag = A01
+						A30 = {
+							has_country_flag = wex_lorentish_support
+						}
+					}
+					AND = {
+						tag = A59
+						A30 = {
+							has_country_flag = wex_corvurian_aid
+						}
+					}
+				}
+				is_subject = no
+			}
+			join_all_offensive_wars_of = A30
+		}
+		every_known_country = {
+			limit = {
+				OR = {
+					has_country_flag = wex_incident_against
+					AND = {
+						tag = A59
+						A30 = {
+							has_country_flag = wex_angered_corvurians
+						}
+					}
+				}
+				is_subject = no
+			}
+			set_country_flag = fought_against_wex
+			join_all_defensive_wars_of = emperor
+		}
+	}
+}
+
+#Start war event for Wex, gives buffs based on missions done
+country_event = {
+	id = flavor_wex.108
+	title = flavor_wex.108.t
+	desc = flavor_wex.108.d
+	picture = GENERALS_DISCUSSING_eventPicture
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = flavor_wex.109
+				days = 60
+			}
+		}
+	}
+	option = {
+		name = flavor_wex.108.a
+		if = {
+			limit = {
+				has_country_flag = wex_magisterium_puppet
+			}
+			define_general = {
+				name = "Richard Fiedler"
+				fire = 2
+				shock = 8
+				manuever = 1
+				siege = 4
+				trait = war_wizard_personality
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = A30_sugamber_shoes
+			}
+			add_country_modifier = {
+				name = sugamber_shoes
+				duration = 3650
+			}
+		}
+		if = {
+			limit = {
+				A85 = {
+					is_subject_of = ROOT
+				}
+				NOT = {
+					has_country_flag = wex_magisterium_puppet
+				}
+			}
+			A85 = {
+				add_liberty_desire = 50
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = weak_orda_aldresia
+				}
+			}
+			emperor = {
+				add_country_modifier = {
+					name = aldresian_fervor
+					duration = 3650
+				}
+			}
+			A77 = {
+				add_country_modifier = {
+					name = aldresian_fervor
+					duration = 3650
+				}
+			}
+		}
+		every_known_country = { #failsafe
+			limit = {
+				OR = {
+					has_country_flag = wex_incident_allied
+					AND = {
+						tag = A01
+						A30 = {
+							has_country_flag = wex_lorentish_support
+						}
+					}
+					AND = {
+						tag = A59
+						A30 = {
+							has_country_flag = wex_corvurian_aid
+						}
+					}
+				}
+				is_subject = no
+			}
+			join_all_offensive_wars_of = A30
+		}
+	}
+}
+
+#Varivar Silmunist rebellion
+country_event = {
+	id = flavor_wex.109
+	title = flavor_wex.109.t
+	desc = flavor_wex.109.d
+	picture = VILLAGE_RAIDED_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		5 = {
+			owned_by = A30
+		}
+	}
+	immediate = {
+		5 = {
+			spawn_rebels = {
+				type = nationalist_rebels
+				size = 5
+				culture = moon_elf
+				friend = emperor
+			}
+		}
+	}
+	option = {
+		name = flavor_wex.109.a
+		small_decrease_of_elven_tolerance_effect = yes
+	}
+}
+
+#Wex victory event
+country_event = {
+	id = flavor_wex.110
+	title = flavor_wex.110.t
+	desc = flavor_wex.110.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	major = yes
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.110.a
+		add_splendor = 200
+		add_prestige_or_monarch_power = {
+			amount = 100
+		}
+		add_legitimacy = 25
+		add_power_projection = {
+			type = dismantled_the_hre
+			amount = 25
+		}
+		increase_ruler_mil_effect = yes
+		add_country_modifier = {
+			name = rebirth_of_wex
+			duration = -1
+		}
+		remove_country_modifier = wex_lothane_infamy
+		if = {
+			limit = {
+				NOT = {
+					government_rank = 2
+				}
+			}
+			set_government_rank = 2
+		}
+		custom_tooltip = A30_unlocked_domination_paths_tooltip
+	}
+}
+
+#Empire members lost event
+country_event = {
+	id = flavor_wex.111
+	title = flavor_wex.111.t
+	desc = flavor_wex.111.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.111.a
+		trigger = {
+			OR = {
+				has_country_flag = fought_against_wex
+				overlord = {
+					has_country_flag = fought_against_wex
+				}
+			}
+		}
+		add_stability = -1
+		add_prestige = -25
+	}
+	option = {
+		name = flavor_wex.111.b
+		trigger = {
+			NOT = {
+				has_country_flag = fought_against_wex
+				overlord = {
+					has_country_flag = fought_against_wex
+				}
+			}
+		}
+	}
+}
+
+#Wex lost event
+country_event = {
+	id = flavor_wex.112
+	title = flavor_wex.112.t
+	desc = flavor_wex.112.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.112.a
+		kill_ruler = yes
+		add_stability = -1
+		add_prestige = -200
+		add_legitimacy = -50
+		add_manpower = -100
+		set_country_flag = git_gud
+	}
+}
+
+#Empire members won event
+country_event = {
+	id = flavor_wex.113
+	title = flavor_wex.113.t
+	desc = flavor_wex.113.d
+	picture = BYZ_BYZANTINE_EAGLE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.113.a
+		trigger = {
+			OR = {
+				has_country_flag = fought_against_wex
+				overlord = {
+					has_country_flag = fought_against_wex
+				}
+			}
+		}
+		add_legitimacy = 10
+		add_prestige = 25
+	}
+	option = {
+		name = flavor_wex.113.b
+		trigger = {
+			NOT = {
+				has_country_flag = fought_against_wex
+				overlord = {
+					has_country_flag = fought_against_wex
+				}
+			}
+		}
+	}
+}
+
+#Emperor won event
+country_event = {
+	id = flavor_wex.114
+	title = flavor_wex.114.t
+	desc = flavor_wex.114.d
+	picture = BYZ_BYZANTINE_EAGLE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.114.a
+		add_prestige = 20
+		add_splendor = 100
+		add_prestige_or_monarch_power = {
+			amount = 50
+		}
+		add_imperial_influence = 25
+	}
+}
+
+#####################
+###Ruby Crown Path###
+#####################
+
+country_event = {
+	id = flavor_wex.200
+	title = flavor_wex.200.t
+	desc = flavor_wex.200.d
+	picture = COURT_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.200.a
+		add_prestige = 10
+		define_advisor = {
+			type = diplomat
+			name = "Vincen Silmuna"
+			skill = 3
+			culture = west_damerian
+			religion = ROOT
+			cost_multiplier = 0.25
+		}
+		wesdam_area = {
+			add_local_autonomy = 20
+		}
+		windtower_area = {
+			add_local_autonomy = 20
+		}
+	}
+	option = {
+		name = flavor_wex.200.b
+		trigger = {
+			has_consort = no
+		}
+		add_prestige = 10
+		if = {
+			limit = {
+				is_female = no
+			}
+			define_consort = {
+				name = "Aucanna"
+				dynasty = "Silmuna"
+				culture = west_damerian
+				adm = 4
+				dip = 5
+				mil = 3
+				female = yes
+			}
+		}
+		else = {
+			define_consort = {
+				name = "Vincen"
+				dynasty = "Silmuna"
+				culture = west_damerian
+				adm = 2
+				dip = 6
+				mil = 4
+			}
+		}
+		wesdam_area = {
+			add_local_autonomy = 20
+		}
+		windtower_area = {
+			add_local_autonomy = 20
+		}
+	}
+	option = {
+		name = flavor_wex.200.c
+		wesdam_area = {
+			add_local_autonomy = -10
+		}
+		windtower_area = {
+			add_local_autonomy = -10
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.201
+	title = flavor_wex.201.t
+	desc = flavor_wex.201.d
+	picture = CULTURE_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		mission_completed = A30_lencorization_wesdam
+		any_owned_province = {
+			OR = {
+				area = wesdam_area
+				province_id = 20
+			}
+			NOT = {
+				culture_is_wexonard = yes
+				culture_is_high_lorentish = yes
+			}
+		}
+	}
+	option = {
+		name = flavor_wex.201.a
+		random_owned_province = {
+			limit = {
+				OR = {
+					area = wesdam_area
+					province_id = 20
+				}
+				NOT = {
+					culture_is_wexonard = yes
+					culture_is_high_lorentish = yes
+				}
+			}
+			change_culture_to_high_lorentish = yes
+			add_base_production = 2
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.202
+	title = flavor_wex.202.t
+	desc = flavor_wex.202.d
+	picture = THEATRE_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		mission_completed = A30_conquer_western_lencenor
+		any_owned_province = {
+			culture = low_lorentish
+			superregion = western_cannor_superregion
+		}
+	}
+	option = {
+		name = flavor_wex.202.a
+		add_prestige_or_monarch_power = {
+			amount = 10
+		}
+		random_owned_province = {
+			limit = {
+				culture = low_lorentish
+				superregion = western_cannor_superregion
+			}
+			change_culture_to_high_lorentish = yes
+		}
+		random_owned_province = {
+			limit = {
+				culture = low_lorentish
+				superregion = western_cannor_superregion
+			}
+			change_culture_to_high_lorentish = yes
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.203
+	title = flavor_wex.203.t
+	desc = flavor_wex.203.d
+	picture = REVOLT_HUNGARIAN_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		OR = {
+			tag = A30
+			was_tag = A30
+		}
+		NOT = {
+			has_government_attribute = enable_estate_lorentish_elite
+		}
+		mission_completed = A30_our_claim
+		OR = {
+			A01 = {
+				is_subject_of = ROOT
+			}
+			AND = {
+				A01 = {
+					exists = no
+				}
+				num_of_owned_provinces_with = {
+					value = 5
+					is_core = A01
+					OR = {
+						region = west_dameshead_region
+						region = lencenor_region
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = flavor_wex.203.a
+		custom_tooltip = A30_lorentish_uprising_tooltip
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = lorent_weaker_rebels
+					had_country_flag = {
+						flag = wex_on_the_rose_throne
+						days = 9125
+					}
+					tag = AC0
+				}
+			}
+			spawn_lorentish_rebels = yes
+		}
+		if = {
+			limit = {
+				NOT = {
+					tag = AC0
+				}
+			}
+			spawn_lorentish_rebels = yes
+		}
+		spawn_lorentish_rebels = yes
+	}
+}
+
+country_event = {
+	id = flavor_wex.204
+	title = flavor_wex.204.t
+	desc = flavor_wex.204.d
+	picture = DIPLOMACY_SIGNING_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.204.a
+		custom_tooltip = A30_weaker_lorentish_rebel_tooltip
+		set_country_flag = lorent_weaker_rebels
+		if = {
+			limit = {
+				A01 = {
+					is_subject_of = ROOT
+				}
+			}
+			A01 = {
+				add_liberty_desire = -25
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.205
+	title = flavor_wex.205.t
+	desc = flavor_wex.205.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.205.a
+		set_country_flag = wex_lorent_collapse
+		custom_tooltip = A30_lorent_pu_collapse_tooltip
+		hidden_effect = {	
+			A01 = {
+				every_subject_country = {
+					limit = {
+						OR = {
+							is_subject_of_type = crown_colony
+							is_subject_of_type = private_enterprise
+							is_subject_of_type = self_governing_colony
+						}
+					}
+					set_country_flag = go_back_to_be_vassalized_scrub
+				}
+				release_all_subjects = yes
+				every_country = {
+					limit = {
+						has_country_flag = go_back_to_be_vassalized_scrub
+					}
+					A01 = {
+						create_subject = {
+							subject_type = self_governing_colony
+							subject = PREV
+						}
+					}
+					clr_country_flag = go_back_to_be_vassalized_scrub
+				}
+				release = A07
+				release = A08
+				release = A64
+				release = A65
+				release = A66
+				release = A67
+				release = A68
+				release = A69
+				release = A70
+				release = A71
+			}
+			small_country_region = {
+				limit = {
+					NOT = {
+						area = lorenans_reach_area
+					}
+					is_core = A01
+				}
+				remove_core = A01
+				add_claim = A01
+				add_claim = A30
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.206
+	title = flavor_wex.206.t
+	desc = flavor_wex.206.d
+	picture = DIPLOMACY_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.206.a
+		ai_chance = {
+			factor = 100
+		}
+		A30 = {
+			vassalize = ROOT
+			create_subject = {
+				subject_type = autonomous_vassal
+				subject = ROOT
+			}
+		}
+		primary_and_ruler_culture_change = {
+			race = human
+			new_culture = wexonard
+		}
+	}
+	option = {
+		name = flavor_wex.206.b
 		ai_chance = {
 			factor = 0
 		}
+		gisden_area = {
+			add_permanent_claim = A30
+		}
+	}
+}
 
-		release_with_religion_and_culture = { tag = Z40 religion = regent_court culture = east_damerian }
-		create_subject = {
-			subject_type = vassal
-			subject = Z40
-		}
-		Z40 = {
-			remove_opinion = {
-				who = A30
-				modifier = released_vassal
+country_event = {
+	id = flavor_wex.207
+	title = flavor_wex.207.t
+	desc = flavor_wex.207.d
+	picture = SPY_eventPicture
+	fire_only_once = yes
+	trigger = {
+		has_country_flag = A30_domination_path
+		mission_completed = A30_question_of_magisterium
+		A85 = {
+			dynasty	= "Vinerick"
+			is_in_war = {
+				attacker_leader = ROOT
+				defender_leader = A85
+				casus_belli = cb_vassalize_mission_magisterium
 			}
-			add_opinion = {
-				who = A30
-				modifier = wex_loyalist_rule
+		}
+
+	}
+	option = {
+		name = flavor_wex.207.a
+		A85 = {
+			exile_heir_as = vinerick_exiled_heir
+			exile_ruler_as = {
+				name = vinerick_exiled_ruler
 			}
 		}
-		switch_tag = Z40
+	}
+}
+
+country_event = {
+	id = flavor_wex.208
+	title = flavor_wex.208.t
+	desc = flavor_wex.208.d
+	picture = FEAST_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		mission_completed = A30_small_duchy
+		any_owned_province = {
+			superregion = western_cannor_superregion
+			is_cannorian_halfling_primary_culture = yes
+			NOT = {
+				culture = redfoot_halfling
+			}
+		}
+	}
+	option = {
+		name = flavor_wex.208.a
+		random_owned_province = {
+			limit = {
+				superregion = western_cannor_superregion
+				is_cannorian_halfling_primary_culture = yes
+				NOT = {
+					culture = redfoot_halfling
+				}
+			}
+			change_culture = redfoot_halfling
+			add_base_production = 1
+		}
+		random_owned_province = {
+			limit = {
+				superregion = western_cannor_superregion
+				is_cannorian_halfling_primary_culture = yes
+				NOT = {
+					culture = redfoot_halfling
+				}
+			}
+			change_culture = redfoot_halfling
+			add_base_production = 1
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.209
+	title = flavor_wex.209.t
+	desc = flavor_wex.209.d
+	picture = COURT_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.209.a
+		change_estate_land_share = {
+			estate = estate_lorentish_elite
+			share = 10
+		}
+		set_estate_privilege = estate_lorentish_elite_ruby_crown
+	}
+}
+
+country_event = {
+	id = flavor_wex.210
+	title = flavor_wex.210.t
+	desc = flavor_wex.210.d
+	picture = CULTURE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.210.a
+		add_splendor = 100
+		add_prestige_or_monarch_power = {
+			amount = 25
+		}
+		add_stability_or_adm_power = yes
+		custom_tooltip = A30_form_wexonerti_group_tooltip
+		change_primary_culture = wexonard_dual
+		if = {
+			limit = {
+				ruler_culture = wexonard
+			}
+			set_ruler_culture = wexonard_dual
+		}
+		if = {
+			limit = {
+				ruler_culture = high_lorentish
+			}
+			set_ruler_culture = high_lorentish_dual
+		}
+		if = {
+			limit = {
+				has_heir = yes
+				heir_culture = wexonard
+			}
+			set_heir_culture = wexonard_dual
+		}
+		if = {
+			limit = {
+				has_heir = yes
+				heir_culture = high_lorentish
+			}
+			set_heir_culture = high_lorentish_dual
+		}
+		if = {
+			limit = {
+				has_consort = yes
+				consort_culture = wexonard
+			}
+			set_consort_culture = wexonard_dual
+		}
+		if = {
+			limit = {
+				has_consort = yes
+				consort_culture = high_lorentish
+			}
+			set_consort_culture = high_lorentish_dual
+		}
+		hidden_effect = {
+			every_province = {
+				limit = {
+					OR = {
+						culture = wexonard
+						culture = high_lorentish
+					}
+				}
+				trigger_switch = {
+					on_trigger = culture
+					wexonard = {
+						change_culture = wexonard_dual
+					}
+					high_lorentish = {
+						change_culture = high_lorentish_dual
+					}
+				}
+			}
+			every_country = {
+				limit = {
+					OR = {
+						primary_culture = wexonard
+						primary_culture = high_lorentish
+					}
+				}
+				trigger_switch = {
+					on_trigger = primary_culture
+					wexonard = {
+						change_primary_culture = wexonard_dual
+						set_ruler_culture = wexonard_dual
+						if = {
+							limit = {
+								has_heir = yes
+							}
+							set_heir_culture = wexonard_dual
+						}
+						if = {
+							limit = {
+								has_consort = yes
+							}
+							set_consort_culture = wexonard_dual
+						}
+					}
+					high_lorentish = {
+						change_primary_culture = high_lorentish_dual
+						set_ruler_culture = high_lorentish_dual
+						if = {
+							limit = {
+								has_heir = yes
+							}
+							set_heir_culture = high_lorentish_dual
+						}
+						if = {
+							limit = {
+								has_consort = yes
+							}
+							set_consort_culture = high_lorentish_dual
+						}
+					}
+				}
+			}
+			remove_accepted_culture = high_lorentish
+			set_global_flag = wexorenti_group
+		}
+	}
+}
+
+##################
+###Other Events###
+##################
+
+#Hidden event to recalculate scaling modifiers, done yearly
+country_event = {
+	id = flavor_wex.300
+	title = flavor_wex.300.t
+	desc = flavor_wex.300.d
+	picture = TRADEGOODS_eventPicture
+	is_triggered_only = yes
+	hidden = yes
+	trigger = {
+		OR = {
+			tag = A30
+			was_tag = A30
+		}
+		has_estate_privilege = estate_steelblood_barons
+		OR = {
+			has_country_flag = wex_scaling_steel_unlocked
+			AND = {
+				has_country_flag = steelblood_barons_copper_unlocked
+				has_country_flag = wex_scaling_flagship_unlocked
+			}
+		}
+	}
+	immediate = {
+		if = {
+			limit = {
+				has_country_flag = wex_scaling_steel_unlocked
+			}
+			recalculate_wex_steel_modifier = yes
+		}
+		if = {
+			limit = {
+				has_country_flag = steelblood_barons_copper_unlocked
+				has_country_flag = wex_scaling_flagship_unlocked
+			}
+			recalculate_wex_bronze_modifier = yes
+		}
+		if = {
+			limit = {
+				has_country_flag = wex_scaling_artillery_unlocked
+			}
+			recalculate_wex_artillery_modifier = yes
+		}
+	}
+	option = {
+		name = flavor_wex.300.a
+	}
+}
+
+country_event = {
+	id = flavor_wex.400
+	title = flavor_wex.400.z
+	desc = flavor_wex.400.zz
+	picture = ADVISOR_eventPicture
+	is_triggered_only = yes
+	#adm
+	option = {
+		name = flavor_wex.400.a
+		generate_lorentish_adivisor = {
+			type = philosopher
+		}
+	}
+	option = {
+		name = flavor_wex.400.b
+		generate_lorentish_adivisor = {
+			type = natural_scientist
+		}
+	}
+	option = {
+		name = flavor_wex.400.c
+		generate_lorentish_adivisor = {
+			type = artist
+		}
+	}
+	option = {
+		name = flavor_wex.400.d
+		generate_lorentish_adivisor = {
+			type = treasurer
+		}
+	}
+	option = {
+		name = flavor_wex.400.e
+		generate_lorentish_adivisor = {
+			type = theologian
+		}
+	}
+	option = {
+		name = flavor_wex.400.f
+		generate_lorentish_adivisor = {
+			type = master_of_mint
+		}
+	}
+	option = {
+		name = flavor_wex.400.g
+		generate_lorentish_adivisor = {
+			type = inquisitor
+		}
+	}
+	option = {
+		name = flavor_wex.400.h
+		generate_lorentish_adivisor = {
+			type = court_mage
+		}
+	}
+
+	#dip
+	option = {
+		name = flavor_wex.400.i
+		generate_lorentish_adivisor = {
+			type = statesman
+		}
+	}
+	option = {
+		name = flavor_wex.400.j
+		generate_lorentish_adivisor = {
+			type = naval_reformer
+		}
+	}
+	option = {
+		name = flavor_wex.400.k
+		generate_lorentish_adivisor = {
+			type = trader
+		}
+	}
+	option = {
+		name = flavor_wex.400.l
+		generate_lorentish_adivisor = {
+			type = spymaster
+		}
+	}
+	option = {
+		name = flavor_wex.400.m
+		generate_lorentish_adivisor = {
+			type = colonial_governor
+		}
+	}
+	option = {
+		name = flavor_wex.400.n
+		generate_lorentish_adivisor = {
+			type = diplomat
+		}
+	}
+	option = {
+		name = flavor_wex.400.o
+		generate_lorentish_adivisor = {
+			type = navigator
+		}
+	}
+
+	#mil
+	option = {
+		name = flavor_wex.400.p
+		generate_lorentish_adivisor = {
+			type = army_reformer
+		}
+	}
+	option = {
+		name = flavor_wex.400.q
+		generate_lorentish_adivisor = {
+			type = army_organiser
+		}
+	}
+	option = {
+		name = flavor_wex.400.r
+		generate_lorentish_adivisor = {
+			type = commandant
+		}
+	}
+	option = {
+		name = flavor_wex.400.s
+		generate_lorentish_adivisor = {
+			type = quartermaster
+		}
+	}
+	option = {
+		name = flavor_wex.400.t
+		generate_lorentish_adivisor = {
+			type = recruitmaster
+		}
+	}
+	option = {
+		name = flavor_wex.400.u
+		generate_lorentish_adivisor = {
+			type = fortification_expert
+		}
+	}
+	option = {
+		name = flavor_wex.400.v
+		generate_lorentish_adivisor = {
+			type = grand_captain
+		}
+	}
+
+	option = {
+		name = flavor_wex.400.w
+		add_treasury = 500
+		clr_country_flag = invited_lorentish_advisor
+	}
+}
+
+country_event = {
+	id = flavor_wex.401
+	title = flavor_wex.401.t
+	desc = flavor_wex.401.d
+	picture = ANGRY_MOB_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		has_estate = estate_lorentish_elite
+		NOT = {
+			estate_loyalty = {
+				estate = estate_lorentish_elite
+				loyalty = 30
+			}
+		}
+		OR = {
+			had_country_flag = {
+				flag = angry_lorentish
+				days = 360
+			}
+			NOT = {
+				has_country_flag = angry_lorentish
+			}
+		}
+	}
+	option = {
+		name = flavor_wex.401.a
+		clr_country_flag = wex_loyal_lorentish
+		clr_country_flag = angry_lorentish
+		set_country_flag = angry_lorentish
+		custom_tooltip = A30_angry_ruby_crown_tooltip
+		hidden_effect = {
+			lencenor_region = {
+				limit = {
+					owned_by = ROOT
+					NOT = {
+						pure_unrest = 15
+					}
+				}
+				add_unrest = 6
+			}
+			west_dameshead_region = {
+				limit = {
+					owned_by = ROOT
+					NOT = {
+						pure_unrest = 15
+					}
+				}
+				add_unrest = 6
+			}
+			lorenans_reach_area = {
+				limit = {
+					owned_by = ROOT
+					NOT = {
+						pure_unrest = 15
+					}
+				}
+				add_unrest = 6
+			}
+			lencenor_region = {
+				limit = {
+					owned_by = ROOT
+				}
+				add_local_autonomy = 10
+				remove_province_modifier = loyal_ruby_crown
+			}
+			west_dameshead_region = {
+				limit = {
+					owned_by = ROOT
+				}
+				add_local_autonomy = 10
+				remove_province_modifier = loyal_ruby_crown
+			}
+			lorenans_reach_area = {
+				limit = {
+					owned_by = ROOT
+				}
+				add_local_autonomy = 10
+				remove_province_modifier = loyal_ruby_crown
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.402
+	title = flavor_wex.402.t
+	desc = flavor_wex.402.d
+	picture = TRADEGOODS_eventPicture
+	is_triggered_only = yes
+	hidden = yes
+	trigger = {
+		has_estate = estate_lorentish_elite
+		estate_loyalty = {
+			estate = estate_lorentish_elite
+			loyalty = 60
+		}
+		NOT = {
+			has_country_flag = wex_loyal_lorentish
+		}
+	}
+	immediate = {
+		set_country_flag = wex_loyal_lorentish
+		lencenor_region = {
+			limit = {
+				owned_by = ROOT
+			}
+			add_province_modifier = {
+				name = loyal_ruby_crown
+				duration = -1
+			}
+		}
+		west_dameshead_region = {
+			limit = {
+				owned_by = ROOT
+			}
+			add_province_modifier = {
+				name = loyal_ruby_crown
+				duration = -1
+			}
+		}
+		lorenans_reach_area = {
+			limit = {
+				owned_by = ROOT
+			}
+			add_province_modifier = {
+				name = loyal_ruby_crown
+				duration = -1
+			}
+		}
+	}
+	option = {
+		name = flavor_wex.402.a
+	}
+}
+
+country_event = {
+	id = flavor_wex.403
+	title = flavor_wex.403.t
+	desc = flavor_wex.403.d
+	picture = TRADEGOODS_eventPicture
+	is_triggered_only = yes
+	hidden = yes
+	trigger = {
+		has_estate = estate_lorentish_elite
+		NOT = {
+			estate_loyalty = {
+				estate = estate_lorentish_elite
+				loyalty = 60
+			}
+		}
+		has_country_flag = wex_loyal_lorentish
+	}
+	immediate = {
+		clr_country_flag = wex_loyal_lorentish
+		lencenor_region = {
+			limit = {
+				owned_by = ROOT
+			}
+			remove_province_modifier = loyal_ruby_crown
+		}
+		west_dameshead_region = {
+			limit = {
+				owned_by = ROOT
+			}
+			remove_province_modifier = loyal_ruby_crown
+		}
+		lorenans_reach_area = {
+			limit = {
+				owned_by = ROOT
+			}
+			remove_province_modifier = loyal_ruby_crown
+		}
+	}
+	option = {
+		name = flavor_wex.403.a
+	}
+}
+
+#dau cronen formation event
+country_event = {
+	id = flavor_wex.404
+	title = flavor_wex.404.t
+	desc = flavor_wex.404.d
+	picture = SEJM_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.404.a
+		add_prestige_or_monarch_power = {
+			amount = 25
+		}
+		change_ruler_stat = {
+			type = dip
+			amount = 1
+		}
+		country_event = {
+			id = flavor_wex.406
+		}
+	}
+}
+
+country_event = {
+	id = flavor_wex.405
+	title = flavor_wex.405.t
+	desc = flavor_wex.405.d
+	picture = SEJM_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.405.a
+		override_country_name = EMPIRE_OF_WEX
+	}
+	option = {
+		name = flavor_wex.405.b
+		override_country_name = WEXONARD_EMPIRE
+	}
+	option = {
+		name = flavor_wex.405.c
+		override_country_name = WEX_DOMINION
+	}
+	option = {
+		name = flavor_wex.405.e
+		override_country_name = WEXONARD_DOMINION
+	}
+	option = {
+		name = flavor_wex.405.f
+	}
+}
+
+country_event = {
+	id = flavor_wex.406
+	title = flavor_wex.406.t
+	desc = flavor_wex.406.d
+	picture = SEJM_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = flavor_wex.406.a
+		override_country_name = DUAL_MONARCHY
+	}
+	option = {
+		name = flavor_wex.406.b
+		override_country_name = EMPIRE_TWO_CROWNS
+	}
+	option = {
+		name = flavor_wex.406.c
+		override_country_name = TWO_CROWNS
+	}
+	option = {
+		name = flavor_wex.406.e
+		override_country_name = DAU_CROEN
+	}
+	option = {
+		name = flavor_wex.406.f
+		override_country_name = WEX_LORENT
+	}
+	option = {
+		name = flavor_wex.406.g
+	}
+}
+
+country_event = {
+	id = flavor_wex.1000
+	title = flavor_wex.1000.t
+	desc = flavor_wex.1000.d
+	picture = SEJM_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	trigger = {
+		tag = A30
+		ai = yes
+	}
+	option = {
+		name = flavor_wex.1000.a
+		ai_chance = {
+			factor = 1111
+		}
+		set_ai_personality = {
+			personality = ai_militarist
+		}
+		set_country_flag = A30_domination_path
+		preview_mission_branch_batch_1 = { branch = 1 }
+		select_current_missions_WEX = yes
+	}
+	option = {
+		name = flavor_wex.1000.b
+		ai_chance = {
+			factor = 2
+		}
+		set_country_flag = A30_imperial_path
+		preview_mission_branch_batch_1 = { branch = 2 }
+		select_current_missions_WEX = yes
 	}
 }
