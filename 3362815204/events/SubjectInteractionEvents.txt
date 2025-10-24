@@ -1,7 +1,7 @@
 ########################################
 # Events for Subject Interaction
 #
-# written by Sara Wendel-Örtqvist
+# written by Sara Wendel-ï¿½rtqvist
 ########################################
 
 namespace = subject_interaction_events
@@ -1998,10 +1998,27 @@ country_event = {
   
 	mean_time_to_happen = {
 		days = 1
+		modifier = {
+			factor = 100
+			OR = {
+				has_country_modifier = ace_unnatural_misfortune
+				AND = {
+					NOT = {
+						has_country_modifier = ace_unnatural_misfortune
+					}
+					any_subject_country = {
+						has_country_modifier = ace_unnatural_luck
+					}
+				}
+			}
+		}
 	}
   
 	option = {
 		name = subject_interaction_events.35.a	# Long term loss
+		ai_chance = {
+			factor = 1
+		}
 		add_country_modifier = {
 			name = "disloyal_subjects"
 			duration = 1825 #About 5 years
@@ -2009,6 +2026,23 @@ country_event = {
 	}
 	option = {
 		name = subject_interaction_events.35.b	# Short term loss
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_modifier = ace_unnatural_misfortune
+					AND = {
+						NOT = {
+							has_country_modifier = ace_unnatural_misfortune
+						}
+						any_subject_country = {
+							has_country_modifier = ace_unnatural_luck
+						}
+					}
+				}
+			}
+		}
 		add_dip_power = -60
 	}
 }
@@ -2205,6 +2239,7 @@ country_event = {
 			any_owned_province = {
 				controlled_by = THIS
 				is_capital = no
+				is_city = yes
 				OR = {
 					AND = {
 						is_claim = ROOT
@@ -2225,6 +2260,7 @@ country_event = {
 					limit = {
 						controlled_by = THIS
 						is_capital = no
+						is_city = yes
 						OR = {
 							AND = {
 								is_claim = ROOT
@@ -2243,14 +2279,38 @@ country_event = {
   
 	mean_time_to_happen = {
 		days = 1
+		modifier = {
+			factor = 100
+			has_country_modifier = ace_unnatural_luck
+			NOT = {
+				overlord = {
+					has_country_modifier = ace_unnatural_luck
+				}
+			}
+		}
 	}
   
 	option = {
 		name = subject_interaction_events.40.a
+		ai_chance = {
+			factor = 1
+		}
 		overlord = { country_event = { id = subject_interaction_events.41 } }
 	}
 	option = {
 		name = subject_interaction_events.40.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_country_modifier = ace_unnatural_luck
+				NOT = {
+					overlord = {
+						has_country_modifier = ace_unnatural_luck
+					}
+				}
+			}
+		}
 		add_prestige = 10
 		event_target:rightful_province = {
 			if = {
@@ -2300,6 +2360,15 @@ country_event = {
 				factor = 1.5
 				event_target:rightful_province = {
 					is_core = FROM
+				}
+			}
+			modifier = {
+				factor = 0
+				FROM = {
+					has_country_modifier = ace_unnatural_luck
+				}
+				NOT = {
+					has_country_modifier = ace_unnatural_luck
 				}
 			}
 		}

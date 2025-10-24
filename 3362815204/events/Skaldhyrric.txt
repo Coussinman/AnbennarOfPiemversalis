@@ -995,7 +995,7 @@ province_event = {
 	option = {
 		name = skaldhyrric.8.a
 		owner = {
-			add_treasury = 30
+			add_treasury = 75
 		}
 		add_devastation = -25
 		add_province_modifier = { name = einher_glorious_victory duration = 1825 }
@@ -1289,32 +1289,107 @@ country_event = { #ruler
 	
 	option = { #admin - coordinate hunting plans
 		name = skaldhyrric.21.a
-		if = {
-			limit = { NOT = { adm = 6 } }
-			change_adm = 1
+		change_ruler_stat = {
+			type = adm
+			amount = 1
 		}
-		else = {
-			add_adm_power = 100
+		if = {
+			limit = {
+				tag = AD5
+				NOT = {
+					mission_completed = AD5_end_the_sidrvetr
+				}
+			}
+			random_list = {
+				33 = {
+					change_variable = {
+						which = variable_AD5_hallfredhavn_food
+						value = 10
+					}
+				}
+				33 = {
+					change_variable = {
+						which = variable_AD5_hallfredhavn_food
+						value = 5
+					}
+				}
+				33 = {
+					change_variable = {
+						which = variable_AD5_hallfredhavn_food
+						value = 3
+					}
+				}
+			}
 		}
 	}
 	option = { #dip - allow key ally the kill
 		name = skaldhyrric.21.b
-		if = {
-			limit = { NOT = { dip = 6 } }
-			change_dip = 1
+		change_ruler_stat = {
+			type = dip
+			amount = 1
 		}
-		else = {
-			add_dip_power = 100
+		if = {
+			limit = {
+				tag = AD5
+				NOT = {
+					mission_completed = AD5_end_the_sidrvetr
+				}
+			}
+			random_list = {
+				33 = {
+					change_variable = {
+						which = variable_AD5_hallfredhavn_food
+						value = 10
+					}
+				}
+				33 = {
+					change_variable = {
+						which = variable_AD5_hallfredhavn_food
+						value = 5
+					}
+				}
+				33 = {
+					change_variable = {
+						which = variable_AD5_hallfredhavn_food
+						value = 3
+					}
+				}
+			}
 		}
 	}
 	option = { #mil - chaaarge!
 		name = skaldhyrric.21.c
-		if = {
-			limit = { NOT = { mil = 6 } }
-			change_mil = 1
+		change_ruler_stat = {
+			type = mil
+			amount = 1
 		}
-		else = {
-			add_mil_power = 100
+		if = {
+			limit = {
+				tag = AD5
+				NOT = {
+					mission_completed = AD5_end_the_sidrvetr
+				}
+			}
+			random_list = {
+				33 = {
+					change_variable = {
+						which = variable_AD5_hallfredhavn_food
+						value = 10
+					}
+				}
+				33 = {
+					change_variable = {
+						which = variable_AD5_hallfredhavn_food
+						value = 5
+					}
+				}
+				33 = {
+					change_variable = {
+						which = variable_AD5_hallfredhavn_food
+						value = 3
+					}
+				}
+			}
 		}
 	}
 }
@@ -1329,32 +1404,107 @@ country_event = { #heir
 	
 	option = { #admin - coordinate hunting plans
 		name = skaldhyrric.22.a
-		if = {
-			limit = { NOT = { heir_adm = 6 } }
-			change_heir_adm = 1
+		change_heir_stat = {
+			type = adm
+			amount = 1
 		}
-		else = {
-			add_adm_power = 100
+		if = {
+			limit = {
+				tag = AD5
+				NOT = {
+					mission_completed = AD5_end_the_sidrvetr
+				}
+			}
+			random_list = {
+				33 = {
+					change_variable = {
+						which = variable_AD5_hallfredhavn_food
+						value = 15
+					}
+				}
+				33 = {
+					change_variable = {
+						which = variable_AD5_hallfredhavn_food
+						value = 10
+					}
+				}
+				33 = {
+					change_variable = {
+						which = variable_AD5_hallfredhavn_food
+						value = 5
+					}
+				}
+			}
 		}
 	}
 	option = { #dip - allow key ally the kill
 		name = skaldhyrric.22.b
-		if = {
-			limit = { NOT = { heir_dip = 6 } }
-			change_heir_dip = 1
+		change_heir_stat = {
+			type = dip
+			amount = 1
 		}
-		else = {
-			add_dip_power = 100
+		if = {
+			limit = {
+				tag = AD5
+				NOT = {
+					mission_completed = AD5_end_the_sidrvetr
+				}
+			}
+			random_list = {
+				33 = {
+					change_variable = {
+						which = variable_AD5_hallfredhavn_food
+						value = 15
+					}
+				}
+				33 = {
+					change_variable = {
+						which = variable_AD5_hallfredhavn_food
+						value = 10
+					}
+				}
+				33 = {
+					change_variable = {
+						which = variable_AD5_hallfredhavn_food
+						value = 5
+					}
+				}
+			}
 		}
 	}
 	option = { #mil - chaaarge!
 		name = skaldhyrric.22.c
-		if = {
-			limit = { NOT = { heir_mil = 6 } }
-			change_heir_mil = 1
+		change_heir_stat = {
+			type = mil
+			amount = 1
 		}
-		else = {
-			add_mil_power = 100
+		if = {
+			limit = {
+				tag = AD5
+				NOT = {
+					mission_completed = AD5_end_the_sidrvetr
+				}
+			}
+			random_list = {
+				33 = {
+					change_variable = {
+						which = variable_AD5_hallfredhavn_food
+						value = 15
+					}
+				}
+				33 = {
+					change_variable = {
+						which = variable_AD5_hallfredhavn_food
+						value = 10
+					}
+				}
+				33 = {
+					change_variable = {
+						which = variable_AD5_hallfredhavn_food
+						value = 5
+					}
+				}
+			}
 		}
 	}
 }
@@ -1390,6 +1540,7 @@ country_event = { #Outreach with Regent Court/Corinite
 			save_event_target_as = skald_regent_court_outreach
 		}
 	}
+	goto = skald_regent_court_outreach
 	
 	option = {
 		name = skaldhyrric.23.a
@@ -1397,7 +1548,7 @@ country_event = { #Outreach with Regent Court/Corinite
 			add_province_modifier = { name = skald_court_practices duration = 5475 }
 			change_religion = skaldhyrric_faith
 		}
-		add_treasury = -25
+		add_treasury = -50
 	}
 	option = {
 		name = skaldhyrric.23.b
@@ -1659,6 +1810,7 @@ country_event = { #unorthodox tales
 			}
 		}
 	}
+	goto = skald_unorthodox_tales
 	
 	option = { #stop them
 		name = skaldhyrric.29.a
@@ -1783,7 +1935,10 @@ country_event = { #cold year
 	
 	option = {
 		name = skaldhyrric.31.a
-		add_years_of_income = -0.5
+		add_country_modifier = {
+			name = ace_skaldhyrric_cold_year
+			duration = 3650
+		}
 		add_legitimacy_equivalent = { amount = -10 republican_tradition = -5 }
 		random = {
 			chance = 25
@@ -1835,3 +1990,1004 @@ country_event = { #doubt in ruler
 		}
 	}
 }
+country_event = { #annual skald council meeting
+	id = skaldhyrric.33
+	title = skaldhyrric.33.t
+	desc = skaldhyrric.33.d
+	picture = bonfire_of_the_vanities_eventpicture
+	is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	trigger = {
+		religion = skaldhyrric_faith
+		has_country_flag = skald_council_established
+	}
+
+	option = { #church powerr
+		name = skaldhyrric.33.a
+		ai_chance = { factor = 25 }
+		random_list = {
+			50 = { add_church_power = 20 }
+			50 = { add_church_power = -20 }
+		}
+		add_estate_loyalty = {
+			estate = estate_church
+			loyalty = 5
+		}
+	}
+	
+	option = { #patron of arts
+		name = skaldhyrric.33.b
+		highlight = yes
+		ai_chance = { 
+			factor = 25
+		}
+		trigger = {
+			OR = {
+				ruler_has_personality = patron_of_arts_personality
+				ruler_has_personality = architectural_visionary_personality
+			}
+		}
+		add_treasury = -100
+		random_owned_province = {
+			limit = {
+				religion = skaldhyrric_faith
+			}
+			if = {
+				limit = {
+					has_tax_building_trigger = yes
+				}
+				add_base_tax = 2
+			}
+			else = {
+				add_building = temple
+			}
+		}
+		add_estate_loyalty = {
+			estate = estate_church
+			loyalty = 15
+		}
+	}
+
+	option = { #nah
+		name = skaldhyrric.33.c
+		ai_chance = { 
+			factor = 25
+		}
+		random_list = {
+			50 = { change_government_reform_progress = 10 }
+			50 = { add_army_tradition = 5 }
+		}
+		add_estate_loyalty = {
+			estate = estate_church
+			loyalty = -5
+		}
+	}
+}
+
+country_event = { #new generation of skalds
+	id = skaldhyrric.34
+	title = skaldhyrric.34.t
+	desc = skaldhyrric.34.d
+	picture = bonfire_of_the_vanities_eventpicture
+	is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	trigger = {
+		religion = skaldhyrric_faith
+	}
+
+	option = { #church powerr
+		name = skaldhyrric.34.a
+		add_church_power = 30
+	}
+}
+
+country_event = { #aspects
+	id = skaldhyrric.100
+	title = skaldhyrric.100.t
+	desc = skaldhyrric.100.d
+	picture = CITY_VIEW_eventPicture
+
+	is_triggered_only = yes
+
+	option = { #back
+		name = skaldhyrric.100.abc
+		highlight = yes
+		trigger = { ai = no }
+		ai_chance = { factor = 1 }
+		
+	}
+
+	option = { #master boat builders enabled
+		name = skaldhyrric.100.a
+		highlight = yes
+		ai_chance = { factor = 100 }
+		trigger = {
+			num_of_heavy_ship = 40
+			hidden_trigger = { NOT = { has_country_flag = unlocked_song_ace_master_boat_builders_of_far_gerudia_beyond } }
+		}
+		unlock_song = { church_aspect = ace_master_boat_builders_of_far_gerudia_beyond }
+		hidden_effect = {
+			change_variable = {
+				which = AceSkaldSongs
+				value = 1
+			}
+		}
+	}
+	option = { #master boat builders disabled
+		name = skaldhyrric.100.a.1
+		ai_chance = { factor = 0 }
+		if = {
+			limit = {
+				NOT = { 
+					num_of_heavy_ship = 40
+				}
+			}
+			custom_tooltip = boat_builders_disabled_tt
+		}
+		trigger = {
+			ai = no
+				NOT = {
+					num_of_heavy_ship = 40
+				}
+			NOT = { has_country_flag = unlocked_song_ace_master_boat_builders_of_far_gerudia_beyond }
+		}
+	}
+
+	option = { #giantslayers enabled option
+		name = skaldhyrric.100.b
+		highlight = yes
+		ai_chance = { factor = 100 }
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				region = gerudian_frontier_region
+				is_city = yes
+			}
+			hidden_trigger = { NOT = { has_country_flag = unlocked_song_ace_gjalund_and_the_giantslayers } }
+		}
+		unlock_song = { church_aspect = ace_gjalund_and_the_giantslayers }
+		hidden_effect = {
+			change_variable = {
+				which = AceSkaldSongs
+				value = 1
+			}
+		}
+	}
+	option = { #giantslayers disabled option
+		name = skaldhyrric.100.b.1
+		ai_chance = { factor = 0 }
+		if = {
+			limit = {
+				NOT = { 
+					num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+						value = 10
+						region = gerudian_frontier_region
+						is_city = yes
+					}
+				}
+			}
+			custom_tooltip = giantslayers_disabled_tt
+		}
+		trigger = {
+			ai = no
+				NOT = {
+					num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+						value = 10
+						region = gerudian_frontier_region
+						is_city = yes
+					}
+				}
+			NOT = { has_country_flag = unlocked_song_ace_gjalund_and_the_giantslayers }
+		}
+	}
+	
+	option = { #corin enabled option
+		name = skaldhyrric.100.c
+		highlight = yes
+		ai_chance = { factor = 100 }
+		trigger = {
+			is_religion_enabled = corinite
+			hidden_trigger = { NOT = { has_country_flag = unlocked_song_ace_skcorin } }	
+		}
+		unlock_song = { church_aspect = ace_skcorin }
+		hidden_effect = {
+			change_variable = {
+				which = AceSkaldSongs
+				value = 1
+			}
+		}
+	}
+	option = { #corin disabled option
+		name = skaldhyrric.100.c.1
+		ai_chance = { factor = 0 }
+		if = {
+			limit = {
+				NOT = { 
+					is_religion_enabled = corinite
+				}
+			}
+			custom_tooltip = skcorin_disabled_tt
+		}
+		trigger = {
+			ai = no
+			NOT = {
+					is_religion_enabled = corinite
+			}
+			NOT = { has_country_flag = unlocked_song_ace_skcorin }		
+		}
+	}
+
+	option = { #elves enabled option
+		name = skaldhyrric.100.dd
+		highlight = yes
+		ai_chance = { factor = 100 }
+		trigger = {
+			high_tolerance_elven_race_trigger = yes
+			serpentshead_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				religion = skaldhyrric_faith
+			}
+			hidden_trigger = { NOT = { has_country_flag = unlocked_song_ace_elven_voyages } }
+		}
+		unlock_song = { church_aspect = ace_elven_voyages }
+		hidden_effect = {
+			change_variable = {
+				which = AceSkaldSongs
+				value = 1
+			}
+		}
+	}
+	option = { #elves disabled option
+		name = skaldhyrric.100.dd.1
+		ai_chance = { factor = 0 }
+		if = {
+			limit = {
+				NOT = { 
+					high_tolerance_elven_race_trigger = yes
+					serpentshead_area = {
+						type = all
+						country_or_non_sovereign_subject_holds = ROOT
+						religion = skaldhyrric_faith
+					}
+				}
+			}
+			custom_tooltip = elven_voyages_disabled_tt
+		}
+		trigger = {
+			ai = no
+			NOT = {
+				high_tolerance_elven_race_trigger = yes
+				serpentshead_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+					religion = skaldhyrric_faith
+				}			
+			}
+			NOT = { has_country_flag = unlocked_song_ace_elven_voyages }		
+		}
+	}
+
+	option = { #ebonsteel enabled option
+		name = skaldhyrric.100.e
+		highlight = yes
+		ai_chance = { factor = 100 }
+		trigger = {
+			has_country_modifier = ebonforging_rediscovered
+			num_of_carolean = 15
+            hidden_trigger = { NOT = { has_country_flag = unlocked_song_ace_ebonsteel } }	
+		}
+		unlock_song = { church_aspect = ace_ebonsteel }
+		hidden_effect = {
+			change_variable = {
+				which = AceSkaldSongs
+				value = 1
+			}
+		}	 
+	}
+	option = { #ebonsteel disabled option
+		name = skaldhyrric.100.e.1
+		ai_chance = { factor = 0 }
+		if = {
+			limit = {
+				NOT = { 
+					OR = {
+						has_country_modifier = ebonforging_rediscovered
+						num_of_carolean = 15
+					}
+				}
+			}
+			custom_tooltip = ebonsteel_disabled_tt
+		}
+		trigger = {
+			ai = no
+			NOT = {
+				has_country_modifier = ebonforging_rediscovered
+				num_of_carolean = 15
+				has_country_flag = unlocked_song_ace_ebonsteel
+			}		
+		}
+	}
+
+	option = { #olav enabled option
+		name = skaldhyrric.100.f
+		highlight = yes
+		ai_chance = { factor = 100 }
+		trigger = {
+			Z17 = { exists = no }
+			Z89 = { exists = no }
+            hidden_trigger = { NOT = { has_country_flag = unlocked_song_ace_olav } }
+		}
+		unlock_song = { church_aspect = ace_olav }
+		hidden_effect = {
+			change_variable = {
+				which = AceSkaldSongs
+				value = 1
+			}
+		}
+	}
+	option = { #olav disabled option
+		name = skaldhyrric.100.f.1
+		ai_chance = { factor = 0 }
+		if = {
+			limit = {
+				OR = {
+					Z17 = { exists = yes }
+					Z89 = { exists = yes }
+				}
+			}
+			custom_tooltip = olav_disabled_tt
+		}
+		trigger = {
+			ai = no
+				OR = {
+					Z17 = { exists = yes }
+					Z89 = { exists = yes }
+				}
+            NOT = { has_country_flag = unlocked_song_ace_olav }	
+		}
+	}
+
+	option = { #gnomes enabled option
+		name = skaldhyrric.100.g
+		highlight = yes
+		ai_chance = { factor = 100 }
+		trigger = {
+			storm_isles_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				religion = skaldhyrric_faith
+			}
+			high_tolerance_gnomish_race_trigger = yes
+            hidden_trigger = { NOT = { has_country_flag = unlocked_song_ace_gnomes } }
+		}
+		unlock_song = { church_aspect = ace_gnomes }
+		hidden_effect = {
+			change_variable = {
+				which = AceSkaldSongs
+				value = 1
+			}
+		}	 
+	}
+	option = { #gnomes disabled option
+		name = skaldhyrric.100.g.1
+		ai_chance = { factor = 0 }
+		if = {
+			limit = {
+				OR = {
+					NOT = { 
+						storm_isles_area = {
+							type = all
+							country_or_non_sovereign_subject_holds = ROOT
+							religion = skaldhyrric_faith
+						}
+					}
+					NOT = { high_tolerance_gnomish_race_trigger = yes }
+				}
+			}
+			custom_tooltip = gnomes_disabled_tt
+		}
+		trigger = {
+			ai = no
+			NOT = {
+					storm_isles_area = {
+						type = all
+						country_or_non_sovereign_subject_holds = ROOT
+						religion = skaldhyrric_faith
+					}
+					high_tolerance_gnomish_race_trigger = yes			
+			}
+            NOT = { has_country_flag = unlocked_song_ace_gnomes }	
+		}
+	}
+
+	option = { #blue reach enabled option
+		name = skaldhyrric.100.h
+		highlight = yes
+		ai_chance = { factor = 100 }
+		trigger = {
+			coast_of_vics_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				religion = skaldhyrric_faith
+			}
+			northern_greatwoods_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				religion = skaldhyrric_faith
+			}
+			700 = {
+				development = 15
+			}
+            hidden_trigger = { NOT = { has_country_flag = unlocked_song_ace_blue_reach } }
+		}
+		unlock_song = { church_aspect = ace_blue_reach }
+		hidden_effect = {
+			change_variable = {
+				which = AceSkaldSongs
+				value = 1
+			}
+		}	 
+	}
+	option = { #blue reach disabled option
+		name = skaldhyrric.100.h.1
+		ai_chance = { factor = 0 }
+		if = {
+			limit = {
+				OR = {
+					NOT = {
+						coast_of_vics_area = {
+							type = all
+							country_or_non_sovereign_subject_holds = ROOT
+							religion = skaldhyrric_faith
+						}
+					}
+					NOT = {
+						northern_greatwoods_area = {
+							type = all
+							country_or_non_sovereign_subject_holds = ROOT
+							religion = skaldhyrric_faith
+						}
+					}
+					NOT = {
+						700 = { development = 15 }	
+					}
+				}		
+			}
+			custom_tooltip = blue_reach_disabled_tt
+		}
+		trigger = {
+			ai = no
+				OR = {
+					NOT = {
+						coast_of_vics_area = {
+							type = all
+							country_or_non_sovereign_subject_holds = ROOT
+							religion = skaldhyrric_faith
+						}
+					}
+					NOT = {
+						northern_greatwoods_area = {
+							type = all
+							country_or_non_sovereign_subject_holds = ROOT
+							religion = skaldhyrric_faith
+						}
+					}
+					NOT = {
+						700 = { development = 15 }	
+					}
+				}		
+            NOT = { has_country_flag = unlocked_song_ace_blue_reach }
+		}
+	}
+
+	option = { #Tale of Reverians enabled option
+		name = skaldhyrric.100.i
+		highlight = yes
+		ai_chance = { factor = 100 }
+		trigger = {
+			reaver_coast_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				religion = skaldhyrric_faith
+			}
+			gnomish_pass_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				religion = skaldhyrric_faith
+			}
+            hidden_trigger = { NOT = { has_country_flag = unlocked_song_ace_askel_reaverking } }
+		}
+		unlock_song = { church_aspect = ace_askel_reaverking }
+		hidden_effect = {
+			change_variable = {
+				which = AceSkaldSongs
+				value = 1
+			}
+		}
+	}
+	option = { #Tale of Reverians disabled option
+		name = skaldhyrric.100.i.1
+		ai_chance = { factor = 0 }
+		if = {
+			limit = {
+				OR = {
+					NOT = {
+						reaver_coast_area = {
+							type = all
+							country_or_non_sovereign_subject_holds = ROOT
+							religion = skaldhyrric_faith
+						}
+					}
+					NOT = {
+						gnomish_pass_area = {
+							type = all
+							country_or_non_sovereign_subject_holds = ROOT
+							religion = skaldhyrric_faith
+						}						
+					}
+				}
+			}
+			custom_tooltip = askel_reaverking_disabled_tt
+		}
+		trigger = {
+			ai = no
+				OR = {
+					NOT = {
+						reaver_coast_area = {
+							type = all
+							country_or_non_sovereign_subject_holds = ROOT
+							religion = skaldhyrric_faith
+						}
+					}
+					NOT = {
+						gnomish_pass_area = {
+							type = all
+							country_or_non_sovereign_subject_holds = ROOT
+							religion = skaldhyrric_faith
+						}						
+					}					
+				}		
+            NOT = { has_country_flag = unlocked_song_ace_askel_reaverking }
+		}
+	}
+
+	option = { #The Reaverqueen Legacy enabled option
+		name = skaldhyrric.100.j
+		highlight = yes
+		ai_chance = { factor = 100 }
+		trigger = {
+			deranne_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				religion = skaldhyrric_faith
+			}
+			darom_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				religion = skaldhyrric_faith
+			}
+            hidden_trigger = { NOT = { has_country_flag = unlocked_song_ace_derhilde_reaverqueen } }
+		}
+		unlock_song = { church_aspect = ace_derhilde_reaverqueen }
+		change_variable = {
+			which = AceSkaldSongs
+			value = 1
+		}	 
+	}
+	option = { #The Reaverqueen Legacy disabled option
+		name = skaldhyrric.100.j.1
+		ai_chance = { factor = 0 }
+		if = {
+			limit = {
+				OR = {
+					NOT = {
+						deranne_area = {
+							type = all
+							country_or_non_sovereign_subject_holds = ROOT
+							religion = skaldhyrric_faith
+						}
+					}
+					NOT = {
+						darom_area = {
+							type = all
+							country_or_non_sovereign_subject_holds = ROOT
+							religion = skaldhyrric_faith
+						}						
+					}
+				}
+			}
+			custom_tooltip = derhilde_reaverqueen_disabled_tt
+		}
+		trigger = {
+			ai = no
+				OR = {
+					NOT = {
+						deranne_area = {
+							type = all
+							country_or_non_sovereign_subject_holds = ROOT
+							religion = skaldhyrric_faith
+						}
+					}
+					NOT = {
+						darom_area = {
+							type = all
+							country_or_non_sovereign_subject_holds = ROOT
+							religion = skaldhyrric_faith
+						}						
+					}					
+				}		
+            NOT = { has_country_flag = unlocked_song_ace_derhilde_reaverqueen }
+		}
+	}
+
+	option = { #Divenhal Raiders enabled option
+		name = skaldhyrric.100.k
+		highlight = yes
+		ai_chance = { factor = 100 }
+		trigger = {
+			isle_of_tef_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				religion = skaldhyrric_faith
+			}
+            hidden_trigger = { NOT = { has_country_flag = unlocked_song_ace_halfdal_the_hoarder } }
+		}
+		unlock_song = { church_aspect = ace_halfdal_the_hoarder }
+		hidden_effect = {
+			change_variable = {
+				which = AceSkaldSongs
+				value = 1
+			}
+		} 
+	}
+	option = { #Divenhal Raiders disabled option
+		name = skaldhyrric.100.k.1
+		ai_chance = { factor = 0 }
+		if = {
+			limit = {
+				NOT = {
+					isle_of_tef_area = {
+						type = all
+						country_or_non_sovereign_subject_holds = ROOT
+						religion = skaldhyrric_faith
+					}
+				}
+			}
+			custom_tooltip = halfdal_the_hoarder_disabled_tt
+		}
+		trigger = {
+			ai = no
+			NOT = {
+				reaver_coast_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+					religion = skaldhyrric_faith
+				}
+			}
+            NOT = { has_country_flag = unlocked_song_ace_halfdal_the_hoarder }
+		}
+	}
+
+	option = { #Reavers of the Empire enabled option
+		name = skaldhyrric.100.l
+		highlight = yes
+		ai_chance = { factor = 100 }
+		trigger = {
+			damespearl_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				religion = skaldhyrric_faith
+			}
+			pearlywine_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				religion = skaldhyrric_faith
+			}
+			tretunica_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				religion = skaldhyrric_faith
+			}
+            hidden_trigger = { NOT = { has_country_flag = unlocked_song_ace_henrik_divenscourge } }
+		}
+		unlock_song = { church_aspect = ace_henrik_divenscourge }
+		hidden_effect = {
+			change_variable = {
+				which = AceSkaldSongs
+				value = 1
+			}
+		}	 
+	}
+	option = { #Reavers of the Empire disabled option
+		name = skaldhyrric.100.l.1
+		ai_chance = { factor = 0 }
+		if = {
+			limit = {
+				OR = {
+					NOT = {
+						damespearl_area = {
+							type = all
+							country_or_non_sovereign_subject_holds = ROOT
+							religion = skaldhyrric_faith
+						}
+					}
+					NOT = {
+						pearlywine_area = {
+							type = all
+							country_or_non_sovereign_subject_holds = ROOT
+							religion = skaldhyrric_faith
+						}					
+					}
+					NOT = {
+						tretunica_area = {
+							type = all
+							country_or_non_sovereign_subject_holds = ROOT
+							religion = skaldhyrric_faith
+						}				
+					}					
+				}
+			}
+			custom_tooltip = henrik_divenscourge_disabled_tt
+		}
+		trigger = {
+			ai = no
+				OR = {
+					NOT = {
+						damespearl_area = {
+							type = all
+							country_or_non_sovereign_subject_holds = ROOT
+							religion = skaldhyrric_faith
+						}
+					}
+					NOT = {
+						pearlywine_area = {
+							type = all
+							country_or_non_sovereign_subject_holds = ROOT
+							religion = skaldhyrric_faith
+						}							
+					}
+					NOT = {
+						tretunica_area = {
+							type = all
+							country_or_non_sovereign_subject_holds = ROOT
+							religion = skaldhyrric_faith
+						}				
+					}									
+				}		
+            NOT = { has_country_flag = unlocked_song_ace_henrik_divenscourge }
+		}
+	}
+
+	option = { #ambrstrond disabled option
+		name = skaldhyrric.100.m.1
+		ai_chance = { factor = 0 }
+		if = {
+			limit = {
+				NOT = { 
+					colony = 2
+				}
+			}
+			custom_tooltip = ambrstrond_disabled_tt
+		}
+		trigger = {
+			ai = no
+			NOT = {
+				colony = 3
+			}
+            NOT = { has_country_flag = unlocked_song_ace_ambrstrond }		
+		}
+	}
+	option = { #ambrstrond enabled option
+		name = skaldhyrric.100.m
+		highlight = yes
+		ai_chance = { factor = 100 }
+		trigger = {
+			colony = 3
+            hidden_trigger = { NOT = { has_country_flag = unlocked_song_ace_ambrstrond } }
+		}
+		unlock_song = { church_aspect = ace_ambrstrond }
+		custom_tooltip = ace_sf_voyage_disabled_tt
+		remove_church_aspect = ace_voyage_of_the_north_raider
+		add_country_modifier = {
+			name = ace_ambrstrond_modifier
+			duration = 18250
+		}
+		hidden_effect = {
+			change_variable = {
+				which = AceSkaldSongs
+				value = 1
+			}
+		}
+	}
+
+	option = { #anbenncost enabled option
+		name = skaldhyrric.100.n
+		highlight = yes
+		ai_chance = { factor = 100 }
+		trigger = {
+			eoa_is_dismantled = yes
+			west_damesear_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				religion = skaldhyrric_faith
+			}
+			east_damesear_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				religion = skaldhyrric_faith
+			}
+            hidden_trigger = { NOT = { has_country_flag = unlocked_song_ace_anbenncost } }
+		}
+		unlock_song = { church_aspect = ace_anbenncost }
+		add_country_modifier = {
+			name = ace_anbenncost_modifier
+			duration = 18250
+		}
+		hidden_effect = {
+			change_variable = {
+				which = AceSkaldSongs
+				value = 1
+			}
+		}
+	}
+	option = { #anbenncost disabled option
+		name = skaldhyrric.100.n.1
+		ai_chance = { factor = 0 }
+		if = {
+			limit = {
+				OR = {
+					NOT = { eoa_is_dismantled = yes }
+					NOT = {
+							west_damesear_area = {
+								type = all
+								country_or_non_sovereign_subject_holds = ROOT
+								religion = skaldhyrric_faith
+							}
+					}
+					NOT = {		
+							east_damesear_area = {
+								type = all
+								country_or_non_sovereign_subject_holds = ROOT
+								religion = skaldhyrric_faith
+							}	
+					}
+				}
+			}
+			custom_tooltip = anbenncost_disabled_tt
+		}
+		trigger = {
+			ai = no
+			OR = {
+				NOT = { eoa_is_dismantled = yes }
+				NOT = {
+						west_damesear_area = {
+							type = all
+							country_or_non_sovereign_subject_holds = ROOT
+							religion = skaldhyrric_faith
+						}
+				}
+				NOT = {		
+						east_damesear_area = {
+							type = all
+							country_or_non_sovereign_subject_holds = ROOT
+							religion = skaldhyrric_faith
+						}	
+				}
+			}
+            	NOT = { has_country_flag = unlocked_song_ace_anbenncost }
+		}
+	}
+	
+	option = { #ebonfrost enabled option
+		name = skaldhyrric.100.o
+		highlight = yes
+		ai_chance = { factor = 100 }
+		trigger = {
+			OR = {
+                AND = {
+					castonath_area = {
+						type = all
+						country_or_non_sovereign_subject_holds = ROOT
+						religion = skaldhyrric_faith
+					}
+					num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+						value = 35
+						OR = {
+							region = west_castanor_region
+							region = inner_castanor_region
+							region = south_castanor_region
+						}
+						religion = skaldhyrric_faith
+					}
+				}
+                is_absolutism_active = yes
+		    }
+			hidden_trigger = { NOT = { has_country_flag = unlocked_song_ace_castan_ebonfrost } }
+		}
+		unlock_song = { church_aspect = ace_castan_ebonfrost }
+		add_country_modifier = {
+			name = ace_castan_ebonfrost_modifier
+			duration = 18250
+		}
+		hidden_effect = {
+			change_variable = {
+				which = AceSkaldSongs
+				value = 1
+			}
+		}
+	}
+	option = { #ebonfrost disabled option
+		name = skaldhyrric.100.o.1
+		ai_chance = { factor = 0 }
+		if = {
+			limit = {
+				OR = {
+					NOT = {
+						castonath_area = {
+							type = all
+							country_or_non_sovereign_subject_holds = ROOT
+							religion = skaldhyrric_faith
+						}
+						num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+							value = 35
+							OR = {
+								region = west_castanor_region
+								region = inner_castanor_region
+								region = south_castanor_region
+							}
+							religion = skaldhyrric_faith
+						}
+					}
+					NOT = { is_absolutism_active = yes }
+				}
+			}
+			custom_tooltip = ebonfrost_disabled_tt
+		}
+		trigger = {
+			ai = no
+			OR = {	
+				NOT = {
+					castonath_area = {
+						type = all
+						country_or_non_sovereign_subject_holds = ROOT
+						religion = skaldhyrric_faith
+					}
+					num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+						value = 35
+						OR = {
+							region = west_castanor_region
+							region = inner_castanor_region
+							region = south_castanor_region
+						}
+						religion = skaldhyrric_faith
+					}
+				}
+			}
+			NOT = { has_country_flag = unlocked_song_ace_castan_ebonfrost }
+		}
+	}
+
+	option = { #back
+		name = skaldhyrric.100.abc
+		highlight = yes
+		trigger = { ai = no }
+		ai_chance = { factor = 1 }
+	}
+
+	after = {
+		hidden_effect = {
+			clr_country_flag = skaldhyrric_menu_flag
+		}
+	}
+}
+
+

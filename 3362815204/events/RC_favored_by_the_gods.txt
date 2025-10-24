@@ -1504,6 +1504,7 @@ country_event = {
 		OR = {
 			has_personal_deity = nathalyne
 			has_personal_deity = wip
+			# has_personal_deity = upgraded_nathalyne
 		}
 		OR = {
 			ruler_has_personality = secretive_personality
@@ -2181,6 +2182,268 @@ country_event = {
 		name = "favored_RC.42.a"
 		add_ruler_modifier = {
 			name = RC_emulant_begga_2
+			duration = -1
+		}
+	}
+}
+
+##################################################
+# The One-Armed Skald (ACE)
+##################################################
+
+# Favored of the Gods - Skald
+country_event = {
+	id = favored_RC.400
+	title = "favored_RC.400.t"
+	desc = "favored_RC.400.d"
+	picture = RELIGION_eventPicture
+
+	trigger = {
+		OR = {
+			has_personal_deity = one_armed_skald
+			has_personal_deity = one_armed_skald_upgraded
+		}
+		OR = {
+			ruler_has_personality = pious_personality
+			ruler_has_personality = bold_fighter_personality
+			ruler_has_personality = inspiring_leader_personality
+		}
+		has_regency = no
+		NOT = { has_ruler_modifier = RC_withdrawn_meditation }
+		NOT = { has_ruler_modifier = favored_RC_skald_t_a }
+		NOT = { has_ruler_modifier = favored_RC_skald_t_b }
+		NOT = { has_ruler_flag = RC_emulant_rejected_skald }
+	}
+
+	is_triggered_only = yes
+
+	# Emulate aspect 1
+	option = {
+		name = "favored_RC.400.a"
+		add_ruler_modifier = {
+			name = favored_RC_skald_t_a
+			hidden = yes
+			duration = -1
+		}
+		add_ruler_modifier = {
+			name = RC_withdrawn_meditation
+			duration = 1825
+		}
+		custom_tooltip = favored_tt
+		tooltip = {
+			add_ruler_modifier = {
+				name = RC_emulant_skald_1
+				duration = -1
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = favored_RC.401
+				days = 1826
+			}
+		}
+	}
+
+	# Emulate aspect 2
+	option = {
+		name = "favored_RC.400.b"
+		add_ruler_modifier = {
+			name = favored_RC_skald_t_b
+			hidden = yes
+			duration = -1
+		}
+		add_ruler_modifier = {
+			name = RC_withdrawn_meditation
+			duration = 1825
+		}
+		custom_tooltip = favored_tt
+		tooltip = {
+			add_ruler_modifier = {
+				name = RC_emulant_skald_2
+				duration = -1
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = favored_RC.402
+				days = 1826
+			}
+		}
+	}
+
+	# Eschew emulation
+	option = {
+		name = "favored_RC.400.c"
+		add_prestige = 2
+		set_ruler_flag = RC_emulant_rejected_skald
+	}
+}
+
+# aspect 1
+country_event = {
+	id = favored_RC.401
+	title = "favored_RC.401.t"
+	desc = "favored_RC.401.d"
+	picture = RELIGION_eventPicture
+
+	trigger = {
+		has_ruler_modifier = favored_RC_skald_t_a
+		NOT = { has_ruler_modifier = RC_withdrawn_meditation }
+		NOT = { has_ruler_modifier = RC_emulant_skald_1 }
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = "favored_RC.401.a"
+		add_ruler_modifier = {
+			name = RC_emulant_skald_1
+			duration = -1
+		}
+	}
+}
+
+# aspect 2
+country_event = {
+	id = favored_RC.402
+	title = "favored_RC.402.t"
+	desc = "favored_RC.402.d"
+	picture = RELIGION_eventPicture
+
+	trigger = {
+		has_ruler_modifier = favored_RC_skald_t_b
+		NOT = { has_ruler_modifier = RC_withdrawn_meditation }
+		NOT = { has_ruler_modifier = RC_emulant_skald_2 }
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = "favored_RC.402.a"
+		add_ruler_modifier = {
+			name = RC_emulant_skald_2
+			duration = -1
+		}
+	}
+}
+
+# Favored of the Gods - Mother Akasik
+country_event = {
+	id = favored_RC.410
+	title = "favored_RC.410.t"
+	desc = "favored_RC.410.d"
+	picture = RELIGION_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		has_personal_deity = ace_mother_akasik
+		OR = {
+			ruler_has_personality = fire_planetouched_personality
+			ruler_has_personality = water_planetouched_personality
+			ruler_has_personality = earth_planetouched_personality
+			ruler_has_personality = wind_planetouched_personality
+		}
+		has_regency = no
+		NOT = {
+			has_ruler_modifier = RC_withdrawn_meditation
+			has_ruler_modifier = favored_RC_akasik_t_a
+			has_ruler_modifier = favored_RC_akasik_t_b
+			has_ruler_flag = RC_emulant_rejected_akasik
+		}
+	}
+	option = {
+		name = "favored_RC.410.a"
+		add_ruler_modifier = {
+			name = favored_RC_akasik_t_a
+			hidden = yes
+			duration = -1
+		}
+		add_ruler_modifier = {
+			name = RC_withdrawn_meditation
+			duration = 1825
+		}
+		custom_tooltip = favored_tt
+		tooltip = {
+			add_ruler_modifier = {
+				name = RC_emulant_akasik_1
+				duration = -1
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = favored_RC.411
+				days = 1826
+			}
+		}
+	}
+	option = {
+		name = "favored_RC.410.b"
+		add_ruler_modifier = {
+			name = favored_RC_akasik_t_b
+			hidden = yes
+			duration = -1
+		}
+		add_ruler_modifier = {
+			name = RC_withdrawn_meditation
+			duration = 1825
+		}
+		custom_tooltip = favored_tt
+		tooltip = {
+			add_ruler_modifier = {
+				name = RC_emulant_akasik_2
+				duration = -1
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = favored_RC.412
+				days = 1826
+			}
+		}
+	}
+	option = {
+		name = "favored_RC.410.c"
+		add_prestige = 2
+		set_ruler_flag = RC_emulant_rejected_akasik
+	}
+}
+country_event = {
+	id = favored_RC.411
+	title = "favored_RC.411.t"
+	desc = "favored_RC.411.d"
+	picture = RELIGION_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		has_ruler_modifier = favored_RC_akasik_t_a
+		NOT = {
+			has_ruler_modifier = RC_withdrawn_meditation
+			has_ruler_modifier = RC_emulant_akasik_1
+		}
+	}
+	option = {
+		name = "favored_RC.411.a"
+		add_ruler_modifier = {
+			name = RC_emulant_akasik_1
+			duration = -1
+		}
+	}
+}
+country_event = {
+	id = favored_RC.412
+	title = "favored_RC.412.t"
+	desc = "favored_RC.412.d"
+	picture = RELIGION_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		has_ruler_modifier = favored_RC_akasik_t_b
+		NOT = {
+			has_ruler_modifier = RC_withdrawn_meditation
+			has_ruler_modifier = RC_emulant_akasik_2
+		}
+	}
+	option = {
+		name = "favored_RC.412.a"
+		add_ruler_modifier = {
+			name = RC_emulant_akasik_2
 			duration = -1
 		}
 	}
