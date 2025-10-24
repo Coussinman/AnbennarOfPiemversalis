@@ -2703,23 +2703,24 @@ mines_of_yfelorr = {
 			}
 		}
 		else = {
-			OR = {
-				culture = wood_elf
-				culture = forest_goblin
-				culture = green_orc
-				culture = emerald_orc
-				culture = karakhanbari_orc
-			}
-			owner = {
-				capital_scope = {
-					superregion = deepwoods_superregion
-				}
 				OR = {
-					accepted_culture = wood_elf
-					accepted_culture = forest_goblin
-					accepted_culture = green_orc
-					accepted_culture = emerald_orc
-					accepted_culture = karakhanbari_orc
+					culture = wood_elf
+					culture = forest_goblin
+					culture = green_orc
+					culture = emerald_orc
+					culture = karakhanbari_orc
+				}
+				owner = {
+					capital_scope = {
+						superregion = deepwoods_superregion
+					}
+					OR = {
+						accepted_culture = wood_elf
+						accepted_culture = forest_goblin
+						accepted_culture = green_orc
+						accepted_culture = emerald_orc
+						accepted_culture = karakhanbari_orc
+					}
 				}
 			}
 		}
@@ -2747,23 +2748,24 @@ mines_of_yfelorr = {
 			}
 		}
 		else = {
-			OR = {
-				culture = wood_elf
-				culture = forest_goblin
-				culture = green_orc
-				culture = emerald_orc
-				culture = karakhanbari_orc
-			}
-			owner = {
-				capital_scope = {
-					superregion = deepwoods_superregion
-				}
 				OR = {
-					accepted_culture = wood_elf
-					accepted_culture = forest_goblin
-					accepted_culture = green_orc
-					accepted_culture = emerald_orc
-					accepted_culture = karakhanbari_orc
+					culture = wood_elf
+					culture = forest_goblin
+					culture = green_orc
+					culture = emerald_orc
+					culture = karakhanbari_orc
+				}
+				owner = {
+					capital_scope = {
+						superregion = deepwoods_superregion
+					}
+					OR = {
+						accepted_culture = wood_elf
+						accepted_culture = forest_goblin
+						accepted_culture = green_orc
+						accepted_culture = emerald_orc
+						accepted_culture = karakhanbari_orc
+					}
 				}
 			}
 		}
@@ -4963,7 +4965,7 @@ lorenans_rest = {
 						dynasty = "Siloriel"
 						dynasty = "Silmuna"
 						dynasty = "síl Rubenaire"
-						dynasty = "síl Eil�sin"
+						dynasty = "síl Eilísin"
 						dynasty = "síl Kyliande"
 					}
 				}
@@ -4988,7 +4990,7 @@ lorenans_rest = {
 						dynasty = "Siloriel"
 						dynasty = "Silmuna"
 						dynasty = "síl Rubenaire"
-						dynasty = "síl Eil�sin"
+						dynasty = "síl Eilísin"
 						dynasty = "síl Kyliande"
 					}
 				}
@@ -5288,246 +5290,6 @@ grave_forest_of_ilvandet = {
 
 		on_upgraded = {
 			unlock_estate_privilege = { estate_privilege = estate_burghers_forest_expansion }
-		}
-	}
-}
-
-imperial_palace_anbenncost = {
-	start = 8		#Anbenncost
-
-	date = 1.1.1
-
-	time = {
-		months = 120
-	}
-
-	build_cost = 0
-
-	can_be_moved = no
-
-	starting_tier = 0
-
-	#project type
-	type = monument
-
-	build_trigger = {
-		if = {
-            limit = { has_province_flag = imperial_palace_destroyed_flag }
-            custom_trigger_tooltip = {
-                tooltip = monument_destroyed_tt
-                NOT = { has_province_flag = imperial_palace_destroyed_flag }
-            }
-        }
-	}
-
-	on_built = {
-	}
-
-	on_destroyed = {
-	}
-
-	can_upgrade_trigger = {
-		owner = {
-			OR = {
-				is_part_of_hre = yes
-				OR = {
-					tag = Z01
-					tag = AD6
-				}
-				custom_trigger_tooltip = {
-					tooltip = has_dismantled_the_hre_tt
-					has_country_flag = has_dismantled_the_hre
-				}
-				mission_completed = A30_secure_damesear
-			}
-		}
-	}
-
-	can_use_modifiers_trigger = {
-		owner = {
-			OR = {
-				is_part_of_hre = yes
-				OR = {
-					tag = Z01
-					tag = AD6
-				}
-				custom_trigger_tooltip = {
-					tooltip = has_dismantled_the_hre_tt
-					has_country_flag = has_dismantled_the_hre
-				}
-				mission_completed = A30_secure_damesear
-			}
-		}
-	}
-
-	keep_trigger = {
-	}
-
-	#tier data
-	tier_0 = {
-		upgrade_time = {
-			months = 0
-		}
-
-		cost_to_upgrade = {
-			factor = 0
-		}
-
-		province_modifiers = {
-		}
-
-		area_modifier = {
-		}
-
-		country_modifiers = {
-
-		}
-
-		on_upgraded = {
-		}
-	}
-
-	tier_1 = {
-		upgrade_time = {
-			months = 120
-		}
-
-		cost_to_upgrade = {
-			factor = 1000
-		}
-
-		province_modifiers = {
-		}
-
-		area_modifier = {
-		}
-
-		region_modifier = {
-		}
-
-		country_modifiers = {
-		}
-
-		on_upgraded = {
-			8 = {
-				add_permanent_province_modifier = {
-					name = cannot_upgrade_monument
-					duration = 9125
-				}
-			}
-			custom_tooltip = imperial_palace_effect_tt_1
-			hidden_effect = {
-				every_country = {
-					limit = { is_part_of_hre = yes }
-					add_country_modifier = {
-						name = imperial_palace_prince_modifier_tier_1
-						duration = -1
-					}
-				}
-				emperor = {
-					add_ruler_modifier = {
-						name = imperial_palace_modifier_tier_1
-						duration = -1
-					}
-				}
-			}
-		}
-	}
-
-	tier_2 = {
-		upgrade_time = {
-			months = 120
-		}
-
-		cost_to_upgrade = {
-			factor = 2500
-		}
-
-		province_modifiers = {
-		}
-
-		area_modifier = {
-		}
-
-		region_modifier = {
-		}
-
-		country_modifiers = {
-			max_absolutism = 5
-			max_revolutionary_zeal = 5
-		}
-
-		on_upgraded = {
-			8 = {
-				add_permanent_province_modifier = {
-					name = cannot_upgrade_monument
-					duration = 9125
-				}
-			}
-			custom_tooltip = imperial_palace_effect_tt_2
-			hidden_effect = {
-				every_country = {
-					limit = { is_part_of_hre = yes }
-					add_country_modifier = {
-						name = imperial_palace_prince_modifier_tier_2
-						duration = -1
-					}
-					remove_country_modifier = imperial_palace_prince_modifier_tier_1
-				}
-				emperor = {
-					remove_country_modifier = imperial_palace_modifier_tier_1
-					add_ruler_modifier = {
-						name = imperial_palace_modifier_tier_2
-						duration = -1
-					}
-				}
-			}
-		}
-	}
-
-	tier_3 = {
-		
-		upgrade_time = {
-			months = 120
-		}
-
-		cost_to_upgrade = {
-			factor = 5000
-		}
-
-		province_modifiers = {
-		}
-
-		area_modifier = {
-		}
-
-		region_modifier = {
-		}
-
-		country_modifiers = {
-			max_absolutism = 10
-			max_revolutionary_zeal = 10
-		}
-
-		on_upgraded = {
-			custom_tooltip = imperial_palace_effect_tt_3
-			hidden_effect = {
-				every_country = {
-					limit = { is_part_of_hre = yes }
-					add_country_modifier = {
-						name = imperial_palace_prince_modifier_tier_3
-						duration = -1
-					}
-					remove_country_modifier = imperial_palace_prince_modifier_tier_2
-				}
-				emperor = {
-					remove_country_modifier = imperial_palace_modifier_tier_2
-					add_ruler_modifier = {
-						name = imperial_palace_modifier_tier_3
-						duration = -1
-					}
-				}
-			}
 		}
 	}
 }
