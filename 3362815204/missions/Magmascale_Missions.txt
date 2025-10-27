@@ -256,10 +256,7 @@ magmascale_1 = {
 					devastation = 1
 				}
 				province_has_center_of_trade_of_level = 2
-				OR = {
-					num_of_times_improved_by_owner = 10
-					development = 35
-				}
+				development = 30
 			}
 			high_tolerance_goblin_race_trigger = yes
 			development_in_provinces = {
@@ -367,7 +364,7 @@ magmascale_1 = {
 					}
 				}
 			}
-			custom_tooltip = "  "
+			custom_tooltip = " "
 			custom_tooltip = AC5_exotic_fireplant_upgrade_tt
 			set_country_flag = AC5_exotic_fireplant_upgrade
 		}
@@ -689,7 +686,7 @@ magmascale_2 = {
 			AC5_fill_valley
 		}
 		provinces_to_highlight = {
-			has_province_modifier = harpy_roost
+			harpy_roost_st_has_any_roost = yes
 			owned_by = ROOT
 			NOT = {
 				num_of_units_in_province = {
@@ -705,7 +702,7 @@ magmascale_2 = {
 					all_owned_province = {
 						OR = {
 							NOT = {
-								has_province_modifier = harpy_roost
+								harpy_roost_st_has_any_roost = yes
 							}
 							num_of_units_in_province = {
 								who = ROOT
@@ -730,7 +727,7 @@ magmascale_2 = {
 					all_owned_province = {
 						OR = {
 							NOT = {
-								has_province_modifier = harpy_roost
+								harpy_roost_st_has_any_roost = yes
 							}
 							num_of_units_in_province = {
 								who = ROOT
@@ -752,7 +749,7 @@ magmascale_2 = {
 						all_owned_province = {
 							OR = {
 								NOT = {
-									has_province_modifier = harpy_roost
+									harpy_roost_st_has_any_roost = yes
 								}
 								num_of_units_in_province = {
 									who = ROOT
@@ -820,6 +817,10 @@ magmascale_2 = {
 					who = ROOT
 					amount = 10
 				}
+			}
+			development_in_provinces = {
+				value = 500
+				has_province_modifier = AC5_lava_river
 			}
 		}
 		effect = {
@@ -1212,7 +1213,10 @@ magmascale_3 = {
 					6150 = { add_province_modifier = { name = AC5_lava_surf duration = 7300 } }
 					4039 = {
 						add_permanent_province_modifier = { name = ruined_hold duration = -1 }
-						add_base_tax = -10 add_base_production = -10 add_base_manpower = -10 add_devastation = 100
+						add_base_tax = -10
+						add_base_production = -10
+						add_base_manpower = -10
+						add_devastation = 100
 					}
 				"
 			}
@@ -1555,7 +1559,7 @@ magmascale_3 = {
 					duration = -1
 				}
 			}
-			custom_tooltip = "  "
+			custom_tooltip = " "
 			if = {
 				limit = {
 					475 = {
@@ -1702,7 +1706,7 @@ magmascale_4 = {
 			add_stability = -2
 			change_government_reform_progress = -50
 			change_government = monarchy
-			add_government_reform = ace_magmascales_stratocratic_rule
+			add_government_reform = magmascales_stratocratic_rule
 			increase_ruler_adm_effect = yes
 			increase_ruler_dip_effect = yes
 			increase_ruler_mil_effect = yes
@@ -1787,7 +1791,7 @@ magmascale_4 = {
 					AC5_expand_river_mission_effect = yes
 				}
 			}
-			custom_tooltip = "  "
+			custom_tooltip = " "
 			custom_tooltip = AC5_ae_tt
 			hidden_effect = {
 				every_known_country = {
@@ -2100,6 +2104,10 @@ magmascale_5 = {
 				trade_goods = copper
 				amount = 5
 			}
+			trade_goods_produced_amount = {
+				trade_goods = mithril
+				amount = 5
+			}
 			custom_trigger_tooltip = {
 				tooltip = AC5_troops_in_lava_river_triggered_tooltip
 				any_owned_province = {
@@ -2304,7 +2312,7 @@ magmascale_5 = {
 		effect = {
 			custom_tooltip = AC5_rename_artificers_tooltip
 			set_country_flag = AC5_lava_engineers
-			add_government_reform = ace_magmascale_engineer_generals_reform
+			add_government_reform = magmascale_engineer_generals_reform
 		}
 	}
 	AC5_strenghten_engineers = {

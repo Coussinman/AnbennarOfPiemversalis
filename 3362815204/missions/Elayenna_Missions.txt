@@ -226,11 +226,17 @@ elayenna_2 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-			F46 = {
-				has_opinion = {
-					who = ROOT
-					value = 150
+			if = {
+				limit = { exists = F46	}
+				F46 = {
+					has_opinion = {
+						who = ROOT
+						value = 150
+					}
 				}
+			}
+			else = {
+				NOT = { exists = F46 }
 			}
 		}
 		effect = {
@@ -248,11 +254,17 @@ elayenna_2 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-			F46 = {
-				has_opinion = {
-					who = ROOT
-					value = 150
+			if = {
+				limit = { exists = F46	}
+				F46 = {
+					has_opinion = {
+						who = ROOT
+						value = 150
+					}
 				}
+			}
+			else = {
+				NOT = { exists = F46 }
 			}
 			adm_tech = 3
 			dip_tech = 3
@@ -411,9 +423,9 @@ elayenna_2 = {
 			}
 		}
 		effect = {
-			add_country_modifier = {
+			add_ruler_modifier = {
 				name = "elayenna_controlling_life"
-				duration = 29200
+				duration = -1
 			}
 		}
 	}
@@ -657,20 +669,17 @@ elayenna_3 = {
 			}
 		}
 		effect = {
-			sarkhashabid_area = {
-				add_permanent_claim = ROOT
-			}
 			ascension_cape_area = {
 				add_permanent_claim = ROOT
 			}
 			add_country_modifier = {
 				name = "elayenna_silk_turban_integration"
-				duration = 5475
+				duration = 7300
 			}
 			2913 = {
 				add_province_modifier = {
 					name = elayenna_steering_from_rahen
-					duration = 5475
+					duration = 7300
 				}
 			}
 		}
@@ -730,7 +739,7 @@ elayenna_3 = {
 					amount = 8
 				}
 			}
-			dip_power = 300
+			dip_power = 200
 			employed_advisor = {
 				culture = siadunan_harpy
 				type = diplomat
@@ -741,7 +750,7 @@ elayenna_3 = {
 				name = elayenna_harpy_diplomats
 				duration = -1
 			}
-			add_dip_power = -300
+			add_dip_power = -200
 			add_prestige = 20
 		}
 	}
@@ -787,27 +796,17 @@ elayenna_3 = {
 			}
 		}
 		effect = {
-			if = {
-				limit = {
-					OR = {
-						has_reform = prabhi_reform
-						has_reform = senapti_reform
-					}
-				}
-				add_casus_belli = {
-					target = R51
-					type = cb_prabhi_claim_raj
-					months = 240
-				}
-			}
-			else = {
-				add_country_modifier = {
-					name = elayenna_attacking_the_raja
-					duration = 1825
-				}
-			}
 			4411 = {
 				add_core = ROOT
+			}
+			declare_war_with_cb = {
+				who = R51
+				casus_belli = cb_core
+				war_goal_province = 4411
+			}
+			add_country_modifier = {
+					name = elayenna_attacking_the_raja
+					duration = 1825
 			}
 		}
 	}
@@ -996,6 +995,7 @@ elayenna_4 = {
 		}
 		trigger = {
 			mulenue_area = {
+				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
 			2917 = {
@@ -1071,27 +1071,24 @@ elayenna_4 = {
 		}
 		provinces_to_highlight = {
 			OR = {
-				area = south_ghankedhen_area
-				area = middle_ghankedhen_area
-				area = north_ghankedhen_area
-			}
+						province_id = 4548
+						province_id = 4444
+						province_id = 4442
+						province_id = 4440
+						province_id = 4439
+						province_id = 4437
+					}
 			NOT = {
 				owned_by = ROOT
 			}
 		}
 		trigger = {
-			south_ghankedhen_area = {
-				type = all
-				owned_by = ROOT
-			}
-			middle_ghankedhen_area = {
-				type = all
-				owned_by = ROOT
-			}
-			north_ghankedhen_area = {
-				type = all
-				owned_by = ROOT
-			}
+			owns_core_province = 4548
+			owns_core_province = 4444
+			owns_core_province = 4442
+			owns_core_province = 4440
+			owns_core_province = 4439
+			owns_core_province = 4437
 		}
 		effect = {
 			add_country_modifier = {

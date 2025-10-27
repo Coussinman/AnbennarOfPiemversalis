@@ -333,6 +333,8 @@ Z05_2 = {
 				}
 			}
 			change_primary_culture = tretunic
+			set_ruler_culture = tretunic
+			set_heir_culture = tretunic
 			custom_tooltip = " "
 			tretunica_area = {
 				change_culture = tretunic
@@ -478,7 +480,7 @@ Z05_2 = {
 			calc_true_if = {
 				amount = 2
 				all_known_country = {
-					has_matching_religion = corinite
+					religion = corinite
 					alliance_with = ROOT
 				}
 			}
@@ -486,7 +488,7 @@ Z05_2 = {
 			calc_true_if = {
 				amount = 5
 				all_known_country = {
-					has_matching_religion = corinite
+					religion = corinite
 					has_opinion = {
 						who = ROOT
 						value = 100
@@ -497,7 +499,7 @@ Z05_2 = {
 		}
 		effect = {
 			custom_tooltip = Z05_faithful_tt
-				set_country_flag = Z05_faithful
+			set_country_flag = Z05_faithful
 
 			add_country_modifier = {
 				name = corinite_refugee_influx
@@ -591,8 +593,11 @@ Z05_3 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-			is_in_war = {
-				casus_belli = cb_independence_war
+			OR = {
+				is_in_war = {
+					casus_belli = cb_independence_war
+				}
+				is_subject = no
 			}
 		}
 		effect = {
@@ -959,6 +964,9 @@ Z05_4 = {
 			is_in_deficit = no
 			num_of_mercenaries = 3
 			any_hired_mercenary_company = { template = merc_tretun_foreign_legion }
+			NOT = {
+				has_reform = corinite_crusaders_reform
+			}
 
 		}
 		effect = {
@@ -1017,15 +1025,7 @@ Z05_4 = {
 				add_base_tax = -3
 			}
 			68 = {
-				if = {
-					limit = {
-						primary_culture = tretunic
-					}
-					change_culture = tretunic
-				}
-				else = {
-					change_culture = pearlsedger
-				}
+				change_culture = ROOT
 				add_base_manpower = 3
 				add_base_production = 3
 				add_base_tax = 3
@@ -1063,7 +1063,7 @@ Z05_4 = {
 			}
 		}
 		effect = {
-			complex_dynamic_effect = {
+			complex_dynamic_effect_without_alternative = {
 				first_custom_tooltip = Z05_united_faith_tt
 				first_limit = "
 					any_subject_country = {
@@ -1086,9 +1086,7 @@ Z05_4 = {
 				"
 
 				second_effect = "
-					add_years_of_owned_provinces_production_income = {
-						years = 2
-					}
+					add_yearly_manpower = 2
 					add_karma = -20
 					add_country_modifier = {
 						name = pushing_into_lencenor

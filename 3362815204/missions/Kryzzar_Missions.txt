@@ -115,7 +115,7 @@ AC7_1 = {
 					add_permanent_claim = ROOT
 				}
 			}
-			rule_might = yes
+			kryzzar_rule_might = yes
 		}
 	}
 
@@ -239,7 +239,7 @@ AC7_1 = {
 			}
 
 			country_event_with_effect_insight = {
-				id = flavor_Kryzzar.2
+				id = flavor_kryzzar.2
 				effect = "
 					random_list = {
 						33 = { change_adm = 1}
@@ -288,7 +288,7 @@ AC7_1 = {
 
 		effect = {
 			country_event_with_effect_insight = {
-				id = flavor_Kryzzar.12
+				id = flavor_kryzzar.12
 				days = 3650
 				effect = "
 					add_country_modifier = {
@@ -326,7 +326,7 @@ AC7_2 = {
 
 		effect = {
 			country_event_with_effect_insight = {
-				id = flavor_Kryzzar.3
+				id = flavor_kryzzar.3
 				effect = "
 					add_country_modifier = {
 						name = AC7_demonic_favor
@@ -369,12 +369,12 @@ AC7_2 = {
 
 			emperor = {
 				country_event_with_effect_insight = {
-					id = flavor_Kryzzar.4
+					id = flavor_kryzzar.4
 					effect = "
 						custom_tooltip = AC7_demonic_favor_tooltip
 						AC7 = {
 							country_event = {
-								id = flavor_Kryzzar.5
+								id = flavor_kryzzar.5
 								days = 10
 							}
 						}
@@ -576,18 +576,24 @@ AC7_3 = {
 		}
 
 		trigger = {
-			custom_trigger_tooltip = {
-				tooltip = flamemarkwinwars
-				check_variable = {
-					which = flamemark_won_wars
-					value = 3
+			OR = {
+				custom_trigger_tooltip = {
+					tooltip = flamemarkwinwars
+					check_variable = {
+						which = flamemark_won_wars
+						value = 3
+					}
+				}
+				num_of_owned_provinces_with = {
+					value = 5
+					is_city = yes
 				}
 			}
 		}
 
 		effect = {
 			country_event = {
-				id = flavor_Kryzzar.6
+				id = flavor_kryzzar.6
 			}
 
 			ourdia_region = {
@@ -595,6 +601,10 @@ AC7_3 = {
 			}
 			dostanor_region = {
 				add_permanent_claim = ROOT
+			}
+
+			daravans_folly_region = {
+				add_core = ROOT
 			}
 
 			complex_dynamic_effect_without_alternative = {
@@ -815,7 +825,7 @@ AC7_3 = {
 
 			custom_tooltip = AC7_hellfire_tooltip
 			country_event_with_effect_insight = {
-				id = flavor_Kryzzar.8
+				id = flavor_kryzzar.8
 				effect = "
 					add_country_modifier = {
 						name = AC7_demonic_fury
@@ -966,11 +976,11 @@ AC7_3 = {
 			}
 			332 = {
 				has_tax_building_trigger = yes
-				num_of_times_improved_by_owner = 4
+				development = 15
 			}
 			919 = {
 				has_production_building_trigger = yes
-				num_of_times_improved_by_owner = 4
+				development = 15
 			}
 		}
 
@@ -1063,7 +1073,7 @@ AC7_3 = {
 			}
 
 			country_event_with_effect_insight = {
-				id = flavor_Kryzzar.13
+				id = flavor_kryzzar.13
 				effect = "
 					add_patriarch_authority = 0.3
 
@@ -1197,7 +1207,7 @@ AC7_4 = {
 
 		effect = {
 			country_event_with_effect_insight = {
-				id = flavor_Kryzzar.10
+				id = flavor_kryzzar.10
 				effect = "
 					451 = {
 						change_trade_goods = slaves
@@ -1518,7 +1528,7 @@ AC7_5 = {
 		effect = {
 			add_patriarch_authority = 0.1
 			country_event_with_option_insight = {
-				id = flavor_Kryzzar.11
+				id = flavor_kryzzar.11
 				option_1 = "
 					large_increase_of_dwarven_tolerance_effect = yes
 					release = F23
