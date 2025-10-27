@@ -3678,6 +3678,1125 @@ guiTypes = {
 			} # End Racial Military Interface (right side)
 		} #End container for Racial Pop menu
 	
+		# ACE Game Rules
+		windowType = {
+			name = "ACE_game_rules_gui_window"
+			orientation = "LOWER_RIGHT"
+			scripted = yes
+			windowType = {
+				name = "ACE_game_rules_menu_window"
+				scripted = yes
+				if_resolution = {
+					min_height = 1080
+					position = { x = -1500 y = -945 }
+				}
+				if_resolution = {
+					max_height = 1079
+					min_height = 1050
+					position = { x = -1380 y = -930 }
+				}
+				if_resolution = {
+					max_height = 1049
+					position = { x = -1360 y = -763 }
+				}
+				windowType = {
+					name = "ACE_game_rules_menu_etc_window"
+					iconType = {
+						name = "ACE_game_rules_menu"
+						quadTextureSprite ="GFX_game_rules_menu"
+					}
+					instantTextBoxType = {
+						name = "ACE_game_rules_menu_title"
+						position = { x = 0 y = 20 }
+						font = "vic_29s"
+						maxWidth = 1080
+						format = center
+						text = ACE_game_rules_menu_text
+					}
+					guiButtonType = {
+						name = "ACE_game_rules_close_button"
+						position = { x = 1005 y = 0 }
+						quadTextureSprite ="GFX_button_close_big"
+						scripted = yes
+						shortcut = "ESCAPE"
+					}
+					windowType = {
+						name = "ACE_game_rules_page_banner_window"
+						position = { x = 268 y = 55 }
+						iconType = {
+							name = "ACE_game_rules_page_banner"
+							quadTextureSprite ="GFX_province_banner_foreign"
+						}
+						instantTextBoxType = {
+							name = "ACE_game_rules_page_banner_text"
+							position = { x = 0 y = 18 }
+							font = "vic_29s"
+							maxWidth = 541
+							format = center
+							scripted = yes
+						}
+					}
+					guiButtonType = {
+						name = "ACE_game_rules_confirm_button"
+						position = { x = 396 y = 612 }
+						quadTextureSprite ="GFX_game_rules_confirm"
+						scripted = yes
+					}
+					guiButtonType = {
+						name = "ACE_game_rules_page_back_button"
+						position = { x = 342 y = 621 }
+						quadTextureSprite ="GFX_button_back"
+						scripted = yes
+					}
+					guiButtonType = {
+						name = "ACE_game_rules_page_next_button"
+						position = { x = 691 y = 621 }
+						quadTextureSprite ="GFX_button_goto"
+						scripted = yes
+					}
+				}
+				windowType = {
+					name = "ACE_game_rules_page_1_window"
+					scripted = yes
+					windowType = {
+						name = "ACE_game_rules_delete_region_window"
+						position = { x = 59 y = 183 }
+						iconType = {
+							name = "ACE_game_rules_delete_region_image"
+							spriteType = "GFX_game_rules_delete_region"
+							scripted = yes
+						}
+						guiButtonType = {
+							name = "ACE_game_rules_open_delete_region_button"
+							position = { x = 92 y = 114 }
+							spriteType ="GFX_game_rules_open_button"
+							scale = "1.25"
+							scripted = yes
+						}
+						windowType = {
+							name = "ACE_game_rules_delete_region_etc_window"
+							iconType = {
+								name = "ACE_game_rules_title_banner"
+								position = { x = -3 y = -42 }
+								quadTextureSprite ="GFX_game_rules_banner"
+							}
+							instantTextBoxType = {
+								name = "ACE_game_rules_delete_region_title"
+								position = { x = 0 y = -34 }
+								textureFile = ""
+								font = "vic_29s"
+								maxWidth = 293
+								maxHeight = 40
+								format = center
+								text = ACE_game_rules_banner_delete_region
+							}
+						}
+					}
+					windowType = {
+						name = "ACE_game_rules_achievement_rule_window"
+						position = { x = 392 y = 183 }
+						iconType = {
+							name = "ACE_game_rules_achievement_image"
+							quadTextureSprite ="GFX_game_rules_option_achievement"
+							scripted = yes
+						}
+						instantTextBoxType = {
+							name = "ACE_game_rules_title_achievement"
+							position = { x = 56 y = 121 }
+							font = "vic_18"
+							maxWidth = 180
+							maxHeight = 32
+							format = center
+							scripted = yes
+						}
+						windowType = {
+							name = "ACE_game_rules_achievement_etc_window"
+							iconType = {
+								name = "ACE_game_rules_title_banner"
+								position = { x = -3 y = -42 }
+								quadTextureSprite ="GFX_game_rules_banner"
+							}
+							instantTextBoxType = {
+								name = "ACE_game_rules_achievement_title"
+								position = { x = 0 y = -34 }
+								textureFile = ""
+								font = "vic_29s"
+								maxWidth = 293
+								maxHeight = 40
+								format = center
+								text = ACE_game_rules_banner_achievement
+							}
+							guiButtonType = {
+								name = "ACE_game_rules_achievement_back_button"
+								position = { x = 0 y = 113 }
+								quadTextureSprite ="GFX_button_back"
+								scripted = yes
+							}
+							guiButtonType = {
+								name = "ACE_game_rules_achievement_next_button"
+								position = { x = 247 y = 113 }
+								quadTextureSprite ="GFX_button_goto"
+								scripted = yes
+							}
+						}
+					}
+					windowType = {
+						name = "ACE_game_rules_todo_3_rule_window"
+						position = { x = 725 y = 183 }
+						scripted = yes
+						iconType = {
+							name = "ACE_game_rules_todo_3_image"
+							quadTextureSprite ="GFX_game_rules_option_todo_test"
+							scripted = yes
+						}
+						instantTextBoxType = {
+							name = "ACE_game_rules_title_todo_3"
+							position = { x = 56 y = 121 }
+							font = "vic_18"
+							maxWidth = 180
+							maxHeight = 32
+							format = center
+							scripted = yes
+						}
+						windowType = {
+							name = "ACE_game_rules_todo_3_etc_window"
+							iconType = {
+								name = "ACE_game_rules_title_banner"
+								position = { x = -3 y = -42 }
+								quadTextureSprite ="GFX_game_rules_banner"
+							}
+							instantTextBoxType = {
+								name = "ACE_game_rules_todo_3_title"
+								position = { x = 0 y = -34 }
+								textureFile = ""
+								font = "vic_29s"
+								maxWidth = 293
+								maxHeight = 40
+								format = center
+								text = "TODO 3"
+							}
+							guiButtonType = {
+								name = "ACE_game_rules_todo_3_back_button"
+								position = { x = 0 y = 113 }
+								quadTextureSprite ="GFX_button_back"
+								scripted = yes
+							}
+							guiButtonType = {
+								name = "ACE_game_rules_todo_3_next_button"
+								position = { x = 247 y = 113 }
+								quadTextureSprite ="GFX_button_goto"
+								scripted = yes
+							}
+						}
+					}
+					windowType = {
+						name = "ACE_game_rules_title_yes_great_conquerors_rule_window"
+						position = { x = 59 y = 410 }
+						iconType = {
+							name = "ACE_game_rules_title_yes_great_conquerors_image"
+							quadTextureSprite ="GFX_game_rules_option_great_conqueror"
+							scripted = yes
+						}
+						instantTextBoxType = {
+							name = "ACE_game_rules_title_great_conquerors"
+							position = { x = 56 y = 121 }
+							font = "vic_18"
+							maxWidth = 180
+							maxHeight = 32
+							format = center
+							scripted = yes
+						}
+						windowType = {
+							name = "ACE_game_rules_title_yes_great_conquerors_etc_window"
+							iconType = {
+								name = "ACE_game_rules_title_banner"
+								position = { x = -3 y = -42 }
+								quadTextureSprite ="GFX_game_rules_banner"
+							}
+							instantTextBoxType = {
+								name = "ACE_game_rules_title_yes_great_conquerors_title"
+								position = { x = 0 y = -34 }
+								textureFile = ""
+								font = "vic_29s"
+								maxWidth = 293
+								maxHeight = 40
+								format = center
+								text = ACE_game_rules_banner_great_conquerors
+							}
+							guiButtonType = {
+								name = "ACE_game_rules_title_yes_great_conquerors_back_button"
+								position = { x = 0 y = 113 }
+								quadTextureSprite ="GFX_button_back"
+								scripted = yes
+							}
+							guiButtonType = {
+								name = "ACE_game_rules_title_yes_great_conquerors_next_button"
+								position = { x = 247 y = 113 }
+								quadTextureSprite ="GFX_button_goto"
+								scripted = yes
+							}
+						}
+					}
+
+
+
+					windowType = {
+						name = "ACE_game_rules_variant_conquerors_window"
+						position = { x = 392 y = 410 }
+						scripted = yes
+						iconType = {
+							name = "ACE_game_rules_variant_conquerors_image"
+							quadTextureSprite ="GFX_game_rules_option_variant_conqueror"
+							scripted = yes
+						}
+						instantTextBoxType = {
+							name = "ACE_game_rules_title_variant_conquerors"
+							position = { x = 56 y = 121 }
+							font = "vic_18"
+							maxWidth = 180
+							maxHeight = 32
+							format = center
+							scripted = yes
+						}
+						windowType = {
+							name = "ACE_game_rules_variant_conquerors_etc_window"
+							iconType = {
+								name = "ACE_game_rules_title_banner"
+								position = { x = -3 y = -42 }
+								quadTextureSprite ="GFX_game_rules_banner"
+							}
+							instantTextBoxType = {
+								name = "ACE_game_rules_variant_conquerors_title"
+								position = { x = 0 y = -34 }
+								textureFile = ""
+								font = "vic_29s"
+								maxWidth = 293
+								maxHeight = 40
+								format = center
+								text = ACE_game_rules_banner_variant_conquerors
+							}
+							guiButtonType = {
+								name = "ACE_game_rules_variant_conquerors_back_button"
+								position = { x = 0 y = 113 }
+								quadTextureSprite ="GFX_button_back"
+								scripted = yes
+							}
+							guiButtonType = {
+								name = "ACE_game_rules_variant_conquerors_next_button"
+								position = { x = 247 y = 113 }
+								quadTextureSprite ="GFX_button_goto"
+								scripted = yes
+							}
+						}
+					}
+					windowType = {
+						name = "ACE_game_rules_variant_conquerors_disabled_window"
+						position = { x = 392 y = 410 }
+						scripted = yes
+						iconType = {
+							name = "ACE_game_rules_variant_conquerors_disabled_image"
+							quadTextureSprite ="GFX_game_rules_option_variant_conqueror_disabled"
+						}
+						instantTextBoxType = {
+							name = "ACE_game_rules_title_variant_conquerors"
+							position = { x = 56 y = 121 }
+							font = "vic_18"
+							maxWidth = 180
+							maxHeight = 32
+							format = center
+							scripted = yes
+						}
+						windowType = {
+							name = "ACE_game_rules_variant_conquerors_disabled_etc_window"
+							iconType = {
+								name = "ACE_game_rules_title_banner_disabled"
+								position = { x = -3 y = -42 }
+								quadTextureSprite ="GFX_game_rules_banner_disabled"
+							}
+							instantTextBoxType = {
+								name = "ACE_game_rules_variant_conquerors_title"
+								position = { x = 0 y = -34 }
+								textureFile = ""
+								font = "vic_29s"
+								maxWidth = 293
+								maxHeight = 40
+								format = center
+								text = ACE_game_rules_banner_variant_conquerors
+							}
+							iconType = {
+								name = "ACE_game_rules_variant_conquerors_disabled_back_button"
+								position = { x = 0 y = 113 }
+								quadTextureSprite ="GFX_button_back_disabled"
+							}
+							iconType = {
+								name = "ACE_game_rules_variant_conquerors_disabled_next_button"
+								position = { x = 247 y = 113 }
+								quadTextureSprite ="GFX_button_next_disabled"
+							}
+						}
+					}
+
+
+
+					windowType = {
+						name = "ACE_game_rules_delayed_conquerors_window"
+						position = { x = 725 y = 410 }
+						scripted = yes
+						iconType = {
+							name = "ACE_game_rules_delayed_conquerors_image"
+							quadTextureSprite ="GFX_game_rules_option_delayed_conqueror"
+							scripted = yes
+						}
+						instantTextBoxType = {
+							name = "ACE_game_rules_title_delayed_conquerors"
+							position = { x = 56 y = 121 }
+							font = "vic_18"
+							maxWidth = 180
+							maxHeight = 32
+							format = center
+							scripted = yes
+						}
+						windowType = {
+							name = "ACE_game_rules_delayed_conquerors_etc_window"
+							iconType = {
+								name = "ACE_game_rules_title_banner"
+								position = { x = -3 y = -42 }
+								quadTextureSprite ="GFX_game_rules_banner"
+							}
+							instantTextBoxType = {
+								name = "ACE_game_rules_delayed_conquerors_title"
+								position = { x = 0 y = -34 }
+								textureFile = ""
+								font = "vic_29s"
+								maxWidth = 293
+								maxHeight = 40
+								format = center
+								text = ACE_game_rules_banner_delayed_conquerors
+							}
+							guiButtonType = {
+								name = "ACE_game_rules_delayed_conquerors_back_button"
+								position = { x = 0 y = 113 }
+								quadTextureSprite ="GFX_button_back"
+								scripted = yes
+							}
+							guiButtonType = {
+								name = "ACE_game_rules_delayed_conquerors_next_button"
+								position = { x = 247 y = 113 }
+								quadTextureSprite ="GFX_button_goto"
+								scripted = yes
+							}
+						}
+					}
+					windowType = {
+						name = "ACE_game_rules_delayed_conquerors_disabled_window"
+						position = { x = 725 y = 410 }
+						scripted = yes
+						iconType = {
+							name = "ACE_game_rules_delayed_conquerors_disabled_image"
+							quadTextureSprite ="GFX_game_rules_option_delayed_conqueror_disabled"
+							scripted = yes
+						}
+						instantTextBoxType = {
+							name = "ACE_game_rules_title_delayed_conquerors"
+							position = { x = 56 y = 121 }
+							font = "vic_18"
+							maxWidth = 180
+							maxHeight = 32
+							format = center
+							scripted = yes
+						}
+						windowType = {
+							name = "ACE_game_rules_delayed_conquerors_disabled_etc_window"
+							iconType = {
+								name = "ACE_game_rules_title_banner_disabled"
+								position = { x = -3 y = -42 }
+								quadTextureSprite ="GFX_game_rules_banner_disabled"
+							}
+							instantTextBoxType = {
+								name = "ACE_game_rules_delayed_conquerors_title"
+								position = { x = 0 y = -34 }
+								textureFile = ""
+								font = "vic_29s"
+								maxWidth = 293
+								maxHeight = 40
+								format = center
+								text = ACE_game_rules_banner_delayed_conquerors
+							}
+							iconType = {
+								name = "ACE_game_rules_delayed_conquerors_back_button_disabled"
+								position = { x = 0 y = 113 }
+								quadTextureSprite ="GFX_button_back_disabled"
+							}
+							iconType = {
+								name = "ACE_game_rules_delayed_conquerors_next_button"
+								position = { x = 247 y = 113 }
+								quadTextureSprite ="GFX_button_next_disabled"
+							}
+						}
+					}
+				}
+
+
+
+				windowType = {
+					name = "ACE_game_rules_page_2_window"
+					scripted = yes
+					windowType = {
+						name = "ACE_game_rules_unraveling_rule_window"
+						position = { x = 59 y = 183 }
+						iconType = {
+							name = "ACE_game_rules_unraveling_image"
+							quadTextureSprite ="GFX_game_rules_option_unraveling"
+							scripted = yes
+						}
+						instantTextBoxType = {
+							name = "ACE_game_rules_title_unraveling"
+							position = { x = 56 y = 121 }
+							font = "vic_18"
+							maxWidth = 180
+							maxHeight = 32
+							format = center
+							scripted = yes
+						}
+						windowType = {
+							name = "ACE_game_rules_unraveling_etc_window"
+							iconType = {
+								name = "ACE_game_rules_title_banner"
+								position = { x = -3 y = -42 }
+								quadTextureSprite ="GFX_game_rules_banner"
+							}
+							instantTextBoxType = {
+								name = "ACE_game_rules_unraveling_title"
+								position = { x = 0 y = -34 }
+								textureFile = ""
+								font = "vic_29s"
+								maxWidth = 293
+								maxHeight = 40
+								format = center
+								text = "Unraveling"
+							}
+							guiButtonType = {
+								name = "ACE_game_rules_unraveling_back_button"
+								position = { x = 0 y = 113 }
+								quadTextureSprite ="GFX_button_back"
+								scripted = yes
+							}
+							guiButtonType = {
+								name = "ACE_game_rules_unraveling_next_button"
+								position = { x = 247 y = 113 }
+								quadTextureSprite ="GFX_button_goto"
+								scripted = yes
+							}
+						}
+					}
+					windowType = {
+						name = "ACE_game_rules_wex_rule_window"
+						position = { x = 392 y = 183 }
+						iconType = {
+							name = "ACE_game_rules_wex_image"
+							quadTextureSprite ="GFX_game_rules_option_wex"
+							scripted = yes
+						}
+						instantTextBoxType = {
+							name = "ACE_game_rules_title_wex"
+							position = { x = 56 y = 121 }
+							font = "vic_18"
+							maxWidth = 180
+							maxHeight = 32
+							format = center
+							scripted = yes
+						}
+						windowType = {
+							name = "ACE_game_rules_wex_etc_window"
+							iconType = {
+								name = "ACE_game_rules_title_banner"
+								position = { x = -3 y = -42 }
+								quadTextureSprite ="GFX_game_rules_banner"
+							}
+							instantTextBoxType = {
+								name = "ACE_game_rules_wex_title"
+								position = { x = 0 y = -34 }
+								textureFile = ""
+								font = "vic_29s"
+								maxWidth = 293
+								maxHeight = 40
+								format = center
+								text = "Wex"
+							}
+							guiButtonType = {
+								name = "ACE_game_rules_wex_back_button"
+								position = { x = 0 y = 113 }
+								quadTextureSprite ="GFX_button_back"
+								scripted = yes
+							}
+							guiButtonType = {
+								name = "ACE_game_rules_wex_next_button"
+								position = { x = 247 y = 113 }
+								quadTextureSprite ="GFX_button_goto"
+								scripted = yes
+							}
+						}
+					}
+					windowType = {
+						name = "ACE_game_rules_lencenor_rule_window"
+						position = { x = 725 y = 183 }
+						iconType = {
+							name = "ACE_game_rules_lencenor_image"
+							quadTextureSprite ="GFX_game_rules_option_lencenor"
+							scripted = yes
+						}
+						instantTextBoxType = {
+							name = "ACE_game_rules_title_lencenor"
+							position = { x = 56 y = 121 }
+							font = "vic_18"
+							maxWidth = 180
+							maxHeight = 32
+							format = center
+							scripted = yes
+						}
+						windowType = {
+							name = "ACE_game_rules_lencenor_etc_window"
+							iconType = {
+								name = "ACE_game_rules_title_banner"
+								position = { x = -3 y = -42 }
+								quadTextureSprite ="GFX_game_rules_banner"
+							}
+							instantTextBoxType = {
+								name = "ACE_game_rules_lencenor_title"
+								position = { x = 0 y = -34 }
+								textureFile = ""
+								font = "vic_29s"
+								maxWidth = 293
+								maxHeight = 40
+								format = center
+								text = "Lencenor"
+							}
+							guiButtonType = {
+								name = "ACE_game_rules_lencenor_back_button"
+								position = { x = 0 y = 113 }
+								quadTextureSprite ="GFX_button_back"
+								scripted = yes
+							}
+							guiButtonType = {
+								name = "ACE_game_rules_lencenor_next_button"
+								position = { x = 247 y = 113 }
+								quadTextureSprite ="GFX_button_goto"
+								scripted = yes
+							}
+						}
+					}
+					windowType = {
+						name = "ACE_game_rules_gawed_rule_window"
+						position = { x = 59 y = 410 }
+						iconType = {
+							name = "ACE_game_rules_gawed_image"
+							quadTextureSprite ="GFX_game_rules_option_gawed"
+							scripted = yes
+						}
+						instantTextBoxType = {
+							name = "ACE_game_rules_title_gawed"
+							position = { x = 56 y = 121 }
+							font = "vic_18"
+							maxWidth = 180
+							maxHeight = 32
+							format = center
+							scripted = yes
+						}
+						windowType = {
+							name = "ACE_game_rules_gawed_etc_window"
+							iconType = {
+								name = "ACE_game_rules_title_banner"
+								position = { x = -3 y = -42 }
+								quadTextureSprite ="GFX_game_rules_banner"
+							}
+							instantTextBoxType = {
+								name = "ACE_game_rules_gawed_title"
+								position = { x = 0 y = -34 }
+								textureFile = ""
+								font = "vic_29s"
+								maxWidth = 293
+								maxHeight = 40
+								format = center
+								text = "Gawed"
+							}
+							guiButtonType = {
+								name = "ACE_game_rules_gawed_back_button"
+								position = { x = 0 y = 113 }
+								quadTextureSprite ="GFX_button_back"
+								scripted = yes
+							}
+							guiButtonType = {
+								name = "ACE_game_rules_gawed_next_button"
+								position = { x = 247 y = 113 }
+								quadTextureSprite ="GFX_button_goto"
+								scripted = yes
+							}
+						}
+					}
+				}
+
+
+
+				windowType = {
+					name = "ACE_game_rules_page_3_window"
+					scripted = yes
+					windowType = {
+						name = "ACE_game_rules_burning_desert_rule_window"
+						position = { x = 59 y = 183 }
+						iconType = {
+							name = "ACE_game_rules_burning_desert_image"
+							quadTextureSprite ="GFX_game_rules_option_burning_desert"
+							scripted = yes
+						}
+						instantTextBoxType = {
+							name = "ACE_game_rules_title_burning_desert"
+							position = { x = 56 y = 121 }
+							font = "vic_18"
+							maxWidth = 180
+							maxHeight = 32
+							format = center
+							scripted = yes
+						}
+						windowType = {
+							name = "ACE_game_rules_burning_desert_etc_window"
+							iconType = {
+								name = "ACE_game_rules_title_banner"
+								position = { x = -3 y = -42 }
+								quadTextureSprite ="GFX_game_rules_banner"
+							}
+							instantTextBoxType = {
+								name = "ACE_game_rules_burning_desert_title"
+								position = { x = 0 y = -34 }
+								textureFile = ""
+								font = "vic_29s"
+								maxWidth = 293
+								maxHeight = 40
+								format = center
+								text = ACE_game_rules_banner_burning_desert
+							}
+							guiButtonType = {
+								name = "ACE_game_rules_burning_desert_back_button"
+								position = { x = 0 y = 113 }
+								quadTextureSprite ="GFX_button_back"
+								scripted = yes
+							}
+							guiButtonType = {
+								name = "ACE_game_rules_burning_desert_next_button"
+								position = { x = 247 y = 113 }
+								quadTextureSprite ="GFX_button_goto"
+								scripted = yes
+							}
+						}
+					}
+					windowType = {
+						name = "ACE_game_rules_decades_devastation_rule_window"
+						position = { x = 392 y = 183 }
+						iconType = {
+							name = "ACE_game_rules_decades_devastation_image"
+							quadTextureSprite ="GFX_game_rules_option_decades_devastation"
+							scripted = yes
+						}
+						instantTextBoxType = {
+							name = "ACE_game_rules_title_decades_devastation"
+							position = { x = 56 y = 121 }
+							font = "vic_18"
+							maxWidth = 180
+							maxHeight = 32
+							format = center
+							scripted = yes
+						}
+						windowType = {
+							name = "ACE_game_rules_decades_devastation_etc_window"
+							iconType = {
+								name = "ACE_game_rules_title_banner"
+								position = { x = -3 y = -42 }
+								quadTextureSprite ="GFX_game_rules_banner"
+							}
+							instantTextBoxType = {
+								name = "ACE_game_rules_decades_devastation_title"
+								position = { x = 0 y = -34 }
+								textureFile = ""
+								font = "vic_29s"
+								maxWidth = 293
+								maxHeight = 40
+								format = center
+								text = ACE_game_rules_banner_decades_devastation
+							}
+							guiButtonType = {
+								name = "ACE_game_rules_decades_devastation_back_button"
+								position = { x = 0 y = 113 }
+								quadTextureSprite ="GFX_button_back"
+								scripted = yes
+							}
+							guiButtonType = {
+								name = "ACE_game_rules_decades_devastation_next_button"
+								position = { x = 247 y = 113 }
+								quadTextureSprite ="GFX_button_goto"
+								scripted = yes
+							}
+						}
+					}
+				}
+				windowType = {
+					name = "ACE_game_rules_page_delete_regions_window"
+					scripted = yes
+
+					iconType = {
+						name = "ACE_game_rules_delete_regions_image"
+						position = { x = 80 y = 150 }
+						quadTextureSprite ="GFX_game_rules_delete_regions_image"
+						scripted = yes
+					}
+					iconType = {
+						name = "ACE_game_rules_north_aelantir_image"
+						position = { x = 80 y = 150 }
+						quadTextureSprite ="GFX_game_rules_north_aelantir"
+						scripted = yes
+					}
+					iconType = {
+						name = "ACE_game_rules_south_aelantir_image"
+						position = { x = 80 y = 150 }
+						quadTextureSprite ="GFX_game_rules_south_aelantir"
+						scripted = yes
+					}
+					iconType = {
+						name = "ACE_game_rules_cannor_image"
+						position = { x = 80 y = 150 }
+						quadTextureSprite ="GFX_game_rules_cannor"
+						scripted = yes
+					}
+					iconType = {
+						name = "ACE_game_rules_deepwoods_image"
+						position = { x = 80 y = 150 }
+						quadTextureSprite ="GFX_game_rules_deepwoods_image"
+						scripted = yes
+					}
+					iconType = {
+						name = "ACE_game_rules_western_spine_image"
+						position = { x = 80 y = 150 }
+						quadTextureSprite ="GFX_game_rules_western_spine_image"
+						scripted = yes
+					}
+					iconType = {
+						name = "ACE_game_rules_forbidden_plains_image"
+						position = { x = 80 y = 150 }
+						quadTextureSprite ="GFX_game_rules_forbidden_plains_image"
+						scripted = yes
+					}
+					iconType = {
+						name = "ACE_game_rules_gozengun_image"
+						position = { x = 80 y = 150 }
+						quadTextureSprite ="GFX_game_rules_gozengun_image"
+						scripted = yes
+					}
+					iconType = {
+						name = "ACE_game_rules_bulwar_image"
+						position = { x = 80 y = 150 }
+						quadTextureSprite ="GFX_game_rules_bulwar_image"
+						scripted = yes
+					}
+					iconType = {
+						name = "ACE_game_rules_rahen_image"
+						position = { x = 80 y = 150 }
+						quadTextureSprite ="GFX_game_rules_rahen_image"
+						scripted = yes
+					}
+					iconType = {
+						name = "ACE_game_rules_east_haless_image"
+						position = { x = 80 y = 150 }
+						quadTextureSprite ="GFX_game_rules_east_haless_image"
+						scripted = yes
+					}
+					iconType = {
+						name = "ACE_game_rules_eastern_spine_image"
+						position = { x = 80 y = 150 }
+						quadTextureSprite ="GFX_game_rules_eastern_spine_image"
+						scripted = yes
+					}
+					iconType = {
+						name = "ACE_game_rules_north_salahad_image"
+						position = { x = 80 y = 150 }
+						quadTextureSprite ="GFX_game_rules_north_salahad_image"
+						scripted = yes
+					}
+					iconType = {
+						name = "ACE_game_rules_west_sarhal_image"
+						position = { x = 80 y = 150 }
+						quadTextureSprite ="GFX_game_rules_west_sarhal_image"
+						scripted = yes
+					}
+					iconType = {
+						name = "ACE_game_rules_east_sarhal_image"
+						position = { x = 80 y = 150 }
+						quadTextureSprite ="GFX_game_rules_east_sarhal_image"
+						scripted = yes
+					}
+
+					instantTextBoxType = {
+						name = "ACE_game_rules_title_delete_regions"
+						position = { x = 56 y = 121 }
+						font = "vic_18"
+						maxWidth = 180
+						maxHeight = 32
+						format = center
+						scripted = yes
+					}
+
+					windowType = {
+						name = "ACE_game_rules_toggle_north_aelantir_window"
+						position = { x = 240 y = 220 }
+						guiButtonType = {
+							name = "ACE_game_rules_toggle_north_aelantir_button"
+							quadTextureSprite ="GFX_game_rules_region_choice"
+							scale = 0.6
+							scripted = yes
+						}
+						instantTextBoxType = {
+							name = "ACE_game_rules_toggle_north_aelantir_text"
+							position = { x = -64 y = -1 }
+							font = "Arial12"
+							format = center
+							alwaystransparent = yes
+							scripted = yes
+						}
+					}
+					windowType = {
+						name = "ACE_game_rules_toggle_south_aelantir_window"
+						position = { x = 290 y = 390 }
+						guiButtonType = {
+							name = "ACE_game_rules_toggle_south_aelantir_button"
+							quadTextureSprite ="GFX_game_rules_region_choice"
+							scale = 0.6
+							scripted = yes
+						}
+						instantTextBoxType = {
+							name = "ACE_game_rules_toggle_south_aelantir_text"
+							position = { x = -64 y = -1 }
+							font = "Arial12"
+							format = center
+							alwaystransparent = yes
+							scripted = yes
+						}
+					}
+					windowType = {
+						name = "ACE_game_rules_toggle_cannor_window"
+						position = { x = 450 y = 210 }
+						guiButtonType = {
+							name = "ACE_game_rules_toggle_cannor_button"
+							quadTextureSprite ="GFX_game_rules_region_choice"
+							scale = 0.6
+							scripted = yes
+						}
+						instantTextBoxType = {
+							name = "ACE_game_rules_toggle_cannor_text"
+							position = { x = -64 y = -1 }
+							font = "Arial12"
+							format = center
+							alwaystransparent = yes
+							scripted = yes
+						}
+					}
+					windowType = {
+						name = "ACE_game_rules_toggle_deepwoods_window"
+						position = { x = 530 y = 220 }
+						guiButtonType = {
+							name = "ACE_game_rules_toggle_deepwoods_button"
+							quadTextureSprite ="GFX_game_rules_region_choice"
+							scale = 0.6
+							scripted = yes
+						}
+						instantTextBoxType = {
+							name = "ACE_game_rules_toggle_deepwoods_text"
+							position = { x = -64 y = -1 }
+							font = "Arial12"
+							format = center
+							alwaystransparent = yes
+							scripted = yes
+						}
+					}
+					windowType = {
+						name = "ACE_game_rules_toggle_western_spine_window"
+						position = { x = 580 y = 180 }
+						guiButtonType = {
+							name = "ACE_game_rules_toggle_western_spine_button"
+							quadTextureSprite ="GFX_game_rules_region_choice"
+							scale = 0.6
+							scripted = yes
+						}
+						instantTextBoxType = {
+							name = "ACE_game_rules_toggle_western_spine_text"
+							position = { x = -64 y = -1 }
+							font = "Arial12"
+							format = center
+							alwaystransparent = yes
+							scripted = yes
+						}
+					}
+					windowType = {
+						name = "ACE_game_rules_toggle_forbidden_plains_window"
+						position = { x = 670 y = 190 }
+						guiButtonType = {
+							name = "ACE_game_rules_toggle_forbidden_plains_button"
+							quadTextureSprite ="GFX_game_rules_region_choice"
+							scale = 0.6
+							scripted = yes
+						}
+						instantTextBoxType = {
+							name = "ACE_game_rules_toggle_forbidden_plains_text"
+							position = { x = -64 y = -1 }
+							font = "Arial12"
+							format = center
+							alwaystransparent = yes
+							scripted = yes
+						}
+					}
+					windowType = {
+						name = "ACE_game_rules_toggle_gozengun_window"
+						position = { x = 780 y = 190 }
+						guiButtonType = {
+							name = "ACE_game_rules_toggle_gozengun_button"
+							quadTextureSprite ="GFX_game_rules_region_choice"
+							scale = 0.6
+							scripted = yes
+						}
+						instantTextBoxType = {
+							name = "ACE_game_rules_toggle_gozengun_text"
+							position = { x = -64 y = -1 }
+							font = "Arial12"
+							format = center
+							alwaystransparent = yes
+							scripted = yes
+						}
+					}
+					windowType = {
+						name = "ACE_game_rules_toggle_bulwar_window"
+						position = { x = 610 y = 280 }
+						guiButtonType = {
+							name = "ACE_game_rules_toggle_bulwar_button"
+							quadTextureSprite ="GFX_game_rules_region_choice"
+							scale = 0.6
+							scripted = yes
+						}
+						instantTextBoxType = {
+							name = "ACE_game_rules_toggle_bulwar_text"
+							position = { x = -64 y = -1 }
+							font = "Arial12"
+							format = center
+							alwaystransparent = yes
+							scripted = yes
+						}
+					}
+					windowType = {
+						name = "ACE_game_rules_toggle_rahen_window"
+						position = { x = 700 y = 280 }
+						guiButtonType = {
+							name = "ACE_game_rules_toggle_rahen_button"
+							quadTextureSprite ="GFX_game_rules_region_choice"
+							scale = 0.6
+							scripted = yes
+						}
+						instantTextBoxType = {
+							name = "ACE_game_rules_toggle_rahen_text"
+							position = { x = -64 y = -1 }
+							font = "Arial12"
+							format = center
+							alwaystransparent = yes
+							scripted = yes
+						}
+					}
+					windowType = {
+						name = "ACE_game_rules_toggle_east_haless_window"
+						position = { x = 780 y = 280 }
+						guiButtonType = {
+							name = "ACE_game_rules_toggle_east_haless_button"
+							quadTextureSprite ="GFX_game_rules_region_choice"
+							scale = 0.6
+							scripted = yes
+						}
+						instantTextBoxType = {
+							name = "ACE_game_rules_toggle_east_haless_text"
+							position = { x = -64 y = -1 }
+							font = "Arial12"
+							format = center
+							alwaystransparent = yes
+							scripted = yes
+						}
+					}
+					windowType = {
+						name = "ACE_game_rules_toggle_eastern_spine_window"
+						position = { x = 730 y = 230 }
+						guiButtonType = {
+							name = "ACE_game_rules_toggle_eastern_spine_button"
+							quadTextureSprite ="GFX_game_rules_region_choice"
+							scale = 0.6
+							scripted = yes
+						}
+						instantTextBoxType = {
+							name = "ACE_game_rules_toggle_eastern_spine_text"
+							position = { x = -64 y = -1 }
+							font = "Arial12"
+							format = center
+							alwaystransparent = yes
+							scripted = yes
+						}
+					}
+					windowType = {
+						name = "ACE_game_rules_toggle_north_salahad_window"
+						position = { x = 510 y = 280 }
+						guiButtonType = {
+							name = "ACE_game_rules_toggle_north_salahad_button"
+							quadTextureSprite ="GFX_game_rules_region_choice"
+							scale = 0.6
+							scripted = yes
+						}
+						instantTextBoxType = {
+							name = "ACE_game_rules_toggle_north_salahad_text"
+							position = { x = -64 y = -1 }
+							font = "Arial12"
+							format = center
+							alwaystransparent = yes
+							scripted = yes
+						}
+					}
+					windowType = {
+						name = "ACE_game_rules_toggle_west_sarhal_window"
+						position = { x = 530 y = 340 }
+						guiButtonType = {
+							name = "ACE_game_rules_toggle_west_sarhal_button"
+							quadTextureSprite ="GFX_game_rules_region_choice"
+							scale = 0.6
+							scripted = yes
+						}
+						instantTextBoxType = {
+							name = "ACE_game_rules_toggle_west_sarhal_text"
+							position = { x = -64 y = -1 }
+							font = "Arial12"
+							format = center
+							alwaystransparent = yes
+							scripted = yes
+						}
+					}
+					windowType = {
+						name = "ACE_game_rules_toggle_east_sarhal_window"
+						position = { x = 680 y = 330 }
+						guiButtonType = {
+							name = "ACE_game_rules_toggle_east_sarhal_button"
+							quadTextureSprite ="GFX_game_rules_region_choice"
+							scale = 0.6
+							scripted = yes
+						}
+						instantTextBoxType = {
+							name = "ACE_game_rules_toggle_east_sarhal_text"
+							position = { x = -64 y = -1 }
+							font = "Arial12"
+							format = center
+							alwaystransparent = yes
+							scripted = yes
+						}
+					}
+				}
+			}
+		}
 	} ### end of "topbar"
 
 	windowType = {
