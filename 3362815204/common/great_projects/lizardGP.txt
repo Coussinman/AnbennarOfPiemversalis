@@ -814,7 +814,7 @@ guild_of_hydromancers = {
 			global_prosperity_growth = 0.1
 			mages_influence_modifier = 0.025
 			mages_loyalty_modifier = 0.05
-			global_production_efficiency = 0.10
+			production_efficiency = 0.05
 		}
 		on_upgraded = {
 		}
@@ -839,7 +839,7 @@ guild_of_hydromancers = {
 			mages_loyalty_modifier = 0.10
 			global_monthly_devastation = -0.05
 			global_prosperity_growth = 0.3
-			global_production_efficiency = 0.15
+			production_efficiency = 0.075
 		}
 		on_upgraded = {
 		}
@@ -865,7 +865,7 @@ guild_of_hydromancers = {
 			mages_loyalty_modifier = 0.15
             global_monthly_devastation = -0.08
 			global_prosperity_growth = 0.5
-			global_production_efficiency = 0.20
+			production_efficiency = 0.10
 		}
 		on_upgraded = {
 			owner {
@@ -1754,6 +1754,10 @@ Zirrbit = {
 			global_prosperity_growth = 0.3
 		}
 		on_upgraded = {
+			custom_tooltip = zirbit_2_tt
+			owner = {
+            	set_country_flag = zirbit_2
+    		}
 		}
 	}
 	tier_3 = {
@@ -1775,8 +1779,9 @@ Zirrbit = {
 			global_prosperity_growth = 0.5
 		}
 		on_upgraded = {
+			custom_tooltip = zirbit_3_tt
 			owner = {
-            	unlock_estate_privilege = { estate_privilege = estate_mages_desert_enhancement }
+            	set_country_flag = zirbit_3
     		}
 		}
 	}
@@ -2163,7 +2168,7 @@ first_empire_throne = {
 		}
 		country_modifiers = {
 			expand_administration_cost = -0.5
-			overextension_impact_modifier = -0.1
+			max_absolutism_effect = 0.15
 			max_absolutism = 7.5
 			legitimacy = 2
 			devotion = 2
@@ -2295,14 +2300,22 @@ Golcora_gold_mines = {
 	start = 479
 	date = 01.01.01
 	time = {
-		months = 0
+		months = 120
 	}
-	build_cost = 0
+	build_cost = 1000
 	can_be_moved = no
 	move_days_per_unit_distance = 1
 	starting_tier = 0
 	type = monument
 	build_trigger = {	
+		NOT = { has_global_flag = mint_dstr }
+		OR = {
+			owner = { culture_group = gnollish }
+			AND = {
+				has_owner_accepted_culture = yes
+				owner = { is_emperor_of_china = yes }
+			}
+		}
 	}
 	on_built = {		
 	}
@@ -2360,7 +2373,7 @@ Golcora_gold_mines = {
 		}
 		country_modifiers = {
 			inflation_action_cost = -0.1
-			global_tax_income = 240
+			global_tax_income = 360
 		}
 		on_upgraded = {
 		}
@@ -2404,7 +2417,7 @@ Golcora_gold_mines = {
 		country_modifiers = {
 			interest = -1
 			inflation_action_cost = -0.3
-			global_tax_income = 1440
+			global_tax_income = 840
 		}
 		on_upgraded = {
 		}
@@ -2640,8 +2653,8 @@ city_build_by_slaves = {
 			local_manpower_modifier = 0.25
 		}
 		area_modifier = {
-			build_cost = -0.10
-			build_time = -0.10
+			local_build_cost = -0.10
+			local_build_time = -0.10
 		}
 		country_modifiers = {
 			build_cost = -0.15
@@ -2943,4 +2956,143 @@ Order_of_the_Tidal_Scales = {
 		}
 	}
 }
-
+#Golcora gnoll gold mines
+gnoll_gold_mines = {
+	start = 479
+	date = 1855.06.20
+	time = {
+		months = 120
+	}
+	build_cost = 1000
+	can_be_moved = no
+	move_days_per_unit_distance = 1
+	starting_tier = 0
+	type = monument
+	build_trigger = {
+		has_global_flag = mint_dstr
+		owner = {
+			culture_group = gnollish
+		}
+	}
+	on_built = {		
+	}
+	on_destroyed = {	
+	}
+	can_use_modifiers_trigger = {
+		OR = {
+			AND = {
+				owner = { culture_group = gnollish }
+				owner = { is_emperor_of_china = no }
+			}
+			AND = {
+				has_owner_accepted_culture = yes
+				owner = { is_emperor_of_china = no }
+			}
+		}
+	}		
+	can_upgrade_trigger = {
+		OR = {
+			AND = {
+				owner = { culture_group = gnollish }
+				owner = { is_emperor_of_china = no }
+			}
+			AND = {
+				has_owner_accepted_culture = yes
+				owner = { is_emperor_of_china = no }
+			}
+		}
+	}		
+	keep_trigger = {
+	}
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+		cost_to_upgrade = {
+			factor = 0
+		}
+		province_modifiers = {
+		}
+		area_modifier = {
+		}
+		country_modifiers = {	
+		}
+		on_upgraded = {
+		}
+	}
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+		cost_to_upgrade = {
+			factor = 1500
+		}
+		province_modifiers = {
+			local_gold_depletion_chance_modifier = -0.25
+			trade_goods_size = 4
+			local_development_cost = +0.1
+			local_unrest = +3
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+			production_efficiency = 0.05
+		}
+		on_upgraded = {
+			inflation = 3 
+		}
+	}
+	tier_2 = {
+		upgrade_time = {
+			months = 240
+		}
+		cost_to_upgrade = {
+			factor = 3000
+		}
+		province_modifiers = {
+            local_gold_depletion_chance_modifier = -0.33
+			trade_goods_size = 8
+			local_development_cost = +0.15
+			local_unrest = +5
+		}
+		area_modifier = {
+			trade_goods_size = 2
+		}
+		country_modifiers = {
+			production_efficiency = 0.075
+			
+		}
+		on_upgraded = {
+			inflation = 5
+			480 = {
+				change_trade_goods = gold
+			}
+		}
+	}
+	tier_3 = {
+		upgrade_time = {
+			months = 480
+		}
+		cost_to_upgrade = {
+			factor = 6000
+		}
+		province_modifiers = {
+            local_gold_depletion_chance_modifier = -0.50
+			trade_goods_size = 16
+			local_development_cost = +0.20
+			local_unrest = +7.5
+		}
+		area_modifier = {
+			trade_goods_size = 4
+		}
+		country_modifiers = {
+			production_efficiency = 0.15
+		}
+		on_upgraded = {
+			inflation = 10
+			3195 = {
+				change_trade_goods = gold
+			}
+		}
+	}
+}

@@ -1,0 +1,96 @@
+country_decisions = {
+    warlock_decision = {
+        major = yes
+
+        potential = {
+            has_country_flag = warlockpkk_decision_unlocked
+        }
+
+        allow = {
+            hidden_trigger = {
+                NOT = { has_country_modifier = warlockpkk_cooldown }
+            }
+        }
+
+        effect = {
+            country_event = { id = warlockpkk_event.3 }
+            add_country_modifier = {
+                name = warlockpkk_cooldown
+                duration = 31
+            }
+        }
+
+        ai_will_do = {
+            factor = 1
+            modifier = {
+                factor = 0
+                always = yes
+            }
+        }
+    }
+    destr_mint = {
+		major = yes
+		potential = {
+			owns = 479
+			culture_group = gnollish
+            NOT = {
+                is_emperor_of_china = yes
+				has_global_flag = mint_dstr
+            }
+			has_dlc = "Leviathan" 
+		}
+		allow = {
+			owns_core_province = 479
+			adm_power = 100
+		}
+		effect = {
+			479 = {
+				add_great_project = {
+					type = gnoll_gold_mines
+				}
+				destroy_great_project = {
+					type = Golcora_gold_mines
+				}
+				cancel_construction = yes
+			}		
+			set_global_flag = mint_dstr
+			add_adm_power = -100
+
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+    revv_mint = {
+		major = yes
+		potential = {
+			owns_core_province = 479
+			religion_group = khetist
+			has_global_flag = mint_dstr
+			has_dlc = "Leviathan" 
+		}
+		allow = {
+			owns_core_province = 479
+			adm_power = 100
+		}
+		effect = {
+			479 = {
+				add_great_project = {
+					type = Golcora_gold_mines
+				}
+				destroy_great_project = {
+					type = gnoll_gold_mines     
+				}
+				cancel_construction = yes
+			}
+			clr_global_flag = mint_dstr
+			add_adm_power = -100
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+
+}
