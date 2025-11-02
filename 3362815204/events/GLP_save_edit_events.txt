@@ -628,14 +628,18 @@ country_event = {
 	option = {
 		name = "glp_save_edit_events.EVTMINORITIESA03"
 		FROM = {
-			save_event_target_as = MJ_minorities
+			owner = {
+				save_event_target_as = MJ_minorities_country
+			}
 		}
 		country_event = { id = glp_save_edit_events_MINORITIES.3 }
 	}
 	option = {
 		name = "glp_save_edit_events.EVTMINORITIESA04"
 		FROM = {
-			save_event_target_as = MJ_minorities
+			owner = {
+				save_event_target_as = MJ_minorities_country
+			}
 		}
 		country_event = { id = glp_save_edit_events_MINORITIES.4 }
 	}
@@ -2738,6 +2742,72 @@ country_event = {
 	option = {
 		name = "glp_save_edit_events.EVTBUFFA34"
 		add_imperial_influence = -100
+	}
+	option = {
+		name = "glp_save_edit_events.EVTBUFFA35"
+		FROM = {
+			owner = { 
+				change_estate_land_share = {
+					estate = all
+					share = -5
+				}
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTBUFFA36"
+		FROM = {
+			owner = { 
+				change_estate_land_share = {
+					estate = all
+					share = -10
+				}
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTBUFFA37"
+		FROM = {
+			owner = { 
+				change_estate_land_share = {
+					estate = all
+					share = -50
+				}
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTBUFFA38"
+		FROM = {
+			owner = { 
+				change_estate_land_share = {
+					estate = all
+					share = -100
+				}
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTBUFFA39"
+		FROM = {
+			owner = { 
+				change_estate_land_share = {
+					estate = all
+					share = 5
+				}
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTBUFFA40"
+		FROM = {
+			owner = { 
+				change_estate_land_share = {
+					estate = all
+					share = 10
+				}
+			}
+		}
 	}
 }
 
@@ -5836,6 +5906,262 @@ country_event = {
 		custom_tooltip = glp_new_npc_advisor_tt
 	}
 }
+
+#Magical event for country
+country_event = {
+	id = glp_save_edit_events.40
+	title = "glp_save_edit_events.EVTNAME40"
+	desc = "glp_save_edit_events.EVTDESC40"
+	picture = HRE_eventPicture
+
+	is_triggered_only = yes
+
+	trigger = {
+	}
+
+	mean_time_to_happen = {
+	}
+
+	option = {
+		name = "glp_save_edit_events.MAGICALZZ1"
+	}
+
+	option = {
+		name = "glp_save_edit_events.MAGICALA01"
+		FROM= {
+			owner = { 
+				increase_study_experience = {
+					experience = 100
+				}
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.MAGICALA02"
+		FROM= {
+			owner = { 
+				increase_study_experience = {
+					experience = 200
+				}
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.MAGICALA03"
+		FROM= {
+			owner = { 
+				increase_study_experience = {
+					experience = 500
+				}
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.MAGICALA04"
+		FROM= {
+			owner = { 
+				increase_study_experience = {
+					experience = 1000
+				}
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.MAGICALA05"
+		FROM= {
+			owner = { 
+				increase_study_experience = {
+					experience = 1500
+				}
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.MAGICALA06"
+		FROM= {
+			owner = { 
+				increase_study_experience = {
+					experience = 2000
+				}
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.MAGICALA07"
+		FROM= {
+			owner = { 
+				increase_study_experience = {
+					experience = -100
+				}
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.MAGICALA08"
+		FROM= {
+			owner = { 
+				increase_study_experience = {
+					experience = -200
+				}
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.MAGICALA09"
+		FROM= {
+			owner = { 
+				magic_study_clear_study_effects = yes
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.MAGICALA10"
+		FROM = {
+			owner = {
+				update_magic_study_experience_modifier = { value = 10 }
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.MAGICALA11"
+		FROM = {
+			owner = {
+				update_magic_study_experience_modifier = { value = -10 }
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.MAGICALA12"
+		FROM = {
+			owner = {
+				magic_study_level_up_abjuration = yes
+				clr_ruler_flag = ruler_studying_magic_flag
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.MAGICALA13"
+		FROM = {
+			owner = {
+				magic_study_level_up_divination = yes
+				clr_ruler_flag = ruler_studying_magic_flag
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.MAGICALA14"
+		FROM = {
+			owner = {
+				magic_study_level_up_conjuration = yes
+				clr_ruler_flag = ruler_studying_magic_flag
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.MAGICALA15"
+		FROM = {
+			owner = {
+				magic_study_level_up_enchantment = yes
+				clr_ruler_flag = ruler_studying_magic_flag
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.MAGICALA16"
+		FROM = {
+			owner = {
+				magic_study_level_up_evocation = yes
+				clr_ruler_flag = ruler_studying_magic_flag
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.MAGICALA17"
+		FROM = {
+			owner = {
+				magic_study_level_up_illusion = yes
+				clr_ruler_flag = ruler_studying_magic_flag
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.MAGICALA18"
+		FROM = {
+			owner = {
+				magic_study_level_up_necromancy = yes
+				clr_ruler_flag = ruler_studying_magic_flag
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.MAGICALA19"
+		FROM = {
+			owner = {
+				magic_study_level_up_transmutation = yes
+				clr_ruler_flag = ruler_studying_magic_flag
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.MAGICALA20"
+		FROM = {
+			owner = {
+				ruler_save_spell_schools = yes
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.MAGICALA21"
+		FROM = {
+			owner = {
+				ruler_clear_saved_spell_schools = yes
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.MAGICALA22"
+		FROM = {
+			owner = {
+				increase_witch_king_points_small = yes
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.MAGICALA23"
+		FROM = {
+			owner = {
+				increase_witch_king_points_medium = yes
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.MAGICALA24"
+		FROM = {
+			owner = {
+				increase_witch_king_points_large = yes
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.MAGICALA25"
+		FROM = {
+			owner = {
+				increase_witch_king_points_massive = yes
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.MAGICALA26"
+		FROM = {
+			owner = {
+				clear_witch_king_points = yes
+			}
+		}
+	}
+
+}
+
+
 
 #################################
 #	ANNOUNCEMENT EVENTS
@@ -11840,487 +12166,487 @@ country_event = {
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA01"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_increase_of_elven_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA02"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_increase_of_elven_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA03"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_increase_of_elven_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA04"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_increase_of_elven_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA05"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_increase_of_dwarven_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA06"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_increase_of_dwarven_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA07"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_increase_of_dwarven_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA08"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_increase_of_dwarven_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA09"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_increase_of_gnollish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA10"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_increase_of_gnollish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA11"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_increase_of_gnollish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA12"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_increase_of_gnollish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA13"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_increase_of_gnomish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA14"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_increase_of_gnomish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA15"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_increase_of_gnomish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA16"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_increase_of_gnomish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA17"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_increase_of_goblin_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA18"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_increase_of_goblin_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA19"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_increase_of_goblin_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA20"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_increase_of_goblin_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA21"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_increase_of_half_elven_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA22"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_increase_of_half_elven_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA23"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_increase_of_half_elven_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA24"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_increase_of_half_elven_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA25"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_increase_of_half_orcish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA26"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_increase_of_half_orcish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA27"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_increase_of_half_orcish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA28"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_increase_of_half_orcish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA29"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_increase_of_halfling_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA30"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_increase_of_halfling_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA31"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_increase_of_halfling_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA32"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_increase_of_halfling_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA33"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_increase_of_harpy_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA34"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_increase_of_harpy_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA35"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_increase_of_harpy_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA36"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_increase_of_harpy_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA37"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_increase_of_human_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA38"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_increase_of_human_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA39"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_increase_of_human_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA40"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_increase_of_human_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA41"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_increase_of_kobold_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA42"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_increase_of_kobold_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA43"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_increase_of_kobold_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA44"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_increase_of_kobold_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA45"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_increase_of_orcish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA46"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_increase_of_orcish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA47"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_increase_of_orcish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA48"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_increase_of_orcish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA49"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_increase_of_ruinborn_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA50"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_increase_of_ruinborn_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA51"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_increase_of_ruinborn_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA52"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_increase_of_ruinborn_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA53"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_increase_of_troll_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA54"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_increase_of_troll_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA55"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_increase_of_troll_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA56"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_increase_of_troll_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA57"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_increase_of_ogre_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA58"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_increase_of_ogre_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA59"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_increase_of_ogre_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA60"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_increase_of_ogre_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA61"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_increase_of_centaur_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA62"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_increase_of_centaur_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA63"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_increase_of_centaur_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA64"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_increase_of_centaur_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA65"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_increase_of_hobgoblin_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA66"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_increase_of_hobgoblin_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA67"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_increase_of_hobgoblin_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA68"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_increase_of_hobgoblin_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA69"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_increase_of_harimari_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA70"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_increase_of_harimari_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA71"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_increase_of_harimari_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA72"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_increase_of_harimari_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA73"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_increase_of_lizardfolk_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA74"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_increase_of_lizardfolk_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA75"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_increase_of_lizardfolk_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA76"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_increase_of_lizardfolk_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA77"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_increase_of_mechanim_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA78"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_increase_of_mechanim_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA79"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_increase_of_mechanim_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESAPROOVEA80"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_increase_of_mechanim_tolerance_effect = yes
 		}
 	}
 	after  = {
 		hidden_effect = {
-			clear_global_event_target = MJ_minorities
+			clear_global_event_target = MJ_minorities_country
 		}
 	}
 }
@@ -12343,487 +12669,487 @@ country_event = {
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA01"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_decrease_of_elven_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA02"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_decrease_of_elven_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA03"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_decrease_of_elven_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA04"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_decrease_of_elven_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA05"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_decrease_of_dwarven_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA06"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_decrease_of_dwarven_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA07"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_decrease_of_dwarven_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA08"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_decrease_of_dwarven_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA09"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_decrease_of_gnollish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA10"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_decrease_of_gnollish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA11"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_decrease_of_gnollish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA12"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_decrease_of_gnollish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA13"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_decrease_of_gnomish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA14"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_decrease_of_gnomish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA15"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_decrease_of_gnomish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA16"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_decrease_of_gnomish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA17"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_decrease_of_goblin_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA18"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_decrease_of_goblin_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA19"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_decrease_of_goblin_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA20"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_decrease_of_goblin_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA21"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_decrease_of_half_elven_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA22"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_decrease_of_half_elven_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA23"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_decrease_of_half_elven_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA24"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_decrease_of_half_elven_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA25"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_decrease_of_half_orcish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA26"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_decrease_of_half_orcish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA27"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_decrease_of_half_orcish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA28"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_decrease_of_half_orcish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA29"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_decrease_of_halfling_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA30"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_decrease_of_halfling_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA31"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_decrease_of_halfling_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA32"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_decrease_of_halfling_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA33"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_decrease_of_harpy_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA34"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_decrease_of_harpy_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA35"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_decrease_of_harpy_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA36"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_decrease_of_harpy_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA37"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_decrease_of_human_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA38"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_decrease_of_human_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA39"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_decrease_of_human_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA40"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_decrease_of_human_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA41"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_decrease_of_kobold_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA42"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_decrease_of_kobold_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA43"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_decrease_of_kobold_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA44"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_decrease_of_kobold_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA45"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_decrease_of_orcish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA46"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_decrease_of_orcish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA47"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_decrease_of_orcish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA48"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_decrease_of_orcish_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA49"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_decrease_of_ruinborn_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA50"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_decrease_of_ruinborn_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA51"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_decrease_of_ruinborn_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA52"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_decrease_of_ruinborn_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA53"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_decrease_of_troll_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA54"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_decrease_of_troll_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA55"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_decrease_of_troll_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA56"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_decrease_of_troll_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA57"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_decrease_of_ogre_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA58"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_decrease_of_ogre_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA59"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_decrease_of_ogre_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA60"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_decrease_of_ogre_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA61"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_decrease_of_centaur_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA62"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_decrease_of_centaur_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA63"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_decrease_of_centaur_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA64"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_decrease_of_centaur_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA65"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_decrease_of_hobgoblin_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA66"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_decrease_of_hobgoblin_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA67"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_decrease_of_hobgoblin_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA68"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_decrease_of_hobgoblin_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA69"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_decrease_of_harimari_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA70"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_decrease_of_harimari_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA71"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_decrease_of_harimari_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA72"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_decrease_of_harimari_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA73"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_decrease_of_lizardfolk_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA74"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_decrease_of_lizardfolk_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA75"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_decrease_of_lizardfolk_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA76"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_decrease_of_lizardfolk_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA77"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			small_decrease_of_mechanim_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA78"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			medium_decrease_of_mechanim_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA79"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			large_decrease_of_mechanim_tolerance_effect = yes
 		}
 	}
 	option = {
 		name = "glp_save_edit_events.MINORITIESDISAPROOVEA80"
-		event_target:MJ_minorities = {
+		event_target:MJ_minorities_country = {
 			largest_decrease_of_mechanim_tolerance_effect = yes
 		}
 	}
 	after  = {
 		hidden_effect = {
-			clear_global_event_target = MJ_minorities
+			clear_global_event_target = MJ_minorities_country
 		}
 	}
 }

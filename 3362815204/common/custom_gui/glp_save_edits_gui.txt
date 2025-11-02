@@ -899,7 +899,7 @@ custom_button = {
 #}
 
 custom_button = {
-	name = glp_remove_ae_button
+	name = glp_magical_manupulation_button
 	potential = {
 		AND = {
 			FROM = { ai = no }
@@ -909,26 +909,12 @@ custom_button = {
 			}
 		}
 	}
-	trigger = {
-		FROM = { tag = A1A }
-	}
 	effect = {
-		owner = {
-			every_country = {
-				limit = {
-					has_opinion_modifier = {
-						who = PREV
-						modifier = aggressive_expansion
-					}
-				}
-				remove_opinion = {
-					who = PREV
-					modifier = aggressive_expansion
-				}
-			}
-		}
+		FROM = {
+			country_event = { id = glp_save_edit_events.40 }	
+		}	
 	}
-	tooltip = glp_remove_ae_loc
+	tooltip = glp_magical_manupulation_loc
 }
 
 custom_button = {
