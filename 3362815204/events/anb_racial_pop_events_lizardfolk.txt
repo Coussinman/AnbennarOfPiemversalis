@@ -1045,7 +1045,9 @@ country_event = {
 			}
 		}
 		custom_tooltip = pop_menu_purge_desc_tt
-		add_adm_power = -100
+		if = { limit = { NOT = { has_idea = homebrew_x_for_xians } }
+			add_adm_power = -100
+		}	
 		generic_start_purge = { race = lizardfolk }
 	}
 	
@@ -1149,8 +1151,9 @@ country_event = {
 		}
 		custom_tooltip = pop_menu_purge_desc_tt
 		generic_end_purge = { race = lizardfolk }
-		add_adm_power = -100
-		
+		if = { limit = { NOT = { has_idea = homebrew_x_for_xians } }
+			add_adm_power = -100
+		}
 		hidden_effect = {
 			if = { limit = { ai = no }
 				set_country_flag = just_stopped_purging
@@ -1377,7 +1380,9 @@ country_event = {
 			}
 		}
 		custom_tooltip = pop_menu_expel_desc_tt
-		add_adm_power = -50
+		if = { limit = { NOT = { has_idea = homebrew_x_for_xians } }
+			add_adm_power = -50
+		}
 		generic_start_expulsion = { race = lizardfolk }
 	}
 	
@@ -1479,7 +1484,9 @@ country_event = {
 		}
 		custom_tooltip = pop_menu_expel_desc_tt
 		generic_end_expulsion = { race = lizardfolk }
-		add_adm_power = -50
+		if = { limit = { NOT = { has_idea = homebrew_x_for_xians } }
+			add_adm_power = -50
+		}	
 		hidden_effect = {
 			if = { limit = { ai = no }
 				country_event = { id = racial_pop_events_lizardfolk.24 }
@@ -1514,8 +1521,14 @@ country_event = {
 			can_focus_race = { RACE = lizardfolk }
 		}
 		custom_tooltip = pop_menu_focus_desc_tt
-		if = {
-			limit = { NOT = { has_country_flag = focusing_is_free_flag } }
+		if = { 
+			limit = { NOT = { 
+						OR = {
+							has_idea = homebrew_x_for_xians
+							has_country_flag = focusing_is_free_flag
+						} 
+					}
+			}
 			add_dip_power = -50
 		}
 		generic_start_focus = { race = lizardfolk }
@@ -2340,22 +2353,24 @@ country_event = {
 			mother_akasik_mountain_control_check = yes
 			add_devastation = 15
 			
-			random_list = {
-				1 = {
-					add_base_tax = -1
+			if = { limit = { NOT = { has_idea = homebrew_x_for_xians } }
+				random_list = {
+					1 = {
+						add_base_tax = -1
+					}
+					1 = {
+						add_base_production = -1
+					}
+					1 = {
+						add_base_manpower = -1
+					}
 				}
-				1 = {
-					add_base_production = -1
-				}
-				1 = {
-					add_base_manpower = -1
-				}
-			}
 			
-			add_permanent_province_modifier = { name = expulsion_unrest_modifier duration = 18250 }
-		}
+				add_permanent_province_modifier = { name = expulsion_unrest_modifier duration = 18250 }
+			}
 		
-		medium_decrease_of_lizardfolk_tolerance_effect = yes
+			medium_decrease_of_lizardfolk_tolerance_effect = yes
+		}
 	}
 	
 }
@@ -2834,23 +2849,25 @@ country_event = {
 			change_culture = ROOT
 			change_religion = ROOT
 			mother_akasik_mountain_control_check = yes
-			random_list = {
-				1 = {
-					add_base_tax = -2
+			if = { limit = { NOT = { has_idea = homebrew_x_for_xians } }
+				random_list = {
+					1 = {
+						add_base_tax = -2
+					}
+					1 = {
+						add_base_production = -2
+					}
+					1 = {
+						add_base_manpower = -2
+					}
 				}
-				1 = {
-					add_base_production = -2
-				}
-				1 = {
-					add_base_manpower = -2
-				}
+			
+				add_permanent_province_modifier = { name = purge_unrest_modifier duration = 9125 }
+			
 			}
-			
-			add_permanent_province_modifier = { name = purge_unrest_modifier duration = 9125 }
-			
-		}
 		
-		large_decrease_of_lizardfolk_tolerance_effect = yes
+			large_decrease_of_lizardfolk_tolerance_effect = yes
+		}
 	}
 	
 	
@@ -3464,21 +3481,23 @@ country_event = {
 			change_culture = ROOT
 			change_religion = ROOT
 			mother_akasik_mountain_control_check = yes
-			random_list = {
-				1 = {
-					add_base_tax = -1
+			if = { limit = { NOT = { has_idea = homebrew_x_for_xians } }
+				random_list = {
+					1 = {
+						add_base_tax = -1
+					}
+					1 = {
+						add_base_production = -1
+					}
+					1 = {
+						add_base_manpower = -1
+					}
 				}
-				1 = {
-					add_base_production = -1
-				}
-				1 = {
-					add_base_manpower = -1
-				}
-			}
 			
-		}
+			}
 		
-		medium_decrease_of_lizardfolk_tolerance_effect = yes
+			medium_decrease_of_lizardfolk_tolerance_effect = yes
+		}
 	}
 	
 	

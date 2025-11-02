@@ -1,6 +1,14 @@
 # common/triggered_modifiers/zzz_tech_scalers_split.txt
 # --- Série 1 : ADM → great_project_upgrade_cost ---
 # Formule: value = max(-0.90, -0.03*(adm_tech-1))
+less_prod = {
+    potential = { always = yes}
+    trigger = {
+        NOT = { has_institution = manufactories }
+    }
+    global_trade_goods_size_modifier = -0.15
+}
+
 
 tm_admtech_02 = {
     potential = { always = yes }
