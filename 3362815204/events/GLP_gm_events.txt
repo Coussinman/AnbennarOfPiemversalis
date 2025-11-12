@@ -212,3 +212,70 @@ country_event = {
         custom_tooltip = "glp_institution_spawned_tt"
     }
 }
+
+country_event = {
+    id = glp_gm_events.5
+    title = "glp_gm_events.EVTNAME5"
+    desc = "glp_gm_events.EVTDESC5"
+    picture = TRADE_GOODS_PLANTATION_GOODS_IN_WAREHOUSE_eventPicture
+
+    is_triggered_only = yes
+    major = yes
+
+    trigger = {
+    }
+
+    mean_time_to_happen = {
+    }
+
+    option = {
+        name = "glp_gm_events.EVTSEPCULATIONA01"
+        add_country_modifier = {
+            name = "glp_slave_speculation_bonus_modifier"
+        }
+        add_years_of_income = 2
+        country_event = { id = glp_gm_events.6 days = 12775 }#35 years 
+    }
+    option = {
+        name = "glp_gm_events.EVTSEPCULATIONA02"
+        add_country_modifier = {
+            name = "glp_slave_speculation_malus_modifier" 
+        }
+        country_event = { id = glp_gm_events.7 days = 12775 }#35 years 
+    }
+}
+
+country_event = {
+    id = glp_gm_events.6
+    title = "glp_gm_events.EVTNAME6"
+    desc = "glp_gm_events.EVTDESC6"
+    picture = BANKRUPTCY_eventPicture
+
+    is_triggered_only = yes
+    major = yes
+
+    option = {
+        name = "glp_gm_events.EVTSEPCULATIONB01"
+        remove_country_modifier = glp_slave_speculation_bonus_modifier
+        add_stability = -1
+        add_prestige = -30
+        add_years_of_income = -2
+        add_corruption = 5
+    }
+}
+
+country_event = {
+    id = glp_gm_events.7
+    title = "glp_gm_events.EVTNAME7"
+    desc = "glp_gm_events.EVTDESC7"
+    picture = KING_DOING_GREAT_eventPicture
+
+    is_triggered_only = yes
+    major = yes
+
+    option = {
+        name = "glp_gm_events.EVTSEPCULATIONB02"
+        remove_country_modifier = glp_slave_speculation_malus_modifier
+        add_prestige = 30
+    }
+}

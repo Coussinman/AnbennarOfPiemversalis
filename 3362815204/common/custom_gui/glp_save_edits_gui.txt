@@ -836,67 +836,43 @@ custom_button = {
 #	tooltip = glp_supress_inquisition_decision_loc
 #}
 
-#custom_button = {
-#	name = glp_release_pope_button
-#	potential = {
-#		AND = {
-#			FROM = { ai = no }
-#			OR = {
-#				FROM = { tag = A1A }
-#				FROM = { tag = A2A }
-#			}
-#		}
-#	}
-#	trigger = {
-#		FROM = { tag = A2A }
-#		is_capital = no
-#		NOT = { exists = PAP }
-#	}
-#	effect = {	
-#		add_core = PAP
-#		cede_province = PAP
-#		PAP = {
-#			change_religion = catholic
-#			change_government = theocracy
-#			add_government_reform = papacy_reform
-#		}
-#	}
-#	tooltip = glp_release_pope_loc
-#}
+custom_button = {
+	name = glp_spawn_rebel_button
+	potential = {
+		AND = {
+			FROM = { ai = no }
+			OR = {
+				FROM = { tag = A1A }
+				FROM = { tag = A2A }
+			}
+		}
+	}
+	effect = {	
+		FROM = {			
+			country_event = { id = glp_save_edit_events.36 }			
+		}
+	}
+	tooltip = glp_spawn_rebel_loc
+}
 
-#custom_button = {
-#	name = glp_ignore_tech_formation_button
-#	potential = {
-#		AND = {
-#			FROM = { ai = no }
-#			OR = {
-#				FROM = { tag = A1A }
-#				FROM = { tag = A2A }
-#			}
-#		}
-#	}
-#	trigger = {
-#		FROM = { tag = A2A }
-#	}
-#	effect = {
-#		if = {
-#			limit = {
-#				owner = {
-#					NOT = { has_country_flag = glp_can_ignore_tech_formations_flag }
-#				}
-#			}
-#			owner = {
-#				set_country_flag = glp_can_ignore_tech_formations_flag
-#			}
-#		}
-#		else = {
-#			owner = {
-#				clr_country_flag = glp_can_ignore_tech_formations_flag
-#			}
-#		}
-#	}
-#	tooltip = glp_ignore_tech_formation_loc
-#}
+custom_button = {
+	name = glp_event_perso_MJ_button
+	potential = {
+		AND = {
+			FROM = { ai = no }
+			OR = {
+				FROM = { tag = A1A }
+				FROM = { tag = A2A }
+			}
+		}
+	}
+	effect = {
+		FROM = {
+			country_event = { id = glp_save_edit_events.35 }	
+		}
+	}
+	tooltip = glp_event_perso_MJ_loc
+}
 
 custom_button = {
 	name = glp_magical_manupulation_button

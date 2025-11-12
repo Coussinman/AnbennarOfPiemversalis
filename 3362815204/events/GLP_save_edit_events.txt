@@ -5212,7 +5212,7 @@ country_event = {
 	}
 }
 
-# Spawn NPC Advisors
+# Mj event manual trigger
 
 country_event = {
 	id = glp_save_edit_events.35
@@ -5229,64 +5229,22 @@ country_event = {
 	}
 
 	option = {
-		name = "glp_save_edit_events.EVTOPTA35"
+		name = "glp_save_edit_events.EVTMJEVTZZ1"
 	}
 
 	option = {
-		name = "glp_save_edit_events.EVTOPTB35"
-		FROM = {
-			owner = {
-				save_event_target_as = glp_npc_advisor_country
+		name = "glp_save_edit_events.EVTMJEVTA01"
+		every_country = {
+			limit = {
+				ai = no
 			}
+			country_event = { id = glp_gm_events.5 }
 		}
-		set_country_flag = glp_npc_advisor_overlord	
-		country_event = { id = glp_save_edit_events.36 }
-	}
-
-	option = {
-		name = "glp_save_edit_events.EVTOPTC35"
-		FROM = {
-			owner = {
-				save_event_target_as = glp_npc_advisor_country
-			}
-		}
-		set_country_flag = glp_npc_advisor_spymistress
-		country_event = { id = glp_save_edit_events.36 }
-	}
-
-	option = {
-		name = "glp_save_edit_events.EVTOPTD35"
-		FROM = {
-			owner = {
-				save_event_target_as = glp_npc_advisor_country
-			}
-		}
-		set_country_flag = glp_npc_advisor_merlin
-		country_event = { id = glp_save_edit_events.36 }
-	}
-
-	option = {
-		name = "glp_save_edit_events.EVTOPTE35"
-		FROM = {
-			owner = {
-				save_event_target_as = glp_npc_advisor_country
-			}
-		}
-		set_country_flag = glp_npc_advisor_jester
-		country_event = { id = glp_save_edit_events.36 }
-	}
-
-	option = {
-		name = "glp_save_edit_events.EVTOPTF35"
-		FROM = {
-			owner = {
-				save_event_target_as = glp_npc_advisor_country
-			}
-		}
-		set_country_flag = glp_npc_advisor_judge
-		country_event = { id = glp_save_edit_events.36 }
+		custom_tooltip = "glp_save_edit_events.EVTMJEVTA01TT"
 	}
 }
+
+
 
 country_event = {
 	id = glp_save_edit_events.36
@@ -5302,101 +5260,79 @@ country_event = {
 	mean_time_to_happen = {
 	}
 
-	option = {
-		name = "glp_save_edit_events.EVTOPTA36"
-		trigger = {
-			has_country_flag = glp_npc_advisor_overlord	
-		}
-		set_country_flag = glp_npc_advisor_overlord_comandant
-		country_event = { id = glp_save_edit_events.37 }
+	option  = {
+		name = "glp_save_edit_events.EVTREBELZZ1"
 	}
 
 	option = {
-		name = "glp_save_edit_events.EVTOPTB36"
-		trigger = {
-			has_country_flag = glp_npc_advisor_overlord	
+		name = "glp_save_edit_events.EVTREBELA01"
+		FROM = {
+			save_event_target_as = glp_rebel_spawn_province
 		}
-		set_country_flag = glp_npc_advisor_overlord_army_reformer
-		country_event = { id = glp_save_edit_events.37 }
+		country_event = { id = glp_save_edit_events.370 }
 	}
-
 	option = {
-		name = "glp_save_edit_events.EVTOPTC36"
-		trigger = {
-			has_country_flag = glp_npc_advisor_spymistress
+		name = "glp_save_edit_events.EVTREBELA02"
+		FROM = {
+			save_event_target_as = glp_rebel_spawn_province
 		}
-		set_country_flag = glp_npc_advisor_spymistress_trader
-		country_event = { id = glp_save_edit_events.37 }
+		country_event = { id = glp_save_edit_events.371 }
 	}
-
 	option = {
-		name = "glp_save_edit_events.EVTOPTD36"
-		trigger = {
-			has_country_flag = glp_npc_advisor_spymistress
+		name = "glp_save_edit_events.EVTREBELA03"
+		FROM = {
+			save_event_target_as = glp_rebel_spawn_province
 		}
-		set_country_flag = glp_npc_advisor_spymistress_spymaster
-		country_event = { id = glp_save_edit_events.37 }
+		country_event = { id= glp_save_edit_events.372 }
 	}
-
 	option = {
-		name = "glp_save_edit_events.EVTOPTE36"
-		trigger = {
-			has_country_flag = glp_npc_advisor_merlin
+		name = "glp_save_edit_events.EVTREBELA04"
+		FROM = {
+			save_event_target_as = glp_rebel_spawn_province
 		}
-		set_country_flag = glp_npc_advisor_merlin_naturalscientist
-		country_event = { id = glp_save_edit_events.37 }
+		country_event = { id = glp_save_edit_events.373 }
 	}
-
 	option = {
-		name = "glp_save_edit_events.EVTOPTF36"
-		trigger = {
-			has_country_flag = glp_npc_advisor_merlin
+		name = "glp_save_edit_events.EVTREBELA05"
+		FROM = {
+			save_event_target_as = glp_rebel_spawn_province
 		}
-		set_country_flag = glp_npc_advisor_merlin_masterofmint
-		country_event = { id = glp_save_edit_events.37 }
+		country_event = { id = glp_save_edit_events.374 }
 	}
-
 	option = {
-		name = "glp_save_edit_events.EVTOPTG36"
-		trigger = {
-			has_country_flag = glp_npc_advisor_jester
+		name = "glp_save_edit_events.EVTREBELA06"
+		FROM = {
+			save_event_target_as = glp_rebel_spawn_province
 		}
-		set_country_flag = glp_npc_advisor_jester_philosopher
-		country_event = { id = glp_save_edit_events.37 }
+		country_event = { id = glp_save_edit_events.375 }
 	}
-
 	option = {
-		name = "glp_save_edit_events.EVTOPTH36"
-		trigger = {
-			has_country_flag = glp_npc_advisor_jester
+		name = "glp_save_edit_events.EVTREBELA07"
+		FROM = {
+			save_event_target_as = glp_rebel_spawn_province
 		}
-		set_country_flag = glp_npc_advisor_jester_artist
-		country_event = { id = glp_save_edit_events.37 }
+		country_event = { id = glp_save_edit_events.376 }
 	}
-
 	option = {
-		name = "glp_save_edit_events.EVTOPTI36"
-		trigger = {
-			has_country_flag = glp_npc_advisor_judge
+		name = "glp_save_edit_events.EVTREBELA08"
+		FROM = {
+			save_event_target_as = glp_rebel_spawn_province
 		}
-		set_country_flag = glp_npc_advisor_judge_inquisitor
-		country_event = { id = glp_save_edit_events.37 }
+		country_event = { id = glp_save_edit_events.377 }
 	}
-
 	option = {
-		name = "glp_save_edit_events.EVTOPTJ36"
-		trigger = {
-			has_country_flag = glp_npc_advisor_judge
+		name = "glp_save_edit_events.EVTREBELA09"
+		FROM = {
+			save_event_target_as = glp_rebel_spawn_province
 		}
-		set_country_flag = glp_npc_advisor_judge_statesman
-		country_event = { id = glp_save_edit_events.37 }
+		country_event = { id = glp_save_edit_events.378 }
 	}
 }
 
 country_event = {
-	id = glp_save_edit_events.37
-	title = "glp_save_edit_events.EVTNAME37"
-	desc = "glp_save_edit_events.EVTDESC37"
+	id = glp_save_edit_events.370
+	title = "glp_save_edit_events.EVTNAMEA37"
+	desc = "glp_save_edit_events.EVTDESCA37"
 	picture = HRE_eventPicture
 
 	is_triggered_only = yes
@@ -5407,490 +5343,65 @@ country_event = {
 	mean_time_to_happen = {
 	}
 
-	option = {
-		name = "glp_save_edit_events.EVTOPTA37"
-		set_country_flag = glp_npc_advisor_50_discount
-		country_event = { id = glp_save_edit_events.38 }
+	option  = {
+		name = "glp_save_edit_events.EVTREBELSIZEAZZ1"
 	}
 
 	option = {
-		name = "glp_save_edit_events.EVTOPTB37"
-		set_country_flag = glp_npc_advisor_75_discount
-		country_event = { id = glp_save_edit_events.38 }
-	}
-
-	option = {
-		name = "glp_save_edit_events.EVTOPTC37"
-		set_country_flag = glp_npc_advisor_85_discount
-		country_event = { id = glp_save_edit_events.38 }
-	}
-}
-
-country_event = {
-	id = glp_save_edit_events.38
-	title = "glp_save_edit_events.EVTNAME38"
-	desc = "glp_save_edit_events.EVTDESC38"
-	picture = HRE_eventPicture
-
-	is_triggered_only = yes
-
-	trigger = {
-	}
-
-	mean_time_to_happen = {
-	}
-
-	option = {
-		name = "glp_save_edit_events.EVTOPTA38"
-	}
-
-	option = {
-		name = "glp_save_edit_events.EVTOPTB38"
-		event_target:glp_npc_advisor_country = {
-			country_event = { id = glp_save_edit_events.39 }
-			#Overlord
-			if = {
-				limit = {
-					ROOT = { has_country_flag = glp_npc_advisor_overlord_comandant }
-				}
-				if = {
-					limit = {
-						ROOT = { has_country_flag = glp_npc_advisor_50_discount }
-					}
-					define_advisor = {
-						name = "Vladimir Draceul"
-						type = commandant
-						skill = 2
-						cost_multiplier = 0.5
-						#female = yes
-					}
-				}
-				else_if = {
-					limit = {
-						ROOT = { has_country_flag = glp_npc_advisor_75_discount }
-					}
-					define_advisor = {
-						name = "Vladimir Draceul"
-						type = commandant
-						skill = 2
-						cost_multiplier = 0.25
-						#female = yes
-					}
-				}
-				else_if = {
-					limit = {
-						ROOT = { has_country_flag = glp_npc_advisor_85_discount }
-					}
-					define_advisor = {
-						name = "Vladimir Draceul"
-						type = commandant
-						skill = 2
-						cost_multiplier = 0.15
-						#female = yes
-					}
-				}
-			}
-			if = {
-				limit = {
-					ROOT = { has_country_flag = glp_npc_advisor_overlord_army_reformer }
-				}
-				if = {
-					limit = {
-						ROOT = { has_country_flag = glp_npc_advisor_50_discount }
-					}
-					define_advisor = {
-						name = "Vladimir Draceul"
-						type = army_reformer
-						skill = 2
-						cost_multiplier = 0.5
-						#female = yes
-					}
-				}
-				else_if = {
-					limit = {
-						ROOT = { has_country_flag = glp_npc_advisor_75_discount }
-					}
-					define_advisor = {
-						name = "Vladimir Draceul"
-						type = army_reformer
-						skill = 2
-						cost_multiplier = 0.25
-						#female = yes
-					}
-				}
-				else_if = {
-					limit = {
-						ROOT = { has_country_flag = glp_npc_advisor_85_discount }
-					}
-					define_advisor = {
-						name = "Vladimir Draceul"
-						type = army_reformer
-						skill = 2
-						cost_multiplier = 0.15
-						#female = yes
-					}
-				}
-			}
-			#Spymistress
-			if = {
-				limit = {
-					ROOT = { has_country_flag = glp_npc_advisor_spymistress_trader }
-				}
-				if = {
-					limit = {
-						ROOT = { has_country_flag = glp_npc_advisor_50_discount }
-					}
-					define_advisor = {
-						name = "Elisabeth Bathory"
-						type = trader
-						skill = 2
-						cost_multiplier = 0.5
-						female = yes
-					}
-				}
-				else_if = {
-					limit = {
-						ROOT = { has_country_flag = glp_npc_advisor_75_discount }
-					}
-					define_advisor = {
-						name = "Elisabeth Bathory"
-						type = trader
-						skill = 2
-						cost_multiplier = 0.25
-						female = yes
-					}
-				}
-				else_if = {
-					limit = {
-						ROOT = { has_country_flag = glp_npc_advisor_85_discount }
-					}
-					define_advisor = {
-						name = "Elisabeth Bathory"
-						type = trader
-						skill = 2
-						cost_multiplier = 0.15
-						female = yes
-					}
-				}
-			}
-			if = {
-				limit = {
-					ROOT = { has_country_flag = glp_npc_advisor_spymistress_spymaster }
-				}
-				if = {
-					limit = {
-						ROOT = { has_country_flag = glp_npc_advisor_50_discount }
-					}
-					define_advisor = {
-						name = "Elisabeth Bathory"
-						type = spymaster
-						skill = 2
-						cost_multiplier = 0.5
-						female = yes
-					}
-				}
-				else_if = {
-					limit = {
-						ROOT = { has_country_flag = glp_npc_advisor_75_discount }
-					}
-					define_advisor = {
-						name = "Elisabeth Bathory"
-						type = spymaster
-						skill = 2
-						cost_multiplier = 0.25
-						female = yes
-					}
-				}
-				else_if = {
-					limit = {
-						ROOT = { has_country_flag = glp_npc_advisor_85_discount }
-					}
-					define_advisor = {
-						name = "Elisabeth Bathory"
-						type = spymaster
-						skill = 2
-						cost_multiplier = 0.15
-						female = yes
-					}
-				}
-			}
-			#Merlin
-			if = {
-				limit = {
-					ROOT = { has_country_flag = glp_npc_advisor_merlin_naturalscientist }
-				}
-				if = {
-					limit = {
-						ROOT = { has_country_flag = glp_npc_advisor_50_discount }
-					}
-					define_advisor = {
-						name = "Nosferatu"
-						type = natural_scientist
-						skill = 2
-						cost_multiplier = 0.5
-						#female = yes
-					}
-				}
-				else_if = {
-					limit = {
-						ROOT = { has_country_flag = glp_npc_advisor_75_discount }
-					}
-					define_advisor = {
-						name = "Nosferatu"
-						type = natural_scientist
-						skill = 2
-						cost_multiplier = 0.25
-						#female = yes
-					}
-				}
-				else_if = {
-					limit = {
-						ROOT = { has_country_flag = glp_npc_advisor_85_discount }
-					}
-					define_advisor = {
-						name = "Nosferatu"
-						type = natural_scientist
-						skill = 2
-						cost_multiplier = 0.15
-						#female = yes
-					}
-				}
-			}
-			if = {
-				limit = {
-					ROOT = { has_country_flag = glp_npc_advisor_merlin_masterofmint }
-				}
-				if = {
-					limit = {
-						ROOT = { has_country_flag = glp_npc_advisor_50_discount }
-					}
-					define_advisor = {
-						name = "Nosferatu"
-						type = master_of_mint
-						skill = 2
-						cost_multiplier = 0.5
-						#female = yes
-					}
-				}
-				else_if = {
-					limit = {
-						ROOT = { has_country_flag = glp_npc_advisor_75_discount }
-					}
-					define_advisor = {
-						name = "Nosferatu"
-						type = master_of_mint
-						skill = 2
-						cost_multiplier = 0.25
-						#female = yes
-					}
-				}
-				else_if = {
-					limit = {
-						ROOT = { has_country_flag = glp_npc_advisor_85_discount }
-					}
-					define_advisor = {
-						name = "Nosferatu"
-						type = master_of_mint
-						skill = 2
-						cost_multiplier = 0.15
-						#female = yes
-					}
-				}
-			}
-			#Jester
-			if = {
-				limit = {
-					ROOT = { has_country_flag = glp_npc_advisor_jester_philosopher }
-				}
-				if = {
-					limit = {
-						ROOT = { has_country_flag = glp_npc_advisor_50_discount }
-					}
-					define_advisor = {
-						name = "Jester"
-						type = philosopher
-						skill = 2
-						cost_multiplier = 0.5
-						#female = yes
-					}
-				}
-				else_if = {
-					limit = {
-						ROOT = { has_country_flag = glp_npc_advisor_75_discount }
-					}
-					define_advisor = {
-						name = "Jester"
-						type = philosopher
-						skill = 2
-						cost_multiplier = 0.25
-						#female = yes
-					}
-				}
-				else_if = {
-					limit = {
-						ROOT = { has_country_flag = glp_npc_advisor_85_discount }
-					}
-					define_advisor = {
-						name = "Jester"
-						type = philosopher
-						skill = 2
-						cost_multiplier = 0.15
-						#female = yes
-					}
-				}
-			}
-			if = {
-				limit = {
-					ROOT = { has_country_flag = glp_npc_advisor_jester_artist }
-				}
-				if = {
-					limit = {
-						ROOT = { has_country_flag = glp_npc_advisor_50_discount }
-					}
-					define_advisor = {
-						name = "Jester"
-						type = artist
-						skill = 2
-						cost_multiplier = 0.5
-						#female = yes
-					}
-				}
-				else_if = {
-					limit = {
-						ROOT = { has_country_flag = glp_npc_advisor_75_discount }
-					}
-					define_advisor = {
-						name = "Jester"
-						type = artist
-						skill = 2
-						cost_multiplier = 0.25
-						#female = yes
-					}
-				}
-				else_if = {
-					limit = {
-						ROOT = { has_country_flag = glp_npc_advisor_85_discount }
-					}
-					define_advisor = {
-						name = "Jester"
-						type = artist
-						skill = 2
-						cost_multiplier = 0.15
-						#female = yes
-					}
-				}
-			}
-			#Judge
-			if = {
-				limit = {
-					ROOT = { has_country_flag = glp_npc_advisor_judge_inquisitor }
-				}
-				if = {
-					limit = {
-						ROOT = { has_country_flag = glp_npc_advisor_50_discount }
-					}
-					define_advisor = {
-						name = "Justicar"
-						type = inquisitor
-						skill = 2
-						cost_multiplier = 0.5
-						#female = yes
-					}
-				}
-				else_if = {
-					limit = {
-						ROOT = { has_country_flag = glp_npc_advisor_75_discount }
-					}
-					define_advisor = {
-						name = "Justicar"
-						type = inquisitor
-						skill = 2
-						cost_multiplier = 0.25
-						#female = yes
-					}
-				}
-				else_if = {
-					limit = {
-						ROOT = { has_country_flag = glp_npc_advisor_85_discount }
-					}
-					define_advisor = {
-						name = "Justicar"
-						type = inquisitor
-						skill = 2
-						cost_multiplier = 0.15
-						#female = yes
-					}
-				}
-			}
-			if = {
-				limit = {
-					ROOT = { has_country_flag = glp_npc_advisor_judge_statesman }
-				}
-				if = {
-					limit = {
-						ROOT = { has_country_flag = glp_npc_advisor_50_discount }
-					}
-					define_advisor = {
-						name = "Justicar"
-						type = statesman
-						skill = 2
-						cost_multiplier = 0.5
-						#female = yes
-					}
-				}
-				else_if = {
-					limit = {
-						ROOT = { has_country_flag = glp_npc_advisor_75_discount }
-					}
-					define_advisor = {
-						name = "Justicar"
-						type = statesman
-						skill = 2
-						cost_multiplier = 0.25
-						#female = yes
-					}
-				}
-				else_if = {
-					limit = {
-						ROOT = { has_country_flag = glp_npc_advisor_85_discount }
-					}
-					define_advisor = {
-						name = "Justicar"
-						type = statesman
-						skill = 2
-						cost_multiplier = 0.15
-						#female = yes
-					}
-				}
+		name = "glp_save_edit_events.EVTREBELSIZEAA01"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 1
+				type = MJ_rebels
 			}
 		}
 	}
-	after = { 
-		clr_country_flag = glp_npc_advisor_overlord	
-		clr_country_flag = glp_npc_advisor_spymistress
-		clr_country_flag = glp_npc_advisor_merlin
-		clr_country_flag = glp_npc_advisor_jester
-		clr_country_flag = glp_npc_advisor_judge
-		clr_country_flag = glp_npc_advisor_overlord_comandant
-		clr_country_flag = glp_npc_advisor_overlord_army_reformer
-		clr_country_flag = glp_npc_advisor_spymistress_trader
-		clr_country_flag = glp_npc_advisor_spymistress_spymaster
-		clr_country_flag = glp_npc_advisor_merlin_naturalscientist
-		clr_country_flag = glp_npc_advisor_merlin_masterofmint
-		clr_country_flag = glp_npc_advisor_jester_philosopher
-		clr_country_flag = glp_npc_advisor_jester_artist
-		clr_country_flag = glp_npc_advisor_judge_inquisitor
-		clr_country_flag = glp_npc_advisor_judge_statesman
-		clr_country_flag = glp_npc_advisor_50_discount
-		clr_country_flag = glp_npc_advisor_75_discount
-		clr_country_flag = glp_npc_advisor_85_discount
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEAA02"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 2
+				type = MJ_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEAA03"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 5
+				type = MJ_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEAA04"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 10
+				type = MJ_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEAA05"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 25
+				type = MJ_rebels
+			}
+		}
+	}
+	after  = {
+		hidden_effect = {
+			clear_global_event_target = glp_rebel_spawn_province
+		}
 	}
 }
-
 country_event = {
-	id = glp_save_edit_events.39
-	title = "glp_save_edit_events.EVTNAME39"
-	desc = "glp_save_edit_events.EVTDESC39"
+	id = glp_save_edit_events.371
+	title = "glp_save_edit_events.EVTNAMEB37"
+	desc = "glp_save_edit_events.EVTDESCB37"
 	picture = HRE_eventPicture
 
 	is_triggered_only = yes
@@ -5901,9 +5412,538 @@ country_event = {
 	mean_time_to_happen = {
 	}
 
+	option  = {
+		name = "glp_save_edit_events.EVTREBELSIZEBZZ1"
+	}
+
 	option = {
-		name = "glp_save_edit_events.EVTOPTA39"
-		custom_tooltip = glp_new_npc_advisor_tt
+		name = "glp_save_edit_events.EVTREBELSIZEBA01"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 1
+				type = noble_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEBA02"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 2
+				type = noble_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEBA03"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 5
+				type = noble_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEBA04"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 10
+				type = noble_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEBA05"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 25
+				type = noble_rebels
+			}
+		}
+	}
+	after  = {
+		hidden_effect = {
+			clear_global_event_target = glp_rebel_spawn_province
+		}
+	}
+}
+
+country_event = {
+	id = glp_save_edit_events.372
+	title = "glp_save_edit_events.EVTNAMEC37"
+	desc = "glp_save_edit_events.EVTDESCC37"
+	picture = HRE_eventPicture
+
+	is_triggered_only = yes
+
+	trigger = {
+	}
+
+	mean_time_to_happen = {
+	}
+
+	option  = {
+		name = "glp_save_edit_events.EVTREBELSIZECZZ1"
+	}
+
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZECA01"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 1
+				type = pretender_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZECA02"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 2
+				type = pretender_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZECA03"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 5
+				type = pretender_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZECA04"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 10
+				type = pretender_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZECA05"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 25
+				type = pretender_rebels
+			}
+		}
+	}
+	after  = {
+		hidden_effect = {
+			clear_global_event_target = glp_rebel_spawn_province
+		}
+	}
+}
+country_event = {
+	id = glp_save_edit_events.373
+	title = "glp_save_edit_events.EVTNAMED37"
+	desc = "glp_save_edit_events.EVTDESCD37"
+	picture = HRE_eventPicture
+
+	is_triggered_only = yes
+
+	trigger = {
+	}
+
+	mean_time_to_happen = {
+	}
+
+	option  = {
+		name = "glp_save_edit_events.EVTREBELSIZEDZZ1"
+	}
+
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEDA01"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 1
+				type = particularist_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEDA02"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 2
+				type = particularist_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEDA03"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 5
+				type = particularist_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEDA04"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 10
+				type = particularist_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEDA05"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 25
+				type = particularist_rebels
+			}
+		}
+	}
+	after  = {
+		hidden_effect = {
+			clear_global_event_target = glp_rebel_spawn_province
+		}
+	}
+}
+country_event = {
+	id = glp_save_edit_events.374
+	title = "glp_save_edit_events.EVTNAMEE37"
+	desc = "glp_save_edit_events.EVTDESCE37"
+	picture = HRE_eventPicture
+
+	is_triggered_only = yes
+
+	trigger = {
+	}
+
+	mean_time_to_happen = {
+	}
+
+	option  = {
+		name = "glp_save_edit_events.EVTREBELSIZEEZZ1"
+	}
+
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEEA01"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 1
+				type = leadered_peasant_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEEA02"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 2
+				type = leadered_peasant_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEEA03"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 5
+				type = leadered_peasant_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEEA04"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 10
+				type = leadered_peasant_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEEA05"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 25
+				type = leadered_peasant_rebels
+			}
+		}
+	}
+	after  = {
+		hidden_effect = {
+			clear_global_event_target = glp_rebel_spawn_province
+		}
+	}
+}
+country_event = {
+	id = glp_save_edit_events.375
+	title = "glp_save_edit_events.EVTNAMEF37"
+	desc = "glp_save_edit_events.EVTDESCF37"
+	picture = HRE_eventPicture
+
+	is_triggered_only = yes
+
+	trigger = {
+	}
+
+	mean_time_to_happen = {
+	}
+
+	option  = {
+		name = "glp_save_edit_events.EVTREBELSIZEFZZ1"
+	}
+
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEFA01"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 1
+				type = effelai_beast_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEFA02"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 2
+				type = effelai_beast_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEFA03"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 5
+				type = effelai_beast_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEFA04"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 10
+				type = effelai_beast_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEFA05"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 25
+				type = effelai_beast_rebels
+			}
+		}
+	}
+	after  = {
+		hidden_effect = {
+			clear_global_event_target = glp_rebel_spawn_province
+		}
+	}
+}
+country_event = {
+	id = glp_save_edit_events.376
+	title = "glp_save_edit_events.EVTNAMEG37"
+	desc = "glp_save_edit_events.EVTDESCG37"
+	picture = HRE_eventPicture
+	is_triggered_only = yes
+	trigger = {
+	}
+	mean_time_to_happen = {
+	}
+	option  = {
+		name = "glp_save_edit_events.EVTREBELSIZEGZZ1"
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEGA01"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 1
+				type = vampires_nobles
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEGA02"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 2
+				type = vampires_nobles
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEGA03"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 5
+				type = vampires_nobles
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEGA04"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 10
+				type = vampires_nobles
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEGA05"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 25
+				type = vampires_nobles
+			}
+		}
+	}
+	after  = {
+		hidden_effect = {
+			clear_global_event_target = glp_rebel_spawn_province
+		}
+	}
+}
+country_event = {
+	id = glp_save_edit_events.377
+	title = "glp_save_edit_events.EVTNAMEH37"
+	desc = "glp_save_edit_events.EVTDESCH37"
+	picture = HRE_eventPicture
+
+	is_triggered_only = yes
+
+	trigger = {
+	}
+
+	mean_time_to_happen = {
+	}
+
+	option  = {
+		name = "glp_save_edit_events.EVTREBELSIZEHZZ1"
+	}
+
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEHA01"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 1
+				type = infernal_court_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEHA02"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 2
+				type = infernal_court_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEHA03"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 5
+				type = infernal_court_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEHA04"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 10
+				type = infernal_court_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEHA05"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 25
+				type = infernal_court_rebels
+			}
+		}
+	}
+	after  = {
+		hidden_effect = {
+			clear_global_event_target = glp_rebel_spawn_province
+		}
+	}
+}
+country_event = {
+	id = glp_save_edit_events.378
+	title = "glp_save_edit_events.EVTNAMEI37"
+	desc = "glp_save_edit_events.EVTDESCI37"
+	picture = HRE_eventPicture
+
+	is_triggered_only = yes
+
+	trigger = {
+	}
+
+	mean_time_to_happen = {
+	}
+
+	option  = {
+		name = "glp_save_edit_events.EVTREBELSIZEIZZ1"
+	}
+
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEIA01"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 1
+				type = daxugo_human_racists_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEIA02"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 2
+				type = daxugo_human_racists_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEIA03"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 5
+				type = daxugo_human_racists_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEIA04"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 10
+				type = daxugo_human_racists_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEIA05"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 25
+				type = daxugo_human_racists_rebels
+			}
+		}
+	}
+	after  = {
+		hidden_effect = {
+			clear_global_event_target = glp_rebel_spawn_province
+		}
 	}
 }
 
