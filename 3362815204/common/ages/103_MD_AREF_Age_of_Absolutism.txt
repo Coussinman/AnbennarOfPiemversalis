@@ -1,0 +1,307 @@
+age_of_absolutism = {
+	start = 1620
+	
+	can_start = {
+		is_institution_enabled = global_trade
+	}
+	
+	papacy = 1.5
+	
+	absolutism = {
+		harsh_treatment = 1
+		stability = 1
+		decrease_autonomy_command = 1
+		strengthen_government = 2
+		
+		increase_autonomy_command = -2
+		debase_currency = -1
+		execute_rebel_acceptance_command = -10
+		seat_in_parliament = -3
+		war_exhaustion = -1
+	}
+
+	religious_conflicts = yes # Anbennar
+	
+	objectives = {
+		obj_md_enlarge_crownland = {
+			st_md_large_crownland = yes
+		}
+		obj_md_international_trade = {
+			st_md_international_trade = yes
+		}
+		obj_md_have_colony = {
+			st_md_have_colony = yes
+		}
+		obj_md_textiles_supply = {
+			st_md_textiles_supply = yes
+		}
+		obj_md_luxury_supply = {
+			st_md_luxury_supply = yes
+		}
+		obj_md_flavor_supply = {
+			st_md_flavor_supply = yes
+		}
+		obj_md_beverage_supply = {
+			st_md_beverage_supply = yes
+		}
+		obj_md_city_tier_2_cannor = {
+			allow = { st_md_capital_in_cannor = yes }
+			st_md_huge_capital = yes
+		}
+		obj_md_city_tier_2_haless = {
+			allow = { st_md_capital_in_haless = yes }
+			st_md_huge_capital = yes
+		}
+		obj_md_city_tier_2_serpentspine = {
+			allow = { st_md_capital_in_serpentspine = yes }
+			st_md_huge_capital = yes
+		}
+		obj_md_city_tier_2_forbidden_lands = {
+			allow = { st_md_capital_in_forbidden_lands = yes }
+			st_md_huge_capital = yes
+		}
+		obj_md_city_tier_2_bulwar = {
+			allow = { st_md_capital_in_bulwar = yes }
+			st_md_huge_capital = yes
+		}
+		obj_md_city_tier_2_sarhal = {
+			allow = { st_md_capital_in_sarhal = yes }
+			st_md_huge_capital = yes
+		}
+		obj_md_city_tier_2_aelantir = {
+			allow = { st_md_capital_in_aelantir = yes }
+			st_md_huge_capital = yes
+		}
+	}	
+	
+	
+	
+	
+	abilities = {
+		# Identical copy of Ages Reformed.
+		ab_md_1600s_allow_edict_of_absolutism = {
+			effect = {
+				custom_tooltip = edict_of_absolutism_tt
+				set_country_flag = edict_of_absolutism
+			}
+			modifier = {
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = edicts flagName = allow_edict_of_absolutism abilityName = ab_1600s_allow_edict_of_absolutism }
+			}
+		}
+		ab_md_1600s_rival_change = {
+			modifier = {
+				rival_change_cost = -0.5
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 0
+			}
+			effect = {
+				se_md_refund_splendor = { flagName = rival_change_cost flagCategory = rival_change_cost }
+			}
+		}
+		ab_md_1600s_rival_border_fort = {
+			modifier = {
+				defensiveness = 0.10
+				fort_maintenance_modifier = -0.25
+				rival_border_fort_maintenance = -1.0
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = siege flagName = rival_border_fort abilityName = ab_md_1600s_rival_border_fort showTooltip = true }
+			}
+		}
+		ab_md_1600s_autonomy = {
+			modifier = {
+				autonomy_change_time = -0.5
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_refund_splendor = { flagName = autonomy_change_time flagCategory = autonomy_change_time }
+			}
+		}
+		ab_md_1600s_harsh_treatment = {
+			modifier = {
+				harsh_treatment_cost = -0.5
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = docile flagName = harsh_treatment_cost abilityName = ab_md_1600s_harsh_treatment showTooltip = true }
+			}
+		}
+		ab_md_1600s_fervent_march = {
+			modifier = {
+				movement_speed = 0.25
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = endurance flagName = movement_speed abilityName = ab_md_1600s_fervent_march showTooltip = true }
+			}
+		}
+		ab_md_1600s_admin_efficiency = {
+			modifier = {
+				administrative_efficiency = 0.05
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_refund_splendor = { flagName = administrative_efficiency flagCategory = administrative_efficiency }
+			}
+		}
+		ab_md_1600s_yearly_absolutism = {
+			modifier = {
+				yearly_absolutism = 1
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 100
+			}
+			effect = {
+				se_md_refund_splendor = { flagName = yearly_absolutism flagCategory = yearly_absolutism }
+			}
+		}
+		ab_md_1600s_divine_right = {
+			modifier = {
+				country_military_power = 1
+				prestige = 0.5
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 100
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = monarchy flagName = divine_right abilityName = ab_md_1600s_divine_right showTooltip = true }
+			}
+		}
+		ab_md_1600s_financial_opportunities = {
+			modifier = {
+				merchants = 1
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = trade flagName = merchant abilityName = ab_md_1600s_financial_opportunities showTooltip = true }
+			}
+		}
+		ab_md_1600s_faster_trade_connections = {
+			modifier = {
+				trade_efficiency = 0.2
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = navy flagName = trade_efficiency abilityName = ab_md_1600s_faster_trade_connections showTooltip = true }
+			}
+		}
+		ab_md_1600s_expel_minorities = {
+			modifier = {
+				expel_minorities_cost = -0.2
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = culturalchange flagName = expel_minorities_cost abilityName = ab_md_1600s_expel_minorities showTooltip = true }
+			}
+		}
+		ab_md_1600s_royal_endorsement_of_science = {
+			modifier = {
+				global_institution_spread = 0.2
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = science flagName = institution_spread abilityName = ab_md_1600s_royal_endorsement_of_science showTooltip = true }
+			}
+		}
+		ab_md_1600s_urgent_construction = {
+			modifier = {
+				build_time = -0.25
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_refund_splendor = { flagName = build_time flagCategory = build_time }
+			}
+		}
+		ab_md_1600s_developing_economies = {
+			modifier = {
+				development_cost = -0.1
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = economy flagName = development_cost abilityName = ab_md_1600s_developing_economies showTooltip = true }
+			}
+		}
+		ab_md_1500s_holy_kingdom = {
+			modifier = {
+				yearly_corruption = -0.25
+				global_spy_defence = 0.2
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = religion flagName = corruption_spydefence abilityName = ab_md_1500s_holy_kingdom showTooltip = true }
+			}
+		}
+		ab_md_1400s_spy_networks = {
+			modifier = {
+				spy_offence = 0.2
+				num_of_age_rewards = 1
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = espionage flagName = spy_offence abilityName = ab_md_1400s_spy_networks showTooltip = true }
+			}
+			ai_will_do = {
+				factor = 10
+			}
+		}
+		ab_md_1400s_slave_soldiers = {
+			modifier = {
+				manpower_recovery_speed = 0.2
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_refund_splendor = { flagName = manpower_recovery_speed flagCategory = improved_manpower }
+			}
+		}
+	}
+}
+

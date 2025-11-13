@@ -1,0 +1,169 @@
+# Actions for scripting the age ability bonuses.
+
+# The return splendor message and action for any ability that doesn't have a bonus attached to it.
+se_md_refund_splendor = {
+
+    if = {
+        limit = {
+            has_country_flag = flag_ab_md_has_had_$flagName$
+        }
+        hidden_effect = {
+            add_splendor = 200
+        }
+        custom_tooltip = md_same_ability_past_age
+    }
+    else_if = {
+        limit = {
+            has_country_flag = flag_ab_md_has_had_cat_$flagCategory$
+        }
+        hidden_effect = {
+            add_splendor = 100
+        }
+        custom_tooltip = md_similar_ability_past_age
+    }
+
+    set_country_flag = flag_ab_md_has_had_$flagName$
+    set_country_flag = flag_ab_md_has_had_cat_$flagCategory$
+}
+
+
+# The player is in the process of acquiring bonus levels on this ability type and thus the splendor return mentions that the bonus will be replaced.
+se_md_refund_splendor_bonus_progress = {
+    if = {
+        limit = {
+            has_country_flag = flag_ab_md_has_had_$flagName$
+        }
+        hidden_effect = {
+            add_splendor = 200
+        }
+        custom_tooltip = md_very_similar_ability_past_age_bonus
+    }
+    else_if = {
+        limit = {
+            OR = {
+                has_country_modifier = bns_md_$bonusName$_1
+                has_country_modifier = bns_md_$bonusName$_2
+            }
+        }
+        hidden_effect = {
+            add_splendor = 100
+        }
+        custom_tooltip = md_similar_ability_past_age_bonus
+    }
+}
+
+
+# The bonus of this type is already at level 3 and thus shouldn't display anything about a bonus being upgraded. Only mentions a splendor return.
+se_md_refund_splendor_bonus_complete = {
+    if = {
+        limit = {
+            has_country_flag = flag_ab_md_has_had_$flagName$
+        }
+        hidden_effect = {
+            add_splendor = 200
+        }
+        custom_tooltip = md_same_ability_past_age
+    }
+    else_if = {
+        limit = {
+            OR = {
+                has_country_modifier = bns_md_$bonusName$_1
+                has_country_modifier = bns_md_$bonusName$_2
+            }
+        }
+        hidden_effect = {
+            add_splendor = 100
+        }
+        custom_tooltip = md_similar_ability_past_age
+    }
+}
+
+
+# Chooses which return splendor message should display and progresses the ability bonuses from 0-1, 1-2, 2-3
+se_md_add_or_upgrade_bonus = {
+    if = {
+        limit = {
+            NOT = {
+                has_country_flag = flag_ab_md_purchased_$abilityName$
+            }
+        }
+        if = {
+            limit = {
+                NOT = {
+                    has_country_modifier = bns_md_$bonusName$_3
+                }
+            }
+            se_md_refund_splendor_bonus_progress = { bonusName = $bonusName$ flagName = $flagName$ }
+        }
+        else = {
+            se_md_refund_splendor_bonus_complete = { bonusName = $bonusName$ flagName = $flagName$ }
+        }
+    }
+
+    set_country_flag = flag_ab_md_has_had_$flagName$
+
+
+    if = {
+        # Add Bonus Level 1, replacing 0.
+        limit = {
+            OR = {
+                NOT = {
+                    has_country_modifier = bns_md_$bonusName$_1
+                    has_country_modifier = bns_md_$bonusName$_2
+                    has_country_modifier = bns_md_$bonusName$_3
+                }
+                AND = {
+                    has_country_modifier = bns_md_$bonusName$_1
+                    has_country_flag = flag_ab_md_purchased_$abilityName$
+                }
+            }
+        }
+        add_country_modifier = { name = bns_md_$bonusName$_1 duration = -1 }
+        [[showTooltip] custom_tooltip = md_mention_primary_effect]
+        set_country_flag = flag_ab_md_purchased_$abilityName$
+    }
+
+    else_if = {
+        # Add Bonus Level 2, replacing 1.
+        limit = {
+            OR = {
+                NOT = {
+                    has_country_modifier = bns_md_$bonusName$_2
+                    has_country_modifier = bns_md_$bonusName$_3
+                }
+                AND = {
+                    has_country_modifier = bns_md_$bonusName$_2
+                    has_country_flag = flag_ab_md_purchased_$abilityName$
+                }
+            }
+        }
+        hidden_effect = {
+            remove_country_modifier = bns_md_$bonusName$_1
+        }
+        add_country_modifier = { name = bns_md_$bonusName$_2 duration = -1 }
+        [[showTooltip] custom_tooltip = md_mention_primary_effect]
+        set_country_flag = flag_ab_md_purchased_$abilityName$
+    }
+
+    else_if = {
+        # Add Bonus Level 3, replacing 2.
+        limit = {
+            OR = {
+                NOT = {
+                    has_country_modifier = bns_md_$bonusName$_3
+                }
+                AND = {
+                    has_country_modifier = bns_md_$bonusName$_3
+                    has_country_flag = flag_ab_md_purchased_$abilityName$
+                }
+            }
+        }
+        hidden_effect = {
+            remove_country_modifier = bns_md_$bonusName$_2
+        }
+        add_country_modifier = { name = bns_md_$bonusName$_3 duration = -1 }
+        [[showTooltip] custom_tooltip = md_mention_primary_effect]
+        set_country_flag = flag_ab_md_purchased_$abilityName$
+    }
+}
+

@@ -1,0 +1,312 @@
+age_of_reformation = {
+	start = 1530
+
+
+	can_start = {
+		#is_religion_enabled = corinite
+		#After Greentide region is fine 
+		OR = {
+			custom_trigger_tooltip = {
+				tooltip = castellos_is_dead_tooltip
+				has_global_flag = "castellos_is_dead"
+			}
+			is_year = 1560	#in case castellos never dies
+		}
+	}
+	#What if Ravelianism starts in Aelantir? if so in general they should rise from coastal provinces too and those facing west
+	#Ravelianism could be more popular with the urban class? Peasants like the simplicity of the gods but historically christianity liked peasants
+	
+	
+	religious_conflicts = yes
+	papacy = 1.25
+	
+	objectives = {
+		obj_md_convert_provinces_anbennar = {
+			custom_trigger_tooltip = { tooltip = obj_md_convert_provinces_tooltip check_variable = { which = num_converted_religion value = 25 } }
+		}
+		obj_md_theocratic_rule_white = {
+			st_md_religious_estates_influence_anbennar = yes
+		}
+		obj_md_force_converted_europe = {
+			custom_trigger_tooltip = {
+				tooltip = obj_md_force_converted_tooltip
+				check_variable = { which = var_md_forced_conversion_counter value = 2 }
+			}
+		}
+		obj_md_humanism_religious = {
+			OR = {
+				full_idea_group = humanist_ideas
+				full_idea_group = religious_ideas
+			}
+		}
+		obj_md_many_vassals_anbennar = {
+			allow = {
+				NOT = {
+					capital_scope = {
+						continent = serpentspine
+					}
+				}
+			}
+			vassal = 3
+		}
+		obj_md_claim_the_road = {
+			allow = {
+				NOT = { culture_group = dwarven }
+				capital_scope = {
+					continent = serpentspine
+				}
+			}
+			st_md_has_claimed_dwarven_road = yes
+		}
+		obj_md_reclaim_the_road = {
+			allow = {
+				culture_group = dwarven
+				capital_scope = {
+					continent = serpentspine
+				}
+			}
+			st_md_has_claimed_dwarven_road = yes
+		}
+		obj_md_religious_unity = {
+			religious_unity = 1
+		}
+		obj_md_two_continents_anbennar = {
+			num_of_continents = 2
+		}
+		obj_md_audit_government = {
+			st_md_audit_government = yes
+		}
+	}	
+	
+	
+	abilities = {
+		# Identical copy of Ages Reformed.
+		ab_md_1500s_allow_religion_enforced = {
+			effect = {
+				custom_tooltip = religion_enforced_edict
+				set_country_flag = religion_enforced_edict
+			}
+			modifier = {
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 0
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = edicts flagName = allow_religion_enforced abilityName = ab_md_1500s_allow_religion_enforced }
+			}
+		}
+		ab_md_1500s_warscore_vs_religion = {
+			modifier = {
+				warscore_cost_vs_other_religion = -0.25
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_refund_splendor = { flagName = religion_warscore flagCategory = religion_war }
+			}
+		}
+		ab_md_1500s_mercenary_discipline = {
+			modifier = {
+				mercenary_discipline = 0.05
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = mercenary flagName = mercenary_discipline abilityName = ab_md_1500s_mercenary_discipline showTooltip = true }
+			}
+		}
+		ab_md_1500s_ship_power_propagation = {
+			modifier = {
+				ship_power_propagation = 0.2
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = navy flagName = ship_power_propagation abilityName = ab_md_1500s_ship_power_propagation showTooltip = true }
+			}
+		}
+		ab_md_1500s_institution_spread_from_true_faith = {
+			modifier = {
+				institution_spread_from_true_faith = 0.5
+				global_institution_spread = 0.1
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_refund_splendor = { flagName = institution_spread_religion flagCategory = institution_spread }
+			}
+		}
+		ab_md_1500s_prestige_per_development_from_conversion = {
+			modifier = {
+				prestige_per_development_from_conversion = 0.3
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_refund_splendor = { flagName = prestige_conversion flagCategory = prestige_conversion }
+			}
+		}
+		ab_md_1500s_additional_missionary = {
+			modifier = {
+				missionaries = 1
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_refund_splendor = { flagName = additional_missionary flagCategory = additional_missionary }
+			}
+		}
+		ab_md_1500s_attentive_listening = {
+			modifier = {
+				global_missionary_strength = 0.03
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 100
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = religion flagName = missionary_strength abilityName = ab_md_1500s_attentive_listening showTooltip = true }
+			}
+		}
+		ab_md_1500s_hardened_soldiers = {
+			modifier = {
+				land_attrition = -0.25
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = endurance flagName = reduced_attrition abilityName = ab_md_1500s_hardened_soldiers showTooltip = true }
+			}
+		}
+		ab_md_1500s_persecution_migration = {
+			modifier = {
+				culture_conversion_cost = -0.25
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = culturalchange flagName = culture_conversion abilityName = ab_md_1500s_persecution_migration showTooltip = true }
+			}
+		}
+		ab_md_1500s_accepting_new_ideas = {
+			modifier = {
+				idea_cost = -0.1
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = science flagName = idea_cost abilityName = ab_md_1500s_accepting_new_ideas showTooltip = true }
+			}
+		}
+		ab_md_1500s_secret_religion = {
+			modifier = {
+				spy_offence = 0.25
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = espionage flagName = spy_offence abilityName = ab_md_1500s_secret_religion showTooltip = true }
+			}
+		}
+		ab_md_1500s_god_over_country = {
+			modifier = {
+				relation_with_same_religion = 25
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = diplomacy flagName = relation_with_same_religion abilityName = ab_md_1500s_god_over_country showTooltip = true }
+			}
+		}
+		ab_md_1500s_converted_merchants = {
+			modifier = {
+				merchants = 1
+				trade_efficiency = 0.15
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = trade flagName = trade_efficiency_and_merchant abilityName = ab_md_1500s_converted_merchants showTooltip = true }
+			}
+		}
+		ab_md_1500s_like_minded_immigration = {
+			modifier = {
+				development_cost = -0.1
+				build_cost = -0.1
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = economy flagName = like_minded_immigration abilityName = ab_md_1500s_like_minded_immigration showTooltip = true }
+			}
+		}
+		ab_md_1600s_colony_boost_development = {
+			modifier = {
+				colony_development_boost = 1
+				can_colony_boost_development = yes
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+				modifier = {
+					factor = 0
+					NOT = { num_of_colonists = 1 }
+				}
+			}
+			effect = {
+				se_md_refund_splendor = { flagName = colony_boost_development flagCategory = colony_boost_development }
+			}
+		}
+		ab_md_1600s_religious_refugees = {
+			modifier = {
+				global_colonial_growth = 30
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 0
+			}
+			effect = {
+				se_md_refund_splendor = { flagName = colonial_growth flagCategory = colonial_growth }
+			}
+		}
+		ab_md_1600s_colonial_charter = {
+			modifier = {
+				colonists = 1
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 0
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = colonization flagName = colonist abilityName = ab_md_1600s_colonial_charter showTooltip = true }
+			}
+		}
+	}
+}

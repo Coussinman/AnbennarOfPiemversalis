@@ -1,0 +1,594 @@
+age_of_discovery = {
+	start = 1400
+	
+	can_start = {
+		always = yes
+	}
+	
+	religious_conflicts = yes
+	papacy = 1.0
+	
+
+	objectives = {
+
+		# Large City -------------------------------------------------------------------
+
+		obj_md_city_tier_1_cannor = {
+			allow = { st_md_capital_in_cannor = yes }
+			custom_trigger_tooltip = { tooltip = obj_30_development_city_tooltip st_md_has_30_city = yes }
+		}
+		obj_md_city_tier_1_haless = {
+			allow = { st_md_capital_in_haless = yes }
+			custom_trigger_tooltip = { tooltip = obj_30_development_city_tooltip st_md_has_30_city = yes }
+		}
+		obj_md_city_tier_1_serpentspine = {
+			allow = { st_md_capital_in_serpentspine = yes }
+			custom_trigger_tooltip = { tooltip = obj_30_development_city_tooltip st_md_has_30_city = yes }
+		}
+		obj_md_city_tier_1_forbidden_lands = {
+			allow = { st_md_capital_in_forbidden_lands = yes }
+			custom_trigger_tooltip = { tooltip = obj_30_development_city_tooltip st_md_has_30_city = yes }
+		}
+		obj_md_city_tier_1_bulwar = {
+			allow = { st_md_capital_in_bulwar = yes }
+			custom_trigger_tooltip = { tooltip = obj_30_development_city_tooltip st_md_has_30_city = yes }
+		}
+		obj_md_city_tier_1_sarhal = {
+			allow = { st_md_capital_in_sarhal = yes }
+			custom_trigger_tooltip = { tooltip = obj_30_development_city_tooltip st_md_has_30_city = yes }
+		}
+		obj_md_city_tier_1_aelantir = {
+			allow = { st_md_capital_in_aelantir = yes }
+			custom_trigger_tooltip = { tooltip = obj_30_development_city_tooltip st_md_has_30_city = yes }
+		}
+
+		# End Large City -------------------------------------------------------------------
+
+		obj_md_50_development = {
+			grown_by_development = 50
+		}
+
+		obj_md_armed_with_cannons = {
+			st_md_has_artillery = yes
+		}
+
+		# Build a Fleet -------------------------------------------------------------------
+
+		obj_md_build_fleet_cannor = {
+			allow = { st_md_capital_in_cannor = yes }
+			st_md_build_fleet = yes
+		}
+		obj_md_build_fleet_haless = {
+			allow = {
+				st_md_capital_in_haless = yes
+				st_md_capital_in_forbidden_lands = no
+			}
+			st_md_build_fleet = yes
+		}
+		obj_md_build_fleet_bulwar = {
+			allow = { st_md_capital_in_bulwar = yes }
+			st_md_build_fleet = yes
+		}
+		obj_md_build_fleet = {
+			allow = {
+				st_md_capital_in_cannor = no 
+				st_md_capital_in_haless = no
+				st_md_capital_in_bulwar = no
+				st_md_capital_in_aelantir = no
+				st_md_capital_in_serpentspine = no
+				st_md_capital_in_forbidden_lands = no
+			}
+			st_md_build_fleet = yes
+		}
+
+		# End Build a Fleet -------------------------------------------------------------------
+
+		obj_md_anbennar_large_native_force = {
+			allow = {
+				OR = {
+					st_md_capital_in_aelantir = yes
+					st_md_capital_in_serpentspine = yes
+					st_md_capital_in_forbidden_lands = yes
+				}
+			}
+			land_forcelimit = 25
+		}
+
+		obj_md_anbennar_fought_recent_war = {
+			allow = {
+				OR = {
+					st_md_capital_in_aelantir = yes
+					st_md_capital_in_serpentspine = yes
+					st_md_capital_in_forbidden_lands = yes
+				}
+			}
+			had_recent_war = 15
+		}
+
+		obj_md_discover_aelantir = {
+			allow = { 
+				st_md_capital_in_aelantir = no
+				st_md_capital_in_serpentspine = no
+				st_md_capital_in_forbidden_lands = no
+			}
+			custom_trigger_tooltip = {
+				tooltip = obj_md_discover_america_tooltip
+					st_md_discover_america = yes
+				}
+		}
+
+		# Humiliate Rival -------------------------------------------------------------------
+
+		obj_md_humiliate_rival_human_west = {
+			allow = {
+				OR = {
+					AND = {
+						st_md_capital_in_cannor = yes
+						culture_is_human = yes 
+					}
+					AND = {
+						st_md_humiliate_rival_human_east = no
+						st_md_humiliate_rival_elven = no
+						st_md_capital_in_forbidden_lands = no
+						NOT = {
+							culture_group = orcish
+							capital_scope = { superregion = rahen_superregion }
+							AND = {
+								st_md_capital_in_serpentspine = yes
+								culture_group = goblin
+							}
+							AND = {
+								st_md_capital_in_serpentspine = yes
+								culture_group = dwarven
+							}
+						}
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = obj_humiliate_rival_tooltip
+				has_country_flag = humiliated_rival
+			}
+		}
+		obj_md_humiliate_rival_human_east = {
+			allow = {
+				st_md_humiliate_rival_human_east = yes
+			}
+			custom_trigger_tooltip = {
+				tooltip = obj_humiliate_rival_tooltip
+				has_country_flag = humiliated_rival
+			}
+		}
+		obj_md_humiliate_rival_elven = {
+			allow = {
+				st_md_humiliate_rival_elven = yes
+			}
+			custom_trigger_tooltip = {
+				tooltip = obj_humiliate_rival_tooltip
+				has_country_flag = humiliated_rival
+			}
+		}
+		obj_md_humiliate_rival_orcish = {
+			allow = {
+				culture_group = orcish
+			}
+			custom_trigger_tooltip = {
+				tooltip = obj_humiliate_rival_tooltip
+				has_country_flag = humiliated_rival
+			}
+		}
+		obj_md_humiliate_rival_dwarven = {
+			allow = { 
+				st_md_capital_in_serpentspine = yes
+				culture_group = goblin
+			}
+			custom_trigger_tooltip = {
+				tooltip = obj_humiliate_rival_tooltip
+				has_country_flag = humiliated_rival
+			}
+		}
+		obj_md_humiliate_rival_goblin = {
+			allow = { 
+				st_md_capital_in_serpentspine = yes
+				culture_group = dwarven
+			}
+			custom_trigger_tooltip = {
+				tooltip = obj_humiliate_rival_tooltip
+				has_country_flag = humiliated_rival
+			}
+		}
+		obj_md_humiliate_rival_centaur = {
+			allow = { 
+				st_md_capital_in_forbidden_lands = yes
+			}
+			custom_trigger_tooltip = {
+				tooltip = obj_humiliate_rival_tooltip
+				has_country_flag = humiliated_rival
+			}
+		}
+		obj_md_humiliate_rival_harimari = {
+			allow = { 
+				capital_scope = { superregion = rahen_superregion }
+			}
+			custom_trigger_tooltip = {
+				tooltip = obj_humiliate_rival_tooltip
+				has_country_flag = humiliated_rival
+			}
+		}
+		
+		# End Humiliate Rival -------------------------------------------------------------------
+
+		obj_md_competent_court_human_west = {
+			allow = {
+				OR = {
+					culture_group = anbennarian
+					culture_group = alenic
+					culture_group = businori
+					culture_group = escanni
+					culture_group = dostanorian_g
+					culture_group = lencori
+					culture_group = reachman
+					culture_group = gerudian
+					culture_group = ynnsman
+					culture_group = trollsbayer
+				}
+			}
+			st_md_competent_court = yes
+		}
+		obj_md_competent_court_human_south = {
+			allow = {
+				OR = {
+					culture_group = akani
+					culture_group = bulwari
+					culture_group = divenori
+				}
+			}
+			st_md_competent_court = yes
+		}
+		obj_md_competent_court_human_east = {
+			allow = {
+				OR = {
+					culture_group = upper_raheni
+					culture_group = middle_raheni
+					culture_group = south_raheni
+					culture_group = triunic
+					culture_group = kai
+					culture_group = wuhyun
+					culture_group = bom
+					culture_group = yan
+					culture_group = kelino
+					culture_group = yanglam
+					culture_group = odheongun
+					culture_group = khantaar
+					culture_group = besholgi
+				}
+			}
+			st_md_competent_court = yes
+		}
+		obj_md_competent_court_elven = {
+			allow = {
+				culture_group = elven
+			}
+			st_md_competent_court = yes
+		}
+		obj_md_competent_court_orcish = {
+			allow = {
+				culture_group = orcish
+			}
+			st_md_competent_court = yes
+		}
+		obj_md_competent_court_ruinborn_a = {
+			allow = {
+				OR = {
+					culture_group = ynnic_ruinborn_elf
+					culture_group = eordan_ruinborn_elf
+				}
+			}
+			st_md_competent_court = yes
+		}
+		obj_md_competent_court_dwarves = {
+			allow = {
+				culture_group = dwarven
+			}
+			st_md_competent_court = yes
+		}
+		obj_md_competent_court_harimari = {
+			allow = {
+				culture_group = harimari
+			}
+			st_md_competent_court = yes
+		}
+		obj_md_competent_court = {
+			allow = {
+				NOT = {
+					culture_is_human = yes
+					culture_group = orcish
+					culture_group = elven
+					culture_group = dwarven
+					culture_group = harimari
+					culture_group = ynnic_ruinborn_elf
+					culture_group = eordan_ruinborn_elf
+				}
+			}
+			st_md_competent_court = yes
+		}
+
+		obj_md_anbennar_merchant = {
+			allow = {
+				capital_scope = {
+					OR = {
+						superregion = forbidden_lands_superregion
+						NOT = {
+							continent = europe
+							continent = asia
+						}
+					}
+				}
+			}
+			st_md_is_anbennar_merchant = yes
+		}
+
+		obj_md_cannorian_merchant = {
+			allow = {
+				capital_scope = {
+					continent = europe
+				}
+			}
+			st_md_is_cannorian_merchant = yes
+		}
+
+		obj_md_halessi_merchant = {
+			allow = {
+				capital_scope = {
+					continent = asia
+					NOT = {
+						superregion = forbidden_lands_superregion
+					}
+				}
+			}
+			st_md_is_halessi_merchant = yes
+		}
+	}		
+	
+	abilities = {
+		# Identical copy of Ages Reformed.
+		ab_md_1400s_allow_feudal_de_jure_law = {
+			effect = {
+				custom_tooltip = feudal_de_jure_law
+				set_country_flag = feudal_de_jure_law
+			}
+			modifier = {
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = edicts flagName = allow_fuedal_de_jure_law abilityName = ab_md_1400s_allow_feudal_de_jure_law }
+			}
+		}
+		ab_md_1400s_justified_wars = {
+			modifier = {
+				ae_impact = -0.15
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_refund_splendor = { flagName = reduce_aggressive_expansion flagCategory = reduce_aggressive_expansion }
+			}
+		}
+		ab_md_1400s_transfer_vassal_wargoal = {
+			modifier = {
+				can_transfer_vassal_wargoal = yes
+				can_chain_claim = yes
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_refund_splendor = { flagName = transfer_vassal flagCategory = peace_treaty_options }
+			}
+		}
+		ab_md_1400s_free_war_taxes = {
+			modifier = {
+				war_taxes_cost_modifier = -1.0
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_refund_splendor = { flagName = free_war_taxes flagCategory = reduce_war_taxes }
+			}
+		}
+		ab_md_1400s_cavalry_armies = {
+			modifier = {
+				cav_to_inf_ratio = 0.2
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_refund_splendor = { flagName = cav_to_inf_ratio flagCategory = increase_cavalry }
+			}
+		}
+		ab_md_1400s_attack_bonus_in_capital_terrain = {
+			modifier = {
+				attack_bonus_in_capital_terrain = yes
+				attack_bonus_in_capital_terrain = 1
+				leader_land_manuever = 1
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_refund_splendor = { flagName = attack_bonus_in_capital_terrain flagCategory = attack_bonus_in_capital_terrain }
+			}
+		}
+		ab_md_1400s_hardened_soldiers = {
+			modifier = {
+				land_attrition = -0.25
+				num_of_age_rewards = 1
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = endurance flagName = reduced_attrition abilityName = ab_md_1400s_hardened_soldiers showTooltip = true }
+			}
+			ai_will_do = {
+				factor = 10
+			}
+		}
+		ab_md_1400s_insecure_castles = {
+			modifier = {
+				artillery_levels_available_vs_fort = 1
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = siege flagName = artillery_levels_1 abilityName = ab_md_1400s_insecure_castles showTooltip = true }
+			}
+		}
+		ab_md_1400s_loyal_vassals = {
+			modifier = {
+				reduced_liberty_desire = 20
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 100
+				modifier = {
+					factor = 0
+					NOT = {
+						any_subject_country = {
+							liberty_desire = 20
+						}
+					}
+				}
+			}
+			effect = {
+				se_md_refund_splendor = { flagName = loyal_vassals flagCategory = loyal_vassals }
+			}
+		}
+		ab_md_1400s_mercenary_discipline = {
+			modifier = {
+				mercenary_discipline = 0.05
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = mercenary flagName = mercenary_discipline abilityName = ab_md_1400s_mercenary_discipline showTooltip = true }
+			}
+		}
+		ab_md_1400s_cheap_counsel = {
+			modifier = {
+				advisor_cost = -0.25
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_refund_splendor = { flagName = advisor_cost flagCategory = advisor_cost }
+			}
+		}
+		ab_md_1400s_changing_world = {
+			modifier = {
+				culture_conversion_cost = -0.25
+				num_of_age_rewards = 1
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = culturalchange flagName = culture_conversion abilityName = ab_md_1400s_changing_world showTooltip = true }
+			}
+			ai_will_do = {
+				factor = 10
+			}
+		}
+		ab_md_1400s_tyrant_acceptance = {
+			modifier = {
+				min_autonomy_in_territories = -0.10
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = docile flagName = min_autonomy_in_territories abilityName = ab_md_1400s_tyrant_acceptance showTooltip = true }
+			}
+		}
+		ab_md_1500s_colony_boost_development = {
+			modifier = {
+				colony_development_boost = 1
+				can_colony_boost_development = yes
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+				modifier = {
+					factor = 0
+					NOT = { num_of_colonists = 1 }
+				}
+			}
+			effect = {
+				se_md_refund_splendor = { flagName = colony_boost_development flagCategory = colony_boost_development }
+			}
+		}
+		ab_md_1500s_early_colonial_interest = {
+			modifier = {
+				global_colonial_growth = 20
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = colonization flagName = colonial_growth abilityName = ab_md_1500s_early_colonial_interest showTooltip = true }
+			}
+		}
+		ab_md_1400s_competent_diplomats = {
+			modifier = {
+				improve_relation_modifier = 0.25
+				num_of_age_rewards = 1
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = diplomacy flagName = improve_relations abilityName = ab_md_1400s_competent_diplomats showTooltip = true }
+			}
+			ai_will_do = {
+				factor = 10
+			}
+		}
+		ab_md_1400s_balanced_books = {
+			modifier = {
+				interest = -0.5
+				yearly_corruption = -0.15
+				num_of_age_rewards = 1
+			}
+			ai_will_do = {
+				factor = 10
+			}
+			effect = {
+				se_md_refund_splendor = { flagName = interest_and_corruption flagCategory = interest_and_corruption }
+			}
+		}
+		ab_md_1400s_savvy_merchants = {
+			modifier = {
+				global_trade_power = 0.1
+				trade_efficiency = 0.1
+				num_of_age_rewards = 1
+			}
+			effect = {
+				se_md_add_or_upgrade_bonus = { bonusName = trade flagName = trade_efficiency abilityName = ab_md_1400s_savvy_merchants showTooltip = true }
+			}
+			ai_will_do = {
+				factor = 10
+			}
+		}
+	}
+}
+

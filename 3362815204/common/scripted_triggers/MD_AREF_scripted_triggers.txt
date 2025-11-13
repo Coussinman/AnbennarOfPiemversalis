@@ -1,0 +1,821 @@
+# -----------------------------------------------------
+# Scripted Triggers for use with Ages Reformed.
+# -----------------------------------------------------
+
+st_md_capital_in_christian_europe = {
+    capital_scope = {
+        continent = europe
+    }
+    NOT = {
+        religion_group = muslim
+    }
+}
+
+st_md_capital_in_subsaharan_africa = {
+    capital_scope = {
+        OR = {
+            superregion = africa_superregion
+            superregion = southern_africa_superregion
+        }
+        NOT = {
+            region = maghreb_region
+        }
+    }
+}
+
+st_md_capital_in_africa_not_muslim = {
+    capital_scope = {
+        OR = {
+            superregion = africa_superregion
+            superregion = southern_africa_superregion
+
+        }
+    }
+    NOT = {
+        religion_group = muslim
+    }
+}
+
+st_md_capital_in_eastasia = {
+    capital_scope = {
+        OR = {
+            superregion = far_east_superregion
+            superregion = china_superregion
+        }
+    }
+}
+
+st_md_capital_in_india = {
+    capital_scope = {
+        superregion = india_superregion
+    }
+}
+
+st_md_capital_in_civilized_eastindies = {
+    capital_scope = {
+        superregion = east_indies_superregion
+        NOT = {
+            continent = oceania
+            region = moluccas_region
+        }
+    }
+}
+
+st_md_capital_in_civilized_southasia = {
+    OR = {
+        st_md_capital_in_india = yes
+        st_md_capital_in_civilized_eastindies = yes
+    }
+}
+
+st_md_is_muslim_in_europe = {
+    religion_group = muslim
+    capital_scope = {
+        continent = europe
+    }
+}
+
+st_md_capital_in_levant_or_persia = {
+    capital_scope = {
+        OR = {
+            superregion = near_east_superregion
+            superregion = persia_superregion
+        }
+        NOT = {
+            continent = europe
+        }
+    }
+}
+
+st_md_capital_in_levant_persia_or_northafrica = {
+    capital_scope = {
+        OR = {
+            superregion = near_east_superregion
+            superregion = persia_superregion
+            region = maghreb_region
+        }
+        NOT = {
+            continent = europe
+        }
+    }
+}
+
+st_md_muslim_in_africa = {
+    capital_scope = {
+        continent = africa
+    }
+    religion_group = muslim
+}
+
+st_md_capital_in_americas = {
+    capital_scope = {
+        OR = {
+            continent = north_america
+            continent = south_america
+        }
+    }
+}
+
+st_md_capital_in_australia = {
+    capital_scope = {
+        region = australia_region
+    }
+}
+
+st_md_capital_in_uncivilized_eastindies_or_oceania = {
+    capital_scope = {
+        OR = {
+            continent = oceania
+            region = moluccas_region
+        }
+    }
+}
+
+st_md_capital_in_uncivilized_eastindies_or_oceania_not_australia = {
+    capital_scope = {
+        OR = {
+            continent = oceania
+            region = moluccas_region
+        }
+        NOT = {
+            region = australia_region
+        }
+    }
+}
+
+st_md_capital_in_tartary = {
+    capital_scope = {
+        superregion = tartary_superregion
+    }
+}
+
+st_md_is_mesoamerican_religion = {
+    OR = {
+        religion = mesoamerican_religion
+        religion = nahuatl
+        religion = inti
+    }
+}
+
+st_md_capital_in_mesoamerican_regions = {
+    capital_scope = {
+        OR = {
+            region = mexico_region
+            region = central_america_region
+            region = peru_region
+            area = popayan_area
+            area = cordillera_occidental_area
+            area = coquivacoa_area
+            area = maracaibo_area
+            area = bogota_area
+        }
+    }
+}
+
+st_md_capital_in_horn_of_africa = {
+    capital_scope = {
+        region = horn_of_africa_region
+    }
+}
+
+
+
+# Art Religion Groups --------------------------------------------------
+
+st_md_religion_art_protestant = {
+    OR = {
+        religion = reformed
+        religion = protestant
+        religion = hussite
+        religion = anglican
+    }
+}
+
+st_md_religion_art_islamic = {
+    OR = {
+        religion = sunni
+        religion = shiite
+        religion = ibadi
+    }
+}
+
+st_md_religion_art_buddhist = {
+    OR = {
+        religion = buddhism #Theravada
+        religion = mahayana
+        religion = vajrayana
+    }
+}
+
+st_md_religion_art_mesoamerican = {
+    OR = {
+        religion = mesoamerican_religion #Mayan
+        religion = nahuatl
+        religion = inti
+    }
+}
+
+st_md_religion_art_catholic = {
+    religion = catholic
+}
+st_md_religion_art_orthodox = {
+    religion = orthodox
+}
+st_md_religion_art_coptic = {
+    religion = coptic
+}
+st_md_religion_art_confucian = {
+    religion = confucianism
+}
+st_md_religion_art_shinto = {
+    religion = shinto
+}
+st_md_religion_art_animist = {
+    religion = animism
+}
+st_md_religion_art_fetishist = {
+    religion = shamanism
+}
+st_md_religion_art_totemist = {
+    religion = totemism
+}
+st_md_religion_art_tengri = {
+    religion = tengri_pagan_reformed
+}
+st_md_religion_art_norse = {
+    religion = norse_pagan_reformed
+}
+st_md_religion_art_aboriginal = {
+    religion = dreamtime
+}
+st_md_religion_art_hindu = {
+    religion = hinduism
+}
+st_md_religion_art_sikh = {
+    religion = sikhism
+}
+st_md_religion_art_jewish = {
+    religion = jewish
+}
+st_md_religion_art_zoroastrian = {
+    religion = zoroastrian
+}
+
+st_md_is_white = {
+    st_md_capital_in_christian_europe = yes
+}
+st_md_is_black = {
+    OR = {
+        st_md_capital_in_subsaharan_africa = yes
+        st_md_capital_in_australia = yes
+    }
+}
+st_md_is_brown = {
+    st_md_is_white = no
+    st_md_is_black = no
+}
+
+
+
+
+
+# Age of Discovery --------------------------------------------------
+
+st_md_has_artillery = {
+    num_of_artillery = 5
+}
+
+st_md_discover_america = {
+    OR = {
+        north_america = { has_discovered = ROOT }
+        south_america = { has_discovered = ROOT }
+        new_world = { has_discovered = ROOT }
+    }
+}
+
+st_md_has_30_city = {
+    any_owned_province = {
+        exclude_from_progress = {
+            is_core = ROOT
+            controlled_by = owner
+        }
+        development_discounting_tribal = 30
+    }
+}
+
+st_md_build_fleet = {
+    num_of_light_ship = 10
+    OR = {
+        num_of_heavy_ship = 5
+        num_of_galley = 20
+    }
+}
+
+st_md_build_fleet_natives = {
+    num_of_light_ship = 2
+    OR = {
+        num_of_heavy_ship = 1
+        num_of_galley = 4
+    }
+}
+
+st_md_competent_court = {
+    employed_advisor = { category = ADM }
+    employed_advisor = { category = DIP }
+    employed_advisor = { category = MIL }
+
+    OR = {
+        has_adm_advisor_2 = yes
+        has_dip_advisor_2 = yes
+        has_mil_advisor_2 = yes
+    }
+}
+
+st_md_is_european_merchant = {
+    OR = {
+        num_of_owned_provinces_with = {
+            value = 7
+            trade_goods = wine
+        }
+        num_of_owned_provinces_with = {
+            value = 3
+            trade_goods = glass
+        }
+        num_of_owned_provinces_with = {
+            value = 3
+            trade_goods = copper
+        }
+        num_of_owned_provinces_with = {
+            value = 5
+            trade_goods = iron
+        }
+        num_of_owned_provinces_with = {
+            value = 7
+            trade_goods = naval_supplies
+        }
+    }
+}
+
+st_md_is_african_merchant = {
+    OR = {
+        num_of_owned_provinces_with = {
+            value = 5
+            trade_goods = slaves
+        }
+        num_of_owned_provinces_with = {
+            value = 5
+            trade_goods = ivory
+        }
+        num_of_owned_provinces_with = {
+            value = 3
+            trade_goods = gold
+        }
+        num_of_owned_provinces_with = {
+            value = 5
+            trade_goods = coffee
+        }
+        num_of_owned_provinces_with = {
+            value = 5
+            trade_goods = incense
+        }
+    }
+}
+
+st_md_is_asian_merchant = {
+    OR = {
+        num_of_owned_provinces_with = {
+            value = 5
+            trade_goods = silk
+        }
+        num_of_owned_provinces_with = {
+            value = 7
+            trade_goods = spices
+        }
+        num_of_owned_provinces_with = {
+            value = 7
+            trade_goods = cotton
+        }
+        num_of_owned_provinces_with = {
+            value = 5
+            trade_goods = gems
+        }
+        num_of_owned_provinces_with = {
+            value = 5
+            trade_goods = ivory
+        }
+        num_of_owned_provinces_with = {
+            value = 7
+            trade_goods = tea
+        }
+    }
+}
+
+st_md_is_fareast_merchant = {
+    OR = {
+        num_of_owned_provinces_with = {
+            value = 7
+            trade_goods = fish
+        }
+        num_of_owned_provinces_with = {
+            value = 5
+            trade_goods = naval_supplies
+        }
+        num_of_owned_provinces_with = {
+            value = 3
+            trade_goods = chinaware
+        }
+        num_of_owned_provinces_with = {
+            value = 3
+            trade_goods = tea
+        }
+    }
+}
+
+st_md_is_steppe_merchant = {
+    OR = {
+        num_of_owned_provinces_with = {
+            value = 10
+            trade_goods = wool
+        }
+        num_of_owned_provinces_with = {
+            value = 7
+            trade_goods = fur
+        }
+        num_of_owned_provinces_with = {
+            value = 2
+            trade_goods = gems
+        }
+        num_of_owned_provinces_with = {
+            value = 3
+            trade_goods = salt
+        }
+    }
+}
+
+st_md_is_islamic_merchant = {
+    OR = {
+        num_of_owned_provinces_with = {
+            value = 3
+            trade_goods = sugar
+        }
+        num_of_owned_provinces_with = {
+            value = 3
+            trade_goods = gems
+        }
+        num_of_owned_provinces_with = {
+            value = 5
+            trade_goods = coffee
+        }
+        num_of_owned_provinces_with = {
+            value = 5
+            trade_goods = incense
+        }
+        num_of_owned_provinces_with = {
+            value = 5
+            trade_goods = cotton
+        }
+        num_of_owned_provinces_with = {
+            value = 5
+            trade_goods = silk
+        }
+        num_of_owned_provinces_with = {
+            value = 5
+            trade_goods = spices
+        }
+    }
+}
+
+st_md_is_native_merchant = {
+    OR = {
+        num_of_owned_provinces_with = {
+            value = 2
+            trade_goods = gold
+        }
+        num_of_owned_provinces_with = {
+            value = 2
+            trade_goods = gems
+        }
+        num_of_owned_provinces_with = {
+            value = 2
+            trade_goods = dyes
+        }
+        num_of_owned_provinces_with = {
+            value = 2
+            trade_goods = cloves
+        }
+        num_of_owned_provinces_with = {
+            value = 3
+            trade_goods = spices
+        }
+        num_of_owned_provinces_with = {
+            value = 5
+            trade_goods = tobacco
+        }
+        num_of_owned_provinces_with = {
+            value = 5
+            trade_goods = cotton
+        }
+        num_of_owned_provinces_with = {
+            value = 5
+            trade_goods = wool
+        }
+        num_of_owned_provinces_with = {
+            value = 5
+            trade_goods = fur
+        }
+        num_of_owned_provinces_with = {
+            value = 7
+            trade_goods = fish
+        }
+    }
+}
+
+
+
+
+# Age of Reformation --------------------------------------------------
+
+st_md_religious_estates_influence = {
+    OR = {
+        estate_influence = {
+            estate = estate_church
+            influence = 60
+        }
+        estate_influence = {
+            estate = estate_brahmins
+            influence = 60
+        }
+    }
+}
+
+st_md_audit_government = {
+    NOT = {
+        corruption = 0.1
+        num_of_loans = 1
+    }
+    stability = 2
+}
+
+
+
+
+# Age of Absolutism --------------------------------------------------
+st_md_large_crownland = {
+    crown_land_share = 65
+}
+
+st_md_have_colony = {
+    colony = 1
+}
+
+st_md_large_forcelimit = {
+    land_forcelimit = 200
+}
+
+st_md_international_trade = {
+    calc_true_if = {
+        all_owned_province = {
+            province_has_center_of_trade_of_level = 3
+            controlled_by = owner
+            is_core = ROOT
+        }
+        amount = 2
+    }
+}
+
+st_md_textiles_supply = {
+    OR = {
+        num_of_owned_provinces_with = {
+            value = 5
+            trade_goods = dyes
+        }
+        num_of_owned_provinces_with = {
+            value = 10
+            trade_goods = silk
+        }
+        num_of_owned_provinces_with = {
+            value = 20
+            trade_goods = wool
+        }
+        num_of_owned_provinces_with = {
+            value = 20
+            trade_goods = cotton
+        }
+        num_of_owned_provinces_with = {
+            value = 30
+            trade_goods = cloth
+        }
+        num_of_owned_provinces_with = {
+            value = 30
+            trade_goods = fur
+        }
+    }
+}
+
+st_md_luxury_supply = {
+    OR = {
+        num_of_owned_provinces_with = {
+            value = 5
+            trade_goods = gold
+        }
+        num_of_owned_provinces_with = {
+            value = 7
+            trade_goods = gems
+        }
+        num_of_owned_provinces_with = {
+            value = 10
+            trade_goods = ivory
+        }
+        num_of_owned_provinces_with = {
+            value = 10
+            trade_goods = chinaware
+        }
+        num_of_owned_provinces_with = {
+            value = 10
+            trade_goods = incense
+        }
+    }
+}
+
+st_md_flavor_supply = {
+    OR = {
+        num_of_owned_provinces_with = {
+            value = 10
+            trade_goods = sugar
+        }
+        num_of_owned_provinces_with = {
+            value = 10
+            trade_goods = salt
+        }
+        num_of_owned_provinces_with = {
+            value = 10
+            trade_goods = spices
+        }
+        num_of_owned_provinces_with = {
+            value = 2
+            trade_goods = cloves
+        }
+    }
+}
+
+st_md_beverage_supply = {
+    OR = {
+        num_of_owned_provinces_with = {
+            value = 10
+            trade_goods = wine
+        }
+        num_of_owned_provinces_with = {
+            value = 10
+            trade_goods = coffee
+        }
+        num_of_owned_provinces_with = {
+            value = 10
+            trade_goods = tea
+        }
+    }
+}
+
+
+
+
+
+
+
+# Age of Revolutions --------------------------------------------------
+st_md_is_emperor = {
+    OR = {	
+        is_emperor = yes
+        government_rank = 3
+        is_emperor_of_china = yes
+    }
+}
+
+st_md_huge_capital = {
+    capital_scope = {
+        development = 50
+    }
+}
+
+st_md_number_of_diplomatic_relations = {
+    num_of_diplomatic_relations = 7
+}
+
+st_md_has_universities = {
+    university = 5
+}
+
+st_md_cultures_accepted = {
+    num_accepted_cultures = 5
+}
+
+st_md_colonial_empire = {
+    colony = 5
+}
+
+st_md_has_disciplined_army = {
+    has_global_modifier_value = {
+        which = discipline
+        value = 0.25
+        extra_shortcut = yes
+    }
+}
+
+st_md_american_supply = {
+    OR = {
+        num_of_owned_provinces_with = {
+            value = 10
+            trade_goods = cocoa
+        }
+        num_of_owned_provinces_with = {
+            value = 10
+            trade_goods = tobacco
+        }
+    }
+}
+
+st_md_control_multiple_markets = {
+    calc_true_if = {
+        amount = 2
+        st_md_textiles_supply = yes
+        st_md_luxury_supply = yes
+        st_md_flavor_supply = yes
+        st_md_beverage_supply = yes
+    }
+}
+
+# Age of Industrialization --------------------------------------------------
+
+
+st_md_capital_node_is_highest_trade_node = {
+    hidden_trigger = {
+        OR = {
+            AND = {
+                always = yes
+                exclude_from_progress = {
+                    home_trade_node = {
+                        highest_value_trade_node = yes
+                    }
+                }
+            }
+            AND = {
+                always = no
+                exclude_from_progress = {
+                    home_trade_node = {
+                        highest_value_trade_node = yes
+                    }
+                }
+            }
+        }
+    }
+    exclude_from_progress = {
+        home_trade_node = {
+            highest_value_trade_node = yes
+        }
+    }
+}
+
+st_md_has_50_manufactories = {
+    calc_true_if = {
+        all_owned_province = {
+            OR = {
+                has_building = mills
+                has_building = farm_estate
+                has_building = tradecompany
+                has_building = plantations
+                has_building = textile
+                has_building = weapons
+                has_building = wharf
+                has_building = furnace
+            }
+        }
+        amount = 50
+    }
+}
+
+st_md_has_metal_bonus = {
+    OR = {
+        trading_bonus = {
+            trade_goods = iron
+            value = yes
+        }
+        trading_bonus = {
+            trade_goods = copper
+            value = yes
+        }
+    }
+}
+
+st_md_has_10_in_africa = {
+    num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+        value = 10
+        OR = {
+            continent = africa
+        }
+    }
+}
+
+st_md_capital_is_metropolis = {
+    capital_scope = {
+        development = 70
+    }
+}

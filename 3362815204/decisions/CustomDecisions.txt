@@ -143,4 +143,29 @@ country_decisions = {
 		}
         }
     }
-}
+    #GP varainé
+    alchemical_gold = {
+        color = { 0 128 100 }
+        potential = {
+            has_country_flag = lead_to_gold
+            lead = 1
+        }
+        ai_will_do = {
+            factor = 0
+        }
+        effect = {
+            add_adm_power = -150 
+            add_treasury = -1500
+            random_owned_province = {
+                limit = {
+                    trade_goods = lead
+                }
+                change_trade_goods = gold
+                add_province_modifier = {
+                    name = alchemical_gold_vein
+                    duration = -1
+                }
+            }
+        }
+    }
+}   

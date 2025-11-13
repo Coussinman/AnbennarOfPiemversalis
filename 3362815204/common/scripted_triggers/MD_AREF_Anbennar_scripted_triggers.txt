@@ -1,0 +1,294 @@
+# -----------------------------------------------------
+# Scripted Triggers for use with Ages Reformed.
+# -----------------------------------------------------
+
+# Locations ---------------------------------------------------------
+
+st_md_capital_in_cannor = {
+    capital_scope = {
+        continent = europe
+    }
+}
+st_md_capital_in_haless = {
+    capital_scope = {
+        continent = asia
+        NOT = {
+            superregion = forbidden_lands_superregion
+        }
+    }
+}
+st_md_capital_in_serpentspine = {
+    capital_scope = {
+        continent = serpentspine
+    }
+}
+st_md_capital_in_forbidden_lands = {
+    capital_scope = {
+        superregion = forbidden_lands_superregion
+    }
+}
+st_md_capital_in_bulwar = {
+    capital_scope = {
+        superregion = bulwar_superregion
+    }
+}
+st_md_capital_in_sarhal = {
+    capital_scope = {
+        continent = africa
+        NOT = {
+            superregion = bulwar_superregion
+        }
+    }
+}
+st_md_capital_in_aelantir = {
+    capital_scope = {
+        OR = {
+            continent = north_america
+            continent = south_america
+        }
+    }
+}
+st_md_religious_estates_influence_anbennar = {
+    OR = {
+        estate_influence = {
+            estate = estate_church
+            influence = 60
+        }
+        estate_influence = {
+            estate = estate_brahmins
+            influence = 60
+        }
+        estate_influence = {
+            estate = estate_shinukhorchi
+            influence = 60
+        }
+    }
+}
+
+
+st_md_has_claimed_dwarven_road = {
+    num_of_owned_provinces_with = {
+        value = 10
+        has_terrain = dwarven_road
+    }
+}
+
+st_md_has_conquered_serpentspine = {
+    num_of_owned_provinces_with = {
+        value = 30
+        has_terrain = dwarven_road
+    }
+    num_of_owned_provinces_with = {
+        value = 10
+        OR = {
+            has_terrain = dwarven_hold
+            has_terrain = dwarven_hold_surface
+        }
+    }
+}
+
+
+
+st_md_humiliate_rival_human_east = {
+    st_md_capital_in_haless = yes
+    NOT = { 
+        culture_group = elven
+        culture_group = ynnic_ruinborn_elf
+        culture_group = eordan_ruinborn_elf
+        culture_group = orcish
+        capital_scope = {
+            OR = {
+                superregion = forbidden_lands_superregion
+                superregion = rahen_superregion
+            }
+        } 
+    }
+}
+
+st_md_humiliate_rival_elven = {
+    OR = {
+        culture_group = elven
+        culture_group = ynnic_ruinborn_elf
+        culture_group = eordan_ruinborn_elf
+        st_md_capital_in_aelantir = yes
+    }
+}
+
+
+
+
+
+
+st_md_is_anbennar_merchant = {
+    OR = {
+        num_of_owned_provinces_with = {
+            value = 1
+            trade_goods = damestear
+        }
+        num_of_owned_provinces_with = {
+            value = 2
+            trade_goods = gold
+        }
+        num_of_owned_provinces_with = {
+            value = 2
+            trade_goods = gems
+        }
+        num_of_owned_provinces_with = {
+            value = 2
+            trade_goods = dyes
+        }
+        num_of_owned_provinces_with = {
+            value = 3
+            trade_goods = paper
+        }
+        num_of_owned_provinces_with = {
+            value = 3
+            trade_goods = silk
+        }
+        num_of_owned_provinces_with = {
+            value = 3
+            trade_goods = ivory
+        }
+        num_of_owned_provinces_with = {
+            value = 3
+            trade_goods = incense
+        }
+        num_of_owned_provinces_with = {
+            value = 3
+            trade_goods = sugar
+        }
+        num_of_owned_provinces_with = {
+            value = 4
+            trade_goods = glass
+        }
+        num_of_owned_provinces_with = {
+            value = 5
+            trade_goods = iron
+        }
+        num_of_owned_provinces_with = {
+            value = 5
+            trade_goods = copper
+        }
+        num_of_owned_provinces_with = {
+            value = 5
+            trade_goods = spices
+        }
+        num_of_owned_provinces_with = {
+            value = 7
+            trade_goods = fur
+        }
+        num_of_owned_provinces_with = {
+            value = 7
+            trade_goods = fish
+        }
+    }
+}
+
+st_md_is_cannorian_merchant = {
+    OR = {
+        num_of_owned_provinces_with = {
+            value = 1
+            trade_goods = damestear
+        }
+        num_of_owned_provinces_with = {
+            value = 2
+            trade_goods = gold
+        }
+        num_of_owned_provinces_with = {
+            value = 2
+            trade_goods = gems
+        }
+        num_of_owned_provinces_with = {
+            value = 2
+            trade_goods = dyes
+        }
+        num_of_owned_provinces_with = {
+            value = 3
+            trade_goods = paper
+        }
+        num_of_owned_provinces_with = {
+            value = 3
+            trade_goods = silk
+        }
+        num_of_owned_provinces_with = {
+            value = 4
+            trade_goods = salt
+        }
+        num_of_owned_provinces_with = {
+            value = 4
+            trade_goods = glass
+        }
+        num_of_owned_provinces_with = {
+            value = 5
+            trade_goods = iron
+        }
+        num_of_owned_provinces_with = {
+            value = 5
+            trade_goods = copper
+        }
+        num_of_owned_provinces_with = {
+            value = 5
+            trade_goods = wine
+        }
+        num_of_owned_provinces_with = {
+            value = 10
+            trade_goods = wool
+        }
+    }
+}
+
+st_md_is_halessi_merchant = {
+    OR = {
+        num_of_owned_provinces_with = {
+            value = 1
+            trade_goods = damestear
+        }
+        num_of_owned_provinces_with = {
+            value = 2
+            trade_goods = gold
+        }
+        num_of_owned_provinces_with = {
+            value = 2
+            trade_goods = gems
+        }
+        num_of_owned_provinces_with = {
+            value = 4
+            trade_goods = ivory
+        }
+        num_of_owned_provinces_with = {
+            value = 4
+            trade_goods = dyes
+        }
+        num_of_owned_provinces_with = {
+            value = 4
+            trade_goods = silk
+        }
+        num_of_owned_provinces_with = {
+            value = 4
+            trade_goods = chinaware
+        }
+        num_of_owned_provinces_with = {
+            value = 4
+            trade_goods = paper
+        }
+        num_of_owned_provinces_with = {
+            value = 5
+            trade_goods = spices
+        }
+        num_of_owned_provinces_with = {
+            value = 5
+            trade_goods = iron
+        }
+        num_of_owned_provinces_with = {
+            value = 5
+            trade_goods = copper
+        }
+        num_of_owned_provinces_with = {
+            value = 10
+            trade_goods = tea
+        }
+    }
+}
+
+
+
