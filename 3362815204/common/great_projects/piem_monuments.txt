@@ -3159,6 +3159,7 @@ rosemetal_mines = {
 		cost_to_upgrade = { factor = 2500 }
 		province_modifiers = {
 			trade_goods_size = 3
+			local_development_cost = -0.3
 		}
 		area_modifier = {}
 		country_modifiers = {
@@ -3178,6 +3179,7 @@ rosemetal_mines = {
 		cost_to_upgrade = { factor = 5000 }
 		province_modifiers = {
 			trade_goods_size = 5
+			local_development_cost = -0.5
 		}
 		area_modifier = {}
 		country_modifiers = {
@@ -5109,18 +5111,20 @@ milcorissia_labyrinth = {
 			adventurers_loyalty_modifier = 0.15
 			adventurers_influence_modifier = 0.1
 			merc_leader_army_tradition = 1
-			morale_damage_received = 0.15
+			morale_damage_received = -0.15
 		}
 		on_upgraded = {
 			add_devastation = 100
-			define_general = {
-                    fire = 12
-                    shock = 5	
-                    manuever = 0	
-                    siege = 6
-                    name = "Xamarzu, the Bane of Milcorissia"
-                    trait = arch_demon_personality
-                }
+			owner = {
+				define_general = {
+						fire = 12
+						shock = 5	
+						manuever = 0	
+						siege = 6
+						name = "Xamarzu, the Bane of Milcorissia"
+						trait = arch_demon_personality
+					}
+			} 
 		}
 	}
 }
