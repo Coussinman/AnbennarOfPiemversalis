@@ -23,6 +23,7 @@ country_event = {
 		is_year = 1450
 		owns = 526 #ovdal tungr
 		NOT = { has_global_flag = delete_west_serpentspine_region }
+		always = no # Piemversalis (already spwaned at start)
 	}
 	
 	immediate = {
@@ -802,14 +803,14 @@ country_event = {
 }
 
 # Began's Expedition intro
-country_event = {
+country_event = { #piemverslis : Spawn directly 
 	id = diggy_spawnable.10
 	title = diggy_spawnable.10.t
 	desc = diggy_spawnable.10.d
 	picture = CAVE_eventPicture
 	
 	fire_only_once = yes
-	is_triggered_only = yes
+	mean_time_to_happen = { days = 1 }
 	
 	trigger = {
 		tag = H95
@@ -826,7 +827,29 @@ country_event = {
 				spawn_expedition = yes
 			}
 		}
+		hidden_effect = {
+			H95 = {
+				country_event = { id = diggy_spawnable.10 days = 3 } 
+				add_country_modifier = {
+					name = dwarovar_claimer
+					duration = 16000 #plus 1450 is roughly 1494
+				}
+				set_country_flag = dwarovar_claimer_setup
+				lose_reforms = 10
+				add_government_reform = dwarovar_adventurer_reform
+				change_government_reform_progress = 100
+				add_country_modifier = { name = reclaiming_dwarovar duration = -1 }
+				country_event = { id = anb_miscevents.8 days = 2 }
+				west_serpentspine_superregion = {
+					discover_country = PREV
+				}
+				set_ruler = began
+
+				country_event = { id = anb_miscevents.22 } # new country setup
+			}
+		}
 	}
+
 }
 
 # Axebellow intro
