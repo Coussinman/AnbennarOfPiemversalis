@@ -2769,10 +2769,13 @@ moonhaven_gp  = {
 		}
 		on_upgraded = {
 			add_base_production = 8
-			add_country_modifier = {
+			owner = {
+				add_country_modifier = {
 					name = monhaven_tier3
 					duration = 3650
 				}
+			}
+			
 		}
 	}
 }
@@ -4929,7 +4932,9 @@ house_of_redemption = {
 	move_days_per_unit_distance = 0
 	starting_tier = 1
 	type = monument
-	build_trigger = {}
+	build_trigger = {
+		owner = { has_country_flag = house_of_redemption_host }
+	}
 	on_built = {}
 	on_destroyed = {}
 	can_use_modifiers_trigger = {}
@@ -4984,7 +4989,9 @@ hq_of_asra_bank = {
 	move_days_per_unit_distance = 0
 	starting_tier = 1
 	type = monument
-	build_trigger = {}
+	build_trigger = {
+		owner = { has_country_flag = asra_bank_host }
+	}
 	on_built = {}
 	on_destroyed = {}
 	can_use_modifiers_trigger = {}
@@ -5157,13 +5164,14 @@ grifroche_sanctuary = {
 		cost_to_upgrade = { factor = 1000 }
 		province_modifiers = {
 			local_defensiveness = 0.15
+			local_amount_of_hussars = 1
 		}
 		area_modifier = {}
-		country_modifiers = {
-			cavalry_cost = -0.05
+		country_modifiers = {	
 		}
 		on_upgraded = {
 			change_trade_goods = exotic_animals
+			owner = {enable_mythical_cavalry = { mount = griffon_knight }}
 		}
 	}
 	tier_2 = {
@@ -5171,10 +5179,10 @@ grifroche_sanctuary = {
 		cost_to_upgrade = { factor = 2500 }
 		province_modifiers = {
 			local_defensiveness = 0.3
+			local_amount_of_hussars = 4
 		}
 		area_modifier = {}
 		country_modifiers = {
-			cavalry_cost = -0.1
 			movement_speed = 0.05
 		}
 		on_upgraded = {
@@ -5185,11 +5193,11 @@ grifroche_sanctuary = {
 		upgrade_time = { months = 480 }
 		cost_to_upgrade = { factor = 5000 }
 		province_modifiers = {
-			local_defensiveness = 0.15
+			local_defensiveness = 0.45
+			local_amount_of_hussars = 6
 		}
 		area_modifier = {}
 		country_modifiers = {
-			cavalry_cost = -0.15
 			movement_speed = 0.1
 		}
 		on_upgraded = {
@@ -5226,15 +5234,18 @@ sanctuary_toxic_wings = {
 		cost_to_upgrade = { factor = 1000 }
 		province_modifiers = {
 			local_defensiveness = 0.15
+			local_amount_of_hussars = 1
 		}
 		area_modifier = {}
 		country_modifiers = {
 			diplomatic_reputation = -0.5
 			loot_amount = 0.2
 			available_province_loot = 0.1
+			
 		}
 		on_upgraded = {
 			change_trade_goods = exotic_animals
+			owner = {enable_mythical_cavalry = { mount = wyvern }}
 		}
 	}
 	tier_2 = {
@@ -5242,6 +5253,7 @@ sanctuary_toxic_wings = {
 		cost_to_upgrade = { factor = 2500 }
 		province_modifiers = {
 			local_defensiveness = 0.3
+			local_amount_of_hussars = 4
 		}
 		area_modifier = {}
 		country_modifiers = {
@@ -5259,6 +5271,7 @@ sanctuary_toxic_wings = {
 		cost_to_upgrade = { factor = 5000 }
 		province_modifiers = {
 			local_defensiveness = 0.15
+			local_amount_of_hussars = 6
 		}
 		area_modifier = {}
 		country_modifiers = {
@@ -5269,6 +5282,189 @@ sanctuary_toxic_wings = {
 		}
 		on_upgraded = {
 			
+		}
+	}
+}
+
+gempath_tunnel = {
+	# province it starts in
+	start = 4232
+	
+	# random guess, doesn't need to be canon
+	date = 1720.01.20
+	
+	#time to build
+	time = {
+		months = 1
+	}
+	
+	#how much to build one
+	build_cost = 10000
+	
+	#can we move it?
+	can_be_moved = no
+	
+	#tier that the project starts at when first placed in the game (be that at game start or when built by a country as the game progresses)
+	starting_tier = 1
+	
+	#project type
+	type = canal
+
+	#can we build it?
+	build_trigger = {
+		owner = { has_country_flag = gempath_tunnel_opened }
+	}
+	
+	#what to do when it's built
+	on_built = {
+		4157 = {
+			add_canal = gempath_tunnel
+		}
+	}
+	
+	#what to do when it's destroyed
+	on_destroyed = {
+		4157 = {
+			remove_canal = gempath_tunnel
+		}
+	}
+
+	#can our country use it?
+	can_use_modifiers_trigger = {
+	}
+
+	#can our country upgrade it?
+	can_upgrade_trigger = {
+	}
+
+	#can our country keep it or is it destroyed when we get hold of it?
+	keep_trigger = {
+	}
+
+	#tier data
+	tier_0 = {
+		#time to upgrade to this level (0 for tier 0)
+		upgrade_time = {
+			months = 0
+		}
+
+		#cost to upgrade to this level (0 for tier 0)
+		cost_to_upgrade = {
+			factor = 0
+		}
+
+		#what modifiers are added to the province when we have this project here on this tier
+		province_modifiers = {
+			local_friendly_movement_speed = -0.2
+			local_hostile_movement_speed = -0.2
+		}
+
+		#what modifiers are added to the provinces in the map area when we have this project here on this tier
+		area_modifier = {
+		}
+
+		#what modifiers are added to the country when we have this project here on this tier
+		country_modifiers = {
+		}
+
+		#what effects happen when this tier is achieved
+		on_upgraded = {
+		}
+	}
+
+	tier_1 = {
+		#time to upgrade to this level (0 for tier 0)
+		upgrade_time = {
+			months = 120
+		}
+
+		#cost to upgrade to this level (0 for tier 0)
+		cost_to_upgrade = {
+			factor = 1000
+		}
+
+		#what modifiers are added to the province when we have this project here on this tier
+		province_modifiers = {
+			province_trade_power_value = 5
+			local_friendly_movement_speed = 0.1
+			local_hostile_movement_speed = 0.1
+			local_defensiveness = 0.1
+		}
+
+		#what modifiers are added to the provinces in the map area when we have this project here on this tier
+		area_modifier = {
+		}
+
+		#what modifiers are added to the country when we have this project here on this tier
+		country_modifiers = {
+		}
+
+		#what effects happen when this tier is achieved
+		on_upgraded = {
+		}
+	}
+
+	tier_2 = {
+		#time to upgrade to this level (0 for tier 0)
+		upgrade_time = {
+			months = 120
+		}
+
+		#cost to upgrade to this level (0 for tier 0)
+		cost_to_upgrade = {
+			factor = 1000
+		}
+
+		#what modifiers are added to the province when we have this project here on this tier
+		province_modifiers = {
+			province_trade_power_value = 10
+			local_friendly_movement_speed = 0.33
+			local_hostile_movement_speed = 0.33
+			local_defensiveness = 0.2
+		}
+
+		#what modifiers are added to the provinces in the map area when we have this project here on this tier
+		area_modifier = {
+		}
+
+		#what modifiers are added to the country when we have this project here on this tier
+		country_modifiers = {
+		}
+
+		#what effects happen when this tier is achieved
+		on_upgraded = {
+		}
+	}
+
+	tier_3 = {
+		#time to upgrade to this level (0 for tier 0)
+		upgrade_time = {
+			months = 120
+		}
+
+		#cost to upgrade to this level (0 for tier 0)
+		cost_to_upgrade = {
+			factor = 1000
+		}
+
+		#what modifiers are added to the province when we have this project here on this tier
+		province_modifiers = {
+			province_trade_power_value = 15
+			local_friendly_movement_speed = 0.5
+			local_hostile_movement_speed = 0.5
+			local_defensiveness = 0.33
+		}
+
+		#what modifiers are added to the provinces in the map area when we have this project here on this tier
+		area_modifier = {
+		}
+
+		#what modifiers are added to the country when we have this project here on this tier
+		country_modifiers = {
+		}
+
+		#what effects happen when this tier is achieved
+		on_upgraded = {
 		}
 	}
 }
