@@ -1136,7 +1136,10 @@ A11_3 = {
 		}
 		trigger = {
 			production_leader = {
-				trade_goods = gems
+				OR = {
+					trade_goods = pearls
+					trade_goods = gems
+				}	
 			}
 			8 = {
 				is_strongest_trade_power = ROOT
@@ -1148,6 +1151,12 @@ A11_3 = {
 		effect = {
 			change_price = {
 				trade_goods = gems
+				key = GEM_HEGEMONY
+				value = 0.5
+				duration = -1
+			}
+			change_price = {
+				trade_goods = pearls
 				key = GEM_HEGEMONY
 				value = 0.5
 				duration = -1
