@@ -739,31 +739,28 @@ custom_button = {
 	tooltip = glp_spawn_nations_loc
 }
 
-#custom_button = {
-#	name = glp_polish_events_spawn_button
-#	potential = {
-#		AND = {
-#			FROM = { ai = no }
-#			OR = {
-#				FROM = { tag = A1A }
-#				FROM = { tag = A2A }
-#			}
-#		}
-#	}
-#	trigger = {
-#		FROM = { tag = A2A }
-#		OR = {
-#			owner = { tag = POL }
-#			owner = { tag = PLC }
-#		}
-#	}
-#	effect = {
-#		FROM = {
-#			country_event = { id = glp_2024_events.12 }	
-#		}	
-#	}
-#	tooltip = glp_polish_events_spawn_loc
-#}
+custom_button = {
+	name = glp_a1a_annex_button
+	potential = {
+		AND = {
+			FROM = { ai = no }
+			OR = {
+				FROM = { tag = A1A }
+			}
+		}
+	}
+	trigger = {
+
+	}
+	effect = {
+		FROM = {
+			hidden_effect = {
+				FROM = { country_event = { id = glp_save_edit_events.78 } }
+			}
+		}	
+	}
+	tooltip = glp_a1a_annex_loc
+}
 
 #custom_button = {
 #	name = glp_request_duel
@@ -814,27 +811,29 @@ custom_button = {
 #	tooltip = glp_request_duel_loc
 #}
 
-#custom_button = {
-#	name = glp_supress_inquisition_decision_button
-#	potential = {
-#		AND = {
-#			FROM = { ai = no }
-#			OR = {
-#				FROM = { tag = A1A }
-#				FROM = { tag = A2A }
-#			}
-#		}
-#	}
-#	trigger = {
-#		FROM = { tag = A2A }
-#	}
-#	effect = {
-#		FROM = {
-#			country_event = { id = glp_2024_events.17 }
-#		}	
-#	}
-#	tooltip = glp_supress_inquisition_decision_loc
-#}
+custom_button = {
+	name = glp_a2a_annex_button
+	potential = {
+		AND = {
+			FROM = { ai = no }
+			OR = {
+				FROM = { tag = A1A }
+				FROM = { tag = A2A }
+			}
+		}
+	}
+	trigger = {
+		
+	}
+	effect = {
+		FROM = {
+			hidden_effect = {
+				FROM = { country_event = { id = glp_save_edit_events.79 } }
+			}
+		}	
+	}
+	tooltip = glp_a2a_annex_loc
+}
 
 custom_button = {
 	name = glp_spawn_rebel_button
