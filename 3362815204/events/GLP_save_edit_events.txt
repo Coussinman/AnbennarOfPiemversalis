@@ -4608,49 +4608,6 @@ country_event = {
 			}
 		}
 	}
-	option = {
-		name = "glp_save_edit_events.EVTCAPACTIVEA58"
-		from = {
-			owner = {
-				add_country_modifier = {
-					name = "ace_unnatural_luck"
-					duration = -1
-				}
-			}
-		}
-	}
-	option = {
-		name = "glp_save_edit_events.EVTCAPACTIVEA59"
-		from = {
-			owner = {
-				add_country_modifier = {
-					name = "ace_unnatural_misfortune"
-					duration = -1
-				}
-			}
-		}
-	}
-	option = {
-		name = "glp_save_edit_events.EVTCAPACTIVEA60"
-		from = {
-			owner = {
-				remove_country_modifier = {
-					name = "ace_unnatural_luck"
-				}
-			}
-		}
-	}
-	option = {
-		name = "glp_save_edit_events.EVTCAPACTIVEA61"
-		from = {
-			owner = {
-				remove_country_modifier = {
-					name = "ace_unnatural_misfortune"
-				}
-			}
-		}
-	}
-
 }
 
 country_event = {
@@ -6234,6 +6191,265 @@ country_event = {
 		name = "glp_save_edit_events.EMPIREA14"
 		set_hre_religion_treaty = no
 		set_hre_religion = the_jadd
+	}
+}
+
+country_event = {
+	id = glp_save_edit_events.42
+	title = "glp_save_edit_events.EVTNAME42"
+	desc = "glp_save_edit_events.EVTDESC42"
+	picture = DIET_eventPicture
+
+	is_triggered_only = yes
+
+	trigger = {
+	}
+
+	mean_time_to_happen = {
+	}
+
+	immediate = {
+		from = {
+			save_event_target_as = glp_event_nation
+		}
+	}
+
+	option = {
+		name = "glp_save_edit_events.PROVMODIFZZ1"
+		clear_global_event_target = glp_event_nation
+	}
+	option = {
+		name = "glp_save_edit_events.PROVMODIFA01"
+		country_event = { id = glp_save_edit_events.43 }
+		
+	}
+	option = {
+		name = "glp_save_edit_events.PROVMODIFA02"
+		country_event = { id = glp_save_edit_events.44 }
+	}
+}
+
+country_event = {
+	id = glp_save_edit_events.43
+	title = "glp_save_edit_events.EVTNAME43"
+	desc = "glp_save_edit_events.EVTDESC43"
+	picture = DIET_eventPicture
+
+	is_triggered_only = yes
+
+	trigger = {
+	}
+
+	mean_time_to_happen = {
+	}
+
+	option = {
+		name = "glp_save_edit_events.PROVMODIFADDZZ1"
+	}
+	option = {
+		name = "glp_save_edit_events.PROVMODIFADDA01"
+		event_target:glp_event_nation = {
+			add_province_modifier = {
+				name = ColonaddMJ
+				duration = -1
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.PROVMODIFADDA02"
+		event_target:glp_event_nation = {
+			add_province_modifier = {
+				name = ProductionaddMJ5
+				duration = -1
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.PROVMODIFADDA03"
+		event_target:glp_event_nation = {
+			add_province_modifier = {
+				name = ProductionaddMJ10
+				duration = -1
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.PROVMODIFADDA04"
+		event_target:glp_event_nation = {
+			add_province_modifier = {
+				name = MarcheDuRubis
+				duration = -1
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.PROVMODIFADDA05"
+		event_target:glp_event_nation = {
+			add_province_modifier = {
+				name = ApparatDeRubis
+				duration = -1
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.PROVMODIFADDA06"
+		event_target:glp_event_nation = {
+			add_province_modifier = {
+				name = SiegePrixNainbell
+				duration = -1
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.PROVMODIFADDA07"
+		event_target:glp_event_nation = {
+			add_province_modifier = {
+				name = Armuredecorinn
+				duration = -1
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.PROVMODIFADDA08"
+		event_target:glp_event_nation = {
+			add_province_modifier = {
+				name = LanguedeserpentMJ
+				duration = -1
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTCAPACTIVEA58"
+		event_target:glp_event_nation = {
+			owner = {
+				add_country_modifier = {
+					name = "ace_unnatural_luck"
+					duration = -1
+				}
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTCAPACTIVEA59"
+		event_target:glp_event_nation = {
+			owner = {
+				add_country_modifier = {
+					name = "ace_unnatural_misfortune"
+					duration = -1
+				}
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTCAPACTIVEA62"
+		event_target:glp_event_nation = {
+			owner = {
+				add_country_modifier = {
+					name = glp_bonus_devcost
+					duration = 3650
+				}
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTCAPACTIVEA63"
+		event_target:glp_event_nation = {
+			owner = {
+				add_country_modifier = {
+					name = glp_bonus_integration
+					duration = 3650
+				}
+			}
+		}
+	}
+	after = {
+		clear_global_event_target = glp_event_nation
+	}
+}
+
+country_event = {
+	id = glp_save_edit_events.44
+	title = "glp_save_edit_events.EVTNAME44"
+	desc = "glp_save_edit_events.EVTDESC44"
+	picture = DIET_eventPicture
+
+	is_triggered_only = yes
+
+	trigger = {
+	}
+
+	mean_time_to_happen = {
+	}
+
+	option = {
+		name = "glp_save_edit_events.PROVMODIFREMOVEZZ1"
+	}
+	option = {
+		name = "glp_save_edit_events.PROVMODIFREMOVEA01"
+		event_target:glp_event_nation = {
+			remove_province_modifier = ColonaddMJ
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.PROVMODIFREMOVEA02"
+		event_target:glp_event_nation = {
+			remove_province_modifier =  ProductionaddMJ5
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.PROVMODIFREMOVEA03"
+		event_target:glp_event_nation = {
+			remove_province_modifier = ProductionaddMJ10
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.PROVMODIFREMOVEA04"
+		event_target:glp_event_nation = {
+			remove_province_modifier = MarcheDuRubis
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.PROVMODIFREMOVEA05"
+		event_target:glp_event_nation = {
+			remove_province_modifier = ApparatDeRubis
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.PROVMODIFREMOVEA06"
+		event_target:glp_event_nation = {
+			remove_province_modifier = SiegePrixNainbell
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.PROVMODIFREMOVEA07"
+		event_target:glp_event_nation = {
+			remove_province_modifier = Armuredecorinn
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.PROVMODIFREMOVEA08"
+		event_target:glp_event_nation = {
+			remove_province_modifier = LanguedeserpentMJ
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTCAPACTIVEA60"
+		event_target:glp_event_nation = {
+			owner = {
+				remove_country_modifier = ace_unnatural_luck
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTCAPACTIVEA61"
+		event_target:glp_event_nation = {
+			owner = {
+				remove_country_modifier = ace_unnatural_misfortune
+			}
+		}
+	}
+	after = {
+		clear_global_event_target = glp_event_nation
 	}
 }
 
