@@ -1405,6 +1405,18 @@ country_event = {
 	}
 
 	option = {
+		name = "glp_save_edit_events.EVTLEADERA08"
+		trigger = {
+			FROM = { 
+				owner = {
+					has_consort = yes
+				}
+			}
+		}
+		FROM = { owner = { kill_consort = {} } }
+	}
+	
+	option = {
 		name = "glp_save_edit_events.EVTLEADERA03"
 		FROM = {
 			owner = {
@@ -5982,6 +5994,40 @@ country_event = {
 	}
 
 	option = {
+		name = "glp_save_edit_events.MAGICALA27"
+		FROM= {
+			owner = { 
+				add_ruler_personality = mage_personality
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.MAGICALA28"
+		FROM= {
+			owner = { 
+				remove_ruler_personality = mage_personality
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.MAGICALA29"
+		FROM= {
+			owner = { 
+				set_heir_mage_effect = yes
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.MAGICALA30"
+		FROM= {
+			owner = { 
+				remove_country_modifier = heir_mage_personality_mod
+				clr_heir_flag = heir_consort_mage_personality
+			}
+		}
+	}
+
+	option = {
 		name = "glp_save_edit_events.MAGICALA01"
 		FROM= {
 			owner = { 
@@ -6452,7 +6498,7 @@ country_event = {
 		name = "glp_save_edit_events.PROVMODIFADDA010"
 		event_target:glp_event_nation = {
 			add_province_modifier = {
-				name = glp_bonus_more_colonist
+				name = glp_malus_colonist
 				duration = -1
 			}
 		}
@@ -6492,6 +6538,58 @@ country_event = {
 			}
 		}
 	}
+	option = {
+		name = "glp_save_edit_events.PROVMODIFADDA015"
+		event_target:glp_event_nation = {
+			add_province_modifier = {
+				name = glp_bonus_more_lifespan
+				duration = -1
+			}
+		}
+	}
+
+	option = {
+		name = "glp_save_edit_events.PROVMODIFADDA016"
+		event_target:glp_event_nation = {
+			add_province_modifier = {
+				name = glp_bonus_minor_provincial_mp
+				duration = -1
+			}
+		}
+	}
+
+	option = {
+		name = "glp_save_edit_events.PROVMODIFADDA017"
+		event_target:glp_event_nation = {
+			add_province_modifier = {
+				name = glp_bonus_minor_provincial_good_produced
+				duration = -1
+			}
+		}
+	}
+
+	option = {
+		name = "glp_save_edit_events.PROVMODIFADDA018"
+		event_target:glp_event_nation = {
+			add_province_modifier = {
+				name = glp_bonus_minor_provincial_naval_fl
+				duration = -1
+			}
+		}
+	}
+
+	option = {
+		name = "glp_save_edit_events.PROVMODIFADDA019"
+		event_target:glp_event_nation = {
+			owner = {
+				add_country_modifier = {
+					name = glp_bad_tolerance_of_other
+					duration = -1
+				}
+			}
+		}
+	}
+
 	option = {
 		name = "glp_save_edit_events.EVTCAPACTIVEA58"
 		event_target:glp_event_nation = {
@@ -6615,7 +6713,7 @@ country_event = {
 	option = {
 		name = "glp_save_edit_events.PROVMODIFREMOVEA010"
 		event_target:glp_event_nation = {
-			remove_province_modifier = glp_bonus_more_colonist
+			remove_province_modifier = glp_malus_colonist
 		}
 	}
 	option = {
@@ -6655,6 +6753,38 @@ country_event = {
 		name = "glp_save_edit_events.PROVMODIFREMOVEA014"
 		event_target:glp_event_nation = {
 			remove_province_modifier = glp_reelection_cost
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.PROVMODIFREMOVEA016" 
+		event_target:glp_event_nation = {
+			remove_province_modifier = glp_bonus_more_lifespan
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.PROVMODIFREMOVEA017" 
+		event_target:glp_event_nation = {
+			remove_province_modifier = glp_bonus_minor_provincial_mp
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.PROVMODIFREMOVEA018" 
+		event_target:glp_event_nation = {
+			remove_province_modifier = glp_bonus_minor_provincial_good_produced
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.PROVMODIFREMOVEA019" 
+		event_target:glp_event_nation = {
+			remove_province_modifier = glp_bonus_minor_provincial_naval_fl
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.PROVMODIFREMOVEA020" 
+		event_target:glp_event_nation = {
+			owner = {
+				remove_country_modifier = glp_bad_tolerance_of_other
+			}
 		}
 	}
 	option = {
