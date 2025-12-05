@@ -1184,7 +1184,7 @@ country_event = {
 		FROM = { owner = { country_event = { id = glp_save_edit_events.6 } } }
 	}
 	option = {
-		name = "glp_save_edit_events.EVTMILITARYA13"
+		name = "glp_save_edit_events.EVTMILITARYA14"
 		trigger = {
 		}
 		FROM = {
@@ -1193,6 +1193,22 @@ country_event = {
 			rajput_infantry = FROM
 			rajput_infantry = FROM
 			rajput_infantry = FROM
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTMILITARYA15"
+		trigger = {
+		}
+		FROM = {
+			kill_units = {
+					who = enemy
+				}
+			kill_units = {
+					who = owner
+				} 
+			kill_units = {
+					who = controller
+				}
 		}
 	}
 }
@@ -1415,7 +1431,7 @@ country_event = {
 		}
 		FROM = { owner = { kill_consort = {} } }
 	}
-	
+
 	option = {
 		name = "glp_save_edit_events.EVTLEADERA03"
 		FROM = {
@@ -6591,6 +6607,16 @@ country_event = {
 	}
 
 	option = {
+		name = "glp_save_edit_events.PROVMODIFADDA020"
+		event_target:glp_event_nation = {
+			add_province_modifier = {
+				name = glp_doomed
+				duration = -1
+			}
+		}
+	}
+
+	option = {
 		name = "glp_save_edit_events.EVTCAPACTIVEA58"
 		event_target:glp_event_nation = {
 			owner = {
@@ -6785,6 +6811,12 @@ country_event = {
 			owner = {
 				remove_country_modifier = glp_bad_tolerance_of_other
 			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.PROVMODIFREMOVEA021" 
+		event_target:glp_event_nation = {
+			remove_province_modifier = glp_doomed
 		}
 	}
 	option = {
