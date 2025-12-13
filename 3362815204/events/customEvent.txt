@@ -307,3 +307,50 @@ country_event = {
         }
     }
 }
+
+
+namespace = custom_heir_boost
+
+country_event = {
+    id = custom_heir_boost.1
+    title = custom_heir_boost.1.t
+    desc = custom_heir_boost.1.d
+    picture = GFX_evt_trade_ports
+
+    trigger = { 
+        has_country_flag = heir_boost_6
+        has_heir = yes 
+        AND = {
+            NOT = { heir_adm = 6 }
+            NOT = { heir_dip = 6 }
+            NOT = { heir_mil = 6 }
+        }
+    }   
+
+    option = {
+        name = custom_heir_boost.1.a
+		change_heir_adm = 6
+        change_heir_dip = 6
+        change_heir_mil = 6
+    }
+}
+
+country_event = {
+    id = custom_heir_boost.2
+    title = custom_heir_boost.2.t
+    desc = custom_heir_boost.2.d
+    picture = GFX_evt_trade_ports
+
+    trigger = { 
+        has_country_flag = heir_boost_1_dip
+        NOT = {has_heir_flag = heir_boost}
+        has_heir = yes 
+        NOT = { heir_dip = 6 }
+    }   
+
+    option = {
+        name = custom_heir_boost.2.a
+        change_heir_dip = 1
+        set_heir_flag = heir_boost
+    }
+}
