@@ -5286,6 +5286,20 @@ country_event = {
 		}
 		country_event = { id = glp_save_edit_events.378 }
 	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELA10"
+		FROM = {
+			save_event_target_as = glp_rebel_spawn_province
+		}
+		country_event = { id = glp_save_edit_events.379 }
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELA11"
+		FROM = {
+			save_event_target_as = glp_rebel_spawn_province
+		}
+		country_event = { id = glp_save_edit_events.380 }
+	}
 }
 
 country_event = {
@@ -5896,6 +5910,147 @@ country_event = {
 			spawn_rebels = {
 				size = 25
 				type = daxugo_human_racists_rebels
+			}
+		}
+	}
+	after  = {
+		hidden_effect = {
+			clear_global_event_target = glp_rebel_spawn_province
+		}
+	}
+}
+
+country_event = {
+	id = glp_save_edit_events.379
+	title = "glp_save_edit_events.EVTNAMEI37"
+	desc = "glp_save_edit_events.EVTDESCI37"
+	picture = HRE_eventPicture
+
+	is_triggered_only = yes
+
+	trigger = {
+	}
+
+	mean_time_to_happen = {
+	}
+
+	option  = {
+		name = "glp_save_edit_events.EVTREBELSIZEIZZ1"
+	}
+
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEIA01"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 1
+				type = corinite_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEIA02"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 2
+				type = corinite_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEIA03"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 5
+				type = corinite_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEIA04"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 10
+				type = corinite_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEIA05"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 25
+				type = corinite_rebels
+			}
+		}
+	}
+	after  = {
+		hidden_effect = {
+			clear_global_event_target = glp_rebel_spawn_province
+		}
+	}
+}
+
+
+country_event = {
+	id = glp_save_edit_events.380
+	title = "glp_save_edit_events.EVTNAMEI37"
+	desc = "glp_save_edit_events.EVTDESCI37"
+	picture = HRE_eventPicture
+
+	is_triggered_only = yes
+
+	trigger = {
+	}
+
+	mean_time_to_happen = {
+	}
+
+	option  = {
+		name = "glp_save_edit_events.EVTREBELSIZEIZZ1"
+	}
+
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEIA01"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 1
+				type = regent_court_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEIA02"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 2
+				type = regent_court_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEIA03"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 5
+				type = regent_court_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEIA04"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 10
+				type = regent_court_rebels
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTREBELSIZEIA05"
+		event_target:glp_rebel_spawn_province = {
+			spawn_rebels = {
+				size = 25
+				type = regent_court_rebels
 			}
 		}
 	}
@@ -6668,6 +6823,29 @@ country_event = {
 			}
 		}
 	}
+	option = {
+		name = "glp_save_edit_events.EVTCAPACTIVEA64"
+		event_target:glp_event_nation = {
+			owner = {
+				add_country_modifier = {
+					name = "glp_modifier_minor"
+					duration = -1
+				}
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTCAPACTIVEA65"
+		event_target:glp_event_nation = {
+			owner = {
+				add_country_modifier = {
+					name = "glp_modifier_regional"
+					duration = -1
+				}
+			}
+		}
+	}
+
 	after = {
 		clear_global_event_target = glp_event_nation
 	}
@@ -6905,6 +7083,23 @@ country_event = {
 			}
 		}
 	}
+	option = {
+		name = "glp_save_edit_events.EVTCAPACTIVEA66"
+		event_target:glp_event_nation = {
+			owner = {
+				remove_country_modifier = glp_modifier_minor
+			}
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.EVTCAPACTIVEA67"
+		event_target:glp_event_nation = {
+			owner = {
+				remove_country_modifier = glp_modifier_regional
+			}
+		}
+	}
+
 	after = {
 		clear_global_event_target = glp_event_nation
 	}

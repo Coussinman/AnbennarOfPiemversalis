@@ -4642,11 +4642,15 @@ reveria_5 = {
 			is_capital_of = Z08
 		}
 		trigger = {
-			storm_isles_area = {
-				type = all
-				owned_by = ROOT
-				is_core = ROOT
+			OR = {
+				storm_isles_area = {
+					type = all
+					owned_by = ROOT
+					is_core = ROOT
+				}
+				diplomatic_reputation = 2
 			}
+			
 			OR = {
 				Z08 = {
 					has_opinion = {
@@ -4713,6 +4717,7 @@ reveria_5 = {
 					owned_by = ROOT
 					is_core = ROOT
 				}
+				NOT = { exists = Z08 }
 			}
 			OR = {
 				Z08 = {
