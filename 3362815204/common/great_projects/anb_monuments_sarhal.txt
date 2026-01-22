@@ -2989,9 +2989,14 @@ tree_of_tales = {
 	type = monument
 
 	build_trigger = {
-		has_country_flag = A11_tree #ACE
-		religion_group = tanibic_religion
-		has_owner_religion = yes
+		OR = {
+			has_country_flag = A11_tree #ACE
+			AND = {
+				religion_group = tanibic_religion
+				has_owner_religion = yes
+			}
+		}
+		
 	}
 
 	on_built = {

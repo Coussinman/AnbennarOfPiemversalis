@@ -1480,9 +1480,19 @@ A11_4 = {
 			}
 		}
 		trigger = {
-			eastneck_area = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
+			OR = {
+				eastneck_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT	
+					}
+				eastneck_area = {	
+					owner = {
+							has_opinion = {
+								who = ROOT
+								value = 150
+							}
+						}
+					}
 			}
 			custom_trigger_tooltip = {
 				tooltip = A11_protector_dameshead_tt
@@ -2099,13 +2109,16 @@ A11_5 = {
 		trigger = {
 			custom_trigger_tooltip = {
 				tooltip = A11_slay_wyvern_tt2
-				all_province = {
-					OR = {
-						NOT = {
-							is_core = A33
+				OR = {
+					all_province = {
+						OR = {
+							NOT = {
+								is_core = A33
+							}
+							country_or_non_sovereign_subject_holds = ROOT
 						}
-						country_or_non_sovereign_subject_holds = ROOT
 					}
+					NOT = { exists = A33 }
 				}
 			}
 		}
