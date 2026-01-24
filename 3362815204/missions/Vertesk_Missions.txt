@@ -1002,11 +1002,15 @@ vertesk_2_missions = {
 			}
 		}
 		
-		trigger = { 
-			NOT = { exists = A76 }
-			owns_core_province = 207
-			owns_core_province = 209
-			owns_core_province = 347
+		trigger = {
+			OR = {
+				NOT = { exists = A76 }
+				AND = {
+					owns_core_province = 207
+					owns_core_province = 209
+					owns_core_province = 347
+				}
+			} 
 			216 = {
 				trade_share = {
 					country = A23

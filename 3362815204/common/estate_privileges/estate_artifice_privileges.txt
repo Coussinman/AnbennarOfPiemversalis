@@ -6934,23 +6934,29 @@ artifice_invention_coddorran_powered_exosuit = {
 	loyalty = 0.00
 	influence = 0 #artificer privileges must never affect influence due to the fact influence affects points
 	is_valid = {
-		has_country_flag = unlocked_artifice_invention_coddorran_powered_exosuit
 		OR = {
-		has_country_modifier = gnomish_military
-			mission_completed = A05_gnomes_in_the_army
+			has_country_flag = unlocked_artifice_invention_coddorran_powered_exosuit
+			OR = {
+				has_country_modifier = gnomish_military
+				mission_completed = A05_gnomes_in_the_army
+			}
+			OR = {
+				ai = yes
+				has_estate_privilege = artifice_invention_coddorran_powered_exosuit
+			}
 		}
-		OR = {
-			ai = yes
-			has_estate_privilege = artifice_invention_coddorran_powered_exosuit
-		}
+		
 	}
 	can_select = {
-        ai = yes
-		artifice_has_points_20 = yes
 		OR = {
-		has_country_modifier = gnomish_military
-			mission_completed = A05_gnomes_in_the_army
+			ai = yes
+			artifice_has_points_20 = yes
+			OR = {
+			has_country_modifier = gnomish_military
+				mission_completed = A05_gnomes_in_the_army
+			}
 		}
+        
 	}
 	can_revoke = {
 		hidden_trigger = {
