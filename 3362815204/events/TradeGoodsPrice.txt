@@ -2550,6 +2550,42 @@ country_event = {
 	}
 }
 
+country_event = {
+	id = anb_price.109
+	title = anb_price.109.t
+	desc = anb_price.109.d
+	picture = TRADEGOODS_eventPicture
+
+	fire_only_once = yes
+	
+	major = yes
+
+	trigger = {
+		has_global_flag = activate_lencenorian_cepage_2
+		NOT = { has_global_flag = lencenorian_cepage_2 }
+		tag = A02
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	
+	option = {
+		name = anb_price.109.a
+		change_price = {
+			trade_goods = wine
+			key = LENCENORIAN_CEPAGE2
+			value = 0.5
+			duration = -1
+		}
+		change_price = {
+			trade_goods = champagne
+			key = LENCENORIAN_CEPAGE2
+			value = 0.7
+			duration = -1
+		}
+		hidden_effect = { set_global_flag = lencenorian_cepage_2 }
+	}
+}
 
 ####################
 #### Chinaware
