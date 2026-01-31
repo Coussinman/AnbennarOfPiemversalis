@@ -557,10 +557,15 @@ country_event = {
 		}
 		add_stability = -1
 		hidden_effect = {
-			set_country_flag = denied_rectorship
-			ravelian_founder_send_event = {
-				event_small_tag = ravelian.3
-				event_large_tag = ravelian.4
+			if = {
+				limit = {tag = A81}
+			}
+			else = {
+				set_country_flag = denied_rectorship
+				ravelian_founder_send_event = {
+					event_small_tag = ravelian.3
+					event_large_tag = ravelian.4
+				}
 			}
 		}
 	}
