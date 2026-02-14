@@ -5210,6 +5210,20 @@ country_event = {
 		}
 		custom_tooltip = "glp_save_edit_events.EVTMJEVTA02TT"
 	}
+
+	option = {
+		name = "glp_save_edit_events.EVTMJEVTA03"
+		every_country = {
+			limit = {
+				capital_scope = {
+					continent = europe
+				}
+			}
+			country_event = { id = glp_gm_events.8 }
+		}
+		custom_tooltip = "glp_save_edit_events.EVTMJEVTA03TT"
+	}
+
 }
 
 
@@ -7375,9 +7389,22 @@ country_event = {
 	}
 
 	option = {
-		name = "glp_save_edit_events.PROVMODIFADDA075"
+		name = "glp_save_edit_events.PROVMODIFADDA076"
 		event_target:glp_event_nation = {
-			set_global_flag = GLP_VOLCANO_TRIGGER
+			add_province_modifier = {
+					name = glp_adianse_tu_fais_chier
+					duration = -1
+			}
+		}
+	}
+
+	option = {
+		name = "glp_save_edit_events.PROVMODIFADDA077"
+		event_target:glp_event_nation = {
+			add_province_modifier = {
+					name = glp_no_prod_damestear
+					duration = -1
+			}
 		}
 	}
 
@@ -7940,6 +7967,19 @@ country_event = {
 		name = "glp_save_edit_events.PROVMODIFREMOVEA074"
 		event_target:glp_event_nation = {
 			remove_province_modifier = glp_mouvspeed_down
+		}
+	}
+
+	option = {
+		name = "glp_save_edit_events.PROVMODIFREMOVEA076"
+		event_target:glp_event_nation = {
+			clr_global_flag = glp_adianse_tu_fais_chier
+		}
+	}
+	option = {
+		name = "glp_save_edit_events.PROVMODIFREMOVEA077"
+		event_target:glp_event_nation = {
+			clr_global_flag = glp_no_prod_damestear
 		}
 	}
 
