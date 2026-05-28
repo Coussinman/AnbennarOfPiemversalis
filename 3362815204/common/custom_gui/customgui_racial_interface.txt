@@ -39,7 +39,7 @@ custom_button = {
 		number = 2
 		trigger = { has_country_flag = racial_pop_menu_opened }
 	}
-	tooltip = racial_pop_menu_open_button_text
+	tooltip = racial_pop_menu_open_button_text_tt
 }
 custom_button = {
 	name = racial_mil_menu_open_button
@@ -57,7 +57,7 @@ custom_button = {
 		number = 2
 		trigger = { has_country_flag = racial_military_menu_opened }
 	}
-	tooltip = racial_mil_menu_open_button_text
+	tooltip = racial_mil_menu_open_button_text_tt
 }
 
 custom_button = {
@@ -92,7 +92,7 @@ custom_button = {
 			racial_interface_update_main = yes
 		}
 	}
-	tooltip = racial_pop_list_headerbutton1_text
+	tooltip = racial_pop_list_headerbutton1_text_tt
 }
 custom_button = {
 	name = racial_pop_list_headerbutton2
@@ -111,7 +111,7 @@ custom_button = {
 			racial_interface_update_main = yes
 		}
 	}
-	tooltip = racial_pop_list_headerbutton2_text
+	tooltip = racial_pop_list_headerbutton2_text_tt
 }
 custom_button = {
 	name = racial_pop_list_headerbutton3
@@ -130,7 +130,7 @@ custom_button = {
 			racial_interface_update_main = yes
 		}
 	}
-	tooltip = racial_pop_list_headerbutton3_text
+	tooltip = racial_pop_list_headerbutton3_text_tt
 }
 custom_button = {
 	name = racial_pop_list_headerbutton4
@@ -149,7 +149,7 @@ custom_button = {
 			racial_interface_update_main = yes
 		}
 	}
-	tooltip = racial_pop_list_headerbutton4_text
+	tooltip = racial_pop_list_headerbutton4_text_tt
 }
 
 ## List implementation ##
@@ -1316,7 +1316,14 @@ custom_button = { #Enact purge
 	potential = { rp_can_enact_policy_generic_trigger = { rppolicy = purge } }
 	trigger = { }
 	effect = {
-		add_adm_power = -100
+		if = { 
+			limit = { 
+				NOT = { 
+					has_idea = homebrew_x_for_xians 
+				} 
+			}
+			add_adm_power = -100
+		}
 		racial_pop_on_click_generic_verb_policy =  { verb = start rppolicy = purge }
 		hidden_effect = {
 			racial_pop_interface_update_main = yes
@@ -1350,7 +1357,14 @@ custom_button = { #End purge
 	trigger = { }
 	effect = {
 		racial_pop_on_click_generic_verb_policy =  { verb = end rppolicy = purge }
-		add_adm_power = -100
+		if = { 
+			limit = { 
+				NOT = { 
+					has_idea = homebrew_x_for_xians 
+				} 
+			}
+			add_adm_power = -100
+		}
 		hidden_effect = {
 			racial_pop_interface_update_main = yes
 		}
@@ -1386,7 +1400,14 @@ custom_button = { #Enact expulsion
 	potential = { rp_can_enact_policy_generic_trigger = { rppolicy = expel } }
 	trigger = { }
 	effect = {
-		add_adm_power = -50
+		if = { 
+			limit = { 
+				NOT = { 
+					has_idea = homebrew_x_for_xians 
+				} 
+			}
+			add_adm_power = -50
+		}
 		racial_pop_on_click_generic_verb_policy =  { verb = start rppolicy = expulsion }
 		hidden_effect = {
 			racial_pop_interface_update_main = yes
@@ -1420,7 +1441,14 @@ custom_button = { #End expulsion
 	trigger = { }
 	effect = {
 		racial_pop_on_click_generic_verb_policy =  { verb = end rppolicy = expulsion }
-		add_adm_power = -50
+		if = { 
+			limit = { 
+				NOT = { 
+					has_idea = homebrew_x_for_xians 
+				} 
+			}
+			add_adm_power = -50
+		}
 		hidden_effect = {
 			racial_pop_interface_update_main = yes
 		}

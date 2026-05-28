@@ -1,30 +1,3887 @@
-ruler_has_mage_personality = {
+##############
+### SYSTEM ###
+##############
+
+can_use_magic = { #Can I cast spells and study? (interact with the magic UI)
 	custom_trigger_tooltip = {
-		tooltip = ruler_has_mage_personality
+		tooltip = can_use_magic
+		has_not_banned_magic = yes #banning magic instantly blocks magic, even if you have a PM ruler
+		NOT = { has_country_modifier = block_magic_temp_modifier } #modifier to block all casting of magic, without removing the mage estate
+		OR = {
+			AND = {
+				has_magic_estate_or_equiv = yes
+				NOT = { has_country_modifier = mages_strike }	#loc is generic, reuse at will
+			}
+			has_ruler_flag = ruler_can_cast_magic_without_mage_personality_flag #For MT always letting you cast spells, like Zokka
+			ruler_is_powerful_mage = yes
+		}
+		OR = {
+			is_not_in_artificery_mode = yes
+			has_country_flag = can_use_magic_while_artificery #Command
+		}
+	}
+}
+
+has_magic_estate_or_equiv = { #Do I have a mage estate? More to the point, do I have estate magic?
+	custom_trigger_tooltip = {
+		tooltip = has_magic_estate_or_equiv_tt
+		OR = {
+			has_estate = estate_mages
+			has_country_flag = has_mages_estate_equiv #Azjakuma/Command etc.
+		}		
+	}
+}
+
+has_banned_magic = { #Shared restrictions between mage personality, mage estate, and magic UI
+	custom_trigger_tooltip = {
+		tooltip = has_banned_magic
+		OR = {
+			has_country_flag = banned_magic
+			has_country_flag = LF_mages_banned # LF has to go through its crisis first
+		}
+	}
+}
+
+has_banned_magic_artificery = { #Like above, but has the artificery flag too
+	custom_trigger_tooltip = {
+		tooltip = has_banned_magic_artificery
+		OR = {
+			has_banned_magic = yes
+			has_country_flag = magic_artificery_artificery_only
+		}
+	}
+}
+
+has_not_banned_magic = { #Can I have the mage estate and roll powerful mage rulers? (Yes)
+	custom_trigger_tooltip = {
+		tooltip = has_not_banned_magic
+		NOT = {
+			has_country_flag = banned_magic
+			has_country_flag = LF_mages_banned # LF has to go through its crisis first
+		}
+	}
+}
+
+has_not_banned_magic_artificery = { #Like above, but has the artificery flag too
+	custom_trigger_tooltip = {
+		tooltip = has_not_banned_magic_artificery
+		has_not_banned_magic = yes
+		NOT = { has_country_flag = magic_artificery_artificery_only }
+	}
+}
+
+###################################
+### SPELL SCHOOL LEVEL TRIGGERS ###
+###################################
+
+# Country flags and ruler flags are ENTIRELY separate things.
+# You can set a country flag named "A" and a ruler flag named "A" and they will be tracked separately.
+# A ruler flag named "A" will NOT fulfill the requirements for has_country_flag = A,
+# and the clr_country_flag effect will NOT clear ruler flags.
+
+# The same, however, is NOT true of modifiers.
+# A ruler modifier "A" WILL fulfill the requirements for has_country_modifier = A.
+# It can be removed with the remove_country_modifier effect (there is no remove_ruler_modfier effect).
+# A country modifier will NOT count as a ruler modifier for the purposes of has_ruler_modifier trigger,
+# but you ALSO cannot use the add_ruler_modifier effect in any meaningful way while you have a country modifier of the same name.
+
+is_overall_abjuration_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_abjuration_level_0
+		NOT = {
+			has_ruler_flag = abjuration_1 has_ruler_flag = abjuration_2 has_ruler_flag = abjuration_3
+			has_country_flag = abjuration_1 has_country_flag = abjuration_2 has_country_flag = abjuration_3
+		}
+	}
+}
+is_overall_abjuration_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_abjuration_level_1_minimum
+		OR = {
+			has_ruler_flag = abjuration_1 has_ruler_flag = abjuration_2 has_ruler_flag = abjuration_3
+			has_country_flag = abjuration_1 has_country_flag = abjuration_2 has_country_flag = abjuration_3
+		}
+	}
+}
+is_overall_abjuration_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_abjuration_level_1
+		OR = { has_ruler_flag = abjuration_1 has_country_flag = abjuration_1 }
+	}
+}
+is_overall_abjuration_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_abjuration_level_2_minimum
+		OR = {
+			has_ruler_flag = abjuration_2 has_ruler_flag = abjuration_3
+			has_country_flag = abjuration_2 has_country_flag = abjuration_3
+		}
+	}
+}
+is_overall_abjuration_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_abjuration_level_2
+		OR = { has_ruler_flag = abjuration_2 has_country_flag = abjuration_2 }
+	}
+}
+is_overall_abjuration_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_abjuration_level_3
+		OR = { has_ruler_flag = abjuration_3 has_country_flag = abjuration_3 }
+	}
+}
+is_overall_conjuration_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_conjuration_level_0
+		NOT = {
+			has_ruler_flag = conjuration_1 has_ruler_flag = conjuration_2 has_ruler_flag = conjuration_3
+			has_country_flag = conjuration_1 has_country_flag = conjuration_2 has_country_flag = conjuration_3
+		}
+	}
+}
+is_overall_conjuration_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_conjuration_level_1_minimum
+		OR = {
+			has_ruler_flag = conjuration_1 has_ruler_flag = conjuration_2 has_ruler_flag = conjuration_3
+			has_country_flag = conjuration_1 has_country_flag = conjuration_2 has_country_flag = conjuration_3
+		}
+	}
+}
+is_overall_conjuration_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_conjuration_level_1
+		OR = { has_ruler_flag = conjuration_1 has_country_flag = conjuration_1 }
+	}
+}
+is_overall_conjuration_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_conjuration_level_2_minimum
+		OR = {
+			has_ruler_flag = conjuration_2 has_ruler_flag = conjuration_3
+			has_country_flag = conjuration_2 has_country_flag = conjuration_3
+		}
+	}
+}
+is_overall_conjuration_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_conjuration_level_2
+		OR = { has_ruler_flag = conjuration_2 has_country_flag = conjuration_2 }
+	}
+}
+is_overall_conjuration_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_conjuration_level_3
+		OR = { has_ruler_flag = conjuration_3 has_country_flag = conjuration_3 }
+	}
+}
+is_overall_divination_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_divination_level_0
+		NOT = {
+			has_ruler_flag = divination_1 has_ruler_flag = divination_2 has_ruler_flag = divination_3
+			has_country_flag = divination_1 has_country_flag = divination_2 has_country_flag = divination_3
+		}
+	}
+}
+is_overall_divination_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_divination_level_1_minimum
+		OR = {
+			has_ruler_flag = divination_1 has_ruler_flag = divination_2 has_ruler_flag = divination_3
+			has_country_flag = divination_1 has_country_flag = divination_2 has_country_flag = divination_3
+		}
+	}
+}
+is_overall_divination_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_divination_level_1
+		OR = { has_ruler_flag = divination_1 has_country_flag = divination_1 }
+	}
+}
+is_overall_divination_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_divination_level_2_minimum
+		OR = {
+			has_ruler_flag = divination_2 has_ruler_flag = divination_3
+			has_country_flag = divination_2 has_country_flag = divination_3
+		}
+	}
+}
+is_overall_divination_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_divination_level_2
+		OR = { has_ruler_flag = divination_2 has_country_flag = divination_2 }
+	}
+}
+is_overall_divination_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_divination_level_3
+		OR = { has_ruler_flag = divination_3 has_country_flag = divination_3 }
+	}
+}
+is_overall_enchantment_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_enchantment_level_0
+		NOT = {
+			has_ruler_flag = enchantment_1 has_ruler_flag = enchantment_2 has_ruler_flag = enchantment_3
+			has_country_flag = enchantment_1 has_country_flag = enchantment_2 has_country_flag = enchantment_3
+		}
+	}
+}
+is_overall_enchantment_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_enchantment_level_1_minimum
+		OR = {
+			has_ruler_flag = enchantment_1 has_ruler_flag = enchantment_2 has_ruler_flag = enchantment_3
+			has_country_flag = enchantment_1 has_country_flag = enchantment_2 has_country_flag = enchantment_3
+		}
+	}
+}
+is_overall_enchantment_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_enchantment_level_1
+		OR = { has_ruler_flag = enchantment_1 has_country_flag = enchantment_1 }
+	}
+}
+is_overall_enchantment_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_enchantment_level_2_minimum
+		OR = {
+			has_ruler_flag = enchantment_2 has_ruler_flag = enchantment_3
+			has_country_flag = enchantment_2 has_country_flag = enchantment_3
+		}
+	}
+}
+is_overall_enchantment_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_enchantment_level_2
+		OR = { has_ruler_flag = enchantment_2 has_country_flag = enchantment_2 }
+	}
+}
+is_overall_enchantment_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_enchantment_level_3
+		OR = { has_ruler_flag = enchantment_3 has_country_flag = enchantment_3 }
+	}
+}
+is_overall_evocation_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_evocation_level_0
+		NOT = {
+			has_ruler_flag = evocation_1 has_ruler_flag = evocation_2 has_ruler_flag = evocation_3
+			has_country_flag = evocation_1 has_country_flag = evocation_2 has_country_flag = evocation_3
+		}
+	}
+}
+is_overall_evocation_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_evocation_level_1_minimum
+		OR = {
+			has_ruler_flag = evocation_1 has_ruler_flag = evocation_2 has_ruler_flag = evocation_3
+			has_country_flag = evocation_1 has_country_flag = evocation_2 has_country_flag = evocation_3
+		}
+	}
+}
+is_overall_evocation_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_evocation_level_1
+		OR = { has_ruler_flag = evocation_1 has_country_flag = evocation_1 }
+	}
+}
+is_overall_evocation_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_evocation_level_2_minimum
+		OR = {
+			has_ruler_flag = evocation_2 has_ruler_flag = evocation_3
+			has_country_flag = evocation_2 has_country_flag = evocation_3
+		}
+	}
+}
+is_overall_evocation_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_evocation_level_2
+		OR = { has_ruler_flag = evocation_2 has_country_flag = evocation_2 }
+	}
+}
+is_overall_evocation_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_evocation_level_3
+		OR = { has_ruler_flag = evocation_3 has_country_flag = evocation_3 }
+	}
+}
+is_overall_illusion_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_illusion_level_0
+		NOT = {
+			has_ruler_flag = illusion_1 has_ruler_flag = illusion_2 has_ruler_flag = illusion_3
+			has_country_flag = illusion_1 has_country_flag = illusion_2 has_country_flag = illusion_3
+		}
+	}
+}
+is_overall_illusion_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_illusion_level_1_minimum
+		OR = {
+			has_ruler_flag = illusion_1 has_ruler_flag = illusion_2 has_ruler_flag = illusion_3
+			has_country_flag = illusion_1 has_country_flag = illusion_2 has_country_flag = illusion_3
+		}
+	}
+}
+is_overall_illusion_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_illusion_level_1
+		OR = { has_ruler_flag = illusion_1 has_country_flag = illusion_1 }
+	}
+}
+is_overall_illusion_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_illusion_level_2_minimum
+		OR = {
+			has_ruler_flag = illusion_2 has_ruler_flag = illusion_3
+			has_country_flag = illusion_2 has_country_flag = illusion_3
+		}
+	}
+}
+is_overall_illusion_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_illusion_level_2
+		OR = { has_ruler_flag = illusion_2 has_country_flag = illusion_2 }
+	}
+}
+is_overall_illusion_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_illusion_level_3
+		OR = { has_ruler_flag = illusion_3 has_country_flag = illusion_3 }
+	}
+}
+is_overall_necromancy_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_necromancy_level_0
+		NOT = {
+			has_ruler_flag = necromancy_1 has_ruler_flag = necromancy_2 has_ruler_flag = necromancy_3
+			has_country_flag = necromancy_1 has_country_flag = necromancy_2 has_country_flag = necromancy_3
+		}
+	}
+}
+is_overall_necromancy_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_necromancy_level_1_minimum
+		OR = {
+			has_ruler_flag = necromancy_1 has_ruler_flag = necromancy_2 has_ruler_flag = necromancy_3
+			has_country_flag = necromancy_1 has_country_flag = necromancy_2 has_country_flag = necromancy_3
+		}
+	}
+}
+is_overall_necromancy_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_necromancy_level_1
+		OR = { has_ruler_flag = necromancy_1 has_country_flag = necromancy_1 }
+	}
+}
+is_overall_necromancy_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_necromancy_level_2_minimum
+		OR = {
+			has_ruler_flag = necromancy_2 has_ruler_flag = necromancy_3
+			has_country_flag = necromancy_2 has_country_flag = necromancy_3
+		}
+	}
+}
+is_overall_necromancy_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_necromancy_level_2
+		OR = { has_ruler_flag = necromancy_2 has_country_flag = necromancy_2 }
+	}
+}
+is_overall_necromancy_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_necromancy_level_3
+		OR = { has_ruler_flag = necromancy_3 has_country_flag = necromancy_3 }
+	}
+}
+is_overall_transmutation_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_transmutation_level_0
+		NOT = {
+			has_ruler_flag = transmutation_1 has_ruler_flag = transmutation_2 has_ruler_flag = transmutation_3
+			has_country_flag = transmutation_1 has_country_flag = transmutation_2 has_country_flag = transmutation_3
+		}
+	}
+}
+is_overall_transmutation_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_transmutation_level_1_minimum
+		OR = {
+			has_ruler_flag = transmutation_1 has_ruler_flag = transmutation_2 has_ruler_flag = transmutation_3
+			has_country_flag = transmutation_1 has_country_flag = transmutation_2 has_country_flag = transmutation_3
+		}
+	}
+}
+is_overall_transmutation_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_transmutation_level_1
+		OR = { has_ruler_flag = transmutation_1 has_country_flag = transmutation_1 }
+	}
+}
+is_overall_transmutation_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_transmutation_level_2_minimum
+		OR = {
+			has_ruler_flag = transmutation_2 has_ruler_flag = transmutation_3
+			has_country_flag = transmutation_2 has_country_flag = transmutation_3
+		}
+	}
+}
+is_overall_transmutation_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_transmutation_level_2
+		OR = { has_ruler_flag = transmutation_2 has_country_flag = transmutation_2 }
+	}
+}
+is_overall_transmutation_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_transmutation_level_3
+		OR = { has_ruler_flag = transmutation_3 has_country_flag = transmutation_3 }
+	}
+}
+
+### RULER TRIGGERS ###
+
+is_ruler_abjuration_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_abjuration_level_0
+		NOT = { has_ruler_flag = abjuration_1 has_ruler_flag = abjuration_2 has_ruler_flag = abjuration_3 }
+	}
+}
+is_ruler_abjuration_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_abjuration_level_1_minimum
+		OR = { has_ruler_flag = abjuration_1 has_ruler_flag = abjuration_2 has_ruler_flag = abjuration_3 }
+	}
+}
+is_ruler_abjuration_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_abjuration_level_1
+		has_ruler_flag = abjuration_1
+	}
+}
+is_ruler_abjuration_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_abjuration_level_2_minimum
+		OR = { has_ruler_flag = abjuration_2 has_ruler_flag = abjuration_3 }
+	}
+}
+is_ruler_abjuration_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_abjuration_level_2
+		has_ruler_flag = abjuration_2
+	}
+}
+is_ruler_abjuration_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_abjuration_level_3
+		has_ruler_flag = abjuration_3
+	}
+}
+is_ruler_conjuration_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_conjuration_level_0
+		NOT = { has_ruler_flag = conjuration_1 has_ruler_flag = conjuration_2 has_ruler_flag = conjuration_3 }
+	}
+}
+is_ruler_conjuration_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_conjuration_level_1_minimum
+		OR = { has_ruler_flag = conjuration_1 has_ruler_flag = conjuration_2 has_ruler_flag = conjuration_3 }
+	}
+}
+is_ruler_conjuration_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_conjuration_level_1
+		has_ruler_flag = conjuration_1
+	}
+}
+is_ruler_conjuration_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_conjuration_level_2_minimum
+		OR = { has_ruler_flag = conjuration_2 has_ruler_flag = conjuration_3 }
+	}
+}
+is_ruler_conjuration_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_conjuration_level_2
+		has_ruler_flag = conjuration_2
+	}
+}
+is_ruler_conjuration_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_conjuration_level_3
+		has_ruler_flag = conjuration_3
+	}
+}
+is_ruler_divination_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_divination_level_0
+		NOT = { has_ruler_flag = divination_1 has_ruler_flag = divination_2 has_ruler_flag = divination_3 }
+	}
+}
+is_ruler_divination_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_divination_level_1_minimum
+		OR = { has_ruler_flag = divination_1 has_ruler_flag = divination_2 has_ruler_flag = divination_3 }
+	}
+}
+is_ruler_divination_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_divination_level_1
+		has_ruler_flag = divination_1
+	}
+}
+is_ruler_divination_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_divination_level_2_minimum
+		OR = { has_ruler_flag = divination_2 has_ruler_flag = divination_3 }
+	}
+}
+is_ruler_divination_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_divination_level_2
+		has_ruler_flag = divination_2
+	}
+}
+is_ruler_divination_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_divination_level_3
+		has_ruler_flag = divination_3
+	}
+}
+is_ruler_enchantment_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_enchantment_level_0
+		NOT = { has_ruler_flag = enchantment_1 has_ruler_flag = enchantment_2 has_ruler_flag = enchantment_3 }
+	}
+}
+is_ruler_enchantment_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_enchantment_level_1_minimum
+		OR = { has_ruler_flag = enchantment_1 has_ruler_flag = enchantment_2 has_ruler_flag = enchantment_3 }
+	}
+}
+is_ruler_enchantment_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_enchantment_level_1
+		has_ruler_flag = enchantment_1
+	}
+}
+is_ruler_enchantment_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_enchantment_level_2_minimum
+		OR = { has_ruler_flag = enchantment_2 has_ruler_flag = enchantment_3 }
+	}
+}
+is_ruler_enchantment_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_enchantment_level_2
+		has_ruler_flag = enchantment_2
+	}
+}
+is_ruler_enchantment_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_enchantment_level_3
+		has_ruler_flag = enchantment_3
+	}
+}
+is_ruler_evocation_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_evocation_level_0
+		NOT = { has_ruler_flag = evocation_1 has_ruler_flag = evocation_2 has_ruler_flag = evocation_3 }
+	}
+}
+is_ruler_evocation_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_evocation_level_1_minimum
+		OR = { has_ruler_flag = evocation_1 has_ruler_flag = evocation_2 has_ruler_flag = evocation_3 }
+	}
+}
+is_ruler_evocation_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_evocation_level_1
+		has_ruler_flag = evocation_1
+	}
+}
+is_ruler_evocation_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_evocation_level_2_minimum
+		OR = { has_ruler_flag = evocation_2 has_ruler_flag = evocation_3 }
+	}
+}
+is_ruler_evocation_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_evocation_level_2
+		has_ruler_flag = evocation_2
+	}
+}
+is_ruler_evocation_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_evocation_level_3
+		has_ruler_flag = evocation_3
+	}
+}
+is_ruler_illusion_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_illusion_level_0
+		NOT = { has_ruler_flag = illusion_1 has_ruler_flag = illusion_2 has_ruler_flag = illusion_3 }
+	}
+}
+is_ruler_illusion_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_illusion_level_1_minimum
+		OR = { has_ruler_flag = illusion_1 has_ruler_flag = illusion_2 has_ruler_flag = illusion_3 }
+	}
+}
+is_ruler_illusion_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_illusion_level_1
+		has_ruler_flag = illusion_1
+	}
+}
+is_ruler_illusion_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_illusion_level_2_minimum
+		OR = { has_ruler_flag = illusion_2 has_ruler_flag = illusion_3 }
+	}
+}
+is_ruler_illusion_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_illusion_level_2
+		has_ruler_flag = illusion_2
+	}
+}
+is_ruler_illusion_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_illusion_level_3
+		has_ruler_flag = illusion_3
+	}
+}
+is_ruler_necromancy_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_necromancy_level_0
+		NOT = { has_ruler_flag = necromancy_1 has_ruler_flag = necromancy_2 has_ruler_flag = necromancy_3 }
+	}
+}
+is_ruler_necromancy_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_necromancy_level_1_minimum
+		OR = { has_ruler_flag = necromancy_1 has_ruler_flag = necromancy_2 has_ruler_flag = necromancy_3 }
+	}
+}
+is_ruler_necromancy_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_necromancy_level_1
+		has_ruler_flag = necromancy_1
+	}
+}
+is_ruler_necromancy_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_necromancy_level_2_minimum
+		OR = { has_ruler_flag = necromancy_2 has_ruler_flag = necromancy_3 }
+	}
+}
+is_ruler_necromancy_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_necromancy_level_2
+		has_ruler_flag = necromancy_2
+	}
+}
+is_ruler_necromancy_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_necromancy_level_3
+		has_ruler_flag = necromancy_3
+	}
+}
+is_ruler_transmutation_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_transmutation_level_0
+		NOT = { has_ruler_flag = transmutation_1 has_ruler_flag = transmutation_2 has_ruler_flag = transmutation_3 }
+	}
+}
+is_ruler_transmutation_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_transmutation_level_1_minimum
+		OR = { has_ruler_flag = transmutation_1 has_ruler_flag = transmutation_2 has_ruler_flag = transmutation_3 }
+	}
+}
+is_ruler_transmutation_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_transmutation_level_1
+		has_ruler_flag = transmutation_1
+	}
+}
+is_ruler_transmutation_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_transmutation_level_2_minimum
+		OR = { has_ruler_flag = transmutation_2 has_ruler_flag = transmutation_3 }
+	}
+}
+is_ruler_transmutation_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_transmutation_level_2
+		has_ruler_flag = transmutation_2
+	}
+}
+is_ruler_transmutation_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_transmutation_level_3
+		has_ruler_flag = transmutation_3
+	}
+}
+
+### HEIR TRIGGERS ###
+
+is_heir_abjuration_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_abjuration_level_0
+		NOT = { has_heir_flag = abjuration_1 has_heir_flag = abjuration_2 has_heir_flag = abjuration_3 }
+	}
+}
+is_heir_abjuration_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_abjuration_level_1_minimum
+		OR = { has_heir_flag = abjuration_1 has_heir_flag = abjuration_2 has_heir_flag = abjuration_3 }
+	}
+}
+is_heir_abjuration_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_abjuration_level_1
+		has_heir_flag = abjuration_1
+	}
+}
+is_heir_abjuration_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_abjuration_level_2_minimum
+		OR = { has_heir_flag = abjuration_2 has_heir_flag = abjuration_3 }
+	}
+}
+is_heir_abjuration_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_abjuration_level_2
+		has_heir_flag = abjuration_2
+	}
+}
+is_heir_abjuration_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_abjuration_level_3
+		has_heir_flag = abjuration_3
+	}
+}
+is_heir_conjuration_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_conjuration_level_0
+		NOT = { has_heir_flag = conjuration_1 has_heir_flag = conjuration_2 has_heir_flag = conjuration_3 }
+	}
+}
+is_heir_conjuration_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_conjuration_level_1_minimum
+		OR = { has_heir_flag = conjuration_1 has_heir_flag = conjuration_2 has_heir_flag = conjuration_3 }
+	}
+}
+is_heir_conjuration_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_conjuration_level_1
+		has_heir_flag = conjuration_1
+	}
+}
+is_heir_conjuration_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_conjuration_level_2_minimum
+		OR = { has_heir_flag = conjuration_2 has_heir_flag = conjuration_3 }
+	}
+}
+is_heir_conjuration_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_conjuration_level_2
+		has_heir_flag = conjuration_2
+	}
+}
+is_heir_conjuration_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_conjuration_level_3
+		has_heir_flag = conjuration_3
+	}
+}
+is_heir_divination_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_divination_level_0
+		NOT = { has_heir_flag = divination_1 has_heir_flag = divination_2 has_heir_flag = divination_3 }
+	}
+}
+is_heir_divination_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_divination_level_1_minimum
+		OR = { has_heir_flag = divination_1 has_heir_flag = divination_2 has_heir_flag = divination_3 }
+	}
+}
+is_heir_divination_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_divination_level_1
+		has_heir_flag = divination_1
+	}
+}
+is_heir_divination_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_divination_level_2_minimum
+		OR = { has_heir_flag = divination_2 has_heir_flag = divination_3 }
+	}
+}
+is_heir_divination_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_divination_level_2
+		has_heir_flag = divination_2
+	}
+}
+is_heir_divination_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_divination_level_3
+		has_heir_flag = divination_3
+	}
+}
+is_heir_enchantment_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_enchantment_level_0
+		NOT = { has_heir_flag = enchantment_1 has_heir_flag = enchantment_2 has_heir_flag = enchantment_3 }
+	}
+}
+is_heir_enchantment_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_enchantment_level_1_minimum
+		OR = { has_heir_flag = enchantment_1 has_heir_flag = enchantment_2 has_heir_flag = enchantment_3 }
+	}
+}
+is_heir_enchantment_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_enchantment_level_1
+		has_heir_flag = enchantment_1
+	}
+}
+is_heir_enchantment_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_enchantment_level_2_minimum
+		OR = { has_heir_flag = enchantment_2 has_heir_flag = enchantment_3 }
+	}
+}
+is_heir_enchantment_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_enchantment_level_2
+		has_heir_flag = enchantment_2
+	}
+}
+is_heir_enchantment_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_enchantment_level_3
+		has_heir_flag = enchantment_3
+	}
+}
+is_heir_evocation_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_evocation_level_0
+		NOT = { has_heir_flag = evocation_1 has_heir_flag = evocation_2 has_heir_flag = evocation_3 }
+	}
+}
+is_heir_evocation_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_evocation_level_1_minimum
+		OR = { has_heir_flag = evocation_1 has_heir_flag = evocation_2 has_heir_flag = evocation_3 }
+	}
+}
+is_heir_evocation_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_evocation_level_1
+		has_heir_flag = evocation_1
+	}
+}
+is_heir_evocation_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_evocation_level_2_minimum
+		OR = { has_heir_flag = evocation_2 has_heir_flag = evocation_3 }
+	}
+}
+is_heir_evocation_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_evocation_level_2
+		has_heir_flag = evocation_2
+	}
+}
+is_heir_evocation_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_evocation_level_3
+		has_heir_flag = evocation_3
+	}
+}
+is_heir_illusion_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_illusion_level_0
+		NOT = { has_heir_flag = illusion_1 has_heir_flag = illusion_2 has_heir_flag = illusion_3 }
+	}
+}
+is_heir_illusion_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_illusion_level_1_minimum
+		OR = { has_heir_flag = illusion_1 has_heir_flag = illusion_2 has_heir_flag = illusion_3 }
+	}
+}
+is_heir_illusion_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_illusion_level_1
+		has_heir_flag = illusion_1
+	}
+}
+is_heir_illusion_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_illusion_level_2_minimum
+		OR = { has_heir_flag = illusion_2 has_heir_flag = illusion_3 }
+	}
+}
+is_heir_illusion_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_illusion_level_2
+		has_heir_flag = illusion_2
+	}
+}
+is_heir_illusion_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_illusion_level_3
+		has_heir_flag = illusion_3
+	}
+}
+is_heir_necromancy_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_necromancy_level_0
+		NOT = { has_heir_flag = necromancy_1 has_heir_flag = necromancy_2 has_heir_flag = necromancy_3 }
+	}
+}
+is_heir_necromancy_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_necromancy_level_1_minimum
+		OR = { has_heir_flag = necromancy_1 has_heir_flag = necromancy_2 has_heir_flag = necromancy_3 }
+	}
+}
+is_heir_necromancy_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_necromancy_level_1
+		has_heir_flag = necromancy_1
+	}
+}
+is_heir_necromancy_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_necromancy_level_2_minimum
+		OR = { has_heir_flag = necromancy_2 has_heir_flag = necromancy_3 }
+	}
+}
+is_heir_necromancy_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_necromancy_level_2
+		has_heir_flag = necromancy_2
+	}
+}
+is_heir_necromancy_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_necromancy_level_3
+		has_heir_flag = necromancy_3
+	}
+}
+is_heir_transmutation_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_transmutation_level_0
+		NOT = { has_heir_flag = transmutation_1 has_heir_flag = transmutation_2 has_heir_flag = transmutation_3 }
+	}
+}
+is_heir_transmutation_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_transmutation_level_1_minimum
+		OR = { has_heir_flag = transmutation_1 has_heir_flag = transmutation_2 has_heir_flag = transmutation_3 }
+	}
+}
+is_heir_transmutation_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_transmutation_level_1
+		has_heir_flag = transmutation_1
+	}
+}
+is_heir_transmutation_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_transmutation_level_2_minimum
+		OR = { has_heir_flag = transmutation_2 has_heir_flag = transmutation_3 }
+	}
+}
+is_heir_transmutation_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_transmutation_level_2
+		has_heir_flag = transmutation_2
+	}
+}
+is_heir_transmutation_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_heir_transmutation_level_3
+		has_heir_flag = transmutation_3
+	}
+}
+
+### CONSORT TRIGGERS ###
+
+is_consort_abjuration_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_abjuration_level_0
+		NOT = { has_consort_flag = abjuration_1 has_consort_flag = abjuration_2 has_consort_flag = abjuration_3 }
+	}
+}
+is_consort_abjuration_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_abjuration_level_1_minimum
+		OR = { has_consort_flag = abjuration_1 has_consort_flag = abjuration_2 has_consort_flag = abjuration_3 }
+	}
+}
+is_consort_abjuration_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_abjuration_level_1
+		has_consort_flag = abjuration_1
+	}
+}
+is_consort_abjuration_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_abjuration_level_2_minimum
+		OR = { has_consort_flag = abjuration_2 has_consort_flag = abjuration_3 }
+	}
+}
+is_consort_abjuration_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_abjuration_level_2
+		has_consort_flag = abjuration_2
+	}
+}
+is_consort_abjuration_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_abjuration_level_3
+		has_consort_flag = abjuration_3
+	}
+}
+is_consort_conjuration_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_conjuration_level_0
+		NOT = { has_consort_flag = conjuration_1 has_consort_flag = conjuration_2 has_consort_flag = conjuration_3 }
+	}
+}
+is_consort_conjuration_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_conjuration_level_1_minimum
+		OR = { has_consort_flag = conjuration_1 has_consort_flag = conjuration_2 has_consort_flag = conjuration_3 }
+	}
+}
+is_consort_conjuration_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_conjuration_level_1
+		has_consort_flag = conjuration_1
+	}
+}
+is_consort_conjuration_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_conjuration_level_2_minimum
+		OR = { has_consort_flag = conjuration_2 has_consort_flag = conjuration_3 }
+	}
+}
+is_consort_conjuration_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_conjuration_level_2
+		has_consort_flag = conjuration_2
+	}
+}
+is_consort_conjuration_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_conjuration_level_3
+		has_consort_flag = conjuration_3
+	}
+}
+is_consort_divination_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_divination_level_0
+		NOT = { has_consort_flag = divination_1 has_consort_flag = divination_2 has_consort_flag = divination_3 }
+	}
+}
+is_consort_divination_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_divination_level_1_minimum
+		OR = { has_consort_flag = divination_1 has_consort_flag = divination_2 has_consort_flag = divination_3 }
+	}
+}
+is_consort_divination_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_divination_level_1
+		has_consort_flag = divination_1
+	}
+}
+is_consort_divination_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_divination_level_2_minimum
+		OR = { has_consort_flag = divination_2 has_consort_flag = divination_3 }
+	}
+}
+is_consort_divination_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_divination_level_2
+		has_consort_flag = divination_2
+	}
+}
+is_consort_divination_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_divination_level_3
+		has_consort_flag = divination_3
+	}
+}
+is_consort_enchantment_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_enchantment_level_0
+		NOT = { has_consort_flag = enchantment_1 has_consort_flag = enchantment_2 has_consort_flag = enchantment_3 }
+	}
+}
+is_consort_enchantment_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_enchantment_level_1_minimum
+		OR = { has_consort_flag = enchantment_1 has_consort_flag = enchantment_2 has_consort_flag = enchantment_3 }
+	}
+}
+is_consort_enchantment_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_enchantment_level_1
+		has_consort_flag = enchantment_1
+	}
+}
+is_consort_enchantment_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_enchantment_level_2_minimum
+		OR = { has_consort_flag = enchantment_2 has_consort_flag = enchantment_3 }
+	}
+}
+is_consort_enchantment_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_enchantment_level_2
+		has_consort_flag = enchantment_2
+	}
+}
+is_consort_enchantment_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_enchantment_level_3
+		has_consort_flag = enchantment_3
+	}
+}
+is_consort_evocation_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_evocation_level_0
+		NOT = { has_consort_flag = evocation_1 has_consort_flag = evocation_2 has_consort_flag = evocation_3 }
+	}
+}
+is_consort_evocation_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_evocation_level_1_minimum
+		OR = { has_consort_flag = evocation_1 has_consort_flag = evocation_2 has_consort_flag = evocation_3 }
+	}
+}
+is_consort_evocation_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_evocation_level_1
+		has_consort_flag = evocation_1
+	}
+}
+is_consort_evocation_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_evocation_level_2_minimum
+		OR = { has_consort_flag = evocation_2 has_consort_flag = evocation_3 }
+	}
+}
+is_consort_evocation_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_evocation_level_2
+		has_consort_flag = evocation_2
+	}
+}
+is_consort_evocation_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_evocation_level_3
+		has_consort_flag = evocation_3
+	}
+}
+is_consort_illusion_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_illusion_level_0
+		NOT = { has_consort_flag = illusion_1 has_consort_flag = illusion_2 has_consort_flag = illusion_3 }
+	}
+}
+is_consort_illusion_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_illusion_level_1_minimum
+		OR = { has_consort_flag = illusion_1 has_consort_flag = illusion_2 has_consort_flag = illusion_3 }
+	}
+}
+is_consort_illusion_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_illusion_level_1
+		has_consort_flag = illusion_1
+	}
+}
+is_consort_illusion_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_illusion_level_2_minimum
+		OR = { has_consort_flag = illusion_2 has_consort_flag = illusion_3 }
+	}
+}
+is_consort_illusion_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_illusion_level_2
+		has_consort_flag = illusion_2
+	}
+}
+is_consort_illusion_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_illusion_level_3
+		has_consort_flag = illusion_3
+	}
+}
+is_consort_necromancy_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_necromancy_level_0
+		NOT = { has_consort_flag = necromancy_1 has_consort_flag = necromancy_2 has_consort_flag = necromancy_3 }
+	}
+}
+is_consort_necromancy_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_necromancy_level_1_minimum
+		OR = { has_consort_flag = necromancy_1 has_consort_flag = necromancy_2 has_consort_flag = necromancy_3 }
+	}
+}
+is_consort_necromancy_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_necromancy_level_1
+		has_consort_flag = necromancy_1
+	}
+}
+is_consort_necromancy_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_necromancy_level_2_minimum
+		OR = { has_consort_flag = necromancy_2 has_consort_flag = necromancy_3 }
+	}
+}
+is_consort_necromancy_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_necromancy_level_2
+		has_consort_flag = necromancy_2
+	}
+}
+is_consort_necromancy_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_necromancy_level_3
+		has_consort_flag = necromancy_3
+	}
+}
+is_consort_transmutation_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_transmutation_level_0
+		NOT = { has_consort_flag = transmutation_1 has_consort_flag = transmutation_2 has_consort_flag = transmutation_3 }
+	}
+}
+is_consort_transmutation_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_transmutation_level_1_minimum
+		OR = { has_consort_flag = transmutation_1 has_consort_flag = transmutation_2 has_consort_flag = transmutation_3 }
+	}
+}
+is_consort_transmutation_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_transmutation_level_1
+		has_consort_flag = transmutation_1
+	}
+}
+is_consort_transmutation_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_transmutation_level_2_minimum
+		OR = { has_consort_flag = transmutation_2 has_consort_flag = transmutation_3 }
+	}
+}
+is_consort_transmutation_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_transmutation_level_2
+		has_consort_flag = transmutation_2
+	}
+}
+is_consort_transmutation_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_consort_transmutation_level_3
+		has_consort_flag = transmutation_3
+	}
+}
+
+### ESTATE TRIGGERS ###
+
+is_estate_abjuration_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_abjuration_level_0
+		NOT = { has_country_flag = abjuration_1 has_country_flag = abjuration_2 has_country_flag = abjuration_3 }
+	}
+}
+is_estate_abjuration_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_abjuration_level_1_minimum
+		OR = { has_country_flag = abjuration_1 has_country_flag = abjuration_2 has_country_flag = abjuration_3 }
+	}
+}
+is_estate_abjuration_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_abjuration_level_1
+		has_country_flag = abjuration_1
+	}
+}
+is_estate_abjuration_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_abjuration_level_2_minimum
+		OR = { has_country_flag = abjuration_2 has_country_flag = abjuration_3 }
+	}
+}
+is_estate_abjuration_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_abjuration_level_2
+		has_country_flag = abjuration_2
+	}
+}
+is_estate_abjuration_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_abjuration_level_3
+		has_country_flag = abjuration_3
+	}
+}
+is_estate_conjuration_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_conjuration_level_0
+		NOT = { has_country_flag = conjuration_1 has_country_flag = conjuration_2 has_country_flag = conjuration_3 }
+	}
+}
+is_estate_conjuration_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_conjuration_level_1_minimum
+		OR = { has_country_flag = conjuration_1 has_country_flag = conjuration_2 has_country_flag = conjuration_3 }
+	}
+}
+is_estate_conjuration_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_conjuration_level_1
+		has_country_flag = conjuration_1
+	}
+}
+is_estate_conjuration_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_conjuration_level_2_minimum
+		OR = { has_country_flag = conjuration_2 has_country_flag = conjuration_3 }
+	}
+}
+is_estate_conjuration_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_conjuration_level_2
+		has_country_flag = conjuration_2
+	}
+}
+is_estate_conjuration_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_conjuration_level_3
+		has_country_flag = conjuration_3
+	}
+}
+is_estate_divination_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_divination_level_0
+		NOT = { has_country_flag = divination_1 has_country_flag = divination_2 has_country_flag = divination_3 }
+	}
+}
+is_estate_divination_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_divination_level_1_minimum
+		OR = { has_country_flag = divination_1 has_country_flag = divination_2 has_country_flag = divination_3 }
+	}
+}
+is_estate_divination_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_divination_level_1
+		has_country_flag = divination_1
+	}
+}
+is_estate_divination_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_divination_level_2_minimum
+		OR = { has_country_flag = divination_2 has_country_flag = divination_3 }
+	}
+}
+is_estate_divination_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_divination_level_2
+		has_country_flag = divination_2
+	}
+}
+is_estate_divination_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_divination_level_3
+		has_country_flag = divination_3
+	}
+}
+is_estate_enchantment_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_enchantment_level_0
+		NOT = { has_country_flag = enchantment_1 has_country_flag = enchantment_2 has_country_flag = enchantment_3 }
+	}
+}
+is_estate_enchantment_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_enchantment_level_1_minimum
+		OR = { has_country_flag = enchantment_1 has_country_flag = enchantment_2 has_country_flag = enchantment_3 }
+	}
+}
+is_estate_enchantment_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_enchantment_level_1
+		has_country_flag = enchantment_1
+	}
+}
+is_estate_enchantment_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_enchantment_level_2_minimum
+		OR = { has_country_flag = enchantment_2 has_country_flag = enchantment_3 }
+	}
+}
+is_estate_enchantment_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_enchantment_level_2
+		has_country_flag = enchantment_2
+	}
+}
+is_estate_enchantment_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_enchantment_level_3
+		has_country_flag = enchantment_3
+	}
+}
+is_estate_evocation_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_evocation_level_0
+		NOT = { has_country_flag = evocation_1 has_country_flag = evocation_2 has_country_flag = evocation_3 }
+	}
+}
+is_estate_evocation_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_evocation_level_1_minimum
+		OR = { has_country_flag = evocation_1 has_country_flag = evocation_2 has_country_flag = evocation_3 }
+	}
+}
+is_estate_evocation_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_evocation_level_1
+		has_country_flag = evocation_1
+	}
+}
+is_estate_evocation_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_evocation_level_2_minimum
+		OR = { has_country_flag = evocation_2 has_country_flag = evocation_3 }
+	}
+}
+is_estate_evocation_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_evocation_level_2
+		has_country_flag = evocation_2
+	}
+}
+is_estate_evocation_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_evocation_level_3
+		has_country_flag = evocation_3
+	}
+}
+is_estate_illusion_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_illusion_level_0
+		NOT = { has_country_flag = illusion_1 has_country_flag = illusion_2 has_country_flag = illusion_3 }
+	}
+}
+is_estate_illusion_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_illusion_level_1_minimum
+		OR = { has_country_flag = illusion_1 has_country_flag = illusion_2 has_country_flag = illusion_3 }
+	}
+}
+is_estate_illusion_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_illusion_level_1
+		has_country_flag = illusion_1
+	}
+}
+is_estate_illusion_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_illusion_level_2_minimum
+		OR = { has_country_flag = illusion_2 has_country_flag = illusion_3 }
+	}
+}
+is_estate_illusion_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_illusion_level_2
+		has_country_flag = illusion_2
+	}
+}
+is_estate_illusion_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_illusion_level_3
+		has_country_flag = illusion_3
+	}
+}
+is_estate_necromancy_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_necromancy_level_0
+		NOT = { has_country_flag = necromancy_1 has_country_flag = necromancy_2 has_country_flag = necromancy_3 }
+	}
+}
+is_estate_necromancy_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_necromancy_level_1_minimum
+		OR = { has_country_flag = necromancy_1 has_country_flag = necromancy_2 has_country_flag = necromancy_3 }
+	}
+}
+is_estate_necromancy_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_necromancy_level_1
+		has_country_flag = necromancy_1
+	}
+}
+is_estate_necromancy_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_necromancy_level_2_minimum
+		OR = { has_country_flag = necromancy_2 has_country_flag = necromancy_3 }
+	}
+}
+is_estate_necromancy_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_necromancy_level_2
+		has_country_flag = necromancy_2
+	}
+}
+is_estate_necromancy_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_necromancy_level_3
+		has_country_flag = necromancy_3
+	}
+}
+is_estate_transmutation_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_transmutation_level_0
+		NOT = { has_country_flag = transmutation_1 has_country_flag = transmutation_2 has_country_flag = transmutation_3 }
+	}
+}
+is_estate_transmutation_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_transmutation_level_1_minimum
+		OR = { has_country_flag = transmutation_1 has_country_flag = transmutation_2 has_country_flag = transmutation_3 }
+	}
+}
+is_estate_transmutation_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_transmutation_level_1
+		has_country_flag = transmutation_1
+	}
+}
+is_estate_transmutation_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_transmutation_level_2_minimum
+		OR = { has_country_flag = transmutation_2 has_country_flag = transmutation_3 }
+	}
+}
+is_estate_transmutation_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_transmutation_level_2
+		has_country_flag = transmutation_2
+	}
+}
+is_estate_transmutation_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_transmutation_level_3
+		has_country_flag = transmutation_3
+	}
+}
+
+is_estate_any_school_level_1_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_any_school_level_1_minimum
+		OR = {
+			is_estate_abjuration_level_1_minimum = yes
+			is_estate_conjuration_level_1_minimum = yes
+			is_estate_divination_level_1_minimum = yes
+			is_estate_enchantment_level_1_minimum = yes
+			is_estate_evocation_level_1_minimum = yes
+			is_estate_illusion_level_1_minimum = yes
+			is_estate_necromancy_level_1_minimum = yes
+			is_estate_transmutation_level_1_minimum = yes
+		}
+	}
+}
+is_estate_any_school_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_any_school_level_1
+		OR = {
+			is_estate_abjuration_level_1 = yes
+			is_estate_conjuration_level_1 = yes
+			is_estate_divination_level_1 = yes
+			is_estate_enchantment_level_1 = yes
+			is_estate_evocation_level_1 = yes
+			is_estate_illusion_level_1 = yes
+			is_estate_necromancy_level_1 = yes
+			is_estate_transmutation_level_1 = yes
+		}
+	}
+}
+is_estate_any_school_level_2_minimum = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_any_school_level_2_minimum
+		OR = {
+			is_estate_abjuration_level_2_minimum = yes
+			is_estate_conjuration_level_2_minimum = yes
+			is_estate_divination_level_2_minimum = yes
+			is_estate_enchantment_level_2_minimum = yes
+			is_estate_evocation_level_2_minimum = yes
+			is_estate_illusion_level_2_minimum = yes
+			is_estate_necromancy_level_2_minimum = yes
+			is_estate_transmutation_level_2_minimum = yes
+		}
+	}
+}
+is_estate_any_school_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_any_school_level_2
+		OR = {
+			is_estate_abjuration_level_2 = yes
+			is_estate_conjuration_level_2 = yes
+			is_estate_divination_level_2 = yes
+			is_estate_enchantment_level_2 = yes
+			is_estate_evocation_level_2 = yes
+			is_estate_illusion_level_2 = yes
+			is_estate_necromancy_level_2 = yes
+			is_estate_transmutation_level_2 = yes
+		}
+	}
+}
+is_estate_any_school_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_estate_any_school_level_3
+		OR = {
+			is_estate_abjuration_level_3 = yes
+			is_estate_conjuration_level_3 = yes
+			is_estate_divination_level_3 = yes
+			is_estate_enchantment_level_3 = yes
+			is_estate_evocation_level_3 = yes
+			is_estate_illusion_level_3 = yes
+			is_estate_necromancy_level_3 = yes
+			is_estate_transmutation_level_3 = yes
+		}
+	}
+}
+
+is_estate_num_school_level_1 = {
+	calc_true_if = {
+		amount = $amount$
+		desc = is_estate_num_school_level_1_tt
+		is_estate_abjuration_level_1 = yes
+		is_estate_conjuration_level_1 = yes
+		is_estate_divination_level_1 = yes
+		is_estate_enchantment_level_1 = yes
+		is_estate_evocation_level_1 = yes
+		is_estate_illusion_level_1 = yes
+		is_estate_necromancy_level_1 = yes
+		is_estate_transmutation_level_1 = yes
+	}
+}
+
+is_estate_num_school_level_2 = {
+	calc_true_if = {
+		amount = $amount$
+		desc = is_estate_num_school_level_2_tt
+		is_estate_abjuration_level_2 = yes
+		is_estate_conjuration_level_2 = yes
+		is_estate_divination_level_2 = yes
+		is_estate_enchantment_level_2 = yes
+		is_estate_evocation_level_2 = yes
+		is_estate_illusion_level_2 = yes
+		is_estate_necromancy_level_2 = yes
+		is_estate_transmutation_level_2 = yes
+	}
+}
+
+is_estate_num_school_level_3 = {
+	calc_true_if = {
+		amount = $amount$
+		desc = is_estate_num_school_level_3_tt
+		is_estate_abjuration_level_3 = yes
+		is_estate_conjuration_level_3 = yes
+		is_estate_divination_level_3 = yes
+		is_estate_enchantment_level_3 = yes
+		is_estate_evocation_level_3 = yes
+		is_estate_illusion_level_3 = yes
+		is_estate_necromancy_level_3 = yes
+		is_estate_transmutation_level_3 = yes
+	}
+}
+
+is_overall_num_school_level_1 = {
+	calc_true_if = {
+		amount = $amount$
+		desc = is_overall_num_school_level_1_tt
+		is_overall_abjuration_level_1 = yes
+		is_overall_conjuration_level_1 = yes
+		is_overall_divination_level_1 = yes
+		is_overall_enchantment_level_1 = yes
+		is_overall_evocation_level_1 = yes
+		is_overall_illusion_level_1 = yes
+		is_overall_necromancy_level_1 = yes
+		is_overall_transmutation_level_1 = yes
+	}
+}
+
+is_overall_num_school_level_2 = {
+	calc_true_if = {
+		amount = $amount$
+		desc = is_overall_num_school_level_2_tt
+		is_overall_abjuration_level_2 = yes
+		is_overall_conjuration_level_2 = yes
+		is_overall_divination_level_2 = yes
+		is_overall_enchantment_level_2 = yes
+		is_overall_evocation_level_2 = yes
+		is_overall_illusion_level_2 = yes
+		is_overall_necromancy_level_2 = yes
+		is_overall_transmutation_level_2 = yes
+	}
+}
+
+is_overall_num_school_level_3 = {
+	calc_true_if = {
+		amount = $amount$
+		desc = is_overall_num_school_level_3_tt
+		is_overall_transmutation_level_3 = yes
+		is_overall_evocation_level_3 = yes
+		is_overall_abjuration_level_3 = yes
+		is_overall_divination_level_3 = yes
+		is_overall_conjuration_level_3 = yes
+		is_overall_necromancy_level_3 = yes
+		is_overall_enchantment_level_3 = yes
+		is_overall_illusion_level_3 = yes
+	}
+}
+
+#####################
+### POWERFUL MAGE ###
+#####################
+
+ruler_is_powerful_mage = {
+	custom_trigger_tooltip = {
+		tooltip = ruler_is_powerful_mage
 		OR = {
 			ruler_has_personality = mage_personality
 			ruler_has_personality = ancestor_mage_personality
 		}
 	}
 }
-heir_has_mage_personality = {
+ruler_is_not_powerful_mage = {
 	custom_trigger_tooltip = {
-		tooltip = heir_has_mage_personality
+		tooltip = ruler_is_not_powerful_mage
+		NOT = {
+			ruler_has_personality = mage_personality
+			ruler_has_personality = ancestor_mage_personality
+		}
+	}
+}
+
+heir_is_powerful_mage = {
+	custom_trigger_tooltip = {
+		tooltip = heir_is_powerful_mage
 		OR = {
 			heir_has_personality = mage_personality
 			heir_has_personality = ancestor_mage_personality
+			has_heir_flag = is_powerful_mage #For under-15s
 		}
 	}
 }
-consort_has_mage_personality = {
+heir_is_not_powerful_mage = {
 	custom_trigger_tooltip = {
-		tooltip = consort_has_mage_personality
+		tooltip = heir_is_not_powerful_mage
+		NOT = {
+			heir_has_personality = mage_personality
+			heir_has_personality = ancestor_mage_personality
+			has_heir_flag = is_powerful_mage #For under-15s
+		}
+	}
+}
+consort_is_powerful_mage = {
+	custom_trigger_tooltip = {
+		tooltip = consort_is_powerful_mage
 		OR = {
 			consort_has_personality = mage_personality
 			consort_has_personality = ancestor_mage_personality
+			has_consort_flag = is_powerful_mage #So they can have another trait
 		}
 	}
 }
+consort_is_not_powerful_mage = {
+	custom_trigger_tooltip = {
+		tooltip = consort_is_not_powerful_mage
+		NOT = {
+			consort_has_personality = mage_personality
+			consort_has_personality = ancestor_mage_personality
+			has_consort_flag = is_powerful_mage #So they can have another trait
+		}
+	}
+}
+
+slow_study_type = { #type = ruler/heir/consort/country (in case it somehow gets passed into the same scripted trigger
+	OR = {
+		is_long_lived_$type$ = yes
+		$type$_is_immortal = yes
+	}
+}
+slow_study_ruler = {
+	OR = {
+		is_long_lived_ruler = yes
+		ruler_is_immortal = yes
+	}
+	# Varina exemption from a MT reward
+	NOT = {
+		AND = {
+			has_country_flag = B54_cflag_varina_slow_study_exemption
+			OR = {
+				has_ruler_flag = esthil_varina
+				has_country_flag = esthil_varina_lich
+			}
+			NOT = { ruler_age = 100 }
+		}
+	}
+}
+slow_study_heir = {
+	OR = {
+		is_long_lived_heir = yes
+		heir_is_immortal = yes
+	}
+}
+slow_study_consort = {
+	OR = {
+		is_long_lived_consort = yes
+		consort_is_immortal = yes
+	}
+}
+slow_study_country = { }
+
+is_ruler_any_school_level_3 = { #Made for Elikhand but generally usable. The tooltip is with Elikhand's loc if somebody wants to move it.
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_any_school_level_3
+		OR = {
+			is_ruler_abjuration_level_3 = yes
+			is_ruler_conjuration_level_3 = yes
+			is_ruler_divination_level_3 = yes
+			is_ruler_enchantment_level_3 = yes
+			is_ruler_evocation_level_3 = yes
+			is_ruler_illusion_level_3 = yes
+			is_ruler_necromancy_level_3 = yes
+			is_ruler_transmutation_level_3 = yes
+		}
+	}
+}
+
+is_ruler_num_school_level_3 = {
+	calc_true_if = {
+		amount = $amount$
+		desc = is_ruler_num_school_level_3
+		is_ruler_abjuration_level_3 = yes
+		is_ruler_conjuration_level_3 = yes
+		is_ruler_divination_level_3 = yes
+		is_ruler_enchantment_level_3 = yes
+		is_ruler_evocation_level_3 = yes
+		is_ruler_illusion_level_3 = yes
+		is_ruler_necromancy_level_3 = yes
+		is_ruler_transmutation_level_3 = yes
+	}
+}
+
+is_ruler_all_schools_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = is_ruler_all_schools_level_3
+		is_ruler_abjuration_level_3 = yes
+		is_ruler_conjuration_level_3 = yes
+		is_ruler_divination_level_3 = yes
+		is_ruler_enchantment_level_3 = yes
+		is_ruler_evocation_level_3 = yes
+		is_ruler_illusion_level_3 = yes
+		is_ruler_necromancy_level_3 = yes
+		is_ruler_transmutation_level_3 = yes
+	}
+}
+
+type_has_amount_spell_levels = { check_variable = { $type$_spell_schools = $amount$ } }
+ruler_has_amount_spell_levels = { type_has_amount_spell_levels = { type = ruler amount = $amount$ } }
+heir_has_amount_spell_levels = { type_has_amount_spell_levels = { type = heir amount = $amount$ } }
+estate_has_amount_spell_levels = { type_has_amount_spell_levels = { type = country amount = $amount$ } }
+
+######################
+### MAGICAL INFAMY ###
+######################
+
+ruler_is_witch_king = {
+	custom_trigger_tooltip = {
+		tooltip = ruler_is_witch_king
+		has_country_flag = ruled_by_witch_king
+	}
+}
+
+ruler_is_not_witch_king = {
+	custom_trigger_tooltip = {
+		tooltip = ruler_is_not_witch_king
+		NOT = { has_country_flag = ruled_by_witch_king }
+	}
+}
+
+type_has_infamy_witch_king = { #16+ witch-king points = witch-king
+	custom_trigger_tooltip = {
+		tooltip = $type$_infamy_witch_king
+		check_variable = { $type$_witch_king_points = 16 }
+	}
+}
+type_has_infamy_denounced = { #12-15 witch-king points = denounced
+	custom_trigger_tooltip = {
+		tooltip = $type$_infamy_denounced
+		NOT = { check_variable = { $type$_witch_king_points = 16 } }
+		check_variable = { $type$_witch_king_points = 12 }
+	}
+}
+type_has_infamy_suspicious = { #8-11 witch-king points = suspicious
+	custom_trigger_tooltip = {
+		tooltip = $type$_infamy_suspicious
+		NOT = { check_variable = { $type$_witch_king_points = 12 } }
+		check_variable = { $type$_witch_king_points = 8 }
+	}
+}
+type_has_infamy_respected = { #4-7 witch-king points = respected
+	custom_trigger_tooltip = {
+		tooltip = $type$_infamy_respected
+		NOT = { check_variable = { $type$_witch_king_points = 8 } }
+		check_variable = { $type$_witch_king_points = 4 }
+	}
+}
+type_has_infamy_paragon = { #0-3 witch-king points = paragon
+	custom_trigger_tooltip = {
+		tooltip = $type$_infamy_paragon
+		NOT = { check_variable = { $type$_witch_king_points = 4 } }
+	}
+}
+
+### Not all the above are pseudonymized because 90% of the time, not including the other end of it is a mistake
+### So we don't let you make that mistake
+
+ruler_has_infamy_witch_king = { type_has_infamy_witch_king = { type = ruler } } #pseudonyms
+ruler_has_infamy_paragon = { type_has_infamy_paragon = { type = ruler } }
+heir_has_infamy_witch_king = { type_has_infamy_witch_king = { type = heir } } #pseudonyms
+heir_has_infamy_paragon = { type_has_infamy_paragon = { type = heir } }
+consort_has_infamy_witch_king = { type_has_infamy_witch_king = { type = consort } } #pseudonyms
+consort_has_infamy_paragon = { type_has_infamy_paragon = { type = consort } }
+estate_has_infamy_witch_king = { type_has_infamy_witch_king = { type = country } }
+estate_has_infamy_paragon = { type_has_infamy_paragon = { type = country } }
+
+type_has_infamy_denounced_or_worse = {
+	custom_trigger_tooltip = {
+		tooltip = $type$_infamy_denounced_or_worse
+		check_variable = { $type$_witch_king_points = 12 }
+	}
+}
+type_has_infamy_suspicious_or_worse = {
+	custom_trigger_tooltip = {
+		tooltip = $type$_infamy_suspicious_or_worse
+		check_variable = { $type$_witch_king_points = 8 }
+	}
+}
+
+ruler_has_infamy_denounced_or_worse = { type_has_infamy_denounced_or_worse = { type = ruler } }
+ruler_has_infamy_suspicious_or_worse = { type_has_infamy_suspicious_or_worse = { type = ruler } }
+heir_has_infamy_denounced_or_worse = { type_has_infamy_denounced_or_worse = { type = heir } }
+heir_has_infamy_suspicious_or_worse = { type_has_infamy_suspicious_or_worse = { type = heir } }
+consort_has_infamy_denounced_or_worse = { type_has_infamy_denounced_or_worse = { type = consort } }
+consort_has_infamy_suspicious_or_worse = { type_has_infamy_suspicious_or_worse = { type = consort } }
+consort_has_infamy_respected_or_worse = { type_has_infamy_respected_or_worse = { type = consort } }
+estate_has_infamy_denounced_or_worse = { type_has_infamy_denounced_or_worse = { type = country } }
+estate_has_infamy_suspicious_or_worse = { type_has_infamy_suspicious_or_worse = { type = country } }
+
+type_has_infamy_suspicious_or_better = {
+	custom_trigger_tooltip = {
+		tooltip = $type$_infamy_suspicious_or_better
+		NOT = { check_variable = { $type$_witch_king_points = 12 } }
+	}
+}
+type_has_infamy_respected_or_better = {
+	custom_trigger_tooltip = {
+		tooltip = $type$_infamy_respected_or_better
+		NOT = { check_variable = { $type$_witch_king_points = 8 } }
+	}
+}
+
+ruler_has_infamy_suspicious_or_better = { type_has_infamy_suspicious_or_better = { type = ruler } }
+ruler_has_infamy_respected_or_better = { type_has_infamy_respected_or_better = { type = ruler } }
+heir_has_infamy_suspicious_or_better = { type_has_infamy_suspicious_or_better = { type = heir } }
+heir_has_infamy_respected_or_better = { type_has_infamy_respected_or_better = { type = heir } }
+consort_has_infamy_suspicious_or_better = { type_has_infamy_suspicious_or_better = { type = consort } }
+consort_has_infamy_respected_or_better = { type_has_infamy_respected_or_better = { type = consort } }
+estate_has_infamy_suspicious_or_better = { type_has_infamy_suspicious_or_better = { type = country } }
+estate_has_infamy_respected_or_better = { type_has_infamy_respected_or_better = { type = country } }
+
+####################
+### SPELLCASTING ###
+####################
+
+has_mana = { #faster to write
+	check_variable = { which = currentMana value = $amount$ }
+}
+
+#Keep in sync with 'has_mana_to_cast_magical_tradition_spell'
+has_mana_to_cast_spell = {
+
+	# Ok so basically, we wanted to make an if-else chain checking for discounts, but that didn't work.
+	# Country modifier limit checks don't work when inside the else part of an else-if construction in a scripted trigger
+	# In other words, having the country modifier check does the same as not having it.
+	# They also don't function while inside an OR/NOT.
+	# However, we discovered that the OR/NOT checks do function if we put them inside of another scripted trigger
+	# This is because of trigger validation - each scripted trigger is validated separately and recursively validates all triggers inside.
+	# Therefore we can't have any else_if = { limit = {} } constructions, but we can have OR statements at least.
+
+	# Alternatively, we could've put everything into a big OR = { AND = { OR = {} } } custom trigger tooltip
+	# And then that tooltip would have linked to has_mana_to_cast_$id$_spell
+	# And has_mana_to_cast_$id$_spell would look like �MCurrent Mana�! (�Y[Root.currentMana.GetValue]�!) is at least �Y[GetGuidanceDiscount]�!
+	# The problem, of course, being that we would have to create custom loca for every single spell
+	# It would be slightly more performant but also a lot more work, and either way the AI doesn't check mana costs
+	# So we went with this solution because it was slightly easier
+
+	if = {
+		limit = { has_mana_discount = { school = $school$ level = $level$ id = $id$ discount = free } }
+		custom_trigger_tooltip = {
+			tooltip = spell_is_free_tt
+			always = yes
+		}
+	}
+	
+	if = {
+		limit = { mana_proxy_half = { school = $school$ level = $level$ id = $id$ } } #Proxied because scripted triggers don't work in scripted trigger if limit constructions with NOT = {} around them
+		custom_trigger_tooltip = {
+			tooltip = spell_is_half_tt
+			always = yes
+		}
+		has_half_mana_to_cast_level_$level$_spell = yes
+	}
+
+	if = {
+		limit = { mana_proxy_three_quarter = { school = $school$ level = $level$ id = $id$ } }
+		custom_trigger_tooltip = {
+			tooltip = spell_is_three_quarter_tt
+			always = yes
+		}
+		has_three_quarter_mana_to_cast_level_$level$_spell = yes
+	}
+
+	if = {
+		limit = { mana_proxy_full = { school = $school$ level = $level$ id = $id$ } }
+		has_mana_to_cast_level_$level$_spell = yes
+	}
+}
+has_mana_discount = { #this is important to help us bypass the fact that country mods don't work inside OR checks in if limits
+	OR = {
+		has_country_modifier = all_spell_$discount$
+		has_country_flag = all_spell_$discount$_next_cast
+		has_ruler_flag = all_spell_$discount$
+
+		has_country_modifier = $school$_$level$_$id$_spell_$discount$
+		has_country_flag = $school$_$level$_$id$_spell_$discount$_next_cast
+		has_ruler_flag = $school$_$level$_$id$_spell_$discount$
+
+		has_country_modifier = $school$_spell_$discount$
+		has_country_flag = $school$_spell_$discount$_next_cast
+		has_ruler_flag = $school$_spell_$discount$
+	}
+}
+mana_proxy_half = {
+	has_mana_discount = { school = $school$ level = $level$ id = $id$ discount = half }
+	NOT = { has_mana_discount = { school = $school$ level = $level$ id = $id$ discount = free } }
+}
+mana_proxy_three_quarter = {
+	has_mana_discount = { school = $school$ level = $level$ id = $id$ discount = three_quarter }
+	NOT = { has_mana_discount = { school = $school$ level = $level$ id = $id$ discount = free } }
+	NOT = { has_mana_discount = { school = $school$ level = $level$ id = $id$ discount = half } }
+}
+mana_proxy_full = {
+	NOT = { has_mana_discount = { school = $school$ level = $level$ id = $id$ discount = free } }
+	NOT = { has_mana_discount = { school = $school$ level = $level$ id = $id$ discount = half } }
+	NOT = { has_mana_discount = { school = $school$ level = $level$ id = $id$ discount = three_quarter } }
+}
+has_mana_to_cast_magical_tradition_spell = { ### Derivative of 'has_mana_to_cast_spell' for magical traditions. Keep in sync.
+	if = {
+		limit = { has_magical_tradition_mana_discount = { school = $school$ discount = free [[has_spell_specific_discounts] level = $level$ id = $id$ has_spell_specific_discounts = yes ] } }
+		custom_trigger_tooltip = {
+			tooltip = spell_is_free_tt
+			always = yes
+		}
+	}
+	
+	if = {
+		limit = { magical_tradition_mana_proxy_half = { school = $school$ [[has_spell_specific_discounts] level = $level$ id = $id$ has_spell_specific_discounts = yes ] } } #Proxied because scripted triggers don't work in scripted trigger if limit constructions with NOT = {} around them
+		custom_trigger_tooltip = {
+			tooltip = spell_is_half_tt
+			always = yes
+		}
+		has_half_mana_to_cast_level_$level$_spell = yes
+	}
+
+	if = {
+		limit = { magical_tradition_mana_proxy_three_quarter = { school = $school$ [[has_spell_specific_discounts] level = $level$ id = $id$ has_spell_specific_discounts = yes ] } }
+		custom_trigger_tooltip = {
+			tooltip = spell_is_three_quarter_tt
+			always = yes
+		}
+		has_three_quarter_mana_to_cast_level_$level$_spell = yes
+	}
+
+	if = {
+		limit = { magical_tradition_mana_proxy_full = { school = $school$ [[has_spell_specific_discounts] level = $level$ id = $id$ has_spell_specific_discounts = yes ] } }
+		has_mana_to_cast_level_$level$_spell = yes
+	}
+}
+has_magical_tradition_mana_discount = { #this is important to help us bypass the fact that country mods don't work inside else limits
+	OR = {
+		has_country_modifier = all_spell_$discount$
+		has_country_flag = all_spell_$discount$_next_cast
+		has_ruler_flag = all_spell_$discount$
+
+		[[has_spell_specific_discounts]
+			has_country_modifier = $school$_$level$_$id$_spell_$discount$
+			has_country_flag = $school$_$level$_$id$_spell_$discount$_next_cast
+			has_ruler_flag = $school$_$level$_$id$_spell_$discount$
+		]
+
+		has_country_modifier = $school$_spell_$discount$
+		has_country_flag = $school$_spell_$discount$_next_cast
+		has_ruler_flag = $school$_spell_$discount$
+	}
+}
+magical_tradition_mana_proxy_half = {
+	has_magical_tradition_mana_discount = { school = $school$ discount = half [[has_spell_specific_discounts] level = $level$ id = $id$ has_spell_specific_discounts = yes ] }
+	NOT = { has_magical_tradition_mana_discount = { school = $school$ discount = free [[has_spell_specific_discounts] level = $level$ id = $id$ has_spell_specific_discounts = yes ] } }
+}
+magical_tradition_mana_proxy_three_quarter = {
+	has_magical_tradition_mana_discount = { school = $school$ discount = three_quarter [[has_spell_specific_discounts] level = $level$ id = $id$ has_spell_specific_discounts = yes ] }
+	NOT = { has_magical_tradition_mana_discount = { school = $school$ discount = free [[has_spell_specific_discounts] level = $level$ id = $id$ has_spell_specific_discounts = yes ] } }
+	NOT = { has_magical_tradition_mana_discount = { school = $school$ discount = half [[has_spell_specific_discounts] level = $level$ id = $id$ has_spell_specific_discounts = yes ] } }
+}
+magical_tradition_mana_proxy_full = {
+	NOT = { has_magical_tradition_mana_discount = { school = $school$ discount = free [[has_spell_specific_discounts] level = $level$ id = $id$ has_spell_specific_discounts = yes ] } }
+	NOT = { has_magical_tradition_mana_discount = { school = $school$ discount = half [[has_spell_specific_discounts] level = $level$ id = $id$ has_spell_specific_discounts = yes ] } }
+	NOT = { has_magical_tradition_mana_discount = { school = $school$ discount = three_quarter [[has_spell_specific_discounts] level = $level$ id = $id$ has_spell_specific_discounts = yes ] } }
+}
+
+has_half_mana_to_cast_level_0_spell = { has_mana = { amount = 12.5 } }
+has_three_quarter_mana_to_cast_level_0_spell = { has_mana = { amount = 18.75 } }
+has_mana_to_cast_level_0_spell = { has_mana = { amount = 25 } }
+has_half_mana_to_cast_level_1_spell = { has_mana = { amount = 25 } }
+has_three_quarter_mana_to_cast_level_1_spell = { has_mana = { amount = 37.5 } }
+has_mana_to_cast_level_1_spell = { has_mana = { amount = 50 } }
+has_half_mana_to_cast_level_2_spell = { has_mana = { amount = 50 } }
+has_three_quarter_mana_to_cast_level_2_spell = { has_mana = { amount = 75 } }
+has_mana_to_cast_level_2_spell = { has_mana = { amount = 100 } }
+has_half_mana_to_cast_level_3_spell = { has_mana = { amount = 100 } }
+has_three_quarter_mana_to_cast_level_3_spell = { has_mana = { amount = 150 } }
+has_mana_to_cast_level_3_spell = { has_mana = { amount = 200 } }
+
+### Unlike effects, not every spell has a trigger associated with it
+
+# use like
+# siege_magic_trigger = { [[menu] menu = yes defense_trigger = "abjuration_1_ward_local_trigger = yes" ] }
+# then you can choose to call the menu part or not, depending
+
+siege_magic_trigger = {
+	[[menu]
+		custom_trigger_tooltip = { #further triggers for tooltips only
+			tooltip = siege_spell_tt
+			ai = yes
+		}
+	]
+	[[offense] has_war_wizard = yes ]
+
+	[[offense_trigger] #offense_trigger and defense_trigger are strictly sub-arguments of menu
+		if = {
+			limit = { ai = yes } #AI use a more performant trigger that would error for players
+			any_army = {
+				location = {
+					siege_interface_offensive_trigger = yes
+					$offense_trigger$
+				}
+			}
+		}
+		else = {
+			any_province = {
+				siege_interface_offensive_trigger = yes
+				$offense_trigger$
+			}
+		}
+	]
+	[[defense_trigger]
+		any_owned_province = {
+			siege_interface_defensive_trigger = yes
+			$defense_trigger$
+		}
+	]
+}
+siege_interface_offensive_trigger = { #This is the trigger for offensive siege spells in the interface
+	fort_level = 1
+	sieged_by = FROM
+	hidden_trigger = { unit_in_battle = no } #Reported cases of simultaneous sieges and battles
+	unit_has_leader = yes
+	if = { #AI shouldn't destroy their own side's forts
+		limit = { FROM = { ai = yes } }
+		owner = { war_with = FROM }
+	}
+	province_not_immune_to_siege_magic = yes
+}
+province_not_immune_to_siege_magic = { #Cannot use FROM and ROOT here
+	if = {
+		limit = { magical_fortress_proxy_trigger = yes }
+		custom_trigger_tooltip = {
+			tooltip = cannot_siege_magical_fortress
+			always = no
+		}
+	}
+	if = {
+		limit = { porcelain_shields_proxy_trigger = yes }
+		custom_trigger_tooltip = {
+			tooltip = cannot_siege_porcelain_ramparts
+			NOT = { has_building = ramparts }
+		}
+	}
+}
+magical_fortress_proxy_trigger = { #If-limits in scripted triggers don't validate their triggers two layers deep. See has_mana_to_cast_spell for more info
+	owner = { at_least_magic_project_level = { project = magical_fortress level = 3 } }
+	province_has_magical_ward = yes
+}
+porcelain_shields_proxy_trigger = { owner = { has_estate_privilege = estate_artificers_porcelain_shields } } #If-limits in scripted triggers don't validate their triggers two layers deep. See has_mana_to_cast_spell for more info
+
+siege_interface_defensive_trigger = { #This is the trigger for defensive siege spells in the interface
+	fort_level = 1
+	owned_by = FROM
+	controlled_by = FROM
+	hidden_trigger = { unit_in_battle = no } #Reported cases of simultaneous sieges and battles
+	has_siege = yes
+}
+
+has_war_wizard = {
+	custom_trigger_tooltip = {
+		tooltip = has_war_wizard
+		has_leader_with = { shock = 7 }
+	}
+}
+
+level_requirement_lowered = { #use for tooltip when a spell has a level req lowered
+	custom_trigger_tooltip = {
+		tooltip = $cause$_lowered_req
+		always = yes
+	}
+}
+
+war_magic_trigger = { #universal trigger for all war magic spells
+	if = {
+		limit = { has_country_modifier = magical_infrastructure_no_war_magic }
+		NOT = { has_country_modifier = magical_infrastructure_no_war_magic }
+	}
+}
+
+has_cast_war_magic = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_war_magic
+		OR = { #If more spell schools get war magic, add it on
+			has_cast_abjuration_war_magic = yes
+			has_cast_manipulated_fortune = yes
+			has_cast_heartstring_thoughtweave = yes
+			has_cast_evocation_war_magic = yes
+
+			#Artificer
+			has_country_modifier = mechanim_sonic_amplifiers_modifier_country
+
+			#Verkal Ozovar
+			has_country_modifier = Y63_minor_rune_argzana
+			has_country_modifier = Y63_minor_rune_jolkin_kanzad
+
+			#Azjakuma
+			has_country_modifier = estate_shinukhorchi_korashi_talisman_mod
+
+			#Black Herd
+			has_country_modifier = I55_markhentakruan_1_mod
+			has_country_modifier = I55_markhentakruan_2_mod
+		}
+	}
+}
+
+has_not_cast_war_magic = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_war_magic
+		NOT = { has_cast_war_magic = yes }
+	}
+}
+
+# checks if at least "count" spells of "school" have been cast
+# also accepts all for an overall count
+# requires prior use of start_count_spells_effect
+# Every base spell is localised, but to track a magical tradition spell you just have to name the variable somewhere
+has_cast_amount_spell = { # school/all, count
+	check_variable = {
+		which = $school$_[[id]$level$_$id$_]spell_count
+		value = $amount$
+	}
+}
+
+has_spent_amount_mana_on_spells = { # school/all, amount. Only accepts school argument, why use this instead of the above if you're checking a particular spell?
+	check_variable = {
+		which = count_$school$_spell_mana
+		value = $amount$
+	}
+}
+
+has_num_active_magic_spells = {
+	calc_true_if = {
+		amount = $amount$
+
+		#Abjuration
+		OR = { has_cast_abjuration_war_magic = yes }
+		OR = { has_cast_protected_journey = yes }
+		OR = { has_cast_ward = yes }
+		OR = { has_cast_field_of_forbiddance = yes }
+
+		#Conjuration
+		OR = { has_cast_summon_familiars = yes }
+		OR = { has_cast_summon_animals = yes }
+		OR = { has_cast_conjure_supplies = yes }
+		OR = { has_cast_summon_elementals = yes }
+		OR = { has_cast_aid_construction = yes }
+		OR = { has_cast_extraplanar_contact = yes }
+		OR = { has_country_modifier = conjuration_1_bulwar_default_3_tracking_mod }
+
+		#Divination
+		OR = { has_cast_deposit_divination = yes }
+		OR = { has_cast_eye_for_talent = yes }
+		OR = { has_cast_scry = yes }
+		OR = { has_cast_manipulated_fortune = yes }
+		OR = { has_cast_foresight = yes }
+
+		#Enchantment
+		OR = { has_cast_heartstring_thoughtweave = yes }
+		OR = { has_cast_enchanting_envoy_embassy = yes }
+		OR = { has_cast_command_animals = yes }
+		OR = { has_cast_firanyas_call = yes }
+		OR = { has_country_modifier = enchantment_3_harpy_mod }
+		OR = { has_country_modifier = enchantment_2_bulwar_default_2_tracking_mod }
+		
+		#Evocation
+		OR = { has_cast_evocation_war_magic = yes }
+		
+		#Illusion
+		OR = { has_cast_invisibility = yes }
+		OR = { has_cast_fear_and_loathing = yes }
+		OR = { has_cast_assimilation_program = yes }
+		OR = { has_cast_shadows_in_the_night = yes }
+		OR = { has_cast_lead_the_crowds = yes }
+		
+		#Necromancy
+		OR = { has_cast_false_life = yes }
+		OR = { has_cast_steal_vitality = yes }
+		OR = { has_cast_contagion = yes }
+		OR = { has_cast_speak_with_dead = yes }
+		OR = { has_cast_chronophage = yes }
+
+		#Transmutation
+		OR = { has_cast_longstrider = yes }
+		OR = { has_cast_plant_growth = yes }
+		OR = { has_cast_reshape_terrain = yes }
+		OR = { has_country_modifier = transmutation_2_harpy_default_3_tracking_mod }
+		OR = { has_country_modifier = transmutation_3_bulwar_default_1_tracking_mod }
+		OR = { has_country_modifier = transmutation_2_bulwar_default_4_tracking_mod }
+	}
+}
+
+##################
+### ABJURATION ###
+##################
+
+abjuration_0_combat_ward_trigger = { # Combat Ward
+	war_magic_trigger = yes
+	[[player] has_mana_to_cast_spell = { school = abjuration level = 0 id = combat_ward } ]
+	has_not_cast_combat_ward = yes
+}
+abjuration_1_ward_trigger = { # Ward
+	is_overall_abjuration_level_1_minimum = yes
+	[[player] 
+		has_mana_to_cast_spell = { school = abjuration level = 1 id = ward }
+	]
+	if = {
+		limit = { has_country_modifier = magical_infrastructure_wards_failing }
+		NOT = { has_country_modifier = magical_infrastructure_wards_failing }
+	}
+
+	siege_magic_trigger = { [[menu] menu = yes defense_trigger = "abjuration_1_ward_local_trigger = yes" ] }
+}
+abjuration_1_ward_local_trigger = { # Protective Ward
+	province_has_no_magical_ward = yes
+}
+abjuration_1_protected_journey_trigger = { # Protected Journey
+	is_overall_abjuration_level_1_minimum = yes
+	[[player] has_mana_to_cast_spell = { school = abjuration level = 1 id = protected_journey } ]
+	has_not_cast_protected_journey = yes
+}
+abjuration_2_mass_ward_trigger = { # Mass Ward
+	is_overall_abjuration_level_2_minimum = yes
+	[[player] has_mana_to_cast_spell = { school = abjuration level = 2 id = mass_ward } ]
+	if = {
+		limit = { has_country_modifier = magical_infrastructure_wards_failing }
+		NOT = { has_country_modifier = magical_infrastructure_wards_failing }
+	}
+	has_not_cast_mass_ward = yes
+}
+abjuration_2_mage_armor_trigger = { # Mage Armour
+	is_overall_abjuration_level_2_minimum = yes
+	war_magic_trigger = yes
+	[[player] has_mana_to_cast_spell = { school = abjuration level = 2 id = mage_armor } ]
+	has_not_cast_mage_armor = yes
+}
+abjuration_3_field_of_forbiddance_trigger = { # Field of Forbiddance
+	if = {
+		limit = {
+			6729 = { #Have Azmera's Wezinmesig
+				owned_by = ROOT
+				has_great_project = { 
+					type = azmeras_wezinmesig
+					tier = 2
+				}
+				can_use_azmeras_wezinmesig = yes
+			}
+		}
+		level_requirement_lowered = { cause = azmeras_wezinmesig }
+		is_overall_abjuration_level_2_minimum = yes
+	}
+	else = { is_overall_abjuration_level_3 = yes }
+	[[player] has_mana_to_cast_spell = { school = abjuration level = 3 id = field_of_forbiddance } ]
+	mage_tower = 1
+	has_not_cast_field_of_forbiddance = yes
+}
+
+has_cast_combat_ward = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_combat_ward
+		has_country_modifier = abjuration_0_combat_ward_mod
+	}
+}
+has_not_cast_combat_ward = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_combat_ward
+		NOT = { has_cast_combat_ward = yes }
+	}
+}
+has_cast_protected_journey = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_protected_journey
+		has_country_modifier = abjuration_1_protected_journey_mod
+	}
+}
+has_not_cast_protected_journey = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_protected_journey
+		NOT = { has_cast_protected_journey = yes }
+	}
+}
+has_cast_mass_ward = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_mass_ward
+		has_country_modifier = abjuration_2_mass_ward_cooldown_mod
+	}
+}
+has_not_cast_mass_ward = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_mass_ward
+		NOT = { has_cast_mass_ward = yes }
+	}
+}
+has_cast_mage_armor = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_mage_armor
+		OR = {
+			has_country_modifier = abjuration_2_mage_armor_mod
+			has_country_modifier = abjuration_2_mage_armor_mod_buffed
+		}
+	}
+}
+has_not_cast_mage_armor = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_mage_armor
+		NOT = { has_cast_mage_armor = yes }
+	}
+}
+has_cast_field_of_forbiddance = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_field_of_forbiddance
+		has_country_modifier = abjuration_3_field_of_forbiddance_cooldown_mod
+	}
+}
+has_not_cast_field_of_forbiddance = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_field_of_forbiddance
+		NOT = { has_cast_field_of_forbiddance = yes }
+	}
+}
+has_cast_abjuration_war_magic = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_abjuration_war_magic
+		OR = {
+			has_cast_combat_ward = yes
+			has_cast_mage_armor = yes
+			has_country_modifier = H14_icewardery_magic
+		}
+	}
+}
+has_not_cast_abjuration_war_magic = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_abjuration_war_magic
+		NOT = { has_cast_abjuration_war_magic = yes }
+	}
+}
+
+has_cast_ward = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_ward
+		any_owned_province = {
+			province_has_magical_ward = yes
+		}
+	}
+}
+has_not_cast_ward = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_ward
+		NOT = { has_cast_ward = yes }
+	}
+}
+province_has_magical_ward = {
+	custom_trigger_tooltip = {
+		tooltip = province_has_magical_ward
+		OR = {
+			has_province_modifier = abjuration_1_ward_mod_0
+			has_province_modifier = abjuration_1_ward_mod_1
+			has_province_modifier = abjuration_1_ward_mod_2
+			has_province_modifier = abjuration_1_ward_mod_3
+			has_province_modifier = Y63_minor_rune_runic_ward_1
+			has_province_modifier = Y63_minor_rune_runic_ward_2
+			has_province_modifier = Y63_minor_rune_runic_ward_3
+		}
+	}
+}
+
+province_has_no_magical_ward = {
+	custom_trigger_tooltip = {
+		tooltip = province_has_no_magical_ward
+		NOT = { province_has_magical_ward = yes }
+	}
+}
+
+# please add any new has_cast_ to the below
+has_cast_any_abjuration_spell = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_any_abjuration_spell_tt
+		OR = {
+			has_cast_abjuration_war_magic = yes
+			has_cast_protected_journey = yes
+			has_cast_ward = yes
+		}
+	}
+}
+
+###################
+### CONJURATION ###
+###################
+
+conjuration_0_summon_familiars_trigger = { # Summon Familiars
+	[[player] has_mana_to_cast_spell = { school = conjuration level = 0 id = summon_familiars } ]
+	type_is_advancing_magic = { type = country }
+	has_not_cast_summon_familiars = yes
+}
+summon_familiars_school_trigger = {
+	OR = {
+		AND = {
+			estate_is_advancing_abjuration = yes
+			is_ruler_abjuration_level_$level$ = yes
+		}
+		AND = {
+			estate_is_advancing_conjuration = yes
+			is_ruler_conjuration_level_$level$ = yes
+		}
+		AND = {
+			estate_is_advancing_divination = yes
+			is_ruler_divination_level_$level$ = yes
+		}
+		AND = {
+			estate_is_advancing_enchantment = yes
+			is_ruler_enchantment_level_$level$ = yes
+		}
+		AND = {
+			estate_is_advancing_evocation = yes
+			is_ruler_evocation_level_$level$ = yes
+		}
+		AND = {
+			estate_is_advancing_illusion = yes
+			is_ruler_illusion_level_$level$ = yes
+		}
+		AND = {
+			estate_is_advancing_necromancy = yes
+			is_ruler_necromancy_level_$level$ = yes
+		}
+		AND = {
+			estate_is_advancing_transmutation = yes
+			is_ruler_transmutation_level_$level$ = yes
+		}
+	}
+}
+conjuration_1_summon_animals_trigger = { # Summon Animals
+	is_overall_conjuration_level_1_minimum = yes
+	[[player] has_mana_to_cast_spell = { school = conjuration level = 1 id = summon_animals } ]
+	has_not_cast_summon_animals = yes
+}
+conjuration_1_conjure_supplies_trigger = { # Conjure Supplies
+	is_overall_conjuration_level_1_minimum = yes
+	[[player] has_mana_to_cast_spell = { school = conjuration level = 1 id = conjure_supplies } ]
+	has_not_cast_conjure_supplies = yes
+}
+conjuration_2_summon_elementals_trigger = { # Summon Elementals
+	is_overall_conjuration_level_2_minimum = yes
+	[[player] has_mana_to_cast_spell = { school = conjuration level = 2 id = summon_elementals } ]
+	has_not_cast_summon_elementals = yes
+}
+conjuration_2_aid_construction_trigger = { # Aid Construction
+	is_overall_conjuration_level_2_minimum = yes
+	[[player] has_mana_to_cast_spell = { school = conjuration level = 2 id = aid_construction } ]
+	has_not_cast_aid_construction = yes
+}
+conjuration_3_extraplanar_contact_trigger = { # Extraplanar Contact
+	if = {
+		limit = {
+			OR = {
+				has_ruler_flag = ancestor_spirit_patron
+				has_ruler_flag = baku_patron
+				has_ruler_flag = unthroned_patron
+				has_ruler_flag = spring_old_patron
+			}
+		}
+		level_requirement_lowered = { cause = patron }
+		is_overall_abjuration_level_2_minimum = yes
+	}
+	else = { is_overall_conjuration_level_3 = yes }
+	[[player] has_mana_to_cast_spell = { school = conjuration level = 3 id = extraplanar_contact } ]
+	is_lesser_in_union = no
+	has_not_cast_extraplanar_contact = yes
+}
+
+has_cast_summon_familiars = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_summon_familiars
+		OR = {
+			has_country_modifier = conjuration_0_summon_familiars_mod
+			has_country_modifier = conjuration_0_summon_familiars_mod_1
+			has_country_modifier = conjuration_0_summon_familiars_mod_2
+			has_country_modifier = conjuration_0_summon_familiars_mod_3
+		}
+	}
+}
+has_not_cast_summon_familiars = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_summon_familiars
+		NOT = { has_cast_summon_familiars = yes }
+	}
+}
+has_cast_summon_animals = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_summon_animals
+		OR = {
+			has_country_modifier = conjuration_1_summon_animals_mod
+			has_country_modifier = conjuration_1_summon_animals_xhazobkult_mod
+			has_country_modifier = conjuration_1_summon_elemental_animals_mod
+			has_country_modifier = conjuration_1_summon_hellhounds_mod_1
+			has_country_modifier = conjuration_1_summon_hellhounds_mod_2
+		}
+	}
+}
+
+has_not_cast_summon_animals = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_summon_animals
+		NOT = { has_cast_summon_animals = yes }
+	}
+}
+
+has_cast_conjure_supplies = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_conjure_supplies
+		has_country_modifier = conjuration_1_conjure_supplies_mod
+	}
+}
+has_not_cast_conjure_supplies = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_conjure_supplies
+		NOT = { has_cast_conjure_supplies = yes }
+	}
+}
+has_cast_summon_elementals = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_summon_elementals
+		OR = {
+			has_country_modifier = conjuration_2_summon_elementals_mod
+			has_country_modifier = conjuration_2_greater_summon_elementals_mod
+			has_country_modifier = conjuration_2_summon_elementals_xhazobkult_mod
+			has_country_modifier = conjuration_2_summon_spiritfire_elementals_mod
+		}
+	}
+}
+has_not_cast_summon_elementals = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_summon_elementals
+		NOT = { has_cast_summon_elementals = yes }
+	}
+}
+has_cast_aid_construction = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_aid_construction
+		OR = {
+			has_country_modifier = conjuration_2_aid_construction_mod
+			has_country_modifier = conjuration_2_aid_construction_mod_buffed
+			has_country_modifier = Y63_minor_rune_gulan_amekh
+			has_country_modifier = Y63_minor_rune_gulan_amekh_subject
+		}
+	}
+}
+has_not_cast_aid_construction = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_aid_construction
+		NOT = { has_cast_aid_construction = yes }
+	}
+}
+has_cast_extraplanar_contact = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_extraplanar_contact
+		has_country_modifier = conjuration_3_extraplanar_contact_estate_mod
+	}
+}
+has_not_cast_extraplanar_contact = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_extraplanar_contact
+		NOT = { has_cast_extraplanar_contact = yes }
+	}
+}
+
+# please add any new has_cast_ to the below
+has_cast_any_conjuration_spell = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_any_conjuration_spell_tt
+		OR = {
+			has_cast_summon_familiars = yes
+			has_cast_summon_animals = yes
+			has_cast_conjure_supplies = yes
+			has_cast_summon_elementals = yes
+			has_cast_aid_construction = yes
+			has_cast_extraplanar_contact = yes
+			has_country_modifier = conjuration_1_bulwar_default_3_tracking_mod
+		}
+	}
+}
+
+has_summoned_conjuration_mercenaries = {
+	custom_trigger_tooltip = {
+		tooltip = has_summoned_conjuration_mercenaries_tt
+		any_hired_mercenary_company = {
+			OR = {
+				template = merc_feral_animals
+				template = merc_elemental_animals
+
+				template = merc_leashed_elementals
+				template = merc_greater_leashed_elementals
+				template = merc_spiritfire_elementals
+
+				template = merc_angels_base
+				template = merc_angels_defense
+				template = merc_angels_defense_2
+				template = merc_angels_offense
+				template = merc_angels_offense_2
+
+				template = merc_eldritch_base
+				template = merc_eldritch_fast
+				template = merc_eldritch_fast_2
+				template = merc_eldritch_mass
+				template = merc_eldritch_mass_2
+
+				template = merc_devils_base
+				template = merc_devils_frontline
+				template = merc_devils_frontline_2
+				template = merc_devils_backline
+				template = merc_devils_backline_2
+			}
+		}
+	}
+}
+has_not_summoned_conjuration_mercenaries = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_summoned_conjuration_mercenaries
+		NOT = { has_summoned_conjuration_mercenaries = yes }
+	}
+}
+
+##################
+### DIVINATION ###
+##################
+
+receiving_mindarayan_buff = {
+	4527 = {
+		owned_by = ROOT
+		has_great_project = { type = oracle_mountain tier = 2 }
+		can_use_mindarayan = yes
+	}
+}
+
+# divination_0_guidance_trigger = { } # Guidance
+divination_1_eye_for_talent_trigger = { # Eye for Talent
+	is_overall_divination_level_1_minimum = yes
+	[[player] has_mana_to_cast_spell = { school = divination level = 1 id = eye_for_talent } ]
+}
+divination_1_deposit_divination_trigger = { # Deposit Divination
+	is_overall_divination_level_1_minimum = yes
+	[[player] has_mana_to_cast_spell = { school = divination level = 1 id = deposit_divination } ]
+	has_not_cast_deposit_divination = yes
+	custom_trigger_tooltip = {
+		tooltip = divination_1_deposit_divination_trigger
+		OR = {
+			copper = 1
+			iron = 1
+			gems = 1
+			salt = 1
+			gold = 1
+			mithril = 1
+			damestear = 1
+			coal = 1
+		}
+	}
+}
+divination_2_scry_trigger = { # Scry
+	if = {
+		limit = { has_ruler_flag = autumn_gloam_patron }
+		level_requirement_lowered = { cause = patron }
+		is_overall_divination_level_1_minimum = yes
+	}
+	else = { is_overall_divination_level_2_minimum = yes }
+	[[player] has_mana_to_cast_spell = { school = divination level = 2 id = scry } ]
+	has_not_cast_scry = yes
+}
+divination_2_manipulated_fortune_trigger = { # Manipulated Fortune
+	is_overall_divination_level_2_minimum = yes
+	war_magic_trigger = yes
+	[[player] has_mana_to_cast_spell = { school = divination level = 2 id = manipulated_fortune } ]
+	has_not_cast_manipulated_fortune = yes
+}
+divination_3_foresight_trigger = { # Foresight
+	if = {
+		limit = {
+			OR = {
+				has_ruler_flag = nang_patron
+				has_ruler_flag = bladedancer_patron
+				has_ruler_flag = summer_waves_patron
+			}
+		}
+		level_requirement_lowered = { cause = patron }
+		is_overall_divination_level_2_minimum = yes
+	}
+	else = { is_overall_divination_level_3 = yes }
+	[[player] has_mana_to_cast_spell = { school = divination level = 3 id = foresight } ]
+	has_not_cast_foresight = yes
+}
+
+has_cast_deposit_divination = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_deposit_divination
+		has_country_modifier = divination_1_deposit_divination_mod
+	}
+}
+has_not_cast_deposit_divination = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_deposit_divination
+		NOT = { has_cast_deposit_divination = yes }
+	}
+}
+has_cast_eye_for_talent = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_eye_for_talent
+		OR = {
+			has_country_modifier = divination_1_eye_for_talent_artist_mod
+			has_country_modifier = divination_1_eye_for_talent_inquisitor_mod
+			has_country_modifier = divination_1_eye_for_talent_master_of_mint_mod
+			has_country_modifier = divination_1_eye_for_talent_natural_scientist_mod
+			has_country_modifier = divination_1_eye_for_talent_philosopher_mod
+			has_country_modifier = divination_1_eye_for_talent_theologian_mod
+			has_country_modifier = divination_1_eye_for_talent_treasurer_mod
+			has_country_modifier = divination_1_eye_for_talent_colonial_governor_mod
+			has_country_modifier = divination_1_eye_for_talent_diplomat_mod
+			has_country_modifier = divination_1_eye_for_talent_naval_reformer_mod
+			has_country_modifier = divination_1_eye_for_talent_navigator_mod
+			has_country_modifier = divination_1_eye_for_talent_spymaster_mod
+			has_country_modifier = divination_1_eye_for_talent_statesman_mod
+			has_country_modifier = divination_1_eye_for_talent_trader_mod
+			has_country_modifier = divination_1_eye_for_talent_army_organiser_mod
+			has_country_modifier = divination_1_eye_for_talent_army_reformer_mod
+			has_country_modifier = divination_1_eye_for_talent_commandant_mod
+			has_country_modifier = divination_1_eye_for_talent_grand_captain_mod
+			has_country_modifier = divination_1_eye_for_talent_recruitmaster_mod
+			has_country_modifier = divination_1_eye_for_talent_fortification_expert_mod
+			has_country_modifier = divination_1_eye_for_talent_quartermaster_mod
+		}
+	}
+}
+has_not_cast_eye_for_talent = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_eye_for_talent
+		NOT = { has_cast_eye_for_talent = yes }
+	}
+}
+has_cast_scry = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_scry
+		OR = {
+			has_country_modifier = is_scrying_mod
+			has_country_modifier = is_scrying_mod_buffed
+		}
+	}
+}
+has_not_cast_scry = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_scry
+		NOT = { has_cast_scry = yes }
+	}
+}
+has_cast_manipulated_fortune = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_manipulated_fortune
+		OR = {
+			has_country_modifier = divination_2_manipulated_fortune_mod
+			has_country_modifier = divination_2_manipulated_fortune_mod_buffed
+		}
+	}
+}
+has_not_cast_manipulated_fortune = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_manipulated_fortune
+		NOT = { has_cast_manipulated_fortune = yes }
+	}
+}
+has_cast_foresight = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_foresight
+		OR = {
+			has_country_modifier = divination_3_foresight_mod
+			has_country_modifier = divination_3_foresight_mod_buffed
+		}
+	}
+}
+has_not_cast_foresight = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_foresight
+		NOT = { has_cast_foresight = yes }
+	}
+}
+
+# please add any new has_cast_ to the below
+has_cast_any_divination_spell = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_any_divination_spell_tt
+		OR = {
+			has_cast_deposit_divination = yes
+			has_cast_eye_for_talent = yes
+			has_cast_scry = yes
+			has_cast_manipulated_fortune = yes
+			has_cast_foresight = yes
+		}
+	}
+}
+
+
+###################
+### ENCHANTMENT ###
+###################
+
+enchantment_0_enchanting_envoy_trigger = { # Enchanting Envoy
+	[[player] has_mana_to_cast_spell = { school = enchantment level = 0 id = enchanting_envoy } ]
+	has_not_cast_enchanting_envoy_embassy = yes
+}
+enchantment_1_heartstring_trigger = { # Heartstring
+	is_overall_enchantment_level_1_minimum = yes
+	war_magic_trigger = yes
+	[[player] has_mana_to_cast_spell = { school = enchantment level = 1 id = heartstring } ]
+	has_not_cast_heartstring_thoughtweave = yes
+}
+enchantment_1_command_animals_trigger = { # Command Animals
+	is_overall_enchantment_level_1_minimum = yes
+	[[player] has_mana_to_cast_spell = { school = enchantment level = 1 id = command_animals } ]
+	has_not_cast_command_animals = yes
+	custom_trigger_tooltip = {
+		tooltip = enchantment_1_command_animals_trigger
+		OR = {
+			livestock = 1
+			wool = 1
+			fish = 1
+			fur = 1
+			ivory = 1
+			silk = 1
+		}
+	}
+}
+enchantment_2_thoughtweave_trigger = { # Thoughtweave
+	is_overall_enchantment_level_2_minimum = yes
+	war_magic_trigger = yes
+	[[player] has_mana_to_cast_spell = { school = enchantment level = 2 id = thoughtweave } ]
+	has_not_cast_thoughtweave = yes
+}
+enchantment_2_enchanting_embassy_trigger = { # Enchanting Embassy
+	is_overall_enchantment_level_2_minimum = yes
+	[[player] has_mana_to_cast_spell = { school = enchantment level = 2 id = enchanting_embassy } ]
+	has_not_cast_enchanting_embassy = yes
+}
+enchantment_3_dominate_to_surrender_trigger = { # Dominate to Surrender
+	if = {
+		limit = { has_ruler_flag = baku_patron }
+		level_requirement_lowered = { cause = patron }
+		is_overall_enchantment_level_2_minimum = yes
+	}
+	else = { is_overall_enchantment_level_3 = yes }
+	[[player] has_mana_to_cast_spell = { school = enchantment level = 3 id = dominate_to_surrender } ]
+	siege_magic_trigger = { offense = yes [[menu] menu = yes offense_trigger = "enchantment_3_dominate_to_surrender_local_trigger = yes" ] }
+}
+enchantment_3_dominate_to_surrender_local_trigger = {
+	NOT = { has_province_modifier = enchantment_3_dominate_to_surrender_local_mod }
+}
+
+has_cast_enchanting_envoy = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_enchanting_envoy
+		has_country_modifier = enchantment_0_enchanting_envoy_mod
+	}
+}
+has_not_cast_enchanting_envoy = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_enchanting_envoy
+		NOT = { has_cast_enchanting_envoy = yes }
+	}
+}
+has_cast_heartstring = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_heartstring
+		has_country_modifier = enchantment_1_heartstring_mod
+	}
+}
+has_not_cast_heartstring = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_heartstring
+		NOT = { has_cast_heartstring = yes }
+	}
+}
+has_cast_command_animals = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_command_animals
+		has_country_modifier = enchantment_1_command_animals_mod
+	}
+}
+has_not_cast_command_animals = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_command_animals
+		NOT = { has_cast_command_animals = yes }
+	}
+}
+has_cast_enchanting_embassy = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_enchanting_embassy
+		has_country_modifier = enchantment_2_enchanting_embassy_mod
+	}
+}
+has_not_cast_enchanting_embassy = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_enchanting_embassy
+		NOT = { has_cast_enchanting_embassy = yes }
+	}
+}
+has_cast_thoughtweave = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_thoughtweave
+		has_country_modifier = enchantment_2_thoughtweave_mod
+	}
+}
+has_not_cast_thoughtweave = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_thoughtweave
+		NOT = { has_cast_thoughtweave = yes }
+	}
+}
+
+has_cast_enchanting_envoy_embassy = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_enchanting_envoy_embassy
+		OR = {
+			has_cast_enchanting_envoy = yes
+			has_cast_enchanting_embassy = yes
+		}
+	}
+}
+has_not_cast_enchanting_envoy_embassy = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_enchanting_envoy_embassy
+		NOT = { has_cast_enchanting_envoy_embassy = yes }
+	}
+}
+has_cast_heartstring_thoughtweave = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_heartstring_thoughtweave
+		OR = {
+			has_cast_heartstring = yes
+			has_cast_thoughtweave = yes
+		}
+	}
+}
+has_not_cast_heartstring_thoughtweave = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_heartstring_thoughtweave
+		NOT = { has_cast_heartstring_thoughtweave = yes }
+	}
+}
+
+# please add any new has_cast_ to the below
+has_cast_any_enchantment_spell = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_any_enchantment_spell_tt
+		OR = {
+			has_cast_heartstring_thoughtweave = yes
+			has_cast_enchanting_envoy_embassy = yes
+			has_cast_command_animals = yes
+			has_cast_firanyas_call = yes
+			has_country_modifier = enchantment_3_harpy_mod
+			has_country_modifier = enchantment_2_bulwar_default_2_tracking_mod
+		}
+	}
+}
+
+#################
+### EVOCATION ###
+#################
+
+evocation_0_fireball_trigger = { # Fireball
+	[[player] has_mana_to_cast_spell = { school = evocation level = 0 id = fireball } ]
+	siege_magic_trigger = { offense = yes [[menu] menu = yes offense_trigger = "" ] }
+}
+evocation_1_shock_and_awe_trigger = { # Shock and Awe
+	is_overall_evocation_level_1_minimum = yes
+	war_magic_trigger = yes
+	[[player] has_mana_to_cast_spell = { school = evocation level = 1 id = shock_and_awe } ]
+	has_not_cast_shock_and_awe = yes
+	has_not_cast_elemental_fury = yes
+}
+evocation_1_flaming_munitions_trigger = { # Flaming Munitions
+	is_overall_evocation_level_1_minimum = yes
+	war_magic_trigger = yes
+	[[player] has_mana_to_cast_spell = { school = evocation level = 1 id = flaming_munitions } ]
+	has_not_cast_flaming_munitions = yes
+	has_not_cast_elemental_fury = yes
+}
+evocation_2_meteor_swarm_trigger = { # Meteor Swarm
+	if = {
+		limit = { has_ruler_flag = zokka_phoenix_flag }
+		custom_trigger_tooltip = {
+			tooltip = zokka_siege_magic_tt
+			always = yes
+		}
+	}
+	else_if = {
+		limit = {
+			OR = {
+				has_ruler_flag = autumn_gloam_patron
+				has_ruler_flag = rakshasa_patron
+			}
+		}
+		level_requirement_lowered = { cause = patron }
+		is_overall_evocation_level_1_minimum = yes
+	}
+	else = { is_overall_evocation_level_2_minimum = yes }
+	[[player] has_mana_to_cast_spell = { school = evocation level = 2 id = meteor_swarm } ]
+	if = {
+		limit = { has_ruler_flag = zokka_phoenix_flag }
+		siege_magic_trigger = { [[menu] menu = yes offense_trigger = "evocation_2_meteor_swarm_local_trigger = yes" ] }
+	}
+	else = { siege_magic_trigger = { offense = yes [[menu] menu = yes offense_trigger = "evocation_2_meteor_swarm_local_trigger = yes" ] } }
+}
+evocation_2_meteor_swarm_local_trigger = { #Meteor Swarm local trigger
+	NOT = {
+		has_terrain = cavern
+		has_terrain = dwarven_road
+		province_group = hold_province
+		custom_trigger_tooltip = {
+			tooltip = kobold_traps_lvl_3_or_4_siege_magic_trigger
+			OR = {
+				has_province_modifier = kobold_traps_lvl_3
+				has_province_modifier = kobold_traps_lvl_4
+				has_province_modifier = modified_kobold_traps_lvl_3
+				has_province_modifier = modified_kobold_traps_lvl_4
+			}
+		}
+	}
+}
+evocation_2_tearfall_trigger = { # Tearfall
+	is_overall_evocation_level_2_minimum = yes
+	[[player] has_mana_to_cast_spell = { school = evocation level = 2 id = tearfall } ]
+	custom_trigger_tooltip = {
+		tooltip = evocation_2_tearfall_spell_trigger_tt
+		NOT = { has_country_modifier = evocation_2_tearfall_cooldown_mod }
+	}
+	any_owned_province = {
+		NOT = {
+			trade_goods = damestear
+			has_terrain = cavern
+			has_terrain = dwarven_road
+			province_group = hold_province
+		}
+	}
+}
+evocation_3_elemental_fury_trigger = { # Elemental Fury
+	is_overall_evocation_level_3 = yes
+	war_magic_trigger = yes
+	[[player] has_mana_to_cast_spell = { school = evocation level = 3 id = elemental_fury } ]
+	has_not_cast_elemental_fury = yes
+}
+
+has_cast_shock_and_awe = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_shock_and_awe
+		OR = {
+			has_country_modifier = evocation_1_shock_and_awe_mod
+			has_country_modifier = patron_green_shock_and_awe
+			has_country_modifier = patron_ice_shock_and_awe
+			has_country_modifier = patron_diranbe_shock_and_awe
+			has_country_modifier = L76_shock_and_awe
+			has_country_modifier = V05_shock_and_awe
+		}
+	}
+}
+has_not_cast_shock_and_awe = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_shock_and_awe
+		NOT = { has_cast_shock_and_awe = yes }
+	}
+}
+
+has_cast_flaming_munitions = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_flaming_munitions
+		OR = {
+			has_country_modifier = evocation_1_flaming_munitions_mod
+			has_country_modifier = patron_green_munitions
+			has_country_modifier = patron_ice_munitions
+			has_country_modifier = patron_diranbe_munitions
+		}
+	}
+}
+has_not_cast_flaming_munitions = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_flaming_munitions
+		NOT = { has_cast_flaming_munitions = yes }
+	}
+}
+
+has_cast_elemental_fury = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_elemental_fury
+		OR = {
+			has_country_modifier = evocation_3_elemental_fury_mod
+			has_country_modifier = patron_green_elemental_fury
+			has_country_modifier = patron_ice_elemental_fury
+			has_country_modifier = patron_diranbe_elemental_fury
+			has_country_modifier = U39_weak_wild_fury
+			has_country_modifier = U39_uncontrollable_wild_fury
+			has_country_modifier = U39_targeted_wild_fury
+			has_country_modifier = V05_elemental_fury_upgrade
+		}
+	}
+}
+has_not_cast_elemental_fury = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_elemental_fury
+		NOT = { has_cast_elemental_fury = yes }
+	}
+}
+
+has_cast_evocation_war_magic = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_evocation_war_magic
+		OR = {
+			has_cast_shock_and_awe = yes
+			has_cast_flaming_munitions = yes
+			has_cast_elemental_fury = yes
+
+			has_cast_kiovas_gale = yes
+		}
+	}
+}
+
+# please add any new has_cast_ to the below
+has_cast_any_evocation_spell = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_any_evocation_spell_tt
+		OR = {
+			has_cast_evocation_war_magic = yes
+			# currently matches has_cast_evocation_war_magic
+			# here for unified tt and pot. future spells
+		}
+	}
+}
+
+################
+### ILLUSION ###
+################
+
+illusion_0_invisibility_trigger = { # Invisibility
+	[[player] has_mana_to_cast_spell = { school = illusion level = 0 id = invisibility } ]
+	has_not_cast_invisibility = yes
+}
+illusion_1_fear_and_loathing_trigger = { # Fear and Loathing
+	is_overall_illusion_level_1_minimum = yes
+	[[player] has_mana_to_cast_spell = { school = illusion level = 1 id = fear_and_loathing } ]
+	has_not_cast_fear_and_loathing = yes
+}
+illusion_1_bread_and_circuses_trigger = { # Bread and Circuses
+	if = {
+		limit = {
+			OR = {
+				has_ruler_flag = huli_jing_patron
+				has_ruler_flag = gumiho_patron
+				has_ruler_flag = summer_waves_patron
+			}
+		}
+		level_requirement_lowered = { cause = patron }
+	}
+	else = { is_overall_illusion_level_1_minimum = yes }
+	[[player] has_mana_to_cast_spell = { school = illusion level = 1 id = bread_and_circuses } ]
+	if = {
+		limit = { has_any_estates = no }
+		has_any_estates = yes
+	}
+	if = {
+		limit = { has_government_attribute = blocked_call_diet }
+		NOT = { has_government_attribute = blocked_call_diet }
+	}
+	OR = {
+		NOT = { has_any_active_estate_agenda = yes } #Needs a NOT or it won't work as a NOT
+		can_auto_complete_active_agenda = yes
+	}
+	[[player] #The ai will not be in a state where this can apply
+		if = {
+			limit = { has_country_flag = diet_event_opened }
+			custom_trigger_tooltip = {
+				tooltip = illusion_1_bread_and_circuses_cttt_1
+				NOT = { has_country_flag = diet_event_opened }
+			}
+		}
+	]
+	if = {
+		limit = { has_country_flag = auto_complete_estate_agenda_all }
+		custom_trigger_tooltip = {
+			tooltip = illusion_1_bread_and_circuses_cttt_2
+			NOT = { has_country_flag = auto_complete_estate_agenda_all }
+		}
+	}
+	if = {
+		limit = { has_country_flag = anb_has_special_agendas }
+		custom_trigger_tooltip = {
+			tooltip = anb_has_special_agendas_tooltip
+			always = no
+		}
+	}
+}
+illusion_2_assimilation_program_trigger = { # Assimilation Program
+	is_overall_illusion_level_2_minimum = yes
+	[[player] has_mana_to_cast_spell = { school = illusion level = 2 id = assimilation_program } ]
+	has_not_cast_assimilation_program = yes
+}
+illusion_2_shadows_in_the_night_trigger = { # Shadows in the Night
+	is_overall_illusion_level_2_minimum = yes
+	[[player] has_mana_to_cast_spell = { school = illusion level = 2 id = shadows_in_the_night } ]
+	has_not_cast_shadows_in_the_night = yes
+}
+illusion_3_lead_the_crowds_trigger = { # Lead the Crowds
+	is_overall_illusion_level_3 = yes
+	[[player] has_mana_to_cast_spell = { school = illusion level = 3 id = lead_the_crowds } ]
+	overextension_percentage = 0.9
+	has_not_cast_lead_the_crowds = yes
+}
+
+has_cast_invisibility = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_invisibility
+		has_country_modifier = illusion_0_invisibility_mod
+	}
+}
+has_not_cast_invisibility = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_invisibility
+		NOT = { has_cast_invisibility = yes }
+	}
+}
+has_cast_fear_and_loathing = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_fear_and_loathing
+		has_country_modifier = illusion_1_fear_and_loathing_cooldown_mod
+	}
+}
+has_not_cast_fear_and_loathing = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_fear_and_loathing
+		NOT = { has_cast_fear_and_loathing = yes }
+	}
+}
+has_cast_assimilation_program = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_assimilation_program
+		has_country_modifier = illusion_2_assimilation_program_mod
+	}
+}
+has_not_cast_assimilation_program = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_assimilation_program
+		NOT = { has_cast_assimilation_program = yes }
+	}
+}
+has_cast_shadows_in_the_night = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_shadows_in_the_night
+		OR = {
+			any_rival_country = { has_country_modifier = illusion_2_shadows_in_the_night_sabotage_mod }
+			any_war_enemy_country = { has_country_modifier = illusion_2_shadows_in_the_night_sabotage_mod }
+		}
+	}
+}
+has_not_cast_shadows_in_the_night = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_shadows_in_the_night
+		NOT = { has_cast_shadows_in_the_night = yes }
+	}
+}
+has_cast_lead_the_crowds = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_lead_the_crowds
+		has_country_modifier = illusion_3_lead_the_crowds_mod
+	}
+}
+has_not_cast_lead_the_crowds = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_lead_the_crowds
+		NOT = { has_cast_lead_the_crowds = yes }
+	}
+}
+affected_by_sabotage_magic = {
+	custom_trigger_tooltip = {
+		tooltip = affected_by_sabotage_magic
+		OR = {
+			has_removed_fow = yes
+			has_country_modifier = illusion_1_fear_and_loathing_sabotage_mod
+			has_country_modifier = illusion_2_shadows_in_the_night_sabotage_mod
+		}
+	}
+}
+not_affected_by_sabotage_magic = {
+	custom_trigger_tooltip = {
+		tooltip = not_affected_by_sabotage_magic
+		NOT = { affected_by_sabotage_magic = yes }
+	}
+}
+
+# please add any new has_cast_ to the below
+has_cast_any_illusion_spell = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_any_illusion_spell_tt
+		OR = {
+			has_cast_invisibility = yes
+			has_cast_fear_and_loathing = yes
+			has_cast_assimilation_program = yes
+			has_cast_shadows_in_the_night = yes
+			has_cast_lead_the_crowds = yes
+		}
+	}
+}
+
+##################
+### NECROMANCY ###
+##################
+
+necromancy_0_false_life_trigger = { # False Life
+	has_not_banned_necromancy = yes
+	[[player] has_mana_to_cast_spell = { school = necromancy level = 0 id = false_life } ]
+	has_not_cast_false_life = yes
+}
+necromancy_1_steal_vitality_trigger = { # Steal Vitality
+	has_not_banned_necromancy = yes
+	is_overall_necromancy_level_1_minimum = yes
+	[[player] has_mana_to_cast_spell = { school = necromancy level = 1 id = steal_vitality } ]
+	has_not_cast_steal_vitality = yes
+	custom_trigger_tooltip = {
+		tooltip = necromancy_1_steal_vitality_trigger
+		OR = {
+			glass = 1
+			paper = 1
+			cloth = 1
+			chinaware = 1
+			precursor_relics = 1
+			dyes = 1
+			slaves = 1
+		}
+	}
+}
+necromancy_1_contagion_trigger = { #Contagion
+	has_not_banned_necromancy = yes
+	is_overall_necromancy_level_1_minimum = yes
+	[[player] has_mana_to_cast_spell = { school = necromancy level = 1 id = contagion } ]
+	siege_magic_trigger = { [[menu] menu = yes defense_trigger = "necromancy_1_contagion_local_trigger = yes" ] }
+}
+necromancy_1_contagion_local_trigger = { # Contagion
+	NOT = { has_province_modifier = necromancy_1_contagion_local_mod }
+}
+necromancy_2_speak_with_dead_trigger = { # Speak With Dead
+	has_not_banned_necromancy = yes
+	if = {
+		limit = { has_ruler_flag = hoko_patron }
+		level_requirement_lowered = { cause = patron }
+		is_overall_necromancy_level_1_minimum = yes
+	}
+	else = { is_overall_necromancy_level_2_minimum = yes }
+	[[player] has_mana_to_cast_spell = { school = necromancy level = 2 id = speak_with_dead } ]
+	is_lesser_in_union = no
+	custom_trigger_tooltip = {
+		tooltip = necromancy_2_speak_with_dead_spell_trigger_tt
+		NOT = { has_ruler_modifier = necromancy_2_speak_with_dead_cooldown_mod }
+	}
+	OR = {
+		NOT = { adm = 5 }
+		NOT = { dip = 5 }
+		NOT = { mil = 5 }
+		ruler_is_immortal = yes
+	}
+	hidden_trigger = {
+		NOT = {
+			AND = {
+				adm = 6
+				dip = 6
+				mil = 6
+			}
+		}
+	}
+}
+necromancy_2_remove_pain_trigger = { # Remove Pain
+	has_not_banned_necromancy = yes
+	is_overall_necromancy_level_2_minimum = yes
+	[[player] has_mana_to_cast_spell = { school = necromancy level = 2 id = remove_pain } ]
+	if = {
+		limit = { has_country_modifier = witch_king_armies_modifier }
+		custom_trigger_tooltip = {
+			tooltip = magic_booster_by_witch_king_tt
+			always = yes
+		}
+	}
+	else_if = {
+		limit = { has_ruler_flag = winter_everfrost_patron }
+		custom_trigger_tooltip = {
+			tooltip = magic_booster_by_patron_tt
+			always = yes
+		}
+	}
+	else = { army_tradition = 10 }
+}
+necromancy_3_chronophage_trigger = { # Chronophage
+	has_not_banned_necromancy = yes
+	is_overall_necromancy_level_3 = yes
+	[[player] has_mana_to_cast_spell = { school = necromancy level = 3 id = chronophage } ]
+	has_not_cast_chronophage = yes
+}
+
+has_cast_false_life = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_false_life
+		has_country_modifier = necromancy_0_false_life_mod
+	}
+}
+has_not_cast_false_life = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_false_life
+		NOT = { has_cast_false_life = yes }
+	}
+}
+has_cast_steal_vitality = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_steal_vitality
+		has_country_modifier = necromancy_1_steal_vitality_cooldown_mod
+	}
+}
+has_not_cast_steal_vitality = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_steal_vitality
+		NOT = { has_cast_steal_vitality = yes }
+	}
+}
+has_cast_contagion = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_contagion
+		has_country_modifier = necromancy_1_contagion_tracking_mod
+	}
+}
+has_not_cast_contagion = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_contagion
+		NOT = { has_cast_contagion = yes }
+	}
+}
+province_has_contagion = {
+	custom_trigger_tooltip = {
+		tooltip = province_has_contagion
+		has_province_modifier = necromancy_1_contagion_local_mod
+	}
+}
+province_has_not_contagion = {
+	custom_trigger_tooltip = {
+		tooltip = province_has_not_contagion
+		NOT = { province_has_contagion = yes }
+	}
+}
+has_cast_speak_with_dead = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_speak_with_dead
+		has_ruler_flag = has_spoken_with_dead
+	}
+}
+has_not_cast_speak_with_dead = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_speak_with_dead
+		NOT = { has_cast_speak_with_dead = yes }
+	}
+}
+has_cast_chronophage = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_chronophage
+		has_country_modifier = necromancy_3_chronophage_mod
+	}
+}
+has_not_cast_chronophage = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_chronophage
+		NOT = { has_cast_chronophage = yes }
+	}
+}
+
+# please add any new has_cast_ to the below
+has_cast_any_necromancy_spell = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_any_necromancy_spell_tt
+		OR = {
+			has_cast_false_life = yes
+			has_cast_steal_vitality = yes
+			has_cast_contagion = yes
+			has_cast_speak_with_dead = yes
+			has_cast_chronophage = yes
+		}
+	}
+}
+
+#####################
+### TRANSMUTATION ###
+#####################
+
+transmutation_0_longstrider_trigger = { # Longstrider
+	[[player] has_mana_to_cast_spell = { school = transmutation level = 0 id = longstrider } ]
+	has_not_cast_longstrider = yes
+}
+transmutation_1_plant_growth_trigger = { # Plant Growth
+	is_overall_transmutation_level_1_minimum = yes
+	[[player] has_mana_to_cast_spell = { school = transmutation level = 1 id = plant_growth } ]
+	has_not_cast_plant_growth = yes
+	custom_trigger_tooltip = {
+		tooltip = transmutation_1_plant_growth_trigger
+		OR = {
+			fungi = 1
+			serpentbloom = 1
+			grain = 1
+			wine = 1
+			spices = 1
+			tea = 1
+			coffee = 1
+			cocoa = 1
+			cotton = 1
+			sugar = 1
+			tobacco = 1
+			cloves = 1
+			incense = 1
+			naval_supplies = 1
+			tropical_wood = 1
+		}
+	}
+}
+transmutation_1_mass_enlarge_trigger = { # Mass Enlarge
+	is_overall_transmutation_level_1_minimum = yes
+	[[player] has_mana_to_cast_spell = { school = transmutation level = 1 id = mass_enlarge } ]
+	siege_magic_trigger = { offense = yes [[menu] menu = yes offense_trigger = "transmutation_1_mass_enlarge_local_trigger = yes" ] }
+}
+transmutation_1_mass_enlarge_local_trigger = {
+	NOT = { has_province_modifier = transmutation_1_mass_enlarge_local_mod }
+}
+transmutation_2_transmute_to_gold_trigger = { # Transmute to Gold
+	is_overall_transmutation_level_2_minimum = yes
+	[[player] has_mana_to_cast_spell = { school = transmutation level = 2 id = transmute_to_gold } ]
+	if = {
+		limit = { has_country_modifier = JY_LF_recent_trade }
+		OR = {
+			monthly_income = 500 #We are large enough to mostly ignore the effects of the treasure fleet
+			custom_trigger_tooltip = {
+				tooltip = JY_LF_not_trading
+				always = no
+			}
+		}
+	}
+}
+transmutation_2_reshape_terrain_trigger = { # Reshape Terrain
+	is_overall_transmutation_level_2_minimum = yes
+	[[player] has_mana_to_cast_spell = { school = transmutation level = 2 id = reshape_terrain } ]
+	has_not_cast_reshape_terrain = yes
+	if = {
+		limit = {
+			has_bulwar_spell_list_default = yes
+		}
+		custom_trigger_tooltip = {
+			tooltip = has_not_cast_wish_for_order
+			NOT = {
+				has_country_modifier = transmutation_3_bulwar_default_1_tracking_mod
+			}
+		}
+	}
+}
+transmutation_3_rite_of_conception_trigger = { # Rite of Conception
+	if = { # Rending tughayasa_reward
+		limit = {
+			OR = {
+				has_country_flag = tughayasa_reward_primary
+				has_country_flag = tughayasa_reward
+			}
+		}
+		level_requirement_lowered = { cause = tughayasa }
+		is_overall_transmutation_level_2_minimum = yes
+	}
+	else = {
+		is_overall_transmutation_level_3 = yes
+	}
+	[[player] has_mana_to_cast_spell = { school = transmutation level = 3 id = rite_of_conception } ]
+
+	if = {
+		limit = {
+			OR = {
+				has_country_flag = tughayasa_reward_primary
+				has_country_flag = tughayasa_reward
+			}
+		}
+		if = {
+			limit = { has_government_attribute = heir }
+			heir_is_not_powerful_mage = yes
+		}
+		else = { ruler_is_not_powerful_mage = yes }
+	}
+	else = {
+		government_has_heirs = yes
+		NOT = { government = theocracy }
+		heir_is_not_powerful_mage = yes
+	}
+
+	if = {
+		limit = { has_government_attribute = queen }
+		has_consort = yes #Can be of the same gender, because of magic
+	}
+
+	is_lesser_in_union = no
+	ruler_is_not_immortal = yes
+
+	custom_trigger_tooltip = {
+		tooltip = transmutation_3_rite_of_conception_trigger_tt
+		NOT = { has_country_modifier = transmutation_3_rite_of_conception_cooldown_mod }
+	}
+}
+
+has_cast_longstrider = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_longstrider
+		has_country_modifier = transmutation_0_longstrider_mod
+	}
+}
+has_not_cast_longstrider = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_longstrider
+		NOT = { has_cast_longstrider = yes }
+	}
+}
+has_cast_plant_growth = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_plant_growth
+		has_country_modifier = transmutation_1_plant_growth_cooldown_mod
+	}
+}
+has_not_cast_plant_growth = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_plant_growth
+		NOT = { has_cast_plant_growth = yes }
+	}
+}
+has_cast_reshape_terrain = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_reshape_terrain
+		OR = {
+			has_country_modifier = transmutation_2_reshape_terrain_mod
+			has_country_modifier = transmutation_2_reshape_terrain_buffed_mod
+			has_country_modifier = S50_transmutation_2_reshape_terrain_buffed_mod
+		}
+	}
+}
+has_not_cast_reshape_terrain = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_reshape_terrain
+		NOT = { has_cast_reshape_terrain = yes }
+	}
+}
+
+# please add any new has_cast_ to the below
+has_cast_any_transmutation_spell = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_any_transmutation_spell_tt
+		OR = {
+			has_cast_longstrider = yes
+			has_cast_plant_growth = yes
+			has_cast_reshape_terrain = yes
+			has_country_modifier = transmutation_2_harpy_default_3_tracking_mod
+			has_country_modifier = transmutation_3_bulwar_default_1_tracking_mod
+			has_country_modifier = transmutation_2_bulwar_default_4_tracking_mod
+		}
+	}
+}
+
+#######################
+### PATRON TRIGGERS ###
+#######################
 
 has_a_patron_trigger = {
 	custom_trigger_tooltip = {
@@ -36,12 +3893,17 @@ has_a_patron_trigger = {
 			has_ruler_flag = huli_jing_patron
 			has_ruler_flag = bladedancer_patron
 			has_ruler_flag = maiden_patron
-			has_ruler_flag = nang_patron
-			has_ruler_flag = baku_patron
+			has_ruler_flag = sage_patron
 			has_ruler_flag = rakshasa_patron
-			has_ruler_flag = xhazob_patron
+			has_ruler_flag = baku_patron
 			has_ruler_flag = yaksha_patron
 			has_ruler_flag = manifestation_of_surael_patron
+			has_ruler_flag = spring_old_patron
+			has_ruler_flag = summer_waves_patron
+			has_ruler_flag = autumn_gloam_patron
+			has_ruler_flag = winter_everfrost_patron
+			has_ruler_flag = unthroned_patron_patron
+			has_ruler_flag = xhazob_patron
 		}
 	}
 }
@@ -53,709 +3915,1474 @@ has_patron_trigger = {
 	}
 }
 
-has_ward_province_modifier = {
-	custom_trigger_tooltip = {
-		tooltip = province_is_warded_tt
-		OR = {
-			has_province_modifier = magic_realm_abjuration_empowered_ward
-			has_province_modifier = magic_realm_abjuration_ward
-			has_province_modifier = magic_estate_ward_1
-			has_province_modifier = magic_estate_ward_2
-			has_province_modifier = magic_estate_ward_3
-			has_province_modifier = magic_estate_broad_ward_1
-			has_province_modifier = magic_estate_broad_ward_2
-			has_province_modifier = magic_estate_broad_ward_3
-			has_province_modifier = Y63_minor_rune_runic_ward_1
-			has_province_modifier = Y63_minor_rune_runic_ward_2
-			has_province_modifier = Y63_minor_rune_runic_ward_3
-			has_province_modifier = magic_realm_patron_abjuration_empowered_ward
-			has_province_modifier = magic_realm_patron_abjuration_ward
-		}
-	}
-}
+#######################################
+### MAGICAL ADVANCEMENTS IN GENERAL ###
+#######################################
 
-has_no_ward_province_modifiers = {
-	custom_trigger_tooltip = {
-		tooltip = province_is_not_warded_tt
-		NOT = { has_province_modifier = magic_realm_abjuration_empowered_ward }
-		NOT = { has_province_modifier = magic_realm_abjuration_ward }
-		NOT = { has_province_modifier = magic_estate_ward_1 }
-		NOT = { has_province_modifier = magic_estate_ward_2 }
-		NOT = { has_province_modifier = magic_estate_ward_3 }
-		NOT = { has_province_modifier = magic_estate_broad_ward_1 }
-		NOT = { has_province_modifier = magic_estate_broad_ward_2 }
-		NOT = { has_province_modifier = magic_estate_broad_ward_3 }
-		# Verkal Ozovar
-		NOT = { has_province_modifier = Y63_minor_rune_runic_ward_1 }
-		NOT = { has_province_modifier = Y63_minor_rune_runic_ward_2 }
-		NOT = { has_province_modifier = Y63_minor_rune_runic_ward_3 }
-		#Patrons
-		NOT = { has_province_modifier = magic_realm_patron_abjuration_empowered_ward }
-		NOT = { has_province_modifier = magic_realm_patron_abjuration_ward }
-	}
-}
-
-has_no_plant_growth_province_modifiers = {
-	NOT = { has_province_modifier = magic_realm_transmutation_plant_growth_1 }
-	NOT = { has_province_modifier = magic_realm_transmutation_plant_growth_2 }
-	NOT = { has_province_modifier = magic_realm_transmutation_plant_growth_3 }
-	NOT = { has_province_modifier = magic_realm_transmutation_plant_growth_4 }
-}
-
-plant_growth_target = {
+magic_advancement_done = {
 	OR = {
-		trade_goods = serpentbloom
-		trade_goods = grain
-		trade_goods = wine
-		trade_goods = spices
-		trade_goods = tea
-		trade_goods = coffee
-		trade_goods = cocoa
-		trade_goods = cotton
-		trade_goods = sugar
-		trade_goods = tobacco
-		trade_goods = cloves
-		trade_goods = incense
-		trade_goods = tropical_wood
-		trade_goods = apiculture
-		trade_goods = beer
-		trade_goods = champagne
-		trade_goods = citrus
-		trade_goods = olives
-		trade_goods = dates
-		trade_goods = vanilla
-		trade_goods = rice
-		trade_goods = saffron
-		trade_goods = oppium
-		trade_goods = cinnamon
-		trade_goods = nutmeg
-		trade_goods = maize
-		trade_goods = potatoes
-		trade_goods = tomatoes
-		trade_goods = millet
+		AND = {
+			has_ruler_flag = magic_advancement
+			type_advancement_done = { type = ruler }
+		}
+		AND = {
+			has_heir_flag = magic_advancement
+			type_advancement_done = { type = heir }
+		}
+		AND = {
+			has_country_flag = magic_advancement
+			type_advancement_done = { type = country }
+		}
 	}
 }
 
-enhance_ability_cost_adm_trigger = {
-	if = { limit = { has_ruler_flag = transmutation_3 }
-		if = {
-			limit = { adm = 5 }
-			adm_power = 500
+type_advancement_done = {
+	check_variable = {
+		which = $type$_magic_experience
+		which = magic_experience_target
+	}
+}
+
+type_is_advancing_school = {
+	custom_trigger_tooltip = {
+		tooltip = $type$_advancing_$school$_tt
+		has_$type$_flag = $school$_advancement
+	}
+}
+type_is_not_advancing_school = {
+	custom_trigger_tooltip = {
+		tooltip = $type$_not_advancing_$school$_tt
+		NOT = { has_$type$_flag = $school$_advancement }
+	}
+}
+
+type_is_advancing_magic = {
+	custom_trigger_tooltip = {
+		tooltip = $type$_advancing_magic_tt
+		has_$type$_flag = magic_advancement
+	}
+}
+
+type_is_not_advancing_magic = {
+	custom_trigger_tooltip = {
+		tooltip = $type$_not_advancing_magic_tt
+		NOT = { has_$type$_flag = magic_advancement }
+	}
+}
+
+is_overall_advancing_magic = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_advancing_magic_tt
+		OR = {
+			has_country_flag = magic_advancement
+			has_ruler_flag = magic_advancement
+			has_heir_flag = magic_advancement
 		}
-		else_if = {
-			limit = { adm = 4 }
-			adm_power = 400
+	}
+}
+
+is_overall_not_advancing_magic = {
+	custom_trigger_tooltip = {
+		tooltip = is_overall_not_advancing_magic_tt
+		NOT = {
+			has_country_flag = magic_advancement
+			has_ruler_flag = magic_advancement
+			has_heir_flag = magic_advancement
 		}
-		else_if = {
-			limit = { adm = 3 }
-			adm_power = 300
+	}
+}
+
+is_overall_advancing_school = {
+	custom_trigger_tooltip = {
+		tooltip = $school$_advancement
+		OR = {
+			has_country_flag = $school$_advancement
+			has_ruler_flag = $school$_advancement
+			has_heir_flag = $school$_advancement
 		}
-		else_if = {
-			limit = { adm = 2 }
-			adm_power = 200
+	}
+}
+
+ruler_is_advancing_abjuration = { type_is_advancing_school = { type = ruler school = abjuration } }
+ruler_is_advancing_conjuration = { type_is_advancing_school = { type = ruler school = conjuration } }
+ruler_is_advancing_evocation = { type_is_advancing_school = { type = ruler school = evocation } }
+ruler_is_advancing_transmutation = { type_is_advancing_school = { type = ruler school = transmutation } }
+ruler_is_advancing_illusion = { type_is_advancing_school = { type = ruler school = illusion } }
+ruler_is_advancing_enchantment = { type_is_advancing_school = { type = ruler school = enchantment } }
+ruler_is_advancing_necromancy = { type_is_advancing_school = { type = ruler school = necromancy } }
+ruler_is_advancing_divination = { type_is_advancing_school = { type = ruler school = divination } }
+
+heir_is_advancing_abjuration = { type_is_advancing_school = { type = heir school = abjuration } }
+heir_is_advancing_conjuration = { type_is_advancing_school = { type = heir school = conjuration } }
+heir_is_advancing_evocation = { type_is_advancing_school = { type = heir school = evocation } }
+heir_is_advancing_transmutation = { type_is_advancing_school = { type = heir school = transmutation } }
+heir_is_advancing_illusion = { type_is_advancing_school = { type = heir school = illusion } }
+heir_is_advancing_enchantment = { type_is_advancing_school = { type = heir school = enchantment } }
+heir_is_advancing_necromancy = { type_is_advancing_school = { type = heir school = necromancy } }
+heir_is_advancing_divination = { type_is_advancing_school = { type = heir school = divination } }
+
+estate_is_advancing_abjuration = { type_is_advancing_school = { type = country school = abjuration } }
+estate_is_advancing_conjuration = { type_is_advancing_school = { type = country school = conjuration } }
+estate_is_advancing_evocation = { type_is_advancing_school = { type = country school = evocation } }
+estate_is_advancing_transmutation = { type_is_advancing_school = { type = country school = transmutation } }
+estate_is_advancing_illusion = { type_is_advancing_school = { type = country school = illusion } }
+estate_is_advancing_enchantment = { type_is_advancing_school = { type = country school = enchantment } }
+estate_is_advancing_necromancy = { type_is_advancing_school = { type = country school = necromancy } }
+estate_is_advancing_divination = { type_is_advancing_school = { type = country school = divination } }
+
+ruler_is_not_advancing_abjuration = { type_is_not_advancing_school = { type = ruler school = abjuration } }
+ruler_is_not_advancing_conjuration = { type_is_not_advancing_school = { type = ruler school = conjuration } }
+ruler_is_not_advancing_divination = { type_is_not_advancing_school = { type = ruler school = divination } }
+ruler_is_not_advancing_enchantment = { type_is_not_advancing_school = { type = ruler school = enchantment } }
+ruler_is_not_advancing_evocation = { type_is_not_advancing_school = { type = ruler school = evocation } }
+ruler_is_not_advancing_illusion = { type_is_not_advancing_school = { type = ruler school = illusion } }
+ruler_is_not_advancing_necromancy = { type_is_not_advancing_school = { type = ruler school = necromancy } }
+ruler_is_not_advancing_transmutation = { type_is_not_advancing_school = { type = ruler school = transmutation } }
+
+heir_is_not_advancing_abjuration = { type_is_not_advancing_school = { type = heir school = abjuration } }
+heir_is_not_advancing_conjuration = { type_is_not_advancing_school = { type = heir school = conjuration } }
+heir_is_not_advancing_divination = { type_is_not_advancing_school = { type = heir school = divination } }
+heir_is_not_advancing_enchantment = { type_is_not_advancing_school = { type = heir school = enchantment } }
+heir_is_not_advancing_evocation = { type_is_not_advancing_school = { type = heir school = evocation } }
+heir_is_not_advancing_illusion = { type_is_not_advancing_school = { type = heir school = illusion } }
+heir_is_not_advancing_necromancy = { type_is_not_advancing_school = { type = heir school = necromancy } }
+heir_is_not_advancing_transmutation = { type_is_not_advancing_school = { type = heir school = transmutation } }
+
+estate_is_not_advancing_abjuration = { type_is_not_advancing_school = { type = country school = abjuration } }
+estate_is_not_advancing_conjuration = { type_is_not_advancing_school = { type = country school = conjuration } }
+estate_is_not_advancing_divination = { type_is_not_advancing_school = { type = country school = divination } }
+estate_is_not_advancing_enchantment = { type_is_not_advancing_school = { type = country school = enchantment } }
+estate_is_not_advancing_evocation = { type_is_not_advancing_school = { type = country school = evocation } }
+estate_is_not_advancing_illusion = { type_is_not_advancing_school = { type = country school = illusion } }
+estate_is_not_advancing_necromancy = { type_is_not_advancing_school = { type = country school = necromancy } }
+estate_is_not_advancing_transmutation = { type_is_not_advancing_school = { type = country school = transmutation } }
+
+has_flag_based_on_advancement = {
+	OR = {
+		AND = {
+			has_ruler_flag = magic_advancement
+			has_ruler_flag = $flag$
 		}
-		else = {
-			adm_power = 100
+		AND = {
+			has_heir_flag = magic_advancement
+			has_heir_flag = $flag$
 		}
+		AND = {
+			has_country_flag = magic_advancement
+			has_country_flag = $flag$
+		}
+	}
+}
+
+has_personality_based_on_advancement = { #accounts for both ruler and heir
+	if = {
+		limit = { has_heir_flag = magic_advancement }
+		heir_has_personality = $personality$
 	}
 	else = {
-		if = {
-			limit = { adm = 5 }
-			adm_power = 400
-		}
-		else_if = {
-			limit = { adm = 4 }
-			adm_power = 300
-		}
-		else_if = {
-			limit = { adm = 3 }
-			adm_power = 200
-		}
-		else = {
-			adm_power = 100
+		ruler_has_personality = $personality$
+	}
+}
+
+has_unregulated_research = {
+	custom_trigger_tooltip = {
+		tooltip = tt_has_unregulated_research
+		OR = {
+			has_estate_privilege = estate_mages_reduced_research_regulations
+			AND = {
+				NOT = { has_estate = estate_mages }
+				has_country_flag = inherently_immoral_research
+			}
 		}
 	}
 }
 
-enhance_ability_cost_dip_trigger = {
-	if = { limit = { has_ruler_flag = transmutation_3 }
-		if = {
-			limit = { dip = 5 }
-			dip_power = 500
-		}
-		else_if = {
-			limit = { dip = 4 }
-			dip_power = 400
-		}
-		else_if = {
-			limit = { dip = 3 }
-			dip_power = 300
-		}
-		else_if = {
-			limit = { dip = 2 }
-			dip_power = 200
-		}
-		else = {
-			dip_power = 100
-		}
-	}
-	else = {
-		if = {
-			limit = { dip = 5 }
-			dip_power = 400
-		}
-		else_if = {
-			limit = { dip = 4 }
-			dip_power = 300
-		}
-		else_if = {
-			limit = { dip = 3 }
-			dip_power = 200
-		}
-		else = {
-			dip_power = 100
+#######################
+### MAGICAL STUDIES ###
+#######################
+
+is_type_eligible_to_study = { #Used in UI
+	is_$type$_eligible_to_study = yes
+}
+is_ruler_eligible_to_study = {
+	ruler_is_powerful_mage = yes
+	is_lesser_in_union = no
+	hidden_trigger = { has_ruler_flag = initialized_magic_flags }
+}
+is_heir_eligible_to_study = {
+	heir_is_powerful_mage = yes
+	is_lesser_in_union = no
+	heir_age = 10
+	hidden_trigger = { has_heir_flag = initialized_magic_flags }
+}
+is_estate_eligible_to_study = {
+	has_magic_estate_or_equiv = yes
+	custom_trigger_tooltip = {
+		tooltip = magic_study_estate_spell_schools_limit
+		NOT = {
+			check_variable = {
+				which = country_spell_schools
+				which = max_estate_spell_levels_val
+			}
 		}
 	}
 }
 
-enhance_ability_cost_mil_trigger = {
-	if = { limit = { has_ruler_flag = transmutation_3 }
-		if = {
-			limit = { mil = 5 }
-			mil_power = 500
-		}
-		else_if = {
-			limit = { mil = 4 }
-			mil_power = 400
-		}
-		else_if = {
-			limit = { mil = 3 }
-			mil_power = 300
-		}
-		else_if = {
-			limit = { mil = 2 }
-			mil_power = 200
-		}
-		else = {
-			mil_power = 100
-		}
-	}
-	else = {
-		if = {
-			limit = { mil = 5 }
-			mil_power = 400
-		}
-		else_if = {
-			limit = { mil = 4 }
-			mil_power = 300
-		}
-		else_if = {
-			limit = { mil = 3 }
-			mil_power = 200
-		}
-		else = {
-			mil_power = 100
+magic_study_type_is_not_level_3 = { #Used in UI, types are ruler/heir/estate
+	custom_trigger_tooltip = {
+		tooltip = magic_study_$type$_is_not_level_3
+		OR = {
+			AND = {
+				has_country_flag = magic_study_setup_abjuration_flag
+				NOT = { is_$type$_abjuration_level_3 = yes }
+			}
+			AND = {
+				has_country_flag = magic_study_setup_conjuration_flag
+				NOT = { is_$type$_conjuration_level_3 = yes }
+			}
+			AND = {
+				has_country_flag = magic_study_setup_divination_flag
+				NOT = { is_$type$_divination_level_3 = yes }
+			}
+			AND = {
+				has_country_flag = magic_study_setup_enchantment_flag
+				NOT = { is_$type$_enchantment_level_3 = yes }
+			}
+			AND = {
+				has_country_flag = magic_study_setup_evocation_flag
+				NOT = { is_$type$_evocation_level_3 = yes }
+			}
+			AND = {
+				has_country_flag = magic_study_setup_illusion_flag
+				NOT = { is_$type$_illusion_level_3 = yes }
+			}
+			AND = {
+				has_country_flag = magic_study_setup_necromancy_flag
+				NOT = { is_$type$_necromancy_level_3 = yes }
+			}
+			AND = {
+				has_country_flag = magic_study_setup_transmutation_flag
+				NOT = { is_$type$_transmutation_level_3 = yes }
+			}
 		}
 	}
 }
 
-magic_legend_lore_cost_trigger = {	
+can_select_school_to_study = {
+	OR = {
+		AND = {
+			has_country_flag = magic_study_setup_estate_flag
+			NOT = { has_country_flag = $school$_3 }
+		}
+		AND = {
+			has_country_flag = magic_study_setup_ruler_flag
+			NOT = { has_ruler_flag = $school$_3 }
+		}
+		AND = {
+			has_country_flag = magic_study_setup_heir_flag
+			NOT = { has_heir_flag = $school$_3 }
+		}
+	}
+}
+
+type_is_studying_magic = { #YOU PROBABLY DON'T WANT THIS TRIGGER. USE type_is_advancing_magic UNLESS YOU SPECIFICALLY DO NOT WANT PROJECTS TO COUNT
+	custom_trigger_tooltip = {
+		tooltip = $type$_studying_magic_tt
+		has_$type$_flag = magic_study
+	}
+	[[school]
+		custom_trigger_tooltip = {
+			tooltip = magic_school_$school$
+			has_$type$_flag = $school$_advancement
+		}
+	]
+}
+
+type_is_not_studying_magic = { #YOU PROBABLY DON'T WANT THIS TRIGGER. USE type_is_advancing_magic UNLESS YOU SPECIFICALLY DO NOT WANT PROJECTS TO COUNT
+	custom_trigger_tooltip = {
+		tooltip = $type$_not_studying_magic_tt
+		NOT = { has_$type$_flag = magic_study }
+	}
+	[[school]
+		custom_trigger_tooltip = {
+			tooltip = magic_school_$school$
+			NOT = { has_$type$_flag = $school$_advancement }
+		}
+	]
+}
+
+is_overall_studying_magic = { #YOU PROBABLY DON'T WANT THIS TRIGGER. USE type_is_advancing_magic UNLESS YOU SPECIFICALLY DO NOT WANT PROJECTS TO COUNT
+	custom_trigger_tooltip = {
+		tooltip = is_overall_studying_magic
+		OR = {
+			has_country_flag = magic_study
+			has_ruler_flag = magic_study
+			has_heir_flag = magic_study
+		}
+	}
+	[[school]
+		custom_trigger_tooltip = {
+			tooltip = magic_school_$school$
+			OR = {
+				has_country_flag = $school$_advancement
+				has_ruler_flag = $school$_advancement
+				has_heir_flag = $school$_advancement
+			}
+		}
+	]
+}
+
+is_overall_not_studying_magic = { #YOU PROBABLY DON'T WANT THIS TRIGGER. USE type_is_advancing_magic UNLESS YOU SPECIFICALLY DO NOT WANT PROJECTS TO COUNT
+	custom_trigger_tooltip = {
+		tooltip = is_overall_not_studying_magic
+		NOT = {
+			has_country_flag = magic_study
+			has_ruler_flag = magic_study
+			has_heir_flag = magic_study
+		}
+	}
+	[[school]
+		custom_trigger_tooltip = {
+			tooltip = magic_school_$school$
+			NOT = {
+				has_country_flag = $school$_advancement
+				has_ruler_flag = $school$_advancement
+				has_heir_flag = $school$_advancement
+			}
+		}
+	]
+}
+
+type_amount_studied_magic = { check_variable = { num_times_studied_magic_$type$ = $amount$ } }
+amount_ruler_studied_magic = { type_amount_studied_magic = { type = ruler amount = $amount$ } }
+amount_heir_studied_magic = { type_amount_studied_magic = { type = heir amount = $amount$ } }
+amount_estate_studied_magic = { type_amount_studied_magic = { type = country amount = $amount$ } }
+amount_overall_studied_magic = { type_amount_studied_magic = { type = total amount = $amount$ } }
+
+########################
+### MAGICAL PROJECTS ###
+########################
+
+is_advancing_any_project = {
+	custom_trigger_tooltip = {
+		tooltip = is_advancing_project
+		has_country_flag = magic_project
+	}
+}
+
+is_not_advancing_project = {
+	custom_trigger_tooltip = {
+		tooltip = is_not_advancing_project
+		NOT = { has_country_flag = magic_project }
+	}
+}
+
+is_advancing_specific_project = {
+	custom_trigger_tooltip = {
+		tooltip = advancing_$project$_tt
+		has_country_flag = magic_project
+		has_country_flag = $project$_project
+	}
+}
+
+is_advancing_orb_of_omniscience = { is_advancing_specific_project = { project = orb_of_omniscience } }
+is_advancing_artifact_of_enthrallment = { is_advancing_specific_project = { project = artifact_of_enthrallment } }
+is_advancing_battlemage_academy = { is_advancing_specific_project = { project = battlemage_academy } }
+is_advancing_homunculus = { is_advancing_specific_project = { project = homunculus } }
+is_advancing_theatre_of_simulacra = { is_advancing_specific_project = { project = theatre_of_simulacra } }
+is_advancing_summon_extraplanars = { is_advancing_specific_project = { project = summon_extraplanars } }
+is_advancing_magical_fortress = { is_advancing_specific_project = { project = magical_fortress } }
+is_advancing_army_of_the_dead = { is_advancing_specific_project = { project = army_of_the_dead } }
+
+at_least_magic_project_level = {
+	check_variable = { which = $project$_level value = $level$ }
+}
+exactly_magic_project_level = {
+	is_variable_equal = { which = $project$_level value = $level$ }
+}
+
+can_upgrade_project = {
+	is_overall_not_advancing_magic = yes
+	NOT = {
+		check_variable = {
+			which = $project$_level
+			value = 3
+		}
+	}
+	[[school]
+		if = {
+			limit = { check_variable = { which = $project$_level value = 2 } }
+			is_estate_$school$_level_3 = yes
+		}
+		else_if = {
+			limit = { check_variable = { which = $project$_level value = 1 } }
+			is_estate_$school$_level_2_minimum = yes
+		}
+		else = { is_estate_$school$_level_1_minimum = yes }
+	]
+	[[school2]
+		if = {
+			limit = { check_variable = { which = $project$_level value = 2 } }
+			is_estate_$school2$_level_3 = yes
+		}
+		else_if = {
+			limit = { check_variable = { which = $project$_level value = 1 } }
+			is_estate_$school2$_level_2_minimum = yes
+		}
+		else = { is_estate_$school2$_level_1_minimum = yes }
+	]
+	hidden_trigger = {
+		NOT = {
+			has_ruler_flag = in_magic_progress_event
+			has_heir_flag = in_magic_progress_event
+			has_country_flag = in_magic_progress_event
+		}
+	}
+}
+
+can_upgrade_project_with_single_stage = {
+	is_overall_not_advancing_magic = yes
+	NOT = {
+		check_variable = {
+			which = $project$_level
+			value = 1
+		}
+	}
+	[[school]
+    	is_estate_$school$_level_$level$_minimum = yes
+	]
+}
+
+theatre_of_simulacra_personality_available_trigger = {
+	NOT = { has_country_modifier = theatre_$personality$_bonus }
+	OR = {
+		ruler_has_personality = $personality$_personality
+		ruler_has_personality = ancestor_$personality$_personality
+		AND = {
+			at_least_magic_project_level = { project = theatre_of_simulacra level = 2 }
+			OR = {
+				consort_has_personality = $personality$_personality
+				consort_has_personality = ancestor_$personality$_personality
+			}
+		}
+		AND = {
+			at_least_magic_project_level = { project = theatre_of_simulacra level = 3 }
+			OR = {
+				heir_has_personality = $personality$_personality
+				heir_has_personality = ancestor_$personality$_personality
+			}
+		}
+	}
+}
+
+theatre_of_simulacra_school_available_trigger = {
+	NOT = { has_country_modifier = theatre_$school$_bonus }
+	OR = {
+		is_ruler_$school$_level_1_minimum = yes
+		AND = {
+			at_least_magic_project_level = { project = theatre_of_simulacra level = 2 }
+			is_consort_$school$_level_1_minimum = yes
+		}
+		AND = {
+			at_least_magic_project_level = { project = theatre_of_simulacra level = 3 }
+			is_heir_$school$_level_1_minimum = yes
+		}
+	}
+}
+
+theatre_of_simulacra_can_remove_bonus_trigger = {
+	has_country_modifier = theatre_$bonus$_bonus
+}
+
+ruler_is_lich = {
+	custom_trigger_tooltip = {
+		tooltip = ruler_is_lich
+		has_country_flag = ruled_by_lich
+	}
+}
+
+ruler_is_not_lich = {
+	custom_trigger_tooltip = {
+		tooltip = ruler_is_not_lich
+		NOT = { has_country_flag = ruled_by_lich }
+	}
+}
+
+ruler_is_homunculus = {
+	custom_trigger_tooltip = {
+		tooltip = ruler_is_homunculus
+		has_ruler_flag = is_a_homunculus
+	}
+}
+
+ruler_is_not_homunculus = {
+	custom_trigger_tooltip = {
+		tooltip = ruler_is_not_homunculus
+		NOT = { has_ruler_flag = is_a_homunculus }
+	}
+}
+
+heir_is_homunculus = {
+	custom_trigger_tooltip = {
+		tooltip = heir_is_homunculus
+		has_heir_flag = is_a_homunculus
+	}
+}
+
+heir_is_not_homunculus = {
+	custom_trigger_tooltip = {
+		tooltip = heir_is_not_homunculus
+		NOT = { has_heir_flag = is_a_homunculus }
+	}
+}
+
+##############################
+### MAGICAL INFRASTRUCTURE ###
+##############################
+
+is_advancing_infrastructure = {
+	custom_trigger_tooltip = {
+		tooltip = is_advancing_infrastructure
+		has_country_flag = magical_infrastructure
+	}
+}
+
+is_not_advancing_infrastructure = {
+	custom_trigger_tooltip = {
+		tooltip = is_not_advancing_infrastructure
+		NOT = { has_country_flag = magical_infrastructure }
+	}
+}
+
+at_least_magical_infrastructure_level_4 = {
+	custom_trigger_tooltip = {
+		tooltip = at_least_magical_infrastructure_level_4
+		has_country_modifier = magical_infrastructure_4
+	}
+}
+at_least_magical_infrastructure_level_3 = {
+	custom_trigger_tooltip = {
+		tooltip = at_least_magical_infrastructure_level_3
+		OR = {
+			has_country_modifier = magical_infrastructure_4
+			has_country_modifier = magical_infrastructure_3
+		}
+	}
+}
+at_least_magical_infrastructure_level_2 = {
+	custom_trigger_tooltip = {
+		tooltip = at_least_magical_infrastructure_level_2
+		OR = {
+			has_country_modifier = magical_infrastructure_4
+			has_country_modifier = magical_infrastructure_3
+			has_country_modifier = magical_infrastructure_2
+		}
+	}
+}
+at_least_magical_infrastructure_level_1 = {
+	custom_trigger_tooltip = {
+		tooltip = at_least_magical_infrastructure_level_1
+		OR = {
+			has_country_modifier = magical_infrastructure_4
+			has_country_modifier = magical_infrastructure_3
+			has_country_modifier = magical_infrastructure_2
+			has_country_modifier = magical_infrastructure_1
+		}
+	}
+}
+has_magical_infrastructure_level_0 = {
+	custom_trigger_tooltip = {
+		tooltip = at_least_magical_infrastructure_level_1
+		NOT = {
+			has_country_modifier = magical_infrastructure_4
+			has_country_modifier = magical_infrastructure_3
+			has_country_modifier = magical_infrastructure_2
+			has_country_modifier = magical_infrastructure_1
+		}
+	}
+}
+
+exactly_magical_infrastructure_level = {
+	has_country_modifier = magical_infrastructure_$level$
+}
+
+# You might notice that we surround all of the individual trigger with OR = { }
+# This is because of how calc_true_if tracks progress
+# Some cases are obvious: all_core_province = { } would check every province as a sub-trigger
+# Other cases are less obvious:
+# Not every trigger returns true (1) or false (0), some of them return a different integer
+# This integer is then checked against the right-hand argument when evaluating
+# monthly_adm is one example of this, it returns the amount of monthly adm you have
+# calc_true_if naively adds together all the integers returned from all sub-triggers
+# and happily accepts 14 generated monthly adm as 14 fulfilled sub-triggers
+# Therefore, to be safe, we have to wrap every trigger in an OR = { }
+# This bug was discovered and solved by @jothell on Discord
+
+can_upgrade_to_magical_infrastructure_5 = {
+	hidden_trigger = { always = no }
+}
+
+can_upgrade_to_magical_infrastructure_4 = {
+	calc_true_if = {
+		amount = 3
+		custom_trigger_tooltip = { #Has Mage Towers in all core provinces
+			tooltip = MI_4_mage_tower_cttt
+			OR = {
+				all_core_province = { has_building = mage_tower }
+			}
+		}
+		custom_trigger_tooltip = { #Gains 14 dip, adm, and mil power each month
+			tooltip = MI_4_monarch_power_cttt
+			OR = {
+				AND = {
+					monthly_adm = 14
+					monthly_dip = 14
+					monthly_mil = 14
+				}
+			}
+		}
+		custom_trigger_tooltip = { #Completed at least three Magical Projects
+			tooltip = MI_4_projects_cttt
+			OR = {
+				check_variable = {
+					which = magic_projects_completed
+					value = 3
+				}
+			}
+		}
+		custom_trigger_tooltip = { #Has Trading Bonus in Damestear AND Relics
+			tooltip = MI_4_trade_goods_cttt
+			OR = {
+				AND = {
+					trading_bonus = { trade_goods = damestear value = yes }
+					trading_bonus = { trade_goods = precursor_relics value = yes }
+				}
+			}
+		}
+		custom_trigger_tooltip = { #Has 9 Mage Estate Privileges AND Mage Estate has 100 influence
+			tooltip = MI_4_mages_cttt
+			OR = {
+				AND = {
+					estate_influence = {
+						estate = estate_mages
+						influence = 100
+					}
+					num_of_estate_privileges = {
+						estate = estate_mages
+						value = 9
+					}
+				}
+			}
+		}
+		custom_trigger_tooltip = { #Is a Witch-Kingdom and a Magocracy
+			tooltip = MI_4_witch_king_cttt
+			OR = {
+				AND = {
+					ruler_is_witch_king = yes
+					has_government_attribute = is_magocracy
+				}
+			}
+		}
+		custom_trigger_tooltip = {
+			tooltip = MI_has_bypass_cttt
+			OR = {
+				has_country_flag = MI_permanent_bypass_flag
+				has_ruler_flag = MI_permanent_bypass_flag
+				has_country_flag = MI_temporary_bypass_flag
+				AND = {
+					owns = 609
+					609 = {
+						has_great_project = {
+							type = eka_idulnazzar
+							tier = 3
+						}
+						sarhal_owner_can_use_eka_idulnazzar = yes
+					}
+				}
+				has_nila_tenvach = { level = 3 }
+			}
+		}
+	}
+}
+
+can_upgrade_to_magical_infrastructure_3 = {
+	calc_true_if = {
+		amount = 3
+		custom_trigger_tooltip = { #At least 50 Mage Towers OR has Mage Towers in all core provinces
+			tooltip = MI_3_mage_tower_cttt
+			OR = {
+				# mage_tower = 50 # Fails to create trigger when used in "common\estate_crown_land\00_interactions.txt"
+				num_of_owned_provinces_with = { value = 50 has_building = mage_tower }
+				all_core_province = { has_building = mage_tower }
+			}
+		}
+		custom_trigger_tooltip = { #Has 3 level 5 advisors, including a Court Mage
+			tooltip = MI_3_court_mage_cttt
+			OR = {
+				AND = {
+					court_mage = 5
+					has_dip_advisor_of_level = { level = 5 }
+					has_mil_advisor_of_level = { level = 5 }
+				}
+			}
+		}
+		custom_trigger_tooltip = { #Completed at least two Magical Projects
+			tooltip = MI_3_projects_cttt
+			OR = {
+				check_variable = {
+					which = magic_projects_completed
+					value = 2
+				}
+			}
+		}
+		custom_trigger_tooltip = { #Has Trading Bonus in Damestear OR Relics
+			tooltip = MI_3_trade_goods_cttt
+			OR = {
+				trading_bonus = { trade_goods = damestear value = yes }
+				trading_bonus = { trade_goods = precursor_relics value = yes }
+			}
+		}
+		custom_trigger_tooltip = { #Has 7 Mage Estate Privileges AND Mage Estate has 90 influence
+			tooltip = MI_3_mages_cttt
+			OR = {
+				AND = {
+					estate_influence = {
+						estate = estate_mages
+						influence = 90
+					}
+					num_of_estate_privileges = {
+						estate = estate_mages
+						value = 7
+					}
+				}
+			}
+		}
+		custom_trigger_tooltip = { #Is a Witch-Kingdom
+			tooltip = MI_3_witch_king_cttt
+			ruler_is_witch_king = yes
+		}
+		custom_trigger_tooltip = {
+			tooltip = MI_has_bypass_cttt
+			OR = {
+				has_country_flag = MI_permanent_bypass_flag
+				has_ruler_flag = MI_permanent_bypass_flag
+				has_country_flag = MI_temporary_bypass_flag
+				AND = {
+					owns = 609
+					609 = {
+						has_great_project = {
+							type = eka_idulnazzar
+							tier = 3
+						}
+						sarhal_owner_can_use_eka_idulnazzar = yes
+					}
+				}
+				has_nila_tenvach = { level = 3 }
+			}
+		}
+	}
+}
+
+can_upgrade_to_magical_infrastructure_2 = {
+	calc_true_if = {
+		amount = 3
+		custom_trigger_tooltip = { #At least 10 Mage Towers, or have one in all cores
+			tooltip = MI_2_mage_tower_cttt
+			OR = {
+				# mage_tower = 10 # Fails to create trigger when used in "common\estate_crown_land\00_interactions.txt"
+				num_of_owned_provinces_with = { value = 10 has_building = mage_tower }
+				all_core_province = { has_building = mage_tower }
+			}
+		}
+		custom_trigger_tooltip = { #Has level 4 Court Mage for 1 year
+			tooltip = MI_2_court_mage_cttt
+			OR = { has_specific_adm_advisor_for_duration = { duration = 365 type = court_mage skill = 4 } }
+		}
+		custom_trigger_tooltip = { #Completed at least one Magical Project
+			tooltip = MI_2_projects_cttt
+			OR = {
+				check_variable = {
+					which = magic_projects_completed
+					value = 1
+				}
+			}
+		}
+		custom_trigger_tooltip = { #Owns or subject owns 2 Damestear or Relics provinces
+			tooltip = MI_2_trade_goods_cttt
+			OR = {
+				num_of_provinces_owned_or_owned_by_subjects_with = {
+					value = 2
+					OR = {
+						trade_goods = damestear
+						trade_goods = precursor_relics
+					}
+				}
+			}
+		}
+		custom_trigger_tooltip = { #Has 4 Mage Estate Privileges AND Mage Estate has 60 influence
+			tooltip = MI_2_mages_cttt
+			OR = {
+				AND = {
+					estate_influence = {
+						estate = estate_mages
+						influence = 60
+					}
+					num_of_estate_privileges = {
+						estate = estate_mages
+						value = 5
+					}
+				}
+			}
+		}
+		custom_trigger_tooltip = { #Ruler is Powerful Mage
+			tooltip = MI_2_powerful_mage_cttt
+			ruler_is_powerful_mage = yes
+		}
+		custom_trigger_tooltip = {
+			tooltip = MI_has_bypass_cttt
+			OR = {
+				has_country_flag = MI_permanent_bypass_flag
+				has_ruler_flag = MI_permanent_bypass_flag
+				has_country_flag = MI_temporary_bypass_flag
+				AND = {
+					owns = 609
+					609 = {
+						has_great_project = {
+							type = eka_idulnazzar
+							tier = 3
+						}
+						sarhal_owner_can_use_eka_idulnazzar = yes
+					}
+				}
+				has_nila_tenvach = { level = 3 }
+			}
+		}
+	}
+}
+
+can_upgrade_to_magical_infrastructure_1 = {
+	calc_true_if = {
+		amount = 3
+		custom_trigger_tooltip = { #Capital has mage tower
+			tooltip = MI_1_mage_tower_cttt
+			capital_scope = {
+				has_building = mage_tower
+			}
+		}
+		custom_trigger_tooltip = { #Has level 2 Court Mage for 1 year
+			tooltip = MI_1_court_mage_cttt
+			OR = { has_specific_adm_advisor_for_duration = { duration = 365 type = court_mage skill = 2 } }
+		}
+		custom_trigger_tooltip = { #Has legendary school
+			tooltip = MI_1_study_cttt
+			OR = {
+				is_overall_abjuration_level_3 = yes
+				is_overall_conjuration_level_3 = yes
+				is_overall_divination_level_3 = yes
+				is_overall_enchantment_level_3 = yes
+				is_overall_evocation_level_3 = yes
+				is_overall_illusion_level_3 = yes
+				is_overall_necromancy_level_3 = yes
+				is_overall_transmutation_level_3 = yes
+			}
+		}
+		custom_trigger_tooltip = { #Owns or subject owns 1 Damestear OR Relics province
+			tooltip = MI_1_trade_goods_cttt
+			OR = {
+				num_of_provinces_owned_or_owned_by_subjects_with = {
+					value = 1
+					OR = {
+						trade_goods = damestear
+						trade_goods = precursor_relics
+					}
+				}
+			}
+		}
+		custom_trigger_tooltip = { #Has Privilege Magocratic Administration AND Mage Estate has 30 influence
+			tooltip = MI_1_mages_cttt
+			OR = {
+				AND = {
+					estate_influence = {
+						estate = estate_mages
+						influence = 30
+					}
+					has_estate_privilege = estate_mages_magocratic_administration
+				}
+			}
+		}
+		custom_trigger_tooltip = { #Ruler OR Heir is Powerful Mage
+			tooltip = MI_1_powerful_mage_cttt
+			OR = {
+				ruler_is_powerful_mage = yes
+				heir_is_powerful_mage = yes
+			}
+		}
+		custom_trigger_tooltip = {
+			tooltip = MI_has_bypass_cttt
+			OR = {
+				has_country_flag = MI_permanent_bypass_flag
+				has_ruler_flag = MI_permanent_bypass_flag
+				has_country_flag = MI_temporary_bypass_flag
+				AND = {
+					owns = 609
+					609 = {
+						has_great_project = {
+							type = eka_idulnazzar
+							tier = 3
+						}
+						sarhal_owner_can_use_eka_idulnazzar = yes
+					}
+				}
+				has_nila_tenvach = { level = 3 }
+			}
+		}
+	}
+}
+
+## Scripted Triggers
+##
+has_MI_X_institution_penalty_bypass = {
+	has_MI_X_institution_penalty_bypass_$penalty$ = { level = $level$ }
+}
+has_MI_X_institution_penalty_bypass_1 = { #$level$, #includes penalty2 reduction flag
+	OR = {
+		has_country_flag = bypass_magical_infrastructure_$level$_institution_penalty_1
+		has_country_flag = bypass_magical_infrastructure_$level$_institution_penalty_2
+		has_country_flag = bypass_magical_infrastructure_institution_penalty_all
+	}
+}
+has_MI_X_institution_penalty_bypass_2 = { #$level$
+	OR = {
+		has_country_flag = bypass_magical_infrastructure_$level$_institution_penalty_2
+		has_country_flag = bypass_magical_infrastructure_institution_penalty_all
+	}
+}
+
+#
+#Custom magic triggers
+#
+# Has any spell list
+has_any_custom_spell_list = {
+	has_custom_spell_list_of_group = { group = any }
+}
+# Has any spell list from a custom magic group
+has_any_custom_spell_list_in_group = {
+	has_custom_spell_list_of_group = { group = $group$ }
+}
+# Has a specific spell list from a custom magic group
+has_custom_spell_list_in_group = {
+	has_custom_spell_list_of_group_with_subgroup = { group = $group$ subgroup = $subgroup$ }
+}
+
+has_custom_spell_list_of_group = {
+	custom_trigger_tooltip = {
+		tooltip = has_magic_list_$group$
+		has_country_flag = magic_list_$group$
+	}
+}
+has_custom_spell_list_of_group_with_subgroup = {
+	custom_trigger_tooltip = {
+		tooltip = has_magic_list_$group$_$subgroup$
+		has_country_flag = magic_list_$group$_$subgroup$
+	}
+}
+has_custom_spell_list_of_group_non_default = {
+	custom_trigger_tooltip = {
+		tooltip = has_magic_list_$group$_non_default
+		has_country_flag = magic_list_$group$
+		NOT = { has_country_flag = magic_list_$group$_default }
+	}
+}
+
+#Pre-formed magical tradition triggers
+has_template_spell_list_default = {
+	has_custom_spell_list_of_group_with_subgroup = { group = template subgroup = default }
+}
+has_template_spell_list_non_default = {
+	has_custom_spell_list_of_group_non_default = { group = template }
+}
+
+has_harpy_spell_list_default = {
+	has_custom_spell_list_of_group_with_subgroup = { group = harpy subgroup = default }
+}
+has_harpy_spell_list_non_default = {
+	has_custom_spell_list_of_group_non_default = { group = harpy }
+}
+has_centaur_spell_list_default = {
+	has_custom_spell_list_of_group_with_subgroup = { group = centaur subgroup = default }
+}
+has_centaur_spell_list_non_default = {
+	has_custom_spell_list_of_group_non_default = { group = centaur }
+}
+
+has_bulwar_spell_list_default = {
+	has_custom_spell_list_of_group_with_subgroup = { group = bulwar subgroup = default }
+}
+has_bulwar_spell_list_non_default = {
+	has_custom_spell_list_of_group_non_default = { group = bulwar }
+}
+has_eordand_spell_list_default = {
+	has_custom_spell_list_of_group_with_subgroup = { group = eordand subgroup = default }
+}
+has_eordand_spell_list_non_default = {
+	has_custom_spell_list_of_group_non_default = { group = eordand }
+}
+
+has_xhazobkult_spell_list_default = {
+	has_custom_spell_list_of_group_with_subgroup = { group = xhazobkult subgroup = default }
+}
+has_xhazobkult_spell_list_non_default = {
+	has_custom_spell_list_of_group_non_default = { group = xhazobkult }
+}
+
+
+
+
+#Magical traditions spell triggers
+# usage: magical_tradition_spell_trigger = { group = <group> subgroup = <subgroup> slot = <spellnumber> [optional:player = yes] }
+magical_tradition_spell_trigger = {
+	custom_spell_$group$_$subgroup$_$slot$_trigger = { [[player] player = $player$ ] }
+}
+#custom_spell_$group$_$subgroup$_$slot$_trigger
+#Within, to enable re-use of spells with different flavour, triggers take the form:
+# $school$_$level$_$id$_trigger = yes
+# $school$ = school of magic, this must be one of the 8 schools of magic, NOT the name of the spell list
+#			(abjuration, conjuration, divination, enchantment, evocation, illusion, necromancy, transmutation)
+# $level$ = level of spell
+# $id$ = name of the spell
+
+#Note: >illusion< was used as an example, this can be any school of magic, and they can all be different
+custom_spell_template_default_1_trigger = {
+	illusion_0_template_default_1_trigger = { [[player] player = $player$ ] }
+}
+custom_spell_template_default_2_trigger = {
+	illusion_1_template_default_2_trigger = { [[player] player = $player$ ] }
+}
+custom_spell_template_default_3_trigger = {
+	illusion_1_template_default_3_trigger = { [[player] player = $player$ ] }
+}
+custom_spell_template_default_4_trigger = {
+	illusion_2_template_default_4_trigger = { [[player] player = $player$ ] }
+}
+custom_spell_template_default_5_trigger = {
+	illusion_2_template_default_5_trigger = { [[player] player = $player$ ] }
+}
+custom_spell_template_default_6_trigger = {
+	illusion_3_template_default_6_trigger = { [[player] player = $player$ ] }
+}
+custom_spell_template_tag_specific_example_1_trigger = {
+	illusion_0_template_tag_specific_example_1_trigger = { [[player] player = $player$ ] }
+}
+custom_spell_template_tag_specific_example_2_trigger = {
+	illusion_1_template_tag_specific_example_2_trigger = { [[player] player = $player$ ] }
+}
+custom_spell_template_tag_specific_example_3_trigger = {
+	illusion_1_template_tag_specific_example_3_trigger = { [[player] player = $player$ ] }
+}
+custom_spell_template_tag_specific_example_4_trigger = {
+	illusion_2_template_tag_specific_example_4_trigger = { [[player] player = $player$ ] }
+}
+custom_spell_template_tag_specific_example_5_trigger = {
+	illusion_2_template_tag_specific_example_5_trigger = { [[player] player = $player$ ] }
+}
+custom_spell_template_tag_specific_example_6_trigger = {
+	illusion_3_template_tag_specific_example_6_trigger = { [[player] player = $player$ ] }
+}
+
+
+illusion_0_template_default_1_trigger = {
+	[[player] has_mana_to_cast_magical_tradition_spell = { school = illusion level = 0 id = template_default_1 } ]
+}
+illusion_1_template_default_2_trigger = {
+	is_overall_illusion_level_1_minimum = yes
+	[[player] has_mana_to_cast_magical_tradition_spell = { school = illusion level = 1 id = template_default_2 } ]
+}
+illusion_1_template_default_3_trigger = {
+	is_overall_illusion_level_1_minimum = yes
+	[[player] has_mana_to_cast_magical_tradition_spell = { school = illusion level = 1 id = template_default_3 } ]
+}
+illusion_2_template_default_4_trigger = {
+	is_overall_illusion_level_2_minimum = yes
+	[[player] has_mana_to_cast_magical_tradition_spell = { school = illusion level = 2 id = template_default_4 } ]
+}
+illusion_2_template_default_5_trigger = {
+	is_overall_illusion_level_2_minimum = yes
+	[[player] has_mana_to_cast_magical_tradition_spell = { school = illusion level = 2 id = template_default_5 } ]
+}
+illusion_3_template_default_6_trigger = {
+	is_overall_illusion_level_3 = yes
+	[[player] has_mana_to_cast_magical_tradition_spell = { school = illusion level = 3 id = template_default_6 } ]
+}
+illusion_0_template_tag_specific_example_1_trigger = {
+	[[player] has_mana_to_cast_magical_tradition_spell = { school = illusion level = 0 id = template_tag_specific_example_1 } ]
+}
+illusion_1_template_tag_specific_example_2_trigger = {
+	is_overall_illusion_level_1_minimum = yes
+	[[player] has_mana_to_cast_magical_tradition_spell = { school = illusion level = 1 id = template_tag_specific_example_2 } ]
+}
+illusion_1_template_tag_specific_example_3_trigger = {
+	is_overall_illusion_level_1_minimum = yes
+	[[player] has_mana_to_cast_magical_tradition_spell = { school = illusion level = 1 id = template_tag_specific_example_3 } ]
+}
+illusion_2_template_tag_specific_example_4_trigger = {
+	is_overall_illusion_level_2_minimum = yes
+	[[player] has_mana_to_cast_magical_tradition_spell = { school = illusion level = 2 id = template_tag_specific_example_4 } ]
+}
+illusion_2_template_tag_specific_example_5_trigger = {
+	is_overall_illusion_level_2_minimum = yes
+	[[player] has_mana_to_cast_magical_tradition_spell = { school = illusion level = 2 id = template_tag_specific_example_5 } ]
+}
+illusion_3_template_tag_specific_example_6_trigger = {
+	is_overall_illusion_level_3 = yes
+	[[player] has_mana_to_cast_magical_tradition_spell = { school = illusion level = 3 id = template_tag_specific_example_6 } ]
+}
+
+#Harpy
+custom_spell_harpy_default_1_trigger = {
+	enchantment_0_harpy_default_1_trigger = { [[player] player = $player$ ] }
+}
+custom_spell_harpy_default_2_trigger = {
+	evocation_2_harpy_default_2_trigger = { [[player] player = $player$ ] }
+}
+custom_spell_harpy_default_3_trigger = {
+	transmutation_2_harpy_default_3_trigger = { [[player] player = $player$ ] }
+}
+custom_spell_harpy_default_4_trigger = {
+	enchantment_3_harpy_default_4_trigger = { [[player] player = $player$ ] }
+}
+custom_spell_harpy_default_5_trigger = {
+	enchantment_3_harpy_default_5_trigger = { [[player] player = $player$ ] }
+}
+
+enchantment_0_harpy_default_1_trigger = {
+	[[player] has_mana_to_cast_magical_tradition_spell = { school = enchantment level = 0 id = harpy_default_1 } ]
+	NOT = { has_country_modifier = enchantment_0_harpy_mod }
+}
+evocation_2_harpy_default_2_trigger = {
+	evocation_2_harpy_default_2_subtrigger = yes
+	war_magic_trigger = yes
+	[[player] has_mana_to_cast_magical_tradition_spell = { school = evocation level = 2 id = harpy_default_2 } ]
+	has_not_cast_kiovas_gale = yes
+}
+evocation_2_harpy_default_2_subtrigger = {	#aka is the spell "unlocked"?
+	is_overall_evocation_level_2_minimum = yes
+	check_variable = { ruler_battles_won = 10 }
+}
+transmutation_2_harpy_default_3_trigger = {
+	transmutation_2_harpy_default_3_subtrigger = yes
+	[[player] has_mana_to_cast_magical_tradition_spell = { school = transmutation level = 2 id = harpy_default_3 } ]
+	has_not_cast_reshape_terrain = yes
+	custom_trigger_tooltip = {
+		tooltip = transmutation_2_harpy_default_3_trigger_tt
+		NOT = { has_country_modifier = transmutation_2_harpy_default_3_tracking_mod }
+	}
+}
+transmutation_2_harpy_default_3_subtrigger = {	#aka is the spell "unlocked"?
+	is_overall_transmutation_level_2_minimum = yes
+	num_of_owned_provinces_with = {
+		value = 3
+		harpy_roost_st_has_non_fledgling_roost = yes
+		development = 30
+		has_building = mage_tower
+		if = {
+			limit = { has_dlc = "Leviathan" }
+			num_of_times_expanded_infrastructure = 1
+		}
+	}	
+}
+enchantment_3_harpy_default_4_trigger = {
+	enchantment_3_harpy_default_4_subtrigger = yes
+	[[player] has_mana_to_cast_magical_tradition_spell = { school = enchantment level = 3 id = harpy_default_4 } ]
+	NOT = { has_country_modifier = enchantment_3_harpy_mod }
+}
+enchantment_3_harpy_default_4_subtrigger = {	#aka is the spell "unlocked"?
+	is_overall_enchantment_level_3 = yes
+	government_rank = 3
+	fast_owns_num_pops_of_race = { race = harpy amount = 50 }
+}
+enchantment_3_harpy_default_5_trigger = {
+	[[player] has_mana_to_cast_magical_tradition_spell = { school = enchantment level = 3 id = harpy_default_5 } ]
+	custom_trigger_tooltip = {
+		tooltip = enchantment_3_harpy_default_5_trigger_tt
+		NOT = { has_country_modifier = enchantment_3_harpylen_tracking_mod }
+	}
+	num_of_subjects = 1
+}
+
+has_cast_firanyas_call = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_firanyas_call
+		has_country_modifier = enchantment_0_harpy_mod
+	}
+}
+has_cast_kiovas_gale = {
+	custom_trigger_tooltip = {
+		tooltip = has_cast_kiovas_gale
+		OR = {
+			has_country_modifier = evocation_2_harpy_mod
+			has_country_modifier = evocation_2_harpy_mod_boosted
+		}
+	}
+}
+has_not_cast_kiovas_gale = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_cast_kiovas_gale
+		NOT = { has_cast_kiovas_gale = yes }
+	}
+}
+
+#Black Herd
+custom_spell_centaur_black_herd_5_trigger = {
+	evocation_2_centaur_black_herd_5_trigger = { [[player] player = $player$ ] }
+}
+
+evocation_2_centaur_black_herd_5_trigger = {
+	is_overall_transmutation_level_1_minimum = yes
+	[[player]
+		has_mana_to_cast_magical_tradition_spell = {
+			school = evocation
+			level = 2
+			id = centaur_black_herd_5
+			has_spell_specific_discounts = yes
+		}
+	]
+	war_magic_trigger = yes
+	check_variable = { markhentakruan_land_units_killed = 20000 }
+	is_at_war = yes
+}
+
+evocation_2_centaur_black_herd_5_effect_sub_trigger = {
+	$scope$ = {
+		[[war_leader]
+			OR = {
+				is_in_war = { attacker_leader = THIS defenders = ROOT }
+				is_in_war = { defender_leader = THIS attackers = ROOT }
+			}
+		]
+		any_owned_province = {
+			sieged_by = ROOT
+			[[priority_trigger] $priority_trigger$ ]
+		}
+	}
+}
+
+#Bulwar
+custom_spell_bulwar_default_1_trigger = {
+	transmutation_3_bulwar_default_1_trigger = { [[player] player = $player$ ] }
+}
+custom_spell_bulwar_default_2_trigger = {
+	enchantment_2_bulwar_default_2_trigger = { [[player] player = $player$ ] }
+}
+custom_spell_bulwar_default_3_trigger = {
+	conjuration_1_bulwar_default_3_trigger = { [[player] player = $player$ ] }
+}
+custom_spell_bulwar_default_4_trigger = {
+	transmutation_2_bulwar_default_4_trigger = { [[player] player = $player$ ] }
+}
+
+transmutation_3_bulwar_default_1_trigger = {
+	[[player] has_mana_to_cast_magical_tradition_spell = { school = transmutation level = 3 id = bulwar_default_1 } ]
+	government_rank = 3
+	estate_loyalty = {
+		estate = estate_nobles
+		loyalty = 65
+	}
+	has_not_cast_reshape_terrain = yes
+}
+enchantment_2_bulwar_default_2_trigger = {
+	[[player] has_mana_to_cast_magical_tradition_spell = { school = enchantment level = 2 id = bulwar_default_2 } ]
+	government_rank = 3
 	if = {
 		limit = {
 			OR = {
-				AND = {
-					has_ruler_flag = ruler_studying_abjuration
-					has_ruler_flag = abjuration_2
-				}
-				AND = {
-					has_ruler_flag = ruler_studying_conjuration
-					has_ruler_flag = conjuration_2
-				}
-				AND = {
-					has_ruler_flag = ruler_studying_divination
-					has_ruler_flag = divination_2
-				}
-				AND = {
-					has_ruler_flag = ruler_studying_enchantment
-					has_ruler_flag = enchantment_2
-				}
-				AND = {
-					has_ruler_flag = ruler_studying_evocation
-					has_ruler_flag = evocation_2
-				}
-				AND = {
-					has_ruler_flag = ruler_studying_illusion
-					has_ruler_flag = illusion_2
-				}
-				AND = {
-					has_ruler_flag = ruler_studying_necromancy
-					has_ruler_flag = necromancy_2
-				}
-				AND = {
-					has_ruler_flag = ruler_studying_transmutation
-					has_ruler_flag = transmutation_2
-				}
+				capital_scope = { superregion = bulwar_superregion }
+				tag = F51 #Jadd Empire
 			}
 		}
-		dip_power = 80
-		mil_power = 20
+		601 = { #Bulwar
+			owned_by = ROOT
+			development = 15
+			has_tax_building_trigger = yes
+		}
+		631 = { #Eduz-Vacyn
+			owned_by = ROOT
+			development = 15
+			has_tax_building_trigger = yes
+		}
+		643 = { #Azka-sur
+			owned_by = ROOT
+			development = 15
+			has_tax_building_trigger = yes
+		}
 	}
-	else_if = {
+	if = {
 		limit = {
-			OR = {
-				AND = {
-					has_ruler_flag = ruler_studying_abjuration
-					has_ruler_flag = abjuration_1
-				}
-				AND = {
-					has_ruler_flag = ruler_studying_conjuration
-					has_ruler_flag = conjuration_1
-				}
-				AND = {
-					has_ruler_flag = ruler_studying_divination
-					has_ruler_flag = divination_1
-				}
-				AND = {
-					has_ruler_flag = ruler_studying_enchantment
-					has_ruler_flag = enchantment_1
-				}
-				AND = {
-					has_ruler_flag = ruler_studying_evocation
-					has_ruler_flag = evocation_1
-				}
-				AND = {
-					has_ruler_flag = ruler_studying_illusion
-					has_ruler_flag = illusion_1
-				}
-				AND = {
-					has_ruler_flag = ruler_studying_necromancy
-					has_ruler_flag = necromancy_1
-				}
-				AND = {
-					has_ruler_flag = ruler_studying_transmutation
-					has_ruler_flag = transmutation_1
+			NOT = {
+				OR = {
+					capital_scope = { superregion = bulwar_superregion }
+					tag = F51 #Jadd Empire
 				}
 			}
 		}
-		dip_power = 40
-		mil_power = 10
+		num_of_owned_provinces_with = {
+			value = 15
+			has_tax_building_trigger = yes
+		}
+		estate_influence = {
+			estate = estate_church
+			influence = 40
+		}
 	}
-	else = {
-		dip_power = 20
-		mil_power = 5
-	}
-}
-
-
-
-
-ruler_studying_magic = {
+} 
+conjuration_1_bulwar_default_3_trigger = {
+	[[player] has_mana_to_cast_magical_tradition_spell = { school = conjuration level = 1 id = bulwar_default_3 } ]
+	is_overall_conjuration_level_2_minimum = yes
 	custom_trigger_tooltip = {
-		tooltip = ruler_studying_magic_tt
-		OR = {
-			has_ruler_modifier = ruler_studying_magic
-			has_ruler_flag = ruler_studying_abjuration
-			has_ruler_flag = ruler_studying_conjuration
-			has_ruler_flag = ruler_studying_divination
-			has_ruler_flag = ruler_studying_enchantment
-			has_ruler_flag = ruler_studying_evocation
-			has_ruler_flag = ruler_studying_illusion
-			has_ruler_flag = ruler_studying_necromancy
-			has_ruler_flag = ruler_studying_transmutation
+		tooltip = conjuration_1_bulwar_default_3_cooldown_tt
+		NOT = {
+			has_country_modifier = conjuration_1_bulwar_default_3_tracking_mod
 		}
 	}
 }
-has_finished_magical_studies = {
-	custom_trigger_tooltip = {
-		tooltip = magical_study_tt
-		if = {
-			limit = { has_ruler_flag = magical_study_1 }
-			check_variable = {
-				ruler_study_experience = 1000
-			}
-		}
-		else_if = {
-			limit = { has_ruler_flag = magical_study_2 }
-			check_variable = {
-				ruler_study_experience = 1500
-			}
-		}
-		else_if = {
-			limit = { has_ruler_flag = magical_study_3 }
-			check_variable = {
-				ruler_study_experience = 2000
-			}
-		}
-		else = {
-			check_variable = {
-				ruler_study_experience = 5000
-			}
-		}
-	}
-}
-
-magical_project_in_progress = {
+transmutation_2_bulwar_default_4_trigger = {
+	[[player] has_mana_to_cast_magical_tradition_spell = { school = transmutation level = 2 id = bulwar_default_4 } ]
 	OR = {
-		has_ruler_flag = magic_project_homunculus_started
-		has_ruler_flag = magic_project_simulacrum_started
-		has_ruler_flag = magic_project_lichdom_started
-		has_ruler_flag = magic_project_summoning_started
-		has_ruler_flag = magic_project_alchemy_started
+		is_overall_enchantment_level_2_minimum = yes
+		is_overall_transmutation_level_2_minimum = yes
 	}
-}
-
-is_abjuration_0 = {
-	custom_trigger_tooltip = {
-		tooltip = is_abjuration_0_tt
-		
-		NOT = { has_ruler_flag = abjuration_1 }
-		NOT = { has_ruler_flag = abjuration_2 }
-		NOT = { has_ruler_flag = abjuration_3 }
-	}
-}
-
-is_abjuration_1 = {
-	custom_trigger_tooltip = {
-		tooltip = is_abjuration_1_tt
-		
-		has_ruler_flag = abjuration_1
-		NOT = { has_ruler_flag = abjuration_2 }
-		NOT = { has_ruler_flag = abjuration_3 }
-	}
-}
-
-is_abjuration_2 = {
-	custom_trigger_tooltip = {
-		tooltip = is_abjuration_2_tt
-		has_ruler_flag = abjuration_2
-		NOT = { has_ruler_flag = abjuration_3 }
-	}
-}
-
-is_abjuration_3 = {
-	custom_trigger_tooltip = {
-		tooltip = is_abjuration_3_tt
-		has_ruler_flag = abjuration_3
-	}
-}
-
-is_conjuration_0 = {
-	custom_trigger_tooltip = {
-		tooltip = is_conjuration_0_tt
-		
-		NOT = { has_ruler_flag = conjuration_1 }
-		NOT = { has_ruler_flag = conjuration_2 }
-		NOT = { has_ruler_flag = conjuration_3 }
-	}
-}
-
-is_conjuration_1 = {
-	custom_trigger_tooltip = {
-		tooltip = is_conjuration_1_tt
-		
-		has_ruler_flag = conjuration_1
-		NOT = { has_ruler_flag = conjuration_2 }
-		NOT = { has_ruler_flag = conjuration_3 }
-	}
-}
-
-is_conjuration_2 = {
-	custom_trigger_tooltip = {
-		tooltip = is_conjuration_2_tt
-		has_ruler_flag = conjuration_2
-		NOT = { has_ruler_flag = conjuration_3 }
-	}
-}
-
-is_conjuration_3 = {
-	custom_trigger_tooltip = {
-		tooltip = is_conjuration_3_tt
-		has_ruler_flag = conjuration_3
-	}
-}
-
-is_divination_0 = {
-	custom_trigger_tooltip = {
-		tooltip = is_divination_0_tt
-		
-		NOT = { has_ruler_flag = divination_1 }
-		NOT = { has_ruler_flag = divination_2 }
-		NOT = { has_ruler_flag = divination_3 }
-	}
-}
-
-is_divination_1 = {
-	custom_trigger_tooltip = {
-		tooltip = is_divination_1_tt
-		
-		has_ruler_flag = divination_1
-		NOT = { has_ruler_flag = divination_2 }
-		NOT = { has_ruler_flag = divination_3 }
-	}
-}
-
-is_divination_2 = {
-	custom_trigger_tooltip = {
-		tooltip = is_divination_2_tt
-		has_ruler_flag = divination_2
-		NOT = { has_ruler_flag = divination_3 }
-	}
-}
-
-is_divination_3 = {
-	custom_trigger_tooltip = {
-		tooltip = is_divination_3_tt
-		has_ruler_flag = divination_3
-	}
-}
-
-is_enchantment_0 = {
-	custom_trigger_tooltip = {
-		tooltip = is_enchantment_0_tt
-		
-		NOT = { has_ruler_flag = enchantment_1 }
-		NOT = { has_ruler_flag = enchantment_2 }
-		NOT = { has_ruler_flag = enchantment_3 }
-	}
-}
-
-is_enchantment_1 = {
-	custom_trigger_tooltip = {
-		tooltip = is_enchantment_1_tt
-		
-		has_ruler_flag = enchantment_1
-		NOT = { has_ruler_flag = enchantment_2 }
-		NOT = { has_ruler_flag = enchantment_3 }
-	}
-}
-
-is_enchantment_2 = {
-	custom_trigger_tooltip = {
-		tooltip = is_enchantment_2_tt
-		has_ruler_flag = enchantment_2
-		NOT = { has_ruler_flag = enchantment_3 }
-	}
-}
-
-is_enchantment_3 = {
-	custom_trigger_tooltip = {
-		tooltip = is_enchantment_3_tt
-		has_ruler_flag = enchantment_3
-	}
-}
-
-is_evocation_0 = {
-	custom_trigger_tooltip = {
-		tooltip = is_evocation_0_tt
-		
-		NOT = { has_ruler_flag = evocation_1 }
-		NOT = { has_ruler_flag = evocation_2 }
-		NOT = { has_ruler_flag = evocation_3 }
-	}
-}
-
-is_evocation_1 = {
-	custom_trigger_tooltip = {
-		tooltip = is_evocation_1_tt
-		
-		has_ruler_flag = evocation_1
-		NOT = { has_ruler_flag = evocation_2 }
-		NOT = { has_ruler_flag = evocation_3 }
-	}
-}
-
-is_evocation_2 = {
-	custom_trigger_tooltip = {
-		tooltip = is_evocation_2_tt
-		has_ruler_flag = evocation_2
-		NOT = { has_ruler_flag = evocation_3 }
-	}
-}
-
-is_evocation_3 = {
-	custom_trigger_tooltip = {
-		tooltip = is_evocation_3_tt
-		has_ruler_flag = evocation_3
-	}
-}
-
-is_illusion_0 = {
-	custom_trigger_tooltip = {
-		tooltip = is_illusion_0_tt
-		
-		NOT = { has_ruler_flag = illusion_1 }
-		NOT = { has_ruler_flag = illusion_2 }
-		NOT = { has_ruler_flag = illusion_3 }
-	}
-}
-
-is_illusion_1 = {
-	custom_trigger_tooltip = {
-		tooltip = is_illusion_1_tt
-		
-		has_ruler_flag = illusion_1
-		NOT = { has_ruler_flag = illusion_2 }
-		NOT = { has_ruler_flag = illusion_3 }
-	}
-}
-
-is_illusion_2 = {
-	custom_trigger_tooltip = {
-		tooltip = is_illusion_2_tt
-		has_ruler_flag = illusion_2
-		NOT = { has_ruler_flag = illusion_3 }
-	}
-}
-
-is_illusion_3 = {
-	custom_trigger_tooltip = {
-		tooltip = is_illusion_3_tt
-		has_ruler_flag = illusion_3
-	}
-}
-
-is_necromancy_0 = {
-	custom_trigger_tooltip = {
-		tooltip = is_necromancy_0_tt
-		
-		NOT = { has_ruler_flag = necromancy_1 }
-		NOT = { has_ruler_flag = necromancy_2 }
-		NOT = { has_ruler_flag = necromancy_3 }
-	}
-}
-
-is_necromancy_1 = {
-	custom_trigger_tooltip = {
-		tooltip = is_necromancy_1_tt
-		
-		has_ruler_flag = necromancy_1
-		NOT = { has_ruler_flag = necromancy_2 }
-		NOT = { has_ruler_flag = necromancy_3 }
-	}
-}
-
-is_necromancy_2 = {
-	custom_trigger_tooltip = {
-		tooltip = is_necromancy_2_tt
-		has_ruler_flag = necromancy_2
-		NOT = { has_ruler_flag = necromancy_3 }
-	}
-}
-
-is_necromancy_3 = {
-	custom_trigger_tooltip = {
-		tooltip = is_necromancy_3_tt
-		has_ruler_flag = necromancy_3
-	}
-}
-
-is_transmutation_0 = {
-	custom_trigger_tooltip = {
-		tooltip = is_transmutation_0_tt
-		
-		NOT = { has_ruler_flag = transmutation_1 }
-		NOT = { has_ruler_flag = transmutation_2 }
-		NOT = { has_ruler_flag = transmutation_3 }
-	}
-}
-
-is_transmutation_1 = {
-	custom_trigger_tooltip = {
-		tooltip = is_transmutation_1_tt
-		
-		has_ruler_flag = transmutation_1
-		NOT = { has_ruler_flag = transmutation_2 }
-		NOT = { has_ruler_flag = transmutation_3 }
-	}
-}
-
-is_transmutation_2 = {
-	custom_trigger_tooltip = {
-		tooltip = is_transmutation_2_tt
-		has_ruler_flag = transmutation_2
-		NOT = { has_ruler_flag = transmutation_3 }
-	}
-}
-
-is_transmutation_3 = {
-	custom_trigger_tooltip = {
-		tooltip = is_transmutation_3_tt
-		has_ruler_flag = transmutation_3
-	}
-}
-
-is_scrying = {
-	custom_trigger_tooltip = {
-		tooltip = is_scrying_tt
-
+	NOT = {
 		OR = {
-			has_country_modifier = magic_realm_divination_scrying_rivals
-			has_country_modifier = magic_realm_divination_scrying_internal_dissidents
-			has_country_modifier = magic_realm_divination_scrying_affairs
-			has_country_modifier = magic_estate_scrying_military_intelligence_1
-			has_country_modifier = magic_estate_scrying_military_intelligence_2
-			has_country_modifier = magic_estate_scrying_military_intelligence_3
-			has_country_modifier = magic_estate_scrying_internal_dissidents_1
-			has_country_modifier = magic_estate_scrying_internal_dissidents_2
-			has_country_modifier = magic_estate_scrying_internal_dissidents_3
-			has_country_modifier = magic_estate_scrying_rivals_1
-			has_country_modifier = magic_estate_scrying_rivals_2
-			has_country_modifier = magic_estate_scrying_rivals_3
-			has_country_modifier = magic_estate_scrying_neighbours_1
-			has_country_modifier = magic_estate_scrying_neighbours_2
-			has_country_modifier = magic_estate_scrying_neighbours_3
+			has_country_modifier = transmutation_2_bulwar_crown
+			has_country_modifier = transmutation_2_bulwar_vessel
+			has_country_modifier = transmutation_2_bulwar_hammer
+			has_country_modifier = transmutation_2_bulwar_ring
 		}
 	}
 }
 
-have_cast_aid_construction = {
+#Xhazobkult spells
+custom_spell_xhazobkult_default_1_trigger = {
+	evocation_2_xhazobkult_default_1_trigger = { [[player] player = $player$ ] }
+}
+custom_spell_xhazobkult_default_2_trigger = {
+	conjuration_2_xhazobkult_default_2_trigger = { [[player] player = $player$ ] }
+}
+custom_spell_xhazobkult_default_3_trigger = {
+	evocation_3_xhazobkult_default_3_trigger = { [[player] player = $player$ ] }
+}
+
+evocation_2_xhazobkult_default_1_trigger = {
+	[[player] has_mana_to_cast_magical_tradition_spell = { school = evocation level = 2 id = xhazobkult_default_1 } ]
+	if = {
+		limit = { NOT = { has_ruler_modifier = avatar_of_the_nightmarish_end } }
+		patriarch_authority = 0.1
+	}
+	religion = xhazobkult
+	is_overall_evocation_level_2_minimum  = yes
+	is_overall_conjuration_level_1_minimum  = yes
 	custom_trigger_tooltip = {
-		tooltip = have_cast_aid_construction_tt
-		OR = {
-			has_country_modifier = magic_estate_aiding_construction_1
-			has_country_modifier = magic_estate_aiding_construction_2
-			has_country_modifier = magic_estate_aiding_construction_3
+		tooltip = has_killed_30k_troops_while_xhaz_overall_tt
+		check_variable = {
+			which = troopsKilledByXhazobineOverall
+			value = 30000
+		}
+	}
+	custom_trigger_tooltip = {
+		tooltip = has_gained_150_dp_tt
+		check_variable = {
+			which = demonicPowerGainedByXhazobine
+			value = 150
 		}
 	}
 }
-
-have_cast_magnificent_feast = {
+conjuration_2_xhazobkult_default_2_trigger = {
+	[[player] has_mana_to_cast_magical_tradition_spell = { school = conjuration level = 2 id = xhazobkult_default_2 } ]
+	if = {
+		limit = { NOT = { has_ruler_modifier = avatar_of_the_nightmarish_end } }
+		patriarch_authority = 0.1
+	}
+	religion = xhazobkult
+	is_overall_evocation_level_2_minimum  = yes
+	is_overall_conjuration_level_2_minimum  = yes
 	custom_trigger_tooltip = {
-		tooltip = have_cast_manificent_feast_tt
-		OR = {
-			has_country_modifier = magic_estate_magnificent_feast_1
-			has_country_modifier = magic_estate_magnificent_feast_2
-			has_country_modifier = magic_estate_magnificent_feast_3
+		tooltip = has_killed_50k_troops_while_xhaz_overall_tt
+		check_variable = {
+			which = troopsKilledByXhazobineOverall
+			value = 50000
 		}
 	}
-}
-
-have_cast_scry_dissidents = {
 	custom_trigger_tooltip = {
-		tooltip = have_cast_scry_dissidents_tt
-		OR = {
-			has_country_modifier = magic_estate_scrying_internal_dissidents_1
-			has_country_modifier = magic_estate_scrying_internal_dissidents_2
-			has_country_modifier = magic_estate_scrying_internal_dissidents_3
+		tooltip = has_gained_300_dp_tt
+		check_variable = {
+			which = demonicPowerGainedByXhazobine
+			value = 300
 		}
 	}
-}
-
-have_cast_broad_ward = {
+	is_at_war = yes
+} 
+evocation_3_xhazobkult_default_3_trigger = {
+	[[player] has_mana_to_cast_magical_tradition_spell = { school = evocation level = 3 id = xhazobkult_default_3 } ]
+	religion = xhazobkult
+	is_ruler_evocation_level_3 = yes
+	is_ruler_conjuration_level_3 = yes
 	custom_trigger_tooltip = {
-		tooltip = have_cast_broad_ward_tt
-		any_owned_province = {
-			OR = {
-				has_province_modifier = magic_estate_broad_ward_1
-				has_province_modifier = magic_estate_broad_ward_2
-				has_province_modifier = magic_estate_broad_ward_3
+		tooltip = has_killed_100k_troops_while_xhaz_overall_tt
+		check_variable = {
+			which = troopsKilledByXhazobineOverall
+			value = 100000
+		}
+	}
+	custom_trigger_tooltip = {
+		tooltip = has_gained_500_dp_tt
+		check_variable = {
+			which = demonicPowerGainedByXhazobine
+			value = 500
+		}
+	}
+	6104 = {
+		owned_by = ROOT
+		OR = {
+			has_great_project = {
+				type = ger_bexamurr
+				tier = 2
 			}
+			development = 30
 		}
 	}
-}
-toarnaire_wine_mage_tower = {
-	AND = {
-		trade_goods = wine
-		has_building = mage_tower
+	ruler_has_personality = xhazobs_chosen_personality
+	custom_trigger_tooltip = {
+		tooltip = ruler_has_killed_25k_troops_while_xhaz_tt
+		check_variable = {
+			which = troopsKilledByXhazobineCurrent
+			value = 25000
+		}
 	}
+	NOT = { has_ruler_modifier = avatar_of_the_nightmarish_end }
+	NOT = { has_ruler_modifier = fire_that_burn_the_body_and_soul }
 }
+
+#Eighard
+custom_spell_eordand_eighard_5_trigger = {
+	abjuration_1_eordand_eighard_5_trigger = { [[player] player = $player$ ] }
+}
+
+abjuration_1_eordand_eighard_5_trigger = {
+	war_magic_trigger = yes
+	[[player]
+		has_mana_to_cast_magical_tradition_spell = {
+			school = abjuration
+			level = 1
+			id = eordand_eighard_5
+		}
+	]
+	is_at_war = yes
+}
+
+### STOP.
+### IF YOU ARE HERE, IT IS BECAUSE YOU ARE TRYING TO ADD A NEW SCRIPTED TRIGGER TO THE SYSTEM
+### BEFORE BLINDLY ADDING IT TO THE BOTTOM OF THE LIST, ASK YOURSELF:
+### "IS THERE A CATEGORY TO WHICH THIS TRIGGER MIGHT BELONG?"
+### THE ANSWER, DEAR READER,
+### IS YES.
+### IF YOU ADD A SCRIPTED TRIGGER HERE NOT RELATED TO CUSTOM MAGIC SCHOOLS,
+### I WILL BE VERY DISAPPOINTED.

@@ -77,10 +77,7 @@ country_event = {
 			has_faction = nl_cooperatists
 		}
 		add_manpower = -5
-		add_faction_influence = {
-			faction = nl_cooperatists
-			influence = 10
-		}
+
 	}
 }
 #factory fire
@@ -158,10 +155,7 @@ country_event = {
 				name = workers_justice
 				duration = 3650
 			}
-		add_faction_influence = {
-			faction = nl_cooperatists
-			influence = 15
-		}
+
 		every_owned_province = {
 			limit = {
 				has_province_flag = factory_fire
@@ -301,10 +295,7 @@ country_event = {
 				duration = 7300
 			}
 		}
-		add_faction_influence = {
-			faction = nl_cooperatists
-			influence = 10
-		}
+
 	}
 }
 #expand labor pools
@@ -463,7 +454,6 @@ country_event = {
 	trigger = {
 		has_country_modifier = chief_artificer
 		NOT = { has_country_flag = unlocked_artifice_invention_domination_potions }
-		NOT = { has_country_flag = nurael_convention }
 		NOT = { has_country_modifier = artificer_cooldown }
 	}
 	immediate = {
@@ -507,7 +497,6 @@ country_event = {
 		has_country_modifier = chief_artificer
 		has_country_flag = unlocked_artifice_invention_domination_potions
 		NOT = { has_country_flag = unlocked_artifice_invention_necrolyzer }
-		NOT = { has_country_flag = nurael_convention }
 		NOT = { has_country_modifier = artificer_cooldown }
 	}
 	immediate = {
@@ -551,7 +540,6 @@ country_event = {
 		is_institution_enabled = global_trade
 		has_country_flag = unlocked_artifice_invention_necrolyzer
 		NOT = { has_country_flag = unlocked_artifice_invention_bullet_worms }
-		NOT = { has_country_flag = nurael_convention }
 		NOT = { has_country_modifier = artificer_cooldown }
 	}
 	immediate = {
@@ -614,7 +602,6 @@ country_event = {
 		is_institution_enabled = enlightenment
 		has_country_flag = unlocked_artifice_invention_dwarf_eye
 		NOT = { has_country_flag = unlocked_artifice_invention_serpentrot_gas }
-		NOT = { has_country_flag = nurael_convention }
 		NOT = { has_country_modifier = artificer_cooldown }
 	}
 	immediate = {
@@ -1065,99 +1052,7 @@ country_event = {
 		add_mil_power = -100
 	}
 }
-#chief artificer protests nurael convention
-country_event = {
 
-	id = homebrew_idea.29
-	title = homebrew_idea.29.t
-	desc = homebrew_idea.29.d
-	picture = BURGHER_ESTATE_UPSET_eventPicture
-	
-	is_triggered_only = yes
-	
-	trigger = {
-		has_country_modifier = chief_artificer
-		has_country_flag = nurael_convention
-	}
-	mean_time_to_happen = { 
-		days = 1 
-		modifier = {
-		factor = 1000
-		NOT = { has_country_flag = artificer_protest }
-		}
-	}
-	immediate = { set_country_flag = artificer_protest }
-	option = {
-		name = homebrew_idea.29.1
-		ai_chance = { factor = 10 }
-		add_prestige = -10
-		add_estate_loyalty = {
-			estate = estate_artificers
-			loyalty = 10
-		}
-		clr_country_flag = nurael_convention
-		add_country_modifier = {
-			name = nurael_suggestion
-			duration = -1
-		}
-	}
-	option = {
-		name = homebrew_idea.29.2
-		ai_chance = { factor = 90 }
-		add_dip_power = -50
-	}
-	option = {
-		name = homebrew_idea.29.3
-		ai_chance = { factor = 0 }
-		set_country_flag = runaway_artificer
-		if = {
-			limit = {
-				OR = {
-					NOT = { mil = 2 }
-					ruler_has_personality = loose_lips_personality
-					ruler_has_personality = craven_personality
-					ruler_has_personality = babbling_buffoon_personality
-				}
-			}
-			country_event = {
-				id = homebrew_idea.28
-				}
-		}
-		if = {
-			limit = {
-				OR = {
-					mil = 5
-					ruler_has_personality = bold_fighter_personality
-					ruler_has_personality = inspiring_leader_personality
-					ruler_has_personality = strict_personality
-				}
-			}
-			country_event = {
-				id = homebrew_idea.25
-				}
-		}
-		else = {
-			random_list = {
-				10 = {
-					country_event = {
-					id = homebrew_idea.26 #guards fail to catch
-					}
-				}
-				10 = {
-					country_event = {
-					id = homebrew_idea.27 #guards fail, heavy losses
-					}
-				}
-				10 = {
-					country_event = {
-					id = homebrew_idea.28 #preemptive strike by ch. artificer
-					}
-				}
-			}
-		}
-		custom_tooltip = homebrew_rollinit_tt
-	}
-}
 #rumble of scientific triumph
 country_event = {
 
@@ -1903,7 +1798,8 @@ country_event = {
 	is_triggered_only = yes
 
 	trigger = {
-		full_idea_group = monstrous_ideas
+		has_country_flag = removing_monstrous
+		has_idea_group = monstrous_ideas
 		NOT = { has_country_flag = demonsterize_event }
 	}
 	immediate = { set_country_flag = demonsterize_event }

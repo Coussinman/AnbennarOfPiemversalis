@@ -48,7 +48,7 @@ country_event = {
 			10 = {
 				trigger = {
 					ai_external_migration_trigger = { race = orcish }
-						}
+				}
 				modifier = {
 					factor = 0.5
 					all_neighbor_country = {
@@ -923,10 +923,7 @@ country_event = {
 			}
 			modifier = { #+Evil country stuff
 				factor = 1.5
-				OR = {
-					has_country_modifier = evil_nation
-					has_country_modifier = lich_ruler
-				}
+				is_evil = yes
 			}
 			modifier = { #+If you have a enemy or rival
 				factor = 1.25
@@ -1308,10 +1305,7 @@ country_event = {
 			}
 			modifier = { #+Evil country stuff
 				factor = 1.25
-				OR = {
-					has_country_modifier = evil_nation
-					has_country_modifier = lich_ruler
-				}
+				is_evil = yes
 			}
 			modifier = { #+If you have a enemy or rival
 				factor = 1.25
@@ -1687,11 +1681,6 @@ country_event = {
 	desc = racial_pop_events_orcish.13.d
 	picture = REFUGEES_ESCAPING_eventPicture
 	
-	major = yes
-	major_trigger = {
-		is_neighbor_of = ROOT
-	}
-	
 	hidden = yes
 	
 	is_triggered_only = yes
@@ -1747,10 +1736,10 @@ country_event = {
 	desc = racial_pop_events_orcish.14.d
 	picture = PLAGUE_eventPicture
 	
-	major = yes
-	major_trigger = {
-		is_neighbor_of = ROOT
-	}
+	# major = yes
+	# major_trigger = {
+	# 	is_neighbor_of = FROM
+	# }
 	
 	is_triggered_only = yes
 	
@@ -1775,10 +1764,10 @@ country_event = {
 	desc = racial_pop_events_orcish.15.d
 	picture = REFUGEES_ESCAPING_eventPicture
 	
-	major = yes
-	major_trigger = {
-		is_neighbor_of = ROOT
-	}
+	# major = yes
+	# major_trigger = {
+	# 	is_neighbor_of = FROM
+	# }
 	
 	is_triggered_only = yes
 	
@@ -1803,10 +1792,10 @@ country_event = {
 	desc = racial_pop_events_orcish.16.d
 	picture = PLAGUE_eventPicture
 	
-	major = yes
-	major_trigger = {
-		is_neighbor_of = ROOT
-	}
+	# major = yes
+	# major_trigger = {
+	# 	is_neighbor_of = FROM
+	# }
 	
 	is_triggered_only = yes
 	
@@ -2453,27 +2442,16 @@ country_event = {
 		event_target:racial_pop_province_origin = {
 			change_culture = ROOT
 			change_religion = ROOT
-			mother_akasik_mountain_control_check = yes
 			add_devastation = 15
 			
 			if = { limit = { NOT = { has_idea = homebrew_x_for_xians } }
-				random_list = {
-					1 = {
-						add_base_tax = -1
-					}
-					1 = {
-						add_base_production = -1
-					}
-					1 = {
-						add_base_manpower = -1
-					}
-				}
+				remove_random_development = yes
 			
 				add_permanent_province_modifier = { name = expulsion_unrest_modifier duration = 18250 }
 			}
-		
-			medium_decrease_of_orcish_tolerance_effect = yes
+			
 		}
+		medium_decrease_of_orcish_tolerance_effect = yes
 	}
 	
 }
@@ -2697,6 +2675,8 @@ country_event = {
 		}
 		
 		large_decrease_of_orcish_tolerance_effect = yes
+
+		B54_se_purge_effect = { gov_power_gained = 5000 }
 	}
 	
 	option = {		#Special: Evil Purge them entirely
@@ -2720,6 +2700,8 @@ country_event = {
 		}
 		
 		large_decrease_of_orcish_tolerance_effect = yes
+
+		B54_se_purge_effect = { gov_power_gained = 10000 }
 	}
 	
 }
@@ -2958,7 +2940,7 @@ country_event = {
 			add_devastation = 25
 			change_culture = ROOT
 			change_religion = ROOT
-			mother_akasik_mountain_control_check = yes
+			
 			if = { limit = { NOT = { has_idea = homebrew_x_for_xians } }
 				random_list = {
 					1 = {
@@ -2972,12 +2954,13 @@ country_event = {
 					}
 				}
 			
-				add_permanent_province_modifier = { name = purge_unrest_modifier duration = 9125 }
+			add_permanent_province_modifier = { name = purge_unrest_modifier duration = 9125 }
 			
-			}
-		
-			large_decrease_of_orcish_tolerance_effect = yes
 		}
+		}
+		large_decrease_of_orcish_tolerance_effect = yes
+		
+		B54_se_purge_effect = { gov_power_gained = 15000 }
 	}
 	
 	
@@ -3263,7 +3246,7 @@ country_event = {
 	option = {		
 		name = racial_pop_events_orcish.17.a
 		trigger = {
-			
+			NOT = { is_or_was_tag = { tag = B54 } }
 		}
 		ai_chance = {
 			factor = 50
@@ -3277,8 +3260,20 @@ country_event = {
 		
 		medium_decrease_of_orcish_tolerance_effect = yes
 	}
-	
-	
+
+	option = {
+		name = racial_pop_events_flee_from_B54
+		trigger = { is_or_was_tag = { tag = B54 } }
+		B54_se_purge_effect = { gov_power_gained = 2500 }		
+
+		#Remove Minority from Origin Province
+		event_target:racial_pop_province_origin = {
+			remove_orcish_minority_size_effect = yes
+			add_devastation = 20
+		}
+		
+		large_decrease_of_orcish_tolerance_effect = yes
+	}
 }
 
 
@@ -3576,7 +3571,7 @@ country_event = {
 	option = {		
 		name = racial_pop_events_orcish.17.a
 		trigger = {
-			
+			NOT = { is_or_was_tag = { tag = B54 } }
 		}
 		ai_chance = {
 			factor = 50
@@ -3590,27 +3585,35 @@ country_event = {
 			add_devastation = 15
 			change_culture = ROOT
 			change_religion = ROOT
-			mother_akasik_mountain_control_check = yes
+			
 			if = { limit = { NOT = { has_idea = homebrew_x_for_xians } }
-				random_list = {
-					1 = {
-						add_base_tax = -1
-					}
-					1 = {
-						add_base_production = -1
-					}
-					1 = {
-						add_base_manpower = -1
-					}
-				}
+				remove_random_development = yes
 			
 			}
-		
-			medium_decrease_of_orcish_tolerance_effect = yes
+
 		}
+		
+		medium_decrease_of_orcish_tolerance_effect = yes
 	}
 	
-	
+	option = {
+		name = racial_pop_events_flee_from_B54
+		trigger = { is_or_was_tag = { tag = B54 } }
+		B54_se_purge_effect = { gov_power_gained = 7500 }		
+
+		#Remove majority from Origin Province
+		event_target:racial_pop_province_origin = {
+
+			hidden_effect = { remove_racial_majority = { race = orcish } } # delete immediately so no minority left
+
+			add_devastation = 30
+			change_culture = ROOT
+			change_religion = ROOT
+			remove_random_development = yes
+			
+		}
+		large_decrease_of_orcish_tolerance_effect = yes
+	}	
 }
 
 

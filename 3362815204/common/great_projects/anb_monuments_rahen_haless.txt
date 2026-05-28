@@ -69,6 +69,8 @@ aksa_sanuyego = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 
@@ -98,7 +100,8 @@ aksa_sanuyego = {
 		}
 
 		on_upgraded = {
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }		
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 
@@ -129,7 +132,8 @@ aksa_sanuyego = {
 		}
 
 		on_upgraded = {
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }				
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 
@@ -150,18 +154,19 @@ aksa_sanuyego = {
 
 		area_modifier = {
 			local_defensiveness = 0.1
+			local_own_coast_naval_combat_bonus = 1
 		}
 		
 		region_modifier = {
 		}
 
 		country_modifiers = {
-			global_ship_trade_power = 0.45
-			local_own_coast_naval_combat_bonus = 1
+			global_ship_trade_power = 0.33
 		}
 
 		on_upgraded = {
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }				
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 }
@@ -185,32 +190,7 @@ balkhangfa_palace = {
 	type = monument
 
 	build_trigger = {
-		owner = {
-			OR = {
-				has_church_aspect = accretive_path_teachings_of_balris_minor
-				has_church_aspect = accretive_path_teachings_of_balris_major_unimproved
-				has_church_aspect = accretive_path_teachings_of_balris_major_improved
-				has_country_modifier = accretive_path_teachings_of_balris_major_improved_mod
-				if = {
-					limit = {
-						tag = Y85
-						is_subject_of_type = twin_empire
-					}
-					custom_trigger_tooltip = {
-						tooltip = balkhangfa_palace_special_allowed
-						always = yes
-					}
-				}
-				else = {
-					hidden_trigger = { always = no }
-				}
-			}
-		}
-		NOT = { 
-			owner = { 
-				has_country_modifier = Y85_balkhangfa_stagnation 
-			} 
-		}
+		owner = { mission_completed = Y85_balkhangfa_palace }
 	}
 
 	on_built = {
@@ -222,9 +202,9 @@ balkhangfa_palace = {
 	can_use_modifiers_trigger = {
 		owner = {
 			OR = {
-				has_church_aspect = accretive_path_teachings_of_balris_minor
-				has_church_aspect = accretive_path_teachings_of_balris_major_unimproved
-				has_church_aspect = accretive_path_teachings_of_balris_major_improved
+				has_church_aspect = accretive_path_teachings_of_balris_unimproved
+				has_church_aspect = accretive_path_teachings_of_balris_improved
+				has_country_modifier = accretive_path_teachings_of_balris_mod
 			}
 		}
 	}
@@ -232,9 +212,9 @@ balkhangfa_palace = {
 	can_upgrade_trigger = {
 		owner = {
 			OR = {
-				has_church_aspect = accretive_path_teachings_of_balris_minor
-				has_church_aspect = accretive_path_teachings_of_balris_major_unimproved
-				has_church_aspect = accretive_path_teachings_of_balris_major_improved
+				has_church_aspect = accretive_path_teachings_of_balris_unimproved
+				has_church_aspect = accretive_path_teachings_of_balris_improved
+				has_country_modifier = accretive_path_teachings_of_balris_mod
 			}	
 		}
 		NOT = { 
@@ -269,6 +249,8 @@ balkhangfa_palace = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 
@@ -295,6 +277,8 @@ balkhangfa_palace = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 			owner = {
 				add_estate_loyalty = {
 					estate = estate_church
@@ -333,6 +317,8 @@ balkhangfa_palace = {
 
 		
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 			owner = {
 				add_estate_loyalty = {
 					estate = estate_church
@@ -372,6 +358,8 @@ balkhangfa_palace = {
 		}
 		
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 			owner = {
 				add_estate_loyalty = {
 					estate = estate_church
@@ -444,6 +432,8 @@ feiten_aerodrome = {
 		}
 		
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 	
@@ -474,6 +464,8 @@ feiten_aerodrome = {
 		}
 		
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 			owner = { add_estate_loyalty = { estate = estate_artificers loyalty = 5 } }
 			owner = { mission_reward_artifice_points_1 = yes }
 			custom_tooltip = updateGrandSkyportTT
@@ -511,6 +503,8 @@ feiten_aerodrome = {
 		}
 		
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 			owner = { add_estate_loyalty = { estate = estate_artificers loyalty = 10 } }
 			owner = { mission_reward_artifice_points_3 = yes }
 			custom_tooltip = updateGrandSkyportTT
@@ -550,6 +544,8 @@ feiten_aerodrome = {
 		}
 		
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 			owner = { add_estate_loyalty = { estate = estate_artificers loyalty = 10 } }
 			owner = { mission_reward_artifice_points_5 = yes }
 			custom_tooltip = updateGrandSkyportBeegTT
@@ -578,41 +574,53 @@ hall_of_endless_debate = {
 	type = monument
 
 	can_use_modifiers_trigger = {
-		OR = {
-			province_is_or_accepts_or_harmonizes_religion_group = {
-				religion_group = raheni
-			}
-			province_is_or_accepts_or_harmonizes_religion = {
-				religion = godlost
-			}
-			province_is_or_accepts_or_harmonizes_religion = {
-				religion = the_jadd
-			}
-			province_is_or_accepts_or_harmonizes_religion = {
-				religion = the_thought
+		if = {
+			limit = { owner = { has_country_flag = R36_hall_of_endless_debate_bypass } }
+			province_is_or_accepts_or_harmonizes_religion = { religion = mystic_accord }
+		}
+		else = {
+			OR = {
+				province_is_or_accepts_or_harmonizes_religion_group = {
+					religion_group = raheni
+				}
+				province_is_or_accepts_or_harmonizes_religion = {
+					religion = godlost
+				}
+				province_is_or_accepts_or_harmonizes_religion = {
+					religion = the_jadd
+				}
+				province_is_or_accepts_or_harmonizes_religion = {
+					religion = the_thought
+				}
 			}
 		}
 	}
 
 	can_upgrade_trigger = {
-		OR = {
-			province_is_or_accepts_or_harmonizes_religion_group = {
-				religion_group = raheni
-			}
-			province_is_or_accepts_or_harmonizes_religion = {
-				religion = godlost
-			}
-			province_is_or_accepts_or_harmonizes_religion = {
-				religion = the_jadd
-			}
-			province_is_or_accepts_or_harmonizes_religion = {
-				religion = the_thought
+		if = {
+			limit = { owner = { has_country_flag = R36_hall_of_endless_debate_bypass } }
+			province_is_or_accepts_or_harmonizes_religion = { religion = mystic_accord }
+		}
+		else = {
+			OR = {
+				province_is_or_accepts_or_harmonizes_religion_group = {
+					religion_group = raheni
+				}
+				province_is_or_accepts_or_harmonizes_religion = {
+					religion = godlost
+				}
+				province_is_or_accepts_or_harmonizes_religion = {
+					religion = the_jadd
+				}
+				province_is_or_accepts_or_harmonizes_religion = {
+					religion = the_thought
+				}
 			}
 		}
 	}
 
-	keep_trigger = {
-	}
+	keep_trigger = {}
+	build_trigger = {}
 
 	#tier data
 	tier_0 = {
@@ -637,6 +645,8 @@ hall_of_endless_debate = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 
@@ -667,6 +677,8 @@ hall_of_endless_debate = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 
@@ -698,6 +710,8 @@ hall_of_endless_debate = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 			owner = { change_government_reform_progress = 50 }
 		}
 	}
@@ -715,6 +729,9 @@ hall_of_endless_debate = {
 		province_modifiers = {
 			
 		}
+		area_modifier = {
+			
+		}
 
 		region_modifier = {
 			local_institution_spread = 0.50
@@ -728,6 +745,8 @@ hall_of_endless_debate = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 			owner = { change_government_reform_progress = 50 }
 		}
 	}
@@ -751,90 +770,18 @@ oracle_mountain = {
 	type = monument
 
 	build_trigger = {
-        if = {
-            limit = { has_province_flag = minda_destroyed_flag }
-            custom_trigger_tooltip = {
-                tooltip = monument_destroyed_tt
-                NOT = { has_province_flag = minda_destroyed_flag }
-            }
-        }
+		if = {
+			limit = { has_province_flag = destroyed_monument_flag }
+			custom_trigger_tooltip = {
+				tooltip = monument_destroyed_tt
+				NOT = { has_province_flag = destroyed_monument_flag }
+			}
+		}
     }
 
-	can_use_modifiers_trigger = {
-		if = {
-			limit = {
-				owner = {
-					has_country_flag = s23_bigmount
-				}
-			}
-			custom_trigger_tooltip = {
-				tooltip = s23_bigmount_t
-				owner = {
-					has_country_flag = s23_bigmount
-				}
-			}
-		}
-		else_if = {
-			limit = { has_province_flag = wonder_religion_bypass_flag }
-			has_owner_religion = yes
-		}
-		else_if = {
-			limit = { owner = { tag = F29 } }
-			custom_trigger_tooltip = {
-				tooltip = zokka_minda_usage_tt
-				owner = { has_country_flag = zokka_minda_flag }
-			}
-		}
-		else = {
-			OR = {
-				religion_group = raheni
-				religion = accretive_path
-				religion = transmutative_path
-				religion = mystic_accord
-				religion = neokttareum
-				religion = saanorgegh
-			}
-			has_owner_religion = yes
-		}
-	}
+	can_use_modifiers_trigger = { can_use_mindarayan = yes }
 
-	can_upgrade_trigger = {
-		if = {
-			limit = {
-				owner = {
-					has_country_flag = s23_bigmount
-				}
-			}
-			custom_trigger_tooltip = {
-				tooltip = s23_bigmount_t
-				owner = {
-					has_country_flag = s23_bigmount
-				}
-			}
-		}
-		else_if = {
-			limit = { has_province_flag = wonder_religion_bypass_flag }
-			has_owner_religion = yes
-		}
-		else_if = {
-			limit = { owner = { tag = F29 } }
-			custom_trigger_tooltip = {
-				tooltip = zokka_minda_usage_tt
-				owner = { has_country_flag = zokka_minda_flag }
-			}
-		}
-		else = {
-			OR = {
-				religion_group = raheni
-				religion = accretive_path
-				religion = transmutative_path
-				religion = mystic_accord
-				religion = neokttareum
-				religion = saanorgegh
-			}
-			has_owner_religion = yes
-		}
-	}
+	can_upgrade_trigger = { can_use_mindarayan = yes }
 
 	keep_trigger = {
 	}
@@ -862,6 +809,8 @@ oracle_mountain = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 
@@ -887,7 +836,8 @@ oracle_mountain = {
 		}
 
 		on_upgraded = {
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }				
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 
@@ -914,11 +864,9 @@ oracle_mountain = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 			custom_tooltip = tughayasa_better_divination_1_tt
-			hidden_effect = {
-				set_province_flag = tughayasa_better_divination_1
-			}
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }				
 		}
 	}
 
@@ -947,12 +895,9 @@ oracle_mountain = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 			custom_tooltip = tughayasa_better_divination_2_tt
-			hidden_effect = {
-				clr_province_flag = tughayasa_better_divination_1
-				set_province_flag = tughayasa_better_divination_2
-			}
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }				
 		}
 	}
 }
@@ -974,14 +919,19 @@ golden_palace = {
 
 	type = monument
 
-	build_trigger = { NOT = { has_province_flag = golden_palace_skewered_drake_can_build } }
+	build_trigger = {
+		if = {
+			limit = { has_province_flag = destroyed_monument_flag }
+			custom_trigger_tooltip = {
+				tooltip = monument_destroyed_tt
+				NOT = { has_province_flag = destroyed_monument_flag }
+			}
+		}
+	}
 
 	can_use_modifiers_trigger = {
 		OR = {
-			custom_trigger_tooltip = {
-				tooltip = golden_palace_capital_tt
-				owner = { capital = 4411 }
-			}
+			is_capital = yes
 			hidden_trigger = { owner = { has_country_flag = dhenijansar_regional_administration_flag } }
 			custom_trigger_tooltip = {
 				tooltip = golden_palace_raheni_tt
@@ -999,10 +949,7 @@ golden_palace = {
 
 	can_upgrade_trigger = {
 		OR = {
-			custom_trigger_tooltip = {
-				tooltip = golden_palace_capital_tt
-				owner = { capital = 4411 }
-			}
+			is_capital = yes
 			hidden_trigger = { owner = { has_country_flag = dhenijansar_regional_administration_flag } }
 			custom_trigger_tooltip = {
 				tooltip = golden_palace_raheni_tt
@@ -1044,6 +991,8 @@ golden_palace = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 
@@ -1070,7 +1019,8 @@ golden_palace = {
 		}
 
 		on_upgraded = {
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }				
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 
@@ -1102,6 +1052,8 @@ golden_palace = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 			custom_tooltip = golden_palace_upgrade_tt
 			hidden_effect = {
 				owner = {
@@ -1122,7 +1074,6 @@ golden_palace = {
 					}
 				}
 			}
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }			
 		}
 	}
 
@@ -1155,6 +1106,8 @@ golden_palace = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 			custom_tooltip = golden_palace_upgrade_tt
 			hidden_effect = {
 				owner = {
@@ -1175,7 +1128,6 @@ golden_palace = {
 					}
 				}
 			}
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }				
 		}
 	}
 }
@@ -1197,38 +1149,89 @@ godswall = {
 
 	type = monument
 
-	can_use_modifiers_trigger = {
-		OR = {
-			province_is_or_accepts_or_harmonizes_religion_group = {
-				religion_group = raheni
-			}
-			province_is_or_accepts_or_harmonizes_religion_group = {
-				religion_group = halessi
-			}
-			province_is_or_accepts_or_harmonizes_religion_group = {
-				religion_group = supreme_spirit
+	build_trigger = {
+		if = {
+			limit = { has_province_flag = destroyed_monument_flag }
+			custom_trigger_tooltip = {
+				tooltip = monument_destroyed_tt
+				NOT = { has_province_flag = destroyed_monument_flag }
 			}
 		}
-		has_owner_accepted_culture = yes
+	}
+
+	can_use_modifiers_trigger = {
+		if = {
+			limit = { owner = { is_or_was_tag = { tag = Y86 } } }					#Azkare/sunrise empire
+			custom_trigger_tooltip = {
+				tooltip = azkare_godswall_tt
+				owner = { 
+					OR = {
+						religion = accretive_path
+						religion = transmutative_path
+						religion = devouring_path
+						religion = mystic_accord
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = azkare_tolerance_monuments_tt
+				tolerance_to_this = 1
+			}
+			has_owner_accepted_culture = yes
+		}
+		else = {
+			OR = {
+				province_is_or_accepts_or_harmonizes_religion_group = {
+					religion_group = raheni
+				}
+				province_is_or_accepts_or_harmonizes_religion_group = {
+					religion_group = halessi
+				}
+				province_is_or_accepts_or_harmonizes_religion_group = {
+					religion_group = supreme_spirit
+				}
+			}
+			has_owner_accepted_culture = yes
+		}
 	}
 
 	can_upgrade_trigger = {
-		OR = {
-			province_is_or_accepts_or_harmonizes_religion_group = {
-				religion_group = raheni
+		if = {
+			limit = { owner = { is_or_was_tag = { tag = Y86 } } }					#Azkare/sunrise empire
+			custom_trigger_tooltip = {
+				tooltip = azkare_godswall_tt
+				owner = { 
+					OR = {
+						religion = accretive_path
+						religion = transmutative_path
+						religion = devouring_path
+						religion = mystic_accord
+					}
+				}
 			}
-			province_is_or_accepts_or_harmonizes_religion_group = {
-				religion_group = halessi
+			custom_trigger_tooltip = {
+				tooltip = azkare_tolerance_monuments_tt
+				tolerance_to_this = 1
 			}
-			province_is_or_accepts_or_harmonizes_religion_group = {
-				religion_group = supreme_spirit
-			}
+			has_owner_accepted_culture = yes
 		}
-		has_owner_accepted_culture = yes
+		else = {
+			OR = {
+				province_is_or_accepts_or_harmonizes_religion_group = {
+					religion_group = raheni
+				}
+				province_is_or_accepts_or_harmonizes_religion_group = {
+					religion_group = halessi
+				}
+				province_is_or_accepts_or_harmonizes_religion_group = {
+					religion_group = supreme_spirit
+				}
+			}
+			has_owner_accepted_culture = yes
+		}
 	}
 
-	keep_trigger = {
-	}
+	keep_trigger = {}
 
 	#tier data
 	tier_0 = {
@@ -1253,6 +1256,8 @@ godswall = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 
@@ -1281,7 +1286,8 @@ godswall = {
 		}
 
 		on_upgraded = {
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }			
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 
@@ -1312,7 +1318,8 @@ godswall = {
 		}
 
 		on_upgraded = {
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }			
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 
 		conditional_modifier = {
@@ -1351,11 +1358,12 @@ godswall = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 			add_great_project = {
 				type = godswall_tunnel
 				instant = yes
 			}
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }				
 		}
 		
 		conditional_modifier = {
@@ -1449,6 +1457,8 @@ sarisung_city = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 
@@ -1478,7 +1488,8 @@ sarisung_city = {
 		}
 
 		on_upgraded = {
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }				
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 
@@ -1512,7 +1523,8 @@ sarisung_city = {
 		}
 
 		on_upgraded = {
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }	
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 
@@ -1548,7 +1560,8 @@ sarisung_city = {
 		}
 
 		on_upgraded = {
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }				
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 }
@@ -1569,6 +1582,16 @@ palace_of_divine_call = {
 	starting_tier = 1
 
 	type = monument
+
+	build_trigger = {
+		if = {
+			limit = { has_province_flag = destroyed_monument_flag }
+			custom_trigger_tooltip = {
+				tooltip = monument_destroyed_tt
+				NOT = { has_province_flag = destroyed_monument_flag }
+			}
+		}
+	}
 
 	can_use_modifiers_trigger = {
 		has_owner_accepted_culture = yes
@@ -1604,8 +1627,7 @@ palace_of_divine_call = {
 		owner = { government_rank = 2 }
 	}
 
-	keep_trigger = {
-	}
+	keep_trigger = {}
 
 	#tier data
 	tier_0 = {
@@ -1630,6 +1652,8 @@ palace_of_divine_call = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 
@@ -1659,7 +1683,8 @@ palace_of_divine_call = {
 		}
 
 		on_upgraded = {
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }				
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 
@@ -1689,118 +1714,23 @@ palace_of_divine_call = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 			custom_tooltip = high_temple_divine_palace_claims_tt
 			hidden_effect = {
-				4618 = {
-					if = {
-						limit = {
-							NOT = { owned_by = ROOT }
-							NOT = { is_core = ROOT }
-						}
-						add_permanent_claim = ROOT
-					}
-				}
-				4811 = {
-					if = {
-						limit = {
-							NOT = { owned_by = ROOT }
-							NOT = { is_core = ROOT }
-						}
-						add_permanent_claim = ROOT
-					}
-				}
-				4633 = {
-					if = {
-						limit = {
-							NOT = { owned_by = ROOT }
-							NOT = { is_core = ROOT }
-						}
-						add_permanent_claim = ROOT
-					}
-				}
-				4546 = {
-					if = {
-						limit = {
-							NOT = { owned_by = ROOT }
-							NOT = { is_core = ROOT }
-						}
-						add_permanent_claim = ROOT
-					}
-				}
-				4630 = {
-					if = {
-						limit = {
-							NOT = { owned_by = ROOT }
-							NOT = { is_core = ROOT }
-						}
-						add_permanent_claim = ROOT
-					}
-				}
-				4925 = {
-					if = {
-						limit = {
-							NOT = { owned_by = ROOT }
-							NOT = { is_core = ROOT }
-						}
-						add_permanent_claim = ROOT
-					}
-				}
-				4979 = {
-					if = {
-						limit = {
-							NOT = { owned_by = ROOT }
-							NOT = { is_core = ROOT }
-						}
-						add_permanent_claim = ROOT
-					}
-				}
-				4930 = {
-					if = {
-						limit = {
-							NOT = { owned_by = ROOT }
-							NOT = { is_core = ROOT }
-						}
-						add_permanent_claim = ROOT
-					}
-				}
-				4859 = {
-					if = {
-						limit = {
-							NOT = { owned_by = ROOT }
-							NOT = { is_core = ROOT }
-						}
-						add_permanent_claim = ROOT
-					}
-				}
-				4949 = {
-					if = {
-						limit = {
-							NOT = { owned_by = ROOT }
-							NOT = { is_core = ROOT }
-						}
-						add_permanent_claim = ROOT
-					}
-				}
-				4839 = {
-					if = {
-						limit = {
-							NOT = { owned_by = ROOT }
-							NOT = { is_core = ROOT }
-						}
-						add_permanent_claim = ROOT
-					}
-				}
-				4951 = {
-					if = {
-						limit = {
-							NOT = { owned_by = ROOT }
-							NOT = { is_core = ROOT }
-						}
-						add_permanent_claim = ROOT
-					}
-				}
+				4618 = { add_permanent_claim = ROOT }
+				4811 = { add_permanent_claim = ROOT }
+				4633 = { add_permanent_claim = ROOT }
+				4546 = { add_permanent_claim = ROOT }
+				4630 = { add_permanent_claim = ROOT }
+				4925 = { add_permanent_claim = ROOT }
+				4979 = { add_permanent_claim = ROOT }
+				4930 = { add_permanent_claim = ROOT }
+				4859 = { add_permanent_claim = ROOT }
+				4949 = { add_permanent_claim = ROOT }
+				4839 = { add_permanent_claim = ROOT }
+				4951 = { add_permanent_claim = ROOT }
 			}
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }				
 		}
 	}
 
@@ -1817,7 +1747,9 @@ palace_of_divine_call = {
 		province_modifiers = {
 			
 		}
-
+		area_modifier = {
+			
+		}
 		region_modifier = {
 			local_governing_cost = -0.25
 		}
@@ -1843,8 +1775,9 @@ palace_of_divine_call = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 			custom_tooltip = golden_highway_discount_tt
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }				
 		}
 	}
 }
@@ -1926,7 +1859,15 @@ bim_lau_necropolis = {
 		NOT = { has_province_modifier = Y51_tomb_spirits_furious }
 	}
 
-	keep_trigger = {
+	keep_trigger = {}
+	build_trigger = {
+		if = {
+			limit = { has_province_flag = destroyed_monument_flag }
+			custom_trigger_tooltip = {
+				tooltip = monument_destroyed_tt
+				NOT = { has_province_flag = destroyed_monument_flag }
+			}
+		}
 	}
 
 	#tier data
@@ -1952,6 +1893,8 @@ bim_lau_necropolis = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 
@@ -1981,6 +1924,8 @@ bim_lau_necropolis = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 			custom_tooltip = bim_lau_spirit_update_monument_tt
 			hidden_effect = {
 				4565 = {
@@ -2024,6 +1969,8 @@ bim_lau_necropolis = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 			custom_tooltip = bim_lau_spirit_update_monument_tt
 			hidden_effect = {
 				4565 = {
@@ -2069,6 +2016,8 @@ bim_lau_necropolis = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 			custom_tooltip = bim_lau_spirit_update_monument_tt
 			hidden_effect = {
 				4565 = {
@@ -2106,65 +2055,121 @@ temple_of_undying_flame = {
 
 	can_use_modifiers_trigger = {
 		has_province_modifier = temple_complex
-		owner = {
-			OR = {
-				custom_trigger_tooltip = {
-					tooltip = monument_undying_flame_tt
+		if = {
+			limit = { owner = { is_or_was_tag = { tag = Y86 } } }					#Azkare/sunrise empire
+			custom_trigger_tooltip = {
+				tooltip = azkare_temple_of_undying_flame_tt
+				owner = { 
 					OR = {
-						religion_group = raheni
-						religion = saanorgegh
 						religion = accretive_path
 						religion = transmutative_path
-						secondary_religion = high_philosophy
-						secondary_religion = suhans_praxis
-						secondary_religion = saanorgegh
 					}
 				}
 			}
+			custom_trigger_tooltip = {
+				tooltip = azkare_tolerance_monuments_tt
+				tolerance_to_this = 1
+			}
 		}
-		custom_trigger_tooltip = {
-			tooltip = has_owner_religion_tt
-			OR = {
-				has_owner_religion = yes
-				owner = {
-					secondary_religion = ROOT
+		else = {
+			owner = {
+				OR = {
+					custom_trigger_tooltip = {
+						tooltip = monument_undying_flame_tt
+						OR = {
+							religion_group = raheni
+							religion = saanorgegh
+							religion = accretive_path
+							religion = transmutative_path
+							secondary_religion = high_philosophy
+							secondary_religion = suhans_praxis
+							secondary_religion = saanorgegh
+							has_harmonized_with = raheni
+							has_harmonized_with = supreme_spirit
+							has_harmonized_with = halessi
+						}
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = monument_undying_flame_religion_tt
+				OR = {
+					has_owner_religion = yes
+					owner = {
+						OR = {
+							secondary_religion = ROOT
+							has_harmonized_with = ROOT
+						}
+					}
 				}
 			}
 		}
 	}
 
 	can_upgrade_trigger = {
-		hidden_trigger = { owner = { ai = no } }
+		hidden_trigger = { owner = { OR = { ai = no overlord = { ai = no } } } }
 		has_province_modifier = temple_complex
 		NOT = { has_province_modifier = temple_restoration_efforts }
-		owner = {
-			OR = {
-				custom_trigger_tooltip = {
-					tooltip = monument_undying_flame_tt
+		if = {
+			limit = { owner = { is_or_was_tag = { tag = Y86 } } }					#Azkare/sunrise empire
+			custom_trigger_tooltip = {
+				tooltip = azkare_temple_of_undying_flame_tt
+				owner = { 
 					OR = {
-						religion_group = raheni
-						religion = saanorgegh
 						religion = accretive_path
 						religion = transmutative_path
-						secondary_religion = high_philosophy
-						secondary_religion = suhans_praxis
-						secondary_religion = saanorgegh
 					}
 				}
 			}
+			custom_trigger_tooltip = {
+				tooltip = azkare_tolerance_monuments_tt
+				tolerance_to_this = 1
+			}
 		}
-		custom_trigger_tooltip = {
-			tooltip = has_owner_religion_tt
-			OR = {
-				has_owner_religion = yes
-				owner = {
-					secondary_religion = ROOT
+		else = {
+			owner = {
+				OR = {
+					custom_trigger_tooltip = {
+						tooltip = monument_undying_flame_tt
+						OR = {
+							religion_group = raheni
+							religion = saanorgegh
+							religion = accretive_path
+							religion = transmutative_path
+							secondary_religion = high_philosophy
+							secondary_religion = suhans_praxis
+							secondary_religion = saanorgegh
+							has_harmonized_with = raheni
+							has_harmonized_with = supreme_spirit
+							has_harmonized_with = halessi
+						}
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = monument_undying_flame_religion_tt
+				OR = {
+					has_owner_religion = yes
+					owner = {
+						OR = {
+							secondary_religion = ROOT
+							has_harmonized_with = ROOT
+						}
+					}
 				}
 			}
 		}
 	}
 
-	keep_trigger = {
+	keep_trigger = {}
+	build_trigger = {
+		if = {
+			limit = { has_province_flag = destroyed_monument_flag }
+			custom_trigger_tooltip = {
+				tooltip = monument_destroyed_tt
+				NOT = { has_province_flag = destroyed_monument_flag }
+			}
+		}
 	}
 
 	#tier data
@@ -2190,6 +2195,8 @@ temple_of_undying_flame = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 
@@ -2219,7 +2226,8 @@ temple_of_undying_flame = {
 		}
 
 		on_upgraded = {
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }			
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 
@@ -2249,11 +2257,12 @@ temple_of_undying_flame = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 			custom_tooltip = monument_undying_flame_wards_1
 			hidden_effect = {
 				province_event = { id = spirits.1001 }
 			}
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }			
 		}
 	}
 
@@ -2284,11 +2293,16 @@ temple_of_undying_flame = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 			custom_tooltip = monument_undying_flame_wards_2
 			hidden_effect = {
 				province_event = { id = spirits.1001 }
 			}
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }			
+			5214 = {
+				remove_province_modifier = facestealer_3
+				add_permanent_province_modifier = { name = facestealer_2 duration = -1 }
+			}
 		}
 	}
 }
@@ -2374,6 +2388,8 @@ budanphre_canal = {
 
 		#what effects happen when this tier is achieved
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 
@@ -2404,8 +2420,9 @@ budanphre_canal = {
 
 		#what effects happen when this tier is achieved
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 			owner = { add_prestige = 30 }
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }				
 		}
 	}
 
@@ -2436,7 +2453,8 @@ budanphre_canal = {
 
 		#what effects happen when this tier is achieved
 		on_upgraded = {
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }				
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 
@@ -2467,7 +2485,8 @@ budanphre_canal = {
 
 		#what effects happen when this tier is achieved
 		on_upgraded = {
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }				
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 }
@@ -2497,14 +2516,22 @@ godswall_tunnel = {
 
 	#can we build it?
 	build_trigger = {
-		OR = {
-			has_great_project = {
-				type = godswall
-				tier = 3
+		if = {
+			limit = {
+				owner = { tag = R54 }
 			}
 			custom_trigger_tooltip = {
-				tooltip = rending_has_happened
-				has_global_flag = rending_happened
+				tooltip = tunnel_bypass_tt
+				owner = { has_country_flag = R54_godswall_tunnel_bypass }
+			}
+		}
+		else = {
+			OR = {
+				has_great_project = {
+					type = godswall
+					tier = 3
+				}
+				rending_has_happened = yes
 			}
 		}
 	}
@@ -2550,7 +2577,10 @@ godswall_tunnel = {
 		country_modifiers = {}
 
 		#what effects happen when this tier is achieved
-		on_upgraded = {}
+		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
+		}
 	}
 
 	tier_1 = {
@@ -2571,7 +2601,8 @@ godswall_tunnel = {
 
 		#what effects happen when this tier is achieved
 		on_upgraded = {
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }			
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 
@@ -2593,7 +2624,8 @@ godswall_tunnel = {
 
 		#what effects happen when this tier is achieved
 		on_upgraded = {
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }				
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 
@@ -2615,7 +2647,8 @@ godswall_tunnel = {
 
 		#what effects happen when this tier is achieved
 		on_upgraded = {
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }			
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 }
@@ -2649,7 +2682,7 @@ dwarovar_valley_tunnel = {
 			is_subject = no
 			adm_tech = 12
 		}
-		NOT = { 6830 = { has_great_project = { type = valley_dwarovar_tunnel } has_construction = dwarovar_valley_tunnel } }
+		NOT = { 6830 = { has_construction = any } has_global_flag = dwarovar_valley_tunnel_opened }
 	}
 
 	#what to do when it's built
@@ -2692,7 +2725,10 @@ dwarovar_valley_tunnel = {
 		country_modifiers = {}
 
 		#what effects happen when this tier is achieved
-		on_upgraded = {}
+		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
+		}
 	}
 
 	tier_1 = {
@@ -2713,7 +2749,8 @@ dwarovar_valley_tunnel = {
 
 		#what effects happen when this tier is achieved
 		on_upgraded = {
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }				
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 
@@ -2735,7 +2772,8 @@ dwarovar_valley_tunnel = {
 
 		#what effects happen when this tier is achieved
 		on_upgraded = {
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }			
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 
@@ -2757,7 +2795,8 @@ dwarovar_valley_tunnel = {
 
 		#what effects happen when this tier is achieved
 		on_upgraded = {
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }			
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 }
@@ -2791,7 +2830,7 @@ valley_dwarovar_tunnel = {
 			is_subject = no
 			adm_tech = 12
 		}
-		NOT = { 4285 = { has_great_project = { type = dwarovar_valley_tunnel } has_construction = valley_dwarovar_tunnel } }
+		NOT = { 4285 = { has_construction = any } has_global_flag = dwarovar_valley_tunnel_opened }
 	}
 
 	#what to do when it's built
@@ -2834,7 +2873,10 @@ valley_dwarovar_tunnel = {
 		country_modifiers = {}
 
 		#what effects happen when this tier is achieved
-		on_upgraded = {}
+		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
+		}
 	}
 
 	tier_1 = {
@@ -2855,7 +2897,8 @@ valley_dwarovar_tunnel = {
 
 		#what effects happen when this tier is achieved
 		on_upgraded = {
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }				
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 
@@ -2877,7 +2920,8 @@ valley_dwarovar_tunnel = {
 
 		#what effects happen when this tier is achieved
 		on_upgraded = {
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }			
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 
@@ -2899,7 +2943,8 @@ valley_dwarovar_tunnel = {
 
 		#what effects happen when this tier is achieved
 		on_upgraded = {
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }				
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 }
@@ -2913,6 +2958,8 @@ jiangliubao = {
 		months = 120
 	}
 
+	build_trigger = { }
+
 	build_cost = 1500
 
 	can_be_moved = no
@@ -2922,23 +2969,60 @@ jiangliubao = {
 	type = monument
 
 	can_use_modifiers_trigger = {
-		OR = {
-			province_is_or_accepts_religion = { religion = accretive_path }
-			province_is_or_accepts_religion = { religion = transmutative_path }
-			province_is_or_accepts_religion = { religion = devouring_path }
+		if = {
+			limit = { owner = { is_or_was_tag = { tag = Y86 } } }					#Azkare/sunrise empire
+			custom_trigger_tooltip = {
+				tooltip = azkare_jiangliubao_tt
+				owner = { 
+					OR = {
+						religion = accretive_path
+						religion = transmutative_path
+						religion = devouring_path
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = azkare_tolerance_monuments_tt
+				tolerance_to_this = 1
+			}
+		}
+		else = {
+			OR = {
+				province_is_or_accepts_religion = { religion = accretive_path }
+				province_is_or_accepts_religion = { religion = transmutative_path }
+				province_is_or_accepts_religion = { religion = devouring_path }
+			}
 		}
 	}
 
 	can_upgrade_trigger = {
-		OR = {
-			province_is_or_accepts_religion = { religion = accretive_path }
-			province_is_or_accepts_religion = { religion = transmutative_path }
-			province_is_or_accepts_religion = { religion = devouring_path }
+		if = {
+			limit = { owner = { is_or_was_tag = { tag = Y86 } } }					#Azkare/sunrise empire
+			custom_trigger_tooltip = {
+				tooltip = azkare_jiangliubao_tt
+				owner = { 
+					OR = {
+						religion = accretive_path
+						religion = transmutative_path
+						religion = devouring_path
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = azkare_tolerance_monuments_tt
+				tolerance_to_this = 1
+			}
+		}
+		else = {
+			OR = {
+				province_is_or_accepts_religion = { religion = accretive_path }
+				province_is_or_accepts_religion = { religion = transmutative_path }
+				province_is_or_accepts_religion = { religion = devouring_path }
+			}
 		}
 	}
 
-	keep_trigger = {
-	}
+	keep_trigger = {}
 
 	#tier data
 	tier_0 = {
@@ -2963,6 +3047,8 @@ jiangliubao = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 
@@ -2995,7 +3081,8 @@ jiangliubao = {
 		}
 
 		on_upgraded = {
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }			
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 		}
 	}
 
@@ -3028,12 +3115,13 @@ jiangliubao = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 			if = {
 				limit = { owner = { NOT = { has_government_attribute = is_in_xia } } }
 				custom_tooltip = jiangliubao_t2_tt
-				hidden_effect = { owner = { choose_new_xia_path = { path = 4559 } } }
+				hidden_effect = { owner = { choose_new_xia_path = { path = flowing_water } } }
 			}
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }			
 		}
 	}
 
@@ -3066,11 +3154,12 @@ jiangliubao = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 			if = {
 				limit = { owner = { NOT = { has_government_attribute = is_in_xia } } }
 				custom_tooltip = jiangliubao_t3_tt
 			}
-			owner = { accretive_path_harimari_chi_stacking_effect = { amount = 200 } }			
 		}
 	}
 }
@@ -3082,6 +3171,10 @@ ruby_gardens = {
 
 	type = monument
 	can_be_moved = no
+	build_cost = 0
+	time = { months = 0 }
+
+	build_trigger = { }
 
 	can_use_modifiers_trigger = {
 		culture = royal_harimari
@@ -3092,16 +3185,41 @@ ruby_gardens = {
 	}
 
 	can_upgrade_trigger = {
+		culture = royal_harimari
 		OR = {
-			province_is_or_accepts_or_harmonizes_religion = { religion = the_jadd }
-			province_is_or_accepts_or_harmonizes_religion_group = { religion_group = raheni }
+			has_owner_culture = yes
+			has_owner_accepted_culture = yes
 		}
+		if = {
+			limit = { owner = { has_country_flag = R36_the_second_ruby_garden_debate_flag } }
+			OR = {
+				province_is_or_accepts_or_harmonizes_religion = { religion = the_jadd }
+				province_is_or_accepts_or_harmonizes_religion_group = { religion_group = raheni }
+				province_is_or_accepts_or_harmonizes_religion = { religion = mystic_accord }
+			}
+		}	
+		else = {
+			OR = {
+				province_is_or_accepts_or_harmonizes_religion = { religion = the_jadd }
+				province_is_or_accepts_or_harmonizes_religion_group = { religion_group = raheni }
+			}
+		}
+	}
+	keep_trigger = {}
+
+	tier_0 = {
+		upgrade_time = { months = 0 }
+		cost_to_upgrade = { factor = 0 }
+		province_modifiers = {}
+		area_modifier = {}
+		country_modifiers = {}
+		on_upgraded = {}
 	}
 
 	tier_1 = {
 		upgrade_time = { months = 120 }
 		cost_to_upgrade = { factor = 1000 }
-
+		province_modifiers = {}
 		area_modifier = { local_prosperity_growth = 0.1 }
 		country_modifiers = {
 			monthly_splendor = 2
@@ -3112,7 +3230,7 @@ ruby_gardens = {
 	tier_2 = {
 		upgrade_time = { months = 240 }
 		cost_to_upgrade = { factor = 2500 }
-
+		province_modifiers = {}
 		area_modifier = { local_prosperity_growth = 0.2 }
 		country_modifiers = {
 			monthly_splendor = 3
@@ -3120,15 +3238,32 @@ ruby_gardens = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 			custom_tooltip = ruby_gardens_tier_2_tt
-			owner = { country_event = { id = rahen.100 } }
+			owner = {
+				if = {
+					limit = {
+						any_known_country = {
+							capital_scope = { superregion = rahen_superregion }
+							NOT = {
+								tag = PREV
+								is_enemy = PREV
+								is_rival = PREV
+								has_country_modifier = monstrous_nation
+							}
+						}
+					}
+					country_event = { id = rahen.100 }
+				}
+			}
 		}
 	}
 
 	tier_3 = {
 		upgrade_time = { months = 480 }
 		cost_to_upgrade = { factor = 5000 }
-
+		province_modifiers = {}
 		area_modifier = { local_prosperity_growth = 0.2 }
 		region_modifier = { local_prosperity_growth = 0.15 }
 		country_modifiers = {
@@ -3138,6 +3273,8 @@ ruby_gardens = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 			owner = { remove_country_modifier = ruby_gardens_tier_2_marriage }
 			custom_tooltip = ruby_gardens_tier_3_tt
 			hidden_effect = {
@@ -3154,6 +3291,10 @@ iron_palace = {
 
 	type = monument
 	can_be_moved = no
+	build_cost = 0
+	time = { months = 0 }
+
+	build_trigger = { }
 
 	can_use_modifiers_trigger = {
 		owner = { num_of_war_reparations = 1 }
@@ -3176,14 +3317,37 @@ iron_palace = {
 			}
 		}
 	}
+	keep_trigger = {}
+	build_trigger = {
+		if = {
+			limit = { has_province_flag = destroyed_monument_flag }
+			custom_trigger_tooltip = {
+				tooltip = monument_destroyed_tt
+				NOT = { has_province_flag = destroyed_monument_flag }
+			}
+		}
+	}
+
+	tier_0 = {
+		upgrade_time = { months = 0 }
+		cost_to_upgrade = { factor = 0 }
+		province_modifiers = {}
+		area_modifier = {}
+		country_modifiers = {}
+		on_upgraded = {}
+	}
 
 	tier_1 = {
 		upgrade_time = { months = 600 }
-
+		cost_to_upgrade = { factor = 0 }
+		province_modifiers = {}
+		area_modifier = {}
 		region_modifier = { local_governing_cost = -0.05 }
 		country_modifiers = { manpower_in_own_culture_provinces = 0.05 }
-
+		
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 			province_event = { id = rahen.102 }
 			custom_tooltip = EVENT_INSIGHT_INTRO
 			custom_tooltip = iron_palace_tier_1_tt
@@ -3192,7 +3356,9 @@ iron_palace = {
 
 	tier_2 = {
 		upgrade_time = { months = 1200 }
-
+		cost_to_upgrade = { factor = 0 }
+		province_modifiers = {}
+		area_modifier = {}
 		region_modifier = { local_governing_cost = -0.1 }
 		country_modifiers = {
 			min_autonomy_in_territories = -0.025
@@ -3200,6 +3366,8 @@ iron_palace = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 			province_event = { id = rahen.103 }
 			custom_tooltip = EVENT_INSIGHT_INTRO
 			custom_tooltip = iron_palace_tier_2_tt
@@ -3208,7 +3376,9 @@ iron_palace = {
 
 	tier_3 = {
 		upgrade_time = { months = 2400 }
-
+		cost_to_upgrade = { factor = 0 }
+		province_modifiers = {}
+		area_modifier = {}
 		region_modifier = { local_governing_cost = -0.1 }
 		country_modifiers = {
 			min_autonomy_in_territories = -0.05
@@ -3216,6 +3386,894 @@ iron_palace = {
 		}
 
 		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
+			province_event = { id = rahen.104 }
+			custom_tooltip = EVENT_INSIGHT_INTRO
+			custom_tooltip = iron_palace_tier_3_tt
+		}
+	}
+}
+
+the_red_citadel = {
+	start = 4844	#Emgolu
+	date = 1100.1.1
+
+	can_be_moved = no
+
+	starting_tier = 0
+
+	#project type
+	type = monument
+
+	build_trigger = {
+		if = {
+			limit = { has_province_flag = destroyed_monument_flag }
+			custom_trigger_tooltip = {
+				tooltip = monument_destroyed_tt
+				NOT = { has_province_flag = destroyed_monument_flag }
+			}
+		}
+	}
+
+	can_use_modifiers_trigger = {
+		can_use_red_citadel_trigger = yes
+	}
+
+	can_upgrade_trigger = {
+		can_use_red_citadel_trigger = yes
+		owner = { red_citadel_check_province_group = yes }
+		if = {
+			limit = {
+				has_great_project = {
+					type = the_red_citadel
+					tier = 2
+				}
+			}
+			development = 30
+			custom_trigger_tooltip = {
+				tooltip = beikling_wonders_upgraded.tt
+				4974 = { has_province_modifier = the_masterforge_upgrade }
+				4952 = {
+					OR = {
+						has_province_modifier = the_dark_temple_upgrade 
+						has_province_modifier = the_great_sheng_shan
+						has_province_modifier = the_great_sheng_shan_no_chi				
+					}
+				}
+				4842 = { has_province_modifier = the_yan_toll_upgrade }
+				5415 = { has_province_modifier = the_northern_bastion_upgrade }
+			}
+		}
+		else_if = {
+			limit = {
+				has_great_project = {
+					type = the_red_citadel
+					tier = 1
+				}
+			}
+			development = 20
+			custom_trigger_tooltip = {
+				tooltip = beikling_wonders_rebuild.tt
+				4974 = {
+					NOT = { has_province_modifier = the_masterforge_unlit }
+				}
+				4952 = {
+					NOT = { has_province_modifier = the_empty_visage }
+				}
+				4842 = {
+					NOT = { has_province_modifier = an_abandoned_toll }
+				}
+				5415 = { 
+					NOT = { has_province_modifier = legends_of_the_northern_vanguard }
+				}
+			}
+		}
+	}
+
+	keep_trigger = {
+	}
+
+	#tier data
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+
+		cost_to_upgrade = {
+			factor = 0
+		}
+
+		province_modifiers = {
+		}
+
+		area_modifier = {
+		}
+
+		country_modifiers = {
+
+		}
+
+		on_upgraded = {
+		}
+	}
+
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 1000
+		}
+
+		province_modifiers = {
+			local_build_cost = -0.05
+		}
+
+		area_modifier = {
+		}
+
+		region_modifier = {
+		}
+
+		country_modifiers = {
+		}
+
+		on_upgraded = {
+			owner = {
+				accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 }
+				country_event = { id = flavor_beiklings.310 }
+			}
+			custom_tooltip = red_citadel_homeland_dev_1.tt
+			hidden_effect =  {
+				owner = {
+					every_owned_province = {
+						limit = { 
+							province_group = beikling_homeland_provinces
+							NOT = { 
+								OR = {
+									has_province_modifier = beikling_homeland_extra_dev_1 
+									has_province_modifier = beikling_homeland_extra_dev_2 
+									has_province_modifier = beikling_homeland_extra_dev_3 
+								}
+							}
+						}
+						add_province_modifier = {
+							name = beikling_homeland_extra_dev_1
+							duration = -1
+						}
+					}
+				}
+			}
+		}
+	}
+
+	tier_2 = {
+		upgrade_time = {
+			months = 240
+		}
+
+		cost_to_upgrade = {
+			factor = 2500
+		}
+
+		province_modifiers = {
+			local_build_cost = -0.15
+		}
+
+		area_modifier = {
+		}
+		
+		region_modifier = {
+		}
+
+		country_modifiers = {
+			governing_capacity_modifier = 0.05
+		}
+
+		on_upgraded = {
+			owner = { 
+				accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 }
+				country_event = { id = flavor_beiklings.311 }
+			}
+			custom_tooltip = red_citadel_homeland_dev_2.tt
+			hidden_effect =  {
+				owner = {
+					every_owned_province = {
+						limit = { 
+							province_group = beikling_homeland_provinces
+							NOT = { 
+								OR = {
+									has_province_modifier = beikling_homeland_extra_dev_2 
+									has_province_modifier = beikling_homeland_extra_dev_3 
+								}
+							}
+						}
+						remove_province_modifier = beikling_homeland_extra_dev_1
+						add_province_modifier = {
+							name = beikling_homeland_extra_dev_2
+							duration = -1
+						}
+					}
+				}
+			}
+						
+		}
+	}
+
+	tier_3 = {
+		
+		upgrade_time = {
+			months = 480
+		}
+
+		cost_to_upgrade = {
+			factor = 5000
+		}
+
+		province_modifiers = {
+			local_build_cost = -0.25
+		}
+
+		area_modifier = {
+		}
+		
+		region_modifier = {
+		}
+
+		country_modifiers = {
+			governing_capacity_modifier = 0.1
+		}
+
+		on_upgraded = {
+			owner = { 
+				accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 }
+				country_event = { id = flavor_beiklings.312 } 
+			}
+			
+			custom_tooltip = red_citadel_homeland_dev_3.tt
+
+			custom_tooltip = the_red_citadel_extra_dev.tt
+			hidden_effect =  {
+				owner = {
+					every_owned_province = {
+						limit = { 
+							province_group = beikling_homeland_provinces 
+							NOT = { has_province_modifier = beikling_homeland_extra_dev_3 }
+						}
+						remove_province_modifier = beikling_homeland_extra_dev_2
+						add_province_modifier = {
+							name = beikling_homeland_extra_dev_3
+							duration = -1
+						}
+					}
+					set_country_flag = the_red_citadel_extra_dev 
+				}
+			}
+		}
+	}
+}
+
+takta_lupulan = {
+	start = 4710	#Candiraya
+
+	date = 1444.1.1
+
+	can_be_moved = no
+
+	starting_tier = 1
+
+	#project type
+	type = monument
+
+	build_trigger = {
+
+	}
+
+	can_use_modifiers_trigger = {
+		OR = {
+			AND = {
+				owner = {
+					religion = mystic_accord
+				}
+				has_owner_religion = yes
+			}
+			AND = {
+				custom_trigger_tooltip = {
+					tooltip = takta_lupulan_appeased_tt
+					owner = {
+						has_country_flag = lupulan_appeased
+					}
+				}
+				tolerance_to_this = 1
+			}
+		}
+	}
+
+	can_upgrade_trigger = {
+		OR = {
+			AND = {
+				owner = {
+					religion = mystic_accord
+				}
+				has_owner_religion = yes
+			}
+			AND = {
+				custom_trigger_tooltip = {
+					tooltip = takta_lupulan_appeased_tt
+					owner = {
+						has_country_flag = lupulan_appeased
+					}
+				}
+				tolerance_to_this = 1
+			}
+		}
+		if = {
+			limit = {
+				has_great_project = {
+					type = takta_lupulan
+					tier = 2
+				}
+			}
+			owner = {
+				owns_or_non_sovereign_subject_of = 4964
+			}
+			hidden_trigger = {
+				OR = {
+					owner = { ai = no }
+					has_global_flag = rending_happened
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				has_great_project = {
+					type = takta_lupulan
+					tier = 1
+				}
+			}
+			owner = {
+				owns_or_non_sovereign_subject_of = 4719
+			}
+		}
+	}
+
+	keep_trigger = {}
+
+	#tier data
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+
+		cost_to_upgrade = {
+			factor = 0
+		}
+
+		province_modifiers = {
+
+		}
+
+		area_modifier = {
+
+		}
+
+		country_modifiers = {
+
+		}
+
+		on_upgraded = {
+			
+		}
+	}
+
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 1000
+		}
+
+		province_modifiers = {
+			local_development_cost = -0.25
+		}
+
+		area_modifier = {
+			
+		}
+
+		region_modifier = {
+			
+		}
+
+		country_modifiers = {
+			church_power_modifier = 0.10
+			monthly_sri_baginda_power = 0.10
+		}
+
+		on_upgraded = {
+			
+		}
+	}
+
+	tier_2 = {
+		upgrade_time = {
+			months = 240
+		}
+
+		cost_to_upgrade = {
+			factor = 2500
+		}
+
+		province_modifiers = {
+			
+		}
+
+		area_modifier = {
+			local_development_cost = -0.25
+		}
+
+		region_modifier = {
+			
+		}
+
+		country_modifiers = {
+			missionaries = 1
+			church_power_modifier = 0.15
+			monthly_sri_baginda_power = 0.15
+		}
+
+		on_upgraded = {
+			
+		}
+	}
+
+	tier_3 = {
+		
+		upgrade_time = {
+			months = 480
+		}
+
+		cost_to_upgrade = {
+			factor = 5000
+		}
+
+		province_modifiers = {
+			
+		}
+
+		area_modifier = {
+			local_development_cost = -0.35
+		}
+
+		region_modifier = {
+			
+		}
+
+		country_modifiers = {
+			missionaries = 1
+			church_power_modifier = 0.20
+			monthly_sri_baginda_power = 0.20
+		}
+
+		on_upgraded = {
+			if = {
+				limit = { 
+					owner = {  
+						religion = mystic_accord
+					} 
+				}
+				custom_tooltip = takta_lupulan_upgraded_festivals_tt
+			}
+			custom_tooltip = takta_lupulan_ruin_brenulan_tt
+			hidden_effect = {
+				owner = {
+					country_event = { id = mystic_accord_events.300 }
+				}
+			}
+		}
+	}
+}
+
+palace_of_divine_call_tsukqiao = {
+	start = 4844 #Emgolu
+
+	date = 1820.1.1
+
+	time = {
+		months = 120
+	}
+
+	build_cost = 1500
+
+	can_be_moved = no
+
+	starting_tier = 1
+
+	type = monument
+
+	can_use_modifiers_trigger = {
+		is_capital = yes
+		development = 40
+	}
+
+	can_upgrade_trigger = {
+		is_capital = yes
+		development = 40
+	}
+
+	keep_trigger = {}
+	build_trigger = {
+		owner = { has_country_flag = tsukqiao_build_our_heirdom_flag }
+	}
+
+	#tier data
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+
+		cost_to_upgrade = {
+			factor = 0
+		}
+
+		province_modifiers = {
+
+		}
+
+		area_modifier = {
+
+		}
+
+		country_modifiers = {
+
+		}
+
+		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
+		}
+	}
+
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 1000
+		}
+
+		province_modifiers = {
+			
+		}
+
+		area_modifier = {
+			
+		}
+
+		region_modifier = {
+			local_governing_cost = -0.05
+		}
+
+		country_modifiers = {
+			years_of_nationalism = -2.5
+		}
+
+		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
+		}
+	}
+
+	tier_2 = {
+		upgrade_time = {
+			months = 240
+		}
+
+		cost_to_upgrade = {
+			factor = 2500
+		}
+
+		province_modifiers = {
+			
+		}
+
+		area_modifier = {
+			
+		}
+
+		region_modifier = {
+			local_governing_cost = -0.1
+		}
+
+		country_modifiers = {
+			years_of_nationalism = -5
+		}
+
+		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
+		}
+	}
+
+	tier_3 = {
+		
+		upgrade_time = {
+			months = 480
+		}
+
+		cost_to_upgrade = {
+			factor = 5000
+		}
+
+		province_modifiers = {
+			
+		}
+		area_modifier = {
+			
+		}
+		region_modifier = {
+			local_governing_cost = -0.25
+		}
+
+		country_modifiers = {
+			years_of_nationalism = -5
+		}
+
+		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
+			custom_tooltip = golden_highway_discount_tt
+		}
+	}
+}
+
+
+golden_palace_tsukqiao = {
+	start = 4844 #Emgolu
+
+	date = 1820.1.1
+
+	time = {
+		months = 120
+	}
+
+	build_trigger = {
+		owner = { has_country_flag = tsukqiao_build_our_heirdom_flag }
+	}
+
+	build_cost = 1500
+
+	can_be_moved = no
+
+	starting_tier = 1
+
+	type = monument
+
+	can_use_modifiers_trigger = {
+		is_capital = yes
+	}
+
+	can_upgrade_trigger = {
+		is_capital = yes
+	}
+
+	keep_trigger = {
+	}
+
+	#tier data
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+
+		cost_to_upgrade = {
+			factor = 0
+		}
+
+		province_modifiers = {
+
+		}
+
+		area_modifier = {
+
+		}
+
+		country_modifiers = {
+
+		}
+
+		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
+		}
+	}
+
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+
+		cost_to_upgrade = {
+			factor = 1000
+		}
+
+		province_modifiers = {
+			local_unrest = -1
+		}
+
+		area_modifier = {
+			local_tax_modifier = 0.1
+			local_autonomy = -0.025
+		}
+
+		country_modifiers = {
+			governing_capacity_modifier = 0.05
+		}
+
+		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
+		}
+	}
+
+	tier_2 = {
+		upgrade_time = {
+			months = 240
+		}
+
+		cost_to_upgrade = {
+			factor = 2500
+		}
+
+		province_modifiers = {
+			
+		}
+
+		area_modifier = {
+			local_unrest = -3
+			local_tax_modifier = 0.25
+			local_autonomy = -0.05
+		}
+
+		region_modifier = {
+			min_local_autonomy = -25
+		}
+
+		country_modifiers = {
+			governing_capacity_modifier = 0.10
+		}
+
+		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
+		}
+	}
+
+	tier_3 = {
+		
+		upgrade_time = {
+			months = 480
+		}
+
+		cost_to_upgrade = {
+			factor = 5000
+		}
+
+		province_modifiers = {
+			
+		}
+
+		area_modifier = {
+			local_tax_modifier = 0.25
+			local_autonomy = -0.05
+		}
+
+		region_modifier = {
+			min_local_autonomy = -50
+			local_unrest = -3
+		}
+		
+		country_modifiers = {
+			governing_capacity_modifier = 0.10
+		}
+
+		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
+		}
+	}
+}
+
+
+iron_palace_tsukqiao = {
+	start = 4844 #Emgolu
+	date = 1820.1.1
+	starting_tier = 0
+
+	type = monument
+	can_be_moved = no
+	build_cost = 0
+	time = { months = 0 }
+
+	can_use_modifiers_trigger = {
+		owner = { num_of_war_reparations = 1 }
+		is_capital = yes
+	}
+
+	can_upgrade_trigger = {
+		NOT = { num_of_buildings_in_province = 8 }
+		is_capital = yes
+	}
+	keep_trigger = {}
+	build_trigger = {
+		owner = { has_country_flag = tsukqiao_build_our_heirdom_flag }
+	}
+
+	tier_0 = {
+		upgrade_time = { months = 0 }
+		cost_to_upgrade = { factor = 0 }
+		province_modifiers = {}
+		area_modifier = {}
+		country_modifiers = {}
+		on_upgraded = {}
+	}
+
+	tier_1 = {
+		upgrade_time = { months = 600 }
+		cost_to_upgrade = { factor = 0 }
+		province_modifiers = {}
+		area_modifier = {}
+		region_modifier = { local_governing_cost = -0.05 }
+		country_modifiers = { manpower_in_own_culture_provinces = 0.05 }
+		
+		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
+			province_event = { id = rahen.102 }
+			custom_tooltip = EVENT_INSIGHT_INTRO
+			custom_tooltip = iron_palace_tier_1_tt
+		}
+	}
+
+	tier_2 = {
+		upgrade_time = { months = 1200 }
+		cost_to_upgrade = { factor = 0 }
+		province_modifiers = {}
+		area_modifier = {}
+		region_modifier = { local_governing_cost = -0.1 }
+		country_modifiers = {
+			min_autonomy_in_territories = -0.025
+			manpower_in_own_culture_provinces = 0.1
+		}
+
+		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
+			province_event = { id = rahen.103 }
+			custom_tooltip = EVENT_INSIGHT_INTRO
+			custom_tooltip = iron_palace_tier_2_tt
+		}
+	}
+
+	tier_3 = {
+		upgrade_time = { months = 2400 }
+		cost_to_upgrade = { factor = 0 }
+		province_modifiers = {}
+		area_modifier = {}
+		region_modifier = { local_governing_cost = -0.1 }
+		country_modifiers = {
+			min_autonomy_in_territories = -0.05
+			manpower_in_own_culture_provinces = 0.25
+		}
+
+		on_upgraded = {
+			owner = { accretive_path_gain_chi = { aspect = the_second_ascension category = adm amount = 100 } }
+			owner = { if = { limit = { has_reform = tsukqiao_throne_of_lies_reform } add_legitimacy = 10 } }
 			province_event = { id = rahen.104 }
 			custom_tooltip = EVENT_INSIGHT_INTRO
 			custom_tooltip = iron_palace_tier_3_tt

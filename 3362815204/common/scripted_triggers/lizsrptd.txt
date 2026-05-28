@@ -1,0 +1,484 @@
+# Проверка для Khugra_The_Sapphire_of_Sarhal
+# Использование: has_subject_khugra = { TIER = 3 }
+has_subject_khugra = {
+	5914 = {
+		has_great_project = {
+			type = Khugra_The_Sapphire_of_Sarhal
+			tier = 3
+		}
+		owner = { is_subject_of = ROOT }
+	}
+}
+
+# Zerat_war_academy
+has_subject_zerat = {
+	5921 = {
+		has_great_project = {
+			type = Zerat_war_academy
+			tier = 3
+		}
+		owner = { is_subject_of = ROOT }
+	}
+}
+
+# Shargra_Artificery_guild
+has_subject_shargra = {
+	5646 = {
+		has_great_project = {
+			type = Shargra_Artificery_guild
+			tier = 3
+		}
+		owner = { is_subject_of = ROOT }
+	}
+}
+
+# serpent_palace
+has_subject_serpent_palace = {
+	5650 = {
+		has_great_project = {
+			type = serpent_palace
+			tier = 3
+		}
+		owner = { is_subject_of = ROOT }
+	}
+}
+
+# # Great_Zatsarya
+# has_subject_zatsarya = {
+# 	any_subject = {
+# 		has_great_project = {
+# 			type = Great_Zatsarya
+# 			tier = 3
+# 		}
+# 	}
+# }
+
+# guild_of_hydromancers
+has_subject_hydromancers = {
+	5834 = {
+		has_great_project = {
+			type = guild_of_hydromancers
+			tier = 3
+		}
+		owner = { is_subject_of = ROOT }
+	}
+}
+
+# Akhanekas_Fortress_against_curse
+# has_subject_akhanekas = {
+# 	any_subject = {
+# 		has_great_project = {
+# 			type = Akhanekas_Fortress_against_curse
+# 			tier = 3
+# 		}
+# 	}
+# }
+
+# Giantickin_Skeleton
+# has_subject_giant_skeleton = {
+# 	any_subject = {
+# 		has_great_project = {
+# 			type = Giantickin_Skeleton
+# 			tier = 3
+# 		}
+# 	}
+# }
+
+# Emerald_of_the_Seas
+has_subject_emerald_seas = {
+	5898 = {
+		has_great_project = {
+			type = Emerald_of_the_Seas
+			tier = 3
+		}
+		owner = { is_subject_of = ROOT }
+	}
+}
+
+# Order_of_the_Tidal_Scales
+# has_subject_tidal_scales = {
+# 	any_subject = {
+# 		has_great_project = {
+# 			type = Order_of_the_Tidal_Scales
+# 			tier = 3
+# 		}
+# 	}
+# }
+
+# Вставьте в common/scripted_triggers/
+is_fighting_monstrous_enemies = {
+	has_country_flag = monu_castan
+    any_known_country = {
+        war_with = root
+        has_country_modifier = monstrous_nation
+    }
+}
+
+# Scripted triggers для рабов Адины
+
+has_slaves_1_4 = {
+	has_country_flag = adeena_mon_3
+    num_of_owned_provinces_with = {
+        value = 1
+        trade_goods = slaves
+    }
+    NOT = {
+        num_of_owned_provinces_with = {
+            value = 5
+            trade_goods = slaves
+        }
+    }
+}
+
+has_slaves_5_9 = {
+	has_country_flag = adeena_mon_3
+    num_of_owned_provinces_with = {
+        value = 5
+        trade_goods = slaves
+    }
+    NOT = {
+        num_of_owned_provinces_with = {
+            value = 10
+            trade_goods = slaves
+        }
+    }
+}
+
+has_slaves_10_14 = {
+	has_country_flag = adeena_mon_3
+    num_of_owned_provinces_with = {
+        value = 10
+        trade_goods = slaves
+    }
+    NOT = {
+        num_of_owned_provinces_with = {
+            value = 15
+            trade_goods = slaves
+        }
+    }
+}
+
+has_slaves_15_19 = {
+	has_country_flag = adeena_mon_3
+    num_of_owned_provinces_with = {
+        value = 15
+        trade_goods = slaves
+    }
+    NOT = {
+        num_of_owned_provinces_with = {
+            value = 20
+            trade_goods = slaves
+        }
+    }
+}
+
+has_slaves_20_plus = {
+	has_country_flag = adeena_mon_3
+    num_of_owned_provinces_with = {
+        value = 20
+        trade_goods = slaves
+    }
+}
+
+has_merfolk_province = {
+	has_country_flag = has_hasri_akun_library_t3
+    OR = {
+        has_province_modifier = offcoast_merfolk_allied
+        has_province_modifier = offcoast_merfolk_neutral
+    }
+}
+
+has_merfolk_provinces_1 = {
+	has_country_flag = has_hasri_akun_library_t3
+    num_of_owned_provinces_with = {
+        value = 1
+        has_merfolk_province = yes
+    }
+    NOT = {
+        num_of_owned_provinces_with = {
+            value = 2
+            has_merfolk_province = yes
+        }
+    }
+}
+
+has_merfolk_provinces_2_5 = {
+	has_country_flag = has_hasri_akun_library_t3
+    num_of_owned_provinces_with = {
+        value = 2
+        has_merfolk_province = yes
+    }
+    NOT = {
+        num_of_owned_provinces_with = {
+            value = 6
+            has_merfolk_province = yes
+        }
+    }
+}
+
+has_merfolk_provinces_6_9 = {
+	has_country_flag = has_hasri_akun_library_t3
+    num_of_owned_provinces_with = {
+        value = 6
+        has_merfolk_province = yes
+    }
+    NOT = {
+        num_of_owned_provinces_with = {
+            value = 10
+            has_merfolk_province = yes
+        }
+    }
+}
+
+has_merfolk_provinces_10_plus = {
+	has_country_flag = has_hasri_akun_library_t3
+    num_of_owned_provinces_with = {
+        value = 10
+        has_merfolk_province = yes
+    }
+}
+
+# is_not_free_merc_company = {
+# 	ROOT = {
+# 		# NOT = { mercenary_company = merc_hakkapeliita_cavalry }
+# 		# NOT = { mercenary_company = merc_prussian_volunteer_army }
+# 		# NOT = { mercenary_company = merc_knights_templar }
+# 		# NOT = { mercenary_company = merc_swiss_guard }
+# 		# NOT = { mercenary_company = merc_large_hakkapeliita_cavalry }
+# 		# NOT = { mercenary_company = merc_guerilla_hakkapeliita_cavalry }
+# 		# NOT = { mercenary_company = merc_elite_hakkapeliita_cavalry }
+# 		# NOT = { mercenary_company = merc_mongol_banner }
+# 		# NOT = { mercenary_company = merc_swiss_canton_mercenaries }
+# 		# NOT = { mercenary_company = merc_japanese_volunteers }
+# 		# NOT = { mercenary_company = merc_militant_order_of_saint_joan }
+# 		# NOT = { mercenary_company = merc_black_army }
+# 		# NOT = { mercenary_company = merc_black_army_2 }
+# 		# NOT = { mercenary_company = merc_tatar_vanguard }
+# 		# NOT = { mercenary_company = merc_righteous_army }
+# 		# NOT = { mercenary_company = merc_scouting_almogavars }
+# 		# NOT = { mercenary_company = merc_skirmishing_almogavars }
+# 		# NOT = { mercenary_company = merc_veteran_almogavars }
+# 		# NOT = { mercenary_company = merc_gavras_house_guards }
+# 		# NOT = { mercenary_company = merc_tatar_vanguard }
+# 		# NOT = { mercenary_company = merc_inc_big_ears }
+# 		# NOT = { mercenary_company = merc_may_chontals }
+# 		# NOT = { mercenary_company = merc_mug_elite_gurkhas }
+# 		# NOT = { mercenary_company = merc_lisowczyk }
+# 		#Anbennar
+# 		NOT = { mercenary_company = merc_442nd }
+# 		NOT = { mercenary_company = merc_aelnar_first_corps }
+# 		NOT = { mercenary_company = merc_aelnar_second_corps }
+# 		NOT = { mercenary_company = merc_aelnar_third_corps }
+# 		NOT = { mercenary_company = merc_aelnar_fourth_corps }
+# 		NOT = { mercenary_company = merc_aelnar_precursor_legions }
+# 		NOT = { mercenary_company = merc_amldahvad_guard }
+# 		NOT = { mercenary_company = merc_corvurian_dark_legion }
+# 		NOT = { mercenary_company = merc_domandrod_lightbringers }
+# 		NOT = { mercenary_company = merc_grim_legion }
+# 		NOT = { mercenary_company = merc_iron_company }
+# 		NOT = { mercenary_company = merc_marrhold_griffon_bombardiers }
+# 		NOT = { mercenary_company = merc_marrhold_griffon_grenadiers }
+# 		NOT = { mercenary_company = merc_marrhold_griffon_knight }
+# 		NOT = { mercenary_company = merc_marrhold_griffon_sky_lancers }
+# 		NOT = { mercenary_company = merc_marrhold_griffon_survey }
+# 		NOT = { mercenary_company = merc_marrhold_steel_griffon }
+# 		NOT = { mercenary_company = merc_ogrillons }
+# 		NOT = { mercenary_company = merc_sarisung_city_guard }
+# 		NOT = { mercenary_company = merc_seinathil_warsingers }
+# 		NOT = { mercenary_company = merc_serpent_knights }
+# 		NOT = { mercenary_company = merc_jaddaresas_chosen }
+# 		NOT = { mercenary_company = merc_suraelic_guard }
+# 		NOT = { mercenary_company = merc_wolves_of_crovis }
+# 		NOT = { mercenary_company = merc_order_of_keepers }
+# 		NOT = { mercenary_company = merc_cannorian_veterans }
+# 		NOT = { mercenary_company = merc_convocationary_guard }
+# 		NOT = { mercenary_company = merc_blue_viziers }
+# 		NOT = { mercenary_company = merc_shuvuush_auxillaries }
+# 		NOT = { mercenary_company = merc_kenmanshir }
+# 		NOT = { mercenary_company = merc_dhenijanraj_sramaya_pearlglaives }
+# 		NOT = { mercenary_company = merc_dhenijanraj_tiger_command }
+# 		NOT = { mercenary_company = merc_feiten_jellyfish_scouts }
+# 		NOT = { mercenary_company = merc_feiten_lightning_jellyfish }
+# 		NOT = { mercenary_company = merc_feiten_stasis }
+# 		NOT = { mercenary_company = merc_feiten_firestorm }
+# 		NOT = { mercenary_company = merc_feiten_sky_factory }
+# 		NOT = { mercenary_company = merc_jiantsiang_blazing_claws }
+# 		NOT = { mercenary_company = merc_jiantsiang_shuvuush_auxilaries }
+# 		NOT = { mercenary_company = merc_northern_legion }
+# 		NOT = { mercenary_company = merc_novice_slayers }
+# 		NOT = { mercenary_company = merc_bloodied_slayers }
+# 		NOT = { mercenary_company = merc_doomed_slayers }
+# 		NOT = { mercenary_company = veykodan_guard_elite_merc }
+# 		NOT = { mercenary_company = merc_vault_guard }
+# 		NOT = { mercenary_company = merc_tluukt_harpy_janissaries }
+# 		NOT = { mercenary_company = merc_tluukt_masnsih_janissaries }
+# 		NOT = { mercenary_company = merc_tluukt_bulwar_janissaries }
+# 		NOT = { mercenary_company = merc_bianfang_hobgoblin_army }
+# 		NOT = { mercenary_company = merc_freemarches_the_gray_guard }
+# 		NOT = { mercenary_company = merc_dartax_sebhuliam }
+# 		NOT = { mercenary_company = merc_dartax_mage_sebhuliam }
+# 		NOT = { mercenary_company = merc_amacimst_the_amethyst_order }
+# 		NOT = { mercenary_company = merc_shazstundihr_marbleblood }
+# 		NOT = { mercenary_company = merc_newshire_peapods }
+# 		NOT = { mercenary_company = merc_newshire_wallnuts }
+# 		NOT = { mercenary_company = merc_newshire_squashkin }
+# 		NOT = { mercenary_company = merc_newshire_sunwatchers }
+# 		NOT = { mercenary_company = merc_terror_knights }
+# 		NOT = { mercenary_company = merc_crimson_executioners }
+# 		NOT = { mercenary_company = merc_fjarforska }
+# 		NOT = { mercenary_company = merc_siadan_stormtalon_guard }
+# 		NOT = { mercenary_company = merc_surani_exemplars }
+# 		NOT = { mercenary_company = merc_jaherian_exemplars }
+# 		NOT = { mercenary_company = merc_command_wolf_army }
+# 		NOT = { mercenary_company = merc_command_boar_army }
+# 		NOT = { mercenary_company = merc_command_lion_army }
+# 		NOT = { mercenary_company = merc_command_dragon_army }
+# 		NOT = { mercenary_company = merc_command_elephant_army }
+# 		NOT = { mercenary_company = merc_command_tiger_army }
+# 		NOT = { mercenary_company = merc_dauvek_veker }
+# 		NOT = { mercenary_company = merc_mountainshark_giantsharks }
+# 		NOT = { mercenary_company = merc_mountainshark_dragonsharks }
+# 		NOT = { mercenary_company = merc_chien_boarsofdinh }
+# 		NOT = { mercenary_company = merc_shrine_guard }
+# 		NOT = { mercenary_company = merc_raggedy_gun_knights }
+# 		NOT = { mercenary_company = merc_lords_of_platinum }
+# 		NOT = { mercenary_company = merc_lords_of_platinum_improved }
+# 		NOT = { mercenary_company = merc_yidabs_vanguard }
+# 		NOT = { mercenary_company = merc_steam_baron_engineering_corps }
+# 		NOT = { mercenary_company = merc_mboala_war_dogs }
+# 		NOT = { mercenary_company = merc_verkalgulan_the_golden_shield_company }
+# 		NOT = { mercenary_company = merc_verkalgulan_the_citadel_cannonneers }
+# 		NOT = { mercenary_company = merc_verkalgulan_the_kings_gate_banners }
+# 		NOT = { mercenary_company = merc_paddleboard_knights }
+# 		NOT = { mercenary_company = merc_haebiszyae_guard_cavalry }
+# 		NOT = { mercenary_company = merc_royakottar_kattyva_elite_vangaurd }
+# 		NOT = { mercenary_company = merc_volisi_vara_redeemed_swordsmen }
+# 		NOT = { mercenary_company = merc_the_silverspite_company }
+# 		NOT = { mercenary_company = merc_sarraka }
+# 		NOT = { mercenary_company = merc_sarraka_two }
+# 		NOT = { mercenary_company = merc_sarraka_three }
+# 		NOT = { mercenary_company = merc_R61_pasindesh_scouts }
+# 		NOT = { mercenary_company = merc_daughters_of_akasik_elite }
+# 		NOT = { mercenary_company = merc_larankarha_household_cavalry }
+# 		NOT = { mercenary_company = merc_wolfguard }
+# 		NOT = { mercenary_company = merc_wyvernheart_burnblood_company_1 }
+# 		NOT = { mercenary_company = merc_wyvernheart_burnblood_company_2_1 }
+# 		NOT = { mercenary_company = merc_wyvernheart_burnblood_company_2_2 }
+# 		NOT = { mercenary_company = merc_wyvernheart_burnblood_company_3_1 }
+# 		NOT = { mercenary_company = merc_wyvernheart_burnblood_company_3_2 }
+# 		NOT = { mercenary_company = merc_wyvernheart_burnblood_company_4_1 }
+# 		NOT = { mercenary_company = merc_wyvernheart_burnblood_company_4_2 }
+# 		NOT = { mercenary_company = merc_wyvernheart_burnblood_company_4_3 }
+# 		NOT = { mercenary_company = merc_wyvernheart_burnblood_company_5_1 }
+# 		NOT = { mercenary_company = merc_wyvernheart_burnblood_company_5_2 }
+# 		NOT = { mercenary_company = merc_wyvernheart_burnblood_company_5_3 }
+# 		NOT = { mercenary_company = merc_wyvernheart_burnblood_company_6_1 }
+# 		NOT = { mercenary_company = merc_wyvernheart_burnblood_company_6_2 }
+# 		NOT = { mercenary_company = merc_wyvernheart_burnblood_company_6_3 }
+# 		NOT = { mercenary_company = merc_wyvernheart_burnblood_company_6_4 }
+# 		NOT = { mercenary_company = merc_stone_army_tier_2 }
+# 		NOT = { mercenary_company = merc_rock_raiders }
+# 		NOT = { mercenary_company = merc_rock_raiders_tier_2 }
+# 		NOT = { mercenary_company = merc_chrome_claws }
+# 		NOT = { mercenary_company = merc_chrome_claws_tier_2 }
+# 		NOT = { mercenary_company = merc_dacite_dragons }
+# 		NOT = { mercenary_company = merc_dacite_dragons_tier_2 }
+# 		NOT = { mercenary_company = merc_whetstones }
+# 		NOT = { mercenary_company = merc_whetstones_tier_2 }
+# 		NOT = { mercenary_company = merc_marble_mounts }
+# 		NOT = { mercenary_company = merc_marble_mounts_tier_2 }
+# 		NOT = { mercenary_company = merc_flying_pebbles }
+# 		NOT = { mercenary_company = merc_flying_pebbles_tier_2 }
+# 		NOT = { mercenary_company = merc_the_orcish_company }
+# 		NOT = { mercenary_company = merc_shadowbound_ashama }
+# 		NOT = { mercenary_company = merc_ameion_kattyam_auxiliary }
+# 		NOT = { mercenary_company = merc_rhada_lifters }
+# 		NOT = { mercenary_company = merc_gnoll_buffalo_jumpers }
+# 		NOT = { mercenary_company = merc_izenwez_league_players }
+# 		NOT = { mercenary_company = merc_G53_lawarund }
+# 		NOT = { mercenary_company = merc_G53_hsamaz }
+# 		NOT = { mercenary_company = merc_mojobaa_warrior_monks }
+# 		NOT = { mercenary_company = merc_lrm_city_guard }
+# 		NOT = { mercenary_company = merc_lrm_city_guard_upgraded }
+# 		NOT = { mercenary_company = merc_ashhana_royal_guard }
+# 		NOT = { mercenary_company = merc_patrician_guard }
+# 		NOT = { mercenary_company = merc_uesrennu_armoured_kotakompus }
+# 		NOT = { mercenary_company = merc_children_of_the_thorns }
+# 		NOT = { mercenary_company = merc_wineport_seven_chalices }
+# 		NOT = { mercenary_company = merc_wineport_watchers }
+# 		NOT = { mercenary_company = merc_foxalley_foxes }
+# 		NOT = { mercenary_company = merc_raj_foreign_legion }
+# 		NOT = { mercenary_company = merc_ironwall }
+# 		NOT = { mercenary_company = merc_chaqway_flamingoes }
+# 		NOT = { mercenary_company = merc_zokka_rakshasa_devotees }
+# 		NOT = { mercenary_company = merc_istralari_banshees_small_a }
+# 		NOT = { mercenary_company = merc_istralari_banshees_small_b }
+# 		NOT = { mercenary_company = merc_istralari_banshees_mid_a }
+# 		NOT = { mercenary_company = merc_istralari_banshees_mid_b }
+# 		NOT = { mercenary_company = merc_istralari_banshees_large_a }
+# 		NOT = { mercenary_company = merc_istralari_banshees_large_b }
+# 		NOT = { mercenary_company = merc_verne_exploration_team_1 }
+# 		NOT = { mercenary_company = merc_verne_exploration_team_2 }
+# 		NOT = { mercenary_company = merc_parahechendi_scythed_chariots }
+# 		NOT = { mercenary_company = merc_ebeneshi_scythed_chariots }
+# 		NOT = { mercenary_company = merc_kalavendi_scythed_chariots }
+# 		NOT = { mercenary_company = merc_larankarha_scythed_chariots }
+# 		NOT = { mercenary_company = merc_konol_hawk_legion }
+# 		NOT = { mercenary_company = merc_konol_carrion_legion }
+# 		NOT = { mercenary_company = merc_konol_sandstorm_legion }
+# 		NOT = { mercenary_company = merc_konol_venom_legion }
+# 		NOT = { mercenary_company = merc_konol_scourge_legion }
+# 		NOT = { mercenary_company = merc_adeen_hardliners }
+# 		NOT = { mercenary_company = merc_human_iyashlagila_1 }
+# 		NOT = { mercenary_company = merc_human_iyashlagila_2 }
+# 		NOT = { mercenary_company = merc_human_iyashlagila_3 }
+# 		NOT = { mercenary_company = merc_human_iyashlagila_4 }
+# 		NOT = { mercenary_company = merc_angels_base }
+# 		NOT = { mercenary_company = merc_angels_defense }
+# 		NOT = { mercenary_company = merc_angels_defense_2 }
+# 		NOT = { mercenary_company = merc_angels_offense }
+# 		NOT = { mercenary_company = merc_angels_offense_2 }
+# 		NOT = { mercenary_company = merc_eldritch_base }
+# 		NOT = { mercenary_company = merc_eldritch_fast }
+# 		NOT = { mercenary_company = merc_eldritch_fast_2 }
+# 		NOT = { mercenary_company = merc_eldritch_mass }
+# 		NOT = { mercenary_company = merc_eldritch_mass_2 }
+# 		NOT = { mercenary_company = merc_devils_base }
+# 		NOT = { mercenary_company = merc_devils_frontline }
+# 		NOT = { mercenary_company = merc_devils_frontline_2 }
+# 		NOT = { mercenary_company = merc_devils_backline }
+# 		NOT = { mercenary_company = merc_devils_backline_2 }
+# 		NOT = { mercenary_company = merc_children_of_the_vanguard }
+# 		NOT = { mercenary_company = merc_bibyobi_monster_hunters }
+# 		NOT = { mercenary_company = merc_bibyobi_ninki_nanka }
+# 		NOT = { mercenary_company = merc_bibyobi_wereleopards }
+# 		NOT = { mercenary_company = merc_deranne_seaflower_knights }
+# 		NOT = { mercenary_company = merc_beikling_hill_raiders }
+# 		NOT = { mercenary_company = merc_beikling_royal_host }
+# 		NOT = { mercenary_company = merc_wild_magic_casters }
+# 		NOT = { mercenary_company = merc_campurana_corintar }
+# 		NOT = { mercenary_company = merc_campurana_hotzaya }
+# 		NOT = { mercenary_company = merc_lelanan_daughters_of_lel }
+# 		NOT = { mercenary_company = merc_lelanan_daughters_of_lel_upgraded_1 }
+# 		NOT = { mercenary_company = merc_lelanan_daughters_of_lel_upgraded_2 }
+# 		NOT = { mercenary_company = merc_emperors_flame }
+# 		NOT = { mercenary_company = merc_ostavranan }
+# 		NOT = { mercenary_company = merc_elemental_animals }
+# 		NOT = { mercenary_company = merc_spiritfire_elementals }
+#         NOT = { mercenary_company = merc_hellhounds_1 }
+#         NOT = { mercenary_company = merc_hellhounds_2 }
+# 	}
+# }
+
+# has_cast_summon_animals = {
+# 	custom_trigger_tooltip = {
+# 		tooltip = has_cast_summon_animals
+# 		OR = {
+# 			has_country_modifier = conjuration_1_summon_animals_mod
+# 			has_country_modifier = conjuration_1_summon_animals_xhazobkult_mod
+# 			has_country_modifier = conjuration_1_summon_elemental_animals_mod
+# 			has_country_modifier = conjuration_1_summon_hellhounds_mod_1
+# 			has_country_modifier = conjuration_1_summon_hellhounds_mod_2
+# 		}
+# 	}
+# }

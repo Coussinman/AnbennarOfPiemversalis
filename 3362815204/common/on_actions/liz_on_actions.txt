@@ -1,0 +1,50 @@
+on_province_owner_change = {
+    if = {
+        limit = {
+            owner = {
+                any_owned_province = {
+                    has_great_project = { type = dagmender_city tier = 3 }
+                }
+            }
+            OR = {
+                province_has_center_of_trade_of_level = 1
+                has_river_estuary_trigger = yes
+            }
+        }
+        add_province_modifier = {
+            name = dagmender_boosted_cot_mod
+            duration = -1
+        }
+    }
+    if = {
+        limit = {
+            owner = {
+                any_owned_province = {
+                    has_great_project = { type = baash_maru tier = 2 }
+                }
+            }
+            has_province_modifier = offcoast_merfolk_allied
+        }
+        add_province_modifier = {
+            name = baash_maru_2_mod
+            duration = -1
+        }
+    }
+
+    # Тир 3 (перезаписывает тир 2 если есть)
+    if = {
+        limit = {
+            owner = {
+                any_owned_province = {
+                    has_great_project = { type = baash_maru tier = 3 }
+                }
+            }
+            has_province_modifier = offcoast_merfolk_allied
+        }
+        remove_province_modifier = baash_maru_2_mod
+        add_province_modifier = {
+            name = baash_maru_3_mod
+            duration = -1
+        }
+    }
+}

@@ -1,0 +1,273 @@
+namespace = tkachuk
+
+country_event = { 
+	id = tkachuk.0
+	title = "tkachuk.t"
+	desc = "tkachuk.d"
+	picture = weav_event_Picture
+
+	is_triggered_only = yes
+
+	trigger = {
+	}
+
+	option = {
+		name = tkachuk.0.a
+		random_list = {
+			5 = { 
+				add_ruler_modifier = { 
+					name = adm_prophecy_1 
+					duration = -1
+				}
+				add_prestige = 35
+				add_legitimacy = 25
+			}
+			30 = { 
+				add_ruler_modifier = { 
+					name = adm_prophecy_2
+					duration = -1
+				}
+				add_prestige = 25
+				add_legitimacy = 15
+			}
+			30 = { 
+				add_ruler_modifier = { 
+					name = adm_prophecy_3 
+					duration = -1
+				} 
+				add_prestige = 15
+				add_legitimacy = 5
+			}
+			30 = { 
+				add_ruler_modifier = { 
+					name = adm_prophecy_4 
+					duration = -1
+				}
+				add_prestige = 10
+			}
+			5 = { 
+				add_ruler_modifier = { 
+					name = adm_prophecy_5
+					duration = -1
+				}
+				add_prestige = -20
+				add_legitimacy = -20
+			}
+		}
+	}
+	option = {
+		name = tkachuk.0.b
+		random_list = {
+			5 = { 
+				add_ruler_modifier = { 
+					name = dip_prophecy_1 
+					duration = -1
+				}
+				add_prestige = 35
+				add_legitimacy = 25
+			}
+			30 = { 
+				add_ruler_modifier = { 
+					name = dip_prophecy_2 
+					duration = -1
+				}
+				add_prestige = 25
+				add_legitimacy = 15
+			}
+			30 = { 
+				add_ruler_modifier = { 
+					name = dip_prophecy_3
+					duration = -1
+				}
+				add_prestige = 15
+				add_legitimacy = 5
+			}
+			30 = { 
+				add_ruler_modifier = { 
+					name = dip_prophecy_4 
+					duration = -1
+				}
+				add_prestige = 5
+			}
+			5 = { 
+				add_ruler_modifier = { 
+					name = dip_prophecy_5
+					duration = -1
+				}
+				add_prestige = -20
+				add_legitimacy = -20
+			}
+		}
+	}
+	option = {
+		name = tkachuk.0.c
+		random_list = {
+			5 = { 
+				add_ruler_modifier = { 
+					name = mil_prophecy_1 
+					duration = -1
+				}
+				add_prestige = 35
+				add_legitimacy = 25
+			}
+			30 = { 
+				add_ruler_modifier = { 
+					name = mil_prophecy_2
+					duration = -1
+				}
+				add_prestige = 25
+				add_legitimacy = 15
+			}
+			30 = { 
+				add_ruler_modifier = { 
+					name = mil_prophecy_3 
+					duration = -1
+				}
+				add_prestige = 15
+				add_legitimacy = 5
+			}
+			30 = { 
+				add_ruler_modifier = { 
+					name = mil_prophecy_4 
+					duration = -1
+				}
+				add_prestige = 5
+			}
+			5 = { 
+				add_ruler_modifier = { 
+					name = mil_prophecy_5
+					duration = -1
+				}
+				add_prestige = -20
+				add_legitimacy = -20
+			}
+		}
+	}
+}
+
+country_event = {
+    id = tkachuk.1
+    title = "tkachuk.1.t"
+    desc = "tkachuk.1.d"
+    picture = BANKRUPTCY_eventPicture
+
+	is_triggered_only = yes
+
+    trigger = {
+    }
+
+    option = {
+        name = tkachuk.1.a # Инвестировать
+        add_years_of_income = -1
+        set_country_flag = investment_active
+
+        country_event = {
+            days = 1825
+            id = tkachuk.2
+        }
+    }
+
+	option = {
+        name = tkachuk.1.b # Инвестировать рабов
+        add_yearly_manpower = -1
+        set_country_flag = investment_active
+
+        country_event = {
+            days = 1825
+            id = tkachuk.2
+        }
+    }
+
+    option = {
+        name = tkachuk.1.c
+    }
+}
+
+country_event = {
+    id = tkachuk.2
+    title = "tkachuk.2.t"
+    desc = "tkachuk.2.d"
+    picture = ECONOMY_eventPicture
+
+    is_triggered_only = yes
+
+    trigger = {
+    }
+
+    option = {
+        name = tkachuk.2.a
+		clr_country_flag = investment_active
+		random_list = {
+            30 = { 
+				country_event = {
+					id = tkachuk.3
+				} 
+			}
+            60 = { 
+				country_event = {
+					id = tkachuk.4
+				} 
+			}
+            10 = { 
+				country_event = {
+					id = tkachuk.5
+				}  
+			} 
+        }
+    }
+}
+
+
+country_event = {
+    id = tkachuk.3
+    title = "tkachuk.3.t"
+    desc = "tkachuk.3.d"
+    picture = FEAST_eventPicture
+
+    is_triggered_only = yes
+
+    trigger = {
+    }
+
+    option = {
+        name = tkachuk.3.a
+		add_years_of_income = 5
+    	add_mercantilism = 0.05
+    }
+}
+
+country_event = {
+    id = tkachuk.4
+    title = "tkachuk.4.t"
+    desc = "tkachuk.4.d"
+    picture = TRADEGOODS_eventPicture
+
+    is_triggered_only = yes
+
+    trigger = {
+    }
+
+    option = {
+        name = tkachuk.4.a
+		add_years_of_income = 2
+		add_mercantilism = 0.01
+    }
+}
+
+country_event = {
+    id = tkachuk.5
+    title = "tkachuk.5.t"
+    desc = "tkachuk.5.d"
+    picture = OVEREXTENSION_eventPicture
+
+    is_triggered_only = yes
+
+    trigger = {
+    }
+
+    option = {
+        name = tkachuk.5.a
+		add_stability = -1
+		add_mercantilism = -0.01
+    }
+}

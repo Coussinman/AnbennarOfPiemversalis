@@ -1,0 +1,321 @@
+# estate_action_RECRUIT_WAR_WIZARD = { #Сделанео так что бы можно было призвать с монмуентом арамуля боевых магов без академии
+# 	if = {
+# 		limit = { 
+#             exactly_magic_project_level = { project = battlemage_academy level = 3 } 
+#         }
+# 		add_mil_power = -40
+# 	}
+# 	else_if = {
+#         OR = {
+#             limit = { exactly_magic_project_level = { project = battlemage_academy level = 2 } }
+#             has_country_flag = sosal_palace_tier_3
+#         }
+# 		add_mil_power = -60
+# 	}
+# 	else_if = {
+#         OR = {
+#             limit = { exactly_magic_project_level = { project = battlemage_academy level = 1 } }
+#             has_country_flag = sosal_palace_tier_2
+#         }
+# 		add_mil_power = -80
+# 	}
+# 	else = {
+# 		add_mil_power = -100
+# 	}
+# 	create_war_wizard = yes
+# }
+
+# create_war_wizard = { #the more general war-wizard function
+# 	custom_tooltip = create_war_wizard_tt
+# 	hidden_effect = { #RNG for names is broken unless we set saved name
+# 		set_saved_name = { key = ww_male_name type = leader }
+# 		set_saved_name = { key = ww_female_name type = leader female = yes }
+# 	}
+
+# 	if = { #all the tooltips go after this block!
+# 		limit = { 
+#             exactly_magic_project_level = { project = battlemage_academy level = 3 } 
+#         }
+# 		add_country_modifier = { name = war_wizard_3_mod duration = 1 hidden = yes } #4/9/7/4
+# 		custom_tooltip = war_wizard_level_3_base_stats_tt
+# 	}
+# 	else_if = {
+# 		limit = { 
+#             exactly_magic_project_level = { project = battlemage_academy level = 2 } 
+#             has_country_flag = sosal_palace_tier_3
+#         }
+# 		add_country_modifier = { name = war_wizard_2_mod duration = 1 hidden = yes } #2/8/6/3
+# 		custom_tooltip = war_wizard_level_2_base_stats_tt
+# 	}
+# 	else_if = {
+# 		limit = { 
+#             exactly_magic_project_level = { project = battlemage_academy level = 1 } 
+#             has_country_flag = sosal_palace_tier_2
+#         }
+# 		add_country_modifier = { name = war_wizard_1_mod duration = 1 hidden = yes } #1/7/5/2
+# 		custom_tooltip = war_wizard_level_1_base_stats_tt
+# 	}
+# 	else = {
+# 		add_country_modifier = { name = war_wizard_0_mod duration = 1 hidden = yes } #0/7/3/1
+# 		custom_tooltip = war_wizard_level_0_base_stats_tt
+# 	}
+
+# 	apply_war_wizard_buffs = yes
+
+# 	hidden_effect = { #We need the PRNG for situations like the evocation project
+# 		if = {
+# 			limit = { culture_is_harpy = yes }
+# 			create_general = { name = ww_female_name female = yes }
+# 		}
+# 		else = {
+# 			randnum_effect = {
+# 				max = 2
+# 				case1 = "create_general = { name = ww_male_name }"
+# 				case2 = "create_general = { name = ww_female_name female = yes }"
+# 			}
+# 		}
+
+# 		#Clear names
+# 		clear_saved_name = ww_male_name
+# 		clear_saved_name = ww_female_name
+
+# 		#Clear war wizard modifiers
+# 		remove_country_modifier = war_wizard_3_mod
+# 		remove_country_modifier = war_wizard_2_mod
+# 		remove_country_modifier = war_wizard_1_mod
+# 		remove_country_modifier = war_wizard_0_mod
+
+# 		clear_war_wizard_buffs = yes
+# 	}
+# }
+
+# conjuration_1_summon_animals_effect = { # Summon Animals Сделал сюда крч адских гончих вооооооот
+# 	if = {
+# 		limit = { has_country_flag = V05_shock_and_awe_upgrade_flag }
+# 		custom_tooltip = conjuration_1_summon_elemental_animals_spell_effect_tt
+# 		add_country_modifier = { name = conjuration_1_summon_elemental_animals_mod duration = 1825 }
+# 	}
+# 	else_if = {
+# 		limit = { has_ruler_modifier = avatar_of_the_nightmarish_end }
+# 		custom_tooltip = conjuration_1_summon_animals_spell_effect_tt
+# 		add_country_modifier = { name = conjuration_1_summon_animals_xhazobkult_mod duration = 1825 }
+# 	}
+#     #Модовое
+#     else_if = {
+#         limit = { has_country_flag = MM_hellhounds_1 }
+#         custom_tooltip = conjuration_1_summon_hellhounds_1_spell_effect_tt
+#         add_country_modifier = { name = conjuration_1_summon_hellhounds_mod_1 duration = 1825 }
+#     }
+#     else_if = {
+#         limit = { has_country_flag = MM_hellhounds_2 }
+#         custom_tooltip = conjuration_1_summon_hellhounds_2_spell_effect_tt
+#         add_country_modifier = { name = conjuration_1_summon_hellhounds_mod_2 duration = 1825 }
+#     }
+
+# 	else = {
+# 		custom_tooltip = conjuration_1_summon_animals_spell_effect_tt
+# 		add_country_modifier = { name = conjuration_1_summon_animals_mod duration = 1825 }
+# 	}
+# 	hidden_effect = { country_event = { id = magic_spell.202 days = 1826 } }
+# }
+
+# transmutation_1_plant_growth_sub_effect = { #Plant Growth - sub-effect
+# 	tooltip = {
+# 		5690 = {
+# 			if = {
+# 				limit = {
+# 					PREV = {
+# 						OR = {
+# 							AND = { has_grave_forest_of_ilvandet_spell_active = yes 31 = { has_great_project = { type = grave_forest_of_ilvandet tier = 3 } } }
+# 							AND = { has_court_of_everlasting_blossoms_spell_active = yes  2007 = { has_great_project = { type = court_of_everlasting_blossoms tier = 3 } } }
+# 						}
+# 					}
+# 				}
+# 				add_province_modifier = { name = transmutation_1_plant_growth_local_mod_upgraded_more duration = $days$ }
+# 			}
+# 			else_if = {
+# 				limit = { 
+# 					PREV = {
+# 						OR = {
+# 							AND = { has_grave_forest_of_ilvandet_spell_active = yes 31 = { has_great_project = { type = grave_forest_of_ilvandet tier = 2 } } }
+# 							AND = { has_court_of_everlasting_blossoms_spell_active = yes  2007 = { has_great_project = { type = court_of_everlasting_blossoms tier = 2 } } }
+# 						}
+# 					}
+# 				}
+# 				add_province_modifier = { name = transmutation_1_plant_growth_local_mod_upgraded duration = $days$ }
+# 			}
+# 			else = {
+# 				add_province_modifier = { name = transmutation_1_plant_growth_local_mod duration = $days$ }
+# 			}
+
+# 			if = {
+# 				limit = { PREV = { has_country_flag = S50_improved_plant_growth } }
+# 				add_prosperity = 10
+# 			}
+# 			if = {
+# 				limit = { PREV = { has_estate_privilege = artifice_invention_assisted_growth } }
+# 				add_province_modifier = { name = artifice_assisted_growth_modifier duration = $days$ }
+# 			}
+# 		}
+# 	}
+
+# 	hidden_effect = {
+# 		# Определяем уровень модификатора один раз через переменные-флаги не нужны —
+# 		# просто дублируем три ветки, добавляя в limit провинций zirbit условия
+
+# 		if = {
+# 			limit = {
+# 				OR = {
+# 					AND = { has_grave_forest_of_ilvandet_spell_active = yes 31 = { has_great_project = { type = grave_forest_of_ilvandet tier = 3 } } }
+# 					AND = { has_court_of_everlasting_blossoms_spell_active = yes  2007 = { has_great_project = { type = court_of_everlasting_blossoms tier = 3 } } }
+# 				}
+# 			}
+# 			# Стандартные аграрные провинции (всегда)
+# 			every_owned_province = {
+# 				limit = { province_with_arable_goods = yes }
+# 				add_province_modifier = { name = transmutation_1_plant_growth_local_mod_upgraded_more duration = $days$ }
+# 			}
+# 			# zirbit_2: степи без привязки к товару
+# 			if = {
+# 				limit = { has_country_flag = zirbit_2 }
+# 				every_owned_province = {
+# 					limit = {
+# 						NOT = { province_with_arable_goods = yes } # чтобы не дублировать уже покрытые выше
+# 						terrain = steppe
+# 					}
+# 					add_province_modifier = { name = transmutation_1_plant_growth_local_mod_upgraded_more duration = $days$ }
+# 				}
+# 			}
+# 			# zirbit_3: степи И пустыни без привязки к товару
+# 			if = {
+# 				limit = { has_country_flag = zirbit_3 }
+# 				every_owned_province = {
+# 					limit = {
+# 						NOT = { province_with_arable_goods = yes }
+# 						OR = {
+# 							terrain = steppe
+# 							terrain = desert
+# 						}
+# 					}
+# 					add_province_modifier = { name = transmutation_1_plant_growth_local_mod_upgraded_more duration = $days$ }
+# 				}
+# 			}
+# 		}
+# 		else_if = {
+# 			limit = {
+# 				OR = {
+# 					AND = { has_grave_forest_of_ilvandet_spell_active = yes 31 = { has_great_project = { type = grave_forest_of_ilvandet tier = 2 } } }
+# 					AND = { has_court_of_everlasting_blossoms_spell_active = yes  2007 = { has_great_project = { type = court_of_everlasting_blossoms tier = 2 } } }
+# 				}
+# 			}
+# 			every_owned_province = {
+# 				limit = { province_with_arable_goods = yes }
+# 				add_province_modifier = { name = transmutation_1_plant_growth_local_mod_upgraded duration = $days$ }
+# 			}
+# 			if = {
+# 				limit = { has_country_flag = zirbit_2 }
+# 				every_owned_province = {
+# 					limit = {
+# 						NOT = { province_with_arable_goods = yes }
+# 						terrain = steppe
+# 					}
+# 					add_province_modifier = { name = transmutation_1_plant_growth_local_mod_upgraded duration = $days$ }
+# 				}
+# 			}
+# 			if = {
+# 				limit = { has_country_flag = zirbit_3 }
+# 				every_owned_province = {
+# 					limit = {
+# 						NOT = { province_with_arable_goods = yes }
+# 						OR = {
+# 							terrain = steppe
+# 							terrain = desert
+# 						}
+# 					}
+# 					add_province_modifier = { name = transmutation_1_plant_growth_local_mod_upgraded duration = $days$ }
+# 				}
+# 			}
+# 		}
+# 		else = {
+# 			every_owned_province = {
+# 				limit = { province_with_arable_goods = yes }
+# 				add_province_modifier = { name = transmutation_1_plant_growth_local_mod duration = $days$ }
+# 			}
+# 			if = {
+# 				limit = { has_country_flag = zirbit_2 }
+# 				every_owned_province = {
+# 					limit = {
+# 						NOT = { province_with_arable_goods = yes }
+# 						terrain = steppe
+# 					}
+# 					add_province_modifier = { name = transmutation_1_plant_growth_local_mod duration = $days$ }
+# 				}
+# 			}
+# 			if = {
+# 				limit = { has_country_flag = zirbit_3 }
+# 				every_owned_province = {
+# 					limit = {
+# 						NOT = { province_with_arable_goods = yes }
+# 						OR = {
+# 							terrain = steppe
+# 							terrain = desert
+# 						}
+# 					}
+# 					add_province_modifier = { name = transmutation_1_plant_growth_local_mod duration = $days$ }
+# 				}
+# 			}
+# 		}
+
+# 		add_country_modifier = { name = transmutation_1_plant_growth_cooldown_mod duration = $days$ hidden = yes }
+
+# 		if = {
+# 			limit = { has_country_flag = S50_improved_plant_growth }
+# 			every_owned_province = {
+# 				limit = { province_with_arable_goods = yes }
+# 				add_prosperity = 10
+# 			}
+# 		}
+
+# 		if = { #Orenvalyam
+# 			limit = {
+# 				OR = {
+# 					has_country_flag = U39_plant_growth_burn_flag
+# 					has_country_flag = U39_plant_growth_dormant_flag
+# 				}
+# 			}
+# 			every_owned_province = {
+# 				limit = {
+# 					is_effelai_network_root = yes
+# 					province_with_arable_goods = yes
+# 				}
+# 				if = {
+# 					limit = { PREV = { has_country_flag = U39_plant_growth_burn_flag } } 
+# 					add_devastation = 15
+# 					randnum_effect = {
+# 						max = 2
+# 						case1 = " 
+# 							add_base_tax = 1
+# 							add_base_production = 1
+# 							add_base_manpower = 1
+# 						"
+# 					}
+# 				}
+# 				if = {
+# 					limit = { PREV = { has_country_flag = U39_plant_growth_dormant_flag } } 
+# 					effelai_attune_province = yes 
+# 					province_event = { id = orenvalyam_events.26 days = $days$ }
+# 				}
+# 			}
+# 		}
+# 		if = { #Artificery
+# 			limit = { has_estate_privilege = artifice_invention_assisted_growth }
+# 			every_owned_province = {
+# 				limit = { province_with_arable_goods = yes }
+# 				add_province_modifier = { name = artifice_assisted_growth_modifier duration = $days$ }
+# 			}
+# 		}
+# 	}
+# }
+
+
+

@@ -282,9 +282,7 @@ estate_shinukhorchi_monopoly_of_damestear = {
 	loyalty = 0.1
 	is_valid = {
 		has_dlc = "Emperor"
-		any_owned_province = {
-			trade_goods = damestear
-		}
+		damestear = 1
 	}
 	can_select = {
 		custom_trigger_tooltip = {
@@ -296,6 +294,8 @@ estate_shinukhorchi_monopoly_of_damestear = {
 					value = 1
 				}
 			}
+		}
+		custom_trigger_tooltip = {
 			tooltip = JY_LF_not_trading #Anbennar
 			NOT = { has_country_modifier = JY_LF_recent_trade }
 		}
@@ -433,7 +433,7 @@ estate_shinukhorchi_development_of_monasteries = {
 	loyalty = 0.1
 	influence = 0.05
 	max_absolutism = -5
-	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes NOT = { has_government_attribute = buff_development_of_temple } } modifier = { max_absolutism = 1 } }
 	# is_valid = { #its totally a different privilege
 	# 	has_dlc = "Domination"
 	# }
@@ -496,10 +496,10 @@ estate_shinukhorchi_development_of_monasteries = {
 	mechanics = {
 		no_estate_crownland_loss_from_developing
 	}
-	conditional_modifier = {
-		trigger = { has_government_mechanic = russian_modernization_mechanic }
-		modifier = { monthly_russian_modernization = -0.03 }
-	}
+	# conditional_modifier = {
+	# 	trigger = { has_government_mechanic = russian_modernization_mechanic }
+	# 	modifier = { monthly_russian_modernization = -0.03 }
+	# }
 	conditional_modifier = { #Anbennar
 		trigger = { has_country_flag = J53_retore_ustiqlik }
 		modifier = { church_loyalty_modifier = 0.05 }
@@ -564,6 +564,8 @@ estate_chumijemoya_monopoly_of_incense = {
 					value = 1
 				}
 			}
+		}
+		custom_trigger_tooltip = {
 			tooltip = JY_LF_not_trading #Anbennar
 			NOT = { has_country_modifier = JY_LF_recent_trade }
 		}
@@ -1018,6 +1020,8 @@ estate_ajgriijarul_monopoly_metals = {
 					value = 1
 				}
 			}
+		}
+		custom_trigger_tooltip = {
 			tooltip = JY_LF_not_trading #Anbennar
 			NOT = { has_country_modifier = JY_LF_recent_trade }
 		}
@@ -1381,35 +1385,34 @@ estate_kabiurgarko_indebted_to_golden = {
 	loyalty = 0.05
 	influence = 0.05
 	on_granted = {
-		#Check if need to change this tooltip
-		custom_tooltip = estate_burghers_indebted_to_burghers_effect_tooltip
+		custom_tooltip = estate_burghers_indebted_to_burghers_effect_homebrew_tooltip
 		add_mercantilism = -1
 		tooltip = {
 			add_inflation = 0.5
 		}
 		hidden_effect = {
 			add_loan = {
-				fixed_interest = 1
+				fixed_interest = 2
 				duration = 60
 				estate_loan = yes
 			}
 			add_loan = {
-				fixed_interest = 1
+				fixed_interest = 2
 				duration = 60
 				estate_loan = yes
 			}
 			add_loan = {
-				fixed_interest = 1
+				fixed_interest = 2
 				duration = 60
 				estate_loan = yes
 			}
 			add_loan = {
-				fixed_interest = 1
+				fixed_interest = 2
 				duration = 60
 				estate_loan = yes
 			}
 			add_loan = {
-				fixed_interest = 1
+				fixed_interest = 2
 				duration = 60
 				estate_loan = yes
 			}
@@ -1487,6 +1490,8 @@ estate_kabiurgarko_monopoly_of_luxuries = {
 					value = 1
 				}
 			}
+		}
+		custom_trigger_tooltip = {
 			tooltip = JY_LF_not_trading #Anbennar
 			NOT = { has_country_modifier = JY_LF_recent_trade }
 		}
@@ -1990,6 +1995,8 @@ estate_khelorvalshi_monopoly_of_relics = {
 					value = 1
 				}
 			}
+		}
+		custom_trigger_tooltip = {
 			tooltip = JY_LF_not_trading #Anbennar
 			NOT = { has_country_modifier = JY_LF_recent_trade }
 		}
@@ -2003,7 +2010,7 @@ estate_khelorvalshi_monopoly_of_relics = {
 			}
 			custom_tooltip = MONOPOLY_INCOME_RELICS_DESC
 		}
-		custom_tooltip = estate_khelorvalshi_monopoly_of_relics_effect_tooltip
+		custom_tooltip = estate_mages_monopoly_of_relics_effect_tooltip
 	}
 	on_granted_province = {
 		if = {
@@ -2023,7 +2030,7 @@ estate_khelorvalshi_monopoly_of_relics = {
 		}
 	}
 	on_revoked = {
-		custom_tooltip = estate_khelorvalshi_monopoly_of_relics_revoke_tooltip
+		custom_tooltip = estate_mages_monopoly_of_relics_revoke_tooltip
 	}
 	on_revoked_province = {
 		if = {
@@ -2034,7 +2041,7 @@ estate_khelorvalshi_monopoly_of_relics = {
 		}
 	}
 	on_invalid = {
-		custom_tooltip = estate_khelorvalshi_monopoly_of_relics_revoke_tooltip
+		custom_tooltip = estate_mages_monopoly_of_relics_revoke_tooltip
 	}
 	on_invalid_province = {
 		if = {
@@ -2069,8 +2076,8 @@ estate_khelorvalshi_church_power = {
 		legitimacy = -0.5
 		devotion = -0.5
 		horde_unity = -0.5
-		meritocracy = -0.5
-		republican_tradition = -0.25
+		meritocracy = -0.25
+		republican_tradition = -0.2
 	}
 	benefits = {
 		church_power_modifier = 0.2
@@ -2084,20 +2091,11 @@ estate_khelorvalshi_study_help = {
 	influence = 0.05
 	loyalty = -0.05
 	is_valid = {
-		ruler_has_mage_personality = yes
+		ruler_is_powerful_mage = yes
 	}
 
-	on_granted = {
-		update_magic_study_experience_modifier = { value=20 }
-		custom_tooltip = oni_study_help_tooltip
-	}
-	on_revoked = {
-		update_magic_study_experience_modifier = { value=-20 }
-	}
-	on_invalid = {
-		update_magic_study_experience_modifier = { value=-20 }
-	}
 	benefits = {
+		mages_ruler_experience_mod = 0.2
 	}
 }
 

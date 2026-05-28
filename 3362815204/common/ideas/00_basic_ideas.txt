@@ -13,10 +13,29 @@ aristocracy_ideas = {
 	bonus = {
 		max_absolutism = 10
 		nobles_loyalty_modifier = 0.1
+		# ANBENNAR
+		uppercastes_loyalty_modifier = 0.05 #half because Aristo/Divine/Religious also gives 5%
 	}
-		
+
 	trigger = {
-		has_government_attribute = enables_aristocratic_idea_group
+		OR = {
+			has_government_attribute = enables_aristocratic_idea_group
+			AND = {
+				government = tribal
+				has_government_attribute = enables_aristocratic_idea_group
+			}
+		}
+		#NOT = { government = theocracy }	#Anbennar - Twilight Court enables Aristocratic Ideas while being a theocracy reform
+		NOT = { 
+			OR = {
+				has_reform = steppe_horde
+				has_reform = centaur_horde
+				has_reform = centaur_settled
+				has_reform = great_centaur_horde
+				has_reform = pachyderm_masters
+				has_country_flag = rakkaz_unlocked_horde_gov_ideas
+			}
+		}
 	}
 	
 	monarchie1 = {
@@ -48,6 +67,9 @@ aristocracy_ideas = {
 
 	monarchie7 = {
 		global_manpower_modifier = 0.25
+		#Anbennar
+		effect = { increase_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
+		removed_effect = { decrease_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
 	}
 	
 	
@@ -56,14 +78,19 @@ aristocracy_ideas = {
 	}
 }
 
+
 plutocracy_ideas = {
 	category = ADM
 
 	bonus = {
 		manpower_recovery_speed = 0.15
 		burghers_loyalty_modifier = 0.1
+
+		# ANBENNAR
+		castonath_patricians_loyalty_modifier = 0.1
+		middlecastes_loyalty_modifier = 0.1
 	}
-		
+
 	trigger = {
 		has_government_attribute = enables_plutocratic_idea_group
 	}	
@@ -74,7 +101,7 @@ plutocracy_ideas = {
 	}
 	
 	republik2 = {
-		land_morale = 0.075
+		land_morale = 0.1
 	}
 	republik3 = {
 		global_unrest = -2
@@ -90,11 +117,15 @@ plutocracy_ideas = {
 	
 	
 	republik6 = {
-		global_trade_goods_size_modifier = 0.075
+		global_trade_goods_size_modifier = 0.1
 	}
 	
 	republik7 = {
 		republican_tradition = 0.3
+
+		#Anbennar
+		effect = { increase_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
+		removed_effect = { decrease_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
 	}
 	
 	ai_will_do = {
@@ -111,27 +142,29 @@ innovativeness_ideas = {
 	}
 
 	patron_of_art  = {
-		prestige_decay = -0.007
+		prestige_decay = -0.01
 	}
 	empiricism = {
-		innovativeness_gain = 0.35
+		innovativeness_gain = 0.5
 	}
 	print_culture = {
-		global_institution_spread = 0.15
-		embracement_cost = -0.1
+		global_institution_spread = 0.5
+		embracement_cost = -0.5
 	}
 	scientific_revolution = {
-		technology_cost = -0.075
+		technology_cost = -0.1
 	}
 	dynamic_court = {
 		advisor_pool = 1
 	}
 	optimism = {
-		war_exhaustion = -0.02
+		war_exhaustion = -0.03
 	}
 	expanded_policies = {
 		possible_adm_policy = 1
 		free_adm_policy = 1
+		effect = { increase_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
+		removed_effect = { decrease_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
 	}
 
 	ai_will_do = {
@@ -150,8 +183,6 @@ innovativeness_ideas = {
 		}
 	}
 }
-
-#religious ideas moved to combo ideas
 
 spy_ideas = {
 	category = DIP
@@ -173,7 +204,8 @@ spy_ideas = {
 	}
 
 	vetting = {
-		global_spy_defence = 0.33
+		global_spy_defence = 0.25
+		advisor_cost = -0.10
 	}	
 	
 	additional_loyalist_recruitment = {
@@ -181,8 +213,7 @@ spy_ideas = {
 	}
 
 	efficient_spies = {
-		siege_ability = 0.1
-		advisor_cost = -0.10
+		siege_ability = 0.15
 	}
 
 	
@@ -192,7 +223,9 @@ spy_ideas = {
 	}
 	
 	audit_checks = {
-		yearly_corruption = -0.1
+		yearly_corruption = -0.15
+		effect = { increase_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
+		removed_effect = { decrease_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
 	}
 
 
@@ -216,11 +249,11 @@ diplomatic_ideas = {
 	category = DIP
 	bonus = {
 		reduced_stab_impacts = yes
-		dip_tech_cost_modifier = -0.075
+		dip_tech_cost_modifier = -0.1
 	}
 	
 	foreign_embassies = {
-		dip_advisor_cost = -0.075
+		dip_advisor_cost = -0.15
 		diplomats = 1
 	}
 	establish_cadet_branches = {
@@ -231,23 +264,21 @@ diplomatic_ideas = {
 	}
 	
 	diplomatic_corps_2 = {
-		improve_relation_modifier = 0.2
+		improve_relation_modifier = 0.25
 	}
 	
 	benign_diplomats = {
-		province_warscore_cost = -0.075
+		province_warscore_cost = -0.1
 	}
 	experienced_diplomats = {
 		diplomats = 1
 		imperial_authority_value = 0.05
 	}
-	#homebrew_pu_war = {
-	#	#enables pu cb
-	#	shock_damage = 0.05
-	#}
 	hb_expanded_ranks = {
 		possible_dip_policy = 1
 		free_dip_policy = 1
+		effect = { increase_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
+		removed_effect = { decrease_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
 	}
 
 	ai_will_do = {
@@ -285,31 +316,32 @@ influence_ideas = {
 
 	bonus = {
 		unjustified_demands = -0.5
-		allow_client_states = yes #Needs testing, will probably get rid of it
 	}
 
 	buffer_states = {
 		diplomatic_upkeep = 1
 	}
 	integrated_elites = {
-		diplomatic_annexation_cost = -0.15
+		diplomatic_annexation_cost = -0.2
 	}
 	tribute_system = {
 		vassal_income = 0.25
 	}
 	diplomatic_influence = {
-		diplomatic_reputation = 1.5
+		diplomatic_reputation = 2
 		chance_to_inherit = 0.5
 	}
 	marcher_lords = {
-		vassal_forcelimit_bonus = 0.5
+		vassal_forcelimit_bonus = 0.35
 	}
 	blackmailing = {
 		monthly_favor_modifier = 0.25
-		accept_vassalization_reasons = 10
+		accept_vassalization_reasons = 15
 	}
 	homebrew_puppeteer = {
 		liberty_desire_from_subject_development = -0.25
+		effect = { increase_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
+		removed_effect = { decrease_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
 	}
 
 	ai_will_do = {
@@ -334,7 +366,6 @@ influence_ideas = {
 	}	
 }
 
-
 offensive_ideas = {
 	category = MIL
 
@@ -350,24 +381,29 @@ offensive_ideas = {
 	}
 	national_conscripts = {
 		artillery_levels_available_vs_fort = 2
-		artillery_level_modifier = 0.4
+		artillery_cost = 0.75
 	}
 	relentless_assault = {
 		leader_siege = 1
+		artillery_level_modifier = 0.4
 	}
 	widespread_recruitment = {
 		manpower_recovery_speed = 0.2
+		backrow_artillery_damage = -0.1
 	}
 	engineer_corps = {
 		siege_ability = 0.10
 		defensiveness = -0.10
 	}
 	grand_army = {
+		reinforce_cost_modifier = 0.33
 		reinforce_speed = 0.20
 	}
 	napoleonic_warfare = {
 		assault_fort_ability = 0.50
 		artillery_barrage_cost = -0.50
+		effect = { increase_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
+		removed_effect = { decrease_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
 	}
 
 	ai_will_do = {
@@ -375,13 +411,12 @@ offensive_ideas = {
 	}
 }
 
-
 defensive_ideas = {
 	category = MIL
 
 	bonus = {
-		hostile_attrition = 1.5
-		max_hostile_attrition = 0.5
+		hostile_attrition = 2
+		max_hostile_attrition = 2
 	}
 
 	battlefield_commisions = {
@@ -391,7 +426,7 @@ defensive_ideas = {
 		shock_damage = -0.075
 	}
 	military_drill = {
-		fort_maintenance_modifier = -0.15
+		fort_maintenance_modifier = -0.2
 	}
 	fish_in_a_barrel = {
 		leader_land_fire = 1
@@ -400,21 +435,23 @@ defensive_ideas = {
 		land_morale = 0.075
 	}
 	defensive_mentality = {
-		shock_damage_received = -0.035
-		defensiveness = 0.1
+		shock_damage_received = -0.05
+		defensiveness = 0.25
 	}
 	supply_trains = {
 		garrison_damage = 0.25
+		fire_damage_received = -0.05
 	}
 	improved_foraging = {
-		garrison_size = 0.3
+		garrison_size = 0.5
+		effect = { increase_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
+		removed_effect = { decrease_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
 	}
 
 	ai_will_do = {
 		factor = 0.77
 	}
 }
-
 
 trade_ideas = {
 	category = DIP
@@ -446,6 +483,8 @@ trade_ideas = {
 	fast_negotiations = {
 		caravan_power = 0.25
 		mercantilism_cost = -0.2
+		effect = { increase_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
+		removed_effect = { decrease_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
 	}
 
 	ai_will_do = {
@@ -472,9 +511,6 @@ trade_ideas = {
 	}
 }
 
-
-
-
 economic_ideas = {
 	category = ADM
 
@@ -483,13 +519,13 @@ economic_ideas = {
 	}
 
 	bureaucracy = {
-		global_tax_modifier = 0.15
+		global_tax_modifier = 0.25
 	}
 	organised_construction = {
 		build_cost = -0.075
 	}
 	national_bank = {
-		gold_depletion_chance_modifier = -0.1
+		gold_depletion_chance_modifier = -0.25
 		monthly_gold_inflation_modifier = -0.05
 	}
 	debt_and_loans = {
@@ -500,10 +536,12 @@ economic_ideas = {
 		global_autonomy = -0.05
 	}
 	nationalistic_enthusiasm = {
-		land_maintenance_modifier = -0.05
+		land_maintenance_modifier = -0.1
 	}
 	smithian_economics = {
 		production_efficiency = 0.1
+		effect = { increase_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
+		removed_effect = { decrease_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
  	}
 
 	ai_will_do = {
@@ -535,7 +573,6 @@ economic_ideas = {
 	}
 }
 
-
 exploration_ideas = {
 	category = DIP
 	important = yes
@@ -553,17 +590,19 @@ exploration_ideas = {
 		range = 0.5
 	}
 	land_of_opportunity = {
-		global_colonial_growth = 20
+		global_colonial_growth = 25
 	}
 	vice_roys  = {
  		global_tariffs = 0.20
+		treasure_fleet_income = 0.5
  	}
 	free_colonies = {
 		colonist_placement_chance = 0.1
 	}
 	global_empire = {
 		naval_forcelimit_modifier = 0.25
-		treasure_fleet_income = 0.25
+		effect = { increase_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
+		removed_effect = { decrease_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
 	}
 
 	ai_will_do = {
@@ -704,11 +743,11 @@ exploration_ideas = {
 			factor = 2.0
 			num_of_ports = 20
 		}
-#		modifier = {	#sun elves wanting to reclaim homeland
-#			factor = 1000
-#			primary_culture = sun_elf
-#			num_of_ports = 5
-#		}
+	#		modifier = {	#sun elves wanting to reclaim homeland
+	#			factor = 1000
+	#			primary_culture = sun_elf
+	#			num_of_ports = 5
+	#		}
 		modifier = {	#this makes spawned adventurers etc take exploration
 			factor = 100
 			AND = {
@@ -809,7 +848,6 @@ exploration_ideas = {
 	}
 }
 
-
 maritime_ideas = {
 	category = DIP
 
@@ -849,6 +887,8 @@ maritime_ideas = {
 	}
 	maritim7 = {
 		merchants = 1
+		effect = { increase_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
+		removed_effect = { decrease_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
 	}
 	
 	ai_will_do = {
@@ -887,24 +927,22 @@ maritime_ideas = {
 	}
 }
 
-
 quality_ideas = {
 	category = MIL
 
 	bonus = {
 		discipline = 0.05
-		drill_decay_modifier = -0.2
 	}
 
 	private_to_marshal = {
-		land_maintenance_modifier = 0.1
-		mercenary_discipline = 0.05
+		global_manpower_modifier = -0.1
+		drill_decay_modifier = -0.3
 	}
 	quality_education = {
-		infantry_power = 0.075
+		infantry_power = 0.1
 	}
 	finest_of_horses = {
-		cavalry_power = 0.075
+		cavalry_power = 0.1
 	}
 	siege_artillery = {
 		leader_siege = 1
@@ -917,14 +955,15 @@ quality_ideas = {
 		army_tradition_decay = -0.0075
 	}
 	massed_battery = {
-		artillery_power = 0.075
+		artillery_power = 0.1
+		effect = { increase_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
+		removed_effect = { decrease_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
 	}
 
 	ai_will_do = {
 		factor = 0.49
 	}
 }
-
 
 quantity_ideas = {
 	category = MIL
@@ -948,7 +987,7 @@ quantity_ideas = {
 		morale_damage_received = -0.05
 	}
 	bullandhorns = {  
-		yearly_army_professionalism = -0.003
+		army_tradition_decay = 0.005
 		reinforce_speed = 0.20
 	}
 	expanded_supply_trains = {
@@ -957,14 +996,15 @@ quantity_ideas = {
 	}
 	depth_defense = {  
 		free_land_leader_pool = 2
-		reinforce_cost = -0.20
+		reinforce_cost_modifier = -0.20
+		effect = { increase_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
+		removed_effect = { decrease_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
 	}
-
+	
 	ai_will_do = {
 		factor = 1
 	}
 }
-
 
 expansion_ideas = {
 	category = ADM
@@ -988,14 +1028,15 @@ expansion_ideas = {
 		merchants = 1
 	}
 	factories = {
-		trade_steering = 0.1
-		center_of_trade_upgrade_cost = -0.2
+		center_of_trade_upgrade_cost = -0.33
 	}
 	general_colonization_law  = {
 		colonists = 1
 	}
 	homebrew_chartering  = {
-		core_creation = -0.15
+		core_creation = -0.1
+		effect = { increase_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
+		removed_effect = { decrease_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
 	}
 	
 
@@ -1118,23 +1159,22 @@ expansion_ideas = {
 	}
 }
 
-
 administrative_ideas = {
 	category = ADM
 
 	bonus = {
 		governing_capacity_modifier = 0.2
-		adm_tech_cost_modifier = -0.075
 	}
 
 	administrative_efficiency_idea = {
-		adm_advisor_cost = -0.075
+		adm_advisor_cost = -0.15
 	}
 	reform_provincial_admin = {
 		expand_administration_cost = -0.25
+		adm_tech_cost_modifier = -0.1
 	}
 	adaptability = {
-		core_creation = -0.15
+		core_creation = -0.2
 	}
 	bookkeeping = {
 		interest = -1
@@ -1147,6 +1187,8 @@ administrative_ideas = {
 	}
 	new_taxation = {
 		global_tax_income = 144
+		effect = { increase_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
+		removed_effect = { decrease_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
 	}
 
 	ai_will_do = {
@@ -1162,8 +1204,10 @@ humanist_ideas = {
 	category = ADM
 
 	bonus = {
-		idea_cost = -0.075
-		yearly_harmony = 0.25
+		idea_cost = -0.1
+
+		# ANBENNAR
+		lowercastes_loyalty_modifier = 0.1
 	}
 
 	tolerance_idea_2 = {
@@ -1183,11 +1227,14 @@ humanist_ideas = {
 		tolerance_heathen = 2
 	}
 	benevolence = {
-		improve_relation_modifier = 0.2
+		improve_relation_modifier = 0.25
+		yearly_harmony = 0.25
 	}
 	racial_tolerance = {
-		num_accepted_cultures = 2
+		num_accepted_cultures = 5
 		#add option to improve racial tolerance
+		effect = { increase_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
+		removed_effect = { decrease_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
 	}
 
 	ai_will_do = {
@@ -1217,5 +1264,47 @@ humanist_ideas = {
 			religious_unity = 1.0
 		}
 		
+	}
+}
+
+indigenous_ideas = { #These certainly need to be readjusted, but for now, these are placed here simply because they are referenced in other parts of the game >> less errors or potential crashes
+	category = ADM
+
+	bonus = {
+		global_institution_spread = 0.25
+	}
+
+	trigger = {
+		has_government_attribute = enables_natives_idea_group
+	}
+
+	indigenous_bountiful_land = {
+		tribal_development_growth = 0.015
+		development_cost = -0.05
+	}
+	indigenous_irregular_warfare = {
+		hostile_attrition = 1
+	}
+	indigenous_constitution = {
+		monthly_reform_progress_modifier = 0.25
+	}
+	indigenous_braves = {
+		land_morale = 0.10
+	}
+	indigenous_controlled_burns = {
+		global_manpower_modifier = 0.15
+	}
+	indigenous_trade_with_foreigners = {
+		idea_cost = -0.1
+	}
+	indigenous_treaties = {
+		province_warscore_cost = -0.2
+		#Anbennar
+		effect = { increase_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
+		removed_effect = { decrease_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
+	}
+
+	ai_will_do = {
+		factor = 10
 	}
 }

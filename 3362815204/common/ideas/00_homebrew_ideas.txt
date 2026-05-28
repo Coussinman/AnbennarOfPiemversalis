@@ -1,7 +1,7 @@
 #reference for ez replacement/purging: gross0 handel0 galle0 flottenbasis0
 #reminder to check and replace vanilla tags/regions
 
-homebrew_highseas_ideas = {
+naval_ideas = {
 	category = DIP
 	
 	bonus = {
@@ -22,7 +22,7 @@ homebrew_highseas_ideas = {
 		heavy_ship_power = 0.1
 	}
 	homebrew_fingeronthepulse = {
-		justify_trade_conflict_cost = -1
+		blockade_efficiency = 0.5
 		privateer_efficiency = 0.5
 	}
 
@@ -36,10 +36,12 @@ homebrew_highseas_ideas = {
 	}
 	homebrew_merchantnavy = {
 		global_ship_trade_power = 0.25
-		blockade_efficiency = 0.5
+		light_ship_power = 0.2
 	}
 	homebrew_signalspells = {
 		global_naval_engagement_modifier = 0.1
+		effect = { increase_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
+		removed_effect = { decrease_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
 	}
 	
 	ai_will_do = {
@@ -86,10 +88,11 @@ homebrew_amphibious_ideas = {
 	}
 	trigger = {
 		primitives = no
-		NOT = { has_idea_group = homebrew_highseas_ideas }
+		NOT = { has_idea_group = naval_ideas }
 	}
 	homebrew_marineracademies2 = {
-		global_sailors_modifier = 0.25	
+		global_sailors_modifier = 0.25
+		global_ship_repair = 0.1	
 	}
 	homebrew_orcishrowmen = {
 		galley_power = 0.2
@@ -100,18 +103,20 @@ homebrew_amphibious_ideas = {
 	}
 
 	homebrew_overseasprojection = {
-		global_ship_repair = 0.1
+		global_naval_barrage_cost = -1
 		#add_cb = cb_coast
 	}
 
 	homebrew_merchantsfriend = {
-		trade_efficiency = 0.1
+		trade_efficiency = 0.15
 	}
 	homebrew_boardingparties = {
-		capture_ship_chance = 0.1
+		capture_ship_chance = 0.25
 	}
 	homebrew_coastalformations = {
-		disengagement_chance = 0.05
+		disengagement_chance = 0.15
+		effect = { increase_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
+		removed_effect = { decrease_legitimacy_equivalent_absolutism_from_idea_groups_mod = yes }
 	}
 	
 	ai_will_do = {

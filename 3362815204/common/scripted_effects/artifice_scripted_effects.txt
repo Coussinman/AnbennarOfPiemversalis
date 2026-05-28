@@ -40,20 +40,20 @@ update_artifice_points = {
 				which = ArtificePointsDamestear
 				value = 0
 			}
-
-
-			6168 = {
-				PREV = {
-					set_variable = {
-						which = GlobalArtificeLimit
-						which = PREV
+			if = {
+				limit = { NOT = { has_reform = bazuneizar_clockwork_republic } }
+				6168 = {
+					PREV = {
+						set_variable = {
+							which = GlobalArtificeLimit
+							which = PREV
+						}
 					}
 				}
-			}
-
-			change_variable = {
-				which = MaxArtificePoints
-				which = GlobalArtificeLimit
+				change_variable = {
+					which = MaxArtificePoints
+					which = GlobalArtificeLimit
+				}
 			}
 
 			change_variable = {
@@ -140,6 +140,17 @@ update_artifice_points = {
 			if = {
 				limit = {
 					has_age_ability = ab_aelantir_relics
+				}
+				multiply_variable = {
+					which = ArtificePointsRelics
+					value = 2
+				}
+			}
+
+			#ideas
+			if = {
+				limit = {
+					has_idea = AIG_artificer_grants
 				}
 				multiply_variable = {
 					which = ArtificePointsRelics
@@ -241,7 +252,36 @@ update_artifice_points = {
 				}
 			}
 
+			#Overclan lazzaward artifice monument no-carpets-compensation
+			if = {
+				limit = {
+					tag = F78
+					has_dlc = "Leviathan"
+					has_country_flag = allow_lazzaward_usage
+					owns_core_province = 655
+					655 = { has_great_project = { type = mount_lazzaward tier = 2 } }
+				}
+				change_variable = {
+					which = MaxArtificePoints
+					value = 5
+				}
+				if = {
+					limit = { 655 = { has_great_project = { type = mount_lazzaward tier = 3 } } }
+					change_variable = {
+						which = MaxArtificePoints
+						value = 5
+					}
+				}
+			}
 
+			#Insyaa Foundationism
+			if = {
+				limit = { religion = foundationism }
+				change_variable = {
+					which = MaxArtificePoints
+					which = divine_workshops_art_cap
+				}
+			}
 			#static sources from things like missions and upkeep
 			change_variable = {
 				which = MaxArtificePoints
@@ -475,7 +515,7 @@ update_artifice_points = {
 			#liches and witch kings have no need for artifice and are distrustful of the threat it represents to them
 			if = {
 				limit = {
-					has_country_flag = orlghelovar_science_mages_privilege
+					has_estate_privilege = estate_mages_organization_science_mages
 				}
 				change_variable = {
 					which = ArtificePointsMultiplier
@@ -492,11 +532,7 @@ update_artifice_points = {
 				}
 			}
 			if = {
-				limit = {
-					has_country_flag = magic_artificery_artificery_only
-					ruler_has_personality = mage_personality
-					NOT = { has_ruler_flag = pursuing_artificery }
-				}
+				limit = { has_country_flag = non_artificery_culture }
 				subtract_variable = {
 					which = ArtificePointsMultiplier
 					value = 0.5
@@ -507,6 +543,13 @@ update_artifice_points = {
 					tag = J84 #Taychendi Empire
 					has_country_flag = J84_increased_percent_artifice_capacity_flag
 				}
+				change_variable = {
+					which = ArtificePointsMultiplier
+					value = 0.25
+				}
+			}
+			if = {	#hityranyalen
+				limit = { has_estate_privilege = estate_artificers_hyti_peace }
 				change_variable = {
 					which = ArtificePointsMultiplier
 					value = 0.25
@@ -598,6 +641,7 @@ update_artifice_points = {
 					}
 				}
 				add_country_modifier = { name =  artificers_over_artifice_capacity duration = -1 }
+				country_event = { id = artifice_inventions.1234 }
 			}
 			else = {
 				remove_country_modifier = artificers_over_artifice_capacity
@@ -745,15 +789,7 @@ set_up_artifice_system = {
 			NOT = { has_country_flag = artificery_choice }
 			NOT = { tag = H74 } #dak special
 			OR = {
-				AND = {
-					is_tribal = no
-					OR = {
-						culture_group = kobold
-						culture_group = goblin
-						culture_group = gnomish
-					}
-					NOT = { primary_culture = goldscale_kobold }
-				}
+				is_artificery_culture_government = yes
 				AND = {
 					has_institution = manufactories
 					OR = {
@@ -768,6 +804,29 @@ set_up_artifice_system = {
 		}	
 		set_country_flag = artificery_choice
 	}
+	else_if = {
+		limit = {
+			OR = {
+				has_estate_privilege = estate_artificers_organization_pillar_expedition
+				has_estate_privilege = estate_artificers_organization_mechanim_base
+			}
+			has_institution = manufactories
+			NOT = { has_country_flag = artificery_choice }
+		}
+		remove_estate_privilege = estate_artificers_organization_pillar_expedition
+		remove_estate_privilege = estate_artificers_organization_mechanim_base
+
+		set_country_flag = artificery_choice
+		country_event = { id = magic_artificery_setup.2 }
+	}
+	else_if = {
+		limit = { #you have no flags and are a spawnable
+			is_not_in_mage_mode = yes
+			is_not_in_mixed_mode = yes
+			is_not_in_artificery_mode = yes
+		}
+		set_country_flag = magic_artificery_mage_only
+	}
 	update_artifice_points = yes
 }
 
@@ -781,15 +840,25 @@ artifice_granted_10 = {
 		}
 	}
 	if = {
-		limit = {
-			ai = no
+		limit = { ai = no }
+		if = {
+			limit = { has_country_flag = inventions_cost_more_mana }
+			add_treasury = -50
+			add_adm_power = -20
+			add_dip_power = -20
+			add_mil_power = -20
 		}
-		add_treasury = -50
-		add_adm_power = -5
-		add_dip_power = -5
-		add_mil_power = -5
+		else = {
+			add_treasury = -50
+			add_adm_power = -5
+			add_dip_power = -5
+			add_mil_power = -5
+		}
 	}
-	update_artifice_points = yes
+	hidden_effect = { country_event = { id = artifice_inventions.1 } }
+	# this does update_artifice_points = yes in the immediate
+	# so that we only have one instance of that long effect
+	# rather than hundreds from every time these scripted effects are used in artificery privileges
 }
 
 artifice_remove_10 = {
@@ -801,7 +870,10 @@ artifice_remove_10 = {
 			value = 10
 		}
 	}
-	update_artifice_points = yes
+	hidden_effect = { country_event = { id = artifice_inventions.1 } }
+	# this does update_artifice_points = yes in the immediate
+	# so that we only have one instance of that long effect
+	# rather than hundreds from every time these scripted effects are used in artificery privileges
 }
 
 artifice_granted_20 = {
@@ -814,15 +886,25 @@ artifice_granted_20 = {
 		}
 	}
 	if = {
-		limit = {
-			ai = no
+		limit = { ai = no }
+		if = {
+			limit = { has_country_flag = inventions_cost_more_mana }
+			add_treasury = -100
+			add_adm_power = -40
+			add_dip_power = -40
+			add_mil_power = -40
 		}
-		add_treasury = -100
-		add_adm_power = -10
-		add_dip_power = -10
-		add_mil_power = -10
+		else = {
+			add_treasury = -100
+			add_adm_power = -10
+			add_dip_power = -10
+			add_mil_power = -10
+		}
 	}
-	update_artifice_points = yes
+	hidden_effect = { country_event = { id = artifice_inventions.1 } }
+	# this does update_artifice_points = yes in the immediate
+	# so that we only have one instance of that long effect
+	# rather than hundreds from every time these scripted effects are used in artificery privileges
 }
 
 artifice_remove_20 = {
@@ -834,7 +916,10 @@ artifice_remove_20 = {
 			value = 20
 		}
 	}
-	update_artifice_points = yes
+	hidden_effect = { country_event = { id = artifice_inventions.1 } }
+	# this does update_artifice_points = yes in the immediate
+	# so that we only have one instance of that long effect
+	# rather than hundreds from every time these scripted effects are used in artificery privileges
 }
 
 artifice_granted_30 = {
@@ -847,15 +932,25 @@ artifice_granted_30 = {
 		}
 	}
 	if = {
-		limit = {
-			ai = no
+		limit = { ai = no }
+		if = {
+			limit = { has_country_flag = inventions_cost_more_mana }
+			add_treasury = -200
+			add_adm_power = -80
+			add_dip_power = -80
+			add_mil_power = -80
 		}
-		add_treasury = -200
-		add_adm_power = -20
-		add_dip_power = -20
-		add_mil_power = -20
+		else = {
+			add_treasury = -200
+			add_adm_power = -20
+			add_dip_power = -20
+			add_mil_power = -20
+		}
 	}
-	update_artifice_points = yes
+	hidden_effect = { country_event = { id = artifice_inventions.1 } }
+	# this does update_artifice_points = yes in the immediate
+	# so that we only have one instance of that long effect
+	# rather than hundreds from every time these scripted effects are used in artificery privileges
 }
 
 artifice_remove_30 = {
@@ -867,7 +962,10 @@ artifice_remove_30 = {
 			value = 30
 		}
 	}
-	update_artifice_points = yes
+	hidden_effect = { country_event = { id = artifice_inventions.1 } }
+	# this does update_artifice_points = yes in the immediate
+	# so that we only have one instance of that long effect
+	# rather than hundreds from every time these scripted effects are used in artificery privileges
 }
 
 
@@ -881,15 +979,25 @@ artifice_granted_40 = {
 		}
 	}
 	if = {
-		limit = {
-			ai = no
+		limit = { ai = no }
+		if = {
+			limit = { has_country_flag = inventions_cost_more_mana }
+			add_treasury = -400
+			add_adm_power = -160
+			add_dip_power = -160
+			add_mil_power = -160
 		}
-		add_treasury = -400
-		add_adm_power = -40
-		add_dip_power = -40
-		add_mil_power = -40
+		else = {
+			add_treasury = -400
+			add_adm_power = -40
+			add_dip_power = -40
+			add_mil_power = -40
+		}
 	}
-	update_artifice_points = yes
+	hidden_effect = { country_event = { id = artifice_inventions.1 } }
+	# this does update_artifice_points = yes in the immediate
+	# so that we only have one instance of that long effect
+	# rather than hundreds from every time these scripted effects are used in artificery privileges
 }
 
 artifice_remove_40 = {
@@ -901,7 +1009,10 @@ artifice_remove_40 = {
 			value = 40
 		}
 	}
-	update_artifice_points = yes
+	hidden_effect = { country_event = { id = artifice_inventions.1 } }
+	# this does update_artifice_points = yes in the immediate
+	# so that we only have one instance of that long effect
+	# rather than hundreds from every time these scripted effects are used in artificery privileges
 }
 
 artifice_remove_dynamic = { #Purpose: Removing / tracking capacity for inventions with costs that vary (e.g. Kobildzan's Draconic Ascension)
@@ -976,6 +1087,17 @@ mission_reward_artifice_points_10 = {
 		change_variable = {
 			which = StaticArtificePoints
 			value = 10
+		}
+	}
+	update_artifice_points = yes
+}
+
+mission_reward_artifice_points_15 = {
+	custom_tooltip = permanently_increases_our_artifice_points_by_15_tt
+	hidden_effect = {
+		change_variable = {
+			which = StaticArtificePoints
+			value = 15
 		}
 	}
 	update_artifice_points = yes
@@ -1484,6 +1606,13 @@ estate_action_GRANT_GENERALSHIP_ARTIFICE = {
 		leader = general
 		type = army
 	}
+	if = { 
+		limit = { has_country_flag = RSP_palegold_improved_artificer_generals }
+		create_leader_scaling_with_tradition_artifice = {
+			leader = admiral
+			type = navy
+		}
+	}
 	add_estate_loyalty = {
 		estate = estate_artificers
 		loyalty = -10
@@ -1872,7 +2001,6 @@ artifice_research_select_innovation_options_effect = {
 						primary_culture = nurcestiran
 						primary_culture = ancardian
 						primary_culture = anbenncoster
-						primary_culture = anbenlander
 					}
 				}
 				set_country_flag = research_artifice_invention_automated_translator
@@ -1951,6 +2079,25 @@ artifice_research_select_innovation_options_effect = {
 					mission_completed = z22_commercialised_magic
 				}
 				set_country_flag = research_artifice_invention_sustaining_arks
+				subtract_variable = {
+					which = artificeResearchOptionsTier1
+					value = 1
+				}
+			}
+			1 = {
+				trigger = {
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_hanging_houses
+							has_country_flag = unlocked_artifice_invention_hanging_houses
+							has_country_flag = artifice_researching_military
+							has_country_flag = artifice_researching_society
+						}
+					}
+					is_bulwari_influenced_harpy_culture = yes
+					NOT = { is_or_was_tag = { tag = F50 } }
+				}
+				set_country_flag = research_artifice_invention_hanging_houses
 				subtract_variable = {
 					which = artificeResearchOptionsTier1
 					value = 1
@@ -2167,6 +2314,42 @@ artifice_research_select_innovation_options_effect = {
 					value = 1
 				}
 			}
+			1 = {
+				trigger = {
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_table_war
+							has_country_flag = unlocked_artifice_invention_table_war
+							has_country_flag = artifice_researching_economic
+							has_country_flag = artifice_researching_society
+						}
+					}
+					religion = the_jadd
+				}
+				set_country_flag = research_artifice_invention_table_war
+				subtract_variable = {
+					which = artificeResearchOptionsTier1
+					value = 1
+				}
+			}
+			1 = {
+				trigger = {
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_kevlar_shields
+							has_country_flag = unlocked_artifice_invention_kevlar_shields
+							has_country_flag = artifice_researching_economic
+							has_country_flag = artifice_researching_society
+						}
+					}
+					is_bulwari_elf = yes
+				}
+				set_country_flag = research_artifice_invention_kevlar_shields
+				subtract_variable = {
+					which = artificeResearchOptionsTier1
+					value = 1
+				}
+			}
 			#Society
 			1 = {
 				trigger = {
@@ -2238,6 +2421,495 @@ artifice_research_select_innovation_options_effect = {
 					culture_group = gnomish
 				}
 				set_country_flag = research_artifice_invention_conversation_calibrator
+				subtract_variable = {
+					which = artificeResearchOptionsTier1
+					value = 1
+				}
+			}
+			1 = {
+				trigger = {
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_voice_vessels
+							has_country_flag = unlocked_artifice_invention_voice_vessels
+							has_country_flag = artifice_researching_economic
+							has_country_flag = artifice_researching_military
+						}
+					}
+					religion = the_hunt
+				}
+				set_country_flag = research_artifice_invention_voice_vessels
+				subtract_variable = {
+					which = artificeResearchOptionsTier1
+					value = 1
+				}
+			}
+			1 = {
+				trigger = {
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_sunspire_pylons
+							has_country_flag = unlocked_artifice_invention_sunspire_pylons
+							has_country_flag = artifice_researching_economic
+							has_country_flag = artifice_researching_military
+						}
+					}
+					is_bulwari_elf = yes
+				}
+				set_country_flag = research_artifice_invention_sunspire_pylons
+				subtract_variable = {
+					which = artificeResearchOptionsTier1
+					value = 1
+				}
+			}
+			1 = {
+				trigger = {
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_inscription_tools
+							has_country_flag = unlocked_artifice_invention_inscription_tools
+							has_country_flag = artifice_researching_economic
+							has_country_flag = artifice_researching_military
+						}
+					}
+					OR = {
+						culture = firanyan_harpy
+						culture = exodus_goblin
+						is_bulwari_or_zanlibi_culture = yes
+					}
+				}
+				set_country_flag = research_artifice_invention_inscription_tools
+				subtract_variable = {
+					which = artificeResearchOptionsTier1
+					value = 1
+				}
+			}
+			1 = {
+				trigger = {
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_law_books
+							has_country_flag = unlocked_artifice_invention_law_books
+							has_country_flag = artifice_researching_economic
+							has_country_flag = artifice_researching_military
+						}
+					}
+					OR = {
+						religion = bulwari_sun_cult
+						religion = old_bulwari_sun_cult
+					}
+				}
+				set_country_flag = research_artifice_invention_law_books
+				subtract_variable = {
+					which = artificeResearchOptionsTier1
+					value = 1
+				}
+			}
+			#Insyaa tab inventions
+			1 = { #Economic
+				trigger = {
+					NOT = { has_country_modifier = mechanim_administration }
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_tgs_farmland
+							has_country_flag = unlocked_artifice_invention_tgs_farmland
+							has_country_flag = artifice_researching_military
+							has_country_flag = artifice_researching_society
+						}
+					}
+					NOT = {
+						capital_scope = {
+							continent = oceania
+						}
+					}
+					6234 = {
+						had_province_flag = {
+							flag = unlocked_artifice_invention_tgs_farmland_global
+							days = 5475
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_from_insyaa
+				set_country_flag = research_artifice_invention_tgs_farmland
+				subtract_variable = {
+					which = artificeResearchOptionsTier1
+					value = 1
+				}
+			}
+			1 = { #Economic
+				trigger = {
+					NOT = { has_country_modifier = mechanim_administration }
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_tgs_livestock
+							has_country_flag = unlocked_artifice_invention_tgs_livestock
+							has_country_flag = artifice_researching_military
+							has_country_flag = artifice_researching_society
+						}
+					}
+					NOT = {
+						capital_scope = {
+							continent = oceania
+						}
+					}
+					6234 = {
+						had_province_flag = {
+							flag = unlocked_artifice_invention_tgs_livestock_global
+							days = 5475
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_from_insyaa
+				set_country_flag = research_artifice_invention_tgs_livestock
+				subtract_variable = {
+					which = artificeResearchOptionsTier1
+					value = 1
+				}
+			}
+			1 = { #Military
+				trigger = {
+					has_country_flag = magic_artificery_artificery_only
+					NOT = { has_country_modifier = mechanim_administration }
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_sonic_weaponary
+							has_country_flag = unlocked_artifice_invention_sonic_weaponary
+							has_country_flag = artifice_researching_society
+							has_country_flag = artifice_researching_economic
+						}
+					}
+					OR = {
+						AND = {
+							capital_scope = {
+								continent = oceania
+							}
+							6234 = {
+								had_province_flag = {
+									flag = unlocked_artifice_invention_sonic_weaponary_local
+									days = 5475
+								}
+							}
+						}
+						6234 = {
+							had_province_flag = {
+								flag = unlocked_artifice_invention_sonic_weaponary_global
+								days = 5475
+							}
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_from_insyaa
+				set_country_flag = research_artifice_invention_sonic_weaponary
+				subtract_variable = {
+					which = artificeResearchOptionsTier1
+					value = 1
+				}
+			}
+			1 = { #Military
+				trigger = {
+					NOT = { has_country_flag = magic_artificery_artificery_only }
+					NOT = { has_country_modifier = mechanim_administration }
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_sonic_amplifiers
+							has_country_flag = unlocked_artifice_invention_sonic_amplifiers
+							has_country_flag = artifice_researching_society
+							has_country_flag = artifice_researching_economic
+						}
+					}
+					OR = {
+						AND = {
+							capital_scope = {
+								continent = oceania
+							}
+							6234 = {
+								had_province_flag = {
+									flag = unlocked_artifice_invention_sonic_amplifiers_local
+									days = 5475
+								}
+							}
+						}
+						6234 = {
+							had_province_flag = {
+								flag = unlocked_artifice_invention_sonic_amplifiers_global
+								days = 5475
+							}
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_from_insyaa
+				set_country_flag = research_artifice_invention_sonic_amplifiers
+				subtract_variable = {
+					which = artificeResearchOptionsTier1
+					value = 1
+				}
+			}
+			1 = { #Society
+				trigger = {
+					NOT = { has_country_modifier = mechanim_administration }
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_pillar_scouts
+							has_country_flag = unlocked_artifice_invention_pillar_scouts
+							has_country_flag = artifice_researching_military
+							has_country_flag = artifice_researching_economic
+						}
+					}
+					capital_scope = {
+						continent = oceania
+					}
+					6234 = {
+						had_province_flag = {
+							flag = unlocked_artifice_invention_pillar_scouts_local
+							days = 5475
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_from_insyaa
+				set_country_flag = research_artifice_invention_pillar_scouts
+				subtract_variable = {
+					which = artificeResearchOptionsTier1
+					value = 1
+				}
+			}
+			1 = { #Society + Economic
+				trigger = {
+					NOT = { has_country_modifier = mechanim_administration }
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_reverse_mechanim
+							has_country_flag = unlocked_artifice_invention_reverse_mechanim
+							has_country_flag = artifice_researching_military
+						}
+					}
+					OR = {
+						AND = {
+							capital_scope = {
+								continent = oceania
+							}
+							6234 = {
+								had_province_flag = {
+									flag = unlocked_artifice_invention_reverse_mechanim_local
+									days = 5475
+								}
+							}
+						}
+						6234 = {
+							had_province_flag = {
+								flag = unlocked_artifice_invention_reverse_mechanim_global
+								days = 5475
+							}
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_from_insyaa
+				set_country_flag = research_artifice_invention_reverse_mechanim
+				subtract_variable = {
+					which = artificeResearchOptionsTier1
+					value = 1
+				}
+			}
+			1 = { #Economic
+				trigger = {
+					has_country_modifier = mechanim_administration
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_mech_building_plates
+							has_country_flag = unlocked_artifice_invention_mech_building_plates
+							has_country_flag = artifice_researching_military
+							has_country_flag = artifice_researching_society
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_mech_building_plates
+				subtract_variable = {
+					which = artificeResearchOptionsTier1
+					value = 1
+				}
+			}
+			1 = { #Military
+				trigger = {
+					has_country_modifier = mechanim_military
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_mech_fireproof_plating
+							has_country_flag = unlocked_artifice_invention_mech_fireproof_plating
+							has_country_flag = artifice_researching_economic
+							has_country_flag = artifice_researching_society
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_mech_fireproof_plating
+				subtract_variable = {
+					which = artificeResearchOptionsTier1
+					value = 1
+				}
+			}
+			1 = { #Society
+				trigger = {
+					has_country_modifier = mechanim_military
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_mech_pillar_scouts
+							has_country_flag = unlocked_artifice_invention_mech_pillar_scouts
+							has_country_flag = artifice_researching_economic
+							has_country_flag = artifice_researching_society
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_mech_pillar_scouts
+				subtract_variable = {
+					which = artificeResearchOptionsTier1
+					value = 1
+				}
+			}
+			1 = { #Military
+				trigger = {
+					has_country_modifier = mechanim_military
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_mech_amphibious_attachements
+							has_country_flag = unlocked_artifice_invention_mech_amphibious_attachements
+							has_country_flag = artifice_researching_economic
+							has_country_flag = artifice_researching_society
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_mech_amphibious_attachements
+				subtract_variable = {
+					which = artificeResearchOptionsTier1
+					value = 1
+				}
+			}
+			1 = { #Economic
+				trigger = {
+					NOT = { has_country_flag = magic_artificery_artificery_only }
+					NOT = { has_country_modifier = mechanim_administration }
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_assisted_growth
+							has_country_flag = unlocked_artifice_invention_assisted_growth
+							has_country_flag = artifice_researching_military
+							has_country_flag = artifice_researching_society
+						}
+					}
+					OR = {
+						AND = {
+							capital_scope = {
+								continent = oceania
+							}
+							6234 = {
+								had_province_flag = {
+									flag = unlocked_artifice_invention_assisted_growth_local
+									days = 5475
+								}
+							}
+						}
+						6234 = {
+							had_province_flag = {
+								flag = unlocked_artifice_invention_assisted_growth_global
+								days = 5475
+							}
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_from_insyaa
+				set_country_flag = research_artifice_invention_assisted_growth
+				subtract_variable = {
+					which = artificeResearchOptionsTier1
+					value = 1
+				}
+			}
+			1 = { #Economic
+				trigger = {
+					has_country_flag = magic_artificery_artificery_only
+					NOT = { has_country_modifier = mechanim_administration }
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_crop_enlarge
+							has_country_flag = unlocked_artifice_invention_crop_enlarge
+							has_country_flag = artifice_researching_military
+							has_country_flag = artifice_researching_society
+						}
+					}
+					OR = {
+						AND = {
+							capital_scope = {
+								continent = oceania
+							}
+							6234 = {
+								had_province_flag = {
+									flag = unlocked_artifice_invention_crop_enlarge_local
+									days = 5475
+								}
+							}
+						}
+						6234 = {
+							had_province_flag = {
+								flag = unlocked_artifice_invention_crop_enlarge_global
+								days = 5475
+							}
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_from_insyaa
+				set_country_flag = research_artifice_invention_crop_enlarge
+				subtract_variable = {
+					which = artificeResearchOptionsTier1
+					value = 1
+				}
+			}
+			1 = { #Society
+				trigger = {
+					NOT = { has_country_modifier = mechanim_administration }
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_okalu_scanners
+							has_country_flag = unlocked_artifice_invention_okalu_scanners
+							has_country_flag = artifice_researching_economic
+							has_country_flag = artifice_researching_military
+						}
+					}
+					capital_scope = {
+						continent = oceania
+					}
+					6234 = {
+						had_province_flag = {
+							flag = unlocked_artifice_invention_okalu_scanners_local
+							days = 5475
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_from_insyaa
+				set_country_flag = research_artifice_invention_okalu_scanners
+				subtract_variable = {
+					which = artificeResearchOptionsTier1
+					value = 1
+				}
+			}
+			1 = { #Society
+				trigger = {
+					NOT = { has_country_modifier = mechanim_administration }
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_memory_module
+							has_country_flag = unlocked_artifice_invention_memory_module
+							has_country_flag = artifice_researching_military
+							has_country_flag = artifice_researching_economic
+						}
+					}
+					capital_scope = {
+						continent = oceania
+					}
+					6234 = {
+						had_province_flag = {
+							flag = unlocked_artifice_invention_memory_module_local
+							days = 5475
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_from_insyaa
+				set_country_flag = research_artifice_invention_memory_module
 				subtract_variable = {
 					which = artificeResearchOptionsTier1
 					value = 1
@@ -2459,6 +3131,24 @@ artifice_research_select_innovation_options_effect = {
 					value = 1
 				}
 			}
+			1 = {
+				trigger = {
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_seismic_armor
+							has_country_flag = unlocked_artifice_invention_seismic_armor
+							has_country_flag = artifice_researching_economic
+							has_country_flag = artifice_researching_society
+						}
+					}
+					is_bulwari_influenced_harpy_culture = yes
+				}
+				set_country_flag = research_artifice_invention_seismic_armor
+				subtract_variable = {
+					which = artificeResearchOptionsTier2
+					value = 1
+				}
+			}
 			#Society Inventions  - Tier 2
 			1 = {
 				trigger = {
@@ -2466,7 +3156,6 @@ artifice_research_select_innovation_options_effect = {
 						OR = {
 							has_country_flag = research_artifice_invention_remedial_tinctures
 							has_country_flag = unlocked_artifice_invention_remedial_tinctures
-							has_country_flag = unlocked_artifice_invention_conversation_calibrator
 							has_country_flag = artifice_researching_economic
 							has_country_flag = artifice_researching_military
 						}
@@ -2637,6 +3326,91 @@ artifice_research_select_innovation_options_effect = {
 					mission_completed = z22_commercialised_magic
 				}
 				set_country_flag = research_artifice_invention_innate_windshaping
+				subtract_variable = {
+					which = artificeResearchOptionsTier2
+					value = 1
+				}
+			}
+			1 = {
+				trigger = {
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_moisture_collector
+							has_country_flag = unlocked_artifice_invention_moisture_collector
+							has_country_flag = artifice_researching_military
+							has_country_flag = artifice_researching_society
+						}
+					}
+					OR = {
+						culture = sandfang_gnoll
+						culture = siadunan_harpy
+						culture = desert_elf
+					}
+				}
+				set_country_flag = research_artifice_invention_moisture_collector
+				subtract_variable = {
+					which = artificeResearchOptionsTier2
+					value = 1
+				}
+			}
+			1 = {
+				trigger = {
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_sand_sails
+							has_country_flag = unlocked_artifice_invention_sand_sails
+							has_country_flag = artifice_researching_military
+							has_country_flag = artifice_researching_society
+						}
+					}
+					OR = {
+						culture = sandfang_gnoll
+						culture = desert_elf
+						culture = pyreclaw_gnoll
+						culture = fieldstalker_gnoll
+						culture = windhowler_gnoll
+					}
+				}
+				set_country_flag = research_artifice_invention_sand_sails
+				subtract_variable = {
+					which = artificeResearchOptionsTier2
+					value = 1
+				}
+			}
+			1 = {
+				trigger = {
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_selfrepairing_sails
+							has_country_flag = unlocked_artifice_invention_selfrepairing_sails
+							has_country_flag = artifice_researching_military
+							has_country_flag = artifice_researching_society
+						}
+					}
+					OR = {
+						culture = exodus_goblin
+						culture = bahari
+					}
+				}
+				set_country_flag = research_artifice_invention_selfrepairing_sails
+				subtract_variable = {
+					which = artificeResearchOptionsTier2
+					value = 1
+				}
+			}
+			1 = {
+				trigger = {
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_high_velocity_irrigation
+							has_country_flag = unlocked_artifice_invention_high_velocity_irrigation
+							has_country_flag = artifice_researching_military
+							has_country_flag = artifice_researching_society
+						}
+					}
+					is_bulwari_or_zanlibi_culture = yes
+				}
+				set_country_flag = research_artifice_invention_high_velocity_irrigation
 				subtract_variable = {
 					which = artificeResearchOptionsTier2
 					value = 1
@@ -2920,15 +3694,15 @@ artifice_research_select_innovation_options_effect = {
 				trigger = {
 					NOT = {
 						OR = {
-							has_country_flag = research_artifice_invention_gerudian_autorowers
-							has_country_flag = unlocked_artifice_invention_gerudian_autorowers
+							has_country_flag = research_artifice_invention_brine_severer
+							has_country_flag = unlocked_artifice_invention_brine_severer
 							has_country_flag = artifice_researching_economic
 							has_country_flag = artifice_researching_society
 						}
 					}
-					culture_group = gerudian
+					culture = sandfang_gnoll
 				}
-				set_country_flag = research_artifice_invention_gerudian_autorowers
+				set_country_flag = research_artifice_invention_brine_severer
 				subtract_variable = {
 					which = artificeResearchOptionsTier2
 					value = 1
@@ -2938,15 +3712,15 @@ artifice_research_select_innovation_options_effect = {
 				trigger = {
 					NOT = {
 						OR = {
-							has_country_flag = research_artifice_invention_gerudian_axepistol
-							has_country_flag = unlocked_artifice_invention_gerudian_axepistol
+							has_country_flag = research_artifice_invention_gravehound
+							has_country_flag = unlocked_artifice_invention_gravehound
 							has_country_flag = artifice_researching_economic
 							has_country_flag = artifice_researching_society
 						}
 					}
-					culture_group = gerudian
+					culture = sandfang_gnoll
 				}
-				set_country_flag = research_artifice_invention_gerudian_axepistol
+				set_country_flag = research_artifice_invention_gravehound
 				subtract_variable = {
 					which = artificeResearchOptionsTier2
 					value = 1
@@ -2956,15 +3730,15 @@ artifice_research_select_innovation_options_effect = {
 				trigger = {
 					NOT = {
 						OR = {
-							has_country_flag = research_artifice_invention_gerudian_weightless_holds
-							has_country_flag = unlocked_artifice_invention_gerudian_weightless_holds
+							has_country_flag = research_artifice_invention_djinn_flyship
+							has_country_flag = unlocked_artifice_invention_djinn_flyship
 							has_country_flag = artifice_researching_economic
 							has_country_flag = artifice_researching_society
 						}
 					}
-					culture_group = gerudian
+					is_bulwari_or_zanlibi_culture = yes
 				}
-				set_country_flag = research_artifice_invention_gerudian_weightless_holds
+				set_country_flag = research_artifice_invention_djinn_flyship
 				subtract_variable = {
 					which = artificeResearchOptionsTier2
 					value = 1
@@ -2974,123 +3748,18 @@ artifice_research_select_innovation_options_effect = {
 				trigger = {
 					NOT = {
 						OR = {
-							has_country_flag = research_artifice_invention_eplusplus_compound
-							has_country_flag = unlocked_artifice_invention_eplusplus_compound
+							has_country_flag = research_artifice_invention_inscripted_rifle
+							has_country_flag = unlocked_artifice_invention_inscripted_rifle
 							has_country_flag = artifice_researching_economic
 							has_country_flag = artifice_researching_society
 						}
 					}
-					has_country_modifier = goblin_military
-				}
-				set_country_flag = research_artifice_invention_eplusplus_compound
-				subtract_variable = {
-					which = artificeResearchOptionsTier2
-					value = 1
-				}
-			}
-			1 = {
-				trigger = {
-					NOT = {
-						OR = {
-							has_country_flag = research_artifice_invention_elemental_gunpowder
-							has_country_flag = unlocked_artifice_invention_elemental_gunpowder
-							has_country_flag = artifice_researching_economic
-							has_country_flag = artifice_researching_society
-						}
+					OR = {
+						is_bulwari_or_zanlibi_culture = yes
+						is_bulwari_elf = yes
 					}
-					has_country_modifier = goblin_military
 				}
-				set_country_flag = research_artifice_invention_elemental_gunpowder
-				subtract_variable = {
-					which = artificeResearchOptionsTier2
-					value = 1
-				}
-			}
-			1 = {
-				trigger = {
-					NOT = {
-						OR = {
-							has_country_flag = research_artifice_invention_gyrocopters
-							has_country_flag = unlocked_artifice_invention_gyrocopters
-							has_country_flag = artifice_researching_economic
-							has_country_flag = artifice_researching_society
-						}
-					}
-					has_country_modifier = dwarven_military
-				}
-				set_country_flag = research_artifice_invention_gyrocopters
-				subtract_variable = {
-					which = artificeResearchOptionsTier2
-					value = 1
-				}
-			}
-			1 = {
-				trigger = {
-					NOT = {
-						OR = {
-							has_country_flag = research_artifice_invention_kaydhano_powered_vessels
-							has_country_flag = unlocked_artifice_invention_kaydhano_powered_vessels
-							has_country_flag = artifice_researching_economic
-							has_country_flag = artifice_researching_society
-						}
-					}
-					culture_group = kheionai_ruinborn_elf
-				}
-				set_country_flag = research_artifice_invention_kaydhano_powered_vessels
-				subtract_variable = {
-					which = artificeResearchOptionsTier2
-					value = 1
-				}
-			}
-			1 = {
-				trigger = {
-					NOT = {
-						OR = {
-							has_country_flag = research_artifice_invention_warfare_simulator
-							has_country_flag = unlocked_artifice_invention_warfare_simulator
-							has_country_flag = artifice_researching_economic
-							has_country_flag = artifice_researching_society
-						}
-					}
-					culture_group = hobgoblin
-				}
-				set_country_flag = research_artifice_invention_warfare_simulator
-				subtract_variable = {
-					which = artificeResearchOptionsTier2
-					value = 1
-				}
-			}
-			1 = {
-				trigger = {
-					NOT = {
-						OR = {
-							has_country_flag = research_artifice_invention_gu_boats
-							has_country_flag = unlocked_artifice_invention_gu_boats
-							has_country_flag = artifice_researching_economic
-							has_country_flag = artifice_researching_society
-						}
-					}
-					culture_group = gnomish
-				}
-				set_country_flag = research_artifice_invention_gu_boats
-				subtract_variable = {
-					which = artificeResearchOptionsTier2
-					value = 1
-				}
-			}
-			1 = {
-				trigger = {
-					NOT = {
-						OR = {
-							has_country_flag = research_artifice_invention_veykoda_rune_protections
-							has_country_flag = unlocked_artifice_invention_veykoda_rune_protections
-							has_country_flag = artifice_researching_economic
-							has_country_flag = artifice_researching_society
-						}
-					}
-					culture_group = eordan_ruinborn_elf
-				}
-				set_country_flag = research_artifice_invention_veykoda_rune_protections
+				set_country_flag = research_artifice_invention_inscripted_rifle
 				subtract_variable = {
 					which = artificeResearchOptionsTier2
 					value = 1
@@ -3163,24 +3832,6 @@ artifice_research_select_innovation_options_effect = {
 				trigger = {
 					NOT = {
 						OR = {
-							has_country_flag = research_artifice_invention_skaldhyrric_tale_generator
-							has_country_flag = unlocked_artifice_invention_skaldhyrric_tale_generator
-							has_country_flag = artifice_researching_economic
-							has_country_flag = artifice_researching_military
-						}
-					}
-					religion = skaldhyrric_faith
-				}
-				set_country_flag = research_artifice_invention_skaldhyrric_tale_generator
-				subtract_variable = {
-					which = artificeResearchOptionsTier2
-					value = 1
-				}
-			}
-			1 = {
-				trigger = {
-					NOT = {
-						OR = {
 							has_country_flag = research_artifice_invention_god_fragment_decoder
 							has_country_flag = unlocked_artifice_invention_god_fragment_decoder
 							has_country_flag = artifice_researching_economic
@@ -3211,6 +3862,491 @@ artifice_research_select_innovation_options_effect = {
 					}
 				}
 				set_country_flag = research_artifice_invention_talking_god_temples
+				subtract_variable = {
+					which = artificeResearchOptionsTier2
+					value = 1
+				}
+			}
+			1 = {
+				trigger = {
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_litoral_reclamation
+							has_country_flag = unlocked_artifice_invention_litoral_reclamation
+							has_country_flag = artifice_researching_economic
+							has_country_flag = artifice_researching_military
+						}
+					}
+					culture = exodus_goblin
+				}
+				set_country_flag = research_artifice_invention_litoral_reclamation
+				subtract_variable = {
+					which = artificeResearchOptionsTier2
+					value = 1
+				}
+			}
+			1 = {
+				trigger = {
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_enhanced_masks
+							has_country_flag = unlocked_artifice_invention_enhanced_masks
+							has_country_flag = artifice_researching_economic
+							has_country_flag = artifice_researching_military
+						}
+					}
+					is_bulwari_elf = yes
+				}
+				set_country_flag = research_artifice_invention_enhanced_masks
+				subtract_variable = {
+					which = artificeResearchOptionsTier2
+					value = 1
+				}
+			}
+			1 = {
+				trigger = {
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_incantation_bowls
+							has_country_flag = unlocked_artifice_invention_incantation_bowls
+							has_country_flag = artifice_researching_economic
+							has_country_flag = artifice_researching_military
+						}
+					}
+					religion_group = bulwari
+				}
+				set_country_flag = research_artifice_invention_incantation_bowls
+				subtract_variable = {
+					which = artificeResearchOptionsTier2
+					value = 1
+				}
+			}			
+			#Insyaa
+			1 = { #Society
+				trigger = {
+					NOT = { has_country_modifier = mechanim_administration }
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_behavioral_chip
+							has_country_flag = unlocked_artifice_invention_behavioral_chip
+							has_country_flag = artifice_researching_society
+							has_country_flag = artifice_researching_economic
+						}
+					}
+					capital_scope = {
+						NOT = { continent = oceania }
+					}
+					OR = {
+						has_estate_privilege = artifice_invention_reverse_mechanim
+						has_estate_privilege = artifice_invention_industrial_automatories
+					}
+				}
+				set_country_flag = research_artifice_invention_from_insyaa
+				set_country_flag = research_artifice_invention_behavioral_chip
+				subtract_variable = {
+					which = artificeResearchOptionsTier2
+					value = 1
+				}
+			}
+			1 = { #Military
+				trigger = {
+					NOT = { has_country_modifier = mechanim_administration }
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_titano_thorns
+							has_country_flag = unlocked_artifice_invention_titano_thorns
+							has_country_flag = artifice_researching_economic
+							has_country_flag = artifice_researching_society
+						}
+					}
+					OR = {
+						AND = {
+							capital_scope = {
+								continent = oceania
+							}
+							6234 = {
+								had_province_flag = {
+									flag = unlocked_artifice_invention_titano_thorns_local
+									days = 5475
+								}
+							}
+						}
+						6234 = {
+							had_province_flag = {
+								flag = unlocked_artifice_invention_titano_thorns_global
+								days = 5475
+							}
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_from_insyaa
+				set_country_flag = research_artifice_invention_titano_thorns
+				subtract_variable = {
+					which = artificeResearchOptionsTier2
+					value = 1
+				}
+			}
+			1 = { #Military
+				trigger = {
+					NOT = { has_country_modifier = mechanim_administration }
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_titano_thorns
+							has_country_flag = unlocked_artifice_invention_titano_thorns
+							has_country_flag = artifice_researching_economic
+							has_country_flag = artifice_researching_society
+						}
+					}
+					OR = {
+						AND = {
+							capital_scope = {
+								continent = oceania
+							}
+							6234 = {
+								had_province_flag = {
+									flag = unlocked_artifice_invention_titano_thorns_local
+									days = 5475
+								}
+							}
+						}
+						6234 = {
+							had_province_flag = {
+								flag = unlocked_artifice_invention_titano_thorns_global
+								days = 5475
+							}
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_from_insyaa
+				set_country_flag = research_artifice_invention_titano_thorns
+				subtract_variable = {
+					which = artificeResearchOptionsTier2
+					value = 1
+				}
+			}
+			1 = { #Military
+				trigger = {
+					NOT = { has_country_modifier = mechanim_administration }
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_flak_cannons
+							has_country_flag = unlocked_artifice_invention_flak_cannons
+							has_country_flag = artifice_researching_economic
+							has_country_flag = artifice_researching_society
+						}
+					}
+					OR = {
+						AND = {
+							capital_scope = {
+								continent = oceania
+							}
+							6234 = {
+								had_province_flag = {
+									flag = unlocked_artifice_invention_flak_cannons_local
+									days = 5475
+								}
+							}
+						}
+						6234 = {
+							had_province_flag = {
+								flag = unlocked_artifice_invention_flak_cannons_global
+								days = 5475
+							}
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_from_insyaa
+				set_country_flag = research_artifice_invention_flak_cannons
+				subtract_variable = {
+					which = artificeResearchOptionsTier2
+					value = 1
+				}
+			}
+			1 = { #Military
+				trigger = {
+					NOT = { has_country_modifier = mechanim_administration }
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_fireproof_plating
+							has_country_flag = unlocked_artifice_invention_fireproof_plating
+							has_country_flag = artifice_researching_economic
+							has_country_flag = artifice_researching_society
+						}
+					}
+					capital_scope = {
+						continent = oceania
+					}
+					6234 = {
+						had_province_flag = {
+							flag = unlocked_artifice_invention_fireproof_plating_local
+							days = 5475
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_from_insyaa
+				set_country_flag = research_artifice_invention_fireproof_plating
+				subtract_variable = {
+					which = artificeResearchOptionsTier2
+					value = 1
+				}
+			}
+			1 = { #Military
+				trigger = {
+					NOT = { has_country_modifier = mechanim_administration }
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_mechanim_regiments
+							has_country_flag = unlocked_artifice_invention_mechanim_regiments
+							has_country_flag = artifice_researching_economic
+							has_country_flag = artifice_researching_society
+						}
+					}
+					capital_scope = {
+						NOT = { continent = oceania }
+					}
+					6234 = {
+						had_province_flag = {
+							flag = unlocked_artifice_invention_mechanim_regiments_global
+							days = 5475
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_from_insyaa
+				set_country_flag = research_artifice_invention_mechanim_regiments
+				subtract_variable = {
+					which = artificeResearchOptionsTier2
+					value = 1
+				}
+			}
+			1 = { #Society
+				trigger = {
+					NOT = { has_country_modifier = mechanim_administration }
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_mechanim_deconstructor
+							has_country_flag = unlocked_artifice_invention_mechanim_deconstructor
+							has_country_flag = artifice_researching_military
+							has_country_flag = artifice_researching_economic
+						}
+					}
+					capital_scope = {
+						NOT = { continent = oceania }
+					}
+					6234 = {
+						had_province_flag = {
+							flag = unlocked_artifice_invention_mechanim_deconstructor_global
+							days = 5475
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_from_insyaa
+				set_country_flag = research_artifice_invention_mechanim_deconstructor
+				subtract_variable = {
+					which = artificeResearchOptionsTier2
+					value = 1
+				}
+			}
+			1 = { #Socitey
+				trigger = {
+					NOT = { has_country_modifier = mechanim_administration }
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_steel_tracking
+							has_country_flag = unlocked_artifice_invention_steel_tracking
+							has_country_flag = artifice_researching_military
+							has_country_flag = artifice_researching_economic
+						}
+					}
+					OR = {
+						AND = {
+							capital_scope = {
+								continent = oceania
+							}
+							6234 = {
+								had_province_flag = {
+									flag = unlocked_artifice_invention_steel_tracking_local
+									days = 5475
+								}
+							}
+						}
+						6234 = {
+							had_province_flag = {
+								flag = unlocked_artifice_invention_steel_tracking_global
+								days = 5475
+							}
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_from_insyaa
+				set_country_flag = research_artifice_invention_steel_tracking
+				subtract_variable = {
+					which = artificeResearchOptionsTier2
+					value = 1
+				}
+			}
+			1 = { #Military
+				trigger = {
+					NOT = { has_country_modifier = mechanim_administration }
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_seed_siege
+							has_country_flag = unlocked_artifice_invention_seed_siege
+							has_country_flag = artifice_researching_society
+							has_country_flag = artifice_researching_economic
+						}
+					}
+					capital_scope = {
+						continent = oceania
+					}
+					6234 = {
+						had_province_flag = {
+							flag = unlocked_artifice_invention_seed_siege_local
+							days = 5475
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_from_insyaa
+				set_country_flag = research_artifice_invention_seed_siege
+				subtract_variable = {
+					which = artificeResearchOptionsTier2
+					value = 1
+				}
+			}
+			1 = { #Society
+				trigger = {
+					NOT = { has_country_modifier = mechanim_administration }
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_titano_weed
+							has_country_flag = unlocked_artifice_invention_titano_weed
+							has_country_flag = artifice_researching_military
+							has_country_flag = artifice_researching_economic
+						}
+					}
+					capital_scope = {
+						continent = oceania
+					}
+					6234 = {
+						had_province_flag = {
+							flag = unlocked_artifice_invention_titano_weed_local
+							days = 5475
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_from_insyaa
+				set_country_flag = research_artifice_invention_titano_weed
+				subtract_variable = {
+					which = artificeResearchOptionsTier2
+					value = 1
+				}
+			}
+			1 = { #Economic
+				trigger = {
+					NOT = { has_country_modifier = mechanim_administration }
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_animal_gene
+							has_country_flag = unlocked_artifice_invention_animal_gene
+							has_country_flag = artifice_researching_military
+							has_country_flag = artifice_researching_society
+						}
+					}
+					capital_scope = {
+						continent = oceania
+					}
+					6234 = {
+						had_province_flag = {
+							flag = unlocked_artifice_invention_animal_gene_local
+							days = 5475
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_from_insyaa
+				set_country_flag = research_artifice_invention_animal_gene
+				subtract_variable = {
+					which = artificeResearchOptionsTier2
+					value = 1
+				}
+			}
+			1 = { #Economic
+				trigger = {
+					NOT = { has_country_modifier = mechanim_administration }
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_construction_bots
+							has_country_flag = unlocked_artifice_invention_construction_bots
+							has_country_flag = artifice_researching_military
+							has_country_flag = artifice_researching_society
+						}
+					}
+					NOT = {
+						capital_scope = {
+							continent = oceania
+						}
+					}
+					6234 = {
+						had_province_flag = {
+							flag = unlocked_artifice_invention_construction_bots_global
+							days = 5475
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_from_insyaa
+				set_country_flag = research_artifice_invention_construction_bots
+				subtract_variable = {
+					which = artificeResearchOptionsTier2
+					value = 1
+				}
+			}
+			1 = { #Economic
+				trigger = {
+					has_country_modifier = mechanim_administration
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_mech_steel_detector
+							has_country_flag = unlocked_artifice_invention_mech_steel_detector
+							has_country_flag = artifice_researching_military
+							has_country_flag = artifice_researching_society
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_mech_steel_detector
+				subtract_variable = {
+					which = artificeResearchOptionsTier2
+					value = 1
+				}
+			}
+			1 = { #Society
+				trigger = {
+					has_country_modifier = mechanim_administration
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_mech_reawakening_procedure
+							has_country_flag = unlocked_artifice_invention_mech_reawakening_procedure
+							has_country_flag = artifice_researching_economic
+							has_country_flag = artifice_researching_society
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_mech_reawakening_procedure
+				subtract_variable = {
+					which = artificeResearchOptionsTier2
+					value = 1
+				}
+			}
+			1 = { #Military
+				trigger = {
+					has_country_modifier = mechanim_military
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_mech_lava_cell
+							has_country_flag = unlocked_artifice_invention_mech_lava_cell
+							has_country_flag = artifice_researching_economic
+							has_country_flag = artifice_researching_society
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_mech_lava_cell
 				subtract_variable = {
 					which = artificeResearchOptionsTier2
 					value = 1
@@ -3431,6 +4567,24 @@ artifice_research_select_innovation_options_effect = {
 					value = 1
 				}
 			}
+			1 = {
+				trigger = {
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_scream_beamers
+							has_country_flag = unlocked_artifice_invention_scream_beamers
+							has_country_flag = artifice_researching_economic
+							has_country_flag = artifice_researching_society
+						}
+					}
+					is_bulwari_influenced_harpy_culture = yes
+				}
+				set_country_flag = research_artifice_invention_scream_beamers
+				subtract_variable = {
+					which = artificeResearchOptionsTier3
+					value = 1
+				}
+			}
 			#Society Inventions  - Tier 3
 			1 = {
 				trigger = {
@@ -3524,24 +4678,6 @@ artifice_research_select_innovation_options_effect = {
 				trigger = {
 					NOT = {
 						OR = {
-							has_country_flag = research_artifice_invention_high_velocity_irrigation
-							has_country_flag = unlocked_artifice_invention_high_velocity_irrigation
-							has_country_flag = artifice_researching_military
-							has_country_flag = artifice_researching_society
-						}
-					}
-					culture_group = bulwari
-				}
-				set_country_flag = research_artifice_invention_high_velocity_irrigation
-				subtract_variable = {
-					which = artificeResearchOptionsTier3
-					value = 1
-				}
-			}
-			1 = {
-				trigger = {
-					NOT = {
-						OR = {
 							has_country_flag = research_artifice_invention_weather_predicticator
 							has_country_flag = unlocked_artifice_invention_weather_predicticator
 							has_country_flag = artifice_researching_military
@@ -3587,6 +4723,24 @@ artifice_research_select_innovation_options_effect = {
 					culture_group = gnomish
 				}
 				set_country_flag = research_artifice_invention_prefabricated_city_constructors
+				subtract_variable = {
+					which = artificeResearchOptionsTier3
+					value = 1
+				}
+			}
+			1 = {
+				trigger = {
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_reshtic_machine
+							has_country_flag = unlocked_artifice_invention_reshtic_machine
+							has_country_flag = artifice_researching_military
+							has_country_flag = artifice_researching_society
+						}
+					}
+					is_bulwari_or_zanlibi_culture = yes
+				}
+				set_country_flag = research_artifice_invention_reshtic_machine
 				subtract_variable = {
 					which = artificeResearchOptionsTier3
 					value = 1
@@ -3701,6 +4855,231 @@ artifice_research_select_innovation_options_effect = {
 					has_estate_privilege = estate_artificers_organization_discombobulatorium
 				}
 				set_country_flag = research_artifice_invention_divendancer_speedboat
+				subtract_variable = {
+					which = artificeResearchOptionsTier3
+					value = 1
+				}
+			}
+			1 = {
+				trigger = {
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_mech_bureau
+							has_country_flag = unlocked_artifice_invention_mech_bureau
+							has_country_flag = artifice_researching_economic
+							has_country_flag = artifice_researching_military
+						}
+					}
+					culture = exodus_goblin
+				}
+				set_country_flag = research_artifice_invention_mech_bureau
+				subtract_variable = {
+					which = artificeResearchOptionsTier3
+					value = 1
+				}
+			}
+			#Insyaa
+			1 = { #Society + Economic
+				trigger = {
+					NOT = { has_country_modifier = mechanim_administration }
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_industrial_automatories
+							has_country_flag = unlocked_artifice_invention_industrial_automatories
+							has_country_flag = artifice_researching_society
+						}
+					}
+					has_country_flag = unlocked_artifice_invention_reverse_mechanim #You cant have industrial automatories without inventing them
+					OR = {
+						AND = {
+							capital_scope = {
+								continent = oceania
+							}
+							6234 = {
+								had_province_flag = {
+									flag = unlocked_artifice_invention_industrial_automatories_local
+									days = 5475
+								}
+							}
+						}
+						6234 = {
+							had_province_flag = {
+								flag = unlocked_artifice_invention_industrial_automatories_global
+								days = 5475
+							}
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_from_insyaa
+				set_country_flag = research_artifice_invention_industrial_automatories
+				subtract_variable = {
+					which = artificeResearchOptionsTier3
+					value = 1
+				}
+			}
+			1 = { #Economic
+				trigger = {
+					NOT = { has_country_modifier = mechanim_administration }
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_terrain_shaper
+							has_country_flag = unlocked_artifice_invention_terrain_shaper
+							has_country_flag = artifice_researching_military
+							has_country_flag = artifice_researching_society
+						}
+					}
+					OR = {
+						AND = {
+							capital_scope = {
+								continent = oceania
+							}
+							6234 = {
+								had_province_flag = {
+									flag = unlocked_artifice_invention_terrain_shaper_local
+									days = 5475
+								}
+							}
+						}
+						6234 = {
+							had_province_flag = {
+								flag = unlocked_artifice_invention_terrain_shaper_global
+								days = 5475
+							}
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_from_insyaa
+				set_country_flag = research_artifice_invention_terrain_shaper
+				subtract_variable = {
+					which = artificeResearchOptionsTier3
+					value = 1
+				}
+			}
+			1 = { #Society
+				trigger = {
+					NOT = { has_country_modifier = mechanim_administration }
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_memory_storage
+							has_country_flag = unlocked_artifice_invention_memory_storage
+							has_country_flag = artifice_researching_military
+							has_country_flag = artifice_researching_economic
+						}
+					}
+					capital_scope = {
+						continent = oceania
+					}
+					6234 = {
+						had_province_flag = {
+							flag = unlocked_artifice_invention_memory_storage_local
+							days = 5475
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_from_insyaa
+				set_country_flag = research_artifice_invention_memory_storage
+				subtract_variable = {
+					which = artificeResearchOptionsTier3
+					value = 1
+				}
+			}
+			1 = { #Military
+				trigger = {
+					NOT = { has_country_modifier = mechanim_administration }
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_titano_cav
+							has_country_flag = unlocked_artifice_invention_titano_cav
+							has_country_flag = artifice_researching_society
+							has_country_flag = artifice_researching_economic
+						}
+					}
+					capital_scope = {
+						NOT = { continent = oceania }
+					}
+					6234 = {
+						had_province_flag = {
+							flag = unlocked_artifice_invention_titano_cav_global
+							days = 5475
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_from_insyaa
+				set_country_flag = research_artifice_invention_titano_cav
+				subtract_variable = {
+					which = artificeResearchOptionsTier3
+					value = 1
+				}
+			}
+			1 = { #Military
+				trigger = {
+					NOT = { has_country_modifier = mechanim_administration }
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_titano_artif
+							has_country_flag = unlocked_artifice_invention_titano_artif
+							has_country_flag = artifice_researching_society
+							has_country_flag = artifice_researching_economic
+						}
+					}
+					capital_scope = {
+						NOT = { continent = oceania }
+					}
+					6234 = {
+						had_province_flag = {
+							flag = unlocked_artifice_invention_titano_artif_global
+							days = 5475
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_from_insyaa
+				set_country_flag = research_artifice_invention_titano_artif
+				subtract_variable = {
+					which = artificeResearchOptionsTier3
+					value = 1
+				}
+			}
+			1 = { #Society
+				trigger = {
+					NOT = { has_country_modifier = mechanim_administration }
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_auto_scribes
+							has_country_flag = unlocked_artifice_invention_auto_scribes
+							has_country_flag = artifice_researching_economic
+							has_country_flag = artifice_researching_military
+						}
+					}
+					capital_scope = {
+						NOT = { continent = oceania }
+					}
+					6234 = {
+						had_province_flag = {
+							flag = unlocked_artifice_invention_auto_scribes_global
+							days = 5475
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_from_insyaa
+				set_country_flag = research_artifice_invention_auto_scribes
+				subtract_variable = {
+					which = artificeResearchOptionsTier3
+					value = 1
+				}
+			}
+			1 = { #Military
+				trigger = {
+					has_country_modifier = mechanim_administration
+					NOT = {
+						OR = {
+							has_country_flag = research_artifice_invention_mech_terrain_specialization
+							has_country_flag = unlocked_artifice_invention_mech_terrain_specialization
+							has_country_flag = artifice_researching_economic
+							has_country_flag = artifice_researching_society
+						}
+					}
+				}
+				set_country_flag = research_artifice_invention_mech_terrain_specialization
 				subtract_variable = {
 					which = artificeResearchOptionsTier3
 					value = 1
@@ -4136,6 +5515,8 @@ artifice_gui_tab_flag_clearing = {
 	clr_country_flag = artifice_invention_menu_open_cultural
 	clr_country_flag = artifice_invention_menu_open_unique_large
 	clr_country_flag = artifice_invention_menu_open_unique_small
+	clr_country_flag = artifice_invention_menu_open_insyaa_mechanim
+	clr_country_flag = artifice_invention_menu_open_insyaa_biological
 }
 
 artifice_inventions_currently_used_increase = {
@@ -4171,7 +5552,6 @@ artifice_inventions_give_basket = {
 				NOT = { is_year = 1500 }
 			}
 			set_country_flag = unlocked_artifice_invention_spell_in_a_box
-			set_country_flag = unlocked_artifice_invention_vorpal_bullets
 		}
 		else_if = {
 			limit = { 
@@ -4193,16 +5573,16 @@ artifice_inventions_give_basket = {
 artifice_magic_switch_to_artificery_only_mode = {
 	custom_tooltip = force_artificery_only_tt
 	if = {
-		limit = { 
-			NOT = { 
-				has_country_flag = magic_artificery_artificery_only 
-			}
-		}
+		limit = { NOT = { has_country_flag = magic_artificery_artificery_only } }
 		hidden_effect = {
 			clr_country_flag = magic_artificery_mage_only
 			set_country_flag = magic_artificery_artificery_only
 			clr_country_flag = magic_artificery_mixed
+			remove_country_modifier = magic_artificery_mixed_mod
 		
+			# Ends whatever research you're doing
+			country_event = { id = magic_system.99 }
+			
 			#bans the mages
 			country_event = { 
 				id = magic_artificery_setup.3
@@ -4218,6 +5598,12 @@ artifice_magic_switch_to_artificery_only_mode = {
 					days = 1
 				}
 			}
+			if = { #To prevent player from picking magic only mode if they previously decided to have artificery 
+				limit = { #Losing artificery after gaining it is unsupported in the system and has undefined behavior involved (for example, what happens to currently-researching inventions).
+					has_country_flag = unlocked_artificery_by_pillar
+				}
+				set_country_flag = artificery_needed
+			}
 		}
 	}
 }
@@ -4225,24 +5611,22 @@ artifice_magic_switch_to_artificery_only_mode = {
 artifice_magic_switch_to_magic_only_mode = {
 	custom_tooltip = force_magic_only_tt
 	if = {
-		limit = { 
-			NOT = { 
-				has_country_flag = magic_artificery_mage_only 
-			}
-		}
+		limit = { NOT = { has_country_flag = magic_artificery_mage_only } }
 		hidden_effect = {
 			set_country_flag = magic_artificery_mage_only
 			clr_country_flag = magic_artificery_artificery_only
 			clr_country_flag = magic_artificery_mixed
+			remove_country_modifier = magic_artificery_mixed_mod
 	
 			#reinviting the mages into the governement if they are gone
 			if = {
-				limit = {
-					has_country_flag = banned_magic
-				}
-				country_event = { 
-					id = magic_artificery_setup.4
-				}
+				limit = { has_banned_magic = yes }
+				unban_magic = yes
+			}
+			if = { #Gained by Exploring Pillars
+				limit = { has_country_flag = unlocked_artificery_by_pillar } #Player chose not to explore artificery
+				clr_country_flag = unlocked_artificery_by_pillar
+				clr_country_flag = artificery_choice
 			}
 		}
 	}
@@ -4252,24 +5636,18 @@ artifice_magic_switch_to_magic_only_mode = {
 artifice_magic_switch_to_mixed_mode = {
 	custom_tooltip = force_mixed_tt
 	if = {
-		limit = { 
-			NOT = { 
-				has_country_flag = magic_artificery_mixed 
-			}
-		}
+		limit = { NOT = { has_country_flag = magic_artificery_mixed } }
+		add_country_modifier = { name = magic_artificery_mixed_mod duration = -1 }
 		hidden_effect = {
+			change_mana = yes #update mana bar
 			clr_country_flag = magic_artificery_mage_only
 			clr_country_flag = magic_artificery_artificery_only
 			set_country_flag = magic_artificery_mixed
 
 			#reinviting the mages into the governement if they are gone
 			if = {
-				limit = {
-					has_country_flag = banned_magic
-				}
-				country_event = { 
-					id = magic_artificery_setup.4
-				}
+				limit = { has_banned_magic = yes }
+				unban_magic = yes
 			}
 			#unlocking artificery if it hasnt been unlocked
 			if = {
@@ -4281,6 +5659,12 @@ artifice_magic_switch_to_mixed_mode = {
 					id = magic_artificery_setup.2
 					days = 1
 				}
+			}
+			if = { #To prevent player from picking magic only mode if they previously decided to have artificery
+				limit = { #Losing artificery after gaining it is unsupported in the system and has undefined behavior involved (for example, what happens to currently-researching inventions).
+					has_country_flag = unlocked_artificery_by_pillar
+				}
+				set_country_flag = artificery_needed
 			}
 		}
 	}
@@ -4570,6 +5954,29 @@ artifice_unlock_random_invention_effect = {
 					}
 					set_country_flag = unlocked_artifice_invention_sustaining_arks
 				}
+				1 = {
+					trigger = {
+						NOT = {
+							has_country_flag = research_artifice_invention_hanging_houses
+							has_country_flag = unlocked_artifice_invention_hanging_houses
+						}
+						is_bulwari_influenced_harpy_culture = yes
+						NOT = { is_or_was_tag = { tag = F50 } }
+					}
+					set_country_flag = unlocked_artifice_invention_hanging_houses
+				}
+				1 = {
+					trigger = {
+						NOT = {
+							OR = {
+								has_country_flag = research_artifice_invention_voice_vessels
+								has_country_flag = unlocked_artifice_invention_voice_vessels
+							}
+						}
+						religion = the_hunt
+					}
+					set_country_flag = unlocked_artifice_invention_voice_vessels
+				}
 				#Military
 				1 = {
 					trigger = {
@@ -4715,6 +6122,30 @@ artifice_unlock_random_invention_effect = {
 					}
 					set_country_flag = unlocked_artifice_invention_artificer_exo_arms
 				}
+				1 = {
+					trigger = {
+						NOT = {
+							OR = {
+								has_country_flag = research_artifice_invention_kevlar_shields
+								has_country_flag = unlocked_artifice_invention_kevlar_shields
+							}
+						}
+						is_bulwari_elf = yes
+					}
+					set_country_flag = unlocked_artifice_invention_kevlar_shields
+				}
+				1 = {
+					trigger = {
+						NOT = {
+							OR = {
+								has_country_flag = research_artifice_invention_table_war
+								has_country_flag = unlocked_artifice_invention_table_war
+							}
+						}
+						religion = the_jadd
+					}
+					set_country_flag = unlocked_artifice_invention_table_war
+				}
 				#Society
 				1 = {
 					trigger = {
@@ -4766,6 +6197,49 @@ artifice_unlock_random_invention_effect = {
 						culture_group = gnomish
 					}
 					set_country_flag = unlocked_artifice_invention_conversation_calibrator
+				}
+				1 = {
+					trigger = {
+						NOT = {
+							OR = {
+								has_country_flag = research_artifice_invention_inscription_tools
+								has_country_flag = unlocked_artifice_invention_inscription_tools
+							}
+						}
+						OR = {
+							is_bulwari_or_zanlibi_culture = yes
+							culture = firanyan_harpy
+							culture = exodus_goblin
+						}
+					}
+					set_country_flag = unlocked_artifice_invention_inscription_tools
+				}
+				1 = {
+					trigger = {
+						NOT = {
+							OR = {
+								has_country_flag = research_artifice_invention_law_books
+								has_country_flag = unlocked_artifice_invention_law_books
+							}
+						}
+						OR = {
+							religion = bulwari_sun_cult
+							religion = old_bulwari_sun_cult
+						}
+					}
+					set_country_flag = unlocked_artifice_invention_law_books
+				}
+				1 = {
+					trigger = {
+						NOT = {
+							OR = {
+								has_country_flag = research_artifice_invention_sunspire_pylons
+								has_country_flag = unlocked_artifice_invention_sunspire_pylons
+							}
+						}
+						is_bulwari_elf = yes
+					}
+					set_country_flag = unlocked_artifice_invention_sunspire_pylons
 				}
 			}
 		}
@@ -5008,6 +6482,67 @@ artifice_unlock_random_invention_effect = {
 					}
 					set_country_flag = unlocked_artifice_invention_innate_windshaping
 				}
+				1 = {
+					trigger = {
+						NOT = {
+							OR = {
+								has_country_flag = research_artifice_invention_high_velocity_irrigation
+								has_country_flag = unlocked_artifice_invention_high_velocity_irrigation
+							}
+						}
+						is_bulwari_or_zanlibi_culture = yes
+					}
+					set_country_flag = unlocked_artifice_invention_high_velocity_irrigation
+				}
+				1 = {
+					trigger = {
+						NOT = {
+							OR = {
+								has_country_flag = research_artifice_invention_moisture_collector
+								has_country_flag = unlocked_artifice_invention_moisture_collector
+							}
+						}
+						OR = {
+							culture = desert_elf
+							culture = siadunan_harpy
+							culture = sandfang_gnoll
+						}
+					}
+					set_country_flag = unlocked_artifice_invention_moisture_collector
+				}
+				1 = {
+					trigger = {
+						NOT = {
+							OR = {
+								has_country_flag = research_artifice_invention_sand_sails
+								has_country_flag = unlocked_artifice_invention_sand_sails
+							}
+						}
+						OR = {
+							culture = desert_elf
+							culture = sandfang_gnoll
+							culture = windhowler_gnoll
+							culture = pyreclaw_gnoll
+							culture = fieldstalker_gnoll
+						}
+					}
+					set_country_flag = unlocked_artifice_invention_sand_sails
+				}
+				1 = {
+					trigger = {
+						NOT = {
+							OR = {
+								has_country_flag = research_artifice_invention_selfrepairing_sails
+								has_country_flag = unlocked_artifice_invention_selfrepairing_sails
+							}
+						}
+						OR = {
+							culture = bahari
+							culture = exodus_goblin
+						}
+					}
+					set_country_flag = unlocked_artifice_invention_selfrepairing_sails
+				}
 				#Military
 				1 = {
 					trigger = {
@@ -5190,6 +6725,69 @@ artifice_unlock_random_invention_effect = {
 					}
 					set_country_flag = unlocked_artifice_invention_icestorm_cannons
 				}
+				1 = {
+					trigger = {
+						NOT = {
+							OR = {
+								has_country_flag = research_artifice_invention_seismic_armor
+								has_country_flag = unlocked_artifice_invention_seismic_armor
+							}
+						}
+						is_bulwari_influenced_harpy_culture = yes
+					}
+					set_country_flag = unlocked_artifice_invention_seismic_armor
+				}
+				1 = {
+					trigger = {
+						NOT = {
+							OR = {
+								has_country_flag = research_artifice_invention_brine_severer
+								has_country_flag = unlocked_artifice_invention_brine_severer
+							}
+						}
+						culture = sandfang_gnoll
+					}
+					set_country_flag = unlocked_artifice_invention_brine_severer
+				}
+				1 = {
+					trigger = {
+						NOT = {
+							OR = {
+								has_country_flag = research_artifice_invention_gravehound
+								has_country_flag = unlocked_artifice_invention_gravehound
+							}
+						}
+						culture = sandfang_gnoll
+					}
+					set_country_flag = unlocked_artifice_invention_gravehound
+				}
+				1 = {
+					trigger = {
+						NOT = {
+							OR = {
+								has_country_flag = research_artifice_invention_djinn_flyship
+								has_country_flag = unlocked_artifice_invention_djinn_flyship
+							}
+						}
+						is_bulwari_or_zanlibi_culture = yes
+					}
+					set_country_flag = unlocked_artifice_invention_djinn_flyship
+				}
+				1 = {
+					trigger = {
+						NOT = {
+							OR = {
+								has_country_flag = research_artifice_invention_inscripted_rifle
+								has_country_flag = unlocked_artifice_invention_inscripted_rifle
+							}
+						}
+						OR = {
+							is_bulwari_elf = yes
+							is_bulwari_or_zanlibi_culture = yes
+						}
+					}
+					set_country_flag = unlocked_artifice_invention_inscripted_rifle
+				}
 				#Society
 				1 = {
 					trigger = {
@@ -5246,6 +6844,42 @@ artifice_unlock_random_invention_effect = {
 					}
 					set_country_flag = unlocked_artifice_invention_talking_god_temples
 				}
+				1 = {
+					trigger = {
+						NOT = {
+							OR = {
+								has_country_flag = research_artifice_invention_litoral_reclamation
+								has_country_flag = unlocked_artifice_invention_litoral_reclamation
+							}
+						}
+						culture = exodus_goblin
+					}
+					set_country_flag = unlocked_artifice_invention_litoral_reclamation
+				}
+				1 = {
+					trigger = {
+						NOT = {
+							OR = {
+								has_country_flag = research_artifice_invention_enhanced_masks
+								has_country_flag = unlocked_artifice_invention_enhanced_masks
+							}
+						}
+						is_bulwari_elf = yes
+					}
+					set_country_flag = unlocked_artifice_invention_enhanced_masks
+				}
+				1 = {
+					trigger = {
+						NOT = {
+							OR = {
+								has_country_flag = research_artifice_invention_incantation_bowls
+								has_country_flag = unlocked_artifice_invention_incantation_bowls
+							}
+						}
+						religion_group = bulwari
+					}
+					set_country_flag = unlocked_artifice_invention_incantation_bowls
+				}	
 			}
 		}
 	
@@ -5428,18 +7062,6 @@ artifice_unlock_random_invention_effect = {
 					trigger = {
 						NOT = {
 							OR = {
-								has_country_flag = research_artifice_invention_high_velocity_irrigation
-								has_country_flag = unlocked_artifice_invention_high_velocity_irrigation
-							}
-						}
-						culture_group = bulwari
-					}
-					set_country_flag = unlocked_artifice_invention_high_velocity_irrigation
-				}
-				1 = {
-					trigger = {
-						NOT = {
-							OR = {
 								has_country_flag = research_artifice_invention_weather_predicticator
 								has_country_flag = unlocked_artifice_invention_weather_predicticator
 							}
@@ -5471,6 +7093,18 @@ artifice_unlock_random_invention_effect = {
 						culture_group = gnomish
 					}
 					set_country_flag = unlocked_artifice_invention_prefabricated_city_constructors
+				}
+				1 = {
+					trigger = {
+						NOT = {
+							OR = {
+								has_country_flag = research_artifice_invention_reshtic_machine
+								has_country_flag = unlocked_artifice_invention_reshtic_machine
+							}
+						}
+						is_bulwari_or_zanlibi_culture = yes
+					}
+					set_country_flag = unlocked_artifice_invention_reshtic_machine
 				}
 				#Military
 				1 = {
@@ -5546,6 +7180,30 @@ artifice_unlock_random_invention_effect = {
 					}
 					set_country_flag = unlocked_artifice_invention_divendancer_speedboat
 				}
+				1 = {
+					trigger = {
+						NOT = {
+							OR = {
+								has_country_flag = research_artifice_invention_scream_beamers
+								has_country_flag = unlocked_artifice_invention_scream_beamers
+							}
+						}
+						is_bulwari_influenced_harpy_culture = yes
+					}
+					set_country_flag = unlocked_artifice_invention_scream_beamers
+				}
+				1 = {
+					trigger = {
+						NOT = {
+							OR = {
+								has_country_flag = research_artifice_invention_mech_bureau
+								has_country_flag = unlocked_artifice_invention_mech_bureau
+							}
+						}
+						culture = exodus_goblin
+					}
+					set_country_flag = unlocked_artifice_invention_mech_bureau
+				}
 			}
 		}
 	}
@@ -5570,9 +7228,7 @@ disable_all_artifice_inventions = {
 	custom_tooltip = disable_all_artifice_inventions_tt
 	hidden_effect = {
 		# tier 1 economic
-		remove_estate_privilege = artifice_invention_artificer_exo_arms
 		remove_estate_privilege = artifice_invention_spell_in_a_box
-		remove_estate_privilege = artifice_invention_commercial_sky_galleons
 		remove_estate_privilege = artifice_invention_fine_print_obfuscator
 		remove_estate_privilege = artifice_invention_automated_translator
 		remove_estate_privilege = artifice_invention_wine_ageifier
@@ -5716,5 +7372,928 @@ unlock_artificery = {
             }    
             set_country_flag = artificery_choice
         }
+	}
+}
+
+one_time_decrease_artificery_research_time = {
+	custom_tooltip = one_time_$years$_years_decrease_research_time
+	hidden_effect = {
+		if = {
+			limit = {
+				has_country_flag = artifice_research_in_progress
+			}
+			subtract_variable = {
+				which = ResearchSpeed
+				value = $years$
+			}
+			if = {
+				limit = {
+					NOT = {
+						check_variable = {
+							which = ResearchSpeed
+							value = 1
+						}
+					}
+				}
+				country_event = {
+					id = artifice_research.4
+					days = 1
+					random = 120
+				}
+			}
+		}
+	}
+}
+
+unlock_insyaa_invention = {
+	custom_tooltip = $invention$
+	set_country_flag = unlocked_$invention$
+	if = {
+		limit = {
+			capital_scope = {
+				NOT = { continent = oceania }
+			}
+		}
+		6234 = {
+			set_province_flag = unlocked_$invention$_global
+		}
+	}
+	6234 = {
+		set_province_flag = unlocked_$invention$_local
+	}	
+}
+mechanim_automatory_cooldown_effect = {
+	if = {
+		limit = {
+			OR = {
+				has_country_flag = mechanim_automatory_building_working_mechanim
+				has_country_flag = mechanim_automatory_building_working_privilege
+			}
+			automatory = 1
+			NOT = {
+				has_country_modifier = racial_pop_mechanim_expulsion
+				has_country_modifier = racial_pop_mechanim_purge
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					has_estate_privilege = artifice_invention_industrial_automatories
+					NOT = { has_country_flag = automatory_cooldown }
+				}
+			}
+			set_country_flag = automatory_cooldown
+			if = {
+				limit = { ai = yes }
+				mechanim_automatory_cooldown_count_ai = yes
+			}
+			else = {
+				mechanim_automatory_cooldown_count_player = yes
+			}
+		}
+		else = {
+			clr_country_flag = automatory_cooldown
+		}
+	}
+}
+mechanim_automatory_cooldown_count_ai = {
+	if = {
+		limit = { automatory = 5 }
+		change_variable = {
+			which = mechanim_spread_country
+			value = 5
+		}
+	}
+	else_if = {
+		limit = { automatory = 4 }
+		change_variable = {
+			which = mechanim_spread_country
+			value = 4
+		}
+	}
+	else_if = {
+		limit = { automatory = 3 }
+		change_variable = {
+			which = mechanim_spread_country
+			value = 3
+		}
+	}
+	else_if = {
+		limit = { automatory = 2 }
+		change_variable = {
+			which = mechanim_spread_country
+			value = 2
+		}
+	}
+	else = {
+		change_variable = {
+			which = mechanim_spread_country
+			value = 1
+		}
+	}
+}
+mechanim_automatory_cooldown_count_player = {
+	every_owned_province = {
+		limit = {
+			has_building = automatory
+			had_province_flag = { #Was built at least 5 years ago
+				flag = automatory_built
+				days = 1825
+			}
+			development = 15
+		}
+		if = {
+			limit = {
+				OR = { #Do I have mechanims?
+					culture_group = mechanim
+					has_large_mechanim_minority_trigger = yes
+				}
+			}
+			owner = {
+				change_variable = {
+					which = mechanim_spread_country
+					value = 1
+				}
+			}
+		}
+		else = { #Spread to itself
+			add_mechanim_minority_size_effect = yes
+			mechanim_automatory_additional_effects = yes
+		}
+
+		#Cost
+		remove_random_development = yes
+		#Additional effect
+		owner = {
+			if = {
+				limit = { has_estate_privilege = artifice_invention_behavioral_chip }
+				medium_decrease_of_mechanim_tolerance_effect = yes
+			}
+		}
+	}
+	mechanim_automatory_cap_spread_country = { cap = 20 } #If more than 20 set to 20
+	mechanim_automatory_count_spread_per_year = yes
+}
+mechanim_automatory_cap_spread_country = { 
+	if = { 
+		limit = {
+			check_variable = {
+				which = mechanim_spread_country
+				value = $cap$
+			}
+		}
+		set_variable = {
+			which = mechanim_spread_country
+			value = $cap$
+		}
+	}
+}
+mechanim_automatory_count_spread_per_year = {
+	set_variable = {
+		which = mechanim_spread_per_year
+		which = mechanim_spread_country
+	}
+	if = {
+		limit = { has_estate_privilege = artifice_invention_industrial_automatories }
+		divide_variable = {
+			which = mechanim_spread_per_year
+			value = 4 #One less than cooldown for now
+		}
+	}
+	else = {
+		divide_variable = {
+			which = mechanim_spread_per_year
+			value = 9 #One less than cooldown for now
+		}		
+	}
+	round_variable = {
+   		which = mechanim_spread_per_year
+		value = 1
+	}
+}
+mechanim_automatory_start_of_spread_effect = {
+	if = {
+		limit = {
+			OR = {
+				has_country_flag = mechanim_automatory_building_working_mechanim
+				has_country_flag = mechanim_automatory_building_working_privilege
+			}
+			automatory = 1
+			NOT = {
+				has_country_modifier = racial_pop_mechanim_expulsion
+				has_country_modifier = racial_pop_mechanim_purge
+			}
+			check_variable = {
+				which = mechanim_spread_country
+				value = 1
+			}
+		}
+		
+		if = {
+			limit = {
+				ai = yes
+			}
+			if = {
+				limit =  {
+					check_variable = {
+						which = mechanim_spread_country
+						value = 1
+					}
+				}
+				subtract_variable = {
+					which = mechanim_spread_country
+					value = 1
+				}
+				mechanim_automatory_spread_for_ai = yes
+			}
+		}
+		else = {
+			mechanim_automatory_spread = yes
+		}
+	}
+}
+mechanim_automatory_spread_for_ai = {
+	random_owned_province = {
+		limit = {
+			NOT = {
+				culture_group = mechanim
+				has_large_mechanim_minority_trigger = yes
+			}
+		}
+		save_event_target_as = mechanim_spread_province
+	}
+	if = { #If failed to find province to do normal spread finish with else
+		limit = { NOT = { has_saved_event_target = mechanim_spread_province } }
+		random_owned_province = {
+			save_event_target_as = mechanim_spread_province
+		}
+	}
+	event_target:mechanim_spread_province = {
+		#Main effect
+		mechanim_automatory_main_effect = yes
+		#Additional effects
+		mechanim_automatory_additional_effects = yes
+	}
+}
+mechanim_automatory_spread = {
+	export_to_variable = {
+		which = automatory_number_of_provinces_without_mechanim
+		value = trigger_value:num_of_cities 
+	}
+	if = {
+		limit = {
+			check_variable = { #Checking if variable is set 
+				which = mechanim_count
+				value = 1
+			}
+		}
+		multiply_variable = { #Trying to account for small minorities
+			which = automatory_number_of_provinces_without_mechanim
+			value = 1.2
+		}
+		subtract_variable = {
+			which = automatory_number_of_provinces_without_mechanim
+			which = mechanim_count
+		}
+	}
+	if = {
+		limit = {
+			check_variable = {
+				which = mechanim_spread_country
+				which = mechanim_spread_per_year
+			}
+		}
+		subtract_variable = {
+			which = mechanim_spread_country
+			which = mechanim_spread_per_year
+		}
+		set_variable = {
+			which = mechanim_spread_current
+			which = mechanim_spread_per_year
+		}
+	}
+	else = {
+		set_variable = {
+			which = mechanim_spread_current
+			which = mechanim_spread_country
+		}
+		set_variable = {
+			which = mechanim_spread_country
+			value = 0
+		}
+	}
+	if = { #Small amount of Mechanims in our country
+		limit = {
+			check_variable = {
+				which = automatory_number_of_provinces_without_mechanim
+				which = mechanim_count
+			}
+		}
+		while = {
+			limit =  {
+				check_variable = {
+					which = mechanim_spread_current
+					value = 1
+				}
+			}
+			subtract_variable = {
+				which = mechanim_spread_current
+				value = 1
+			}
+			mechanim_automatory_spread_for_player = yes
+		}
+	}
+	else = { #There is a lot of mechanims in our country
+		while = {
+			limit =  {
+				check_variable = {
+					which = mechanim_spread_current
+					value = 1
+				}
+			}
+			subtract_variable = {
+				which = mechanim_spread_current
+				value = 1
+			}
+			reverse_mechanim_automatory_spread_for_player = yes
+		}
+	}
+	clr_country_flag = mechanim_automatory_spread_finish_while_with_else
+}
+mechanim_automatory_spread_for_player = {
+	if = {
+		limit = {
+			NOT = { has_country_flag = mechanim_automatory_spread_finish_while_with_else }
+		}
+		random_owned_province = {
+			limit = {
+				OR = {
+					culture_group = mechanim
+					has_large_mechanim_minority_trigger = yes
+				}
+				any_neighbor_province = {
+					owned_by = ROOT
+					NOT = {
+						culture_group = mechanim
+						has_large_mechanim_minority_trigger = yes
+					}
+				}
+			}
+			random_neighbor_province = {
+				limit = {
+					owned_by = ROOT
+					NOT = {
+						culture_group = mechanim
+						has_large_mechanim_minority_trigger = yes
+					}
+				}
+				save_event_target_as = mechanim_spread_province
+				owner = { set_country_flag = found_mechanim_spread_province }
+			}
+		}
+		if = { #If failed to find province to do normal spread finish with else
+			limit = { NOT = { has_country_flag = found_mechanim_spread_province } } #Cant use has_saved_event_target because we could see province from previous while
+			set_country_flag = mechanim_automatory_spread_finish_while_with_else #Cleared once while ends
+			random_owned_province = {
+				save_event_target_as = mechanim_spread_province
+			}
+		}
+		else = {
+			clr_country_flag = found_mechanim_spread_province
+		}
+	}
+	else = {
+		random_owned_province = {
+			save_event_target_as = mechanim_spread_province
+		}
+	}
+	event_target:mechanim_spread_province = {
+		#Main effect
+		mechanim_automatory_main_effect = yes
+		#Additional effects
+		mechanim_automatory_additional_effects = yes
+	}
+}
+reverse_mechanim_automatory_spread_for_player = {
+	if = {
+		limit = {
+			NOT = { has_country_flag = mechanim_automatory_spread_finish_while_with_else }
+		}
+		random_owned_province = { #Province not fully saturated with mechanims
+			limit = {
+				OR = {
+					NOT = { fast_has_pop_of_race = { race = mechanim } }
+					has_small_mechanim_minority_trigger = yes
+				}
+				any_neighbor_province = {
+					owned_by = ROOT
+					OR = {
+						culture_group = mechanim
+						has_large_mechanim_minority_trigger = yes
+					}
+				}
+			}
+			save_event_target_as = mechanim_spread_province
+			owner = { set_country_flag = found_mechanim_spread_province }
+		}
+		if = { #If failed to find province to do normal spread finish with else
+			limit = { NOT = { has_country_flag = found_mechanim_spread_province } } #Cant use has_saved_event_target because we could see province from previous while
+			set_country_flag = mechanim_automatory_spread_finish_while_with_else #Cleared once while ends
+			random_owned_province = {
+				save_event_target_as = mechanim_spread_province
+			}
+		}
+		else = {
+			clr_country_flag = found_mechanim_spread_province
+		}
+	}
+	else = {
+		random_owned_province = {
+			save_event_target_as = mechanim_spread_province
+		}
+	}
+	event_target:mechanim_spread_province = {
+		#Main effect
+		mechanim_automatory_main_effect = yes
+		#Additional effects
+		mechanim_automatory_additional_effects = yes
+	}
+}
+mechanim_automatory_main_effect = {
+	if = {
+		limit = { OR = { has_large_mechanim_minority_trigger = yes culture_group = mechanim } }
+		if = {
+			limit = { owner = { ai = no } }
+			add_random_development = 1
+		}
+	}
+	else_if = {
+		limit = { NOT = { development = 6 } }
+		change_culture = awoken_mechanim
+	}
+	else = {
+		add_mechanim_minority_size_effect = yes
+	}
+}
+mechanim_automatory_additional_effects = {
+	if = {
+		limit = {
+			owner = {
+				has_estate_privilege = artifice_invention_auto_scribes
+			}
+		}
+		random = {
+			chance = 10
+			add_base_tax = 1
+		}
+	}
+	if = {
+		limit = { owner = { has_estate_privilege = artifice_invention_memory_module } }
+		add_province_modifier = {
+			name = artifice_memory_module_modifier
+			duration = -1
+		}
+	}
+	else_if = {
+		limit = { owner = { has_estate_privilege = artifice_invention_behavioral_chip } }
+		add_province_modifier = {
+			name = artifice_behavioral_chip_modifier
+			duration = -1
+		}
+	}
+	if = {
+		limit = { owner = { has_estate_privilege = artifice_invention_construction_bots } }
+		add_province_modifier = {
+			name = artifice_construction_bots_modifier
+			duration = -1
+		}
+	}
+	if = {
+		limit = { owner = { has_estate_privilege = artifice_invention_auto_scribes } }
+		add_province_modifier = {
+			name = artifice_auto_scribes_modifier
+			duration = -1
+		}
+	}
+
+}
+artifice_unlock_random_part_head = {
+	hidden_effect = {
+		random_list = {
+			1 = {
+				trigger = {
+					NOT = { has_country_flag = unlocked_artifice_invention_head_long_range }
+				}
+				set_country_flag = unlocked_artifice_invention_head_long_range
+				country_event = {
+					id = insyaa_flavour.134
+				}
+			}
+			1 = {
+				trigger = {
+					NOT = { has_country_flag = unlocked_artifice_invention_head_war_craved }
+				}
+				set_country_flag = unlocked_artifice_invention_head_war_craved
+				country_event = {
+					id = insyaa_flavour.135
+				}
+			}
+			1 = {
+				trigger = {
+					NOT = { has_country_flag = unlocked_artifice_invention_head_human_like }
+				}
+				set_country_flag = unlocked_artifice_invention_head_human_like
+				country_event = {
+					id = insyaa_flavour.136
+				}
+			}
+			1 = {
+				trigger = {
+					NOT = { has_country_flag = unlocked_artifice_invention_head_adm_oversight }
+				}
+				set_country_flag = unlocked_artifice_invention_head_adm_oversight
+				country_event = {
+					id = insyaa_flavour.137
+				}
+			}
+		}
+	}
+}
+artifice_unlock_random_part_torso = {
+	hidden_effect = {
+		random_list = {
+			1 = {
+				trigger = {
+					NOT = { has_country_flag = unlocked_artifice_invention_torso_self_repair }
+				}
+				set_country_flag = unlocked_artifice_invention_torso_self_repair
+				country_event = {
+					id = insyaa_flavour.138
+				}
+			}
+			1 = {
+				trigger = {
+					NOT = { has_country_flag = unlocked_artifice_invention_torso_war_craved }
+				}
+				set_country_flag = unlocked_artifice_invention_torso_war_craved
+				country_event = {
+					id = insyaa_flavour.139
+				}
+			}
+			1 = {
+				trigger = {
+					NOT = { has_country_flag = unlocked_artifice_invention_torso_container_part }
+				}
+				set_country_flag = unlocked_artifice_invention_torso_container_part
+				country_event = {
+					id = insyaa_flavour.140
+				}
+			}
+			1 = {
+				trigger = {
+					NOT = { has_country_flag = unlocked_artifice_invention_torso_war_machine }
+				}
+				set_country_flag = unlocked_artifice_invention_torso_war_machine
+				country_event = {
+					id = insyaa_flavour.141
+				}
+			}
+		}
+	}
+}
+artifice_unlock_random_part_chassis = {
+	hidden_effect = {
+		random_list = {
+			1 = {
+				trigger = {
+					NOT = { has_country_flag = unlocked_artifice_invention_chassis_heavy }
+				}
+				set_country_flag = unlocked_artifice_invention_chassis_heavy
+				country_event = {
+					id = insyaa_flavour.142
+				}
+			}
+			1 = {
+				trigger = {
+					NOT = { has_country_flag = unlocked_artifice_invention_chassis_light }
+				}
+				set_country_flag = unlocked_artifice_invention_chassis_light
+				country_event = {
+					id = insyaa_flavour.143
+				}
+			}
+			1 = {
+				trigger = {
+					NOT = { has_country_flag = unlocked_artifice_invention_chassis_waterproof }
+				}
+				set_country_flag = unlocked_artifice_invention_chassis_waterproof
+				country_event = {
+					id = insyaa_flavour.144
+				}
+			}
+			1 = {
+				trigger = {
+					NOT = { has_country_flag = unlocked_artifice_invention_chassis_soarer_struts }
+				}
+				set_country_flag = unlocked_artifice_invention_chassis_soarer_struts
+				country_event = {
+					id = insyaa_flavour.145
+				}
+			}
+		}
+	}	
+}
+artifice_unlock_random_part_arms = {
+	hidden_effect = {
+		random_list = {
+			1 = {
+				trigger = {
+					NOT = { has_country_flag = unlocked_artifice_invention_arms_dual_pair }
+				}
+				set_country_flag = unlocked_artifice_invention_arms_dual_pair
+				country_event = {
+					id = insyaa_flavour.146
+				}
+			}
+			1 = {
+				trigger = {
+					NOT = { has_country_flag = unlocked_artifice_invention_arms_stabilizer }
+				}
+				set_country_flag = unlocked_artifice_invention_arms_stabilizer
+				country_event = {
+					id = insyaa_flavour.147
+				}
+			}
+			1 = {
+				trigger = {
+					NOT = { has_country_flag = unlocked_artifice_invention_arms_construction }
+				}
+				set_country_flag = unlocked_artifice_invention_arms_construction
+				country_event = {
+					id = insyaa_flavour.148
+				}
+			}
+			1 = {
+				trigger = {
+					NOT = { has_country_flag = unlocked_artifice_invention_arms_sonic_firearm }
+				}
+				set_country_flag = unlocked_artifice_invention_arms_sonic_firearm
+				country_event = {
+					id = insyaa_flavour.149
+				}
+			}
+		}
+	}
+}
+artifice_unlock_random_part_legs = {
+	hidden_effect = {
+		random_list = {
+			1 = {
+				trigger = {
+					NOT = { has_country_flag = unlocked_artifice_invention_legs_quadripedal }
+				}
+				set_country_flag = unlocked_artifice_invention_legs_quadripedal
+				country_event = {
+					id = insyaa_flavour.150
+				}
+			}
+			1 = {
+				trigger = {
+					NOT = { has_country_flag = unlocked_artifice_invention_legs_bipedal }
+				}
+				set_country_flag = unlocked_artifice_invention_legs_bipedal
+				country_event = {
+					id = insyaa_flavour.151
+				}
+			}
+			1 = {
+				trigger = {
+					NOT = { has_country_flag = unlocked_artifice_invention_legs_octipedal }
+				}
+				set_country_flag = unlocked_artifice_invention_legs_octipedal
+				country_event = {
+					id = insyaa_flavour.152
+				}
+			}
+			1 = {
+				trigger = {
+					NOT = { has_country_flag = unlocked_artifice_invention_legs_trailblazer }
+				}
+				set_country_flag = unlocked_artifice_invention_legs_trailblazer
+				country_event = {
+					id = insyaa_flavour.153
+				}
+			}
+		}
+	}
+}
+artifice_unlock_random_part_all_30 = { #30% to get something
+	hidden_effect = {
+		random_list = {
+			6 = {
+				artifice_unlock_random_part_head = yes
+			}
+			6 = {
+				artifice_unlock_random_part_torso = yes
+			}
+			6 = {
+				artifice_unlock_random_part_chassis = yes
+			}
+			6 = {
+				artifice_unlock_random_part_arms = yes
+			}
+			6 = {
+				artifice_unlock_random_part_legs = yes
+			}
+			70 = {
+
+			}
+		}
+	}
+}
+artifice_mechanim_inventions_scripted_effect = {
+	if = {
+		limit = { has_estate_privilege = artifice_invention_memory_module }
+		every_owned_province = {
+			if = {
+				limit = { fast_has_pop_of_race = { race = mechanim } }
+				add_province_modifier = {
+					name = artifice_memory_module_modifier
+					duration = -1
+				}
+			}
+			else = {
+				remove_province_modifier = artifice_memory_module_modifier
+			}
+		}
+	}
+	else_if = {
+		limit = { has_estate_privilege = artifice_invention_behavioral_chip }
+		every_owned_province = {
+			if = {
+				limit = { fast_has_pop_of_race = { race = mechanim } }
+				add_province_modifier = {
+					name = artifice_behavioral_chip_modifier
+					duration = -1
+				}
+			}
+			else = {
+				remove_province_modifier = artifice_behavioral_chip_modifier
+			}
+		}
+	}
+
+	if = {
+		limit = { has_estate_privilege = artifice_invention_construction_bots }
+		every_owned_province = {
+			if = {
+				limit = { fast_has_pop_of_race = { race = mechanim } }
+				add_province_modifier = {
+					name = artifice_construction_bots_modifier
+					duration = -1
+				}
+			}
+			else = {
+				remove_province_modifier = artifice_construction_bots_modifier
+			}
+		}
+	}
+	if = {
+		limit = { has_estate_privilege = artifice_invention_auto_scribes }
+		every_owned_province = {
+			if = {
+				limit = { fast_has_pop_of_race = { race = mechanim } }
+				add_province_modifier = {
+					name = artifice_auto_scribes_modifier
+					duration = -1
+				}
+			}
+			else = {
+				remove_province_modifier = artifice_auto_scribes_modifier
+			}
+		}
+	}
+}
+
+unlock_invention_from = {
+	if = {
+		limit = {
+			NOT = { has_country_flag = unlocked_artifice_invention_$invention$ }
+			$tag$ = { has_country_flag = unlocked_artifice_invention_$invention$ }
+		}
+		set_country_flag = unlocked_artifice_invention_$invention$
+	}
+}
+
+unlock_all_invention_from = { #too lazy to split each racial invention -Fahes
+	[[custom_tooltip]
+		custom_tooltip = $custom_tooltip$
+	]
+	hidden_effect = {
+		unlock_invention_from = { invention = arithmatons tag = $tag$ }
+		unlock_invention_from = { invention = apparitional_communicator tag = $tag$ }
+		unlock_invention_from = { invention = mystic_ciphers tag = $tag$ }
+		unlock_invention_from = { invention = viewcatcher tag = $tag$ }
+		unlock_invention_from = { invention = conversation_calibrator tag = $tag$ }
+		unlock_invention_from = { invention = centipedal_chests tag = $tag$ }
+		unlock_invention_from = { invention = god_fragment_decoder tag = $tag$ }
+		unlock_invention_from = { invention = sunblotter_cream tag = $tag$ }
+		unlock_invention_from = { invention = talking_god_temples tag = $tag$ }
+		unlock_invention_from = { invention = thinkquik_drink_mix tag = $tag$ }
+		unlock_invention_from = { invention = wondrous_lunchbox tag = $tag$ }
+		unlock_invention_from = { invention = brass_prosthesis tag = $tag$ }
+		unlock_invention_from = { invention = artificer_exo_arms tag = $tag$ }
+		unlock_invention_from = { invention = t_wave_transceivers tag = $tag$ }
+		unlock_invention_from = { invention = pathway_transmutation tag = $tag$ }
+		unlock_invention_from = { invention = artificial_egg_surrogates tag = $tag$ }
+		unlock_invention_from = { invention = automated_translator tag = $tag$ }
+		unlock_invention_from = { invention = great_processor tag = $tag$ }
+		unlock_invention_from = { invention = prehensile_tail_attachments tag = $tag$ }
+		unlock_invention_from = { invention = soarwing_grafts tag = $tag$ }
+		unlock_invention_from = { invention = balloonboost_packs tag = $tag$ }
+		unlock_invention_from = { invention = sparkdrive_rifles tag = $tag$ }
+		unlock_invention_from = { invention = bioartificed_ascension tag = $tag$ }
+		unlock_invention_from = { invention = believable_ruin_2_bomb tag = $tag$ }
+		unlock_invention_from = { invention = ancestral_guardian_golems tag = $tag$ }
+		unlock_invention_from = { invention = artifice_hunting_masks tag = $tag$ }
+		unlock_invention_from = { invention = avatar_supersoldier_serum tag = $tag$ }
+		unlock_invention_from = { invention = coddorran_powered_exosuit tag = $tag$ }
+		unlock_invention_from = { invention = demonflame_flamethrowers tag = $tag$ }
+		unlock_invention_from = { invention = dragonblood_gene_warriors tag = $tag$ }
+		unlock_invention_from = { invention = dragonscale_plating tag = $tag$ }
+		unlock_invention_from = { invention = eplusplus_compound tag = $tag$ }
+		unlock_invention_from = { invention = kaydhano_powered_vessels tag = $tag$ }
+		unlock_invention_from = { invention = lullaby_cannon tag = $tag$ }
+		unlock_invention_from = { invention = power_fists tag = $tag$ }
+		unlock_invention_from = { invention = sunbeam_armaments tag = $tag$ }
+		unlock_invention_from = { invention = warfare_simulator tag = $tag$ }
+		unlock_invention_from = { invention = arcane_blaster tag = $tag$ }
+		unlock_invention_from = { invention = sending_stones tag = $tag$ }
+		unlock_invention_from = { invention = crierless_crier_device tag = $tag$ }
+		unlock_invention_from = { invention = living_mirrors tag = $tag$ }
+		unlock_invention_from = { invention = fey_spray tag = $tag$ }
+		unlock_invention_from = { invention = vendorless_stall tag = $tag$ }
+		unlock_invention_from = { invention = spell_in_a_box tag = $tag$ }
+		unlock_invention_from = { invention = chi_cultivation_charm tag = $tag$ }
+		unlock_invention_from = { invention = weather_predicticator tag = $tag$ }
+		unlock_invention_from = { invention = vorpal_bullets tag = $tag$ }
+		unlock_invention_from = { invention = war_golems tag = $tag$ }
+		unlock_invention_from = { invention = wandlocks tag = $tag$ }
+		unlock_invention_from = { invention = personal_mageshields tag = $tag$ }
+		unlock_invention_from = { invention = antimagic_field_generator tag = $tag$ }
+		unlock_invention_from = { invention = controlled_rage_serum tag = $tag$ }
+		unlock_invention_from = { invention = elemental_gunpowder tag = $tag$ }
+		unlock_invention_from = { invention = vernman_hero_tonic tag = $tag$ }
+		unlock_invention_from = { invention = veykoda_rune_protections tag = $tag$ }
+		unlock_invention_from = { invention = box_of_holding tag = $tag$ }
+		unlock_invention_from = { invention = growth_beans tag = $tag$ }
+		unlock_invention_from = { invention = magic_missile_deployer tag = $tag$ }
+		unlock_invention_from = { invention = naval_mageshields tag = $tag$ }
+		unlock_invention_from = { invention = remedial_tinctures tag = $tag$ }
+		unlock_invention_from = { invention = elemental_locomotives tag = $tag$ }
+		unlock_invention_from = { invention = burrower_arms tag = $tag$ }
+		unlock_invention_from = { invention = divendancer_speedboat tag = $tag$ }
+		unlock_invention_from = { invention = scrapperclaws tag = $tag$ }
+		unlock_invention_from = { invention = artifice_powered_magnate_factories tag = $tag$ }
+		unlock_invention_from = { invention = city_maintenance_bots tag = $tag$ }
+		unlock_invention_from = { invention = fine_print_obfuscator tag = $tag$ }
+		unlock_invention_from = { invention = prefabricated_city_constructors tag = $tag$ }
+		unlock_invention_from = { invention = pearl_cultivators tag = $tag$ }
+		unlock_invention_from = { invention = superfast_elevators tag = $tag$ }
+		unlock_invention_from = { invention = wine_ageifier tag = $tag$ }
+		unlock_invention_from = { invention = commercial_sky_galleons tag = $tag$ }
+		unlock_invention_from = { invention = self_cleaning_parchment tag = $tag$ }
+		unlock_invention_from = { invention = high_velocity_irrigation tag = $tag$ }
+		unlock_invention_from = { invention = gene_food_cultivation tag = $tag$ }
+		unlock_invention_from = { invention = chase_em_rockets tag = $tag$ }
+		unlock_invention_from = { invention = giantshape_warframe tag = $tag$ }
+		unlock_invention_from = { invention = gu_boats tag = $tag$ }
+		unlock_invention_from = { invention = gyrocopters tag = $tag$ }
+		unlock_invention_from = { invention = platinum_warsuit tag = $tag$ }
+		unlock_invention_from = { invention = predator_exoskeleton tag = $tag$ }
+		unlock_invention_from = { invention = scrap_mechs tag = $tag$ }
+		unlock_invention_from = { invention = war_rigs tag = $tag$ }
+		unlock_invention_from = { invention = wind_invokers tag = $tag$ }
+		unlock_invention_from = { invention = portable_turrets tag = $tag$ }
+		unlock_invention_from = { invention = black_damestear_bullets tag = $tag$ }
+		unlock_invention_from = { invention = artillery_autoloader tag = $tag$ }
+		unlock_invention_from = { invention = prototype_tanks tag = $tag$ }
+		unlock_invention_from = { invention = military_sky_galleons tag = $tag$ }
+		unlock_invention_from = { invention = spirit_proof_exoskeleton tag = $tag$ }
+		unlock_invention_from = { invention = damestear_reactor_megacannon tag = $tag$ }
+		unlock_invention_from = { invention = bureaucratizer tag = $tag$ }
+		unlock_invention_from = { invention = runethought_network tag = $tag$ }
+		unlock_invention_from = { invention = negotiation_nexus tag = $tag$ }
+	}
+}
+get_partial_artificery_for_gene_pillar_exploration = {
+	if = {
+		limit = { #Im not really sure how this limit should look like
+			NOT = { has_country_flag = artificery_unlocked }
+			NOT = { has_country_flag = artificery_choice }
+		}
+		set_country_flag = artifice_no_base_privileges
+		set_country_flag = unlocked_artificery_by_pillar
+		unlock_artificery = yes
 	}
 }

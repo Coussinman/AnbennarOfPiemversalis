@@ -67,11 +67,6 @@ difficulty_easy_ai = {
 }
 
 difficulty_normal_ai = {
-	interest = -1
-	global_regiment_cost = -0.33
-	global_unrest = -1
-	war_exhaustion = -0.05
-	advisor_cost = -0.33
 }
 
 difficulty_hard_ai = {
@@ -269,7 +264,7 @@ provincial_production_size = {
 
 knowledge_sharing = {
 	institution_growth = 12
-	monthly_russian_modernization = 0.06 #1.35
+	# monthly_russian_modernization = 0.06 #1.35
 }
 
 cardinals_spread_institution = {
@@ -326,10 +321,13 @@ patriarch_authority_global = {
 }
 
 pasha_state = {
-	local_state_maintenance_modifier = -0.5
-	local_unrest = -2
-	local_build_cost = 0.2
-	local_regiment_cost = 0.2
+	local_governing_cost = -0.2
+	min_local_autonomy = 20
+	local_state_maintenance_modifier = -0.33
+	local_autonomy = -0.1
+	local_monthly_devastation = -0.05
+	local_tolerance_of_heathens = 10
+	local_tolerance_of_heretics = 10
 }
 
 colony_level = {
@@ -625,6 +623,12 @@ base_values = {
 	max_flagships = 1 #1.35
 	num_of_parliament_issues = 10 #1.35
 	has_marines = yes
+
+	#Anbennar magic system
+	mages_mana_regen = 1.0
+	mages_mana_capacity = 200
+	max_estate_spell_levels = 4
+	mages_monthly_experience = 10
 }
 
 # AI 'cheats' that compensate for flaws in its long-term decision making, removing these may severely cripple the AI
@@ -660,18 +664,18 @@ positive_stability = {
 	yearly_corruption = -0.02
 	global_institution_spread = 0.05
 	yearly_harmony = 0.25
-	monthly_ottoman_decadence = -0.05
+	# monthly_ottoman_decadence = -0.05
  
 	#Anbennar
 	adv_pioneers_influence = 0.03
 	nl_cooperatists_influence = 0.05
-	mages_loyalty_modifier = 0.02
 	pen_harmaceuticals_influence = 0.02
 	monthly_allclan_pandemonium_power = -0.05
 	monthly_argordstun_luster_power = 0.05
 	monthly_argordstun_roughness_power = -0.02
 	monthly_caravan_preparation = 0.08
 	monthly_gronstunad_authority_power = 0.25
+	monthly_badakhan_orcish_soul_struggle = 0.2
 }
 
 privateering = {
@@ -686,8 +690,8 @@ negative_stability = {
 	devotion = 1
 	caravan_power = 0.05
 	yearly_harmony = 0.25
-	monthly_russian_modernization = 0.03
-	monthly_ottoman_decadence = -0.15
+	# monthly_russian_modernization = 0.03
+	# monthly_ottoman_decadence = -0.15
 
 	#Anbennar
 	monthly_adventurer_unity = 0.05
@@ -699,6 +703,7 @@ negative_stability = {
 	monthly_caravan_preparation = -0.08
 	tec_brilliance_influence = -0.066
 	monthly_gronstunad_authority_power = -1.0
+	monthly_badakhan_orcish_soul_struggle = 0.2
 
 	yearly_authority = 1
 }
@@ -757,7 +762,7 @@ inflation = { #1.35
 	center_of_trade_upgrade_cost = 0.01					#1% for each inflation step
 	trade_company_investment_cost = 0.01				#1% for each inflation step
 	state_maintenance_modifier = 0.01					#1% for each inflation step
-	monthly_russian_modernization = -0.01
+	# monthly_russian_modernization = -0.01
 
 	#Anbennar
 	tec_mechanists_influence = -0.002
@@ -786,7 +791,7 @@ bankruptcy = {
 	idea_cost = 0.5
 	imperial_mandate = -0.1
 	great_project_upgrade_cost = 0.5
-	monthly_russian_modernization = -1
+	# monthly_russian_modernization = -1
 
 	#Anbennar
 	adv_fortune_seekers_influence = 0.25
@@ -804,7 +809,6 @@ war = {
 	pen_cloak_and_swagger_influence = 0.1
 	monthly_drakonshan_authority_power = -0.3
 	beso_dhorbhen_influence = 0.5
-	monthly_A33_gov_power = 0.15
 }
 
 peace = {
@@ -815,7 +819,7 @@ peace = {
 	rr_girondists_influence = -0.1
 	pr_smugglers_influence = 0.1
 	monthly_adventurer_unity = -0.1
-	monthly_ottoman_decadence = 0.1
+	# monthly_ottoman_decadence = 0.1
 	# monthly_asha_vahishta = 0.25
 
 	#Anbennar
@@ -825,7 +829,6 @@ peace = {
 	monthly_caravan_preparation = 0.33
 	monthly_jaddari_zealotry = -0.25
 	monthly_taychend_vainglory_power = -0.275
-	monthly_A33_gov_power = -0.15
 }
 
 unconditional_surrender = {
@@ -835,11 +838,11 @@ unconditional_surrender = {
 }
 
 call_for_peace = {
-	war_exhaustion = 0 #1.35
+	war_exhaustion = 0.005 #1.35
 }
 
 war_exhaustion = {
-	global_unrest = 1
+	global_unrest = 1.5
 	global_regiment_recruit_speed = 0.02
 	global_ship_recruit_speed = 0.02
 	core_creation = 0.03
@@ -850,15 +853,20 @@ war_exhaustion = {
 	manpower_recovery_speed = -0.01
 	sailors_recovery_speed = -0.01
 	siege_ability = -0.01
+	defensiveness = -0.015
 	global_trade_goods_size_modifier = -0.02
 	monthly_adventurer_unity = -0.05
-	monthly_A33_gov_power = -0.1
+	monthly_lelanan_love_power = -0.2
+	land_morale = -0.02
+	naval_morale = -0.02
+	global_monthly_devastation = 0.04
 
 	#Anbennar
 	adv_marchers_influence = 0.05
 	tec_brilliance_influence = -0.02
 	pen_cloak_and_swagger_influence = -0.05
 	icewind_clan_influence = -0.02
+	monthly_badakhan_orcish_soul_struggle = -0.1
 }
 
 doom = {
@@ -868,9 +876,10 @@ doom = {
 }
 
 authority = {
-	stability_cost_modifier = -0.1
+	stability_cost_modifier = -0.2
 	global_unrest = -2
 	church_influence_modifier = 0.15
+	development_cost = -0.4
 }
 
 regency_council = {
@@ -901,7 +910,6 @@ mercantilism = {
 	nl_trade_barons_influence = 0.1 # Does this make sense for the free trade dudes lol?
 	beso_nautabhen_influence = 0.1
 	frozentide_clan_influence = 0.02
-	monthly_A33_gov_power = 0.1
 }
 
 army_tradition = {
@@ -919,7 +927,7 @@ army_tradition = {
 	#janissaries_loyalty_modifier = 0.05 #1.35
 	# #qizilbash_loyalty_modifier = 0.05
 	# #ghulams_loyalty_modifier = 0.05
-	allowed_tercio_fraction = 0.1 #1.35
+	#allowed_tercio_fraction = 0.1 #1.35
 	allowed_samurai_fraction = 0.1 #1.35
 
 	#Anbennar
@@ -927,6 +935,7 @@ army_tradition = {
 	nl_old_guard_influence = 0.1
 	pen_cloak_and_swagger_influence = 0.1
 	tec_technomancy_influence = 0.4
+	monthly_tactical_capacity = 0.75
 }
 
 navy_tradition = {
@@ -1115,9 +1124,7 @@ devotion = {
 	church_loyalty_modifier = 0.1
 	#brahmins_hindu_loyalty_modifier = 0.1
 	reform_progress_growth = 0.5
-	
-	#Anbennar
-	mages_loyalty_modifier = 0.05
+	monthly_lelanan_love_power = 2
 }
 
 #Anbennar
@@ -1159,8 +1166,8 @@ corruption = {
 	# #qizilbash_loyalty_modifier = 0.1
 	# #ghulams_loyalty_modifier = 0.1
 	monthly_heir_claim_increase = 0.025
-	monthly_russian_modernization = -1
-	monthly_ottoman_decadence = 10
+	# monthly_russian_modernization = -1
+	# monthly_ottoman_decadence = 10
 
 	#Anbennar
 	adv_fortune_seekers_influence = 0.05
@@ -1170,7 +1177,7 @@ corruption = {
 	frozentide_clan_influence = -0.1
 	
 	vampires_loyalty_modifier = 0.1
-	mages_loyalty_modifier = 0.01
+	mages_loyalty_modifier = 0.1
 	artificers_loyalty_modifier = 0.1
 	adventurers_loyalty_modifier = 0.1
 	monstrous_tribes_loyalty_modifier = 0.1
@@ -1180,7 +1187,6 @@ corruption = {
     middlecastes_loyalty_modifier = 0.1
     raj_ministries_loyalty_modifier = 0.1
     eunuchs_anb_loyalty_modifier = 0.1
-    daulophs_loyalty_modifier = 0.1
     shinukhorchi_loyalty_modifier = 0.1
     chumijemoya_loyalty_modifier = 0.1
     ajgriijarul_loyalty_modifier = 0.1
@@ -1194,8 +1200,8 @@ corruption = {
     tiger_command_loyalty_modifier = 0.1
     elephant_command_loyalty_modifier = 0.1
     dragon_command_loyalty_modifier = 0.1
-    acolytes_loyalty_modifier = 0.1
-	yearly_authority = -50
+	yearly_authority = -30
+	monthly_lelanan_love_power = -20
 }
 
 root_out_corruption = {
@@ -1214,6 +1220,8 @@ recovery_motivation = {
 	global_unrest = -5
 	interest = -1
 	horde_unity = 10
+
+	global_monthly_devastation = -0.25
 	
 	#Anbennar
 }
@@ -1260,7 +1268,7 @@ over_extension = {
 	bureaucrats_influence = 0.5
 	mr_guilds_influence = 0.5
 	yearly_corruption = 0.5
-	ottoman_decadence_gain_modifier = 0.25
+	# ottoman_decadence_gain_modifier = 0.25
 
 	#Anbennar
 	adv_fortune_seekers_influence = 0.5			
@@ -1381,6 +1389,8 @@ religious_unity = {
 	#Anbennar
 	pen_clodhoppers_influence = 0.05
 	beso_kheinbhen_influence = 0.05
+	allowed_mamluks_fraction = 0.05
+	monthly_lelanan_love_power = 1
 }
 
 inverse_religious_unity = {
@@ -1391,6 +1401,8 @@ inverse_religious_unity = {
 	yearly_corruption = 0.1
 	monthly_kalsyto_influence = -0.5 #Anbennar
 	tec_technomancy_influence = -0.2
+	monthly_badakhan_orcish_soul_struggle = -1
+	monthly_lelanan_love_power = -1
 }
 
 total_occupation = {
@@ -1500,45 +1512,6 @@ trade_protectorate_overlord_modifier = { #1.35
 	global_trade_goods_size_modifier = 0.02
 }
 
-#####ace
-adventure_colony_sub = {
-	colonists = 1
-	land_maintenance_modifier = -0.33
-	manpower_recovery_speed = 0.33
-	global_unrest = 2
-	liberty_desire = 25
-}
-adventure_colony_ove = {
-	global_tariffs = -0.10
-	merchants = 1
-	land_forcelimit_modifier = 0.025
-}
-adventure_colony_sub_up_1 = {
-	global_unrest = -3
-	tolerance_heathen = 2
-	tolerance_heretic = 2
-}
-adventure_colony_sub_up_2 = {
-	land_forcelimit = 0.2
-	global_manpower_modifier = 0.2
-	land_morale = 0.1
-}
-adventure_colony_ove_1 = {
-	global_tariffs = 0.125
-	trade_steering = 0.025
-}
-grand_duchy_overlord = {
-	imperial_authority_value = 0.05
-	all_estate_influence_modifier = 0.025
-	reasons_to_elect = 3
-	#monthly_A33_gov_power = -0.03
-}
-grand_duchy_sub = {
-	global_tax_modifier = 0.2
-	production_efficiency = 0.2
-	land_forcelimit = -0.15
-}
-
 liberty_desire = { #1.35
 	#extra diplo slot when at least 80% LD so that they can ask for support
 	diplomatic_upkeep = 1.25
@@ -1566,7 +1539,7 @@ absolutism = {
 	administrative_efficiency = 0.3
 	discipline = 0.05
 	core_decay_on_your_own = -0.5
-	monthly_ottoman_decadence = -0.5
+	# monthly_ottoman_decadence = -0.5
 
 	#Anbennar
 	monthly_drakonshan_authority_power = 0.30
@@ -1575,15 +1548,18 @@ absolutism = {
 low_army_professionalism = {
 	mercenary_cost = -0.15
 	mercenary_manpower = 0.15
+	drill_gain_modifier = -0.5 #this'll have to do for drill gain nerfs
 }
 
 high_army_professionalism = {
 	fire_damage = 0.1
 	shock_damage = 0.1
 	siege_ability = 0.2
-	drill_decay_modifier = -0.5
+	drill_decay_modifier = -0.6 #tacked on an extra 10%
+	yearly_army_professionalism = -0.003 #-0.1% per 33%
 	allowed_samurai_fraction = 0.1 #1.35
 	tec_mechanists_influence = 0.4
+	monthly_tactical_capacity = 0.75
 }
 
 streltsy_modifier = { #1.35
@@ -1875,15 +1851,14 @@ dishonoured_alliance =  {
 
 drilling_armies = { # Multiplied by percentage of forcelimit currently drilling
 	yearly_army_professionalism = 0.01
-	monthly_A33_gov_power = -0.15
 }
 
 ##################################################################################################
 # Scripted and used from Diplomatic System
 ##################################################################################################
 recruitment_sabotaged = {
-	manpower_recovery_speed = -0.2
-	sailors_recovery_speed = -0.2
+	manpower_recovery_speed = -0.25
+	sailors_recovery_speed = -0.25
 }
 
 merchants_slandered = {
@@ -2302,6 +2277,7 @@ starry_eye_scholar_modifier = {
 	idea_cost = -0.1
 	advisor_cost = -0.1
 	monthly_piety = -0.001
+	picture = "GFX_icon_high_philosophy_school_starry_eye"
 }
 radiant_sun_scholar_modifier = {
 	religion_sub_modifier = yes # Will make icon placed next to religion modifier
@@ -2311,6 +2287,7 @@ radiant_sun_scholar_modifier = {
 	global_manpower_modifier = 0.1
 	development_cost = -0.1
 	monthly_piety = -0.001
+	picture = "GFX_icon_high_philosophy_school_radiant_sun"
 }
 orange_sash_scholar_modifier = {
 	religion_sub_modifier = yes # Will make icon placed next to religion modifier
@@ -2322,6 +2299,7 @@ orange_sash_scholar_modifier = {
 	devotion = 0.5
 	republican_tradition = 0.2
 	monthly_piety_accelerator = 0.001
+	picture = "GFX_icon_high_philosophy_school_orange_sash"
 }
 golden_palace_scholar_modifier = {
 	religion_sub_modifier = yes # Will make icon placed next to religion modifier
@@ -2331,6 +2309,7 @@ golden_palace_scholar_modifier = {
 	global_unrest  = -2
 	global_tax_modifier = 0.1
 	monthly_piety_accelerator = 0.001
+	picture = "GFX_icon_high_philosophy_school_golden_palace"
 }
 unbroken_claw_scholar_modifier = {
 	religion_sub_modifier = yes # Will make icon placed next to religion modifier
@@ -2340,6 +2319,7 @@ unbroken_claw_scholar_modifier = {
 	shock_damage = 0.10
 	war_exhaustion = -0.02
 	monthly_piety = 0.001
+	picture = "GFX_icon_high_philosophy_school_unbroken_claw"
 }
 silk_turban_scholar_modifier = {
 	religion_sub_modifier = yes # Will make icon placed next to religion modifier
@@ -2349,6 +2329,7 @@ silk_turban_scholar_modifier = {
 	trade_efficiency = 0.1
 	merchants = 1
 	monthly_piety = 0.001
+	picture = "GFX_icon_high_philosophy_school_silk_turban"
 }
 ascendant_soul_scholar_modifier = {
 	religion_sub_modifier = yes # Will make icon placed next to religion modifier
@@ -2358,6 +2339,7 @@ ascendant_soul_scholar_modifier = {
 	country_admin_power = 1
 	army_tradition = 0.5
 	monthly_piety_accelerator = 0.001
+	picture = "GFX_icon_high_philosophy_school_ascendant_soul"
 }
 synthetic_truth_scholar_modifier = {
 	religion_sub_modifier = yes # Will make icon placed next to religion modifier
@@ -2367,6 +2349,7 @@ synthetic_truth_scholar_modifier = {
 	prestige = 1
 	technology_cost = -0.05
 	monthly_piety = -0.001
+	picture = "GFX_icon_high_philosophy_school_synthetic_truth"
 }
 final_paradigm_scholar_modifier = {
 	religion_sub_modifier = yes # Will make icon placed next to religion modifier
@@ -2376,6 +2359,7 @@ final_paradigm_scholar_modifier = {
 	warscore_cost_vs_other_religion = -0.1
 	autonomy_change_time = -0.25
 	monthly_piety = 0.001
+	picture = "GFX_icon_high_philosophy_school_final_paradigm"
 }
 piercing_fang_scholar_modifier = {
 	religion_sub_modifier = yes # Will make icon placed next to religion modifier
@@ -2385,6 +2369,7 @@ piercing_fang_scholar_modifier = {
 	morale_damage_received = -0.1
 	movement_speed = 0.1
 	monthly_piety = 0.001
+	picture = "GFX_icon_high_philosophy_school_piercing_fang"
 }
 
 #Irdaeos Worship Schools
@@ -2394,6 +2379,7 @@ filustkhuga_scholar_modifier = {
 	is_scholar_modifier = yes # Tells the AI and will only show the alert if country has none
 	expire_message_type = "RELIGIOUS_SCHOLAR_EXPIRY"
 	global_manpower_modifier = 0.05
+	picture = "GFX_icon_centaur_religion_filustkhuga_school"
 }
 
 irdukhuga_scholar_modifier = {
@@ -2402,6 +2388,7 @@ irdukhuga_scholar_modifier = {
 	is_scholar_modifier = yes # Tells the AI and will only show the alert if country has none
 	expire_message_type = "RELIGIOUS_SCHOLAR_EXPIRY"
 	merchants = 1
+	picture = "GFX_icon_centaur_religion_irdukhuga_school"
 }
 
 maslekhuga_scholar_modifier = {
@@ -2410,6 +2397,7 @@ maslekhuga_scholar_modifier = {
 	is_scholar_modifier = yes # Tells the AI and will only show the alert if country has none
 	expire_message_type = "RELIGIOUS_SCHOLAR_EXPIRY"
 	reinforce_speed = 0.05
+	picture = "GFX_icon_centaur_religion_maslekhuga_school"
 }
 
 malukhuga_scholar_modifier = {
@@ -2418,6 +2406,7 @@ malukhuga_scholar_modifier = {
 	is_scholar_modifier = yes # Tells the AI and will only show the alert if country has none
 	expire_message_type = "RELIGIOUS_SCHOLAR_EXPIRY"
 	shock_damage_received = -0.05
+	picture = "GFX_icon_centaur_religion_malukhuga_school"
 }
 
 #Lizard Schools
@@ -2443,6 +2432,7 @@ blade_and_needle_scholar_modifier = {
 	is_scholar_modifier = yes # Tells the AI and will only show the alert if country has none
 	expire_message_type = "RELIGIOUS_SCHOLAR_EXPIRY"
 	manpower_recovery_speed = 0.1
+	picture = "GFX_icon_lizard_school_blade_and_needle"
 }
 
 great_cycle_scholar_modifier = {
@@ -2451,6 +2441,7 @@ great_cycle_scholar_modifier = {
 	is_scholar_modifier = yes # Tells the AI and will only show the alert if country has none
 	expire_message_type = "RELIGIOUS_SCHOLAR_EXPIRY"
 	build_cost = -0.1
+	picture = "GFX_icon_lizard_school_great_cycle"
 }
 
 humble_zeal_scholar_modifier = {
@@ -2459,6 +2450,7 @@ humble_zeal_scholar_modifier = {
 	is_scholar_modifier = yes # Tells the AI and will only show the alert if country has none
 	expire_message_type = "RELIGIOUS_SCHOLAR_EXPIRY"
 	advisor_cost = -0.1
+	picture = "GFX_icon_lizard_school_humble_zeal"
 }
 
 soul_song_scholar_modifier = {
@@ -2467,6 +2459,7 @@ soul_song_scholar_modifier = {
 	is_scholar_modifier = yes # Tells the AI and will only show the alert if country has none
 	expire_message_type = "RELIGIOUS_SCHOLAR_EXPIRY"
 	recover_army_morale_speed = 0.15
+	picture = "GFX_icon_lizard_school_soul_song"
 }
 
 colors_of_life_scholar_modifier = {
@@ -2475,6 +2468,7 @@ colors_of_life_scholar_modifier = {
 	is_scholar_modifier = yes # Tells the AI and will only show the alert if country has none
 	expire_message_type = "RELIGIOUS_SCHOLAR_EXPIRY"
 	improve_relation_modifier = 0.2
+	picture = "GFX_icon_lizard_school_colors_of_life"
 }
 
 #Gnollish Religion Schools
@@ -2484,6 +2478,7 @@ demons_of_the_sorrow_tradition_modifier = {
 	is_scholar_modifier = yes # Tells the AI and will only show the alert if country has none
 	expire_message_type = "RELIGIOUS_SCHOLAR_EXPIRY"
 	ae_impact = -0.1
+	picture = "GFX_icon_gnoll_school_demons_of_the_sorrow"
 }
 
 monstrous_pedigrees_tradition_modifier = {
@@ -2492,6 +2487,7 @@ monstrous_pedigrees_tradition_modifier = {
 	is_scholar_modifier = yes # Tells the AI and will only show the alert if country has none
 	expire_message_type = "RELIGIOUS_SCHOLAR_EXPIRY"
 	prestige = 1
+	picture = "GFX_icon_gnoll_school_monstrous_pedigrees"
 }
 
 children_of_goxma_tradition_modifier = {
@@ -2500,6 +2496,7 @@ children_of_goxma_tradition_modifier = {
 	is_scholar_modifier = yes # Tells the AI and will only show the alert if country has none
 	expire_message_type = "RELIGIOUS_SCHOLAR_EXPIRY"
 	tolerance_heathen = 2
+	picture = "GFX_icon_gnoll_school_children_of_goxma"
 }
 
 kult_of_the_packmother_tradition_modifier = {
@@ -2508,6 +2505,7 @@ kult_of_the_packmother_tradition_modifier = {
 	is_scholar_modifier = yes # Tells the AI and will only show the alert if country has none
 	expire_message_type = "RELIGIOUS_SCHOLAR_EXPIRY"
 	yearly_corruption = -0.1
+	picture = "GFX_icon_gnoll_school_kult_of_the_packmother"
 }
 
 demonic_shamans_tradition_modifier = {
@@ -2516,6 +2514,7 @@ demonic_shamans_tradition_modifier = {
 	is_scholar_modifier = yes # Tells the AI and will only show the alert if country has none
 	expire_message_type = "RELIGIOUS_SCHOLAR_EXPIRY"
 	yearly_patriarch_authority = 0.005
+	picture = "GFX_icon_gnoll_school_demonic_shamans"
 }
 
 umbral_bargains_tradition_modifier = {
@@ -2524,6 +2523,7 @@ umbral_bargains_tradition_modifier = {
 	is_scholar_modifier = yes # Tells the AI and will only show the alert if country has none
 	expire_message_type = "RELIGIOUS_SCHOLAR_EXPIRY"
 	advisor_cost = -0.1
+	picture = "GFX_icon_gnoll_school_umbral_bargains"
 }
 
 way_of_iron_tradition_modifier = {
@@ -2532,6 +2532,7 @@ way_of_iron_tradition_modifier = {
 	is_scholar_modifier = yes # Tells the AI and will only show the alert if country has none
 	expire_message_type = "RELIGIOUS_SCHOLAR_EXPIRY"
 	production_efficiency = 0.1
+	picture = "GFX_icon_gnoll_school_way_of_iron"
 }
 
 way_of_bones_tradition_modifier = {
@@ -2540,6 +2541,7 @@ way_of_bones_tradition_modifier = {
 	is_scholar_modifier = yes # Tells the AI and will only show the alert if country has none
 	expire_message_type = "RELIGIOUS_SCHOLAR_EXPIRY"
 	army_tradition = 0.5
+	picture = "GFX_icon_gnoll_school_way_of_bones"
 }
 
 xhazobain_primacy_tradition_modifier = {
@@ -2548,6 +2550,99 @@ xhazobain_primacy_tradition_modifier = {
 	is_scholar_modifier = yes # Tells the AI and will only show the alert if country has none
 	expire_message_type = "RELIGIOUS_SCHOLAR_EXPIRY"
 	governing_capacity_modifier = 0.1
+	picture = "GFX_icon_gnoll_school_xhazobain_primacy"
+}
+
+seafaring_demonborns_tradition_modifier = {
+	religion_sub_modifier = yes # Will make icon placed next to religion modifier
+	religion = yes
+	is_scholar_modifier = yes # Tells the AI and will only show the alert if country has none
+	expire_message_type = "RELIGIOUS_SCHOLAR_EXPIRY"
+	coast_raid_range = 2
+	liberty_desire_from_subject_development = -0.05
+	picture = "GFX_icon_gnoll_school_seafaring_demonborns"
+}
+
+#Dangurangan Schools
+danguranga_water_scholar_modifier = {
+	religion_sub_modifier = yes # Will make icon placed next to religion modifier
+	religion = yes
+	is_scholar_modifier = yes # Tells the AI and will only show the alert if country has none
+	expire_message_type = "RELIGIOUS_SCHOLAR_EXPIRY"
+	manpower_recovery_speed = 0.1
+	picture = "danguranga_dunborgula_water_origin"
+}
+
+danguranga_water_earth_scholar_modifier = {
+	religion_sub_modifier = yes # Will make icon placed next to religion modifier
+	religion = yes
+	is_scholar_modifier = yes # Tells the AI and will only show the alert if country has none
+	expire_message_type = "RELIGIOUS_SCHOLAR_EXPIRY"
+	global_own_trade_power = 0.15
+	picture = "danguranga_dunborgula_earth_origin"
+}
+
+danguranga_water_fire_scholar_modifier = {
+	religion_sub_modifier = yes # Will make icon placed next to religion modifier
+	religion = yes
+	is_scholar_modifier = yes # Tells the AI and will only show the alert if country has none
+	expire_message_type = "RELIGIOUS_SCHOLAR_EXPIRY"
+	fire_damage  = 0.1
+	picture = "danguranga_dunborgula_fire_origin"
+}
+
+danguranga_earth_scholar_modifier = {
+	religion_sub_modifier = yes # Will make icon placed next to religion modifier
+	religion = yes
+	is_scholar_modifier = yes # Tells the AI and will only show the alert if country has none
+	expire_message_type = "RELIGIOUS_SCHOLAR_EXPIRY"
+	governing_capacity_modifier = 0.1
+	picture = "danguranga_aycha_alpa_earth_origin"
+}
+
+danguranga_earth_water_scholar_modifier = {
+	religion_sub_modifier = yes # Will make icon placed next to religion modifier
+	religion = yes
+	is_scholar_modifier = yes # Tells the AI and will only show the alert if country has none
+	expire_message_type = "RELIGIOUS_SCHOLAR_EXPIRY"
+	vassal_income = 0.25
+	picture = "danguranga_aycha_alpa_water_origin"
+}
+
+danguranga_earth_fire_scholar_modifier = {
+	religion_sub_modifier = yes # Will make icon placed next to religion modifier
+	religion = yes
+	is_scholar_modifier = yes # Tells the AI and will only show the alert if country has none
+	expire_message_type = "RELIGIOUS_SCHOLAR_EXPIRY"
+	infantry_power = 0.1
+	picture = "danguranga_aycha_alpa_fire_origin"
+}
+
+danguranga_fire_scholar_modifier = {
+	religion_sub_modifier = yes # Will make icon placed next to religion modifier
+	religion = yes
+	is_scholar_modifier = yes # Tells the AI and will only show the alert if country has none
+	expire_message_type = "RELIGIOUS_SCHOLAR_EXPIRY"
+	siege_ability = 0.1
+	picture = "danguranga_mumambarra_fire_origin"
+}
+
+danguranga_fire_water_scholar_modifier = {
+	religion_sub_modifier = yes # Will make icon placed next to religion modifier
+	religion = yes
+	is_scholar_modifier = yes # Tells the AI and will only show the alert if country has none
+	expire_message_type = "RELIGIOUS_SCHOLAR_EXPIRY"
+	idea_cost = -0.1
+	picture = "danguranga_mumambarra_water_origin"
+}
+
+danguranga_fire_earth_scholar_modifier = {
+	religion_sub_modifier = yes # Will make icon placed next to religion modifier
+	religion = yes
+	is_scholar_modifier = yes # Tells the AI and will only show the alert if country has none
+	expire_message_type = "RELIGIOUS_SCHOLAR_EXPIRY"
+	infantry_cost = -0.1
+	picture = "danguranga_mumambarra_earth_origin"
 }
 
 ########################################
@@ -2556,8 +2651,10 @@ xhazobain_primacy_tradition_modifier = {
 regiment_drill_modifier = { # Used by individual regiments
 	shock_damage = 0.1
 	fire_damage = 0.1
-	fire_damage_received = -0.25
-	shock_damage_received = -0.25
+	morale_damage = 0.1 #works on both phases, very valuable
+	fire_damage_received = -0.125
+	shock_damage_received = -0.125 #reduced defense from vanilla is why high professionalism gives extra drill gain/decay reduction
+	morale_damage_received = -0.125 #works on both phases, very valuable
 }
 
 army_drill_modifier = { # Used by an entire army, is the average of all subunits drill
@@ -2590,10 +2687,13 @@ marine_regiment = {
 }
 
 banner_regiment = {
-	discipline = 0.05
-	land_maintenance_modifier = -0.5
-	reinforce_speed = -0.5
-	regiment_manpower_usage = -0.75
+	#discipline = 0.05
+	#land_maintenance_modifier = -0.5
+	#reinforce_speed = -0.5
+	#regiment_manpower_usage = -0.75
+	shock_damage = 0.20
+	shock_damage_received = 0.05
+	fire_damage_received = 0.05
 }
 
 streltsy_regiment = { #1.35
@@ -2601,8 +2701,12 @@ streltsy_regiment = { #1.35
 	fire_damage_received = -0.1
 }
 
-tercio_regiment = { #1.35
-	shock_damage_received = -0.3
+tercio_regiment = { #Landslide Infantry
+	#shock_damage_received = -0.3
+	shock_damage = 0.15
+	fire_damage_received = -0.15
+	drill_gain_modifier = -0.5
+	regiment_manpower_usage = 0.33
 }
 
 musketeer_regiment = { #1.35
@@ -2621,9 +2725,14 @@ qizilbash_regiment = {
 }
 
 mamluks_regiment = {
-	drill_gain_modifier = 1
+	morale_damage_received = -0.75
 	morale_damage = 0.1
-	reinforce_speed = 0.33 
+	shock_damage = 0.1
+	reinforce_speed = -0.33
+	#Anbennar above, vanilla below
+	#drill_gain_modifier = 1
+	#morale_damage = 0.1
+	#reinforce_speed = 0.33 
 }
 
 geobukseon_ship = { #1.35
@@ -2639,7 +2748,11 @@ geobukseon_ship = { #1.35
 man_of_war_ship = { #1.35
 	#engagement_cost = -1
 	#naval_maintenance_modifier = 0.5
-	naval_morale_damage = 0.15
+	# vanilla:
+	#naval_morale_damage = 0.15
+	# anbennar behemoths:
+	hull_size_modifier = 0.10
+	sailor_maintenance_modifer = 0.25
 }
 
 galleon_ship = { #1.35
@@ -2749,7 +2862,7 @@ over_governing_capacity_modifier = {
 	monthly_prussian_militarized_society_2 = -1
 	monthly_prussian_militarized_society_3 = -1
 	administrative_efficiency = -0.5
-	monthly_ottoman_decadence = 2
+	# monthly_ottoman_decadence = 2
 	monthly_korashi_reserves = -1
 }
 
@@ -2823,18 +2936,21 @@ num_accepted_cultures = {
 }
 
 ruler_adm = {
-	monthly_council_consensus = 0.1
+	#monthly_council_consensus = 0.1
 	meritocracy = 0.05  #Anbennar
+	mages_ruler_experience_mod = 0.01
 }
 
 ruler_dip = {
-	monthly_council_consensus = 0.1
+	#monthly_council_consensus = 0.1
 	meritocracy = 0.05 #Anbennar
+	mages_ruler_experience_mod = 0.01
 }
 
 ruler_mil = {
-	monthly_council_consensus = 0.1
+	#monthly_council_consensus = 0.1
 	meritocracy = 0.025 #Anbennar, khet don't care much about mil
+	mages_ruler_experience_mod = 0.01
 }
 
 heir_adm = {
@@ -2905,11 +3021,11 @@ average_overseas_subject_liberty_desire = { #only counts subjects with capitals 
 }
 
 reverse_average_overseas_subject_liberty_desire = { #only counts subjects with capitals on different continents than yours, 100% LD => 0% modifier #1.35
-	monthly_council_consensus = 0.2
+	#monthly_council_consensus = 0.2
 }
 
 average_subject_liberty_desire = { #100% LD => 100% modifier #1.35
-	monthly_ottoman_decadence = 0.125
+	# monthly_ottoman_decadence = 0.125
 }
 
 reverse_average_subject_liberty_desire = { #100% LD => 0% modifier #1.35
@@ -2917,12 +3033,12 @@ reverse_average_subject_liberty_desire = { #100% LD => 0% modifier #1.35
 }
 
 average_global_autonomy = { #100% autonomy => 100% modifier #1.35
-	monthly_ottoman_decadence = 0.25
+	# monthly_ottoman_decadence = 0.25
 	monthly_korashi_reserves = -5
 }
 
 reverse_average_global_autonomy = { #100% autonomy => 0% modifier #1.35
-	monthly_council_consensus = 0.2
+	#monthly_council_consensus = 0.2
 
 	#ANBENNAR
 	beso_skighubhen_influence = 0.1
@@ -3129,4 +3245,26 @@ medasi_disciples_horutep_reform_modifier = {
 
 medasi_enlightening_halann_reform_modifier = {
 	manpower_in_accepted_culture_provinces = 0.1
+}
+
+
+vic_league_leader_bonus = {
+	land_forcelimit = 1
+}
+
+vic_league_member_bonus = {
+	land_forcelimit = 1
+	global_tax_income = 6
+}
+
+# Giesadh
+
+z22_is_giesadh = {
+	ship_trade_power_modifier = 0.2
+}
+
+# HOMEBREW
+
+hb_dominion_subject = { 
+	liberty_desire = -0.1 
 }

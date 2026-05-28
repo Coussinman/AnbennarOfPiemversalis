@@ -27,9 +27,7 @@ estate_artificers = {
 			has_country_flag = magic_artificery_artificery_only
 			has_country_flag = magic_artificery_mixed
 		}
-		NOT = {
-			tag = R62
-		}
+		NOT = { has_estate = estate_dragon_command }
 	}
 
 	# These scale with loyalty & power
@@ -134,16 +132,9 @@ estate_artificers = {
 	influence_modifier = {
 		desc = EST_VAL_OTHER_ESTATE_IN_POWER
 		trigger = {
-			OR = {
-				has_disaster = estate_nobility_disaster
-				has_disaster = estate_church_disaster
-				has_disaster = estate_mages_disaster
-				has_disaster = estate_burghers_disaster
-				has_disaster = estate_adventurers_disaster
-				#has_disaster = estate_brahmins_disaster
-				#has_disaster = estate_jains_disaster
-			}
-		}	
+			has_any_estate_disaster_active = yes
+			has_not_own_estate_disaster_active = { estate = estate_artificers }
+		}
 		influence = -40
 	}
 	influence_modifier = {
@@ -157,15 +148,8 @@ estate_artificers = {
 	loyalty_modifier = {
 		desc = EST_VAL_OTHER_ESTATE_IN_POWER_LOY
 		trigger = {
-			OR = {
-				has_disaster = estate_nobility_disaster
-				has_disaster = estate_church_disaster
-				has_disaster = estate_mages_disaster
-				has_disaster = estate_burghers_disaster
-				has_disaster = estate_adventurers_disaster
-				#has_disaster = estate_brahmins_disaster
-				#has_disaster = estate_jains_disaster
-			}
+			has_any_estate_disaster_active = yes
+			has_not_own_estate_disaster_active = { estate = estate_artificers }
 		}
 		loyalty = -20
 	}
@@ -179,6 +163,20 @@ estate_artificers = {
 
 	
 	# Custom Names
+
+	custom_name = {
+		desc = estate_the_gommo
+		trigger = {
+			has_reform = iochand_gnomish_monarchy
+		}
+	}
+
+	custom_name = {
+		desc = estate_builders_of_the_future
+		trigger = {
+			has_reform = bazuneizar_clockwork_republic
+		}
+	}
 
 	custom_name = {
 		desc = estate_innlak
@@ -220,6 +218,20 @@ estate_artificers = {
 		trigger = {
 			tag = H16
 			has_country_flag = gemradcurt_artificers_rename
+		}
+	}
+
+	custom_name = {
+		desc = estate_vaultwardens
+		trigger = {
+			tag = I14
+		}
+	}
+
+	custom_name = {
+		desc = estate_hyti_dreamers
+		trigger = {
+			is_or_was_tag = { tag = F81 }
 		}
 	}
 
@@ -275,10 +287,15 @@ estate_artificers = {
 		trigger = { tag = S15 }
 	}
 
-	custom_name = { #ACE
-		desc = estate_magmascales_artificers
+	custom_name = {
+		desc = RSP_relic_smugglers
 		trigger = {
-			has_country_flag = AC5_lava_engineers
+			OR = {
+				tag = J95
+				tag = J96
+				tag = J97
+				tag = J98
+			}
 		}
 	}
 
@@ -298,11 +315,16 @@ estate_artificers = {
 		estate_artificers_organization_covenant
 		estate_artificers_organization_sun_elf
 		estate_artificers_organization_feiten_shuimu_cadre
+		estate_artificers_organization_vaultwardens
 		estate_artificers_organization_vazhatun_enhanced_astronomy
 		estate_artificers_organization_discombobulatorium
 		estate_artificers_organization_giberd_magisterium_oversight
 		estate_artificers_organization_giberd_ravelian_guilds
 		estate_artificers_organization_giberd_beacon_of_harmony
+
+		#Insyaa Organizations
+		estate_artificers_organization_pillar_expedition
+		estate_artificers_organization_mechanim_base
 		
 		# Non-Inventions Privileges
 		estate_artificers_feiten_invest_engineering_workshop
@@ -318,7 +340,7 @@ estate_artificers = {
 		estate_artificers_ravelian_emissaries
 		estate_artificers_precursor_weapons
 		estate_artificers_development_tools
-		# estate_artificers_porcelain_shields
+		estate_artificers_porcelain_shields
 		estate_artificers_ivory_tools #what is this supposed to be called??
 		estate_artificers_grant_production_rights
 		estate_artificers_grand_exhibition_hall
@@ -328,6 +350,10 @@ estate_artificers = {
 		estate_artificers_draft_artificers #no effect, what is this?
 		estate_artifice_wishcrafters_lazzaward #Mount Lazzaward Reward
 		estate_artificers_organization_strict_state_supervision #Pashaine
+		estate_artificers_hyti_labs
+		estate_artificers_hyti_peace
+		estate_artificers_flamekeepers #Beikdugang
+		estate_artificers_hyti_circle
 
 		#estate_artificers_karshyr
 		#estate_artificers_karshyr_improved
@@ -493,6 +519,10 @@ estate_artificers = {
 		#10
 		artifice_invention_ancestral_golems #10
 		artifice_invention_fey_spray #10
+		artifice_invention_voice_vessels		
+		artifice_invention_sunbeam_armaments
+		artifice_invention_law_books
+		artifice_invention_table_war
 		#20
 		artifice_invention_wind_invokers #20
 		artifice_invention_chi_cultivation #20
@@ -502,6 +532,7 @@ estate_artificers = {
 		artifice_invention_lullaby_cannon #20
 		artifice_invention_power_fists
 		artifice_invention_game_of_khet
+		artifice_invention_incantation_bowls
 		#30
 		artifice_invention_talking_god_temples #30
 		artifice_invention_think_quik_drink_mix #30
@@ -517,7 +548,10 @@ estate_artificers = {
 		artifice_invention_believable_ruin_bomb
 		artifice_invention_vernman_hero_tonic
 		artifice_invention_war_rigs
-		artifice_invention_sunbeam_armaments
+		artifice_invention_hanging_houses
+		artifice_invention_inscription_tools
+		artifice_invention_sunspire_pylons
+		artifice_invention_kevlar_shields
 		#20
 		artifice_invention_avatar_supersoldier_serum #20
 		artifice_invention_warfare_simulator #20
@@ -531,12 +565,25 @@ estate_artificers = {
 		artifice_invention_veykoda_rune_protections
 		artifice_invention_kaydhano_powered_vessels
 		artifice_invention_high_velocity_irrigation
+		artifice_invention_seismic_armor
+		artifice_invention_inscripted_rifle
+		artifice_invention_djinn_flyship
+		artifice_invention_enhanced_masks
+		artifice_invention_litoral_reclamation
+		artifice_invention_selfrepairing_sails
+		artifice_invention_sand_sails
+		artifice_invention_moisture_collector
+		artifice_invention_gravehound
+		artifice_invention_brine_severer
 		#30
 		artifice_invention_demonflame_flamethrowers #30
 		artifice_invention_artificial_egg_surrogates #30
 		artifice_invention_weather_predicticator #30
 		artifice_invention_divendancer_speedboat
 		artifice_invention_artifice_powered_magnate_factories
+		artifice_invention_scream_beamers
+		artifice_invention_reshtic_machine
+		artifice_invention_mech_bureau
 		#Special
 		#10
 		artifice_invention_korashi_drills
@@ -613,6 +660,9 @@ estate_artificers = {
 		artifice_invention_the_carousel #Plumstead 10
 		artifice_endura_reigns #Plumstead 10
 		artifice_everlasting_fertilizer #Plumstead 10
+		artifice_invention_goblin_fire #Overclan 10
+		artifice_invention_order_inscribed_forges #Overclan 10
+		artifice_invention_machine_inscribers #Overclan 10
 		artifice_invention_karakhanbar_high_heat_smelters #Karakhanbar 10
 		artifice_invention_karakhanbar_black_hearth_torches #Karakhanbar 30
 		artifice_invention_holy_gunblade # Orda Aldresia 10
@@ -633,17 +683,96 @@ estate_artificers = {
 		artifice_invention_innate_windshaping #Celmaldor 20
 		artifice_invention_icestorm_cannons #Celmaldor 20
 		artifice_invention_sustaining_arks #Celmaldor 10 
+		artifice_invention_kinetic_multiplier #Spiked Log 10
+		artifice_invention_reaver_axe_rifle #Reveria 10
+		artifice_invention_hyti_magiwind #Hytiranyalen 10
+		artifice_invention_clockwork_rope_swingers #Port Palegold 10
+		artifice_invention_rapid_fermentation #Iochand 20
+		artifice_invention_plant_grown_animals #Iochand 10
+		artifice_invention_ravenous_fertilizer #Iochand 20
 
-		#ACE
-		artifice_invention_gerudian_autorowers #Gerudians 20
-		artifice_invention_gerudian_axepistol #Gerudians 20
-		artifice_invention_gerudian_weightless_holds #Gerudians 20
-		artifice_invention_skaldhyrric_tale_generator #Skaldhyrric Faith 20
-		artifice_invention_obsidian_settlement_generation_kit #Magmascales 30
-		artifice_invention_bioartificed_fireplants #Magmascales 20
-		artifice_invention_flamewoven_clothing #Magmascales 30
-		artifice_invention_rock_melter_mk1 #Magmascales 20
-		AC5_engineer_bureaucracy #Magmascales not invention
+		#### Insyaa ####
+		#Tier 4 Gene Pillars
+		artifice_invention_kraken_galleons
+		artifice_invention_spirit_munition
+		artifice_invention_bio_processor
+		#Mechanim
+		artifice_invention_reverse_mechanim
+		artifice_invention_industrial_automatories
+		artifice_invention_memory_module
+		artifice_invention_fireproof_plating
+		artifice_invention_okalu_scanners
+		artifice_invention_pillar_scouts
+		artifice_invention_behavioral_chip
+		artifice_invention_construction_bots
+		artifice_invention_mechanim_regiments
+		artifice_invention_auto_scribes
+		#Gene Magic
+		artifice_invention_crop_enlarge #full
+		artifice_invention_assisted_growth #mixed
+		artifice_invention_animal_gene
+		artifice_invention_titano_thorns
+		artifice_invention_titano_weed
+		artifice_invention_seed_siege
+		artifice_invention_tgs_farmland #Titanoflora Gene Sequenced
+		artifice_invention_tgs_livestock
+		artifice_invention_titano_artif
+		artifice_invention_titano_cav
+		#Precursor Tech
+		artifice_invention_sonic_amplifiers #mixed
+		artifice_invention_sonic_weaponary #full
+		artifice_invention_flak_cannons
+		artifice_invention_terrain_shaper
+		artifice_invention_steel_tracking
+		artifice_invention_memory_storage
+		artifice_invention_mechanim_deconstructor
+		### Mechanim ###
+		#Cultural
+		artifice_invention_mech_steel_detector
+		artifice_invention_mech_reawakening_procedure
+		#Religious
+		artifice_invention_mech_building_plates
+		artifice_invention_mech_terrain_specialization
+		#Military
+		artifice_invention_mech_lava_cell
+		artifice_invention_mech_fireproof_plating
+		artifice_invention_mech_pillar_scouts
+		artifice_invention_mech_amphibious_attachements
+		#Head
+		artifice_invention_head_long_range
+		artifice_invention_head_war_craved
+		artifice_invention_head_human_like
+		artifice_invention_head_adm_oversight
+		#Torso
+		artifice_invention_torso_self_repair
+		artifice_invention_torso_war_craved
+		artifice_invention_torso_container_part
+		artifice_invention_torso_war_machine
+		#Chassis
+		artifice_invention_chassis_heavy
+		artifice_invention_chassis_light
+		artifice_invention_chassis_waterproof
+		artifice_invention_chassis_soarer_struts
+		#Arms
+		artifice_invention_arms_dual_pair
+		artifice_invention_arms_stabilizer
+		artifice_invention_arms_construction
+		artifice_invention_arms_sonic_firearm
+		#Legs
+		artifice_invention_legs_quadripedal
+		artifice_invention_legs_bipedal
+		artifice_invention_legs_octipedal
+		artifice_invention_legs_trailblazer
+		#Homebrew
+		# artifice_invention_domination_potions
+		# artifice_invention_necrolyzer
+		# artifice_invention_bullet_worms
+		# artifice_invention_runepress
+		# artifice_invention_dwarf_eye
+		# artifice_invention_khetgirl
+		# artifice_invention_serpentrot_gas
+
+
 	}
 	
 	agendas = {

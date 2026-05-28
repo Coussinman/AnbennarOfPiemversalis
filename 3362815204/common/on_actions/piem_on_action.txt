@@ -1,0 +1,261 @@
+# province
+on_adm_development = {
+	on_adm_development_effect = yes
+	on_development_effect = yes
+
+	#Anbennar
+	events = {
+		kheionai.4
+		flavour_mulen.1
+		flavour_mulen.2
+        flavour_gor_vazumbrog.201
+	}
+
+	owner = { accretive_path_goldscale_kobold_chi_stacking_effect = { amount = 10 } }
+
+	if = {
+		limit = {
+			transmutative_path_has_chi_wellspring_trigger = yes
+		}
+		add_chi_wellspring_to_size = yes
+	}
+	#Monkey devclick
+	hidden_effect = {
+		owner = {
+			change_variable = {
+				which = dev_adm_clicks
+				value = 1
+
+			}
+			change_variable = {
+				which = dev_sum_clicks
+				value = 1
+			}
+		}
+	}
+	if = { #vaengheim
+		limit = {
+			Z88 = {
+				has_country_flag = Z88_subject_dev_refund 
+			}
+			owner = {
+				is_subject_of = Z88
+				NOT = {
+					has_country_modifier = Z88_refund_cd
+				}
+			}
+		}
+		Z88 = {
+			add_adm_power = 50
+		}
+		owner = {
+			add_country_modifier = {
+				name = Z88_refund_cd
+				duration = 1825
+				hidden = yes
+			}
+			add_opinion = {
+				who = Z88
+				modifier = developed_subject_z88
+			}
+		}
+	}
+}
+
+# province
+on_dip_development = {
+	on_dip_development_effect = yes
+	on_development_effect = yes
+
+	#Anbennar
+	events = {
+		kheionai.4
+		flavour_mulen.1
+		flavour_mulen.2
+        flavour_gor_vazumbrog.201
+	}
+
+	owner = { accretive_path_naamjyut_chi_stacking_effect = { amount = 10 } }
+
+	if = {
+		limit = {
+			transmutative_path_has_chi_wellspring_trigger = yes
+		}
+		add_chi_wellspring_to_size = yes
+	}
+	if = {
+		limit = {
+			owner = { has_estate_privilege = estate_nobles_U10_torment_of_hellfire }
+			base_production = 10
+			has_building = tradecompany
+			trade_goods = slaves
+		}
+		add_province_modifier = {
+			name = U10_hellfire_factory
+			duration = -1
+		}
+	}
+	#Monkey devclick
+	hidden_effect = {
+		owner = {
+			change_variable = {
+				which = dev_dip_clicks
+				value = 1
+
+			}
+			change_variable = {
+				which = dev_sum_clicks
+				value = 1
+			}
+		}
+	}
+	if = { #vaengheim
+		limit = {
+			Z88 = {
+				has_country_flag = Z88_subject_dev_refund 
+			}
+			owner = {
+				is_subject_of = Z88
+				NOT = {
+					has_country_modifier = Z88_refund_cd
+				}
+			}
+		}
+		Z88 = {
+			add_dip_power = 50
+		}
+		owner = {
+			add_country_modifier = {
+				name = Z88_refund_cd
+				hidden = yes
+				duration = 1825
+			}
+			add_opinion = {
+				who = Z88
+				modifier = developed_subject_z88
+			}
+		}
+	}
+}
+
+# province
+on_mil_development = {
+	on_mil_development_effect = yes
+	on_development_effect = yes
+
+	#Anbennar
+	events = {
+		kheionai.4
+		flavour_mulen.1
+		flavour_mulen.2
+        flavour_gor_vazumbrog.201
+	}
+
+	owner = { accretive_path_harimari_chi_stacking_effect = { amount = 10 } }
+
+	if = {
+		limit = {
+			transmutative_path_has_chi_wellspring_trigger = yes
+		}
+		add_chi_wellspring_to_size = yes
+	}
+	#Monkey devclick
+	hidden_effect = {
+		owner = {
+			change_variable = {
+				which = dev_mil_clicks
+				value = 1
+
+			}
+			change_variable = {
+				which = dev_sum_clicks
+				value = 1
+			}
+		}
+	}
+	if = { #vaengheim
+		limit = {
+			Z88 = {
+				has_country_flag = Z88_subject_dev_refund 
+			}
+			owner = {
+				is_subject_of = Z88
+				NOT = {
+					has_country_modifier = Z88_refund_cd
+				}
+			}
+		}
+		Z88 = {
+			add_mil_power = 50
+		}
+		owner = {
+			add_country_modifier = {
+				name = Z88_refund_cd
+				duration = 1825
+				hidden = yes
+			}
+			add_opinion = {
+				who = Z88
+				modifier = developed_subject_z88
+			}
+		}
+	}
+    # Huugeta Mercenary Enterprise
+	if = {
+		limit = {
+			owner = {
+				has_country_flag = S45_mercenary_enterprise
+			}
+		}
+		owner = {
+			change_variable = {
+				which = S45_mil_dev_counter
+				value = 1
+			}
+
+			if = {
+				limit = {
+					check_variable = {
+						which = S45_mil_dev_counter
+						value = 5
+					}
+				}
+				set_variable = {
+					which = S45_mil_dev_counter
+					value = 0
+				}
+				S45_add_momentum = { value = 1 action = dev }
+			}
+		}
+
+		# Huugeta Mercenary Chapter
+		if = {
+			limit = {
+				owner = { has_country_flag = S45_mercenary_chapters }
+				S45_mercenary_chapter_requirements = yes
+			}
+			add_province_modifier = {
+				name = S45_mercenary_chapter
+				duration = -1
+			}
+		}
+	}
+	
+	if = {
+		limit = {
+			owner = { has_estate = estate_planetouched ai = no }
+			NOT = { has_province_flag = planetouched_improved_mil_dev_twice_flag }
+		}
+		if = {
+			limit = { has_province_flag = planetouched_improved_mil_dev_flag }
+			set_province_flag = planetouched_improved_mil_dev_twice_flag
+			owner = {
+				change_variable = {
+					which = planetouchedImprovedMilDevQuan
+					value = 1
+				}
+			}
+		}
+		else = { set_province_flag = planetouched_improved_mil_dev_flag }
+	}
+}

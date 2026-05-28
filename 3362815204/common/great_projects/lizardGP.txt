@@ -130,8 +130,10 @@ Khugra_The_Sapphire_of_Sarhal = {
 			merchants = 1
 			burghers_influence_modifier = 0.1
 			burghers_loyalty_modifier = 0.1
+			
 		}
 		on_upgraded = {
+			custom_tooltip = liz_mon_hat_tt
 			every_province_in_area = {
 				limit = {
 					OR = {
@@ -280,6 +282,7 @@ Zerat_war_academy = {
 			nobles_influence_modifier = 0.1
 		}
 		on_upgraded = {
+			custom_tooltip = liz_mon_hat_tt
 		}
 	}
 }
@@ -369,8 +372,6 @@ Shargra_Artificery_guild= {
 			allowed_rajput_fraction = 0.025
 		    fire_damage = 0.05
 			infantry_fire = 0.05
-			technology_cost = -0.025
-			innovativeness_gain = 0.1
 		}
 		on_upgraded = {
 		}
@@ -393,8 +394,8 @@ Shargra_Artificery_guild= {
 			allowed_rajput_fraction = 0.05
 		    infantry_fire = 0.075
 		    fire_damage = 0.075
-			technology_cost = -0.05
-			innovativeness_gain = 0.2
+			technology_cost = -0.033
+			innovativeness_gain = 0.1
 		}
 		on_upgraded = {
 		}
@@ -413,14 +414,15 @@ Shargra_Artificery_guild= {
 		area_modifier = {
 		}
 		country_modifiers = {
-		      allowed_rajput_fraction = 0.1
-		      artificers_loyalty_modifier = 0.1
-		      fire_damage = 0.1
-			  infantry_fire = 0.10
-			  technology_cost = -0.075
-			  innovativeness_gain = 0.3
+		    allowed_rajput_fraction = 0.1
+		    artificers_loyalty_modifier = 0.1
+		    fire_damage = 0.1
+			infantry_fire = 0.10
+			technology_cost = -0.05
+			innovativeness_gain = 0.25
 		}
 		on_upgraded = {
+			custom_tooltip = liz_mon_hat_tt
 			change_trade_goods = precursor_relics
 			set_province_flag = permanent_precursor_relics
 			add_permanent_province_modifier = {
@@ -582,152 +584,153 @@ serpent_palace = {
 			administrative_efficiency = 0.025
 		}
 		on_upgraded = {
+			custom_tooltip = liz_mon_hat_tt
 			add_base_tax = 1
 			add_base_production = 1
 			add_base_manpower = 1
 		}
 	}
 }
-#Shalazar Great Zatsarya
-Great_Zatsarya = {
-	start = 5650
-	date = 01.01.01
-	time = {
-		months = 0
-	}
-	build_cost = 0
-	can_be_moved = no
-	move_days_per_unit_distance = 1
-	starting_tier = 0
-	type = monument
-	build_trigger = {	
-	}
-	on_built = {		
-	}
-	on_destroyed = {	
-	}
-	can_use_modifiers_trigger = {
-		development = 20
-		OR = {
-			owner = {
-				OR = {
-					culture_group = lizardfolk
-				}
-			}
-			AND = {
-				OR = {
-					culture_group = lizardfolk
-				}
-				has_owner_accepted_culture = yes
-			}
-		}
-	}		
-	can_upgrade_trigger = {
-		development = 20
-		OR = {
-			owner = {
-				OR = {
-					culture_group = lizardfolk
-				}
-			}
-			AND = {
-				OR = {
-					culture_group = lizardfolk
-				}
-				has_owner_accepted_culture = yes
-			}
-		}
-	}	
-	keep_trigger = {
-	}
-	tier_0 = {
-		upgrade_time = {
-			months = 0
-		}
-		cost_to_upgrade = {
-			factor = 0
-		}
-		province_modifiers = {
-		}
-		area_modifier = {
-		}
-		country_modifiers = {	
-		}
-		on_upgraded = {
-		}
-	}
-	tier_1 = {
-		upgrade_time = {
-			months = 120
-		}
-		cost_to_upgrade = {
-			factor = 2000
-		}
-		province_modifiers = {
-			local_tax_modifier = 0.1
-		}
-		area_modifier = {
-		}
-		country_modifiers = {
-			institution_spread_from_true_faith = 0.1
-			global_missionary_strength = 0.01
-		}
-		on_upgraded = {
-			add_base_tax = 1
-		}
-	}
-	tier_2 = {
-		upgrade_time = {
-			months = 240
-		}
-		cost_to_upgrade = {
-			factor = 3500
-		}
-		province_modifiers = {
-			local_tax_modifier = 0.25
-		}
-		area_modifier = {
-		}
-		country_modifiers = {
-			institution_spread_from_true_faith = 0.2
-			church_influence_modifier = 0.025
-			church_loyalty_modifier = 0.05
-			global_missionary_strength = 0.02
-		}
-		on_upgraded = {
-			add_base_tax = 1
-		}
-	}
-	tier_3 = {
-		upgrade_time = {
-			months = 480
-		}
-		cost_to_upgrade = {
-			factor = 7500
-		}
-		province_modifiers = {
-		}
-		area_modifier = {
-			local_tax_modifier = 0.25
-		}
-		country_modifiers = {
-			missionaries = 1
-			institution_spread_from_true_faith = 0.3
-			church_influence_modifier = 0.05
-			church_loyalty_modifier = 0.1
-			global_missionary_strength = 0.03
-		}
-		on_upgraded = {
-			change_trade_goods = damestear
-			set_province_flag = permanent_damestear
-			add_permanent_province_modifier = {
-				name = lizard_damestear
-				duration = -1
-			}
-			add_base_tax = 1
-		}
-	}
-}
+#Shalazar Great Zatsarya Временно удалено так как итак есть в шалазаре монумент затсарая
+# Great_Zatsarya = {
+# 	start = 5650
+# 	date = 01.01.01
+# 	time = {
+# 		months = 0
+# 	}
+# 	build_cost = 0
+# 	can_be_moved = no
+# 	move_days_per_unit_distance = 1
+# 	starting_tier = 0
+# 	type = monument
+# 	build_trigger = {	
+# 	}
+# 	on_built = {		
+# 	}
+# 	on_destroyed = {	
+# 	}
+# 	can_use_modifiers_trigger = {
+# 		development = 20
+# 		OR = {
+# 			owner = {
+# 				OR = {
+# 					culture_group = lizardfolk
+# 				}
+# 			}
+# 			AND = {
+# 				OR = {
+# 					culture_group = lizardfolk
+# 				}
+# 				has_owner_accepted_culture = yes
+# 			}
+# 		}
+# 	}		
+# 	can_upgrade_trigger = {
+# 		development = 20
+# 		OR = {
+# 			owner = {
+# 				OR = {
+# 					culture_group = lizardfolk
+# 				}
+# 			}
+# 			AND = {
+# 				OR = {
+# 					culture_group = lizardfolk
+# 				}
+# 				has_owner_accepted_culture = yes
+# 			}
+# 		}
+# 	}	
+# 	keep_trigger = {
+# 	}
+# 	tier_0 = {
+# 		upgrade_time = {
+# 			months = 0
+# 		}
+# 		cost_to_upgrade = {
+# 			factor = 0
+# 		}
+# 		province_modifiers = {
+# 		}
+# 		area_modifier = {
+# 		}
+# 		country_modifiers = {	
+# 		}
+# 		on_upgraded = {
+# 		}
+# 	}
+# 	tier_1 = {
+# 		upgrade_time = {
+# 			months = 120
+# 		}
+# 		cost_to_upgrade = {
+# 			factor = 2000
+# 		}
+# 		province_modifiers = {
+# 			local_tax_modifier = 0.1
+# 		}
+# 		area_modifier = {
+# 		}
+# 		country_modifiers = {
+# 			institution_spread_from_true_faith = 0.1
+# 			global_missionary_strength = 0.01
+# 		}
+# 		on_upgraded = {
+# 			add_base_tax = 1
+# 		}
+# 	}
+# 	tier_2 = {
+# 		upgrade_time = {
+# 			months = 240
+# 		}
+# 		cost_to_upgrade = {
+# 			factor = 3500
+# 		}
+# 		province_modifiers = {
+# 			local_tax_modifier = 0.25
+# 		}
+# 		area_modifier = {
+# 		}
+# 		country_modifiers = {
+# 			institution_spread_from_true_faith = 0.2
+# 			church_influence_modifier = 0.025
+# 			church_loyalty_modifier = 0.05
+# 			global_missionary_strength = 0.02
+# 		}
+# 		on_upgraded = {
+# 			add_base_tax = 1
+# 		}
+# 	}
+# 	tier_3 = {
+# 		upgrade_time = {
+# 			months = 480
+# 		}
+# 		cost_to_upgrade = {
+# 			factor = 7500
+# 		}
+# 		province_modifiers = {
+# 		}
+# 		area_modifier = {
+# 			local_tax_modifier = 0.25
+# 		}
+# 		country_modifiers = {
+# 			missionaries = 1
+# 			institution_spread_from_true_faith = 0.3
+# 			church_influence_modifier = 0.05
+# 			church_loyalty_modifier = 0.1
+# 			global_missionary_strength = 0.03
+# 		}
+# 		on_upgraded = {
+# 			change_trade_goods = damestear
+# 			set_province_flag = permanent_damestear
+# 			add_permanent_province_modifier = {
+# 				name = lizard_damestear
+# 				duration = -1
+# 			}
+# 			add_base_tax = 1
+# 		}
+# 	}
+# }
 #Karshyr guild of hydromancers
 guild_of_hydromancers = {
 	start = 5834
@@ -810,8 +813,7 @@ guild_of_hydromancers = {
 		area_modifier = {
 		}
 		country_modifiers = {
-			global_monthly_devastation = -0.03
-			global_prosperity_growth = 0.1
+			global_monthly_devastation = -0.2
 			mages_influence_modifier = 0.025
 			mages_loyalty_modifier = 0.05
 			production_efficiency = 0.05
@@ -837,8 +839,8 @@ guild_of_hydromancers = {
 		country_modifiers = {
             mages_influence_modifier = 0.05
 			mages_loyalty_modifier = 0.10
-			global_monthly_devastation = -0.05
-			global_prosperity_growth = 0.3
+			global_monthly_devastation = -0.03
+			global_prosperity_growth = 0.1
 			production_efficiency = 0.075
 		}
 		on_upgraded = {
@@ -863,12 +865,14 @@ guild_of_hydromancers = {
 		country_modifiers = {
 			mages_influence_modifier = 0.10
 			mages_loyalty_modifier = 0.15
-            global_monthly_devastation = -0.08
-			global_prosperity_growth = 0.5
+            global_monthly_devastation = -0.05
+			global_prosperity_growth = 0.3
 			production_efficiency = 0.10
+			custom_tooltip = liz_mon_hat_tt
 		}
 		on_upgraded = {
-			owner {
+			custom_tooltip = liz_mon_hat_tt
+			owner = {
 				set_global_flag = karshyrrr_monument_built
 				country_event = { 
 					id = karshyrrr.7
@@ -986,6 +990,12 @@ Akhanekas_Fortress_against_curse = {
 			garrison_size = 0.05
 		}
 		on_upgraded = {
+			6062 = {
+				add_province_modifier = {
+					name = abjuration_1_ward_mod_1
+					duration = -1
+				}
+			}
 		}
 	}
 	tier_3 = {
@@ -1010,6 +1020,12 @@ Akhanekas_Fortress_against_curse = {
 			garrison_size = 0.15
 		}
 		on_upgraded = {
+			6062 = {
+				add_province_modifier = {
+					name = abjuration_1_ward_mod_2
+					duration = -1
+				}
+			}
 		}
 	}
 }
@@ -1145,125 +1161,125 @@ Giantickin_Skeleton = {
 	}
 }
 #Van slave market
-Slave_market = {
-	start = 6592
-	date = 01.01.01
-	time = {
-		months = 0
-	}
-	build_cost = 0
-	can_be_moved = no
-	move_days_per_unit_distance = 1
-	starting_tier = 0
-	type = monument
-	build_trigger = {	
-	}
-	on_built = {		
-	}
-	on_destroyed = {	
-	}
-	can_use_modifiers_trigger = {
-	}		
-	can_upgrade_trigger = {
-	}		
-	keep_trigger = {
-	}
-	tier_0 = {
-		upgrade_time = {
-			months = 0
-		}
-		cost_to_upgrade = {
-			factor = 0
-		}
-		province_modifiers = {
-		}
-		area_modifier = {
-		}
-		country_modifiers = {	
-		}
-		on_upgraded = {
-		}
-	}
-	tier_1 = {
-		upgrade_time = {
-			months = 120
-		}
-		cost_to_upgrade = {
-			factor = 1650
-		}
-		province_modifiers = {
-            local_development_cost = -0.05
-			province_trade_power_value = 5
-		}
-		area_modifier = {
-		}
-		country_modifiers = {
-			trade_efficiency = 0.05
-		}
-		on_upgraded = {
-			add_human_minority_size_effect = yes
-		}
-	}
-	tier_2 = {
-		upgrade_time = {
-			months = 240
-		}
-		cost_to_upgrade = {
-			factor = 3300
-		}
-		province_modifiers = {
-            local_development_cost = -0.10
-			province_trade_power_value = 10
-		}
-		area_modifier = {
-			province_trade_power_value = 5
-		}
-		country_modifiers = {
-            trade_efficiency = 0.10
-			global_ship_trade_power = 0.15
-		}
-		on_upgraded = {
-			add_human_minority_size_effect = yes
-			add_harpy_minority_size_effect = yes
-		}
-	}
-	tier_3 = {
-		upgrade_time = {
-			months = 480
-		}
-		cost_to_upgrade = {
-			factor = 6600
-		}
-		province_modifiers = {
-            local_development_cost = -0.15
-			province_trade_power_value = 15
-		}
-		area_modifier = {
-			local_development_cost = -0.05
-			province_trade_power_value = 5
-		}
-		country_modifiers = {
-			trade_efficiency = 0.15
-			global_ship_trade_power = 0.25
-		}
-		on_upgraded = {
-			custom_tooltip = vslave_tooltip
-			owner {
-				hidden_effect = { 
-					set_global_flag = Vanslave_monument_built
-					country_event = { 
-						id = Vanslave.6
-					} 
-				}
-			}
-			add_human_minority_size_effect = yes
-			add_harpy_minority_size_effect = yes
-			add_lizardfolk_minority_size_effect = yes
-			add_gnollish_minority_size_effect = yes
-		}
-	}
-}
-#Aakhet Palace
+# Slave_market = {
+# 	start = 6592
+# 	date = 01.01.01
+# 	time = {
+# 		months = 0
+# 	}
+# 	build_cost = 0
+# 	can_be_moved = no
+# 	move_days_per_unit_distance = 1
+# 	starting_tier = 0
+# 	type = monument
+# 	build_trigger = {	
+# 	}
+# 	on_built = {		
+# 	}
+# 	on_destroyed = {	
+# 	}
+# 	can_use_modifiers_trigger = {
+# 	}		
+# 	can_upgrade_trigger = {
+# 	}		
+# 	keep_trigger = {
+# 	}
+# 	tier_0 = {
+# 		upgrade_time = {
+# 			months = 0
+# 		}
+# 		cost_to_upgrade = {
+# 			factor = 0
+# 		}
+# 		province_modifiers = {
+# 		}
+# 		area_modifier = {
+# 		}
+# 		country_modifiers = {	
+# 		}
+# 		on_upgraded = {
+# 		}
+# 	}
+# 	tier_1 = {
+# 		upgrade_time = {
+# 			months = 120
+# 		}
+# 		cost_to_upgrade = {
+# 			factor = 1650
+# 		}
+# 		province_modifiers = {
+#             local_development_cost = -0.05
+# 			province_trade_power_value = 5
+# 		}
+# 		area_modifier = {
+# 		}
+# 		country_modifiers = {
+# 			trade_efficiency = 0.05
+# 		}
+# 		on_upgraded = {
+# 			add_human_minority_size_effect = yes
+# 		}
+# 	}
+# 	tier_2 = {
+# 		upgrade_time = {
+# 			months = 240
+# 		}
+# 		cost_to_upgrade = {
+# 			factor = 3300
+# 		}
+# 		province_modifiers = {
+#             local_development_cost = -0.10
+# 			province_trade_power_value = 10
+# 		}
+# 		area_modifier = {
+# 			province_trade_power_value = 5
+# 		}
+# 		country_modifiers = {
+#             trade_efficiency = 0.10
+# 			global_ship_trade_power = 0.15
+# 		}
+# 		on_upgraded = {
+# 			add_human_minority_size_effect = yes
+# 			add_harpy_minority_size_effect = yes
+# 		}
+# 	}
+# 	tier_3 = {
+# 		upgrade_time = {
+# 			months = 480
+# 		}
+# 		cost_to_upgrade = {
+# 			factor = 6600
+# 		}
+# 		province_modifiers = {
+#             local_development_cost = -0.15
+# 			province_trade_power_value = 15
+# 		}
+# 		area_modifier = {
+# 			local_development_cost = -0.05
+# 			province_trade_power_value = 5
+# 		}
+# 		country_modifiers = {
+# 			trade_efficiency = 0.15
+# 			global_ship_trade_power = 0.25
+# 		}
+# 		on_upgraded = {
+# 			custom_tooltip = vslave_tooltip
+# 			owner = {
+# 				hidden_effect = { 
+# 					set_global_flag = Vanslave_monument_built
+# 					country_event = { 
+# 						id = Vanslave.6
+# 					} 
+# 				}
+# 			}
+# 			add_human_minority_size_effect = yes
+# 			add_harpy_minority_size_effect = yes
+# 			add_lizardfolk_minority_size_effect = yes
+# 			add_gnollish_minority_size_effect = yes
+# 		}
+# 	}
+# }
+#Aakhet Palace  #Сделано: теперь позволяет нанимать вармагов
 sosal_palace = {
 	start = 5870
 	date = 01.01.01
@@ -1319,15 +1335,12 @@ sosal_palace = {
 		area_modifier = {
 		}
 		country_modifiers = {
-			nobles_loyalty_modifier = 0.05
-			nobles_influence_modifier = 0.05
+			leader_land_shock = 1
+			leader_land_fire = 1
 		}
 		on_upgraded = {
-			custom_tooltip = warmage_tooltip1
-			owner {
-				hidden_effect = { 
-					set_country_flag = sosal_palace_tier_1 
-				}
+			owner = {
+				enable_estate_action = { estate_action = RECRUIT_WAR_WIZARD }
 			}
 		}
 	}
@@ -1345,16 +1358,14 @@ sosal_palace = {
 		area_modifier = {
 		}
 		country_modifiers = {
-            nobles_loyalty_modifier = 0.10
-			nobles_influence_modifier = 0.075
+            evocation_experience_mod = 0.1
 			leader_land_shock = 1
 			leader_land_fire = 1
 		}
 		on_upgraded = {
 			custom_tooltip = warmage_tooltip2
-			owner {
+			owner = {
 				hidden_effect = { 
-					clr_country_flag = sosal_palace_tier_1
 					set_country_flag = sosal_palace_tier_2
 				}
 			}
@@ -1374,8 +1385,7 @@ sosal_palace = {
 		area_modifier = {
 		}
 		country_modifiers = {
-			nobles_loyalty_modifier = 0.15
-			nobles_influence_modifier = 0.10
+			evocation_experience_mod = 0.15
 			leader_land_shock = 1
 			leader_land_fire = 1
 			max_general_shock = 1
@@ -1383,7 +1393,7 @@ sosal_palace = {
 		}
 		on_upgraded = {
 			custom_tooltip = warmage_tooltip3
-			owner {
+			owner = {
 				hidden_effect = { 
 					clr_country_flag = sosal_palace_tier_2
 					set_country_flag = sosal_palace_tier_3
@@ -1392,7 +1402,7 @@ sosal_palace = {
 		}
 	}
 }
-#Mazu Makhara
+#Mazu Makhara #Сделано:Теперь дает адских гончих как юнит
 Mazu_Makhara = {
 	start = 5466
 	date = 01.01.01
@@ -1452,8 +1462,10 @@ Mazu_Makhara = {
 		country_modifiers = {
 			mages_loyalty_modifier = 0.05
 			national_focus_years = -5
+			conjuration_experience_mod = 0.05
 		}
 		on_upgraded = {
+			
 		}
 	}
 	tier_2 = {
@@ -1476,8 +1488,13 @@ Mazu_Makhara = {
 		country_modifiers = {
             mages_loyalty_modifier = 0.10
 			national_focus_years = -10
+			conjuration_experience_mod = 0.1
 		}
 		on_upgraded = {
+			custom_tooltip = MM_animal_tt_3
+			owner = {
+				set_country_flag = MM_hellhounds_1
+			}
 		}
 	}
 	tier_3 = {
@@ -1500,13 +1517,13 @@ Mazu_Makhara = {
 		country_modifiers = {
 			mages_loyalty_modifier = 0.10
 			national_focus_years = -10
-			all_power_cost = -0.025
+			conjuration_experience_mod = 0.2
 		}
 		on_upgraded = {	
+			custom_tooltip = MM_animal_tt_2
 			owner = {
-				country_event = {
-					id = warlockpkk_event.2
-				}
+				clr_country_flag = MM_hellhounds_1
+				set_country_flag = MM_hellhounds_2
 			}
 		}
 	}
@@ -1533,14 +1550,12 @@ Saikinoma_Citadel_of_the_Waves = {
 		OR = {
 			has_province_modifier = ananoma_standart
 			has_province_modifier = ananoma_improved
-			has_province_modifier = ananoma_improved_more
 		}
 	}		
 	can_upgrade_trigger = {
 		OR = {
 			has_province_modifier = ananoma_standart
 			has_province_modifier = ananoma_improved
-			has_province_modifier = ananoma_improved_more
 		}
 	}		
 	keep_trigger = {
@@ -1607,13 +1622,13 @@ Saikinoma_Citadel_of_the_Waves = {
 		on_upgraded = {
 			5840 = { change_culture = amezatany }
 			custom_tooltip = vyz_privileges_tt
-			owner{
+			owner = {
 				hidden_effect = {
 				add_accepted_culture = amezatany
 				add_country_modifier = {
-					name = vyz_slot
-					duration = -1
-					hidden = yes
+						name = vyz_slot
+						duration = -1
+						hidden = yes
 					}
 				}
 			}
@@ -1638,7 +1653,7 @@ Saikinoma_Citadel_of_the_Waves = {
 		country_modifiers = {
 			burghers_loyalty_modifier = 0.15
 			galley_cost = -0.15
-			galley_power = 0.15
+			galley_power = 0.1
 		}
 		on_upgraded = {
 			owner = {
@@ -1650,7 +1665,7 @@ Saikinoma_Citadel_of_the_Waves = {
 	}
 }
 #Zirrbit
-Zirrbit = {
+Zirrbit = { #Сделано: теперь рост растений будет рабоать на провинции пустыни и степей
 	start = 5789
 	date = 01.01.01
 	time = {
@@ -1729,7 +1744,7 @@ Zirrbit = {
 		area_modifier = {
 		}
 		country_modifiers = {
-			global_monthly_devastation = -0.03
+			global_monthly_devastation = -0.01
 			global_prosperity_growth = 0.1
 		}
 		on_upgraded = {
@@ -1750,7 +1765,7 @@ Zirrbit = {
 			allowed_num_of_buildings = 1
 		}
 		country_modifiers = {
-            global_monthly_devastation = -0.05
+            global_monthly_devastation = -0.03
 			global_prosperity_growth = 0.3
 		}
 		on_upgraded = {
@@ -1775,7 +1790,7 @@ Zirrbit = {
 			allowed_num_of_buildings = 1
 		}
 		country_modifiers = {
-			global_monthly_devastation = -0.08
+			global_monthly_devastation = -0.05
 			global_prosperity_growth = 0.5
 		}
 		on_upgraded = {
@@ -2262,7 +2277,7 @@ Kiumbanda_Counsel = {
 			state_maintenance_modifier = -0.15
 		}
 		on_upgraded = {
-			owner {
+			owner = {
 				enables_divine_idea_group = yes
 			}
 		}
@@ -2289,7 +2304,7 @@ Kiumbanda_Counsel = {
 			monarch_admin_power = 1
 		}
 		on_upgraded = {
-			owner {
+			owner = {
 				enables_divine_idea_group = yes
 			}
 		}
@@ -2307,7 +2322,7 @@ Golcora_gold_mines = {
 	move_days_per_unit_distance = 1
 	starting_tier = 0
 	type = monument
-	build_trigger = {	
+	build_trigger = {
 		NOT = { has_global_flag = mint_dstr }
 		OR = {
 			owner = { culture_group = gnollish }
@@ -2503,7 +2518,6 @@ Throne_of_gnollkind = {
 		area_modifier = {
 		}
 		country_modifiers = {
-			min_autonomy_in_territories = -0.05
 			num_accepted_cultures = 1
 			governing_capacity_modifier = 0.05
 		}
@@ -2525,7 +2539,7 @@ Throne_of_gnollkind = {
 			trade_goods_size = 0.5
 		}
 		country_modifiers = {
-			min_autonomy_in_territories = -0.1
+			min_autonomy_in_territories = -0.05
 			tolerance_heathen = 1
 			num_accepted_cultures = 2
 			governing_capacity_modifier = 0.10
@@ -2548,7 +2562,7 @@ Throne_of_gnollkind = {
 			trade_goods_size = 1
 		}
 		country_modifiers = {
-			min_autonomy_in_territories = -0.15
+			min_autonomy_in_territories = -0.1
 			tolerance_heathen = 2
 			num_accepted_cultures = 3
 			governing_capacity_modifier = 0.15
@@ -2611,8 +2625,8 @@ city_build_by_slaves = {
 		area_modifier = {
 		}
 		country_modifiers = {
-			build_cost = -0.05
-			build_time = -0.1
+			lbuild_cost = -0.05
+			build_time = -0.05
 			fort_maintenance_modifier = -0.15
 		}
 		on_upgraded = {
@@ -2630,12 +2644,12 @@ city_build_by_slaves = {
 			local_manpower_modifier = 0.15
 		}
 		area_modifier = {
-			build_cost = -0.05
-			build_time = -0.05
+			local_build_cost = -0.05
+			local_build_time = -0.05
 		}
 		country_modifiers = {
-			build_cost = -0.10
-			build_time = -0.15
+			build_cost = -0.075
+			build_time = -0.10
 			fort_maintenance_modifier = -0.25
 		}
 		on_upgraded = {
@@ -2657,9 +2671,9 @@ city_build_by_slaves = {
 			local_build_time = -0.10
 		}
 		country_modifiers = {
-			build_cost = -0.15
-			build_time = -0.25
-			fort_maintenance_modifier = -0.33
+			build_cost = -0.10
+			build_time = -0.15
+			local_fort_maintenance_modifier = -0.33
 		}
 		on_upgraded = {
 		}
@@ -2799,163 +2813,164 @@ Emerald_of_the_Seas = {
 			movement_speed_in_fleet_modifier = 1 
 		}
 		on_upgraded = {
+			custom_tooltip = liz_mon_hat_tt
 		}
 	}
 }
 #Karassk
-Order_of_the_Tidal_Scales = {
-	start = 5898
-	date = 01.01.01
-	time = {
-		months = 0
-	}
-	build_cost = 0
-	can_be_moved = no
-	move_days_per_unit_distance = 1
-	starting_tier = 0
-	type = monument
-	build_trigger = {	
-	}
-	on_built = {		
-	}
-	on_destroyed = {	
-	}
-	can_use_modifiers_trigger = {
-		development = 30
-		OR = {
-			owner = {
-				OR = {
-					culture_group = lizardfolk
-				}
-			}
-			AND = {
-				OR = {
-					culture_group = lizardfolk
-				}
-				has_owner_accepted_culture = yes
-			}
-		}
-	}		
-	can_upgrade_trigger = {
-		development = 30
-		OR = {
-			owner = {
-				OR = {
-					culture_group = lizardfolk
-				}
-			}
-			AND = {
-				OR = {
-					culture_group = lizardfolk
-				}
-				has_owner_accepted_culture = yes
-			}
-		}
-	}		
-	keep_trigger = {
-	}
-	tier_0 = {
-		upgrade_time = {
-			months = 0
-		}
-		cost_to_upgrade = {
-			factor = 0
-		}
-		province_modifiers = {
-		}
-		area_modifier = {
-		}
-		country_modifiers = {	
-		}
-		on_upgraded = {
-		}
-	}
-	tier_1 = {
-		upgrade_time = {
-			months = 120
-		}
-		cost_to_upgrade = {
-			factor = 1500
-		}
-		province_modifiers = {
-			local_development_cost = -0.1
-			local_sailors_modifier = 0.1
-			local_regiment_cost = -0.1
-		}
-		area_modifier = {
-		}
-		country_modifiers = {
-			global_sailors_modifier = 0.1
-			allowed_marine_fraction = 0.1
-		}
-		on_upgraded = {
-			owner = {
-				add_country_modifier = {
-					name = karrsk_marin_one
-					duration = -1
-				}
-			}
-		}
-	}
-	tier_2 = {
-		upgrade_time = {
-			months = 240
-		}
-		cost_to_upgrade = {
-			factor = 3000
-		}
-		province_modifiers = {
-			local_development_cost = -0.15
-			local_sailors_modifier = 0.20
-			local_regiment_cost = -0.2
-		}
-		area_modifier = {
-			local_sailors_modifier = 0.05
-		}
-		country_modifiers = {
-			global_sailors_modifier = 0.2
-			allowed_marine_fraction = 0.10
-		}
-		on_upgraded = {
-			owner = {
-				remove_country_modifier = karrsk_marin_one
-				add_country_modifier = {
-					name = karrsk_marin_two
-					duration = -1
-				}
-			}
-		}
-	}
-	tier_3 = {
-		upgrade_time = {
-			months = 480
-		}
-		cost_to_upgrade = {
-			factor = 6000
-		}
-		province_modifiers = {
-			local_development_cost = -0.20
-			local_sailors_modifier = 0.35
-			local_regiment_cost = -0.3
-		}
-		area_modifier = {
-			local_sailors_modifier = 0.075
-		}
-		country_modifiers = {
-			global_sailors_modifier = 0.3
-			allowed_marine_fraction = 0.20
-		}
-		on_upgraded = {
-			owner = {
-				remove_country_modifier = karrsk_marin_two
-				add_country_modifier = {
-					name = karrsk_marin_three
-					duration = -1
-				}
-			}
-		}
-	}
-}
+# Order_of_the_Tidal_Scales = {
+# 	start = 5898
+# 	date = 01.01.01
+# 	time = {
+# 		months = 0
+# 	}
+# 	build_cost = 0
+# 	can_be_moved = no
+# 	move_days_per_unit_distance = 1
+# 	starting_tier = 0
+# 	type = monument
+# 	build_trigger = {	
+# 	}
+# 	on_built = {		
+# 	}
+# 	on_destroyed = {	
+# 	}
+# 	can_use_modifiers_trigger = {
+# 		development = 30
+# 		OR = {
+# 			owner = {
+# 				OR = {
+# 					culture_group = lizardfolk
+# 				}
+# 			}
+# 			AND = {
+# 				OR = {
+# 					culture_group = lizardfolk
+# 				}
+# 				has_owner_accepted_culture = yes
+# 			}
+# 		}
+# 	}		
+# 	can_upgrade_trigger = {
+# 		development = 30
+# 		OR = {
+# 			owner = {
+# 				OR = {
+# 					culture_group = lizardfolk
+# 				}
+# 			}
+# 			AND = {
+# 				OR = {
+# 					culture_group = lizardfolk
+# 				}
+# 				has_owner_accepted_culture = yes
+# 			}
+# 		}
+# 	}		
+# 	keep_trigger = {
+# 	}
+# 	tier_0 = {
+# 		upgrade_time = {
+# 			months = 0
+# 		}
+# 		cost_to_upgrade = {
+# 			factor = 0
+# 		}
+# 		province_modifiers = {
+# 		}
+# 		area_modifier = {
+# 		}
+# 		country_modifiers = {	
+# 		}
+# 		on_upgraded = {
+# 		}
+# 	}
+# 	tier_1 = {
+# 		upgrade_time = {
+# 			months = 120
+# 		}
+# 		cost_to_upgrade = {
+# 			factor = 1500
+# 		}
+# 		province_modifiers = {
+# 			local_development_cost = -0.1
+# 			local_sailors_modifier = 0.1
+# 			local_regiment_cost = -0.1
+# 		}
+# 		area_modifier = {
+# 		}
+# 		country_modifiers = {
+# 			global_sailors_modifier = 0.1
+# 			allowed_marine_fraction = 0.1
+# 		}
+# 		on_upgraded = {
+# 			owner = {
+# 				add_country_modifier = {
+# 					name = karrsk_marin_one
+# 					duration = -1
+# 				}
+# 			}
+# 		}
+# 	}
+# 	tier_2 = {
+# 		upgrade_time = {
+# 			months = 240
+# 		}
+# 		cost_to_upgrade = {
+# 			factor = 3000
+# 		}
+# 		province_modifiers = {
+# 			local_development_cost = -0.15
+# 			local_sailors_modifier = 0.20
+# 			local_regiment_cost = -0.2
+# 		}
+# 		area_modifier = {
+# 			local_sailors_modifier = 0.05
+# 		}
+# 		country_modifiers = {
+# 			global_sailors_modifier = 0.2
+# 			allowed_marine_fraction = 0.10
+# 		}
+# 		on_upgraded = {
+# 			owner = {
+# 				remove_country_modifier = karrsk_marin_one
+# 				add_country_modifier = {
+# 					name = karrsk_marin_two
+# 					duration = -1
+# 				}
+# 			}
+# 		}
+# 	}
+# 	tier_3 = {
+# 		upgrade_time = {
+# 			months = 480
+# 		}
+# 		cost_to_upgrade = {
+# 			factor = 6000
+# 		}
+# 		province_modifiers = {
+# 			local_development_cost = -0.20
+# 			local_sailors_modifier = 0.35
+# 			local_regiment_cost = -0.3
+# 		}
+# 		area_modifier = {
+# 			local_sailors_modifier = 0.075
+# 		}
+# 		country_modifiers = {
+# 			global_sailors_modifier = 0.3
+# 			allowed_marine_fraction = 0.20
+# 		}
+# 		on_upgraded = {
+# 			owner = {
+# 				remove_country_modifier = karrsk_marin_two
+# 				add_country_modifier = {
+# 					name = karrsk_marin_three
+# 					duration = -1
+# 				}
+# 			}
+# 		}
+# 	}
+# }
 #Golcora gnoll gold mines
 gnoll_gold_mines = {
 	start = 479
@@ -3086,7 +3101,7 @@ gnoll_gold_mines = {
 			trade_goods_size = 4
 		}
 		country_modifiers = {
-			production_efficiency = 0.15
+			production_efficiency = 0.1
 		}
 		on_upgraded = {
 			inflation = 10
@@ -3096,3 +3111,1613 @@ gnoll_gold_mines = {
 		}
 	}
 }
+#Castan II monument
+castan2_monument = {
+	start = 479
+	date = 01.01.01
+	time = {
+		months = 120
+	}
+	build_cost = 1000
+	can_be_moved = no
+	move_days_per_unit_distance = 1
+	starting_tier = 0
+	type = monument
+	build_trigger = {
+		
+	}
+	on_built = {		
+	}
+	on_destroyed = {	
+	}
+	can_use_modifiers_trigger = {
+		owner = {
+			culture_is_human = yes
+		}
+	}		
+	can_upgrade_trigger = {
+		owner = {
+			culture_is_human = yes
+		}
+	}		
+	keep_trigger = {
+	}
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+		cost_to_upgrade = {
+			factor = 0
+		}
+		province_modifiers = {
+		}
+		area_modifier = {
+		}
+		country_modifiers = {	
+		}
+		on_upgraded = {
+		}
+	}
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+		cost_to_upgrade = {
+			factor = 1500
+		}
+		province_modifiers = {
+			local_development_cost = -0.05
+			province_trade_power_value = 5
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+			culture_conversion_cost = -0.1
+			culture_conversion_time = -0.1
+		}
+		on_upgraded = {
+		}
+	}
+	tier_2 = {
+		upgrade_time = {
+			months = 240
+		}
+		cost_to_upgrade = {
+			factor = 3000
+		}
+		province_modifiers = {
+            local_development_cost = -0.1
+			province_trade_power_value = 10
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+			culture_conversion_cost = -0.15
+			culture_conversion_time = -0.2
+		}
+		on_upgraded = {
+			479 = { 
+				change_culture = castanorian
+			}
+		}
+	}
+	tier_3 = {
+		upgrade_time = {
+			months = 480
+		}
+		cost_to_upgrade = {
+			factor = 6000
+		}
+		province_modifiers = {
+        	local_development_cost = -0.15
+			province_trade_power_value = 20
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+			culture_conversion_cost = -0.2
+			culture_conversion_time = -0.33
+		}
+		on_upgraded = {
+			custom_tooltip = castan2mon_tt
+			owner = {
+				set_country_flag = monu_castan
+			}
+		}
+	}
+}
+#Prison adeena 
+adeena_monument = {  #Крч основа - первый уровень дает сословие, второй дет бонус привилегии, трейтий дает механику на скалирование приколов от рабов. как то так
+	start = 6009
+	date = 01.01.01
+	time = {
+		months = 120
+	}
+	build_cost = 1000
+	can_be_moved = no
+	move_days_per_unit_distance = 1
+	starting_tier = 0
+	type = monument
+	build_trigger = {
+		
+	}
+	on_built = {		
+	}
+	on_destroyed = {	
+	}
+	can_use_modifiers_trigger = {
+	}		
+	can_upgrade_trigger = {
+	}		
+	keep_trigger = {
+	}
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+		cost_to_upgrade = {
+			factor = 0
+		}
+		province_modifiers = {
+		}
+		area_modifier = {
+		}
+		country_modifiers = {	
+		}
+		on_upgraded = {
+		}
+	}
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+		cost_to_upgrade = {
+			factor = 1500
+		}
+		province_modifiers = {
+			local_governing_cost = -0.1
+			min_local_autonomy = 10
+			local_manpower = 10
+			local_sailors = 1000
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+			allowed_marine_fraction = 0.05
+			global_sailors_modifier = 0.05
+			harsh_treatment_cost = -0.5
+		}
+		on_upgraded = {
+			custom_tooltip = adeena_estate_unlock_mon_tt
+			owner = {
+				set_country_flag = jaddika
+				set_country_flag = adeena_mon_1
+			}
+		}
+	}
+	tier_2 = {
+		upgrade_time = {
+			months = 240
+		}
+		cost_to_upgrade = {
+			factor = 3000
+		}
+		province_modifiers = {
+			local_governing_cost = -0.2
+			min_local_autonomy = 15
+			local_manpower = 15
+			local_sailors = 1500
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+			allowed_marine_fraction = 0.075
+			global_sailors_modifier = 0.075
+			global_unrest = -1
+			harsh_treatment_cost = -0.1
+		}
+		on_upgraded = {
+			custom_tooltip = adeena_strict_drilling_buff_mon_tt
+			owner = {
+				set_country_flag = adeena_mon_2
+			}
+		}
+	}
+	tier_3 = {
+		upgrade_time = {
+			months = 480
+		}
+		cost_to_upgrade = {
+			factor = 6000
+		}
+		province_modifiers = {
+			local_governing_cost = -0.3
+			min_local_autonomy = 20
+			local_manpower = 20
+			local_sailors = 2000
+		}
+		area_modifier = {
+			local_manpower = 5
+			local_sailors = 5
+		}
+		country_modifiers = {
+			allowed_marine_fraction = 0.1
+			global_sailors_modifier = 0.1
+			global_unrest = -2
+			harsh_treatment_cost = -0.2
+		}
+		on_upgraded = {
+			custom_tooltip = adeen_monument_tier_3_tt
+			owner = {
+				set_country_flag = adeena_mon_3				
+			}
+		}
+	}
+}
+#The Great Library of Hasri Akun
+baashi_libr = {  #крч идея в том что бы сделать шутки с мерфолками воооооот. Тут будет тема что за каждую прову с мерфолками -стоимость идеи. Кап 15 за 5 провинции
+	start = 6679	
+	date = 01.01.01
+	time = {
+		months = 120
+	}
+	build_cost = 1000
+	can_be_moved = no
+	move_days_per_unit_distance = 1
+	starting_tier = 0
+	type = monument
+	build_trigger = {
+		
+	}
+	on_built = {		
+	}
+	on_destroyed = {	
+	}
+	can_use_modifiers_trigger = {
+		OR = {
+			owner = {
+				OR = {
+					culture_group = baashidi
+				}
+			}
+			AND = {
+				OR = {
+					culture_group = baashidi
+				}
+				has_owner_accepted_culture = yes
+			}
+		}
+	}		
+	can_upgrade_trigger = {
+		OR = {
+			owner = {
+				OR = {
+					culture_group = baashidi
+				}
+			}
+			AND = {
+				OR = {
+					culture_group = baashidi
+				}
+				has_owner_accepted_culture = yes
+			}
+		}
+	}		
+	keep_trigger = {
+	}
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+		cost_to_upgrade = {
+			factor = 0
+		}
+		province_modifiers = {
+		}
+		area_modifier = {
+		}
+		country_modifiers = {	
+		}
+		on_upgraded = {
+		}
+	}
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+		cost_to_upgrade = {
+			factor = 1500
+		}
+		province_modifiers = {
+			institution_growth = 5
+			local_institution_spread = 0.1
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+			adm_tech_cost_modifier = -0.05
+			dip_tech_cost_modifier = -0.05
+			prestige = 0.5
+		}
+		on_upgraded = {
+			6679 = {
+				merfolk_spawn_modifier = yes
+			}
+		}
+	}
+	tier_2 = {
+		upgrade_time = {
+			months = 240
+		}
+		cost_to_upgrade = {
+			factor = 3000
+		}
+		province_modifiers = {
+			institution_growth = 7.5
+			local_institution_spread = 0.15
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+			adm_tech_cost_modifier = -0.075
+			dip_tech_cost_modifier = -0.075
+			prestige = 0.75
+		}
+		on_upgraded = {
+			owner = {
+				merfolk_add_opinion_effect_large = yes
+			}
+		}
+	}
+	tier_3 = {
+		upgrade_time = {
+			months = 480
+		}
+		cost_to_upgrade = {
+			factor = 6000
+		}
+		province_modifiers = {
+			institution_growth = 10
+			local_institution_spread = 0.25
+		}
+		area_modifier = {
+			institution_growth = 3
+		}
+		country_modifiers = {
+			adm_tech_cost_modifier = -0.1
+			dip_tech_cost_modifier = -0.1
+			prestige = 1
+		}
+		on_upgraded = {
+			custom_tooltip = hasri_akun_library_mechanic_tooltip
+			owner = {
+				set_country_flag = has_hasri_akun_library_t3
+			}
+		}
+	}
+}
+
+baash_maru = {  #крч идея в том что бы сделать шутки с мерфолками воооооот. Тут будет тема что провинции с мерфолками будут давать больше бонусов (такой же какой дает сам монумент но на увроень ниже)
+	start = 6678	
+	date = 01.01.01
+	time = {
+		months = 120
+	}
+	build_cost = 1000
+	can_be_moved = no
+	move_days_per_unit_distance = 1
+	starting_tier = 0
+	type = monument
+	build_trigger = {
+		
+	}
+	on_built = {		
+	}
+	on_destroyed = {	
+	}
+	can_use_modifiers_trigger = {
+		OR = {
+			owner = {
+				OR = {
+					culture_group = baashidi
+				}
+			}
+			AND = {
+				OR = {
+					culture_group = baashidi
+				}
+				has_owner_accepted_culture = yes
+			}
+		}
+		has_country_flag = merfolk_opinion_allied
+	}		
+	can_upgrade_trigger = {
+	}		
+	keep_trigger = {
+	}
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+		cost_to_upgrade = {
+			factor = 0
+		}
+		province_modifiers = {
+		}
+		area_modifier = {
+		}
+		country_modifiers = {	
+		}
+		on_upgraded = {
+		}
+	}
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+		cost_to_upgrade = {
+			factor = 1500
+		}
+		province_modifiers = {
+			local_development_cost = -0.1
+			local_prosperity_growth = 0.1
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+			monthly_splendor = 0.5
+			legitimacy = 0.1
+			republican_tradition = 0.05
+			devotion = 0.1
+		}
+		on_upgraded = {
+			6678 = {
+				merfolk_spawn_modifier = yes
+			}
+			owner = {
+				merfolk_add_opinion_effect_large = yes
+			}
+		}
+	}
+	tier_2 = {
+		upgrade_time = {
+			months = 240
+		}
+		cost_to_upgrade = {
+			factor = 3000
+		}
+		province_modifiers = {
+			local_development_cost = -0.15
+			local_prosperity_growth = 0.15
+			province_trade_power_value = 5
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+			monthly_splendor = 1
+			legitimacy = 0.3
+			republican_tradition = 0.1
+			devotion = 0.3
+			global_prosperity_growth = 0.1
+		}
+		on_upgraded = {
+			owner = {
+				merfolk_add_opinion_effect_large = yes
+				every_owned_province = { 
+					limit = { has_province_modifier = offcoast_merfolk_allied } 
+					add_province_modifier = {
+						name = baash_maru_2_mod
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+	tier_3 = {
+		upgrade_time = {
+			months = 480
+		}
+		cost_to_upgrade = {
+			factor = 6000
+		}
+		province_modifiers = {
+			local_development_cost = -0.2
+			local_prosperity_growth = 0.2
+			province_trade_power_value = 10
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+			monthly_splendor = 2
+			legitimacy = 0.5
+			republican_tradition = 0.2
+			devotion = 0.5
+			global_prosperity_growth = 0.25
+		}
+		on_upgraded = {
+			owner = {
+				merfolk_add_opinion_effect_large = yes
+				every_owned_province = { 
+					limit = { has_province_modifier = offcoast_merfolk_allied } 
+					remove_province_modifier = baash_maru_2_mod
+					add_province_modifier = {
+						name = baash_maru_3_mod
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+}
+
+baashi_uba_acad = {  #крч идея в том что бы сделать шутки с мерфолками воооооот. Тут будет тема что за каждую прову с мерфолками -стоимость идеи. Кап 15 за 5 провинции
+	start = 6021	
+	date = 01.01.01
+	time = {
+		months = 120
+	}
+	build_cost = 1000
+	can_be_moved = no
+	move_days_per_unit_distance = 1
+	starting_tier = 0
+	type = monument
+	build_trigger = {
+		
+	}
+	on_built = {		
+	}
+	on_destroyed = {	
+	}
+	can_use_modifiers_trigger = {
+		OR = {
+			owner = {
+				OR = {
+					culture_group = baashidi
+				}
+			}
+			AND = {
+				OR = {
+					culture_group = baashidi
+				}
+				has_owner_accepted_culture = yes
+			}
+		}
+	}		
+	can_upgrade_trigger = {
+		OR = {
+			owner = {
+				OR = {
+					culture_group = baashidi
+				}
+			}
+			AND = {
+				OR = {
+					culture_group = baashidi
+				}
+				has_owner_accepted_culture = yes
+			}
+		}
+	}		
+	keep_trigger = {
+	}
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+		cost_to_upgrade = {
+			factor = 0
+		}
+		province_modifiers = {
+		}
+		area_modifier = {
+		}
+		country_modifiers = {	
+		}
+		on_upgraded = {
+		}
+	}
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+		cost_to_upgrade = {
+			factor = 1500
+		}
+		province_modifiers = {
+			local_tax_modifier = 0.1
+			local_build_time = -0.1
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+			improve_relation_modifier = 0.1
+			power_projection_from_insults = 0.5
+		}
+		on_upgraded = {
+			6677 = {
+				add_building = courthouse
+			}
+		}
+	}
+	tier_2 = {
+		upgrade_time = {
+			months = 240
+		}
+		cost_to_upgrade = {
+			factor = 3000
+		}
+		province_modifiers = {
+			local_tax_modifier = 0.2
+			local_build_time = -0.15
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+			improve_relation_modifier = 0.2
+			power_projection_from_insults = 1
+		}
+		on_upgraded = {
+			6677 = {
+				add_building = state_house
+			}
+		}
+	}
+	tier_3 = {
+		upgrade_time = {
+			months = 480
+		}
+		cost_to_upgrade = {
+			factor = 6000
+		}
+		province_modifiers = {
+			local_tax_modifier = 0.33
+			local_build_cost = -0.1
+			local_build_time = -0.25
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+			improve_relation_modifier = 0.3
+			power_projection_from_insults = 1.5
+			monarch_diplomatic_power = 1
+			candidate_random_bonus = 1
+		}
+		on_upgraded = {
+			6677 = {
+				add_building = university
+			}
+		}
+	}
+}
+
+baashi_hisguleh = {  #крч идея в том что бы сделать шутки с мерфолками воооооот. Тут будет тема что за каждую прову с мерфолками -стоимость идеи. Кап 15 за 5 провинции
+	start = 6052	
+	date = 01.01.01
+	time = {
+		months = 120
+	}
+	build_cost = 1000
+	can_be_moved = no
+	move_days_per_unit_distance = 1
+	starting_tier = 0
+	type = monument
+	build_trigger = {
+		
+	}
+	on_built = {		
+	}
+	on_destroyed = {	
+	}
+	can_use_modifiers_trigger = {
+		OR = {
+			owner = {
+				OR = {
+					culture_group = baashidi
+				}
+			}
+			AND = {
+				OR = {
+					culture_group = baashidi
+				}
+				has_owner_accepted_culture = yes
+			}
+		}
+	}		
+	can_upgrade_trigger = {
+		OR = {
+			owner = {
+				OR = {
+					culture_group = baashidi
+				}
+			}
+			AND = {
+				OR = {
+					culture_group = baashidi
+				}
+				has_owner_accepted_culture = yes
+			}
+		}
+	}		
+	keep_trigger = {
+	}
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+		cost_to_upgrade = {
+			factor = 0
+		}
+		province_modifiers = {
+		}
+		area_modifier = {
+		}
+		country_modifiers = {	
+		}
+		on_upgraded = {
+		}
+	}
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+		cost_to_upgrade = {
+			factor = 1500
+		}
+		province_modifiers = {
+			local_defensiveness = 0.15
+			local_fort_maintenance_modifier = -0.15
+			fort_level = 1
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+			war_exhaustion = -0.03
+			reserves_organisation = 0.1
+		}
+		on_upgraded = {
+		}
+	}
+	tier_2 = {
+		upgrade_time = {
+			months = 240
+		}
+		cost_to_upgrade = {
+			factor = 3000
+		}
+		province_modifiers = {
+			local_defensiveness = 0.25
+			local_fort_maintenance_modifier = -0.25
+			hostile_attrition = 1
+			max_hostile_attrition = 1
+			fort_level = 2
+		}
+		area_modifier = {
+			local_defensiveness = 0.15
+			local_fort_maintenance_modifier = -0.15
+		}
+		country_modifiers = {
+			morale_damage_received = -0.05
+			war_exhaustion = -0.07
+			reserves_organisation = 0.15
+		}
+		on_upgraded = {
+		}
+	}
+	tier_3 = {
+		upgrade_time = {
+			months = 480
+		}
+		cost_to_upgrade = {
+			factor = 6000
+		}
+		province_modifiers = {
+			local_defensiveness = 0.33
+			local_fort_maintenance_modifier = -0.33
+			hostile_attrition = 3
+			max_hostile_attrition = 3
+			fort_level = 3
+		}
+		area_modifier = {
+			local_defensiveness = 0.25
+			local_fort_maintenance_modifier = -0.25
+			hostile_attrition = 1
+			max_hostile_attrition = 1
+		}
+		country_modifiers = {
+			morale_damage_received = -0.1
+			war_exhaustion = -0.1
+			reserves_organisation = 0.20
+		}
+		on_upgraded = {
+		}
+	}
+}
+
+baashi_uva_clr_house = {   #Сделать сюда кондишинл на то что если знаком с каннорцами то +бонуска)))
+	start = 6677	
+	date = 01.01.01
+	time = {
+		months = 120
+	}
+	build_cost = 1000
+	can_be_moved = no
+	move_days_per_unit_distance = 1
+	starting_tier = 0
+	type = monument
+	build_trigger = {
+		
+	}
+	on_built = {		
+	}
+	on_destroyed = {	
+	}
+	can_use_modifiers_trigger = {
+		OR = {
+			owner = {
+				OR = {
+					culture_group = baashidi
+				}
+			}
+			AND = {
+				OR = {
+					culture_group = baashidi
+				}
+				has_owner_accepted_culture = yes
+			}
+		}
+	}		
+	can_upgrade_trigger = {
+		OR = {
+			owner = {
+				OR = {
+					culture_group = baashidi
+				}
+			}
+			AND = {
+				OR = {
+					culture_group = baashidi
+				}
+				has_owner_accepted_culture = yes
+			}
+		}
+	}		
+	keep_trigger = {
+	}
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+		cost_to_upgrade = {
+			factor = 0
+		}
+		province_modifiers = {
+		}
+		area_modifier = {
+		}
+		country_modifiers = {	
+		}
+		on_upgraded = {
+		}
+	}
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+		cost_to_upgrade = {
+			factor = 1500
+		}
+		province_modifiers = {
+			local_tax_modifier = 0.15
+			local_governing_cost = -0.1
+			local_development_cost = -0.1
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+			inflation_action_cost = -0.15
+			inflation_reduction = 0.05
+		}
+		on_upgraded = {
+		}
+	}
+	tier_2 = {
+		upgrade_time = {
+			months = 240
+		}
+		cost_to_upgrade = {
+			factor = 3000
+		}
+		province_modifiers = {
+			local_tax_modifier = 0.25
+			local_governing_cost = -0.2
+			local_development_cost = -0.2
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+			interest = -0.5
+			inflation_action_cost = -0.25
+			inflation_reduction = 0.1
+		}
+		on_upgraded = {
+		}
+	}
+	tier_3 = {
+		upgrade_time = {
+			months = 480
+		}
+		cost_to_upgrade = {
+			factor = 6000
+		}
+		province_modifiers = {
+			local_tax_modifier = 0.35
+			local_governing_cost = -0.3
+			local_development_cost = -0.3
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+			interest = -1
+			inflation_action_cost = -0.33
+			inflation_reduction = 0.2
+		}
+		conditional_modifier = {
+			# tooltip_potential = {
+			# 	owner = { has_discovered_region = cannor_region }
+			# }
+            trigger = { 
+                owner = {
+                    OR = {
+                        any_known_country = {
+                            technology_group = tech_cannorian
+                        }
+                        any_neighbor_country = {
+                            technology_group = tech_cannorian
+                        }
+                    }
+                } 
+            }
+            modifier = { 
+                interest = -0.5      
+                tax_income = 144    
+            }
+        }
+		on_upgraded = {
+		}
+	}
+}
+
+dagmender_city = {   #Сделать сюда кондишинл на то что если знаком с каннорцами то +бонуска)))
+	start = 5505	
+	date = 01.01.01
+	time = {
+		months = 120
+	}
+	build_cost = 1000
+	can_be_moved = no
+	move_days_per_unit_distance = 1
+	starting_tier = 0
+	type = monument
+	build_trigger = {
+		
+	}
+	on_built = {		
+	}
+	on_destroyed = {	
+	}
+	can_use_modifiers_trigger = {
+	}		
+	can_upgrade_trigger = {
+	}		
+	keep_trigger = {
+	}
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+		cost_to_upgrade = {
+			factor = 0
+		}
+		province_modifiers = {
+		}
+		area_modifier = {
+		}
+		country_modifiers = {	
+		}
+		on_upgraded = {
+		}
+	}
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+		cost_to_upgrade = {
+			factor = 1500
+		}
+		province_modifiers = {
+			province_trade_power_modifier = 0.15
+			province_trade_power_value = 5
+			local_development_cost = -0.1
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+			trade_company_investment_cost = -0.15
+			min_autonomy_in_territories = -0.05
+			trade_steering = 0.075
+		}
+		on_upgraded = {
+		}
+	}
+	tier_2 = {
+		upgrade_time = {
+			months = 240
+		}
+		cost_to_upgrade = {
+			factor = 3000
+		}
+		province_modifiers = {
+			province_trade_power_modifier = 0.25
+			province_trade_power_value = 10
+			local_development_cost = -0.2
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+			trade_company_investment_cost = -0.25
+			min_autonomy_in_territories = -0.075
+			trade_steering = 0.15
+		}
+		on_upgraded = {
+		}
+	}
+	tier_3 = {
+		upgrade_time = {
+			months = 480
+		}
+		cost_to_upgrade = {
+			factor = 6000
+		}
+		province_modifiers = {
+			province_trade_power_modifier = 0.33
+			province_trade_power_value = 15
+			local_development_cost = -0.3
+		}
+		area_modifier = {
+			province_trade_power_modifier = 0.1
+			province_trade_power_value = 5
+			local_development_cost = -0.1
+		}
+		country_modifiers = {
+			trade_company_investment_cost = -0.33
+			min_autonomy_in_territories = -0.1
+			trade_steering = 0.25
+		}
+		on_upgraded = {
+			custom_tooltip = dagmender_city_tier_3_custom_tooltip
+			owner = {
+				every_owned_province = {
+					limit = {
+						OR = {
+							province_has_center_of_trade_of_level = 1
+							has_river_estuary_trigger = yes
+						}
+					}
+					add_province_modifier = {
+						name = dagmender_boosted_cot_mod
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+}
+
+lone_tower = {   
+	start = 5714	
+	date = 01.01.01
+	time = {
+		months = 120
+	}
+	build_cost = 1000
+	can_be_moved = no
+	move_days_per_unit_distance = 1
+	starting_tier = 1
+	type = monument
+	build_trigger = {
+		
+	}
+	on_built = {		
+	}
+	on_destroyed = {	
+	}
+	can_use_modifiers_trigger = {
+	}		
+	can_upgrade_trigger = {
+	}		
+	keep_trigger = {
+	}
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+		cost_to_upgrade = {
+			factor = 0
+		}
+		province_modifiers = {
+		}
+		area_modifier = {
+		}
+		country_modifiers = {	
+		}
+		on_upgraded = {
+		}
+	}
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+		cost_to_upgrade = {
+			factor = 1500
+		}
+		province_modifiers = {
+			hostile_fleet_attrition = 2
+			defensiveness = 0.15
+			local_garrison_size = 0.20
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+			monarch_lifespan = 0.15
+			stability_cost_modifier = -0.1
+		}
+		on_upgraded = {
+		}
+	}
+	tier_2 = {
+		upgrade_time = {
+			months = 240
+		}
+		cost_to_upgrade = {
+			factor = 3000
+		}
+		province_modifiers = {
+			hostile_fleet_attrition = 3.5
+			defensiveness = 0.25
+			local_garrison_size = 0.33
+			blockade_force_required = 0.25
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+			monarch_lifespan = 0.25
+			stability_cost_modifier = -0.2
+			no_stability_loss_on_monarch_death = yes
+		}
+		on_upgraded = {
+			5714 = {
+				add_province_modifier = {
+					name = ananoma_standart
+					duration = -1
+				}
+			}
+		}
+	}
+	tier_3 = {
+		upgrade_time = {
+			months = 480
+		}
+		cost_to_upgrade = {
+			factor = 6000
+		}
+		province_modifiers = {
+			hostile_fleet_attrition = 5
+			defensiveness = 0.33
+			local_garrison_size = 0.45
+			blockade_force_required = 0.5
+		}
+		area_modifier = {
+			province_trade_power_modifier = 0.1
+			province_trade_power_value = 5
+			local_development_cost = -0.1
+		}
+		country_modifiers = {
+			monarch_lifespan = 0.33
+			stability_cost_modifier = -0.33
+			no_stability_loss_on_monarch_death = yes
+		}
+		on_upgraded = {
+			5714 = {
+				remove_province_modifier = ananoma_standart
+				add_province_modifier = {
+					name = ananoma_improved
+					duration = -1
+				}
+			}
+		}
+	}
+}
+
+baash_ardim_karast = {   
+	start = 6063	
+	date = 01.01.01
+	time = {
+		months = 120
+	}
+	build_cost = 1000
+	can_be_moved = no
+	move_days_per_unit_distance = 1
+	starting_tier = 0
+	type = monument
+	build_trigger = {
+		
+	}
+	on_built = {		
+	}
+	on_destroyed = {	
+	}
+	can_use_modifiers_trigger = {
+	}		
+	can_upgrade_trigger = {
+	}		
+	keep_trigger = {
+	}
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+		cost_to_upgrade = {
+			factor = 0
+		}
+		province_modifiers = {
+		}
+		area_modifier = {
+		}
+		country_modifiers = {	
+		}
+		on_upgraded = {
+		}
+	}
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+		cost_to_upgrade = {
+			factor = 1500
+		}
+		province_modifiers = {
+			local_development_cost = -0.1
+			trade_goods_size = 1
+			local_prosperity_growth = 0.1
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+			national_focus_years = -3
+			expand_administration_cost = -0.2
+			expand_infrastructure_cost_modifier = -0.25
+		}
+		on_upgraded = {
+		}
+	}
+	tier_2 = {
+		upgrade_time = {
+			months = 240
+		}
+		cost_to_upgrade = {
+			factor = 3000
+		}
+		province_modifiers = {
+			local_development_cost = -0.2
+			trade_goods_size = 3
+			local_prosperity_growth = 0.15
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+			national_focus_years = -5
+			expand_administration_cost = -0.35
+			expand_infrastructure_cost_modifier = -0.33
+		}
+		on_upgraded = {
+			custom_tooltip = ardim_karast_tier_2_unlock_tt
+		}
+	}
+	tier_3 = {
+		upgrade_time = {
+			months = 480
+		}
+		cost_to_upgrade = {
+			factor = 6000
+		}
+		province_modifiers = {
+			local_development_cost = -0.33
+			trade_goods_size = 5
+			local_prosperity_growth = 0.15
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+			national_focus_years = -10
+			expand_administration_cost = -0.5
+			expand_infrastructure_cost_modifier = -0.5
+		}
+		on_upgraded = {
+			6063 = {
+				change_trade_goods = precursor_relics
+				set_province_flag = permanent_precursor_relics
+			}
+			custom_tooltip = ardim_karast_tier_3_unlock_tt
+		}
+	}
+}
+
+baash_gavahizi = {   
+	start = 6675	
+	date = 01.01.01
+	time = {
+		months = 120
+	}
+	build_cost = 1000
+	can_be_moved = no
+	move_days_per_unit_distance = 1
+	starting_tier = 0
+	type = monument
+	build_trigger = {
+		
+	}
+	on_built = {		
+	}
+	on_destroyed = {	
+	}
+	can_use_modifiers_trigger = {
+	}		
+	can_upgrade_trigger = {
+	}		
+	keep_trigger = {
+	}
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+		cost_to_upgrade = {
+			factor = 0
+		}
+		province_modifiers = {
+		}
+		area_modifier = {
+		}
+		country_modifiers = {	
+		}
+		on_upgraded = {
+		}
+	}
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+		cost_to_upgrade = {
+			factor = 1500
+		}
+		province_modifiers = {
+			province_trade_power_value = 7.5
+			trade_value_modifier = 0.15
+			local_development_cost = -0.1
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+			light_ship_cost = -0.1
+			light_ship_power = 0.1
+			global_ship_trade_power = 0.1
+		}
+		on_upgraded = {
+		}
+	}
+	tier_2 = {
+		upgrade_time = {
+			months = 240
+		}
+		cost_to_upgrade = {
+			factor = 3000
+		}
+		province_modifiers = {
+			province_trade_power_value = 10
+			trade_value_modifier = 0.25
+			local_development_cost = -0.2
+		}
+		area_modifier = {
+			province_trade_power_value = 2
+			trade_value_modifier = 0.05
+		}
+		country_modifiers = {
+			light_ship_cost = -0.15
+			light_ship_power = 0.1
+			global_ship_trade_power = 0.15
+			has_voc_indiamen = yes
+			allowed_voc_indiamen_fraction = 0.1
+		}
+		on_upgraded = {
+		}
+	}
+	tier_3 = {
+		upgrade_time = {
+			months = 480
+		}
+		cost_to_upgrade = {
+			factor = 6000
+		}
+		province_modifiers = {
+			province_trade_power_value = 15
+			trade_value_modifier = 0.33
+			local_development_cost = -0.33
+		}
+		area_modifier = {
+			province_trade_power_value = 4
+			trade_value_modifier = 0.075
+		}
+		country_modifiers = {
+			light_ship_cost = -0.2
+			light_ship_power = 0.15
+			global_ship_trade_power = 0.2
+			has_voc_indiamen = yes
+			allowed_voc_indiamen_fraction = 0.2
+		}
+		on_upgraded = {
+		}
+	}
+}
+
+#The Grand Haven of Nazhni
+The_Grand_Haven_of_Nazhni = {
+	start = 5941
+	date = 01.01.01
+	time = {
+		months = 0
+	}
+	build_cost = 0
+	can_be_moved = no
+	move_days_per_unit_distance = 1
+	starting_tier = 0
+	type = monument
+	build_trigger = {	
+	}
+	on_built = {		
+	}
+	on_destroyed = {	
+	}
+	can_use_modifiers_trigger = {
+		development = 20
+		OR = {
+			owner = {
+				OR = {
+					culture_group = lizardfolk
+				}
+			}
+			AND = {
+				OR = {
+					culture_group = lizardfolk
+				}
+				has_owner_accepted_culture = yes
+			}
+		}
+	}		
+	can_upgrade_trigger = {
+		development = 20
+		OR = {
+			owner = {
+				OR = {
+					culture_group = lizardfolk
+				}
+			}
+			AND = {
+				OR = {
+					culture_group = lizardfolk
+				}
+				has_owner_accepted_culture = yes
+			}
+		}
+	}	
+	keep_trigger = {
+	}
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+		cost_to_upgrade = {
+			factor = 0
+		}
+		province_modifiers = {
+		}
+		area_modifier = {
+		}
+		country_modifiers = {	
+		}
+		on_upgraded = {
+		}
+	}
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+		cost_to_upgrade = {
+			factor = 1500
+		}
+		province_modifiers = {
+			local_development_cost = -0.1
+			local_ship_cost = -0.1
+			local_ship_repair = 0.15
+			ship_recruit_speed = -0.1
+			province_trade_power_modifier = 0.33
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+		    placed_merchant_power = 10
+			spy_offence = 0.1
+		}
+		on_upgraded = {
+		}
+	}
+	tier_2 = {
+		upgrade_time = {
+			months = 240
+		}
+		cost_to_upgrade = {
+			factor = 3000
+		}
+		province_modifiers = {
+			local_development_cost = -0.2
+			local_ship_cost = -0.15
+			local_ship_repair = 0.25
+			ship_recruit_speed = -0.2
+			province_trade_power_modifier = 0.5
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+		    placed_merchant_power = 20
+			spy_offence = 0.2
+			embargo_efficiency = 0.25
+		}
+		on_upgraded = {
+		}
+	}
+	tier_3 = {
+		upgrade_time = {
+			months = 480
+		}
+		cost_to_upgrade = {
+			factor = 6000
+		}
+		province_modifiers = {
+			local_development_cost = -0.33
+			local_ship_cost = -0.33
+			local_ship_repair = 0.33
+			ship_recruit_speed = -0.33
+			province_trade_power_modifier = 1
+		}
+		area_modifier = {
+
+		}
+		country_modifiers = {
+		    placed_merchant_power = 25
+			spy_offence = 0.33
+			embargo_efficiency = 0.5
+		}
+		on_upgraded = {
+			custom_tooltip = nazh_trade_pol_tt
+			owner = {
+				set_country_flag = disabled_trading_policy_maximize_profit
+				set_country_flag = disabled_trading_policy_hostile_trading
+				set_country_flag = disabled_trading_policy_improve_inland_routes
+				set_country_flag = disabled_trading_policy_establish_communities
+				set_country_flag = enabled_trading_policy_establish_communities_upgraded
+				set_country_flag = enabled_trading_policy_improve_inland_routes_upgraded
+				set_country_flag = enabled_trading_policy_hostile_trading_upgraded
+				set_country_flag = enabled_trading_policy_maximize_profit_upgraded
+			}
+		}
+	}
+}
+

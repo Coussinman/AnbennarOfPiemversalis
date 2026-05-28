@@ -3,201 +3,34 @@
 # These are here to make it easier for the devs to mod events (also allows smaller adjustment of event effects)
 # All of these either increase or decrease the current tolerance by 5, 10, 15 or 20.
 
-# If you make changes here, please make similar changes to the following scipted_effects/triggers:
-## racial_mil_military_change_tech
-## reset_racial_military_via_administration
-## racial_modifiers.6
-## has_unmatching_military_to_unit
 reset_racial_military_via_administration = {
+	add_country_modifier = {
+		name = restructuring_military
+		duration = 3650
+	}
+
 	if = { # Effects for orcs
-		limit = {
-			has_country_modifier = orcish_administration
-		}
-		add_country_modifier = {
-			name = restructuring_military
-			duration = 3650
-		}
+		limit = { has_country_modifier = orcish_administration }
+
 		add_country_modifier = {
 			name = orcish_military
 			duration = -1
 			hidden = yes
 		}
-		if = {
-			limit = {
-				OR = {
-					capital_scope = {
-						continent = serpentspine
-					}
-					dwarovar_orc_culture_primary = yes
-					AND = {
-						dwarovar_orc_culture_accepted = yes
-						NOT = { culture_group = orcish }
-					}
-				}
-			}
-			change_unit_type = tech_black_orcish
-		}
-		else_if = {
-			limit = {
-				OR = {
-					capital_scope = {
-						continent = asia
-						NOT = { superregion = forbidden_lands_superregion }
-					}
-					primary_culture = brown_orc
-					AND = {
-						accepted_culture = brown_orc
-						NOT = { culture_group = orcish }
-					}
-				}
-			}
-			change_unit_type = tech_east_orcish
-		}
-		else = {
-			change_unit_type = tech_orcish
-		}
+		racial_mil_military_change_to_orcish_units = yes
 	}
 	else_if = { # Effects for humans
-		limit = {
-			has_country_modifier = human_administration
-		}
-		add_country_modifier = {
-			name = restructuring_military
-			duration = 3650
-		}
+		limit = { has_country_modifier = human_administration }
 		add_country_modifier = {
 			name = human_military
 			duration = -1
 			hidden = yes
 		}
-		if = { limit = { capital_scope = { superregion = bulwar_superregion } }
-			change_unit_type = tech_bulwari
-		}
-		else_if = { limit = { capital_scope = { superregion = north_salahad_superregion } }
-			change_unit_type = tech_salahadesi
-		}
-		else_if = { limit = { capital_scope = { superregion = south_salahad_superregion } }
-			change_unit_type = tech_salahadesi
-		}
-		### Not sure if this or the other, there's two versions
-		else_if = {
-			limit = { capital_scope = { superregion = tanib_dajek_superregion } }
-			if = {
-				limit = {
-					OR = {
-						accepted_culture = tanizu
-						accepted_culture = antmvura
-						accepted_culture = kombedak
-						accepted_culture = umsozidak
-						accepted_culture = wakoodak
-					}
-					NOT = { culture_group = inyaswarosa }
-				}
-				change_unit_type = tech_inyaswarosa
-			}
-			else = { change_unit_type = tech_west_sarhaly }
-		}
-
-		### The other
-		# else_if = {
-		# 	limit = { capital_scope = { superregion = tanib_dajek_superregion } }
-		# 	change_unit_type = tech_west_sarhaly
-		# }
-		# else_if = {
-		# 	limit = {
-		# 		capital_scope = { superregion = east_sarhal_superregion }
-		# 	}
-		# 	if = {
-		# 		limit = { 
-		# 			OR = {
-		# 				accepted_culture = tanizu
-		# 				accepted_culture = antmvura
-		# 				accepted_culture = kombedak
-		# 				accepted_culture = umsozidak
-		# 				accepted_culture = wakoodak
-		# 			}
-		# 			NOT = { culture_group = inyaswarosa }
-		# 		}
-		# 		change_unit_type = tech_inyaswarosa
-		# 	}
-		# 	else = { change_unit_type = tech_east_sarhaly }
-		# }
-
-
-		else_if = {
-			limit = {
-				capital_scope = {
-					OR = {
-						superregion = djinnakah_superregion
-						superregion = taneyas_superregion
-					}
-				}
-			}
-			if = {
-				limit = {
-					OR = {
-						accepted_culture = suhratbi
-						accepted_culture = dhebiji
-						accepted_culture = guryadagga
-						accepted_culture = ashamadi
-					}
-					NOT = { culture_group = baashidi }
-				}
-				change_unit_type = tech_baashidi
-			}
-			else = { change_unit_type = tech_south_sarhaly }
-		}
-		else_if = { limit = { capital_scope = { superregion = east_sarhal_superregion } }	#wingren again
-			change_unit_type = tech_east_sarhaly
-		}
-		else_if = { limit = { capital_scope = { superregion = rahen_superregion } }
-			change_unit_type = tech_raheni
-		}
-		else_if = {
-			limit = {
-				OR = {
-					capital_scope = { superregion = yanshen_superregion }
-					capital_scope = { superregion = vimdatrong_superregion }
-				}
-			}
-			change_unit_type = tech_halessi
-		}
-		else_if = { limit = { capital_scope = { superregion = gozengun_superregion } }
-			if = { limit = { primary_culture = shuvuush }
-				change_unit_type = tech_shuvuush
-			}
-			else = {
-				change_unit_type = tech_wastelander
-			}
-		}
-		else_if = { limit = { capital_scope = { superregion = forbidden_lands_superregion } }
-			change_unit_type = tech_triunic
-		}
-		else_if = { limit = { capital_scope = { superregion = gerudia_superregion } }
-			change_unit_type = tech_gerudian
-		}
-		else_if = {
-			limit = {
-				OR = {
-					capital_scope = { superregion = broken_lands_superregion }
-					capital_scope = { superregion = eordand_superregion }
-					capital_scope = { superregion = ynn_superregion }
-				}
-			}
-			change_unit_type = tech_ynnsmen
-		}
-		else = {
-			change_unit_type = tech_cannorian
-		}
+		racial_mil_military_change_to_human_units = yes
 	}
 	else_if = { # Effects for elves
-		limit = {
-			has_country_modifier = elven_administration
-		}
-		add_country_modifier = {
-			name = restructuring_military
-			duration = 3650
-		}
+		limit = { has_country_modifier = elven_administration }
+
 		add_country_modifier = {
 			name = elven_military
 			duration = -1
@@ -209,376 +42,60 @@ reset_racial_military_via_administration = {
 				duration = -1  
 			}
 		}
-		if = {
-			limit = {
-				OR = {
-					capital_scope = { superregion = deepwoods_superregion }
-					primary_culture = wood_elf
-					AND = {
-						accepted_culture = wood_elf
-						NOT = { culture_group = elven }
-					}
-				}
-			}
-			change_unit_type = tech_wood_elf
-		}
-		else_if = {
-			limit = {
-				OR = {
-					primary_culture = sun_elf
-					primary_culture = dawn_elf
-					primary_culture = desert_elf
-					primary_culture = sunrise_elf
-					primary_culture = sunset_elf
-					capital_scope = { continent = asia }
-					capital_scope = { continent = africa }
-					AND = {
-						religion_group = bulwari
-						OR = {
-							capital_scope = { continent = north_america }
-							capital_scope = { continent = south_america }
-						}
-					}
-					AND = {
-						NOT = { culture_group = elven }
-						OR = {
-							accepted_culture = sun_elf
-							accepted_culture = dawn_elf
-							accepted_culture = desert_elf
-							accepted_culture = sunrise_elf
-							accepted_culture = sunset_elf
-						}
-					}
-				}
-			}
-			change_unit_type = tech_east_elven
-		}
-		else = {
-			change_unit_type = tech_elven
-		}
+		racial_mil_military_change_to_elven_units = yes
 	}
 	else_if = { #Effects for half-elves
-		limit = {
-			has_country_modifier = half_elven_administration
-		}
-		add_country_modifier = {
-			name = restructuring_military
-			duration = 3650
-		}
+		limit = { has_country_modifier = half_elven_administration }
+
 		add_country_modifier = {
 			name = half_elven_military
 			duration = -1
 			hidden = yes
 		}
-		if = { limit = { capital_scope = { superregion = bulwar_superregion } }
-			change_unit_type = tech_bulwari
-		}
-		else_if = { limit = { capital_scope = { superregion = north_salahad_superregion } }
-			change_unit_type = tech_salahadesi
-		}
-		else_if = { limit = { capital_scope = { superregion = south_salahad_superregion } }
-			change_unit_type = tech_salahadesi
-		}
-		### Not sure if this or the other, there's two versions
-		else_if = {
-			limit = { capital_scope = { superregion = tanib_dajek_superregion } }
-			if = {
-				limit = {
-					OR = {
-						accepted_culture = tanizu
-						accepted_culture = antmvura
-						accepted_culture = kombedak
-						accepted_culture = umsozidak
-						accepted_culture = wakoodak
-					}
-					NOT = { culture_group = inyaswarosa }
-				}
-				change_unit_type = tech_inyaswarosa
-			}
-			else = { change_unit_type = tech_west_sarhaly }
-		}
-
-		### The other
-		# else_if = {
-		# 	limit = { capital_scope = { superregion = tanib_dajek_superregion } }
-		# 	change_unit_type = tech_west_sarhaly
-		# }
-		# else_if = {
-		# 	limit = {
-		# 		capital_scope = { superregion = east_sarhal_superregion }
-		# 	}
-		# 	if = {
-		# 		limit = { 
-		# 			OR = {
-		# 				accepted_culture = tanizu
-		# 				accepted_culture = antmvura
-		# 				accepted_culture = kombedak
-		# 				accepted_culture = umsozidak
-		# 				accepted_culture = wakoodak
-		# 			}
-		# 			NOT = { culture_group = inyaswarosa }
-		# 		}
-		# 		change_unit_type = tech_inyaswarosa
-		# 	}
-		# 	else = { change_unit_type = tech_east_sarhaly }
-		# }
-
-
-		else_if = {
-			limit = {
-				capital_scope = {
-					OR = {
-						superregion = djinnakah_superregion
-						superregion = taneyas_superregion
-					}
-				}
-			}
-			if = {
-				limit = {
-					OR = {
-						accepted_culture = suhratbi
-						accepted_culture = dhebiji
-						accepted_culture = guryadagga
-						accepted_culture = ashamadi
-					}
-					NOT = { culture_group = baashidi }
-				}
-				change_unit_type = tech_baashidi
-			}
-			else = { change_unit_type = tech_south_sarhaly }
-		}
-		else_if = { limit = { capital_scope = { superregion = east_sarhal_superregion } }	#wingren again
-			change_unit_type = tech_east_sarhaly
-		}
-		else_if = { limit = { capital_scope = { superregion = rahen_superregion } }
-			change_unit_type = tech_raheni
-		}
-		else_if = {
-			limit = {
-				OR = {
-					capital_scope = { superregion = yanshen_superregion }
-					capital_scope = { superregion = vimdatrong_superregion }
-				}
-			}
-			change_unit_type = tech_halessi
-		}
-		else_if = { limit = { capital_scope = { superregion = gozengun_superregion } }
-			if = { limit = { primary_culture = shuvuush }
-				change_unit_type = tech_shuvuush
-			}
-			else = {
-				change_unit_type = tech_wastelander
-			}
-		}
-		else_if = { limit = { capital_scope = { superregion = forbidden_lands_superregion } }
-			change_unit_type = tech_triunic
-		}
-		else_if = { limit = { capital_scope = { superregion = gerudia_superregion } }
-			change_unit_type = tech_gerudian
-		}
-		else_if = {
-			limit = {
-				OR = {
-					capital_scope = { superregion = broken_lands_superregion }
-					capital_scope = { superregion = eordand_superregion }
-					capital_scope = { superregion = ynn_superregion }
-				}
-			}
-			change_unit_type = tech_ynnsmen
-		}
-		else = {
-			change_unit_type = tech_cannorian
-		}
+		racial_mil_military_change_to_half_elven_units = yes
 	}
 	else_if = { # Effects for half-orcs
-		limit = {
-			has_country_modifier = half_orcish_administration
-		}
-		add_country_modifier = {
-			name = restructuring_military
-			duration = 3650
-		}
+		limit = { has_country_modifier = half_orcish_administration }
 		add_country_modifier = {
 			name = half_orcish_military
 			duration = -1
 			hidden = yes
 		}
-		if = {
-			limit = {
-				OR = {
-					capital_scope = { superregion = gerudia_superregion }
-					primary_culture = grombar_half_orc
-					primary_culture = grombar_orc
-					primary_culture = gray_orc
-					AND = {
-						accepted_culture = grombar_half_orc
-						NOT = { culture_is_half_orcish = yes }
-					}
-					AND = {
-						accepted_culture = grombar_orc
-						NOT = { culture_is_half_orcish = yes }
-					}
-					AND = {
-						accepted_culture = gray_orc
-						NOT = { culture_is_half_orcish = yes }
-					}
-				}
-			}
-			change_unit_type = tech_gerudian
-		}
-		else_if = {
-			limit = {
-				capital_scope = {
-					OR = {
-						superregion = rahen_superregion
-						region = xianjie_region
-					}
-				}
-			}
-			change_unit_type = tech_raheni
-		}
-		else = {
-			change_unit_type = tech_cannorian
-		}
+		racial_mil_military_change_to_half_orcish_units = yes
 	}
 	else_if = { # Effects for trolls
-		limit = {
-			has_country_modifier = troll_administration
-		}
-		add_country_modifier = {
-			name = restructuring_military
-			duration = 3650
-		}
+		limit = { has_country_modifier = troll_administration }
+
 		add_country_modifier = {
 			name = troll_military
 			duration = -1
 			hidden = yes
 		}
-		if = {
-			limit = {
-				OR = {
-					# Pick a capital scope
-					# capital_scope = { region = shadow_swamp_region }
-					capital_scope = { superregion = east_sarhal_superregion }
-					primary_culture = swamp_troll
-					AND = {
-						accepted_culture = swamp_troll
-						NOT = { culture_group = giantkind }
-					}
-				}
-			}
-			change_unit_type = tech_swamp_troll
-		}
-		else_if = {
-			limit = {
-				OR = {
-					capital_scope = {
-						continent = asia
-						NOT = { superregion = forbidden_lands_superregion } 
-					}
-					primary_culture = hill_troll
-					AND = {
-						accepted_culture = hill_troll
-						NOT = { culture_group = giantkind }
-					}
-				}
-			}
-			change_unit_type = tech_hill_troll
-        }
-		else = {
-			change_unit_type = tech_northern_troll	#may need custom one
-		}
+		racial_mil_military_change_to_troll_units = yes
 	}
 	else_if = { # Effects for gnolls
-		limit = {
-			has_country_modifier = gnollish_administration
-		}
-		add_country_modifier = {
-			name = restructuring_military
-			duration = 3650
-		}
+		limit = { has_country_modifier = gnollish_administration }
+
 		add_country_modifier = {
 			name = gnollish_military
 			duration = -1
 			hidden = yes
 		}
-		change_unit_type = tech_gnollish
+		racial_mil_military_change_to_gnollish_units = yes
 	}
 	else_if = { # Effects for goblins
-		limit = {
-			has_country_modifier = goblin_administration
-		}
-		add_country_modifier = {
-			name = restructuring_military
-			duration = 3650
-		}
+		limit = { has_country_modifier = goblin_administration }
+
 		add_country_modifier = {
 			name = goblin_military
 			duration = -1
 			hidden = yes
 		}
-		if = {
-			limit = {
-				OR = { #Forest Goblin
-					capital_scope = { superregion = deepwoods_superregion }
-					primary_culture = forest_goblin
-					AND = {
-						accepted_culture = forest_goblin
-						NOT = { culture_group = goblin }
-					}
-				}
-			}
-			change_unit_type = tech_forest_goblin
-		}
-		else_if = {
-			limit = {
-				OR = { #Exodus Goblin
-					capital_scope = { superregion = bulwar_superregion }
-					primary_culture = exodus_goblin
-					AND = {
-						accepted_culture = exodus_goblin
-						NOT = { culture_group = goblin }
-					}
-				}
-			}
-			change_unit_type = tech_exodus_goblin
-		}
-		else_if = {
-			limit = {
-				OR = { #Cave Goblin
-					capital_scope = { continent = serpentspine }
-					dwarovar_goblin_culture_primary = yes
-					AND = {
-						dwarovar_goblin_culture_accepted = yes
-						NOT = { culture_group = goblin }
-					}
-				}
-			}
-			change_unit_type = tech_cave_goblin
-		}
-		else_if = {
-			limit = {
-				capital_scope = {
-					OR = {
-						superregion = east_serpentspine_superregion
-						continent = asia
-					}
-				}
-			}
-			change_unit_type = tech_east_cave_goblin
-		}
-		else = { #Common Goblin (Fallback if all other conditions fail)
-			change_unit_type = tech_goblin
-		}
+		racial_mil_military_change_to_goblin_units = yes
 	}
 	else_if = { # Effects for gnomes
-		limit = {
-			has_country_modifier = gnomish_administration
-		}
-		add_country_modifier = {
-			name = restructuring_military
-			duration = 3650
-		}
+		limit = { has_country_modifier = gnomish_administration }
+
 		add_country_modifier = {
 			name = gnomish_military
 			duration = -1
@@ -589,394 +106,91 @@ reset_racial_military_via_administration = {
 			duration = -1
 			hidden = yes
 		}
-		change_unit_type = tech_gnomish
+		racial_mil_military_change_to_gnomish_units = yes
 	}
 	else_if = { # Effects for dwarves
-		limit = {
-			has_country_modifier = dwarven_administration
-		}
-		add_country_modifier = {
-			name = restructuring_military
-			duration = 3650
-		}
+		limit = { has_country_modifier = dwarven_administration }
+
 		add_country_modifier = {
 			name = dwarven_military
 			duration = -1
 			hidden = yes
 		}
-		if = {
-			limit = {
-				capital_scope = {
-					OR = {
-						superregion = east_serpentspine_superregion
-						continent = asia
-					}
-				}
-			}
-			change_unit_type = tech_east_dwarven
-		}
-		else = {
-			change_unit_type = tech_west_dwarven
-		}
+		racial_mil_military_change_to_dwarven_units = yes
 	}
 	else_if = { # Effects for kobolds
-		limit = {
-			has_country_modifier = kobold_administration
-		}
-		add_country_modifier = {
-			name = restructuring_military
-			duration = 3650
-		}
+		limit = { has_country_modifier = kobold_administration }
+
 		add_country_modifier = {
 			name = kobold_military
 			duration = -1
 			hidden = yes
 		}
-		if = {
-			limit = {
-				OR = {
-					capital_scope = { superregion = yanshen_superregion }
-					capital_scope = { superregion = vimdatrong_superregion }
-					capital_scope = { superregion = gozengun_superregion }
-					capital_scope = { superregion = rahen_superregion }
-					primary_culture = goldscale_kobold
-					primary_culture = dragonfire_kobold
-					AND = {
-						accepted_culture = goldscale_kobold
-						NOT = { culture_group = kobold }
-					}
-					AND = {
-						accepted_culture = dragonfire_kobold
-						NOT = { culture_group = kobold }
-					}
-				}
-			}
-			change_unit_type = tech_east_kobold
-		}
-		else_if = {
-			limit = {
-				capital_scope = { continent = serpentspine }
-			}
-			change_unit_type = tech_darkscale_kobold
-		}
-		else = {
-			change_unit_type = tech_kobold
-		}
+		racial_mil_military_change_to_kobold_units = yes
 	}
 	else_if = { # Effects for ruinborn
-		limit = {
-			has_country_modifier = ruinborn_administration
-		}
-		add_country_modifier = {
-			name = restructuring_military
-			duration = 3650
-		}
+		limit = { has_country_modifier = ruinborn_administration }
+
 		add_country_modifier = {
 			name = ruinborn_military
 			duration = -1
 			hidden = yes
 		}
-		if = {
-			limit = {
-				OR = {
-					capital_scope = { superregion = ynn_superregion }
-					capital_scope = { region = forest_of_the_cursed_ones_region }
-				}
-			}
-			change_unit_type = tech_ynnic
-		}
-		else_if = { limit = { capital_scope = { superregion = eordand_superregion } }
-			change_unit_type = tech_eordand
-		}
-		else_if = {
-			limit = {
-				OR = {
-					culture_group = devandi_ruinborn_elf
-					culture_group = eltibhari_ruinborn_elf
-					capital_scope = { region = chendhya_region }
-				}
-			}
-			change_unit_type = tech_bharbhen
-		}
-		else_if = { limit = { capital_scope = { superregion = kheionai_superregion } }
-			change_unit_type = tech_kheionai
-		}
-		else_if = { limit = { capital_scope = { superregion = taychend_superregion } }
-			change_unit_type = tech_taychendi
-		}
-		else_if = {
-			limit = {
-				OR = {
-					capital_scope = { region = haraf_region }
-					capital_scope = { region = tor_nayyi_region }
-				}
-			}
-			change_unit_type = tech_harafic
-		}
-		else_if = {
-			limit = {
-				OR = {
-					capital_scope = { superregion = broken_lands_superregion }
-					capital_scope = { superregion = ruin_proper_superregion }
-				}
-			}
-			change_unit_type = tech_noruin
-		}
-		else_if = {
-			limit = {
-				OR = {
-					capital_scope = { superregion = effelai_superregion }
-					capital_scope = { region = amadia_region }
-				}
-			}
-			if = {
-				limit = {
-					OR = {
-						culture_group = eltibhari_ruinborn_elf
-						culture_group = devandi_ruinborn_elf
-					}
-				}
-				change_unit_type = tech_bharbhen
-			}
-			else = {
-				change_unit_type = tech_south_aelantiri
-			}
-		}
-		else = {
-			change_unit_type = tech_noruin
-		}
+		racial_mil_military_change_to_ruinborn_units = yes
 	}
 	else_if = { # Effects for harpies
-		limit = {
-			has_country_modifier = harpy_administration
-		}
-		add_country_modifier = {
-			name = restructuring_military
-			duration = 3650
-		}
+		limit = { has_country_modifier = harpy_administration }
+
 		add_country_modifier = {
 			name = harpy_military
 			duration = -1
 			hidden = yes
 		}
-		if = {
-			limit = {
-				OR ={
-					primary_culture = siadunan_harpy
-					AND = {
-						accepted_culture = siadunan_harpy
-						NOT = { culture_group = harpy }
-					}
-				}
-			}
-			change_unit_type = tech_siadunan_harpy
-		}
-		if = {
-			limit = {
-				OR = {
-					capital_scope = { superregion = yanshen_superregion }
-					capital_scope = { superregion = vimdatrong_superregion }
-					capital_scope = { superregion = gozengun_superregion }
-					primary_culture = pezarangi_harpy
-					primary_culture = reishao_harpy
-					AND = {
-						accepted_culture = pezarangi_harpy
-						NOT = { culture_group = harpy }
-					}
-					AND = {
-						accepted_culture = reishao_harpy
-						NOT = { culture_group = harpy }
-					}
-				}
-			}
-			change_unit_type = tech_pezarangi_harpy
-		}
-		else_if = {
-			limit = {
-				OR = {
-					capital_scope = { superregion = north_salahad_superregion }
-					capital_scope = { superregion = tanib_dajek_superregion }
-					capital_scope = { superregion = fangaula_superregion }
-					primary_culture = nzeri_harpy
-					AND = {
-						accepted_culture = nzeri_harpy
-						NOT = { culture_group = harpy }
-					}
-				}
-			}
-			change_unit_type = tech_nzeri_harpy
-		}
-		else_if = {
-			limit = {
-				OR = {
-					capital_scope = { superregion = gozengun_superregion }
-					primary_culture = nuzenapu_harpy
-					AND = {
-						accepted_culture = nuzenapu_harpy
-						NOT = { culture_group = harpy }
-					}
-				}
-			}
-			change_unit_type = tech_nuzenapu_harpy
-		}
-		else = {
-			change_unit_type = tech_firanyan_harpy
-		}
+		racial_mil_military_change_to_harpy_units = yes
 	}
 	else_if = { # Effects for halflings
-		limit = {
-			has_country_modifier = halfling_administration
-		}
-		add_country_modifier = {
-			name = restructuring_military
-			duration = 3650
-		}
+		limit = { has_country_modifier = halfling_administration }
+
 		add_country_modifier = {
 			name = halfling_military
 			duration = -1
 			hidden = yes
 		}
-		if = {
-			limit = {
-				OR = {
-					capital_scope = {
-						superregion = tanib_dajek_superregion
-					}
-					is_vyzemby_primary_culture = yes
-					AND = {
-						OR = {
-							accepted_culture = amezatany
-							accepted_culture = mboala
-							accepted_culture = mazava
-							accepted_culture = fomarati
-							accepted_culture = vyoronsi
-							accepted_culture = zohebidi
-						}
-						NOT = { is_vyzemby_primary_culture = yes }
-					}
-				}
-			}
-			change_unit_type = tech_vyzemby
-		}
-		else = {
-			change_unit_type = tech_halfling	#may need custom one
-		}
+		racial_mil_military_change_to_halfling_units = yes
 	}
 	else_if = { # Effects for ogres
-		limit = {
-			has_country_modifier = ogre_administration
-		}
-		add_country_modifier = {
-			name = restructuring_military
-			duration = 3650
-		}
+		limit = { has_country_modifier = ogre_administration }
+
 		add_country_modifier = {
 			name = ogre_military
 			duration = -1
 			hidden = yes
 		}
-		if = {
-			limit = {
-				OR = {
-					capital_scope = { superregion = yanshen_superregion }
-					capital_scope = { superregion = vimdatrong_superregion }
-					capital_scope = { superregion = rahen_superregion }
-					primary_culture = horned_ogre
-					AND = {
-						accepted_culture = horned_ogre
-						NOT = { culture_group = ogre }
-					}
-				}
-			}
-			change_unit_type = tech_eastern_ogre
-		}
-		else_if = {
-			limit = {
-				capital_scope = { region = nomsyulhan_region }
-			}
-			change_unit_type = tech_soulseeker_ogre
-		}
-		else_if = {
-			limit = { capital_scope = { superregion = fangaula_superregion } }
-			change_unit_type = tech_dunesole_ogre
-		}
-		else = {
-			change_unit_type = tech_ogre	#may need custom one
-		}
-		#No idea if this is meant to be an additional case for "tech_soulseeker_ogre"
-		#There was no effect in "anb_scripted_effects_for_racial_tolerances.txt"
-		# else_if = {
-		# 	limit = {
-		# 		OR = {
-		# 			capital_scope = { superregion = gozengun_superregion }
-		# 			AND = {
-		# 				accepted_culture = soulseeker_ogre
-		# 				NOT = { culture_group = ogre }
-		# 			}
-		# 		}
-		# 	}
-		# }
+		racial_mil_military_change_to_ogre_units = yes
 	}
 	else_if = { # Effects for centaurs
-		limit = {
-			has_country_modifier = centaur_administration
-		}
-		add_country_modifier = {
-			name = restructuring_military
-			duration = 3650
-		}
+		limit = { has_country_modifier = centaur_administration }
+
 		add_country_modifier = {
 			name = centaur_military
 			duration = -1
 			hidden = yes
 		}
-		change_unit_type = tech_centaur
+		racial_mil_military_change_to_centaur_units = yes
 	}
 	else_if = { # Effects for harimari
-		limit = {
-			has_country_modifier = harimari_administration
-		}
-		add_country_modifier = {
-			name = restructuring_military
-			duration = 3650
-		}
+		limit = { has_country_modifier = harimari_administration }
+
 		add_country_modifier = {
 			name = harimari_military
 			duration = -1
 			hidden = yes
 		}
-		if = {
-			limit = {
-				OR = {
-					capital_scope = { superregion = yanshen_superregion }
-					capital_scope = { superregion = vimdatrong_superregion }
-					capital_scope = { superregion = gozengun_superregion }
-					primary_culture = serene_harimari
-					primary_culture = roaming_harimari
-					AND = {
-						accepted_culture = serene_harimari
-						NOT = { culture_group = harimari }
-					}
-					AND = {
-						accepted_culture = roaming_harimari
-						NOT = { culture_group = harimari }
-					}
-				}
-			}
-			change_unit_type = tech_east_harimari
-		}
-		else = {
-			change_unit_type = tech_west_harimari
-		}
+		racial_mil_military_change_to_harimari_units = yes
 	}
 	else_if = { # Effects for hobgoblin
-		limit = {
-			has_country_modifier = hobgoblin_administration
-		}
-		add_country_modifier = {
-			name = restructuring_military
-			duration = 3650
-		}
+		limit = { has_country_modifier = hobgoblin_administration }
+
 		add_country_modifier = {
 			name = hobgoblin_military
 			duration = -1
@@ -988,41 +202,27 @@ reset_racial_military_via_administration = {
 				duration = -1  
 			}
 		}
-		if = {
-			limit = { capital_scope = { superregion = gozengun_superregion } }
-			change_unit_type = tech_eagle_hobgoblin
-		}
-		else = { change_unit_type = tech_hobgoblin }
+		racial_mil_military_change_to_hobgoblin_units = yes
 	}
 	else_if = { # Effects for lizardfolk
-		limit = {
-			has_country_modifier = lizardfolk_administration
-		}
-		add_country_modifier = {
-			name = restructuring_military
-			duration = 3650
-		}
+		limit = { has_country_modifier = lizardfolk_administration }
+
 		add_country_modifier = {
 			name = lizardfolk_military
 			duration = -1
 			hidden = yes
 		}
-		change_unit_type = tech_lizardfolk
+		racial_mil_military_change_to_lizardfolk_units = yes
 	}
 	else_if = { # Effects for mechanim
-		limit = {
-			has_country_modifier = mechanim_administration
-		}
-		add_country_modifier = {
-			name = restructuring_military
-			duration = 3650
-		}
+		limit = { has_country_modifier = mechanim_administration }
+
 		add_country_modifier = {
 			name = mechanim_military
 			duration = -1
 			hidden = yes
 		}
-		change_unit_type = tech_mechanim
+		racial_mil_military_change_to_mechanim_units = yes
 	}
 }
 
@@ -1079,34 +279,15 @@ clear_racial_military = {
 	# Disband your undead army
 	if = {
 		limit = { has_country_modifier = undead_military }
-		custom_tooltip = tooltip_undead_army_destroy_all_armies
-
-		hidden_effect = {
-			every_owned_province = {
-				kill_units = {
-					who = owner
-					type = infantry
-				}
-				kill_units = {
-					who = owner
-					type = cavalry
-				}
-			}
-		}
+		disband_all_regiments = yes
 		remove_country_modifier = undead_military
+		undead_mil_remove_special_mods = yes
 	}
 
 	if = {
 		limit = { has_country_modifier = spirit_military }
-
-		hidden_effect = {
-			remove_country_modifier = spirit_mil_1
-			remove_country_modifier = spirit_mil_2
-			remove_country_modifier = spirit_mil_3
-			remove_country_modifier = spirit_mil_4
-			remove_country_modifier = spirit_mil_5
-		}
 		remove_country_modifier = spirit_military
+		spirit_mil_shock_dmg_remove = yes
 	}
 }
 
@@ -1529,6 +710,72 @@ generic_add_race_minority_size_effect = {
 	}
 }
 
+# this can technically be achieved via two
+# generic_add_race_minority_size_effect = yes (as we typically did it)
+# but there's a fair amount of redundant code there -
+# this is a much more concise version for when you know you want a large minority
+generic_add_race_large_minority_effect = {
+	custom_tooltip = add_$race$_large_minority_effect_tooltip
+	hidden_effect = {
+	
+		# Do nothing if the province has a majority or a large minority already
+		if = {
+			limit = {
+				has_$race$_majority_trigger = no
+				has_large_$race$_minority_trigger = no
+			}
+	
+			if = {
+				limit = { NOT = { has_province_flag = $race$_present } }
+				set_province_flag = $race$_present
+				owner = { increment_racial_pop_count = { race = $race$ } }
+			}
+	
+			#Impact Integrated
+			if = {
+				limit = {
+					owner = { high_tolerance_$race$_race_trigger = yes }
+				}
+				remove_province_modifier = $race$_minority_integrated_small
+				# in case a small minority was present
+				add_permanent_province_modifier = {
+					name = $race$_minority_integrated_large
+					duration = -1
+				}
+			}
+	
+			#Impact Coexisting
+			else_if = {
+				limit = {
+					owner = { medium_tolerance_$race$_race_trigger = yes }
+				}
+				remove_province_modifier = $race$_minority_coexisting_small
+				add_permanent_province_modifier = {
+					name = $race$_minority_coexisting_large
+					duration = -1
+				}
+			}
+
+			#Impact Oppressed
+			# strictly speaking, this is probably just an else, but it makes me feel safer to use else_if
+			# (it's also what the other effects do and it should be consistent, and changing the other effects means lots more testing!)
+			else_if = {
+				limit = {
+					OR = {
+						is_empty = yes
+						owner = { low_tolerance_$race$_race_trigger = yes }
+					}
+				}
+				remove_province_modifier = $race$_minority_oppressed_small
+				add_permanent_province_modifier = {
+					name = $race$_minority_oppressed_large
+					duration = -1
+				}
+			}
+		}
+	}
+}
+
 generic_remove_race_minority_size_effect = {
 	custom_tooltip = remove_$race$_minority_size_effect_tooltip
 	hidden_effect = {
@@ -1591,6 +838,18 @@ generic_remove_race_minority_size_effect = {
 				duration = -1
 			}
 		}
+		#homebrew
+		if = {
+			limit = {
+				owner = { has_idea = homebrew_x_for_xians }
+			}
+			random_list = {
+				33 = { add_base_tax = 1 }
+				33 = { add_base_production = 1 }
+				33 = { add_base_manpower = 1 }
+			}
+		}
+		hb_remove_melting_pot = { race = $race$ }		
 	}
 	
 }
@@ -1710,12 +969,12 @@ generic_increase_of_racial_tolerance_effect = {
 			limit = {
 				check_variable = {
 					which = $race$_race_tolerance
-					which = max_race_tolerance
+					value = 100
 				}
 			}
 			set_variable = {
 				which = $race$_race_tolerance
-				which = max_race_tolerance
+				value = 100
 			}
 		}
 		#every_owned_province = {
@@ -1929,6 +1188,10 @@ add_dwarven_minority_size_effect = {
 	generic_add_race_minority_size_effect = { race = dwarven }
 }
 
+add_dwarven_large_minority_effect = {
+	generic_add_race_large_minority_effect = { race = dwarven }
+}
+
 remove_dwarven_minority_size_effect = {
 	generic_remove_race_minority_size_effect = { race = dwarven }
 }
@@ -1969,6 +1232,10 @@ largest_decrease_of_gnomish_tolerance_effect = {
 
 add_gnomish_minority_size_effect = {
 	generic_add_race_minority_size_effect = { race = gnomish }
+}
+
+add_gnomish_large_minority_effect = {
+	generic_add_race_large_minority_effect = { race = gnomish }
 }
 
 remove_gnomish_minority_size_effect = {
@@ -2030,6 +1297,10 @@ add_elven_minority_size_effect = {
 	generic_add_race_minority_size_effect = { race = elven }
 }
 
+add_elven_large_minority_effect = {
+	generic_add_race_large_minority_effect = { race = elven }
+}
+
 remove_elven_minority_size_effect = {
 	generic_remove_race_minority_size_effect = { race = elven }
 }
@@ -2069,6 +1340,10 @@ largest_decrease_of_half_orcish_tolerance_effect = {
 
 add_half_orcish_minority_size_effect = {
 	generic_add_race_minority_size_effect = { race = half_orcish }
+}
+
+add_half_orcish_large_minority_effect = {
+	generic_add_race_large_minority_effect = { race = half_orcish }
 }
 
 remove_half_orcish_minority_size_effect = {
@@ -2113,149 +1388,53 @@ add_kobold_minority_size_effect = {
 	generic_add_race_minority_size_effect = { race = kobold }
 }
 
+add_kobold_large_minority_effect = {
+	generic_add_race_large_minority_effect = { race = kobold }
+}
+
 remove_kobold_minority_size_effect = {
 	generic_remove_race_minority_size_effect = { race = kobold }
 }
 
 # Gnollish
 small_increase_of_gnollish_tolerance_effect = {
-	if = {
-		limit = {
-			NOT = {
-				AND = {
-					tag = A48
-					has_country_flag = sugamber_gnollish_garrison
-					NOT = {
-						has_country_flag = sugamber_integrated_gnolls
-					}
-				}
-			}
-		}
 	generic_increase_of_racial_tolerance_effect = { race = gnollish small = yes }
-}
 }
 
 medium_increase_of_gnollish_tolerance_effect = {
-	if = {
-		limit = {
-			NOT = {
-				AND = {
-					tag = A48
-					has_country_flag = sugamber_gnollish_garrison
-					NOT = {
-						has_country_flag = sugamber_integrated_gnolls
-					}
-				}
-			}
-		}
 	generic_increase_of_racial_tolerance_effect = { race = gnollish medium = yes }
-}
 }
 
 large_increase_of_gnollish_tolerance_effect = {
-	if = {
-		limit = {
-			NOT = {
-				AND = {
-					tag = A48
-					has_country_flag = sugamber_gnollish_garrison
-					NOT = {
-						has_country_flag = sugamber_integrated_gnolls
-					}
-				}
-			}
-		}
 	generic_increase_of_racial_tolerance_effect = { race = gnollish large = yes }
-}
 }
 
 largest_increase_of_gnollish_tolerance_effect = {
-	if = {
-		limit = {
-			NOT = {
-				AND = {
-					tag = A48
-					has_country_flag = sugamber_gnollish_garrison
-					NOT = {
-						has_country_flag = sugamber_integrated_gnolls
-					}
-				}
-			}
-		}
 	generic_increase_of_racial_tolerance_effect = { race = gnollish largest = yes }
-}
 }
 
 small_decrease_of_gnollish_tolerance_effect = {
-	if = {
-		limit = {
-			NOT = {
-				AND = {
-					tag = A48
-					has_country_flag = sugamber_gnollish_garrison
-					NOT = {
-						has_country_flag = sugamber_integrated_gnolls
-					}
-				}
-			}
-		}
 	generic_decrease_of_racial_tolerance_effect = { race = gnollish small = yes }
-}
 }
 
 medium_decrease_of_gnollish_tolerance_effect = {
-	if = {
-		limit = {
-			NOT = {
-				AND = {
-					tag = A48
-					has_country_flag = sugamber_gnollish_garrison
-					NOT = {
-						has_country_flag = sugamber_integrated_gnolls
-					}
-				}
-			}
-		}
 	generic_decrease_of_racial_tolerance_effect = { race = gnollish medium = yes }
-}
 }
 
 large_decrease_of_gnollish_tolerance_effect = {
-	if = {
-		limit = {
-			NOT = {
-				AND = {
-					tag = A48
-					has_country_flag = sugamber_gnollish_garrison
-					NOT = {
-						has_country_flag = sugamber_integrated_gnolls
-					}
-				}
-			}
-		}
 	generic_decrease_of_racial_tolerance_effect = { race = gnollish large = yes }
-}
 }
 
 largest_decrease_of_gnollish_tolerance_effect = {
-	if = {
-		limit = {
-			NOT = {
-				AND = {
-					tag = A48
-					has_country_flag = sugamber_gnollish_garrison
-					NOT = {
-						has_country_flag = sugamber_integrated_gnolls
-					}
-				}
-			}
-		}
 	generic_decrease_of_racial_tolerance_effect = { race = gnollish largest = yes }
-}
 }
 
 add_gnollish_minority_size_effect = {
 	generic_add_race_minority_size_effect = { race = gnollish }
+}
+
+add_gnollish_large_minority_effect = {
+	generic_add_race_large_minority_effect = { race = gnollish }
 }
 
 remove_gnollish_minority_size_effect = {
@@ -2299,6 +1478,10 @@ add_orcish_minority_size_effect = {
 	generic_add_race_minority_size_effect = { race = orcish }
 }
 
+add_orcish_large_minority_effect = {
+	generic_add_race_large_minority_effect = { race = orcish }
+}
+
 remove_orcish_minority_size_effect = {
 	generic_remove_race_minority_size_effect = { race = orcish }
 }
@@ -2338,6 +1521,10 @@ largest_decrease_of_halfling_tolerance_effect = {
 
 add_halfling_minority_size_effect = {
 	generic_add_race_minority_size_effect = { race = halfling }
+}
+
+add_halfling_large_minority_effect = {
+	generic_add_race_large_minority_effect = { race = halfling }
 }
 
 remove_halfling_minority_size_effect = {
@@ -2381,6 +1568,10 @@ add_human_minority_size_effect = {
 	generic_add_race_minority_size_effect = { race = human }
 }
 
+add_human_large_minority_effect = {
+	generic_add_race_large_minority_effect = { race = human }
+}
+
 remove_human_minority_size_effect = {
 	generic_remove_race_minority_size_effect = { race = human }
 }
@@ -2420,6 +1611,10 @@ largest_decrease_of_half_elven_tolerance_effect = {
 
 add_half_elven_minority_size_effect = {
 	generic_add_race_minority_size_effect = { race = half_elven }
+}
+
+add_half_elven_large_minority_effect = {
+	generic_add_race_large_minority_effect = { race = half_elven }
 }
 
 remove_half_elven_minority_size_effect = {
@@ -2463,6 +1658,10 @@ add_ruinborn_minority_size_effect = {
 	generic_add_race_minority_size_effect = { race = ruinborn }
 }
 
+add_ruinborn_large_minority_effect = {
+	generic_add_race_large_minority_effect = { race = ruinborn }
+}
+
 remove_ruinborn_minority_size_effect = {
 	generic_remove_race_minority_size_effect = { race = ruinborn }
 }
@@ -2502,6 +1701,10 @@ largest_decrease_of_goblin_tolerance_effect = {
 
 add_goblin_minority_size_effect = {
 	generic_add_race_minority_size_effect = { race = goblin }
+}
+
+add_goblin_large_minority_effect = {
+	generic_add_race_large_minority_effect = { race = goblin }
 }
 
 remove_goblin_minority_size_effect = {
@@ -2545,6 +1748,10 @@ add_harpy_minority_size_effect = {
 	generic_add_race_minority_size_effect = { race = harpy }
 }
 
+add_harpy_large_minority_effect = {
+	generic_add_race_large_minority_effect = { race = harpy }
+}
+
 remove_harpy_minority_size_effect = {
 	generic_remove_race_minority_size_effect = { race = harpy }
 }
@@ -2584,6 +1791,10 @@ largest_decrease_of_troll_tolerance_effect = {
 
 add_troll_minority_size_effect = {
 	generic_add_race_minority_size_effect = { race = troll }
+}
+
+add_troll_large_minority_effect = {
+	generic_add_race_large_minority_effect = { race = troll }
 }
 
 remove_troll_minority_size_effect = {
@@ -2627,6 +1838,10 @@ add_ogre_minority_size_effect = {
 	generic_add_race_minority_size_effect = { race = ogre }
 }
 
+add_ogre_large_minority_effect = {
+	generic_add_race_large_minority_effect = { race = ogre }
+}
+
 remove_ogre_minority_size_effect = {
 	generic_remove_race_minority_size_effect = { race = ogre }
 }
@@ -2666,6 +1881,10 @@ largest_decrease_of_harimari_tolerance_effect = {
 
 add_harimari_minority_size_effect = {
 	generic_add_race_minority_size_effect = { race = harimari }
+}
+
+add_harimari_large_minority_effect = {
+	generic_add_race_large_minority_effect = { race = harimari }
 }
 
 remove_harimari_minority_size_effect = {
@@ -2709,6 +1928,10 @@ add_centaur_minority_size_effect = {
 	generic_add_race_minority_size_effect = { race = centaur }
 }
 
+add_centaur_large_minority_effect = {
+	generic_add_race_large_minority_effect = { race = centaur }
+}
+
 remove_centaur_minority_size_effect = {
 	generic_remove_race_minority_size_effect = { race = centaur }
 }
@@ -2748,6 +1971,10 @@ largest_decrease_of_hobgoblin_tolerance_effect = {
 
 add_hobgoblin_minority_size_effect = {
 	generic_add_race_minority_size_effect = { race = hobgoblin }
+}
+
+add_hobgoblin_large_minority_effect = {
+	generic_add_race_large_minority_effect = { race = hobgoblin }
 }
 
 remove_hobgoblin_minority_size_effect = {
@@ -2791,6 +2018,10 @@ add_lizardfolk_minority_size_effect = {
 	generic_add_race_minority_size_effect = { race = lizardfolk }
 }
 
+add_lizardfolk_large_minority_effect = {
+	generic_add_race_large_minority_effect = { race = lizardfolk }
+}
+
 remove_lizardfolk_minority_size_effect = {
 	generic_remove_race_minority_size_effect = { race = lizardfolk }
 }
@@ -2830,6 +2061,10 @@ largest_decrease_of_mechanim_tolerance_effect = {
 
 add_mechanim_minority_size_effect = {
 	generic_add_race_minority_size_effect = { race = mechanim }
+}
+
+add_mechanim_large_minority_effect = {
+	generic_add_race_large_minority_effect = { race = mechanim }
 }
 
 remove_mechanim_minority_size_effect = {
@@ -3182,6 +2417,7 @@ convert_majority_to_minority = {
 		add_minority_with_correct_tolerance = { race = human size = $size$ }
 
 		remove_racial_majority = { race = human }
+
 	}
 
 	#gnollish
@@ -4697,23 +3933,6 @@ make_majority_primary = {
 	}
 }
 
-#Check so tolerance values are not over max
-check_tolerance_values = {
-	if = {
-		limit = {
-			check_variable = {
-				which = $race$_race_tolerance
-				which = max_race_tolerance
-			}
-		}
-		set_variable = {
-			which = $race$_race_tolerance
-			which = max_race_tolerance
-		}
-		country_event = { id = racial_pop_events_$race$.99 }
-	}
-}
-
 #For increasing the tolerance values of all races that exists in any owned provinces.
 increase_all_existing_tolerances = {
 	custom_tooltip = $size$_increase_in_all_existing_tolerances_tooltip
@@ -4865,6 +4084,31 @@ increase_all_tolerances = {
 		$size$_increase_of_orcish_tolerance_effect = yes
 		$size$_increase_of_ruinborn_tolerance_effect = yes
 		$size$_increase_of_troll_tolerance_effect = yes
+	}
+}
+decrease_all_tolerances = {
+	custom_tooltip = $size$_decrease_in_all_tolerances_tooltip
+	hidden_effect = {
+		$size$_decrease_of_centaur_tolerance_effect = yes
+		$size$_decrease_of_dwarven_tolerance_effect = yes
+		$size$_decrease_of_elven_tolerance_effect = yes
+		$size$_decrease_of_gnollish_tolerance_effect = yes
+		$size$_decrease_of_gnomish_tolerance_effect = yes
+		$size$_decrease_of_goblin_tolerance_effect = yes
+		$size$_decrease_of_halfling_tolerance_effect = yes
+		$size$_decrease_of_half_elven_tolerance_effect = yes
+		$size$_decrease_of_half_orcish_tolerance_effect = yes
+		$size$_decrease_of_harimari_tolerance_effect = yes
+		$size$_decrease_of_harpy_tolerance_effect = yes
+		$size$_decrease_of_hobgoblin_tolerance_effect = yes
+		$size$_decrease_of_human_tolerance_effect = yes
+		$size$_decrease_of_kobold_tolerance_effect = yes
+		$size$_decrease_of_lizardfolk_tolerance_effect = yes
+		$size$_decrease_of_mechanim_tolerance_effect = yes
+		$size$_decrease_of_ogre_tolerance_effect = yes
+		$size$_decrease_of_orcish_tolerance_effect = yes
+		$size$_decrease_of_ruinborn_tolerance_effect = yes
+		$size$_decrease_of_troll_tolerance_effect = yes
 	}
 }
 
@@ -5113,6 +4357,10 @@ grant_unlimited_state_action = {
 increase_free_state_action = {
 	custom_tooltip = increase_free_$action$_tt
 	hidden_effect = { generic_decrease_state_action_malus = { action = $action$ } }
+}
+decrease_free_state_action = {
+	custom_tooltip = decrease_free_$action$_tt
+	hidden_effect = { generic_increase_state_action_malus = { action = $action$ } }
 }
 generic_increase_state_action_malus = { #this can be called to take away free state actions
 	if = {
@@ -5446,6 +4694,10 @@ racial_purge_disabled_tt =  {
 	if = { limit = { OR = { has_government_attribute = disabled_purging has_government_attribute = disabled_purging_$RACE$ } }
 		custom_tooltip = pop_menu_cannot_purge_government_attribute_tt
 	}
+	if = {
+		limit = { OR = { has_country_flag = disabled_purging_$RACE$_flag has_country_flag = disabled_purging_flag } }
+		custom_tooltip =  pop_menu_cannot_purge_specific_race_flag_tt
+	}
     hidden_effect = {
 		country_event = { id = racial_pop_events_$RACE$.24 }
     }
@@ -5480,6 +4732,10 @@ racial_expel_disabled_tt = {
 	}
 	if = { limit = { OR = { has_government_attribute = disabled_expelling has_government_attribute = disabled_expelling_$RACE$ } }
 		custom_tooltip = pop_menu_cannot_expel_government_attribute_tt
+	}
+	if = {
+		limit = { OR = { has_country_flag = disabled_expelling_$RACE$_flag has_country_flag = disabled_expelling_flag  } }
+		custom_tooltip =  pop_menu_cannot_expel_specific_race_flag_tt
 	}
 	hidden_effect = {
 		country_event = { id = racial_pop_events_$RACE$.24 }
@@ -7301,7 +6557,7 @@ add_matching_race_minority_size_from_scope = {
 	}
 	else_if = {
 		limit = { $scope$ = { culture_is_mechanim = yes } }
-		generic_add_race_minority_size_effect = { race = mechanim }
+		add_mechanim_minority_size_effect = yes
 	}
 	else_if = {
 		limit = { $scope$ = { culture_is_ogre = yes } }
@@ -7318,5 +6574,611 @@ add_matching_race_minority_size_from_scope = {
 	else_if = {
 		limit = { $scope$ = { culture_is_troll = yes } }
 		generic_add_race_minority_size_effect = { race = troll }
+	}
+}
+
+# Add small tolerance for matching province's minority
+add_tolerance_of_matching_race_minority_size_from_province = {
+	#AddNewRaceHere
+	if = {
+		limit = { has_centaur_minority_trigger = yes }
+		owner = { small_increase_of_centaur_tolerance_effect = yes }
+	}
+	if = {
+		limit = { has_dwarven_minority_trigger = yes }
+		owner = { small_increase_of_dwarven_tolerance_effect = yes }
+	}
+	if = {
+		limit = { has_elven_minority_trigger = yes }
+		owner = { small_increase_of_elven_tolerance_effect = yes }
+	}
+	if = {
+		limit = { has_gnollish_minority_trigger = yes }
+		owner = { small_increase_of_gnollish_tolerance_effect = yes }
+	}
+	if = {
+		limit = { has_gnomish_minority_trigger = yes }
+		owner = { small_increase_of_gnomish_tolerance_effect = yes }
+	}
+	if = {
+		limit = { has_goblin_minority_trigger = yes }
+		owner = { small_increase_of_goblin_tolerance_effect = yes }
+	}
+	if = {
+		limit = { has_half_elven_minority_trigger = yes }
+		owner = { small_increase_of_half_elven_tolerance_effect = yes }
+	}
+	if = {
+		limit = { has_half_orcish_minority_trigger = yes }
+		owner = { small_increase_of_half_orcish_tolerance_effect = yes }
+	}
+	if = {
+		limit = { has_halfling_minority_trigger = yes }
+		owner = { small_increase_of_halfling_tolerance_effect = yes }
+	}
+	if = {
+		limit = { has_harimari_minority_trigger = yes }
+		owner = { small_increase_of_harimari_tolerance_effect = yes }
+	}
+	if = {
+		limit = { has_harpy_minority_trigger = yes }
+		owner = { small_increase_of_harpy_tolerance_effect = yes }
+	}
+	if = {
+		limit = { has_hobgoblin_minority_trigger = yes }
+		owner = { small_increase_of_hobgoblin_tolerance_effect = yes }
+	}
+	if = {
+		limit = { has_human_minority_trigger = yes }
+		owner = { small_increase_of_human_tolerance_effect = yes }
+	}
+	if = {
+		limit = { has_kobold_minority_trigger = yes }
+		owner = { small_increase_of_kobold_tolerance_effect = yes }
+	}
+	if = {
+		limit = { has_lizardfolk_minority_trigger = yes }
+		owner = { small_increase_of_lizardfolk_tolerance_effect = yes }
+	}
+	if = {
+		limit = { has_mechanim_minority_trigger = yes }
+		owner = { small_increase_of_mechanim_tolerance_effect = yes }
+	}
+	if = {
+		limit = { has_ogre_minority_trigger = yes }
+		owner = { small_increase_of_ogre_tolerance_effect = yes }
+	}
+	if = {
+		limit = { has_orcish_minority_trigger = yes }
+		owner = { small_increase_of_orcish_tolerance_effect = yes }
+	}
+	if = {
+		limit = { has_ruinborn_minority_trigger = yes }
+		owner = { small_increase_of_ruinborn_tolerance_effect = yes }
+	}
+	if = {
+		limit = { has_troll_minority_trigger = yes }
+		owner = { small_increase_of_troll_tolerance_effect = yes }
+	}
+}
+remove_every_biological_race_minority = {
+	if = {
+		limit = {
+			fast_has_pop_of_race = { race = dwarven }
+		}
+		remove_dwarven_minority_size_effect = yes
+		remove_dwarven_minority_size_effect = yes
+	}
+	if = {
+		limit = {
+			fast_has_pop_of_race = { race = gnomish }
+		}
+		remove_gnomish_minority_size_effect = yes
+		remove_gnomish_minority_size_effect = yes
+	}
+	if = {
+		limit = {
+			fast_has_pop_of_race = { race = elven }
+		}
+		remove_elven_minority_size_effect = yes
+		remove_elven_minority_size_effect = yes
+	}
+	if = {
+		limit = {
+			fast_has_pop_of_race = { race = half_orcish }
+		}
+		remove_half_orcish_minority_size_effect = yes
+		remove_half_orcish_minority_size_effect = yes
+	}
+	if = { # :C
+		limit = {
+			fast_has_pop_of_race = { race = kobold }
+		}
+		remove_kobold_minority_size_effect = yes
+		remove_kobold_minority_size_effect = yes
+	}
+	if = {
+		limit = {
+			fast_has_pop_of_race = { race = gnollish }
+		}
+		remove_gnollish_minority_size_effect = yes
+		remove_gnollish_minority_size_effect = yes
+	}
+	if = {
+		limit = {
+			fast_has_pop_of_race = { race = orcish }
+		}
+		remove_orcish_minority_size_effect = yes
+		remove_orcish_minority_size_effect = yes
+	}
+	if = {
+		limit = {
+			fast_has_pop_of_race = { race = halfling }
+		}
+		remove_halfling_minority_size_effect = yes
+		remove_halfling_minority_size_effect = yes
+	}
+	if = {
+		limit = {
+			fast_has_pop_of_race = { race = human }
+		}
+		remove_human_minority_size_effect = yes
+		remove_human_minority_size_effect = yes
+	}
+	if = {
+		limit = {
+			fast_has_pop_of_race = { race = half_elven }
+		}
+		remove_half_elven_minority_size_effect = yes
+		remove_half_elven_minority_size_effect = yes
+	}
+	if = {
+		limit = {
+			fast_has_pop_of_race = { race = ruinborn }
+		}
+		remove_ruinborn_minority_size_effect = yes
+		remove_ruinborn_minority_size_effect = yes
+	}
+	if = {
+		limit = {
+			fast_has_pop_of_race = { race = goblin }
+		}
+		remove_goblin_minority_size_effect = yes
+		remove_goblin_minority_size_effect = yes
+	}
+	if = {
+		limit = {
+			fast_has_pop_of_race = { race = harpy }
+		}
+		remove_harpy_minority_size_effect = yes
+		remove_harpy_minority_size_effect = yes
+	}
+	if = {
+		limit = {
+			fast_has_pop_of_race = { race = troll }
+		}
+		remove_troll_minority_size_effect = yes
+		remove_troll_minority_size_effect = yes
+	}
+	if = {
+		limit = {
+			fast_has_pop_of_race = { race = ogre }
+		}
+		remove_ogre_minority_size_effect = yes
+		remove_ogre_minority_size_effect = yes
+	}
+	if = {
+		limit = {
+			fast_has_pop_of_race = { race = harimari }
+		}
+		remove_harimari_minority_size_effect = yes
+		remove_harimari_minority_size_effect = yes
+	}
+	if = {
+		limit = {
+			fast_has_pop_of_race = { race = centaur }
+		}
+		remove_centaur_minority_size_effect = yes
+		remove_centaur_minority_size_effect = yes
+	}
+	if = {
+		limit = {
+			fast_has_pop_of_race = { race = hobgoblin }
+		}
+		remove_hobgoblin_minority_size_effect = yes
+		remove_hobgoblin_minority_size_effect = yes
+	}
+	if = {
+		limit = {
+			fast_has_pop_of_race = { race = lizardfolk }
+		}
+		remove_lizardfolk_minority_size_effect = yes
+		remove_lizardfolk_minority_size_effect = yes
+	}
+}
+# Decrease and increase of tolerance for all monstrous races. Took the list from monstrous_culture in common/scripted_triggers/anb_scripted_triggers_racial.txt
+# leaving out degenerated_elf since race = ruinborn is too wide
+# 'size' must be 'small', 'medium', 'large', or 'largest'
+monstrous_races_decrease_of_racial_tolerance_effect = {
+	custom_tooltip = $size$_decrease_in_monstrous_tolerance_tooltip
+	hidden_effect = {
+		generic_decrease_of_racial_tolerance_effect = { race = kobold $size$ = yes }
+		generic_decrease_of_racial_tolerance_effect = { race = orcish $size$ = yes }
+		generic_decrease_of_racial_tolerance_effect = { race = gnollish $size$ = yes }
+		generic_decrease_of_racial_tolerance_effect = { race = goblin $size$ = yes }
+		generic_decrease_of_racial_tolerance_effect = { race = harpy $size$ = yes }
+		generic_decrease_of_racial_tolerance_effect = { race = troll $size$ = yes }
+		generic_decrease_of_racial_tolerance_effect = { race = hobgoblin $size$ = yes }
+		generic_decrease_of_racial_tolerance_effect = { race = centaur $size$ = yes }
+		generic_decrease_of_racial_tolerance_effect = { race = ogre $size$ = yes }
+		generic_decrease_of_racial_tolerance_effect = { race = lizardfolk $size$ = yes }
+	}
+}
+
+monstrous_races_increase_of_racial_tolerance_effect = {
+	custom_tooltip = $size$_increase_in_monstrous_tolerance_tooltip
+	hidden_effect = {
+		generic_increase_of_racial_tolerance_effect = { race = kobold $size$ = yes }
+		generic_increase_of_racial_tolerance_effect = { race = orcish $size$ = yes }
+		generic_increase_of_racial_tolerance_effect = { race = gnollish $size$ = yes }
+		generic_increase_of_racial_tolerance_effect = { race = goblin $size$ = yes }
+		generic_increase_of_racial_tolerance_effect = { race = harpy $size$ = yes }
+		generic_increase_of_racial_tolerance_effect = { race = troll $size$ = yes }
+		generic_increase_of_racial_tolerance_effect = { race = hobgoblin $size$ = yes }
+		generic_increase_of_racial_tolerance_effect = { race = centaur $size$ = yes }
+		generic_increase_of_racial_tolerance_effect = { race = ogre $size$ = yes }
+		generic_increase_of_racial_tolerance_effect = { race = lizardfolk $size$ = yes }
+	}
+}
+
+# Used in Harpylen (F98) MT. $custom_tooltip$, $amount$ and $target$ as arguments
+gain_minorities_of_target_country_primary_race = {
+	# It's hidden because there is no helpful tooltip that is generated
+	# I scope back to $target$ so we don't have to keep changing scope for each
+	# culture_is_x check
+	custom_tooltip = $custom_tooltip$
+	hidden_effect = {
+		$target$ = {
+			if = {
+				limit = {
+					culture_is_centaur = yes
+				}
+				PREV = {
+					for = {
+						amount = $amount$
+						effect = "
+							random_owned_province = {
+								limit = {
+									NOT = { fast_has_pop_of_race = { race = centaur } }
+								}
+								add_centaur_minority_size_effect = yes
+							}"
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					culture_is_dwarven = yes
+				}
+				PREV = {
+					for = {
+						amount = $amount$
+						effect = "
+							random_owned_province = {
+								limit = {
+									NOT = { fast_has_pop_of_race = { race = dwarven } }
+								}
+								add_dwarven_minority_size_effect = yes
+							}"
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					culture_is_elven = yes
+				}
+				PREV = {
+					for = {
+						amount = $amount$
+						effect = "
+							random_owned_province = {
+								limit = {
+									NOT = { fast_has_pop_of_race = { race = elven } }
+								}
+								add_elven_minority_size_effect = yes
+							}"
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					culture_is_gnollish = yes
+				}
+				PREV = {
+					for = {
+						amount = $amount$
+						effect = "
+							random_owned_province = {
+								limit = {
+									NOT = { fast_has_pop_of_race = { race = gnollish } }
+								}
+								add_gnollish_minority_size_effect = yes
+							}"
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					culture_is_gnomish = yes
+				}
+				PREV = {
+					for = {
+						amount = $amount$
+						effect = "
+							random_owned_province = {
+								limit = {
+									NOT = { fast_has_pop_of_race = { race = gnomish } }
+								}
+								add_gnomish_minority_size_effect = yes
+							}"
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					culture_is_goblin = yes
+				}
+				PREV = {
+					for = {
+						amount = $amount$
+						effect = "
+							random_owned_province = {
+								limit = {
+									NOT = { fast_has_pop_of_race = { race = goblin } }
+								}
+								add_goblin_minority_size_effect = yes
+							}"
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					culture_is_halfling = yes
+				}
+				PREV = {
+					for = {
+						amount = $amount$
+						effect = "
+							random_owned_province = {
+								limit = {
+									NOT = { fast_has_pop_of_race = { race = halfling } }
+								}
+								add_halfling_minority_size_effect = yes
+							}"
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					culture_is_half_elven = yes
+				}
+				PREV = {
+					for = {
+						amount = $amount$
+						effect = "
+							random_owned_province = {
+								limit = {
+									NOT = { fast_has_pop_of_race = { race = half_elven } }
+								}
+								add_half_elven_minority_size_effect = yes
+							}"
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					culture_is_half_orcish = yes
+				}
+				PREV = {
+					for = {
+						amount = $amount$
+						effect = "
+							random_owned_province = {
+								limit = {
+									NOT = { fast_has_pop_of_race = { race = half_orcish } }
+								}
+								add_half_orcish_minority_size_effect = yes
+							}"
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					culture_is_harimari = yes
+				}
+				PREV = {
+					for = {
+						amount = $amount$
+						effect = "
+							random_owned_province = {
+								limit = {
+									NOT = { fast_has_pop_of_race = { race = harimari } }
+								}
+								add_harimari_minority_size_effect = yes
+							}"
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					culture_is_harpy = yes
+				}
+				PREV = {
+					for = {
+						amount = $amount$
+						effect = "
+							random_owned_province = {
+								limit = {
+									NOT = { fast_has_pop_of_race = { race = harpy } }
+								}
+								add_harpy_minority_size_effect = yes
+							}"
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					culture_is_human = yes
+				}
+				PREV = {
+					for = {
+						amount = $amount$
+						effect = "
+							random_owned_province = {
+								limit = {
+									NOT = { fast_has_pop_of_race = { race = human } }
+								}
+								add_human_minority_size_effect = yes
+							}"
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					culture_is_hobgoblin = yes
+				}
+				PREV = {
+					for = {
+						amount = $amount$
+						effect = "
+							random_owned_province = {
+								limit = {
+									NOT = { fast_has_pop_of_race = { race = hobgoblin } }
+								}
+								add_hobgoblin_minority_size_effect = yes
+							}"
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					culture_is_kobold = yes
+				}
+				PREV = {
+					for = {
+						amount = $amount$
+						effect = "
+							random_owned_province = {
+								limit = {
+									NOT = { fast_has_pop_of_race = { race = kobold } }
+								}
+								add_kobold_minority_size_effect = yes
+							}"
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					culture_is_lizardfolk = yes
+				}
+				PREV = {
+					for = {
+						amount = $amount$
+						effect = "
+							random_owned_province = {
+								limit = {
+									NOT = { fast_has_pop_of_race = { race = lizardfolk } }
+								}
+								add_lizardfolk_minority_size_effect = yes
+							}"
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					culture_is_mechanim = yes
+				}
+				PREV = {
+					for = {
+						amount = $amount$
+						effect = "
+							random_owned_province = {
+								limit = {
+									NOT = { fast_has_pop_of_race = { race = mechanim } }
+								}
+								add_mechanim_minority_size_effect = yes
+							}"
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					culture_is_ogre = yes
+				}
+				PREV = {
+					for = {
+						amount = $amount$
+						effect = "
+							random_owned_province = {
+								limit = {
+									NOT = { fast_has_pop_of_race = { race = ogre } }
+								}
+								add_ogre_minority_size_effect = yes
+							}"
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					culture_is_orcish = yes
+				}
+				PREV = {
+					for = {
+						amount = $amount$
+						effect = "
+							random_owned_province = {
+								limit = {
+									NOT = { fast_has_pop_of_race = { race = orcish } }
+								}
+								add_orcish_minority_size_effect = yes
+							}"
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					culture_is_troll = yes
+				}
+				PREV = {
+					for = {
+						amount = $amount$
+						effect = "
+							random_owned_province = {
+								limit = {
+									NOT = { fast_has_pop_of_race = { race = troll } }
+								}
+								add_troll_minority_size_effect = yes
+							}"
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					culture_is_ruinborn = yes
+				}
+				PREV = {
+					for = {
+						amount = $amount$
+						effect = "
+							random_owned_province = {
+								limit = {
+									NOT = { fast_has_pop_of_race = { race = ruinborn } }
+								}
+								add_ruinborn_minority_size_effect = yes
+							}"
+					}
+				}
+			}
+		}
 	}
 }

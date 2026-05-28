@@ -1,33 +1,33 @@
 country_decisions = {
-    warlock_decision = {
-        major = yes
+    # warlock_decision = {
+    #     major = yes
 
-        potential = {
-            has_country_flag = warlockpkk_decision_unlocked
-        }
+    #     potential = {
+    #         has_country_flag = warlockpkk_decision_unlocked
+    #     }
 
-        allow = {
-            hidden_trigger = {
-                NOT = { has_country_modifier = warlockpkk_cooldown }
-            }
-        }
+    #     allow = {
+    #         hidden_trigger = {
+    #             NOT = { has_country_modifier = warlockpkk_cooldown }
+    #         }
+    #     }
 
-        effect = {
-            country_event = { id = warlockpkk_event.3 }
-            add_country_modifier = {
-                name = warlockpkk_cooldown
-                duration = 31
-            }
-        }
+    #     effect = {
+    #         country_event = { id = warlockpkk_event.3 }
+    #         add_country_modifier = {
+    #             name = warlockpkk_cooldown
+    #             duration = 31
+    #         }
+    #     }
 
-        ai_will_do = {
-            factor = 1
-            modifier = {
-                factor = 0
-                always = yes
-            }
-        }
-    }
+    #     ai_will_do = {
+    #         factor = 1
+    #         modifier = {
+    #             factor = 0
+    #             always = yes
+    #         }
+    #     }
+    # }
     destr_mint = {
 		major = yes
 		potential = {
@@ -92,5 +92,133 @@ country_decisions = {
 		}
 		ai_importance = 400
 	}
+    # Этап 1: Восстановление Старой Джиннаки
+    irrigate_old_djinnakah_area = {
+        major = yes
+        potential = {
+            any_owned_province = {
+                has_great_project = { type = baash_ardim_karast tier = 2 }
+            }
+            NOT = { has_country_flag = irrigated_old_djinnakah }
+        }
+        allow = {
+            adm_power = 100
+            treasury = 400
+            old_djinnakah_area = { type = all owned_by = ROOT } 
+        }
+        effect = {
+            add_treasury = -400
+            add_adm_power = -100
+            set_country_flag = irrigated_old_djinnakah
+            every_owned_province = {
+                limit = { area = old_djinnakah_area }
+                add_province_modifier = {
+                    name = ardimya_irrigation_mod
+                    duration = -1
+                }
+            }
+        }
+    }
 
+    irrigate_mnemba_ziidan_bariga_vumb_area = {
+        major = yes
+        potential = {
+            any_owned_province = {
+                has_great_project = { type = baash_ardim_karast tier = 3 }
+            }
+            has_country_flag = irrigated_old_djinnakah
+            NOT = { has_country_flag = irrigated_mnemba_bariga }
+        }
+        allow = {
+            adm_power = 100
+            treasury = 800
+            mnemba_ziidan_area = { type = all owned_by = ROOT }
+            bariga_vumb_area = { type = all owned_by = ROOT }
+        }
+        effect = {
+            add_adm_power = -100
+            add_treasury = -800
+            set_country_flag = irrigated_mnemba_bariga
+            every_owned_province = {
+                limit = {
+                    OR = {
+                        area = mnemba_ziidan_area
+                        area = bariga_vumb_area
+                    }
+                }
+                add_province_modifier = {
+                    name = ardimya_irrigation_mod
+                    duration = -1
+                }
+            }
+        }
+    }
+
+    irrigate_merfolk_tip_daagalkauva_area = {
+        major = yes
+        potential = {
+            has_country_flag = irrigated_mnemba_bariga
+            any_owned_province = {
+                has_great_project = { type = baash_ardim_karast tier = 3 }
+            }
+            NOT = { has_country_flag = irrigated_merfolk_daagal }
+        }
+        allow = {
+            adm_power = 100
+            treasury = 800
+            merfolk_tip_area = { type = all owned_by = ROOT }
+            daagalkauva_area = { type = all owned_by = ROOT }
+        }
+        effect = {
+            add_adm_power = -100
+            add_treasury = -800
+            set_country_flag = irrigated_merfolk_daagal
+            every_owned_province = {
+                limit = {
+                    OR = {
+                        area = merfolk_tip_area
+                        area = daagalkauva_area
+                    }
+                }
+                add_province_modifier = {
+                    name = ardimya_irrigation_mod
+                    duration = -1
+                }
+            }
+        }
+    }
+
+    irrigate_muudeyneen_new_armanhal_area = {
+    major = yes
+    potential = {
+        has_country_flag = irrigated_merfolk_daagal
+         any_owned_province = {
+            has_great_project = { type = baash_ardim_karast tier = 3 }
+        }
+        NOT = { has_country_flag = irrigated_muudeyneen_armanhal }
+    }
+    allow = {
+        adm_power = 100
+        treasury = 800
+        muudeyneen_heartlands_area = { type = all owned_by = ROOT }
+        new_armanhal_area = { type = all owned_by = ROOT }
+    }
+    effect = {
+        add_adm_power = -100
+        add_treasury = -800
+        set_country_flag = irrigated_muudeyneen_armanhal
+        every_owned_province = {
+            limit = {
+                OR = {
+                    area = muudeyneen_heartlands_area
+                    area = new_armanhal_area
+                }
+            }
+            add_province_modifier = {
+                name = ardimya_irrigation_mod
+                duration = -1
+            }
+        }
+    }
+}
 }

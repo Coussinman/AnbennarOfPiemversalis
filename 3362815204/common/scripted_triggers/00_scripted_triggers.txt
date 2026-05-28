@@ -113,39 +113,48 @@ has_adm_advisor_3 = {
 }
 
 has_adm_advisor_of_level = {
-	OR = {
-		treasurer = $level$
-		philosopher = $level$
-		artist = $level$
-		theologian = $level$
-		master_of_mint = $level$
-		inquisitor = $level$
-		natural_scientist = $level$
-		court_mage = $level$
+	custom_trigger_tooltip = {
+		tooltip = has_adm_advisor_$level$_tooltip
+		OR = {
+			treasurer = $level$
+			philosopher = $level$
+			artist = $level$
+			theologian = $level$
+			master_of_mint = $level$
+			inquisitor = $level$
+			natural_scientist = $level$
+			court_mage = $level$
+		}
 	}
 }
 
 has_dip_advisor_of_level = {
-	OR = {
-		statesman = $level$
-		diplomat = $level$
-		naval_reformer = $level$
-		trader = $level$
-		colonial_governor = $level$
-		navigator = $level$
-		spymaster = $level$
+	custom_trigger_tooltip = {
+		tooltip = has_dip_advisor_$level$_tooltip
+		OR = {
+			statesman = $level$
+			diplomat = $level$
+			naval_reformer = $level$
+			trader = $level$
+			colonial_governor = $level$
+			navigator = $level$
+			spymaster = $level$
+		}
 	}
 }
 
 has_mil_advisor_of_level = {
-	OR = {
-		army_organiser = $level$
-		army_reformer = $level$
-		commandant = $level$
-		grand_captain = $level$
-		recruitmaster = $level$
-		fortification_expert = $level$
-		quartermaster = $level$
+	custom_trigger_tooltip = {
+		tooltip = has_mil_advisor_$level$_tooltip
+		OR = {
+			army_organiser = $level$
+			army_reformer = $level$
+			commandant = $level$
+			grand_captain = $level$
+			recruitmaster = $level$
+			fortification_expert = $level$
+			quartermaster = $level$
+		}
 	}
 }
 
@@ -207,6 +216,7 @@ is_subject_other_than_tributary_trigger = { #Ie Tags that cannot conduct indepen
 		NOT = { is_subject_of_type = tributary_state_anb }
 		NOT = { is_subject_of_type = centaur_dominion }
 		NOT = { is_subject_of_type = democratic_sphere_of_influence_subject }
+		NOT = { is_subject_of_type = karassk_idzarshin_trib_subject }
 	}
 }
 
@@ -219,6 +229,7 @@ is_free_or_tributary_trigger = { #I.e. Tags that can conduct independent diploma
 			is_subject_of_type = tributary_state_anb
 			is_subject_of_type = centaur_dominion
 			is_subject_of_type = democratic_sphere_of_influence_subject
+			is_subject_of_type = karassk_idzarshin_trib_subject
 		}
 	}
 }
@@ -286,6 +297,7 @@ ruler_has_good_mil_personality = {
 		ruler_has_personality = martial_educator_personality
 		ruler_has_personality = kind_hearted_personality
 		ruler_has_personality = legendary_pirate_personality
+		ruler_has_personality = renowned_adventurer_personality
 	}
 }
 
@@ -383,6 +395,7 @@ heir_has_good_mil_personality = {
 		heir_has_personality = conqueror_personality
 		heir_has_personality = strict_personality
 		heir_has_personality = inspiring_leader_personality
+		heir_has_personality = renowned_adventurer_personality
 		heir_has_personality = martial_educator_personality
 		heir_has_personality = kind_hearted_personality
 		heir_has_personality = legendary_pirate_personality
@@ -416,6 +429,24 @@ heir_has_bad_mil_personality = {
 	#OR = {
 	heir_has_personality = craven_personality
 	#}
+}
+
+heir_has_num_bad_personality = {
+    calc_true_if = {
+        amount = $amount$
+        heir_has_personality = embezzler_personality
+        heir_has_personality = sinner_personality
+        heir_has_personality = greedy_personality
+        heir_has_personality = obsessive_perfectionist_personality
+        heir_has_personality = drunkard_personality
+        heir_has_personality = babbling_buffoon_personality
+        heir_has_personality = cruel_personality
+        heir_has_personality = naive_personality
+        heir_has_personality = malevolent_personality
+        heir_has_personality = loose_lips_personality
+        heir_has_personality = craven_personality
+        heir_has_personality = infertile_personality
+    }
 }
 
 #Queen personality triggers
@@ -508,19 +539,26 @@ can_have_center_of_reformation_trigger = { #Province Scope
 		religion = suhans_praxis
 		religion_group = triunic_lake
 		religion = oren_nayiru #Don't think this is needed but just in case
+		religion = molten_eternity
+		religion = great_dookan
+		religion = bulgu_orazan
+		religion = volcanic_truth
 	}
 	OR = {
 		#religion = protestant
 		#religion = catholic
 		#religion = reformed
 		religion = regent_court
-		religion = dalcabba
 		religion = corinite
 		religion = ravelian
 		religion = infernal_court
 		religion = suhans_praxis
 		religion_group = triunic_lake
 		religion = oren_nayiru #Don't think this is needed but just in case
+		religion = molten_eternity
+		religion = great_dookan
+		religion = bulgu_orazan
+		religion = volcanic_truth
 	}
 	#NOT = { province_id = 118 } #Roma isn't in Anbennar- this is a redglades province lmao
 	is_in_capital_area = yes
@@ -600,15 +638,13 @@ was_never_end_game_tag_trigger = {	#Country Scope
 			NOT = { was_tag = F97 }	#Phoenix Empire
 			NOT = { was_tag = Z34 }	#Black Castanor
 			NOT = { was_tag = Z38 }	#Kobildzan
-			NOT = { was_tag = Z99 }	#Black Demense
+			NOT = { was_tag = Z99 }	#Black Demesne
 			NOT = { was_tag = B62 } #Moredhal
 			#NOT = { was_tag = B63 } #Grudgeknight Moredhal
 			#NOT = { was_tag = B64 } #Passionate Moredhal
 			#NOT = { was_tag = B65 } #Devotee Moredhal
 			NOT = { was_tag = Z97 }	#Ravelian State
-			
-			#ACE
-			NOT = { was_tag = AD6 } #Vivin
+			NOT = { was_tag = B01 } #Greentide
 			
 			NOT = { tag = Z01 }	#Anbennar
 			NOT = { tag = A79 }	#Gnomish Hierarchy
@@ -617,7 +653,7 @@ was_never_end_game_tag_trigger = {	#Country Scope
 			NOT = { tag = F97 }	#Phoenix Empire
 			NOT = { tag = Z34 }	#Black Castanor
 			NOT = { tag = Z38 }	#Kobildzan
-			NOT = { tag = Z99 }	#Black Demense
+			NOT = { tag = Z99 }	#Black Demesne
 			NOT = { tag = B62 } #Moredhal
 			#NOT = { tag = B63 } #Grudgeknight Moredhal
 			#NOT = { tag = B64 } #Passionate Moredhal
@@ -663,6 +699,9 @@ was_never_end_game_tag_trigger = {	#Country Scope
 			NOT = { tag = H24 }	#Dragon Dominion
 			NOT = { was_tag = H27 }	#Ynnic Empire
 			NOT = { tag = H27 }	#Ynnic Empire
+
+			NOT = { was_tag = G10 } #Ruinsail Confederacy
+			NOT = { tag = G10 } #Ruinsail Confederacy
 			
 			NOT = { was_tag = R71 }	#Rahenraj
 			NOT = { tag = R71 }		#Rahenraj
@@ -672,14 +711,25 @@ was_never_end_game_tag_trigger = {	#Country Scope
 			NOT = { was_tag = J33 }	#Lake Federation
 			NOT = { tag = J33 }		#Lake Federation
 			
-			NOT = { was_tag = I89 }	#Kh�raen Ulaeg
-			NOT = { tag = I89 }		#Kh�raen Ulaeg
+			#Centaur Formables
+			NOT = { was_tag = I89 }	#Khuraen Ulaeg
+			NOT = { tag = I89 }		#Khuraen Ulaeg
+			NOT = { was_tag = J54 }	#Altorzamh
+			NOT = { tag = J54 }		#Altorzamh
+			NOT = { was_tag = J55 }	#Lejdazamh
+			NOT = { tag = J55 }		#Lejdazamh
+			NOT = { was_tag = J56 }	#Tarjeanzamh
+			NOT = { tag = J56 }		#Tarjeanzamh
+
 
 			NOT = { was_tag = I98 } #Ves Udzenklan
 			NOT = { tag = I98 } #Ves Udzenklan
 
 			NOT = { was_tag = I99 } #Nizhn Korvesto
 			NOT = { tag = I99 } #Nizhn Korvesto
+
+			NOT = { was_tag = F78 } #Šaznekaru
+			NOT = { tag = F78 } #Šaznekaru (Overclan)
 
 			NOT = { was_tag = M03 } #Svaikzenszel
 			NOT = { tag = M03 } #Svaikzenszel
@@ -713,18 +763,20 @@ was_never_end_game_tag_trigger = {	#Country Scope
 			NOT = { was_tag = Y00 } #Sunrise Empire
 			NOT = { tag = V23 } #Luzhong
 			NOT = { was_tag = V23 } #Luzhong
+			NOT = { tag = V29 } #Nirunkhupen
+			NOT = { was_tag = V29 } #Nirunkhupen
+			NOT = { tag = V30 } #Bawa Simpat
+			NOT = { was_tag = V30 } #Bawa Simpat
+			NOT = { tag = V99 } #Kimni Solenh
+			NOT = { was_tag = V99 } #Kimni Solenh
 			
 			#Smaller lads
-			NOT = { was_tag = Z07 }	#Dostanor
-			NOT = { tag = Z07 }	#Dostanor
 			NOT = { was_tag = A01 }	#Lorent
 			NOT = { tag = A01 }	#Lorent
 			NOT = { was_tag = A13 }	#Gawed
 			NOT = { tag = A13 }	#Gawed
 			NOT = { was_tag = A97 }	#Small Country
 			NOT = { tag = A97 }	#Small Country
-			NOT = { was_tag = A58 }	#Dameria
-			NOT = { tag = A58 }	#Dameria
 			NOT = { was_tag = B96 }	#Salceran
 			NOT = { tag = B96 }	#Salceran
 
@@ -732,12 +784,6 @@ was_never_end_game_tag_trigger = {	#Country Scope
 			#orcs formables
 			NOT = { was_tag = Z50 }	#Grombar
 			NOT = { tag = Z50 }	#Grombar
-			NOT = { was_tag = Z51 }	#Khozrugan
-			NOT = { tag = Z51 }	#Khozrugan
-			NOT = { was_tag = Z52 }	#Unguldavor
-			NOT = { tag = Z52 }	#Unguldavor
-			NOT = { was_tag = Z53 }	#Barumand
-			NOT = { tag = Z53 }	#Barumand
 			NOT = { was_tag = I46 }	#Tugund-Darakh
 			NOT = { tag = I46 }	#Tugund-Darakh
 			NOT = { was_tag = Z54 }	#Karakhanbar
@@ -783,7 +829,27 @@ was_never_end_game_tag_trigger = {	#Country Scope
 			NOT = { was_tag = S93 } #Alefisol
 			NOT = { tag = S93 } #Alefisol
 
-			NOT = { has_country_flag = formed_enteben } #Enteben
+			#Insyaa
+			#Kanolowele
+			NOT = { was_tag = N20 } #Comezkahuaina
+			NOT = { tag = N20 } #Comezkahuaina
+			NOT = { was_tag = N73 } #Satrialaam
+			NOT = { tag = N73 } #Satrialaam
+			NOT = { was_tag = N74 } #Kangyarang
+			NOT = { tag = N74 } #Kangyarang
+			NOT = { was_tag = N75 } #Huio Pamokai
+			NOT = { tag = N75 } #Huio Pamokai
+			#Plateau
+			NOT = { was_tag = N76 } #Dopabari
+			NOT = { tag = N76 } #Dopabari
+			NOT = { was_tag = N77 } #Serulumatay
+			NOT = { tag = N77 } #Serulumatay
+			#West Insyaa
+			NOT = { was_tag = P37 } #Charkuchar
+			NOT = { tag = P37 } #Charkuchar
+			NOT = { was_tag = P18 } #Bomowoka
+			NOT = { tag = P18 } #Bomowoka
+
 			NOT = { has_country_flag = formed_end_game_tag_flag } #Generic Blocker
 		}
 	}
@@ -842,6 +908,7 @@ has_manufactory_trigger = { #Province Scope
 			has_building = impressment_offices
 			has_building = state_house
 			has_building = mage_tower
+			has_building = automatory
 		}
 	}
 }
@@ -946,6 +1013,7 @@ has_no_manufactory_trigger = { #Province Scope
 	NOT = { has_building = impressment_offices }
 	NOT = { has_building = state_house }
 	NOT = { has_building = mage_tower }
+	NOT = { has_building = automatory }
 }
 
 # Does not include new manufactories - they don't fit for the purposes of this trigger
@@ -1182,14 +1250,15 @@ has_final_tier_reforms_trigger = {
 	}
 }
 
-has_holy_order_trigger = {
-	if = {
-		limit = {
-			has_dlc = "Golden Century"
-		}
-		custom_trigger_tooltip = {
-			tooltip = "has_holy_order_trigger_tooltip"
-			OR = {
+# Don't use. Too expensive. Use triggers for specific religions instead
+# has_holy_order_trigger = {
+# 	if = {
+# 		limit = {
+# 			has_dlc = "Golden Century"
+# 		}
+# 		custom_trigger_tooltip = {
+# 			tooltip = "has_holy_order_trigger_tooltip"
+# 			OR = {
 				# holy_order = jesuit_order
 				# holy_order = dominican_order
 				# holy_order = franciscan_order
@@ -1216,30 +1285,115 @@ has_holy_order_trigger = {
 				# holy_order = san_juan_order
 				# holy_order = santiago_order
 				#Anbennar
-				holy_order = order_of_judges_order
-				holy_order = servants_of_surael_order
-				holy_order = order_of_exemplars_order
-				holy_order = lightbringers_order
-				holy_order = jasienes_daughters_order
-				holy_order = militant_jadd_order
-				holy_order = lightbringers_order_upgraded
-				holy_order = jasienes_daughters_order_upgraded
-				holy_order = militant_jadd_order_upgraded
-				holy_order = servants_of_surakel_order
-				holy_order = eduz_nabari_order
-				holy_order = the_unforgivable_order
-				holy_order = agrados_passion_order
-				holy_order = triadic_devotees_order
-				holy_order = grudgeknights_order
-			}
-		}
-	}
-}
+				#Bulwari Sun Cult
+# 				holy_order = order_of_judges_order
+# 				holy_order = servants_of_surael_order
+# 				holy_order = order_of_exemplars_order
+# 				holy_order = sundancers_order
+# 				holy_order = avengers_order
+# 				#Jadd
+# 				holy_order = lightbringers_order
+# 				holy_order = jasienes_daughters_order
+# 				holy_order = militant_jadd_order
+# 				holy_order = lightbringers_order_upgraded
+# 				holy_order = jasienes_daughters_order_upgraded
+# 				holy_order = militant_jadd_order_upgraded
+# 				#Old Sun Cult
+# 				holy_order = servants_of_surakel_order
+# 				holy_order = eduz_nabari_order
+# 				holy_order = the_unforgivable_order
+# 				#Gor Vazumbrog
+# 				holy_order = vaultwardens_order
+# 				holy_order = monster_hunters_order
+# 				holy_order = arm_of_krummul_order
+# 				#Infernal Court
+# 				holy_order = agrados_passion_order
+# 				holy_order = triadic_devotees_order
+# 				holy_order = grudgeknights_order
+# 				#Corinite
+# 				holy_order = begga_order
+# 				holy_order = dame_order
+# 				holy_order = esmaryal_order
+# 				holy_order = nerat_order
+# 				holy_order = minara_order
+# 				holy_order = munas_order
+# 				holy_order = ryala_order
+# 				holy_order = balgar_order
+# 				holy_order = corin_order
+# 				holy_order = falah_order
+# 				holy_order = nathalyne_order
+# 				holy_order = dookan_order
+# 				holy_order = adean_order
+# 				#Runefather Worship
+# 				holy_order = clan_shadowhammer_order
+# 				holy_order = clan_darkstone_order
+# 				holy_order = groedi_az_an_order
+# 				holy_order = amlruzskappa_order
+# 				holy_order = furdanhund_order
+# 				#Kheionist
+# 				holy_order = maederitic_rule_order_level_1
+# 				holy_order = maederitic_rule_order_level_2
+# 				holy_order = maederitic_rule_order_level_3
+# 				holy_order = schaal_onitheia_order_level_1
+# 				holy_order = schaal_onitheia_order_level_2
+# 				holy_order = schaal_onitheia_order_level_3
+# 				holy_order = teachings_of_varamelas_order_level_1
+# 				holy_order = teachings_of_varamelas_order_level_2
+# 				holy_order = teachings_of_varamelas_order_level_3
+# 				holy_order = dictats_of_isparokaeus_order_level_1
+# 				holy_order = dictats_of_isparokaeus_order_level_2
+# 				holy_order = dictats_of_isparokaeus_order_level_3
+# 				holy_order = archatiradist_doctrine_order_level_1
+# 				holy_order = archatiradist_doctrine_order_level_2
+# 				holy_order = archatiradist_doctrine_order_level_3
+# 				holy_order = anagbheism_order_level_1
+# 				holy_order = anagbheism_order_level_2
+# 				holy_order = anagbheism_order_level_3
+# 				holy_order = axierophonic_mandate_order_level_1
+# 				holy_order = axierophonic_mandate_order_level_2
+# 				holy_order = axierophonic_mandate_order_level_3
+# 				holy_order = drivos_rochos_order_level_1
+# 				holy_order = drivos_rochos_order_level_2
+# 				holy_order = drivos_rochos_order_level_3
+# 				holy_order = laskaris_creed_order_level_1
+# 				holy_order = laskaris_creed_order_level_2
+# 				holy_order = laskaris_creed_order_level_3
+# 				#Drozma Tur
+# 				holy_order = drozma_avarkavalky_order
+# 				holy_order = drozma_gydkanecy_order
+# 				holy_order = drozma_drozmove_bojevy_order
+# 				holy_order = drozma_bozamachi_order
+# 				holy_order = drozma_varlen_order
+# 				#Corinite
+# 				holy_order = istralore_order
+# 				holy_order = crimson_wings_protectors_order
+# 				holy_order = steward_of_the_crimson_wings_order
+# 				#Volcanic Truth
+# 				holy_order = yollonana_order
+# 				holy_order = yectlamo_order
+# 				holy_order = liztialoli_order
+# 				holy_order = tlanhau_order
+# 				holy_order = molomoa_order
+# 				holy_order = cuauholoi_order
+# 				holy_order = hueiala_order
+# 				holy_order = hakumaco_order
+# 				holy_order = tzohanu_order
+# 				#Shadow Pact
+# 				holy_order = shadow_warriors_order
+# 				#Molten Eternity
+# 				holy_order = kihokamalama_order
+# 				holy_order = tumirbedi_order
+# 				holy_order = tlokopinaztica_order
+# 			}
+# 		}
+# 	}
+# }
 
-has_any_holy_order = {
-	custom_trigger_tooltip = {
-		tooltip = "has_holy_order_trigger_tooltip"
-		OR = {
+# Don't use. Too expensive. Use triggers for specific religions instead
+# has_any_holy_order = {
+# 	custom_trigger_tooltip = {
+# 		tooltip = "has_holy_order_trigger_tooltip"
+# 		OR = {
 			# holy_order = benedictines
 			# holy_order = carthusians
 			# holy_order = hieronymites
@@ -1264,9 +1418,9 @@ has_any_holy_order = {
 			# holy_order = du_si
 			# holy_order = savafid_order
 			# holy_order = zahediyeh_order
-		}
-	}
-}
+# 		}
+# 	}
+# }
 
 can_create_holy_orders = {
 	OR = {
@@ -1451,6 +1605,27 @@ has_fort_building_trigger = {
 	}
 }
 
+has_fort_16th_building_trigger = {
+	custom_trigger_tooltip = {
+		tooltip = has_fort_16th_building_trigger_tt
+		OR = {
+			has_building = fort_16th
+			has_building = fort_17th
+			has_building = fort_18th
+		}
+	}
+}
+
+has_fort_17th_building_trigger = {
+	custom_trigger_tooltip = {
+		tooltip = has_fort_17th_building_trigger_tt
+		OR = {
+			has_building = fort_17th
+			has_building = fort_18th
+		}
+	}
+}
+
 has_coast_defense_building_trigger = {
 	custom_trigger_tooltip = {
 		tooltip = has_coast_defense_building_trigger_tt
@@ -1490,50 +1665,50 @@ valid_for_personal_unions_trigger = {
 	}
 }
 
-is_shadow_kingdom_eligible_trigger = {
-	is_emperor = no
-	is_part_of_hre = yes
-	OR = {
-		capital_scope = { region = italy_region }
-		AND = {
-			culture_group = latin
-			any_owned_province = {
-				region = italy_region
-			}
-		}
-	}
-}
+# is_shadow_kingdom_eligible_trigger = {
+# 	is_emperor = no
+# 	is_part_of_hre = yes
+# 	OR = {
+# 		capital_scope = { region = italy_region }
+# 		AND = {
+# 			culture_group = latin
+# 			any_owned_province = {
+# 				region = italy_region
+# 			}
+# 		}
+# 	}
+# }
 
-will_leave_for_shadow_kingdom_trigger = {
-	NOT = {
-		OR = {
-			has_country_flag = reined_in_for_shadow_kingdom
-			emperor = {
-				alliance_with = PREV
-			}
-			has_opinion = {
-				who = emperor
-				value = 150
-			}
-			is_subject_of = emperor
-			has_reform = free_city
-		}
-	}
-}
+# will_leave_for_shadow_kingdom_trigger = {
+# 	NOT = {
+# 		OR = {
+# 			has_country_flag = reined_in_for_shadow_kingdom
+# 			emperor = {
+# 				alliance_with = PREV
+# 			}
+# 			has_opinion = {
+# 				who = emperor
+# 				value = 150
+# 			}
+# 			is_subject_of = emperor
+# 			has_reform = free_city
+# 		}
+# 	}
+# }
 
 
-is_germanic_but_not_swamp = {
-	culture_group = germanic
-	NOT = { primary_culture = dutch }
-	NOT = { primary_culture = flemish }
-	NOT = { primary_culture = frisian }
-}
+# is_germanic_but_not_swamp = {
+# 	culture_group = germanic
+# 	NOT = { primary_culture = dutch }
+# 	NOT = { primary_culture = flemish }
+# 	NOT = { primary_culture = frisian }
+# }
 
-is_germanic_but_not_mountains = {
-	culture_group = germanic
-	NOT = { primary_culture = swiss }
-	NOT = { primary_culture = austrian }
-}
+# is_germanic_but_not_mountains = {
+# 	culture_group = germanic
+# 	NOT = { primary_culture = swiss }
+# 	NOT = { primary_culture = austrian }
+# }
 
 #province scope; checks it is highest or joint highest supply limit in the area owned by you (useful for spawning rebels)
 highest_supply_limit_in_area = {
@@ -2269,13 +2444,21 @@ has_completed_idea_group_of_category = {
 		custom_trigger_tooltip = {
 			tooltip = has_completed_one_adm_idea_group
 			OR = {
+				full_idea_group = aristocracy_ideas
+				full_idea_group = plutocracy_ideas
 				full_idea_group = innovativeness_ideas
-				full_idea_group = religious_ideas
 				full_idea_group = economic_ideas
 				full_idea_group = expansion_ideas
 				full_idea_group = administrative_ideas
 				full_idea_group = humanist_ideas
-				full_idea_group = infrastructure_ideas
+				full_idea_group = religious_ideas
+				full_idea_group = AIG_elven_supremacy_ideas
+				full_idea_group = justiz0
+				full_idea_group = gesundheit0
+				full_idea_group = theocracy_gov_ideas
+				full_idea_group = horde_gov_ideas
+				full_idea_group = indigenous_ideas
+
 			}
 		}
 	]
@@ -2285,11 +2468,26 @@ has_completed_idea_group_of_category = {
 			OR = {
 				full_idea_group = spy_ideas
 				full_idea_group = diplomatic_ideas
+				full_idea_group = influence_ideas
 				full_idea_group = trade_ideas
 				full_idea_group = exploration_ideas
 				full_idea_group = maritime_ideas
-				full_idea_group = influence_ideas
+				full_idea_group = assimilation0
+				full_idea_group = nationalismus0
 				full_idea_group = gesellschaft0
+				full_idea_group = court_ideas
+				full_idea_group = konigreich0
+				full_idea_group = imperialismus0
+				full_idea_group = staatsverwaltung0
+				full_idea_group = zentra0
+				full_idea_group = dezentra0
+				full_idea_group = naval_ideas
+				full_idea_group = homebrew_amphibious_ideas
+				full_idea_group = AIG_industrial_ideas
+				full_idea_group = AIG_magocratic_ideas
+				full_idea_group = monstrous_ideas
+				full_idea_group = AIG_imperial_ideas
+				
 			}
 		}
 	]
@@ -2297,17 +2495,26 @@ has_completed_idea_group_of_category = {
 		custom_trigger_tooltip = {
 			tooltip = has_completed_one_mil_idea_group
 			OR = {
-				full_idea_group = aristocracy_ideas
 				full_idea_group = offensive_ideas
 				full_idea_group = defensive_ideas
 				full_idea_group = quality_ideas
 				full_idea_group = quantity_ideas
-				full_idea_group = homebrew_highseas_ideas
-				full_idea_group = theocracy_gov_ideas
-				full_idea_group = indigenous_ideas
-				full_idea_group = horde_gov_ideas
-				full_idea_group = plutocracy_ideas
-				full_idea_group = soldnerheer0
+				full_idea_group = formation0
+				full_idea_group = AIG_serpentspine_ideas
+				full_idea_group = AIG_legionary_ideas
+				full_idea_group = generalstab0
+				full_idea_group = stehendesheer0
+				full_idea_group = mercenary_ideas
+				full_idea_group = wehrpflicht0
+				full_idea_group = waffenqualitat0
+				full_idea_group = festung0
+				full_idea_group = militarismus0
+				full_idea_group = kolonialimperium0
+				full_idea_group = AIG_artificery_ideas
+				full_idea_group = kriegsproduktion0
+				full_idea_group = shock0
+				full_idea_group = fire0
+
 			}
 		}
 	]
@@ -2317,35 +2524,64 @@ has_completed_idea_group_of_category = {
 num_of_completed_idea_groups_by_category = {
 	calc_true_if = {
 		[[adm_ideas]
+			full_idea_group = aristocracy_ideas
+			full_idea_group = plutocracy_ideas
 			full_idea_group = innovativeness_ideas
-			full_idea_group = religious_ideas
 			full_idea_group = economic_ideas
 			full_idea_group = expansion_ideas
 			full_idea_group = administrative_ideas
 			full_idea_group = humanist_ideas
-			full_idea_group = infrastructure_ideas
+			full_idea_group = religious_ideas
+			full_idea_group = AIG_elven_supremacy_ideas
+			full_idea_group = justiz0
+			full_idea_group = gesundheit0
+			full_idea_group = theocracy_gov_ideas
+			full_idea_group = horde_gov_ideas
+			full_idea_group = indigenous_ideas
 		]
 		[[dip_ideas]
 			full_idea_group = spy_ideas
 			full_idea_group = diplomatic_ideas
+			full_idea_group = influence_ideas
 			full_idea_group = trade_ideas
 			full_idea_group = exploration_ideas
 			full_idea_group = maritime_ideas
-			full_idea_group = influence_ideas
+			full_idea_group = assimilation0
+			full_idea_group = nationalismus0
+			full_idea_group = gesellschaft0
 			full_idea_group = court_ideas
+			full_idea_group = konigreich0
+			full_idea_group = imperialismus0
+			full_idea_group = staatsverwaltung0
+			full_idea_group = zentra0
+			full_idea_group = dezentra0
+			full_idea_group = naval_ideas
+			full_idea_group = homebrew_amphibious_ideas
+			full_idea_group = AIG_industrial_ideas
+			full_idea_group = AIG_magocratic_ideas
+			full_idea_group = monstrous_ideas
+			full_idea_group = AIG_imperial_ideas
 		]
 		[[mil_ideas]
-			full_idea_group = aristocracy_ideas
 			full_idea_group = offensive_ideas
 			full_idea_group = defensive_ideas
 			full_idea_group = quality_ideas
 			full_idea_group = quantity_ideas
-			full_idea_group = naval_ideas
-			full_idea_group = theocracy_gov_ideas
-			full_idea_group = indigenous_ideas
-			full_idea_group = horde_gov_ideas
-			full_idea_group = plutocracy_ideas
+			full_idea_group = formation0
+			full_idea_group = AIG_serpentspine_ideas
+			full_idea_group = AIG_legionary_ideas
+			full_idea_group = generalstab0
+			full_idea_group = stehendesheer0
 			full_idea_group = mercenary_ideas
+			full_idea_group = wehrpflicht0
+			full_idea_group = waffenqualitat0
+			full_idea_group = festung0
+			full_idea_group = militarismus0
+			full_idea_group = kolonialimperium0
+			full_idea_group = AIG_artificery_ideas
+			full_idea_group = kriegsproduktion0
+			full_idea_group = shock0
+			full_idea_group = fire0
 		]
 		amount = $amount$
 	}
@@ -2353,31 +2589,60 @@ num_of_completed_idea_groups_by_category = {
 
 num_of_idea_groups_chosen = {
 	calc_true_if = {
-		has_idea_group = innovativeness_ideas
-		has_idea_group = religious_ideas
-		has_idea_group = economic_ideas
-		has_idea_group = expansion_ideas
-		has_idea_group = administrative_ideas
-		has_idea_group = humanist_ideas
-		has_idea_group = infrastructure_ideas
-		has_idea_group = spy_ideas
-		has_idea_group = diplomatic_ideas
-		has_idea_group = trade_ideas
-		has_idea_group = exploration_ideas
-		has_idea_group = maritime_ideas
-		has_idea_group = influence_ideas
-		has_idea_group = court_ideas
-		has_idea_group = aristocracy_ideas
-		has_idea_group = offensive_ideas
-		has_idea_group = defensive_ideas
-		has_idea_group = quality_ideas
-		has_idea_group = quantity_ideas
-		has_idea_group = naval_ideas
-		has_idea_group = theocracy_gov_ideas
-		has_idea_group = indigenous_ideas
-		has_idea_group = horde_gov_ideas
-		has_idea_group = plutocracy_ideas
-		has_idea_group = mercenary_ideas
+		full_idea_group = aristocracy_ideas
+		full_idea_group = plutocracy_ideas
+		full_idea_group = innovativeness_ideas
+		full_idea_group = economic_ideas
+		full_idea_group = expansion_ideas
+		full_idea_group = administrative_ideas
+		full_idea_group = humanist_ideas
+		full_idea_group = religious_ideas
+		full_idea_group = AIG_elven_supremacy_ideas
+		full_idea_group = justiz0
+		full_idea_group = gesundheit0
+		full_idea_group = theocracy_gov_ideas
+		full_idea_group = horde_gov_ideas
+		full_idea_group = indigenous_ideas
+		full_idea_group = spy_ideas
+		full_idea_group = diplomatic_ideas
+		full_idea_group = influence_ideas
+		full_idea_group = trade_ideas
+		full_idea_group = exploration_ideas
+		full_idea_group = maritime_ideas
+		full_idea_group = assimilation0
+		full_idea_group = nationalismus0
+		full_idea_group = gesellschaft0
+		full_idea_group = court_ideas
+		full_idea_group = konigreich0
+		full_idea_group = imperialismus0
+		full_idea_group = staatsverwaltung0
+		full_idea_group = zentra0
+		full_idea_group = dezentra0
+		full_idea_group = naval_ideas
+		full_idea_group = homebrew_amphibious_ideas
+		full_idea_group = AIG_industrial_ideas
+		full_idea_group = AIG_magocratic_ideas
+		full_idea_group = monstrous_ideas
+		full_idea_group = AIG_imperial_ideas
+		full_idea_group = offensive_ideas
+		full_idea_group = defensive_ideas
+		full_idea_group = quality_ideas
+		full_idea_group = quantity_ideas
+		full_idea_group = formation0
+		full_idea_group = AIG_serpentspine_ideas
+		full_idea_group = AIG_legionary_ideas
+		full_idea_group = generalstab0
+		full_idea_group = stehendesheer0
+		full_idea_group = mercenary_ideas
+		full_idea_group = wehrpflicht0
+		full_idea_group = waffenqualitat0
+		full_idea_group = festung0
+		full_idea_group = militarismus0
+		full_idea_group = kolonialimperium0
+		full_idea_group = AIG_artificery_ideas
+		full_idea_group = kriegsproduktion0
+		full_idea_group = shock0
+		full_idea_group = fire0
 		amount = $amount$
 	}
 }
@@ -2523,23 +2788,39 @@ mal_will_never_accept_offer = {
 
 has_any_heir_cult_active = {
 	OR = {
-		has_country_modifier = junior_yemoja_cult
-		has_country_modifier = junior_roog_cult
-		has_country_modifier = junior_nyame_cult
-		has_country_modifier = junior_cwezi_cult
-		has_country_modifier = junior_central_african_ancestor_cult
-		has_country_modifier = junior_mwari_cult
-		has_country_modifier = junior_enkai_cult
-		has_country_modifier = junior_waaq_cult
-		has_country_modifier = junior_zanahary_cult
-		has_country_modifier = junior_christianity_cult
-		has_country_modifier = junior_islam_cult
-		has_country_modifier = junior_buddhism_cult
-		has_country_modifier = junior_dharmic_cult
-		has_country_modifier = junior_south_central_american_cult
-		has_country_modifier = junior_norse_cult
-		has_country_modifier = junior_jewish_cult
-		has_country_modifier = junior_zoroastrian_cult
+		has_country_modifier = junior_kroozmuta_zemna_cult
+		has_country_modifier = junior_kroozbuto_nubo_cult
+		has_country_modifier = junior_tewaka_sunka_cult
+		has_country_modifier = junior_muta_mestika_cult
+		has_country_modifier = junior_apzarko_hrom_cult
+		has_country_modifier = junior_vortza_lesa_cult
+		has_country_modifier = junior_vortzo_laukuno_cult
+		has_country_modifier = junior_vortza_krpa_cult
+		has_country_modifier = junior_zvaiko_udenzo_cult
+		has_country_modifier = junior_zvaika_kirba_cult
+		has_country_modifier = junior_vortzo_liezmo_cult
+		has_country_modifier = junior_muta_kroozpauz_cult
+		has_country_modifier = junior_cannorian_cult
+		has_country_modifier = junior_cube_cult
+		has_country_modifier = junior_ancestor_worship_cult
+		has_country_modifier = junior_grobilazk_cult
+		has_country_modifier = junior_scribble_cult
+		has_country_modifier = junior_gnomish_cult
+		has_country_modifier = junior_godlost_cult
+		has_country_modifier = junior_khetist_cult
+		has_country_modifier = junior_gnollish_cult
+		has_country_modifier = junior_elven_cult
+		has_country_modifier = junior_bulwari_cult
+		has_country_modifier = junior_gerudian_cult
+		has_country_modifier = junior_orcish_cult
+		has_country_modifier = junior_bulgu_cult
+		has_country_modifier = junior_harpy_cult
+		has_country_modifier = junior_fey_cult
+		has_country_modifier = junior_raheni_cult
+		has_country_modifier = junior_giantkin_cult
+		has_country_modifier = junior_centaur_cult
+		has_country_modifier = junior_kobold_cult
+		has_country_modifier = junior_chivalry_cult
 	}
 }
 
@@ -2664,7 +2945,6 @@ is_not_free_merc_company = {
 		NOT = { mercenary_company = merc_marrhold_griffon_survey }
 		NOT = { mercenary_company = merc_marrhold_steel_griffon }
 		NOT = { mercenary_company = merc_ogrillons }
-		NOT = { mercenary_company = merc_rezankand_var_kultoz }
 		NOT = { mercenary_company = merc_sarisung_city_guard }
 		NOT = { mercenary_company = merc_seinathil_warsingers }
 		NOT = { mercenary_company = merc_serpent_knights }
@@ -2717,10 +2997,11 @@ is_not_free_merc_company = {
 		NOT = { mercenary_company = merc_command_dragon_army }
 		NOT = { mercenary_company = merc_command_elephant_army }
 		NOT = { mercenary_company = merc_command_tiger_army }
+		NOT = { mercenary_company = merc_dauvek_veker }
 		NOT = { mercenary_company = merc_mountainshark_giantsharks }
 		NOT = { mercenary_company = merc_mountainshark_dragonsharks }
 		NOT = { mercenary_company = merc_chien_boarsofdinh }
-		NOT = { mercenary_company = merc_shrine_guard}
+		NOT = { mercenary_company = merc_shrine_guard }
 		NOT = { mercenary_company = merc_raggedy_gun_knights }
 		NOT = { mercenary_company = merc_lords_of_platinum }
 		NOT = { mercenary_company = merc_lords_of_platinum_improved }
@@ -2781,7 +3062,7 @@ is_not_free_merc_company = {
 		NOT = { mercenary_company = merc_mojobaa_warrior_monks }
 		NOT = { mercenary_company = merc_lrm_city_guard }
 		NOT = { mercenary_company = merc_lrm_city_guard_upgraded }
-		NOT = { mercenary_company = merc_ashhana_royal_guard}
+		NOT = { mercenary_company = merc_ashhana_royal_guard }
 		NOT = { mercenary_company = merc_patrician_guard }
 		NOT = { mercenary_company = merc_uesrennu_armoured_kotakompus }
 		NOT = { mercenary_company = merc_children_of_the_thorns }
@@ -2810,40 +3091,45 @@ is_not_free_merc_company = {
 		NOT = { mercenary_company = merc_konol_venom_legion }
 		NOT = { mercenary_company = merc_konol_scourge_legion }
 		NOT = { mercenary_company = merc_adeen_hardliners }
-		NOT = { mercenary_company = merc_rosemetal_engineers_company }
-
-		#ACE mercenaries
-		NOT = { mercenary_company = merc_bald_heads }
-		NOT = { mercenary_company = merc_morbanite_chargers }
-		NOT = { mercenary_company = merc_sons_of_the_sea }
-		NOT = { mercenary_company = merc_hill_gnoll }
-		NOT = { mercenary_company = merc_maritime_guard_nathalaire }
-		NOT = { mercenary_company = merc_crusaders }
-		NOT = { mercenary_company = merc_tretun_foreign_legion }
-		NOT = { mercenary_company = merc_bladeborn }
-		NOT = { mercenary_company = merc_green_thorn_crusaders }
-		NOT = { mercenary_company = merc_red_thorn_crusaders }
-		NOT = { mercenary_company = merc_black_thorn_crusaders }
-		NOT = { mercenary_company = merc_knights_magnificent }
-		NOT = { mercenary_company = merc_drake_army_1 }
-		NOT = { mercenary_company = merc_drake_army_2 }
-		NOT = { mercenary_company = merc_drake_army_3 }
-		NOT = { mercenary_company = merc_drake_army_4 }
-		NOT = { mercenary_company = merc_drake_army_5 }
-		NOT = { mercenary_company = merc_drake_army_6 }
-		NOT = { mercenary_company = merc_drake_army_7 }
-		NOT = { mercenary_company = merc_drake_army_8 }
-		NOT = { mercenary_company = merc_drake_army_9 }
-		NOT = { mercenary_company = merc_drake_army_10 }
-		NOT = { mercenary_company = merc_A33_pizzaro_band }
-		NOT = { mercenary_company = merc_A33_cortes_band }
-		NOT = { mercenary_company = merc_A33_pizzaro_band_1 }
-		NOT = { mercenary_company = merc_A33_cortes_band_2 }
-		NOT = { mercenary_company = merc_A33_yinnic_mariners }
-		NOT = { mercenary_company = merc_A33_yinnic_rangers }
-		NOT = { mercenary_company = merc_A33_eord_rangers }
-		NOT = { mercenary_company = merc_gnollcutters }
-		NOT = { mercenary_company = merc_rootburners }
+		NOT = { mercenary_company = merc_human_iyashlagila_1 }
+		NOT = { mercenary_company = merc_human_iyashlagila_2 }
+		NOT = { mercenary_company = merc_human_iyashlagila_3 }
+		NOT = { mercenary_company = merc_human_iyashlagila_4 }
+		NOT = { mercenary_company = merc_angels_base }
+		NOT = { mercenary_company = merc_angels_defense }
+		NOT = { mercenary_company = merc_angels_defense_2 }
+		NOT = { mercenary_company = merc_angels_offense }
+		NOT = { mercenary_company = merc_angels_offense_2 }
+		NOT = { mercenary_company = merc_eldritch_base }
+		NOT = { mercenary_company = merc_eldritch_fast }
+		NOT = { mercenary_company = merc_eldritch_fast_2 }
+		NOT = { mercenary_company = merc_eldritch_mass }
+		NOT = { mercenary_company = merc_eldritch_mass_2 }
+		NOT = { mercenary_company = merc_devils_base }
+		NOT = { mercenary_company = merc_devils_frontline }
+		NOT = { mercenary_company = merc_devils_frontline_2 }
+		NOT = { mercenary_company = merc_devils_backline }
+		NOT = { mercenary_company = merc_devils_backline_2 }
+		NOT = { mercenary_company = merc_children_of_the_vanguard }
+		NOT = { mercenary_company = merc_bibyobi_monster_hunters }
+		NOT = { mercenary_company = merc_bibyobi_ninki_nanka }
+		NOT = { mercenary_company = merc_bibyobi_wereleopards }
+		NOT = { mercenary_company = merc_deranne_seaflower_knights }
+		NOT = { mercenary_company = merc_beikling_hill_raiders }
+		NOT = { mercenary_company = merc_beikling_royal_host }
+		NOT = { mercenary_company = merc_wild_magic_casters }
+		NOT = { mercenary_company = merc_campurana_corintar }
+		NOT = { mercenary_company = merc_campurana_hotzaya }
+		NOT = { mercenary_company = merc_lelanan_daughters_of_lel }
+		NOT = { mercenary_company = merc_lelanan_daughters_of_lel_upgraded_1 }
+		NOT = { mercenary_company = merc_lelanan_daughters_of_lel_upgraded_2 }
+		NOT = { mercenary_company = merc_emperors_flame }
+		NOT = { mercenary_company = merc_ostavranan }
+		NOT = { mercenary_company = merc_elemental_animals }
+		NOT = { mercenary_company = merc_spiritfire_elementals }
+		#Моддик
+        NOT = { mercenary_company = merc_hellhounds_1 }
+        NOT = { mercenary_company = merc_hellhounds_2 }		
 	}
 }
 
@@ -2851,16 +3137,9 @@ has_free_mercs_trait = {
 	OR = {
 		# has_country_modifier = dan_sca_merc_contract
 		has_idea = seasoned_veterans
-		AND = {
-			has_idea = soldnerheer7 #Piemversalis
-			has_government_attribute = anbennar_T5_generic_adventurer_contracts
-		}
 		mission_completed = reign_in_the_knight_errants 
 		has_government_attribute = mercs_do_not_cost_army_professionalism
 		# has_country_flag = fra_free_mercs_bargain_sale_flag
-
-		#ACE
-		has_country_flag = Z05_free_mercs
 	}
 }
 
@@ -2870,12 +3149,6 @@ has_not_free_mercs_trait = {
 	NOT = { has_government_attribute = mercs_do_not_cost_army_professionalism }
 	NOT = { mission_completed = reign_in_the_knight_errants }
 	NOT = { has_country_flag = fra_free_mercs_bargain_sale_flag } #1.35
-	NOT  = {
-		AND = {
-			has_idea = soldnerheer7 #Piemversalis
-			has_government_attribute = anbennar_T5_generic_adventurer_contracts
-		}
-	}
 }
 
 mal_target_country_exists_in_region = {
@@ -3585,7 +3858,7 @@ num_of_ruler_traits = {
 		ruler_has_personality = fertile_personality
 		ruler_has_personality = well_advised_personality
 		ruler_has_personality = benevolent_personality
-		ruler_has_personality = zealot_personality 
+		ruler_has_personality = zealot_personality
 		ruler_has_personality = pious_personality
 		ruler_has_personality = lawgiver_personality
 		ruler_has_personality = midas_touched_personality
@@ -3625,6 +3898,10 @@ num_of_ruler_traits = {
 		ruler_has_personality = legendary_conqueror_personality
 		ruler_has_personality = great_engineer_personality
 		ruler_has_personality = patron_of_arts_personality
+		ruler_has_personality = fu_papal_puppetmaster_personality
+		ruler_has_personality = iron_crowned_personality
+		ruler_has_personality = peasant_revolt_leader_personality
+		ruler_has_personality = reaver_personality
 		#Anbennar
 		ruler_has_personality = mage_personality
 		ruler_has_personality = great_conqueror_personality
@@ -3637,6 +3914,7 @@ num_of_ruler_traits = {
 		ruler_has_personality = wind_planetouched_personality
 		ruler_has_personality = shadow_planetouched_personality
 		ruler_has_personality = life_planetouched_personality
+		ruler_has_personality = renowned_adventurer_personality
 		amount = $amount$
 	}
 }
@@ -4040,52 +4318,81 @@ has_strong_mil_national_ideas = {
 
 #1.35
 has_any_active_incomplete_idea_group_of_category = {
-    [[adm_ideas]
-        custom_trigger_tooltip = {
-            tooltip = has_any_active_incomplete_idea_group_of_category_adm
-            OR = {
-                AND = { has_idea_group = innovativeness_ideas NOT = { full_idea_group = innovativeness_ideas } }
-                AND = { has_idea_group = religious_ideas      NOT = { full_idea_group = religious_ideas } }
-                AND = { has_idea_group = economic_ideas       NOT = { full_idea_group = economic_ideas } }
-                AND = { has_idea_group = expansion_ideas      NOT = { full_idea_group = expansion_ideas } }
-                AND = { has_idea_group = administrative_ideas NOT = { full_idea_group = administrative_ideas } }
-                AND = { has_idea_group = humanist_ideas       NOT = { full_idea_group = humanist_ideas } }
-                AND = { has_idea_group = infrastructure_ideas NOT = { full_idea_group = infrastructure_ideas } }
-            }
-        }
-    ]
-    [[dip_ideas]
-        custom_trigger_tooltip = {
-            tooltip = has_any_active_incomplete_idea_group_of_category_dip
-            OR = {
-                AND = { has_idea_group = spy_ideas         	NOT = { full_idea_group = spy_ideas } }
-                AND = { has_idea_group = diplomatic_ideas  	NOT = { full_idea_group = diplomatic_ideas } }
-                AND = { has_idea_group = trade_ideas       	NOT = { full_idea_group = trade_ideas } }
-                AND = { has_idea_group = exploration_ideas 	NOT = { full_idea_group = exploration_ideas } }
-                AND = { has_idea_group = maritime_ideas    	NOT = { full_idea_group = maritime_ideas } }
-                AND = { has_idea_group = influence_ideas   	NOT = { full_idea_group = influence_ideas } }
-                AND = { has_idea_group = gesellschaft0       	NOT = { full_idea_group = gesellschaft0 } }
-            }
-        }
-    ]
-    [[mil_ideas]
-        custom_trigger_tooltip = {
-            tooltip = has_any_active_incomplete_idea_group_of_category_mil
-            OR = {
-                AND = { has_idea_group = aristocracy_ideas       	NOT = { full_idea_group = aristocracy_ideas } }
-                AND = { has_idea_group = offensive_ideas       		NOT = { full_idea_group = offensive_ideas } }
-                AND = { has_idea_group = defensive_ideas       		NOT = { full_idea_group = defensive_ideas } }
-                AND = { has_idea_group = quality_ideas           	NOT = { full_idea_group = quality_ideas } }
-                AND = { has_idea_group = quantity_ideas             NOT = { full_idea_group = quantity_ideas } }
-                AND = { has_idea_group = theocracy_gov_ideas   		NOT = { full_idea_group = theocracy_gov_ideas } }
-                AND = { has_idea_group = indigenous_ideas      	    NOT = { full_idea_group = indigenous_ideas } }
-                AND = { has_idea_group = horde_gov_ideas       	    NOT = { full_idea_group = horde_gov_ideas } }
-                AND = { has_idea_group = plutocracy_ideas        	NOT = { full_idea_group = plutocracy_ideas } }
-                AND = { has_idea_group = soldnerheer0        	NOT = { full_idea_group = soldnerheer0 } }
-                AND = { has_idea_group = homebrew_highseas_ideas				NOT = { full_idea_group = homebrew_highseas_ideas } }
-            }
-        }
-    ]
+	[[adm_ideas]
+		custom_trigger_tooltip = {
+			tooltip = has_any_active_incomplete_idea_group_of_category_adm
+			OR = {
+				AND = { has_idea_group = aristocracy_ideas         NOT = { full_idea_group = aristocracy_ideas } }
+				AND = { has_idea_group = plutocracy_ideas          NOT = { full_idea_group = plutocracy_ideas } }
+				AND = { has_idea_group = innovativeness_ideas      NOT = { full_idea_group = innovativeness_ideas } }
+				AND = { has_idea_group = economic_ideas            NOT = { full_idea_group = economic_ideas } }
+				AND = { has_idea_group = expansion_ideas           NOT = { full_idea_group = expansion_ideas } }
+				AND = { has_idea_group = administrative_ideas      NOT = { full_idea_group = administrative_ideas } }
+				AND = { has_idea_group = humanist_ideas            NOT = { full_idea_group = humanist_ideas } }
+				AND = { has_idea_group = religious_ideas           NOT = { full_idea_group = religious_ideas } }
+				AND = { has_idea_group = AIG_elven_supremacy_ideas NOT = { full_idea_group = AIG_elven_supremacy_ideas } }
+				AND = { has_idea_group = justiz0                   NOT = { full_idea_group = justiz0 } }
+				AND = { has_idea_group = gesundheit0               NOT = { full_idea_group = gesundheit0 } }
+				AND = { has_idea_group = theocracy_gov_ideas       NOT = { full_idea_group = theocracy_gov_ideas } }
+				AND = { has_idea_group = horde_gov_ideas           NOT = { full_idea_group = horde_gov_ideas } }
+				AND = { has_idea_group = indigenous_ideas          NOT = { full_idea_group = indigenous_ideas } }
+			}
+		}
+	]
+	[[dip_ideas]
+		custom_trigger_tooltip = {
+			tooltip = has_any_active_incomplete_idea_group_of_category_dip
+			OR = {
+				AND = { has_idea_group = spy_ideas                 NOT = { full_idea_group = spy_ideas } }
+				AND = { has_idea_group = diplomatic_ideas          NOT = { full_idea_group = diplomatic_ideas } }
+				AND = { has_idea_group = influence_ideas           NOT = { full_idea_group = influence_ideas } }
+				AND = { has_idea_group = trade_ideas               NOT = { full_idea_group = trade_ideas } }
+				AND = { has_idea_group = exploration_ideas         NOT = { full_idea_group = exploration_ideas } }
+				AND = { has_idea_group = maritime_ideas            NOT = { full_idea_group = maritime_ideas } }
+				AND = { has_idea_group = assimilation0             NOT = { full_idea_group = assimilation0 } }
+				AND = { has_idea_group = nationalismus0            NOT = { full_idea_group = nationalismus0 } }
+				AND = { has_idea_group = gesellschaft0             NOT = { full_idea_group = gesellschaft0 } }
+				AND = { has_idea_group = court_ideas               NOT = { full_idea_group = court_ideas } }
+				AND = { has_idea_group = konigreich0               NOT = { full_idea_group = konigreich0 } }
+				AND = { has_idea_group = imperialismus0            NOT = { full_idea_group = imperialismus0 } }
+				AND = { has_idea_group = staatsverwaltung0         NOT = { full_idea_group = staatsverwaltung0 } }
+				AND = { has_idea_group = zentra0                   NOT = { full_idea_group = zentra0 } }
+				AND = { has_idea_group = dezentra0                 NOT = { full_idea_group = dezentra0 } }
+				AND = { has_idea_group = naval_ideas               NOT = { full_idea_group = naval_ideas } }
+				AND = { has_idea_group = homebrew_amphibious_ideas NOT = { full_idea_group = homebrew_amphibious_ideas } }
+				AND = { has_idea_group = AIG_industrial_ideas      NOT = { full_idea_group = AIG_industrial_ideas } }
+				AND = { has_idea_group = AIG_magocratic_ideas      NOT = { full_idea_group = AIG_magocratic_ideas } }
+				AND = { has_idea_group = monstrous_ideas           NOT = { full_idea_group = monstrous_ideas } }
+				AND = { has_idea_group = AIG_imperial_ideas        NOT = { full_idea_group = AIG_imperial_ideas } }
+			}
+		}
+	]
+	[[mil_ideas]
+		custom_trigger_tooltip = {
+			tooltip = has_any_active_incomplete_idea_group_of_category_mil
+			OR = {
+				AND = { has_idea_group = offensive_ideas        NOT = { full_idea_group = offensive_ideas } }
+				AND = { has_idea_group = defensive_ideas        NOT = { full_idea_group = defensive_ideas } }
+				AND = { has_idea_group = quality_ideas          NOT = { full_idea_group = quality_ideas } }
+				AND = { has_idea_group = quantity_ideas         NOT = { full_idea_group = quantity_ideas } }
+				AND = { has_idea_group = formation0             NOT = { full_idea_group = formation0 } }
+				AND = { has_idea_group = AIG_serpentspine_ideas NOT = { full_idea_group = AIG_serpentspine_ideas } }
+				AND = { has_idea_group = AIG_legionary_ideas    NOT = { full_idea_group = AIG_legionary_ideas } }
+				AND = { has_idea_group = generalstab0           NOT = { full_idea_group = generalstab0 } }
+				AND = { has_idea_group = stehendesheer0         NOT = { full_idea_group = stehendesheer0 } }
+				AND = { has_idea_group = mercenary_ideas        NOT = { full_idea_group = mercenary_ideas } }
+				AND = { has_idea_group = wehrpflicht0           NOT = { full_idea_group = wehrpflicht0 } }
+				AND = { has_idea_group = waffenqualitat0        NOT = { full_idea_group = waffenqualitat0 } }
+				AND = { has_idea_group = festung0               NOT = { full_idea_group = festung0 } }
+				AND = { has_idea_group = militarismus0          NOT = { full_idea_group = militarismus0 } }
+				AND = { has_idea_group = kolonialimperium0      NOT = { full_idea_group = kolonialimperium0 } }
+				AND = { has_idea_group = AIG_artificery_ideas   NOT = { full_idea_group = AIG_artificery_ideas } }
+				AND = { has_idea_group = kriegsproduktion0      NOT = { full_idea_group = kriegsproduktion0 } }
+				AND = { has_idea_group = shock0                 NOT = { full_idea_group = shock0 } }
+				AND = { has_idea_group = fire0                  NOT = { full_idea_group = fire0 } }
+			}
+		}
+	]
 }
 #1.35
 has_unlocked_church_aspect = {
@@ -5242,22 +5549,6 @@ neighbor_is_ahead_in_institution = {
 	}
 }
 
-is_legendary_mage = { #Made for Elikhand but generally usable. The tooltip is with Elikhand's loc if somebody wants to move it.
-	custom_trigger_tooltip = {
-		tooltip = is_mage_3_tt
-		OR = {
-			is_abjuration_3 = yes
-			is_conjuration_3 = yes
-			is_divination_3 = yes
-			is_enchantment_3 = yes
-			is_evocation_3 = yes
-			is_illusion_3 = yes
-			is_necromancy_3 = yes
-			is_transmutation_3 = yes
-		}
-	}
-}
-
 eligible_for_gov_tribal_reform_monster_non_horde = {
 	OR = {
 		culture_group = orcish
@@ -5324,7 +5615,6 @@ can_have_incorporated_vassals = {
     OR = {
         has_government_attribute = GER_unlock_integrated_vassal
         has_country_flag = hab_integrated_vassals_flag
-		has_couuntry_flag = ARB_integrated_vassals_flag
     }
 }
 has_new_aztec_inca_maya_mission_trigger = {
@@ -5703,5 +5993,13 @@ is_or_was_moghulistan_nation = {
 				was_tag = KZH
 			}
 		}
+	}
+}
+
+has_any_winter_trigger = {
+	OR = {
+		has_winter = mild_winter
+		has_winter = normal_winter
+		has_winter = severe_winter
 	}
 }

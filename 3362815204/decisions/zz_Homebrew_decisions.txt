@@ -2,7 +2,7 @@ country_decisions = {
 
 	homebrew_demonsterization_dec = {
 		potential = {
-			full_idea_group = monstrous_ideas
+			has_idea = AIG_war_economy
 			has_country_flag = homebrew_demonsterization
 			OR = {
 				has_country_modifier = monstrous_nation
@@ -10,6 +10,7 @@ country_decisions = {
 			}
 		}
 		allow = {
+			full_idea_group = monstrous_ideas
 			AND = {
 				adm_power = 30
 				dip_power = 30
@@ -217,7 +218,7 @@ country_decisions = {
 	
 	homebrew_rural_industry_update = {
 		potential = {
-			has_idea_group = AIG_infrastructure_ideas
+			has_idea_group = infrastructure_ideas
 			NOT = { has_country_flag = rural_industry_update }
 		}
 		allow = {
@@ -359,7 +360,7 @@ country_decisions = {
 	
 	homebrew_mining_regulations_start = {
 		potential = {
-			has_idea_group = AIG_infrastructure_ideas
+			has_idea_group = infrastructure_ideas
 			NOT = { has_country_flag = mining_regulations_start }
 		}
 		allow = {
@@ -400,10 +401,6 @@ country_decisions = {
 		}
 		ai_will_do = {
 		factor = 1
-			modifier = {
-			factor = 0
-			has_country_flag = nurael_convention
-			}
 		}
 	}
 	
@@ -423,53 +420,6 @@ country_decisions = {
 			modifier = {
 			factor = 0
 			has_country_modifier = nurael_suggestion
-			}
-		}
-	}
-	
-	#sign nurael convention
-	nurael_convention_start = {
-		potential = {
-			has_country_flag = initialized_nurael_convention
-			NOT = { has_country_flag = nurael_convention }
-		}
-		allow = {
-			always = yes
-		}
-		effect = {
-			set_country_flag = nurael_convention
-			remove_country_modifier = nurael_suggestion
-		}
-		ai_will_do = {
-		factor = 1
-			modifier = {
-			factor = 0
-			has_country_modifier = chief_artificer
-			}
-		}
-	}
-	
-	nurael_convention_end = {
-		potential = {
-			has_country_flag = nurael_convention
-			NOT = { has_country_modifier = nurael_suggestion }
-		}
-		allow = {
-			always = yes
-		}
-		effect = {
-			add_stability = -1
-			add_country_modifier = {
-				name = nurael_suggestion
-				duration = -1
-				}
-			clr_country_flag = nurael_convention
-		}
-		ai_will_do = {
-		factor = 0
-			modifier = {
-			factor = 0
-			NOT = { has_country_modifier = chief_artificer }
 			}
 		}
 	}
@@ -629,7 +579,10 @@ country_decisions = {
 		}
 		allow = {
 			has_idea = wehrpflicht1
-			if = { limit = { has_country_flag = conscript_builder_sailors }
+			if = { 
+				limit = { 
+					has_country_flag = conscript_builder_sailors 
+				}
 				sailors = 2500
 			}
 			else = {
@@ -758,7 +711,12 @@ country_decisions = {
 					}
 				}
 				tooltip = { add_unrest = -0.01 } #dummy that marks province in the effect preview
-				if = { limit = { has_country_flag = conscript_builder_sailors } #wip
+				if = { 
+					limit = { 
+						ROOT = {
+							has_country_flag = conscript_builder_sailors 
+						}
+					} #wip
 					custom_tooltip = hb_conscript_builders_sailors_tt
 				}
 				else = {
@@ -910,6 +868,7 @@ country_decisions = {
 						impressment_offices = { set_variable = { which = base_build_cost value = 750 } }
 						state_house = { set_variable = { which = base_build_cost value = 750 } }
 						mage_tower = { set_variable = { which = base_build_cost value = 750 } }
+						automatory = {set_variable = {which = base_build_cost value = 750 } }
 					}
 					
 					#scans for construction progress, local build cost and speed modifiers, and makes an all-in-one variable
@@ -986,6 +945,7 @@ country_decisions = {
 						impressment_offices = { add_building = impressment_offices }
 						state_house = { add_building = state_house }
 						mage_tower = { add_building = mage_tower }
+						automatory = { add_building = automatory }
 					}
 					
 					#canceling construction, and negating refunds
@@ -1053,14 +1013,14 @@ country_decisions = {
 		potential = {
 				has_idea_group = wehrpflicht0
 				OR = {
-					has_idea_group = homebrew_highseas_ideas 
+					has_idea_group = naval_ideas 
 					has_idea_group = homebrew_amphibious_ideas
 				}
 		}
 		allow = {
 				has_idea_group = wehrpflicht0
 				OR = {
-					full_idea_group = homebrew_highseas_ideas 
+					full_idea_group = naval_ideas 
 					full_idea_group = homebrew_amphibious_ideas
 				}
 		}
@@ -1093,6 +1053,64 @@ country_decisions = {
 		}
 		ai_will_do = {
 			factor = 0 #lag machine otherwise
+		}
+	}
+
+
+	homebrew_highlight_fort_exceptions = {
+
+		color = { 102 102 255 }
+
+		potential = {
+			is_ai = no
+		}
+
+		provinces_to_highlight = {
+
+			OR = {
+				homebrew_excluded_provinces = yes
+
+				has_province_flag = highlight_exception_flag
+
+			}
+
+			
+		}
+
+		allow = {
+			#homebrew_excluded_provinces = yes
+			
+			custom_trigger_tooltip = {
+				tooltip = homebrew_highlight_fort
+				always = yes
+			}
+		}
+
+		effect = {
+            custom_tooltip = homebrew_highlight
+
+			every_province = {
+				limit = {
+
+					OR = {
+						has_province_modifier = harpy_roost_present
+						has_province_modifier = harpy_roost_mod_roost_fledgling
+						has_province_modifier = harpy_roost_mod_roost_flourishing_active
+						has_province_modifier = castanorian_citadel
+					}
+
+					NOT = {
+						has_province_flag = highlight_exception_flag
+					}
+				}
+
+				set_province_flag = highlight_exception_flag
+				
+			}
+		}
+
+		ai_will_do = {
+			factor = 0
 		}
 	}
 } #end of file

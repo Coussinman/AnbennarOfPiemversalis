@@ -189,8 +189,8 @@ country_event = {
 				country_event = { id = racial_pop_events_hobgoblin.7 }
 			}
 			#events 100-200 are reserved for custom migration events, put their triggers here
-			}
 		}
+	}
 }
 
 #generic migration arrival notif - for destination
@@ -920,10 +920,7 @@ country_event = {
 			}
 			modifier = { #+Evil country stuff
 				factor = 1.5
-				OR = {
-					has_country_modifier = evil_nation
-					has_country_modifier = lich_ruler
-				}
+				is_evil = yes
 			}
 			modifier = { #+If you have a enemy or rival
 				factor = 1.25
@@ -1259,10 +1256,7 @@ country_event = {
 			}
 			modifier = { #+Evil country stuff
 				factor = 1.25
-				OR = {
-					has_country_modifier = evil_nation
-					has_country_modifier = lich_ruler
-				}
+				is_evil = yes
 			}
 			modifier = { #+If you have a enemy or rival
 				factor = 1.25
@@ -1593,11 +1587,6 @@ country_event = {
 	desc = racial_pop_events_hobgoblin.13.d
 	picture = REFUGEES_ESCAPING_eventPicture
 	
-	major = yes
-	major_trigger = {
-		is_neighbor_of = ROOT
-	}
-	
 	hidden = yes
 	
 	is_triggered_only = yes
@@ -1653,10 +1642,10 @@ country_event = {
 	desc = racial_pop_events_hobgoblin.14.d
 	picture = PLAGUE_eventPicture
 	
-	major = yes
-	major_trigger = {
-		is_neighbor_of = ROOT
-	}
+	# major = yes
+	# major_trigger = {
+	# 	is_neighbor_of = FROM
+	# }
 	
 	is_triggered_only = yes
 	
@@ -1681,10 +1670,10 @@ country_event = {
 	desc = racial_pop_events_hobgoblin.15.d
 	picture = REFUGEES_ESCAPING_eventPicture
 	
-	major = yes
-	major_trigger = {
-		is_neighbor_of = ROOT
-	}
+	# major = yes
+	# major_trigger = {
+	# 	is_neighbor_of = FROM
+	# }
 	
 	is_triggered_only = yes
 	
@@ -1709,10 +1698,10 @@ country_event = {
 	desc = racial_pop_events_hobgoblin.16.d
 	picture = PLAGUE_eventPicture
 	
-	major = yes
-	major_trigger = {
-		is_neighbor_of = ROOT
-	}
+	# major = yes
+	# major_trigger = {
+	# 	is_neighbor_of = FROM
+	# }
 	
 	is_triggered_only = yes
 	
@@ -2367,27 +2356,16 @@ country_event = {
 		event_target:racial_pop_province_origin = {
 			change_culture = ROOT
 			change_religion = ROOT
-			mother_akasik_mountain_control_check = yes
 			add_devastation = 15
 			
 			if = { limit = { NOT = { has_idea = homebrew_x_for_xians } }
-				random_list = {
-					1 = {
-						add_base_tax = -1
-					}
-					1 = {
-						add_base_production = -1
-					}
-					1 = {
-						add_base_manpower = -1
-					}
-				}
+				remove_random_development = yes
 			
 				add_permanent_province_modifier = { name = expulsion_unrest_modifier duration = 18250 }
 			}
-		
-			medium_decrease_of_hobgoblin_tolerance_effect = yes
+			
 		}
+		medium_decrease_of_hobgoblin_tolerance_effect = yes
 	}
 	
 }
@@ -2403,7 +2381,7 @@ country_event = {
 	
 	trigger = {
 		has_country_modifier = racial_pop_hobgoblin_purge
-		
+	
 		fast_owns_num_pops_of_race = { race = hobgoblin amount = 1 } # this must at least be true for the below to be true, and is much faster	
 		any_owned_province = {
 			has_hobgoblin_minority_trigger = yes
@@ -2611,6 +2589,10 @@ country_event = {
 		}
 		
 		large_decrease_of_hobgoblin_tolerance_effect = yes
+
+		if = { limit = { has_country_flag = B54_cflag_arbitrary_purges } 
+			B54_se_purge_effect = { gov_power_gained = 5000 }
+		}
 	}
 	
 	option = {		#Special: Evil Purge them entirely
@@ -2634,6 +2616,10 @@ country_event = {
 		}
 		
 		large_decrease_of_hobgoblin_tolerance_effect = yes
+
+		if = { limit = { has_country_flag = B54_cflag_arbitrary_purges } 
+			B54_se_purge_effect = { gov_power_gained = 10000 }
+		}
 	}
 	
 }
@@ -2873,7 +2859,7 @@ country_event = {
 			add_devastation = 25
 			change_culture = ROOT
 			change_religion = ROOT
-			mother_akasik_mountain_control_check = yes
+			
 			if = { limit = { NOT = { has_idea = homebrew_x_for_xians } }
 				random_list = {
 					1 = {
@@ -2889,9 +2875,12 @@ country_event = {
 			
 			add_permanent_province_modifier = { name = purge_unrest_modifier duration = 9125 }
 			
-			}
-		
-			large_decrease_of_hobgoblin_tolerance_effect = yes
+		}
+		}
+		large_decrease_of_hobgoblin_tolerance_effect = yes
+
+		if = { limit = { has_country_flag = B54_cflag_arbitrary_purges } 
+			B54_se_purge_effect = { gov_power_gained = 15000 }
 		}
 	}
 	
@@ -3182,7 +3171,7 @@ country_event = {
 	option = {		
 		name = racial_pop_events_hobgoblin.17.a
 		trigger = {
-			
+			NOT = { AND = { is_or_was_tag = { tag = B54 } has_country_flag = B54_cflag_arbitrary_purges } }
 		}
 		ai_chance = {
 			factor = 50
@@ -3197,7 +3186,19 @@ country_event = {
 		medium_decrease_of_hobgoblin_tolerance_effect = yes
 	}
 	
-	
+	option = {
+		name = racial_pop_events_flee_from_B54
+		trigger = { is_or_was_tag = { tag = B54 } has_country_flag = B54_cflag_arbitrary_purges }
+		B54_se_purge_effect = { gov_power_gained = 2500 }		
+
+		#Remove Minority from Origin Province
+		event_target:racial_pop_province_origin = {
+			remove_hobgoblin_minority_size_effect = yes
+			add_devastation = 20
+		}
+		
+		large_decrease_of_hobgoblin_tolerance_effect = yes
+	}
 }
 
 
@@ -3499,7 +3500,7 @@ country_event = {
 	option = {		
 		name = racial_pop_events_hobgoblin.17.a
 		trigger = {
-			
+			NOT = { AND = { is_or_was_tag = { tag = B54 } has_country_flag = B54_cflag_arbitrary_purges } }
 		}
 		ai_chance = {
 			factor = 50
@@ -3513,27 +3514,35 @@ country_event = {
 			add_devastation = 15
 			change_culture = ROOT
 			change_religion = ROOT
-			mother_akasik_mountain_control_check = yes
+			
 			if = { limit = { NOT = { has_idea = homebrew_x_for_xians } }
-				random_list = {
-					1 = {
-						add_base_tax = -1
-					}
-					1 = {
-						add_base_production = -1
-					}
-					1 = {
-						add_base_manpower = -1
-					}
-				}
+				remove_random_development = yes
 			
 			}
 		
-			medium_decrease_of_hobgoblin_tolerance_effect = yes
 		}
+		
+		medium_decrease_of_hobgoblin_tolerance_effect = yes
 	}
 	
-	
+	option = {
+		name = racial_pop_events_flee_from_B54
+		trigger = { is_or_was_tag = { tag = B54 } has_country_flag = B54_cflag_arbitrary_purges }
+		B54_se_purge_effect = { gov_power_gained = 7500 }
+
+		#Remove majority from Origin Province
+		event_target:racial_pop_province_origin = {
+
+			hidden_effect = { remove_racial_majority = { race = hobgoblin } } # delete immediately so no minority left
+
+			add_devastation = 30
+			change_culture = ROOT
+			change_religion = ROOT
+			remove_random_development = yes
+			
+		}
+		large_decrease_of_hobgoblin_tolerance_effect = yes
+	}
 }
 
 

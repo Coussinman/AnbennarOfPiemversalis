@@ -7,8 +7,8 @@ AIG_industrial_ideas = {
 		nl_cooperatists_influence = 0.05
 	}
 	trigger = {
-		adm_tech = 11
-		has_estate = estate_artificers
+		adm_tech = 10
+		NOT = { is_not_in_artificery_mode = yes }
 	}
 	AIG_factory_towns = {
 		build_time = -0.1
@@ -19,7 +19,7 @@ AIG_industrial_ideas = {
 		movement_speed_in_fleet_modifier = 1 #not 100% bonus, adds +1 to ships' movement speed
 	}
 	AIG_artificer_grants = {
-		allowed_rajput_fraction = 0.05
+		artificers_capacity = 5
 		#allows mage towers to be built + double bonus from precursor relics
 	}
 	AIG_sending_stone_proliferation = {
@@ -63,10 +63,10 @@ kolonialimperium0 = {
 	category = DIP
 
 	bonus = {
-		diplomatic_upkeep = 2
+		global_tariffs = 0.5
 	}
 	trigger = {
-		dip_tech = 13
+		dip_tech = 10
 	}
 
 	kolonialimperium2 = {
@@ -75,11 +75,11 @@ kolonialimperium0 = {
 	}
 	
 	kolonialimperium1 = {
-		trade_company_governing_cost = -0.25
+		diplomatic_upkeep = 2
 	}
 	
 	kolonialimperium4 = {
-		global_tariffs = 0.25
+		global_tariffs = 0.5
 		# <<WIKI>> global_tariffs = 0.05/Colonial Nation
 		# <<WIKI>> Inflation reduction = -0.025/Colonial Nation
 	}
@@ -92,17 +92,17 @@ kolonialimperium0 = {
 	}
 	
 	kolonialimperium6 = {
-		naval_forcelimit_modifier = 0.15
+		naval_forcelimit_modifier = 0.25
 		# <<WIKI>> naval_forcelimit_modifier = 0.05/Colonial Nation
 	}
 
 	kolonialimperium5 = {
-		build_cost = -0.05
-		trade_steering = 0.1
+		build_cost = -0.2
+		trade_steering = 0.15
 	}
 	
 	kolonialimperium7 = {
-		liberty_desire_from_subject_development = -0.25
+		liberty_desire_from_subject_development = -0.33
 	}
 	
 	ai_will_do = {
@@ -186,7 +186,7 @@ kolonialimperium0 = {
 			factor = 2.5
 			OR = {
 				has_idea_group = maritime_ideas
-				has_idea_group = homebrew_highseas_ideas
+				has_idea_group = naval_ideas
 			}
 		}
 		modifier = {
@@ -265,16 +265,8 @@ AIG_artificery_ideas = {
 		tec_brilliance_influence = 0.05
 	}
 	trigger = {
-		mil_tech = 14
-		OR = {
-			AND = {
-				has_estate = estate_dragon_command
-				has_estate_privilege = estate_dragon_command_ninyu_kikun_sunyanin_artificers
-			}
-			
-		has_estate = estate_artificers
-		}
-		
+		mil_tech = 7
+		NOT = { is_not_in_artificery_mode = yes }
 	}
 	AIG_m_missile = {
 		mil_tech_cost_modifier = -0.1
@@ -288,19 +280,19 @@ AIG_artificery_ideas = {
 		drill_decay_modifier = -0.01
 	}
 	AIG_smart_armor = {
-		fire_damage_received = -0.001
+		fire_damage_received = -0.005
 		#fire_damage_received = -0.1 and shock_damage_received = -0.1 on artificer regiments
 	}
 	AIG_expanded_doctrines = {
-		possible_mil_policy = 1
-		free_mil_policy = 1
+		artificers_capacity = 10
 	}
 	AIG_evocation_drones = {
-		shock_damage = 0.01
+		shock_damage = 0.05
 		#infantry_shock = 0.35 on artificer regiments
 	}
 	AIG_prospector_mages = {
-		allowed_rajput_fraction = 0.05
+		possible_mil_policy = 1
+		free_mil_policy = 1
 		#increased chance of damestear and relic discovery
 	}
 	ai_will_do = {
@@ -355,8 +347,8 @@ kriegsproduktion0 = {
 		merchants = 1
 	}
 	kriegsproduktion6 = {
-		global_trade_goods_size_modifier = 0.075
-		war_exhaustion = -0.05
+		global_trade_goods_size_modifier = 0.1
+		war_exhaustion_cost = 0.30
 	}
 	kriegsproduktion7 = {
 		naval_forcelimit_modifier = 0.15
@@ -394,37 +386,43 @@ shock0 = {
 	}
 		
 	shock1 = {
-		morale_damage_received = -0.075
-		fire_damage = -0.15
+		morale_damage_received = -0.1
 	}
 	shock2 = {
-		reserves_organisation = 0.20
+		reserves_organisation = 0.15
+		fire_damage_received = -0.1
 	}
 	shock3 = {
 		cav_to_inf_ratio = 0.1
 		infantry_cost = -0.15
 	}
 	shock4 = {
-		reinforce_speed = 0.15
+		shock_damage = 0.1
+		fire_damage = -0.15
 	}
 	shock5 = {
-		cavalry_power = 0.10
-		infantry_power = 0.10
+		reinforce_speed = 0.15
 	}
 	shock6 = {
-		shock_damage = 0.1
+		cavalry_power = 0.10
+		infantry_power = 0.10
 	}
 	shock7 = {
 		leader_land_shock = 1
 	}
 	
 	ai_will_do = {
-		factor = 0.37
+		factor = 0.5
 		modifier = {
-			factor = 2
+			factor = 5
 			OR = { #racial mil
 				has_country_modifier = centaur_military
 				has_country_modifier = orcish_military
+			}
+		}
+		modifier = {
+			factor = 2
+			OR = { #racial mil
 				has_country_modifier = half_orcish_military
 				has_country_modifier = troll_military
 				has_country_modifier = gnollish_military
@@ -461,7 +459,7 @@ fire0 = {
 	
 	bonus = {
 		infantry_fire = 0.15
-		artillery_fire = 0.20
+		artillery_fire = 0.10
 		cavalry_fire = 0.6
 		infantry_shock = -0.1
 		cavalry_shock = -0.3
@@ -470,11 +468,9 @@ fire0 = {
 	
 	fire1 = {
 		army_tradition_decay = -0.005
-		shock_damage = -0.15
 	}
 	fire2 = {
-		artillery_levels_available_vs_fort = 2
-		siege_ability = 0.10
+		artillery_levels_available_vs_fort = 3
 		infantry_power = 0.05
 	}
 	fire3 = {
@@ -483,13 +479,14 @@ fire0 = {
 
 	fire4 = {
 		fire_damage = 0.1
+		shock_damage = -0.15
 	}
 
 	fire5 = {
 		defensiveness = 0.15
 	}
 	fire6 = {
-		backrow_artillery_damage = 0.075
+		backrow_artillery_damage = 0.05
 	}
 	fire7 = {
 		leader_land_fire = 1
@@ -498,7 +495,7 @@ fire0 = {
 	ai_will_do = {
 		factor = 0.37
 		modifier = {
-			factor = 2
+			factor = 5
 			OR = { #racial mil
 				has_country_modifier = dwarven_military
 				has_country_modifier = gnomish_military

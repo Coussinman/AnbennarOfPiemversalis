@@ -1,5 +1,5 @@
 #Designed and coded by: Auirus
-
+# has_metal_goods addition
 ##########Part 1##########
 krakazol_1 = { 
 	slot = 1
@@ -1840,10 +1840,7 @@ krakazol_3c = {
 			}
 			else = {
 				owned_by = ROOT
-				OR = {
-					trade_goods = iron
-					trade_goods = copper
-				}
+				has_metal_goods = yes
 				NOT = {
 					province_group = hold_province
 					area = ibran_pass_area
@@ -1887,10 +1884,7 @@ krakazol_3c = {
 			}
 			else = {
 				any_owned_province = {
-					OR = {
-						trade_goods = iron
-						trade_goods = copper
-					}
+					has_metal_goods = yes
 					base_production = 8
 					has_manufactory_trigger = yes
 					NOT = { 
@@ -1907,10 +1901,7 @@ krakazol_3c = {
 				limit = { NOT = { mithril = 1 } }
 				random_owned_province = {
 					limit = {
-						OR = {
-							trade_goods = iron
-							trade_goods = copper
-						}
+						has_metal_goods = yes
 						base_production = 8
 						has_manufactory_trigger = yes
 						NOT = { 
@@ -2484,6 +2475,9 @@ krakazol_4c = {
 							development = 6
 						}
 						trade_goods = gems
+						trade_goods = tin
+						trade_goods = lead
+						trade_goods = zinc
 						trade_goods = copper
 						trade_goods = iron
 						trade_goods = gold

@@ -1,0 +1,1 @@
+	NDefines.NEconomy.MAX_BUILDING_SLOTS = 16  					 -- Maximum number of buildings slots, i.e. max buildings possible.
